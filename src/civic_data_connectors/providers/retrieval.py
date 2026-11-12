@@ -63,6 +63,9 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if source.provider == "legistar":
             from .legistar import fetch_record
             return fetch_record(source, namespace, request["external_id"], bounds, context, transport)
+        if source.provider == "civicweb":
+            from .civicweb import fetch_record
+            return fetch_record(source, namespace, request["external_id"], bounds, context, transport)
         if source.provider == "wistia":
             from .wistia import fetch_record
             return fetch_record(source, namespace, request["external_id"], bounds, context, transport,

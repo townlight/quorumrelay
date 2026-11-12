@@ -361,7 +361,8 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
     if len(content) > bounds.parser_bytes:
         raise ValueError("The provider listing exceeds the configured parser byte limit.")
     if input_format in {"legistar-events-json", "legistar-event-json", "wistia-api-media-json",
-                        "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html"}:
+                        "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
+                        "civicweb-detail-html"}:
         return parse_native(source, namespace, content, input_format), ()
     result = engine.normalize(replace(source, body=None), content, input_format=input_format,
                               bounds=replace(bounds, date_from=None, date_to=None,

@@ -150,6 +150,9 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format == "civicweb-detail-html":
+        from .civicweb import detail_bundle
+        return detail_bundle(source, namespace, content)
     if input_format.startswith("telvue-connect-") or input_format == "essential-multimedia-json":
         from .account_reads import essential_bundle, telvue_bundle
         return (essential_bundle(source, namespace, content) if input_format == "essential-multimedia-json"
