@@ -21974,9 +21974,9 @@
           "proof_level": "vendor_contract_and_synthetic_engine_execution",
           "findings": [
             "Exact official Markdown/OpenAPI bytes and SHA256 pins: docs/capabilities/evidence/wistia-swap/source.json; PUT /modern/medias/{mediaHashedId}/swap JSON replacement_media_id; same media type; background_job_status response.",
-            "tests/test_wistia_swap.py:12 distinct passes; tests/test_write_providers.py:three affected existing media/tag/uncertain-receipt passes reused in this batch. Both media IDs/current policy/before fingerprints and explicit embedded-content effect bound to immutable approved plan; pending/failed/lost-ack/finished-uncertain receipts never resend."
+            "tests/test_wistia_swap.py:13 distinct passes; tests/test_write_providers.py:three affected existing media/tag/uncertain-receipt passes reused in this batch. Both media IDs/current policy/before fingerprints and explicit embedded-content effect bound to immutable approved plan; pending/failed/lost-ack/finished-confirmed receipts never resend."
           ],
-          "limits": "No remote mutation. Finished job plus target GET does not independently identify replacement bytes; stays uncertain. This is swap, not undocumented overwrite or automatic caption/transcript generation."
+          "limits": "No remote mutation. Exact acknowledged finished job plus target identity/type GET confirms provider completion; bytes/playback are not independently verified. This is swap, not undocumented overwrite or automatic caption/transcript generation."
         }
       ],
       "tenants": [
@@ -22739,8 +22739,8 @@
           ],
           "account_requirements": "Runtime Bearer update permission on both media and account feature; local media_swap:update grant plus meeting/resource allowlists.",
           "authorized_test_access": "local_synthetic_execution_accepted_by_owner_amendment",
-          "readback_receipt": "Durable queued job, exact-job polling and target media GET; finished remains uncertain because documented result lacks independent replacement-content identity. Never replay uncertain send.",
-          "verification_status": "synthetic_engine_queued_and_recovery_verified_content_confirmation_unresolved",
+          "readback_receipt": "Durable queued job, exact-job polling and target media GET; exact finished job plus matching target identity/type confirms provider completion, without independent replacement-byte/playback verification. Never replay uncertain send.",
+          "verification_status": "synthetic_engine_swap_job_completion_and_recovery_verified",
           "notes": "Engine entity media_swap/update. Plan explicitly names original/replacement IDs and impact on existing embeds. No deletion, purchase, generation, implicit publication or overwrite contract inferred.",
           "requirement_ids": [
             "C01",
@@ -22787,7 +22787,7 @@
         "Core now implements authenticated media-detail and supplied-caption-list/per-language GETs plus native search. Complete account-level reads only after a trusted Wistia token and selected account are supplied; none was supplied.",
         "/modern/search is capped at 100 primary and 100 transcript-only candidates with no cursor and provider-defined exact/phrase candidate semantics. Local exact checks cover returned metadata/excerpts, not full transcripts.",
         "Resolve account-tier limits and media replacement/swap behavior before those paths are claimed. Keep upload/import, media metadata, caption create/update and edits permission scopes separate; no remote writes occurred.",
-        "Media swap is source implemented and synthetic tested; pending jobs are preserved and finished jobs remain uncertain without independently provable replacement content. Overwrite is not inferred from swap. Wistia documented account-list discovery remains an executable implementation gap, not a credential gate."
+        "Media swap is source implemented and synthetic tested; pending jobs are preserved and exact finished jobs with target identity/type readback confirm provider completion without independent byte/playback claims. Overwrite is not inferred from swap. Wistia documented account-list discovery remains an executable implementation gap, not a credential gate."
       ],
       "requirement_ids": [
         "C01",

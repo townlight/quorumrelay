@@ -96,7 +96,7 @@ def test_vendor_evidence_hashes_and_swap_request_contract():
 
 
 @pytest.mark.parametrize("status,expected", [("queued", "pending"), ("started", "pending"),
-                                            ("failed", "failed"), ("finished", "uncertain")])
+                                            ("failed", "failed"), ("finished", "succeeded")])
 def test_swap_queued_receipt_reconciliation_never_replays(tmp_path, status, expected):
     engine, context, network, request = setup(tmp_path)
     planned, approval = plan(engine, context, request)
@@ -114,6 +114,7 @@ def test_swap_queued_receipt_reconciliation_never_replays(tmp_path, status, expe
     assert reconciled.data["items"][0]["state"] == expected
     if status == "finished":
         assert reconciled.data["items"][0]["readback"]["hashed_id"] == "original"
+        assert "not independently verified" in reconciled.data["items"][0]["verification_limits"]
     assert sum(method == "PUT" for method, _ in network.calls) == 1
 
 
@@ -160,3 +161,14 @@ def test_swap_exact_targets_current_grant_and_exact_job(tmp_path, problem):
         result = engine.execute("commit_write", approval, context=context)
         assert result.data["items"][0]["state"] == "uncertain"
         assert sum(method == "PUT" for method, _ in network.calls) == 1
+
+
+def test_finished_swap_wrong_target_readback_stays_uncertain(tmp_path):
+    engine, context, network, request = setup(tmp_path)
+    _, approval = plan(engine, context, request)
+    engine.execute("commit_write", approval, context=context)
+    network.job["status"] = "finished"
+    network.rows["original"]["hashed_id"] = "different"
+    result = engine.execute("commit_write", approval, context=context)
+    assert result.data["items"][0]["state"] == "uncertain"
+    assert sum(method == "PUT" for method, _ in network.calls) == 1

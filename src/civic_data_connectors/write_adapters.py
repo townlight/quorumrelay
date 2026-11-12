@@ -1159,10 +1159,15 @@ class WriteAdapter:
                     return {"state": "pending", "job": status}
                 if status.get("status") == "finished":
                     value = self.read(source, prepared["read_url"], context, bounds, deadline)
-                    return {"state": "uncertain", "job": status, "readback": value,
+                    confirmed = (isinstance(value, dict)
+                                 and value.get("hashed_id") == prepared["change"]["resource_id"]
+                                 and value.get("type") == prepared["before"]["replacement"]["type"])
+                    return {"state": "succeeded" if confirmed else "uncertain", "job": status, "readback": value,
                             "resource_id": prepared["change"]["resource_id"],
-                            "reason": "The job finished; documented readback does not independently identify "
-                                      "the replacement content. Do not repeat this swap."}
+                            "confirmation": "acknowledged_swap_job_finished_and_target_identity_readback"
+                            if confirmed else "target_identity_readback_mismatch",
+                            "verification_limits": "Provider-confirmed job completion; replacement bytes "
+                                                   "and playable processing are not independently verified."}
                 return {"state": "uncertain", "job": status, "reason": "Unknown swap job status."}
             if status.get("status") == "failed":
                 return {"state": "failed", "reason": "The provider background job failed.", "job": status}
