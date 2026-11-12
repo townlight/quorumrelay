@@ -223,20 +223,35 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if source.provider == "boardbook":
             from .boardbook import resolve_document
             transfer_url, resolution = resolve_document(url, transport, bounds, context, deadline)
+        boardable_viewer = (source.provider == "boardable" and kind == "documents"
+                            and parsed.hostname == "app.boardable.com" and parsed.path.endswith("/view"))
+        remaining_transfer = bounds.transfer_bytes
+        if boardable_viewer:
+            from .boardable_documents import resolve_document
+            transfer_url, resolution = resolve_document(source, url, transport, bounds, context, deadline)
+            remaining_transfer -= resolution["viewer_capture"]["byte_length"]
+            if remaining_transfer <= 0:
+                raise ValueError("The document viewer exhausted the transfer budget.")
         if context.check_cancelled():
             return OperationResult("cancelled", {"record": record, "bundle": bundle},
                                    operation_id=context.operation_id)
         response = transport.request(
-            transfer_url, byte_limit=bounds.transfer_bytes,
-            deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=allowed)
+            transfer_url, byte_limit=remaining_transfer,
+            deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=allowed,
+            **({"allow_redirects": False} if boardable_viewer else {}))
         if response.status != 200:
             raise ValueError("The captured attachment did not return HTTP 200.")
         pdf_expected = (kind == "documents" and (
             urlsplit(transfer_url).path.lower().endswith(".pdf") or
+            (boardable_viewer and str(document.get("title", "")).lower().endswith(".pdf")) or
             response.content_type.split(";", 1)[0].strip().lower() == "application/pdf"))
-        if (resolution or pdf_expected) and not response.content.startswith(b"%PDF-"):
+        if ((resolution and not boardable_viewer) or pdf_expected) and not response.content.startswith(b"%PDF-"):
             raise ValueError("The supplied PDF download did not return PDF bytes.")
-        if len(response.content) > bounds.transfer_bytes:
+        if boardable_viewer and (response.content_type.split(";", 1)[0].strip().lower() in {
+                "text/html", "application/xhtml+xml"} or response.content.lstrip().lower().startswith(
+                    (b"<!doctype html", b"<html"))):
+            raise ValueError("The document download returned another HTML viewer, not original file bytes.")
+        if len(response.content) > remaining_transfer:
             raise ValueError("The document exceeds the configured transfer byte limit.")
         if _origin(response.url) not in allowed:
             raise ValueError("The document left its configured download origins.")

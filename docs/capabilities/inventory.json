@@ -21351,6 +21351,24 @@
           "observation_date": "2026-11-12",
           "access_scope": "local_source_and_fixture_contracts_no_provider_access",
           "proof_level": "source_and_named_test_coverage_not_provider_acceptance"
+        },
+        {
+          "id": "boardable-detail-document-2026-11-12",
+          "url": "https://site.boardable.com/ventura-county-community-college-district/meetings/4870d6-board-of-trustees-regular-meeting",
+          "title": "Boardable configured detail and original public supporting PDF",
+          "kind": "public_tenant",
+          "observed": "Explicit detail engine GET returned one partial record/five supplied links; one captured viewer-declared original PDF completed through guarded resolver.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": [
+            "Viewer return_url and original-file download mapping validated at the exact supplied organization/meeting/document path.",
+            "One application/octet-stream PDF: 227464 bytes; SHA256606b68337d78113ea981517b11c5eb7cca263285150a9712a6c20298ef85480a.",
+            "Viewer bytes/hash preserved separately; no HTML response counted as usable PDF."
+          ],
+          "limits": "Explicit standalone detail Source only; no root-to-detail traversal, other document availability, catalog, timezone reconciliation or provider-write acceptance.",
+          "receipt_path": "docs/verification/boardable-detail-document-2026-11-12.json",
+          "receipt_sha256": "46ad7c59ad097efee1a112a7e38a896839770a295725a03cd994246000cd7e1b"
         }
       ],
       "tenants": [
@@ -21419,11 +21437,12 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "boardable-tenant"
+            "boardable-tenant",
+            "boardable-detail-document-2026-11-12"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval.",
+          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Resumed local source resolves exact supplied Boardable public /view links through their declared original-file /download mapping; one configured detail GET and one supplied PDF completed with exact byte/hash and viewer-capture provenance. No automatic root-to-detail lookup is inferred.",
           "dependencies": [],
           "remaining_verification": [
             "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
