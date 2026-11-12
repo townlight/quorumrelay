@@ -8670,7 +8670,7 @@
       }
     },
     "typed_models": "src/civic_data_connectors/data/granicus_platform.json",
-    "verification": "Vendor-WSDL-shaped synthetic engine reads and coordinator CreateEvent/UpdateEvent/UpdateClip/UpdateMetaData transactions verified; private sessions, model parity, exact-plan/conflict/revocation/duplicate/uncertain readback checked. Other bound methods are not yet engine mappings. Four document URL setters and two single-call document uploads are now mapped with durable file, optional named-minutes and exact byte/hash readback tests; larger minutes use the documented SDK add/finish chunk protocol with verified normal, ambiguous-finish and ambiguous-add outcomes. Supporting whole captions, three video locations, Document attachment bytes and minutes metadata are also actual engine fixture-verified; this still does not establish all 48 engine mappings. SDK-explicit metadata Payload wrappers preserve AgendaItem, Note, Document, Rollcall, Motion and VoteRecord type/fields; WSDL parity roundtrips and a real coordinator meeting-bound Motion update pass.",
+    "verification": "Vendor-WSDL-shaped synthetic engine reads and coordinator CreateEvent/UpdateEvent/UpdateClip/UpdateMetaData transactions verified; private sessions, model parity, exact-plan/conflict/revocation/duplicate/uncertain readback checked. Other bound methods are not yet engine mappings. Four document URL setters and two single-call document uploads are now mapped with durable file, optional named-minutes and exact byte/hash readback tests; larger minutes use the documented SDK add/finish chunk protocol with verified normal, ambiguous-finish and ambiguous-add outcomes. Supporting whole captions, three video locations, Document attachment bytes and minutes metadata are also actual engine fixture-verified; this still does not establish all 48 engine mappings. SDK-explicit metadata Payload wrappers preserve AgendaItem, Note, Document, Rollcall, Motion and VoteRecord type/fields; WSDL parity roundtrips and a real coordinator meeting-bound Motion update pass. MediaVault literal binding (13 cases) and actual UploadFile coordinator (3 cases) verify private impersonation, exact bytes and identity/uncertain recovery.",
     "limits": [
       "Pinned official contract, not a live/current compatibility claim",
       "Vendor administration operations excluded",
@@ -8678,8 +8678,10 @@
       "Unknown source response values retained; untyped metadata object payloads not inferred"
     ],
     "contract_discrepancies": [
-      "Pinned WSDL PublishClipData/PublishClipResult are int[]/string[] but same-revision SDK APIEntities.cs defines structured DTOs including explicit Public. Do not invent a publication mapping from conflicting shapes; investigate matching vendor version/reference."
+      "Original .NET WSDL PublishClip types are array placeholders while its SDK DTOs are structured. Per-type override explicitly uses the official Java WSDL revision548e20a5f25f9ca5472e168996fe116ab8bd1164, whose structured fields match the .NET SDK; both raw sources/hashes retained. No live/current-version compatibility inferred."
     ],
-    "media_upload_contract": "Pinned MediaVault.cs + SDK.asmx.wsdl (same official revision) specify normal UploadFile or StartUpload/SendChunk/FinishUpload/RegisterUploadedFile. MediaManager RegisterClipUpload explicitly warns it is not normal upload. Exact evidence/source hashes retained; engine MediaVault mapping remains next."
+    "media_upload_contract": "Pinned MediaVault.cs/SDK.asmx.wsdl normal UploadFile is engine-mapped. StartUpload/SendChunk/FinishUpload/RegisterUploadedFile/AssignUploadedFile are typed bindings, not yet engine workflows. SecurityHeader/current PHPSESSID and exact source/folder/interface policy stay private.",
+    "media_vault_binding": "src/civic_data_connectors/data/granicus_vault.json",
+    "private_control_operation": "GetFolderUploadInterface is an additional typed setup read for MediaVault, beyond the original48 in-domain bindings."
   }
 }

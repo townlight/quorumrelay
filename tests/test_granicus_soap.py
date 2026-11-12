@@ -168,3 +168,18 @@ def test_explicit_vendor_metadata_payload_models_roundtrip(name, fields):
 def test_metadata_payload_types_are_not_inferred_or_allowed_to_drop_fields():
     with pytest.raises(ValueError):
         request_xml("UpdateMetaData", {"MetaData": {"Payload": {"$type": "Motion", "value": {"MotionText": "Only field"}}}}, byte_limit=10000)
+
+
+@pytest.mark.parametrize("name", ["PublishClipData", "PublishClipResult"])
+def test_publication_schema_override_is_exact_vendor_java_wsdl(name):
+    provenance = contract()["type_source_overrides"][name]
+    raw = (Path(__file__).parents[1] / "docs/capabilities/evidence/granicus-platform" / provenance["source_file"]).read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == provenance["source_sha256"]
+    wsdl = ET.fromstring(raw)
+    model = wsdl.find(f'.//{{http://www.w3.org/2001/XMLSchema}}complexType[@name="{name}"]')
+    expected = {field.get("name"): field.get("type") for field in model.find("{http://www.w3.org/2001/XMLSchema}all")}
+    assert contract()["types"][name] == {"fields": expected}
+    if name == "PublishClipData":
+        assert expected["Public"] == "xsd:boolean"
+        with pytest.raises(ValueError):
+            request_xml("PublishClip", {"PublishClipData": {"ClipID": 7, "Public": "assumed"}}, byte_limit=10000)

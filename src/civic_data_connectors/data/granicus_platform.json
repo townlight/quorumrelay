@@ -424,6 +424,15 @@
         "Document": "ns5:Document"
       },
       "response": {}
+    },
+    "GetFolderUploadInterface": {
+      "soap_action": "urn:UserSDK#UserWebservice#GetFolderUploadInterface",
+      "request": {
+        "FolderID": "xsd:int"
+      },
+      "response": {
+        "interface": "ns5:ServerInterfaceData"
+      }
     }
   },
   "types": {
@@ -768,10 +777,38 @@
       "array": "ns5:MinutesDocumentData"
     },
     "PublishClipResult": {
-      "array": "xsd:string"
+      "fields": {
+        "ClipID": "xsd:int",
+        "URL": "xsd:string",
+        "PublishPoint": "xsd:string"
+      }
     },
     "PublishClipData": {
-      "array": "xsd:int"
+      "fields": {
+        "ClipID": "xsd:int",
+        "Public": "xsd:boolean",
+        "Name": "xsd:string",
+        "Title": "xsd:string",
+        "TextField": "xsd:string",
+        "TemplateID": "xsd:int",
+        "MetaID": "xsd:int"
+      }
+    }
+  },
+  "type_source_overrides": {
+    "PublishClipData": {
+      "official_repository": "https://github.com/Granicus/platform-api-java",
+      "revision": "548e20a5f25f9ca5472e168996fe116ab8bd1164",
+      "source_file": "java-granicus.wsdl",
+      "source_sha256": "a4faf563185063a15f9f568a31cb2176332e9b02cb4ed20bdcbb047cd72e9820",
+      "reason": "Structured vendor Java WSDL matches same-product .NET SDK DTOs; original .NET WSDL has conflicting array placeholders. No live-version compatibility inferred."
+    },
+    "PublishClipResult": {
+      "official_repository": "https://github.com/Granicus/platform-api-java",
+      "revision": "548e20a5f25f9ca5472e168996fe116ab8bd1164",
+      "source_file": "java-granicus.wsdl",
+      "source_sha256": "a4faf563185063a15f9f568a31cb2176332e9b02cb4ed20bdcbb047cd72e9820",
+      "reason": "Structured vendor Java WSDL matches same-product .NET SDK DTOs; original .NET WSDL has conflicting array placeholders. No live-version compatibility inferred."
     }
   }
 }

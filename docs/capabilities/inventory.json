@@ -3854,7 +3854,9 @@
             "Document URL/update and single-call agenda/minutes upload mappings execute through actual coordinator with immutable file references; expired input handles do not expire plans, lost mutation responses reconcile without resend, and altered file readback remains uncertain. Six exact vendor methods mapped; tests/test_granicus_write.py.",
             "Pinned MediaManager.cs UploadClipMinutesDocumentXL independently defines 7,000,000-byte add/finish chunks and a 1GB ceiling. Actual coordinator tests verify >7MB complete bytes, final-response-loss reconciliation and intermediate-response-loss uncertainty without repeating a chunk.",
             "Six supporting read methods run through the actual engine in vendor-shaped fixtures: GetClipCaptions, GetEventVideoLocation, GetClipVideoLocation, GetMetaDataVideoLocation, FetchAttachment and GetClipMinutesDocuments. Exact raw XML/Document base64 and byte hash retained; no inferred document URL or caption format. Generic SDK fetch_captions is exercised separately.",
-            "APIEntities.cs MetaDataData.Payload explicitly lists AgendaItem/Note/Document/Rollcall/Motion/VoteRecord. An explicit $type/value wrapper validates full pinned fields, preserves SOAP xsi:type on readback and supports actual meeting-bound Motion update. Generic untyped object schemas remain rejected."
+            "APIEntities.cs MetaDataData.Payload explicitly lists AgendaItem/Note/Document/Rollcall/Motion/VoteRecord. An explicit $type/value wrapper validates full pinned fields, preserves SOAP xsi:type on readback and supports actual meeting-bound Motion update. Generic untyped object schemas remain rejected.",
+            "MediaVault literal binding has 13 focused checks against exact pinned SDK.asmx.wsdl, including bytes/header typing and no token transfer on origin mismatch. Three actual coordinator UploadFile cases prove identity readback, persisted-ID reconciliation and unknown-ID uncertainty/no replay; no implicit publication.",
+            "Official Java WSDL revision548e20a5f25f9ca5472e168996fe116ab8bd1164 supplies structured PublishClipData/PublishClipResult matching .NET SDK DTOs. Explicit per-type source overrides retain and qualify the original conflicting array definitions; two independent provenance checks pass."
           ],
           "limits": "Pinned SDK1.x contract, not a live/current compatibility claim. Document uploads/URLs, media upload registration/publication, metadata add/import and structured motion/attendee engine mappings remain implementation work; no delete/admin scope."
         }
@@ -4110,10 +4112,10 @@
           "evidence_ids": [
             "granicus-platform-pinned-soap-synthetic"
           ],
-          "details": "UploadEventAgendaDocument and UploadClipMinutesDocument bind immutable scoped files into typed SOAP Document at send time. Minutes over 7,000,000 bytes use the pinned vendor SDK add/finish protocol with a plan-bound upload UUID, 7,000,000-byte chunks and min(1GB, configured transfer ceiling). Event agenda uploads retain a 7MB adapter safety ceiling. Exact independent GET byte/hash readback or uncertain receipt; ambiguous add/finish responses are never replayed.",
+          "details": "UploadEventAgendaDocument and UploadClipMinutesDocument bind immutable scoped files into typed SOAP Document at send time. Minutes over 7,000,000 bytes use the pinned vendor SDK add/finish protocol with a plan-bound upload UUID, 7,000,000-byte chunks and min(1GB, configured transfer ceiling). Event agenda uploads retain a 7MB adapter safety ceiling. Exact independent GET byte/hash readback or uncertain receipt; ambiguous add/finish responses are never replayed. Normal MediaVault UploadFile now maps one approved audio/video bytes part to an explicitly authorized folder/interface; current PHPSESSID is injected only into a private SecurityHeader on the exact configured HTTPS MediaVault origin. Success verifies acknowledged ClipID through GetClip; a persisted identity recovers readback failure. Lost upload identity stays uncertain and is not replayed; no remote-original-byte claim or implicit publication.",
           "dependencies": [],
           "remaining_verification": [
-            "Media upload registration/publication and remaining supporting read mappings."
+            "MediaVault chunked/registration/existing-Clip file replacement paths and explicit PublishClip coordinator mapping."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -5316,6 +5318,54 @@
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
         {
+          "entity": "recording",
+          "operation": "upload",
+          "endpoint_or_format": "Explicit private folder-interface-matched HTTPS media_origin + /MediaVault/SDK.asmx (literal SOAP)",
+          "field_mappings": [
+            {
+              "normalized": "fields.FolderID",
+              "provider_field": "FolderID",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "fields.NewFileName",
+              "provider_field": "NewFileName",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "immutable scoped media part",
+              "provider_field": "bytes",
+              "mapping_level": "exact_original_bytes"
+            }
+          ],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Explicit recording:upload, folder_ids, meeting_ids and HTTPS media_origin policy matching GetFolderUploadInterface. Private current PHPSESSID impersonation; never included in plan or receipt.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "UploadFileResult ClipID persisted before independent GetClip identity readback. Lost readback reconciles by known ID; lost upload identity remains uncertain without replay. Submitted file digest binds exact request bytes; no claim of remote original-byte hash.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "UploadFile",
+          "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
           "entity": "media/metadata/motions/attendees",
           "operation": "upload",
           "endpoint_or_format": "Remaining pinned Platform WSDL media/metadata/motion/attendee methods",
@@ -5364,9 +5414,9 @@
         "Map remaining documented in-domain SDK methods: RegisterClipUpload/PublishClip (publication explicit only), metadata Add/Import, and meeting-bound motion/attendee semantics. UID aliases and broad list/query variants remain to reconcile against equivalent mapped resource paths.",
         "Inspect pinned vendor comments/examples for untyped Payload/native enum semantics; do not invent values.",
         "Keep Platform SOAP distinct from ViewPublisher, Legistar, Peak, Swagit and iQM2; no cross-product endpoint inference.",
-        "MediaVault normal upload is documented separately in pinned MediaVault.cs/SDK.asmx.wsdl; RegisterClipUpload warns against normal upload use. Implement the normal file upload path with private session impersonation state.",
-        "Resolve PublishClip WSDL-versus-SDK DTO disagreement with matching official version/reference before engine publication mapping; Public cannot be guessed or implicit.",
-        "CreateAttendees and CreateMotionActions are described as system-wide roster/definitive motion-action list operations. Event/Clip Attendees/MotionTypes and typed MetaDataData Motion/VoteRecord already support meeting-bound fields; do not expand into general contacts/administration."
+        "CreateAttendees and CreateMotionActions are described as system-wide roster/definitive motion-action list operations. Event/Clip Attendees/MotionTypes and typed MetaDataData Motion/VoteRecord already support meeting-bound fields; do not expand into general contacts/administration.",
+        "Normal single-call MediaVault UploadFile is implemented. Map remaining documented chunk/registration/replacement methods; preserve private upload state, current source policy and uncertain no-repeat semantics.",
+        "Publication schema discrepancy is resolved using independently pinned official Java WSDL matching .NET DTOs. Explicit Public input and operation-specific publication/readback/reconciliation engine mapping remain implementation work."
       ],
       "requirement_ids": [
         "C01",
@@ -5392,12 +5442,11 @@
       ],
       "observation_date": "2026-11-11",
       "test_environment": {
-        "mode": "synthetic_fixture_only",
+        "mode": "vendor_documented_synthetic_execution",
         "authorized_remote_writes": false,
-        "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "provider_credentials": "not_required_for_accepted_synthetic_verification",
+        "live_provider_checks": "optional_supporting_evidence",
+        "rule": "Vendor-documented synthetic verification satisfies provider operation acceptance under the dated owner amendment; actual app/Windows/delivery requirements remain."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",

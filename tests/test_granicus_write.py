@@ -401,3 +401,80 @@ def test_meeting_bound_motion_payload_updates_preserve_type_and_readback(tmp_pat
     assert result.status == "completed", result.errors
     assert result.data["items"][0]["readback"]["Payload"] == {"$type": "Motion", "value": after}
     assert network.mutations == 1
+
+
+class MediaNetwork(Network):
+    def __init__(self):
+        super().__init__("ClipData", "GetClip", "UpdateClip", "clip")
+        self.uploaded = None
+        self.lose_upload = self.lose_readback = False
+
+    def send(self, url, **kwargs):
+        import base64
+        from civic_data_connectors.providers.granicus_vault import NAMESPACE
+        root = ET.fromstring(kwargs["body"])
+        request = list(root.find(f"{{{SOAP}}}Body"))[0]
+        method = request.tag.rsplit("}", 1)[-1]
+        body = ET.Element(f"{{{SOAP}}}Envelope")
+        if method == "UploadFile":
+            assert url == "https://synthetic-media.granicus.com/MediaVault/SDK.asmx"
+            assert "Cookie" not in kwargs["headers"]
+            token = root.find(f"{{{SOAP}}}Header/{{{NAMESPACE}}}SecurityHeader/{{{NAMESPACE}}}SecurityToken")
+            assert token.text == "synthetic-vault-private-session"
+            assert request.findtext(f"{{{NAMESPACE}}}FolderID") == "11"
+            self.uploaded = base64.b64decode(request.findtext(f"{{{NAMESPACE}}}bytes"), validate=True)
+            self.values.update(ID=19, Status="Pending", FileName=request.findtext(f"{{{NAMESPACE}}}NewFileName"))
+            self.mutations += 1
+            if self.lose_upload:
+                self.lose_upload = False
+                raise TimeoutError("Synthetic loss after upload")
+            response = ET.SubElement(ET.SubElement(body, f"{{{SOAP}}}Body"), f"{{{NAMESPACE}}}UploadFileResponse")
+            ET.SubElement(response, f"{{{NAMESPACE}}}UploadFileResult").text = "19"
+        else:
+            response = ET.SubElement(ET.SubElement(body, f"{{{SOAP}}}Body"), f"{{{RPC}}}{method}Response")
+            if method == "GetFolderUploadInterface":
+                descriptor = ET.SubElement(response, "interface")
+                ET.SubElement(descriptor, "Host").text = "synthetic-media.granicus.com"
+                ET.SubElement(descriptor, "ControlPort", {f"{{{XSI}}}type": "xsd:int"}).text = "443"
+            elif method == "GetClips":
+                clips = ET.SubElement(response, "clips", {f"{{{ENC}}}arrayType": "g:ClipData[0]"})
+                if self.uploaded is not None:
+                    self._record(ET.SubElement(clips, "item"))
+            elif method == "GetClip":
+                if self.lose_readback:
+                    self.lose_readback = False
+                    raise TimeoutError("Synthetic readback loss")
+                self._record(ET.SubElement(response, "clip"))
+            else:
+                assert method in {"Login", "Logout"}
+        return WriteResponse(200, ET.tostring(body), set_cookie_headers=(
+            ("PHPSESSID=synthetic-vault-private-session; Path=/; Secure",) if method == "Login" else ()))
+
+
+@pytest.mark.parametrize("loss", ["none", "upload", "readback"])
+def test_media_vault_real_coordinator_upload_identity_and_no_uncertain_replay(tmp_path, loss):
+    import io
+    from civic_data_connectors.write_files import stage_write_file
+    network = MediaNetwork()
+    engine, _, context, change = setup(tmp_path, network)
+    context.credentials["granicus"].update(permissions=["recording:upload"], folder_ids=["11"], meeting_ids=["7"],
+                                         media_origin="https://synthetic-media.granicus.com")
+    data = b"synthetic-mp4-byte-stream"
+    handle = stage_write_file(engine, io.BytesIO(data), context=context, filename="approved.mp4", content_type="video/mp4")
+    change.update(entity="recording", operation="upload", resource_id=None, parent_id="11", meeting_id="7",
+        fields={"FolderID": 11, "NewFileName": "approved.mp4"},
+        files=[{"part": "bytes", "filename": "approved.mp4", "content_type": "video/mp4", "file_handle": handle}])
+    request = plan(engine, context, change)
+    network.lose_upload = loss == "upload"
+    network.lose_readback = loss == "readback"
+    result = engine.execute("commit_write", request, context=context)
+    assert result.status == ("completed" if loss == "none" else "partial"), result.errors
+    result = engine.execute("commit_write", request, context=context)
+    assert result.status == ("partial" if loss == "upload" else "completed"), result.errors
+    assert network.mutations == 1 and network.uploaded == data
+    assert "synthetic-vault-private-session" not in json.dumps(result.public_dict())
+    if loss != "upload":
+        assert result.data["items"][0]["readback"]["ID"] == 19
+        assert result.data["items"][0]["publication_requested"] is False
+        assert result.data["items"][0]["provider_status"] == "Pending"
+        assert result.data["items"][0]["playable_media_verified"] is False

@@ -54,6 +54,9 @@ class GranicusWriteAdapter(WriteAdapter):
 
     def authorize(self, source, change, context):
         config = self.credentials(source, context)
+        if change.entity == "recording" and change.operation == "upload":
+            self._media_policy(source, change, context)
+            return
         if change.entity == "document":
             self._document_policy(source, change, context)
             return
@@ -86,6 +89,8 @@ class GranicusWriteAdapter(WriteAdapter):
 
     def prepare(self, source, change, context, bounds, deadline):
         self.authorize(source, change, context)
+        if change.entity == "recording" and change.operation == "upload":
+            return self._prepare_media(source, change, context, bounds, deadline)
         if change.entity == "document":
             return self._prepare_document(source, change, context, bounds, deadline)
         create = change.operation == "create"
@@ -129,6 +134,8 @@ class GranicusWriteAdapter(WriteAdapter):
     def apply(self, source, prepared, context, bounds, deadline, *, persist=None):
         change = WriteChange.from_dict(prepared["change"])
         self.authorize(source, change, context)
+        if change.entity == "recording" and change.operation == "upload":
+            return self._apply_media(source, prepared, context, bounds, deadline, persist=persist)
         if change.entity == "document":
             return self._apply_document(source, prepared, context, bounds, deadline, persist=persist)
         session = self._session(source, context, bounds, deadline)
@@ -174,6 +181,15 @@ class GranicusWriteAdapter(WriteAdapter):
     def reconcile(self, source, prepared, item, context, bounds, deadline):
         change = WriteChange.from_dict(prepared["change"])
         self.authorize(source, change, context)
+        if change.entity == "recording" and change.operation == "upload":
+            identity = item.get("resource_id")
+            if identity is None:
+                return {"state": "uncertain", "reason": "MediaVault upload response identity was lost; no documented unique lookup or safe automatic replay."}
+            session = self._session(source, context, bounds, deadline)
+            try:
+                return self._media_outcome(session, prepared, identity)
+            finally:
+                self._close_document_session(session)
         if change.entity == "document":
             session = self._session(source, context, bounds, deadline)
             try:
@@ -370,3 +386,96 @@ class GranicusWriteAdapter(WriteAdapter):
         return {"state": "succeeded" if matches else "uncertain", "resource_id": actual["ID"],
                 "readback": actual, "reconciled": True, "document_sha256": digest,
                 **({} if matches else {"reason": "The exact planned document could not be independently verified; no upload replay."})}
+
+
+    def _media_policy(self, source, change, context):
+        config = self.credentials(source, context)
+        if (change.resource_id is not None or set(change.fields) != {"FolderID", "NewFileName"}
+                or "recording:upload" not in config.get("permissions", ())
+                or str(numeric_id(change.fields["FolderID"])) not in config.get("folder_ids", ())
+                or change.parent_id not in {None, change.fields["FolderID"], str(change.fields["FolderID"])}
+                or not change.meeting_id or str(change.meeting_id) not in config.get("meeting_ids", ())):
+            raise WriteFailure("permission_denied", "MediaVault upload requires exact folder/meeting policy and documented parameters.")
+        if len(change.files) != 1:
+            raise ValueError("MediaVault upload requires one explicitly approved media file.")
+
+    @staticmethod
+    def _media_folder(session, folder_id):
+        values, _ = session.call("GetClips", {"FolderID": numeric_id(folder_id)})
+        clips = values.get("clips")
+        if not isinstance(clips, list) or any(not isinstance(clip, dict) for clip in clips):
+            raise ValueError("The documented folder-clips result could not be verified.")
+        ids = [numeric_id(clip.get("ID")) for clip in clips]
+        if len(ids) != len(set(ids)):
+            raise ValueError("Folder clips repeat a provider identity.")
+        return clips
+
+    def _prepare_media(self, source, change, context, bounds, deadline):
+        from .granicus_vault import VaultSession, request_xml as vault_xml
+        parts = self._files(change, bounds)
+        part = parts[0]
+        if (part["part"] != "bytes" or part["filename"] != change.fields["NewFileName"]
+                or not part["content_type"].startswith(("video/", "audio/"))
+                or not part["reference"]["byte_length"]):
+            raise ValueError("Approve one nonempty audio/video bytes part with matching NewFileName.")
+        session = self._session(source, context, bounds, deadline)
+        vault = VaultSession(session, change.fields["FolderID"])
+        try:
+            before = self._media_folder(session, change.fields["FolderID"])
+            if any(clip.get("FileName") == change.fields["NewFileName"] for clip in before):
+                raise WriteFailure("conflict", "A folder clip already uses the supplied physical filename.")
+            vault._connect()  # Read-only folder interface + private impersonation setup.
+            endpoint = vault._url
+            # Validate exact literal serialization without persisting its private header.
+            vault_xml("UploadFile", {**change.fields, "bytes": self._file_bytes(part)},
+                service_host=urlsplit(session.url).hostname, token="", byte_limit=bounds.transfer_bytes)
+        finally:
+            vault.close()
+            self._close_document_session(session)
+        fingerprint = canonical_hash(before)
+        if change.expected_version is not None and change.expected_version != fingerprint:
+            raise WriteFailure("conflict", "Folder state differs from the expected upload baseline.")
+        return {"change": asdict(change), "native": {"method": "POST", "url": endpoint,
+            "content_type": "text/xml", "headers": {}, "body": deepcopy(change.fields), "files": list(parts),
+            "soap_method": "UploadFile", "publication": "No PublishClip call or inferred public visibility"},
+            "before": before, "before_fingerprint": fingerprint, "expected_version": fingerprint,
+            "contract_revision": contract()["source_revision"], "read_url": session.url,
+            "conflict_semantics": "preflight_folder_compare_not_atomic_provider_cas"}
+
+    def _apply_media(self, source, prepared, context, bounds, deadline, *, persist):
+        from .granicus_vault import VaultSession
+        change = WriteChange.from_dict(prepared["change"])
+        session = self._session(source, context, bounds, deadline)
+        vault = VaultSession(session, change.fields["FolderID"])
+        try:
+            if canonical_hash(self._media_folder(session, change.fields["FolderID"])) != prepared["before_fingerprint"]:
+                raise WriteFailure("conflict", "The upload folder changed after planning.")
+            vault._connect()
+            if vault._url != prepared["native"]["url"]:
+                raise WriteFailure("conflict", "The folder's authorized MediaVault endpoint changed.")
+            data = self._file_bytes(prepared["native"]["files"][0])
+            if persist:
+                persist({"target_folder_id": change.fields["FolderID"]})
+            try:
+                result = vault.call("UploadFile", {**change.fields, "bytes": data})
+            except ValueError:
+                raise AmbiguousWrite() from None
+            identity = numeric_id(result.get("UploadFileResult"))
+            if persist:
+                persist({"resource_id": identity})
+            return self._media_outcome(session, prepared, identity)
+        finally:
+            vault.close()
+            self._close_document_session(session)
+
+    @staticmethod
+    def _media_outcome(session, prepared, identity):
+        values, _ = session.call("GetClip", {"ClipID": numeric_id(identity)})
+        actual = values.get("clip")
+        if not isinstance(actual, dict) or str(actual.get("ID")) != str(identity):
+            raise ValueError("The uploaded clip identity could not be independently read back.")
+        return {"state": "succeeded", "resource_id": identity, "readback": actual, "reconciled": True,
+                "submitted_file_sha256": prepared["native"]["files"][0]["reference"]["sha256"],
+                "verification_scope": "Documented UploadFile acknowledgement plus independent Clip identity; submitted bytes are plan-verified, not a remote original-byte claim.",
+                "provider_status": actual.get("Status"), "playable_media_verified": False,
+                "publication_requested": False}

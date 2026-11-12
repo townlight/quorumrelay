@@ -46,6 +46,27 @@
       "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/SDK.asmx.wsdl",
       "bytes": 12321,
       "sha256": "07326cbec0146d5f0e7d2b4a6fcfc0321d5066adbed9e10d6720661c6f536135"
+    },
+    {
+      "file": "java-granicus.wsdl",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-java/548e20a5f25f9ca5472e168996fe116ab8bd1164/src/granicus.wsdl",
+      "revision": "548e20a5f25f9ca5472e168996fe116ab8bd1164",
+      "bytes": 110270,
+      "sha256": "a4faf563185063a15f9f568a31cb2176332e9b02cb4ed20bdcbb047cd72e9820"
+    },
+    {
+      "file": "PublishClipData.java",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-java/548e20a5f25f9ca5472e168996fe116ab8bd1164/src/com/granicus/xsd/PublishClipData.java",
+      "revision": "548e20a5f25f9ca5472e168996fe116ab8bd1164",
+      "bytes": 9269,
+      "sha256": "4febe60acebb4e8bb4b22c7843c365630c8dccc61d95f0352177383ac60346a5"
+    },
+    {
+      "file": "PublishClipResult.java",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-java/548e20a5f25f9ca5472e168996fe116ab8bd1164/src/com/granicus/xsd/PublishClipResult.java",
+      "revision": "548e20a5f25f9ca5472e168996fe116ab8bd1164",
+      "bytes": 5510,
+      "sha256": "429208848f42432e33e118e5073d93882a1180cf1b295b631d3cf19da8102b7c"
     }
   ]
 }
