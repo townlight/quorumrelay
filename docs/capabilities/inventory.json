@@ -13693,6 +13693,22 @@
           "limits": "One PDF only; no RSS schema, archive completeness, other media or write acceptance. Detailed receipt serialization limit is retained.",
           "receipt_path": "docs/verification/peak-champ-supplied-artifacts-2026-11-12.json",
           "receipt_sha256": "242605928b1f5edffd5deaaba0a04f32701708a8ea5407a8ceec3219c3ae579d"
+        },
+        {
+          "id": "peak-unlabeled-viewers-2026-11-12",
+          "url": "https://douglascountynv.granicus.com/ViewPublisher.php?view_id=1",
+          "title": "Peak supplied unlabeled agenda viewer mapping",
+          "kind": "source_baseline",
+          "observed": "Captured vendor HTML supplies the exact same-row AgendaViewer and MediaPlayer view/clip identifiers. Ten new synthetic cases and three existing packet cases passed.",
+          "observation_date": "2026-11-12",
+          "access_scope": "offline_saved_capture_and_synthetic_transport",
+          "proof_level": "source_fixture_and_scoped_synthetic_engine_execution",
+          "findings": [
+            "Native rich mapping now preserves exact source/view/clip-bound supplied unlabeled agenda/minutes viewer locators. Compatibility parser remains unchanged."
+          ],
+          "limits": "No new network request or vendor mutation; Viewer locator only; no agenda/PDF bytes or HTML-to-PDF claim; Only otherwise-unlabeled supplied viewer links changed; compatibility output unchanged; No catalog/search/write promotion",
+          "receipt_path": "docs/verification/peak-unlabeled-viewers-2026-11-12.json",
+          "receipt_sha256": "119342ed0996e7308950aec4cf09a226869be313dcfa10a28512ff04a70dea09"
         }
       ],
       "tenants": [
@@ -13742,9 +13758,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "granicus-peak-tenant",
-            "peak-lower-merion-capture-2026-11-12"
+            "peak-lower-merion-capture-2026-11-12",
+            "peak-unlabeled-viewers-2026-11-12"
           ],
-          "details": "The registered Peak current listing uses the explicit granicus-listing-html mapping for its configured public page; 116 captured rows are preserved with supplied packet/media references. No full archive or search coverage is claimed.",
+          "details": "The registered Peak current listing uses the explicit granicus-listing-html mapping for its configured public page; 116 captured rows are preserved with supplied packet/media references. No full archive or search coverage is claimed. Same-row unlabeled agenda/minutes viewer links are retained only when exact configured origin/view and row clip agree; these are locators, not retrieved PDF proof.",
           "dependencies": [],
           "remaining_verification": [
             "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",

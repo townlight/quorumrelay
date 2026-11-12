@@ -418,6 +418,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
+- Rich mapping now retains captured unlabeled agenda/minutes viewer links bound to the same row player, configured origin/view and clip ID (ten new synthetic cases; three packet cases reused). Viewer locators do not prove agenda/PDF bytes; compatibility output is unchanged.
 - The selected capture and one supplied PDF are now recorded. RSS schema, full archive continuation and other document/media outcomes remain unverified; the receipt serialization failure is preserved and was not repaired by repeating the fetch.
 - The Elko Peak manual gives authenticated UI fields, attachment privacy values and a 200 MB limit, but no external route/payload. Machine create/update/upload, role permissions and readback need a supported API contract and authorized Peak account.
 - Do not use ViewPublisher fields as write parameters or reuse MediaManager/Legistar contracts.

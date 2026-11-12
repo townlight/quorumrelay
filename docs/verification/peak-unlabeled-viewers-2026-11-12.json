@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-12",
+  "operation": "peak_supplied_unlabeled_agenda_viewer_mapping",
+  "source_url": "https://douglascountynv.granicus.com/ViewPublisher.php?view_id=1",
+  "fixture": {
+    "path": "tests/fixtures/baseline/peak.response",
+    "sha256": "835e3e2990186c4015b223f3692938b45437e8ee8c91e22fb55740c0cc06fb1b"
+  },
+  "reproduction": "Native rich row clip1897 retained player/packet but omitted its supplied unlabeled same-row AgendaViewer link. Compatibility parser remains unchanged.",
+  "synthetic_execution": {
+    "new_distinct_cases_passed": 10,
+    "reused_packet_cases_passed": 3,
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_peak_viewers.py tests/test_peak_packets.py -q (12 passed; one test assertion used nonexistent coverage key and failed)",
+      ".venv/Scripts/python.exe -m pytest tests/test_peak_viewers.py::test_default_configured_peak_discovery_keeps_locator_without_claiming_file_bytes -q (1 passed after asserting actual coverage.scope)"
+    ],
+    "ruff": "Scoped Ruff passed for changed module/test."
+  },
+  "result": {
+    "clip_id": "1897",
+    "agenda_locator": "https://douglascountynv.granicus.com/AgendaViewer.php?view_id=1&clip_id=1897",
+    "binding": "same-row player plus exact configured origin/view/clip; no duplicate/extra query, fragment or userinfo",
+    "configured_default_discovery": "partial; configured capture only; upstream catalog completeness is unverified"
+  },
+  "limits": [
+    "No new network request or vendor mutation",
+    "Viewer locator only; no agenda/PDF bytes or HTML-to-PDF claim",
+    "Only otherwise-unlabeled supplied viewer links changed; compatibility output unchanged",
+    "No catalog/search/write promotion"
+  ]
+}

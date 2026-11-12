@@ -2,7 +2,7 @@
 
 from datetime import datetime
 import re
-from urllib.parse import parse_qs, urljoin, urlsplit
+from urllib.parse import parse_qs, parse_qsl, urljoin, urlsplit
 
 from .. import compat
 from ..engine import canonical_hash
@@ -14,11 +14,42 @@ class _ListingRows(compat.ViewPublisherRows):
 
     def handle_starttag(self, tag, attrs):
         super().handle_starttag(tag, attrs)
+        if tag == "a" and self.row is not None and not self.cell:
+            href = dict(attrs).get("href") or ""
+            if re.search(r"(?:^|/)(?:AgendaViewer|MinutesViewer)\.php\?", href, re.I):
+                self.row.setdefault("unlabeled_viewer_links", []).append(href)
         if tag != "a" or self.row is None or self.cell != "AgendaPacketLink":
             return
         href = dict(attrs).get("href") or ""
         if href:
             self.row.setdefault("packet_links", []).append(href)
+
+
+def _bound_viewer(source_url, player, href):
+    """Use only supplied unlabeled viewers bound to this row's clip and view."""
+    if not player:
+        return None
+    try:
+        url = urljoin(source_url, href)
+        validate_url(url)
+        target, source, parent = urlsplit(url), urlsplit(source_url), urlsplit(player)
+        pairs = parse_qsl(target.query, keep_blank_values=True)
+        query = dict(pairs)
+        expected = parse_qs(parent.query)
+        source_view = parse_qs(source.query).get("view_id")
+        if (target.scheme != source.scheme or target.hostname != source.hostname
+                or target.port != source.port or target.fragment
+                or target.path.lower() not in {"/agendaviewer.php", "/minutesviewer.php"}
+                or len(pairs) != 2 or set(query) != {"view_id", "clip_id"}
+                or any(not re.fullmatch(r"[1-9][0-9]*", value) for value in query.values())
+                or expected.get("clip_id") != [query["clip_id"]]
+                or expected.get("view_id") != [query["view_id"]]
+                or source_view != [query["view_id"]]):
+            return None
+    except ValueError:
+        return None
+    kind = "agenda" if target.path.lower() == "/agendaviewer.php" else "minutes"
+    return {"kind": kind, "url": url}
 
 
 def listing_rows(source, content):
@@ -60,6 +91,10 @@ def listing_rows(source, content):
         seen.add(identity)
         documents = [{"kind": kind, "url": urljoin(source.url, raw[kind])}
                      for kind in ("agenda", "minutes") if raw.get(kind)]
+        for href in raw.get("unlabeled_viewer_links", []):
+            document = _bound_viewer(source.url, player, href)
+            if document and document not in documents:
+                documents.append(document)
         for href in raw.get("packet_links", []):
             url = urljoin(source.url, href)
             try:
