@@ -39,6 +39,7 @@ def register(engine, *, transport: Transport | None = None,
             ("civicweb", "civicweb-detail-html"),
             ("swagit", "swagit-listing-html"),
             ("onbase", "onbase-public-listing-html"),
+            ("digital-towpath", "digital-towpath-listing-html"),
             ("municode-meetings", "essential-multimedia-json"),
             ("telvue", "telvue-connect-media-json"), ("telvue", "telvue-connect-videos-json"),
             ("telvue", "telvue-connect-playlists-json"),
@@ -72,6 +73,9 @@ def register(engine, *, transport: Transport | None = None,
     from .escribe_search import native_search as escribe_search
     engine.register_native_search("escribe", tracked_handler("search", lambda engine, request, content, context:
                                   escribe_search(engine, request, content, context, transport=transport)))
+    from .swagit_search import native_search as swagit_search
+    engine.register_native_search("swagit", tracked_handler("search", lambda engine, request, content, context:
+                                  swagit_search(engine, request, content, context, transport=transport)))
     from .civicplus_export import export_historical
     engine.register_native_export("civicplus-select", tracked_handler("export", export_historical))
 

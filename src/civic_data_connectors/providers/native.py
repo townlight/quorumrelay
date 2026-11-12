@@ -150,6 +150,9 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format == "digital-towpath-listing-html":
+        from .towpath import listing_bundle
+        return listing_bundle(source, namespace, content)
     if input_format == "onbase-public-listing-html":
         from .onbase import listing_rows
         return make_bundle(source, namespace, content, input_format, listing_rows(source, content))

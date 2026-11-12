@@ -8,7 +8,6 @@ from urllib.parse import parse_qs, urlsplit
 from quorumrelay import OperationContext, create_engine
 from quorumrelay.providers.contracts import Response
 
-from civic_data_connectors.providers.swagit_search import native_search
 
 FIXTURES = Path(__file__).parent / "fixtures" / "swagit-native-search"
 SOURCE = {"provider": "swagit", "url": "https://princetontx.new.swagit.com/views/261/"}
@@ -54,10 +53,7 @@ def request(**bounds):
 
 
 def make_engine(transport):
-    engine = create_engine(provider_transport=transport)
-    engine.register_native_search("swagit", lambda owner, req, content, context:
-                                 native_search(owner, req, content, context, transport=transport))
-    return engine
+    return create_engine(provider_transport=transport)
 
 
 def test_native_search_exact_local_metadata_and_rel_next_resume():

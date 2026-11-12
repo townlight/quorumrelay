@@ -20,6 +20,7 @@ ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json"
                       "civicweb": ("civicweb-detail-html",),
                       "swagit": ("swagit-listing-html",),
                       "onbase": ("onbase-public-listing-html",),
+                      "digital-towpath": ("digital-towpath-listing-html",),
                       "boardable": ("boardable-public-meetings-json",),
                       "telvue": ("telvue-connect-media-json", "telvue-connect-videos-json",
                                  "telvue-connect-playlists-json"),

@@ -161,6 +161,17 @@ def _request_spec(source, bounds, task, context):
         url = _origin(source.url) + "/AgendaCenter/UpdateCategoryList"
         method, body = "POST", form_body(task.get("fields"))
         headers = {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
+    elif kind == "towpath-year" and source.provider == "digital-towpath":
+        fields = task.get("fields")
+        if not isinstance(fields, dict) or set(fields) != {"url", "year"}:
+            raise ValueError("Invalid Digital Towpath public year control.")
+        url = fields["url"]
+        validate_url(url)
+        parts = urlsplit(url)
+        if (_origin(url) != _origin(source.url) or parts.query or parts.scheme != "https"
+                or re.fullmatch(r"/meetings/meetings/[^/]+/20[0-9]{2}", parts.path) is None
+                or parts.path.rsplit("/", 1)[-1] != fields["year"]):
+            raise ValueError("The Digital Towpath year control left its supplied public route.")
     elif kind == "champ" and source.provider == kind:
         event = re.fullmatch(r"/([A-Za-z0-9_-]+)/event/([0-9]+)/?", p.path)
         if p.hostname != "play.champds.com" or event is None:
@@ -378,7 +389,8 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
         raise ValueError("The provider listing exceeds the configured parser byte limit.")
     if input_format in {"legistar-events-json", "legistar-event-json", "wistia-api-media-json",
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
-                        "civicweb-detail-html", "swagit-listing-html", "onbase-public-listing-html"}:
+                        "civicweb-detail-html", "swagit-listing-html", "onbase-public-listing-html",
+                        "digital-towpath-listing-html"}:
         return parse_native(source, namespace, content, input_format), ()
     result = engine.normalize(replace(source, body=None), content, input_format=input_format,
                               bounds=replace(bounds, date_from=None, date_to=None,
@@ -403,6 +415,9 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     namespace = validate_source(source, context, content)
     bounds = Bounds(**request.get("bounds", {}))
     input_format = source.input_format or DEFAULT_FORMAT[source.provider]
+    if (source.provider == "digital-towpath" and source.input_format is None
+            and re.fullmatch(r"/meetings/detail/[0-9]+/?", urlsplit(source.url).path) is None):
+        input_format = "digital-towpath-listing-html"
     saved = _decode_content(request, content)
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")
@@ -469,11 +484,13 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                 page_content = saved
                 following = None
             else:
-                if task.get("kind") in {"suiteone-group", "agendacenter-year"}:
+                if task.get("kind") in {"suiteone-group", "agendacenter-year", "towpath-year"}:
                     if source.provider == "suiteone-media" and task["kind"] == "suiteone-group":
                         from .suiteone import controls
                     elif source.provider == "civicplus-agenda-center" and task["kind"] == "agendacenter-year":
                         from .agendacenter import controls
+                    elif source.provider == "digital-towpath" and task["kind"] == "towpath-year":
+                        from .towpath import controls
                     else:
                         raise ValueError("The public control does not belong to this provider.")
                     # Continuations contain public control values, never trust a
@@ -497,7 +514,7 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                     byte_limit=bounds.parser_bytes, deadline_seconds=max(0.001, deadline - monotonic()),
                     allowed_origins=(origin,),
                     **({"allow_redirects": False} if task.get("kind") in {
-                        "suiteone-group", "agendacenter-year"} else {}),
+                        "suiteone-group", "agendacenter-year", "towpath-year"} else {}),
                 )
                 if _origin(response.url) != origin:
                     raise ValueError("Provider retrieval left its configured origin.")
@@ -576,6 +593,14 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                                  for values in public_controls
                                  if (not bounds.date_from or values["year"] >= bounds.date_from[:4])
                                  and (not bounds.date_to or values["year"] <= bounds.date_to[:4]))
+                elif (source.provider == "digital-towpath" and task.get("kind") == "static"
+                        and input_format == "digital-towpath-listing-html"):
+                    from .towpath import controls
+                    public_controls = controls(page_content)
+                    queue.extend({"kind": "towpath-year", "fields": values}
+                                 for values in public_controls
+                                 if (not bounds.date_from or values["year"] >= bounds.date_from[:4])
+                                 and (not bounds.date_to or values["year"] <= bounds.date_to[:4]))
         except Exception as error:
             # Provider/network exceptions may contain request URLs or credentials.
             # Never expose arbitrary exception text through public errors.
@@ -620,6 +645,10 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
             "scope": "configured Agenda Center root and its supplied year/category controls; archive extent unverified",
             "year_category_controls": len(public_controls or []),
             "control_validation": "current public root revalidated before resumed year POST"})
+    elif source.provider == "digital-towpath" and input_format == "digital-towpath-listing-html":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "supplied dated meeting links and public Other Years links; detail documents not fetched",
+            "control_validation": "current configured listing revalidated before resumed year GET"})
     return OperationResult(status, {"source": source.public_dict(), "records": records,
                                    "captures": captures, "bundles": bundles},
                            tuple(errors), coverage, context.operation_id)
