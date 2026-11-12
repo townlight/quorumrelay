@@ -1,0 +1,2 @@
+# Captures and expected outputs are byte-identity evidence, including original line endings.
+tests/fixtures/** -text
