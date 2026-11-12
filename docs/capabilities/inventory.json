@@ -23160,6 +23160,22 @@
           "limits": "Explicit standalone detail Source only; no root-to-detail traversal, other document availability, catalog, timezone reconciliation or provider-write acceptance.",
           "receipt_path": "docs/verification/boardable-detail-document-2026-11-12.json",
           "receipt_sha256": "46ad7c59ad097efee1a112a7e38a896839770a295725a03cd994246000cd7e1b"
+        },
+        {
+          "id": "boardable-known-detail-2026-11-12",
+          "url": "https://site.boardable.com/ventura-county-community-college-district/meetings",
+          "title": "Boardable scoped listing-to-known-detail synthetic execution",
+          "kind": "source_baseline",
+          "observed": "Twelve focused cases passed against captured listing and existing detail reference-table contract.",
+          "observation_date": "2026-11-12",
+          "access_scope": "scoped_local_storage_and_synthetic_guarded_transport",
+          "proof_level": "source_fixture_and_scoped_synthetic_engine_execution",
+          "findings": [
+            "Generic fetch_record reparses the imported scoped listing capture to resolve the supplied numeric ID/detail URL, verifies raw digest/size and current grants, and checks exact detail identity. No guessed slug."
+          ],
+          "limits": "Synthetic new route execution; no new live provider request or mutation; One detail only, partial coverage; no catalog, native search or private write claim; No document bytes fetched implicitly; existing separate attachment path retained; Dates remain source observations; listing/detail discrepancy unresolved; Latest source only; frozen dev8 artifact and consumer pins unchanged",
+          "receipt_path": "docs/verification/boardable-known-detail-2026-11-12.json",
+          "receipt_sha256": "26bb430fea60d2e7058dd7fd3e262f311c2046a40c15811c0a2754f710399e41"
         }
       ],
       "tenants": [
@@ -23231,9 +23247,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "boardable-tenant",
-            "boardable-detail-document-2026-11-12"
+            "boardable-detail-document-2026-11-12",
+            "boardable-known-detail-2026-11-12"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Resumed local source resolves exact supplied Boardable public /view links through their declared original-file /download mapping; one configured detail GET and one supplied PDF completed with exact byte/hash and viewer-capture provenance. No automatic root-to-detail lookup is inferred.",
+          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Resumed local source resolves exact supplied Boardable public /view links through their declared original-file /download mapping; one configured detail GET and one supplied PDF completed with exact byte/hash and viewer-capture provenance. Current source fetch_record resolves a known native ID only from its scoped imported listing capture and supplied URL, then verifies the detail identity; twelve synthetic cases pass. No unbound root-to-detail search or document download is implicit.",
           "dependencies": [],
           "remaining_verification": [
             "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."

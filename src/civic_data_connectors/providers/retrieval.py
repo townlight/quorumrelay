@@ -86,6 +86,9 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if source.provider == "civicweb":
             from .civicweb import fetch_record
             return fetch_record(source, namespace, request["external_id"], bounds, context, transport)
+        if source.provider == "boardable":
+            from .boardable_detail import fetch_record
+            return fetch_record(engine, source, namespace, request["external_id"], bounds, context, transport)
         if source.provider == "digital-towpath":
             external_id = request["external_id"]
             if (not isinstance(external_id, str) or re.fullmatch(r"[1-9][0-9]{0,18}", external_id) is None

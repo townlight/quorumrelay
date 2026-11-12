@@ -414,6 +414,7 @@ checkout containing the mapping; the frozen dev8 wheel is not silently updated.
 | Supplied source or workflow | Mapping and limits |
 |---|---|
 | BoardBook public rendered agenda | [Native item hierarchy and document associations](BOARDBOOK-DETAIL.md) |
+| Boardable known listing record | [Scoped capture-bound detail retrieval](BOARDABLE-DETAIL.md); no guessed slugs or implicit document download |
 | Town Hall Streams event | [Player citation and declared HLS locator](TOWN-HALL-STREAMS-DETAIL.md); a playlist is not verified media segments |
 | CHAMP event JSON | [Native agenda parents, documents and timeline anchors](CHAMP-AGENDA.md); no inferred transcript or speaker |
 | eSCRIBE rendered agenda | [Capture-local agenda positions and supplied documents](ESCRIBE-DETAIL.md) |
