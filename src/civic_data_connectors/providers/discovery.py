@@ -153,6 +153,13 @@ def _request_spec(source, bounds, task, context):
         url = _origin(source.url) + "/Home/GetRecentEventsGroup"
         method, body = "POST", form_body(task.get("fields"))
         headers = {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
+    elif kind == "agendacenter-year" and source.provider == "civicplus-agenda-center":
+        if p.scheme != "https" or p.path.lower().rstrip("/") != "/agendacenter" or p.query:
+            raise ValueError("Agenda Center year traversal requires its configured HTTPS root.")
+        from .agendacenter import form_body
+        url = _origin(source.url) + "/AgendaCenter/UpdateCategoryList"
+        method, body = "POST", form_body(task.get("fields"))
+        headers = {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
     elif kind == "champ" and source.provider == kind:
         event = re.fullmatch(r"/([A-Za-z0-9_-]+)/event/([0-9]+)/?", p.path)
         if p.hostname != "play.champds.com" or event is None:
@@ -443,7 +450,7 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     records, bundles, captures, failures, errors, retry = [], [], [], [], [], []
     pages = filtered = 0
     unknown_dates, unknown_bodies, visited = [], [], set()
-    suiteone_controls = None
+    public_controls = None
     while queue and pages < bounds.max_pages and len(records) < bounds.max_records:
         if context.check_cancelled() or monotonic() >= deadline:
             break
@@ -461,20 +468,25 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                 page_content = saved
                 following = None
             else:
-                if task.get("kind") == "suiteone-group":
-                    from .suiteone import controls
+                if task.get("kind") in {"suiteone-group", "agendacenter-year"}:
+                    if source.provider == "suiteone-media" and task["kind"] == "suiteone-group":
+                        from .suiteone import controls
+                    elif source.provider == "civicplus-agenda-center" and task["kind"] == "agendacenter-year":
+                        from .agendacenter import controls
+                    else:
+                        raise ValueError("The public control does not belong to this provider.")
                     # Continuations contain public control values, never trust a
                     # caller-modified group absent from the current root page.
-                    if suiteone_controls is None:
+                    if public_controls is None:
                         root = transport.request(source.url, byte_limit=bounds.parser_bytes,
                             deadline_seconds=max(.001, deadline - monotonic()),
                             allowed_origins=(_origin(source.url),), allow_redirects=False)
                         if (root.status != 200 or root.url != source.url
                                 or len(root.content) > bounds.parser_bytes):
-                            raise ValueError("The public SuiteOne control page is unavailable.")
-                        suiteone_controls = controls(root.content)
-                    if task.get("fields") not in suiteone_controls:
-                        raise ValueError("The SuiteOne group is not a current public root control.")
+                            raise ValueError("The public control page is unavailable.")
+                        public_controls = controls(root.content)
+                    if task.get("fields") not in public_controls:
+                        raise ValueError("The requested value is not a current public root control.")
                     if context.check_cancelled() or monotonic() >= deadline:
                         raise RetrievalError("provider_deadline_or_cancellation")
                 url, method, body, headers, size = _request_spec(source, bounds, task, context)
@@ -483,6 +495,8 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                     url, method=method, body=body, headers=headers or None,
                     byte_limit=bounds.parser_bytes, deadline_seconds=max(0.001, deadline - monotonic()),
                     allowed_origins=(origin,),
+                    **({"allow_redirects": False} if task.get("kind") in {
+                        "suiteone-group", "agendacenter-year"} else {}),
                 )
                 if _origin(response.url) != origin:
                     raise ValueError("Provider retrieval left its configured origin.")
@@ -550,9 +564,17 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                 if (source.provider == "suiteone-media" and task.get("kind") == "static"
                         and urlsplit(source.url).path in {"", "/"}):
                     from .suiteone import controls
-                    suiteone_controls = controls(page_content)
+                    public_controls = controls(page_content)
                     queue.extend({"kind": "suiteone-group", "fields": values}
-                                 for values in suiteone_controls)
+                                 for values in public_controls)
+                elif (source.provider == "civicplus-agenda-center" and task.get("kind") == "static"
+                        and urlsplit(source.url).path.lower().rstrip("/") == "/agendacenter"):
+                    from .agendacenter import controls
+                    public_controls = controls(page_content)
+                    queue.extend({"kind": "agendacenter-year", "fields": values}
+                                 for values in public_controls
+                                 if (not bounds.date_from or values["year"] >= bounds.date_from[:4])
+                                 and (not bounds.date_to or values["year"] <= bounds.date_to[:4]))
         except Exception as error:
             # Provider/network exceptions may contain request URLs or credentials.
             # Never expose arbitrary exception text through public errors.
@@ -590,8 +612,13 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     if source.provider == "suiteone-media" and saved is None:
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "configured public root and its supplied Older Meetings groups; catalog extent unverified",
-            "older_groups": len(suiteone_controls or []),
+            "older_groups": len(public_controls or []),
             "control_validation": "current public root revalidated before resumed group POST"})
+    elif source.provider == "civicplus-agenda-center" and saved is None:
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "configured Agenda Center root and its supplied year/category controls; archive extent unverified",
+            "year_category_controls": len(public_controls or []),
+            "control_validation": "current public root revalidated before resumed year POST"})
     return OperationResult(status, {"source": source.public_dict(), "records": records,
                                    "captures": captures, "bundles": bundles},
                            tuple(errors), coverage, context.operation_id)
