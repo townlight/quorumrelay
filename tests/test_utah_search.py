@@ -121,3 +121,20 @@ def test_public_engine_native_and_discovery_registration_keep_notice_identity():
         'source': SOURCE, 'bounds': {'date_from': '2026-11-11', 'date_to': '2026-11-11'}})
     assert discovered.status == 'partial' and not discovered.errors
     assert discovered.data['records'][0]['identity']['external_id'] == '1120627'
+
+
+def test_deadline_failure_is_reported():
+    import time
+    class Slow(Transport):
+        def request(self, url, **kw):
+            time.sleep(0.02)
+            return super().request(url, **kw)
+    result = native_search(create_engine(), request(deadline_seconds=0.005), None, OperationContext(), transport=Slow())
+    assert result.status == 'failed'
+    assert any(error.code == 'provider_deadline_exceeded' for error in result.errors)
+
+
+def test_transfer_budget_covers_initial_form_and_response():
+    result = native_search(create_engine(), request(transfer_bytes=len(FORM) + 1), None,
+                           OperationContext(), transport=Transport())
+    assert result.status == 'failed'

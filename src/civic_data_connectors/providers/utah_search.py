@@ -106,11 +106,23 @@ def _run(engine, source, namespace, bounds, context, transport, *, body, express
     records, bundles, errors = [], [], []
     pages = 0
     finished = False
+    transferred = 0
+
+    def fetch(url, method, body, headers):
+        nonlocal transferred
+        remaining = bounds.transfer_bytes - transferred
+        if remaining <= 0:
+            raise RetrievalError("provider_transfer_limit")
+        response = _response(transport, url, method, body, headers,
+                             replace(bounds, parser_bytes=min(bounds.parser_bytes, remaining)), deadline)
+        transferred += len(response.content)
+        return response
+
     try:
         if state["content"] is None:
             if operation_cancelled(engine.storage, context):
                 return OperationResult("cancelled", operation_id=context.operation_id)
-            form = _response(transport, _URL, "GET", None, _headers(state["cookies"], _URL), bounds, deadline)
+            form = fetch(_URL, "GET", None, _headers(state["cookies"], _URL))
             _cookies(state["cookies"], form, _URL)
             controls = _Controls(form.content)
             if (controls.method != "post" or urljoin(_URL, controls.action or "") != _URL
@@ -123,8 +135,7 @@ def _run(engine, source, namespace, bounds, context, transport, *, body, express
             payload = urlencode(post_fields).encode()
             if len(payload) > bounds.parser_bytes:
                 raise ValueError("Public search form exceeds parser bounds.")
-            response = _response(transport, _URL, "POST", payload,
-                                 _headers(state["cookies"], _URL, controls.token), bounds, deadline)
+            response = fetch(_URL, "POST", payload, _headers(state["cookies"], _URL, controls.token))
             _cookies(state["cookies"], response, _URL)
             state["content"] = response.content
         while pages < bounds.max_pages and len(records) < bounds.max_records:
@@ -138,8 +149,7 @@ def _run(engine, source, namespace, bounds, context, transport, *, body, express
                 form = urlencode({**fields, "startingRow": str(marker)}).encode()
                 if len(form) > bounds.parser_bytes:
                     raise ValueError("Public pager form exceeds parser bounds.")
-                response = _response(transport, _NEXT, "POST", form,
-                                     _headers(state["cookies"], _NEXT, state["token"]), bounds, deadline)
+                response = fetch(_NEXT, "POST", form, _headers(state["cookies"], _NEXT, state["token"]))
                 _cookies(state["cookies"], response, _NEXT)
                 if response.content == state["content"]:
                     raise ValueError("The public pager did not advance.")
@@ -183,6 +193,9 @@ def _run(engine, source, namespace, bounds, context, transport, *, body, express
     except Exception as exc:
         code = exc.code if isinstance(exc, RetrievalError) else "provider_search_failed"
         errors.append(Error(code, "The public Utah search could not be retrieved or verified.",
+                            retryable=True, source=source.url))
+    if monotonic() >= deadline and not operation_cancelled(engine.storage, context):
+        errors.append(Error("provider_deadline_exceeded", "The public search deadline expired.",
                             retryable=True, source=source.url))
     checkpoint = None
     if not finished and state["content"] is not None:
@@ -252,6 +265,7 @@ def native_search(engine, request, content, context, *, transport=None):
     query = replace(query, date_from=lower, date_to=upper, body=body)
     binding = canonical_hash({"source": source.public_dict(), "namespace": namespace, "query": asdict(query),
         "scope": context.scope, "grant": _grant(context), "contract": "utah-native-search/v1"})
+    local_deadline = monotonic() + bounds.deadline_seconds
     result = _run(engine, source, namespace, bounds, context, transport or PublicTransport(),
                   body=body, expression=expressions[0], binding=binding)
     if result.status in {"failed", "cancelled"}:
@@ -260,7 +274,8 @@ def native_search(engine, request, content, context, *, transport=None):
     originals = {source_identity_key(r["identity"]): r for r in records}
     local = [{**deepcopy(r), "normalized": {k: r["normalized"].get(k) for k in ("title", "meeting_date", "body")},
               "text": [], "relationships": []} for r in records]
-    searched = search_records(local, query, bounds=replace(bounds, checkpoint=None),
+    searched = search_records(local, query, bounds=replace(bounds, checkpoint=None,
+        deadline_seconds=max(.001, local_deadline - monotonic())),
         sources=result.coverage["sources"], inherited_coverage=result.coverage, context=context, storage=engine.storage)
     if searched.data is None or searched.status == "cancelled":
         return searched
