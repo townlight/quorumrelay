@@ -223,6 +223,9 @@ class DocumentedNetwork:
                 return response({"value": self.fields.get(identity, [])})
             if tail.endswith("/Tags"):
                 return response({"value": [{"name": t} for t in self.tags.get(identity, [])]})
+            if tail.endswith("/Document/Pages"):
+                return response({"value": [{"pageNumber": n, "hasText": True, "hasImage": False}
+                                            for n, _ in enumerate(self.pages.get(identity, []), 1)]})
             if "/Pages/" in tail:
                 number = int(tail.split("/Pages/")[1].split("/")[0])
                 return response({"text": self.pages[identity][number - 1]})

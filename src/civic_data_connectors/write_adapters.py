@@ -509,6 +509,9 @@ class WriteAdapter:
             before = self.read_before(source, change, read_url, context, bounds, deadline)
             if not isinstance(before, dict):
                 raise ValueError("The existing provider resource could not be read.")
+        if (change.entity == "document_pages" and change.operation != "update"
+                and change.page_number is not None and change.page_number > before["pageCount"] + 1):
+            raise ValueError("The insertion page_number lies beyond the document's next page.")
         expected = change.expected_version
         supplied = before.get(revision_field) if before else None
         if expected is not None and expected != supplied:
@@ -529,6 +532,7 @@ class WriteAdapter:
         return {
             "change": asdict(change), "native": native.public_dict(), "before": before, "after": after,
             "before_fingerprint": canonical_hash(before), "expected_version": supplied,
+            "page_parts_contract": 1 if change.entity == "document_pages" else None,
             "revision_field": revision_field, "identity_field": identity_field,
             "read_url": read_url, "reconcile": lookup,
             "conflict_semantics": "provider_version" if change.entity == "caption_edits"
@@ -750,6 +754,15 @@ class WriteAdapter:
                     raise ValueError("Page creation/replacement uses imageFiles parts.")
                 url = root + safe_id(change.resource_id) + "/Document/Pages"
                 method = "PUT" if op == "update" else "POST"
+                if op != "update" and change.page_number is not None:
+                    if type(change.page_number) is not int or change.page_number < 1:
+                        raise ValueError("Page insertion requires a positive page_number.")
+                    url += "?pageNumber=" + str(change.page_number)
+                elif op == "update" and change.page_number is not None:
+                    raise ValueError("Full page replacement does not accept an insertion page_number.")
+                if (len(files) > 10 or sum(p["reference"]["byte_length"] for p in files) > 100_000_000
+                        or any(p["content_type"] not in {"image/tiff", "image/jpeg", "image/png"} for p in files)):
+                    raise ValueError("Page imageFiles permits at most 10 TIFF/JPG/PNG files and 100 MB aggregate.")
             else:
                 if op != "update" or type(change.page_number) is not int or change.page_number < 1:
                     raise ValueError("Single-page update requires a positive page_number.")
@@ -766,16 +779,16 @@ class WriteAdapter:
         return (NativeRequest(method, url, "multipart/form-data", fields, {}, files),
                 "id", "lastModifiedTime", read_url, None)
 
-    def read_before(self, source, change, url, context, bounds, deadline):
+    def read_before(self, source, change, url, context, bounds, deadline, *, page_parts=True):
         if change.entity == "media_tags":
             return {"media": [self.read(source, "https://api.wistia.com/modern/medias/" + safe_id(i),
                                         context, bounds, deadline) for i in change.fields["hashed_ids"]]}
         value = self.read(source, url, context, bounds, deadline)
         if self.family == "laserfiche":
-            value = self.document_readback(source, value, change, context, bounds, deadline)
+            value = self.document_readback(source, value, change, context, bounds, deadline, page_parts=page_parts)
         return value
 
-    def document_readback(self, source, entry, change, context, bounds, deadline):
+    def document_readback(self, source, entry, change, context, bounds, deadline, *, page_parts=True):
         if not isinstance(entry, dict) or "id" not in entry:
             raise AmbiguousWrite("The repository readback did not identify a document entry.")
         entry = deepcopy(entry)
@@ -808,15 +821,47 @@ class WriteAdapter:
                     "GET", page_url + "/Image", "", {}, {"Accept": "application/octet-stream"}),
                     bounds, deadline, raw=True)
                 entry["_page_image_sha256"] = hashlib.sha256(response.content).hexdigest()
-        if change.entity == "document_pages":
-            # Capture all supplied text pages on an existing document for exact conflict checks/readback.
+        if change.entity == "document_pages" and not page_parts:
+            # Preserve the established text-only readback shape for durable plans.
             entry["_text_pages"] = []
             if entry.get("pageCount", 0) > bounds.max_records:
                 raise ValueError("Page readback exceeds max_records; choose a more specific page update.")
             for number in range(1, entry.get("pageCount", 0) + 1):
                 value = self.read(source, root + f"/Document/Pages/{number}/Text", context, bounds, deadline)
                 entry["_text_pages"].append(value.get("text"))
-        if any(p["part"] == "imageFiles" for p in change.files):
+        elif change.entity == "document_pages":
+            # The vendor pairs imageFiles[i] and textPages[i]; absent parts are
+            # independent. Page metadata prevents reading absent streams as files.
+            listing = self.read(source, root + "/Document/Pages", context, bounds, deadline)
+            pages = listing.get("value") if isinstance(listing, dict) else None
+            count = entry.get("pageCount")
+            if (type(count) is not int or count < 0 or count > bounds.max_records
+                    or not isinstance(pages, list) or len(pages) != count
+                    or "@odata.nextLink" in listing):
+                raise AmbiguousWrite("Page-part readback is incomplete or exceeds max_records.")
+            by_number = {page.get("pageNumber"): page for page in pages if isinstance(page, dict)}
+            if (any(type(number) is not int for number in by_number)
+                    or len(by_number) != count or set(by_number) != set(range(1, count + 1))):
+                raise AmbiguousWrite("Page-part readback did not identify every page.")
+            entry["_page_parts"] = []
+            for number in range(1, count + 1):
+                page = by_number[number]
+                if any(type(page.get(flag)) is not bool for flag in ("hasImage", "hasText")):
+                    raise AmbiguousWrite("Page-part readback omitted stream-presence flags.")
+                part = {"text": None, "image_sha256": None}
+                if page["hasText"]:
+                    value = self.read(source, root + f"/Document/Pages/{number}/Text", context, bounds, deadline)
+                    if not isinstance(value, dict) or not isinstance(value.get("text"), str):
+                        raise AmbiguousWrite("Page text readback is incomplete.")
+                    part["text"] = value["text"]
+                if page["hasImage"]:
+                    response = self._call(source, context, NativeRequest(
+                        "GET", root + f"/Document/Pages/{number}/Image", "", {},
+                        {"Accept": "application/octet-stream"}), bounds, deadline, raw=True)
+                    part["image_sha256"] = hashlib.sha256(response.content).hexdigest()
+                entry["_page_parts"].append(part)
+        if (change.entity != "document_pages" or not page_parts) and any(
+                p["part"] == "imageFiles" for p in change.files):
             page_count = entry.get("pageCount", 0)
             if page_count > bounds.max_records:
                 raise ValueError("Image-page readback exceeds max_records.")
@@ -878,7 +923,8 @@ class WriteAdapter:
                 return False
             if file["part"] == "imageFile" and readback.get("_page_image_sha256") != digest:
                 return False
-            if file["part"] == "imageFiles":
+            if file["part"] == "imageFiles" and (change["entity"] != "document_pages"
+                                                 or prepared.get("page_parts_contract") != 1):
                 submitted = [p["reference"]["sha256"]
                              for p in prepared["native"]["files"] if p["part"] == "imageFiles"]
                 if readback.get("_image_pages_sha256", [])[-len(submitted):] != submitted:
@@ -886,10 +932,24 @@ class WriteAdapter:
         if change["entity"] == "document_page":
             return "text" not in fields or fields["text"] == readback.get("_page_text")
         if change["entity"] == "document_pages":
-            expected = fields.get("textPages", [])
+            texts = fields.get("textPages", [])
+            images = [p["reference"]["sha256"] for p in prepared["native"]["files"]
+                      if p["part"] == "imageFiles"]
+            if prepared.get("page_parts_contract") != 1:
+                expected = texts
+                if change["operation"] != "update":
+                    expected = (prepared["before"] or {}).get("_text_pages", []) + expected
+                return expected == readback.get("_text_pages")
+            expected = [{"text": texts[i] if i < len(texts) else None,
+                         "image_sha256": images[i] if i < len(images) else None}
+                        for i in range(max(len(texts), len(images)))]
             if change["operation"] != "update":
-                expected = (prepared["before"] or {}).get("_text_pages", []) + expected
-            return expected == readback.get("_text_pages")
+                before = (prepared["before"] or {}).get("_page_parts", [])
+                offset = (change.get("page_number") or len(before) + 1) - 1
+                if offset > len(before):
+                    return False
+                expected = before[:offset] + expected + before[offset:]
+            return expected == readback.get("_page_parts")
         return "name" not in fields or fields.get("autoRename") is True or fields["name"] == readback.get("name")
 
     def large_document(self, source, prepared, context, bounds, deadline, *, persist=None):
@@ -944,7 +1004,8 @@ class WriteAdapter:
         change = WriteChange.from_dict(prepared["change"])
         self.authorize(source, change, context)
         if prepared["before"] is not None:
-            now = self.read_before(source, change, prepared["read_url"], context, bounds, deadline)
+            now = self.read_before(source, change, prepared["read_url"], context, bounds, deadline,
+                                   page_parts=prepared.get("page_parts_contract") == 1)
             if canonical_hash(now) != prepared["before_fingerprint"]:
                 raise WriteFailure("conflict", "Provider state changed after this exact plan was prepared.")
         native = NativeRequest(**prepared["native"])
@@ -981,7 +1042,8 @@ class WriteAdapter:
         try:
             readback = self.read(source, read_url, context, bounds, deadline)
             if self.family == "laserfiche":
-                readback = self.document_readback(source, readback, change, context, bounds, deadline)
+                readback = self.document_readback(source, readback, change, context, bounds, deadline,
+                                                  page_parts=prepared.get("page_parts_contract") == 1)
             if self.family == "legistar" and "MatterAttachmentBinary" in native.body:
                 file_response = self._call(source, context, NativeRequest("GET", read_url + "/File", "", {},
                                                                          {"Accept": "application/octet-stream"}),
@@ -1047,7 +1109,8 @@ class WriteAdapter:
             if identity is not None:
                 result = self.read(source, root + "/Entries/" + safe_id(identity), context, bounds, deadline)
                 change = WriteChange.from_dict(prepared["change"])
-                result = self.document_readback(source, result, change, context, bounds, deadline)
+                result = self.document_readback(source, result, change, context, bounds, deadline,
+                                                page_parts=prepared.get("page_parts_contract") == 1)
                 if self.matches(prepared, result):
                     return {"state": "succeeded", "resource_id": identity, "readback": result,
                             "provider_revision": result.get("lastModifiedTime"), "task": task}
@@ -1092,12 +1155,14 @@ class WriteAdapter:
             result = self.read(source, item["read_url"], context, bounds, deadline)
             if self.family == "laserfiche":
                 result = self.document_readback(source, result, WriteChange.from_dict(prepared["change"]),
-                                                context, bounds, deadline)
+                                                context, bounds, deadline,
+                                                page_parts=prepared.get("page_parts_contract") == 1)
             if self.matches(prepared, result):
                 return {"state": "succeeded", "resource_id": identity, "readback": result, "reconciled": True}
         if prepared["change"]["operation"] == "update" or (lookup and lookup.get("caption") is not None):
             result = self.read_before(source, WriteChange.from_dict(prepared["change"]), prepared["read_url"],
-                                      context, bounds, deadline)
+                                      context, bounds, deadline,
+                                                page_parts=prepared.get("page_parts_contract") == 1)
             if self.matches(prepared, result):
                 return {"state": "succeeded", "resource_id": identity or prepared["change"].get("resource_id"),
                         "readback": result, "reconciled": True}

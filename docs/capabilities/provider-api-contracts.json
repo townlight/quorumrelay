@@ -9104,5 +9104,43 @@
       ],
       "basis": "Pinned APIEntities.cs explicitly describes EventData system-assigned/ignored fields; identity cannot change. Full models preserve these values, while patches reject them and readback retains actual server values."
     }
+  },
+  "laserfiche_repository_followup": {
+    "source_manifest": "docs/capabilities/evidence/laserfiche-repository/source.json",
+    "sdk_revision": "3a40996613f6f1a1b2fa90cd7d31c512a149ee25",
+    "scope": "Repository API v2; not an inferred WebLink session or repository identity",
+    "wire_contracts": {
+      "startImportUploadedParts": {
+        "method": "POST",
+        "path": "/v2/Repositories/{repositoryId}/Entries/{entryId}/Folder/ImportUploadedParts",
+        "content_type": "application/json",
+        "body": "JSON.stringify(StartImportUploadedPartsRequest)",
+        "success": 202,
+        "result": "StartTaskResponse; task completion requires independent readback"
+      },
+      "createPages": {
+        "method": "POST",
+        "path": "/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages",
+        "content_type": "multipart/form-data",
+        "request_part": "JSON.stringify(PagesContentRequest)",
+        "file_parts": "repeated imageFiles",
+        "page_number": "optional 1-based insertion query; absent appends",
+        "pairing": "imageFiles[i] and textPages[i] share page i; maximum array length determines new pages; unmatched part absent"
+      },
+      "pageInfo": {
+        "fields": [
+          "pageNumber",
+          "hasImage",
+          "hasText"
+        ],
+        "purpose": "Independent presence and position checks before reading each supplied page stream"
+      }
+    },
+    "guide_disagreements": [
+      "Import guide calls finalization JSON and multipart in adjacent prose; pinned SDK serializes JSON.",
+      "Page guide sample says two pages for one image and one text despite indexed-pairing rule; pinned SDK type and endpoint comments both establish indexed pairing.",
+      "generateText semantics differ between guide and SDK; no new generation option is inferred from this reconciliation."
+    ],
+    "verification": "tests/test_laserfiche_page_parts.py; synthetic actual coordinator, exact SDK bytes pinned independently. No live mutation or remote image-conversion guarantee."
   }
 }

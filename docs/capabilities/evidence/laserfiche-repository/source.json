@@ -1,0 +1,7 @@
+{
+  "source_url": "https://raw.githubusercontent.com/Laserfiche/lf-api-js/3a40996613f6f1a1b2fa90cd7d31c512a149ee25/packages/lf-repository-api-client-v2/index.ts",
+  "revision": "3a40996613f6f1a1b2fa90cd7d31c512a149ee25",
+  "sha256": "de9970a4b12c8b1fa73dcc9cf51bc4bc24618774f9b20ce40ceab9a3d386b762",
+  "byte_length": 1741813,
+  "proof": "Pinned vendor SDK source, not runtime/provider acceptance"
+}
