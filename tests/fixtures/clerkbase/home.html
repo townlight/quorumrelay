@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>South Kingstown, RI - ClerkBase</title>
+	<base href="/">
+	
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<link media="all" rel="stylesheet" href="css/main.css?v20190112">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-3.2.1.min.js" defer><\/script>')</script>
+	<script src="js/jquery.main.js?v20190112" defer></script>
+	<script src="js/app.js?v20190112" defer></script>
+	<style>
+		#header {
+			background-color: #344891;
+		}
+		#header a {
+			color: #fff;
+		}
+		.page-item.active {
+			font-weight: bold;
+			background-color: #DDD;
+		}
+		
+		/* style adjustments */
+		/* TOC */
+		body #sidebar .tab-holder ul { margin: 7px 0 0; }
+		body .search-navigation .name-document {
+			font-weight: bold;
+			color: black;
+		}
+		body .search-table {
+			font-size: 14px;
+		}
+		body .search-word-line {
+			font-size: 11px;
+			padding: 5px 8px;
+		}
+		body .search-table td, body .search-table th {
+			padding: 8px;
+		}
+		@media (min-width: 1024px) {
+			body .search-table td, body .search-table th {
+				padding: 10px 16px;
+			}
+			body .search-form.sidebar-form {
+				padding: 20px 22px 76px;
+			}
+			body .open-fieldset .open-wrap {
+				width: 450px;
+			}
+		}
+		@media (min-width: 768px) {
+			body #sidebar .tab-holder ul {
+				padding: 0 0 0 12px;
+			}
+			body #sidebar .tab-holder li {
+				margin: 0 0 5px;
+			}
+			body .search-form.sidebar-form {
+				padding: 20px 13px 76px;
+			}
+			body .open-fieldset .open-wrap {
+				width: 450px;
+			}
+		}
+		
+		body .toc-accordion a:before {
+			margin-right: 4px;
+		}
+		
+		/* form loggo */
+		body #header {
+			padding: 0 15px 0 0;
+		}
+		@media (min-width: 768px) {
+			/* full logo only option bigger screen otherwise disturbes mobiles */
+			body #header {
+				min-height: 75px;
+				padding: 0 15px 0 0;
+			}
+			body .logo { max-width: 249px; max-height: 75px; }
+		}
+		
+		a.js-result-item.js-result-caption {
+			color: #272a36;
+			text-decoration: none;
+		}
+		a.js-result-item.js-result-caption:hover { text-decoration: underline; }
+		
+		.search-table th a, .search-table th a:hover { color: white; text-decoration: none; }
+		
+		body .toc-breadcrumbs {
+			color: #6d6d6d;
+		}
+		
+		body .open-fieldset .open:after { opacity: 0.8; font-weight: bold; }
+		
+		body .main-nav { font-size: 14px; }
+		.js-near-selected { display: none; }
+		.js-near-selected.near-show { display: block; }
+		
+		
+		.jw-logo-top-right {
+			top: 0;
+			right: 0;
+		}
+		.jw-logo {
+            position: absolute;
+            margin: 20px;
+            cursor: pointer;
+            pointer-events: all;
+            background-repeat: no-repeat;
+            background-size: contain;
+            top: auto;
+            right: auto;
+            left: auto;
+            bottom: auto;
+        }
+	
+		#js-page-holder:not(.hide-search-bar) .sticky-wrap-search-navigation { display: none; }
+		
+		/* test for horiz scroll option iphone safari */
+		/* #js-viewer-holder { overflow: scroll; width: 100%; } */
+		
+	</style>
+		<link media="all" rel="stylesheet" href="Styles/cbi_whitenav.css">
+ </head>
+<body>
+	<div id="wrapper">
+		<header id="header" style="
+			                           background: url('Content/SouthKingstown-ri/Images/SouthKingstown_bg.jpg');
+			                           ">
+			<div class="logo-nav-wrap">
+				<div class="logo">
+                         <a data-page-type="ajax" href="SouthKingstown-ri?sec=intro">
+                            <img src="/Content/SouthKingstown-ri/images/SouthKingstown_left.jpg" alt="SouthKingstown-ri">
+                        </a>
+				</div>
+				<div class="drop-mobile drop-nav">
+					<nav class="main-nav">
+							<a class="home-mobile" href="/SouthKingstown-ri"><i class="icon-house"></i>home</a>
+						<a data-page-type="ajax" href="help?ajax=1"><i class="icon-question"></i>help</a>
+                            <a data-page-type="ajax" href="SouthKingstown-ri?sec=faq"><i class="icon-phone"></i>support</a>
+						<a data-page-type="contact" href="contact"><i class="icon-mail"></i>contact us</a>
+					</nav>
+				</div>
+				<div class="drop-mobile drop-search">
+                    <form class="search-form header-form">
+                        <input type="text" name="keyword" placeholder="Enter keyword or phrase" id="quickSearchBox">
+                        <button type="submit"></button>
+                    </form>
+				</div>
+				<a href="#" class="nav-opener search"></a>
+				<a href="#" class="nav-opener burger">
+					<span></span>
+					<span></span>
+					<span></span>
+				</a>
+			</div>
+		</header>
+        <script>
+    window.clientSite = 'SouthKingstown-ri'; // expected by getAttach.js
+</script>
+<main role="main">
+    <a href="#wrapper" class="btn-top"></a>
+    <aside id="sidebar">
+        <ul class="sidebar-tabset">
+            <li>
+                <a href="#browse"><i class="icon-folder"></i>Browse</a>
+                <a href="#" class="browse-opener"><i class="icon-folder"></i>Browse</a>
+            </li>
+            <li class="search-tab">
+                <a href="#search"><i class="icon-search"></i>Search</a>
+            </li>
+        </ul>
+        <div class="tab-holder">
+            <div id="browse" class="tab">
+                <div class="toc-holder">
+                    <ul class="toc-breadcrumbs" data-default-bradcrumb-text="South Kingstown, RI"></ul>
+                    <ul class="toc-accordion">
+                        <li class="active">
+                            <a data-page-type="ajax" href="SouthKingstown-ri?sec=intro">South Kingstown, RI</a>
+                            <ul>
+    <li class="">
+            <a href="" 
+               class="js-doc-view"
+               title="Town Council Agendas"
+               data-toc-url="/toc/SouthKingstown-ri?path=SouthKingstown_Docket,"
+               data-path="SouthKingstown_Docket," 
+               data-node-id="SouthKingstown_Docket"
+               
+            >Town Council Agendas</a>
+    </li>
+    <li class="">
+            <a href="" 
+               class="js-doc-view"
+               title="Town Council Minutes"
+               data-toc-url="/toc/SouthKingstown-ri?path=SouthKingstown_Council,"
+               data-path="SouthKingstown_Council," 
+               data-node-id="SouthKingstown_Council"
+               
+            >Town Council Minutes</a>
+    </li>
+    <li class="">
+            <a href="" 
+               class="js-doc-view"
+               title="Town Manager Reports"
+               data-toc-url="/toc/SouthKingstown-ri?path=SouthKingstown_TM_Reports,"
+               data-path="SouthKingstown_TM_Reports," 
+               data-node-id="SouthKingstown_TM_Reports"
+               
+            >Town Manager Reports</a>
+    </li>
+    <li class="">
+            <a href="" 
+               class="js-doc-view"
+               title="Planning Board"
+               data-toc-url="/toc/SouthKingstown-ri?path=SK_Planning,"
+               data-path="SK_Planning," 
+               data-node-id="SK_Planning"
+               
+            >Planning Board</a>
+    </li>
+    <li class="">
+            <a href="/Content/SouthKingstown-ri/Boards/TRC.htm" 
+               class="js-doc-view"
+               title="Technical Review Committee"
+               data-toc-url="/toc/SouthKingstown-ri?path=TRC,"
+               data-path="TRC," 
+               data-node-id="TRC"
+               
+            >Technical Review Committee</a>
+    </li>
+    <li class="">
+            <a href="" 
+               class="js-doc-view"
+               title="Zoning Board"
+               data-toc-url="/toc/SouthKingstown-ri?path=SK_Zoning,"
+               data-path="SK_Zoning," 
+               data-node-id="SK_Zoning"
+               
+            >Zoning Board</a>
+    </li>
+    <li class="">
+            <a href="" 
+               class="js-doc-view"
+               title="Other Boards and Committees"
+               data-toc-url="/toc/SouthKingstown-ri?path=BOARDS,"
+               data-path="BOARDS," 
+               data-node-id="BOARDS"
+               
+            >Other Boards and Committees</a>
+    </li>
+    <li class="">
+            <a href="" 
+               class="js-doc-view"
+               title="Town Council Agenda Archive"
+               data-toc-url="/toc/SouthKingstown-ri?path=Town_Council_Agenda%20Archive,"
+               data-path="Town_Council_Agenda Archive," 
+               data-node-id="Town_Council_Agenda Archive"
+               
+            >Town Council Agenda Archive</a>
+    </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="search" class="tab">
+                <!-- pages/search-htm.html - search example with .htm file loading -->
+                <form class="search-form sidebar-form">
+                    <input type="hidden" name="sm.IxId" value="SouthKingstown-ri" id="siteId"/>
+                    <fieldset>
+                        <h3><span class="number">1</span>Enter keywords or phrase</h3>
+                        <input id="sm_SearchRequest" name="sm.SearchRequest" placeholder="Enter here..." type="text" value="" />
+                    </fieldset>
+                    <fieldset class="open-fieldset">
+                        <h3 class="open"><span class="number">2</span><span class="selection-label" data-default-text="Select documents" data-selected-text="Selected documents" data-all-text="All documents">Select documents</span></h3>
+                        <div class="open-wrap">
+                            <ul class="toc-accordion">
+                                <li class="active" id="js-toc-form-holder">
+                                    <label class="custom-label">
+                                        <input type="checkbox">
+                                        <span class="custom-check"></span>
+                                        <a href="#">South Kingstown, RI</a>
+                                    </label>
+                                    <ul>
+    <li>
+                <label class="custom-label">
+                    <input type="checkbox" name="sm.TreePath" value="SouthKingstown_Docket">
+                    <span class="custom-check"></span>
+                    <a href="#" 
+                       data-toc-form-url="/toc/form/SouthKingstown-ri?path=SouthKingstown_Docket,"
+                       title="Town Council Agendas"
+                    >Town Council Agendas</a>
+                </label>
+    </li>
+    <li>
+                <label class="custom-label">
+                    <input type="checkbox" name="sm.TreePath" value="SouthKingstown_Council">
+                    <span class="custom-check"></span>
+                    <a href="#" 
+                       data-toc-form-url="/toc/form/SouthKingstown-ri?path=SouthKingstown_Council,"
+                       title="Town Council Minutes"
+                    >Town Council Minutes</a>
+                </label>
+    </li>
+    <li>
+                <label class="custom-label">
+                    <input type="checkbox" name="sm.TreePath" value="SouthKingstown_TM_Reports">
+                    <span class="custom-check"></span>
+                    <a href="#" 
+                       data-toc-form-url="/toc/form/SouthKingstown-ri?path=SouthKingstown_TM_Reports,"
+                       title="Town Manager Reports"
+                    >Town Manager Reports</a>
+                </label>
+    </li>
+    <li>
+                <label class="custom-label">
+                    <input type="checkbox" name="sm.TreePath" value="SK_Planning">
+                    <span class="custom-check"></span>
+                    <a href="#" 
+                       data-toc-form-url="/toc/form/SouthKingstown-ri?path=SK_Planning,"
+                       title="Planning Board"
+                    >Planning Board</a>
+                </label>
+    </li>
+    <li>
+                <label class="custom-label">
+                    <input type="checkbox" name="sm.TreePath" value="TRC">
+                    <span class="custom-check"></span>
+                    <a href="#" 
+                       data-toc-form-url="/toc/form/SouthKingstown-ri?path=TRC,"
+                       title="Technical Review Committee"
+                    >Technical Review Committee</a>
+                </label>
+    </li>
+    <li>
+                <label class="custom-label">
+                    <input type="checkbox" name="sm.TreePath" value="SK_Zoning">
+                    <span class="custom-check"></span>
+                    <a href="#" 
+                       data-toc-form-url="/toc/form/SouthKingstown-ri?path=SK_Zoning,"
+                       title="Zoning Board"
+                    >Zoning Board</a>
+                </label>
+    </li>
+    <li>
+                <label class="custom-label">
+                    <input type="checkbox" name="sm.TreePath" value="BOARDS">
+                    <span class="custom-check"></span>
+                    <a href="#" 
+                       data-toc-form-url="/toc/form/SouthKingstown-ri?path=BOARDS,"
+                       title="Other Boards and Committees"
+                    >Other Boards and Committees</a>
+                </label>
+    </li>
+    <li>
+                <label class="custom-label">
+                    <input type="checkbox" name="sm.TreePath" value="Town_Council_Agenda Archive">
+                    <span class="custom-check"></span>
+                    <a href="#" 
+                       data-toc-form-url="/toc/form/SouthKingstown-ri?path=Town_Council_Agenda%20Archive,"
+                       title="Town Council Agenda Archive"
+                    >Town Council Agenda Archive</a>
+                </label>
+    </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <div style="padding-top: 20px; font-weight: bold;">All documents are searched by default</div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <h3><span class="number">3</span>Additional search options</h3>
+                        <div class="field-wrap">
+                            <label class="custom-label"><input checked="checked" data-val="true" data-val-required="The SearchType field is required." id="sm_SearchType" name="sm.SearchType" type="radio" value="AllWords" /><span class="custom-check"></span>All of the words</label>
+                        </div>
+                        <div class="field-wrap">
+                            <label class="custom-label"><input id="sm_SearchType" name="sm.SearchType" type="radio" value="AnyWords" /><span class="custom-check"></span>Any of the words</label>
+                        </div>
+                        <div class="field-wrap">
+                            <label class="custom-label"><input id="sm_SearchType" name="sm.SearchType" type="radio" value="Phrase" /><span class="custom-check"></span>Exact phrase</label>
+                        </div>
+                        <div class="field-wrap">
+                            <label class="custom-label"><input id="sm_SearchType" name="sm.SearchType" type="radio" value="Boolean" /><span class="custom-check"></span>Boolean</label>
+                        </div>
+                        <div class="field-wrap">
+                            <label class="custom-label"><input id="sm_SearchType" name="sm.SearchType" type="radio" value="NearTerm" /><span class="custom-check"></span>Near term</label>
+                        </div>
+                        <div class="field-wrap js-near-selected">
+                            <label for="proximity">Proximity</label>
+                        </div>
+                        <div class="field-wrap range-input js-near-selected">
+                            <span class="limit min">01</span>
+                            <span class="limit max">50</span>                            
+                            <input id="proximity" type="range" min="01" max="50" name="sm.Near" value="14">
+                        </div>
+                        <div class="field-wrap">
+                            <label class="custom-label"><input data-val="true" data-val-required="The ExcludeEnabled field is required." id="sm_ExcludeEnabled" name="sm.ExcludeEnabled" type="checkbox" value="true" /><input name="sm.ExcludeEnabled" type="hidden" value="false" /><span class="custom-check"></span>Exclude term</label>
+                        </div>
+                        <div class="field-wrap">
+                            <input id="sm_ExcludeTerm" name="sm.ExcludeTerm" placeholder="Enter term here..." type="text" value="" />
+                        </div>
+                        <div class="field-wrap">
+                            <label class="custom-label"><input checked="checked" data-val="true" data-val-required="The IncludeSynopsis field is required." id="sm_IncludeSynopsis" name="sm.IncludeSynopsis" type="checkbox" value="true" /><input name="sm.IncludeSynopsis" type="hidden" value="false" /><span class="custom-check"></span>Include synopsis</label>
+                        </div>
+                        <div class="field-wrap">
+                            <label class="custom-label"><input checked="checked" data-val="true" data-val-required="The Stemming field is required." id="sm_Stemming" name="sm.Stemming" type="checkbox" value="true" /><input name="sm.Stemming" type="hidden" value="false" /><span class="custom-check"></span>Stemming</label>
+                        </div>
+                        <div class="field-wrap">
+                            <label class="custom-label"><input data-val="true" data-val-required="The WordNetSynonyms field is required." id="sm_WordNetSynonyms" name="sm.WordNetSynonyms" type="checkbox" value="true" /><input name="sm.WordNetSynonyms" type="hidden" value="false" /><span class="custom-check"></span>Synonyms</label>
+                        </div>
+                        <div class="field-wrap">
+                            <label class="custom-label">
+                                <input data-val="true" data-val-required="The Fuzzy field is required." id="sm_Fuzzy" name="sm.Fuzzy" type="checkbox" value="true" /><input name="sm.Fuzzy" type="hidden" value="false" />
+                                <span class="custom-check"></span>Fuzzy Searching
+                            </label>
+                        </div>
+                        <div class="field-wrap">
+                            <select data-val="true" data-val-required="The Fuzziness field is required." id="sm_Fuzziness" name="sm.Fuzziness"><option value="0">Level 0</option>
+<option value="1">Level 1</option>
+<option value="2">Level 2</option>
+<option value="3">Level 3</option>
+<option selected="selected" value="4">Level 4</option>
+<option value="5">Level 5</option>
+<option value="6">Level 6</option>
+</select>
+                        </div>
+                        
+                        
+                        
+                    </fieldset>
+                    <div class="buttons" style="display: none;">
+                        <button type="submit">start search</button>
+                        <button type="reset">Clear Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </aside>
+    <section id="js-page-holder">
+        <div class="loader">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="holder-section">
+            <div class="col dark-white-bg">
+    <div class="holder-text">
+        <h1>Welcome to ClerkBase®</h1>
+        <h4>Transparency Solutions for Government.</h4>
+        <p>Start your search by choosing a folder to your left, or by entering a word or phrase into the Quick Search above. Our Advanced Search tool provides more detailed and refined searching. Consult the links below for tips and helpful advice.</p>
+    </div>
+    <ul class="tabset">
+        <li><a href="#tab-1"><i class="icon-house"></i> South Kingstown, RI</a></li>
+        <li><a href="#tab-2"><i class="icon-power"></i> Getting Started</a></li>
+        <li><a href="#tab-3"><i class="icon-search"></i> Search Tips</a></li>
+        <li class=""><a href="#tab-4"><i class="icon-question"></i> Frequently Asked Questions</a></li>
+    </ul>
+</div>
+<div class="col">
+    <ul class="tab-content tab-accordion">
+        <li id="tab-1" class="accordion-content">
+            <a href="#" class="opener"><i class="icon-house"></i> South Kingstown, RI</a>
+            <div class="slide">
+                <h2>South Kingstown, RI</h2>
+                
+                <b>LIVE STREAM</b> and <b>On Demand</b> broadcasts of meeting are available by opening the appropriate folder on the left and clicking on the link at the top of the meeting or agenda. Or, <b>Click <a href="https://www.youtube.com/channel/UCOz_gL-w5KrVcyoMxojLVmw" target="_blank">HERE</a> to watch the LIVE VIDEO</b> of the meeting. Note that LIVE video has a 4 hours playback limit. If a meeting is longer, the full video will be posted to the agenda following the meeting.
+                
+                <div class="site-contact-info" style="padding-top: 20px;">
+Phone: 401.789.9331<br>                                        Fax: 401.789.5280<br>                    Email: <a href="mailto:townhall@southkingstownri.com">townhall@southkingstownri.com</a><br>                    Website: <a href="https://www.southkingstownri.gov" target="_blank">https://www.southkingstownri.gov</a><br>                </div>
+            </div>
+        </li>
+        <li id="tab-2" class="accordion-content">
+            <a href="#" class="opener"><i class="icon-power"></i> Getting Started</a>
+            <div class="slide">
+                <h2>Getting Started</h2>
+                <ul>
+                    <li><span>Open the Table of Contents in the left frame. Use the + and – symbol or click on a folder to expand and collapse the list. Click on a title and the selected text will appear.</span></li>
+                    <li><span>To search, enter a word, words or phrase into the search window on the top right.</span></li>
+                    <li><span>Need help? Contact us at <a href="mailto:&#109;&#097;&#105;&#108;&#064;&#099;&#108;&#101;&#114;&#107;&#098;&#097;&#115;&#101;&#046;&#099;&#111;&#109;">&#109;&#097;&#105;&#108;&#064;&#099;&#108;&#101;&#114;&#107;&#098;&#097;&#115;&#101;&#046;&#099;&#111;&#109;</a>.</span></li>
+                </ul>
+            </div>
+        </li>
+        <li id="tab-3" class="accordion-content">
+            <a href="#" class="opener"><i class="icon-search"></i> Search Tips</a>
+            <div class="slide">
+                <h2>Search Tips</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operator</th>
+                                <th>Example</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>And</td>
+                            <td>one and two+one+two</td>
+                            <td>Finds documents with both 'one' and 'two'.</td>
+                        </tr>
+                        <tr>
+                            <td>Or</td>
+                            <td>me or you</td>
+                            <td>Finds documents with either 'me' or 'you'.</td>
+                        </tr>
+                        <tr>
+                            <td>Not</td>
+                            <td>not him-him</td>
+                            <td>Finds documents that don't contain 'him'.</td>
+                        </tr>
+                        <tr>
+                            <td>Exclusive Not</td>
+                            <td>apples and not oranges</td>
+                            <td>Finds documents with 'apples' or 'apples' and 'oranges'.</td>
+                        </tr>
+                        <tr>
+                            <td>Phrase</td>
+                            <td>"to be or not"</td>
+                            <td>Finds documents with the exact phrase 'to be or not'.</td>
+                        </tr>
+                        <tr>
+                            <td>Wildcard</td>
+                            <td>work*</td>
+                            <td>Finds documents with ''work', 'works', 'working</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </li>
+        <li id="tab-4" class="accordion-content">
+            <a href="#" class="opener"><i class="icon-question"></i> Frequently Asked Questions</a>
+            <div class="slide">
+                <h2>Frequently Asked Questions</h2>
+                <ul class="faq-accordion">
+                    <li>
+                        <a href="#" class="opener">What is ClerkBase?</a>
+                        <div class="slide">
+                            <p>ClerkBase® is a transparency solution that allows the public and agency personnel to access, search, retrieve and print public information in a quick and simple way, 24 hours a day.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" class="opener">How do I open the Table of Contents?</a>
+                        <div class="slide">
+                            <p>Use the + and – symbol or click on a folder to expand and collapse the list. Click on a title and the selected text will appear.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" class="opener">When I click on a hyperlink, why does a blank box come up?</a>
+                        <div class="slide">
+                            <p>Some supporting documents may contain very large files. Everyone’s download speeds differ, and large files may take longer to load. If you don’t see anything in 30 seconds, 
+                                contact ClerkBase at <a href="mailto:mail@clerkbase.com">mail@clerkbase.com</a>, 
+                                by chat at <a href="http://www.clerkbase.com" target="_blank">www.clerkbase.com</a>, 
+                                or by phone at (401) 727-1567.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    </section>
+</main>
+
+		<footer id="footer">
+			<div class="container">
+				<div class="flex-wrap">
+					<div class="logo">
+						<a href="#">
+							<img src="images/logo-footer.png" alt="ClerkBase">
+						</a>
+					</div>
+					<div class="copyright">
+						<span>© 2026 All Rights Reserved</span>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	
+</body>
+</html>
