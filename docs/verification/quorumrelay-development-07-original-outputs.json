@@ -1,0 +1,353 @@
+{
+  "observed_at": "2026-11-12T13:32:42.804652+00:00",
+  "source_commit": "de6204e1861e27af366cdc9973cf52ce53276add",
+  "candidate": "0.1.0.dev7",
+  "installed_module": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\civic-data-connectors\\.venv-quorumrelay-dev07\\Lib\\site-packages\\quorumrelay\\__init__.py",
+  "status": "PASS",
+  "baseline_formats": 34,
+  "providers": 31,
+  "scope": "Fresh installed wheel outside checkout cwd; exact independently pinned original output hashes and raw capture roundtrip. No reference-product imports or provider acceptance claim.",
+  "cases": [
+    {
+      "provider": "legistar",
+      "input_format": "meeting-export",
+      "capture_sha256": "11fbf132c37d7d24032b9948e9e17bbb1d3f39c189974be6db1db42fd05ae1ce",
+      "expected_original_sha256": "d81a27f2dc8913630c193a8be07b230af5b973afe22665147e6dfa89a02a85a2",
+      "actual_original_sha256": "d81a27f2dc8913630c193a8be07b230af5b973afe22665147e6dfa89a02a85a2",
+      "namespace": "//example.gov",
+      "records": 1,
+      "status": "PASS"
+    },
+    {
+      "provider": "primegov",
+      "input_format": "meeting-export",
+      "capture_sha256": "48150578eea4c6c6e243fde0ff8ca21db8be82f306c8a40aa09728e1f60cfb82",
+      "expected_original_sha256": "9cb99b9fca794ee0fdab741597a5f7b09615356c5244f1cd40f8840bf1de781b",
+      "actual_original_sha256": "9cb99b9fca794ee0fdab741597a5f7b09615356c5244f1cd40f8840bf1de781b",
+      "namespace": "//example.gov",
+      "records": 1,
+      "status": "PASS"
+    },
+    {
+      "provider": "granicus",
+      "input_format": "meeting-export",
+      "capture_sha256": "687bdd058e50db9533df5215d39e2c0ad0cdf4f36c6d5f916723dbdcb4a55059",
+      "expected_original_sha256": "a1bec6fbbcd3e73e4fc0eb5dc1f89601bb519a8c9b08dc34c6f66dbdee37556b",
+      "actual_original_sha256": "a1bec6fbbcd3e73e4fc0eb5dc1f89601bb519a8c9b08dc34c6f66dbdee37556b",
+      "namespace": "//example.gov",
+      "records": 1,
+      "status": "PASS"
+    },
+    {
+      "provider": "novusagenda",
+      "input_format": "meeting-export",
+      "capture_sha256": "e189c9434aa2b01ed233de044423109449e547cdbb2b524ab9709e5316d50d10",
+      "expected_original_sha256": "d717e7755c4dfc43c358c76606fb72bce76216537993fb13312f0f1f5dd00377",
+      "actual_original_sha256": "d717e7755c4dfc43c358c76606fb72bce76216537993fb13312f0f1f5dd00377",
+      "namespace": "//example.gov",
+      "records": 1,
+      "status": "PASS"
+    },
+    {
+      "provider": "granicus",
+      "input_format": "viewpublisher-html",
+      "capture_sha256": "cc75d87f595277facaa5bb5a905ee84707978f94be12d9a85a69e3dd83bd8c20",
+      "expected_original_sha256": "b215002ea71eaa8992fc88950e786df6608d00e0ad7b9e8a9df777f9a6f6b2d4",
+      "actual_original_sha256": "b215002ea71eaa8992fc88950e786df6608d00e0ad7b9e8a9df777f9a6f6b2d4",
+      "namespace": "//oakland.granicus.com",
+      "records": 2,
+      "status": "PASS"
+    },
+    {
+      "provider": "primegov",
+      "input_format": "primegov-portal-json",
+      "capture_sha256": "472bf9a0a8e90cf4379b13b03a6851be0c0fa6a3e664b1f31063dca6084498bc",
+      "expected_original_sha256": "a9921a508cf0ec43454b05cc059fa7aab056d5ea5a0b5688b9c370b5338c22f4",
+      "actual_original_sha256": "a9921a508cf0ec43454b05cc059fa7aab056d5ea5a0b5688b9c370b5338c22f4",
+      "namespace": "//longmont.primegov.com",
+      "records": 7,
+      "status": "PASS"
+    },
+    {
+      "provider": "civicplus-select",
+      "input_format": "civicplus-events-json",
+      "capture_sha256": "ddcfa72e0b16395e6acac7231f07f81368dcca681f4168e252617db7606ceb3b",
+      "expected_original_sha256": "7ed9baca56d520eb5eefd298d436fc31508631389cce2ae998c96ccf54f082bc",
+      "actual_original_sha256": "7ed9baca56d520eb5eefd298d436fc31508631389cce2ae998c96ccf54f082bc",
+      "namespace": "//turlockca.api.civicclerk.com",
+      "records": 15,
+      "status": "PASS"
+    },
+    {
+      "provider": "civicplus-agenda-center",
+      "input_format": "agenda-center-html",
+      "capture_sha256": "975a24df772bddbb1f3fcb4e4f730f72caea952b5fefcebd7a646ca77658a180",
+      "expected_original_sha256": "617fb4bce9e219e8e4081d397364a2e2ea50dacde27ecfb4c80a3c475eb9c84d",
+      "actual_original_sha256": "617fb4bce9e219e8e4081d397364a2e2ea50dacde27ecfb4c80a3c475eb9c84d",
+      "namespace": "//www.clevelandtn.gov",
+      "records": 85,
+      "status": "PASS"
+    },
+    {
+      "provider": "municode-meetings",
+      "input_format": "municode-meetings-html",
+      "capture_sha256": "b72ccb013f3e6b45bb513d9fad0a250471214a362996e59b269c65660ab825d0",
+      "expected_original_sha256": "a47d7fe8b7091d7cb87c89e74e53d8402959fdcd9a0024f8c739ce73f1d4ef76",
+      "actual_original_sha256": "a47d7fe8b7091d7cb87c89e74e53d8402959fdcd9a0024f8c739ce73f1d4ef76",
+      "namespace": "//southjordan-ut.municodemeetings.com",
+      "records": 25,
+      "status": "PASS"
+    },
+    {
+      "provider": "boardbook",
+      "input_format": "boardbook-html",
+      "capture_sha256": "11f47982510d4bca619bf769802fa3276a28a7d49756604fb4563b8f684693cb",
+      "expected_original_sha256": "5d12c10e96bc80c41ad420bf3397d881eb153067a423b038fc1adbae705d362b",
+      "actual_original_sha256": "5d12c10e96bc80c41ad420bf3397d881eb153067a423b038fc1adbae705d362b",
+      "namespace": "//meetings.boardbook.org/Public/Organization/3307",
+      "records": 33,
+      "status": "PASS"
+    },
+    {
+      "provider": "escribe",
+      "input_format": "escribe-calendar-json",
+      "capture_sha256": "7bf3cec03f434ab777975e3ef6a0a3134704b45c0265f1fe628802cdce661417",
+      "expected_original_sha256": "6dd017bd30b0884ecc3451591c97c5f6fdda5fa5d51cd3f64d9d92a97239a3f6",
+      "actual_original_sha256": "6dd017bd30b0884ecc3451591c97c5f6fdda5fa5d51cd3f64d9d92a97239a3f6",
+      "namespace": "//pub-saskatoon.escribemeetings.com",
+      "records": 18,
+      "status": "PASS"
+    },
+    {
+      "provider": "simbli",
+      "input_format": "simbli-html",
+      "capture_sha256": "5f0d54d9939ccd69ec7e36cf9b3c25d58b0959f099e4bad7a9ad4077121f103a",
+      "expected_original_sha256": "172d77335a32262a04dc51dbbbb5b7584c56cd137c4956c671291b9f3dff3185",
+      "actual_original_sha256": "172d77335a32262a04dc51dbbbb5b7584c56cd137c4956c671291b9f3dff3185",
+      "namespace": "//simbli.eboardsolutions.com?S=36030321",
+      "records": 50,
+      "status": "PASS"
+    },
+    {
+      "provider": "civicweb",
+      "input_format": "civicweb-html",
+      "capture_sha256": "d8ffe0293434620f07c5c866878cc0c4da28b4341e6efd5653bd0549493972a9",
+      "expected_original_sha256": "87fcc968cb38f2dc986965dd743777bd655e5e589d5256fee250e22aa67ebd5d",
+      "actual_original_sha256": "87fcc968cb38f2dc986965dd743777bd655e5e589d5256fee250e22aa67ebd5d",
+      "namespace": "//sonomacity.civicweb.net",
+      "records": 45,
+      "status": "PASS"
+    },
+    {
+      "provider": "iqm2",
+      "input_format": "iqm2-html",
+      "capture_sha256": "8bbadac3551a4d3d7c3e68768f4c14f6d96e8412cc809b5a138fcd33c77830f0",
+      "expected_original_sha256": "2a815cf1488416ce9eaf202e9952a9799924d74136a504f682b937c5e2f07bb4",
+      "actual_original_sha256": "2a815cf1488416ce9eaf202e9952a9799924d74136a504f682b937c5e2f07bb4",
+      "namespace": "//santamonicacityca.iqm2.com",
+      "records": 6,
+      "status": "PASS"
+    },
+    {
+      "provider": "swagit",
+      "input_format": "swagit-archive-html",
+      "capture_sha256": "38c63b12ddc4f41ab21e911ead700b516aea4127c01689e99905ee7f7c362581",
+      "expected_original_sha256": "2c272dca6738408554bb8c7132ab67192f02629a10168d81d93e9eec90f1445b",
+      "actual_original_sha256": "2c272dca6738408554bb8c7132ab67192f02629a10168d81d93e9eec90f1445b",
+      "namespace": "//bellca.new.swagit.com",
+      "records": 10,
+      "status": "PASS"
+    },
+    {
+      "provider": "suiteone-media",
+      "input_format": "suiteone-archive-html",
+      "capture_sha256": "c4a0732de74628cf5590129d0020d474937161638719c3215c09533235241112",
+      "expected_original_sha256": "795cb75305d39aeb068fa312ff3e53a27795c10669646fefe53dd85802f34e8e",
+      "actual_original_sha256": "795cb75305d39aeb068fa312ff3e53a27795c10669646fefe53dd85802f34e8e",
+      "namespace": "//watkinsvillega.suiteonemedia.com",
+      "records": 28,
+      "status": "PASS"
+    },
+    {
+      "provider": "peak",
+      "input_format": "peak-viewpublisher-html",
+      "capture_sha256": "835e3e2990186c4015b223f3692938b45437e8ee8c91e22fb55740c0cc06fb1b",
+      "expected_original_sha256": "a1319c5482ea573eb5f371d530f3daeb1106e8cdcd17fb0be0e355cd685bbd06",
+      "actual_original_sha256": "a1319c5482ea573eb5f371d530f3daeb1106e8cdcd17fb0be0e355cd685bbd06",
+      "namespace": "//douglascountynv.granicus.com",
+      "records": 7,
+      "status": "PASS"
+    },
+    {
+      "provider": "utah-public-notice",
+      "input_format": "utah-notice-html",
+      "capture_sha256": "2067ed91c4346b0b39d6236dc9c470e9e0d401b63c8b390afb457745b8953f7e",
+      "expected_original_sha256": "0b4eb776e87ce38937186b0e31eeb762a3f6968f4770956250ab9ab57569a693",
+      "actual_original_sha256": "0b4eb776e87ce38937186b0e31eeb762a3f6968f4770956250ab9ab57569a693",
+      "namespace": "//www.utah.gov",
+      "records": 1,
+      "status": "PASS"
+    },
+    {
+      "provider": "destiny-agendaquick",
+      "input_format": "agendaquick-html",
+      "capture_sha256": "27fa403b6a4bd42093a60dc40a581d4cfbbe643ce4fc513459ec96f70b3c8692",
+      "expected_original_sha256": "8ef675a379222baa7bd948189b4c070e15934abc0645084890b262ba3971825e",
+      "actual_original_sha256": "8ef675a379222baa7bd948189b4c070e15934abc0645084890b262ba3971825e",
+      "namespace": "//public.destinyhosted.com/35247",
+      "records": 10,
+      "status": "PASS"
+    },
+    {
+      "provider": "town-hall-streams",
+      "input_format": "town-hall-streams-html",
+      "capture_sha256": "af55f7fc75824b7744c999c155a228f2007c718c36a13cd817cbe2774ea2394b",
+      "expected_original_sha256": "d6fd9f0d2870cba0b0149623cbdc0e7ce0bd05bd24f8d2399d9fb232a007269e",
+      "actual_original_sha256": "d6fd9f0d2870cba0b0149623cbdc0e7ce0bd05bd24f8d2399d9fb232a007269e",
+      "namespace": "//townhallstreams.com?location_id=31",
+      "records": 415,
+      "status": "PASS"
+    },
+    {
+      "provider": "telvue",
+      "input_format": "telvue-playlist-html",
+      "capture_sha256": "08c2ca51ed7655f5fd6734eaab7e193445deac8764079ee0f8da45ddf9b017fd",
+      "expected_original_sha256": "2f59a1132e076304eec83789840b34afdc41250acd8e625dff93c06b0c004883",
+      "actual_original_sha256": "2f59a1132e076304eec83789840b34afdc41250acd8e625dff93c06b0c004883",
+      "namespace": "//telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M",
+      "records": 15,
+      "status": "PASS"
+    },
+    {
+      "provider": "champ",
+      "input_format": "champ-event-json",
+      "capture_sha256": "8996174ad192d0c4be757871a445117f2001b8414b5cf4106f8a5f814dce1f06",
+      "expected_original_sha256": "9c100aabfd2133c98b5cc7039054ffad18d380673f6ca7e8647a247d35ece5b5",
+      "actual_original_sha256": "9c100aabfd2133c98b5cc7039054ffad18d380673f6ca7e8647a247d35ece5b5",
+      "namespace": "//champds.com/lakezurichil",
+      "records": 1,
+      "status": "PASS"
+    },
+    {
+      "provider": "onbase",
+      "input_format": "onbase-agenda-online-html",
+      "capture_sha256": "52bcf78353802dc087e65c83034dadcf751a61142eebb05821481e5cc3bd56a1",
+      "expected_original_sha256": "37f3cf8b0ba581a143d9f5b51830aba54a7388a542eb18f6672b9b6cfaed5727",
+      "actual_original_sha256": "37f3cf8b0ba581a143d9f5b51830aba54a7388a542eb18f6672b9b6cfaed5727",
+      "namespace": "//ecm.cityofsantacruz.com/onbaseagendaonline",
+      "records": 73,
+      "status": "PASS"
+    },
+    {
+      "provider": "laserfiche-weblink",
+      "input_format": "laserfiche-folder-html",
+      "capture_sha256": "bee1c4fb685d53e6181c3d3750b68475e4c9096752ca34df57cc7f88dccda2d7",
+      "expected_original_sha256": "68b6b5ad8d6709874b467165f146716384a5c7ea06f91edd22dd481ad5c56d8b",
+      "actual_original_sha256": "68b6b5ad8d6709874b467165f146716384a5c7ea06f91edd22dd481ad5c56d8b",
+      "namespace": "//documents.redwoodcity.org/publicweblink",
+      "records": 19,
+      "status": "PASS"
+    },
+    {
+      "provider": "towncloud",
+      "input_format": "towncloud-agenda-html",
+      "capture_sha256": "6dc4c41b94da012eec085fdcab30c64e83812af5f01aa4a381c3f4b31acf5a66",
+      "expected_original_sha256": "e5e09849b291cb58d58c4c902cc1f25dea992171387106ec82fbae37ef23956b",
+      "actual_original_sha256": "e5e09849b291cb58d58c4c902cc1f25dea992171387106ec82fbae37ef23956b",
+      "namespace": "//towncloud.io/go/bennett-co",
+      "records": 1,
+      "status": "PASS"
+    },
+    {
+      "provider": "towncloud",
+      "input_format": "towncloud-table-json",
+      "capture_sha256": "ac713151a85443d99d18d17373a14b910232845f113fe2dcd61bb232718ec1da",
+      "expected_original_sha256": "ed4838d0f58a20bb3fc1abb496d987525a067c94a16f64881bb8568364d8b0af",
+      "actual_original_sha256": "ed4838d0f58a20bb3fc1abb496d987525a067c94a16f64881bb8568364d8b0af",
+      "namespace": "//towncloud.io/go/bennett-co",
+      "records": 25,
+      "status": "PASS"
+    },
+    {
+      "provider": "digital-towpath",
+      "input_format": "digital-towpath-detail-html",
+      "capture_sha256": "f02d3b5b393cf3935cef44d1d574d95bccd29779bef390353f051b8c037f3e3a",
+      "expected_original_sha256": "064ebc05ee3542b18ebbeefa66e526c8f76fc83b4031ec3564224570d943f20d",
+      "actual_original_sha256": "064ebc05ee3542b18ebbeefa66e526c8f76fc83b4031ec3564224570d943f20d",
+      "namespace": "//townofberkshireny.gov",
+      "records": 1,
+      "status": "PASS"
+    },
+    {
+      "provider": "clerkbase",
+      "input_format": "clerkbase-document-html",
+      "capture_sha256": "4bc7c508723796477389fd2385c6e111eee88d5fedb54e7271daea2692d86e2a",
+      "expected_original_sha256": "eb3f98bed6188365b443dd9181dd3c65ebe3d63bdf9685471eef17ada485432e",
+      "actual_original_sha256": "eb3f98bed6188365b443dd9181dd3c65ebe3d63bdf9685471eef17ada485432e",
+      "namespace": "//clerkshq.com",
+      "records": 1,
+      "status": "PASS"
+    },
+    {
+      "provider": "first-party",
+      "input_format": "public-meeting-ics",
+      "capture_sha256": "339a63cd60a7f1145481fceff34a6aa98f5dc0b4768a50cbfda3e1f76522d7d6",
+      "expected_original_sha256": "64cdea3bf7dcfc7bebe87c9a7ab8f3aa7b255020aec57da4e42d539659fc669f",
+      "actual_original_sha256": "64cdea3bf7dcfc7bebe87c9a7ab8f3aa7b255020aec57da4e42d539659fc669f",
+      "namespace": "//calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics",
+      "records": 1307,
+      "status": "PASS"
+    },
+    {
+      "provider": "wistia",
+      "input_format": "wistia-media-json",
+      "capture_sha256": "3b32bb295030cb376e1d50f2cd3d8e355c8d3e22f813b93248570e0037c7d1c0",
+      "expected_original_sha256": "99e83ee973e899de32b3af6c81df4c142f286fd901565da14384e3713326cec6",
+      "actual_original_sha256": "99e83ee973e899de32b3af6c81df4c142f286fd901565da14384e3713326cec6",
+      "namespace": "//fast.wistia.com",
+      "records": 1,
+      "status": "PASS"
+    },
+    {
+      "provider": "boardable",
+      "input_format": "boardable-public-meeting-html",
+      "capture_sha256": "ee3a196a1b76416a570bf26aab28ffb1ab39961e54f31a497f7273525b624847",
+      "expected_original_sha256": "c8b9d7b1e3b289719ca10549ec0666da77548fce3136f13900987be2d5073cb2",
+      "actual_original_sha256": "c8b9d7b1e3b289719ca10549ec0666da77548fce3136f13900987be2d5073cb2",
+      "namespace": "//site.boardable.com/lake-land-college",
+      "records": 1,
+      "status": "PASS"
+    },
+    {
+      "provider": "gworks",
+      "input_format": "gworks-frontdesk-json",
+      "capture_sha256": "1c416144c033155ff3db32dfa1e6720005d9d7c48ea625420087dee34e10ea70",
+      "expected_original_sha256": "793989685d34429f6555bb4b69ec7520a980c8f15b8dd135c2c57f07b303f19e",
+      "actual_original_sha256": "793989685d34429f6555bb4b69ec7520a980c8f15b8dd135c2c57f07b303f19e",
+      "namespace": "//files.frontdeskgworks.com/city/1311/cms/data.json",
+      "records": 173,
+      "status": "PASS"
+    },
+    {
+      "provider": "boarddocs",
+      "input_format": "boarddocs-print-pdf",
+      "capture_sha256": "b54e25f3b6c877a93813614eee9ecafdbe176d9ce074567c78e911daf1411088",
+      "expected_original_sha256": "2c0830daf7d74b39ff3661c4dd3b6784b214713adc272e26b20987de101c52b1",
+      "actual_original_sha256": "2c0830daf7d74b39ff3661c4dd3b6784b214713adc272e26b20987de101c52b1",
+      "namespace": "//resources.finalsite.net",
+      "records": 1,
+      "status": "PASS"
+    },
+    {
+      "provider": "tyler-meeting-manager",
+      "input_format": "tyler-public-calendar-json",
+      "capture_sha256": "9807a51ff559cc0c0c3a734142b80f5616035378d18d3c7e6c09941efdb9edf5",
+      "expected_original_sha256": "5034aa5332f6b04198ded935c6f3683edfa4c0be7afe79e7b6fd47d485b7e781",
+      "actual_original_sha256": "5034aa5332f6b04198ded935c6f3683edfa4c0be7afe79e7b6fd47d485b7e781",
+      "namespace": "//cityofmurraycityut.meetingmanager.tylerapp.com",
+      "records": 14,
+      "status": "PASS"
+    }
+  ],
+  "wheel_sha256": "6b39f51174b2988a4240e1b7beb9d5c41dc731cc0826dbbaf0042827e410a44c"
+}

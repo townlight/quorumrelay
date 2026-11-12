@@ -1,0 +1,63 @@
+{
+  "observed_at": "2026-11-12T13:34:42.312166+00:00",
+  "candidate": "0.1.0.dev7",
+  "source_commit": "de6204e1861e27af366cdc9973cf52ce53276add",
+  "status": "passed_for_frozen_source_and_installed_artifact",
+  "wheel_sha256": "6b39f51174b2988a4240e1b7beb9d5c41dc731cc0826dbbaf0042827e410a44c",
+  "client_sha256": "b30c81a3493d2f664c79f6b68e863f331450ed4cee95b3597a91341d514cc36d",
+  "checks": [
+    {
+      "command": "pytest tests -q",
+      "passed": 594,
+      "skipped": 8,
+      "seconds": 68.36,
+      "receipt": "workspace outputs/quorumrelay-dev7-source-pytest.log",
+      "limits": "Eight optional browser tests skipped; prior real guarded-browser proof reused because browser implementation unchanged."
+    },
+    {
+      "command": "pytest tests/test_capabilities.py tests/test_public_package.py -q",
+      "passed": 4,
+      "scope": "Final generated metadata and version after full source regression."
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "passed"
+    },
+    {
+      "command": "npm --prefix client run build; npm --prefix client test",
+      "status": "passed",
+      "tests": 4
+    },
+    {
+      "command": "validate_capabilities.py --baseline-source <pinned original>",
+      "status": "passed",
+      "providers": 31,
+      "baseline_formats": 34,
+      "evidence_records": 305,
+      "independent_original_ast": true,
+      "negative_checks": 5,
+      "errors": []
+    },
+    {
+      "command": "uv pip check --python .venv-quorumrelay-dev07/Scripts/python.exe",
+      "status": "passed",
+      "packages": 35
+    },
+    {
+      "command": "fresh outside-checkout verify_installed_artifact.py",
+      "status": "passed",
+      "receipt": "quorumrelay-development-07.json"
+    },
+    {
+      "command": "fresh installed original34 output and raw capture comparisons",
+      "status": "passed",
+      "receipt": "quorumrelay-development-07-original-outputs.json"
+    }
+  ],
+  "limits": [
+    "Development snapshot; not full release acceptance.",
+    "Bounded public read receipts do not establish complete catalogs.",
+    "No authorized vendor write tenant credentials supplied; provider write acceptance NOT_RUN.",
+    "Exact consumer pin, required hosted CI and installed native acceptance are separate."
+  ]
+}
