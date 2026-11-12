@@ -20453,8 +20453,8 @@
       "baseline_formats": [
         "boardable-public-meeting-html"
       ],
-      "observations_date": "2026-11-11",
-      "research_status": "bounded_documentation_and_public_observation_pass; unresolved details listed",
+      "observations_date": "2026-11-12",
+      "research_status": "bounded_public_listing_route_observed_and_engine_partial; provider_api_support_catalog_and_write_acceptance_unverified",
       "evidence": [
         {
           "id": "boardable-baseline",
@@ -20573,14 +20573,83 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "boardable-public-list-page-1",
+          "url": "https://app.boardable.com/api/public-sites/meetings?count=10&search=&group=&status=&sort=asc&upcoming=true&page=1",
+          "title": "VCCCD public meetings API page 1 capture",
+          "kind": "public_tenant_capture",
+          "observed": "Captured the public client request and JSON response from the existing VCCCD public site.",
+          "findings": [
+            "The request uses GET /api/public-sites/meetings, count=10, blank search/group/status, sort=asc, upcoming=true and page=1; public SiteId 3 is resolved by matching the configured organization slug in rendered __NUXT_DATA__.",
+            "The response includes ten rows with provider-issued numeric meeting IDs and meta/links pagination fields; exact response bytes are saved as a fixture."
+          ],
+          "limits": "Observed public frontend/API behavior, not a vendor-published supported integration contract or catalog-completeness proof.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only_no_auth",
+          "proof_level": "saved_public_response_fixture_not_catalog_acceptance",
+          "fixture_path": "tests/fixtures/boardable-discovery/page-1.json",
+          "fixture_sha256": "e429416b040df3b8e0818b1a509afdbe783c0e724abbaf1bd6d89a636c086aaa"
+        },
+        {
+          "id": "boardable-public-list-page-2",
+          "url": "https://app.boardable.com/api/public-sites/meetings?count=10&search=&group=&status=&sort=asc&upcoming=true&page=2",
+          "title": "VCCCD public meetings API page 2 capture",
+          "kind": "public_tenant_capture",
+          "observed": "Captured the public client next-page response linked from page 1.",
+          "findings": [
+            "The returned links.next advances the same query and upcoming mode to page=2; page 2 contains ten provider IDs disjoint from page 1.",
+            "Exact response bytes are saved as a separate fixture and drive bounded continuation tests."
+          ],
+          "limits": "Two selected public listing pages do not prove all 150 provider-reported meetings, past-listing behavior or document/detail coverage.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only_no_auth",
+          "proof_level": "saved_public_response_fixture_not_catalog_acceptance",
+          "fixture_path": "tests/fixtures/boardable-discovery/page-2.json",
+          "fixture_sha256": "35eb41d4b3dbf27edf658401d3de45e1cab13744217091f38b1ca1d96346528d"
+        },
+        {
+          "id": "boardable-public-listing-live",
+          "url": "https://site.boardable.com/ventura-county-community-college-district",
+          "title": "VCCCD bounded Boardable public listing engine receipt",
+          "kind": "live_engine_bounded_read_receipt",
+          "observed": "2026-11-12 first and resumed public engine reads.",
+          "findings": [
+            "The first engine call returned 15 distinct numeric-ID meeting records over two pages; resuming its page-2 offset returned the remaining five distinct IDs. Both calls had partial status and no errors.",
+            "The guarded requests resolved public SiteId 3 from the configured slug and followed the same-origin API page link. Dynamic live API response hashes differ from the independent saved page fixtures and are not cross-compared."
+          ],
+          "limits": "One VCCCD tenant, upcoming=true, pages 1 and 2 only. Coverage is partial; the provider-reported total is 150. No past-mode live read, full catalog, native search, detail/document download or write acceptance is established.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_engine_read_no_write",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "receipt_path": "docs/verification/boardable-public-discovery-2026-11-12.json",
+          "receipt_sha256": "c15ff8658b44ba2a0a91129177438788e4f0c22b723e280dec6b9314df13178e"
+        },
+        {
+          "id": "boardable-listing-implementation-and-tests",
+          "url": "https://github.com/townlight/quorumrelay/tree/main/src/civic_data_connectors/providers",
+          "title": "Boardable public listing source and focused fixture tests",
+          "kind": "source_and_named_test_coverage",
+          "observed": "Commit 39a4cb9833dcc1016027329afcf8e090a15300d7; focused Boardable test command passed 16 tests.",
+          "findings": [
+            "providers/boardable.py implements bounded root or /meetings discovery, source-derived public SiteId, same-mode next-link checks, page hash checkpoints, inclusive date filtering and preserved original row/capture values.",
+            "tests/test_boardable_discovery.py covers captured pages, synthetic empty listings, resume and changed-page detection, scope/filter bindings, site-ID mismatch/spoof, forged next links, byte limits, cancellation and unknown-field preservation."
+          ],
+          "limits": "Local source and fixture tests are not provider acceptance. Listing descriptions are not mapped to normalized body; unsupported detail/document behavior remains unverified.",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_source_and_fixture_contracts_no_provider_access",
+          "proof_level": "source_and_named_test_coverage_not_provider_acceptance"
         }
       ],
       "tenants": [
         {
           "url": "https://site.boardable.com/ventura-county-community-college-district",
-          "observation": "VCCCD Public Site; Initial list; search/pagination untested.",
+          "observation": "VCCCD public site; bounded anonymous engine listing returned 15 first-call plus five resumed distinct upcoming meetings across pages 1-2; status partial and catalog completeness false.",
           "evidence_ids": [
-            "boardable-tenant"
+            "boardable-tenant",
+            "boardable-public-list-page-1",
+            "boardable-public-list-page-2",
+            "boardable-public-listing-live"
           ]
         }
       ],
@@ -20609,25 +20678,31 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "boardable-tenant"
+            "boardable-public-list-page-1",
+            "boardable-public-list-page-2",
+            "boardable-public-listing-live",
+            "boardable-listing-implementation-and-tests"
           ],
-          "details": "Public listing/navigation observed; not exhaustive discovery coverage.",
+          "details": "Bounded public root or /meetings discovery resolves SiteId from the rendered organization slug, retrieves meeting-list pages through the observed public client route, validates same-mode links.next pagination, and preserves provider numeric IDs and exact API-page captures. The route is observed, not a vendor-published supported API. The live receipt returned 15 records then five resumed records; both results were partial.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify full date/body bounds, continuation and checkpoints."
+            "The live engine read covered only upcoming=true pages 1-2; past=false has fixture coverage only. The provider-reported total is 150 and the catalog was not exhausted.",
+            "The public UI/API route is not documented as a supported integration contract; version stability, provider search semantics and rate limits remain unknown.",
+            "Rows expose a source description, not a verified governing-body/body field; body filtering remains unknown. Source start-date timezone literals are preserved without timezone conversion.",
+            "The listing provides no linked agenda/document/media detail. Direct detail retrieval and one supplied document download with MIME, redirect and hash evidence remain open."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "live_engine_bounded_read_receipt_not_write_acceptance",
           "tenant_scope": [
             "https://site.boardable.com/ventura-county-community-college-district"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Sixteen focused fixture tests plus one bounded anonymous VCCCD engine read/resume; no provider account acceptance.",
           "restrictions": [
-            "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "No provider test tenant or credentials were supplied; live write acceptance remains access-blocked.",
+            "No arbitrary public-city writes were performed; public UI documentation and bounded read evidence are not write acceptance."
           ]
         },
         "fetch": {
@@ -21036,9 +21111,11 @@
         "Keep explicit PST vs unspecified landing timezone."
       ],
       "remaining_research": [
-        "On the existing VCCCD Public Site, follow View All and one Previous/Next path; capture the actual date/page parameters and GET one supplied document URL with MIME/redirect/hash. Preserve the timezone display discrepancy in detail versus landing.",
-        "Official Boardable guides describe UI create/edit and public-page document upload, not external API or import fields. Notification, visibility and approval effects need an authorized account/manual.",
-        "No Boardable staff/test credentials or API token supplied; write permissions and readback remain access-blocked."
+        "The live engine call covered VCCCD upcoming=true through pages 1-2 and resumed one page offset, returning 20 distinct records across first/resumed calls. Past mode is fixture-tested only; reported total 150 and full catalog coverage remain unverified.",
+        "The public UI search field/API search parameter was not exercised; native-search semantics remain unknown and this discovery path sends blank search.",
+        "Public meeting rows expose description, not a verified normalized body field; body filtering is unknown. Preserve timezone literals and the earlier VCCCD detail-versus-landing display discrepancy.",
+        "The listing has no agenda/document/media links. Direct detail retrieval and bounded download of a supplied document with MIME, redirect and exact-byte/hash evidence remain unverified.",
+        "Official Boardable documentation remains UI-focused and does not establish a supported external API, import schema, create/update/upload contract or readback semantics. No provider test account/credentials were supplied; provider write acceptance is not run and remains access-blocked."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "boardable",

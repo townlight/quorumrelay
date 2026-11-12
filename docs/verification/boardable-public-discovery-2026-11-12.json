@@ -1,0 +1,112 @@
+{
+  "source": "https://site.boardable.com/ventura-county-community-college-district",
+  "status": "partial",
+  "errors": [],
+  "ids": [
+    "472861",
+    "464008",
+    "510182",
+    "523922",
+    "522376",
+    "523416",
+    "511566",
+    "525789",
+    "511274",
+    "502356",
+    "511062",
+    "510175",
+    "501423",
+    "510584",
+    "507949"
+  ],
+  "coverage": {
+    "sources": [
+      {
+        "provider": "boardable",
+        "url": "https://site.boardable.com/ventura-county-community-college-district",
+        "namespace": "//site.boardable.com/ventura-county-community-college-district",
+        "body": null,
+        "input_format": "boardable-public-meetings-json",
+        "options": {}
+      }
+    ],
+    "tenant_resolution": {
+      "method": "matched public __NUXT_DATA__ organization slug",
+      "public_site_id": 3,
+      "landing_sha256": "e2e7d7d6f7174ca14c2c577f910bd48c13ba08e0031b7e542e42d261ec9f3bb6",
+      "landing_byte_length": 224715
+    },
+    "date_from": null,
+    "date_to": null,
+    "date_inclusivity": "both",
+    "record_types": [],
+    "unobserved_record_types": [],
+    "body": null,
+    "returned_records": 15,
+    "filtered_records": 0,
+    "body_filter_status": "not_requested",
+    "actual_dates": [
+      "2026-11-12",
+      "2026-11-13",
+      "2026-11-16",
+      "2026-11-17"
+    ],
+    "unknown_date_records": [],
+    "unknown_body_records": [],
+    "pages": 2,
+    "failed_pages": [],
+    "failures": [],
+    "listing_exhausted": false,
+    "catalog_complete": false,
+    "source_complete": false,
+    "available_text": "meeting_title_and_supplied_description_only",
+    "documents_and_agenda_items": "not_supplied_by_public_meeting_listing",
+    "truncated": true,
+    "deadline_exceeded": false,
+    "scope": "bounded public meeting-list pages; document/detail catalog completeness is unverified"
+  },
+  "resumed": {
+    "status": "partial",
+    "errors": [],
+    "ids": [
+      "496950",
+      "525000",
+      "435590",
+      "511248",
+      "525423"
+    ]
+  },
+  "requests": [
+    {
+      "url": "https://site.boardable.com/ventura-county-community-college-district",
+      "status": 200,
+      "bytes": 224715,
+      "sha256": "e2e7d7d6f7174ca14c2c577f910bd48c13ba08e0031b7e542e42d261ec9f3bb6"
+    },
+    {
+      "url": "https://app.boardable.com/api/public-sites/meetings?count=10&search=&group=&status=&sort=asc&upcoming=true&page=1",
+      "status": 200,
+      "bytes": 13158,
+      "sha256": "ed21926431c89ba1f95ea983d93dcb9c13f06e6aa5982421e57a86a9d0786a9c"
+    },
+    {
+      "url": "https://app.boardable.com/api/public-sites/meetings?count=10&search=&group=&status=&sort=asc&upcoming=true&page=2",
+      "status": 200,
+      "bytes": 15224,
+      "sha256": "c0cdc752ae4fd57ab0016fdb54cadfb2de54430f041b94c015629627ad6ecd4b"
+    },
+    {
+      "url": "https://site.boardable.com/ventura-county-community-college-district",
+      "status": 200,
+      "bytes": 224715,
+      "sha256": "694eef681f2fa2b9b1f0dbd5bfb8bf882dc9a3c97ea19c9e019c3e24982edb91"
+    },
+    {
+      "url": "https://app.boardable.com/api/public-sites/meetings?count=10&search=&group=&status=&sort=asc&upcoming=true&page=2",
+      "status": 200,
+      "bytes": 15224,
+      "sha256": "c0cdc752ae4fd57ab0016fdb54cadfb2de54430f041b94c015629627ad6ecd4b"
+    }
+  ],
+  "limits": "Bounded public listing only; no full catalog, native search, account or write acceptance."
+}

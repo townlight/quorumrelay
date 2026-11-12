@@ -774,32 +774,40 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ## F28 Boardable (`boardable`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Official documentation status: UI create/edit/upload/public-page instructions inspected; no vendor-published external API or import contract established. The public listing API route below is observed in the rendered client and engine, not documented as a supported integration.
+Account/tier: public VCCCD listing accessed without credentials. No Boardable staff/test account or credentials were supplied; no private account access or writes were attempted.
+Current authorization/access (2026-11-12): the full plan authorizes test-tenant acceptance, but no Boardable test tenant or credentials are available. Provider write acceptance is NOT_RUN/access-blocked; no arbitrary public-city data was mutated.
 
-### Representative research observations
+### Bounded public-list observations
 
-- https://site.boardable.com/ventura-county-community-college-district: VCCCD Public Site; Initial list; search/pagination untested.
+- The existing VCCCD organization root and `/meetings` page resolve the numeric public `SiteId` by matching the organization slug in rendered `__NUXT_DATA__`.
+- The rendered public client requests `GET https://app.boardable.com/api/public-sites/meetings` with `SiteId`, `count=10`, blank `search/group/status`, `sort=asc`, `upcoming=true|false`, and `page`. The captured `links.next` advances the same mode to the next page.
+- Saved page 1 and page 2 each contain ten rows with numeric provider IDs; their ID sets are disjoint. The engine receipt exercised `upcoming=true` through two pages, returning 15 first-call records and five distinct resumed records. Both calls returned partial status without errors. The provider-reported total is 150; full catalog completion is not claimed.
+- Captured rows supply title, description, start/end date strings, timezone literals, groups and published-material flags. The implementation retains the exact original row and page capture. `description` is not normalized as governing-body `body`; timezone values are not converted.
+- The listing does not supply agenda/document/media links. Existing saved detail parsing remains the baseline behavior; the new discovery path does not claim live detail or document retrieval.
+- Receipt: `docs/verification/boardable-public-discovery-2026-11-12.json`. Saved response fixtures: `tests/fixtures/boardable-discovery/page-1.json` and `page-2.json`; the sanitized landing fixture omits expiring signed asset URLs.
 
 ### Remaining research
 
-- On the existing VCCCD Public Site, follow View All and one Previous/Next path; capture the actual date/page parameters and GET one supplied document URL with MIME/redirect/hash. Preserve the timezone display discrepancy in detail versus landing.
-- Official Boardable guides describe UI create/edit and public-page document upload, not external API or import fields. Notification, visibility and approval effects need an authorized account/manual.
-- No Boardable staff/test credentials or API token supplied; write permissions and readback remain access-blocked.
+- The live engine read covered only VCCCD `upcoming=true` pages 1-2 and one page-offset resume. `upcoming=false` has fixture coverage only; the provider-reported total 150 and full listing/catalog remain unexhausted.
+- The public client/API request is observed, not a published supported Boardable integration contract. Version stability, rate limits, native search semantics and date-query semantics remain unverified; this implementation sends blank search and filters returned source dates locally.
+- Body filters remain unknown because the listing's `description` field is not proven equivalent to a governing body. Preserve timezone literals and the earlier detail-versus-landing time display discrepancy.
+- Direct detail retrieval and one supplied agenda/minutes/document download with MIME, redirect and exact-byte/hash evidence remain unverified. Listing flags that materials are published do not provide their links or prove public download access.
+- Official guides describe UI create/edit and public-page upload, not external API/import fields. Notification, visibility and approval effects need an authorized account/manual. No test tenant/credentials were supplied; create/update/upload and readback acceptance remain access-blocked, not unsupported.
 
 ### Pagination contract
 
 {
-  "status": "partly_observed_or_unverified",
-  "details": "View all meetings, previous/next detail links; list date/page requests unknown."
+  "status": "observed_bounded_public_client_route; live_engine_partial",
+  "details": "The rendered client uses SiteId from matching public organization state and GET /api/public-sites/meetings with count=10, blank search/group/status, sort=asc, upcoming mode and page. Same-mode links.next is validated. Live engine evidence covered upcoming=true pages 1-2 and resumed an offset; past mode is fixture-only. The provider total was not exhausted and full catalog completeness is false."
 }
 
 ### Authorization restrictions
 
-- Private document upload not public publication.
+- Private document upload is not public publication.
 - Invited-meeting edits send mandatory notifications.
-- Keep explicit PST vs unspecified landing timezone.
+- No arbitrary public-city writes; use an authorized Boardable test tenant when credentials are supplied.
+- Keep the explicit PST versus unspecified landing-time display discrepancy.
 
 ## F29 gWorks FrontDesk (`gworks`)
 
