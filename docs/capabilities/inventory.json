@@ -17623,6 +17623,16 @@
           "limits": "Never count this response as a PDF success; one diagnostic only. Route unavailability and catalog completeness remain unknown.",
           "receipt_path": "docs/verification/onbase-pdf-mismatch-2026-11-12.json",
           "receipt_sha256": "679bd63668cb6dde806dac334e223173ec992a029b2ec9eee9784d932dad6e16"
+        },
+        {
+          "id": "onbase-tagged-dip-contract",
+          "url": "https://docs.hyland.com/r/OnBase/Document-Import-Processor/Foundation-26.1/Document-Import-Processor/Import-Index-File/Import-Index-Parameters/Examples-of-DIP-Format-Process-Settings-and-Field-Order/Tagged-DIP-Example",
+          "title": "OnBase Foundation26.1 Normal Tagged DIP index/document preparation",
+          "kind": "official_documentation",
+          "observation_date": "2026-11-12",
+          "proof_level": "official_documentation",
+          "findings": "Official tagged example/settings and Default Keyword/Field Order guides establish explicit configured tags, exclusive document boundaries, numeric destination File Type before File Name, ordinary repeated keywords and index-directory file resolution for Normal/noFTP DIP. Vendor-linked example GIF is byte/hash pinned under evidence/onbase-dip; local HTML captures are SPA shells, expressly not contract text. Thirteen synthetic export cases independently check emitted layout, exact bytes/hash, mappings and safeguards.",
+          "limits": "Prepared file/index only; no Agenda entity creation/association, remote DIP execution, Test Only report or batch commit. Destination Document Type/file format/keyword/encoding configuration is explicit; no type IDs inferred."
         }
       ],
       "tenants": [
@@ -17805,23 +17815,24 @@
           ]
         },
         "vendor_file_export": {
-          "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "capability_status": "documented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "hyland-onbase-agenda-online-tenant"
+            "hyland-onbase-agenda-online-tenant",
+            "onbase-tagged-dip-contract"
           ],
-          "details": "HTML accessible agenda and PDF/packet links; not machine-import schema.",
+          "details": "Source implements onbase-tagged-dip-files: explicit linked meeting-document bytes and configured Normal Tagged DIP index. Thirteen synthetic export cases verify actual emitted layout and field ordering, exact file hashes, scoped input/output/current policy, collision/control/path/encoding/bounds/cancellation. No Agenda association, vendor execution or imported outcome inferred.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify exact generated file/fields/access. Downloading a PDF is not structured provider import/write-back."
+            "Agenda entity/API fields remain separate unresolved contract work; no file-import preparation claim closes them."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "vendor_documented_format_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Vendor-documented synthetic execution accepted; live observations optional.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -18153,6 +18164,73 @@
           "api_version": "unknown",
           "automatable_contract_verified": false,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "linked_meeting_document",
+          "operation": "vendor_file_export",
+          "endpoint_or_format": "Normal Tagged DIP index.txt plus exact document files; configure destination tags/types; extract local ZIP wrapper first.",
+          "field_mappings": [
+            {
+              "normalized": "document_type",
+              "provider_field": ">>Document Type",
+              "notes": "Exact destination name preserved.",
+              "mapping_level": "documented_filename_or_file_format"
+            },
+            {
+              "normalized": "file_type_number",
+              "provider_field": ">>File Type",
+              "notes": "Explicit destination numeric ID before filename; no MIME-to-ID inference.",
+              "mapping_level": "documented_filename_or_file_format"
+            },
+            {
+              "normalized": "filename",
+              "provider_field": ">>File Name",
+              "notes": "Safe basename in index directory for Normal/noFTP process.",
+              "mapping_level": "documented_filename_or_file_format"
+            },
+            {
+              "normalized": "keywords",
+              "provider_field": "configured ordinary Keyword Types",
+              "notes": "Explicit case-sensitive tag/type/value mapping and repeated values; no system mutation tags.",
+              "mapping_level": "documented_filename_or_file_format"
+            },
+            {
+              "normalized": "file",
+              "provider_field": "original document bytes",
+              "notes": "Hash-verified portable bundle; no conversion/format compatibility or remote import claim.",
+              "mapping_level": "documented_filename_or_file_format"
+            }
+          ],
+          "evidence_ids": [
+            "onbase-tagged-dip-contract"
+          ],
+          "account_requirements": "Existing destination Normal Tagged DIP process with explicit Document Types, numeric file formats and keyword/encoding mappings. No account provisioning or remote execution required for preparation.",
+          "authorized_test_access": "synthetic explicit destination configuration; no remote vendor action",
+          "readback_receipt": "Local emitted index and exact file/hash manifest verified. Actual Test Only Verification Report or remote batch import/commit is not executed and is not a mandatory live gate.",
+          "verification_status": "documented_format_synthetic_engine_verified",
+          "notes": "No Agenda API/meeting association inferred. Numeric file format is explicitly caller-supplied, not guessed from MIME. System revision/admin tags rejected; only ordinary configured keywords projected.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "evidence_level": "official_format_and_synthetic_engine_checks",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "interface_type": "documented_file_import",
+          "contract_confidence": "official_tagged_layout_and_configuration_rules",
+          "method": null,
+          "content_types": [
+            "caller_supplied_destination_document_format"
+          ],
+          "api_version": "not_applicable",
+          "automatable_contract_verified": true,
+          "domain_scope": "Linked meeting-document preparation only; no Agenda entity changes, deletes or provider administration."
         }
       ],
       "pagination": {
@@ -18167,7 +18245,8 @@
       "remaining_research": [
         "On Fitchburg, current root maps 30 rows; one Meetings response mapped zero, and guarded search POST was rejected before redirect details/results. One supplied .pdf returned HTTP 200 text/html (3,719 bytes) without PDF magic; corrected result is partial and retains the meeting. This is neither PDF success nor proof of unsupported route.",
         "Hyland Agenda Foundation 25.1 guidance is version/installation-scoped. Identify deployment/version and entitlement before applying API/write operations to Agenda Online.",
-        "No authorized deployment-matched staff/test account or integration contract was supplied for create/update/upload."
+        "No authorized deployment-matched staff/test account or integration contract was supplied for create/update/upload.",
+        "Normal Tagged DIP linked-document file/index preparation is implemented with exact destination mappings and synthetic emitted-layout proof; no Agenda meeting association or remote processing is inferred. OnBase API SDK remains an actual vendor surface; sdk.onbase.com redirected to Hyland identity, and public REST help describes per-deployment published operations rather than a universal Agenda schema. Continue exact API contract research without credential acquisition."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "onbase",

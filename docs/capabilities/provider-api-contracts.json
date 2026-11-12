@@ -9171,5 +9171,14 @@
     "mapping": "Distinct playlist_item identity, supplied playlist parent, media playable relationship, sequence/windows and existing media projection; no meeting association",
     "proof": "Seven synthetic engine/saved-input cases anchored to selected-field vendor example transcription; no live calls or pagination/current compatibility claim",
     "vendor_reference_date": "December2022 (HTML December1, Markdown December2)"
+  },
+  "onbase_tagged_dip": {
+    "evidence": "docs/capabilities/evidence/onbase-dip/source.json",
+    "documentation": "docs/ONBASE-DIP.md",
+    "product": "OnBase Document Import Processor Foundation26.1; same OnBase document repository, not Agenda API by inference",
+    "format": "onbase-tagged-dip-files",
+    "operation": "export",
+    "model": "Explicit tags, encoding, documents[file_index,filename,document_type,file_type_number,keywords[tag,keyword_type,value]] and authorized files. Normal/noFTP index-directory resolution.",
+    "proof": "Thirteen distinct synthetic engine cases verify emitted vendor layout/order, exact files/hash, private inputs/output and bounds. No remote vendor operation."
   }
 }

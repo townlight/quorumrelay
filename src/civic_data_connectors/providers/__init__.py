@@ -115,6 +115,8 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_native_search("novusagenda", tracked_handler("search", lambda engine, request, content, context:
                                   novus_search(engine, request, content, context, transport=transport)))
     engine.register_native_export("civicplus-select", tracked_handler("export", export_historical))
+    from .onbase_export import export_dip
+    engine.register_native_export("onbase", tracked_handler("export", export_dip))
 
 
 __all__ = ["FORMATS", "BrowserSession", "PublicTransport", "Response", "Transport", "register"]

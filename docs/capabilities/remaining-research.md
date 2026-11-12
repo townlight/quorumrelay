@@ -590,6 +590,8 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
+- Documented OnBase Normal Tagged DIP file/index preparation is now implemented as `onbase-tagged-dip-files`; see [the mapping guide](../ONBASE-DIP.md). Thirteen synthetic actual-engine checks verify emitted layout, mapped tags/types, exact bytes and authorization/bounds. This prepares linked meeting documents only, with explicit destination configuration; it does not establish an Agenda API, meeting association, remote Verification Report or committed import.
+
 - The current bounded follow-up covered root, Meetings response, guarded search attempt and one supplied Downloadfile route. Search results, redirect target/method and adjacent-date/archive completeness remain unresolved; the supplied `.pdf` response is HTML, not a PDF.
 - Hyland Agenda Foundation 25.1 guidance is version/installation-scoped. Identify tenant deployment/version and entitlement before applying API or write operations to Agenda Online.
 - No authorized deployment-matched staff/test account or integration contract was supplied for create/update/upload.
