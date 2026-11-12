@@ -60,9 +60,22 @@ field. Generic player links and `.mp4` appearing only in a query remain untyped.
 Guarded downloads and consumer file checks still apply. All 34 direct-normalize
 compatibility outputs remain unchanged.
 
-Dev5 and its complete verification receipts remain preserved. The new package
-and consumer pins will identify the immutable dev6 build after verification.
-No acceptance scope is reduced and no live provider write is claimed.
+Dev5 and its complete verification receipts remain preserved. Immutable dev6
+Python wheel SHA256:
+`ec1e6c55dc29338dcf3033a1f8bba92bec1975f0108cbb92e2e2e18a4ec19ee1`.
+TypeScript `0.1.0-dev.6` tarball SHA256:
+`ab6439db9041a31acf70db8334089d2213346beda7fad40a6e4a184b561c07da`.
+Source: `4b1c27ca571d1b781233fcd03389ce99ddf58932`.
+
+Fresh Windows installed-package checks, the exact direct-media preview fields,
+all 34 original-output comparisons and all ten copied external examples passed.
+The 78 discovery checks and nine projection/package/Node checks cover the
+changed source; unaffected dev5 checks are reused. The client compiled code,
+types and README are byte-identical to dev5; only its package version changed.
+See the [artifact receipt](verification/quorumrelay-development-06.json) and
+[affected source checks](verification/quorumrelay-development-06-checks.json).
+Installed consumer handoffs and hosted CI remain separate. No acceptance scope
+is reduced and no live provider write is claimed.
 
 ## Development candidate 0.1.0.dev5
 

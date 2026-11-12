@@ -38,5 +38,7 @@
   "limits": [
     "Affected source checks plus inherited unchanged evidence, not a new full local suite claim.",
     "Fresh artifact/consumer/native/required hosted CI/live provider acceptance remain distinct."
-  ]
+  ],
+  "source_commit": "4b1c27ca571d1b781233fcd03389ce99ddf58932",
+  "wheel_sha256": "ec1e6c55dc29338dcf3033a1f8bba92bec1975f0108cbb92e2e2e18a4ec19ee1"
 }
