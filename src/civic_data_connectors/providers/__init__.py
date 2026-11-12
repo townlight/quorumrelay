@@ -36,6 +36,7 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_operation("identify", identify_handler)
     engine.register_operation("validate_source", validate_handler)
     for provider, input_format in (
+            ("civicplus-select", "civicplus-search-json"),
             ("civicweb", "civicweb-detail-html"),
             ("swagit", "swagit-listing-html"),
             ("onbase", "onbase-public-listing-html"),
@@ -82,6 +83,9 @@ def register(engine, *, transport: Transport | None = None,
     from .suiteone_search import native_search as suiteone_search
     engine.register_native_search("suiteone-media", tracked_handler("search", lambda engine, request, content, context:
                                   suiteone_search(engine, request, content, context, transport=transport)))
+    from .civicplus_search import native_search as civicplus_search
+    engine.register_native_search("civicplus-select", tracked_handler("search", lambda engine, request, content, context:
+                                  civicplus_search(engine, request, content, context, transport=transport)))
     from .civicplus_export import export_historical
     engine.register_native_export("civicplus-select", tracked_handler("export", export_historical))
 

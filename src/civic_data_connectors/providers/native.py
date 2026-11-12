@@ -150,6 +150,9 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format == "civicplus-search-json":
+        from .civicplus_search import search_bundle
+        return search_bundle(source, namespace, content)
     if input_format in {"agendaquick-public-listing-html", "agendaquick-item-search-html"}:
         from .agendaquick import listing_rows, search_rows
         mapper = listing_rows if input_format == "agendaquick-public-listing-html" else search_rows

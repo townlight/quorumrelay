@@ -102,7 +102,7 @@ def _initial(source, bounds, input_format, saved):
         return [{"kind": "saved", "offset": 0}]
     provider = source.provider
     if input_format in {"meeting-export", "legistar-event-json", "wistia-media-detail-json", "wistia-caption-json",
-                        "agendaquick-item-search-html"}:
+                        "agendaquick-item-search-html", "civicplus-search-json"}:
         return []
     if provider in NATIVE:
         if not bounds.date_from or not bounds.date_to:
@@ -395,7 +395,7 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
                         "civicweb-detail-html", "swagit-listing-html", "onbase-public-listing-html",
                         "digital-towpath-listing-html", "towncloud-public-listing-json",
-                        "agendaquick-public-listing-html", "agendaquick-item-search-html"}:
+                        "agendaquick-public-listing-html", "agendaquick-item-search-html", "civicplus-search-json"}:
         return parse_native(source, namespace, content, input_format), ()
     result = engine.normalize(replace(source, body=None), content, input_format=input_format,
                               bounds=replace(bounds, date_from=None, date_to=None,
