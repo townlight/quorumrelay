@@ -8,13 +8,14 @@ from quorumrelay.providers.contracts import Response
 
 FIXTURES = Path(__file__).parent / "fixtures"
 SOURCE = {"provider": "civicplus-agenda-center", "url": "https://www.effinghamcounty.org/AgendaCenter"}
-ROOT = b'<input id="searchField" value=""><input id="StartDatePicker" value=""><input id="EndDatePicker" value=""><a href="javascript:changeYear(2025, 3, \'a0\')">2025</a>'
+ROOT = b'<a href class="breadCrumb">Agenda Center Archive</a><input id="searchField" value=""><input id="StartDatePicker" value=""><input id="EndDatePicker" value=""><a href="javascript:changeYear(2025, 3, \'a0\')">2025</a>'
 
 
 class Transport:
     def __init__(self):
         self.calls = []
         self.changed = False
+        self.noise = False
 
     def request(self, url, **kwargs):
         self.calls.append((url, kwargs))
@@ -27,7 +28,9 @@ class Transport:
         assert fields["startDate"] == fields["endDate"] == [""]
         name = "agendacenter-search-error.html" if fields["term"] == ["quorumrelayneverpresentqzxjvk"] else "agendacenter-search-commission.html"
         raw = (FIXTURES / name).read_bytes()
-        return Response(url, raw + (b"<!--changed-->" if self.changed else b""), "text/html")
+        if self.changed:
+            raw = raw.replace(b"Commission Meeting", b"Changed Meeting")
+        return Response(url, raw + (b"<!--generated DOM state changed-->" if self.noise else b""), "text/html")
 
 
 def request(term="Commission", **bounds):
@@ -87,3 +90,13 @@ def test_changed_capture_fails_with_no_silent_row_skip():
     transport.changed = True
     result = engine.execute("search", request(max_records=1, checkpoint=first.coverage["checkpoint"]))
     assert result.status == "failed" and result.errors
+
+
+def test_unmapped_dom_noise_preserves_rows_and_exact_original_captures():
+    transport = Transport()
+    engine = create_engine(provider_transport=transport)
+    first = engine.execute("search", request(max_records=1))
+    transport.noise = True
+    resumed = engine.execute("search", request(max_records=1, checkpoint=first.coverage["checkpoint"]))
+    assert resumed.status == "partial" and not resumed.errors
+    assert first.data["bundles"][0]["capture"]["sha256"] != resumed.data["bundles"][0]["capture"]["sha256"]

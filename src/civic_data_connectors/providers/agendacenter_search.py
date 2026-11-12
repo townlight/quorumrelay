@@ -2,7 +2,6 @@
 
 from copy import deepcopy
 from dataclasses import asdict, replace
-from hashlib import sha256
 from time import monotonic
 from urllib.parse import urlsplit
 
@@ -75,9 +74,6 @@ def native_search(engine, request, content, context, *, transport=None):
             raw = retrieve(origin + "/AgendaCenter/UpdateCategoryList", method="POST",
                 body=form_body({**current["fields"], "term": expressions[0]}),
                 headers={"Content-Type": "application/x-www-form-urlencoded"})
-            digest = sha256(raw).hexdigest()
-            if current.get("sha256") and current["sha256"] != digest:
-                raise ValueError("The keyword result capture changed; restart its continuation.")
             if b"An error has occurred in this application" in raw:
                 bundles.append(make_bundle(source, namespace, raw, "agenda-center-html", []))
                 raise ValueError("The provider returned an application-error page, not an empty result.")
@@ -87,7 +83,14 @@ def native_search(engine, request, content, context, *, transport=None):
                 bundles.append(make_bundle(source, namespace, raw, "agenda-center-html", []))
                 raise ValueError("No readable rows or verified empty-result marker were supplied.")
             bundle, index = result.data, current["offset"]
-            candidates = bundle["records"]
+            candidates = sorted(bundle["records"], key=lambda record: record["identity"]["external_id"])
+            # Published HTML generates fresh DOM row IDs on every response.
+            # They are not record identities or search rank. Bind the mapped
+            # provider values and preserve each exact response independently.
+            digest = canonical_hash([{key: record[key] for key in ("identity", "normalized", "original")}
+                                     for record in candidates])
+            if current.get("sha256") and current["sha256"] != digest:
+                raise ValueError("The mapped keyword result set changed; restart its continuation.")
             if index > len(candidates):
                 raise ValueError("The continuation exceeds its captured page.")
             selected = []
@@ -117,6 +120,7 @@ def native_search(engine, request, content, context, *, transport=None):
         "scope": "supplied public year/category keyword requests; title/date metadata only",
         "full_document_text_searched": False, "catalog_complete": False, "source_complete": False,
         "provider_query_semantics": "provider-defined term parameter; exact local title matching",
+        "continuation_binding": "canonical mapped provider rowset; exact HTML retained; generated DOM IDs and rank are not identities",
         "body_filter": {"requested": query.body, "applied": False, "status": "unknown_retained" if query.body else "not_requested"},
         "pages": pages, "truncated": bool(queue),
         "checkpoint": _checkpoint(binding, queue, seen) if queue else None}

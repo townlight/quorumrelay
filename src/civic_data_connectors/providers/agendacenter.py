@@ -17,7 +17,7 @@ class _Controls(HTMLParser):
             self.inputs[fields['id']] = fields.get('value') or ''
         if tag != 'a':
             return
-        match = re.fullmatch(r"javascript:changeYear\(\s*(20[0-9]{2})\s*,\s*([1-9][0-9]{0,11})\s*,\s*'[^'<>]{1,128}'\s*\)", fields.get('href', ''))
+        match = re.fullmatch(r"javascript:changeYear\(\s*(20[0-9]{2})\s*,\s*([1-9][0-9]{0,11})\s*,\s*'[^'<>]{1,128}'\s*\)", fields.get('href') or '')
         if match and match.groups() not in self.years:
             self.years.append(match.groups())
 
