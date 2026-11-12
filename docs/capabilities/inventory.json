@@ -15604,6 +15604,18 @@
           "limits": "One detail HTML response only; no stream bytes or transcript.",
           "receipt_path": "docs/verification/town-hall-stream-detail-2026-11-12.json",
           "receipt_sha256": "f3bef42c620c611ac3d2aeba6e9681d4b21fdbe8886d635068ae835aa6377ad2"
+        },
+        {
+          "id": "town-hall-streams-player-synthetic",
+          "url": "https://townhallstreams.com/stream.php?location_id=72&id=74003",
+          "title": "Captured public event/player HLS locator mapping",
+          "kind": "synthetic_engine_and_saved_capture",
+          "proof_level": "synthetic_engine_execution_and_offline_capture_not_playable_segment_acceptance",
+          "findings": "Additive town-hall-streams-event-html preserves native event/location identity, displayed title/local date and player citation, mapping only the exact unique supplied CDN HLS declaration. Eight focused cases passed; existing31913-byte HTML mapped offline.",
+          "limits": "No new live request, segment/MP4/transcript bytes, catalog or write acceptance claim.",
+          "receipt_path": "docs/verification/town-hall-streams-player-mapping-2026-11-12.json",
+          "receipt_sha256": "d97857ef83819609f5971c26b4edb832f9c6564303595d9355c247703a6a3b26",
+          "observation_date": "2026-11-12"
         }
       ],
       "tenants": [
@@ -15649,9 +15661,10 @@
           "evidence_ids": [
             "ths-hollis",
             "ths-player",
-            "town-hall-streams-bounded-listing-2026-11-12"
+            "town-hall-streams-bounded-listing-2026-11-12",
+            "town-hall-streams-player-synthetic"
           ],
-          "details": "The selected public location page yielded 132 embedded event rows with status partial; one event detail HTML was fetched. No additional network continuation was observed and catalog/retention bounds remain unknown.",
+          "details": "The selected public location page yielded 132 embedded event rows with status partial; one event detail HTML was fetched. No additional network continuation was observed and catalog/retention bounds remain unknown. Additive town-hall-streams-event-html accepts an exact saved/configured event player, preserves native event/location identity and maps its declared HTTPS CDN HLS locator with raw provenance. Playlist/segment/MP4/transcript completeness is not inferred.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
@@ -15677,9 +15690,10 @@
           "evidence_ids": [
             "ths-hollis",
             "ths-player",
-            "town-hall-streams-event-html-2026-11-12"
+            "town-hall-streams-event-html-2026-11-12",
+            "town-hall-streams-player-synthetic"
           ],
-          "details": "One supplied event-detail link completed as text/html, with no supplied documents. HTML retrieval is not playable stream or media-byte acceptance.",
+          "details": "One supplied event-detail link completed as text/html, with no supplied documents. HTML retrieval is not playable stream or media-byte acceptance. Additive town-hall-streams-event-html accepts an exact saved/configured event player, preserves native event/location identity and maps its declared HTTPS CDN HLS locator with raw provenance. Playlist/segment/MP4/transcript completeness is not inferred.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -15704,9 +15718,10 @@
           "evidence_ids": [
             "media-baseline",
             "media-reader-source",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "town-hall-streams-player-synthetic"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive town-hall-streams-event-html accepts an exact saved/configured event player, preserves native event/location identity and maps its declared HTTPS CDN HLS locator with raw provenance. Playlist/segment/MP4/transcript completeness is not inferred.",
           "dependencies": [
             "standalone extraction",
             "source revision pin"

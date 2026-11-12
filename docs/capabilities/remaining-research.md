@@ -502,6 +502,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 ### Remaining research
 
 - The selected page already embeds 132 rows, and one supplied event detail is captured as HTML. No additional network group/page, PDF, agenda/minutes link or playable stream bytes were observed.
+- Additive `town-hall-streams-event-html` now maps the exact event/location-bound player and supplied HTTPS CDN HLS declaration from the existing capture. Eight synthetic engine/safety cases pass; saved HTML normalizes offline. The player citation and raw provenance remain; no JavaScript, transcript action or hidden loader is executed. See [mapping guide](../TOWN-HALL-STREAMS-DETAIL.md) and `docs/verification/town-hall-streams-player-mapping-2026-11-12.json`.
 - The earlier player error and later completed HTML response are not media acceptance. Stream bytes and tenant retention remain unverified.
 - Reviewed sources provide no public create/update/upload API or vendor import schema; provider/admin documentation is needed for write questions.
 
