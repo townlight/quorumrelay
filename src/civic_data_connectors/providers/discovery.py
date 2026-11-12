@@ -148,6 +148,11 @@ def _request_spec(source, bounds, task, context):
     size = _page_size(source)
     if kind == "static":
         url = source.url
+    elif kind == "clerkbase-tree" and source.provider == "clerkbase":
+        fields = task.get("fields")
+        if not isinstance(fields, dict) or set(fields) != {"url"}:
+            raise ValueError("Invalid ClerkBase public tree control.")
+        url = fields["url"]
     elif kind == "suiteone-group" and source.provider == "suiteone-media":
         if p.scheme != "https" or p.path not in {"", "/"} or p.query:
             raise ValueError("SuiteOne older groups require the configured public HTTPS root.")
@@ -396,7 +401,8 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
                         "civicweb-detail-html", "swagit-listing-html", "onbase-public-listing-html",
                         "digital-towpath-listing-html", "towncloud-public-listing-json",
                         "agendaquick-public-listing-html", "agendaquick-item-search-html", "civicplus-search-json",
-                        "utah-public-search-html"}:
+                        "utah-public-search-html", "iqm2-public-search-html",
+                        "clerkbase-public-tree-html", "clerkbase-search-html"}:
         return parse_native(source, namespace, content, input_format), ()
     result = engine.normalize(replace(source, body=None), content, input_format=input_format,
                               bounds=replace(bounds, date_from=None, date_to=None,
@@ -432,6 +438,9 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     if (source.provider == "destiny-agendaquick" and source.input_format is None
             and urlsplit(source.url).path.lower() == "/agenda_publish.cfm"):
         input_format = "agendaquick-public-listing-html"
+    if (source.provider == "clerkbase" and source.input_format is None
+            and urlsplit(source.url).path.rstrip("/").casefold() == "/southkingstown-ri"):
+        input_format = "clerkbase-public-tree-html"
     saved = _decode_content(request, content)
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")
@@ -505,7 +514,7 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                 page_content = saved
                 following = None
             else:
-                if task.get("kind") in {"suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period"}:
+                if task.get("kind") in {"suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period", "clerkbase-tree"}:
                     if source.provider == "suiteone-media" and task["kind"] == "suiteone-group":
                         from .suiteone import controls
                     elif source.provider == "civicplus-agenda-center" and task["kind"] == "agendacenter-year":
@@ -514,6 +523,10 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                         from .towpath import controls
                     elif source.provider == "destiny-agendaquick" and task["kind"] == "agendaquick-period":
                         from .agendaquick import controls
+                    elif source.provider == "clerkbase" and task["kind"] == "clerkbase-tree":
+                        from .clerkbase_listing import controls as tree_controls
+                        def controls(raw):
+                            return tree_controls(source, raw)
                     else:
                         raise ValueError("The public control does not belong to this provider.")
                     # Continuations contain public control values, never trust a
@@ -537,7 +550,7 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                     byte_limit=bounds.parser_bytes, deadline_seconds=max(0.001, deadline - monotonic()),
                     allowed_origins=(origin,),
                     **({"allow_redirects": False} if task.get("kind") in {
-                        "suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period"} else {}),
+                        "suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period", "clerkbase-tree"} else {}),
                 )
                 if _origin(response.url) != origin:
                     raise ValueError("Provider retrieval left its configured origin.")
@@ -624,6 +637,12 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                                  for values in public_controls
                                  if (not bounds.date_from or values["year"] >= bounds.date_from[:4])
                                  and (not bounds.date_to or values["year"] <= bounds.date_to[:4]))
+                elif (source.provider == "clerkbase" and task.get("kind") == "static"
+                        and input_format == "clerkbase-public-tree-html"):
+                    from .clerkbase_listing import controls
+                    public_controls = controls(source, page_content)
+                    queue.extend({"kind": "clerkbase-tree", "fields": values}
+                                 for values in public_controls)
                 elif (source.provider == "destiny-agendaquick" and task.get("kind") == "static"
                         and input_format == "agendaquick-public-listing-html"
                         and bounds.date_from and bounds.date_to):
@@ -681,6 +700,10 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "supplied dated meeting links and public Other Years links; detail documents not fetched",
             "control_validation": "current configured listing revalidated before resumed year GET"})
+    elif source.provider == "clerkbase" and input_format == "clerkbase-public-tree-html":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "configured public root and supplied top-level trees; nested trees and catalog extent unverified",
+            "control_validation": "current public root revalidated before resumed tree GET"})
     elif source.provider == "destiny-agendaquick" and input_format == "agendaquick-public-listing-html":
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "configured public month and advertised month/year selections within requested bounds",

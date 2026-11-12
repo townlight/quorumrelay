@@ -150,6 +150,13 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format == "clerkbase-public-tree-html":
+        from .clerkbase_listing import listing_bundle
+        return listing_bundle(source, namespace, content)
+    if input_format == "clerkbase-search-html":
+        from .clerkbase_search import _search_rows, mark_supplied_url_identities
+        rows, _ = _search_rows(source, content)
+        return mark_supplied_url_identities(make_bundle(source, namespace, content, input_format, rows))
     if input_format == "iqm2-public-search-html":
         from .iqm2_search import _rows
         rows, _ = _rows(source, content)
