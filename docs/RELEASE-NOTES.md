@@ -168,8 +168,15 @@ remain as recorded in the plan and execution state. Unknown support is not
 evidence that a vendor lacks a feature. No requirement has been waived.
 
 
-## Development candidate 0.1.0.dev7 (source freeze pending artifact)
+## Development candidate 0.1.0.dev7
 
 Preserves all 31 provider families and 34 original baseline formats. Adds the finite verified public-control batch: current layouts and supplied tree/year/group traversal, native metadata/excerpt search for PrimeGov, eSCRIBE, Swagit, SuiteOne, Select, AgendaCenter, AgendaQuick, Utah, iQM2 and ClerkBase, supplied PDF validation/resolvers, and precise supplied-media projection. Runtime registration now contains 28 additive parsers. Exact captures, native or explicitly supplied-URL identities, unknown fields and partial/failure coverage remain distinct.
 
-Small-page continuation fixes cover mutable provider rank/DOM IDs, process-private expiring sessions and current caller grants, cumulative transfer limits and deadlines. No captcha bypass, staff route, inferred parent relationship or full-catalog/full-text claim is introduced. Existing dev6 artifacts and signed Townlight 1.8.4 acceptance remain immutable evidence of their own inputs; dev7 build, installed-consumer acceptance and delivery are pending. Authorized vendor write acceptance remains unrun without supplied test access.
+Small-page continuation fixes cover mutable provider rank/DOM IDs, process-private expiring sessions and current caller grants, cumulative transfer limits and deadlines. No captcha bypass, staff route, inferred parent relationship or full-catalog/full-text claim is introduced. Existing dev6 artifacts and signed Townlight 1.8.4 acceptance remain immutable evidence of their own inputs; dev7 standalone/service installation and original 34-output comparisons passed. Exact consumer pins, hosted checks, native candidate acceptance and delivery are tracked separately in EXECUTION-STATE.md. Authorized vendor write acceptance remains unrun without supplied test access.
+
+Frozen source: `de6204e1861e27af366cdc9973cf52ce53276add`. Wheel SHA256: `6b39f51174b2988a4240e1b7beb9d5c41dc731cc0826dbbaf0042827e410a44c`. TypeScript tarball SHA256: `b30c81a3493d2f664c79f6b68e863f331450ed4cee95b3597a91341d514cc36d`. Required core CI43228635187 passed at receipt-only descendant9355b640108b0b22fdd6fd500084066571914a00; its package code equals the frozen source. Source regression594passed/8optional browser skips; existing unchanged browser proof is retained.
+
+
+## Development candidate 0.1.0.dev8
+
+Corrects stale packaged implementation labels for the already-implemented Legistar/Swagit native search, Swagit/Peak/OnBase/Towpath configured discovery, and CivicWeb/Towpath dedicated detail retrieval. Runtime route code is unchanged from dev7. Registered native-search adapters are now checked against their packaged labels, alongside the explicitly changed discovery/detail mappings. Complete catalog and live provider write acceptance remain unclaimed. Dev7 artifacts and proof stay immutable; this distinct version carries the corrected metadata.

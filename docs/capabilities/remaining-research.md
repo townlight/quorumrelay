@@ -4,6 +4,8 @@ All operations remain mandatory where exposed in the bounded domain. Unknown is 
 
 ## F01 Legistar (`legistar`)
 
+- Current implementation: bounded EventBodyName native OData search is registered and labelled implemented; source/fixture coverage and the existing public query probe do not establish general agenda/full-text semantics or live writes.
+
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"Some clients public; others token query required. Tenant policy controls access.","outbound":"Write credential scope and authorized test tenant not supplied."}}
 Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
@@ -300,6 +302,8 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ## F11 iCompass CivicWeb (`civicweb`)
 
+- Current implementation: the dedicated supplied-ID CivicWeb detail fetch and saved detail layout are registered and labelled implemented. Existing print-PDF proof remains separate; complete catalog and native search contracts stay unresolved.
+
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
 Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
@@ -354,6 +358,8 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 - Preserve Scheduled/Cancelled; ignore self/# file placeholders; minutes may be embedded in following packet.
 
 ## F13 Granicus Swagit (`swagit`)
+
+- Current implementation: configured current-listing discovery and observed public native search are registered and labelled implemented. The first/page-two raw endpoint probe, exact local metadata matching and fixture traversal remain bounded; timestamp links are not transcripts.
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Archive public without credentials; support article requires customer login. Swagit/MediaManager integration account prerequisites unverified."}
@@ -411,6 +417,8 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 - As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F15 Granicus Peak (`peak`)
+
+- Current implementation: the explicit configured Peak current-listing mapping is labelled implemented, preserving the 116-row capture. This does not promote generic attachments into a provider-wide fetch contract or establish archive/search completeness.
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
@@ -582,6 +590,8 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ## F21 Hyland OnBase Agenda Online (`onbase`)
 
+- Current implementation: the explicit configured OnBase current-listing layout is labelled implemented with the existing 30-row capture. Native search redirects and supplied PDF-versus-HTML failures remain unresolved/partial.
+
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
 Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
@@ -665,6 +675,8 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 - As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F24 Digital Towpath (`digital-towpath`)
+
+- Current implementation: supplied current-listing/year controls and dedicated numeric detail fetch are registered and labelled implemented. Existing 2024 ten-record proof and URL-derived identity limits are retained; no full archive, arbitrary slug identity or search contract is inferred.
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Demo reads public; dashboard required for administration. Customer credentials and account roles not supplied."}

@@ -515,18 +515,18 @@
         },
         "native_search": {
           "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "legistar-paging"
           ],
-          "details": "Verified documented OData date/body filters and selected metadata queries; full-text/exact phrase search semantics not established.",
+          "details": "Bounded native EventBodyName OData search is implemented with exact local metadata matching and date/keyset limits; general agenda/full-text phrase semantics are not established.",
           "dependencies": [],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
+            "No complete catalog, provider-wide matching semantics or live write acceptance is claimed."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "implemented_source_and_named_tests_with_bounded_observations_not_catalog_or_write_acceptance",
           "tenant_scope": [
             "https://webapi.legistar.com/v1/olympia"
           ],
@@ -9686,18 +9686,20 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "icompass-civicweb-tenant",
-            "civicweb-supplied-print-pdf-2026-11-12"
+            "civicweb-supplied-print-pdf-2026-11-12",
+            "icompass-civicweb-detail"
           ],
-          "details": "One supplied public print document completed as a 120,193-byte application/pdf through the generic supplied-link fetch path. Its agenda/minutes kind and full archive completeness remain unverified.",
+          "details": "The dedicated CivicWeb fetch_record route maps a supplied meeting identifier into the guarded current detail path, validates returned identity and preserves exact HTML/original fields. A separately supplied print PDF completed; catalog and general native search remain unverified.",
           "dependencies": [],
           "remaining_verification": [
-            "Establish meeting-type/list completeness and separately classify documents only when source metadata supports the kind; the one supplied print PDF is already fetched."
+            "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
+            "No complete catalog, provider-wide matching semantics or live write acceptance is claimed."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "implemented_source_and_named_tests_with_bounded_observations_not_catalog_or_write_acceptance",
           "tenant_scope": [
             "https://csknowledgebase.civicweb.net/document/57754/",
             "https://ciindependenceor.civicweb.net/Portal/MeetingTypeList.aspx"
@@ -10943,22 +10945,22 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "swagit-princeton",
             "swagit-public-search-page2-2026-11-12"
           ],
-          "details": "Follow configured /views/{id}/ archive by body and year, then /videos/{id}; do not treat live player failure as empty archive.",
+          "details": "The registered swagit-listing-html current layout is selected for configured public listings; bounded GET captures preserve provider IDs and supplied links. Pagination/catalog completeness is not claimed.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
           ],
           "remaining_verification": [
-            "Body/year sections observed; page/API pagination, caps and historical completeness unverified.",
-            "Build fixtures and verify complete bounded result traversal."
+            "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
+            "No complete catalog, provider-wide matching semantics or live write acceptance is claimed."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "implemented_source_and_named_tests_with_bounded_observations_not_catalog_or_write_acceptance",
           "tenant_scope": [
             "https://princetontx.new.swagit.com/views/261/"
           ],
@@ -11023,18 +11025,19 @@
         },
         "native_search": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "swagit-princeton",
             "swagit-public-search-page2-2026-11-12"
           ],
-          "details": "Public GET /videos/search?q=Council with utf8 returned 10 rows on each of the first two pages; provider query semantics remain unknown. Bounded exact matching is over available title/date metadata; Sound Search timestamps are retained links, not transcripts.",
+          "details": "Observed public search and supplied Next are implemented with exact local metadata matching and scoped continuation. Sound Search timestamp links remain citations rather than transcripts.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify semantics only through documented provider behavior or separately bounded public examples; fetch additional pages only when required and within the existing bounded scope."
+            "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
+            "No complete catalog, provider-wide matching semantics or live write acceptance is claimed."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "implemented_source_and_named_tests_with_bounded_observations_not_catalog_or_write_acceptance",
           "tenant_scope": [
             "https://princetontx.new.swagit.com/views/261/"
           ],
@@ -12173,18 +12176,19 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "granicus-peak-tenant",
             "peak-lower-merion-capture-2026-11-12"
           ],
-          "details": "Public listing/navigation observed; not exhaustive discovery coverage.",
+          "details": "The registered Peak current listing uses the explicit granicus-listing-html mapping for its configured public page; 116 captured rows are preserved with supplied packet/media references. No full archive or search coverage is claimed.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify full date/body bounds, continuation and checkpoints."
+            "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
+            "No complete catalog, provider-wide matching semantics or live write acceptance is claimed."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "implemented_source_and_named_tests_with_bounded_observations_not_catalog_or_write_acceptance",
           "tenant_scope": [
             "https://elkocounty.granicus.com/DocumentViewer.php?file=elkocounty_297e107d2b4284d01a905ef2af7c24f9.pdf&view=1",
             "https://lowermerion.granicus.com/ViewPublisher.php?view_id=1"
@@ -16124,18 +16128,19 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "hyland-onbase-agenda-online-tenant",
             "onbase-public-search-redirect-blocked-2026-11-12"
           ],
-          "details": "Public listing/navigation observed; not exhaustive discovery coverage.",
+          "details": "The registered onbase-public-listing-html layout maps 30 captured current-listing rows through bounded configured retrieval. This does not implement the redirected native search route or establish full catalog coverage.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify full date/body bounds, continuation and checkpoints."
+            "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
+            "No complete catalog, provider-wide matching semantics or live write acceptance is claimed."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "implemented_source_and_named_tests_with_bounded_observations_not_catalog_or_write_acceptance",
           "tenant_scope": [
             "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/"
           ],
@@ -18443,22 +18448,24 @@
           ]
         },
         "discover": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
-          "evidence_ids": [],
-          "details": "Official demo supports category/year links and /meetings/detail/{id}; verify real tenant deployment/template before implementing blanket discovery.",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
+          "evidence_ids": [
+            "towpath-demo-list"
+          ],
+          "details": "Explicit current dated-link listing and supplied Other Years controls are implemented with current-root revalidation, bounded dates and continuation. One existing 2024 page returned ten records; URL-derived keys are labelled and archive completeness remains unknown.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
           ],
           "remaining_verification": [
-            "Demo Other Years navigation observed. Legacy Brutus category URL moved; no numeric paging or complete archive verified.",
-            "Build fixtures and verify complete bounded result traversal."
+            "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
+            "No complete catalog, provider-wide matching semantics or live write acceptance is claimed."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "unverified",
+          "evidence_level": "implemented_source_and_named_tests_with_bounded_observations_not_catalog_or_write_acceptance",
           "tenant_scope": [
-            "https://townbrutus.digitaltowpath.org:10148/content/MinuteCategories/View/1"
+            "https://digitaltowpath.digitaltowpath.net/government/meetings-and-minutes"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
           "test_access": "bounded_public_research_not_engine_acceptance",
@@ -18469,21 +18476,23 @@
         },
         "fetch": {
           "capability_status": "baseline_source",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "media-baseline"
+            "media-baseline",
+            "towpath-demo-detail"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. PDF manual extraction blocked; indexed excerpts insufficient to claim upload/update API. Demo inconsistent minutes dates must not silently override page dates.",
+          "details": "Explicit supplied numeric /meetings/detail/{id} retrieval is implemented, validates requested identity and preserves exact detail bytes and supplied documents. No arbitrary slug-to-native-ID alias or full-document completeness is inferred.",
           "dependencies": [
             "shared network safeguards"
           ],
           "remaining_verification": [
-            "Verify raw response MIME, redirects, document/media status and independent attachment failures."
+            "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
+            "No complete catalog, provider-wide matching semantics or live write acceptance is claimed."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "implemented_source_and_named_tests_with_bounded_observations_not_catalog_or_write_acceptance",
           "tenant_scope": [
-            "https://townbrutus.digitaltowpath.org:10148/content/MinuteCategories/View/1"
+            "https://digitaltowpath.digitaltowpath.net/government/meetings-and-minutes"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
           "test_access": "bounded_public_research_not_engine_acceptance",
