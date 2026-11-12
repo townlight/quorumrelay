@@ -177,7 +177,7 @@ sequenceDiagram
   Provider-->>Adapter: Current provider state
   Adapter-->>Engine: Success, conflict, failure or uncertainty
   Engine->>Store: Persist receipt and per-item state
-  Engine-->>Caller: Commit result; receipt remains queryable
+  Engine-->>Caller: Commit result and queryable receipt
 ~~~
 
 Planning requires <code>write:plan</code>; commit requires <code>write:commit</code> plus the exact stored plan ID and digest. The engine does not accept edited client-returned plans. An execution intent is persisted before sending a mutation. Duplicate commits consult the durable receipt; if a response is lost, the adapter reconciles the original intent before any retry. Uncertain outcomes remain uncertain until the provider state can be identified. Successful siblings remain in partial batches; remote side effects are not rolled back automatically.
