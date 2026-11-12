@@ -150,6 +150,9 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format == "utah-public-search-html":
+        from .utah_public import search_rows
+        return make_bundle(source, namespace, content, input_format, search_rows(source, content))
     if input_format == "civicplus-search-json":
         from .civicplus_search import search_bundle
         return search_bundle(source, namespace, content)

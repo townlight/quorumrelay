@@ -59,6 +59,12 @@ def run(req=None, *, transport=None, context=None):
     return result, active_transport
 
 
+def test_public_engine_registration_uses_actual_native_adapter():
+    result = create_engine(provider_transport=SearchTransport()).execute("search", request())
+    assert result.status == "partial" and not result.errors
+    assert [hit["identity"]["external_id"] for hit in result.data["hits"]] == ["13632", "13638", "13971"]
+
+
 def test_observed_form_posts_exact_fields_preserves_capture_and_matches_metadata_only():
     result, transport = run()
 

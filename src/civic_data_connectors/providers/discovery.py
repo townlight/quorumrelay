@@ -395,7 +395,8 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
                         "civicweb-detail-html", "swagit-listing-html", "onbase-public-listing-html",
                         "digital-towpath-listing-html", "towncloud-public-listing-json",
-                        "agendaquick-public-listing-html", "agendaquick-item-search-html", "civicplus-search-json"}:
+                        "agendaquick-public-listing-html", "agendaquick-item-search-html", "civicplus-search-json",
+                        "utah-public-search-html"}:
         return parse_native(source, namespace, content, input_format), ()
     result = engine.normalize(replace(source, body=None), content, input_format=input_format,
                               bounds=replace(bounds, date_from=None, date_to=None,
@@ -434,6 +435,13 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     saved = _decode_content(request, content)
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")
+    if (source.provider == "utah-public-notice" and saved is None
+            and source.input_format in (None, "utah-public-search-html")
+            and urlsplit(source.url).path in {"/pmn/", "/pmn/search.html"}):
+        if request.get("record_types") not in (None, [], ["meeting"]):
+            raise ValueError("The public notice form exposes meeting notice records only.")
+        from .utah_search import discover_public
+        return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport())
     if source.provider == "simbli" and saved is None and urlsplit(source.url).path.lower() in {
             "/index.aspx", "/sb_meetings/sb_meetinglisting.aspx"}:
         from .simbli import discover_public

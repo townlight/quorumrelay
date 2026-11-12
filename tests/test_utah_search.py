@@ -103,3 +103,21 @@ def test_pre_cancel_does_not_request_or_leak():
     transport = Transport()
     result = native_search(create_engine(), request(), None, ctx, transport=transport)
     assert result.status == 'cancelled' and not transport.calls
+
+
+def test_public_engine_native_and_discovery_registration_keep_notice_identity():
+    native = create_engine(provider_transport=Transport()).execute('search', request())
+    assert native.status == 'partial' and not native.errors
+    assert native.data['hits'][0]['identity']['external_id'] == '1120627'
+
+    class DiscoveryTransport:
+        def request(self, url, **kwargs):
+            if kwargs['method'] == 'GET':
+                return Response(url, FORM, 'text/html')
+            fields = parse_qs(kwargs['body'].decode(), keep_blank_values=True)
+            assert fields['title'] == [''] and fields['publicBodyName'] == [SOURCE['body']]
+            return Response(url, RESULT, 'text/html')
+    discovered = create_engine(provider_transport=DiscoveryTransport()).execute('discover', {
+        'source': SOURCE, 'bounds': {'date_from': '2026-11-11', 'date_to': '2026-11-11'}})
+    assert discovered.status == 'partial' and not discovered.errors
+    assert discovered.data['records'][0]['identity']['external_id'] == '1120627'
