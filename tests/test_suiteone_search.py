@@ -72,3 +72,17 @@ def test_native_search_namespace_revocation_prevents_transport():
     result = create_engine(provider_transport=transport).execute("search", request(),
         context=OperationContext(allowed_namespaces=frozenset({"unrelated"})))
     assert result.status == "failed" and not transport.calls
+
+
+def test_hit_limit_does_not_prevent_scanning_later_candidates():
+    class LaterMatch(Transport):
+        def request(self, url, **kwargs):
+            if url == SOURCE["url"]:
+                return Response(url, ROOT, "text/html")
+            rows = "".join(f'<tr><td><a href="/event?id={i}" title="Navigate to {title}">{title}</a></td>'
+                '<td>Jan 01, 2026 | 05:00 PM</td></tr>' for i, title in [(1, "Budget"), (2, "Planning"), (3, "Council")])
+            return Response(url, ("<table>" + rows + "</table>").encode(), "text/html")
+    req = request()
+    req["query"]["limit"] = 1
+    result = create_engine(provider_transport=LaterMatch()).execute("search", req)
+    assert [hit["record"]["identity"]["external_id"] for hit in result.data["hits"]] == ["3"]

@@ -103,7 +103,7 @@ def native_search(engine, request, content, context, *, transport=None):
             if task["offset"] > len(candidates):
                 raise ValueError("The continuation exceeds the captured result set.")
             index = task["offset"]
-            while index < len(candidates) and len(records) < min(bounds.max_records, query.limit) and not stopped():
+            while index < len(candidates) and len(records) < bounds.max_records and not stopped():
                 record = candidates[index]
                 index += 1
                 key = source_identity_key(record["identity"])
