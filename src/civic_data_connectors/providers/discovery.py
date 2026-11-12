@@ -22,6 +22,7 @@ NATIVE = {"legistar", "primegov", "civicplus-select", "escribe"}
 SAVED_ONLY = {"novusagenda", "tyler-meeting-manager", "boarddocs"}
 DEFAULT_FORMAT = {provider: formats[-1] for provider, formats in FORMATS.items()}
 DEFAULT_FORMAT.update({"primegov": "primegov-portal-json", "granicus": "granicus-listing-html",
+                       "swagit": "swagit-listing-html",
                        "peak": "granicus-listing-html",
                        "towncloud": "towncloud-agenda-html", "legistar": "legistar-events-json"})
 
@@ -362,7 +363,7 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
         raise ValueError("The provider listing exceeds the configured parser byte limit.")
     if input_format in {"legistar-events-json", "legistar-event-json", "wistia-api-media-json",
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
-                        "civicweb-detail-html"}:
+                        "civicweb-detail-html", "swagit-listing-html"}:
         return parse_native(source, namespace, content, input_format), ()
     result = engine.normalize(replace(source, body=None), content, input_format=input_format,
                               bounds=replace(bounds, date_from=None, date_to=None,

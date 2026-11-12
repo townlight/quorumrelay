@@ -37,6 +37,7 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_operation("validate_source", validate_handler)
     for provider, input_format in (
             ("civicweb", "civicweb-detail-html"),
+            ("swagit", "swagit-listing-html"),
             ("municode-meetings", "essential-multimedia-json"),
             ("telvue", "telvue-connect-media-json"), ("telvue", "telvue-connect-videos-json"),
             ("telvue", "telvue-connect-playlists-json"),
