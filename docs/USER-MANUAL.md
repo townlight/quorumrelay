@@ -1,6 +1,6 @@
 # QuorumRelay user manual
 
-Candidate <code>0.1.0.dev8</code> · schema <code>2.0.0</code>
+Frozen candidate <code>0.1.0.dev8</code> · schema <code>2.0.0</code>. Later local source mappings are identified in the [developer guide](DEVELOPER-GUIDE.md#later-local-source-mapping-guides); they are not additions to the immutable wheel.
 
 QuorumRelay is a standalone engine for identifying configured civic-data sources, reading or parsing bounded captures, normalizing meeting records, searching captured material, preparing neutral exports, and executing a small set of explicitly authorized provider writes. It does not require Townlight, TownReporter, TownRecord, Brief, a hosted service, or a particular application database. Those projects are examples of consumers; the engine API is intended for other products as well.
 
@@ -338,7 +338,7 @@ receipt = write_engine.receipt({"plan_id": approval["plan_id"]}, context=write_c
 
 The native fields are provider-specific. A neutral meeting record is not automatically a writable vendor request. Unknown fields, unsupported entities, deletion, arbitrary URLs and generic administration are rejected. An ambiguous create is not blindly repeated: the write coordinator persists intent and reconciles against readback. Completed siblings remain visible in a partial batch; no automatic remote rollback occurs.
 
-Live write acceptance for this candidate is **NOT_RUN**. The mappings have deterministic fixture checks, but no authorized provider test tenant and credentials have been supplied. Synthetic or mock receipts are not vendor acceptance. Do not use a public city’s production data as a test environment. See [the write contract](WRITE-CONTRACT.md) for the currently mapped operations and their exact fields.
+Live provider writes for this candidate are **NOT_RUN**. Vendor-documented synthetic execution/readback/receipts are the accepted verification basis for the provider operations and fields they actually cover; live checks are optional supporting evidence. A synthetic receipt does not mean a real tenant was changed. Do not use a public city’s production data as a test environment. Real writes still require the application's trusted credentials, current grants and exact-plan approval. See [the write contract](WRITE-CONTRACT.md) for mapped operations, field limits and source-versus-frozen-artifact evidence.
 
 ## 7. Run the CLI or service
 

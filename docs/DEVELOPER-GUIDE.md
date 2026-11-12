@@ -5,10 +5,12 @@ script or agent. It does not require a Townlight installation, an application
 database, a model provider or a hosted QuorumRelay account. Use the Python API in
 process, or run the optional service for HTTP, TypeScript and MCP consumers.
 
-This guide describes **0.1.0.dev8**, schema **2.0.0**. It is a development preview.
-Provider coverage varies by operation. Live account and vendor-write acceptance
-remain deferred; publication of the code and documentation is not a claim that
-those checks passed. Start with the [user manual](USER-MANUAL.md),
+The frozen development preview is **0.1.0.dev8**, schema **2.0.0**; this checkout
+also documents later local source mappings, which are not in that immutable wheel.
+Provider coverage varies by operation. Vendor-documented synthetic execution is
+accepted verification for its evidenced provider-operation scope. Live account
+and vendor-write observations remain unrun where stated; publishing code or
+documentation is not a claim that real tenant transactions occurred. Start with the [user manual](USER-MANUAL.md),
 [architecture](ARCHITECTURE.md) and [capability evidence](capabilities/README.md).
 
 ## 1. Choose an integration path
@@ -396,12 +398,33 @@ grants; a hash itself is not a grant. Native provider policy additionally binds
 namespaces, operations and resource/meeting IDs. Current policy revocation is
 checked again at commit and readback. Create operations are not blindly replayed
 after a lost response. The exact [write contract](WRITE-CONTRACT.md) documents
-Legistar, Wistia, Repository and Essential mappings and unresolved live behavior.
+Legistar, Wistia, Repository, Essential and later Granicus mappings, their field
+limits, and the distinction between source and frozen-artifact evidence.
 
-Publication is allowed while this vendor acceptance remains deferred. Never turn
-a synthetic receipt into a claim that a real tenant was changed. The executable
+Never turn a synthetic receipt into a claim that a real tenant was changed. The executable
 examples refuse non-mock commits; they cannot be repurposed as live acceptance
 without a separately configured designated test environment.
+
+### Later local source mapping guides
+
+These guides describe additive source formats or workflows. They share the same
+engine/interfaces and preserve the original 34 compatibility readers. Use a source
+checkout containing the mapping; the frozen dev8 wheel is not silently updated.
+
+| Supplied source or workflow | Mapping and limits |
+|---|---|
+| BoardBook public rendered agenda | [Native item hierarchy and document associations](BOARDBOOK-DETAIL.md) |
+| Town Hall Streams event | [Player citation and declared HLS locator](TOWN-HALL-STREAMS-DETAIL.md); a playlist is not verified media segments |
+| eSCRIBE rendered agenda | [Capture-local agenda positions and supplied documents](ESCRIBE-DETAIL.md) |
+| Simbli selected item | [Fresh item content and same-meeting attachment mapping](SIMBLI-ITEM-CONTENT.md) |
+| CivicWeb FilePro | [Pinned SOAP reads and saved-response mapping](CIVICWEB-FILEPRO.md) |
+| Wistia replacement | [Exact approved replacement and provider job/readback](WISTIA-SWAP.md) |
+| OnBase linked meeting documents | [Prepared Normal Tagged DIP files](ONBASE-DIP.md); not a remote Agenda import/association |
+
+For Granicus Platform/MediaVault and other supported field mappings, consult the
+[write contract](WRITE-CONTRACT.md#later-local-source-mappings) and
+[per-operation capability evidence](capabilities/README.md). A configured detail
+page or supplied file is not a complete source catalog; preserve partial coverage.
 
 ## 10. Schemas and connector/storage extensions
 

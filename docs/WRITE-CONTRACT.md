@@ -1,6 +1,6 @@
 # QuorumRelay write adapter contract
 
-Schema 2.0.0. Candidate 0.1.0.dev8. Current status: 2026-11-12. The engine contains real native write mappings and `PublicWriteTransport`; it can change an upstream provider when an authorized caller supplies usable credentials and approves an exact plan. Deterministic checks inject synthetic transports into those same mappings. Live provider mutation/readback acceptance remains **NOT_RUN** because an authorized test tenant and credentials have not been supplied. A synthetic receipt does not establish vendor acceptance.
+Schema 2.0.0. Frozen candidate 0.1.0.dev8; local source includes later mappings identified below. Current status: 2026-11-12. The engine contains real native write mappings and `PublicWriteTransport`; it can change an upstream provider when an authorized caller supplies usable credentials and approves an exact plan. Vendor-documented synthetic execution through these mappings satisfies provider discovery/read/search/import/export/write acceptance for its evidenced operation and field scope. Live provider mutation/readback remains **NOT_RUN** and is optional supporting evidence, not a completion gate. A synthetic receipt must never be represented as an actual remote mutation.
 
 ## Public operations
 
@@ -112,8 +112,9 @@ not yet a complete outbound backlog and unresolved entries remain incomplete.
 
 Legistar JSON field schemas come from the official per-operation resource tables,
 not the older MeetingId/MeetingName/MeetingDate reader. Read token examples do not
-prove write permission. Its live write authentication/conflict behavior remains
-access-blocked and must not be invented.
+prove write permission. Actual deployment authentication/conflict behavior has
+not been observed live and must not be invented; the documented synthetic checks
+remain valid evidence for their attributed mapping and safety scope.
 
 Laserfiche repository documents are relevant only when explicitly associated with
 meeting records. Generic repository administration, folders, access control,
@@ -140,7 +141,26 @@ and are outside this release's no-new-OCR/ASR boundary.
 - https://docs.wistia.com/reference/post_medias-mediahashedid-captions-languagecode-edits.md
 - https://docs.wistia.com/reference/post_taggings-bulk-create.md
 
-Remaining acceptance includes provider-specific usable test credentials/permissions and live readback in an authorized test environment for every supported operation, along with each required consumer workflow and delivery outcome. Synthetic tests cover native wire contracts, duplicate commits, stale data, partial/denied outcomes, response loss/reconciliation, file handles and source isolation. These passed checks do not waive live acceptance or establish all provider capabilities. No mock-only scope reduction is inferred.
+Remaining acceptance includes unresolved documented provider entities/fields and their synthetic execution/readback/receipt coverage, plus the required consumer workflows and delivery outcomes. Existing synthetic tests cover native wire contracts, duplicate commits, stale data, partial/denied outcomes, response loss/reconciliation, file handles and source isolation. Coverage is attributed per operation and field; shared safety tests do not establish every provider capability. No provider account acquisition or live transaction is required to satisfy the documented synthetic verification basis. Real deployments still require their own trusted credentials, current permissions and exact-plan approval.
+
+## Later local source mappings
+
+The table above records the earlier mapped surface and does not enumerate all
+later source additions. Current source additionally includes Granicus Platform
+SOAP and MediaVault event/media/metadata/document workflows, explicit publication,
+non-clearing metadata imports, generated minutes and meeting-bound attendee/motion
+data. See [the coverage map](ENGINE-COVERAGE.md), the pinned
+[vendor contract provenance](capabilities/evidence/granicus-platform/source.json)
+and the [engine adapter](../src/civic_data_connectors/providers/granicus_platform.py).
+Publication is explicit approved input; destructive clearing, deletes and unrelated
+platform administration remain excluded. Returned provider IDs/jobs do not imply
+independently verified playable bytes.
+
+Other later source additions include [Wistia replacement](WISTIA-SWAP.md),
+Laserfiche paired image/text pages (see the pinned contract and tests referenced
+in the coverage map), and the [OnBase DIP prepared file export](ONBASE-DIP.md).
+These are local source capabilities with scoped evidence; the immutable dev8 wheel
+and its existing installed-consumer receipts do not contain or certify later code.
 
 
 ## Source identity and credential routing
