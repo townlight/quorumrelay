@@ -803,30 +803,32 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ## F29 gWorks FrontDesk (`gworks`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Official documentation status: inspected with recorded limits; some indexed-only/login or extraction-blocked material
+Account/tier: public city JSON read observed; login/admin writes remain separate. Galena UI showed login disabled at the earlier observation; API credentials and roles remain unknown.
 
-### Representative research observations
+### Bounded public observations
 
-- https://galenaks.frontdeskgworks.com/: GET 200. Public extracted homepage lists Latest Agendas and Minutes; login features describe browsing meeting records. Images identify city 1117. Limits: Links are hash/UI controls; page also says Login is disabled at this moment; not evidence all reads require login.
+- Current Galena source: `GET https://files.frontdeskgworks.com/city/1117/cms/data.json` returned HTTP 200 `application/json`, 49,618 bytes. The engine parsed the one response as 153 meetings (153 `agenda_fl=true`, 142 `minutes_fl=true`), date span 2021-01-05 through 2026-06-01. It returned `partial`, with one page, no errors and no truncation because catalog completeness is unknown. Receipt: `docs/verification/gworks-galena-listing-2026-11-12.json`; raw response and row summary are under `outputs/gworks-followup-20261112/`.
+- Existing city-1311 capture row 5017 (`agenda_fl=true`) used the baseline-derived `GET https://api.gworks.cloud/cms/public/city/1311/agenda/pdf/5017/`. The engine resolved it and retrieved one 5,211-byte PDF object (`application/octet-stream`, `%PDF-` signature, SHA256 `6b9d4bc7967dfd2f0d695113f5e6e2fbf9892f9d37b9f6a7dc429751ec483037`), without a redirect. Receipt: `docs/verification/gworks-city-1311-agenda-fetch-2026-11-12.json`.
+- Galena row 4195 has `minutes_fl=true`; `GET https://api.gworks.cloud/cms/public/city/1117/minutes/pdf/4195/` returned a resolver-ready response, but the guarded signed-object GET returned HTTP 403 `application/xml` (543 bytes, SHA256 `6667a8b825cdfaab782d382a398e8000b848bab4d343c860f0d5bf174e8f045d`). The engine returned `partial`/`attachment_unavailable` and retained the citation. This is one document access failure, not evidence the route or provider capability is unsupported. Receipt: `docs/verification/gworks-galena-minutes-fetch-2026-11-12.json`.
+- Signed transfer URL paths and query values were not saved. The successful read used explicit `download_origins` for the resolver API and the signed origin observed from that resolver.
 
-### Remaining research
+### Remaining research and limits
 
-- On Galena’s current public city JSON, enumerate displayed rows/agenda/minutes flags and GET one available PDF of each kind; record status, MIME, redirect and hash. The current response has no next-page token.
-- Establish update frequency, retained history and payload maximum using repeated bounded captures or current official docs; a single static JSON response cannot prove those limits.
-- The FrontDesk builder describes staff UI, not an external write schema. No vendor API or authorized test credentials supplied.
+- The current city JSON is one static public listing response; no continuation token or separate meeting-detail URL was observed. Provider-wide catalog completeness and successful retrieval of every flagged document remain unverified.
+- Retained history, update frequency and maximum response payload remain unknown; a single response cannot establish them. Additional repeated sampling is optional and is not required for this bounded research result.
+- The FrontDesk builder describes staff UI, not an external write schema. No vendor API or authorized test credentials were supplied; writes remain unaccepted/access-blocked.
 
 ### Pagination contract
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "One static public JSON blob observed; no next-page token. Retained history/update frequency and maximum blob size unknown."
+  "details": "One current Galena response returned 153 rows in a 49,618-byte static JSON body. No continuation token was observed in that response; full catalog, retained history, update frequency and maximum payload remain unknown."
 }
 
 ### Authorization restrictions
 
-- Keep cancelled titles/status indicators. Public city JSON response fields and PDF GET route are not writable API fields.
+- Keep cancelled titles/status indicators. Public city JSON fields and PDF routes are not writable API fields.
 - As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F30 Diligent BoardDocs (`boarddocs`)

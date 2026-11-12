@@ -1,0 +1,108 @@
+{
+  "observed_at": "2026-11-12T10:13:39.817418+00:00",
+  "provider": "gworks",
+  "operation": "engine.fetch_attachment",
+  "source_url": "https://files.frontdeskgworks.com/city/1311/cms/data.json",
+  "listing_capture_sha256": "1c416144c033155ff3db32dfa1e6720005d9d7c48ea625420087dee34e10ea70",
+  "selected": {
+    "external_id": "5017",
+    "title": "November 9, 2026 Regular Council Meeting",
+    "document_index": 0,
+    "document_kind": "agenda",
+    "document_url": "https://api.gworks.cloud/cms/public/city/1311/agenda/pdf/5017/"
+  },
+  "download_origins": [
+    "https://api.gworks.cloud",
+    "https://secured-files-gworks-prod-frontdesk.s3.amazonaws.com"
+  ],
+  "bounds": {
+    "max_pages": 3,
+    "parser_bytes": 16777216,
+    "transfer_bytes": 16777216,
+    "deadline_seconds": 90
+  },
+  "engine_result": {
+    "status": "completed",
+    "errors": [],
+    "coverage": {
+      "sources": [
+        {
+          "provider": "gworks",
+          "url": "https://files.frontdeskgworks.com/city/1311/cms/data.json",
+          "namespace": null,
+          "body": null,
+          "input_format": "gworks-frontdesk-json",
+          "options": {
+            "download_origins": [
+              "https://api.gworks.cloud",
+              "https://secured-files-gworks-prod-frontdesk.s3.amazonaws.com"
+            ]
+          }
+        }
+      ],
+      "failures": [],
+      "unavailable_attachments": []
+    }
+  },
+  "transport_calls": [
+    {
+      "request_host": "api.gworks.cloud",
+      "request_path": "/cms/public/city/1311/agenda/pdf/5017/",
+      "request_method": "GET",
+      "allowed_origins": [
+        "https://files.frontdeskgworks.com",
+        "https://api.gworks.cloud",
+        "https://secured-files-gworks-prod-frontdesk.s3.amazonaws.com"
+      ],
+      "request_byte_limit": 65536,
+      "status": 200,
+      "content_type": "application/json",
+      "response_bytes": 1690,
+      "response_sha256": "fd28ea7805766017d79802a8f724d8e90227f36d93a86b3139c68bd4921cafb8",
+      "response_host": "api.gworks.cloud",
+      "redirected": false,
+      "response_path_redacted": false,
+      "signed_query_names": []
+    },
+    {
+      "request_host": "secured-files-gworks-prod-frontdesk.s3.amazonaws.com",
+      "request_path": "[redacted signed object path]",
+      "request_method": "GET",
+      "allowed_origins": [
+        "https://files.frontdeskgworks.com",
+        "https://api.gworks.cloud",
+        "https://secured-files-gworks-prod-frontdesk.s3.amazonaws.com"
+      ],
+      "request_byte_limit": 16777216,
+      "status": 200,
+      "content_type": "application/octet-stream",
+      "response_bytes": 5211,
+      "response_sha256": "6b9d4bc7967dfd2f0d695113f5e6e2fbf9892f9d37b9f6a7dc429751ec483037",
+      "response_host": "secured-files-gworks-prod-frontdesk.s3.amazonaws.com",
+      "redirected": false,
+      "response_path_redacted": true,
+      "signed_query_names": [
+        "AWSAccessKeyId",
+        "Expires",
+        "Signature",
+        "X-Amzn-Trace-Id",
+        "response-content-disposition",
+        "x-amz-security-token"
+      ]
+    }
+  ],
+  "document": {
+    "citation_url": "https://api.gworks.cloud/cms/public/city/1311/agenda/pdf/5017/",
+    "content_type": "application/octet-stream",
+    "byte_length": 5211,
+    "sha256": "6b9d4bc7967dfd2f0d695113f5e6e2fbf9892f9d37b9f6a7dc429751ec483037",
+    "saved_sha256": "6b9d4bc7967dfd2f0d695113f5e6e2fbf9892f9d37b9f6a7dc429751ec483037",
+    "pdf_magic": true,
+    "saved_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\files-pasted-by-the-user-read\\outputs\\gworks-followup-20261112\\city-1311-meeting-5017-agenda-engine-fetch.pdf"
+  },
+  "limits": [
+    "The captured listing is one bounded public city JSON response, not a full-catalog guarantee.",
+    "The signed temporary object URL path and query values were not saved.",
+    "The file content type is reported exactly as served; PDF signature is checked independently."
+  ]
+}

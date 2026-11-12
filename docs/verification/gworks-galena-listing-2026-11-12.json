@@ -1,0 +1,1429 @@
+{
+  "observed_at": "2026-11-12T10:07:59.405259+00:00",
+  "tenant": "Galena KS city id 1117",
+  "listing": {
+    "requested_url": "https://files.frontdeskgworks.com/city/1117/cms/data.json",
+    "method": "GET",
+    "allowed_origins": [
+      "https://files.frontdeskgworks.com"
+    ],
+    "byte_limit": 16777216,
+    "status": 200,
+    "response_url": "https://files.frontdeskgworks.com/city/1117/cms/data.json",
+    "content_type": "application/json",
+    "content_length_header": "49618",
+    "response_bytes": 49618,
+    "sha256": "e212f61275bc944d7891797cddc666323244fd7fd6b11611a5f3fad25d02c627",
+    "url": "https://files.frontdeskgworks.com/city/1117/cms/data.json",
+    "top_level_keys": [
+      "pages",
+      "notices",
+      "cat",
+      "meetings"
+    ],
+    "meeting_count": 153,
+    "flag_true_counts": {
+      "agenda_fl": 153,
+      "minutes_fl": 142
+    },
+    "meeting_ts_min": "2021-01-05T00:00:00.000Z",
+    "meeting_ts_max": "2026-06-01T23:00:00.000Z",
+    "row_keys": [
+      "agenda_dt",
+      "agenda_fl",
+      "catid",
+      "catlabel",
+      "id",
+      "location",
+      "meeting_ts",
+      "minutes_dt",
+      "minutes_fl",
+      "title"
+    ],
+    "rows": [
+      {
+        "id": 4228,
+        "title": "Regular City Council Meeting-06/01/2026",
+        "meeting_ts": "2026-06-01T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": false,
+        "agenda_dt": "2026-05-29T00:00:00.000Z"
+      },
+      {
+        "id": 4195,
+        "title": "Regular City Council Meeting 05/18/2026",
+        "meeting_ts": "2026-05-18T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2026-05-15T00:00:00.000Z",
+        "minutes_dt": "2026-06-10T00:00:00.000Z"
+      },
+      {
+        "id": 4162,
+        "title": "Regular City Council Meeting-05/04/2026",
+        "meeting_ts": "2026-05-04T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2026-05-01T00:00:00.000Z",
+        "minutes_dt": "2026-05-28T00:00:00.000Z"
+      },
+      {
+        "id": 4129,
+        "title": "Regular City Council Meeting-4/20/2026",
+        "meeting_ts": "2026-04-20T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2026-04-17T00:00:00.000Z",
+        "minutes_dt": "2026-05-05T00:00:00.000Z"
+      },
+      {
+        "id": 4096,
+        "title": "Regular City Council Meeting-04/06/2026",
+        "meeting_ts": "2026-04-06T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2026-04-02T00:00:00.000Z",
+        "minutes_dt": "2026-04-22T00:00:00.000Z"
+      },
+      {
+        "id": 4063,
+        "title": "Regular City Council Meeting 03/16/2026",
+        "meeting_ts": "2026-03-16T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2026-03-13T00:00:00.000Z",
+        "minutes_dt": "2026-04-07T00:00:00.000Z"
+      },
+      {
+        "id": 4030,
+        "title": "Regular City Council Meeting- 03/02/2026",
+        "meeting_ts": "2026-03-03T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2026-02-27T00:00:00.000Z",
+        "minutes_dt": "2026-03-17T00:00:00.000Z"
+      },
+      {
+        "id": 3997,
+        "title": "Regular City Council Meeting-02/17/2026",
+        "meeting_ts": "2026-02-18T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2026-02-13T00:00:00.000Z",
+        "minutes_dt": "2026-03-04T00:00:00.000Z"
+      },
+      {
+        "id": 3964,
+        "title": "Regular City Council Meeting- 02/02/2026",
+        "meeting_ts": "2026-02-03T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2026-01-30T00:00:00.000Z",
+        "minutes_dt": "2026-02-19T00:00:00.000Z"
+      },
+      {
+        "id": 3931,
+        "title": "Regular City Council Meeting 1/20/2026",
+        "meeting_ts": "2026-01-21T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2026-01-16T00:00:00.000Z",
+        "minutes_dt": "2026-02-03T00:00:00.000Z"
+      },
+      {
+        "id": 3898,
+        "title": "Regular City Council Meeting- 01/05/2026",
+        "meeting_ts": "2026-01-06T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2026-01-02T00:00:00.000Z",
+        "minutes_dt": "2026-01-30T00:00:00.000Z"
+      },
+      {
+        "id": 3865,
+        "title": "Regular City Council Meeting- 12/15/2025",
+        "meeting_ts": "2025-12-16T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2026-01-02T00:00:00.000Z",
+        "minutes_dt": "2026-01-20T00:00:00.000Z"
+      },
+      {
+        "id": 3832,
+        "title": "Regular City Council Meeting-12/01/2025",
+        "meeting_ts": "2025-12-02T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-11-26T00:00:00.000Z",
+        "minutes_dt": "2026-01-20T00:00:00.000Z"
+      },
+      {
+        "id": 3799,
+        "title": "Regular City Council Meeting-11/17/2025",
+        "meeting_ts": "2025-11-18T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-11-14T00:00:00.000Z",
+        "minutes_dt": "2025-12-09T00:00:00.000Z"
+      },
+      {
+        "id": 3766,
+        "title": "Regular City Council Meeting-11/03/2025",
+        "meeting_ts": "2025-11-04T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-10-31T00:00:00.000Z",
+        "minutes_dt": "2025-12-09T00:00:00.000Z"
+      },
+      {
+        "id": 3734,
+        "title": "Regular City Council Meeting- 10/20/2025",
+        "meeting_ts": "2025-10-20T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-10-31T00:00:00.000Z",
+        "minutes_dt": "2025-12-09T00:00:00.000Z"
+      },
+      {
+        "id": 3733,
+        "title": "Regular City Council Meeting- 10/06/2025",
+        "meeting_ts": "2025-10-06T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-10-03T00:00:00.000Z",
+        "minutes_dt": "2025-10-30T00:00:00.000Z"
+      },
+      {
+        "id": 3700,
+        "title": "Regular City Council Meeting 09/15/2025",
+        "meeting_ts": "2025-09-15T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-09-12T00:00:00.000Z",
+        "minutes_dt": "2025-10-06T00:00:00.000Z"
+      },
+      {
+        "id": 3667,
+        "title": "Regular City Council Meeting-09/02/2025",
+        "meeting_ts": "2025-09-02T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-08-29T00:00:00.000Z",
+        "minutes_dt": "2025-09-30T00:00:00.000Z"
+      },
+      {
+        "id": 3634,
+        "title": "Regular City Council Meeting 08/18/2025",
+        "meeting_ts": "2025-08-18T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-08-15T00:00:00.000Z",
+        "minutes_dt": "2025-09-03T00:00:00.000Z"
+      },
+      {
+        "id": 3601,
+        "title": "Regular City Council Meeting-8/4/2025",
+        "meeting_ts": "2025-08-04T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-08-01T00:00:00.000Z",
+        "minutes_dt": "2025-08-19T00:00:00.000Z"
+      },
+      {
+        "id": 3503,
+        "title": "Regular City Council Meeting 07/21/2025",
+        "meeting_ts": "2025-07-21T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-07-29T00:00:00.000Z",
+        "minutes_dt": "2025-08-06T00:00:00.000Z"
+      },
+      {
+        "id": 3568,
+        "title": "SPECIAL COUNCIL MEETING 07/15/2025",
+        "meeting_ts": "2025-07-15T22:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-07-15T00:00:00.000Z",
+        "minutes_dt": "2025-07-29T00:00:00.000Z"
+      },
+      {
+        "id": 3535,
+        "title": "SPECIAL COUNCIL MEETING 07/14/2025",
+        "meeting_ts": "2025-07-14T22:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-07-15T00:00:00.000Z",
+        "minutes_dt": "2025-07-29T00:00:00.000Z"
+      },
+      {
+        "id": 3502,
+        "title": "Regular City Council Meeting 07/07/2025",
+        "meeting_ts": "2025-07-07T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-07-03T00:00:00.000Z",
+        "minutes_dt": "2025-07-29T00:00:00.000Z"
+      },
+      {
+        "id": 3469,
+        "title": "Regular City Council Meeting 06/16/2025 CORRECTED",
+        "meeting_ts": "2025-06-16T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-06-13T00:00:00.000Z",
+        "minutes_dt": "2025-07-15T00:00:00.000Z"
+      },
+      {
+        "id": 3403,
+        "title": "Regular City Council Meeting-06/02/2025",
+        "meeting_ts": "2025-06-02T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-05-30T00:00:00.000Z",
+        "minutes_dt": "2025-06-17T00:00:00.000Z"
+      },
+      {
+        "id": 3437,
+        "title": "SPECIAL MEETING 05/21/2025",
+        "meeting_ts": "2025-05-21T22:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-05-21T00:00:00.000Z",
+        "minutes_dt": "2025-06-11T00:00:00.000Z"
+      },
+      {
+        "id": 3370,
+        "title": "Regular City Council Meeting 05/19/2025-CANCELLED",
+        "meeting_ts": "2025-05-19T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": false,
+        "agenda_dt": "2025-05-16T00:00:00.000Z"
+      },
+      {
+        "id": 3337,
+        "title": "Regular City Council Meeting- 05/05/2025",
+        "meeting_ts": "2025-05-05T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-05-02T00:00:00.000Z",
+        "minutes_dt": "2025-06-11T00:00:00.000Z"
+      },
+      {
+        "id": 3304,
+        "title": "Regular City Council Meeting 04/21/2025",
+        "meeting_ts": "2025-04-21T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-05-01T00:00:00.000Z",
+        "minutes_dt": "2025-05-16T00:00:00.000Z"
+      },
+      {
+        "id": 3271,
+        "title": "Regular City Council Meeting 04/07/2025",
+        "meeting_ts": "2025-04-07T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-04-04T00:00:00.000Z",
+        "minutes_dt": "2025-05-02T00:00:00.000Z"
+      },
+      {
+        "id": 3238,
+        "title": "Regular City Council Meeting-03/17/2025",
+        "meeting_ts": "2025-03-17T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-03-18T00:00:00.000Z",
+        "minutes_dt": "2025-04-08T00:00:00.000Z"
+      },
+      {
+        "id": 3205,
+        "title": "Regular City Council Meeting 03/03/2025",
+        "meeting_ts": "2025-03-04T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-02-28T00:00:00.000Z",
+        "minutes_dt": "2025-04-04T00:00:00.000Z"
+      },
+      {
+        "id": 3172,
+        "title": "Regular City Council Meeting-02/18/2025-Cancelled due to inclement weather",
+        "meeting_ts": "2025-02-19T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": false,
+        "agenda_dt": "2025-02-14T00:00:00.000Z"
+      },
+      {
+        "id": 3139,
+        "title": "Regular City Council Meeting-02/03/2025",
+        "meeting_ts": "2025-02-04T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-01-31T00:00:00.000Z",
+        "minutes_dt": "2025-03-06T00:00:00.000Z"
+      },
+      {
+        "id": 3106,
+        "title": "Regular City Council Meeting 01/21/2025",
+        "meeting_ts": "2025-01-22T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-01-17T00:00:00.000Z",
+        "minutes_dt": "2025-02-06T00:00:00.000Z"
+      },
+      {
+        "id": 3073,
+        "title": "REGULAR CITY COUNCIL MEETING- 01/06/2025",
+        "meeting_ts": "2025-01-07T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2025-01-03T00:00:00.000Z",
+        "minutes_dt": "2025-02-06T00:00:00.000Z"
+      },
+      {
+        "id": 3040,
+        "title": "Regular City Council Meeting 12/16/2024-CANCELLED DUE TO LACK OF QUORUM",
+        "meeting_ts": "2024-12-17T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": false,
+        "agenda_dt": "2024-12-13T00:00:00.000Z"
+      },
+      {
+        "id": 3007,
+        "title": "Regular City Council Meeting 12/02/2024",
+        "meeting_ts": "2024-12-03T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-11-27T00:00:00.000Z",
+        "minutes_dt": "2025-01-17T00:00:00.000Z"
+      },
+      {
+        "id": 2974,
+        "title": "Regular City Council Meeting 11/18/2024",
+        "meeting_ts": "2024-11-19T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-11-15T00:00:00.000Z",
+        "minutes_dt": "2024-12-06T00:00:00.000Z"
+      },
+      {
+        "id": 2941,
+        "title": "Regular City Council Meeting-11/04/2024",
+        "meeting_ts": "2024-11-05T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-11-01T00:00:00.000Z",
+        "minutes_dt": "2024-11-21T00:00:00.000Z"
+      },
+      {
+        "id": 2909,
+        "title": "Regular City Council Meeting 10/21/2024",
+        "meeting_ts": "2024-10-21T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-10-18T00:00:00.000Z",
+        "minutes_dt": "2024-11-11T00:00:00.000Z"
+      },
+      {
+        "id": 2908,
+        "title": "Regular City Council Meeting 10/07/2024",
+        "meeting_ts": "2024-10-07T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-10-04T00:00:00.000Z",
+        "minutes_dt": "2024-11-01T00:00:00.000Z"
+      },
+      {
+        "id": 2875,
+        "title": "Special City Council Meeting 09/19/2024",
+        "meeting_ts": "2024-09-19T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-09-18T00:00:00.000Z",
+        "minutes_dt": "2024-10-09T00:00:00.000Z"
+      },
+      {
+        "id": 2842,
+        "title": "Regular City Council Meeting 09/16/2024",
+        "meeting_ts": "2024-09-16T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-09-13T00:00:00.000Z",
+        "minutes_dt": "2024-10-09T00:00:00.000Z"
+      },
+      {
+        "id": 2776,
+        "title": "Regular City Council Meeting 09/03/2024",
+        "meeting_ts": "2024-09-03T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-09-01T00:00:00.000Z",
+        "minutes_dt": "2024-09-23T00:00:00.000Z"
+      },
+      {
+        "id": 2809,
+        "title": "SPECIAL COUNCIL MEETING 08/27/2024",
+        "meeting_ts": "2024-08-27T22:15:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-08-27T00:00:00.000Z",
+        "minutes_dt": "2024-09-12T00:00:00.000Z"
+      },
+      {
+        "id": 2743,
+        "title": "SPECIAL COUNCIL MEETING 08/20/2024",
+        "meeting_ts": "2024-08-20T19:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-08-21T00:00:00.000Z",
+        "minutes_dt": "2024-09-12T00:00:00.000Z"
+      },
+      {
+        "id": 2710,
+        "title": "Regular City Council Meeting 08/19/2024-CANCELLED DUE TO LACK OF QUORUM",
+        "meeting_ts": "2024-08-19T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": false,
+        "agenda_dt": "2024-08-16T00:00:00.000Z"
+      },
+      {
+        "id": 2677,
+        "title": "Regular City Council Meeting 08/05/2024",
+        "meeting_ts": "2024-08-05T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-08-02T00:00:00.000Z",
+        "minutes_dt": "2024-09-12T00:00:00.000Z"
+      },
+      {
+        "id": 2644,
+        "title": "Regular City Council Meeting 7/15/2024",
+        "meeting_ts": "2024-07-15T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-07-16T00:00:00.000Z",
+        "minutes_dt": "2024-08-06T00:00:00.000Z"
+      },
+      {
+        "id": 2484,
+        "title": "Regular City Council Meeting 07/01/2024",
+        "meeting_ts": "2024-07-01T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-07-02T00:00:00.000Z",
+        "minutes_dt": "2024-07-16T00:00:00.000Z"
+      },
+      {
+        "id": 2483,
+        "title": "Regular City Council Meeting 06/17/2024",
+        "meeting_ts": "2024-06-17T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-06-14T00:00:00.000Z",
+        "minutes_dt": "2024-07-16T00:00:00.000Z"
+      },
+      {
+        "id": 2611,
+        "title": "SPECIAL COUNCIL MEETING 06/10/2024",
+        "meeting_ts": "2024-06-10T22:30:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-06-07T00:00:00.000Z",
+        "minutes_dt": "2024-06-18T00:00:00.000Z"
+      },
+      {
+        "id": 2578,
+        "title": "SPECIAL COUNCIL MEETING 06/04/2024",
+        "meeting_ts": "2024-06-04T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-06-04T00:00:00.000Z",
+        "minutes_dt": "2024-06-18T00:00:00.000Z"
+      },
+      {
+        "id": 2482,
+        "title": "Regular City Council Meeting 06/03/2024-Cancelled due to lack of quorum",
+        "meeting_ts": "2024-06-03T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": false,
+        "agenda_dt": "2024-05-31T00:00:00.000Z"
+      },
+      {
+        "id": 2481,
+        "title": "Regular City Council Meeting 05/20/2024",
+        "meeting_ts": "2024-05-20T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-05-17T00:00:00.000Z",
+        "minutes_dt": "2024-06-18T00:00:00.000Z"
+      },
+      {
+        "id": 2545,
+        "title": "Regular City Council Meeting 05/07/2024",
+        "meeting_ts": "2024-05-07T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-05-07T00:00:00.000Z",
+        "minutes_dt": "2024-05-31T00:00:00.000Z"
+      },
+      {
+        "id": 2479,
+        "title": "Regular City Council Meeting 05/06/2024",
+        "meeting_ts": "2024-05-06T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-05-03T00:00:00.000Z",
+        "minutes_dt": "2024-05-31T00:00:00.000Z"
+      },
+      {
+        "id": 2480,
+        "title": "Regular City Council Meeting 04/15/2024",
+        "meeting_ts": "2024-04-15T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-04-12T00:00:00.000Z",
+        "minutes_dt": "2024-05-08T00:00:00.000Z"
+      },
+      {
+        "id": 2512,
+        "title": "SPECIAL COUNCIL MEETING 04/08/2024",
+        "meeting_ts": "2024-04-08T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-04-09T00:00:00.000Z",
+        "minutes_dt": "2024-04-25T00:00:00.000Z"
+      },
+      {
+        "id": 2413,
+        "title": "Regular City Council Meeting 04/01/2024-MEETING CANCELLED",
+        "meeting_ts": "2024-04-01T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": false,
+        "agenda_dt": "2024-04-09T00:00:00.000Z"
+      },
+      {
+        "id": 2446,
+        "title": "Regular City Council Meeting 03/18/2024",
+        "meeting_ts": "2024-03-18T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-03-26T00:00:00.000Z",
+        "minutes_dt": "2024-04-25T00:00:00.000Z"
+      },
+      {
+        "id": 2380,
+        "title": "Regular City Council Meeting-03/04/2024",
+        "meeting_ts": "2024-03-05T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-03-01T00:00:00.000Z",
+        "minutes_dt": "2024-03-28T00:00:00.000Z"
+      },
+      {
+        "id": 2381,
+        "title": "Regular City Council Meeting-02/20/2024",
+        "meeting_ts": "2024-02-21T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-02-16T00:00:00.000Z",
+        "minutes_dt": "2024-03-05T00:00:00.000Z"
+      },
+      {
+        "id": 2348,
+        "title": "Regular City Council Meeting-02/05/2024",
+        "meeting_ts": "2024-02-06T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-02-05T00:00:00.000Z",
+        "minutes_dt": "2024-02-28T00:00:00.000Z"
+      },
+      {
+        "id": 2347,
+        "title": "Regular City Council Meeting-01/16/2024",
+        "meeting_ts": "2024-01-17T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-01-19T00:00:00.000Z",
+        "minutes_dt": "2024-02-12T00:00:00.000Z"
+      },
+      {
+        "id": 2349,
+        "title": "Regular City Council Meeting-01/03/2024",
+        "meeting_ts": "2024-01-04T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2024-01-04T00:00:00.000Z",
+        "minutes_dt": "2024-01-19T00:00:00.000Z"
+      },
+      {
+        "id": 2314,
+        "title": "Regular City Council Meeting 12/18/2023",
+        "meeting_ts": "2023-12-19T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-12-15T00:00:00.000Z",
+        "minutes_dt": "2024-01-04T00:00:00.000Z"
+      },
+      {
+        "id": 2281,
+        "title": "Regular City Council Meeting 12/04/2023",
+        "meeting_ts": "2023-12-05T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-12-01T00:00:00.000Z",
+        "minutes_dt": "2023-12-19T00:00:00.000Z"
+      },
+      {
+        "id": 2248,
+        "title": "Regular City Council Meeting 11/20/2023",
+        "meeting_ts": "2023-11-21T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-11-17T00:00:00.000Z",
+        "minutes_dt": "2023-12-05T00:00:00.000Z"
+      },
+      {
+        "id": 2215,
+        "title": "Regular City Council Meeting 11/6/2023",
+        "meeting_ts": "2023-11-07T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-11-07T00:00:00.000Z",
+        "minutes_dt": "2023-11-27T00:00:00.000Z"
+      },
+      {
+        "id": 2182,
+        "title": "Regular City Council Meeting 10/16/2023",
+        "meeting_ts": "2023-10-16T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-10-17T00:00:00.000Z",
+        "minutes_dt": "2023-11-07T00:00:00.000Z"
+      },
+      {
+        "id": 2116,
+        "title": "Regular City Council Meeting 10/02/2023",
+        "meeting_ts": "2023-10-02T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-09-29T00:00:00.000Z",
+        "minutes_dt": "2023-10-17T00:00:00.000Z"
+      },
+      {
+        "id": 2117,
+        "title": "Regular City Council Meeting 9/18/2023",
+        "meeting_ts": "2023-09-18T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-09-15T00:00:00.000Z",
+        "minutes_dt": "2023-10-12T00:00:00.000Z"
+      },
+      {
+        "id": 2083,
+        "title": "Regular City Council Meeting 9/05/2023",
+        "meeting_ts": "2023-09-05T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-09-01T00:00:00.000Z",
+        "minutes_dt": "2023-10-12T00:00:00.000Z"
+      },
+      {
+        "id": 2050,
+        "title": "Regular City Council Meeting 08/21/2023",
+        "meeting_ts": "2023-08-21T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-08-18T00:00:00.000Z",
+        "minutes_dt": "2023-09-06T00:00:00.000Z"
+      },
+      {
+        "id": 2017,
+        "title": "Regular City Council Meeting 08/07/2023",
+        "meeting_ts": "2023-08-07T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-08-04T00:00:00.000Z",
+        "minutes_dt": "2023-08-24T00:00:00.000Z"
+      },
+      {
+        "id": 1984,
+        "title": "Regular City Council Meeting 07/17/2023",
+        "meeting_ts": "2023-07-17T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-07-14T00:00:00.000Z",
+        "minutes_dt": "2023-08-08T00:00:00.000Z"
+      },
+      {
+        "id": 1953,
+        "title": "Regular City Council Meeting 07/03/2023",
+        "meeting_ts": "2023-07-03T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-07-01T00:00:00.000Z",
+        "minutes_dt": "2023-07-24T00:00:00.000Z"
+      },
+      {
+        "id": 1952,
+        "title": "Regular City Council Meeting 06/20/2023",
+        "meeting_ts": "2023-06-20T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-06-16T00:00:00.000Z",
+        "minutes_dt": "2023-07-06T00:00:00.000Z"
+      },
+      {
+        "id": 1919,
+        "title": "Regular City Council Meeting 06/05/2023",
+        "meeting_ts": "2023-06-05T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-06-02T00:00:00.000Z",
+        "minutes_dt": "2023-06-22T00:00:00.000Z"
+      },
+      {
+        "id": 1918,
+        "title": "Regular City Council Meeting 05/15/2023",
+        "meeting_ts": "2023-05-15T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-05-12T00:00:00.000Z",
+        "minutes_dt": "2023-06-12T00:00:00.000Z"
+      },
+      {
+        "id": 1852,
+        "title": "Regular City Council Meeting 05/01/2023",
+        "meeting_ts": "2023-05-01T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-04-28T00:00:00.000Z",
+        "minutes_dt": "2023-05-23T00:00:00.000Z"
+      },
+      {
+        "id": 1786,
+        "title": "Regular City Council Meeting 04/17/2023",
+        "meeting_ts": "2023-04-17T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-04-19T00:00:00.000Z",
+        "minutes_dt": "2023-05-02T00:00:00.000Z"
+      },
+      {
+        "id": 1753,
+        "title": "Regular City Council Meeting 04/03/2023",
+        "meeting_ts": "2023-04-03T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-03-31T00:00:00.000Z",
+        "minutes_dt": "2023-04-19T00:00:00.000Z"
+      },
+      {
+        "id": 1754,
+        "title": "SPECIAL COUNCIL MEETING 03/27/2023",
+        "meeting_ts": "2023-03-27T22:30:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-03-27T00:00:00.000Z",
+        "minutes_dt": "2023-04-19T00:00:00.000Z"
+      },
+      {
+        "id": 1720,
+        "title": "Regular City Council Meeting 03/20/2023",
+        "meeting_ts": "2023-03-20T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-03-21T00:00:00.000Z",
+        "minutes_dt": "2023-04-04T00:00:00.000Z"
+      },
+      {
+        "id": 1655,
+        "title": "Regular City Council Meeting 03/06/2023",
+        "meeting_ts": "2023-03-07T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-03-03T00:00:00.000Z",
+        "minutes_dt": "2023-03-31T00:00:00.000Z"
+      },
+      {
+        "id": 1654,
+        "title": "SPECIAL COUNCIL MEETING 02/23/2023",
+        "meeting_ts": "2023-02-23T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-03-08T00:00:00.000Z",
+        "minutes_dt": "2023-03-08T00:00:00.000Z"
+      },
+      {
+        "id": 1621,
+        "title": "Regular City Council Meeting 02/21/2023-CANCELLED DUE TO LACK OF QUORUM",
+        "meeting_ts": "2023-02-22T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": false,
+        "agenda_dt": "2023-02-22T00:00:00.000Z"
+      },
+      {
+        "id": 1588,
+        "title": "Regular City Council Meeting 02/06/2023",
+        "meeting_ts": "2023-02-07T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-02-03T00:00:00.000Z",
+        "minutes_dt": "2023-03-08T00:00:00.000Z"
+      },
+      {
+        "id": 1555,
+        "title": "Regular City Council Meeting 01/17/2023",
+        "meeting_ts": "2023-01-18T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2023-01-23T00:00:00.000Z",
+        "minutes_dt": "2023-02-07T00:00:00.000Z"
+      },
+      {
+        "id": 1522,
+        "title": "Regular City Council Meeting 01/03/2023",
+        "meeting_ts": "2023-01-04T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-12-29T00:00:00.000Z",
+        "minutes_dt": "2023-01-18T00:00:00.000Z"
+      },
+      {
+        "id": 1489,
+        "title": "Regular City Council Meeting 12/19/2022",
+        "meeting_ts": "2022-12-20T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-12-16T00:00:00.000Z",
+        "minutes_dt": "2023-01-04T00:00:00.000Z"
+      },
+      {
+        "id": 1456,
+        "title": "Regular City Council Meeting 12/05/2022",
+        "meeting_ts": "2022-12-06T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-12-02T00:00:00.000Z",
+        "minutes_dt": "2022-12-29T00:00:00.000Z"
+      },
+      {
+        "id": 1423,
+        "title": "Regular City Council Meeting 11/21/2022",
+        "meeting_ts": "2022-11-22T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-11-22T00:00:00.000Z",
+        "minutes_dt": "2022-12-06T00:00:00.000Z"
+      },
+      {
+        "id": 1390,
+        "title": "Regular City Council Meeting 11/07/2022",
+        "meeting_ts": "2022-11-08T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-11-04T00:00:00.000Z",
+        "minutes_dt": "2022-12-01T00:00:00.000Z"
+      },
+      {
+        "id": 1324,
+        "title": "Regular City Council Meeting 10/17/2022",
+        "meeting_ts": "2022-10-17T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-10-14T00:00:00.000Z",
+        "minutes_dt": "2022-11-08T00:00:00.000Z"
+      },
+      {
+        "id": 1357,
+        "title": "SPECIAL COUNCIL MEETING 10/11/2022",
+        "meeting_ts": "2022-10-11T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-10-10T00:00:00.000Z",
+        "minutes_dt": "2022-10-20T00:00:00.000Z"
+      },
+      {
+        "id": 1291,
+        "title": "Regular City Council Meeting 10/03/2022",
+        "meeting_ts": "2022-10-03T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-10-03T00:00:00.000Z",
+        "minutes_dt": "2022-10-20T00:00:00.000Z"
+      },
+      {
+        "id": 1225,
+        "title": "Regular City Council Meeting 09/19/2022",
+        "meeting_ts": "2022-09-19T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-09-16T00:00:00.000Z",
+        "minutes_dt": "2022-10-04T00:00:00.000Z"
+      },
+      {
+        "id": 1258,
+        "title": "SPECIAL COUNCIL MEETING 09/15/2022",
+        "meeting_ts": "2022-09-15T22:30:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-09-15T00:00:00.000Z",
+        "minutes_dt": "2022-10-04T00:00:00.000Z"
+      },
+      {
+        "id": 1192,
+        "title": "Regular City Council Meeting 09/06/2022",
+        "meeting_ts": "2022-09-06T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-09-06T00:00:00.000Z",
+        "minutes_dt": "2022-09-20T00:00:00.000Z"
+      },
+      {
+        "id": 1159,
+        "title": "Regular City Council Meeting 08/15/2022",
+        "meeting_ts": "2022-08-15T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-08-15T00:00:00.000Z",
+        "minutes_dt": "2022-09-07T00:00:00.000Z"
+      },
+      {
+        "id": 1127,
+        "title": "Regular City Council Meeting 08/01/2022",
+        "meeting_ts": "2022-08-01T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-08-10T00:00:00.000Z",
+        "minutes_dt": "2022-08-16T00:00:00.000Z"
+      },
+      {
+        "id": 1126,
+        "title": "SPECIAL COUNCIL MEETING 07/25/2022",
+        "meeting_ts": "2022-07-25T22:30:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-07-26T00:00:00.000Z",
+        "minutes_dt": "2022-08-10T00:00:00.000Z"
+      },
+      {
+        "id": 1093,
+        "title": "Regular City Council Meeting 07/18/2022",
+        "meeting_ts": "2022-07-18T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-07-15T00:00:00.000Z",
+        "minutes_dt": "2022-08-10T00:00:00.000Z"
+      },
+      {
+        "id": 1060,
+        "title": "Regular City Council Meeting 07/05/2022",
+        "meeting_ts": "2022-07-05T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-07-08T00:00:00.000Z",
+        "minutes_dt": "2022-07-19T00:00:00.000Z"
+      },
+      {
+        "id": 1027,
+        "title": "SPECIAL COUNCIL MEETING 06/27/22",
+        "meeting_ts": "2022-06-27T22:30:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-06-29T00:00:00.000Z",
+        "minutes_dt": "2022-07-12T00:00:00.000Z"
+      },
+      {
+        "id": 994,
+        "title": "Regular City Council Meeting 06/21/2022",
+        "meeting_ts": "2022-06-21T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-06-17T00:00:00.000Z",
+        "minutes_dt": "2022-07-12T00:00:00.000Z"
+      },
+      {
+        "id": 961,
+        "title": "SPECIAL COUNCIL MEETING 06/16/2022",
+        "meeting_ts": "2022-06-16T21:30:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-06-15T00:00:00.000Z",
+        "minutes_dt": "2022-06-22T00:00:00.000Z"
+      },
+      {
+        "id": 928,
+        "title": "Regular City Council Meeting 06/06/2022",
+        "meeting_ts": "2022-06-06T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-06-14T00:00:00.000Z",
+        "minutes_dt": "2022-06-22T00:00:00.000Z"
+      },
+      {
+        "id": 895,
+        "title": "Regular City Council Meeting 05/16/2022",
+        "meeting_ts": "2022-05-16T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-06-01T00:00:00.000Z",
+        "minutes_dt": "2022-06-15T00:00:00.000Z"
+      },
+      {
+        "id": 862,
+        "title": "Regular City Council Meeting 05/02/2022",
+        "meeting_ts": "2022-05-02T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-04-29T00:00:00.000Z",
+        "minutes_dt": "2022-06-01T00:00:00.000Z"
+      },
+      {
+        "id": 829,
+        "title": "Regular City Council Meeting 04/18/2022 (Amendment)",
+        "meeting_ts": "2022-04-18T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-04-14T00:00:00.000Z",
+        "minutes_dt": "2022-05-09T00:00:00.000Z"
+      },
+      {
+        "id": 796,
+        "title": "Regular City Council Meeting 04/04/2022",
+        "meeting_ts": "2022-04-04T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-04-01T00:00:00.000Z",
+        "minutes_dt": "2022-04-21T00:00:00.000Z"
+      },
+      {
+        "id": 730,
+        "title": "REGULAR COUNCIL MEETING 03/21/2022",
+        "meeting_ts": "2022-03-21T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-03-18T00:00:00.000Z",
+        "minutes_dt": "2022-04-21T00:00:00.000Z"
+      },
+      {
+        "id": 697,
+        "title": "Regular City Council Meeting 03/07/2022",
+        "meeting_ts": "2022-03-08T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-03-04T00:00:00.000Z",
+        "minutes_dt": "2022-03-23T00:00:00.000Z"
+      },
+      {
+        "id": 664,
+        "title": "Regular City Council Meeting 02/22/2022",
+        "meeting_ts": "2022-02-23T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-02-18T00:00:00.000Z",
+        "minutes_dt": "2022-04-05T00:00:00.000Z"
+      },
+      {
+        "id": 631,
+        "title": "Regular City Council Meeting 02/07/2022",
+        "meeting_ts": "2022-02-08T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-02-04T00:00:00.000Z",
+        "minutes_dt": "2022-02-24T00:00:00.000Z"
+      },
+      {
+        "id": 598,
+        "title": "Regular City Council Meeting 01/17/2022",
+        "meeting_ts": "2022-01-18T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2022-01-17T00:00:00.000Z",
+        "minutes_dt": "2022-01-17T00:00:00.000Z"
+      },
+      {
+        "id": 565,
+        "title": "Regular City Council Meeting 01/03/2022",
+        "meeting_ts": "2022-01-04T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-12-29T00:00:00.000Z",
+        "minutes_dt": "2022-02-24T00:00:00.000Z"
+      },
+      {
+        "id": 532,
+        "title": "SPECIAL COUNCIL MEETING 12/27/2021",
+        "meeting_ts": "2021-12-28T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": false,
+        "agenda_dt": "2021-12-27T00:00:00.000Z"
+      },
+      {
+        "id": 499,
+        "title": "Regular City Council Meeting 12/20/2021",
+        "meeting_ts": "2021-12-21T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": false,
+        "agenda_dt": "2021-12-20T00:00:00.000Z"
+      },
+      {
+        "id": 466,
+        "title": "Regular City Council Meeting 12/06/2021",
+        "meeting_ts": "2021-12-07T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": false,
+        "agenda_dt": "2021-12-06T00:00:00.000Z"
+      },
+      {
+        "id": 433,
+        "title": "Regular City Council Meeting 11/15/2021",
+        "meeting_ts": "2021-11-16T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-11-12T00:00:00.000Z",
+        "minutes_dt": "2021-12-20T00:00:00.000Z"
+      },
+      {
+        "id": 400,
+        "title": "Regular City Council Meeting 11/01/2021",
+        "meeting_ts": "2021-11-01T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-10-29T00:00:00.000Z",
+        "minutes_dt": "2021-11-16T00:00:00.000Z"
+      },
+      {
+        "id": 368,
+        "title": "Regular City Council Meeting 10/18/2021",
+        "meeting_ts": "2021-10-18T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-10-15T00:00:00.000Z",
+        "minutes_dt": "2021-12-20T00:00:00.000Z"
+      },
+      {
+        "id": 367,
+        "title": "Regular City Council Meeting 10/04/2021",
+        "meeting_ts": "2021-10-04T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-10-14T00:00:00.000Z",
+        "minutes_dt": "2021-12-20T00:00:00.000Z"
+      },
+      {
+        "id": 336,
+        "title": "Regular City Council Meeting 09/20/2021",
+        "meeting_ts": "2021-09-20T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-09-28T00:00:00.000Z",
+        "minutes_dt": "2021-10-14T00:00:00.000Z"
+      },
+      {
+        "id": 334,
+        "title": "Regular City Council Meeting 09/07/2021",
+        "meeting_ts": "2021-09-07T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-09-28T00:00:00.000Z",
+        "minutes_dt": "2021-09-28T00:00:00.000Z"
+      },
+      {
+        "id": 335,
+        "title": "SPECIAL COUNCIL MEETING 08/30/2021",
+        "meeting_ts": "2021-08-30T23:15:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-09-28T00:00:00.000Z",
+        "minutes_dt": "2021-09-28T00:00:00.000Z"
+      },
+      {
+        "id": 302,
+        "title": "Regular City Council Meeting 08/16/2021",
+        "meeting_ts": "2021-08-16T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-08-13T00:00:00.000Z",
+        "minutes_dt": "2021-09-28T00:00:00.000Z"
+      },
+      {
+        "id": 301,
+        "title": "Regular City Council Meeting 08/02/2021",
+        "meeting_ts": "2021-08-02T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-08-12T00:00:00.000Z",
+        "minutes_dt": "2021-09-28T00:00:00.000Z"
+      },
+      {
+        "id": 271,
+        "title": "Regular City Council Meeting 07/19/2021",
+        "meeting_ts": "2021-07-19T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-21T00:00:00.000Z",
+        "minutes_dt": "2021-08-04T00:00:00.000Z"
+      },
+      {
+        "id": 285,
+        "title": "Regular City Council Meeting 07/06/2021",
+        "meeting_ts": "2021-07-06T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-23T00:00:00.000Z",
+        "minutes_dt": "2021-07-23T00:00:00.000Z"
+      },
+      {
+        "id": 284,
+        "title": "Regular City Council Meeting 06/21/2021",
+        "meeting_ts": "2021-06-21T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-23T00:00:00.000Z",
+        "minutes_dt": "2021-07-23T00:00:00.000Z"
+      },
+      {
+        "id": 283,
+        "title": "Regular City Council Meeting 06/07/2021",
+        "meeting_ts": "2021-06-07T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-23T00:00:00.000Z",
+        "minutes_dt": "2021-07-23T00:00:00.000Z"
+      },
+      {
+        "id": 288,
+        "title": "SPECIAL COUNCIL MEETING 05/20/2021",
+        "meeting_ts": "2021-05-20T20:15:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-23T00:00:00.000Z",
+        "minutes_dt": "2021-07-23T00:00:00.000Z"
+      },
+      {
+        "id": 282,
+        "title": "Regular City Council Meeting 05/17/2021",
+        "meeting_ts": "2021-05-17T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-23T00:00:00.000Z",
+        "minutes_dt": "2021-07-23T00:00:00.000Z"
+      },
+      {
+        "id": 281,
+        "title": "Regular City Council Meeting 05/03/2021",
+        "meeting_ts": "2021-05-03T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-22T00:00:00.000Z",
+        "minutes_dt": "2021-07-22T00:00:00.000Z"
+      },
+      {
+        "id": 280,
+        "title": "Regular City Council Meeting 04/19/2021",
+        "meeting_ts": "2021-04-19T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-22T00:00:00.000Z",
+        "minutes_dt": "2021-07-22T00:00:00.000Z"
+      },
+      {
+        "id": 279,
+        "title": "Regular City Council Meeting 04/05/2021",
+        "meeting_ts": "2021-04-05T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-22T00:00:00.000Z",
+        "minutes_dt": "2021-07-22T00:00:00.000Z"
+      },
+      {
+        "id": 278,
+        "title": "Regular City Council Meeting 03/15/2021",
+        "meeting_ts": "2021-03-15T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-22T00:00:00.000Z",
+        "minutes_dt": "2021-07-22T00:00:00.000Z"
+      },
+      {
+        "id": 277,
+        "title": "Regular City Council Meeting 03/01/2021",
+        "meeting_ts": "2021-03-02T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-22T00:00:00.000Z",
+        "minutes_dt": "2021-07-22T00:00:00.000Z"
+      },
+      {
+        "id": 276,
+        "title": "Regular City Council Meeting 02/16/2021",
+        "meeting_ts": "2021-02-17T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-22T00:00:00.000Z",
+        "minutes_dt": "2021-07-22T00:00:00.000Z"
+      },
+      {
+        "id": 287,
+        "title": "SPECIAL COUNCIL MEETING 02/04/2021",
+        "meeting_ts": "2021-02-05T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-23T00:00:00.000Z",
+        "minutes_dt": "2021-07-23T00:00:00.000Z"
+      },
+      {
+        "id": 275,
+        "title": "Regular City Council Meeting 02/01/2021",
+        "meeting_ts": "2021-02-02T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-22T00:00:00.000Z",
+        "minutes_dt": "2021-07-22T00:00:00.000Z"
+      },
+      {
+        "id": 274,
+        "title": "Regular City Council Meeting 01/18/2021",
+        "meeting_ts": "2021-01-19T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-22T00:00:00.000Z",
+        "minutes_dt": "2021-07-22T00:00:00.000Z"
+      },
+      {
+        "id": 286,
+        "title": "SPECIAL COUNCIL MEETING 01/06/2021",
+        "meeting_ts": "2021-01-06T23:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-23T00:00:00.000Z",
+        "minutes_dt": "2021-07-23T00:00:00.000Z"
+      },
+      {
+        "id": 273,
+        "title": "Regular City Council Meeting 01/04/2021",
+        "meeting_ts": "2021-01-05T00:00:00.000Z",
+        "agenda_fl": true,
+        "minutes_fl": true,
+        "agenda_dt": "2021-07-22T00:00:00.000Z",
+        "minutes_dt": "2021-07-22T00:00:00.000Z"
+      }
+    ],
+    "raw_capture_path": "outputs/gworks-followup-20261112/galena-city-1117-current.response"
+  },
+  "engine": {
+    "status": "partial",
+    "record_count": 153,
+    "pages": 1,
+    "truncated": false,
+    "errors": [],
+    "scope": "configured capture only; upstream catalog completeness is unverified",
+    "capture_sha256": [
+      "e212f61275bc944d7891797cddc666323244fd7fd6b11611a5f3fad25d02c627"
+    ]
+  },
+  "limits": [
+    "One public city JSON request only.",
+    "A single static response does not prove update frequency, retained history, maximum provider payload, or full catalog completeness.",
+    "No provider credentials or writes used."
+  ]
+}

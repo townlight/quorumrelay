@@ -21120,6 +21120,48 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "gworks-galena-current-listing-live",
+          "url": "https://files.frontdeskgworks.com/city/1117/cms/data.json",
+          "title": "Galena public city JSON bounded engine listing read (2026-11-12)",
+          "kind": "public_tenant_listing_receipt",
+          "observed": "One guarded Engine discover request returned HTTP 200 application/json (49,618 bytes); engine returned partial because this is one configured capture, with 153 rows in one page, no errors and no truncation.",
+          "findings": "Top-level keys are pages, notices, cat and meetings. The meetings array has 153 rows; agenda_fl is true on all 153 and minutes_fl on 142; meeting_ts spans 2021-01-05 through 2026-06-01. Capture SHA256 e212f61275bc944d7891797cddc666323244fd7fd6b11611a5f3fad25d02c627.",
+          "limits": "One current static response only. This does not establish the full upstream catalog, retained history, update frequency, maximum payload, or a provider pagination/detail contract. No next-page token was present in this response.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_engine_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_provider_acceptance",
+          "receipt_path": "docs/verification/gworks-galena-listing-2026-11-12.json",
+          "receipt_sha256": "dd19082677d296ba8d8a1362883095cfc6cb28bbccc55dbac89e45afdf0911b0"
+        },
+        {
+          "id": "gworks-city-1311-agenda-engine-fetch-live",
+          "url": "https://api.gworks.cloud/cms/public/city/1311/agenda/pdf/5017/",
+          "title": "gWorks city 1311 meeting 5017 agenda document engine fetch (2026-11-12)",
+          "kind": "public_tenant_document_fetch_receipt",
+          "observed": "Engine fetch_attachment completed for the agenda row in the existing city 1311 capture. The resolver returned ready and the guarded signed-object GET returned HTTP 200 application/octet-stream; one 5,211-byte object, no redirect, PDF magic present, SHA256 6b9d4bc7967dfd2f0d695113f5e6e2fbf9892f9d37b9f6a7dc429751ec483037. The saved output hash matches.",
+          "findings": "The evidenced baseline mapping uses GET /cms/public/city/1311/agenda/pdf/5017/; source ID 5017 is from the existing city-1311 JSON fixture and its agenda_fl is true. Request required explicit download_origins for api.gworks.cloud and the signed object origin observed in the resolver response.",
+          "limits": "One supplied agenda only; no catalog completeness or all-document availability claim. Signed object URL path/query were not persisted. application/octet-stream was the served MIME despite PDF magic.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_engine_read_only_no_credentials",
+          "proof_level": "live_engine_bounded_read_receipt_not_provider_acceptance",
+          "receipt_path": "docs/verification/gworks-city-1311-agenda-fetch-2026-11-12.json",
+          "receipt_sha256": "c3322d04f84957b2b918c1bac48a773ee0698262376b77e335db4e13fe3198bc"
+        },
+        {
+          "id": "gworks-galena-minutes-engine-fetch-403-live",
+          "url": "https://api.gworks.cloud/cms/public/city/1117/minutes/pdf/4195/",
+          "title": "Galena meeting 4195 flagged minutes document bounded fetch (2026-11-12)",
+          "kind": "public_tenant_document_fetch_receipt",
+          "observed": "The captured row has minutes_fl=true. Engine fetch_attachment received resolver ready, then the guarded signed-object GET returned HTTP 403 application/xml (543 bytes, no redirect, response SHA256 6667a8b825cdfaab782d382a398e8000b848bab4d343c860f0d5bf174e8f045d). Engine returned partial with attachment_unavailable and retained the citation.",
+          "findings": "The exact derived route was GET /cms/public/city/1117/minutes/pdf/4195/. The same listing capture has row id 4195, title Regular City Council Meeting 05/18/2026, minutes_fl=true.",
+          "limits": "This is an access/read failure for one flagged document, not proof the route or provider capability is unsupported. No retry or broader tenant probing was performed. Signed object URL path/query were not persisted.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_engine_read_only_no_credentials",
+          "proof_level": "live_engine_bounded_read_receipt_not_provider_acceptance",
+          "receipt_path": "docs/verification/gworks-galena-minutes-fetch-2026-11-12.json",
+          "receipt_sha256": "bb4e185774455d221099b5a0a6904fe61b4a9a3e99af227c1c84bf1052b0d1ca"
         }
       ],
       "tenants": [
@@ -21159,22 +21201,24 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "gworks-galena",
-            "gworks-json"
+            "gworks-json",
+            "gworks-galena-current-listing-live",
+            "quorumrelay-shared-core-operations"
           ],
-          "details": "Resolve configured city ID and GET files.frontdeskgworks.com/city/{id}/cms/data.json; parse meetings and supplied agenda/minutes flags. Baseline derives api.gworks.cloud/cms/public/city/{id}/{agenda|minutes}/pdf/{meeting_id}/ for documents.",
+          "details": "The existing configured static GET and baseline gWorks parser handle https://files.frontdeskgworks.com/city/{city_id}/cms/data.json. Current Galena read produced 153 meetings in one response; results remain partial because a static response does not prove upstream catalog completeness. Agenda/minutes flags derive the documented baseline attachment routes; no separate meeting detail URL or continuation was observed.",
           "dependencies": [
-            "bounded date/body query",
-            "safe public retrieval"
+            "Configured public city JSON URL/city ID",
+            "Safe bounded public retrieval"
           ],
           "remaining_verification": [
-            "One static public JSON blob observed; no next-page token. Retained history/update frequency and maximum blob size unknown.",
-            "Build fixtures and verify complete bounded result traversal."
+            "Provider-wide listing completeness, retained history and update frequency remain unknown; the single static response does not establish those properties.",
+            "No separate meeting detail route or pagination contract was observed in the current response."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "shared_source_named_tests_plus_bounded_live_read_not_provider_acceptance",
           "tenant_scope": [
             "https://galenaks.frontdeskgworks.com/"
           ],
@@ -21187,20 +21231,24 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "gworks-galena",
-            "gworks-json"
+            "gworks-json",
+            "gworks-city-1311-agenda-engine-fetch-live",
+            "gworks-galena-minutes-engine-fetch-403-live",
+            "quorumrelay-shared-core-operations"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. Keep cancelled titles/status indicators. Public city JSON response fields and PDF GET route are not writable API fields.",
+          "details": "The existing fetch_attachment path resolves baseline-derived api.gworks.cloud agenda/minutes URLs and downloads only through explicitly configured exact public origins. The city-1311 agenda fetch completed (5,211-byte PDF); a flagged Galena minutes object resolved but its signed object GET returned HTTP 403, so the citation was retained as partial/unavailable. This is a document route, not a separate meeting detail API.",
           "dependencies": [
-            "shared network safeguards"
+            "Supplied capture with the agenda_fl/minutes_fl row flag",
+            "Explicit bounded download_origins for the API and observed signed-file origin"
           ],
           "remaining_verification": [
-            "Verify raw response MIME, redirects, document/media status and independent attachment failures."
+            "One flagged Galena minutes object returned HTTP 403 after resolver ready; availability for that object remains unresolved and this is not an unsupported-capability finding.",
+            "One successful agenda read does not establish that all supplied documents are retrievable or that the provider-wide catalog is complete."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "shared_source_named_tests_plus_bounded_live_document_reads_not_provider_acceptance",
           "tenant_scope": [
             "https://galenaks.frontdeskgworks.com/"
           ],
@@ -21512,7 +21560,7 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "One static public JSON blob observed; no next-page token. Retained history/update frequency and maximum blob size unknown."
+        "details": "Current Galena GET returned one 49,618-byte static JSON body with 153 meeting rows. No continuation token was observed in this response; provider-wide retained history, update frequency, maximum payload and complete catalog semantics remain unknown."
       },
       "auth": {
         "public_read": "unverified",
@@ -21523,9 +21571,9 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "On Galena’s current public city JSON, enumerate displayed rows/agenda/minutes flags and GET one available PDF of each kind; record status, MIME, redirect and hash. The current response has no next-page token.",
-        "Establish update frequency, retained history and payload maximum using repeated bounded captures or current official docs; a single static JSON response cannot prove those limits.",
-        "The FrontDesk builder describes staff UI, not an external write schema. No vendor API or authorized test credentials supplied."
+        "Bounded public evidence now covers the Galena static listing, one successful city-1311 agenda fetch, and one Galena minutes failure (resolver ready, guarded object GET HTTP 403). See the three F29 receipts. No separate meeting detail route or continuation token was observed; provider-wide catalog completeness and retrieval of every flagged document remain unverified.",
+        "Retained history, update frequency and maximum response payload remain unknown; one static response cannot establish them. No additional repeated sampling is required for this bounded research outcome.",
+        "The FrontDesk builder describes staff UI, not an external write schema. No vendor API or authorized test credentials were supplied; writes remain unaccepted/access-blocked."
       ],
       "authentication": "City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown.",
       "write_findings": "Historical official indexed article documents agenda creation/logging minutes/publication; live docs 404. Machine create/update/upload contracts remain unknown; no absence claim.",

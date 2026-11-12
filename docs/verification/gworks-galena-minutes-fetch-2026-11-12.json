@@ -1,0 +1,117 @@
+{
+  "observed_at": "2026-11-12T10:14:26.113280+00:00",
+  "provider": "gworks",
+  "operation": "engine.fetch_attachment",
+  "source_url": "https://files.frontdeskgworks.com/city/1117/cms/data.json",
+  "listing_capture_sha256": "e212f61275bc944d7891797cddc666323244fd7fd6b11611a5f3fad25d02c627",
+  "selected": {
+    "external_id": "4195",
+    "title": "Regular City Council Meeting 05/18/2026",
+    "minutes_flag": true,
+    "document_index": 1,
+    "document_kind": "minutes",
+    "document_url": "https://api.gworks.cloud/cms/public/city/1117/minutes/pdf/4195/"
+  },
+  "download_origins": [
+    "https://api.gworks.cloud",
+    "https://secured-files-gworks-prod-frontdesk.s3.amazonaws.com"
+  ],
+  "bounds": {
+    "max_pages": 3,
+    "parser_bytes": 16777216,
+    "transfer_bytes": 16777216,
+    "deadline_seconds": 90
+  },
+  "engine_result": {
+    "status": "partial",
+    "errors": [
+      "attachment_unavailable"
+    ],
+    "coverage": {
+      "sources": [
+        {
+          "provider": "gworks",
+          "url": "https://files.frontdeskgworks.com/city/1117/cms/data.json",
+          "namespace": null,
+          "body": null,
+          "input_format": "gworks-frontdesk-json",
+          "options": {
+            "download_origins": [
+              "https://api.gworks.cloud",
+              "https://secured-files-gworks-prod-frontdesk.s3.amazonaws.com"
+            ]
+          }
+        }
+      ],
+      "failures": [
+        "attachment_unavailable"
+      ],
+      "unavailable_attachments": [
+        {
+          "record_key": "d065358598796cd0255cf85ff0e1e61fec322fc47268b655049bf75c44309394",
+          "index": 1,
+          "kind": "documents",
+          "citation_url": "https://api.gworks.cloud/cms/public/city/1117/minutes/pdf/4195/"
+        }
+      ]
+    }
+  },
+  "transport_calls": [
+    {
+      "request_host": "api.gworks.cloud",
+      "request_path": "/cms/public/city/1117/minutes/pdf/4195/",
+      "request_method": "GET",
+      "allowed_origins": [
+        "https://files.frontdeskgworks.com",
+        "https://api.gworks.cloud",
+        "https://secured-files-gworks-prod-frontdesk.s3.amazonaws.com"
+      ],
+      "request_byte_limit": 65536,
+      "status": 200,
+      "content_type": "application/json",
+      "response_bytes": 1692,
+      "response_sha256": "ace24bf44f4ee96187359bfc6107469bea270a14a0e18976feab784d7a2c7458",
+      "response_host": "api.gworks.cloud",
+      "redirected": false,
+      "response_path_redacted": false,
+      "signed_query_names": []
+    },
+    {
+      "request_host": "secured-files-gworks-prod-frontdesk.s3.amazonaws.com",
+      "request_path": "[redacted signed object path]",
+      "request_method": "GET",
+      "allowed_origins": [
+        "https://files.frontdeskgworks.com",
+        "https://api.gworks.cloud",
+        "https://secured-files-gworks-prod-frontdesk.s3.amazonaws.com"
+      ],
+      "request_byte_limit": 16777216,
+      "status": 403,
+      "content_type": "application/xml",
+      "response_bytes": 543,
+      "response_sha256": "6667a8b825cdfaab782d382a398e8000b848bab4d343c860f0d5bf174e8f045d",
+      "response_host": "secured-files-gworks-prod-frontdesk.s3.amazonaws.com",
+      "redirected": false,
+      "response_path_redacted": true,
+      "signed_query_names": [
+        "AWSAccessKeyId",
+        "Expires",
+        "Signature",
+        "X-Amzn-Trace-Id",
+        "response-content-disposition",
+        "x-amz-security-token"
+      ]
+    }
+  ],
+  "document": {
+    "attachment": null,
+    "errors": [
+      "attachment_unavailable"
+    ]
+  },
+  "limits": [
+    "One current Galena listing response only; upstream catalog completeness is unverified.",
+    "The signed temporary object URL path and query values were not saved.",
+    "The content type is reported exactly as served; PDF signature is checked independently."
+  ]
+}
