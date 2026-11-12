@@ -1,0 +1,33 @@
+{
+  "observed_at": "2026-11-12T13:54:24.295347+00:00",
+  "status": "PASS",
+  "candidate": "0.1.0.dev8",
+  "source_commit": "3862e5f4ad7064aee722e09bb438899c3566477f",
+  "wheel_sha256": "bcfe691b4d1eb0de162f5f94985d0242a97b5d3d89bd5eeb9306d1ef28caf692",
+  "client_sha256": "0c11cd41c4361c157151229ba2920b48e4273445d4038a7d6d62aa2eb5de9bf8",
+  "changed_package_members": [
+    "civic_data_connectors/__init__.py",
+    "civic_data_connectors/data/capabilities.json"
+  ],
+  "changed_ts_members": [
+    "package/package.json"
+  ],
+  "native_search_labels": {
+    "wistia": "implemented",
+    "legistar": "implemented",
+    "granicus": "implemented",
+    "primegov": "implemented",
+    "escribe": "implemented",
+    "swagit": "implemented",
+    "suiteone-media": "implemented",
+    "civicplus-select": "implemented",
+    "civicplus-agenda-center": "implemented",
+    "destiny-agendaquick": "implemented",
+    "utah-public-notice": "implemented",
+    "iqm2": "implemented",
+    "clerkbase": "implemented"
+  },
+  "explicit_changed_discovery_detail_labels": "six labels implemented; acceptance not_run",
+  "reused_evidence": "Dev7 source594PASS, original34 installed output/capture comparisons, TypeScript4tests and installed consumer workflows; executable package modules and compiled client bytes identical apart from version label.",
+  "limits": "Metadata consistency and immutable artifact equality only; no new provider/consumer/write acceptance."
+}

@@ -1,10 +1,16 @@
 # QuorumRelay execution state
 
-Updated 2026-11-12 13:53 UTC. Sol execution lead/sole CI monitor; root oversight. Actual native build/signing HELD before launch for stale capability-label correction into dev8. Dev7 bytes/proof preserved. Exactly two of13 native-search labels mismatched; bounded same-cause pass also corrected six known changed discovery/detail labels. Executable route code unchanged: source diff under src is only version and packaged metadata. New capability consistency tests, version/interface checks, pinned-original validator and Ruff PASS; reuse594 source tests and installed client proof. No Sol job active; Terra copied payload/cache preserved, Luna TR checked but unpushed.
+Updated 2026-11-12 13:56 UTC. Sol execution lead/sole CI monitor; root oversight. Final corrected dev8 is immutable and verified; agents have exact hashes. Native build/signing remains held for corrected core CI. Runtime modules equal dev7 except version and capabilities JSON; compiled TS equal except package version. Fresh installed35deps/31providers34formats28parsers/13native-label parity PASS. Reuse594 source tests, original34 comparisons and dev7 client workflows; targeted metadata/version checks PASS. No new public calls or Sol background job.
 
 ## Scope and current boundary
 
 Preserve approved plan SHA256 f1ef84d352504e06c2d229219547f37a5ceca43d80e3000a929dc1dec7032c1d: all 31 providers/34 original formats; standalone Python, CLI, HTTP, MCP, TypeScript, schema/extensions; agreed inbound/outbound operations; four reference integrations; Windows signature/install/upgrade/handoffs; maintained docs and authorized coordinated delivery/postdelivery verification. No added providers, scope waiver, public-city mutation or invented acceptance gate. Unknown provider contracts and missing authorized test credentials remain incomplete, never unsupported merely because inaccessible.
+
+## Final immutable dev8 candidate
+
+Frozen source3862e5f4ad7064aee722e09bb438899c3566477f. Wheel dist/quorumrelay-development-08/quorumrelay-0.1.0.dev8-py3-none-any.whl SHA256bcfe691b4d1eb0de162f5f94985d0242a97b5d3d89bd5eeb9306d1ef28caf692. TS quorumrelay-client-0.1.0-dev.8.tgz SHA2560c11cd41c4361c157151229ba2920b48e4273445d4038a7d6d62aa2eb5de9bf8. Fresh isolated Windows service installation35deps compatible;31providers/34baseline formats/28parsers and all13native-search implementation labels PASS. Equality receipt docs/verification/quorumrelay-development-08-equality.json binds reused dev7 source/original34/client proof to exact unchanged runtime code. Metadata fix covers exactly eight known operation labels in six providers; no new route/code or acceptance promotion. Dev7 artifacts remain immutable.
+
+Final repins: Sol Brief/TownRecord, Luna TownReporter (dev7 all34/boundary PASS reused), Terra ONE Townlight1.8.5/dev8 build in clean detached worktree with copied accepted payload/cache. Actual native build/signing not started; corrected core required CI pending push. Existing guest/profile/1.8.4 proof retained. Do not repeat unchanged suites or public-route investigation.
 
 ## Current immutable dev7 candidate
 
