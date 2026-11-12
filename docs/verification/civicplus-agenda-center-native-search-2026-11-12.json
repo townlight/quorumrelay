@@ -1,0 +1,43 @@
+{
+  "source": {
+    "provider": "civicplus-agenda-center",
+    "url": "https://www.effinghamcounty.org/AgendaCenter"
+  },
+  "query": {
+    "terms": [
+      "Commission"
+    ]
+  },
+  "bounds": {
+    "date_from": "2025-01-01",
+    "date_to": "2025-12-31",
+    "max_records": 3,
+    "max_pages": 1,
+    "parser_bytes": 1048576,
+    "deadline_seconds": 40
+  },
+  "first": {
+    "status": "partial",
+    "errors": [],
+    "candidate_ids": [
+      "919",
+      "921",
+      "924"
+    ],
+    "hits": 3,
+    "has_checkpoint": true
+  },
+  "resume": {
+    "status": "partial",
+    "errors": [],
+    "candidate_ids": [
+      "925",
+      "928",
+      "930"
+    ],
+    "hits": 3,
+    "has_checkpoint": true
+  },
+  "continuation_binding": "canonical mapped provider rows, exact HTML capture retained; generated DOM IDs/rank excluded",
+  "limits": "supplied public year/category keyword requests only; title/date matching; sentinel response was application error, not empty; no fulltext/catalog/live-write acceptance"
+}

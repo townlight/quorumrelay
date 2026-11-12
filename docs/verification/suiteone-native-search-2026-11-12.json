@@ -1,0 +1,43 @@
+{
+  "source": {
+    "provider": "suiteone-media",
+    "url": "https://vermilionoh.suiteonemedia.com/"
+  },
+  "query": {
+    "terms": [
+      "Council"
+    ]
+  },
+  "bounds": {
+    "date_from": "2025-01-01",
+    "date_to": "2026-12-31",
+    "parser_bytes": 2097152,
+    "max_records": 3,
+    "deadline_seconds": 40
+  },
+  "first": {
+    "status": "partial",
+    "errors": [],
+    "candidate_ids": [
+      "1401",
+      "1383",
+      "1376"
+    ],
+    "hits": 0,
+    "has_checkpoint": true,
+    "scope": "public keyword result capture; title/date matching over returned meetings only"
+  },
+  "resume": {
+    "status": "partial",
+    "errors": [],
+    "candidate_ids": [
+      "1364",
+      "1326",
+      "1290"
+    ],
+    "hits": 0,
+    "has_checkpoint": true,
+    "scope": "public keyword result capture; title/date matching over returned meetings only"
+  },
+  "limits": "provider-defined keyword candidates; title/date locally searchable only; Older Meetings filtering, remote date semantics and full catalog unverified"
+}

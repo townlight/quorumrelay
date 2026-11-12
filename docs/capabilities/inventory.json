@@ -5205,6 +5205,38 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "kind": "source_and_named_test_coverage",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_source_and_saved_fixture_contracts",
+          "proof_level": "source_and_named_test_coverage_not_provider_acceptance",
+          "id": "civicplus-select-native-search-source-tests",
+          "url": "https://github.com/townlight/quorumrelay/tree/main/src/civic_data_connectors/providers",
+          "title": "CivicPlus Select native-search source and fixture tests",
+          "observed": "Inspected the registered adapter and named tests for the bounded native-search operation.",
+          "findings": [
+            "providers/civicplus_search.py implements native_search and is registered through providers/__init__.py.",
+            "tests/test_civicplus_search.py covers public search request handling, exact local matching, bounded continuation and scope/error behavior."
+          ],
+          "limits": "Source and saved-fixture coverage is not a provider acceptance run or full tenant catalog proof."
+        },
+        {
+          "id": "civicplus-select-native-search-engine-read-2026-11-12",
+          "url": "https://laceywa.portal.civicclerk.com/event/1077/files",
+          "title": "Lacey bounded CivicPlus Select native-search engine read",
+          "kind": "bounded_engine_read",
+          "observed": "A bounded public native_search request and in-process resume were executed.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "bounded_engine_read_not_provider_acceptance",
+          "findings": [
+            "Council query with 2026-11-01 through 2026-11-30 bounds returned partial/no-error first and resumed results; the receipt records three first-page hits and two resumed hits.",
+            "The first call made one network request; resume reused the exact in-process page snapshot and made zero additional network requests."
+          ],
+          "limits": "One tenant/query and bounded page snapshot only; exact upstream candidate semantics, complete catalog/full text and restart-persistent continuation are not established. No provider write acceptance.",
+          "receipt_path": "docs/verification/civicplus-select-native-search-2026-11-12.json",
+          "receipt_sha256": "f6f0728694dea71e46591059021535749b0ea25636104cfaaeb5865a01f0b103"
         }
       ],
       "tenants": [
@@ -5317,24 +5349,27 @@
           ]
         },
         "native_search": {
-          "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "select-search"
+            "select-search",
+            "civicplus-select-native-search-source-tests",
+            "civicplus-select-native-search-engine-read-2026-11-12"
           ],
-          "details": "Full-text UI search documented; machine route/auth/query grammar still unverified.",
+          "details": "The registered native-search adapter issues a bounded public CivicClerk query and performs local exact matching over returned normalized metadata/excerpts. A Lacey Council/date-bounded engine read and in-process resume returned partial/no-error pages with three then two hits; resume reused a TTL-bound page snapshot.",
           "dependencies": [],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "Provider candidate relevance and exact/phrase behavior beyond the observed bounded query remain unverified.",
+            "Full tenant catalog, search completeness, complete source text and restart-persistent continuation remain unverified.",
+            "No authorized provider test tenant/write acceptance was supplied."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_fixture_and_bounded_engine_read_not_provider_acceptance",
           "tenant_scope": [
             "https://laceywa.portal.civicclerk.com/event/1077/files"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Source/fixture coverage is identified separately from the bounded public engine receipt; the receipt shows one partial query and one in-process resume, not provider acceptance.",
           "restrictions": [
             "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -5961,8 +5996,8 @@
         "Source PDF bytes may change through vendor optimization; preserve local original/capture, do not promise upstream byte equality."
       ],
       "remaining_research": [
-        "On the selected Lacey portal, capture the exact Events/OData request generated by date/type/keyword controls and one continuation response; existing evidence proves an event/file read, not search pagination.",
-        "The exporter now prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4; the official-linked v3.5.9 filename tester supplies classifier results for the latter categories but no backend acceptance. Confirm accepted filenames and post-import behavior with the consultant/vendor; MP4 codec/playability, captions and timestamp preservation remain unverified.",
+        "A bounded Lacey CivicClerk native-search engine read and in-process resume is captured in docs/verification/civicplus-select-native-search-2026-11-12.json: partial/no-error pages yielded three then two local hits; the first request made one network call and resume reused the exact in-process snapshot with zero additional calls. Provider candidate semantics, broader search/full catalog, full text and restart-persistent continuation remain unverified.",
+        "The exporter prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4. The official-linked filename tester classifies the additional tokens, but backend acceptance and post-import behavior remain unverified. MP4 framing does not establish codec/playability, captions or timestamp fidelity; ambiguous Packet, Notices and Audio/Video aliases remain rejected.",
         "Historical FTP host is contradictory; project-lead credentials, transfer, consultant processing and readback are absent. Authenticated create/update/upload routes remain account-gated."
       ],
       "requirement_ids": [
@@ -6140,6 +6175,38 @@
           "limits": "PDF/download MIME and bytes and source-specific attachment support remain unverified.",
           "receipt_path": "docs/verification/agendacenter-viewfile-html-2026-11-12.json",
           "receipt_sha256": "5152ffa25335b4737be39b3358774b9b806add475961b536b219c6e46d619102"
+        },
+        {
+          "kind": "source_and_named_test_coverage",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_source_and_saved_fixture_contracts",
+          "proof_level": "source_and_named_test_coverage_not_provider_acceptance",
+          "id": "civicplus-agendacenter-discovery-search-source-tests",
+          "url": "https://github.com/townlight/quorumrelay/tree/main/src/civic_data_connectors/providers",
+          "title": "AgendaCenter year traversal and native-search source/tests",
+          "observed": "Inspected the bounded year/category discovery and native-search adapters with their named fixture tests.",
+          "findings": [
+            "providers/discovery.py handles supplied AgendaCenter year/category controls with bounded continuation; tests/test_agendacenter_discovery.py covers continuation and failure guards.",
+            "providers/agendacenter_search.py implements the registered native search; tests/test_agendacenter_search.py covers the public year/category search controls and bounded matching."
+          ],
+          "limits": "Fixture source/test coverage does not establish full archive completeness, PDF retrieval, or provider write acceptance."
+        },
+        {
+          "id": "civicplus-agendacenter-native-search-engine-read-2026-11-12",
+          "url": "https://www.effinghamcounty.org/AgendaCenter",
+          "title": "Effingham AgendaCenter bounded native-search engine read",
+          "kind": "bounded_engine_read",
+          "observed": "A bounded public native_search request and checkpoint resume were executed.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "bounded_engine_read_not_provider_acceptance",
+          "findings": [
+            "The Commission query for 2025 returned partial/no-error first and resumed result pages; the receipt lists three hits on each page.",
+            "Continuation is bound to canonical mapped provider rows and preserves the exact HTML capture."
+          ],
+          "limits": "The observed empty/sentinel response was an application error, not an empty-result proof. Search is limited to supplied year/category requests and title/date matching; no full-text, full catalog or provider write acceptance.",
+          "receipt_path": "docs/verification/civicplus-agenda-center-native-search-2026-11-12.json",
+          "receipt_sha256": "374984e232effbdc72a51cf869828bccbe7fa5bfc3006add0d299a166235fb7a"
         }
       ],
       "tenants": [
@@ -6186,24 +6253,27 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "civicplus-agenda-center-tenant",
-            "civicplus-agendacenter-year-2024"
+            "civicplus-agendacenter-year-2024",
+            "civicplus-agendacenter-discovery-search-source-tests"
           ],
-          "details": "Public listing/navigation observed; not exhaustive discovery coverage.",
+          "details": "The bounded discovery adapter follows supplied public AgendaCenter year/category controls and supports checkpoints. Source and saved-fixture coverage is present; one bounded Effingham 2024/category 3 public read returned 35 rows, not a full archive.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify full date/body bounds, continuation and checkpoints."
+            "Other years/categories, full archive completeness and broader date/body bounds remain unverified.",
+            "The observed ViewFile?html=true representation is text/html, not PDF/binary proof; a separate supplied binary route remains unverified.",
+            "No authorized provider test tenant/write acceptance was supplied."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_fixture_and_bounded_public_read_not_provider_acceptance",
           "tenant_scope": [
             "https://www.effinghamcounty.org/AgendaCenter",
             "https://www.cityofchino.org/AgendaCenter"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "tests/test_agendacenter_discovery.py covers saved year/category controls; the separate 2024/category 3 receipt records a bounded public read, not write acceptance.",
           "restrictions": [
             "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -6260,22 +6330,27 @@
           ]
         },
         "native_search": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
-          "evidence_ids": [],
-          "details": "No usable provider-native search contract verified.",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
+          "evidence_ids": [
+            "civicplus-agendacenter-discovery-search-source-tests",
+            "civicplus-agendacenter-native-search-engine-read-2026-11-12"
+          ],
+          "details": "The registered adapter searches supplied public year/category controls and locally matches returned title/date metadata. A bounded Effingham Commission engine query and resume produced partial/no-error pages with three hits each, retaining exact captures.",
           "dependencies": [],
           "remaining_verification": [
-            "Investigate native search without treating missing evidence as unavailable."
+            "Other years/categories, provider keyword semantics, full text and full archive completeness remain unverified.",
+            "The sentinel response was an application error, not evidence of an empty search result.",
+            "No authorized provider test tenant/write acceptance was supplied."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "unverified",
+          "evidence_level": "source_fixture_and_bounded_engine_read_not_provider_acceptance",
           "tenant_scope": [
             "https://www.effinghamcounty.org/AgendaCenter",
             "https://www.cityofchino.org/AgendaCenter"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "tests/test_agendacenter_search.py covers saved controls; the separate bounded engine receipt records one public query and resume, not provider acceptance.",
           "restrictions": [
             "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -6714,8 +6789,8 @@
         "SVG unsupported; PDF-only agendas do not accept structured items; item removal required before modification; approval/publishing rights."
       ],
       "remaining_research": [
-        "Effingham 2024/category 3 returned 35 rows. Supplied ViewFile?html=true returned text/html (2,481 bytes), so no PDF/binary proof exists. Other years/categories, previous-version links and archive completeness remain unresolved; do not repeat the same HTML route. Chino extraction failure remains recorded; add no tenant.",
-        "Official CivicPlus material describes staff UI but supplies no external machine request/response or import schema. A tenant-supported API/integration specification and authorized test account remain needed.",
+        "Effingham 2024/category 3 returned 35 rows; a bounded Commission native-search engine request and resume returned partial/no-error pages with three hits each. The supplied ViewFile?html=true response was text/html (2,481 bytes), not PDF/binary. Other years/categories, PreviousVersions traversal, full archive and binary/PDF retrieval remain unresolved; do not repeat the same HTML route. Chino extraction failure remains recorded; add no tenant.",
+        "Bounded discovery and native search have source/fixture coverage, but official CivicPlus material supplies no external machine write/file-import schema. A tenant-supported API/integration specification and authorized test account remain needed.",
         "If authorized test access is supplied, verify role/approval/visibility and duplicate/update/readback separately for meeting, item and file; no remote writes occurred."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
@@ -11361,6 +11436,38 @@
           "limits": "One group only; does not establish complete traversal.",
           "receipt_path": "docs/verification/suiteone-older-group-request-2026-11-12.json",
           "receipt_sha256": "73df1b17b2a60eea5ebfce705d57e67173f499338c6ec388a54c9b2779364a38"
+        },
+        {
+          "kind": "source_and_named_test_coverage",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_source_and_saved_fixture_contracts",
+          "proof_level": "source_and_named_test_coverage_not_provider_acceptance",
+          "id": "suiteone-search-discovery-source-tests",
+          "url": "https://github.com/townlight/quorumrelay/tree/main/src/civic_data_connectors/providers",
+          "title": "SuiteOne public discovery and native-search source/tests",
+          "observed": "Inspected the registered bounded public search adapter, group discovery path and named fixture tests.",
+          "findings": [
+            "providers/suiteone_search.py implements bounded native search over returned meeting metadata; providers/discovery.py supports supplied suiteone-group continuations.",
+            "tests/test_suiteone_search.py and tests/test_provider_discovery.py cover the saved response and continuation contracts."
+          ],
+          "limits": "Source and fixture coverage does not establish provider search relevance/date semantics or complete older-group enumeration."
+        },
+        {
+          "id": "suiteone-native-search-engine-read-2026-11-12",
+          "url": "https://vermilionoh.suiteonemedia.com/",
+          "title": "Vermilion bounded SuiteOne native-search engine read",
+          "kind": "bounded_engine_read",
+          "observed": "A bounded public Council search request and checkpoint resume were executed.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "bounded_engine_read_not_provider_acceptance",
+          "findings": [
+            "The first and resumed partial/no-error results returned three provider candidates each; exact local title/date matching produced zero hits in both pages.",
+            "The operation retained checkpoints while applying the requested 2025-01-01 through 2026-12-31 range to the bounded result pages."
+          ],
+          "limits": "This does not establish provider relevance or date-filter semantics, Older Meetings coverage, full archive completeness, document retrieval or provider write acceptance.",
+          "receipt_path": "docs/verification/suiteone-native-search-2026-11-12.json",
+          "receipt_sha256": "5bc3763cc5240c92916705e07f1285a3d622aa5260d3ea4e6585fb53f98e2caa"
         }
       ],
       "tenants": [
@@ -11401,26 +11508,29 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "suiteone-vermilion",
-            "suiteone-older-groups-engine-read-2026-11-12"
+            "suiteone-older-groups-engine-read-2026-11-12",
+            "suiteone-search-discovery-source-tests"
           ],
-          "details": "Public archive root plus one current Older Meetings group POST returned 328 records; 17 older groups were reported and continuation is present. Coverage is partial/truncated.",
+          "details": "The source adapter supports bounded public root/group discovery and continuation. A Vermilion engine traversal covered the root plus one supplied Older Meetings group, yielding 328 rows while 17 older groups were reported; coverage remains partial/truncated.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
           ],
           "remaining_verification": [
-            "Continue remaining supplied Older Meetings groups within bounded checkpoints if needed; current evidence covers root plus one of 17 reported groups, not full history."
+            "The remaining reported Older Meetings groups, full history and full archive completeness remain unverified.",
+            "Separate event/agenda/packet/minutes attachment MIME, redirects and bytes remain unverified.",
+            "No authorized provider test tenant/write acceptance was supplied."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_fixture_and_bounded_engine_read_not_provider_acceptance",
           "tenant_scope": [
             "https://vermilionoh.suiteonemedia.com/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "tests/test_provider_discovery.py covers saved group continuation; the separate engine receipt covers one public root/group traversal only.",
           "restrictions": [
             "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -11479,22 +11589,26 @@
         },
         "native_search": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "suiteone-vermilion"
+            "suiteone-vermilion",
+            "suiteone-search-discovery-source-tests",
+            "suiteone-native-search-engine-read-2026-11-12"
           ],
-          "details": "Search Meetings with date range and categories observed, but request route/results not tested.",
+          "details": "The registered adapter submits a bounded public keyword search and applies exact local matching to returned meeting metadata. A Vermilion Council search produced partial/no-error first and resumed pages with three provider candidates each and zero local hits.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify request method/route, exact-term/phrase/date/body semantics, paging and incomplete/error outcomes."
+            "Provider relevance and date-filter semantics, Older Meetings results, full archive/search completeness and document text remain unverified.",
+            "The zero local hits describe only these returned bounded pages, not the archive as a whole.",
+            "No authorized provider test tenant/write acceptance was supplied."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_fixture_and_bounded_engine_read_not_provider_acceptance",
           "tenant_scope": [
             "https://vermilionoh.suiteonemedia.com/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "tests/test_suiteone_search.py covers saved public responses and continuation; the separate engine receipt records a partial public query/resume, not provider acceptance.",
           "restrictions": [
             "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -11823,7 +11937,7 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "On Vermilion, root and one supplied Older Meetings group were traversed (328 rows; 17 older groups reported; continuation retained). Remaining groups, full history and all meeting/document MIME/redirect outcomes remain unestablished.",
+        "On Vermilion, root and one supplied Older Meetings group were traversed (328 rows; 17 older groups reported; continuation retained). A separate bounded Council native-search run/resume returned three provider candidates per page and zero exact local hits. Remaining groups, full history, remote search/date semantics and all meeting/document MIME/redirect outcomes remain unestablished.",
         "The SuiteOne guide names WMV and Liberty *_content.HTML intake with asynchronous processing, but no exact bookmark HTML schema. An authorized vendor-produced example is still needed for that import.",
         "Admin UI steps are documented; no machine write contract, account credentials or publication/readback test is available."
       ],
@@ -18777,6 +18891,88 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "kind": "source_and_named_test_coverage",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_source_and_saved_fixture_contracts",
+          "proof_level": "source_and_named_test_coverage_not_provider_acceptance",
+          "id": "clerkbase-search-tree-source-tests",
+          "url": "https://github.com/townlight/quorumrelay/tree/main/src/civic_data_connectors/providers",
+          "title": "ClerkBase public search and supplied-tree source/tests",
+          "observed": "Inspected the bounded search/tree adapters, shared discovery registration and named saved-fixture engine tests.",
+          "findings": [
+            "providers/clerkbase_search.py implements native search and supplied document-link mapping; providers/clerkbase_listing.py validates published tree controls; providers/discovery.py wires bounded tree traversal.",
+            "tests/test_clerkbase_search.py and tests/test_clerkbase_listing.py exercise saved response pages, source/query/scope binding, continuation and supplied-URL identity derivation."
+          ],
+          "limits": "Integrated engine tests use saved captures; separate raw public route probes are not an engine-mediated live operation. No linked document bytes or provider write acceptance are established."
+        },
+        {
+          "id": "clerkbase-search-route-probes-2026-11-12",
+          "url": "https://clerkshq.com/search",
+          "title": "South Kingstown ClerkBase public search route probes",
+          "kind": "public_route_probe",
+          "observed": "Bounded anonymous POST observations for a Council query and an explicit empty-result query.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "bounded_public_route_probe_not_engine_acceptance",
+          "findings": [
+            "Both observed POST responses were HTTP 200 text/html; the Council response was 39,905 bytes and the empty-result response was 306 bytes."
+          ],
+          "limits": "Raw route probes only; they do not prove that QuorumRelay executed the live route, validate all search semantics or establish catalog completeness.",
+          "receipt_path": "docs/verification/clerkbase-search-route-probes-2026-11-12.json",
+          "receipt_sha256": "52eaa9f6d1c60f3b346b719e75f2e68af606b5512d018d34b20c92c510c770f4"
+        },
+        {
+          "id": "clerkbase-search-page2-tree-route-probes-2026-11-12",
+          "url": "https://clerkshq.com/southkingstown-ri",
+          "title": "South Kingstown ClerkBase search page two and document-tree route probes",
+          "kind": "public_route_probe",
+          "observed": "Bounded anonymous POST page-two and supplied agenda-tree GET observations.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "bounded_public_route_probe_not_engine_acceptance",
+          "findings": [
+            "The published page-two form continuation returned HTTP 200 text/html (38,703 bytes) from https://clerkshq.com/search.",
+            "The supplied data-toc-url tree returned HTTP 200 text/html (1,978 bytes) from https://clerkshq.com/toc/SouthKingstown-ri?path=SouthKingstown_Docket,."
+          ],
+          "limits": "These raw route observations do not constitute an engine-mediated live search/tree run, linked-document fetch or full catalog proof.",
+          "receipt_path": "docs/verification/clerkbase-page2-tree-route-probes-2026-11-12.json",
+          "receipt_sha256": "0cab927f50208cce0381259dde34878000649ef567656f52406e5cf0c4b29942"
+        },
+        {
+          "id": "clerkbase-native-search-engine-read-2026-11-12",
+          "url": "https://clerkshq.com/southkingstown-ri",
+          "title": "South Kingstown bounded ClerkBase native-search engine read",
+          "kind": "bounded_engine_read",
+          "observed": "One bounded integrated-engine search operation on the existing public route was executed against the current working source.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "bounded_engine_read_not_provider_acceptance",
+          "findings": [
+            "Council AllWords returned a partial/no-error result with three records and three exact local hits from the first capped page; each record identity uses its supplied document URL with derivation supplied_url.",
+            "The provider result metadata reported 2,140 results and a page size of 20; the operation requested max_pages=1 and max_records=3, retained a checkpoint, and did not retrieve document content."
+          ],
+          "limits": "One bounded query/page only; provider exact/phrase/wildcard semantics, full-text search, full result/catalog completeness, document bytes and write acceptance remain unverified.",
+          "receipt_path": "docs/verification/clerkbase-native-search-engine-read-2026-11-12.json",
+          "receipt_sha256": "5c9ea1f622f3428b8401cf999a12fb57dd789a6a8b7e60e8f4f660b91d571987"
+        },
+        {
+          "id": "clerkbase-discover-engine-read-2026-11-12",
+          "url": "https://clerkshq.com/southkingstown-ri",
+          "title": "South Kingstown bounded ClerkBase tree-discovery engine read",
+          "kind": "bounded_engine_read",
+          "observed": "One bounded integrated-engine tree-discovery operation followed the configured public root and supplied top-level tree route.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "bounded_engine_read_not_provider_acceptance",
+          "findings": [
+            "The engine returned partial/no-error status after two pages and three document records with a checkpoint; it revalidated the public root before the resumed tree GET.",
+            "The three identities use exact supplied public document URLs with derivation supplied_url; no parent or provider-issued IDs were inferred."
+          ],
+          "limits": "The request was capped at two pages and three records. Nested trees, full catalog extent, linked document bytes/MIME and provider write acceptance remain unverified.",
+          "receipt_path": "docs/verification/clerkbase-tree-engine-discovery-2026-11-12.json",
+          "receipt_sha256": "ea6897717c5ca69d34bc222a596209608dea60b14a354ce3626af823c1e68c46"
         }
       ],
       "tenants": [
@@ -18812,23 +19008,28 @@
           ]
         },
         "discover": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "clerkbase-tenant"
+            "clerkbase-tenant",
+            "clerkbase-search-tree-source-tests",
+            "clerkbase-search-page2-tree-route-probes-2026-11-12",
+            "clerkbase-discover-engine-read-2026-11-12"
           ],
-          "details": "Folder instructions observed, but actual bounded meeting-document catalog not extracted; resolve tree/docId/path.",
+          "details": "The registered bounded tree adapter follows the captured public data-toc-url and maps supplied South Kingstown document links. One integrated-engine read followed the public root and supplied top-level tree route for two pages, returning three URL-keyed document records with partial/no-error status and a checkpoint; the exact supplied URL is the identity derivation, not a provider ID.",
           "dependencies": [],
           "remaining_verification": [
-            "Resolve actual catalog; exercise bounded dates/page transitions and report partial failures."
+            "Nested trees and full tree/catalog completeness remain unverified; the live read was capped at two pages and three records.",
+            "Linked document bytes/MIME/redirect behavior and full file retrieval remain unverified.",
+            "No authorized provider test tenant/write acceptance was supplied."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_fixture_and_bounded_engine_read_not_provider_acceptance",
           "tenant_scope": [
             "https://clerkshq.com/southkingstown-ri"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "tests/test_clerkbase_listing.py covers saved tree captures; the separate bounded live engine receipt records two pages and three records, while raw route probes are separate HTTP observations. No linked document fetch or provider write acceptance.",
           "restrictions": [
             "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -18883,22 +19084,28 @@
         },
         "native_search": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "clerkbase-tenant"
+            "clerkbase-tenant",
+            "clerkbase-search-tree-source-tests",
+            "clerkbase-search-route-probes-2026-11-12",
+            "clerkbase-search-page2-tree-route-probes-2026-11-12",
+            "clerkbase-native-search-engine-read-2026-11-12"
           ],
-          "details": "Quick/Advanced Search Boolean/phrase/wildcard help observed; no query.",
+          "details": "The registered adapter replays the captured public South Kingstown sidebar POST form, honors the observed page control, retains raw HTML and matches captured metadata/snippets without treating rank/row IDs or URLs as text. One bounded integrated-engine Council AllWords read returned three URL-keyed records and three exact local hits from the first capped page, with partial status and a checkpoint; separate raw probes captured the empty-result and page-two requests.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify usable request route, permissions, result fields, exact/phrase semantics and pagination."
+            "The bounded live engine receipt covers one page capped at three records; exact/phrase/wildcard provider semantics beyond the observed AllWords request, full result/catalog completeness, document-body search and linked-document bytes remain unverified.",
+            "The observed result identity is derived from a supplied document URL where present; it is not a provider-issued ID.",
+            "No authorized provider test tenant/write acceptance was supplied."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_saved_fixture_and_bounded_engine_read_not_provider_acceptance",
           "tenant_scope": [
             "https://clerkshq.com/southkingstown-ri"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "tests/test_clerkbase_search.py covers saved response form, page, snippet and scope behavior; one separate bounded live engine read is recorded and capped at three results. Raw route probes remain separate observations, not proof of page-two engine traversal.",
           "restrictions": [
             "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -19199,7 +19406,7 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "On the sole South Kingstown public context, follow the public tree and one Quick/Advanced Search link if exposed; retrieve one meeting-document/video link and preserve query and identity details.",
+        "On the sole South Kingstown context, bounded public tree discovery and native search are implemented. One partial live tree engine read returned three URL-keyed document records across two pages; one separate partial native-search engine read returned three URL-keyed documents and three local hits from one capped page. Full nested-tree/search catalog coverage and provider phrase/wildcard semantics remain unverified. A linked meeting document has not been fetched and verified by bytes/MIME/hash; raw page-two search probes do not prove an engine page-two search traversal.",
         "Current vendor pages distinguish ClerkBase Meeting Center/OnBoardGOV from ClerkMate. Obtain a current ClerkBase-specific API/import contract before implementing writes.",
         "No staff/API credentials supplied; roles, page caps, write permissions and readback remain gated. Do not substitute another product route."
       ],

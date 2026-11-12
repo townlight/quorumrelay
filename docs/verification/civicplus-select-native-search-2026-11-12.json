@@ -1,0 +1,62 @@
+{
+  "source": {
+    "provider": "civicplus-select",
+    "url": "https://laceywa.portal.civicclerk.com/event/1077/files"
+  },
+  "query": {
+    "terms": [
+      "Council"
+    ]
+  },
+  "bounds": {
+    "date_from": "2026-11-01",
+    "date_to": "2026-11-30",
+    "max_records": 3,
+    "max_pages": 2,
+    "parser_bytes": 2097152,
+    "deadline_seconds": 40
+  },
+  "first": {
+    "status": "partial",
+    "errors": [],
+    "candidate_ids": [
+      [
+        "meeting",
+        "1498"
+      ],
+      [
+        "agenda_file",
+        "4319"
+      ],
+      [
+        "meeting",
+        "1407"
+      ]
+    ],
+    "hits": 3,
+    "has_checkpoint": true
+  },
+  "resume": {
+    "status": "partial",
+    "errors": [],
+    "candidate_ids": [
+      [
+        "meeting",
+        "1459"
+      ],
+      [
+        "agenda_file",
+        "4330"
+      ],
+      [
+        "attachment",
+        "4748"
+      ]
+    ],
+    "hits": 2,
+    "has_checkpoint": true
+  },
+  "network_calls": 1,
+  "resume_network_calls": 0,
+  "limits": "exact in-process page snapshot with 15-minute opaque source/query/caller/grant-bound TTL; expires on engine restart; metadata/excerpts only; provider rank/scores retained raw, no full catalog/live-write acceptance"
+}

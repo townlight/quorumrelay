@@ -1,0 +1,212 @@
+{
+  "observed_at": "2026-11-12T13:26:18.021488+00:00",
+  "scope": "one bounded integrated-engine read of an already-verified route; not catalog, installed-client or write acceptance",
+  "source_candidate": "0.1.0.dev7 working source",
+  "operation": "search",
+  "request": {
+    "native": true,
+    "source": {
+      "provider": "clerkbase",
+      "url": "https://clerkshq.com/southkingstown-ri"
+    },
+    "query": {
+      "terms": [
+        "Council"
+      ]
+    },
+    "bounds": {
+      "max_pages": 1,
+      "max_records": 3,
+      "deadline_seconds": 20,
+      "parser_bytes": 2097152,
+      "transfer_bytes": 4194304
+    }
+  },
+  "status": "partial",
+  "errors": [],
+  "coverage": {
+    "sources": [
+      {
+        "provider": "clerkbase",
+        "url": "https://clerkshq.com/southkingstown-ri",
+        "namespace": "//clerkshq.com",
+        "body": null,
+        "input_format": null,
+        "options": {}
+      }
+    ],
+    "native_search": true,
+    "scope": "South Kingstown public document-index candidates with exact local field matching",
+    "provider_query_semantics": "public SearchType and source-index behavior; exact local AND over supplied metadata/snippets",
+    "provider_search_expression": "Council",
+    "provider_search_type": "AllWords",
+    "native_fields": [
+      "title",
+      "location",
+      "search_excerpts",
+      "meeting_date"
+    ],
+    "searched_fields": [
+      "title",
+      "location",
+      "search_excerpts",
+      "meeting_date"
+    ],
+    "search_snippets_only": true,
+    "document_content_retrieved": false,
+    "full_source_searched": false,
+    "provider_page_counts": [
+      {
+        "requested_page_num": null,
+        "first": 0,
+        "last": 19,
+        "page_size": 20,
+        "total": 2140
+      }
+    ],
+    "provider_result_total": 2140,
+    "query_window_exhausted": false,
+    "catalog_complete": false,
+    "source_complete": false,
+    "status": "partial",
+    "pages": 1,
+    "unmapped_rows_omitted": 0,
+    "body_filter": {
+      "status": "not_requested",
+      "requested": null,
+      "applied": false
+    },
+    "date_from": null,
+    "date_to": null,
+    "date_inclusivity": "both",
+    "actual_dates": [
+      "2026-01-05",
+      "2026-01-06",
+      "2026-01-12"
+    ],
+    "available_text": [
+      {
+        "identity": {
+          "provider": "clerkbase",
+          "namespace": "//clerkshq.com",
+          "record_type": "document",
+          "external_id": "https://clerkshq.com/Content/SouthKingstown-ri/council/2026/jan12_26ag.htm",
+          "parent": null,
+          "derivation": "supplied_url",
+          "stability": "Uses the exact supplied public document URL; changes when that URL changes."
+        },
+        "capture_sha256": "35e87031d5015ac8aae6f6159bbe333374278fe65b43b84f504e5c0a792b2648",
+        "status": "metadata_only",
+        "metadata_fields": [
+          "normalized.title",
+          "normalized.location",
+          "normalized.search_excerpts[0]",
+          "normalized.search_excerpts[1]",
+          "normalized.meeting_date"
+        ],
+        "supplied_fields": [],
+        "unavailable": [],
+        "full_source_searched": false
+      },
+      {
+        "identity": {
+          "provider": "clerkbase",
+          "namespace": "//clerkshq.com",
+          "record_type": "document",
+          "external_id": "https://clerkshq.com/Content/SouthKingstown-ri/council/2026/jan06_26ag.htm",
+          "parent": null,
+          "derivation": "supplied_url",
+          "stability": "Uses the exact supplied public document URL; changes when that URL changes."
+        },
+        "capture_sha256": "35e87031d5015ac8aae6f6159bbe333374278fe65b43b84f504e5c0a792b2648",
+        "status": "metadata_only",
+        "metadata_fields": [
+          "normalized.title",
+          "normalized.location",
+          "normalized.search_excerpts[0]",
+          "normalized.search_excerpts[1]",
+          "normalized.meeting_date"
+        ],
+        "supplied_fields": [],
+        "unavailable": [],
+        "full_source_searched": false
+      },
+      {
+        "identity": {
+          "provider": "clerkbase",
+          "namespace": "//clerkshq.com",
+          "record_type": "document",
+          "external_id": "https://clerkshq.com/Content/SouthKingstown-ri/council/2026/jan05_26ag.htm",
+          "parent": null,
+          "derivation": "supplied_url",
+          "stability": "Uses the exact supplied public document URL; changes when that URL changes."
+        },
+        "capture_sha256": "35e87031d5015ac8aae6f6159bbe333374278fe65b43b84f504e5c0a792b2648",
+        "status": "metadata_only",
+        "metadata_fields": [
+          "normalized.title",
+          "normalized.location",
+          "normalized.search_excerpts[0]",
+          "normalized.search_excerpts[1]",
+          "normalized.meeting_date"
+        ],
+        "supplied_fields": [],
+        "unavailable": [],
+        "full_source_searched": false
+      }
+    ],
+    "failures": [],
+    "truncated": false,
+    "searched_records": 3,
+    "match_policy": "Unicode casefold, collapsed whitespace, word boundaries; AND terms/phrases",
+    "incomplete_text": true,
+    "searched_sources": [
+      {
+        "provider": "clerkbase",
+        "namespace": "//clerkshq.com",
+        "url": "https://clerkshq.com/southkingstown-ri"
+      }
+    ],
+    "selected_providers": [],
+    "selected_namespaces": [],
+    "input_status": "partial"
+  },
+  "has_checkpoint": true,
+  "record_identities": [
+    {
+      "provider": "clerkbase",
+      "namespace": "//clerkshq.com",
+      "record_type": "document",
+      "external_id": "https://clerkshq.com/Content/SouthKingstown-ri/council/2026/jan12_26ag.htm",
+      "parent": null,
+      "derivation": "supplied_url",
+      "stability": "Uses the exact supplied public document URL; changes when that URL changes."
+    },
+    {
+      "provider": "clerkbase",
+      "namespace": "//clerkshq.com",
+      "record_type": "document",
+      "external_id": "https://clerkshq.com/Content/SouthKingstown-ri/council/2026/jan06_26ag.htm",
+      "parent": null,
+      "derivation": "supplied_url",
+      "stability": "Uses the exact supplied public document URL; changes when that URL changes."
+    },
+    {
+      "provider": "clerkbase",
+      "namespace": "//clerkshq.com",
+      "record_type": "document",
+      "external_id": "https://clerkshq.com/Content/SouthKingstown-ri/council/2026/jan05_26ag.htm",
+      "parent": null,
+      "derivation": "supplied_url",
+      "stability": "Uses the exact supplied public document URL; changes when that URL changes."
+    }
+  ],
+  "hits": 3,
+  "captures": [
+    {
+      "sha256": "35e87031d5015ac8aae6f6159bbe333374278fe65b43b84f504e5c0a792b2648",
+      "byte_length": 39905,
+      "input_format": "clerkbase-search-html"
+    }
+  ]
+}

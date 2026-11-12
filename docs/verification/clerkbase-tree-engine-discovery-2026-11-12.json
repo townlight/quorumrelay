@@ -1,0 +1,100 @@
+{
+  "observed_at": "2026-11-12T13:27:15.930616+00:00",
+  "scope": "bounded integrated-engine read of previously verified supplied route; not full catalog, installed-client or write acceptance",
+  "source_candidate": "0.1.0.dev7 working source",
+  "operation": "discover",
+  "request": {
+    "source": {
+      "provider": "clerkbase",
+      "url": "https://clerkshq.com/southkingstown-ri"
+    },
+    "bounds": {
+      "max_pages": 2,
+      "max_records": 3,
+      "deadline_seconds": 20,
+      "parser_bytes": 2097152,
+      "transfer_bytes": 4194304
+    }
+  },
+  "status": "partial",
+  "errors": [],
+  "coverage": {
+    "sources": [
+      {
+        "provider": "clerkbase",
+        "url": "https://clerkshq.com/southkingstown-ri",
+        "namespace": "//clerkshq.com",
+        "body": null,
+        "input_format": "clerkbase-public-tree-html",
+        "options": {}
+      }
+    ],
+    "date_from": null,
+    "date_to": null,
+    "date_inclusivity": "both",
+    "record_types": [],
+    "body": null,
+    "actual_dates": [
+      "2026-01-06",
+      "2026-01-12"
+    ],
+    "returned_records": 3,
+    "filtered_records": 0,
+    "pages": 2,
+    "failed_pages": [],
+    "failures": [],
+    "unknown_date_records": [],
+    "unknown_body_records": [],
+    "truncated": true,
+    "deadline_exceeded": false,
+    "unavailable_attachments": [],
+    "scope": "configured public root and supplied top-level trees; nested trees and catalog extent unverified",
+    "available_text": "metadata_and_supplied_text_only",
+    "catalog_complete": false,
+    "source_complete": false,
+    "control_validation": "current public root revalidated before resumed tree GET"
+  },
+  "has_checkpoint": true,
+  "record_identities": [
+    {
+      "provider": "clerkbase",
+      "namespace": "//clerkshq.com",
+      "record_type": "document",
+      "external_id": "https://clerkshq.com/Content/SouthKingstown-ri/Boards/TRC.htm",
+      "parent": null,
+      "derivation": "supplied_url",
+      "stability": "Uses the exact supplied public document URL; changes when that URL changes."
+    },
+    {
+      "provider": "clerkbase",
+      "namespace": "//clerkshq.com",
+      "record_type": "document",
+      "external_id": "https://clerkshq.com/Content/SouthKingstown-ri/council/2026/jan12_26ag.htm",
+      "parent": null,
+      "derivation": "supplied_url",
+      "stability": "Uses the exact supplied public document URL; changes when that URL changes."
+    },
+    {
+      "provider": "clerkbase",
+      "namespace": "//clerkshq.com",
+      "record_type": "document",
+      "external_id": "https://clerkshq.com/Content/SouthKingstown-ri/council/2026/jan06_26ag.htm",
+      "parent": null,
+      "derivation": "supplied_url",
+      "stability": "Uses the exact supplied public document URL; changes when that URL changes."
+    }
+  ],
+  "hits": 0,
+  "captures": [
+    {
+      "sha256": "b1e705ee64876e7d1434e31ad6e95b0697508e6b65e9353075050507e2e2b734",
+      "byte_length": 27230,
+      "input_format": "clerkbase-public-tree-html"
+    },
+    {
+      "sha256": "f6bbafc6b2c93997344cb74227bd28290ea4326fe0ad7704059154c133404ae4",
+      "byte_length": 1978,
+      "input_format": "clerkbase-public-tree-html"
+    }
+  ]
+}
