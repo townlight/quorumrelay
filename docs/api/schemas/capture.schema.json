@@ -1,0 +1,38 @@
+{
+  "title": "Civic data connectors capture 2.0.0",
+  "type": "object",
+  "properties": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "input_format": {
+      "type": "string"
+    },
+    "content_base64": {
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "byte_length": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "original_values": {},
+    "source_url": {
+      "type": "string"
+    },
+    "storage_reference": {}
+  },
+  "required": [
+    "sha256",
+    "captured_at",
+    "input_format",
+    "byte_length",
+    "source_url"
+  ],
+  "additionalProperties": true
+}

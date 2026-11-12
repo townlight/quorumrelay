@@ -1,0 +1,37 @@
+{
+  "title": "Civic data connectors identity 2.0.0",
+  "type": "object",
+  "properties": {
+    "provider": {
+      "type": "string"
+    },
+    "namespace": {
+      "type": "string"
+    },
+    "record_type": {
+      "type": "string"
+    },
+    "external_id": {
+      "type": "string"
+    },
+    "parent": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "derivation": {
+      "type": "string"
+    },
+    "stability": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "provider",
+    "namespace",
+    "record_type",
+    "external_id"
+  ],
+  "additionalProperties": true
+}

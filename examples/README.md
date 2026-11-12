@@ -43,7 +43,7 @@ In a new unrelated directory, install the generated `.tgz`; copy only
 `fifth-client.mjs` there. With the explicit URL/token above:
 
 ```powershell
-npm install C:\connectors\client\quorumrelay-client-0.1.0-dev.6.tgz
+npm install C:\connectors\client\quorumrelay-client-0.1.0-dev.8.tgz
 node C:\unrelated\fifth-client.mjs
 ```
 

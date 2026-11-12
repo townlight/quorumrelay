@@ -1,6 +1,6 @@
-# Engine contract, candidate 0.1.0.dev3 / schema 2.0.0
+# Engine contract, candidate 0.1.0.dev8 / schema 2.0.0
 
-Module ownership: core `models.py`, `engine.py`, `extensions.py`, `compat.py`, `normalization.py`, `fetch.py`; discovery `providers/`; storage/search/export `storage.py`, `search.py`, `interchange.py`, `imports.py`; writes `writes.py`; transports `transports/`, TypeScript `client/`. Do not edit another owner's modules without coordination.
+Implementation layout: core `models.py`, `engine.py`, `extensions.py`, `compat.py`, `normalization.py`, `fetch.py`; discovery `providers/`; storage/search/export `storage.py`, `search.py`, `interchange.py`, `imports.py`; writes `writes.py`; transports `transports/`, TypeScript `client/`.
 
 ## Public boundary
 
