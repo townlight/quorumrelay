@@ -10231,6 +10231,17 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "iqm2-search-observed",
+          "url": "https://kentwa.iqm2.com/Citizens/Search.aspx",
+          "title": "Kent anonymous public search",
+          "kind": "public_tenant",
+          "observed": "One public Council form response returned 20 mixed rows and reported 11,387 results; exact result fixture SHA256 a5fa598011ead3fcf2abfa68cb6df891488b8e0b0bcb4d63b9688ee0fafd0a95. Empty-result fixture and source tests cover mapping and bounded session continuation; no live next-page read. Fixture paths: tests/fixtures/iqm2-search-council.html and iqm2-search-empty.html (empty SHA256 653b4fb5ad0660a523d80c4b42c8db335f6a1b5cb07837cb7ef02e58046644f4).",
+          "limits": "Bounded public source observation and fixture/source checks; not provider-wide coverage, live write or vendor acceptance.",
+          "observation_date": "2026-11-12",
+          "access_scope": "public_research_only",
+          "proof_level": "public_source_and_fixture_not_live_engine_acceptance"
         }
       ],
       "tenants": [
@@ -10267,17 +10278,18 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "iqm2-tenant"
+            "iqm2-tenant",
+            "iqm2-search-observed"
           ],
-          "details": "Public listing/navigation observed; not exhaustive discovery coverage.",
+          "details": "Configured Kent calendar response can be parsed into 185 observed rows; it is a bounded listing, not proven archive completeness or date/body traversal.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify full date/body bounds, continuation and checkpoints."
+            "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
           "tenant_scope": [
             "https://kentwa.iqm2.com/citizens/default.aspx"
           ],
@@ -10336,16 +10348,18 @@
           ]
         },
         "native_search": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
-          "evidence_ids": [],
-          "details": "No usable provider-native search contract verified.",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
+          "evidence_ids": [
+            "iqm2-search-observed"
+          ],
+          "details": "Kent public Search.aspx form uses fresh anonymous state; bounded source adapter maps observed mixed attachment, communication and legislative-file results with route-specific IDs and metadata/excerpt local matching. Supplied Next control is fixture-tested only; live next-page, full text and total catalog remain unverified.",
           "dependencies": [],
           "remaining_verification": [
-            "Investigate native search without treating missing evidence as unavailable."
+            "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "unverified",
+          "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
           "tenant_scope": [
             "https://kentwa.iqm2.com/citizens/default.aspx"
           ],
@@ -10654,7 +10668,7 @@
         "Preserve Scheduled/Cancelled; ignore self/# file placeholders; minutes may be embedded in following packet."
       ],
       "remaining_research": [
-        "On the existing Kent iQM2 tenant, follow one list/calendar entry to Detail_Meeting and FileOpen routes; capture date/body filters and older-record navigation. Pre-2007 records are reported elsewhere, not in this portal.",
+        "The bounded Kent public calendar and first native search result are observed; verify broader date/body and archive coverage and live supplied Next before claiming completeness.",
         "Current Granicus/iQM2 help pages describe authenticated locations/types/meeting and streaming-media workflows, not an iQM2 external API. Get deployment-specific customer documentation/account enablement.",
         "No tenant API credentials, upload limits, write schema or write acceptance were supplied; do not reuse Legistar contracts."
       ],
@@ -12715,6 +12729,17 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "utah-search-observed",
+          "url": "https://www.utah.gov/pmn/search.html",
+          "title": "Utah bounded public body search",
+          "kind": "public_tenant",
+          "observed": "A normal anonymous body/date form submission returned notice 1120627 and a supplied PDF, with no next control. Redacted fixture SHA256 64f149638cd0976b6a6559185ea06ee2e33f744bcbb3000c5735d713aafceb67; the private CSRF token and cookie were not retained. Fixture: tests/fixtures/utah-public-search-redacted.html; bounded source receipt: outputs/utah-agendaquick-clerkbase-followup-20261112/utah-search-bounded-receipt.json in the plan workspace.",
+          "limits": "Bounded public source observation and fixture/source checks; not provider-wide coverage, live write or vendor acceptance.",
+          "observation_date": "2026-11-12",
+          "access_scope": "public_research_only",
+          "proof_level": "public_source_and_fixture_not_live_engine_acceptance"
         }
       ],
       "tenants": [
@@ -12753,21 +12778,21 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "utah-notice"
+            "utah-notice",
+            "utah-search-observed"
           ],
-          "details": "Configure Government Type/entity/body; browse body notices or bounded public filter; fetch /pmn/sitemap/notice/{id}.html and linked files.",
+          "details": "Explicit Utah public body and inclusive dates drive the observed anonymous search form; exact local body/date filtering applies to returned notice metadata, with scope-bound continuation. The single-body response supplies one notice; full result paging and catalog completeness remain unverified.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
           ],
           "remaining_verification": [
-            "No public search paging contract verified. Detail is one notice; per-notice iCalendar link is not a complete notice catalog.",
-            "Build fixtures and verify complete bounded result traversal."
+            "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
           "tenant_scope": [
             "https://www.utah.gov/pmn/sitemap/notice/1120627.html"
           ],
@@ -12831,17 +12856,18 @@
         },
         "native_search": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "utah-notice"
+            "utah-notice",
+            "utah-search-observed"
           ],
-          "details": "Public notice search/browse and date/ZIP filtering observed; full-text semantics and result cap unverified.",
+          "details": "The public form POST returns notice candidates for the first title expression; local title/date/body checks apply to returned metadata. Exact full-text/phrase semantics and live pagination are unverified; supplied pager handling has fixture coverage only.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify request method/route, exact-term/phrase/date/body semantics, paging and incomplete/error outcomes."
+            "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
           "tenant_scope": [
             "https://www.utah.gov/pmn/sitemap/notice/1120627.html"
           ],
@@ -13126,7 +13152,7 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "On the existing Utah Public Notice site, submit bounded government/body/date/ZIP searches and capture continuation/result cap plus one notice document/iCalendar response; notice 1120627 is only one detail.",
+        "One Utah body/date public search returned notice 1120627; government/ZIP search, result caps, live next-page behavior and linked document/iCalendar byte acceptance remain unverified.",
         "Admin Help documents notice draft/publish and attachments as UI steps; no external API or import schema is published. Obtain a supported integration contract and authorized test account.",
         "Notice publication has legal timing/visibility consequences; future writes require explicit authorization and planned readback."
       ],
@@ -13255,6 +13281,17 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "agendaquick-search-observed",
+          "url": "https://public.destinyhosted.com/agenda_publish.cfm?id=98622",
+          "title": "Yuma public agenda-item search",
+          "kind": "public_tenant",
+          "observed": "The public form and returned search response are represented by named agendaquick calendar/search/empty fixtures and focused adapter tests; no staff access or provider write acceptance is claimed. Result fixture tests/fixtures/agendaquick-search.html SHA256 0b3aea173ab22731787433f429cd85c2478f14d64296695a124b55750878a1e4.",
+          "limits": "Bounded public source observation and fixture/source checks; not provider-wide coverage, live write or vendor acceptance.",
+          "observation_date": "2026-11-12",
+          "access_scope": "public_research_only",
+          "proof_level": "public_source_and_fixture_not_live_engine_acceptance"
         }
       ],
       "tenants": [
@@ -13301,21 +13338,21 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "destiny-yuma"
+            "destiny-yuma",
+            "agendaquick-search-observed"
           ],
-          "details": "Tenant id plus mt/get_month/get_year monthly listings; follow dsp=ag&seq= links and document/media URLs.",
+          "details": "The configured Yuma public calendar maps supplied meeting identities and documents and follows bounded supplied period controls; full tenant archive and meeting-type coverage remain unverified.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
           ],
           "remaining_verification": [
-            "Previous/Next Period explicitly observed; month/year and meeting-type coverage must be bounded. Not all tenants return same public shell.",
-            "Build fixtures and verify complete bounded result traversal."
+            "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
           "tenant_scope": [
             "https://destinyhosted.com/frs/coonrapids.htm",
             "https://public.destinyhosted.com/agenda_publish.cfm?id=98622"
@@ -13381,19 +13418,20 @@
           ]
         },
         "native_search": {
-          "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "destiny-yuma",
-            "destiny-doc"
+            "destiny-doc",
+            "agendaquick-search-observed"
           ],
-          "details": "Official public Keyword Search over agendas/minutes; Yuma Search Agenda Items control observed. Endpoint/method not verified.",
+          "details": "The observed Yuma public agenda-item form posts bounded dates and first expression; returned candidates are checked locally against displayed metadata/excerpts. Parent meeting identity is not inferred. Continuation behavior is fixture-tested; provider phrase semantics, full text, result completeness and live next page remain unverified.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify request method/route, exact-term/phrase/date/body semantics, paging and incomplete/error outcomes."
+            "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
           "tenant_scope": [
             "https://destinyhosted.com/frs/coonrapids.htm",
             "https://public.destinyhosted.com/agenda_publish.cfm?id=98622"
@@ -13680,7 +13718,7 @@
       ],
       "remaining_research": [
         "On Yuma’s current AgendaQuick page, follow Previous/Next Period for one adjacent month and another meeting type; inspect agenda sequence 1737 and its supplied attachment/video URLs.",
-        "The public Keyword Search and Search Agenda Items controls have no captured successful query route/response. Verify method, matching and paging on this same tenant.",
+        "Yuma public agenda-item search and bounded fixtures are mapped; live next-page behavior, provider full-text semantics and full result coverage remain unverified.",
         "Official feature copy describes staff scheduling/minute votes/uploads but no machine schema. No authorized credentials or vendor file-import contract were supplied."
       ],
       "authentication": "Yuma list public; staff publishing/editing requires authorized installation account. Hosted and client-installed deployment supported; no API credentials supplied.",
@@ -17645,6 +17683,17 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "towncloud-published-observed",
+          "url": "https://woodfordvt.org/agendas",
+          "title": "Woodford published-agenda listing",
+          "kind": "public_tenant",
+          "observed": "Captured embedded published JSON contains 115 rows; exact extracted fixture SHA256 20c9cdc5fb12a59621b1bcab6c9a2adba7282529b649a57f6911725f03d2c238. Existing detail/table formats remain unchanged; no source-wide completeness or vendor write acceptance. Exact extracted fixture: tests/fixtures/towncloud-published-woodford.json; public source control: outputs/towncloud-towpath-followup-20261112/adjacent-controls.json in the plan workspace.",
+          "limits": "Bounded public source observation and fixture/source checks; not provider-wide coverage, live write or vendor acceptance.",
+          "observation_date": "2026-11-12",
+          "access_scope": "public_research_only",
+          "proof_level": "public_source_and_fixture_not_live_engine_acceptance"
         }
       ],
       "tenants": [
@@ -17684,22 +17733,22 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "towncloud-woodford",
-            "towncloud-detail"
+            "towncloud-detail",
+            "towncloud-published-observed"
           ],
-          "details": "Configured municipality agenda listing plus towncloud.io/go/{tenant}/agendas/{id} details; retain linked document identities and supplied publication dates.",
+          "details": "Explicit Woodford /agendas page contains a 200 embedded published_agendas.json response with 115 rows. The mapper preserves original fields and supplied agenda/document URLs; optional configured towncloud.io download origin remains explicit. No body/year pagination or full-history completeness is inferred.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
           ],
           "remaining_verification": [
-            "Homepage recent groups only; table JSON request method, pagination/search/date filtering and full history remain unverified.",
-            "Build fixtures and verify complete bounded result traversal."
+            "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
           "tenant_scope": [
             "https://woodfordvt.org/"
           ],
@@ -18055,8 +18104,8 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "On the existing Woodford public agenda and detail, inspect the actual list/table request source and one body/year control; the current detail shows items and document links only.",
-        "The exact list JSON query, next-page token, retained history and public search request remain unverified; record the actual request/response before claiming discovery completeness.",
+        "Woodford /agendas embeds the published agenda response; public body/year controls, next-page behavior and complete history remain unverified.",
+        "The observed published JSON is mapped; no native public search or complete archive scope is established.",
         "No external write route or vendor file-import schema is in reviewed evidence; obtain tenant-supported documentation and an authorized account before write work."
       ],
       "authentication": "Published agenda detail public. Editing/publication requires authorized TownCloud account; API access and tier unknown.",

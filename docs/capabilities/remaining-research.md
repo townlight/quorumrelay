@@ -332,11 +332,12 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Representative research observations
 
-- https://kentwa.iqm2.com/citizens/default.aspx: Kent IQM2 portal; Self/# placeholders not downloadable documents; no binary fetch.
+- https://kentwa.iqm2.com/citizens/default.aspx: Kent portal; Self/# placeholders were not downloadable documents in the original capture.
+- Kent public search returned 20 mixed result rows for Council and reported 11,387 results. The captured Council and explicit-empty fixtures exercise source mapping; supplied Next is fixture-tested only, and no full text or complete catalog is claimed.
 
 ### Remaining research
 
-- On the existing Kent iQM2 tenant, follow one list/calendar entry to Detail_Meeting and FileOpen routes; capture date/body filters and older-record navigation. Pre-2007 records are reported elsewhere, not in this portal.
+- The bounded Kent calendar and first native search result are observed; broader date/body and archive coverage, Detail_Meeting and FileOpen byte retrieval, and live supplied Next remain unverified. Pre-2007 records are reported elsewhere, not in this portal.
 - Current Granicus/iQM2 help pages describe authenticated locations/types/meeting and streaming-media workflows, not an iQM2 external API. Get deployment-specific customer documentation/account enablement.
 - No tenant API credentials, upload limits, write schema or write acceptance were supplied; do not reuse Legistar contracts.
 
@@ -446,7 +447,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
-- On the existing Utah Public Notice site, submit bounded government/body/date/ZIP searches and capture continuation/result cap plus one notice document/iCalendar response; notice 1120627 is only one detail.
+- One public body/date search returned notice 1120627 and its supplied PDF link with no next control. Government/ZIP filters, result caps, live next-page behavior and linked document/iCalendar byte acceptance remain unverified; the private CSRF token and cookie were not retained.
 - Admin Help documents notice draft/publish and attachments as UI steps; no external API or import schema is published. Obtain a supported integration contract and authorized test account.
 - Notice publication has legal timing/visibility consequences; future writes require explicit authorization and planned readback.
 
@@ -476,7 +477,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 ### Remaining research
 
 - On Yuma’s current AgendaQuick page, follow Previous/Next Period for one adjacent month and another meeting type; inspect agenda sequence 1737 and its supplied attachment/video URLs.
-- The public Keyword Search and Search Agenda Items controls have no captured successful query route/response. Verify method, matching and paging on this same tenant.
+- The bounded Yuma public agenda-item form and result are mapped by source/fixture tests. Live next-page behavior, provider phrase/full-text semantics and complete result coverage remain unverified.
 - Official feature copy describes staff scheduling/minute votes/uploads but no machine schema. No authorized credentials or vendor file-import contract were supplied.
 
 ### Pagination contract
@@ -645,15 +646,15 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
-- On the existing Woodford public agenda and detail, inspect the actual list/table request source and one body/year control; the current detail shows items and document links only.
-- The exact list JSON query, next-page token, retained history and public search request remain unverified; record the actual request/response before claiming discovery completeness.
+- Woodford /agendas embeds a published-agendas response containing 115 captured rows. Its source mapper preserves supplied IDs and links; public body/year controls and complete history remain unverified.
+- The observed published JSON is mapped; a next-page contract, retained-history completeness and native public search remain unverified.
 - No external write route or vendor file-import schema is in reviewed evidence; obtain tenant-supported documentation and an authorized account before write work.
 
 ### Pagination contract
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "Homepage recent groups only; table JSON request method, pagination/search/date filtering and full history remain unverified."
+  "details": "The Woodford /agendas embedded published JSON is mapped; body/year controls, pagination, native search and full history remain unverified."
 }
 
 ### Authorization restrictions
