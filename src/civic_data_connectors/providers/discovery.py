@@ -399,7 +399,7 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
     if input_format in {"legistar-events-json", "legistar-event-json", "wistia-api-media-json",
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
                         "civicweb-detail-html", "swagit-listing-html", "onbase-public-listing-html",
-                        "digital-towpath-listing-html", "towncloud-public-listing-json",
+                        "digital-towpath-listing-html", "towncloud-public-listing-json", "telvue-cloudcast-mrss-xml",
                         "agendaquick-public-listing-html", "agendaquick-item-search-html", "civicplus-search-json",
                         "utah-public-search-html", "iqm2-public-search-html",
                         "clerkbase-public-tree-html", "clerkbase-search-html"}:
@@ -689,7 +689,12 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
             "configured capture only; upstream catalog completeness is unverified"),
         "available_text": "metadata_and_supplied_text_only",
     }
-    if source.provider == "suiteone-media" and saved is None:
+    if input_format == "telvue-cloudcast-mrss-xml":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "configured published CloudCast player feed; optional recent limit; no archive completeness",
+            "publication_time_is_meeting_time": False,
+            "provider_pagination": "no vendor-documented continuation in MRSS contract"})
+    elif source.provider == "suiteone-media" and saved is None:
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "configured public root and its supplied Older Meetings groups; catalog extent unverified",
             "older_groups": len(public_controls or []),

@@ -186,6 +186,9 @@ def parse_native(source, namespace, content, input_format):
         from .agendaquick import listing_rows, search_rows
         mapper = listing_rows if input_format == "agendaquick-public-listing-html" else search_rows
         return make_bundle(source, namespace, content, input_format, mapper(source, content))
+    if input_format == "telvue-cloudcast-mrss-xml":
+        from .telvue_mrss import listing_rows
+        return make_bundle(source, namespace, content, input_format, listing_rows(source, content))
     if input_format == "towncloud-public-listing-json":
         from .towncloud_public import listing_rows
         return make_bundle(source, namespace, content, input_format, listing_rows(source, content))

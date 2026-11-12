@@ -16189,6 +16189,17 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "telvue-cloudcast-mrss-contract",
+          "url": "https://telvue.com/knowledgebase/cloudcast-mrss/",
+          "title": "CloudCast public MRSS published-player contract",
+          "kind": "official_documentation",
+          "observed": "2026-11-12",
+          "findings": "Explicit /mrss/{player_access_key} feed, optional recent count, descending creation time; media:group variants and cloudcast metadata. Exact official page and one bounded public sample are SHA-pinned by docs/capabilities/evidence/telvue-cloudcast/source.json. Additive parser and synthetic actual engine discovery/normalize checks in tests/test_telvue_mrss.py.",
+          "limits": "Published player content only; no general meeting-date/body inference, complete archive, playable stream, mutation, HyperCaster or native text-search claim.",
+          "observation_date": "2026-11-12",
+          "proof_level": "official_documentation"
         }
       ],
       "tenants": [
@@ -16236,12 +16247,13 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "telvue-training",
-            "telvue-rochester"
+            "telvue-rochester",
+            "telvue-cloudcast-mrss-contract"
           ],
-          "details": "Public player/playlist HTML baseline plus documented authenticated Connect v2 media/videos/playlists. Select tenant/app scope explicitly.",
+          "details": "Public player/playlist HTML baseline plus documented authenticated Connect v2 media/videos/playlists. Select tenant/app scope explicitly. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
@@ -16251,13 +16263,13 @@
             "Build fixtures and verify complete bounded result traversal."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "vendor_contract_and_synthetic_engine_checks_plus_bounded_public_sample",
           "tenant_scope": [
             "https://videoplayer.telvue.com/player/WDZPS7GoaEEQAF8v5_qEOE_Kj--KiACH/categories/574?showtabssearch=false",
             "https://videoplayer.telvue.com/player/dQtoDvlZYDOtqaf7eRn9z2lb1Nb6EZzu/playlists"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Synthetic provider data through real engine; live feed is optional supporting evidence.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -16271,9 +16283,10 @@
             "telvue-rochester",
             "telvue-media",
             "telvue-videos",
-            "telvue-playlists-api"
+            "telvue-playlists-api",
+            "telvue-cloudcast-mrss-contract"
           ],
-          "details": "Source implements explicit Connect v2 GET requests for media, videos and playlists, plus media/playlist detail routes, with exact documented CONNECT-ACCESS-KEY and CONNECT-SECRET-PASSPHRASE headers. The public examples define JSON envelopes and sample fields. Pagination/filter/rate limits remain undocumented; no account key or live read.",
+          "details": "Source implements explicit Connect v2 GET requests for media, videos and playlists, plus media/playlist detail routes, with exact documented CONNECT-ACCESS-KEY and CONNECT-SECRET-PASSPHRASE headers. The public examples define JSON envelopes and sample fields. Pagination/filter/rate limits remain undocumented; no account key or live read. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -16281,13 +16294,13 @@
             "Verify raw response MIME, redirects, document/media status and independent attachment failures."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "official_contract_and_fixture_tested_source_implementation_no_live_account_read",
+          "evidence_level": "vendor_contract_and_synthetic_engine_checks_plus_bounded_public_sample",
           "tenant_scope": [
             "https://videoplayer.telvue.com/player/WDZPS7GoaEEQAF8v5_qEOE_Kj--KiACH/categories/574?showtabssearch=false",
             "https://videoplayer.telvue.com/player/dQtoDvlZYDOtqaf7eRn9z2lb1Nb6EZzu/playlists"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Fixture-only source checks; no authorized Connect client key/secret.",
+          "test_access": "Synthetic provider data through real engine; live feed is optional supporting evidence.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance",
@@ -16300,22 +16313,23 @@
           "evidence_ids": [
             "media-baseline",
             "media-reader-source",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "telvue-cloudcast-mrss-contract"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified.",
           "dependencies": [
             "standalone extraction",
             "source revision pin"
           ],
           "remaining_verification": [],
           "acceptance_status": "not_run",
-          "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
+          "evidence_level": "vendor_contract_and_synthetic_engine_checks_plus_bounded_public_sample",
           "tenant_scope": [
             "https://videoplayer.telvue.com/player/WDZPS7GoaEEQAF8v5_qEOE_Kj--KiACH/categories/574?showtabssearch=false",
             "https://videoplayer.telvue.com/player/dQtoDvlZYDOtqaf7eRn9z2lb1Nb6EZzu/playlists"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Local source and saved-fixture contract coverage; no provider account access required.",
+          "test_access": "Synthetic provider data through real engine; live feed is optional supporting evidence.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -16647,7 +16661,7 @@
       "remaining_research": [
         "Documented Connect v2 reads are GET /api/v2/media[/{id}], /videos and /playlists[/{id}]. The source fetch adapter now implements explicitly requested account reads; live calls remain blocked because no Connect key/secret was supplied.",
         "Published pages show example JSON envelopes/fields but omit filters, pagination/cursor, caps and rate limits. Record these from a supplied authorized account response/current guide; do not claim catalog completeness.",
-        "The upload article documents UI drag-and-drop only. No REST mutation route was found in the cited v2 pages; other write paths remain unresolved, not unsupported. CloudCast MRSS CAPTCHA and HyperCaster are separate."
+        "Connect/CloudCast MRSS is implemented with explicit feed format and partial published-player coverage. Exact vendor page/sample pins and synthetic engine checks establish mapped fields, not full archives or playback. Connect v2 mutations still lack executable payload contracts in reviewed guides; HyperCaster APIs are a separate product and are not substituted."
       ],
       "authentication": "Public playlists anonymous; Connect API requires client application access key + secret passphrase in custom headers, not Basic auth. Upload roles Contributor/Coordinator/Admin and account feature settings matter.",
       "write_findings": "Strong official UI evidence for recording creation/upload and metadata updates. Public v2 pages inspected document GET only, so a write adapter still needs a supported submission contract and authorized access.",

@@ -1,0 +1,14 @@
+{
+  "source_url": "https://telvue.com/knowledgebase/cloudcast-mrss/",
+  "sha256": "b52ac5c19d15a05bb845cadc441fe51a61abd871a1afd5f9572743f083d61de0",
+  "byte_length": 966692,
+  "contract": "Published CloudCast player MRSS; recent optional positive count; descending creation time; media group variants and cloudcast extension; not Connect writes or HyperCaster",
+  "proof": "Vendor documentation plus synthetic engine fixtures; no catalog or playback completeness claim",
+  "public_sample": {
+    "url": "https://connect.telvue.com/mrss/dQtoDvlZYDOtqaf7eRn9z2lb1Nb6EZzu?recent=1",
+    "fixture": "tests/fixtures/telvue-cloudcast-mrss.response",
+    "sha256": "6f76cc0548e07148af8d4b101d8080522808b3431d40c293b15e8d9cf858f2b2",
+    "byte_length": 1842,
+    "proof": "One optional bounded public feed capture; not playback/download/write or full catalog verification"
+  }
+}

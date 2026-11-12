@@ -531,7 +531,8 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 - Documented Connect v2 reads are GET /api/v2/media[/{id}], /videos and /playlists[/{id}]. The source fetch adapter now implements explicitly requested account reads; live calls remain blocked because no Connect key/secret was supplied.
 - Published pages show example JSON envelopes/fields but omit filters, pagination/cursor, caps and rate limits. Record these from a supplied authorized account response/current guide; do not claim catalog completeness.
-- The upload article documents UI drag-and-drop only. No REST mutation route was found in the cited v2 pages; other write paths remain unresolved, not unsupported. CloudCast MRSS CAPTCHA and HyperCaster are separate.
+- CloudCast [official MRSS documentation](https://telvue.com/knowledgebase/cloudcast-mrss/) is now readable and mapped by explicit `telvue-cloudcast-mrss-xml`. Its published-player feed and optional `recent` count retain supplied stable media IDs, URLs, duration and language; creation/publication time is not a meeting date, and program/category is not inferred as meeting body. Exact vendor page and bounded existing-player sample are pinned under evidence/telvue-cloudcast; synthetic normalize/discover and account-boundary checks pass. No complete archive, media download/playback, transcript or native search claim follows from the feed.
+- Connect upload guidance remains UI-only in reviewed material; no executable mutation payload schema was obtained. Separate HyperCaster Add/Edit/Content Metadata REST guides were inspected as a research lead but are outside the existing Connect/CloudCast target and were not implemented or substituted.
 
 ### Pagination contract
 

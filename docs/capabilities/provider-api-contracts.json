@@ -9142,5 +9142,18 @@
       "generateText semantics differ between guide and SDK; no new generation option is inferred from this reconciliation."
     ],
     "verification": "tests/test_laserfiche_page_parts.py; synthetic actual coordinator, exact SDK bytes pinned independently. No live mutation or remote image-conversion guarantee."
+  },
+  "telvue_cloudcast_mrss": {
+    "source_manifest": "docs/capabilities/evidence/telvue-cloudcast/source.json",
+    "source_url": "https://telvue.com/knowledgebase/cloudcast-mrss/",
+    "product": "TelVue Connect/CloudCast published-player feed; not HyperCaster",
+    "method": "GET",
+    "url": "https://connect.telvue.com/mrss/{player_access_key}",
+    "parameters": {
+      "recent": "optional positive count; default published-player content, descending creation time"
+    },
+    "media": "media:group lists supplied HLS/RTMP/html5 variants; mapper accepts safe HTTPS supplied media only",
+    "metadata": "cloudcast extension: program/episode/summary/id; actual namespace and numeric identity independently retained in pinned sample",
+    "limits": "No paging continuation, meeting date/body semantics, binary playback, writes or organization-wide completeness is inferred."
   }
 }

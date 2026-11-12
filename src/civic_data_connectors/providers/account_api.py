@@ -1,6 +1,7 @@
 """Fixed documented account API origins with application-owned namespace binding."""
 
 import json
+import re
 from urllib.parse import urlsplit
 
 ORIGINS = {"municode-meetings": "https://meetingsgov.devmunicode.com",
@@ -8,6 +9,11 @@ ORIGINS = {"municode-meetings": "https://meetingsgov.devmunicode.com",
 
 
 def is_account_api(source):
+    if (source.provider == "telvue" and source.input_format == "telvue-cloudcast-mrss-xml"
+            and re.fullmatch(r"/mrss/[A-Za-z0-9_-]+", urlsplit(source.url).path)):
+        # The documented public player feed shares Connect's host, not its
+        # account credential/namespace contract. No /api route is exempted.
+        return False
     origin = ORIGINS.get(source.provider)
     return origin is not None and urlsplit(source.url).netloc == urlsplit(origin).netloc
 

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rss version="2.0" xmlns:cloudcast="http://cloudcast.telvue.com/mrss_cloudcast/" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+<title>City of Rochester, NH</title>
+<link>https://videoplayer.telvue.com/player/dQtoDvlZYDOtqaf7eRn9z2lb1Nb6EZzu</link>
+<description></description>
+<item>
+<title>CC20261110</title>
+<link>https://videoplayer.telvue.com/player/dQtoDvlZYDOtqaf7eRn9z2lb1Nb6EZzu/media/1068038</link>
+<pubDate>Thu, 12 Nov 2026 08:37:40 -0500</pubDate>
+<media:title>CC20261110</media:title>
+<media:category scheme="urn:flickr:tags">City Council</media:category>
+<media:description></media:description>
+<media:player url="https://videoplayer.telvue.com/player/dQtoDvlZYDOtqaf7eRn9z2lb1Nb6EZzu/media/1068038"></media:player>
+<media:thumbnail url="https://connect.telvue.com/dynamicthumb/W1siZiIsImU2NmJkMzEwLTg4MmYtMDEzMS0xNTAyLTUyNTQwMDQ3MTQ4ZS81MWM0MGQ0NS1jOTEyLTQyMDYtOGM2OS05YjkxMzM5MmQ5ZTgvZnJhbWVncmFiL2ZyYW1lZ3JhYi0xNzk0MzYwNTQ5LmpwZyJdLFsicCIsInRodW1iIiwiMTg4eDE4OCJdXQ?sha=079b31ec4d0371f0"></media:thumbnail>
+<media:framegrab url="https://connect.telvue.com/dynamicthumb/W1siZiIsImU2NmJkMzEwLTg4MmYtMDEzMS0xNTAyLTUyNTQwMDQ3MTQ4ZS81MWM0MGQ0NS1jOTEyLTQyMDYtOGM2OS05YjkxMzM5MmQ5ZTgvZnJhbWVncmFiL2ZyYW1lZ3JhYi0xNzk0MzYwNTQ5LmpwZyJdLFsicCIsInRodW1iIiwiNjQweDY0MCJdXQ?sha=1a23a1dac440e6a5"></media:framegrab>
+<media:group>
+<media:content duration="2803" lang="en" url="https://telvuevod-secure.akamaized.net/vodhls/vod_player/457/media/1068038/1794490660/master.m3u8"></media:content>
+</media:group>
+<cloudcast:id>1068038</cloudcast:id>
+<cloudcast:program>City Council</cloudcast:program>
+<cloudcast:episode>City Council - 11/10/26</cloudcast:episode>
+<cloudcast:summary>City Council</cloudcast:summary>
+<cloudcast:content-file-id></cloudcast:content-file-id>
+</item>
+</channel>
+</rss>
