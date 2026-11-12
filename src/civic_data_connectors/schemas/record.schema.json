@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:civic-data-connectors:schema:2.0.0:record",
+  "title": "Civic data connectors record 2.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "record_type": {
+          "type": "string"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "parent": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "derivation": {
+          "type": "string"
+        },
+        "stability": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "namespace",
+        "record_type",
+        "external_id"
+      ],
+      "additionalProperties": true
+    },
+    "normalized": {
+      "type": "object"
+    },
+    "source_url": {
+      "type": "string"
+    },
+    "citation_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "capture_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "normalized_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_revision": {
+      "type": "object"
+    },
+    "original": {},
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "text": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "citation_url": {
+            "type": "string"
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "timestamp": {},
+          "provenance": {},
+          "completeness": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "field",
+          "text",
+          "citation_url"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "identity",
+    "normalized",
+    "source_url",
+    "citation_urls",
+    "capture_sha256",
+    "captured_at",
+    "normalized_sha256",
+    "source_revision"
+  ],
+  "additionalProperties": true
+}

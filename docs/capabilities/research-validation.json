@@ -1,0 +1,27 @@
+{
+  "status": "PASSED",
+  "scope": "Research schema/references/identities/format validation, not engine/provider acceptance",
+  "providers": 31,
+  "baseline_formats": 34,
+  "operation_entries": 341,
+  "outbound_mapping_entries": 141,
+  "interface_types": {
+    "documented_automated_api": 25,
+    "unresolved": 28,
+    "gated_sdk_contract_unverified": 3,
+    "manual_ui_documented_machine_contract_unverified": 76,
+    "documented_file_import": 1,
+    "manual_ui_export_only_import_unverified": 1,
+    "manual_ui_or_feature_indexed_only": 3,
+    "other_product_applicability_unverified": 3,
+    "neutral_standard_not_provider_write": 1
+  },
+  "evidence_records": 186,
+  "distinct_evidence_urls": 145,
+  "exact_identity_lookups": 37,
+  "original_SOURCE_FORMATS_independently_checked": true,
+  "negative_checks_passed": 3,
+  "errors": [],
+  "live_provider_acceptance": "NOT_RUN, user authorized mocks only",
+  "engine_status_reconciliation": "Owned independently by engine implementation owners"
+}

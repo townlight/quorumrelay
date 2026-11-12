@@ -1,0 +1,81 @@
+{
+ "data": {
+  "name": "Building Code Board of Appeals Agenda and Packet 2026 02 11",
+  "id": 1066144,
+  "metadata": {
+   "templateName": "City Council Records",
+   "localizedName": null,
+   "modified": "2/6/2026 4:17:41 PM",
+   "created": "2/6/2026 3:10:48 PM",
+   "path": "\\BOARDS COMMISSIONS COMMITTEES RECORDS (20.000)\\BUILDING CODE BOARD OF APPEALS\\2026 Building Code Board of Appeals Agendas and Packets\\Building Code Board of Appeals Agenda and Packet 2026 02 11",
+   "tagIds": [],
+   "fInfo": [
+    {
+     "name": "Meeting Date",
+     "values": [
+      "2/11/2026"
+     ],
+     "isMvfg": false
+    },
+    {
+     "name": "Doc Type",
+     "values": [
+      "Boards Commissions Committees Records"
+     ],
+     "isMvfg": false
+    }
+   ],
+   "linkGroup": {
+    "name": null,
+    "entries": []
+   },
+   "documentRelationships": [],
+   "err": null
+  },
+  "iconClass": "EntryImage Document ",
+  "targetType": -2,
+  "pageCount": 31,
+  "pageInfos": [
+   null,
+   {
+    "pageNum": 1,
+    "imageHeight": 3300,
+    "imageWidth": 2550,
+    "xdpi": 300,
+    "ydpi": 300,
+    "rotation": 0,
+    "empty": false,
+    "pageId": 3716085
+   },
+   {
+    "pageNum": 2,
+    "imageHeight": 3300,
+    "imageWidth": 2550,
+    "xdpi": 300,
+    "ydpi": 300,
+    "rotation": 0,
+    "empty": false,
+    "pageId": 3716086
+   },
+   {
+    "pageNum": 3,
+    "imageHeight": 3300,
+    "imageWidth": 2550,
+    "xdpi": 300,
+    "ydpi": 300,
+    "rotation": 0,
+    "empty": false,
+    "pageId": 3716087
+   }
+  ],
+  "hasImagedPages": true,
+  "thumbnailPaths": null,
+  "parentId": 1062552,
+  "edocUrl": null,
+  "extension": null,
+  "mediaMimeType": null,
+  "mediaHandlerUrl": null,
+  "linkTo": 0
+ },
+ "__breach": "fY6J4lkju1O7QmcByKp"
+}

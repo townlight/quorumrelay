@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SwagitAdmin</title>
+  <link rel="stylesheet" media="all" href="/assets/application-aa4ff702d50a0a36e731206cfd144303a3c3318d59628c1700eab86d9efa8a2b.css" data-turbolinks-track="false" />
+  <script src="/assets/application-84b1c92415b2ab208d522e647cfca26328d1b8e25e43fd8db4c69271e3a18c2d.js" data-turbolinks-track="false"></script>
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="UbcqqNnfhXISwaakPw3QxeMAN3/zmsEkPeHStTZWE+U6UkTaIyYJUu2hCl4ZL3flzTSN/QJRUsEkKuik0UyDYA==" />
+  
+</head>
+<body>
+
+  <style>
+    body {
+      padding-top: 0px;
+    }
+  </style>
+
+<!--
+  <div class="container master-container">
+      <div class="row">
+        <div class="col-xs-12">
+-->
+    <!-- Custom styles for this template -->
+<link href="/nav/css/jumbotron-narrow.css" rel="stylesheet">
+
+
+<style>
+
+  .container-fluid {
+    max-width: 700px;
+  }
+
+/* Customize container */
+@media (min-width: 400px) {
+  .container {
+    max-width: 400px;
+  }
+}
+
+  .nav-pills-stacked-swagit {
+    border-style: solid;
+    border-color: #D8D8D8;
+    border-width: 0 1px 0 0;
+  }
+  body {
+    color: #646464;
+  }  
+  .videos a {
+  }
+  
+  .nav-pills-stacked-swagit > li > a {
+    /* padding: 12px 8px; */
+    padding: 5px 10px;
+    /*
+    margin: 0 8px;
+    line-height: 1.4;
+    */
+    color: #777;
+    border: 3px solid transparent;
+    border-width: 3px 0;
+    border-radius: 0;
+  }
+
+  .nav-pills-stacked-swagit > li > a:first-of-type {
+    margin-left: 0;
+  }
+  .nav-pills-stacked-swagit > li > a:hover,
+  .nav-pills-stacked-swagit > li > a:focus {
+    background-color: transparent;
+    border-top-color: transparent;
+  }
+  .nav-pills-stacked-swagit > li > a:hover {
+    color: #000;
+    border-bottom-color: transparent;
+  }
+  .nav-pills-stacked-swagit > li > a:active {
+    color: #dd4b39;
+  }
+  .nav-pills-stacked-swagit > li > a:focus {
+    color: #000;
+    outline: 0;
+  }
+  .nav-pills-stacked-swagit > li.active > a,
+  .nav-pills-stacked-swagit > li.active > a:hover,
+  .nav-pills-stacked-swagit > li.active > a:focus {
+    color: #dd4b39;
+    border: 3px solid transparent;
+    border-width: 0 3px 0 0;
+    border-right-color: #dd4b39;
+    /*
+    border: 3px solid transparent;
+    border-width: 0 3px;
+    border-right-color: #dd4b39;
+    */
+    /*
+    border: 3px solid transparent;
+    border-width: 3px 0;
+    border-bottom-color: #dd4b39;*/
+  }
+
+  .nav-tabs-swagit > li {
+    margin: 0 -1px 0 0;
+  }
+  .nav-tabs-swagit > li > a {
+    padding: 12px 8px;
+    margin: 0 8px;
+
+    padding: 12px 3px;
+    margin: 0 8px;
+
+    line-height: 1.4;
+    color: #777;
+    border: 3px solid transparent;
+    border-width: 3px 0;
+    border-radius: 0;
+  }
+  .nav-tabs-swagit > li > a:first-of-type {
+    margin-left: 0;
+  }
+  .nav-tabs-swagit > li > a:hover,
+  .nav-tabs-swagit > li > a:focus {
+    background-color: transparent;
+    border-top-color: transparent;
+  }
+  .nav-tabs-swagit > li > a:hover {
+    color: #000;
+    border-bottom-color: transparent;
+  }
+  .nav-tabs-swagit > li > a:active {
+    color: #dd4b39;
+  }
+  .nav-tabs-swagit > li > a:focus {
+    color: #000;
+    outline: 0;
+  }
+  .nav-tabs-swagit > li.active > a,
+  .nav-tabs-swagit > li.active > a:hover,
+  .nav-tabs-swagit > li.active > a:focus {
+    color: #dd4b39;
+    border: 3px solid transparent;
+    border-width: 3px 0;
+    border-bottom-color: #dd4b39;
+  }
+
+  #video-table > tbody > tr > td {
+    padding-top:4px;
+    padding-bottom:4px;
+  }
+
+  .pagination {
+    margin-bottom:5px;
+    margin-top:5px;
+  }
+
+  .panel {
+    margin-bottom:0;
+    margin-top:5px;
+  }
+</style>
+
+
+
+    <div class="container-fluid">
+      
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Upcoming Events</h3>
+  </div>
+<div class="panel-body" style="padding:5px">
+No upcoming events.
+</div>
+</div>
+<!--
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">Live</a></li>
+          <li><a href="http://nctcog.org/" target="_blank">Home</a></li>
+          <li><a href="http://nctcog.org/trans/corridor/blacklands.asp" target="_blank">Feasibility Study </a></li>
+        </ul>
+        <h3 class="text-muted">NCTCOG Live</h3>
+      </div>
+-->
+  <ul class="nav nav-tabs nav-tabs-swagit">
+    <li role="presentation"class=active><a href="/past-city-council-videos"/>Past City Council Videos</a></li>
+    <li role="presentation"><a href="/planning-commission"/>Planning Commission</a></li>
+    <li role="presentation"><a href="/other-videos"/>Other Videos</a></li>
+    <li role="presentation"><a href="/internal"/>Internal</a></li>
+    <li role="presentation"><a href="/recycle-bin"/>Recycle Bin</a></li>
+<!--
+    <li role="presentation"><a href="#">City Council</a></li>
+    <li role="presentation" class="active"><a href="#">Boards and Commissions</a></li>
+-->
+  </ul>
+<!--
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Library</a></li>
+  <li class="active">Data</li>
+</ol>
+-->
+
+<div class="row" style="padding-top:5px;">
+<div class="col-xs-4 col-sm-3" style="padding:0px;">
+<ul class="nav nav-pills-stacked-swagit">
+    <li role="presentation"><a href="/city-council">City Council</a></li>
+<!--
+  <li role="presentation"><a href="#">Work Session</a></li>
+  <li role="presentation" class="active"><a href="#">Regular Meeting</a></li>
+-->
+</ul>
+</div>
+<div class="col-xs-8 col-sm-9">
+
+
+<table class="table videos table-striped table-hover" id="video-table" style="margin-bottom:5px;">
+        <thead>
+          <tr>
+            <th>Video</th>
+            <th style="min-width:80px">Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+<a target="_blank" href="/videos/137531">Special City Council</a>
+<br/>Sep 26, 2014
+</td>
+            <td>46m 40s<br/>3 items</td>
+          </tr>
+          <tr>
+            <td>
+<a target="_blank" href="/videos/137530">City Council</a>
+<br/>Sep 24, 2014
+</td>
+            <td>03h 59m<br/>17 items</td>
+          </tr>
+          <tr>
+            <td>
+<a target="_blank" href="/videos/137529">City Council</a>
+<br/>Sep 10, 2014
+</td>
+            <td>02h 00m<br/>16 items</td>
+          </tr>
+          <tr>
+            <td>
+<a target="_blank" href="/videos/137528">City Council</a>
+<br/>Aug 27, 2014
+</td>
+            <td>05h 15m<br/>19 items</td>
+          </tr>
+          <tr>
+            <td>
+<a target="_blank" href="/videos/137527">City Council</a>
+<br/>Aug 18, 2014
+</td>
+            <td>17m 20s<br/>4 items</td>
+          </tr>
+          <tr>
+            <td>
+<a target="_blank" href="/videos/137526">City Council</a>
+<br/>Aug 13, 2014
+</td>
+            <td>03h 49m<br/>16 items</td>
+          </tr>
+          <tr>
+            <td>
+<a target="_blank" href="/videos/137525">Special City Council</a>
+<br/>Jul 30, 2014
+</td>
+            <td>04h 52m<br/>16 items</td>
+          </tr>
+          <tr>
+            <td>
+<a target="_blank" href="/videos/137524">City Council</a>
+<br/>Jul 23, 2014
+</td>
+            <td>03h 32m<br/>11 items</td>
+          </tr>
+          <tr>
+            <td>
+<a target="_blank" href="/videos/137523">City Council</a>
+<br/>Jun 25, 2014
+</td>
+            <td>04h 11m<br/>23 items</td>
+          </tr>
+          <tr>
+            <td>
+<a target="_blank" href="/videos/137522">Special City Council</a>
+<br/>Jun 17, 2014
+</td>
+            <td>02h 15m<br/>6 items</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+<div class="text-center">
+  <ul class="pagination pagination"><li class="prev disabled"><span>&#8592; Previous</span></li> <li class="active"><span>1</span></li> <li><a rel="next" href="/past-city-council-videos?page=2">2</a></li> <li><a href="/past-city-council-videos?page=3">3</a></li> <li><a href="/past-city-council-videos?page=4">4</a></li> <li class="next"><a rel="next" href="/past-city-council-videos?page=2">Next &#8594;</a></li></ul>
+</div>
+
+      <div class="footer">
+        <p>Bell, CA Video Archive / <a href="http://www.swagit.com">Powered by Swagit</a></p>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/nav/js/ie10-viewport-bug-workaround.js"></script>
+<!--
+<p id="notice"></p>
+
+<h1>Listing Videos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td>Special City Council</td>
+        <td></td>
+        <td><a href="/videos/137531">Show</a></td>
+      </tr>
+      <tr>
+        <td>City Council</td>
+        <td></td>
+        <td><a href="/videos/137530">Show</a></td>
+      </tr>
+      <tr>
+        <td>City Council</td>
+        <td></td>
+        <td><a href="/videos/137529">Show</a></td>
+      </tr>
+      <tr>
+        <td>City Council</td>
+        <td></td>
+        <td><a href="/videos/137528">Show</a></td>
+      </tr>
+      <tr>
+        <td>City Council</td>
+        <td></td>
+        <td><a href="/videos/137527">Show</a></td>
+      </tr>
+      <tr>
+        <td>City Council</td>
+        <td></td>
+        <td><a href="/videos/137526">Show</a></td>
+      </tr>
+      <tr>
+        <td>Special City Council</td>
+        <td></td>
+        <td><a href="/videos/137525">Show</a></td>
+      </tr>
+      <tr>
+        <td>City Council</td>
+        <td></td>
+        <td><a href="/videos/137524">Show</a></td>
+      </tr>
+      <tr>
+        <td>City Council</td>
+        <td></td>
+        <td><a href="/videos/137523">Show</a></td>
+      </tr>
+      <tr>
+        <td>Special City Council</td>
+        <td></td>
+        <td><a href="/videos/137522">Show</a></td>
+      </tr>
+  </tbody>
+</table>
+-->
+
+<!--
+        </div>
+    </div>
+  </div>
+-->
+</body>
+</html>

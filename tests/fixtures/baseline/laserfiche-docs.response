@@ -1,0 +1,380 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<html lang="en-US">
+	<head><title>
+	2022 - Laserfiche WebLink
+</title><meta http-equiv="Content-Style-Type" content="text/css"><meta http-equiv="Content-Script-Type" content="text/javascript"><meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema"><meta http-equiv="X-UA-Compatible" content="IE=edge"><link rel="SHORTCUT ICON" href="../../../favicon.ico" /><link href="/PublicWeblink/WebLinkStyles.css" type="text/css" rel="stylesheet" ><style>.LoginSquare { background-image: url(images/WatermarkLogin.gif); }.LeftPanel, .DocViewerMainTable .LeftPanelContentDiv, .DocViewerMainTable .LeftPanelContentDivMobile { background-image: url(images/WatermarkSideNav.gif); }.DocumentPageToolbar8, .DocumentPageToolbar, .DocumentPageToolbar8Mobile, .DocumentPageToolbarMobile { background-image: url(images/docTBbg.gif); }</style><link href="/PublicWeblink/WebLinkStyles.css" type="text/css" rel="stylesheet" ><style>.LoginSquare { background-image: url(images/WatermarkLogin.gif); }.LeftPanel, .DocViewerMainTable .LeftPanelContentDiv, .DocViewerMainTable .LeftPanelContentDivMobile { background-image: url(images/WatermarkSideNav.gif); }.DocumentPageToolbar8, .DocumentPageToolbar, .DocumentPageToolbar8Mobile, .DocumentPageToolbarMobile { background-image: url(images/docTBbg.gif); }</style><link rel="alternate" title="Folder feed" href="https://documents.redwoodcity.org/PublicWeblink/rss/dbid/0/folder/517168/feed.rss" type="application/rss+xml"></head>
+	<body dir='ltr' class="PageBackground ltr" onload="SetWebLinkControlScrolling();">
+		<form method="post" action="./Row1.aspx?dbid=0&amp;startid=517168&amp;row=1" id="Form1">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUIMjE3ODc4NzMPFgIeE1ZhbGlkYXRlUmVxdWVzdE1vZGUCARYCAgEPZBYYAgEPZBYGZg8WCh4FdGl0bGVkHgVjbGFzcwUfU2VhcmNoTG9jYXRpb25Ecm9wRG93bkNvbnRhaW5lch4IdGFiaW5kZXgFATAeBHJvbGUFBG1lbnUeC2FyaWEtaGlkZGVuBQVmYWxzZRYCZg8QD2QWCh8CBRpTZWFyY2hMb2NhdGlvbkRyb3BEb3duTGlzdB8DBQEwHwQFBWdyb3VwHwUFBHRydWUeDWFyaWEtcmVxdWlyZWQFBHRydWUPFgJmAgEWAgUOQ3VycmVudCBmb2xkZXIFC0FsbCBmb2xkZXJzFgBkAgEPD2QWAh4KYXJpYS1sYWJlbAUGU2VhcmNoZAIDDw8WBB4NQWx0ZXJuYXRlVGV4dAUGU2VhcmNoHghJbWFnZVVybAUgL1B1YmxpY1dlYmxpbmsvaW1hZ2VzL3NlYXJjaC5wbmcWBB8CBShidG4gYnRuLXByaW1hcnkgVG9wQmFyU2VhcmNoU3VibWl0QnV0dG9uHgdvbmNsaWNrBRRTaG93U2VhcmNoUnVubmluZygpO2QCAg8WBB4JaW5uZXJodG1sBQpNeSBXZWJMaW5rHgRocmVmBRVNeVdlYkxpbmsuYXNweD9kYmlkPTBkAgMPFgYfCwUESGVscB8MBWFodHRwOi8vd3d3Lmxhc2VyZmljaGUuY29tL3N1cHBvcnQvd2ViaGVscC93ZWJsaW5rLzkuMC9lbi1VUy9XTC9XZWJMaW5rX0NTSC5odG0/Rm9sZGVyX0Jyb3dzZXIuaHRtHgZ0YXJnZXQFBl9ibGFua2QCBA8WBh8MBRkvUHVibGljV2VibGluay9BYm91dC5hc3B4HwoFhQEoZnVuY3Rpb24oKSB7IHZhciBlbCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdBYm91dExpbmsnKTsgd2luZG93Lm9wZW4oZWwuaHJlZiwnV0xBYm91dCcsJ2hlaWdodD00MDgsd2lkdGg9NTAwJyk7fSkoKTtyZXR1cm4gZmFsc2U7HwsFBUFib3V0ZAIFDxYEHwsFCFNpZ24gT3V0HwwFH0xvZ2luLmFzcHg/c2hvd2xvZ2luPXllcyZkYmlkPTBkAgYPDxYCHgpTaG93U2VhcmNoZ2QWAmYPFgIeBXN0eWxlBRBmb250LXNpemU6IDEuMWVtZAIHDw8WCh4JTWF4TGVuZ3RoZh4HRW50cnlJRAKwyB8eClN0YXJ0SW5kZXgCAR4NVG90YWxDaGlsZHJlbgIFHhFDaGlsZHJlbkRpc3BsYXllZAIFZBYCZg9kFgJmD2QWCmYPDxYKHgVJbmRleAIBHglFbnRyeU5hbWUFC1JlZHdvb2RDaXR5HgZJc1Jvb3RnHxECAR4JQ2xpY2thYmxlZ2QWAgIBDxYIHwsFC1JlZHdvb2RDaXR5HwIFE0NsaWNrYWJsZUJyZWFkY3J1bWIfCgUMcmV0dXJuIHRydWU7HwMFATBkAgEPDxYIHxUCAh8WBQpDaXR5IENsZXJrHxECBh8YZ2QWAgIBDxYIHwsFCkNpdHkgQ2xlcmsfAgUTQ2xpY2thYmxlQnJlYWRjcnVtYh8KBQxyZXR1cm4gdHJ1ZTsfAwUBMGQCAg8PFggfFQIDHxYFB0FnZW5kYXMfEQIHHxhnZBYCAgEPFggfCwUHQWdlbmRhcx8CBRNDbGlja2FibGVCcmVhZGNydW1iHwoFDHJldHVybiB0cnVlOx8DBQEwZAIDDw8WCB8VAgQfFgUJMjAyMC0yMDI5HxECwf4XHxhnZBYCAgEPFggfCwUJMjAyMC0yMDI5HwIFE0NsaWNrYWJsZUJyZWFkY3J1bWIfCgUMcmV0dXJuIHRydWU7HwMFATBkAgQPDxYIHxUCBR8WBQQyMDIyHxECsMgfHxhoZBYCAgEPFggfCwUEMjAyMh8CBRZOb25DbGlja2FibGVCcmVhZGNydW1iHwoFDXJldHVybiBmYWxzZTsfAwUCLTFkAggPZBYCZg8WAh8CBRFGb2xkZXJNZXRhZGF0YURpdmQCCQ8PFhQeDlBhcmVudEZvbGRlcklEAsH+Fx4WU2hvd0xhdGVzdFZlcnNpb25zT25seWgeElVzZU5hdGl2ZVZpZXdlclBkZmceCEZvbGRlcklEArDIHx4TVXNlTmF0aXZlVmlld2VyRWRvY2cfEwIUHgdCYXNlVXJsBScvUHVibGljV2VibGluay8wL2ZvbC81MTcxNjgvUm93ezB9LmFzcHgfEAIZHxQCFB8SAgFkFgJmDxYEHw8FJWhlaWdodDoxMDAlO3dpZHRoOjEwMCU7b3ZlcmZsb3c6YXV0bzsfAgUZRG9jdW1lbnRCcm93c2VyRGlzcGxheURpdhYEZg9kFgJmD2QWBGYPZBYCZg8PFggeB0NvbHVtbnMWAwUBMgUCMTAFATQeKGZpZWxkVGhlRG9jdW1lbnRCcm93c2VyX19jdGw0MF9Tb3J0TGluazAFATIeKGZpZWxkVGhlRG9jdW1lbnRCcm93c2VyX19jdGw0MF9Tb3J0TGluazEFAjEwHihmaWVsZFRoZURvY3VtZW50QnJvd3Nlcl9fY3RsNDBfU29ydExpbmsyBQE0ZGQCAQ9kFihmDw8WFB4ETmFtZQUfIEFnZW5kYSAyMDIyLjExLjI4IEpvaW50IFNBIFBGQR8VAgEeC0NvbHVtbk5hbWVzFgIFClBhZ2UgY291bnQFDVRlbXBsYXRlIG5hbWUeCkVudHJ5RmxhZ3MoKVpTeXN0ZW0uVUludDMyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkCMTceDVRlbXBsYXRlQ29sb3JmHxEC6dkfHgpUZW1wbGF0ZUlEAgQeCUV4dGVuc2lvbgUDcGRmHgxDb2x1bW5WYWx1ZXMWAgUBNwUIQ0MgSW5kZXgeBkxpbmtUb2ZkZAIBDw8WFB8jBSBBZ2VuZGEgMjAyMi4wMS4xMCBDbG9zZWQgU2Vzc2lvbh8VAgIfJBYCBQpQYWdlIGNvdW50BQ1UZW1wbGF0ZSBuYW1lHyUoKwQCMTcfJmYfEQLnyh8fJwIEHygFA3BkZh8pFgIFATIFCENDIEluZGV4HypmZGQCAg8PFhQfIwUeQWdlbmRhIDIwMjIuMDEuMTAgSm9pbnQgU0EgUEZBHxUCAx8kFgIFClBhZ2UgY291bnQFDVRlbXBsYXRlIG5hbWUfJSgrBAIxNx8mZh8RAujKHx8nAgQfKAUDcGRmHykWAgUBNQUIQ0MgSW5kZXgfKmZkZAIDDw8WFB8jBSBBZ2VuZGEgMjAyMi4wMS4yNCBDbG9zZWQgU2Vzc2lvbh8VAgQfJBYCBQpQYWdlIGNvdW50BQ1UZW1wbGF0ZSBuYW1lHyUoKwQCMTcfJmYfEQLpyh8fJwIEHygFA3BkZh8pFgIFATIFCENDIEluZGV4HypmZGQCBA8PFhQfIwUeQWdlbmRhIDIwMjIuMDEu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b3c1MS5hc3B4ZAILDxYCHytoFgICAQ8WBh8LBQE0HwEFBlBhZ2UgNB8MBSYvUHVibGljV2VibGluay8wL2ZvbC81MTcxNjgvUm93NzYuYXNweGQCDA8WAh8raBYCAgEPFgYfCwUBNR8BBQZQYWdlIDUfDAUnL1B1YmxpY1dlYmxpbmsvMC9mb2wvNTE3MTY4L1JvdzEwMS5hc3B4ZAINDxYCHytoFgICAQ8WBh8LBQE2HwEFBlBhZ2UgNh8MBScvUHVibGljV2VibGluay8wL2ZvbC81MTcxNjgvUm93MTI2LmFzcHhkAg4PFgIfK2gWAgIBDxYCHwwFJi9QdWJsaWNXZWJsaW5rLzAvZm9sLzUxNzE2OC9Sb3cyNi5hc3B4ZAIPDxYCHytoFgICAQ8WAh8MBSUvUHVibGljV2VibGluay8wL2ZvbC81MTcxNjgvUm93MS5hc3B4ZAICDxYCHwsFCjIwIEVudHJpZXNkAgoPFgIfCwWkAURvY3VtZW50IG1hbmFnZW1lbnQgcG9ydGFsIHBvd2VyZWQgYnkgTGFzZXJmaWNoZSBXZWJMaW5rIDkgJmNvcHk7IDE5OTgtMjAxNSA8YSB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cDovL3d3dy5sYXNlcmZpY2hlLmNvbSc+TGFzZXJmaWNoZS48L2E+IEFsbCByaWdodHMgcmVzZXJ2ZWQuZAILDxYCHgRUZXh0ZWQCDA8WAh8sBYcFPHNjcmlwdD4oZnVuY3Rpb24oKXtmdW5jdGlvbiBhKCl7dmFyIGM9KGZ1bmN0aW9uKCl7dmFyIGQ9MCxmPTA7aWYodHlwZW9mKHdpbmRvdy5pbm5lcldpZHRoKT09Im51bWJlciIpe2Q9d2luZG93LmlubmVyV2lkdGg7Zj13aW5kb3cuaW5uZXJIZWlnaHR9ZWxzZXtpZihkb2N1bWVudC5kb2N1bWVudEVsZW1lbnQmJihkb2N1bWVudC5kb2N1bWVudEVsZW1lbnQuY2xpZW50V2lkdGh8fGRvY3VtZW50LmRvY3VtZW50RWxlbWVudC5jbGllbnRIZWlnaHQpKXtkPWRvY3VtZW50LmRvY3VtZW50RWxlbWVudC5jbGllbnRXaWR0aDtmPWRvY3VtZW50LmRvY3VtZW50RWxlbWVudC5jbGllbnRIZWlnaHR9ZWxzZXtpZihkb2N1bWVudC5ib2R5JiYoZG9jdW1lbnQuYm9keS5jbGllbnRXaWR0aHx8ZG9jdW1lbnQuYm9keS5jbGllbnRIZWlnaHQpKXtkPWRvY3VtZW50LmJvZHkuY2xpZW50V2lkdGg7Zj1kb2N1bWVudC5ib2R5LmNsaWVudEhlaWdodH19fXJldHVybnt3OmQsaDpmfX0pKCk7dmFyIGU9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoIkZvbGRlckJyZWFkY3J1bWJOYXZpZ2F0aW9uIik7dmFyIGI9Yy53LTI5MDtlLnBhcmVudE5vZGUucGFyZW50Tm9kZS5zdHlsZS53aWR0aD1iKyJweCJ9YSgpO3dpbmRvdy5vbnJlc2l6ZT1hfSkoKTs8L3NjcmlwdD5kGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYBBQxzZWFyY2hCdXR0b24uAH2kWZOsPiFsxeY2OBzNzThxNZCezrX5AUcGm5YuOg==" />
+
+
+<script src="/PublicWeblink/WebResource.axd?d=9S_RiA_TyGWAMnN_z4p_94lWEMSF0vy_OV7HCR9lk6RsMmPWmyD6Gj2EumOo2sBBV-tiYTdgLtsGovXH2_43qkhc9OdpZjehJaoi7eO1CW20qbbT4VEYJ9TH53TPAqS-XvqM6c11KgTZII-J_sNXuP9-p7jGoMXTLG3pCXG6nTQ1&amp;t=635730834400000000" type="text/javascript"></script>
+<script type="text/javascript">
+<!--
+
+                var ShowSearchRunning = function()
+			    {
+                    try{
+				        var LoadingBox = document.createElement('div');
+				        LoadingBox.className = 'SearchLoadingBox';
+				        LoadingBox.style.left = (document.body.clientWidth / 2 - 80) + 'px';
+				        var SpinnerIcon = document.createElement('div');
+				        SpinnerIcon.className = 'SpinnerIconSmall Spin';
+                        SpinnerIcon.style.marginRight = '5px';
+				        LoadingBox.appendChild(SpinnerIcon);
+				        var MessageDiv = document.createElement('div');
+                        MessageDiv.style.display = 'inline-block';
+				        MessageDiv.appendChild(document.createTextNode("Searching..."));
+			            LoadingBox.appendChild(MessageDiv);
+
+				        document.body.insertBefore(LoadingBox, document.body.firstChild);
+                    } catch(x){}
+			    }
+                // -->
+</script>
+
+<script src="/PublicWeblink/WebResource.axd?d=4wVAp6SKWU6S-tczHUa04QFzalSgdMDOTFCyYbZ4uKVKns-P9rZH59tbItLcwih8NMpO0uVPlLzAafMy5_G3eOmxSo9QMyDBBoOiZS6UaCbFPRIROzlbjKSepODbA7P4Pul6TYXMeZeuKukNmRCfvX4v79Q73uqGYJf75XUonE0OF1x0BS1hUbMXp9um9ap70&amp;t=635730834400000000" type="text/javascript"></script>
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="E19ACAEB" />
+<input type="hidden" name="__PREVIOUSPAGE" id="__PREVIOUSPAGE" value="-ewSm3pT12MJE5zbP0k7w4LK7sD_Gf4icsnxRYJKZrbg7yrh4PO8ee-dvZNab4U1lqLll8bnafAD3l0h7ALUiGEWn8Pe-TEtwLjv3f0j9aCl2UmHe1c0Zd4Uv_WZ0xyi0" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdADIBDUV7Lr14VDAY0gSLAA3XTynFwTAUM81zwuCLpwHfiTI1zpowCife8WaLnioY2F/ykKbniZKwI1Jywaj28qk688Aoy/xMu9q4K64TQq1mN1BSxsDBaew8rKFdCWh2oV3aycDqb5qgW/6Wak4Z6bmJvlSaVp5w3dp/k9ZTrNRVpE0I6sd0xfr3cmZi5tLRB5NFjQ1x/n/caGM8YFLzECIPHJ2hy8efhEUy4tYCWjW1eCZs+EOEok71Qpok61D6mBiLBF0zXnd9Xv0GTqdr9s+Fd6uUFmfLXSNHxAIOR4y3b5HGzcVEfNzLqEO800qNxSuCAPikbabBe513NtQiNAYYB/2/MCbzDbQ1fJFV9T3PQsO7lzaHNNMdk+6++gQzLxfSBXD3YmbCbFsaVIHl3WKm/cqshu+CHLHRWRHIECVXcbOk8xySjMYgyjr4hWvJj8Wr5WjG/A7FeB2tWyR/m7wRqkuGylFHl0xRhpRB5mtZ38c08pSyLaBU3Fe+99Z3A69QwgHbix8+QD5k6hXgJ/bNbukCg7A5S6CvdRd6n9D400+CDbv2+DLsi56X9Lf/3UIEerAtN8zopLuJGeQLe0Gi5ToeAz5MFxHATPLUYMOpzdbWJi6BrmYL2M62qeAGVBq7hDScyGomRdL7PUNoa8x58AdB9MCzNqnHYRvwWyacGA8Ze0pWPzbTcXyECgjOVUAjWOir+2+P2oLy54V+Xj/3/taEd+7gs9j84ptdOK6abQ7TUXeUZ7OxT1zCMLxP2uyqpmdQYgdqIqX1cDA9GahzVL/aAmCwDsS9qt8x56lD3SEsRmR9rYilgSz4zranA2zoXwqAAXfSVn9WUGWmot75fCXL6V1/b1NJL3FNMtCVIH9H+ezp+5rm5/jUKSEkle8VkpFWKNgKKC1c+fgPS2aExIHbRUOcDroqd5FuOuqw3cjkpn7LXV0PRC+hct6nCKyzh/nMlerPQzszFsWbg6zmiRYPQx+K83S2BDbgWcgPplMgbEs4j5whHA7zdU8bOaY3JGtXqOuMq5QRHZSoEMfq+HCh+f/H5Ru9SXWzY4wWn53mbKJmf2p0VYxr6fOy78a7/CbrpdjwJzHOy/m/A09E" />
+			
+            <!-- Logo image -->
+            <div class="TopBar">
+                <a href="/PublicWeblink/Welcome.aspx" title="Home"><img style="Z-INDEX: 102;" alt="Laserfiche WebLink" title="Home" src="/PublicWeblink/images/LfWLlogo.gif" /></a>
+            </div>
+            <!-- Search bar at top of page, positioned relative to the top of the page -->
+            <div class="SearchBar">
+                <div id="_ctl7" class="SearchLocationDropDownContainer" tabindex="0" role="menu" aria-hidden="false"><ul id="SearchLocationDropDown" class="SearchLocationDropDownList" tabindex="0" role="group" aria-hidden="true" aria-required="true">
+	<li title="Current folder" role="menuitemradio" aria-checked="false" ID="opt0"><a href="javascript:__doPostBack(&#39;SearchLocationDropDown&#39;,&#39;0&#39;)">Current folder</a></li><li title="All folders" role="menuitemradio" aria-checked="false" ID="opt1"><a href="javascript:__doPostBack(&#39;SearchLocationDropDown&#39;,&#39;1&#39;)">All folders</a></li>
+</ul></div><input name="searchBox" type="text" id="searchBox" aria-label="Search" /><input type="hidden" name="searchLoc" id="searchLoc" /><input type="image" name="searchButton" id="searchButton" class="btn btn-primary TopBarSearchSubmitButton" src="/PublicWeblink/images/search.png" alt="Search" onclick="ShowSearchRunning();WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;searchButton&quot;, &quot;&quot;, false, &quot;&quot;, &quot;../../../Search.aspx&quot;, false, false))" language="javascript" /><input name="searchFolderID" type="hidden" id="searchFolderID" value="517168" /><script>
+            function Browse_SubmitOnEnter(event)
+            {
+                var e = event || window.event;
+                var code = e.charCode || e.keyCode;
+                if (code == 13 || code == 10)
+                {
+                    var searchBttn = $get('searchButton');
+                    if(searchBttn) { searchBttn.focus(); searchBttn.click(); }
+                    if(e.preventDefault) { e.preventDefault(); }
+                    if(e.stopPropagation) { e.stopPropagation(); }
+                    if(e.returnValue) { e.returnValue = false; }
+                    return false;
+                }
+            }
+            $get('searchBox').onkeydown = Browse_SubmitOnEnter;
+            $get('searchBox').onkeypress = Browse_SubmitOnEnter;
+
+            $(document).ready(function () {
+
+                /////////////////////////////////////////////////////////
+                // show dropdown when dropdown arrow is selected
+                /////////////////////////////////////////////////////////
+
+                function ShowDropDownOnEnterOrSpace(event)
+                {
+                    var e = event || window.event;
+                    var code = e.charCode || e.keyCode;
+                    if (code == 13 || code == 10 || code == 32)
+                    {
+                        return ShowDropDown(event);
+                    }
+                }
+                function ShowDropDown(event)
+                {
+                    $('#_ctl7').toggleClass('active');
+                    $('#SearchLocationDropDown').attr('aria-hidden', 'false');
+                    return false;
+                }
+
+                // attach handlers to dropdown arrow
+                $get('_ctl7').onclick = ShowDropDown;
+                $get('_ctl7').onkeydown = ShowDropDownOnEnterOrSpace;
+                $get('_ctl7').onkeypress = ShowDropDownOnEnterOrSpace;
+
+                /////////////////////////////////////////////////////////
+                // set search location when dropdown item is selected
+                /////////////////////////////////////////////////////////
+
+                function SetSearchLocationOnEnterOrSpace(event)
+                {
+                    var e = event || window.event;
+                    var code = e.charCode || e.keyCode;
+                    /* console.log(code); */
+                    if (code == 13 || code == 10 || code == 32)
+                    {
+                        return SetSearchLocation($(this));
+                    }
+                }
+                function SetSearchLocationOnClick(event)
+                {
+                    return SetSearchLocation($(this));
+                }
+                function SetSearchLocation(element)
+                {
+                    // get rid of selected class on old selection
+                    var selIndex = $get('searchLoc').value;
+                    if (selIndex)
+                    {
+                        var sel = window.opts.item(parseInt(selIndex));
+                        $(sel).attr('aria-checked', 'false');
+                    }
+                    // store this as the selected item and add selected class to it
+                    $get('searchLoc').value = element.index();
+                    selIndex = $get('searchLoc').value;
+                    var sel = window.opts.item(parseInt(selIndex));
+                    $(sel).attr('aria-checked', 'true');
+                    $('#SearchLocationDropDown').attr('aria-activedescendant', $(sel).attr('id'));
+                }
+
+                // attach handlers to all of the dropdown items
+                window.opts = $get('_ctl7').getElementsByTagName('li');
+                for (i = 0; i < window.opts.length; i++)
+                {
+                    window.opts.item(i).onclick = SetSearchLocationOnClick;
+                    window.opts.item(i).onkeydown = SetSearchLocationOnEnterOrSpace;
+                    window.opts.item(i).onpress = SetSearchLocationOnEnterOrSpace;
+                }
+                // by default, select 'current folder'
+                $get('searchLoc').value = 0;
+                var selIndex = $get('searchLoc').value;
+                var sel = window.opts.item(parseInt(selIndex));
+                $(sel).attr('aria-checked', 'true');
+                $('#SearchLocationDropDown').attr('aria-activedescendant', $(sel).attr('id'));
+            });
+
+            </script>
+            </div>
+            <!-- Navigation on top right, positioned relative to the top of the page -->
+            <div class="TopRightLinks" style="position: absolute; top: 12px;">
+                <a href="../../../MyWebLink.aspx?dbid=0" id="PrefsLink" class="TopLink" rel="nofollow">My WebLink</a>
+                <span class="LinkSpacer">|</span><a href="http://www.laserfiche.com/support/webhelp/weblink/9.0/en-US/WL/WebLink_CSH.htm?Folder_Browser.htm" id="HelpLink" class="TopLink" target="_blank">Help</a>
+                <span class="LinkSpacer">|</span><a href="/PublicWeblink/About.aspx" id="AboutLink" class="TopLink" onclick="(function() { var el = document.getElementById(&#39;AboutLink&#39;); window.open(el.href,&#39;WLAbout&#39;,&#39;height=408,width=500&#39;);})();return false;" target="_blank">About</a>
+                <span class="LinkSpacer">|</span><a href="../../../Login.aspx?showlogin=yes&dbid=0" id="LogoffLink" class="TopLink" rel="nofollow">Sign Out</a>
+            </div>
+            <!-- Everything under the top bar -->
+			<div id="MainPageTable" class="table-container MainPageTable" style="margin-right: 22px">
+                <div class="table-row">
+                    <div class="table-cell">
+                        <!-- Navigation Tabs -->
+                        <div id="NavBreadDiv" class="NavBreadDiv NavBrowse" style="position:relative">
+			                <span id="NavigationControl"><div id="NavigationControl_DisplayDiv" class="NavigationControl" style="font-size: 1.1em"><span class="NavLink">Browse</span><a href="/PublicWeblink/Search.aspx" class="NavLink">Search</a></div></span>
+                        </div>
+                    </div>
+                    <div class="table-cell">
+                        <!-- Bread Crumb Navigation -->
+                        <div class="Breadcrumb">
+						    <span id="FolderBreadcrumbNavigation" class="BreadcrumbNavigation" style="unicode-bidi:override;"><div id="FolderBreadcrumbNavigation_DisplayDiv"><div><a class="ClickableBreadcrumb" onclick="return true;" tabindex="0" href="javascript:__doPostBack(&#39;FolderBreadcrumbNavigation$_ctl1$_ctl0&#39;,&#39;&#39;)">RedwoodCity</a><span class="directionMarker"></span> > <a class="ClickableBreadcrumb" onclick="return true;" tabindex="0" href="javascript:__doPostBack(&#39;FolderBreadcrumbNavigation$_ctl2$_ctl0&#39;,&#39;&#39;)">City Clerk</a><span class="directionMarker"></span> > <a class="ClickableBreadcrumb" onclick="return true;" tabindex="0" href="javascript:__doPostBack(&#39;FolderBreadcrumbNavigation$_ctl3$_ctl0&#39;,&#39;&#39;)">Agendas</a><span class="directionMarker"></span> > <a class="ClickableBreadcrumb" onclick="return true;" tabindex="0" href="javascript:__doPostBack(&#39;FolderBreadcrumbNavigation$_ctl4$_ctl0&#39;,&#39;&#39;)">2020-2029</a><span class="directionMarker"></span> > <a class="NonClickableBreadcrumb" onclick="return false;" tabindex="-1" href="javascript:__doPostBack(&#39;FolderBreadcrumbNavigation$_ctl5$_ctl0&#39;,&#39;&#39;)">2022</a><span class="directionMarker"></span></div></div></span>
+						</div>
+                    </div>
+                </div>
+				<!-- Left and right panels -->
+				<div class="table-row">
+					<!-- Folder tree panel -->
+					<div class="table-cell LeftPanel">
+                        <div id="TheLeftPanel">
+						    <div style="width: 240px; overflow-x: auto;">
+						        <span id="TheFolderMetadata"><div id="TheFolderMetadata_DisplayDiv" class="FolderMetadataDiv"><div class="FolderNameHeader" role="complementary" tabindex="0" aria-label="2022 Folder" title="2022">2022</div><div class="FolderOuterSection"><div class="FolderSectionHeader"><a id="__PropertiesExpando" class="FolderExpandoClass" href="javascript:void(0);" aria-haspopup="true" aria-expanded="true" onclick="ToggleSectionVis('__PropertiesDataSection','__PropertiesExpando');"><img src="images/new_sprite/upArrowCollapse.png" class="FolderSectionExpando" alt="Collapse" /><span class="FolderSectionTitleText">Entry Properties</span></a></div><div id="__PropertiesDataSection" class="FolderSectionBody"><div class="DataSection" role="complementary" tabindex="0"><div class="FolderDataHeader" title="Path">Path</div><div class="FolderDataValue" title="RedwoodCity\City Clerk\Agendas\2020-2029\2022">RedwoodCity\City Clerk\Agendas\2020-2029\2022</div><div class="FolderDataHeader" title="Creation date">Creation date</div><div class="FolderDataValue" title="1/24/2022 2:53:11 PM">1/24/2022 2:53:11 PM</div><div class="FolderDataHeader" title="Last modified">Last modified</div><div class="FolderDataValue" title="1/12/2023 11:55:20 AM">1/12/2023 11:55:20 AM</div></div></div></div><div class="FolderOuterSection"><div class="FolderSectionHeader"><a id="__MetadataExpando" class="FolderExpandoClass" href="javascript:void(0);" aria-haspopup="true" aria-expanded="true" onclick="ToggleSectionVis('__MetadataDataSection','__MetadataExpando');"><img src="images/new_sprite/upArrowCollapse.png" class="FolderSectionExpando" alt="Collapse" /><span class="FolderSectionTitleText">Metadata</span></a></div><div id="__MetadataDataSection" class="FolderSectionBody"><div class="FolderEmptyMessage" role="complementary" tabindex="0">No metadata assigned</div></div></div><script>
+      function ToggleSectionVis(id , srcId) {
+      try {
+        var el = document.getElementById(id);
+        var imgEl = document.getElementById(srcId).childNodes[0];
+        if(el) { el.style.display = (el.style.display == 'none') ? '' : 'none'; }
+          if(imgEl) {
+            imgEl.parentNode.title = (imgEl.src.toLowerCase().indexOf('uparrowcollapse.png') == -1) ? 'Hide' :  'Show';
+            if (imgEl.src.toLowerCase().indexOf('uparrowcollapse.png') == -1) {
+            imgEl.src = 'images/new_sprite/upArrowCollapse.png';
+            imgEl.alt = 'Collapse';
+            $(imgEl.parentNode).attr('aria-expanded', "true");
+          }
+          else {
+            imgEl.src = 'images/downArrowExpand.png';
+            imgEl.alt = 'Expand';
+            $(imgEl.parentNode).attr('aria-expanded', "false");
+          }
+        }
+      } catch(e) { }
+      return false;
+      }
+      
+      function SetTooltip(id, srcId, val) {
+      try {
+      var el = document.getElementById(id);
+      var imgEl = document.getElementById(srcId).childNodes[0];
+      if(imgEl) {
+      imgEl.parentNode.title = val;
+      }
+      } catch(e) { }
+      }
+      SetTooltip('__MetadataDataSection','__MetadataExpando','Hide');
+      SetTooltip('__PropertiesDataSection','__PropertiesExpando','Hide');
+    </script></div></span>
+						    </div>
+                        </div>
+					</div>
+					<!-- Document browser panel -->
+					<div class="table-cell RightPanel" id="TheRightPanel" >
+                        <div style="display: table; table-layout: fixed; width: 100%;">
+                            <span id="TheDocumentBrowser" style="display:inline-block;"><div id="TheDocumentBrowser_DisplayDiv" style="height:100%;width:100%;overflow:auto;" class="DocumentBrowserDisplayDiv"><div class="BrowserBody"><table cellpadding="0" cellspacing="0" class="DocumentBrowserDisplayTable" onkeydown="(function(table, e) { var keyCode = e.keyCode || e.charCode;switch(keyCode) {case 38:case 40:var currentRow;var anchors = $(table).find(&#39;tr > td > a:focus&#39;);if (anchors.length) currentRow = $(anchors[0]).parent().parent();else {var cells = $(table).find(&#39;tr > td:focus&#39;);if (cells.length) currentRow = $(cells[0]).parent();else return;}var rows = $(table).find(&#39;tr&#39;);var idx = rows.index(currentRow) + (keyCode == 38? -1 : 1);if (idx &lt; 0) return;var toFocus = $(table).find(&#39;tr:eq(&#39; + idx + &#39;) > td > a:visible&#39;);if (toFocus.length) $(toFocus[0]).focus();break;default:break;} })(this, event);"><thead><tr>
+	<td class="EntrySorterCell EntrySorterNameCell EntrySorterAscendingColumn" colspan="1"><a id="TheDocumentBrowser__ctl40_SortLink0" href="javascript:__doPostBack(&#39;TheDocumentBrowser$_ctl40$SortLink0&#39;,&#39;&#39;)">Name</a></td>
+	<td class="EntrySorterCell"><a id="TheDocumentBrowser__ctl40_SortLink1" href="javascript:__doPostBack(&#39;TheDocumentBrowser$_ctl40$SortLink1&#39;,&#39;&#39;)">Page count</a></td>
+	<td class="EntrySorterCell"><a id="TheDocumentBrowser__ctl40_SortLink2" href="javascript:__doPostBack(&#39;TheDocumentBrowser$_ctl40$SortLink2&#39;,&#39;&#39;)">Template name</a></td>
+</tr>
+</thead><tbody><tr ondblclick="window.open(&#39;../../edoc/519401/%20Agenda%202022.11.28%20Joint%20SA%20PFA.pdf&#39;)">
+	<td class="DocumentBrowserCell"><a href="../../edoc/519401/%20Agenda%202022.11.28%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label=" Agenda 2022.11.28 Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span> Agenda 2022.11.28 Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl41$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 7"><nobr>7</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517479/Agenda%202022.01.10%20Closed%20Session.pdf&#39;)" class=" DocumentBrowserAlternateRow">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517479/Agenda%202022.01.10%20Closed%20Session.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.01.10 Closed Session pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.01.10 Closed Session</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl42$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 2"><nobr>2</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517480/Agenda%202022.01.10%20Joint%20SA%20PFA.pdf&#39;)">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517480/Agenda%202022.01.10%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.01.10 Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.01.10 Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl43$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 5"><nobr>5</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517481/Agenda%202022.01.24%20Closed%20Session.pdf&#39;)" class=" DocumentBrowserAlternateRow">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517481/Agenda%202022.01.24%20Closed%20Session.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.01.24 Closed Session pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.01.24 Closed Session</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl44$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 2"><nobr>2</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517482/Agenda%202022.01.24%20Joint%20SA%20PFA.pdf&#39;)">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517482/Agenda%202022.01.24%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.01.24 Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.01.24 Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl45$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 5"><nobr>5</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517483/Agenda%202022.02.05%20Special%20Meeting.pdf&#39;)" class=" DocumentBrowserAlternateRow">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517483/Agenda%202022.02.05%20Special%20Meeting.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.02.05 Special Meeting pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.02.05 Special Meeting</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl46$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 2"><nobr>2</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517484/Agenda%202022.02.14%20Joint%20SA%20PFA.pdf&#39;)">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517484/Agenda%202022.02.14%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.02.14 Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.02.14 Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl47$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 7"><nobr>7</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517485/Agenda%202022.02.28%20Joint%20SA%20PFA.pdf&#39;)" class=" DocumentBrowserAlternateRow">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517485/Agenda%202022.02.28%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.02.28 Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.02.28 Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl48$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 6"><nobr>6</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517486/Agenda%202022.03.07%20Joint%20SA%20PFA.pdf&#39;)">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517486/Agenda%202022.03.07%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.03.07 Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.03.07 Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl49$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 4"><nobr>4</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517487/Agenda%202022.03.14%20Special%20Meeting%20(State%20of%20the%20City).pdf&#39;)" class=" DocumentBrowserAlternateRow">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517487/Agenda%202022.03.14%20Special%20Meeting%20(State%20of%20the%20City).pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.03.14 Special Meeting (State of the City) pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.03.14 Special Meeting ‎(State of the City)‎</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl50$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 2"><nobr>2</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517673/Agenda%202022.04.11.%20Joint%20SA%20PFA.pdf&#39;)">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517673/Agenda%202022.04.11.%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.04.11. Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.04.11. Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl51$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 5"><nobr>5</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517663/Agenda%202022.04.25.%20Joint%20SA%20PFA.pdf&#39;)" class=" DocumentBrowserAlternateRow">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517663/Agenda%202022.04.25.%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.04.25. Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.04.25. Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl52$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 7"><nobr>7</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517672/Agenda%202022.05.09.%20Joint%20SA%20PFA.pdf&#39;)">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517672/Agenda%202022.05.09.%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.05.09. Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.05.09. Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl53$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 7"><nobr>7</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517707/Agenda%202022.05.23.%20Joint%20SA%20PFA.pdf&#39;)" class=" DocumentBrowserAlternateRow">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517707/Agenda%202022.05.23.%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.05.23. Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.05.23. Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl54$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 6"><nobr>6</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517780/Agenda%202022.06.13%20Joint%20SA%20PFA.pdf&#39;)">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517780/Agenda%202022.06.13%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.06.13 Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.06.13 Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl55$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 8"><nobr>8</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/517781/Agenda%202022.06.15%20(BCC%20Interviews).pdf&#39;)" class=" DocumentBrowserAlternateRow">
+	<td class="DocumentBrowserCell"><a href="../../edoc/517781/Agenda%202022.06.15%20(BCC%20Interviews).pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.06.15 (BCC Interviews) pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.06.15 ‎(BCC Interviews)‎</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl56$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 3"><nobr>3</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/519148/Agenda%202022.11.14%20Closed%20Session.pdf&#39;)">
+	<td class="DocumentBrowserCell"><a href="../../edoc/519148/Agenda%202022.11.14%20Closed%20Session.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.11.14 Closed Session pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.11.14 Closed Session</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl57$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 2"><nobr>2</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/519147/Agenda%202022.11.14%20Joint%20SA%20PFA.pdf&#39;)" class=" DocumentBrowserAlternateRow">
+	<td class="DocumentBrowserCell"><a href="../../edoc/519147/Agenda%202022.11.14%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.11.14 Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.11.14 Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl58$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 9"><nobr>9</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/519403/Agenda%202022.12.12%20Joint%20SA%20PFA.pdf&#39;)">
+	<td class="DocumentBrowserCell"><a href="../../edoc/519403/Agenda%202022.12.12%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.12.12 Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.12.12 Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl59$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 5"><nobr>5</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+<tr ondblclick="window.open(&#39;../../edoc/519402/Agenda%202022.12.5%20Joint%20SA%20PFA.pdf&#39;)">
+	<td class="DocumentBrowserCell"><a href="../../edoc/519402/Agenda%202022.12.5%20Joint%20SA%20PFA.pdf" class="DocumentBrowserNameLink" target="_blank" aria-label="Agenda 2022.12.5 Joint SA PFA pdf"><nobr><img src="../../../images/spacer.gif" class="DocumentBrowserNameImage ElectronicFileIcon EdocPDF" /><span>Agenda 2022.12.5 Joint SA PFA</span><span class="EntryRowIconText">[Icon]</span></nobr></a><button onclick="__doPostBack('TheDocumentBrowser$_ctl60$_ctl3','')" style="display:none;"></button><span class="DocumentBrowserError"></span></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Page count 4"><nobr>4</nobr></td>
+	<td class="DocumentBrowserCell" tabindex="0" aria-label="Template name CC Index"><nobr>CC Index</nobr></td>
+</tr>
+</tbody></table></div><div class="BrowserFooter"><span></span><span class="PagerStripContainer"><div class="PageXofY">Page 1 of 1</div><span>&lrm;</span></span><span class="PageableListTotal">20 Entries</span><span class="PageableListTotal"></span></div></div><input name="TheDocumentBrowser:XScrollPosition" type="hidden" id="TheDocumentBrowser_XScrollPosition" value="0" /><input name="TheDocumentBrowser:YScrollPosition" type="hidden" id="TheDocumentBrowser_YScrollPosition" value="0" /><script language="javascript">
+var WLScrollFuncs;
+var SetWebLinkControlScrolling;
+
+if(!WLScrollFuncs)
+	WLScrollFuncs = new Array();
+
+if(!SetWebLinkControlScrolling)
+{
+	SetWebLinkControlScrolling = function() {
+		for(var i=0; i < WLScrollFuncs.length; ++i)
+		{
+			WLScrollFuncs[i]();
+		}
+		};
+}
+
+WLScrollFuncs.push(function() {
+	document.getElementById("TheDocumentBrowser_DisplayDiv").onscroll = function() {
+		if(!document.readyState || document.readyState == "complete")
+		{
+			document.getElementById("TheDocumentBrowser_YScrollPosition").value = document.getElementById("TheDocumentBrowser_DisplayDiv").scrollTop;
+			document.getElementById("TheDocumentBrowser_XScrollPosition").value = document.getElementById("TheDocumentBrowser_DisplayDiv").scrollLeft;
+		}
+		else
+		{
+			document.getElementById("TheDocumentBrowser_DisplayDiv").scrollTop = document.getElementById("TheDocumentBrowser_YScrollPosition").value;
+			document.getElementById("TheDocumentBrowser_DisplayDiv").scrollLeft = document.getElementById("TheDocumentBrowser_XScrollPosition").value;
+		}
+		};
+
+	if(document.getElementById("TheDocumentBrowser_YScrollPosition").value.length > 0)
+		document.getElementById("TheDocumentBrowser_DisplayDiv").scrollTop = document.getElementById("TheDocumentBrowser_YScrollPosition").value;
+
+	if(document.getElementById("TheDocumentBrowser_XScrollPosition").value.length > 0)
+		document.getElementById("TheDocumentBrowser_DisplayDiv").scrollLeft = document.getElementById("TheDocumentBrowser_XScrollPosition").value;
+	});
+</script></span>
+                        </div>
+					</div>
+				</div>
+			</div>
+            <div id="PoweredByText" class="PoweredByText" style="margin: 7px 22px 0;">Document management portal powered by Laserfiche WebLink 9 &copy; 1998-2015 <a target='_blank' href='http://www.laserfiche.com'>Laserfiche.</a> All rights reserved.</div>
+			
+    	    <script>(function(){function a(){var c=(function(){var d=0,f=0;if(typeof(window.innerWidth)=="number"){d=window.innerWidth;f=window.innerHeight}else{if(document.documentElement&&(document.documentElement.clientWidth||document.documentElement.clientHeight)){d=document.documentElement.clientWidth;f=document.documentElement.clientHeight}else{if(document.body&&(document.body.clientWidth||document.body.clientHeight)){d=document.body.clientWidth;f=document.body.clientHeight}}}return{w:d,h:f}})();var e=document.getElementById("FolderBreadcrumbNavigation");var b=c.w-290;e.parentNode.parentNode.style.width=b+"px"}a();window.onresize=a})();</script>
+		
+
+<script type="text/javascript">
+<!--
+
+$(document).ready(function() {
+    globalMediaDisplay = new MediaDisplay("mediaDisplay","_ctl15","_ctl16","_ctl18","_ctl14","_ctl28","_ctl29","_ctl19","_ctl24","_ctl26","_ctl21","_ctl23");
+});// -->
+</script>
+</form>
+		<span id="mediaDisplay" class="media-display"><div class="media-backdrop"></div><div id="_ctl14" class="media-container"><div id="_ctl15" class="media-header"><span id="_ctl16" class="media-icon"><i></i></span><div id="_ctl18" class="media-name"></div><button id="_ctl19" class="media-share" title="Share"><i></i></button><div id="_ctl21" class="media-url-container"><label class="media-url-input-label">The URL can be used to link to this page</label><input id="_ctl23" type="text" class="media-url-input"></input></div><button id="_ctl24" class="media-download" title="Download"><i></i></button><button id="_ctl26" class="media-close" title="Close"><i></i></button></div><video id="_ctl28" controls=""><source id="_ctl29"></source><div>Your browser does not support the video tag.</div></video></div></span>
+	</body>
+</html>

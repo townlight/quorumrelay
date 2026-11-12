@@ -1,0 +1,226 @@
+{
+ "d": [
+  {
+   "ID": "802a9902-badb-4011-9da0-588ea50466c6",
+   "MeetingName": "Board of County Commissioners - Regular Meeting",
+   "StartDate": "2026/11/10 09:30:00",
+   "MeetingType": "Board of County Commissioners - Regular Meeting",
+   "MeetingDocumentLink": [
+    {
+     "Format": ".pdf",
+     "Title": "Agenda Cover Page (PDF)",
+     "Type": "AgendaCover",
+     "Url": "/FileStream.ashx?DocumentId=46026"
+    },
+    {
+     "Format": ".pdf",
+     "Title": "Agenda (PDF)",
+     "Type": "Agenda",
+     "Url": "/FileStream.ashx?DocumentId=46027"
+    },
+    {
+     "Format": "HTML",
+     "Title": "Agenda (HTML)",
+     "Type": "Agenda",
+     "Url": "/Meeting.aspx?Id=802a9902-badb-4011-9da0-588ea50466c6&Agenda=Agenda&lang=English"
+    }
+   ]
+  },
+  {
+   "ID": "3115ba87-f755-46ca-bd0f-03194144d5f8",
+   "MeetingName": "Board of County Commissioners - Regular Meeting",
+   "StartDate": "2026/10/27 09:30:00",
+   "MeetingType": "Board of County Commissioners - Regular Meeting",
+   "MeetingDocumentLink": [
+    {
+     "Format": ".pdf",
+     "Title": "Agenda Cover Page (PDF)",
+     "Type": "AgendaCover",
+     "Url": "/FileStream.ashx?DocumentId=45905"
+    },
+    {
+     "Format": ".pdf",
+     "Title": "Agenda (PDF)",
+     "Type": "Agenda",
+     "Url": "/FileStream.ashx?DocumentId=45906"
+    },
+    {
+     "Format": "HTML",
+     "Title": "Agenda (HTML)",
+     "Type": "Agenda",
+     "Url": "/Meeting.aspx?Id=3115ba87-f755-46ca-bd0f-03194144d5f8&Agenda=Agenda&lang=English"
+    },
+    {
+     "Format": ".pdf",
+     "Title": "Minutes (PDF)",
+     "Type": "PostMinutes",
+     "Url": "/FileStream.ashx?DocumentId=45957"
+    },
+    {
+     "Format": "HTML",
+     "Title": "Minutes (HTML)",
+     "Type": "PostMinutes",
+     "Url": "/Meeting.aspx?Id=3115ba87-f755-46ca-bd0f-03194144d5f8&Agenda=PostMinutes&lang=English"
+    },
+    {
+     "Format": "Video",
+     "Title": "Video",
+     "Type": "Video",
+     "Url": "./Players/ISIStandAlonePlayer.aspx?Id=3115ba87-f755-46ca-bd0f-03194144d5f8"
+    }
+   ]
+  },
+  {
+   "ID": "af74d90d-3e89-42c4-93b7-0bfb8613150f",
+   "MeetingName": "Board of County Commissioners - Regular Meeting",
+   "StartDate": "2026/10/22 09:00:00",
+   "MeetingType": "Board of County Commissioners - Regular Meeting",
+   "MeetingDocumentLink": [
+    {
+     "Format": ".pdf",
+     "Title": "Agenda Cover Page (PDF)",
+     "Type": "AgendaCover",
+     "Url": "/FileStream.ashx?DocumentId=45829"
+    },
+    {
+     "Format": ".pdf",
+     "Title": "Agenda (PDF)",
+     "Type": "Agenda",
+     "Url": "/FileStream.ashx?DocumentId=45830"
+    },
+    {
+     "Format": "HTML",
+     "Title": "Agenda (HTML)",
+     "Type": "Agenda",
+     "Url": "/Meeting.aspx?Id=af74d90d-3e89-42c4-93b7-0bfb8613150f&Agenda=Agenda&lang=English"
+    },
+    {
+     "Format": ".pdf",
+     "Title": "Minutes (PDF)",
+     "Type": "PostMinutes",
+     "Url": "/FileStream.ashx?DocumentId=45846"
+    },
+    {
+     "Format": "HTML",
+     "Title": "Minutes (HTML)",
+     "Type": "PostMinutes",
+     "Url": "/Meeting.aspx?Id=af74d90d-3e89-42c4-93b7-0bfb8613150f&Agenda=PostMinutes&lang=English"
+    },
+    {
+     "Format": "Video",
+     "Title": "Video",
+     "Type": "Video",
+     "Url": "./Players/ISIStandAlonePlayer.aspx?Id=af74d90d-3e89-42c4-93b7-0bfb8613150f"
+    }
+   ]
+  },
+  {
+   "ID": "9d69efe4-9f14-47b3-9da4-5871c53fdba5",
+   "MeetingName": "Planning Commission - Regular Meeting",
+   "StartDate": "2026/10/21 13:30:00",
+   "MeetingType": "Planning Commission - Regular Meeting",
+   "MeetingDocumentLink": [
+    {
+     "Format": ".pdf",
+     "Title": "Agenda (PDF)",
+     "Type": "Agenda",
+     "Url": "/FileStream.ashx?DocumentId=45750"
+    },
+    {
+     "Format": "HTML",
+     "Title": "Agenda (HTML)",
+     "Type": "Agenda",
+     "Url": "/Meeting.aspx?Id=9d69efe4-9f14-47b3-9da4-5871c53fdba5&Agenda=Agenda&lang=English"
+    },
+    {
+     "Format": "Video",
+     "Title": "Video",
+     "Type": "Video",
+     "Url": "./Players/ISIStandAlonePlayer.aspx?Id=9d69efe4-9f14-47b3-9da4-5871c53fdba5"
+    }
+   ]
+  },
+  {
+   "ID": "3f619bbf-b4ac-4155-b8d1-635fd475d832",
+   "MeetingName": "Board of County Commissioners - Regular Meeting",
+   "StartDate": "2026/11/05 09:00:00",
+   "MeetingType": "Board of County Commissioners - Regular Meeting",
+   "MeetingDocumentLink": [
+    {
+     "Format": ".pdf",
+     "Title": "Agenda Cover Page (PDF)",
+     "Type": "AgendaCover",
+     "Url": "/FileStream.ashx?DocumentId=45980"
+    },
+    {
+     "Format": ".pdf",
+     "Title": "Agenda (PDF)",
+     "Type": "Agenda",
+     "Url": "/FileStream.ashx?DocumentId=45981"
+    },
+    {
+     "Format": "HTML",
+     "Title": "Agenda (HTML)",
+     "Type": "Agenda",
+     "Url": "/Meeting.aspx?Id=3f619bbf-b4ac-4155-b8d1-635fd475d832&Agenda=Agenda&lang=English"
+    },
+    {
+     "Format": ".pdf",
+     "Title": "Minutes (PDF)",
+     "Type": "PostMinutes",
+     "Url": "/FileStream.ashx?DocumentId=45989"
+    },
+    {
+     "Format": "HTML",
+     "Title": "Minutes (HTML)",
+     "Type": "PostMinutes",
+     "Url": "/Meeting.aspx?Id=3f619bbf-b4ac-4155-b8d1-635fd475d832&Agenda=PostMinutes&lang=English"
+    },
+    {
+     "Format": "Video",
+     "Title": "Video",
+     "Type": "Video",
+     "Url": "./Players/ISIStandAlonePlayer.aspx?Id=3f619bbf-b4ac-4155-b8d1-635fd475d832"
+    }
+   ]
+  },
+  {
+   "ID": "70f2dec6-a52b-448b-be21-e299f56b8e98",
+   "MeetingName": "Parks and Open Space Advisory Committee",
+   "StartDate": "2026/10/22 17:30:00",
+   "MeetingType": "Parks and Open Space Advisory Committee",
+   "MeetingDocumentLink": [
+    {
+     "Format": ".pdf",
+     "Title": "Agenda (PDF)",
+     "Type": "Agenda",
+     "Url": "/FileStream.ashx?DocumentId=45733"
+    },
+    {
+     "Format": "HTML",
+     "Title": "Agenda (HTML)",
+     "Type": "Agenda",
+     "Url": "/Meeting.aspx?Id=70f2dec6-a52b-448b-be21-e299f56b8e98&Agenda=Agenda&lang=English"
+    },
+    {
+     "Format": ".pdf",
+     "Title": "Minutes (PDF)",
+     "Type": "PostMinutes",
+     "Url": "/FileStream.ashx?DocumentId=45964"
+    },
+    {
+     "Format": "HTML",
+     "Title": "Minutes (HTML)",
+     "Type": "PostMinutes",
+     "Url": "/Meeting.aspx?Id=70f2dec6-a52b-448b-be21-e299f56b8e98&Agenda=PostMinutes&lang=English"
+    },
+    {
+     "Format": "Video",
+     "Title": "Video",
+     "Type": "Video",
+     "Url": "./Players/ISIStandAlonePlayer.aspx?Id=70f2dec6-a52b-448b-be21-e299f56b8e98"
+    }
+   ]
+  }
+ ]
+}

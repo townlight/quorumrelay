@@ -1,0 +1,576 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="en" lang="en">
+<head id="HeadMain"><title>
+	Meeting Portal - City of Santa Monica, California
+</title><meta http-equiv="X-UA-Compatible" content="IE=9" />
+
+    <!-- this fixes a minor rendering issue with tables on the ipad -->
+    <meta content="width=device-width, initial-scale=1.0;" name="viewport" />
+
+    <!-- Agency specific meta tags -->
+    <meta name='google-site-verification' content='v8iNp5ToI5384_S9_Exw0F10KJ__b35Fs7jqvTvb0TY' />
+<meta name='msvalidate.01' content='8C654B10898A718CB62BCB19E52589CD' />
+
+
+    <!-- open search discovery -->
+    <link rel="search" type="application/opensearchdescription+xml" href="/Services/GetFederatedSearch.aspx" title="IQM2 search" />
+
+    <!-- Icon -->
+    <link href="/favicon.ico?v=2018" rel="icon" />
+
+    <!-- CSS Links -->
+    <link type="text/css" href="/App_Themes/Main.css?v=86" rel="Stylesheet" /><link type="text/css" href="/lib/jquery-ui.css" rel="stylesheet" />
+ 
+  <script>
+      !function () { var a, b, c, d = window, e = document, f = arguments, g = "script", h = ["config", "track", "trackForm", "trackClick", "identify", "visit", "push", "call"], i = function () { var a, b = this, c = function (a) { b[a] = function () { return b._e.push([a].concat(Array.prototype.slice.call(arguments, 0))), b } }; for (b._e = [], a = 0; a < h.length; a++) c(h[a]) }; for (d.__woo = d.__woo || {}, a = 0; a < f.length; a++) d.__woo[f[a]] = d[f[a]] = d[f[a]] || new i; b = e.createElement(g), b.async = 1, b.src = "//static.woopra.com/js/w.js", c = e.getElementsByTagName(g)[0], c.parentNode.insertBefore(b, c) }("woopra");
+
+      woopra.config({
+          domain: "iqm2.com",
+          cookie_name:"accelaTracker"
+      });
+      woopra.track("mp_pv", {
+          domain: window.location.hostname,
+          title: document.title,
+          url: window.location.href,
+          uri: window.location.pathname,
+          hash: window.location.hash,
+          error: null
+      });
+  </script>
+    <!-- IQM2 Scripts -->
+    <script type="text/javascript" src="/lib/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="/App_Themes/Global.js?v=8_10_48"></script>
+    <script type="text/javascript" src="/lib/MinuteTraq.PopupWindow.js"></script>
+    <script type="text/javascript" src="/lib/jquery-ui.js"></script>
+    <link href="https://unpkg.com/video.js@7.21.1/dist/video-js.css" rel="stylesheet" /><link href="/Scripts/videojs-live-dvr/videojs-dvrseekbar.css" rel="stylesheet" />
+    <script src="https://unpkg.com/video.js@7.21.1/dist/video.js"></script>
+    <script src='https://unpkg.com/videojs-flash@2.1.0/dist/videojs-flash.min.js'></script>
+    <script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+    <script src="/Scripts/videojs-live-dvr/videojs-dvrseekbar.min.js"></script>
+    <script type='text/javascript' src='/Scripts/player.js'></script>
+    <script type="text/javascript" src="/Scripts/js.cookie-2.0.3.min.js"></script>
+    <!-- RSS Feeds (Site) -->
+    
+
+    <!-- Generated CSS Link -->
+    
+  
+    <!-- External CSS / Script Links -->
+    <link type='text/css' href='/Lib/GetCustomCSS.ashx?timestamp=636161988490000000' rel='Stylesheet' /><link type='text/css' href='/Citizens/GetImage.aspx?ID=1002' rel='Stylesheet' /><script type='text/javascript' src='/Citizens/GetImage.aspx?ID=1003'></script>
+    
+   
+    <!--[if IE 7]>
+	   <style type="text/css">
+        .Section H2 { display:inline;}
+        .RowTop div { display:inline;}
+   </style>
+	
+	<![endif]-->
+    
+    <script type="text/javascript" src="/Lib/MinuteTraq.Search.js?v=8_10_66"></script>
+    
+    <script type="text/javascript">
+        
+        // configure tracker
+        
+        $(function () {
+            
+            
+            FixFooterPosition();
+            $(window).on('resize', FixFooterPosition);
+
+            var h = $("#Banner").height();
+            //  var w = $("body").width();
+
+            var sCoords = "0,0,5000," + h;
+
+            $("#lnkBanner").attr("coords", sCoords);
+            var hideTopBanner = Cookies.get('hideTopBanner');
+            var appStyles = {display:'block'};
+            if (hideTopBanner) {
+                appStyles.display = 'none';
+            }
+            $('#topbarAppBanner').css(appStyles);
+            $('.close-topbar-app-banner').bind('click', function () {
+                $('#topbarAppBanner').css('display', 'none');
+                Cookies.set('hideTopBanner', true);
+            });
+            $('.link-wrapper-banner').bind('click', function () {
+                woopra.track('portal-wegovern-banner', {
+                    agency: Cookies.get('AgencyName'),
+                    username: Cookies.get('WebUserName')
+                });
+                return true;
+            });
+        });
+
+        function FixFooterPosition() {
+            //hack for the footer, display at bottom of screen if page is short
+            if ($("form").height() < $(window).height() - 100) {
+                $("#Footer").css("position", "absolute");
+                $("#Footer").css("bottom", "0");
+            }
+            else {
+                $("#Footer").css("position", "");
+            }
+        }
+
+    </script>
+    <style type="text/css" media="screen">
+        #topbarAppBanner {
+            min-height: 40px;
+            z-index: 1000;
+        }
+        .top-banner-app-inner{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            height: 40px;
+            border: 1px solid rgba(10,10,10,.5);
+            box-shadow: 0px 0px 16px 0px #303030;
+            background-color: #456ca7;
+        }
+        .close-topbar-app-banner {
+            position: absolute;
+            display: block;
+            top: 25px;
+            right: 5%;
+            font-size: 1em;
+            color: #e3e3e3
+        }
+        .app-link{
+            display: block;
+            margin: 0 auto;
+            width: 40%;
+        }
+        .wegovern-banner-logo {
+            left: 22px;
+            position: relative;
+            padding-top: 1px;
+        }
+
+        @media screen and (max-width: 981px ){
+            .inside-banner-link {
+                position: relative;
+                top: -15px;
+                left: 30px;
+                color: #e3e3e3;
+                white-space: nowrap;
+            }
+        }
+        @media screen and (min-width: 1595px){
+            .inside-banner-link {
+                position: relative;
+                top: -15px;
+                left: 30px;
+                color: #e3e3e3;
+                white-space: nowrap;
+            }
+        }
+        @media screen and (max-width: 1594px){
+            .inside-banner-link {
+                position: relative;
+                top: -30px;
+                left: 75px;
+                color: #e3e3e3;
+                white-space: nowrap;
+            }
+        }
+        @media screen and (min-width:1100px){
+            .app-link{
+                display: block;
+                margin: 0 auto;
+                width: 40%;
+            }
+            .close-topbar-app-banner {
+                right: 5%;
+            }
+        }
+        @media screen and (max-width:1099px){
+            .app-link {
+                display: block;
+                margin: 0 auto;
+                width: 65%;
+            }
+            .close-topbar-app-banner {
+                right: 5%;
+            }
+            .inside-banner-link {
+                position: relative;
+                top: -15px;
+                left: 30px;
+                color: #e3e3e3;
+                white-space: nowrap;
+            }
+        }
+    </style>
+    
+
+    <!-- Page Level Header Stuff -->
+    </head>
+
+<body id="MainLayout">
+    
+    <form method="post" action="./Default.aspx" id="aspnetForm" enctype="multipart/form-data">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="8XNZPs0rClOB5qsGY3emtC71QLEUz7pQ+9BWesddBGUI/c7TFJat8PjF7i1yY+yWX4pAoM4OAiTa5eIgCg8+OCdPEQbkPoIhqeht1BHnbZujQxhxTwenRJWidauXBPUTURZjbcG+WNJm0N71w9R7Fs6fJrgB+vLghprEzYNAGZGLCzrYwdziJkDPRDH+y0xZ3acnc6z4Wh9kMvgT5qIhfg==" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="3E53FBFF" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="EnRka1R2V9+jgeZlLF4dud8PY++dT+ucNlJ+OUSDxTrBPmKnSTVLVGGvWSFss372GfwqRKqkrorKuRZ9ju9UrfgRmZgv4BRW9tGW+gBWr3hf7fXgJLDgCpoomvsKJxUxvyQswebCkLlBQ12yWFGkK8IN/TWTd+aQYe4H5dyJLyQE9wnU0jNO0FBRzyZf1bsEtBq0NTJQYK4ww7i/tK4agfCZOz1q01wssV3dT8l1DgcVR34aKRfaPsrDs9auV5cVzzz1KA3mzPKsk/hZD2lR9UqYkgy5+bI2IZTiXao5vqkMl2wwtpkux/7IjgGi5qZ7" />
+</div>
+        <div style="display: none">
+            <input type="submit" name="ctl00$btnRefreshPageAfterLogin" value="Button" id="btnRefreshPageAfterLogin" class="btnRefreshPage" />
+            <input name="ctl00$hfShowPopupOnLoad" type="hidden" id="hfShowPopupOnLoad" class="hfShowPopup" />
+        </div>
+        <span id="lblScript"></span>
+  
+    <div id="MainWindow">
+    
+            <div id="Banner" role="banner"  >
+                <img usemap="#bannerMap" src="/Citizens/GetImage.aspx?ID=1001&TimeStamp=636161988490000000" alt="IQM2 Meeting Portal" />
+                <map name="bannerMap">
+                    <area href="/Citizens/Default.aspx" id="lnkBanner" shape="rect" alt="Home" Target="_self" />
+                </map>
+
+                <div id="LogoHeaderTextHolder">
+                    
+                                                                       
+                </div>
+            </div>
+            
+            <div id="ToolStrip" role="navigation" aria-label="site">
+                <div id="Tabs">
+                    <div class="Shadow"></div>
+                    <a href="http://www.smgov.net/departments/clerk/agendas.aspx" id="lnkMainSite" class="Tab LeftTab"><div><span>&laquo;Back to Main Site</span></div></a>
+                    <a href="/Citizens/default.aspx" class="Tab NormalTab"><div><span id="tabWelcome">Welcome</span></div></a>
+                    <a href="/Citizens/calendar.aspx" class="Tab NormalTab"><div><span id="tabMeetings">Meetings</span></div></a>                
+                    <a href="/Citizens/" style="display:none" class="Tab NormalTab"><div dropdown="Browse"><span>Browse</span></div></a>
+                                        
+                                        
+                    <a href="/Citizens/LegalNotice.aspx" id="lnkNotices" class="Tab NormalTab"><div id="tabNotices"><span>Notices</span></div></a>                                        
+                    <a href="/Citizens/Board" class="Tab NormalTab"><div><span id="tabContactUs">Boards+</span></div></a>                                                        
+                </div>
+                <div id="TopExtraBoxTransparentBG"></div>
+                <div id="TopExtraBox">  
+                    <div id="TopLine">
+                        
+                     <a href="../MasterPages/#" id="lnkLogin" onclick="javascript:return PopupWindowShow(&#39;/Citizens/Login.aspx&#39;);">Log in</a><span id="spnThatOneStupidBar"> | </span><a href="mailto:support@granicus.com" id="lnkHelp">Help</a> <span id="spnHelpBar">|</span> <a href="../MasterPages/#" id="lnkRegister" onclick="javascript:return PopupWindowShow(&#39;/Citizens/MyAccount.aspx&#39;);">Register</a>                                                
+                    </div> 
+                    <div id="BottomLine">                       
+                          
+                    </div>                            
+                   <input name="ctl00$txtQuickSearch" type="text" id="txtQuickSearch" value="Search" title="Search" />
+                   <input type="image" name="ctl00$btnQuickSearch" id="btnQuickSearch" alt="Search" src="/Lib/images/search.png" style="cursor:pointer" />                   
+                </div>     
+            </div>
+                     
+            <table class="LayoutTable" role="presentation">
+                <tr>
+                    <td id="tdLeftPanel" class="LeftPanel">
+                        
+                        <div role="navigation" aria-label="Meeting Group">
+                            <div id="divMeetingGroupSelector" class="DetailBox">
+                                <label for="DepartmentID" class="DetailBoxTitle">Meeting Group</label>
+                                <select name="ctl00$DepartmentID" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$DepartmentID\&#39;,\&#39;\&#39;)&#39;, 0)" id="DepartmentID" class="MeetingGroupDropdown">
+	<option selected="selected" value="0">All Meeting Groups</option>
+	<option value="1000">City Council</option>
+
+</select>
+                            </div>
+                        </div>
+                        
+                        <div class="DetailBox">
+                            <img src="/Citizens/images/Print.gif" border="0" alt="Print" />
+                            <a href="/Citizens/Default.aspx?Print=Yes" id="lnkPrint" class="PrintButton" target="_blank">Print This Page</a>                           
+                        </div>
+                        
+                        
+                                                
+                       <!-- <div class="QuickLink">
+                            <img src="/Lib/buttonexample.png" alt="Quick Link 1" />
+                            <a href="#">Quick Link #1</a>
+                        </div>
+                        <div class="QuickLink">
+                            <img src="/Lib/buttonexample.png" alt="Quick Link 2"  />
+                            <a href="#">Quick Link #2</a>
+                        </div>     -->
+                                      
+                    </td>
+
+                    <td id="MainContentHolder">
+                        <div style="width:100%;height:100%;position:relative;margin:0;padding:0;border:0;">
+                            <div id="MainContentLeftShadow">                           
+                            </div>   
+                          
+                            <div class="MainContentPlaceholder" role="main">
+                                
+                                
+    <script src="/Scripts/js.cookie-2.0.3.min.js"></script>
+    <script type="text/javascript" src="/Scripts/LiveBanner.js?v=8_10_48"></script>  
+    
+    <script type="text/javascript">
+
+        $(function ()
+        {
+            var currentLiveMedia = eval("(" + $("#ContentPlaceholder1_hfInitialLiveMedia").val() + ")");
+            BeginLiveMediaCheck($("#divLiveMedia"), currentLiveMedia);        
+        });
+
+    </script>
+
+<div id="ContentPlaceholder1_pnlHomePage" role="main">
+    	 
+     <!-- LIVE MEDIA -->
+     <input name="ctl00$ContentPlaceholder1$hfInitialLiveMedia" type="hidden" id="ContentPlaceholder1_hfInitialLiveMedia" />
+    
+    <div id="divLiveMedia">
+        
+    </div>
+
+    <div id="WelcomePanel">
+        
+        
+        <table class="LayoutTable">
+            <tr style="width:100%">
+                <td id="ContentPlaceholder1_tdAgencyMessage" style="width:100%;vertical-align:top;">
+                    <div id="ContentPlaceholder1_pnlBoardMessage" class="WelcomeMessage AgencyGreeting" style="width:100%;">
+                        <span id="ContentPlaceholder1_lblBoardMessage" style="display:inline-block;width:100%;"><center><h1>This web portal is for City Council agendas, staff reports and minutes from 2015 to current.
+<br>For past reports and minutes, please go Back to Main Site.</h1></center></span>           
+                    </div>
+                </td>
+
+
+                <td style="vertical-align:top">
+                        
+                </td>
+            </tr>
+        </table>
+        
+    </div>
+    
+    <div id="ContentPlaceholder1_NativeList">
+	
+    <div id="ContentPlaceholder1_pnlUpcomingMeetings" class="Section">
+        <div class="SectionHeader">
+            <img src="images/Meeting.gif" alt="meeting"/><h2>Upcoming Meetings</h2>         
+            
+            <div class="HeaderLinks">
+                <a href="/Citizens/Calendar.aspx">
+                <img src="images/Meeting_14x14.gif" alt="meeting" />&nbsp;Full Calendar</a>
+
+                <a href="../Services/RSS.aspx?Feed=Calendar">
+                <img src="images/RSS_14x14.png" alt="rss icon" />&nbsp;RSS</a>
+            </div>
+        </div>
+                
+         
+
+        <div id="ContentPlaceholder1_ctlUpcomingMeetings_rptMeetings_divMonthDivider_0" class="Row MonthHeader">November, 2026</div>
+        <div class="Row MeetingRow" style='border-bottom:0;'  id="divRow">        
+            <div class="RowTop">
+                <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, NOVEMBER 17, 2026  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City Hall Council Chambers&#13;&#09;1685 Main Street, Room 250, Santa Monica, CA  90401" alt='info' /></a></div>                
+                <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1496" title="TUESDAY, NOVEMBER 17, 2026  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City Hall Council Chambers&#13;&#09;1685 Main Street, Room 250, Santa Monica, CA  90401" >Nov 17, 2026 5:30 PM </a></div>                
+                                
+                <div id="ContentPlaceholder1_ctlUpcomingMeetings_rptMeetings_DownloadLinks_0" class="RowRight MeetingLinks">
+                    <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                    <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                    <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                    <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                    <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlUpcomingMeetings_rptMeetings_lnkMeetingVideo_0" class="HiddenDocumentLink">Video</a>&nbsp;</div>                
+                </div>
+            </div>           
+            <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlUpcomingMeetings_rptMeetings_lblMeetingText_0" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>            
+        </div>
+    
+        <div id="ContentPlaceholder1_ctlUpcomingMeetings_rptMeetings_divMonthDivider_1" class="Row MonthHeader">December, 2026</div>
+       <div class="Row MeetingRow Alt" >        
+            <div class="RowTop">
+                <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, DECEMBER 8, 2026  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City Hall Council Chambers&#13;&#09;1685 Main Street, Room 250, Santa Monica, CA  90401" alt='info' /></a></div>                
+                <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1507" title="TUESDAY, DECEMBER 8, 2026  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City Hall Council Chambers&#13;&#09;1685 Main Street, Room 250, Santa Monica, CA  90401" >Dec 8, 2026 5:30 PM </a></div>                
+                                
+                <div id="ContentPlaceholder1_ctlUpcomingMeetings_rptMeetings_DownloadLinks_1" class="RowRight MeetingLinks">
+                    <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                    <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                    <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                    <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                    <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlUpcomingMeetings_rptMeetings_lnkMeetingVideo_1" class="HiddenDocumentLink">Video</a>&nbsp;</div>                
+                </div>
+            </div>
+            <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlUpcomingMeetings_rptMeetings_lblMeetingText_1" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div> 
+        </div>
+    
+
+        
+        <a class="SeeMoreLink" href="/Citizens/Calendar.aspx">See more . . .</a>
+    </div>       
+    
+    <div id="ContentPlaceholder1_pnlPastMeetings" class="Section">
+        <div class="SectionHeader">
+            <img src="images/Meeting.gif" alt="meeting"/><h2>Past Meetings</h2>         
+            <div class="HeaderLinks">
+                <a href="/Citizens/Calendar.aspx">
+                <img src="images/Meeting_14x14.gif" alt="meeting" />&nbsp;Full Calendar</a>
+                <a href="../Services/RSS.aspx?Feed=Calendar">
+                <img src="images/RSS_14x14.png" alt="rss icon" />&nbsp;RSS</a>
+            </div>
+        </div>
+                
+         
+
+        <div id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_divMonthDivider_0" class="Row MonthHeader">October, 2026</div>
+        <div class="Row MeetingRow"  id="divRow">        
+            <div class="RowTop">
+                <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, OCTOBER 27, 2026  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City Hall Council Chambers.&#13;&#09;1685 Main Street, Room 250, Santa Monica, CA 90401, AND 998 W. Mission Bay Drive, San Diego, CA 92109, _, __  __" alt='info' /></a></div>                
+                <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1506" title="TUESDAY, OCTOBER 27, 2026  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City Hall Council Chambers.&#13;&#09;1685 Main Street, Room 250, Santa Monica, CA 90401, AND 998 W. Mission Bay Drive, San Diego, CA 92109, _, __  __" >Oct 27, 2026 5:30 PM </a></div>                
+                                
+                <div id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_DownloadLinks_0" class="RowRight MeetingLinks">
+                    <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1475&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                    <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1475&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                    <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                    <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                    <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_lnkMeetingVideo_0" class="HiddenDocumentLink">Video</a>&nbsp;</div>                
+                </div>
+            </div>           
+            <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_lblMeetingText_0" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>            
+        </div>
+    
+        
+       <div class="Row MeetingRow Alt" style='border-bottom:0;' >        
+            <div class="RowTop">
+                <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, OCTOBER 13, 2026  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City Hall Council Chambers&#13;&#09;1685 Main Street, Room 250, Santa Monica, CA  90401" alt='info' /></a></div>                
+                <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1505" title="TUESDAY, OCTOBER 13, 2026  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City Hall Council Chambers&#13;&#09;1685 Main Street, Room 250, Santa Monica, CA  90401" >Oct 13, 2026 5:30 PM </a></div>                
+                                
+                <div id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_DownloadLinks_1" class="RowRight MeetingLinks">
+                    <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1474&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                    <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1474&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                    <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                    <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                    <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_lnkMeetingVideo_1" class="HiddenDocumentLink">Video</a>&nbsp;</div>                
+                </div>
+            </div>
+            <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_lblMeetingText_1" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div> 
+        </div>
+     
+
+        <div id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_divMonthDivider_2" class="Row MonthHeader">September, 2026</div>
+        <div class="Row MeetingRow"  id="divRow">        
+            <div class="RowTop">
+                <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, SEPTEMBER 22, 2026  5:35 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Special Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City Hall Council Chambers&#13;&#09;1685 Main Street, Room 250, Santa Monica, CA  90401" alt='info' /></a></div>                
+                <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1519" title="TUESDAY, SEPTEMBER 22, 2026  5:35 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Special Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City Hall Council Chambers&#13;&#09;1685 Main Street, Room 250, Santa Monica, CA  90401" >Sep 22, 2026 5:35 PM </a></div>                
+                                
+                <div id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_DownloadLinks_2" class="RowRight MeetingLinks">
+                    <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1473&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                    <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1473&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                    <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1498&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                    <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1498&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                    <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_lnkMeetingVideo_2" class="HiddenDocumentLink">Video</a>&nbsp;</div>                
+                </div>
+            </div>           
+            <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_lblMeetingText_2" class="MainScreenText RowDetails">City Council - Special Meeting</div></div>            
+        </div>
+    
+        
+       <div class="Row MeetingRow Alt" >        
+            <div class="RowTop">
+                <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, SEPTEMBER 22, 2026  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City Hall Council Chambers&#13;&#09;1685 Main Street, Room 250, Santa Monica, CA  90401" alt='info' /></a></div>                
+                <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1504" title="TUESDAY, SEPTEMBER 22, 2026  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City Hall Council Chambers&#13;&#09;1685 Main Street, Room 250, Santa Monica, CA  90401" >Sep 22, 2026 5:30 PM </a></div>                
+                                
+                <div id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_DownloadLinks_3" class="RowRight MeetingLinks">
+                    <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1472&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                    <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1472&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                    <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1499&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                    <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1499&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                    <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_lnkMeetingVideo_3" class="HiddenDocumentLink">Video</a>&nbsp;</div>                
+                </div>
+            </div>
+            <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlPastMeetings_rptMeetings_lblMeetingText_3" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div> 
+        </div>
+    
+
+        
+        <a class="SeeMoreLink" href="/Citizens/Calendar.aspx">See more . . .</a>
+    </div>     
+    
+        
+    
+   	  
+    
+</div>  	
+   
+</div>
+
+<!-- legacy code, will delete soon but keeping it around for reference -->
+
+
+    
+                            </div>
+                        </div>                                                           
+                    </td>
+                </tr>               
+            </table>                                
+        </div>
+        
+    <div id="Footer" role="contentinfo">
+        <br />
+        <span id="lblPoweredBy">
+            Powered by <a href="https://granicus.com/" target="_blank" >Granicus</a>
+        </span>
+    </div>
+
+    
+    <!-- Analytics Stuff (Start) *********************************** -->
+<script async src='https://www.googletagmanager.com/gtag/js?id=UA-70364301-2'></script>
+  <script>
+   window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+  gtag('config', 'UA-70364301-2');</script>
+<!-- Analytics Stuff (End)   *********************************** -->
+    
+        <!-- Popup Menus -->
+        <div id="mnuBrowse" class="PopupMenu" dropdown="Browse">
+            <ul>
+                <li><a href="#">Legislative Files</a></li>
+                <li><a href="#">Legal Notices</a></li>
+                <li><a href="#">Some other Sort of Thing</a></li>
+            </ul>
+        </div>
+
+    
+
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){woopra.identify({ email:"", name:"Anonymous User", agency:"SantaMonicaCityCA", userlogin:"Anonymous"}).push(); })//]]>
+</script>
+</form>
+</body>
+</html>
+
+

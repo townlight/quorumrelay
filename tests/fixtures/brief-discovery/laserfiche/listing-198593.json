@@ -1,0 +1,220 @@
+{
+ "data": {
+  "name": "10 OCT",
+  "folderId": 198593,
+  "colTypes": [
+   {
+    "displayName": "Name",
+    "name": "Name",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": false,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Page count",
+    "name": "PageCount",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": false,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Template name",
+    "name": "TemplateName",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": false,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "ID",
+    "name": "Id",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Template ID",
+    "name": "TemplateId",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Entry type",
+    "name": "EntryType",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Shortcut target",
+    "name": "LinkTo",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Relationship type",
+    "name": "LinkType",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Extension",
+    "name": "Extension",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Flags",
+    "name": "Flags",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Date created",
+    "name": "CreationDate",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Date modified",
+    "name": "LastModified",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   }
+  ],
+  "results": [
+   {
+    "name": "10.06.26",
+    "entryId": 206380,
+    "type": 0,
+    "shortcutTargetId": 0,
+    "targetType": 0,
+    "pathToImage": "~/images/iFolderClosed.gif",
+    "iconClass": "DocumentBrowserNameImage",
+    "extension": "",
+    "multiValueFields": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "isEdoc": false,
+    "entryProperties": null,
+    "contexthits": null,
+    "metadata": null,
+    "thumbnailPageCount": 0,
+    "mediaMimeType": null,
+    "mediaHandlerUrl": null,
+    "tags": null,
+    "data": [
+     "10.06.26",
+     null,
+     null,
+     206380,
+     null,
+     0,
+     null,
+     0,
+     null,
+     257,
+     "11/10/2026 8:05:05 AM",
+     "11/10/2026 8:05:19 AM"
+    ]
+   },
+   {
+    "name": "10.27.26",
+    "entryId": 206381,
+    "type": 0,
+    "shortcutTargetId": 0,
+    "targetType": 0,
+    "pathToImage": "~/images/iFolderClosed.gif",
+    "iconClass": "DocumentBrowserNameImage",
+    "extension": "",
+    "multiValueFields": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "isEdoc": false,
+    "entryProperties": null,
+    "contexthits": null,
+    "metadata": null,
+    "thumbnailPageCount": 0,
+    "mediaMimeType": null,
+    "mediaHandlerUrl": null,
+    "tags": null,
+    "data": [
+     "10.27.26",
+     null,
+     null,
+     206381,
+     null,
+     0,
+     null,
+     0,
+     null,
+     257,
+     "11/10/2026 8:05:25 AM",
+     "11/10/2026 8:14:27 AM"
+    ]
+   }
+  ],
+  "failed": false,
+  "errMsg": null,
+  "entryType": 0,
+  "path": "\\Central Records\\Boards & Commissions\\Planning Board\\2026\\10 OCT",
+  "parentId": 0,
+  "showColumnPicker": false,
+  "totalEntries": 2,
+  "sortAscending": true,
+  "sortColumn": ""
+ },
+ "__breach": "OWZlN0uFJmxeJ+8085"
+}

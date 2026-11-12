@@ -1,0 +1,246 @@
+{
+ "value": [
+  {
+   "id": 1277,
+   "eventName": "Town Council Meeting",
+   "startDateTime": "2026-11-10T19:30:00Z",
+   "categoryName": "Town Council",
+   "publishedFiles": [
+    {
+     "type": "Agenda",
+     "fileId": 2197,
+     "name": "November 10, 2026 Town Council Meeting Agenda"
+    },
+    {
+     "type": "Agenda Packet",
+     "fileId": 2198,
+     "name": "November 10, 2026 Town Council Meeting Agenda Packet"
+    }
+   ]
+  },
+  {
+   "id": 1317,
+   "eventName": "Urban Renewal Authority",
+   "startDateTime": "2026-11-10T18:30:00Z",
+   "categoryName": "Urban Renewal Authority",
+   "publishedFiles": [
+    {
+     "type": "Agenda",
+     "fileId": 2195,
+     "name": "November 10, 2026 Urban Renewal Authority Agenda"
+    },
+    {
+     "type": "Agenda Packet",
+     "fileId": 2196,
+     "name": "November 10, 2026 Urban Renewal Authority Meeting Agenda Packet"
+    }
+   ]
+  },
+  {
+   "id": 1198,
+   "eventName": "Open Space and Trails Advisory Board Meeting - In Person",
+   "startDateTime": "2026-11-09T18:30:00Z",
+   "categoryName": "Open Space and Trails Advisory Board",
+   "publishedFiles": [
+    {
+     "type": "Agenda",
+     "fileId": 2199,
+     "name": "OSTAB Meeting 11-09-2026"
+    },
+    {
+     "type": "Agenda Packet",
+     "fileId": 2200,
+     "name": "OSTAB Meeting  Packet 11-09-2026"
+    }
+   ]
+  },
+  {
+   "id": 1100,
+   "eventName": "Planning Commission Meeting - CANCELED",
+   "startDateTime": "2026-11-04T18:30:00Z",
+   "categoryName": "Planning Commission",
+   "publishedFiles": []
+  },
+  {
+   "id": 1185,
+   "eventName": "Sustainability Advisory Board Meeting - In Person",
+   "startDateTime": "2026-11-04T18:30:00Z",
+   "categoryName": "Sustainability Advisory Board",
+   "publishedFiles": [
+    {
+     "type": "Agenda",
+     "fileId": 2190,
+     "name": "SAB Meeting 11-04-2026"
+    },
+    {
+     "type": "Agenda Packet",
+     "fileId": 2192,
+     "name": "SAB Meeting 11-04-2026"
+    }
+   ]
+  },
+  {
+   "id": 1302,
+   "eventName": "Town Council Study Session Meeting",
+   "startDateTime": "2026-11-03T18:00:00Z",
+   "categoryName": "Town Council",
+   "publishedFiles": []
+  },
+  {
+   "id": 1337,
+   "eventName": "Liquor License Hearing 11-03-2026",
+   "startDateTime": "2026-11-03T13:00:00Z",
+   "categoryName": "Liquor License Authority",
+   "publishedFiles": [
+    {
+     "type": "Agenda",
+     "fileId": 2181,
+     "name": "Liquor License Authority Agenda 11-03-2026"
+    },
+    {
+     "type": "Agenda Packet",
+     "fileId": 2183,
+     "name": "Liquor License Authority Agenda Packet 7-21-2026"
+    }
+   ]
+  },
+  {
+   "id": 1156,
+   "eventName": "Town Council Meeting",
+   "startDateTime": "2026-10-27T18:30:00Z",
+   "categoryName": "Town Council",
+   "publishedFiles": [
+    {
+     "type": "Agenda",
+     "fileId": 2179,
+     "name": "October 27, 2026 Town Council Agenda"
+    },
+    {
+     "type": "Agenda Packet",
+     "fileId": 2180,
+     "name": "October 27, 2026 Town Council Agenda Packet"
+    }
+   ]
+  },
+  {
+   "id": 1236,
+   "eventName": "Historic Preservation Advisory Board Meeting - In Person",
+   "startDateTime": "2026-10-26T18:30:00Z",
+   "categoryName": "Historic Preservation Advisory Board",
+   "publishedFiles": [
+    {
+     "type": "Agenda",
+     "fileId": 2171,
+     "name": "HPAB 10-26-2026"
+    },
+    {
+     "type": "Agenda Packet",
+     "fileId": 2172,
+     "name": "HPAB 10-26-2026"
+    }
+   ]
+  },
+  {
+   "id": 1112,
+   "eventName": "Planning Commission and Open Space and Trails Advisory Board Joint Study Session",
+   "startDateTime": "2026-10-21T18:30:00Z",
+   "categoryName": "Planning Commission",
+   "publishedFiles": [
+    {
+     "type": "Agenda",
+     "fileId": 2162,
+     "name": "October 21, 2026 Planning Commission and Open Space and Trails Advisory Board  Joint Study Session"
+    },
+    {
+     "type": "Agenda Packet",
+     "fileId": 2163,
+     "name": "Planning Commission and Open Space and Trails Advisory Board  Joint Study Session Agenda Packet"
+    }
+   ]
+  },
+  {
+   "id": 1332,
+   "eventName": "Town Council Special Meeting",
+   "startDateTime": "2026-10-20T18:30:00Z",
+   "categoryName": "Town Council",
+   "publishedFiles": [
+    {
+     "type": "Agenda",
+     "fileId": 2169,
+     "name": "October 20. 2026 Town Council Special Meeting Agenda"
+    },
+    {
+     "type": "Agenda Packet",
+     "fileId": 2170,
+     "name": "October 20, 2026 Town Council Special Meeting Agenda Packet"
+    }
+   ]
+  },
+  {
+   "id": 1223,
+   "eventName": "Airport Economic Development Advisory Board Meeting - In Person",
+   "startDateTime": "2026-10-15T18:30:00Z",
+   "categoryName": "Airport Economic Development Advisory Board",
+   "publishedFiles": [
+    {
+     "type": "Agenda",
+     "fileId": 2164,
+     "name": "AEDAB 10-15-2026"
+    },
+    {
+     "type": "Agenda Packet",
+     "fileId": 2165,
+     "name": "AEDAB 10-15-2026"
+    }
+   ]
+  },
+  {
+   "id": 1210,
+   "eventName": "Tree Advisory Board Meeting - In Person",
+   "startDateTime": "2026-10-14T18:30:00Z",
+   "categoryName": "Tree Advisory Board",
+   "publishedFiles": [
+    {
+     "type": "Agenda",
+     "fileId": 2160,
+     "name": "TAB Meeting 10-14-2026"
+    },
+    {
+     "type": "Agenda Packet",
+     "fileId": 2161,
+     "name": "TAB Meeting 10-14-2026"
+    }
+   ]
+  },
+  {
+   "id": 1289,
+   "eventName": "Town Council Meeting",
+   "startDateTime": "2026-10-13T18:30:00Z",
+   "categoryName": "Town Council",
+   "publishedFiles": [
+    {
+     "type": "Agenda",
+     "fileId": 2158,
+     "name": "October 13, 2026 Town Council Meeting Agenda"
+    },
+    {
+     "type": "Agenda Packet",
+     "fileId": 2159,
+     "name": "October 13, 2026 Town Council Meeting Agenda Packet"
+    },
+    {
+     "type": "Minutes",
+     "fileId": 2188,
+     "name": "October 13, 2026 Town Council Meeting Minutes"
+    }
+   ]
+  },
+  {
+   "id": 1197,
+   "eventName": "Open Space and Trails Advisory Board Meeting  - CANCELED",
+   "startDateTime": "2026-10-12T18:30:00Z",
+   "categoryName": "Open Space and Trails Advisory Board",
+   "publishedFiles": []
+  }
+ ]
+}

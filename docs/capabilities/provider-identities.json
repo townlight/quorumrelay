@@ -1,0 +1,244 @@
+{
+  "schema_version": "1.0.0",
+  "canonical_id_authority": "Exact provider keys in original pinned SOURCE_FORMATS baseline and compat registry; do not infer by product names",
+  "lookup_rule": "Match the exact canonical ID or explicit alias. Unknown IDs fail clearly; do not return an empty capability object or guess an adjacent product.",
+  "providers": [
+    {
+      "number": 1,
+      "canonical_id": "legistar",
+      "family_id": "legistar",
+      "aliases": []
+    },
+    {
+      "number": 2,
+      "canonical_id": "primegov",
+      "family_id": "primegov",
+      "aliases": []
+    },
+    {
+      "number": 3,
+      "canonical_id": "granicus",
+      "family_id": "granicus",
+      "aliases": []
+    },
+    {
+      "number": 4,
+      "canonical_id": "novusagenda",
+      "family_id": "novusagenda",
+      "aliases": []
+    },
+    {
+      "number": 5,
+      "canonical_id": "civicplus-select",
+      "family_id": "civicplus_select",
+      "aliases": [
+        "civicplus_select"
+      ]
+    },
+    {
+      "number": 6,
+      "canonical_id": "civicplus-agenda-center",
+      "family_id": "civicplus-agenda-center",
+      "aliases": []
+    },
+    {
+      "number": 7,
+      "canonical_id": "municode-meetings",
+      "family_id": "municode-meetings",
+      "aliases": []
+    },
+    {
+      "number": 8,
+      "canonical_id": "boardbook",
+      "family_id": "boardbook",
+      "aliases": []
+    },
+    {
+      "number": 9,
+      "canonical_id": "escribe",
+      "family_id": "escribe",
+      "aliases": []
+    },
+    {
+      "number": 10,
+      "canonical_id": "simbli",
+      "family_id": "simbli",
+      "aliases": []
+    },
+    {
+      "number": 11,
+      "canonical_id": "civicweb",
+      "family_id": "icompass-civicweb",
+      "aliases": [
+        "icompass-civicweb"
+      ]
+    },
+    {
+      "number": 12,
+      "canonical_id": "iqm2",
+      "family_id": "iqm2",
+      "aliases": []
+    },
+    {
+      "number": 13,
+      "canonical_id": "swagit",
+      "family_id": "swagit",
+      "aliases": []
+    },
+    {
+      "number": 14,
+      "canonical_id": "suiteone-media",
+      "family_id": "suiteone-media",
+      "aliases": []
+    },
+    {
+      "number": 15,
+      "canonical_id": "peak",
+      "family_id": "granicus-peak",
+      "aliases": [
+        "granicus-peak"
+      ]
+    },
+    {
+      "number": 16,
+      "canonical_id": "utah-public-notice",
+      "family_id": "utah-public-notice",
+      "aliases": []
+    },
+    {
+      "number": 17,
+      "canonical_id": "destiny-agendaquick",
+      "family_id": "destiny-agendaquick",
+      "aliases": []
+    },
+    {
+      "number": 18,
+      "canonical_id": "town-hall-streams",
+      "family_id": "town-hall-streams",
+      "aliases": []
+    },
+    {
+      "number": 19,
+      "canonical_id": "telvue",
+      "family_id": "telvue",
+      "aliases": []
+    },
+    {
+      "number": 20,
+      "canonical_id": "champ",
+      "family_id": "champ",
+      "aliases": []
+    },
+    {
+      "number": 21,
+      "canonical_id": "onbase",
+      "family_id": "hyland-onbase-agenda-online",
+      "aliases": [
+        "hyland-onbase-agenda-online"
+      ]
+    },
+    {
+      "number": 22,
+      "canonical_id": "laserfiche-weblink",
+      "family_id": "laserfiche",
+      "aliases": [
+        "laserfiche"
+      ]
+    },
+    {
+      "number": 23,
+      "canonical_id": "towncloud",
+      "family_id": "towncloud",
+      "aliases": []
+    },
+    {
+      "number": 24,
+      "canonical_id": "digital-towpath",
+      "family_id": "digital-towpath",
+      "aliases": []
+    },
+    {
+      "number": 25,
+      "canonical_id": "clerkbase",
+      "family_id": "clerkbase",
+      "aliases": []
+    },
+    {
+      "number": 26,
+      "canonical_id": "first-party",
+      "family_id": "first-party",
+      "aliases": []
+    },
+    {
+      "number": 27,
+      "canonical_id": "wistia",
+      "family_id": "wistia",
+      "aliases": []
+    },
+    {
+      "number": 28,
+      "canonical_id": "boardable",
+      "family_id": "boardable",
+      "aliases": []
+    },
+    {
+      "number": 29,
+      "canonical_id": "gworks",
+      "family_id": "gworks",
+      "aliases": []
+    },
+    {
+      "number": 30,
+      "canonical_id": "boarddocs",
+      "family_id": "diligent-boarddocs",
+      "aliases": [
+        "diligent-boarddocs"
+      ]
+    },
+    {
+      "number": 31,
+      "canonical_id": "tyler-meeting-manager",
+      "family_id": "tyler-meeting-manager",
+      "aliases": []
+    }
+  ],
+  "alias_to_canonical": {
+    "legistar": "legistar",
+    "primegov": "primegov",
+    "granicus": "granicus",
+    "novusagenda": "novusagenda",
+    "civicplus-select": "civicplus-select",
+    "civicplus_select": "civicplus-select",
+    "civicplus-agenda-center": "civicplus-agenda-center",
+    "municode-meetings": "municode-meetings",
+    "boardbook": "boardbook",
+    "escribe": "escribe",
+    "simbli": "simbli",
+    "civicweb": "civicweb",
+    "icompass-civicweb": "civicweb",
+    "iqm2": "iqm2",
+    "swagit": "swagit",
+    "suiteone-media": "suiteone-media",
+    "peak": "peak",
+    "granicus-peak": "peak",
+    "utah-public-notice": "utah-public-notice",
+    "destiny-agendaquick": "destiny-agendaquick",
+    "town-hall-streams": "town-hall-streams",
+    "telvue": "telvue",
+    "champ": "champ",
+    "onbase": "onbase",
+    "hyland-onbase-agenda-online": "onbase",
+    "laserfiche-weblink": "laserfiche-weblink",
+    "laserfiche": "laserfiche-weblink",
+    "towncloud": "towncloud",
+    "digital-towpath": "digital-towpath",
+    "clerkbase": "clerkbase",
+    "first-party": "first-party",
+    "wistia": "wistia",
+    "boardable": "boardable",
+    "gworks": "gworks",
+    "boarddocs": "boarddocs",
+    "diligent-boarddocs": "boarddocs",
+    "tyler-meeting-manager": "tyler-meeting-manager"
+  }
+}

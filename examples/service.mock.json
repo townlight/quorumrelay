@@ -1,0 +1,21 @@
+{
+  "service": {
+    "host": "127.0.0.1",
+    "port": 8765,
+    "tokens": {
+      "synthetic-newsroom-a-token-not-for-deployment": {
+        "principal": "synthetic-editor-a",
+        "client_id": "townreporter",
+        "tenant": "newsroom-a",
+        "operations": ["providers", "capabilities", "identify", "validate_source", "discover", "fetch", "normalize", "search", "import_preview", "import_bundle", "export", "plan_write", "commit_write", "receipt", "status", "cancel"],
+        "authorization": ["write:plan", "write:commit"]
+      },
+      "synthetic-newsroom-b-token-not-for-deployment": {
+        "principal": "synthetic-editor-b",
+        "client_id": "townreporter",
+        "tenant": "newsroom-b",
+        "operations": ["providers", "capabilities", "identify", "validate_source", "discover", "fetch", "normalize", "search", "import_preview", "import_bundle", "export", "receipt", "status", "cancel"]
+      }
+    }
+  }
+}

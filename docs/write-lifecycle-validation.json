@@ -1,0 +1,167 @@
+{
+  "kind": "independent-write-lifecycle",
+  "status": "PASS",
+  "evidence_class": "source-checkout mock transport",
+  "module_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\civic-data-connectors\\src\\civic_data_connectors\\__init__.py",
+  "tests_run": 15,
+  "failures": 0,
+  "errors": 0,
+  "cases": [
+    {
+      "test": "__main__.WriteLifecycle.test_concurrent_commit_sends_one_create",
+      "requirements": [
+        "W05",
+        "W06"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.332431999999244
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_cross_principal_client_and_tenant_cannot_commit",
+      "requirements": [
+        "G01",
+        "W02"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.07746779999797582
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_duplicate_and_mutable_client_plan_do_not_repeat_or_change_create",
+      "requirements": [
+        "W02",
+        "W05"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.5579740000030142
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_happy_path_distinct_app_tenant_and_native_docs",
+      "requirements": [
+        "W01",
+        "W02",
+        "W08"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.1836801999997988
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_lost_response_restart_reconciles_without_repeat",
+      "requirements": [
+        "W05",
+        "W06",
+        "W08"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.36727980000068783
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_partial_batch_keeps_success_and_denial",
+      "requirements": [
+        "W03",
+        "W07"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.5234875000023749
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_provider_namespace_policy_is_enforced",
+      "requirements": [
+        "G01",
+        "W02"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.3171426999979303
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_provider_permission_revoked_after_plan",
+      "requirements": [
+        "W02",
+        "W03"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.16422569999849657
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_receipt_rechecks_current_namespace",
+      "requirements": [
+        "G01",
+        "W08"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.83288309999989
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_reduced_namespace_policy_blocks_prepared_commit",
+      "requirements": [
+        "G01",
+        "W02"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.3282044000006863
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_revoked_current_operation_blocks_commit",
+      "requirements": [
+        "G01",
+        "W02"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.28354419999959646
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_saved_state_contains_no_provider_secret",
+      "requirements": [
+        "G02"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.5323467000016535
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_stale_upstream_state_blocks_update",
+      "requirements": [
+        "W04"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.7359017000017047
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_stored_plan_tampering_is_rejected",
+      "requirements": [
+        "W02"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.13108619999911753
+    },
+    {
+      "test": "__main__.WriteLifecycle.test_unknown_fields_and_arbitrary_origin_are_rejected",
+      "requirements": [
+        "W01",
+        "G01"
+      ],
+      "status": "PASS",
+      "detail": null,
+      "elapsed_seconds": 0.04446619999725954
+    }
+  ],
+  "network": "blocked",
+  "live_write_acceptance": "NOT_RUN",
+  "limitations": [
+    "Mocked provider behavior is not live acceptance",
+    "Source-checkout checks require final installed-artifact rerun",
+    "Legistar Event cases do not prove every outbound inventory operation"
+  ]
+}

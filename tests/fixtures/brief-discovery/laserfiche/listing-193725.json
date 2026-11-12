@@ -1,0 +1,220 @@
+{
+ "data": {
+  "name": "07.08.25",
+  "folderId": 193725,
+  "colTypes": [
+   {
+    "displayName": "Name",
+    "name": "Name",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": false,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Page count",
+    "name": "PageCount",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": false,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Template name",
+    "name": "TemplateName",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": false,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "ID",
+    "name": "Id",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Template ID",
+    "name": "TemplateId",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Entry type",
+    "name": "EntryType",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Shortcut target",
+    "name": "LinkTo",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Relationship type",
+    "name": "LinkType",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Extension",
+    "name": "Extension",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Flags",
+    "name": "Flags",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Date created",
+    "name": "CreationDate",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Date modified",
+    "name": "LastModified",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   }
+  ],
+  "results": [
+   {
+    "name": "07.08.25 BOZA Audio",
+    "entryId": 193726,
+    "type": -2,
+    "shortcutTargetId": 0,
+    "targetType": 0,
+    "pathToImage": "~/images/spacer.gif",
+    "iconClass": "DocumentBrowserNameImage ElectronicFileIcon EdocMP3",
+    "extension": "mp3",
+    "multiValueFields": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "isEdoc": true,
+    "entryProperties": null,
+    "contexthits": null,
+    "metadata": null,
+    "thumbnailPageCount": 0,
+    "mediaMimeType": "audio/mpeg",
+    "mediaHandlerUrl": "mediahandler.ashx?id=193726&t=639299568403068406&dbid=0&repo=LF8PROD2",
+    "tags": null,
+    "data": [
+     "07.08.25 BOZA Audio",
+     0,
+     "CityWide",
+     193726,
+     2,
+     -2,
+     null,
+     -2,
+     "mp3",
+     17,
+     "7/14/2025 11:30:01 AM",
+     "7/14/2025 11:30:02 AM"
+    ]
+   },
+   {
+    "name": "07.08.25 BOZA Packet",
+    "entryId": 193727,
+    "type": -2,
+    "shortcutTargetId": 0,
+    "targetType": 0,
+    "pathToImage": "~/images/spacer.gif",
+    "iconClass": "DocumentBrowserNameImage ElectronicFileIcon EdocPDF",
+    "extension": "pdf",
+    "multiValueFields": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "isEdoc": true,
+    "entryProperties": null,
+    "contexthits": null,
+    "metadata": null,
+    "thumbnailPageCount": 0,
+    "mediaMimeType": "",
+    "mediaHandlerUrl": null,
+    "tags": null,
+    "data": [
+     "07.08.25 BOZA Packet",
+     27,
+     "CityWide",
+     193727,
+     2,
+     -2,
+     null,
+     -2,
+     "pdf",
+     17,
+     "7/14/2025 11:30:03 AM",
+     "7/14/2025 11:30:30 AM"
+    ]
+   }
+  ],
+  "failed": false,
+  "errMsg": null,
+  "entryType": 0,
+  "path": "\\Central Records\\Boards & Commissions\\Board of Zoning Adjustments and Building Appeals (BOZA)\\2025\\07 JUL\\07.08.25",
+  "parentId": 0,
+  "showColumnPicker": false,
+  "totalEntries": 2,
+  "sortAscending": true,
+  "sortColumn": ""
+ },
+ "__breach": "8yMu/yg+rB867TkUbHakbQnS"
+}

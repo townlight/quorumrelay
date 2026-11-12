@@ -1,0 +1,1333 @@
+{
+  "schema_version": "1.0.0",
+  "owner": "core",
+  "library_version": "0.1.0.dev1",
+  "record_schema_version": "2.0.0",
+  "observed_at": "2026-11-11T17:50:51.160358+00:00",
+  "test_policy": "synthetic/mock tests and preserved original saved public captures; no live writes",
+  "release_status": "incomplete",
+  "provider_count": 31,
+  "baseline_format_count": 34,
+  "source_pins": [
+    {
+      "repository": "https://github.com/townlight/townlight",
+      "revision": "d4470aeae662c759351f63140b035edac10d9a52",
+      "state_before_extraction": "clean",
+      "paths": [
+        "desktop/runtime/python-services/townlight_runtime/meeting_imports.py",
+        "desktop/runtime/python-services/townlight_runtime/meeting_import_fetch.py"
+      ]
+    },
+    {
+      "repository": "https://github.com/townlight/core",
+      "revision": "88fe5bd19110058b93d72ce4bb5ae9c2d68d0106",
+      "state_before_extraction": "clean",
+      "paths": [
+        "townlight_core/connectors/imports.py"
+      ]
+    },
+    {
+      "repository": "https://github.com/townlight/meetings",
+      "revision": "f8ccf82807597e228ba276e1b3f89d053a7c0018",
+      "state_before_extraction": "clean",
+      "paths": [
+        "townlight_meetings/imported_meetings.py"
+      ],
+      "reuse": "semantics, no persistence copied"
+    }
+  ],
+  "oracle": {
+    "method": "scripts/capture_baseline.py executed pinned untouched original readers/Core normalizers",
+    "original_corpus_manifest": "tests/fixtures/baseline/cases.json",
+    "manifest_sha256": "85667dab73fb1180fddb99c7dd2435a88e46d6f863b3122626e5109372942ed6",
+    "validator_oracle_sha256": "4ecc089cb8e130218bc9bba819abe095eefdebc0187b61fc58262faf5e7cc6b7",
+    "validator_report": "Independent validator reported frozen baseline wheel full JSON34/34 and no reference imports."
+  },
+  "commands": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_baseline.py tests/test_core.py tests/test_fetch.py tests/test_legacy_projection.py tests/test_extension_dispatch.py tests/test_capabilities.py -q",
+      "exit_status": 0,
+      "result": "PASS",
+      "note": "Each per-format test listed below is separately parameterized."
+    },
+    {
+      "command": ".venv/Scripts/python.exe scripts/run_original_matrix.py <pinned-original>/check-source-matrix.py",
+      "exit_status": 0,
+      "result": "PASS",
+      "observed": "34/34 unchanged original runner local-parser cases"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests -q",
+      "exit_status": 0,
+      "result": "PASS",
+      "observed": "279 passed, 1 Starlette/anyio deprecation warning in57.48s",
+      "limits": "Intermediate combined-source snapshot, not final artifact or later changes."
+    }
+  ],
+  "source_file_sha256": {
+    "src/civic_data_connectors/compat.py": "2a2e9fe3cc14db7cc71e0438ea95aa9b511eb5d9824e6fa2b3e6a32b15ba0530",
+    "src/civic_data_connectors/normalization.py": "1ed6dafe0072eb57327e7d61b12df801f79bfb9ea7ea1738548afb5a002e0606",
+    "src/civic_data_connectors/fetch.py": "ab4798b255c41d877dde389746f5c9123b937f522e86fd0e33917c9ff319ccbe",
+    "src/civic_data_connectors/models.py": "bdea384cdede0e2bdbe5c0fcc76b8c63c7fe6d913dc7ec523651fbc4018509e7",
+    "src/civic_data_connectors/engine.py": "a0498b903c3a0faa7a9690d327f94ecef8124a86e583ae09bd5c6539910504e3",
+    "src/civic_data_connectors/extensions.py": "bf000fef8fe9b3bf33ed782bd61f0adb6773eee816cac026006b6ca90140d9e2",
+    "src/civic_data_connectors/schemas.py": "fc5ab2cf8cdcdb9646143af4e53e2e2793617602a3b10c398d719ea4dfcf4193",
+    "src/civic_data_connectors/factory.py": "c7f8593dad38fe0ded556fee3c005916ee9af3d76448a88f1051ad7edc20afcf",
+    "src/civic_data_connectors/legacy.py": "36ea09065b21b34220ffad23f398cde58c1a966ce419c5014edefe0a1eaac622",
+    "src/civic_data_connectors/capabilities.py": "fc8a550bc2df618e0ccb40941eeb89f6e2215cf59b0e05ce880aad45a834c51c"
+  },
+  "baseline_parse": [
+    {
+      "provider": "legistar",
+      "input_format": "meeting-export",
+      "requirement_ids": [
+        "B01",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_meeting_export",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[legistar/meeting-export]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[legistar/meeting-export]"
+      ],
+      "fixture": "tests/fixtures/baseline/legistar.json",
+      "fixture_sha256": "11fbf132c37d7d24032b9948e9e17bbb1d3f39c189974be6db1db42fd05ae1ce",
+      "oracle_output_sha256": "d81a27f2dc8913630c193a8be07b230af5b973afe22665147e6dfa89a02a85a2",
+      "actual_output_sha256": "d81a27f2dc8913630c193a8be07b230af5b973afe22665147e6dfa89a02a85a2",
+      "original_record_count": 1,
+      "namespace": "//example.gov",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "primegov",
+      "input_format": "meeting-export",
+      "requirement_ids": [
+        "B02",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_meeting_export",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[primegov/meeting-export]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[primegov/meeting-export]"
+      ],
+      "fixture": "tests/fixtures/baseline/primegov.json",
+      "fixture_sha256": "48150578eea4c6c6e243fde0ff8ca21db8be82f306c8a40aa09728e1f60cfb82",
+      "oracle_output_sha256": "9cb99b9fca794ee0fdab741597a5f7b09615356c5244f1cd40f8840bf1de781b",
+      "actual_output_sha256": "9cb99b9fca794ee0fdab741597a5f7b09615356c5244f1cd40f8840bf1de781b",
+      "original_record_count": 1,
+      "namespace": "//example.gov",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "granicus",
+      "input_format": "meeting-export",
+      "requirement_ids": [
+        "B04",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_meeting_export",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[granicus/meeting-export]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[granicus/meeting-export]"
+      ],
+      "fixture": "tests/fixtures/baseline/granicus.json",
+      "fixture_sha256": "687bdd058e50db9533df5215d39e2c0ad0cdf4f36c6d5f916723dbdcb4a55059",
+      "oracle_output_sha256": "a1bec6fbbcd3e73e4fc0eb5dc1f89601bb519a8c9b08dc34c6f66dbdee37556b",
+      "actual_output_sha256": "a1bec6fbbcd3e73e4fc0eb5dc1f89601bb519a8c9b08dc34c6f66dbdee37556b",
+      "original_record_count": 1,
+      "namespace": "//example.gov",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "novusagenda",
+      "input_format": "meeting-export",
+      "requirement_ids": [
+        "B06",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_meeting_export",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[novusagenda/meeting-export]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[novusagenda/meeting-export]"
+      ],
+      "fixture": "tests/fixtures/baseline/novusagenda.json",
+      "fixture_sha256": "e189c9434aa2b01ed233de044423109449e547cdbb2b524ab9709e5316d50d10",
+      "oracle_output_sha256": "d717e7755c4dfc43c358c76606fb72bce76216537993fb13312f0f1f5dd00377",
+      "actual_output_sha256": "d717e7755c4dfc43c358c76606fb72bce76216537993fb13312f0f1f5dd00377",
+      "original_record_count": 1,
+      "namespace": "//example.gov",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "granicus",
+      "input_format": "viewpublisher-html",
+      "requirement_ids": [
+        "B05",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_viewpublisher",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[granicus/viewpublisher-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[granicus/viewpublisher-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/oakland.html",
+      "fixture_sha256": "cc75d87f595277facaa5bb5a905ee84707978f94be12d9a85a69e3dd83bd8c20",
+      "oracle_output_sha256": "b215002ea71eaa8992fc88950e786df6608d00e0ad7b9e8a9df777f9a6f6b2d4",
+      "actual_output_sha256": "b215002ea71eaa8992fc88950e786df6608d00e0ad7b9e8a9df777f9a6f6b2d4",
+      "original_record_count": 2,
+      "namespace": "//oakland.granicus.com",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "primegov",
+      "input_format": "primegov-portal-json",
+      "requirement_ids": [
+        "B03",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_primegov_portal",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[primegov/primegov-portal-json]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[primegov/primegov-portal-json]"
+      ],
+      "fixture": "tests/fixtures/baseline/longmont-ListUpcomingMeetings.json",
+      "fixture_sha256": "472bf9a0a8e90cf4379b13b03a6851be0c0fa6a3e664b1f31063dca6084498bc",
+      "oracle_output_sha256": "a9921a508cf0ec43454b05cc059fa7aab056d5ea5a0b5688b9c370b5338c22f4",
+      "actual_output_sha256": "a9921a508cf0ec43454b05cc059fa7aab056d5ea5a0b5688b9c370b5338c22f4",
+      "original_record_count": 7,
+      "namespace": "//longmont.primegov.com",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "civicplus-select",
+      "input_format": "civicplus-events-json",
+      "requirement_ids": [
+        "B07",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_civicplus_events",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[civicplus-select/civicplus-events-json]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[civicplus-select/civicplus-events-json]"
+      ],
+      "fixture": "tests/fixtures/baseline/civicclerk.response",
+      "fixture_sha256": "ddcfa72e0b16395e6acac7231f07f81368dcca681f4168e252617db7606ceb3b",
+      "oracle_output_sha256": "7ed9baca56d520eb5eefd298d436fc31508631389cce2ae998c96ccf54f082bc",
+      "actual_output_sha256": "7ed9baca56d520eb5eefd298d436fc31508631389cce2ae998c96ccf54f082bc",
+      "original_record_count": 15,
+      "namespace": "//turlockca.api.civicclerk.com",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "civicplus-agenda-center",
+      "input_format": "agenda-center-html",
+      "requirement_ids": [
+        "B08",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_agenda_center",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[civicplus-agenda-center/agenda-center-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[civicplus-agenda-center/agenda-center-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/agenda-center.response",
+      "fixture_sha256": "975a24df772bddbb1f3fcb4e4f730f72caea952b5fefcebd7a646ca77658a180",
+      "oracle_output_sha256": "617fb4bce9e219e8e4081d397364a2e2ea50dacde27ecfb4c80a3c475eb9c84d",
+      "actual_output_sha256": "617fb4bce9e219e8e4081d397364a2e2ea50dacde27ecfb4c80a3c475eb9c84d",
+      "original_record_count": 85,
+      "namespace": "//www.clevelandtn.gov",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "municode-meetings",
+      "input_format": "municode-meetings-html",
+      "requirement_ids": [
+        "B09",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_municode_meetings",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[municode-meetings/municode-meetings-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[municode-meetings/municode-meetings-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/municode.response",
+      "fixture_sha256": "b72ccb013f3e6b45bb513d9fad0a250471214a362996e59b269c65660ab825d0",
+      "oracle_output_sha256": "a47d7fe8b7091d7cb87c89e74e53d8402959fdcd9a0024f8c739ce73f1d4ef76",
+      "actual_output_sha256": "a47d7fe8b7091d7cb87c89e74e53d8402959fdcd9a0024f8c739ce73f1d4ef76",
+      "original_record_count": 25,
+      "namespace": "//southjordan-ut.municodemeetings.com",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "boardbook",
+      "input_format": "boardbook-html",
+      "requirement_ids": [
+        "B10",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_boardbook",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[boardbook/boardbook-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[boardbook/boardbook-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/boardbook.response",
+      "fixture_sha256": "11f47982510d4bca619bf769802fa3276a28a7d49756604fb4563b8f684693cb",
+      "oracle_output_sha256": "5d12c10e96bc80c41ad420bf3397d881eb153067a423b038fc1adbae705d362b",
+      "actual_output_sha256": "5d12c10e96bc80c41ad420bf3397d881eb153067a423b038fc1adbae705d362b",
+      "original_record_count": 33,
+      "namespace": "//meetings.boardbook.org/Public/Organization/3307",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "escribe",
+      "input_format": "escribe-calendar-json",
+      "requirement_ids": [
+        "B11",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_escribe",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[escribe/escribe-calendar-json]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[escribe/escribe-calendar-json]"
+      ],
+      "fixture": "tests/fixtures/baseline/escribe-saskatoon-calendar.response",
+      "fixture_sha256": "7bf3cec03f434ab777975e3ef6a0a3134704b45c0265f1fe628802cdce661417",
+      "oracle_output_sha256": "6dd017bd30b0884ecc3451591c97c5f6fdda5fa5d51cd3f64d9d92a97239a3f6",
+      "actual_output_sha256": "6dd017bd30b0884ecc3451591c97c5f6fdda5fa5d51cd3f64d9d92a97239a3f6",
+      "original_record_count": 18,
+      "namespace": "//pub-saskatoon.escribemeetings.com",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "simbli",
+      "input_format": "simbli-html",
+      "requirement_ids": [
+        "B12",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_simbli",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[simbli/simbli-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[simbli/simbli-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/simbli.response",
+      "fixture_sha256": "5f0d54d9939ccd69ec7e36cf9b3c25d58b0959f099e4bad7a9ad4077121f103a",
+      "oracle_output_sha256": "172d77335a32262a04dc51dbbbb5b7584c56cd137c4956c671291b9f3dff3185",
+      "actual_output_sha256": "172d77335a32262a04dc51dbbbb5b7584c56cd137c4956c671291b9f3dff3185",
+      "original_record_count": 50,
+      "namespace": "//simbli.eboardsolutions.com?S=36030321",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "civicweb",
+      "input_format": "civicweb-html",
+      "requirement_ids": [
+        "B13",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_civicweb",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[civicweb/civicweb-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[civicweb/civicweb-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/civicweb-types.response",
+      "fixture_sha256": "d8ffe0293434620f07c5c866878cc0c4da28b4341e6efd5653bd0549493972a9",
+      "oracle_output_sha256": "87fcc968cb38f2dc986965dd743777bd655e5e589d5256fee250e22aa67ebd5d",
+      "actual_output_sha256": "87fcc968cb38f2dc986965dd743777bd655e5e589d5256fee250e22aa67ebd5d",
+      "original_record_count": 45,
+      "namespace": "//sonomacity.civicweb.net",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "iqm2",
+      "input_format": "iqm2-html",
+      "requirement_ids": [
+        "B14",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_iqm2",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[iqm2/iqm2-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[iqm2/iqm2-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/iqm2.response",
+      "fixture_sha256": "8bbadac3551a4d3d7c3e68768f4c14f6d96e8412cc809b5a138fcd33c77830f0",
+      "oracle_output_sha256": "2a815cf1488416ce9eaf202e9952a9799924d74136a504f682b937c5e2f07bb4",
+      "actual_output_sha256": "2a815cf1488416ce9eaf202e9952a9799924d74136a504f682b937c5e2f07bb4",
+      "original_record_count": 6,
+      "namespace": "//santamonicacityca.iqm2.com",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "swagit",
+      "input_format": "swagit-archive-html",
+      "requirement_ids": [
+        "B15",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_swagit",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[swagit/swagit-archive-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[swagit/swagit-archive-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/swagit.response",
+      "fixture_sha256": "38c63b12ddc4f41ab21e911ead700b516aea4127c01689e99905ee7f7c362581",
+      "oracle_output_sha256": "2c272dca6738408554bb8c7132ab67192f02629a10168d81d93e9eec90f1445b",
+      "actual_output_sha256": "2c272dca6738408554bb8c7132ab67192f02629a10168d81d93e9eec90f1445b",
+      "original_record_count": 10,
+      "namespace": "//bellca.new.swagit.com",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "suiteone-media",
+      "input_format": "suiteone-archive-html",
+      "requirement_ids": [
+        "B16",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_suiteone",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[suiteone-media/suiteone-archive-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[suiteone-media/suiteone-archive-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/suiteone.response",
+      "fixture_sha256": "c4a0732de74628cf5590129d0020d474937161638719c3215c09533235241112",
+      "oracle_output_sha256": "795cb75305d39aeb068fa312ff3e53a27795c10669646fefe53dd85802f34e8e",
+      "actual_output_sha256": "795cb75305d39aeb068fa312ff3e53a27795c10669646fefe53dd85802f34e8e",
+      "original_record_count": 28,
+      "namespace": "//watkinsvillega.suiteonemedia.com",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "peak",
+      "input_format": "peak-viewpublisher-html",
+      "requirement_ids": [
+        "B17",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_peak",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[peak/peak-viewpublisher-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[peak/peak-viewpublisher-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/peak.response",
+      "fixture_sha256": "835e3e2990186c4015b223f3692938b45437e8ee8c91e22fb55740c0cc06fb1b",
+      "oracle_output_sha256": "a1319c5482ea573eb5f371d530f3daeb1106e8cdcd17fb0be0e355cd685bbd06",
+      "actual_output_sha256": "a1319c5482ea573eb5f371d530f3daeb1106e8cdcd17fb0be0e355cd685bbd06",
+      "original_record_count": 7,
+      "namespace": "//douglascountynv.granicus.com",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "utah-public-notice",
+      "input_format": "utah-notice-html",
+      "requirement_ids": [
+        "B18",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_utah_notice",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[utah-public-notice/utah-notice-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[utah-public-notice/utah-notice-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/utah-notice.response",
+      "fixture_sha256": "2067ed91c4346b0b39d6236dc9c470e9e0d401b63c8b390afb457745b8953f7e",
+      "oracle_output_sha256": "0b4eb776e87ce38937186b0e31eeb762a3f6968f4770956250ab9ab57569a693",
+      "actual_output_sha256": "0b4eb776e87ce38937186b0e31eeb762a3f6968f4770956250ab9ab57569a693",
+      "original_record_count": 1,
+      "namespace": "//www.utah.gov",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "destiny-agendaquick",
+      "input_format": "agendaquick-html",
+      "requirement_ids": [
+        "B19",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_destiny",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[destiny-agendaquick/agendaquick-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[destiny-agendaquick/agendaquick-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/destiny.response",
+      "fixture_sha256": "27fa403b6a4bd42093a60dc40a581d4cfbbe643ce4fc513459ec96f70b3c8692",
+      "oracle_output_sha256": "8ef675a379222baa7bd948189b4c070e15934abc0645084890b262ba3971825e",
+      "actual_output_sha256": "8ef675a379222baa7bd948189b4c070e15934abc0645084890b262ba3971825e",
+      "original_record_count": 10,
+      "namespace": "//public.destinyhosted.com/35247",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "town-hall-streams",
+      "input_format": "town-hall-streams-html",
+      "requirement_ids": [
+        "B20",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_town_hall_streams",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[town-hall-streams/town-hall-streams-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[town-hall-streams/town-hall-streams-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/townhallstreams.response",
+      "fixture_sha256": "af55f7fc75824b7744c999c155a228f2007c718c36a13cd817cbe2774ea2394b",
+      "oracle_output_sha256": "d6fd9f0d2870cba0b0149623cbdc0e7ce0bd05bd24f8d2399d9fb232a007269e",
+      "actual_output_sha256": "d6fd9f0d2870cba0b0149623cbdc0e7ce0bd05bd24f8d2399d9fb232a007269e",
+      "original_record_count": 415,
+      "namespace": "//townhallstreams.com?location_id=31",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "telvue",
+      "input_format": "telvue-playlist-html",
+      "requirement_ids": [
+        "B21",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_telvue",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[telvue/telvue-playlist-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[telvue/telvue-playlist-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/telvue.response",
+      "fixture_sha256": "08c2ca51ed7655f5fd6734eaab7e193445deac8764079ee0f8da45ddf9b017fd",
+      "oracle_output_sha256": "2f59a1132e076304eec83789840b34afdc41250acd8e625dff93c06b0c004883",
+      "actual_output_sha256": "2f59a1132e076304eec83789840b34afdc41250acd8e625dff93c06b0c004883",
+      "original_record_count": 15,
+      "namespace": "//telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "champ",
+      "input_format": "champ-event-json",
+      "requirement_ids": [
+        "B22",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_champ",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[champ/champ-event-json]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[champ/champ-event-json]"
+      ],
+      "fixture": "tests/fixtures/baseline/champ-event.response",
+      "fixture_sha256": "8996174ad192d0c4be757871a445117f2001b8414b5cf4106f8a5f814dce1f06",
+      "oracle_output_sha256": "9c100aabfd2133c98b5cc7039054ffad18d380673f6ca7e8647a247d35ece5b5",
+      "actual_output_sha256": "9c100aabfd2133c98b5cc7039054ffad18d380673f6ca7e8647a247d35ece5b5",
+      "original_record_count": 1,
+      "namespace": "//champds.com/lakezurichil",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "onbase",
+      "input_format": "onbase-agenda-online-html",
+      "requirement_ids": [
+        "B23",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_onbase",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[onbase/onbase-agenda-online-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[onbase/onbase-agenda-online-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/onbase.response",
+      "fixture_sha256": "52bcf78353802dc087e65c83034dadcf751a61142eebb05821481e5cc3bd56a1",
+      "oracle_output_sha256": "37f3cf8b0ba581a143d9f5b51830aba54a7388a542eb18f6672b9b6cfaed5727",
+      "actual_output_sha256": "37f3cf8b0ba581a143d9f5b51830aba54a7388a542eb18f6672b9b6cfaed5727",
+      "original_record_count": 73,
+      "namespace": "//ecm.cityofsantacruz.com/onbaseagendaonline",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "laserfiche-weblink",
+      "input_format": "laserfiche-folder-html",
+      "requirement_ids": [
+        "B24",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_laserfiche",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[laserfiche-weblink/laserfiche-folder-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[laserfiche-weblink/laserfiche-folder-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/laserfiche-docs.response",
+      "fixture_sha256": "bee1c4fb685d53e6181c3d3750b68475e4c9096752ca34df57cc7f88dccda2d7",
+      "oracle_output_sha256": "68b6b5ad8d6709874b467165f146716384a5c7ea06f91edd22dd481ad5c56d8b",
+      "actual_output_sha256": "68b6b5ad8d6709874b467165f146716384a5c7ea06f91edd22dd481ad5c56d8b",
+      "original_record_count": 19,
+      "namespace": "//documents.redwoodcity.org/publicweblink",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "towncloud",
+      "input_format": "towncloud-agenda-html",
+      "requirement_ids": [
+        "B26",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_towncloud_agenda",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[towncloud/towncloud-agenda-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[towncloud/towncloud-agenda-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/towncloud-agenda.response",
+      "fixture_sha256": "6dc4c41b94da012eec085fdcab30c64e83812af5f01aa4a381c3f4b31acf5a66",
+      "oracle_output_sha256": "e5e09849b291cb58d58c4c902cc1f25dea992171387106ec82fbae37ef23956b",
+      "actual_output_sha256": "e5e09849b291cb58d58c4c902cc1f25dea992171387106ec82fbae37ef23956b",
+      "original_record_count": 1,
+      "namespace": "//towncloud.io/go/bennett-co",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "towncloud",
+      "input_format": "towncloud-table-json",
+      "requirement_ids": [
+        "B25",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_towncloud",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[towncloud/towncloud-table-json]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[towncloud/towncloud-table-json]"
+      ],
+      "fixture": "tests/fixtures/baseline/towncloud-list.response",
+      "fixture_sha256": "ac713151a85443d99d18d17373a14b910232845f113fe2dcd61bb232718ec1da",
+      "oracle_output_sha256": "ed4838d0f58a20bb3fc1abb496d987525a067c94a16f64881bb8568364d8b0af",
+      "actual_output_sha256": "ed4838d0f58a20bb3fc1abb496d987525a067c94a16f64881bb8568364d8b0af",
+      "original_record_count": 25,
+      "namespace": "//towncloud.io/go/bennett-co",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "digital-towpath",
+      "input_format": "digital-towpath-detail-html",
+      "requirement_ids": [
+        "B27",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_digital_towpath",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[digital-towpath/digital-towpath-detail-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[digital-towpath/digital-towpath-detail-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/digital-towpath-detail.response",
+      "fixture_sha256": "f02d3b5b393cf3935cef44d1d574d95bccd29779bef390353f051b8c037f3e3a",
+      "oracle_output_sha256": "064ebc05ee3542b18ebbeefa66e526c8f76fc83b4031ec3564224570d943f20d",
+      "actual_output_sha256": "064ebc05ee3542b18ebbeefa66e526c8f76fc83b4031ec3564224570d943f20d",
+      "original_record_count": 1,
+      "namespace": "//townofberkshireny.gov",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "clerkbase",
+      "input_format": "clerkbase-document-html",
+      "requirement_ids": [
+        "B28",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_clerkbase",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[clerkbase/clerkbase-document-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[clerkbase/clerkbase-document-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/clerkbase.response",
+      "fixture_sha256": "4bc7c508723796477389fd2385c6e111eee88d5fedb54e7271daea2692d86e2a",
+      "oracle_output_sha256": "eb3f98bed6188365b443dd9181dd3c65ebe3d63bdf9685471eef17ada485432e",
+      "actual_output_sha256": "eb3f98bed6188365b443dd9181dd3c65ebe3d63bdf9685471eef17ada485432e",
+      "original_record_count": 1,
+      "namespace": "//clerkshq.com",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "first-party",
+      "input_format": "public-meeting-ics",
+      "requirement_ids": [
+        "B29",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_public_calendar",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[first-party/public-meeting-ics]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[first-party/public-meeting-ics]"
+      ],
+      "fixture": "tests/fixtures/baseline/sunnyvale.response",
+      "fixture_sha256": "339a63cd60a7f1145481fceff34a6aa98f5dc0b4768a50cbfda3e1f76522d7d6",
+      "oracle_output_sha256": "64cdea3bf7dcfc7bebe87c9a7ab8f3aa7b255020aec57da4e42d539659fc669f",
+      "actual_output_sha256": "64cdea3bf7dcfc7bebe87c9a7ab8f3aa7b255020aec57da4e42d539659fc669f",
+      "original_record_count": 1307,
+      "namespace": "//calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "wistia",
+      "input_format": "wistia-media-json",
+      "requirement_ids": [
+        "B30",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_wistia",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[wistia/wistia-media-json]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[wistia/wistia-media-json]"
+      ],
+      "fixture": "tests/fixtures/baseline/wistia.response",
+      "fixture_sha256": "3b32bb295030cb376e1d50f2cd3d8e355c8d3e22f813b93248570e0037c7d1c0",
+      "oracle_output_sha256": "99e83ee973e899de32b3af6c81df4c142f286fd901565da14384e3713326cec6",
+      "actual_output_sha256": "99e83ee973e899de32b3af6c81df4c142f286fd901565da14384e3713326cec6",
+      "original_record_count": 1,
+      "namespace": "//fast.wistia.com",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "boardable",
+      "input_format": "boardable-public-meeting-html",
+      "requirement_ids": [
+        "B31",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_boardable",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[boardable/boardable-public-meeting-html]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[boardable/boardable-public-meeting-html]"
+      ],
+      "fixture": "tests/fixtures/baseline/boardable-detail.response",
+      "fixture_sha256": "ee3a196a1b76416a570bf26aab28ffb1ab39961e54f31a497f7273525b624847",
+      "oracle_output_sha256": "c8b9d7b1e3b289719ca10549ec0666da77548fce3136f13900987be2d5073cb2",
+      "actual_output_sha256": "c8b9d7b1e3b289719ca10549ec0666da77548fce3136f13900987be2d5073cb2",
+      "original_record_count": 1,
+      "namespace": "//site.boardable.com/lake-land-college",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "gworks",
+      "input_format": "gworks-frontdesk-json",
+      "requirement_ids": [
+        "B32",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_gworks",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[gworks/gworks-frontdesk-json]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[gworks/gworks-frontdesk-json]"
+      ],
+      "fixture": "tests/fixtures/baseline/gworks-1311.response",
+      "fixture_sha256": "1c416144c033155ff3db32dfa1e6720005d9d7c48ea625420087dee34e10ea70",
+      "oracle_output_sha256": "793989685d34429f6555bb4b69ec7520a980c8f15b8dd135c2c57f07b303f19e",
+      "actual_output_sha256": "793989685d34429f6555bb4b69ec7520a980c8f15b8dd135c2c57f07b303f19e",
+      "original_record_count": 173,
+      "namespace": "//files.frontdeskgworks.com/city/1311/cms/data.json",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "boarddocs",
+      "input_format": "boarddocs-print-pdf",
+      "requirement_ids": [
+        "B33",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_boarddocs",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[boarddocs/boarddocs-print-pdf]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[boarddocs/boarddocs-print-pdf]"
+      ],
+      "fixture": "tests/fixtures/baseline/boarddocs-minooka.pdf",
+      "fixture_sha256": "b54e25f3b6c877a93813614eee9ecafdbe176d9ce074567c78e911daf1411088",
+      "oracle_output_sha256": "2c0830daf7d74b39ff3661c4dd3b6784b214713adc272e26b20987de101c52b1",
+      "actual_output_sha256": "2c0830daf7d74b39ff3661c4dd3b6784b214713adc272e26b20987de101c52b1",
+      "original_record_count": 1,
+      "namespace": "//resources.finalsite.net",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    },
+    {
+      "provider": "tyler-meeting-manager",
+      "input_format": "tyler-public-calendar-json",
+      "requirement_ids": [
+        "B34",
+        "R02",
+        "R03"
+      ],
+      "operation": "parse",
+      "implementation_status": "implemented",
+      "acceptance_status": "fixture_passed",
+      "result": "PASS",
+      "evidence_level": "exact_pinned_original_output_comparison",
+      "codepath": "src/civic_data_connectors/compat.py:read_tyler_meeting_manager",
+      "tests": [
+        "tests/test_baseline.py::test_original_corpus_exact_compatibility[tyler-meeting-manager/tyler-public-calendar-json]",
+        "tests/test_baseline.py::test_rich_capture_is_lossless_and_compatible[tyler-meeting-manager/tyler-public-calendar-json]"
+      ],
+      "fixture": "tests/fixtures/baseline/tyler-calendar.response",
+      "fixture_sha256": "9807a51ff559cc0c0c3a734142b80f5616035378d18d3c7e6c09941efdb9edf5",
+      "oracle_output_sha256": "5034aa5332f6b04198ded935c6f3683edfa4c0be7afe79e7b6fd47d485b7e781",
+      "actual_output_sha256": "5034aa5332f6b04198ded935c6f3683edfa4c0be7afe79e7b6fd47d485b7e781",
+      "original_record_count": 14,
+      "namespace": "//cityofmurraycityut.meetingmanager.tylerapp.com",
+      "proves": "Saved format parsing/legacy identity/provenance plus exact capture retention only.",
+      "does_not_prove": [
+        "live discovery",
+        "native search",
+        "vendor export",
+        "remote writes",
+        "installed consumer acceptance"
+      ]
+    }
+  ],
+  "non_provider_specific_checks": [
+    {
+      "requirement_ids": [
+        "S02",
+        "S03"
+      ],
+      "test": "tests/test_core.py::test_parent_identity_metadata_is_not_part_of_identity_but_parent_id_is",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    },
+    {
+      "requirement_ids": [
+        "S05",
+        "S06"
+      ],
+      "test": "tests/test_core.py::test_typed_roundtrip_retains_unknown_nested_and_top_level_fields",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    },
+    {
+      "requirement_ids": [
+        "R05",
+        "S07"
+      ],
+      "test": "tests/test_core.py::test_tyler_rich_cancelled_and_adjourned_retained_legacy_filtered",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    },
+    {
+      "requirement_ids": [
+        "S07",
+        "C07"
+      ],
+      "test": "tests/test_core.py::test_calendar_cancellation_and_timezone_parameters_preserved",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    },
+    {
+      "requirement_ids": [
+        "S01"
+      ],
+      "test": "tests/test_core.py::test_schema_validates_actual_result_and_bundle",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    },
+    {
+      "requirement_ids": [
+        "G01",
+        "G10"
+      ],
+      "test": "tests/test_core.py::test_trusted_discover_normalize_delegation_does_not_expand_public_grants",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    },
+    {
+      "requirement_ids": [
+        "I10"
+      ],
+      "test": "tests/test_core.py::test_conformance_checks_bound_signatures_and_allows_variadic_hooks",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    },
+    {
+      "requirement_ids": [
+        "I10"
+      ],
+      "test": "tests/test_extension_dispatch.py::test_example_extension_discovery_and_identification_need_no_transport_changes",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    },
+    {
+      "requirement_ids": [
+        "G03",
+        "G04"
+      ],
+      "test": "tests/test_fetch.py::test_redirect_rechecks_dns_and_closes_every_connection",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    },
+    {
+      "requirement_ids": [
+        "G05"
+      ],
+      "test": "tests/test_fetch.py::test_dns_resolution_cannot_overrun_total_request_deadline",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    },
+    {
+      "requirement_ids": [
+        "G05",
+        "G06"
+      ],
+      "test": "tests/test_fetch.py::test_default_large_transfer_boundary_streams_without_parser_cap",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    },
+    {
+      "requirement_ids": [
+        "G06"
+      ],
+      "test": "tests/test_core.py::test_original_parser_16mib_exact_boundary",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    },
+    {
+      "requirement_ids": [
+        "R03",
+        "S09"
+      ],
+      "test": "tests/test_legacy_projection.py::test_native_existing_transition_needs_evidenced_id_mapping",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    },
+    {
+      "requirement_ids": [
+        "C06",
+        "S09"
+      ],
+      "test": "tests/test_legacy_projection.py::test_projection_uses_only_selected_records_not_unfiltered_page_preview",
+      "result": "PASS",
+      "limits": "Core contract behavior only; not evidence of each provider live operation."
+    }
+  ],
+  "live_write_acceptance": "NOT_RUN",
+  "installed_consumer_acceptance": "NOT_RUN",
+  "remaining": [
+    "Final coordinated artifact rebuild and affected reruns",
+    "Live provider writes prohibited by current mock-data direction",
+    "Installed consumer and signed-installer acceptance are separate owning tracks"
+  ]
+}

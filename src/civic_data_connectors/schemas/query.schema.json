@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:civic-data-connectors:schema:2.0.0:query",
+  "title": "Civic data connectors query 2.0.0",
+  "type": "object",
+  "properties": {
+    "terms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "phrases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "namespaces": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "providers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "record_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "body": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "date_from": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "date_to": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "limit": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "required": [],
+  "additionalProperties": true
+}

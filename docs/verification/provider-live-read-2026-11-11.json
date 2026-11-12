@@ -1,0 +1,1175 @@
+{
+  "observed_at": "2026-11-11T17:53:13.468724+00:00",
+  "policy": "Bounded public reads only. No attachment downloads, credentials, browser or remote writes. A partial listing is not full discovery acceptance.",
+  "results": [
+    {
+      "provider": "legistar",
+      "source_url": "https://webapi.legistar.com/v1/olympia",
+      "status": "completed",
+      "elapsed_seconds": 0.794,
+      "record_count": 7,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "f96bb34698c0ad01db32166a7218f43f069a9600cfd7897bdc2bb206fd32c1cc"
+      ],
+      "scope": "bounded provider listing",
+      "configuration_policy": "baseline",
+      "input_format": "legistar-events-json",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://webapi.legistar.com/v1/olympia/Events?%24orderby=EventId+asc&%24top=100&%24filter=EventId+gt+0+and+EventDate+ge+datetime%272026-11-01%27+and+EventDate+lt+datetime%272026-11-12%27",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://webapi.legistar.com"
+          ]
+        }
+      ],
+      "acceptance": "live_native_bounded_listing"
+    },
+    {
+      "provider": "primegov",
+      "source_url": "https://reno.primegov.com/public/portal",
+      "status": "completed",
+      "elapsed_seconds": 1.086,
+      "record_count": 7,
+      "pages": 2,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "49339261478eb92bd5524df3f809273c817a468f3853467d0e6d66c9a207fc01",
+        "9846783725f251579217c727aa12399cbbb23decfa268ff3352cb7cdb18cff9c"
+      ],
+      "scope": "bounded provider listing",
+      "configuration_policy": "baseline",
+      "input_format": "primegov-portal-json",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://reno.primegov.com/api/v2/PublicPortal/ListUpcomingMeetings",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://reno.primegov.com"
+          ]
+        },
+        {
+          "url": "https://reno.primegov.com/api/v2/PublicPortal/ListArchivedMeetings?year=2026",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 14.662,
+          "allowed_origins": [
+            "https://reno.primegov.com"
+          ]
+        }
+      ],
+      "acceptance": "live_native_bounded_listing"
+    },
+    {
+      "provider": "granicus",
+      "source_url": "https://oakland.granicus.com/ViewPublisher.php?view_id=2",
+      "status": "partial",
+      "elapsed_seconds": 3.496,
+      "record_count": 0,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "b1c2a68cae3b7ed39b04e53439d512a42676bb864a1e80fef55ce6d5c0cb2cde"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "granicus-listing-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://oakland.granicus.com/ViewPublisher.php?view_id=2",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://oakland.granicus.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "novusagenda",
+      "source_url": "https://example.gov/novusagenda",
+      "status": "unsupported",
+      "elapsed_seconds": 0.001,
+      "record_count": 0,
+      "pages": 0,
+      "truncated": null,
+      "errors": [
+        "saved_capture_required"
+      ],
+      "error_details": [
+        {}
+      ],
+      "capture_sha256": [],
+      "scope": "saved-capture fallback required",
+      "configuration_policy": "baseline",
+      "input_format": "meeting-export",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [],
+      "acceptance": "not_passed"
+    },
+    {
+      "provider": "civicplus-select",
+      "source_url": "https://laceywa.portal.civicclerk.com/event/1077/files",
+      "status": "completed",
+      "elapsed_seconds": 0.911,
+      "record_count": 10,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "20357b71cee0c92feaf0d1a221491cf14674191960f7301050895b7471517e15"
+      ],
+      "scope": "bounded provider listing",
+      "configuration_policy": "baseline",
+      "input_format": "civicplus-events-json",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://laceywa.api.civicclerk.com/v1/Events?%24orderby=startDateTime+desc&%24filter=startDateTime+ge+2026-11-01T00%3A00%3A00Z+and+startDateTime+lt+2026-11-12T00%3A00%3A00Z",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://laceywa.api.civicclerk.com"
+          ]
+        }
+      ],
+      "acceptance": "live_native_bounded_listing"
+    },
+    {
+      "provider": "civicplus-agenda-center",
+      "source_url": "https://www.clevelandtn.gov/AgendaCenter",
+      "status": "partial",
+      "elapsed_seconds": 0.731,
+      "record_count": 3,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "961a6afceda36042f99ad75338fbe43f26b937690618bf397220bba29b5096ba"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "agenda-center-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://www.clevelandtn.gov/AgendaCenter",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://www.clevelandtn.gov"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "municode-meetings",
+      "source_url": "https://southjordan-ut.municodemeetings.com/",
+      "status": "failed",
+      "elapsed_seconds": 0.139,
+      "record_count": 0,
+      "pages": 1,
+      "truncated": true,
+      "errors": [
+        "provider_page_failed"
+      ],
+      "error_details": [
+        {}
+      ],
+      "capture_sha256": [],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "municode-meetings-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://southjordan-ut.municodemeetings.com/",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://southjordan-ut.municodemeetings.com"
+          ]
+        }
+      ],
+      "acceptance": "not_passed"
+    },
+    {
+      "provider": "boardbook",
+      "source_url": "https://meetings.boardbook.org/Public/Organization/3307",
+      "status": "partial",
+      "elapsed_seconds": 0.268,
+      "record_count": 1,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "5b5d3d62e21879534081b583d8ad5b8a037cff60d83b97e044ecaec0927159cd"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "boardbook-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://meetings.boardbook.org/Public/Organization/3307",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://meetings.boardbook.org"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "escribe",
+      "source_url": "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council",
+      "status": "completed",
+      "elapsed_seconds": 0.494,
+      "record_count": 4,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "d4998e763f7f9b41ae241142cd5508ac4b794de5bbff3a8fbbf146cc547cbcaa"
+      ],
+      "scope": "bounded provider listing",
+      "configuration_policy": "baseline",
+      "input_format": "escribe-calendar-json",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://pub-oakville.escribemeetings.com/MeetingsCalendarView.aspx/GetCalendarMeetings",
+          "method": "POST",
+          "json_body": {
+            "calendarStartDate": "2026-11-01",
+            "calendarEndDate": "2026-11-12"
+          },
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://pub-oakville.escribemeetings.com"
+          ]
+        }
+      ],
+      "acceptance": "live_native_bounded_listing"
+    },
+    {
+      "provider": "simbli",
+      "source_url": "https://simbli.eboardsolutions.com/SB_Meetings/SB_MeetingListing.aspx?S=36030321",
+      "status": "partial",
+      "elapsed_seconds": 0.539,
+      "record_count": 1,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "b38cca6cc3597b96383258ea581de65c16a3ded1e93a9af5a9cda5c9119082fd"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "simbli-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://simbli.eboardsolutions.com/SB_Meetings/SB_MeetingListing.aspx?S=36030321",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://simbli.eboardsolutions.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "civicweb",
+      "source_url": "https://sonomacity.civicweb.net/Portal/MeetingTypeList.aspx",
+      "status": "partial",
+      "elapsed_seconds": 2.705,
+      "record_count": 3,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "c2f6f6ad3e8661fcf55d1e9084630f4c43c78585447ab46208fd944d756b719b"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "civicweb-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://sonomacity.civicweb.net/Portal/MeetingTypeList.aspx",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://sonomacity.civicweb.net"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "iqm2",
+      "source_url": "https://santamonicacityca.iqm2.com/Citizens/Default.aspx",
+      "status": "partial",
+      "elapsed_seconds": 0.365,
+      "record_count": 0,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "78f5c7253708341405fa067e6fc67e314753e056f1f7d372cfd6949c032fb8a0"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "iqm2-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://santamonicacityca.iqm2.com/Citizens/Default.aspx",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://santamonicacityca.iqm2.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "swagit",
+      "source_url": "https://bellca.new.swagit.com/past-city-council-videos/",
+      "status": "partial",
+      "elapsed_seconds": 0.286,
+      "record_count": 0,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "8088d79d3751b91714a5f632ea31029cdb1bb5a042e869438edc80d6daa247e0"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "swagit-archive-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://bellca.new.swagit.com/past-city-council-videos/",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://bellca.new.swagit.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "suiteone-media",
+      "source_url": "https://watkinsvillega.suiteonemedia.com/",
+      "status": "partial",
+      "elapsed_seconds": 0.501,
+      "record_count": 0,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "66fc2f432fe38da338a0c15e3c7ef4801d165978678fa8e9218c69721ef42643"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "suiteone-archive-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://watkinsvillega.suiteonemedia.com/",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://watkinsvillega.suiteonemedia.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "peak",
+      "source_url": "https://douglascountynv.granicus.com/ViewPublisher.php?view_id=1",
+      "status": "partial",
+      "elapsed_seconds": 3.754,
+      "record_count": 9,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "c0019a87ba767dcec0632584ecd056e376bb23699fef34d8b47ee660e30d2805"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "granicus-listing-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://douglascountynv.granicus.com/ViewPublisher.php?view_id=1",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://douglascountynv.granicus.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "utah-public-notice",
+      "source_url": "https://www.utah.gov/pmn/sitemap/notice/1101977.html",
+      "status": "partial",
+      "elapsed_seconds": 0.197,
+      "record_count": 0,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "26b0ed4ce322074903416c0ff07b79b8b04ef369ee464ae773f58fe257762d72"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "utah-notice-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://www.utah.gov/pmn/sitemap/notice/1101977.html",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://www.utah.gov"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "destiny-agendaquick",
+      "source_url": "https://public.destinyhosted.com/agenda_publish.cfm?id=35247",
+      "status": "partial",
+      "elapsed_seconds": 0.358,
+      "record_count": 5,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "27fa403b6a4bd42093a60dc40a581d4cfbbe643ce4fc513459ec96f70b3c8692"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "agendaquick-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://public.destinyhosted.com/agenda_publish.cfm?id=35247",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://public.destinyhosted.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "town-hall-streams",
+      "source_url": "https://www.townhallstreams.com/town.php?id=31",
+      "status": "partial",
+      "elapsed_seconds": 0.361,
+      "record_count": 1,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "af55f7fc75824b7744c999c155a228f2007c718c36a13cd817cbe2774ea2394b"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "town-hall-streams-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://www.townhallstreams.com/town.php?id=31",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://www.townhallstreams.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "telvue",
+      "source_url": "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/playlists/1757?fullscreen=false&showtabssearch=true",
+      "status": "partial",
+      "elapsed_seconds": 0.478,
+      "record_count": 1,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "5d9ca23f21d1d5b08445bb96be21a8769650fc74376d40e1a869278e4f9146b0"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "telvue-playlist-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/playlists/1757?fullscreen=false&showtabssearch=true",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://videoplayer.telvue.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "champ",
+      "source_url": "https://play.champds.com/lakezurichil/event/164",
+      "status": "unsupported",
+      "elapsed_seconds": 0.0,
+      "record_count": 0,
+      "pages": 0,
+      "truncated": null,
+      "errors": [
+        "saved_capture_required"
+      ],
+      "error_details": [
+        {}
+      ],
+      "capture_sha256": [],
+      "scope": "saved-capture fallback required",
+      "configuration_policy": "baseline",
+      "input_format": "champ-event-json",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [],
+      "acceptance": "not_passed"
+    },
+    {
+      "provider": "onbase",
+      "source_url": "https://ecm.cityofsantacruz.com/OnBaseAgendaOnline/",
+      "status": "partial",
+      "elapsed_seconds": 2.508,
+      "record_count": 5,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "52bcf78353802dc087e65c83034dadcf751a61142eebb05821481e5cc3bd56a1"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "onbase-agenda-online-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://ecm.cityofsantacruz.com/OnBaseAgendaOnline/",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://ecm.cityofsantacruz.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "laserfiche-weblink",
+      "source_url": "https://documents.redwoodcity.org/PublicWeblink/0/fol/517168/Row1.aspx",
+      "status": "failed",
+      "elapsed_seconds": 0.412,
+      "record_count": 0,
+      "pages": 1,
+      "truncated": true,
+      "errors": [
+        "provider_page_failed"
+      ],
+      "error_details": [
+        {}
+      ],
+      "capture_sha256": [],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "laserfiche-folder-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://documents.redwoodcity.org/PublicWeblink/0/fol/517168/Row1.aspx",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://documents.redwoodcity.org"
+          ]
+        }
+      ],
+      "acceptance": "not_passed"
+    },
+    {
+      "provider": "towncloud",
+      "source_url": "https://towncloud.io/go/bennett-co/agendas/1033",
+      "status": "partial",
+      "elapsed_seconds": 0.256,
+      "record_count": 0,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "fa459c8e8c2bf117452cb9181aa610e0631d8ea7659c53499726837a1d9697d6"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "towncloud-agenda-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://towncloud.io/go/bennett-co/agendas/1033",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://towncloud.io"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "digital-towpath",
+      "source_url": "https://townofberkshireny.gov/meetings/detail/64",
+      "status": "partial",
+      "elapsed_seconds": 1.514,
+      "record_count": 0,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "cb6bdb1462c8ea5015aec3361efa05c1ce1f59ac89bfed1e29e4b6477cdace3c"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "digital-towpath-detail-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://townofberkshireny.gov/meetings/detail/64",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://townofberkshireny.gov"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "clerkbase",
+      "source_url": "https://clerkshq.com/Content/Richmond-ri/council/2022/apr19_22tc.htm",
+      "status": "partial",
+      "elapsed_seconds": 0.526,
+      "record_count": 0,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "4bc7c508723796477389fd2385c6e111eee88d5fedb54e7271daea2692d86e2a"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "clerkbase-document-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://clerkshq.com/Content/Richmond-ri/council/2022/apr19_22tc.htm",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://clerkshq.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "first-party",
+      "source_url": "https://calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics",
+      "status": "partial",
+      "elapsed_seconds": 1.046,
+      "record_count": 8,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "d2a54d26ab0dceba759a3e7a495644abc3f8bae9e8f57c6d50939aa2a602a411"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "public-meeting-ics",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://calendar.google.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "wistia",
+      "source_url": "https://fast.wistia.com/embed/medias/e4a27b971d.json",
+      "status": "partial",
+      "elapsed_seconds": 0.037,
+      "record_count": 1,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "7e10697fb32a8740f7d013d3b111a00b1d3ec018b35a3c86192c470277d9231b"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "wistia-media-json",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://fast.wistia.com/embed/medias/e4a27b971d.json",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://fast.wistia.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "boardable",
+      "source_url": "https://site.boardable.com/lake-land-college/meetings/08b637-regular-board-of-trustees-meeting",
+      "status": "partial",
+      "elapsed_seconds": 1.486,
+      "record_count": 0,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "b864c260162d6a5a017402e795994e97c90d969463cd25c7c5b19585588f0fc2"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "boardable-public-meeting-html",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://site.boardable.com/lake-land-college/meetings/08b637-regular-board-of-trustees-meeting",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://site.boardable.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "gworks",
+      "source_url": "https://files.frontdeskgworks.com/city/1311/cms/data.json",
+      "status": "partial",
+      "elapsed_seconds": 0.241,
+      "record_count": 1,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "1c416144c033155ff3db32dfa1e6720005d9d7c48ea625420087dee34e10ea70"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "gworks-frontdesk-json",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://files.frontdeskgworks.com/city/1311/cms/data.json",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://files.frontdeskgworks.com"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "boarddocs",
+      "source_url": "https://resources.finalsite.net/images/v1778852677/min201org/y5lrm3zfrvt9oguecqun/5-18-2026BoardMeetingAgenda.pdf",
+      "status": "partial",
+      "elapsed_seconds": 0.494,
+      "record_count": 0,
+      "pages": 1,
+      "truncated": false,
+      "errors": [],
+      "error_details": [],
+      "capture_sha256": [
+        "b54e25f3b6c877a93813614eee9ecafdbe176d9ce074567c78e911daf1411088"
+      ],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "configuration_policy": "baseline",
+      "input_format": "boarddocs-print-pdf",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [
+        {
+          "url": "https://resources.finalsite.net/images/v1778852677/min201org/y5lrm3zfrvt9oguecqun/5-18-2026BoardMeetingAgenda.pdf",
+          "method": "GET",
+          "json_body": null,
+          "byte_limit": 8388608,
+          "deadline_seconds": 15.0,
+          "allowed_origins": [
+            "https://resources.finalsite.net"
+          ]
+        }
+      ],
+      "acceptance": "live_configured_capture_only"
+    },
+    {
+      "provider": "tyler-meeting-manager",
+      "source_url": "https://cityofmurraycityut.meetingmanager.tylerapp.com/7452cityofmurraycityut/tylermm/calendar/",
+      "status": "unsupported",
+      "elapsed_seconds": 0.0,
+      "record_count": 0,
+      "pages": 0,
+      "truncated": null,
+      "errors": [
+        "saved_capture_required"
+      ],
+      "error_details": [
+        {}
+      ],
+      "capture_sha256": [],
+      "scope": "saved-capture fallback required",
+      "configuration_policy": "baseline",
+      "input_format": "tyler-public-calendar-json",
+      "request_bounds": {
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-11",
+        "max_records": 20,
+        "max_pages": 2,
+        "parser_bytes": 8388608,
+        "deadline_seconds": 15
+      },
+      "requests": [],
+      "acceptance": "not_passed"
+    }
+  ]
+}

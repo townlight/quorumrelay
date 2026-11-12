@@ -1,0 +1,43 @@
+[
+ {
+  "id": 2851,
+  "meetingTypeId": 49,
+  "committeeId": 30,
+  "dateTime": "2024-07-12T09:00:00",
+  "endDateTime": "2024-07-12T06:00:00",
+  "date": "Jul 12, 2024",
+  "time": "09:00 AM",
+  "endTime": null,
+  "documentList": [
+   {
+    "id": 14308,
+    "language": "en-US",
+    "compileOutputType": 1,
+    "publishStatus": 1,
+    "publishDate": "2024-07-08T21:02:03.57",
+    "templateId": 12805,
+    "meetingId": 2851,
+    "sortOrder": 2,
+    "templateSortOrder": 1,
+    "link": null,
+    "templateName": "Agenda"
+   }
+  ],
+  "allowPublicSpeaker": false,
+  "allowPublicComment": false,
+  "isZoomMeeting": false,
+  "videoUrl": null,
+  "swagitId": null,
+  "isMediaManagerVideo": false,
+  "externalProviderMeetingId": null,
+  "zoomMeetingLink": null,
+  "meetingOnline": false,
+  "streamCompleted": false,
+  "mediaManagerClipPubliclyAvailable": false,
+  "meetingState": 3,
+  "isShowVideoIcon": false,
+  "publishDate": null,
+  "title": "Marijuana Licensing Authority Hearing",
+  "location": "Safety & Justice Center, Courtroom A, 225 Kimbark St., Longmont"
+ }
+]

@@ -1,0 +1,220 @@
+{
+ "data": {
+  "name": "10 OCT",
+  "folderId": 198567,
+  "colTypes": [
+   {
+    "displayName": "Name",
+    "name": "Name",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": false,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Page count",
+    "name": "PageCount",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": false,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Template name",
+    "name": "TemplateName",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": false,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "ID",
+    "name": "Id",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Template ID",
+    "name": "TemplateId",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Entry type",
+    "name": "EntryType",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Shortcut target",
+    "name": "LinkTo",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Relationship type",
+    "name": "LinkType",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Extension",
+    "name": "Extension",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Flags",
+    "name": "Flags",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Date created",
+    "name": "CreationDate",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   },
+   {
+    "displayName": "Date modified",
+    "name": "LastModified",
+    "type": 0,
+    "isNumeric": false,
+    "hidden": true,
+    "multiValue": false,
+    "width": 0
+   }
+  ],
+  "results": [
+   {
+    "name": "10.14.26 OSBT",
+    "entryId": 205845,
+    "type": 0,
+    "shortcutTargetId": 0,
+    "targetType": 0,
+    "pathToImage": "~/images/iFolderClosed.gif",
+    "iconClass": "DocumentBrowserNameImage",
+    "extension": "",
+    "multiValueFields": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "isEdoc": false,
+    "entryProperties": null,
+    "contexthits": null,
+    "metadata": null,
+    "thumbnailPageCount": 0,
+    "mediaMimeType": null,
+    "mediaHandlerUrl": null,
+    "tags": null,
+    "data": [
+     "10.14.26 OSBT",
+     null,
+     null,
+     205845,
+     null,
+     0,
+     null,
+     0,
+     null,
+     257,
+     "10/26/2026 3:24:28 PM",
+     "10/26/2026 3:24:46 PM"
+    ]
+   },
+   {
+    "name": "10.30.26 OSBT Retreat",
+    "entryId": 205846,
+    "type": 0,
+    "shortcutTargetId": 0,
+    "targetType": 0,
+    "pathToImage": "~/images/iFolderClosed.gif",
+    "iconClass": "DocumentBrowserNameImage",
+    "extension": "",
+    "multiValueFields": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "isEdoc": false,
+    "entryProperties": null,
+    "contexthits": null,
+    "metadata": null,
+    "thumbnailPageCount": 0,
+    "mediaMimeType": null,
+    "mediaHandlerUrl": null,
+    "tags": null,
+    "data": [
+     "10.30.26 OSBT Retreat",
+     null,
+     null,
+     205846,
+     null,
+     0,
+     null,
+     0,
+     null,
+     257,
+     "10/26/2026 3:25:06 PM",
+     "10/26/2026 3:25:45 PM"
+    ]
+   }
+  ],
+  "failed": false,
+  "errMsg": null,
+  "entryType": 0,
+  "path": "\\Central Records\\Boards & Commissions\\Open Space Board of Trustees (OSBT)\\2026\\10 OCT",
+  "parentId": 0,
+  "showColumnPicker": false,
+  "totalEntries": 2,
+  "sortAscending": true,
+  "sortColumn": ""
+ },
+ "__breach": "EnG6XQQXg+b7v5/KCEltlL/PCW"
+}

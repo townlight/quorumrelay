@@ -1,0 +1,4288 @@
+{
+  "schema_version": "1.0.0",
+  "owner": "provider-discovery-retrieval-agent",
+  "observed_at": "2026-11-11T17:54:32.730117+00:00",
+  "release_status": "incomplete_catalog_acceptance",
+  "provider_count": 31,
+  "baseline_format_count": 34,
+  "live_read_ledger": "docs/verification/provider-live-read-2026-11-11.json",
+  "live_read_policy": "Bounded public reads only. No attachment downloads, credentials, browser or remote writes. A partial listing is not full discovery acceptance.",
+  "acceptance_counts": {
+    "live_native_bounded_listing_passed": 4,
+    "live_configured_capture_only": 2,
+    "saved_fixture_passed; live_not_passed": 3,
+    "live_configured_capture_only_or_saved_fixture": 20,
+    "independent_capture_mock_passed; live_configured_capture_failed": 1,
+    "mocked_account_api_passed_and_live_public_configured_capture_passed": 1
+  },
+  "important_distinction": {
+    "live_native_bounded_listing": "A documented native listing path completed within explicit public-read bounds for one representative tenant.",
+    "live_configured_capture_only": "The configured URL was fetched and parsed where possible, but upstream catalog completeness is unverified.",
+    "saved_capture_supported_automatic_path_unverified": "Saved baseline input works; this does not prove the provider lacks an API.",
+    "guarded_browser_weblink_mechanics_implemented": "A concrete browser must satisfy the guarded origin contract; injection alone is not proof of a safe browser."
+  },
+  "source_file_sha256": {
+    "src/civic_data_connectors/providers/__init__.py": "aeaa5b3c936d0870e3584d600a1272fc4208efecd160fb2523aa4bfb964bca5e",
+    "src/civic_data_connectors/providers/contracts.py": "5f20b6e2f490b41e96e21d981c70d5b0190b213474feaf53862ba5971643fe68",
+    "src/civic_data_connectors/providers/discovery.py": "f34696b9c470bb1ca01e6f8a47e23d62270b29b72288ab0bdfd26338edbd3e26",
+    "src/civic_data_connectors/providers/granicus.py": "57be518f9d412a26eaeb700e5c255318abde435eb6408aeacda77cf80982afc7",
+    "src/civic_data_connectors/providers/identification.py": "b24c0698f5682cdd59e60af9a8d596fc5311b5c881c77c06386787cec694c72d",
+    "src/civic_data_connectors/providers/laserfiche.py": "3d9ad02ce1ad202bb036cb11392adb4b5ce92a7d10cfe6cb19d5543d292853f1",
+    "src/civic_data_connectors/providers/native.py": "46ad448d85ad4fa8db93d255401acca57703f535e69c25ed703146033de7e8d5",
+    "src/civic_data_connectors/providers/retrieval.py": "6a421d2619c44ff425d70ab083eb0a8b26493cdc276ee7851f6630111bb23860"
+  },
+  "owned_test_files": [
+    "tests/test_provider_discovery.py",
+    "tests/test_provider_laserfiche.py",
+    "tests/provider_live_read_check.py"
+  ],
+  "shared_regression_tests": [
+    "tests/test_provider_discovery.py::test_aliases_unknown_source_fields_and_newsroom_tenant_namespace_scope",
+    "tests/test_provider_discovery.py::test_attachment_failed_fetch_retains_meeting_and_no_arbitrary_proxy",
+    "tests/test_provider_discovery.py::test_identification_rejects_unsafe_or_credential_sources[http://127.0.0.1/]",
+    "tests/test_provider_discovery.py::test_identification_rejects_unsafe_or_credential_sources[http://[::1]/]",
+    "tests/test_provider_discovery.py::test_identification_rejects_unsafe_or_credential_sources[https://city.example/?api_key=do-not-echo]",
+    "tests/test_provider_discovery.py::test_identification_rejects_unsafe_or_credential_sources[https://city.example/?token=do-not-echo]",
+    "tests/test_provider_discovery.py::test_identification_rejects_unsafe_or_credential_sources[https://city.example/a#fragment]",
+    "tests/test_provider_discovery.py::test_identification_rejects_unsafe_or_credential_sources[https://city.example:8443/a]",
+    "tests/test_provider_discovery.py::test_identification_rejects_unsafe_or_credential_sources[https://city.internal/a]",
+    "tests/test_provider_discovery.py::test_identification_rejects_unsafe_or_credential_sources[https://localhost/a]",
+    "tests/test_provider_discovery.py::test_identification_rejects_unsafe_or_credential_sources[https://u:p@city.example/a]",
+    "tests/test_provider_discovery.py::test_roster_identity_ambiguity_custom_domains_and_mismatch",
+    "tests/test_provider_discovery.py::test_saved_required_unknown_not_unsupported_vendor_and_missing_bounds",
+    "tests/test_provider_discovery.py::test_transfer_limit_is_separate_from_parser_limit"
+  ],
+  "providers": [
+    {
+      "provider": "legistar",
+      "default_input_format": "legistar-events-json",
+      "implementation_status": "native_bounded_listing_implemented",
+      "acceptance_status": "live_native_bounded_listing_passed",
+      "automatic_discovery": "implemented_for_documented_public_listing_api",
+      "remaining_gap": "Bounded representative tenant evidence only; not proof of complete catalog coverage across all tenants.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "implemented_for_documented_public_listing_api",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "implemented",
+          "registered_formats": [
+            "legistar-events-json"
+          ]
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "meeting-export",
+          "source_url": "https://example.gov/legistar",
+          "fixture": "tests/fixtures/baseline/legistar.json",
+          "fixture_sha256": "11fbf132c37d7d24032b9948e9e17bbb1d3f39c189974be6db1db42fd05ae1ce",
+          "fixture_sha256_verified": "11fbf132c37d7d24032b9948e9e17bbb1d3f39c189974be6db1db42fd05ae1ce",
+          "oracle_output_sha256": "d81a27f2dc8913630c193a8be07b230af5b973afe22665147e6dfa89a02a85a2",
+          "original_record_count": 1,
+          "original_namespace": "//example.gov",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[legistar/meeting-export]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "legistar",
+        "source_url": "https://webapi.legistar.com/v1/olympia",
+        "status": "completed",
+        "elapsed_seconds": 0.794,
+        "record_count": 7,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "f96bb34698c0ad01db32166a7218f43f069a9600cfd7897bdc2bb206fd32c1cc"
+        ],
+        "scope": "bounded provider listing",
+        "configuration_policy": "baseline",
+        "input_format": "legistar-events-json",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://webapi.legistar.com/v1/olympia/Events?%24orderby=EventId+asc&%24top=100&%24filter=EventId+gt+0+and+EventDate+ge+datetime%272026-11-01%27+and+EventDate+lt+datetime%272026-11-12%27",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://webapi.legistar.com"
+            ]
+          }
+        ],
+        "acceptance": "live_native_bounded_listing"
+      },
+      "reference_urls": [
+        "https://webapi.legistar.com/Help/Api/GET-v1-Client-Events",
+        "https://webapi.legistar.com/Home/Examples"
+      ],
+      "evidence_urls": [
+        "https://example.gov/legistar",
+        "https://webapi.legistar.com/v1/olympia"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[legistar/meeting-export]",
+        "tests/test_provider_discovery.py::test_bounds_body_types_unknown_dates_and_cancel_after_page",
+        "tests/test_provider_discovery.py::test_checkpoint_record_limit_resume_overlap_binding_and_changed_page",
+        "tests/test_provider_discovery.py::test_deadline_between_response_and_records_preserves_resumable_capture",
+        "tests/test_provider_discovery.py::test_empty_middle_page_continues_to_next_and_cross_tenant_link_keeps_capture",
+        "tests/test_provider_discovery.py::test_failed_page_resume_and_all_fail_never_completed_empty",
+        "tests/test_provider_discovery.py::test_http_failure_preserves_status_not_response_secrets",
+        "tests/test_provider_discovery.py::test_legistar_api_separate_mapping_keyset_pages_and_credentials",
+        "tests/test_provider_discovery.py::test_native_saved_direct_normalize_execute_and_base64_parity[legistar-legistar-events-json-https://webapi.legistar.com/v1/city-content0]"
+      ],
+      "live_read_result": {
+        "status": "completed",
+        "acceptance": "live_native_bounded_listing",
+        "record_count": 7,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "f96bb34698c0ad01db32166a7218f43f069a9600cfd7897bdc2bb206fd32c1cc"
+        ],
+        "requests": [
+          {
+            "url": "https://webapi.legistar.com/v1/olympia/Events?%24orderby=EventId+asc&%24top=100&%24filter=EventId+gt+0+and+EventDate+ge+datetime%272026-11-01%27+and+EventDate+lt+datetime%272026-11-12%27",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://webapi.legistar.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "primegov",
+      "default_input_format": "primegov-portal-json",
+      "implementation_status": "native_bounded_listing_implemented",
+      "acceptance_status": "live_native_bounded_listing_passed",
+      "automatic_discovery": "implemented_for_documented_public_listing_api",
+      "remaining_gap": "Bounded representative tenant evidence only; not proof of complete catalog coverage across all tenants.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "implemented_for_documented_public_listing_api",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "implemented",
+          "registered_formats": [
+            "primegov-portal-json"
+          ]
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "meeting-export",
+          "source_url": "https://example.gov/primegov",
+          "fixture": "tests/fixtures/baseline/primegov.json",
+          "fixture_sha256": "48150578eea4c6c6e243fde0ff8ca21db8be82f306c8a40aa09728e1f60cfb82",
+          "fixture_sha256_verified": "48150578eea4c6c6e243fde0ff8ca21db8be82f306c8a40aa09728e1f60cfb82",
+          "oracle_output_sha256": "9cb99b9fca794ee0fdab741597a5f7b09615356c5244f1cd40f8840bf1de781b",
+          "original_record_count": 1,
+          "original_namespace": "//example.gov",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[primegov/meeting-export]"
+          ],
+          "result": "PASS"
+        },
+        {
+          "input_format": "primegov-portal-json",
+          "source_url": "https://longmont.primegov.com/api/v2/PublicPortal/ListUpcomingMeetings",
+          "fixture": "tests/fixtures/baseline/longmont-ListUpcomingMeetings.json",
+          "fixture_sha256": "472bf9a0a8e90cf4379b13b03a6851be0c0fa6a3e664b1f31063dca6084498bc",
+          "fixture_sha256_verified": "472bf9a0a8e90cf4379b13b03a6851be0c0fa6a3e664b1f31063dca6084498bc",
+          "oracle_output_sha256": "a9921a508cf0ec43454b05cc059fa7aab056d5ea5a0b5688b9c370b5338c22f4",
+          "original_record_count": 7,
+          "original_namespace": "//longmont.primegov.com",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[primegov/primegov-portal-json]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "primegov",
+        "source_url": "https://reno.primegov.com/public/portal",
+        "status": "completed",
+        "elapsed_seconds": 1.086,
+        "record_count": 7,
+        "pages": 2,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "49339261478eb92bd5524df3f809273c817a468f3853467d0e6d66c9a207fc01",
+          "9846783725f251579217c727aa12399cbbb23decfa268ff3352cb7cdb18cff9c"
+        ],
+        "scope": "bounded provider listing",
+        "configuration_policy": "baseline",
+        "input_format": "primegov-portal-json",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://reno.primegov.com/api/v2/PublicPortal/ListUpcomingMeetings",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://reno.primegov.com"
+            ]
+          },
+          {
+            "url": "https://reno.primegov.com/api/v2/PublicPortal/ListArchivedMeetings?year=2026",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 14.662,
+            "allowed_origins": [
+              "https://reno.primegov.com"
+            ]
+          }
+        ],
+        "acceptance": "live_native_bounded_listing"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://example.gov/primegov",
+        "https://longmont.primegov.com/api/v2/PublicPortal/ListUpcomingMeetings",
+        "https://reno.primegov.com/public/portal"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[primegov/meeting-export]",
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[primegov/primegov-portal-json]",
+        "tests/test_provider_discovery.py::test_primegov_archive_years_exact_boundaries",
+        "tests/test_provider_discovery.py::test_primegov_independent_failure_keeps_successful_empty_sibling"
+      ],
+      "live_read_result": {
+        "status": "completed",
+        "acceptance": "live_native_bounded_listing",
+        "record_count": 7,
+        "pages": 2,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "49339261478eb92bd5524df3f809273c817a468f3853467d0e6d66c9a207fc01",
+          "9846783725f251579217c727aa12399cbbb23decfa268ff3352cb7cdb18cff9c"
+        ],
+        "requests": [
+          {
+            "url": "https://reno.primegov.com/api/v2/PublicPortal/ListUpcomingMeetings",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://reno.primegov.com"
+            ]
+          },
+          {
+            "url": "https://reno.primegov.com/api/v2/PublicPortal/ListArchivedMeetings?year=2026",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 14.662,
+            "allowed_origins": [
+              "https://reno.primegov.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "granicus",
+      "default_input_format": "granicus-listing-html",
+      "implementation_status": "additive_listing_parser_implemented",
+      "acceptance_status": "live_configured_capture_only",
+      "automatic_discovery": "configured_listing_page_read_implemented",
+      "remaining_gap": "Configured ViewPublisher page is retained and parsed, but upstream catalog completeness and additional views remain unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "configured_listing_page_read_implemented",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "implemented",
+          "registered_formats": [
+            "granicus-listing-html"
+          ]
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "meeting-export",
+          "source_url": "https://example.gov/granicus",
+          "fixture": "tests/fixtures/baseline/granicus.json",
+          "fixture_sha256": "687bdd058e50db9533df5215d39e2c0ad0cdf4f36c6d5f916723dbdcb4a55059",
+          "fixture_sha256_verified": "687bdd058e50db9533df5215d39e2c0ad0cdf4f36c6d5f916723dbdcb4a55059",
+          "oracle_output_sha256": "a1bec6fbbcd3e73e4fc0eb5dc1f89601bb519a8c9b08dc34c6f66dbdee37556b",
+          "original_record_count": 1,
+          "original_namespace": "//example.gov",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[granicus/meeting-export]"
+          ],
+          "result": "PASS"
+        },
+        {
+          "input_format": "viewpublisher-html",
+          "source_url": "https://oakland.granicus.com/ViewPublisher.php?view_id=2",
+          "fixture": "tests/fixtures/baseline/oakland.html",
+          "fixture_sha256": "cc75d87f595277facaa5bb5a905ee84707978f94be12d9a85a69e3dd83bd8c20",
+          "fixture_sha256_verified": "cc75d87f595277facaa5bb5a905ee84707978f94be12d9a85a69e3dd83bd8c20",
+          "oracle_output_sha256": "b215002ea71eaa8992fc88950e786df6608d00e0ad7b9e8a9df777f9a6f6b2d4",
+          "original_record_count": 2,
+          "original_namespace": "//oakland.granicus.com",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[granicus/viewpublisher-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "granicus",
+        "source_url": "https://oakland.granicus.com/ViewPublisher.php?view_id=2",
+        "status": "partial",
+        "elapsed_seconds": 3.496,
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "b1c2a68cae3b7ed39b04e53439d512a42676bb864a1e80fef55ce6d5c0cb2cde"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "granicus-listing-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://oakland.granicus.com/ViewPublisher.php?view_id=2",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://oakland.granicus.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://example.gov/granicus",
+        "https://oakland.granicus.com/ViewPublisher.php?view_id=2"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[granicus/meeting-export]",
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[granicus/viewpublisher-html]",
+        "tests/test_provider_discovery.py::test_granicus_upcoming_attachmentless_row_and_archived_clip_identity",
+        "tests/test_provider_discovery.py::test_native_saved_direct_normalize_execute_and_base64_parity[granicus-granicus-listing-html-https://city.granicus.com/ViewPublisher.php?view_id=1-content2]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "b1c2a68cae3b7ed39b04e53439d512a42676bb864a1e80fef55ce6d5c0cb2cde"
+        ],
+        "requests": [
+          {
+            "url": "https://oakland.granicus.com/ViewPublisher.php?view_id=2",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://oakland.granicus.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "novusagenda",
+      "default_input_format": "meeting-export",
+      "implementation_status": "saved_capture_supported_automatic_path_unverified",
+      "acceptance_status": "saved_fixture_passed; live_not_passed",
+      "automatic_discovery": "not_implemented_unverified",
+      "remaining_gap": "The checker correctly requires a saved response. This is not a claim that the vendor lacks a discovery API.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "not_implemented_unverified",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "meeting-export",
+          "source_url": "https://example.gov/novusagenda",
+          "fixture": "tests/fixtures/baseline/novusagenda.json",
+          "fixture_sha256": "e189c9434aa2b01ed233de044423109449e547cdbb2b524ab9709e5316d50d10",
+          "fixture_sha256_verified": "e189c9434aa2b01ed233de044423109449e547cdbb2b524ab9709e5316d50d10",
+          "oracle_output_sha256": "d717e7755c4dfc43c358c76606fb72bce76216537993fb13312f0f1f5dd00377",
+          "original_record_count": 1,
+          "original_namespace": "//example.gov",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[novusagenda/meeting-export]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "novusagenda",
+        "source_url": "https://example.gov/novusagenda",
+        "status": "unsupported",
+        "elapsed_seconds": 0.001,
+        "record_count": 0,
+        "pages": 0,
+        "truncated": null,
+        "errors": [
+          "saved_capture_required"
+        ],
+        "error_details": [
+          {}
+        ],
+        "capture_sha256": [],
+        "scope": "saved-capture fallback required",
+        "configuration_policy": "baseline",
+        "input_format": "meeting-export",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [],
+        "acceptance": "not_passed"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://example.gov/novusagenda"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[novusagenda/meeting-export]"
+      ],
+      "live_read_result": {
+        "status": "unsupported",
+        "acceptance": "not_passed",
+        "record_count": 0,
+        "pages": 0,
+        "truncated": null,
+        "errors": [
+          "saved_capture_required"
+        ],
+        "capture_sha256": [],
+        "requests": [],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "civicplus-select",
+      "default_input_format": "civicplus-events-json",
+      "implementation_status": "native_bounded_listing_implemented",
+      "acceptance_status": "live_native_bounded_listing_passed",
+      "automatic_discovery": "implemented_for_documented_public_listing_api",
+      "remaining_gap": "Bounded representative tenant evidence only; not proof of complete catalog coverage across all tenants.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "implemented_for_documented_public_listing_api",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "implemented",
+          "registered_formats": [
+            "civicplus-events-json"
+          ]
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "civicplus-events-json",
+          "source_url": "https://turlockca.api.civicclerk.com/v1/Events",
+          "fixture": "tests/fixtures/baseline/civicclerk.response",
+          "fixture_sha256": "ddcfa72e0b16395e6acac7231f07f81368dcca681f4168e252617db7606ceb3b",
+          "fixture_sha256_verified": "ddcfa72e0b16395e6acac7231f07f81368dcca681f4168e252617db7606ceb3b",
+          "oracle_output_sha256": "7ed9baca56d520eb5eefd298d436fc31508631389cce2ae998c96ccf54f082bc",
+          "original_record_count": 15,
+          "original_namespace": "//turlockca.api.civicclerk.com",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[civicplus-select/civicplus-events-json]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [
+        {
+          "fixture": "tests/fixtures/brief-discovery/civicclerk-erie-events-2026-11-11-page1.json",
+          "fixture_sha256": "0ccdf5fb693d2a1de869b59d183a1a0b5ee49589580d37104c591e8e01c8bb07",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/civicclerk-erie-events-2026-11-11-page2.json",
+          "fixture_sha256": "e6f8bd63d9d57ec0c06bb1fc8063119cec9ce3d9848ecc52c2738e3c46e8f571",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/civicclerk-erie-events-2026-11-11-page3.json",
+          "fixture_sha256": "deae6ad7946d17374a6068fb2c158387ce4a7c2e4b3280f6c1462708dc4bf599",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/civicclerk-erie-events-2026-11-11-page4.json",
+          "fixture_sha256": "35da8ea434a62be572b3b94ea9873455fe9646fb88356097121c9559fcbae6b8",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/civicclerk-erie-categories.json",
+          "fixture_sha256": "d531eb80301d98ab2156f7746f42ee16a3fbebbc2bda0d55ec93be94e78fd911",
+          "result": "PASS"
+        }
+      ],
+      "live_read_evidence": {
+        "provider": "civicplus-select",
+        "source_url": "https://laceywa.portal.civicclerk.com/event/1077/files",
+        "status": "completed",
+        "elapsed_seconds": 0.911,
+        "record_count": 10,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "20357b71cee0c92feaf0d1a221491cf14674191960f7301050895b7471517e15"
+        ],
+        "scope": "bounded provider listing",
+        "configuration_policy": "baseline",
+        "input_format": "civicplus-events-json",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://laceywa.api.civicclerk.com/v1/Events?%24orderby=startDateTime+desc&%24filter=startDateTime+ge+2026-11-01T00%3A00%3A00Z+and+startDateTime+lt+2026-11-12T00%3A00%3A00Z",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://laceywa.api.civicclerk.com"
+            ]
+          }
+        ],
+        "acceptance": "live_native_bounded_listing"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://turlockca.api.civicclerk.com/v1/Events",
+        "https://laceywa.portal.civicclerk.com/event/1077/files"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[civicplus-select/civicplus-events-json]",
+        "tests/test_provider_discovery.py::test_civicclerk_independent_captures_follow_all_four_pages"
+      ],
+      "live_read_result": {
+        "status": "completed",
+        "acceptance": "live_native_bounded_listing",
+        "record_count": 10,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "20357b71cee0c92feaf0d1a221491cf14674191960f7301050895b7471517e15"
+        ],
+        "requests": [
+          {
+            "url": "https://laceywa.api.civicclerk.com/v1/Events?%24orderby=startDateTime+desc&%24filter=startDateTime+ge+2026-11-01T00%3A00%3A00Z+and+startDateTime+lt+2026-11-12T00%3A00%3A00Z",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://laceywa.api.civicclerk.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "civicplus-agenda-center",
+      "default_input_format": "agenda-center-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "agenda-center-html",
+          "source_url": "https://www.clevelandtn.gov/AgendaCenter",
+          "fixture": "tests/fixtures/baseline/agenda-center.response",
+          "fixture_sha256": "975a24df772bddbb1f3fcb4e4f730f72caea952b5fefcebd7a646ca77658a180",
+          "fixture_sha256_verified": "975a24df772bddbb1f3fcb4e4f730f72caea952b5fefcebd7a646ca77658a180",
+          "oracle_output_sha256": "617fb4bce9e219e8e4081d397364a2e2ea50dacde27ecfb4c80a3c475eb9c84d",
+          "original_record_count": 85,
+          "original_namespace": "//www.clevelandtn.gov",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[civicplus-agenda-center/agenda-center-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "civicplus-agenda-center",
+        "source_url": "https://www.clevelandtn.gov/AgendaCenter",
+        "status": "partial",
+        "elapsed_seconds": 0.731,
+        "record_count": 3,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "961a6afceda36042f99ad75338fbe43f26b937690618bf397220bba29b5096ba"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "agenda-center-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://www.clevelandtn.gov/AgendaCenter",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://www.clevelandtn.gov"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://www.clevelandtn.gov/AgendaCenter"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[civicplus-agenda-center/agenda-center-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 3,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "961a6afceda36042f99ad75338fbe43f26b937690618bf397220bba29b5096ba"
+        ],
+        "requests": [
+          {
+            "url": "https://www.clevelandtn.gov/AgendaCenter",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://www.clevelandtn.gov"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "municode-meetings",
+      "default_input_format": "municode-meetings-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "municode-meetings-html",
+          "source_url": "https://southjordan-ut.municodemeetings.com/",
+          "fixture": "tests/fixtures/baseline/municode.response",
+          "fixture_sha256": "b72ccb013f3e6b45bb513d9fad0a250471214a362996e59b269c65660ab825d0",
+          "fixture_sha256_verified": "b72ccb013f3e6b45bb513d9fad0a250471214a362996e59b269c65660ab825d0",
+          "oracle_output_sha256": "a47d7fe8b7091d7cb87c89e74e53d8402959fdcd9a0024f8c739ce73f1d4ef76",
+          "original_record_count": 25,
+          "original_namespace": "//southjordan-ut.municodemeetings.com",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[municode-meetings/municode-meetings-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "municode-meetings",
+        "source_url": "https://southjordan-ut.municodemeetings.com/",
+        "status": "failed",
+        "elapsed_seconds": 0.139,
+        "record_count": 0,
+        "pages": 1,
+        "truncated": true,
+        "errors": [
+          "provider_page_failed"
+        ],
+        "error_details": [
+          {}
+        ],
+        "capture_sha256": [],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "municode-meetings-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://southjordan-ut.municodemeetings.com/",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://southjordan-ut.municodemeetings.com"
+            ]
+          }
+        ],
+        "acceptance": "not_passed"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://southjordan-ut.municodemeetings.com/"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[municode-meetings/municode-meetings-html]"
+      ],
+      "live_read_result": {
+        "status": "failed",
+        "acceptance": "not_passed",
+        "record_count": 0,
+        "pages": 1,
+        "truncated": true,
+        "errors": [
+          "provider_page_failed"
+        ],
+        "capture_sha256": [],
+        "requests": [
+          {
+            "url": "https://southjordan-ut.municodemeetings.com/",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://southjordan-ut.municodemeetings.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "boardbook",
+      "default_input_format": "boardbook-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "boardbook-html",
+          "source_url": "https://meetings.boardbook.org/Public/Organization/3307",
+          "fixture": "tests/fixtures/baseline/boardbook.response",
+          "fixture_sha256": "11f47982510d4bca619bf769802fa3276a28a7d49756604fb4563b8f684693cb",
+          "fixture_sha256_verified": "11f47982510d4bca619bf769802fa3276a28a7d49756604fb4563b8f684693cb",
+          "oracle_output_sha256": "5d12c10e96bc80c41ad420bf3397d881eb153067a423b038fc1adbae705d362b",
+          "original_record_count": 33,
+          "original_namespace": "//meetings.boardbook.org/Public/Organization/3307",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[boardbook/boardbook-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "boardbook",
+        "source_url": "https://meetings.boardbook.org/Public/Organization/3307",
+        "status": "partial",
+        "elapsed_seconds": 0.268,
+        "record_count": 1,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "5b5d3d62e21879534081b583d8ad5b8a037cff60d83b97e044ecaec0927159cd"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "boardbook-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://meetings.boardbook.org/Public/Organization/3307",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://meetings.boardbook.org"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://meetings.boardbook.org/Public/Organization/3307"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[boardbook/boardbook-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 1,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "5b5d3d62e21879534081b583d8ad5b8a037cff60d83b97e044ecaec0927159cd"
+        ],
+        "requests": [
+          {
+            "url": "https://meetings.boardbook.org/Public/Organization/3307",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://meetings.boardbook.org"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "escribe",
+      "default_input_format": "escribe-calendar-json",
+      "implementation_status": "native_bounded_listing_implemented",
+      "acceptance_status": "live_native_bounded_listing_passed",
+      "automatic_discovery": "implemented_for_documented_public_listing_api",
+      "remaining_gap": "Bounded representative tenant evidence only; not proof of complete catalog coverage across all tenants.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "implemented_for_documented_public_listing_api",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "implemented",
+          "registered_formats": [
+            "escribe-calendar-json"
+          ]
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "escribe-calendar-json",
+          "source_url": "https://pub-saskatoon.escribemeetings.com/MeetingsCalendarView.aspx/GetCalendarMeetings",
+          "fixture": "tests/fixtures/baseline/escribe-saskatoon-calendar.response",
+          "fixture_sha256": "7bf3cec03f434ab777975e3ef6a0a3134704b45c0265f1fe628802cdce661417",
+          "fixture_sha256_verified": "7bf3cec03f434ab777975e3ef6a0a3134704b45c0265f1fe628802cdce661417",
+          "oracle_output_sha256": "6dd017bd30b0884ecc3451591c97c5f6fdda5fa5d51cd3f64d9d92a97239a3f6",
+          "original_record_count": 18,
+          "original_namespace": "//pub-saskatoon.escribemeetings.com",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[escribe/escribe-calendar-json]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [
+        {
+          "fixture": "tests/fixtures/brief-discovery/escribe-bouldercounty-calendar.json",
+          "fixture_sha256": "615ea67f2b5e85be1f4f2d06f4e3a13621d193793dcadfb9ef28b7d92d89ad97",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/escribe-bocc-agenda-2026-11-05.html",
+          "fixture_sha256": "324ed40f34e8e3539d3e4e8b152ba647ea1f44e0bb94d94cd4cf627e7551a7d6",
+          "result": "PASS"
+        }
+      ],
+      "live_read_evidence": {
+        "provider": "escribe",
+        "source_url": "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council",
+        "status": "completed",
+        "elapsed_seconds": 0.494,
+        "record_count": 4,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "d4998e763f7f9b41ae241142cd5508ac4b794de5bbff3a8fbbf146cc547cbcaa"
+        ],
+        "scope": "bounded provider listing",
+        "configuration_policy": "baseline",
+        "input_format": "escribe-calendar-json",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://pub-oakville.escribemeetings.com/MeetingsCalendarView.aspx/GetCalendarMeetings",
+            "method": "POST",
+            "json_body": {
+              "calendarStartDate": "2026-11-01",
+              "calendarEndDate": "2026-11-12"
+            },
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://pub-oakville.escribemeetings.com"
+            ]
+          }
+        ],
+        "acceptance": "live_native_bounded_listing"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://pub-saskatoon.escribemeetings.com/MeetingsCalendarView.aspx/GetCalendarMeetings",
+        "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[escribe/escribe-calendar-json]",
+        "tests/test_provider_discovery.py::test_discover_real_capture_import_search_preserves_partial_coverage",
+        "tests/test_provider_discovery.py::test_escribe_real_capture_uses_post_and_inclusive_end_translation"
+      ],
+      "live_read_result": {
+        "status": "completed",
+        "acceptance": "live_native_bounded_listing",
+        "record_count": 4,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "d4998e763f7f9b41ae241142cd5508ac4b794de5bbff3a8fbbf146cc547cbcaa"
+        ],
+        "requests": [
+          {
+            "url": "https://pub-oakville.escribemeetings.com/MeetingsCalendarView.aspx/GetCalendarMeetings",
+            "method": "POST",
+            "json_body": {
+              "calendarStartDate": "2026-11-01",
+              "calendarEndDate": "2026-11-12"
+            },
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://pub-oakville.escribemeetings.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "simbli",
+      "default_input_format": "simbli-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "simbli-html",
+          "source_url": "https://simbli.eboardsolutions.com/SB_Meetings/SB_MeetingListing.aspx?S=36030321",
+          "fixture": "tests/fixtures/baseline/simbli.response",
+          "fixture_sha256": "5f0d54d9939ccd69ec7e36cf9b3c25d58b0959f099e4bad7a9ad4077121f103a",
+          "fixture_sha256_verified": "5f0d54d9939ccd69ec7e36cf9b3c25d58b0959f099e4bad7a9ad4077121f103a",
+          "oracle_output_sha256": "172d77335a32262a04dc51dbbbb5b7584c56cd137c4956c671291b9f3dff3185",
+          "original_record_count": 50,
+          "original_namespace": "//simbli.eboardsolutions.com?S=36030321",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[simbli/simbli-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "simbli",
+        "source_url": "https://simbli.eboardsolutions.com/SB_Meetings/SB_MeetingListing.aspx?S=36030321",
+        "status": "partial",
+        "elapsed_seconds": 0.539,
+        "record_count": 1,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "b38cca6cc3597b96383258ea581de65c16a3ded1e93a9af5a9cda5c9119082fd"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "simbli-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://simbli.eboardsolutions.com/SB_Meetings/SB_MeetingListing.aspx?S=36030321",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://simbli.eboardsolutions.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://simbli.eboardsolutions.com/SB_Meetings/SB_MeetingListing.aspx?S=36030321"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[simbli/simbli-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 1,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "b38cca6cc3597b96383258ea581de65c16a3ded1e93a9af5a9cda5c9119082fd"
+        ],
+        "requests": [
+          {
+            "url": "https://simbli.eboardsolutions.com/SB_Meetings/SB_MeetingListing.aspx?S=36030321",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://simbli.eboardsolutions.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "civicweb",
+      "default_input_format": "civicweb-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "civicweb-html",
+          "source_url": "https://sonomacity.civicweb.net/Portal/MeetingTypeList.aspx",
+          "fixture": "tests/fixtures/baseline/civicweb-types.response",
+          "fixture_sha256": "d8ffe0293434620f07c5c866878cc0c4da28b4341e6efd5653bd0549493972a9",
+          "fixture_sha256_verified": "d8ffe0293434620f07c5c866878cc0c4da28b4341e6efd5653bd0549493972a9",
+          "oracle_output_sha256": "87fcc968cb38f2dc986965dd743777bd655e5e589d5256fee250e22aa67ebd5d",
+          "original_record_count": 45,
+          "original_namespace": "//sonomacity.civicweb.net",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[civicweb/civicweb-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "civicweb",
+        "source_url": "https://sonomacity.civicweb.net/Portal/MeetingTypeList.aspx",
+        "status": "partial",
+        "elapsed_seconds": 2.705,
+        "record_count": 3,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "c2f6f6ad3e8661fcf55d1e9084630f4c43c78585447ab46208fd944d756b719b"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "civicweb-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://sonomacity.civicweb.net/Portal/MeetingTypeList.aspx",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://sonomacity.civicweb.net"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://sonomacity.civicweb.net/Portal/MeetingTypeList.aspx"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[civicweb/civicweb-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 3,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "c2f6f6ad3e8661fcf55d1e9084630f4c43c78585447ab46208fd944d756b719b"
+        ],
+        "requests": [
+          {
+            "url": "https://sonomacity.civicweb.net/Portal/MeetingTypeList.aspx",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://sonomacity.civicweb.net"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "iqm2",
+      "default_input_format": "iqm2-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "iqm2-html",
+          "source_url": "https://santamonicacityca.iqm2.com/Citizens/Default.aspx",
+          "fixture": "tests/fixtures/baseline/iqm2.response",
+          "fixture_sha256": "8bbadac3551a4d3d7c3e68768f4c14f6d96e8412cc809b5a138fcd33c77830f0",
+          "fixture_sha256_verified": "8bbadac3551a4d3d7c3e68768f4c14f6d96e8412cc809b5a138fcd33c77830f0",
+          "oracle_output_sha256": "2a815cf1488416ce9eaf202e9952a9799924d74136a504f682b937c5e2f07bb4",
+          "original_record_count": 6,
+          "original_namespace": "//santamonicacityca.iqm2.com",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[iqm2/iqm2-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "iqm2",
+        "source_url": "https://santamonicacityca.iqm2.com/Citizens/Default.aspx",
+        "status": "partial",
+        "elapsed_seconds": 0.365,
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "78f5c7253708341405fa067e6fc67e314753e056f1f7d372cfd6949c032fb8a0"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "iqm2-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://santamonicacityca.iqm2.com/Citizens/Default.aspx",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://santamonicacityca.iqm2.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://santamonicacityca.iqm2.com/Citizens/Default.aspx"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[iqm2/iqm2-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "78f5c7253708341405fa067e6fc67e314753e056f1f7d372cfd6949c032fb8a0"
+        ],
+        "requests": [
+          {
+            "url": "https://santamonicacityca.iqm2.com/Citizens/Default.aspx",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://santamonicacityca.iqm2.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "swagit",
+      "default_input_format": "swagit-archive-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "swagit-archive-html",
+          "source_url": "https://bellca.new.swagit.com/past-city-council-videos/",
+          "fixture": "tests/fixtures/baseline/swagit.response",
+          "fixture_sha256": "38c63b12ddc4f41ab21e911ead700b516aea4127c01689e99905ee7f7c362581",
+          "fixture_sha256_verified": "38c63b12ddc4f41ab21e911ead700b516aea4127c01689e99905ee7f7c362581",
+          "oracle_output_sha256": "2c272dca6738408554bb8c7132ab67192f02629a10168d81d93e9eec90f1445b",
+          "original_record_count": 10,
+          "original_namespace": "//bellca.new.swagit.com",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[swagit/swagit-archive-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "swagit",
+        "source_url": "https://bellca.new.swagit.com/past-city-council-videos/",
+        "status": "partial",
+        "elapsed_seconds": 0.286,
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "8088d79d3751b91714a5f632ea31029cdb1bb5a042e869438edc80d6daa247e0"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "swagit-archive-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://bellca.new.swagit.com/past-city-council-videos/",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://bellca.new.swagit.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://bellca.new.swagit.com/past-city-council-videos/"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[swagit/swagit-archive-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "8088d79d3751b91714a5f632ea31029cdb1bb5a042e869438edc80d6daa247e0"
+        ],
+        "requests": [
+          {
+            "url": "https://bellca.new.swagit.com/past-city-council-videos/",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://bellca.new.swagit.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "suiteone-media",
+      "default_input_format": "suiteone-archive-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "suiteone-archive-html",
+          "source_url": "https://watkinsvillega.suiteonemedia.com/",
+          "fixture": "tests/fixtures/baseline/suiteone.response",
+          "fixture_sha256": "c4a0732de74628cf5590129d0020d474937161638719c3215c09533235241112",
+          "fixture_sha256_verified": "c4a0732de74628cf5590129d0020d474937161638719c3215c09533235241112",
+          "oracle_output_sha256": "795cb75305d39aeb068fa312ff3e53a27795c10669646fefe53dd85802f34e8e",
+          "original_record_count": 28,
+          "original_namespace": "//watkinsvillega.suiteonemedia.com",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[suiteone-media/suiteone-archive-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "suiteone-media",
+        "source_url": "https://watkinsvillega.suiteonemedia.com/",
+        "status": "partial",
+        "elapsed_seconds": 0.501,
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "66fc2f432fe38da338a0c15e3c7ef4801d165978678fa8e9218c69721ef42643"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "suiteone-archive-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://watkinsvillega.suiteonemedia.com/",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://watkinsvillega.suiteonemedia.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://watkinsvillega.suiteonemedia.com/"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[suiteone-media/suiteone-archive-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "66fc2f432fe38da338a0c15e3c7ef4801d165978678fa8e9218c69721ef42643"
+        ],
+        "requests": [
+          {
+            "url": "https://watkinsvillega.suiteonemedia.com/",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://watkinsvillega.suiteonemedia.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "peak",
+      "default_input_format": "granicus-listing-html",
+      "implementation_status": "additive_listing_parser_implemented",
+      "acceptance_status": "live_configured_capture_only",
+      "automatic_discovery": "configured_listing_page_read_implemented",
+      "remaining_gap": "Configured ViewPublisher page is retained and parsed, but upstream catalog completeness and additional views remain unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "configured_listing_page_read_implemented",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "implemented",
+          "registered_formats": [
+            "granicus-listing-html"
+          ]
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "peak-viewpublisher-html",
+          "source_url": "https://douglascountynv.granicus.com/ViewPublisher.php?view_id=1",
+          "fixture": "tests/fixtures/baseline/peak.response",
+          "fixture_sha256": "835e3e2990186c4015b223f3692938b45437e8ee8c91e22fb55740c0cc06fb1b",
+          "fixture_sha256_verified": "835e3e2990186c4015b223f3692938b45437e8ee8c91e22fb55740c0cc06fb1b",
+          "oracle_output_sha256": "a1319c5482ea573eb5f371d530f3daeb1106e8cdcd17fb0be0e355cd685bbd06",
+          "original_record_count": 7,
+          "original_namespace": "//douglascountynv.granicus.com",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[peak/peak-viewpublisher-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "peak",
+        "source_url": "https://douglascountynv.granicus.com/ViewPublisher.php?view_id=1",
+        "status": "partial",
+        "elapsed_seconds": 3.754,
+        "record_count": 9,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "c0019a87ba767dcec0632584ecd056e376bb23699fef34d8b47ee660e30d2805"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "granicus-listing-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://douglascountynv.granicus.com/ViewPublisher.php?view_id=1",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://douglascountynv.granicus.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://douglascountynv.granicus.com/ViewPublisher.php?view_id=1"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[peak/peak-viewpublisher-html]",
+        "tests/test_provider_discovery.py::test_granicus_upcoming_attachmentless_row_and_archived_clip_identity",
+        "tests/test_provider_discovery.py::test_native_saved_direct_normalize_execute_and_base64_parity[peak-granicus-listing-html-https://city.granicus.com/ViewPublisher.php?view_id=1-content3]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 9,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "c0019a87ba767dcec0632584ecd056e376bb23699fef34d8b47ee660e30d2805"
+        ],
+        "requests": [
+          {
+            "url": "https://douglascountynv.granicus.com/ViewPublisher.php?view_id=1",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://douglascountynv.granicus.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "utah-public-notice",
+      "default_input_format": "utah-notice-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "utah-notice-html",
+          "source_url": "https://www.utah.gov/pmn/sitemap/notice/1101977.html",
+          "fixture": "tests/fixtures/baseline/utah-notice.response",
+          "fixture_sha256": "2067ed91c4346b0b39d6236dc9c470e9e0d401b63c8b390afb457745b8953f7e",
+          "fixture_sha256_verified": "2067ed91c4346b0b39d6236dc9c470e9e0d401b63c8b390afb457745b8953f7e",
+          "oracle_output_sha256": "0b4eb776e87ce38937186b0e31eeb762a3f6968f4770956250ab9ab57569a693",
+          "original_record_count": 1,
+          "original_namespace": "//www.utah.gov",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[utah-public-notice/utah-notice-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "utah-public-notice",
+        "source_url": "https://www.utah.gov/pmn/sitemap/notice/1101977.html",
+        "status": "partial",
+        "elapsed_seconds": 0.197,
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "26b0ed4ce322074903416c0ff07b79b8b04ef369ee464ae773f58fe257762d72"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "utah-notice-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://www.utah.gov/pmn/sitemap/notice/1101977.html",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://www.utah.gov"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://www.utah.gov/pmn/sitemap/notice/1101977.html"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[utah-public-notice/utah-notice-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "26b0ed4ce322074903416c0ff07b79b8b04ef369ee464ae773f58fe257762d72"
+        ],
+        "requests": [
+          {
+            "url": "https://www.utah.gov/pmn/sitemap/notice/1101977.html",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://www.utah.gov"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "destiny-agendaquick",
+      "default_input_format": "agendaquick-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "agendaquick-html",
+          "source_url": "https://public.destinyhosted.com/agenda_publish.cfm?id=35247",
+          "fixture": "tests/fixtures/baseline/destiny.response",
+          "fixture_sha256": "27fa403b6a4bd42093a60dc40a581d4cfbbe643ce4fc513459ec96f70b3c8692",
+          "fixture_sha256_verified": "27fa403b6a4bd42093a60dc40a581d4cfbbe643ce4fc513459ec96f70b3c8692",
+          "oracle_output_sha256": "8ef675a379222baa7bd948189b4c070e15934abc0645084890b262ba3971825e",
+          "original_record_count": 10,
+          "original_namespace": "//public.destinyhosted.com/35247",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[destiny-agendaquick/agendaquick-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "destiny-agendaquick",
+        "source_url": "https://public.destinyhosted.com/agenda_publish.cfm?id=35247",
+        "status": "partial",
+        "elapsed_seconds": 0.358,
+        "record_count": 5,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "27fa403b6a4bd42093a60dc40a581d4cfbbe643ce4fc513459ec96f70b3c8692"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "agendaquick-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://public.destinyhosted.com/agenda_publish.cfm?id=35247",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://public.destinyhosted.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://public.destinyhosted.com/agenda_publish.cfm?id=35247"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[destiny-agendaquick/agendaquick-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 5,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "27fa403b6a4bd42093a60dc40a581d4cfbbe643ce4fc513459ec96f70b3c8692"
+        ],
+        "requests": [
+          {
+            "url": "https://public.destinyhosted.com/agenda_publish.cfm?id=35247",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://public.destinyhosted.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "town-hall-streams",
+      "default_input_format": "town-hall-streams-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "town-hall-streams-html",
+          "source_url": "https://www.townhallstreams.com/town.php?id=31",
+          "fixture": "tests/fixtures/baseline/townhallstreams.response",
+          "fixture_sha256": "af55f7fc75824b7744c999c155a228f2007c718c36a13cd817cbe2774ea2394b",
+          "fixture_sha256_verified": "af55f7fc75824b7744c999c155a228f2007c718c36a13cd817cbe2774ea2394b",
+          "oracle_output_sha256": "d6fd9f0d2870cba0b0149623cbdc0e7ce0bd05bd24f8d2399d9fb232a007269e",
+          "original_record_count": 415,
+          "original_namespace": "//townhallstreams.com?location_id=31",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[town-hall-streams/town-hall-streams-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "town-hall-streams",
+        "source_url": "https://www.townhallstreams.com/town.php?id=31",
+        "status": "partial",
+        "elapsed_seconds": 0.361,
+        "record_count": 1,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "af55f7fc75824b7744c999c155a228f2007c718c36a13cd817cbe2774ea2394b"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "town-hall-streams-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://www.townhallstreams.com/town.php?id=31",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://www.townhallstreams.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://www.townhallstreams.com/town.php?id=31"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[town-hall-streams/town-hall-streams-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 1,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "af55f7fc75824b7744c999c155a228f2007c718c36a13cd817cbe2774ea2394b"
+        ],
+        "requests": [
+          {
+            "url": "https://www.townhallstreams.com/town.php?id=31",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://www.townhallstreams.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "telvue",
+      "default_input_format": "telvue-playlist-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "telvue-playlist-html",
+          "source_url": "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/playlists/1757?fullscreen=false&showtabssearch=true",
+          "fixture": "tests/fixtures/baseline/telvue.response",
+          "fixture_sha256": "08c2ca51ed7655f5fd6734eaab7e193445deac8764079ee0f8da45ddf9b017fd",
+          "fixture_sha256_verified": "08c2ca51ed7655f5fd6734eaab7e193445deac8764079ee0f8da45ddf9b017fd",
+          "oracle_output_sha256": "2f59a1132e076304eec83789840b34afdc41250acd8e625dff93c06b0c004883",
+          "original_record_count": 15,
+          "original_namespace": "//telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[telvue/telvue-playlist-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "telvue",
+        "source_url": "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/playlists/1757?fullscreen=false&showtabssearch=true",
+        "status": "partial",
+        "elapsed_seconds": 0.478,
+        "record_count": 1,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "5d9ca23f21d1d5b08445bb96be21a8769650fc74376d40e1a869278e4f9146b0"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "telvue-playlist-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/playlists/1757?fullscreen=false&showtabssearch=true",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://videoplayer.telvue.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/playlists/1757?fullscreen=false&showtabssearch=true"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[telvue/telvue-playlist-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 1,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "5d9ca23f21d1d5b08445bb96be21a8769650fc74376d40e1a869278e4f9146b0"
+        ],
+        "requests": [
+          {
+            "url": "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/playlists/1757?fullscreen=false&showtabssearch=true",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://videoplayer.telvue.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "champ",
+      "default_input_format": "champ-event-json",
+      "implementation_status": "saved_capture_supported_automatic_path_unverified",
+      "acceptance_status": "saved_fixture_passed; live_not_passed",
+      "automatic_discovery": "not_implemented_unverified",
+      "remaining_gap": "The checker correctly requires a saved response. This is not a claim that the vendor lacks a discovery API.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "not_implemented_unverified",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "champ-event-json",
+          "source_url": "https://play.champds.com/lakezurichil/event/164",
+          "fixture": "tests/fixtures/baseline/champ-event.response",
+          "fixture_sha256": "8996174ad192d0c4be757871a445117f2001b8414b5cf4106f8a5f814dce1f06",
+          "fixture_sha256_verified": "8996174ad192d0c4be757871a445117f2001b8414b5cf4106f8a5f814dce1f06",
+          "oracle_output_sha256": "9c100aabfd2133c98b5cc7039054ffad18d380673f6ca7e8647a247d35ece5b5",
+          "original_record_count": 1,
+          "original_namespace": "//champds.com/lakezurichil",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[champ/champ-event-json]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "champ",
+        "source_url": "https://play.champds.com/lakezurichil/event/164",
+        "status": "unsupported",
+        "elapsed_seconds": 0.0,
+        "record_count": 0,
+        "pages": 0,
+        "truncated": null,
+        "errors": [
+          "saved_capture_required"
+        ],
+        "error_details": [
+          {}
+        ],
+        "capture_sha256": [],
+        "scope": "saved-capture fallback required",
+        "configuration_policy": "baseline",
+        "input_format": "champ-event-json",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [],
+        "acceptance": "not_passed"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://play.champds.com/lakezurichil/event/164"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[champ/champ-event-json]"
+      ],
+      "live_read_result": {
+        "status": "unsupported",
+        "acceptance": "not_passed",
+        "record_count": 0,
+        "pages": 0,
+        "truncated": null,
+        "errors": [
+          "saved_capture_required"
+        ],
+        "capture_sha256": [],
+        "requests": [],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "onbase",
+      "default_input_format": "onbase-agenda-online-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "onbase-agenda-online-html",
+          "source_url": "https://ecm.cityofsantacruz.com/OnBaseAgendaOnline/",
+          "fixture": "tests/fixtures/baseline/onbase.response",
+          "fixture_sha256": "52bcf78353802dc087e65c83034dadcf751a61142eebb05821481e5cc3bd56a1",
+          "fixture_sha256_verified": "52bcf78353802dc087e65c83034dadcf751a61142eebb05821481e5cc3bd56a1",
+          "oracle_output_sha256": "37f3cf8b0ba581a143d9f5b51830aba54a7388a542eb18f6672b9b6cfaed5727",
+          "original_record_count": 73,
+          "original_namespace": "//ecm.cityofsantacruz.com/onbaseagendaonline",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[onbase/onbase-agenda-online-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "onbase",
+        "source_url": "https://ecm.cityofsantacruz.com/OnBaseAgendaOnline/",
+        "status": "partial",
+        "elapsed_seconds": 2.508,
+        "record_count": 5,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "52bcf78353802dc087e65c83034dadcf751a61142eebb05821481e5cc3bd56a1"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "onbase-agenda-online-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://ecm.cityofsantacruz.com/OnBaseAgendaOnline/",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://ecm.cityofsantacruz.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://ecm.cityofsantacruz.com/OnBaseAgendaOnline/"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[onbase/onbase-agenda-online-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 5,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "52bcf78353802dc087e65c83034dadcf751a61142eebb05821481e5cc3bd56a1"
+        ],
+        "requests": [
+          {
+            "url": "https://ecm.cityofsantacruz.com/OnBaseAgendaOnline/",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://ecm.cityofsantacruz.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "laserfiche-weblink",
+      "default_input_format": "laserfiche-folder-html",
+      "implementation_status": "guarded_browser_weblink_mechanics_implemented",
+      "acceptance_status": "independent_capture_mock_passed; live_configured_capture_failed",
+      "automatic_discovery": "requires caller-supplied guarded browser session scoped to the configured origin",
+      "remaining_gap": "The static saved-folder URL is not accepted as a complete WebLink catalog source; live configured Redwood City read failed and Louisville/Boulder evidence is from independent captured traffic.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "requires caller-supplied guarded browser session scoped to the configured origin",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "laserfiche-folder-html",
+          "source_url": "https://documents.redwoodcity.org/PublicWeblink/0/fol/517168/Row1.aspx",
+          "fixture": "tests/fixtures/baseline/laserfiche-docs.response",
+          "fixture_sha256": "bee1c4fb685d53e6181c3d3750b68475e4c9096752ca34df57cc7f88dccda2d7",
+          "fixture_sha256_verified": "bee1c4fb685d53e6181c3d3750b68475e4c9096752ca34df57cc7f88dccda2d7",
+          "oracle_output_sha256": "68b6b5ad8d6709874b467165f146716384a5c7ea06f91edd22dd481ad5c56d8b",
+          "original_record_count": 19,
+          "original_namespace": "//documents.redwoodcity.org/publicweblink",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[laserfiche-weblink/laserfiche-folder-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/info-1066144.json",
+          "fixture_sha256": "f3c9ca6c1ecd3bedf114eca7547371b2db7fdc7c0382814fc52886b6f93c0069",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-1010632.json",
+          "fixture_sha256": "be74a001368331d7d8792ebb39596d2945381923e00c19ccac86e634ca6879c9",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-1058850.json",
+          "fixture_sha256": "962b3aa9d84b8fc1024ac6a7596a92a72e117321a0243f149c59a7dc552f75d0",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189762.json",
+          "fixture_sha256": "c99a668b23d58ce40d39e929f07ad7ff7509a7d1f07b013453bb6646313ab822",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189763.json",
+          "fixture_sha256": "5a8df699a1cd311d6d3b51a8695c502eb90fa6633778043bbb542d4ef9309ac7",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189764.json",
+          "fixture_sha256": "aa856053cf2de791bc9c46998856ac3a9a07afb4818de5e9f1b63aca100be251",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189765.json",
+          "fixture_sha256": "1fff15aecf13299163c98d4571a76eaad2832686a39689131046634966bafb37",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189766.json",
+          "fixture_sha256": "95d89ca4a074480b80c6114bec74af91599f9e1e6cf8d66bbbb7da44942ae678",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189767.json",
+          "fixture_sha256": "f3bdb10194ea5a76623ce6e2ece5b87b018c266fd646b9f583a656af4e81739d",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189768.json",
+          "fixture_sha256": "ca09d4a1bb8a613019c66a11f37b0f3f797c140a0567f7a656783b62451450ff",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189769.json",
+          "fixture_sha256": "c37d937ee118225d30ac946a1e437d4a3b4db5ce69e5f7644b99d7ec617b6db0",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189770.json",
+          "fixture_sha256": "07ba122663fcac20995daeb469c78206a743032b0560a49c680ba1425a298b41",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189771.json",
+          "fixture_sha256": "ce81695b0aaaa50d63039cd92cc36b88f01085cdeba83aef36c85518eab4a8aa",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189772.json",
+          "fixture_sha256": "c48acdfea4f679c1e8439714d60597e9cb9047be3e6cd18ea9c9eb1621ddc10c",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189773.json",
+          "fixture_sha256": "420c4a1b96034dfa0b5a1c18eac7b299432b4fc1e11310e915c111b693b8561a",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189774.json",
+          "fixture_sha256": "211f4c2dfab6fe1624f6db0ce2ab871e6f4ad636d5004ba7da71cf23ebd32c34",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-189891.json",
+          "fixture_sha256": "7ed6fabbd19df8a04b258aea7389162abcb8205c1665836ceef5c4a50109ee22",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-192048.json",
+          "fixture_sha256": "ab118c08513c8feb9e123360f1ec54715a106ddcfa601f178a7392ad29dd5506",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-192050.json",
+          "fixture_sha256": "7ae218828527c2ea0775ff01e3ab9b829016c854c4ef63e40f2f69e58a3286a8",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-193721.json",
+          "fixture_sha256": "22f4be08717edfad91383d6bb77fb20fb9b7e3b123e33c4b96cabc81b94fcdf9",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-193723.json",
+          "fixture_sha256": "846e0437632a3b5b8677e2c673fa410739c62266a185e49a9746a8534885c40a",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-193725.json",
+          "fixture_sha256": "97932efecfd175d39141a43b600666fba086c0a98ca3636562528b3fb5622f9a",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198102.json",
+          "fixture_sha256": "74adac403afc28a204effa12f36451d9cce13854fe4613b0dd7c4910007a1f49",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198472.json",
+          "fixture_sha256": "131958b2e965af550ca08c2733b182415ab50d200f5da0d4324fbeceea3eb6b9",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198473.json",
+          "fixture_sha256": "205cdc7a1c2d464749dae67152334f0f23d81b21bd056d4c0a475e1494079cd8",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198474.json",
+          "fixture_sha256": "3469a74482739e863ab7af572078c9fc8b8a1f17924a77911557af14e17d9ed1",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198475.json",
+          "fixture_sha256": "41988a714f0c0f042a78df1a2f27402d73ab48723b3a165e258bd27e49a78bb3",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198476.json",
+          "fixture_sha256": "bf01c1180db986e8f82683bc5a7204c87c3ce1eeb114a4cf71af986134a63b7c",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198477.json",
+          "fixture_sha256": "f5f6251d578b25d3f71b228e2f0a25d68166d9bbf568fa5af950fff6b6c1b293",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198478.json",
+          "fixture_sha256": "1ab1fc5ec740752f2fa37747b8b6962a2d9fd513300f0739933721736e0b48c5",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198479.json",
+          "fixture_sha256": "b29e7f25f9a7d19e44fa4188ca0486fda57e0417a2e25e528158df715efd09fa",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198480.json",
+          "fixture_sha256": "a1f0641e9a17191b159b33f0f4ff82a5c02b09020cb18aacae2186982c052251",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198481.json",
+          "fixture_sha256": "b9a2b41a558fd93735b36a6281bf34c69c0bc4965e687101580c99de67ec0974",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198482.json",
+          "fixture_sha256": "49186cb74eabb3c22a6bb0af96b2171f0150a0f1e3d68fbd200b12536d1e429a",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198483.json",
+          "fixture_sha256": "1b502eddc39a57c4cf4f2937c953b2aa85cdc233c92dfd558c57b69ce1a663fc",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198484.json",
+          "fixture_sha256": "1c0e11e9f60b86e0614743f4137d19a0b31821dc9a81fb41bd09f423eb5998c2",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198565.json",
+          "fixture_sha256": "60a464bc159bd43cfe46a4aac1a65a76a15ede04e4cb672fdf7d8759382b085e",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198566.json",
+          "fixture_sha256": "b65b6580e3f1fd8681ad932bd3c228917c8bcc84b86de945ab70fc4babdae086",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198567.json",
+          "fixture_sha256": "8e6da349e10ab3cdfeb35553f709ad0285b25e18820b25ee4c81b869a1833785",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198568.json",
+          "fixture_sha256": "357caedfc1105ba6e88bbd276575b651d4cc133c3a43f452e1eb52d7fe96f03e",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198569.json",
+          "fixture_sha256": "529826b8a4335b821d6094279cb52c636571bc49429c9da5e835b1b3f43fbb99",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198583.json",
+          "fixture_sha256": "329068a4207c2a29f02d95872acc6f49874710b470f3aa19725fb3f53388af08",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198591.json",
+          "fixture_sha256": "535d942adf5e1f206747d42a238b33bede4651a0602df9855e24820da0a1f2c9",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198592.json",
+          "fixture_sha256": "d71f1437eff9212c219261ea22fcdd82b569815433b0c0cf12f854f9540838f5",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198593.json",
+          "fixture_sha256": "3e6caa9086275b406a2330994cd9bdcfbf08e1409cfa01d55654dc1b0a1abdaf",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-198594.json",
+          "fixture_sha256": "c255d7fcae75eb7ee7ea4c0e052af13473a2c03cda7ff63bdce7ceafdef1077b",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-203290.json",
+          "fixture_sha256": "b3eaec5cd154d206fdc656b5914968c1778b36313466fa68581eb89e10fc1130",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-203292.json",
+          "fixture_sha256": "8af3bc727fa884195e9c1e07d23c77489f8d280a7ee0e71b73ab73651177a34c",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-203297.json",
+          "fixture_sha256": "569d5543e50a0a8f76f471f5faf13f4c82ef6d83172c9c214f6e6ee44c45594b",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-203938.json",
+          "fixture_sha256": "177396a4d18e2b8c4079db4d783f623326b11adcbfa216be77e8c8c339a3cfe5",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-205251.json",
+          "fixture_sha256": "2973838042c7dab979467d0fb004839ab69b4dc37551ae4fe01ca2dd66acdd7d",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-205254.json",
+          "fixture_sha256": "2ff51ddab03058f43329fff0f8e374db7713546e65400f98b56a9cf0c908aa95",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-205515.json",
+          "fixture_sha256": "e1c6e704fc54d82a221b631c0eb23e0bbfdce075b59d7e304c816d0b08b0d222",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-205516.json",
+          "fixture_sha256": "9c68191504263f8d168deee5e78740c51dafc9f51f670b4c7d36047e2d759ef9",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-205845.json",
+          "fixture_sha256": "3d7983562be33b3ccf5fd80b7ba6fcb0caf0953ad8443a6e2b9b895194b0a446",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-205846.json",
+          "fixture_sha256": "45b50dab73b77b904ba0fcb3ba4822e3964e1675331da31234873e68c702f5e3",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-206380.json",
+          "fixture_sha256": "291172c0f528571cbb0dc3d2422d0b7cef1f89e31df9f52662b11c235368702c",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-206381.json",
+          "fixture_sha256": "9fe20ca1aedcef4a565b5ec8cd33c3d56002872cf7672e1f26966e53bb67548d",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-32770.json",
+          "fixture_sha256": "ed59a07eaef15d84b52bc7a3bee4ca20e225a00461bc1f6d19034802ab63bd91",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-47549.json",
+          "fixture_sha256": "4ec8050a45e7ed42f784a5f8760b4e587217b21f748e3c9036f5740bead26e5b",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/listing-8986.json",
+          "fixture_sha256": "eec195dd66ae39fb2a064c5a50ffc3c69b7ddd4c25606085cbf39d226933f4b9",
+          "result": "PASS"
+        },
+        {
+          "fixture": "tests/fixtures/brief-discovery/laserfiche/text-1066144-1.json",
+          "fixture_sha256": "00864f90e86e1d38e5197b040406c8fa043d39d60e916bd7223c9b04d6c82395",
+          "result": "PASS"
+        }
+      ],
+      "live_read_evidence": {
+        "provider": "laserfiche-weblink",
+        "source_url": "https://documents.redwoodcity.org/PublicWeblink/0/fol/517168/Row1.aspx",
+        "status": "failed",
+        "elapsed_seconds": 0.412,
+        "record_count": 0,
+        "pages": 1,
+        "truncated": true,
+        "errors": [
+          "provider_page_failed"
+        ],
+        "error_details": [
+          {}
+        ],
+        "capture_sha256": [],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "laserfiche-folder-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://documents.redwoodcity.org/PublicWeblink/0/fol/517168/Row1.aspx",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://documents.redwoodcity.org"
+            ]
+          }
+        ],
+        "acceptance": "not_passed"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://documents.redwoodcity.org/PublicWeblink/0/fol/517168/Row1.aspx"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[laserfiche-weblink/laserfiche-folder-html]",
+        "tests/test_provider_laserfiche.py::test_boulder_year_month_meeting_nesting_respects_boundary_dates",
+        "tests/test_provider_laserfiche.py::test_empty_scanned_text_never_claims_readable_or_cross_repo",
+        "tests/test_provider_laserfiche.py::test_folder_pagination_and_resume_no_missing_midpage_entries",
+        "tests/test_provider_laserfiche.py::test_louisville_dated_document_fields_from_independent_capture",
+        "tests/test_provider_laserfiche.py::test_scanned_provider_text_preserves_pages_and_limit_coverage",
+        "tests/test_provider_laserfiche.py::test_session_origin_and_guard_requirements_fail_closed",
+        "tests/test_provider_laserfiche.py::test_type_filter_and_cancellation_checkpoint"
+      ],
+      "live_read_result": {
+        "status": "failed",
+        "acceptance": "not_passed",
+        "record_count": 0,
+        "pages": 1,
+        "truncated": true,
+        "errors": [
+          "provider_page_failed"
+        ],
+        "capture_sha256": [],
+        "requests": [
+          {
+            "url": "https://documents.redwoodcity.org/PublicWeblink/0/fol/517168/Row1.aspx",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://documents.redwoodcity.org"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "towncloud",
+      "default_input_format": "towncloud-agenda-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "towncloud-agenda-html",
+          "source_url": "https://towncloud.io/go/bennett-co/agendas/1033",
+          "fixture": "tests/fixtures/baseline/towncloud-agenda.response",
+          "fixture_sha256": "6dc4c41b94da012eec085fdcab30c64e83812af5f01aa4a381c3f4b31acf5a66",
+          "fixture_sha256_verified": "6dc4c41b94da012eec085fdcab30c64e83812af5f01aa4a381c3f4b31acf5a66",
+          "oracle_output_sha256": "e5e09849b291cb58d58c4c902cc1f25dea992171387106ec82fbae37ef23956b",
+          "original_record_count": 1,
+          "original_namespace": "//towncloud.io/go/bennett-co",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[towncloud/towncloud-agenda-html]"
+          ],
+          "result": "PASS"
+        },
+        {
+          "input_format": "towncloud-table-json",
+          "source_url": "https://towncloud.io/go/bennett-co/table_data",
+          "fixture": "tests/fixtures/baseline/towncloud-list.response",
+          "fixture_sha256": "ac713151a85443d99d18d17373a14b910232845f113fe2dcd61bb232718ec1da",
+          "fixture_sha256_verified": "ac713151a85443d99d18d17373a14b910232845f113fe2dcd61bb232718ec1da",
+          "oracle_output_sha256": "ed4838d0f58a20bb3fc1abb496d987525a067c94a16f64881bb8568364d8b0af",
+          "original_record_count": 25,
+          "original_namespace": "//towncloud.io/go/bennett-co",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[towncloud/towncloud-table-json]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "towncloud",
+        "source_url": "https://towncloud.io/go/bennett-co/agendas/1033",
+        "status": "partial",
+        "elapsed_seconds": 0.256,
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "fa459c8e8c2bf117452cb9181aa610e0631d8ea7659c53499726837a1d9697d6"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "towncloud-agenda-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://towncloud.io/go/bennett-co/agendas/1033",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://towncloud.io"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://towncloud.io/go/bennett-co/agendas/1033",
+        "https://towncloud.io/go/bennett-co/table_data"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[towncloud/towncloud-agenda-html]",
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[towncloud/towncloud-table-json]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "fa459c8e8c2bf117452cb9181aa610e0631d8ea7659c53499726837a1d9697d6"
+        ],
+        "requests": [
+          {
+            "url": "https://towncloud.io/go/bennett-co/agendas/1033",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://towncloud.io"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "digital-towpath",
+      "default_input_format": "digital-towpath-detail-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "digital-towpath-detail-html",
+          "source_url": "https://townofberkshireny.gov/meetings/detail/64",
+          "fixture": "tests/fixtures/baseline/digital-towpath-detail.response",
+          "fixture_sha256": "f02d3b5b393cf3935cef44d1d574d95bccd29779bef390353f051b8c037f3e3a",
+          "fixture_sha256_verified": "f02d3b5b393cf3935cef44d1d574d95bccd29779bef390353f051b8c037f3e3a",
+          "oracle_output_sha256": "064ebc05ee3542b18ebbeefa66e526c8f76fc83b4031ec3564224570d943f20d",
+          "original_record_count": 1,
+          "original_namespace": "//townofberkshireny.gov",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[digital-towpath/digital-towpath-detail-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "digital-towpath",
+        "source_url": "https://townofberkshireny.gov/meetings/detail/64",
+        "status": "partial",
+        "elapsed_seconds": 1.514,
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "cb6bdb1462c8ea5015aec3361efa05c1ce1f59ac89bfed1e29e4b6477cdace3c"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "digital-towpath-detail-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://townofberkshireny.gov/meetings/detail/64",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://townofberkshireny.gov"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://townofberkshireny.gov/meetings/detail/64"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[digital-towpath/digital-towpath-detail-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "cb6bdb1462c8ea5015aec3361efa05c1ce1f59ac89bfed1e29e4b6477cdace3c"
+        ],
+        "requests": [
+          {
+            "url": "https://townofberkshireny.gov/meetings/detail/64",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://townofberkshireny.gov"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "clerkbase",
+      "default_input_format": "clerkbase-document-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "clerkbase-document-html",
+          "source_url": "https://clerkshq.com/Content/Richmond-ri/council/2022/apr19_22tc.htm",
+          "fixture": "tests/fixtures/baseline/clerkbase.response",
+          "fixture_sha256": "4bc7c508723796477389fd2385c6e111eee88d5fedb54e7271daea2692d86e2a",
+          "fixture_sha256_verified": "4bc7c508723796477389fd2385c6e111eee88d5fedb54e7271daea2692d86e2a",
+          "oracle_output_sha256": "eb3f98bed6188365b443dd9181dd3c65ebe3d63bdf9685471eef17ada485432e",
+          "original_record_count": 1,
+          "original_namespace": "//clerkshq.com",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[clerkbase/clerkbase-document-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "clerkbase",
+        "source_url": "https://clerkshq.com/Content/Richmond-ri/council/2022/apr19_22tc.htm",
+        "status": "partial",
+        "elapsed_seconds": 0.526,
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "4bc7c508723796477389fd2385c6e111eee88d5fedb54e7271daea2692d86e2a"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "clerkbase-document-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://clerkshq.com/Content/Richmond-ri/council/2022/apr19_22tc.htm",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://clerkshq.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://clerkshq.com/Content/Richmond-ri/council/2022/apr19_22tc.htm"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[clerkbase/clerkbase-document-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "4bc7c508723796477389fd2385c6e111eee88d5fedb54e7271daea2692d86e2a"
+        ],
+        "requests": [
+          {
+            "url": "https://clerkshq.com/Content/Richmond-ri/council/2022/apr19_22tc.htm",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://clerkshq.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "first-party",
+      "default_input_format": "public-meeting-ics",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "public-meeting-ics",
+          "source_url": "https://calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics",
+          "fixture": "tests/fixtures/baseline/sunnyvale.response",
+          "fixture_sha256": "339a63cd60a7f1145481fceff34a6aa98f5dc0b4768a50cbfda3e1f76522d7d6",
+          "fixture_sha256_verified": "339a63cd60a7f1145481fceff34a6aa98f5dc0b4768a50cbfda3e1f76522d7d6",
+          "oracle_output_sha256": "64cdea3bf7dcfc7bebe87c9a7ab8f3aa7b255020aec57da4e42d539659fc669f",
+          "original_record_count": 1307,
+          "original_namespace": "//calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[first-party/public-meeting-ics]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "first-party",
+        "source_url": "https://calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics",
+        "status": "partial",
+        "elapsed_seconds": 1.046,
+        "record_count": 8,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "d2a54d26ab0dceba759a3e7a495644abc3f8bae9e8f57c6d50939aa2a602a411"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "public-meeting-ics",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://calendar.google.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[first-party/public-meeting-ics]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 8,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "d2a54d26ab0dceba759a3e7a495644abc3f8bae9e8f57c6d50939aa2a602a411"
+        ],
+        "requests": [
+          {
+            "url": "https://calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://calendar.google.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "wistia",
+      "default_input_format": "wistia-media-json",
+      "implementation_status": "native_account_api_and_public_media_capture_implemented",
+      "acceptance_status": "mocked_account_api_passed_and_live_public_configured_capture_passed",
+      "automatic_discovery": "implemented_for_authenticated_modern_media_listing_when_caller_supplies_credential",
+      "remaining_gap": "No account credential was used in the public live ledger; upload timestamps are not meeting dates.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "implemented_for_authenticated_modern_media_listing_when_caller_supplies_credential",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "implemented",
+          "registered_formats": [
+            "wistia-media-json"
+          ]
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "wistia-media-json",
+          "source_url": "https://fast.wistia.com/embed/medias/e4a27b971d.json",
+          "fixture": "tests/fixtures/baseline/wistia.response",
+          "fixture_sha256": "3b32bb295030cb376e1d50f2cd3d8e355c8d3e22f813b93248570e0037c7d1c0",
+          "fixture_sha256_verified": "3b32bb295030cb376e1d50f2cd3d8e355c8d3e22f813b93248570e0037c7d1c0",
+          "oracle_output_sha256": "99e83ee973e899de32b3af6c81df4c142f286fd901565da14384e3713326cec6",
+          "original_record_count": 1,
+          "original_namespace": "//fast.wistia.com",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[wistia/wistia-media-json]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "wistia",
+        "source_url": "https://fast.wistia.com/embed/medias/e4a27b971d.json",
+        "status": "partial",
+        "elapsed_seconds": 0.037,
+        "record_count": 1,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "7e10697fb32a8740f7d013d3b111a00b1d3ec018b35a3c86192c470277d9231b"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "wistia-media-json",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://fast.wistia.com/embed/medias/e4a27b971d.json",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://fast.wistia.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [
+        "https://docs.wistia.com/reference/get_medias.md"
+      ],
+      "evidence_urls": [
+        "https://fast.wistia.com/embed/medias/e4a27b971d.json"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[wistia/wistia-media-json]",
+        "tests/test_provider_discovery.py::test_native_saved_direct_normalize_execute_and_base64_parity[wistia-wistia-api-media-json-https://api.wistia.com/modern/medias-[{\"hashed_id\":\"media1\",\"name\":\"Council\",\"created\":\"2026-11-10T12:00:00Z\"}]]",
+        "tests/test_provider_discovery.py::test_wistia_modern_version_bearer_page_and_unknown_meeting_date"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 1,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "7e10697fb32a8740f7d013d3b111a00b1d3ec018b35a3c86192c470277d9231b"
+        ],
+        "requests": [
+          {
+            "url": "https://fast.wistia.com/embed/medias/e4a27b971d.json",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://fast.wistia.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "boardable",
+      "default_input_format": "boardable-public-meeting-html",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "boardable-public-meeting-html",
+          "source_url": "https://site.boardable.com/lake-land-college/meetings/08b637-regular-board-of-trustees-meeting",
+          "fixture": "tests/fixtures/baseline/boardable-detail.response",
+          "fixture_sha256": "ee3a196a1b76416a570bf26aab28ffb1ab39961e54f31a497f7273525b624847",
+          "fixture_sha256_verified": "ee3a196a1b76416a570bf26aab28ffb1ab39961e54f31a497f7273525b624847",
+          "oracle_output_sha256": "c8b9d7b1e3b289719ca10549ec0666da77548fce3136f13900987be2d5073cb2",
+          "original_record_count": 1,
+          "original_namespace": "//site.boardable.com/lake-land-college",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[boardable/boardable-public-meeting-html]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "boardable",
+        "source_url": "https://site.boardable.com/lake-land-college/meetings/08b637-regular-board-of-trustees-meeting",
+        "status": "partial",
+        "elapsed_seconds": 1.486,
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "b864c260162d6a5a017402e795994e97c90d969463cd25c7c5b19585588f0fc2"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "boardable-public-meeting-html",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://site.boardable.com/lake-land-college/meetings/08b637-regular-board-of-trustees-meeting",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://site.boardable.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://site.boardable.com/lake-land-college/meetings/08b637-regular-board-of-trustees-meeting"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[boardable/boardable-public-meeting-html]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "b864c260162d6a5a017402e795994e97c90d969463cd25c7c5b19585588f0fc2"
+        ],
+        "requests": [
+          {
+            "url": "https://site.boardable.com/lake-land-college/meetings/08b637-regular-board-of-trustees-meeting",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://site.boardable.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "gworks",
+      "default_input_format": "gworks-frontdesk-json",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "gworks-frontdesk-json",
+          "source_url": "https://files.frontdeskgworks.com/city/1311/cms/data.json",
+          "fixture": "tests/fixtures/baseline/gworks-1311.response",
+          "fixture_sha256": "1c416144c033155ff3db32dfa1e6720005d9d7c48ea625420087dee34e10ea70",
+          "fixture_sha256_verified": "1c416144c033155ff3db32dfa1e6720005d9d7c48ea625420087dee34e10ea70",
+          "oracle_output_sha256": "793989685d34429f6555bb4b69ec7520a980c8f15b8dd135c2c57f07b303f19e",
+          "original_record_count": 173,
+          "original_namespace": "//files.frontdeskgworks.com/city/1311/cms/data.json",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[gworks/gworks-frontdesk-json]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "gworks",
+        "source_url": "https://files.frontdeskgworks.com/city/1311/cms/data.json",
+        "status": "partial",
+        "elapsed_seconds": 0.241,
+        "record_count": 1,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "1c416144c033155ff3db32dfa1e6720005d9d7c48ea625420087dee34e10ea70"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "gworks-frontdesk-json",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://files.frontdeskgworks.com/city/1311/cms/data.json",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://files.frontdeskgworks.com"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://files.frontdeskgworks.com/city/1311/cms/data.json"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[gworks/gworks-frontdesk-json]",
+        "tests/test_provider_discovery.py::test_gworks_scheduled_calendar_day_filters_before_record_cap"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 1,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "1c416144c033155ff3db32dfa1e6720005d9d7c48ea625420087dee34e10ea70"
+        ],
+        "requests": [
+          {
+            "url": "https://files.frontdeskgworks.com/city/1311/cms/data.json",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://files.frontdeskgworks.com"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "boarddocs",
+      "default_input_format": "boarddocs-print-pdf",
+      "implementation_status": "saved_format_and_configured_page_capture_supported",
+      "acceptance_status": "live_configured_capture_only_or_saved_fixture",
+      "automatic_discovery": "generic_configured_page_capture_only",
+      "remaining_gap": "A fetched configured URL is not complete discovery; provider-specific listing/detail traversal remains unimplemented or unverified.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "generic_configured_page_capture_only",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "boarddocs-print-pdf",
+          "source_url": "https://resources.finalsite.net/images/v1778852677/min201org/y5lrm3zfrvt9oguecqun/5-18-2026BoardMeetingAgenda.pdf",
+          "fixture": "tests/fixtures/baseline/boarddocs-minooka.pdf",
+          "fixture_sha256": "b54e25f3b6c877a93813614eee9ecafdbe176d9ce074567c78e911daf1411088",
+          "fixture_sha256_verified": "b54e25f3b6c877a93813614eee9ecafdbe176d9ce074567c78e911daf1411088",
+          "oracle_output_sha256": "2c0830daf7d74b39ff3661c4dd3b6784b214713adc272e26b20987de101c52b1",
+          "original_record_count": 1,
+          "original_namespace": "//resources.finalsite.net",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[boarddocs/boarddocs-print-pdf]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "boarddocs",
+        "source_url": "https://resources.finalsite.net/images/v1778852677/min201org/y5lrm3zfrvt9oguecqun/5-18-2026BoardMeetingAgenda.pdf",
+        "status": "partial",
+        "elapsed_seconds": 0.494,
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "error_details": [],
+        "capture_sha256": [
+          "b54e25f3b6c877a93813614eee9ecafdbe176d9ce074567c78e911daf1411088"
+        ],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "configuration_policy": "baseline",
+        "input_format": "boarddocs-print-pdf",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [
+          {
+            "url": "https://resources.finalsite.net/images/v1778852677/min201org/y5lrm3zfrvt9oguecqun/5-18-2026BoardMeetingAgenda.pdf",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://resources.finalsite.net"
+            ]
+          }
+        ],
+        "acceptance": "live_configured_capture_only"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://resources.finalsite.net/images/v1778852677/min201org/y5lrm3zfrvt9oguecqun/5-18-2026BoardMeetingAgenda.pdf"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[boarddocs/boarddocs-print-pdf]"
+      ],
+      "live_read_result": {
+        "status": "partial",
+        "acceptance": "live_configured_capture_only",
+        "record_count": 0,
+        "pages": 1,
+        "truncated": false,
+        "errors": [],
+        "capture_sha256": [
+          "b54e25f3b6c877a93813614eee9ecafdbe176d9ce074567c78e911daf1411088"
+        ],
+        "requests": [
+          {
+            "url": "https://resources.finalsite.net/images/v1778852677/min201org/y5lrm3zfrvt9oguecqun/5-18-2026BoardMeetingAgenda.pdf",
+            "method": "GET",
+            "json_body": null,
+            "byte_limit": 8388608,
+            "deadline_seconds": 15.0,
+            "allowed_origins": [
+              "https://resources.finalsite.net"
+            ]
+          }
+        ],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    },
+    {
+      "provider": "tyler-meeting-manager",
+      "default_input_format": "tyler-public-calendar-json",
+      "implementation_status": "saved_capture_supported_automatic_path_unverified",
+      "acceptance_status": "saved_fixture_passed; live_not_passed",
+      "automatic_discovery": "not_implemented_unverified",
+      "remaining_gap": "The checker correctly requires a saved response. This is not a claim that the vendor lacks a discovery API.",
+      "operations": {
+        "identify": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py"
+        },
+        "validate_source": {
+          "status": "implemented",
+          "codepath": "src/civic_data_connectors/providers/identification.py:validate_source"
+        },
+        "discover": {
+          "status": "not_implemented_unverified",
+          "codepath": "src/civic_data_connectors/providers/discovery.py:discover"
+        },
+        "fetch": {
+          "status": "implemented_for_configured_source_or_verified_record_attachments; no arbitrary URL proxy",
+          "codepath": "src/civic_data_connectors/providers/retrieval.py:fetch"
+        },
+        "normalize_additive_saved_capture": {
+          "status": "not_applicable",
+          "registered_formats": []
+        }
+      },
+      "baseline_saved_inputs": [
+        {
+          "input_format": "tyler-public-calendar-json",
+          "source_url": "https://cityofmurraycityut.meetingmanager.tylerapp.com/7452cityofmurraycityut/tylermm/calendar/",
+          "fixture": "tests/fixtures/baseline/tyler-calendar.response",
+          "fixture_sha256": "9807a51ff559cc0c0c3a734142b80f5616035378d18d3c7e6c09941efdb9edf5",
+          "fixture_sha256_verified": "9807a51ff559cc0c0c3a734142b80f5616035378d18d3c7e6c09941efdb9edf5",
+          "oracle_output_sha256": "5034aa5332f6b04198ded935c6f3683edfa4c0be7afe79e7b6fd47d485b7e781",
+          "original_record_count": 14,
+          "original_namespace": "//cityofmurraycityut.meetingmanager.tylerapp.com",
+          "tests": [
+            "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[tyler-meeting-manager/tyler-public-calendar-json]"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "independent_fixtures": [],
+      "live_read_evidence": {
+        "provider": "tyler-meeting-manager",
+        "source_url": "https://cityofmurraycityut.meetingmanager.tylerapp.com/7452cityofmurraycityut/tylermm/calendar/",
+        "status": "unsupported",
+        "elapsed_seconds": 0.0,
+        "record_count": 0,
+        "pages": 0,
+        "truncated": null,
+        "errors": [
+          "saved_capture_required"
+        ],
+        "error_details": [
+          {}
+        ],
+        "capture_sha256": [],
+        "scope": "saved-capture fallback required",
+        "configuration_policy": "baseline",
+        "input_format": "tyler-public-calendar-json",
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        },
+        "requests": [],
+        "acceptance": "not_passed"
+      },
+      "reference_urls": [],
+      "evidence_urls": [
+        "https://cityofmurraycityut.meetingmanager.tylerapp.com/7452cityofmurraycityut/tylermm/calendar/"
+      ],
+      "exact_tests": [
+        "tests/test_provider_discovery.py::test_all_34_saved_format_discovery_paths[tyler-meeting-manager/tyler-public-calendar-json]"
+      ],
+      "live_read_result": {
+        "status": "unsupported",
+        "acceptance": "not_passed",
+        "record_count": 0,
+        "pages": 0,
+        "truncated": null,
+        "errors": [
+          "saved_capture_required"
+        ],
+        "capture_sha256": [],
+        "requests": [],
+        "request_bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-11",
+          "max_records": 20,
+          "max_pages": 2,
+          "parser_bytes": 8388608,
+          "deadline_seconds": 15
+        }
+      }
+    }
+  ]
+}

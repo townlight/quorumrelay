@@ -1,0 +1,3160 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head><script src="/Looke-From-wert-there-spoke-Who-cont-Macbeth-of-" async></script><script type="text/javascript">
+  var sentryDsn = 'https://178225def835d4d2f410122c26f43318@o4512012501254144.ingest.us.sentry.io/4512100181016576';
+  var sentryAngularDsn = 'https://fbb555d91b0d040111c3baf7e4276120@o4512012501254144.ingest.us.sentry.io/4512100182786048';
+  var sentryEnvironment = 'Production';
+  var sentrySiteId = '36030321';
+  var sentryUserId = '';
+</script>
+<script type="text/javascript" src="/SB_Assets/JS/sentry.browser.min.js?n=10740"></script>
+<script type="text/javascript" src="/SB_Assets/JS/SentryConfig.js?n=2"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /><meta name="robots" content="noindex,nofollow" /><link rel="icon" type="image/png" href="/UX/Images/Common/SmallButtons/favicon.png" /><link rel="apple-touch-icon" href="/SB_Assets/images/simbliIcon.png" /><meta id="title" name="og:title" /><meta id="description" name="og:description" /><link type="text/css" rel="Stylesheet" href="/SB_Assets/css/EB4Master_New.css?n=10080" />
+  <!--<link type="text/css" rel="Stylesheet" href="/SB_Assets/css/style.css?n=10062" />-->
+  <link type="text/css" rel="Stylesheet" href="/UX/Css/RadMenu.css?n=151" /><link type="text/css" rel="StyleSheet" href="/UX/Css/RadMenu_Default.css?n=151" /><link type="text/css" rel="Stylesheet" href="/Style/RadGridModify.css?n=151" /><link href="/SB_Assets/css/ADAStyle.css?n=176" rel="stylesheet" type="text/css" />
+
+  <!-- Jquery -->
+  <script src="/UX/jQuery/jquery-3.6.0.min.js" type="text/javascript"></script>
+  <script src="/UX/jQueryUI/jquery-ui.js?n=1" type="text/javascript"></script>
+  <script src="/SB_Assets/JS/Pages/SimbliMaster.js?n=791"></script>
+  <link href="/UX/Css/jquery-ui.css?n=12" rel="stylesheet" />
+
+  <!-- Ck Editor -->
+  <link href="/ckeditor/Comments_Plugin_V1_0_90/client-demo/css/demo.css?n=159" rel="stylesheet" type="text/css" /><link href="/SB_Assets/css/CKEditorCustomize.css?n=159" rel="stylesheet" type="text/css" />
+
+  <!-- Bootstrap core CSS -->
+  <link href="/UX/OH/bootstrap/css/bootstrap.css?n=157" rel="stylesheet" />
+
+  <!-- Font awesome -->
+  <link rel="stylesheet" href="/UX/OH/bootstrap/css/font-awesome.css?n=151" /><link rel="stylesheet" type="text/css" href="/UX/Css/style.css?n=1572" /><link type="text/css" rel="Stylesheet" href="/UX/Css/Header/DefaultBig.css?n=152" /><link type="text/css" rel="Stylesheet" href="/UX/Css/Header/GridMedium.css?n=152" /><link href="../SB_Assets/css/SimbliMaster.css?n=12" rel="stylesheet" />
+
+  <!--CKEditor Script start-->
+  <script type="text/javascript" src="https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js"></script>
+  <script type="text/javascript" src="/ckeditor/ckeditor.js?n=169"></script>
+  <script type="text/javascript" src="/ckeditor/plugins/lite/lite-interface.js?n=169"></script>
+  <script type="text/javascript" src="/ckeditor/plugins/lance/js/app.min.js?n=169"></script>
+  <script type="text/javascript" src="/ckeditor/plugins/lance/js/jquery.autogrow.min.js?n=169"></script>
+  <script type="text/javascript" src="/ckeditor/plugins/lance/js/annotationsui.js?n=1691"></script>
+  <link href="/ckeditor/Comments_Plugin_V1_0_90/client-demo/css/demo.css?n=169" rel="stylesheet" type="text/css" /><link href="/SB_Assets/css/CKEditorCustomize.css?n=169" rel="stylesheet" type="text/css" />
+
+  <script type="text/javascript" src="/SB_Assets/JS/CKEditorConfiguration.js?n=20260812"></script>
+  <script type="text/javascript" src="/SB_Assets/JS/purify.min.js?n=987"></script>
+  <script type="text/javascript" src="/SB_Assets/JS/Module/MeetingOnlineVoting.js?n=88"></script>
+
+  <!-- Flipclock css and js for session timeout popup -->
+  <link type="text/css" href="/UX/Css/flipclock.css" rel="stylesheet" />
+  <script type="text/javascript" src="/UX/jQuery/flipclock.min.js"></script>
+
+  
+  <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.css" /><link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5-premium-features/44.1.0/ckeditor5-premium-features.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <link href='/SB_Assets/css/style.css?n=169&av=639179932519735485' rel="stylesheet" />
+  <link href='/SB_Assets/css/stylesheet-image-based.css?n=155&av=639179932519735485' rel="stylesheet" />
+  <link href='/SB_Assets/css/ADAStyle.css?n=155&av=639179932519555487' rel="stylesheet" type="text/css" />
+
+  
+  <link href='/CustomControl/css/prettify.css?n=151&av=639179932502689242' rel="stylesheet" />
+  <link href='/CustomControl/css/jquery.scrollbar.css?n=151&av=639179932502679240' rel="stylesheet" />
+
+  
+  <link href='/SB_Assets/css/mobile.css?n=156&av=639179932519725480' rel="stylesheet" />
+
+  
+  <script src='/CustomControl/JS/prettify.js?n=151&av=639179932502859247' type="text/javascript"></script>
+  <script src='/CustomControl/JS/jquery.scrollbar.min.js?n=151&av=639179932502859247' type="text/javascript"></script>
+  <script src='/CustomControl/JS/NewGridJS.js?n=154&av=639179932502849249' type="text/javascript"></script>
+  <script src='/CustomControl/JS/FilterJS.js?n=202&av=639179932502849249' type="text/javascript"></script>
+
+    
+  <script  src='/SB_Assets/JS/Module/HeaderMaster.js?n=98899911&av=639179932517185476' type="text/javascript"></script>
+  
+
+  <script type="text/javascript" src="https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js"></script>
+    <script type="text/javascript" src="/ckeditor/ckeditor.js?n=159"></script>
+    <script type="text/javascript" src="/ckeditor/plugins/lite/lite-interface.js?n=159"></script>
+    <script type="text/javascript" src="/ckeditor/plugins/lance/js/app.min.js?n=159"></script>
+    <script type="text/javascript" src="/ckeditor/plugins/lance/js/jquery.autogrow.min.js?n=159"></script>
+    <script type="text/javascript" src="/ckeditor/plugins/lance/js/annotationsui.js?n=1591"></script>
+    <script type="text/javascript" src="/SB_Assets/JS/purify.min.js?n=987"></script>
+    <link href="/ckeditor/Comments_Plugin_V1_0_90/client-demo/css/demo.css?n=159" rel="stylesheet" type="text/css" />
+    <link href="/SB_Assets/css/CKEditorCustomize.css?n=159" rel="stylesheet" type="text/css" />
+  
+    <script type="text/javascript" src="/SB_Assets/JS/CKEditorConfiguration.js?n=20250208"></script>
+
+  
+  <link href="/SB_Assets/css/DatePicker.css" rel="stylesheet" type="text/css" />
+  <script src='/CustomControl/DateTimePicker/JS/moment.js?n=152&av=639179932502749245' type="text/javascript"></script>
+  <script type="text/javascript" src="/SB_Assets/JS/DatePickerDialog.js"></script>
+  <script type="text/javascript" src="/SB_Assets/JS/FilterDatePickerAdapter.js"></script>
+
+  
+  <script src='/SB_Assets/JS/Pages/SB_MeetingListingJS.js?n=1673&av=639179932517375468' type="text/javascript"></script>
+  <script>
+    function openNewSearch() {
+      // Trigger the search button's click event
+      //document.getElementById('topSearchButton').click();
+      const event = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+       
+      const button = document.getElementById('topSearchButton');
+      button.dispatchEvent(event);
+    }
+  </script>
+  <style type="text/css">
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { /* iPad Portrait */
+      #ContentPlaceHolder1_dvLegend {
+        width: 74% !important;
+      }
+
+      .fixHeader {
+        width: 99.5% !important;
+      }
+    }
+
+    #dvGridPanel th:first-child, #dvGridPanel td:first-child{
+        padding-left: 11px !important;
+    }
+
+    .tab-button {
+      border: none;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .fltrTop {
+        top: 42px !important;
+    }
+
+    .multiSearchContainer .searchCode .searchLens {
+        right: 3px;
+        top: 2px;
+    }
+
+    .removeFormat a {
+        color: #0000ff;
+    }
+    .srt-btn {
+        width: 24px;
+        height: 24px;
+        box-sizing: border-box;
+        text-align: center;
+        padding-top: 5px;
+        margin-left: -10px;
+        vertical-align: sub;
+    }
+    .srt-btn img {
+        vertical-align: top !important;
+    }
+    .srt-btn:focus {
+        outline-offset: -2px !important;
+    }
+    @media screen and (max-width: 760px){
+      .advSrch {
+        display: none;
+      }
+    }
+
+    .en-subscribeBtn {
+        position: absolute;
+        right: 0;
+        z-index: 1;
+    }
+
+    .rowBtns .en-subscribeBtn {
+      top: -26px;
+    }
+
+    .rowBtns.minHeight25 .en-subscribeBtn {
+      top: 0;
+    }
+
+    .en-subscribeBtn button span {
+        color: #0000ff;
+        font-family; Lato, Verdana !important;
+        text-decoration: underline;
+    }
+
+    .searchTitle::placeholder, .rangeColumn input[type="text"]::placeholder {
+        color: #525252 !important;
+        opacity: 1 !important;
+    }
+
+    .searchTitle, .rangeColumn input[type="text"] {
+        color: #000000 !important;
+    } 
+
+    @media screen and ( max-width: 1024px ) and ( min-width: 747px ) {
+      .legendWrap {
+          max-width: 400px;
+      }
+
+      }
+
+      @media screen and ( max-width: 480px ) {
+          #dvNotificationSubscribe {
+              float: left;
+              position: relative;
+              width: 100%;
+          }
+
+          .rowBtns .en-subscribeBtn {
+            top: 0px;
+          }
+      }
+    
+  </style>
+<link href="../App_Themes/generic/ComboBox.Combo_Box.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/generic/Grid.Simple.css" type="text/css" rel="stylesheet" /><title>
+	Meetings Listing | Martinez Unified School District
+</title></head>
+<body>
+  <!-- Pendo code start-->
+  <script type="text/javascript">
+    var siteIdStr = '36030321';
+    var enUIdStr = '';
+    var pendoApiKey = '3e451250-f5b4-4fbb-49a3-a2a7246b845c';
+  </script>
+
+
+  <script src="/SB_Assets/JS/PendoConfig.js?n=252" type="text/javascript"></script>
+  <!-- Pendo code end-->
+
+  <form method="post" action="./SB_MeetingListing.aspx?S=36030321" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="yQTpthnX8ofzskNBokb7FqA7/XdTYfV6MFR7LdxGdzg8Tp34MODKM53WyWngwvwMpipIXhSl2JVjPEzxhgeuAUd1qQI4mFevG//E8MHp7D1i/NjrMhh6EN0zhim5B8GRcXD6jPJiZWi48yd8bGOsoNTixBvAw+YKja0lketTz3GqZnNBKTOIVhhsLWJUlpWuwL3+RPYVO8whN4a2AaitwvUHsHFEhrvHAd0VBiRb+2LclWt7K+JaYUSWK4ZJUBpg+cPoQLdiibYNbMerqRlo/4PqriHFaNN0fjlcBai96sZ2ifZHS0NwyJ1Al3HfwMbAgOA9/etQfWOoxjNGPNJvxlhOOhp5NYJwkKTdRklom5AiL9MBCeweUjdCT9Ulp+3OjoZkyh9F8dRIgKUwGce1vg==" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="8E7431B6" />
+</div>
+    <!--ADA skip section start-->
+    <div class="jump-to-links" role="navigation" aria-label="Skip links">
+      <ul>
+        <li><a href="#jumpToMenu">Skip to Main Menu</a></li>
+        <li><a href="#jumpToMidContent">Skip to Main Content</a></li>
+        <li><a href="#jumpToFooter">Skip to Footer</a></li>
+      </ul>
+    </div>
+    <!--ADA skip section end-->
+
+
+    <!--Google Translate section start-->
+    <div id="google_translate_element" style="display: none;"></div>
+    <!--Google Translate section end-->
+
+
+    <!--Header section start-->
+    <div id="ebsHeader">
+      <app-master-page-header-wrapper></app-master-page-header-wrapper>
+    </div>
+    <!--Header section end-->
+
+    <!--Page mid section start-->
+    <div class="dv-mid-sec" id="jumpToMidContent">
+      
+  <div class="bg-white">
+    <h1 class="heading" style="display: inline-block;">
+      <img src="/SB_Assets/images/meeting-icon.png" alt="" aria-hidden="true" /><span class="mrgnLeft20">Meetings Listing</span>
+    </h1>
+    <button type="button" id="btnADAComp" tabindex="0" class="btnTrans ml-1" aria-controls="adaDisclaimerPPDV" aria-label="ADA Compliance Guidelines" title="ADA Compliance Guidelines" style="display: none;">
+      <img src="../SB_Assets/images/ADA-Disclaimer.png" alt="" aria-hidden="true" width="22" /></button>
+    
+
+    <div id="dvrowBtns" class="rowBtns">
+      
+      
+      <div id="dvNotificationSubscribe" class="en-subscribeBtn" style="display:none">
+        <button type="button" class="btnTrans" role="link" onclick="notificationSubscribeEvent(1);" tabindex="0">
+          <i class="fa fa-envelope" aria-hidden="true"></i><span class="ml-1">Subscribe to Notifications</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="gridData" class="relPosition" style="margin-top: -5px;">
+      <div id="dvMeetingSections" class="leftBar">
+        <div id="" class="leftIconPanel">
+          <div class="left-listing" role="tablist" aria-orientation="vertical" aria-label="Meeting filters">
+            <button id="all" role="tab" type="button" name="All Meetings" tabindex="0" aria-controls="tab_all" aria-selected="true" onclick="javascript: return ReloadMeetingGridForAll(this);" class="selectedSection FocusOnButton tab-button" onkeyup="selectVerticalTabsByKey(event);">
+              <img src="../SB_Assets/images/all_meeting_icon.png" alt="" aria-hidden="true" />
+              All Meetings</button> 
+            <button type="button" role="tab" name="Upcoming" tabindex="-1" aria-controls="tab_upcoming" aria-selected="false" id="upcoming" onclick="javascript: return ReloadMeetingGridForUpcoming(this);" class="tab-button" onkeyup="selectVerticalTabsByKey(event);">
+              <img src="../SB_Assets/images/upcoming_meeting_icon.png" alt="" class="FocusOnButton" aria-hidden="true" />
+              Upcoming</button>
+            <button type="button" role="tab" name="Prior" tabindex="-1" aria-controls="tab_prior" aria-selected="false" id="prior" onclick="javascript: return ReloadMeetingGridForPrior(this);" class="FocusOnButton tab-button" onkeyup="selectVerticalTabsByKey(event);">
+              <img src="../SB_Assets/images/prior_meeting_icon.png" alt="" aria-hidden="true" />
+              Prior</button>
+          </div>
+         
+        </div>
+      </div>
+
+      <div id="dvGridPanel" class="gridPanel ML186 meetinglisting-tabpanel" role="tabpanel" aria-label="All Meetings">
+        <div id='ContentPlaceHolder1_MeetingGridFilter_filterContainer' >
+<table id='ContentPlaceHolder1_MeetingGridFilter' >
+<thead>
+<tr>
+<th width='22%' class=''  aria-sort='descending'>
+ <button type='button' class='srt-btn' tabindex='0' onclick='javascript:return ContentPlaceHolder1_MeetingGridFilter_filter.Sort(ContentPlaceHolder1_MeetingGridFilter_filter,"DateTime",ContentPlaceHolder1_MeetingGrid_newGrid,sortHeader_ContentPlaceHolder1_MeetingGridFilter_DateTime);'aria-label='Sorted by Date - Time Descending. Activate to sort ascending'><img alt='' id='sortHeader_ContentPlaceHolder1_MeetingGridFilter_DateTime' class='ContentPlaceHolder1_MeetingGridFilter_imgSort' aria-hidden='true' src='/SB_Assets/images/sorting_arrow_down.png' /></button>
+<button id='searchHeader_ContentPlaceHolder1_MeetingGridFilter_DateTime' class='border-0 p-0 font13 header-element' tabindex='0' onclick='javascript:return ContentPlaceHolder1_MeetingGridFilter_filter.ShowSearch(ContentPlaceHolder1_MeetingGridFilter_filter,this,ContentPlaceHolder1_MeetingGrid_newGrid,0,event);'><span class='mr-1'>Date - Time</span><img id='filtericon_ContentPlaceHolder1_MeetingGridFilter_Date_-_Time' alt='' aria-hidden='true' src='/SB_Assets/images/arrow_down_filter.png' /></button>
+</th>
+<th width='35%' class=''  >
+<button id='searchHeader_ContentPlaceHolder1_MeetingGridFilter_MM_MeetingTitle' class='border-0 p-0 font13 header-element' tabindex='0' onclick='javascript:return ContentPlaceHolder1_MeetingGridFilter_filter.ShowSearch(ContentPlaceHolder1_MeetingGridFilter_filter,this,ContentPlaceHolder1_MeetingGrid_newGrid,1,event);'><span class='mr-1'>Meeting Title</span><img id='filtericon_ContentPlaceHolder1_MeetingGridFilter_Meeting_Title' alt='' aria-hidden='true' src='/SB_Assets/images/search_icon.png' /></button>
+</th>
+<th width='15%' class='mobileHideColumn'  >
+<span>Minutes</span>
+</th>
+<th width='28%' class='mobileHideColumn'  >
+<button id='searchHeader_ContentPlaceHolder1_MeetingGridFilter_ML_TypeTitle' class='border-0 p-0 font13 header-element' tabindex='0' onclick='javascript:return ContentPlaceHolder1_MeetingGridFilter_filter.ShowSearch(ContentPlaceHolder1_MeetingGridFilter_filter,this,ContentPlaceHolder1_MeetingGrid_newGrid,3,event);'><span class='mr-1'>Meeting Type</span><img id='filtericon_ContentPlaceHolder1_MeetingGridFilter_Meeting_Type' alt='' aria-hidden='true' src='/SB_Assets/images/arrow_down_filter.png' /></button>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<script type='text/javascript'>
+var ContentPlaceHolder1_MeetingGridFilter_filter = new Filter();
+$(document).ready(function () {
+ContentPlaceHolder1_MeetingGridFilter_filter.containerId='ContentPlaceHolder1_MeetingGridFilter_filterContainer';
+ContentPlaceHolder1_MeetingGridFilter_filter.filterClientId='ContentPlaceHolder1_MeetingGridFilter';
+ContentPlaceHolder1_MeetingGridFilter_filter.JsID='ContentPlaceHolder1_MeetingGridFilter_filter';
+ContentPlaceHolder1_MeetingGridFilter_filter.gridObj=ContentPlaceHolder1_MeetingGrid_newGrid;
+ContentPlaceHolder1_MeetingGridFilter_filter.Initialize(ContentPlaceHolder1_MeetingGridFilter_filter);
+});
+</script>
+
+        <div class="gridScrollDyna" id="tab_all">
+          <div id='ContentPlaceHolder1_MeetingGrid_Container' style='overflow-y: auto; height: 0px; width: 100%; ' class='flowHide scrollbar-macosx relPosition' >
+<table id='ContentPlaceHolder1_MeetingGrid' >
+<thead class='sr-only' style='position:relative !important; display: table-caption;'>
+<tr>
+<th width='22%' class='' > <span>Date - Time</span>
+</th>
+<th width='35%' class='' > <span>Meeting Title</span>
+</th>
+<th width='15%' class='mobileHideColumn' > <span>Minutes</span>
+</th>
+<th width='28%' class='mobileHideColumn' > <span>Meeting Type</span>
+</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_0_0' title='11/02/2026 - 01:00 PM'>11/02/2026 - 01:00 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_0_1' onclick='javascript:return ViewMeeting("36030321","98492","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","98492","1","0","P",event);' href='javascript:void(0);' title=''>Special Meeting of the Board of Education - CANCELLED </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_0_2' onclick='javascript:return ViewMinutes("36030321","98492","UNPUBLISHED","0","P","0",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","98492","UNPUBLISHED","0","P","0",event);' href='javascript:void(0);' title=''>UnPublished </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_0_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_1_0' title='10/26/2026 - 06:30 PM'>10/26/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_1_1' onclick='javascript:return ViewMeeting("36030321","90192","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","90192","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_1_2' onclick='javascript:return ViewMinutes("36030321","90192","UNPUBLISHED","0","P","0",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","90192","UNPUBLISHED","0","P","0",event);' href='javascript:void(0);' title=''>UnPublished </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_1_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_2_0' title='10/12/2026 - 06:30 PM'>10/12/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_2_1' onclick='javascript:return ViewMeeting("36030321","89242","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","89242","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_2_2' onclick='javascript:return ViewMinutes("36030321","89242","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","89242","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_2_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_3_0' title='10/10/2026 - 12:00 PM'>10/10/2026 - 12:00 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_3_1' onclick='javascript:return ViewMeeting("36030321","89243","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","89243","1","0","P",event);' href='javascript:void(0);' title=''>Special Meeting of the Board of Education - Governance Workshop </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_3_2' onclick='javascript:return ViewMinutes("36030321","89243","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","89243","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_3_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_4_0' title='10/06/2026 - 05:00 PM'>10/06/2026 - 05:00 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_4_1' onclick='javascript:return ViewMeeting("36030321","89647","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","89647","1","0","P",event);' href='javascript:void(0);' title=''>Martinez Unified School District and City Council School Subcommittee Meeting </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_4_2' onclick='javascript:return ViewMinutes("36030321","89647","UNPUBLISHED","0","P","0",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","89647","UNPUBLISHED","0","P","0",event);' href='javascript:void(0);' title=''>UnPublished </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_4_3' title='Subcommittee Meetings'>Subcommittee Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_5_0' title='09/28/2026 - 06:30 PM'>09/28/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_5_1' onclick='javascript:return ViewMeeting("36030321","84426","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","84426","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_5_2' onclick='javascript:return ViewMinutes("36030321","84426","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","84426","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_5_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_6_0' title='09/14/2026 - 06:30 PM'>09/14/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_6_1' onclick='javascript:return ViewMeeting("36030321","80437","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","80437","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_6_2' onclick='javascript:return ViewMinutes("36030321","80437","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","80437","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_6_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_7_0' title='08/24/2026 - 06:30 PM'>08/24/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_7_1' onclick='javascript:return ViewMeeting("36030321","80427","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","80427","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_7_2' onclick='javascript:return ViewMinutes("36030321","80427","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","80427","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_7_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_8_0' title='08/10/2026 - 06:30 PM'>08/10/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_8_1' onclick='javascript:return ViewMeeting("36030321","76585","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","76585","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_8_2' onclick='javascript:return ViewMinutes("36030321","76585","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","76585","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_8_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_9_0' title='07/10/2026 - 10:15 AM'>07/10/2026 - 10:15 AM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_9_1' onclick='javascript:return ViewMeeting("36030321","75217","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","75217","1","0","P",event);' href='javascript:void(0);' title=''>Special Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_9_2' onclick='javascript:return ViewMinutes("36030321","75217","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","75217","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_9_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_10_0' title='06/22/2026 - 06:30 PM'>06/22/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_10_1' onclick='javascript:return ViewMeeting("36030321","68518","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","68518","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_10_2' onclick='javascript:return ViewMinutes("36030321","68518","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","68518","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_10_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_11_0' title='06/08/2026 - 06:30 PM'>06/08/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_11_1' onclick='javascript:return ViewMeeting("36030321","68516","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","68516","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_11_2' onclick='javascript:return ViewMinutes("36030321","68516","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","68516","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_11_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_12_0' title='05/18/2026 - 06:30 PM'>05/18/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_12_1' onclick='javascript:return ViewMeeting("36030321","66154","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","66154","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_12_2' onclick='javascript:return ViewMinutes("36030321","66154","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","66154","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_12_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_13_0' title='05/04/2026 - 06:30 PM'>05/04/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_13_1' onclick='javascript:return ViewMeeting("36030321","64400","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","64400","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_13_2' onclick='javascript:return ViewMinutes("36030321","64400","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","64400","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_13_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_14_0' title='04/27/2026 - 06:30 PM'>04/27/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_14_1' onclick='javascript:return ViewMeeting("36030321","60172","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","60172","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_14_2' onclick='javascript:return ViewMinutes("36030321","60172","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","60172","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_14_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_15_0' title='04/20/2026 - 10:00 AM'>04/20/2026 - 10:00 AM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_15_1' onclick='javascript:return ViewMeeting("36030321","63255","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","63255","1","0","P",event);' href='javascript:void(0);' title=''>Special Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_15_2' onclick='javascript:return ViewMinutes("36030321","63255","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","63255","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_15_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_16_0' title='04/13/2026 - 06:30 PM'>04/13/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_16_1' onclick='javascript:return ViewMeeting("36030321","58270","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","58270","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_16_2' onclick='javascript:return ViewMinutes("36030321","58270","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","58270","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_16_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_17_0' title='03/23/2026 - 06:30 PM'>03/23/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_17_1' onclick='javascript:return ViewMeeting("36030321","57777","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","57777","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_17_2' onclick='javascript:return ViewMinutes("36030321","57777","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","57777","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_17_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_18_0' title='03/09/2026 - 06:30 PM'>03/09/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_18_1' onclick='javascript:return ViewMeeting("36030321","57215","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","57215","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_18_2' onclick='javascript:return ViewMinutes("36030321","57215","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","57215","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_18_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_19_0' title='03/07/2026 - 09:15 AM'>03/07/2026 - 09:15 AM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_19_1' onclick='javascript:return ViewMeeting("36030321","57434","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","57434","1","0","P",event);' href='javascript:void(0);' title=''>Special Meeting of the Board of Education, Board Governance Professional Development Retreat </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_19_2' onclick='javascript:return ViewMinutes("36030321","57434","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","57434","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_19_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_20_0' title='02/23/2026 - 06:30 PM'>02/23/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_20_1' onclick='javascript:return ViewMeeting("36030321","55829","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","55829","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_20_2' onclick='javascript:return ViewMinutes("36030321","55829","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","55829","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_20_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_21_0' title='02/09/2026 - 06:30 PM'>02/09/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_21_1' onclick='javascript:return ViewMeeting("36030321","54475","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","54475","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_21_2' onclick='javascript:return ViewMinutes("36030321","54475","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","54475","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_21_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_22_0' title='02/03/2026 - 05:00 PM'>02/03/2026 - 05:00 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_22_1' onclick='javascript:return ViewMeeting("36030321","54823","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","54823","1","0","P",event);' href='javascript:void(0);' title=''>Special Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_22_2' onclick='javascript:return ViewMinutes("36030321","54823","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","54823","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_22_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_23_0' title='01/26/2026 - 06:30 PM'>01/26/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_23_1' onclick='javascript:return ViewMeeting("36030321","52024","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","52024","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_23_2' onclick='javascript:return ViewMinutes("36030321","52024","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","52024","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_23_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_24_0' title='01/12/2026 - 06:30 PM'>01/12/2026 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_24_1' onclick='javascript:return ViewMeeting("36030321","49699","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","49699","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_24_2' onclick='javascript:return ViewMinutes("36030321","49699","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","49699","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_24_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_25_0' title='01/08/2026 - 02:00 PM'>01/08/2026 - 02:00 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_25_1' onclick='javascript:return ViewMeeting("36030321","50588","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","50588","1","0","P",event);' href='javascript:void(0);' title=''>Special Meeting of the Board of Education, Budget Workshop </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_25_2' onclick='javascript:return ViewMinutes("36030321","50588","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","50588","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_25_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_26_0' title='12/08/2025 - 06:30 PM'>12/08/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_26_1' onclick='javascript:return ViewMeeting("36030321","48944","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","48944","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_26_2' onclick='javascript:return ViewMinutes("36030321","48944","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","48944","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_26_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_27_0' title='11/17/2025 - 06:30 PM'>11/17/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_27_1' onclick='javascript:return ViewMeeting("36030321","48872","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","48872","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_27_2' onclick='javascript:return ViewMinutes("36030321","48872","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","48872","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_27_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_28_0' title='11/03/2025 - 06:30 PM'>11/03/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_28_1' onclick='javascript:return ViewMeeting("36030321","47062","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","47062","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_28_2' onclick='javascript:return ViewMinutes("36030321","47062","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","47062","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_28_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_29_0' title='10/27/2025 - 06:00 PM'>10/27/2025 - 06:00 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_29_1' onclick='javascript:return ViewMeeting("36030321","45824","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","45824","1","0","P",event);' href='javascript:void(0);' title=''>Martinez Unified School District and City Council School Liaison Subcommittee Meeting </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_29_2' onclick='javascript:return ViewMinutes("36030321","45824","UNPUBLISHED","0","P","0",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","45824","UNPUBLISHED","0","P","0",event);' href='javascript:void(0);' title=''>UnPublished </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_29_3' title='Subcommittee Meetings'>Subcommittee Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_30_0' title='10/20/2025 - 06:30 PM'>10/20/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_30_1' onclick='javascript:return ViewMeeting("36030321","45777","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","45777","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_30_2' onclick='javascript:return ViewMinutes("36030321","45777","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","45777","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_30_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_31_0' title='10/06/2025 - 06:30 PM'>10/06/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_31_1' onclick='javascript:return ViewMeeting("36030321","45519","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","45519","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_31_2' onclick='javascript:return ViewMinutes("36030321","45519","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","45519","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_31_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_32_0' title='09/22/2025 - 06:30 PM'>09/22/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_32_1' onclick='javascript:return ViewMeeting("36030321","44251","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","44251","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_32_2' onclick='javascript:return ViewMinutes("36030321","44251","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","44251","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_32_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_33_0' title='09/08/2025 - 06:30 PM'>09/08/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_33_1' onclick='javascript:return ViewMeeting("36030321","44139","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","44139","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_33_2' onclick='javascript:return ViewMinutes("36030321","44139","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","44139","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_33_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_34_0' title='08/30/2025 - 09:00 AM'>08/30/2025 - 09:00 AM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_34_1' onclick='javascript:return ViewMeeting("36030321","44491","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","44491","1","0","P",event);' href='javascript:void(0);' title=''>Special Meeting of the Board of Education, Board Governance Professional Development Retreat </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_34_2' onclick='javascript:return ViewMinutes("36030321","44491","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","44491","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_34_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_35_0' title='08/29/2025 - 04:30 PM'>08/29/2025 - 04:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_35_1' onclick='javascript:return ViewMeeting("36030321","44490","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","44490","1","0","P",event);' href='javascript:void(0);' title=''>Special Meeting of the Board of Education, Board Governance Professional Development Retreat </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_35_2' onclick='javascript:return ViewMinutes("36030321","44490","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","44490","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_35_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_36_0' title='08/18/2025 - 06:30 PM'>08/18/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_36_1' onclick='javascript:return ViewMeeting("36030321","43143","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","43143","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_36_2' onclick='javascript:return ViewMinutes("36030321","43143","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","43143","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_36_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_37_0' title='08/11/2025 - 06:30 PM'>08/11/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_37_1' onclick='javascript:return ViewMeeting("36030321","42580","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","42580","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_37_2' onclick='javascript:return ViewMinutes("36030321","42580","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","42580","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_37_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_38_0' title='06/23/2025 - 06:30 PM'>06/23/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_38_1' onclick='javascript:return ViewMeeting("36030321","41786","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","41786","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_38_2' onclick='javascript:return ViewMinutes("36030321","41786","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","41786","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_38_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_39_0' title='06/09/2025 - 06:30 PM'>06/09/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_39_1' onclick='javascript:return ViewMeeting("36030321","39953","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","39953","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_39_2' onclick='javascript:return ViewMinutes("36030321","39953","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","39953","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_39_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_40_0' title='06/08/2025 - 07:45 AM'>06/08/2025 - 07:45 AM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_40_1' onclick='javascript:return ViewMeeting("36030321","41455","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","41455","1","0","P",event);' href='javascript:void(0);' title=''>Special Closed Session Meeting: Superintendent Search </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_40_2' onclick='javascript:return ViewMinutes("36030321","41455","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","41455","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_40_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_41_0' title='06/07/2025 - 07:45 AM'>06/07/2025 - 07:45 AM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_41_1' onclick='javascript:return ViewMeeting("36030321","41450","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","41450","1","0","P",event);' href='javascript:void(0);' title=''>Special Closed Session Meeting: Superintendent Search </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_41_2' onclick='javascript:return ViewMinutes("36030321","41450","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","41450","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_41_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_42_0' title='05/19/2025 - 07:15 PM'>05/19/2025 - 07:15 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_42_1' onclick='javascript:return ViewMeeting("36030321","39398","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","39398","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_42_2' onclick='javascript:return ViewMinutes("36030321","39398","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","39398","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_42_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_43_0' title='05/05/2025 - 06:30 PM'>05/05/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_43_1' onclick='javascript:return ViewMeeting("36030321","39084","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","39084","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_43_2' onclick='javascript:return ViewMinutes("36030321","39084","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","39084","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_43_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_44_0' title='04/28/2025 - 06:30 PM'>04/28/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_44_1' onclick='javascript:return ViewMeeting("36030321","38828","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","38828","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_44_2' onclick='javascript:return ViewMinutes("36030321","38828","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","38828","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_44_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_45_0' title='04/14/2025 - 06:30 PM'>04/14/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_45_1' onclick='javascript:return ViewMeeting("36030321","38360","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","38360","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_45_2' onclick='javascript:return ViewMinutes("36030321","38360","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","38360","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_45_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_46_0' title='03/24/2025 - 06:30 PM'>03/24/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_46_1' onclick='javascript:return ViewMeeting("36030321","37958","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","37958","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_46_2' onclick='javascript:return ViewMinutes("36030321","37958","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","37958","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_46_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_47_0' title='03/10/2025 - 06:30 PM'>03/10/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_47_1' onclick='javascript:return ViewMeeting("36030321","37853","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","37853","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_47_2' onclick='javascript:return ViewMinutes("36030321","37853","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","37853","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_47_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_48_0' title='03/03/2025 - 09:00 AM'>03/03/2025 - 09:00 AM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_48_1' onclick='javascript:return ViewMeeting("36030321","37724","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","37724","1","0","P",event);' href='javascript:void(0);' title=''>Special Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_48_2' onclick='javascript:return ViewMinutes("36030321","37724","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","37724","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_48_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+<tr>
+<td width='22%' class='' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_49_0' title='02/24/2025 - 06:30 PM'>02/24/2025 - 06:30 PM</span></td>
+<td width='35%' class=''><a id='ContentPlaceHolder1_MeetingGrid_lnk_49_1' onclick='javascript:return ViewMeeting("36030321","37254","1","0","P",event);' oncontextmenu='javascript:return ConfigureTitleLink("36030321","37254","1","0","P",event);' href='javascript:void(0);' title=''>Regular Meeting of the Board of Education </a> </td>
+<td width='15%' class='padLft34 mobileHideColumn'><a id='ContentPlaceHolder1_MeetingGrid_lnk_49_2' onclick='javascript:return ViewMinutes("36030321","37254","PUBLISHED","0","P","1",event);' oncontextmenu='javascript:return ConfigureMinutesLink("36030321","37254","PUBLISHED","0","P","1",event);' href='javascript:void(0);' title=''>Published </a> </td>
+<td width='28%' class='mobileHideColumn' eddtflname=''><span id='ContentPlaceHolder1_MeetingGrid_sptxt_49_3' title='Board Meetings'>Board Meetings</span></td>
+</tr>
+</tbody>
+
+</table>
+<a id='ContentPlaceHolder1_MeetingGrid_BackToTop' href='javascript:void(0);' role='button' class='bTop' style='display:none;'>Back to Top</a>
+
+</div><script type='text/javascript'>
+var ContentPlaceHolder1_MeetingGrid_newGrid = new NewGrid();
+ContentPlaceHolder1_MeetingGrid_newGrid.containerId='ContentPlaceHolder1_MeetingGrid_Container';
+ContentPlaceHolder1_MeetingGrid_newGrid.gridClientId='ContentPlaceHolder1_MeetingGrid';
+ContentPlaceHolder1_MeetingGrid_newGrid.needDataFunction='NeedData';
+ContentPlaceHolder1_MeetingGrid_newGrid.saveDataFunction='';
+ContentPlaceHolder1_MeetingGrid_newGrid.columns=[
+  {
+    "GridColumnType": 1,
+    "DataFieldName": "DateTime",
+    "HeaderText": "Date - Time",
+    "Visible": true,
+    "Width": "22%",
+    "Sortable": true,
+    "Searchable": true,
+    "SearchType": 2,
+    "HeaderCssClass": "",
+    "CssClass": null,
+    "FilterDataSource": null,
+    "SearchWatermark": null,
+    "DefaultSortDirection": 2,
+    "DefaultStartDate": "12/19/2016",
+    "DefaultEndDate": "11/02/2026",
+    "MaxEndDate": "11/02/2026",
+    "ShowFilterToolTip": false,
+    "IsEditable": false,
+    "EditModeControlType": 0,
+    "DefaultEditText": null,
+    "EditDataFieldName": null,
+    "DisableToolTip": false,
+    "role": null
+  },
+  {
+    "OnClientClick": "ViewMeeting",
+    "ClientFunctionDataParams": "MM_DistrictID,Master_MeetingID,MM_Status,IsUserLoggedIn,ACCESS",
+    "OnContextMenu": "ConfigureTitleLink",
+    "GridColumnType": 3,
+    "DataFieldName": "MM_MeetingTitle",
+    "HeaderText": "Meeting Title",
+    "Visible": true,
+    "Width": "35%",
+    "Sortable": false,
+    "Searchable": true,
+    "SearchType": 1,
+    "HeaderCssClass": null,
+    "CssClass": null,
+    "FilterDataSource": null,
+    "SearchWatermark": "Search Meeting Title",
+    "DefaultSortDirection": 0,
+    "DefaultStartDate": null,
+    "DefaultEndDate": null,
+    "MaxEndDate": null,
+    "ShowFilterToolTip": false,
+    "IsEditable": false,
+    "EditModeControlType": 0,
+    "DefaultEditText": null,
+    "EditDataFieldName": null,
+    "DisableToolTip": true,
+    "role": null
+  },
+  {
+    "OnClientClick": "ViewMinutes",
+    "ClientFunctionDataParams": "MM_DistrictID,Master_MeetingID,MinutesStatus,IsUserLoggedIn,ACCESS,CanPrintMinutes",
+    "OnContextMenu": "ConfigureMinutesLink",
+    "GridColumnType": 3,
+    "DataFieldName": "FilterStatus",
+    "HeaderText": "Minutes",
+    "Visible": true,
+    "Width": "15%",
+    "Sortable": false,
+    "Searchable": false,
+    "SearchType": 4,
+    "HeaderCssClass": "mobileHideColumn",
+    "CssClass": "padLft34 mobileHideColumn",
+    "FilterDataSource": [
+      {
+        "FilterStatus": "Published"
+      },
+      {
+        "FilterStatus": "Unpublished"
+      }
+    ],
+    "SearchWatermark": null,
+    "DefaultSortDirection": 0,
+    "DefaultStartDate": null,
+    "DefaultEndDate": null,
+    "MaxEndDate": null,
+    "ShowFilterToolTip": false,
+    "IsEditable": false,
+    "EditModeControlType": 0,
+    "DefaultEditText": null,
+    "EditDataFieldName": null,
+    "DisableToolTip": true,
+    "role": null
+  },
+  {
+    "GridColumnType": 1,
+    "DataFieldName": "ML_TypeTitle",
+    "HeaderText": "Meeting Type",
+    "Visible": true,
+    "Width": "28%",
+    "Sortable": false,
+    "Searchable": true,
+    "SearchType": 3,
+    "HeaderCssClass": "mobileHideColumn",
+    "CssClass": "mobileHideColumn",
+    "FilterDataSource": [
+      {
+        "ML_TypeTitle": "Board Meetings"
+      },
+      {
+        "ML_TypeTitle": "Subcommittee Meetings"
+      }
+    ],
+    "SearchWatermark": null,
+    "DefaultSortDirection": 0,
+    "DefaultStartDate": null,
+    "DefaultEndDate": null,
+    "MaxEndDate": null,
+    "ShowFilterToolTip": true,
+    "IsEditable": false,
+    "EditModeControlType": 0,
+    "DefaultEditText": null,
+    "EditDataFieldName": null,
+    "DisableToolTip": false,
+    "role": null
+  }
+];ContentPlaceHolder1_MeetingGrid_newGrid.dataBuffer=[
+  {
+    "RowNum": 1,
+    "Master_MeetingID": 98492,
+    "MM_MeetingTitle": "Special Meeting of the Board of Education - CANCELLED",
+    "MM_DateTime": "2026-11-02T13:00:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-10-30T16:05:00",
+    "MM_BoardPublishedDate": "2026-10-30T16:05:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "UNPUBLISHED",
+    "CanPrintMinutes": 0,
+    "FilterStatus": "UnPublished",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "11/02/2026 - 01:00 PM",
+    "EncrMeetingId": "ISG4slsh6BiEw56UMlEeslshEopw==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 2,
+    "Master_MeetingID": 90192,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-10-26T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:00 PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-10-23T14:58:00",
+    "MM_BoardPublishedDate": "2026-10-23T14:58:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "UNPUBLISHED",
+    "CanPrintMinutes": 0,
+    "FilterStatus": "UnPublished",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "10/26/2026 - 06:30 PM",
+    "EncrMeetingId": "4fd2a6FUdO7XSmsBO21jNQ==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 3,
+    "Master_MeetingID": 89242,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-10-12T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:30 PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-10-09T16:38:00",
+    "MM_BoardPublishedDate": "2026-10-09T16:38:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "10/12/2026 - 06:30 PM",
+    "EncrMeetingId": "qCL1ibz4DYMTcuU5l4wAog==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 4,
+    "Master_MeetingID": 89243,
+    "MM_MeetingTitle": "Special Meeting of the Board of Education - Governance Workshop",
+    "MM_DateTime": "2026-10-10T12:00:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-10-07T15:34:00",
+    "MM_BoardPublishedDate": "2026-10-07T15:34:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "10/10/2026 - 12:00 PM",
+    "EncrMeetingId": "hJJnHZuvp0Hr167xovQ3WA==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 5,
+    "Master_MeetingID": 89647,
+    "MM_MeetingTitle": "Martinez Unified School District and City Council School Subcommittee Meeting",
+    "MM_DateTime": "2026-10-06T17:00:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Martinez Unified School District Board Room",
+    "MM_Address2": "921 Susana Street, Martinez, CA 94553",
+    "MM_Address3": "",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 2,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-10-02T14:37:00",
+    "MM_BoardPublishedDate": "2026-10-02T14:37:00",
+    "ML_TypeTitle": "Subcommittee Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "UNPUBLISHED",
+    "CanPrintMinutes": 0,
+    "FilterStatus": "UnPublished",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "10/06/2026 - 05:00 PM",
+    "EncrMeetingId": "uD6uImZmckCpKKCG5i0ILQ==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 6,
+    "Master_MeetingID": 84426,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-09-28T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 6:00PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-09-25T15:55:00",
+    "MM_BoardPublishedDate": "2026-09-25T15:55:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "09/28/2026 - 06:30 PM",
+    "EncrMeetingId": "ZlxkehWlhy2yhK11RslshdWUg==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 7,
+    "Master_MeetingID": 80437,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-09-14T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-09-11T14:28:00",
+    "MM_BoardPublishedDate": "2026-09-11T14:28:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "09/14/2026 - 06:30 PM",
+    "EncrMeetingId": "k24zAKRfcEdIpNPN79vQxw==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 8,
+    "Master_MeetingID": 80427,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-08-24T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:00PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-08-21T15:04:00",
+    "MM_BoardPublishedDate": "2026-08-21T15:04:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "08/24/2026 - 06:30 PM",
+    "EncrMeetingId": "Txhhs0KTSRNjNZYVcqzOSA==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 9,
+    "Master_MeetingID": 76585,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-08-10T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:45PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-08-07T15:34:00",
+    "MM_BoardPublishedDate": "2026-08-07T15:34:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "08/10/2026 - 06:30 PM",
+    "EncrMeetingId": "gplusZJK2O1CjUwDWYD44EyDQ==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 10,
+    "Master_MeetingID": 75217,
+    "MM_MeetingTitle": "Special Meeting of the Board of Education",
+    "MM_DateTime": "2026-07-10T10:15:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 10:00 AM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-07-09T08:27:00",
+    "MM_BoardPublishedDate": "2026-07-09T08:27:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "07/10/2026 - 10:15 AM",
+    "EncrMeetingId": "67HSSG2iVOyOd9l4plusPrxZA==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 11,
+    "Master_MeetingID": 68518,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-06-22T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:45PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-06-18T14:47:00",
+    "MM_BoardPublishedDate": "2026-06-18T14:47:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": "2",
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "06/22/2026 - 06:30 PM",
+    "EncrMeetingId": "DUbbQ8I75FxDmUTWhdiz5Q==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 12,
+    "Master_MeetingID": 68516,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-06-08T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:45PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-06-05T13:30:00",
+    "MM_BoardPublishedDate": "2026-06-05T13:30:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "06/08/2026 - 06:30 PM",
+    "EncrMeetingId": "OvnUGzHswq4ORslshVAPyYuGQ==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 13,
+    "Master_MeetingID": 66154,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-05-18T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:45PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-05-15T15:23:00",
+    "MM_BoardPublishedDate": "2026-05-15T15:23:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "05/18/2026 - 06:30 PM",
+    "EncrMeetingId": "LXGW32slshvnlR1rC2hT8H8nQ==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 14,
+    "Master_MeetingID": 64400,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-05-04T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:30PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-05-01T15:11:00",
+    "MM_BoardPublishedDate": "2026-05-01T15:11:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "05/04/2026 - 06:30 PM",
+    "EncrMeetingId": "qppTAw0r1f9xwyluRF94DA==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 15,
+    "Master_MeetingID": 60172,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-04-27T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 4:00PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-04-24T14:47:00",
+    "MM_BoardPublishedDate": "2026-04-24T14:47:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "04/27/2026 - 06:30 PM",
+    "EncrMeetingId": "yDayt7PCBuMDMaBEYE4Uqw==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 16,
+    "Master_MeetingID": 63255,
+    "MM_MeetingTitle": "Special Meeting of the Board of Education",
+    "MM_DateTime": "2026-04-20T10:00:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-04-17T09:56:00",
+    "MM_BoardPublishedDate": "2026-04-17T09:56:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "04/20/2026 - 10:00 AM",
+    "EncrMeetingId": "GBe9kChqA4H915h4ZEHE6A==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 17,
+    "Master_MeetingID": 58270,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-04-13T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:00PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-04-09T15:45:00",
+    "MM_BoardPublishedDate": "2026-04-09T15:45:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "04/13/2026 - 06:30 PM",
+    "EncrMeetingId": "cW0kGEobODIY03WGJyBxNw==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 18,
+    "Master_MeetingID": 57777,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-03-23T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "No Closed Session",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-03-20T13:24:00",
+    "MM_BoardPublishedDate": "2026-03-20T13:24:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "03/23/2026 - 06:30 PM",
+    "EncrMeetingId": "ljEwgRdYDa0AiuMQUIHnrg==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 19,
+    "Master_MeetingID": 57215,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-03-09T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:30PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-03-06T10:49:00",
+    "MM_BoardPublishedDate": "2026-03-06T10:49:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "03/09/2026 - 06:30 PM",
+    "EncrMeetingId": "DdlN1Y1gwjvcROCBFrjB6Q==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 20,
+    "Master_MeetingID": 57434,
+    "MM_MeetingTitle": "Special Meeting of the Board of Education, Board Governance Professional Development Retreat",
+    "MM_DateTime": "2026-03-07T09:15:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-03-05T08:44:00",
+    "MM_BoardPublishedDate": "2026-03-05T08:44:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "03/07/2026 - 09:15 AM",
+    "EncrMeetingId": "Gnc4QI4ZiNu6BOxOPSeNfA==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 21,
+    "Master_MeetingID": 55829,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-02-23T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:30PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-02-20T15:04:00",
+    "MM_BoardPublishedDate": "2026-02-20T15:04:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "02/23/2026 - 06:30 PM",
+    "EncrMeetingId": "pRChGrxVv1uqGaprgWdXSA==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 22,
+    "Master_MeetingID": 54475,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-02-09T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:30PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-02-06T13:58:00",
+    "MM_BoardPublishedDate": "2026-02-06T13:58:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "02/09/2026 - 06:30 PM",
+    "EncrMeetingId": "ZxWEv6VHfBKdZhBrHcyGcQ==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 23,
+    "Master_MeetingID": 54823,
+    "MM_MeetingTitle": "Special Meeting of the Board of Education",
+    "MM_DateTime": "2026-02-03T17:00:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-02-02T14:54:00",
+    "MM_BoardPublishedDate": "2026-02-02T14:54:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "02/03/2026 - 05:00 PM",
+    "EncrMeetingId": "ZTU2qJaY9etbu2Zpp709tg==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 24,
+    "Master_MeetingID": 52024,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-01-26T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:00PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-01-23T14:22:00",
+    "MM_BoardPublishedDate": "2026-01-23T14:22:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "01/26/2026 - 06:30 PM",
+    "EncrMeetingId": "UKJesCc5CDIow50wPvCt5A==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 25,
+    "Master_MeetingID": 49699,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2026-01-12T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:30PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-01-09T14:51:00",
+    "MM_BoardPublishedDate": "2026-01-09T14:51:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "01/12/2026 - 06:30 PM",
+    "EncrMeetingId": "plusOgFblotBuTn1cAnFKdhMg==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 26,
+    "Master_MeetingID": 50588,
+    "MM_MeetingTitle": "Special Meeting of the Board of Education, Budget Workshop",
+    "MM_DateTime": "2026-01-08T14:00:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2026-01-05T15:23:00",
+    "MM_BoardPublishedDate": "2026-01-05T15:23:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "01/08/2026 - 02:00 PM",
+    "EncrMeetingId": "3eJslaslshhbWwt1EDRmWCAGA==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 27,
+    "Master_MeetingID": 48944,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-12-08T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:00PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-12-05T14:56:00",
+    "MM_BoardPublishedDate": "2025-12-05T14:56:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "12/08/2025 - 06:30 PM",
+    "EncrMeetingId": "MUuSpNXEgWtQzvTGzyY9XA==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 28,
+    "Master_MeetingID": 48872,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-11-17T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session will begin at the conclusion of the Board Meeting",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-11-14T15:09:00",
+    "MM_BoardPublishedDate": "2025-11-14T15:09:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "11/17/2025 - 06:30 PM",
+    "EncrMeetingId": "iswzVoUkUPXLh9zslshAj3Ypw==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 29,
+    "Master_MeetingID": 47062,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-11-03T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:00PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-10-31T13:37:00",
+    "MM_BoardPublishedDate": "2025-10-31T13:37:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "11/03/2025 - 06:30 PM",
+    "EncrMeetingId": "EK0FxS60UlRDa6LPfLAiWg==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 30,
+    "Master_MeetingID": 45824,
+    "MM_MeetingTitle": "Martinez Unified School District and City Council School Liaison Subcommittee Meeting",
+    "MM_DateTime": "2025-10-27T18:00:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Martinez Unified School District Board Room",
+    "MM_Address2": "921 Susana Street, Martinez, CA 94553",
+    "MM_Address3": "",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 2,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-10-24T14:00:00",
+    "MM_BoardPublishedDate": "2025-10-24T14:00:00",
+    "ML_TypeTitle": "Subcommittee Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "UNPUBLISHED",
+    "CanPrintMinutes": 0,
+    "FilterStatus": "UnPublished",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "10/27/2025 - 06:00 PM",
+    "EncrMeetingId": "tplusqwNAhJwKtC1JCpmAH37g==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 31,
+    "Master_MeetingID": 45777,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-10-20T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 4:00PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-10-17T13:56:00",
+    "MM_BoardPublishedDate": "2025-10-17T13:56:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "10/20/2025 - 06:30 PM",
+    "EncrMeetingId": "rEtoc3tXslshe2jsugRuTpnwA==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 32,
+    "Master_MeetingID": 45519,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-10-06T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:00PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-10-03T14:28:00",
+    "MM_BoardPublishedDate": "2025-10-03T14:28:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "10/06/2025 - 06:30 PM",
+    "EncrMeetingId": "MNnID04RaHrpwfIHNEpNzw==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 33,
+    "Master_MeetingID": 44251,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-09-22T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 2:30PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-09-19T10:09:00",
+    "MM_BoardPublishedDate": "2025-09-19T10:09:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "09/22/2025 - 06:30 PM",
+    "EncrMeetingId": "jMAQblXl2FewQ9inq5dplusOg==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 34,
+    "Master_MeetingID": 44139,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-09-08T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:15PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-09-05T14:19:00",
+    "MM_BoardPublishedDate": "2025-09-05T14:19:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "09/08/2025 - 06:30 PM",
+    "EncrMeetingId": "svSRJBV4JrRTymgWL3geVQ==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 35,
+    "Master_MeetingID": 44491,
+    "MM_MeetingTitle": "Special Meeting of the Board of Education, Board Governance Professional Development Retreat",
+    "MM_DateTime": "2025-08-30T09:00:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Martinez Unified School District Board Room",
+    "MM_Address2": "921 Susana Street, Martinez, CA 94553",
+    "MM_Address3": "",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-08-26T12:07:00",
+    "MM_BoardPublishedDate": "2025-08-26T12:07:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "08/30/2025 - 09:00 AM",
+    "EncrMeetingId": "c6DgFXtC4QQ1tD7IZuiR7w==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 36,
+    "Master_MeetingID": 44490,
+    "MM_MeetingTitle": "Special Meeting of the Board of Education, Board Governance Professional Development Retreat",
+    "MM_DateTime": "2025-08-29T16:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Martinez Unified School District Board Room",
+    "MM_Address2": "921 Susana Street, Martinez, CA 94553",
+    "MM_Address3": "",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-08-26T12:01:00",
+    "MM_BoardPublishedDate": "2025-08-26T12:01:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "08/29/2025 - 04:30 PM",
+    "EncrMeetingId": "eWsm4slshsuneD3GsApmjTDslshw==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 37,
+    "Master_MeetingID": 43143,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-08-18T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:30PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-08-15T12:35:00",
+    "MM_BoardPublishedDate": "2025-08-15T12:35:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "08/18/2025 - 06:30 PM",
+    "EncrMeetingId": "7ZPab4GEsJVwtslshdfpluscvrTw==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 38,
+    "Master_MeetingID": 42580,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-08-11T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:30PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-08-08T13:30:00",
+    "MM_BoardPublishedDate": "2025-08-08T13:30:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "08/11/2025 - 06:30 PM",
+    "EncrMeetingId": "zbcr9g1fXJplusjaadGKbIA6g==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 39,
+    "Master_MeetingID": 41786,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-06-23T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-06-20T14:38:00",
+    "MM_BoardPublishedDate": "2025-06-20T14:38:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "06/23/2025 - 06:30 PM",
+    "EncrMeetingId": "p2uslshLYf6P0BJ6LNKUQuhPQ==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 40,
+    "Master_MeetingID": 39953,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-06-09T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:00PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-06-06T12:59:00",
+    "MM_BoardPublishedDate": "2025-06-06T12:59:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "06/09/2025 - 06:30 PM",
+    "EncrMeetingId": "9dVUyldNQwplusWqRgiJzihMw==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 41,
+    "Master_MeetingID": 41455,
+    "MM_MeetingTitle": "Special Closed Session Meeting: Superintendent Search",
+    "MM_DateTime": "2025-06-08T07:45:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "",
+    "MM_Address2": "John Swett Elementary School",
+    "MM_Address3": "4955 Alhambra Valley Road, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-06-03T15:57:00",
+    "MM_BoardPublishedDate": "2025-06-03T15:57:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "06/08/2025 - 07:45 AM",
+    "EncrMeetingId": "JRAr8GooCrOplusRVJLa2Cp9Q==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 42,
+    "Master_MeetingID": 41450,
+    "MM_MeetingTitle": "Special Closed Session Meeting: Superintendent Search",
+    "MM_DateTime": "2025-06-07T07:45:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "",
+    "MM_Address2": "John Swett Elementary School",
+    "MM_Address3": "4955 Alhambra Valley Road, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-06-03T15:57:00",
+    "MM_BoardPublishedDate": "2025-06-03T15:57:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "06/07/2025 - 07:45 AM",
+    "EncrMeetingId": "T3x1SWip8slshjxx8bvdqSNcA==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 43,
+    "Master_MeetingID": 39398,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-05-19T19:15:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 8:00PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-05-16T13:56:00",
+    "MM_BoardPublishedDate": "2025-05-16T13:56:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": "2",
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "05/19/2025 - 07:15 PM",
+    "EncrMeetingId": "x4oi5KHNfbv4t6HbEUslsh0hA==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 44,
+    "Master_MeetingID": 39084,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-05-05T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:30PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-05-02T14:59:00",
+    "MM_BoardPublishedDate": "2025-05-02T14:59:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "05/05/2025 - 06:30 PM",
+    "EncrMeetingId": "ey83URZ5IzgA5UQyufCNSw==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 45,
+    "Master_MeetingID": 38828,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-04-28T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:15PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-04-25T15:16:00",
+    "MM_BoardPublishedDate": "2025-04-25T15:16:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "04/28/2025 - 06:30 PM",
+    "EncrMeetingId": "DH2heEDpL7uvD9xVZFkFxQ==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 46,
+    "Master_MeetingID": 38360,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-04-14T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:30PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-04-10T11:11:00",
+    "MM_BoardPublishedDate": "2025-04-10T11:11:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "04/14/2025 - 06:30 PM",
+    "EncrMeetingId": "kuslshQA5IHQrpUsqHPM8qLbA==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 47,
+    "Master_MeetingID": 37958,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-03-24T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:15PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-03-21T15:05:00",
+    "MM_BoardPublishedDate": "2025-03-21T15:05:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "03/24/2025 - 06:30 PM",
+    "EncrMeetingId": "ADCouwOZxvrOxGCO5cxR9w==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 48,
+    "Master_MeetingID": 37853,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-03-10T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:30PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-03-07T12:47:00",
+    "MM_BoardPublishedDate": "2025-03-07T12:47:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "03/10/2025 - 06:30 PM",
+    "EncrMeetingId": "4N5oZS3uRofpjuH7vj1ApQ==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 49,
+    "Master_MeetingID": 37724,
+    "MM_MeetingTitle": "Special Meeting of the Board of Education",
+    "MM_DateTime": "2025-03-03T09:00:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-02-28T15:47:00",
+    "MM_BoardPublishedDate": "2025-02-28T15:47:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "03/03/2025 - 09:00 AM",
+    "EncrMeetingId": "4A0hAp8ZhMsyiZbmhqaPKw==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  },
+  {
+    "RowNum": 50,
+    "Master_MeetingID": 37254,
+    "MM_MeetingTitle": "Regular Meeting of the Board of Education",
+    "MM_DateTime": "2025-02-24T18:30:00",
+    "MM_Level0": 2,
+    "MM_DistrictID": 36030321,
+    "MM_Address1": "Closed Session: 5:30PM",
+    "MM_Address2": "Martinez Unified School District Board Room",
+    "MM_Address3": "921 Susana Street, Martinez, CA 94553",
+    "MM_Attachments": false,
+    "MM_MeetingTypeID": 1,
+    "MM_Status": "1",
+    "MM_AccessLevel": 0,
+    "MM_Level1": 2,
+    "MM_Level2": 3,
+    "MM_Level3": 3,
+    "MM_isTemplate": false,
+    "MM_TemplateTitle": null,
+    "MM_PublishedDate": "2025-02-21T13:43:00",
+    "MM_BoardPublishedDate": "2025-02-21T13:43:00",
+    "ML_TypeTitle": "Board Meetings",
+    "ACCESS": "P",
+    "ML_IsPublic": true,
+    "MM_Published": null,
+    "IsUserLoggedIn": 0,
+    "MinutesStatus": "PUBLISHED",
+    "CanPrintMinutes": 1,
+    "FilterStatus": "Published",
+    "MinMeetingDate": "2016-12-19T18:30:00",
+    "MaxMeetingDate": "2026-11-02T13:00:00",
+    "MeetingsCount": 253,
+    "DateTime": "02/24/2025 - 06:30 PM",
+    "EncrMeetingId": "vgjkrp8Wv8em0XckrmanCg==",
+    "EncrSiteId": "GcWQpfjT12meRbH9XC8n8g==",
+    "EncrTimeZone": "ApTJWg3hg67GudlslshH0h2tg=="
+  }
+];ContentPlaceHolder1_MeetingGrid_newGrid.backToTopID='ContentPlaceHolder1_MeetingGrid_BackToTop';
+ContentPlaceHolder1_MeetingGrid_newGrid.JsID='ContentPlaceHolder1_MeetingGrid_newGrid';
+ContentPlaceHolder1_MeetingGrid_newGrid.recordCount='50';
+ContentPlaceHolder1_MeetingGrid_newGrid.noDataMessage='No Meetings Found.';
+ContentPlaceHolder1_MeetingGrid_newGrid.onDataLoadedFunction='OnGridDataLoaded';
+ContentPlaceHolder1_MeetingGrid_newGrid.sortColumn='DateTime';
+ContentPlaceHolder1_MeetingGrid_newGrid.sortDec=true;
+ContentPlaceHolder1_MeetingGrid_newGrid.Initialize(ContentPlaceHolder1_MeetingGrid_newGrid);
+ContentPlaceHolder1_MeetingGrid_newGrid.InvokeOnDataLoadedFunction(ContentPlaceHolder1_MeetingGrid_newGrid);
+</script>
+
+        </div>
+      </div>
+    </div>
+    
+    <div id="ContentPlaceHolder1_dvAdvSrch" class="advSrch ML186">Click here to perform a 
+      <button type="button" tabindex="0" class="btnTrans" onclick="openNewSearch()" style="color: #033DAB; text-decoration: underline;">Search</button>.</div>
+      
+  </div>
+  
+
+<style type="text/css">
+.dvOverlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(137,137,137,0.8);
+  top: 0;
+  left: 0;
+  z-index: 9999998;
+  display: none;
+}
+
+div.contentWrapAdaPP {
+  position: fixed;
+  top: 50%;
+  background: #fff;
+  width: 800px;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  box-shadow: 0 1px 15px #a8a8a8;
+  box-sizing: border-box;
+  padding: 14px 18px 13px 20px;
+  z-index: 9999999;
+  display: none;
+}
+
+.pp-header {
+  background: #fff;
+  color: #000;
+  font-size: 16px;
+  text-align: left;
+  box-sizing: border-box;
+  padding: 5px 0px;
+  line-height: 18px;
+  float: left;
+  width: 100%;
+  position: relative;
+}
+
+.pp-header .close-btn {
+  background: #ffffff;
+  border: 2px solid transparent;
+  cursor: pointer;
+  color: #000000;
+  font-size: 14px;
+  padding: 2px;
+  position: absolute;
+  right: 0px;
+  top: 5px;
+  border-radius: 4px;
+}
+
+.pp-content {
+  background: #fff;
+  color: #000;
+  font-weight: normal;
+  text-align: left;
+  box-sizing: border-box;
+  max-height: calc(100vh - 164px);
+  overflow: auto;
+  float: left;
+  width: 100%;
+}
+
+.pp-content p, .pp-content li, .pp-content span, .pp-content strong {
+  font-size: 14px;
+  font-family: Lato;
+  line-height: 20px;
+}
+
+.pp-header h2 {
+  float: left;
+  max-width: calc(100% - 29px);
+}
+
+  .pp-header h2, .pp-content h3 {
+    font-size: 17px;
+    font-family: Lato Bold;
+  }
+
+.pp-content h4 {
+  font-size: 16px;
+  font-family: Lato;
+  font-weight: normal;
+  color: #000000;
+  margin: 10px 0;
+}
+
+.pp-content:focus {
+  outline-offset: -2px !important;
+}
+
+
+.pp-content a {
+  color: #3c7d8d !important;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: Lato Bold;
+}
+
+.pp-content a:hover {
+  color: #2c5d6d !important;
+  text-decoration: underline;
+}
+
+.dvOverlay.show {
+  display: block !important;
+}
+
+.contentWrapAdaPP.show {
+  display: block !important;
+}
+
+
+@media screen and ( max-width: 1100px ) {
+  div.contentWrapAdaPP {
+    width: 98%;
+  }
+}
+
+@media screen and ( max-width:767px ) {
+  div.contentWrapAdaPP {
+    width: 100%;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    margin: 0px !important;
+    transform: translate(0, 0) !important;
+  }
+}
+</style>
+
+
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  var overlay = document.querySelector('.dvOverlay');
+  var contentWrap = document.querySelector('.contentWrapAdaPP');
+  var closeBtn = document.querySelector('.close-btn');
+  var adaButtons = document.querySelectorAll('button[aria-controls="adaDisclaimerPPDV"]');
+  var ppHeading = document.querySelector('.ppHeading');
+  var previousActiveElement = null;
+  
+  // Get all focusable elements within the dialog
+  function getFocusableElements() {
+    return contentWrap.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+  }
+  
+  // Focus trap - keep focus within dialog when open
+  function handleTabKey(e) {
+    if (!contentWrap.classList.contains('show')) return;
+    
+    var focusableElements = getFocusableElements();
+    var firstElement = focusableElements[0];
+    var lastElement = focusableElements[focusableElements.length - 1];
+    
+    if (e.shiftKey) {
+      // Shift + Tab
+      if (document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement.focus();
+      }
+    } else {
+      // Tab
+      if (document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+      }
+    }
+  }
+
+  // Open dialog when any ADA button is clicked
+  if (adaButtons && adaButtons.length > 0) {
+    adaButtons.forEach(function(adaButton) {
+      adaButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        previousActiveElement = document.activeElement;
+        
+        if (overlay) overlay.classList.add('show');
+        if (contentWrap) contentWrap.classList.add('show');
+        if (ppHeading) ppHeading.focus();
+        
+        // Add keyboard event listener for focus trap
+        document.addEventListener('keydown', handleTabKey);
+      });
+    });
+  }
+
+  // Close dialog when close button is clicked
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      closeDialog();
+    });
+  }
+
+  // Close dialog when overlay is clicked
+  if (overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) {
+        closeDialog();
+      }
+    });
+  }
+
+  // Close dialog on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && contentWrap && contentWrap.classList.contains('show')) {
+      closeDialog();
+    }
+  });
+  
+  function closeDialog() {
+    if (overlay) overlay.classList.remove('show');
+    if (contentWrap) contentWrap.classList.remove('show');
+    
+    // Remove focus trap listener
+    document.removeEventListener('keydown', handleTabKey);
+    
+    // Restore focus to the button that opened the dialog
+    if (previousActiveElement) {
+      previousActiveElement.focus();
+    }
+  }
+});
+</script>
+
+
+
+<div class="dvOverlay" aria-hidden="true"></div>
+<div class="contentWrapAdaPP" role="dialog" aria-modal="true" aria-labelledby="modalACGTitle" aria-describedby="modalACGDesc" id="adaDisclaimerPPDV">
+  <div class="pp-header">
+    <button type="button" class="close-btn" aria-label="Close ADA Compliance Guidelines Dialog" tabindex="0">
+      <img src="/SB_Assets/images/light_close_icon.png" alt="" aria-hidden="true" width="24" />
+    </button>
+    <h2 tabindex="0" id="modalACGTitle" class="ppHeading">ADA Compliance Guidelines</h2>
+  </div>
+  <div class="pp-content" tabindex="0">
+    <div class="w-100 float-left mt-1 mb-2">
+      <p id="modalACGDesc">
+        Review the ADA Compliance requirements below before customizing your site content.<br>
+        Details can be found at
+        <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener">
+          Web Content Accessibility Guideline
+        </a>
+      </p>
+    </div>
+    <h3 class="mt-2 float-left w-100">ADA Compliance Responsibility</h3>
+    <div class="w-100 float-left mt-1">
+      <p>
+        Federal accessibility standards require that web content be accessible to users with disabilities. This happens in 2 ways:</p>
+    </div>
+    <div class="w-100 float-left">
+        <h4 class="pr-1 mb-2">1. Simbli Responsibilities:</h4>
+        <p>Simbli is responsible to make sure the framework of the application is accessible. That the end users can zoom in on a page and see the data they need. Or that screen readers can read the content appropriately and that each page is structured so that a disabled person can get to the content they need quickly and effectively.</p>
+        <h4 class="pr-1 mb-2">2. Simbli Customer Content Creator Responsibilities:</h4>
+        <p>As a Simbli site administrator, ensure your content choices meet requirements to provide equal access to all users. This will include but not limited to the following:</p>
+        <ul type="disc" class="pl-4">
+          <li>Contrasting colors - The user can manage through Simbli Site Administration.</li>
+          <li>Documents - If documents are attached, like a PDF file, that the structure would be WCAG2.2 compliant.</li>
+          <li>Video - The attached video's would need to meet WCAG2.2 standards.</li>
+          <li>Pictures within documents have appropriate tags.</li>
+          <li>Structure of content within a module would be structured appropriately to the framework.</li>
+        </ul>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+    <!--Page mid section end-->
+
+    <!--Footer section start-->
+    <footer id="ebsFooter">
+      <app-master-page-footer-wrapper id="jumpToFooter"></app-master-page-footer-wrapper>
+    </footer>
+    <!--Footer section end-->
+
+
+    <!--The below iframe is used for authentication with simbli idp server-->
+    <iframe id="ifrLogin" style="display: none;"></iframe>
+
+
+    <!--Meeting online voting popup start-->
+    <div id="divMeetingVotingResponse" style="display: none; position: fixed; z-index: 999999;">
+      <iframe id="iFrMeetingVotingResponse" width="100%" height="100%" class="position-fixed fixed-top"></iframe>
+    </div>
+    <!--Meeting online voting popup end-->
+
+
+    <!-- Back To Top Icon Code - Start -->
+    <a href="javascript:void(0);" role="button" id="" title="" class="backToTop">Back to Top</a>
+    <script src="/SB_Assets/JS/Pages/BackToTop.js?n=159" type="text/javascript"></script>
+    <!-- Back To Top Icon Code - End -->
+  </form>
+  <!--Common Live Chat-->
+  <span id="scA7Bh" class="chatDiv" style="display: none"></span>
+  <span id="sdA7Bh" style="display: none; padding-left: 34px !important;"></span>
+  <!--Common Live Chat-->
+
+  <script type="text/javascript">
+    ////////var hubspotChatUser = 'null' == '' ? null : JSON.parse('null');
+    var hubspotChatUser = null;
+    var isUserLoggedIn = 'False';
+
+    // Legacy Provide Support chat loader disabled; HubSpot chat is the active chat.
+    /*
+    try {
+      var seA7Bh = document.createElement("script");
+      seA7Bh.type = "text/javascript";
+      var seA7Bhs = (location.protocol.indexOf("https") == 0 ? "https" : "http") + "://image.providesupport.com/js/gsba/safe-standard.js?ps_h=A7Bh\u0026ps_t=" + new Date().getTime() + "\u0026online-image=https%3A//" + document.domain + "/UX/Images/Help/newHelpPanelIcons/btnChatOnlineNormal.png\u0026offline-image=https%3A//" + document.domain + "/UX/Images/Help/newHelpPanelIcons/btnChatOfflineNormal.png";
+      setTimeout("seA7Bh.src=seA7Bhs;document.getElementById('sdA7Bh').appendChild(seA7Bh);", 1);
+    }
+    catch (error) {
+      console.log("safe-standard.js", error);
+    }
+    */
+  </script>
+
+  
+  <!-- Start of HubSpot Embed Code -->
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/21607822.js"></script>
+  <!-- End of HubSpot Embed Code -->
+  <script type="text/javascript" src="/SB_Assets/JS/Hubspot/HubspotChat.js"></script>
+</body>
+
+  <script type="text/javascript">
+    var gridJsObj = eval('ContentPlaceHolder1_MeetingGrid_newGrid');
+    var filterJsObj = eval('ContentPlaceHolder1_MeetingGridFilter_filter');
+    var dvOverviewText = 'ContentPlaceHolder1_dvOverviewText';
+    var meetingCustGrd = JSON.parse('{"ListingType":0,"TimeZone":null,"CustomSort":0,"SortColName":null,"IsSortDesc":false,"RecordStart":0,"RecordCount":0,"FilterExp":null,"ParentGroup":null,"IsUserLoggedIn":false,"UserID":null,"UserRole":null,"EncUserId":null,"HasAutoAuthAccess":false,"Id":0,"SchoolID":null,"ConnectionString":null,"SecurityToken":"ZekKE44z6voP8TArAiQr1KqQ7APJMDvo3Mr5tEPYHAow2XgYXKhCVFLu2pHhFaTMmRvGGlrvIVPntVneL1wpDiE7CYslshYWxAAkiH3RBPvYTN4HK3G2npeFhJfplusBYUslshkno","CreatedOn":"0001-01-01T00:00:00","CreatedBy":null,"ModifiedOn":"0001-01-01T00:00:00","ModifiedBy":null,"DeletedBy":null,"DeletedOnUTC":null,"IsDeleted":false}');
+    var meetingOverviewObj = JSON.parse('{"Content":null,"Id":0,"SchoolID":null,"ConnectionString":null,"SecurityToken":"ZekKE44z6voP8TArAiQr1KqQ7APJMDvo3Mr5tEPYHAow2XgYXKhCVFLu2pHhFaTMmRvGGlrvIVPntVneL1wpDiE7CYslshYWxAAkiH3RBPvYTN4HK3G2npeFhJfplusBYUslshkno","CreatedOn":"0001-01-01T00:00:00","CreatedBy":null,"ModifiedOn":"0001-01-01T00:00:00","ModifiedBy":null,"DeletedBy":null,"DeletedOnUTC":null,"IsDeleted":false}');
+    var constr = 'Z6PDprZMNLXHjSBXkCx3nzxHobapU6THS276Yjb8a1FcxvBC4F4a0YoSPCIBRnXN3L0PVIjfk7eAzUDuZG80sydEUTBJc9gqR0LKYI2FZg6nOauCwslshZBvzfAkaQpHTFIQCd62rcpkJWtNfxexY6fmKUuKkzT1yYC9wOtfzXdslsh9tnCWSOslshamw659Ednd4SnnhhHAaoOY25inDMeiYQOGJPHL7AY8rq4pzJgplusEFbavGJk=';
+    var schoolID = '36030321';
+    var radEditOverview = null;
+    var parentGroup = 'CSBA';
+    var isLoggedInUser = false;
+    var timezoneDiff = '-180';
+    if ('False' == 'True') {
+      isLoggedInUser = true;
+    }
+    var currUserID = '';
+    var enPortalUserID = '';
+    var currUserFullName = '';
+    var enUName = '';
+    var editorData = '';
+    var uniqueS = '';
+    
+var app2Url = 'https://app2.eboardsolutions.com';
+
+        
+    
+    async function fnMeetingEmailNotification() {
+      try {
+      
+        const authToken = getCoreAuthTokenFromCookies();
+        var url = '/CoreServices/api/NotificationPermission/CanAccessMeetingEmailNotification/?sid=' + encrSiteId + '&uid=' + enCuUID; // Replace with your actual API endpoint
+
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+
+        if (!response.ok) {
+          //throw new Error('Network response was not ok');
+          document.getElementById('dvNotificationSubscribe').style.display = 'none';
+        }
+        else {
+          const data = await response.json(); 
+          if (data === true  || data === 'true' || data === 'True') {
+            document.getElementById('dvNotificationSubscribe').style.display = 'block';
+          } else {
+            //console.log('No access to email notification');
+            document.getElementById('dvNotificationSubscribe').style.display = 'none';
+          }
+        }
+        
+
+      } catch (error) {
+        console.error('Error occurred:', error);
+        // Optionally display error message on the page
+        document.getElementById('dvNotificationSubscribe').style.display = 'none'; // Show error notification
+      }
+    }
+
+    $(document).ready(function () {
+      meetingCustGrd.ListingType = '0';
+
+          $('title').each(function () {
+            var $this = $(this);
+            if ($this.html().replace(/\s|&nbsp;/g, '').length == 0)
+              $this.remove();
+          });
+      $('#searchHeader_ContentPlaceHolder1_MeetingGridFilter_ML_TypeTitle').removeAttr('aria-haspopup');
+
+      fnMeetingEmailNotification();
+      var abcOutput = localStorage.getItem('abcOutput');     
+        });
+
+
+   
+  </script>
+
+<script src="/sb_assets/js/pages/SessionTimeoutConfiguration.js?n=60250630"></script>
+<script type="text/javascript">
+  var siteId = '36030321';
+  var siteID = siteId;
+  var encrSiteId = 'GcWQpfjT12meRbH9XC8n8g==';
+  var enSiteID = 'GcWQpfjT12meRbH9XC8n8g==';
+  var enDID = 'GcWQpfjT12meRbH9XC8n8g==';
+  var enCuUID = '';
+  var enUserID = enCuUID;
+  var enPortalUserID = enCuUID;
+  var sToken = 'ZekKE44z6voP8TArAiQr1KqQ7APJMDvo3Mr5tEPYHAow2XgYXKhCVFLu2pHhFaTMmRvGGlrvIVPntVneL1wpDiE7CYslshYWxAAkiH3RBPvYTN4HK3G2npeFhJfplusBYUslshkno';
+  var currUserId = '';
+  var sessionId = 'gucq42uh4bohszr5pcw4115o';
+  var parentPageUrl = window.location.href;
+  var userFullName = 'Unknown';
+  var idpLoginUrl = '';
+  var isProdEnvironment = 'True';
+  var version = '26.16.0.8 Simbli2';
+  var ssoLoginUrl = '/Pages/ErrorPage.aspx?fromsso=true&S=36030321';
+  var showSsoLogin = 'False' == 'True';
+  var app2Url = 'https://app2.eboardsolutions.com';
+  var coreServicesUrl = 'https://simbli.eboardsolutions.com/CoreServices';
+  var convServiceURL = 'https://app1.eboardsolutions.com/';
+  var currentPageSessionTimeoutMinutes = parseInt('30');
+  var currentPageWarningMinutes = parseInt('10');
+  var isWeakPwd = 'False' == 'True';
+  var showADALoginMsg = 'False' == 'True';
+  var preventForm = true;
+  var isPolicyPage = 'False';
+  var showNewSearch = 'True';
+  var enUName = '';
+  var helpDeskUrl = 'https://eboardsolutions.learnupon.com';
+  var knowledgeBaseUrl = 'https://kb.eboardsolutions.com';
+  var productUpdateUrl = 'https://kb.eboardsolutions.com/product-updates';
+  var fromPageId = '';
+  var isDisableSimbliLogin = 'False' == 'True';
+  var isAutoAuth = 'False' == 'True';
+  var isAutoAuthOnPlanning = 'False' == 'True';
+  var isOtherSiteThanLogin = 'True' == 'True';
+  var showAutoAuthDisclaimer = 'False' == 'True';
+  var autoAuthParentSiteId = '' ;
+  if (!window.tabid) {
+    const uniqueTabId = generateUUID();
+    window.tabid = uniqueTabId;
+  }
+
+  $(document).ready(function () {
+    authIdp();
+    if (isUserLoggedIn == "True") {
+      onPageLoad();
+    }
+    setTimeout(function () {
+      if (preventForm) {
+        preventFormDefaultBehaviour();
+      }
+    }, 2000);
+  });
+
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+  }
+
+  function generateUUID() { 
+    if (typeof crypto !== "undefined" && crypto.getRandomValues) {
+      const buffer = new Uint8Array(16);
+      crypto.getRandomValues(buffer);
+       
+      buffer[6] = (buffer[6] & 0x0f) | 0x40;
+      buffer[8] = (buffer[8] & 0x3f) | 0x80;
+
+      const hex = Array.from(buffer).map(b => b.toString(16).padStart(2, '0'));
+      return (
+        hex.slice(0, 4).join('') + '-' +
+        hex.slice(4, 6).join('') + '-' +
+        hex.slice(6, 8).join('') + '-' +
+        hex.slice(8, 10).join('') + '-' +
+        hex.slice(10, 16).join('')
+      );
+    }
+     
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = Math.random() * 16 | 0;
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
+</script>
+<script defer type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+<script src="/UX/OH/bootstrap/js/bootstrap.bundle.min.js?n=152"></script>
+
+
+<link rel="stylesheet" href='/SB_Assets/AngularOutput/styles.css?n=1&av=639294416178651268' />
+<script type="text/javascript" src='/SB_Assets/AngularOutput/polyfills.js?n=1&av=639294416178651268'></script>
+<script type="module" src='/SB_Assets/AngularOutput/main.js?n=1&av=639294416178531294'></script>
+<script type="text/javascript" src="/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=1&cb=429221846" async></script></html>

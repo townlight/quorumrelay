@@ -1,0 +1,342 @@
+[
+  {
+    "input_format": "meeting-export",
+    "file": "legistar.json",
+    "connector": "legistar",
+    "sha256": "11fbf132c37d7d24032b9948e9e17bbb1d3f39c189974be6db1db42fd05ae1ce",
+    "source_url": "https://example.gov/legistar",
+    "original_output_sha256": "d81a27f2dc8913630c193a8be07b230af5b973afe22665147e6dfa89a02a85a2",
+    "original_record_count": 1,
+    "original_namespace": "//example.gov"
+  },
+  {
+    "input_format": "meeting-export",
+    "file": "primegov.json",
+    "connector": "primegov",
+    "sha256": "48150578eea4c6c6e243fde0ff8ca21db8be82f306c8a40aa09728e1f60cfb82",
+    "source_url": "https://example.gov/primegov",
+    "original_output_sha256": "9cb99b9fca794ee0fdab741597a5f7b09615356c5244f1cd40f8840bf1de781b",
+    "original_record_count": 1,
+    "original_namespace": "//example.gov"
+  },
+  {
+    "input_format": "meeting-export",
+    "file": "granicus.json",
+    "connector": "granicus",
+    "sha256": "687bdd058e50db9533df5215d39e2c0ad0cdf4f36c6d5f916723dbdcb4a55059",
+    "source_url": "https://example.gov/granicus",
+    "original_output_sha256": "a1bec6fbbcd3e73e4fc0eb5dc1f89601bb519a8c9b08dc34c6f66dbdee37556b",
+    "original_record_count": 1,
+    "original_namespace": "//example.gov"
+  },
+  {
+    "input_format": "meeting-export",
+    "file": "novusagenda.json",
+    "connector": "novusagenda",
+    "sha256": "e189c9434aa2b01ed233de044423109449e547cdbb2b524ab9709e5316d50d10",
+    "source_url": "https://example.gov/novusagenda",
+    "original_output_sha256": "d717e7755c4dfc43c358c76606fb72bce76216537993fb13312f0f1f5dd00377",
+    "original_record_count": 1,
+    "original_namespace": "//example.gov"
+  },
+  {
+    "input_format": "viewpublisher-html",
+    "file": "oakland.html",
+    "connector": "granicus",
+    "sha256": "cc75d87f595277facaa5bb5a905ee84707978f94be12d9a85a69e3dd83bd8c20",
+    "source_url": "https://oakland.granicus.com/ViewPublisher.php?view_id=2",
+    "original_output_sha256": "b215002ea71eaa8992fc88950e786df6608d00e0ad7b9e8a9df777f9a6f6b2d4",
+    "original_record_count": 2,
+    "original_namespace": "//oakland.granicus.com"
+  },
+  {
+    "input_format": "primegov-portal-json",
+    "file": "longmont-ListUpcomingMeetings.json",
+    "connector": "primegov",
+    "sha256": "472bf9a0a8e90cf4379b13b03a6851be0c0fa6a3e664b1f31063dca6084498bc",
+    "source_url": "https://longmont.primegov.com/api/v2/PublicPortal/ListUpcomingMeetings",
+    "original_output_sha256": "a9921a508cf0ec43454b05cc059fa7aab056d5ea5a0b5688b9c370b5338c22f4",
+    "original_record_count": 7,
+    "original_namespace": "//longmont.primegov.com"
+  },
+  {
+    "input_format": "civicplus-events-json",
+    "file": "civicclerk.response",
+    "connector": "civicplus-select",
+    "sha256": "ddcfa72e0b16395e6acac7231f07f81368dcca681f4168e252617db7606ceb3b",
+    "source_url": "https://turlockca.api.civicclerk.com/v1/Events",
+    "original_output_sha256": "7ed9baca56d520eb5eefd298d436fc31508631389cce2ae998c96ccf54f082bc",
+    "original_record_count": 15,
+    "original_namespace": "//turlockca.api.civicclerk.com"
+  },
+  {
+    "input_format": "agenda-center-html",
+    "file": "agenda-center.response",
+    "connector": "civicplus-agenda-center",
+    "sha256": "975a24df772bddbb1f3fcb4e4f730f72caea952b5fefcebd7a646ca77658a180",
+    "source_url": "https://www.clevelandtn.gov/AgendaCenter",
+    "original_output_sha256": "617fb4bce9e219e8e4081d397364a2e2ea50dacde27ecfb4c80a3c475eb9c84d",
+    "original_record_count": 85,
+    "original_namespace": "//www.clevelandtn.gov"
+  },
+  {
+    "input_format": "municode-meetings-html",
+    "file": "municode.response",
+    "connector": "municode-meetings",
+    "sha256": "b72ccb013f3e6b45bb513d9fad0a250471214a362996e59b269c65660ab825d0",
+    "source_url": "https://southjordan-ut.municodemeetings.com/",
+    "original_output_sha256": "a47d7fe8b7091d7cb87c89e74e53d8402959fdcd9a0024f8c739ce73f1d4ef76",
+    "original_record_count": 25,
+    "original_namespace": "//southjordan-ut.municodemeetings.com"
+  },
+  {
+    "input_format": "boardbook-html",
+    "file": "boardbook.response",
+    "connector": "boardbook",
+    "sha256": "11f47982510d4bca619bf769802fa3276a28a7d49756604fb4563b8f684693cb",
+    "source_url": "https://meetings.boardbook.org/Public/Organization/3307",
+    "original_output_sha256": "5d12c10e96bc80c41ad420bf3397d881eb153067a423b038fc1adbae705d362b",
+    "original_record_count": 33,
+    "original_namespace": "//meetings.boardbook.org/Public/Organization/3307"
+  },
+  {
+    "input_format": "escribe-calendar-json",
+    "file": "escribe-saskatoon-calendar.response",
+    "connector": "escribe",
+    "sha256": "7bf3cec03f434ab777975e3ef6a0a3134704b45c0265f1fe628802cdce661417",
+    "source_url": "https://pub-saskatoon.escribemeetings.com/MeetingsCalendarView.aspx/GetCalendarMeetings",
+    "original_output_sha256": "6dd017bd30b0884ecc3451591c97c5f6fdda5fa5d51cd3f64d9d92a97239a3f6",
+    "original_record_count": 18,
+    "original_namespace": "//pub-saskatoon.escribemeetings.com"
+  },
+  {
+    "input_format": "simbli-html",
+    "file": "simbli.response",
+    "connector": "simbli",
+    "sha256": "5f0d54d9939ccd69ec7e36cf9b3c25d58b0959f099e4bad7a9ad4077121f103a",
+    "source_url": "https://simbli.eboardsolutions.com/SB_Meetings/SB_MeetingListing.aspx?S=36030321",
+    "original_output_sha256": "172d77335a32262a04dc51dbbbb5b7584c56cd137c4956c671291b9f3dff3185",
+    "original_record_count": 50,
+    "original_namespace": "//simbli.eboardsolutions.com?S=36030321"
+  },
+  {
+    "input_format": "civicweb-html",
+    "file": "civicweb-types.response",
+    "connector": "civicweb",
+    "sha256": "d8ffe0293434620f07c5c866878cc0c4da28b4341e6efd5653bd0549493972a9",
+    "source_url": "https://sonomacity.civicweb.net/Portal/MeetingTypeList.aspx",
+    "original_output_sha256": "87fcc968cb38f2dc986965dd743777bd655e5e589d5256fee250e22aa67ebd5d",
+    "original_record_count": 45,
+    "original_namespace": "//sonomacity.civicweb.net"
+  },
+  {
+    "input_format": "iqm2-html",
+    "file": "iqm2.response",
+    "connector": "iqm2",
+    "sha256": "8bbadac3551a4d3d7c3e68768f4c14f6d96e8412cc809b5a138fcd33c77830f0",
+    "source_url": "https://santamonicacityca.iqm2.com/Citizens/Default.aspx",
+    "original_output_sha256": "2a815cf1488416ce9eaf202e9952a9799924d74136a504f682b937c5e2f07bb4",
+    "original_record_count": 6,
+    "original_namespace": "//santamonicacityca.iqm2.com"
+  },
+  {
+    "input_format": "swagit-archive-html",
+    "file": "swagit.response",
+    "connector": "swagit",
+    "sha256": "38c63b12ddc4f41ab21e911ead700b516aea4127c01689e99905ee7f7c362581",
+    "source_url": "https://bellca.new.swagit.com/past-city-council-videos/",
+    "original_output_sha256": "2c272dca6738408554bb8c7132ab67192f02629a10168d81d93e9eec90f1445b",
+    "original_record_count": 10,
+    "original_namespace": "//bellca.new.swagit.com"
+  },
+  {
+    "input_format": "suiteone-archive-html",
+    "file": "suiteone.response",
+    "connector": "suiteone-media",
+    "sha256": "c4a0732de74628cf5590129d0020d474937161638719c3215c09533235241112",
+    "source_url": "https://watkinsvillega.suiteonemedia.com/",
+    "original_output_sha256": "795cb75305d39aeb068fa312ff3e53a27795c10669646fefe53dd85802f34e8e",
+    "original_record_count": 28,
+    "original_namespace": "//watkinsvillega.suiteonemedia.com"
+  },
+  {
+    "input_format": "peak-viewpublisher-html",
+    "file": "peak.response",
+    "connector": "peak",
+    "sha256": "835e3e2990186c4015b223f3692938b45437e8ee8c91e22fb55740c0cc06fb1b",
+    "source_url": "https://douglascountynv.granicus.com/ViewPublisher.php?view_id=1",
+    "original_output_sha256": "a1319c5482ea573eb5f371d530f3daeb1106e8cdcd17fb0be0e355cd685bbd06",
+    "original_record_count": 7,
+    "original_namespace": "//douglascountynv.granicus.com"
+  },
+  {
+    "input_format": "utah-notice-html",
+    "file": "utah-notice.response",
+    "connector": "utah-public-notice",
+    "sha256": "2067ed91c4346b0b39d6236dc9c470e9e0d401b63c8b390afb457745b8953f7e",
+    "source_url": "https://www.utah.gov/pmn/sitemap/notice/1101977.html",
+    "original_output_sha256": "0b4eb776e87ce38937186b0e31eeb762a3f6968f4770956250ab9ab57569a693",
+    "original_record_count": 1,
+    "original_namespace": "//www.utah.gov"
+  },
+  {
+    "input_format": "agendaquick-html",
+    "file": "destiny.response",
+    "connector": "destiny-agendaquick",
+    "sha256": "27fa403b6a4bd42093a60dc40a581d4cfbbe643ce4fc513459ec96f70b3c8692",
+    "source_url": "https://public.destinyhosted.com/agenda_publish.cfm?id=35247",
+    "original_output_sha256": "8ef675a379222baa7bd948189b4c070e15934abc0645084890b262ba3971825e",
+    "original_record_count": 10,
+    "original_namespace": "//public.destinyhosted.com/35247"
+  },
+  {
+    "input_format": "town-hall-streams-html",
+    "file": "townhallstreams.response",
+    "connector": "town-hall-streams",
+    "sha256": "af55f7fc75824b7744c999c155a228f2007c718c36a13cd817cbe2774ea2394b",
+    "source_url": "https://www.townhallstreams.com/town.php?id=31",
+    "original_output_sha256": "d6fd9f0d2870cba0b0149623cbdc0e7ce0bd05bd24f8d2399d9fb232a007269e",
+    "original_record_count": 415,
+    "original_namespace": "//townhallstreams.com?location_id=31"
+  },
+  {
+    "input_format": "telvue-playlist-html",
+    "file": "telvue.response",
+    "connector": "telvue",
+    "sha256": "08c2ca51ed7655f5fd6734eaab7e193445deac8764079ee0f8da45ddf9b017fd",
+    "source_url": "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/playlists/1757?fullscreen=false&showtabssearch=true",
+    "original_output_sha256": "2f59a1132e076304eec83789840b34afdc41250acd8e625dff93c06b0c004883",
+    "original_record_count": 15,
+    "original_namespace": "//telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M"
+  },
+  {
+    "input_format": "champ-event-json",
+    "file": "champ-event.response",
+    "connector": "champ",
+    "sha256": "8996174ad192d0c4be757871a445117f2001b8414b5cf4106f8a5f814dce1f06",
+    "source_url": "https://play.champds.com/lakezurichil/event/164",
+    "original_output_sha256": "9c100aabfd2133c98b5cc7039054ffad18d380673f6ca7e8647a247d35ece5b5",
+    "original_record_count": 1,
+    "original_namespace": "//champds.com/lakezurichil"
+  },
+  {
+    "input_format": "onbase-agenda-online-html",
+    "file": "onbase.response",
+    "connector": "onbase",
+    "sha256": "52bcf78353802dc087e65c83034dadcf751a61142eebb05821481e5cc3bd56a1",
+    "source_url": "https://ecm.cityofsantacruz.com/OnBaseAgendaOnline/",
+    "original_output_sha256": "37f3cf8b0ba581a143d9f5b51830aba54a7388a542eb18f6672b9b6cfaed5727",
+    "original_record_count": 73,
+    "original_namespace": "//ecm.cityofsantacruz.com/onbaseagendaonline"
+  },
+  {
+    "input_format": "laserfiche-folder-html",
+    "file": "laserfiche-docs.response",
+    "connector": "laserfiche-weblink",
+    "sha256": "bee1c4fb685d53e6181c3d3750b68475e4c9096752ca34df57cc7f88dccda2d7",
+    "source_url": "https://documents.redwoodcity.org/PublicWeblink/0/fol/517168/Row1.aspx",
+    "original_output_sha256": "68b6b5ad8d6709874b467165f146716384a5c7ea06f91edd22dd481ad5c56d8b",
+    "original_record_count": 19,
+    "original_namespace": "//documents.redwoodcity.org/publicweblink"
+  },
+  {
+    "input_format": "towncloud-agenda-html",
+    "file": "towncloud-agenda.response",
+    "connector": "towncloud",
+    "sha256": "6dc4c41b94da012eec085fdcab30c64e83812af5f01aa4a381c3f4b31acf5a66",
+    "source_url": "https://towncloud.io/go/bennett-co/agendas/1033",
+    "original_output_sha256": "e5e09849b291cb58d58c4c902cc1f25dea992171387106ec82fbae37ef23956b",
+    "original_record_count": 1,
+    "original_namespace": "//towncloud.io/go/bennett-co"
+  },
+  {
+    "input_format": "towncloud-table-json",
+    "file": "towncloud-list.response",
+    "connector": "towncloud",
+    "sha256": "ac713151a85443d99d18d17373a14b910232845f113fe2dcd61bb232718ec1da",
+    "source_url": "https://towncloud.io/go/bennett-co/table_data",
+    "original_output_sha256": "ed4838d0f58a20bb3fc1abb496d987525a067c94a16f64881bb8568364d8b0af",
+    "original_record_count": 25,
+    "original_namespace": "//towncloud.io/go/bennett-co"
+  },
+  {
+    "input_format": "digital-towpath-detail-html",
+    "file": "digital-towpath-detail.response",
+    "connector": "digital-towpath",
+    "sha256": "f02d3b5b393cf3935cef44d1d574d95bccd29779bef390353f051b8c037f3e3a",
+    "source_url": "https://townofberkshireny.gov/meetings/detail/64",
+    "original_output_sha256": "064ebc05ee3542b18ebbeefa66e526c8f76fc83b4031ec3564224570d943f20d",
+    "original_record_count": 1,
+    "original_namespace": "//townofberkshireny.gov"
+  },
+  {
+    "input_format": "clerkbase-document-html",
+    "file": "clerkbase.response",
+    "connector": "clerkbase",
+    "sha256": "4bc7c508723796477389fd2385c6e111eee88d5fedb54e7271daea2692d86e2a",
+    "source_url": "https://clerkshq.com/Content/Richmond-ri/council/2022/apr19_22tc.htm",
+    "original_output_sha256": "eb3f98bed6188365b443dd9181dd3c65ebe3d63bdf9685471eef17ada485432e",
+    "original_record_count": 1,
+    "original_namespace": "//clerkshq.com"
+  },
+  {
+    "input_format": "public-meeting-ics",
+    "file": "sunnyvale.response",
+    "connector": "first-party",
+    "sha256": "339a63cd60a7f1145481fceff34a6aa98f5dc0b4768a50cbfda3e1f76522d7d6",
+    "source_url": "https://calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics",
+    "original_output_sha256": "64cdea3bf7dcfc7bebe87c9a7ab8f3aa7b255020aec57da4e42d539659fc669f",
+    "original_record_count": 1307,
+    "original_namespace": "//calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics"
+  },
+  {
+    "input_format": "wistia-media-json",
+    "file": "wistia.response",
+    "connector": "wistia",
+    "sha256": "3b32bb295030cb376e1d50f2cd3d8e355c8d3e22f813b93248570e0037c7d1c0",
+    "source_url": "https://fast.wistia.com/embed/medias/e4a27b971d.json",
+    "original_output_sha256": "99e83ee973e899de32b3af6c81df4c142f286fd901565da14384e3713326cec6",
+    "original_record_count": 1,
+    "original_namespace": "//fast.wistia.com"
+  },
+  {
+    "input_format": "boardable-public-meeting-html",
+    "file": "boardable-detail.response",
+    "connector": "boardable",
+    "sha256": "ee3a196a1b76416a570bf26aab28ffb1ab39961e54f31a497f7273525b624847",
+    "source_url": "https://site.boardable.com/lake-land-college/meetings/08b637-regular-board-of-trustees-meeting",
+    "original_output_sha256": "c8b9d7b1e3b289719ca10549ec0666da77548fce3136f13900987be2d5073cb2",
+    "original_record_count": 1,
+    "original_namespace": "//site.boardable.com/lake-land-college"
+  },
+  {
+    "input_format": "gworks-frontdesk-json",
+    "file": "gworks-1311.response",
+    "connector": "gworks",
+    "sha256": "1c416144c033155ff3db32dfa1e6720005d9d7c48ea625420087dee34e10ea70",
+    "source_url": "https://files.frontdeskgworks.com/city/1311/cms/data.json",
+    "original_output_sha256": "793989685d34429f6555bb4b69ec7520a980c8f15b8dd135c2c57f07b303f19e",
+    "original_record_count": 173,
+    "original_namespace": "//files.frontdeskgworks.com/city/1311/cms/data.json"
+  },
+  {
+    "input_format": "boarddocs-print-pdf",
+    "file": "boarddocs-minooka.pdf",
+    "connector": "boarddocs",
+    "sha256": "b54e25f3b6c877a93813614eee9ecafdbe176d9ce074567c78e911daf1411088",
+    "source_url": "https://resources.finalsite.net/images/v1778852677/min201org/y5lrm3zfrvt9oguecqun/5-18-2026BoardMeetingAgenda.pdf",
+    "original_output_sha256": "2c0830daf7d74b39ff3661c4dd3b6784b214713adc272e26b20987de101c52b1",
+    "original_record_count": 1,
+    "original_namespace": "//resources.finalsite.net"
+  },
+  {
+    "input_format": "tyler-public-calendar-json",
+    "file": "tyler-calendar.response",
+    "connector": "tyler-meeting-manager",
+    "sha256": "9807a51ff559cc0c0c3a734142b80f5616035378d18d3c7e6c09941efdb9edf5",
+    "source_url": "https://cityofmurraycityut.meetingmanager.tylerapp.com/7452cityofmurraycityut/tylermm/calendar/",
+    "original_output_sha256": "5034aa5332f6b04198ded935c6f3683edfa4c0be7afe79e7b6fd47d485b7e781",
+    "original_record_count": 14,
+    "original_namespace": "//cityofmurraycityut.meetingmanager.tylerapp.com"
+  }
+]

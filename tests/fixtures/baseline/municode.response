@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html id="html_background" lang="en" >
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="MobileOptimized" content="width" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/themes/mmportal_subtheme/favicon.ico" />
+	
+    <title>Agendas/Minutes | South Jordan Utah Meetings</title>
+    <meta name="Generator" content="Drupal 7 (http://drupal.org)" />
+<link rel="shortcut icon" href="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/files/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta property="og:title" content="Agendas/Minutes" />
+<meta property="og:image" content="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/themes/mmportal_subtheme/logo.png" />
+<meta property="og:site_name" content="South Jordan Utah Meetings" />
+<meta property="og:url" content="https://southjordan-ut.municodemeetings.com/meetings3" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="Agendas/Minutes" />
+    <link type="text/css" rel="stylesheet" href="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/files/css/css_xE-rWrJf-fncB6ztZfd2huxqgxu4WO-qwma6Xer30m4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/files/css/css_9NqWsR75HCHBOZb4yNDFWq49-RCIBtYFT3qAJdYWjFA.css" media="screen" />
+<link type="text/css" rel="stylesheet" href="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/files/css/css_s4WZKx2eX-lEzdjOEpkGh4i_LVlhpEPkG3ACPqyx8mI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/files/css/css_u_avqTuV6lydaXNAyk_XHn6mOMfGq9V7HAopKLZeieE.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/files/css/css_J2c7o5cCgWXiOU852046X0UUaj1GKzZvNrwAvWgtc0s.css" media="all" />
+    <script type="text/javascript" src="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/files/js/js_YD9ro0PAqY25gGWrTki6TjRUG8TdokmmxjfqpNNfzVU.js"></script>
+<script type="text/javascript" src="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/files/js/js_ICaiHSRm4xzH69gcV-fGfYaf60nGJ4ZYMmrqJOJI6Qo.js"></script>
+<script type="text/javascript" src="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/files/js/js_-w-hL0_JOOeZ8ZH2nxOxZ_GLT0ehKXc3-k9blTO8mPc.js"></script>
+<script type="text/javascript" src="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/files/js/js_I1huQFYkTfjwQptCM257Rb88InIN4NNsgee7GEDc4mU.js"></script>
+<script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-9288149-61"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("config", "UA-9288149-61", {"groups":"default"});
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/files/js/js_lOydWFgHMdR4mNtBfIK2fiM64G5I3Lbi0RqH5IS_Z9A.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","setHasJsCookie":0,"ajaxPageState":{"theme":"mmportal_subtheme","theme_token":"HGOEzWg_lPL72QQicysJEqsnVhvZuAtvZ2EGnzMWqIo","js":{"sites\/all\/modules\/views_infinite_scroll\/views-infinite-scroll.js":1,"sites\/southjordan-ut.municodemeetings.com\/themes\/mmportal_subtheme\/js\/view\/calendar.js":1,"sites\/all\/modules\/aha_fasttrack\/aha_fasttrack_lightbox.js":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"misc\/jquery.cookie.js":1,"misc\/jquery.form.js":1,"misc\/ajax.js":1,"sites\/all\/modules\/aha_ada_fixes\/aha_ada_fixes.js":1,"sites\/all\/modules\/aha_simplenews_extras\/aha_simplenews_extras.form.js":1,"sites\/all\/modules\/aha_microsite\/aha_microsite.js":1,"sites\/all\/modules\/lazyloader\/jquery.lazyloader.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/aha_google_ical\/aha_google_ical.js":1,"sites\/all\/modules\/jquerymenu\/jquerymenu.js":1,"sites\/all\/modules\/views_selective_filters\/js\/attachBehaviours.js":1,"misc\/tableheader.js":1,"sites\/all\/modules\/views\/js\/base.js":1,"misc\/progress.js":1,"sites\/all\/modules\/views\/js\/ajax_view.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"https:\/\/www.googletagmanager.com\/gtag\/js?id=UA-9288149-61":1,"0":1,"sites\/all\/themes\/aha_compass\/js\/global-nav-responsive.js":1,"sites\/all\/themes\/aha_compass\/js\/jquery-menu.js":1,"sites\/all\/themes\/aha_compass\/js\/random.js":1,"sites\/southjordan-ut.municodemeetings.com\/themes\/mmportal_subtheme\/js\/search-page.js":1,"sites\/all\/themes\/aha_compass\/js\/accessibility-main-menu.js":1,"sites\/all\/themes\/aha_compass\/js\/min-height.js":1,"sites\/all\/themes\/aha_compass\/js\/table.js":1,"sites\/all\/themes\/aha_compass\/js\/accessibility-expandable-blocks.js":1,"sites\/all\/themes\/aha_compass\/js\/alerts.js":1,"sites\/all\/themes\/aha_compass\/js\/respond.min.js":1,"sites\/southjordan-ut.municodemeetings.com\/themes\/mmportal_subtheme\/js\/webform.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"sites\/all\/modules\/better_views_tables\/css\/bvt-responsive-tables.css":1,"sites\/all\/modules\/simplenews\/simplenews.css":1,"sites\/all\/modules\/calendar\/css\/calendar_multiday.css":1,"sites\/all\/modules\/date\/date_api\/date.css":1,"sites\/all\/modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"sites\/all\/modules\/date\/date_repeat_field\/date_repeat_field.css":1,"modules\/field\/theme\/field.css":1,"sites\/all\/modules\/logintoboggan\/logintoboggan.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/video_filter\/video_filter.css":1,"sites\/all\/modules\/extlink\/extlink.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/aha_fasttrack\/aha_fasttrack.css":1,"sites\/all\/modules\/aha_ft_solr\/aha_ft_solr.css":1,"sites\/all\/modules\/aha_restapi_server\/aha_restapi_server.css":1,"sites\/all\/modules\/mcc_cfgcheck\/mcc_cfgcheck.css":1,"sites\/all\/modules\/lazyloader\/lazyloader.css":1,"sites\/all\/modules\/ckeditor\/css\/ckeditor.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/jquerymenu\/jquerymenu.css":1,"sites\/all\/modules\/taxonomy_access\/taxonomy_access.css":1,"sites\/all\/modules\/aha_ada_fixes\/aha_ada_fixes.css":1,"sites\/all\/modules\/addtoany\/addtoany.css":1,"sites\/all\/modules\/aha_simplenews_extras\/aha_simplenews_extras.css":1,"sites\/all\/themes\/aha_compass\/css\/style.css":1,"sites\/all\/themes\/aha_compass\/css\/custom.css":1,"sites\/southjordan-ut.municodemeetings.com\/themes\/mmportal_subtheme\/mmportalcustom.css":1}},"jquerymenu":{"hover":0,"animate":1,"edit_link":1},"video_filter":{"url":{"ckeditor":"\/video_filter\/dashboard\/ckeditor"},"modulepath":"sites\/all\/modules\/video_filter"},"urlIsAjaxTrusted":{"\/meetings3":true,"\/views\/ajax":true,"\/":true},"views_infinite_scroll":{"img_path":"https:\/\/southjordan-ut.municodemeetings.com\/sites\/all\/modules\/views_infinite_scroll\/images\/ajax-loader.gif","scroll_threshold":200},"views":{"ajax_path":"\/views\/ajax","ajaxViews":{"views_dom_id:1da1552d33dad9a65be4eb919298432c":{"view_name":"calendar","view_display_id":"page_6","view_args":"","view_path":"meetings3","view_base_path":"meetings3","view_dom_id":"1da1552d33dad9a65be4eb919298432c","pager_element":0}}},"extlink":{"extTarget":"_blank","extClass":0,"extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"","extInclude":".*fileattachments.*","extCssExclude":"","extCssExplicit":"","extAlert":0,"extAlertText":"This link will take you to an external web site. We are not responsible for their content.","mailtoClass":0,"mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"account":"UA-9288149-61","trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc|docx|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt|pptx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls|xlsx|xml|z|zip"}});
+//--><!]]>
+</script>
+</head>
+<body id="background" class="html front not-logged-in no-sidebars page-meetings3" >
+    <div id="skip-link" role="complementary">
+    	<a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+    </div>
+        
+<div class="page-outer" role="region" aria-label="Page Content">
+
+  <button class="mobile-nav-toggle" title="Navigation Menu" tabindex="3"><span>Navigation</span></button>
+  <div class="mobile-subnav-placeholder"></div> 
+
+	<!-- START CONTAINER 1-->  
+    <div class="container1-wrapper">
+        <div class="container1">
+                            <div class="logo-wrapper">
+                    <a href="/" title="Home" rel="home" id="logo">
+                        <img src="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/themes/mmportal_subtheme/logo.png" alt="Home" />
+                        <div class="logo-text-wrapper" role="heading" aria-level="1">
+                            <span class="logo-text logo-text__city"></span>
+                            <span class="logo-text logo-text__state"></span>
+                        </div>
+                    </a>
+                </div>
+             
+            <div class="global-nav-wrapper">
+            	<!-- Uncomment out the below line to switch to a template design -->
+            	<div class="header-wrapper">  <div class="region region-header">
+    <div id="block-menu-menu-header-links" class="block block-menu">
+    <div class='block-header'>
+                            </div>
+    <div class="block-content">
+    	<ul class="menu"><li class="first last leaf"><a href="https://www.sjc.utah.gov">City Website</a></li>
+</ul>    </div>
+</div>
+  </div>
+</div>            	  <div class="region region-global-nav">
+    <div id="block-system-main-menu" class="block block-system block-menu">
+    <div class='block-header'>
+                            </div>
+    <div class="block-content">
+    	<ul class="menu"><li class="first leaf"><a href="/" class="active">Meetings</a></li>
+<li class="leaf"><a href="/calendar">Calendar</a></li>
+<li class="last leaf"><a href="/newsletter/subscriptions">Subscribe</a></li>
+</ul>    </div>
+</div>
+  </div>
+            </div>                  
+            <div class="search-wrapper">  <div class="region region-search">
+    <div id="block-search-form" class="block block-search">
+    <div class='block-header'>
+                            </div>
+    <div class="block-content">
+    	<form action="/" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+     <!-- Aha change 20170911 - replace H2 tag with div tag to fix accessibility error of headers being out of sequence -->
+    <div class="element-invisible">Search form</div>
+    <div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search Website </label>
+ <input title="Enter the terms you wish to search for." placeholder="Search Meeting Files" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Submit Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-xycKrlu2zN3q2mI7vlvkkJApv7S7qIIOWwAG-XgqJhs" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div>
+</div></form>    </div>
+</div>
+  </div>
+</div>                 
+        </div>
+        <div class="container1-ornament"></div>
+    </div>
+	<!-- END CONTAINER 1-->
+  
+
+	<!-- START CONTAINER 2--> 
+	<div class="container2-wrapper">
+    	<div class="container2">
+			   
+            <div class="main-content-wrapper"><div class="main" role="main">
+            	<!-- <div class="above-content-wrapper"> --><!--</div> -->            					                <div class="content-outer-border"><div class="content-inner-border">            
+                                                                                <a id="main-content"></a> 
+                    <div class="title-wrapper"><h1 id="page-title">Agendas/Minutes</h1></div>                      <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+    <div class='block-header'>
+                            </div>
+    <div class="block-content">
+    	<div class="view view-calendar view-id-calendar view-display-id-page_6 view-dom-id-1da1552d33dad9a65be4eb919298432c">
+        
+      <div class="view-filters">
+      <form action="/meetings3" method="get" id="views-exposed-form-calendar-page-6" accept-charset="UTF-8"><div><div class="views-exposed-form">
+  <div class="views-exposed-widgets clearfix">
+          <div id="date_views_exposed_filter-1a92725e540df8d3220320ff7ef07569-wrapper" class="views-exposed-widget views-widget-filter-date_filter">
+                        <div class="views-widget">
+          <div id="date_views_exposed_filter-1a92725e540df8d3220320ff7ef07569" class="form-wrapper"><div class="views-webform-date-title-wrapper"><span class="views-webform-date-title">From</span><div  class="container-inline-date"><div class="form-item form-type-date-select form-item-date-filter-value">
+  <div id="edit-date-filter-value"  class="date-padding clearfix"><div class="form-item form-type-select form-item-date-filter-value-month">
+  <label class="element-invisible" for="edit-date-filter-value-month">From Month </label>
+ <div class="date-month"><select class="date-month form-select" id="edit-date-filter-value-month" name="date_filter[value][month]"><option value="">-From Month</option><option value="1">Jan</option><option value="2">Feb</option><option value="3">Mar</option><option value="4">Apr</option><option value="5">May</option><option value="6">Jun</option><option value="7">Jul</option><option value="8">Aug</option><option value="9">Sep</option><option value="10">Oct</option><option value="11" selected="selected">Nov</option><option value="12">Dec</option></select></div>
+</div>
+<div class="form-item form-type-select form-item-date-filter-value-day">
+  <label class="element-invisible" for="edit-date-filter-value-day">From Day </label>
+ <div class="date-day"><select class="date-day form-select" id="edit-date-filter-value-day" name="date_filter[value][day]"><option value="">-From Day</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10" selected="selected">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select></div>
+</div>
+<div class="form-item form-type-select form-item-date-filter-value-year">
+  <label class="element-invisible" for="edit-date-filter-value-year">From Year </label>
+ <div class="date-year"><select class="date-year form-select" id="edit-date-filter-value-year" name="date_filter[value][year]"><option value="">-From Year</option><option value="1976">1976</option><option value="1977">1977</option><option value="1978">1978</option><option value="1979">1979</option><option value="1980">1980</option><option value="1981">1981</option><option value="1982">1982</option><option value="1983">1983</option><option value="1984">1984</option><option value="1985">1985</option><option value="1986">1986</option><option value="1987">1987</option><option value="1988">1988</option><option value="1989">1989</option><option value="1990">1990</option><option value="1991">1991</option><option value="1992">1992</option><option value="1993">1993</option><option value="1994">1994</option><option value="1995">1995</option><option value="1996">1996</option><option value="1997">1997</option><option value="1998">1998</option><option value="1999">1999</option><option value="2000">2000</option><option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option><option value="2004">2004</option><option value="2005">2005</option><option value="2006" selected="selected">2006</option><option value="2007">2007</option><option value="2008">2008</option><option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option></select></div>
+</div>
+</div>
+</div>
+</div></div></div>        </div>
+              </div>
+          <div id="date_views_exposed_filter-18d7dfbe07b24ec059fdf40507efa343-wrapper" class="views-exposed-widget views-widget-filter-date_filter_1">
+                        <div class="views-widget">
+          <div id="date_views_exposed_filter-18d7dfbe07b24ec059fdf40507efa343" class="form-wrapper"><div class="views-webform-date-title-wrapper"><span class="views-webform-date-title">To</span><div  class="container-inline-date"><div class="form-item form-type-date-select form-item-date-filter-1-value">
+  <div id="edit-date-filter-1-value"  class="date-padding clearfix"><div class="form-item form-type-select form-item-date-filter-1-value-month">
+  <label class="element-invisible" for="edit-date-filter-1-value-month">To Month </label>
+ <div class="date-month"><select class="date-month form-select" id="edit-date-filter-1-value-month" name="date_filter_1[value][month]"><option value="">-To Month</option><option value="1">Jan</option><option value="2">Feb</option><option value="3">Mar</option><option value="4">Apr</option><option value="5">May</option><option value="6">Jun</option><option value="7">Jul</option><option value="8">Aug</option><option value="9">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12" selected="selected">Dec</option></select></div>
+</div>
+<div class="form-item form-type-select form-item-date-filter-1-value-day">
+  <label class="element-invisible" for="edit-date-filter-1-value-day">To Day </label>
+ <div class="date-day"><select class="date-day form-select" id="edit-date-filter-1-value-day" name="date_filter_1[value][day]"><option value="">-To Day</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10" selected="selected">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select></div>
+</div>
+<div class="form-item form-type-select form-item-date-filter-1-value-year">
+  <label class="element-invisible" for="edit-date-filter-1-value-year">To Year </label>
+ <div class="date-year"><select class="date-year form-select" id="edit-date-filter-1-value-year" name="date_filter_1[value][year]"><option value="">-To Year</option><option value="1976">1976</option><option value="1977">1977</option><option value="1978">1978</option><option value="1979">1979</option><option value="1980">1980</option><option value="1981">1981</option><option value="1982">1982</option><option value="1983">1983</option><option value="1984">1984</option><option value="1985">1985</option><option value="1986">1986</option><option value="1987">1987</option><option value="1988">1988</option><option value="1989">1989</option><option value="1990">1990</option><option value="1991">1991</option><option value="1992">1992</option><option value="1993">1993</option><option value="1994">1994</option><option value="1995">1995</option><option value="1996">1996</option><option value="1997">1997</option><option value="1998">1998</option><option value="1999">1999</option><option value="2000">2000</option><option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option><option value="2004">2004</option><option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option><option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026" selected="selected">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option></select></div>
+</div>
+</div>
+</div>
+</div></div></div>        </div>
+              </div>
+          <div id="edit-field-microsite-tid-selective-wrapper" class="views-exposed-widget views-widget-filter-field_microsite_tid_selective">
+                  <label for="edit-field-microsite-tid-selective">
+            Meeting Group          </label>
+                        <div class="views-widget">
+          <div class="form-item form-type-select form-item-field-microsite-tid-selective">
+ <select id="edit-field-microsite-tid-selective" name="field_microsite_tid_selective" class="form-select"><option value="All" selected="selected">- Any -</option><option value="27">City Council</option><option value="481">Planning Commission</option></select>
+</div>
+        </div>
+              </div>
+                    <div class="views-exposed-widget views-submit-button">
+      <input type="submit" id="edit-submit-calendar" value="Apply" class="form-submit" />    </div>
+          <div class="views-exposed-widget views-reset-button">
+        <input type="submit" id="edit-reset" name="op" value="Reset" class="form-submit" />      </div>
+      </div>
+</div>
+</div></form>    </div>
+  
+  
+      <div class="view-content">
+      <table class="views-table rwd-table sticky-enabled cols-8" >
+      <caption>Meetings Directory</caption>
+    <thead>
+    <tr>
+                      <th scope="col" >
+          Date        </th>
+                              <th scope="col" class="views-field views-field-title" >
+          Meeting        </th>
+                              <th scope="col" class="views-field views-field-field-agendas" >
+          Agenda        </th>
+                              <th scope="col" class="views-field views-field-field-packets" >
+          Agenda Packet        </th>
+                              <th scope="col" class="views-field views-field-field-minutes" >
+          Minutes        </th>
+                              <th scope="col" class="views-field views-field-field-audio-link" >
+                  </th>
+                              <th scope="col" class="views-field views-field-field-video-link" >
+          Audio        </th>
+                              <th scope="col" class="views-field views-field-view-node" >
+          View        </th>
+                  </tr>
+  </thead>
+  <tbody>
+          <tr class="odd views-row-first">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-12-08T18:30:00-07:00">12/08/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            Planning Commission Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+                      </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+                      </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-pc/page/planning-commission-meeting-80" title="12/08/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="even">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-12-01T18:30:00-07:00">12/01/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            City Council Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+                      </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+                      </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/city-council-meeting-77" title="12/01/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="odd">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-12-01T16:30:00-07:00">12/01/2026 - 4:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            City Council Study Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+                      </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+                      </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/city-council-study-meeting-78" title="12/01/2026 - 4:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="even">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-11-17T18:30:00-07:00">11/17/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            City Council Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+                      </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+                      </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/city-council-meeting-4" title="11/17/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="odd">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-11-17T16:30:00-07:00">11/17/2026 - 4:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            City Council Study Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+                      </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+                      </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/city-council-study-meeting-87" title="11/17/2026 - 4:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="even">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-11-10T19:00:00-07:00">11/10/2026 - 7:00pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            City Council Budget Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-c2a2a66aa7f84a3ab78eac83156d2a02.pdf" title="PDF Agenda for City Council Budget Meeting - 11/10/2026 - 7:00pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=c2a2a66aa7f84a3ab78eac83156d2a02&amp;ip=False" title="HTML Agenda for City Council Budget Meeting - 11/10/2026 - 7:00pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+                      </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/city-council-budget-meeting" title="11/10/2026 - 7:00pm">View Details</a>          </td>
+              </tr>
+          <tr class="odd">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-11-10T18:30:00-07:00">11/10/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            Planning Commission Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-740fa99026944f7bae658abdf682dbd4.pdf" title="PDF Agenda for Planning Commission Meeting - 11/10/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=740fa99026944f7bae658abdf682dbd4&amp;ip=False" title="HTML Agenda for Planning Commission Meeting - 11/10/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Packet-740fa99026944f7bae658abdf682dbd4.pdf" title="PDF Agenda Packet for Planning Commission Meeting - 11/10/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=740fa99026944f7bae658abdf682dbd4&amp;ip=True" title="HTML Agenda Packet for Planning Commission Meeting - 11/10/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="HTML icon"></a>          </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+                      </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-pc/page/planning-commission-meeting-7" title="11/10/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="even">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-10-27T18:30:00-06:00">10/27/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            Planning Commission Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-7b4a81bb18fb4925b2b6f3cae8ba61c6.pdf" title="PDF Agenda for Planning Commission Meeting - 10/27/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=7b4a81bb18fb4925b2b6f3cae8ba61c6&amp;ip=False" title="HTML Agenda for Planning Commission Meeting - 10/27/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Packet-7b4a81bb18fb4925b2b6f3cae8ba61c6.pdf" title="PDF Agenda Packet for Planning Commission Meeting - 10/27/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=7b4a81bb18fb4925b2b6f3cae8ba61c6&amp;ip=True" title="HTML Agenda Packet for Planning Commission Meeting - 10/27/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="HTML icon"></a>          </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+            <a href="/bc-pc/page/planning-commission-meeting-6" title="Video for Planning Commission Meeting - 10/27/2026 - 6:30pm" target="_blank"><img class="meetings-icon video" src="/sites/default/files/video.svg" alt="Video icon"></a>          </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-pc/page/planning-commission-meeting-6" title="10/27/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="odd">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-10-20T18:30:00-06:00">10/20/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            CANCELED City Council Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-ad76f2da042744179956fad95a6a6a60.pdf" title="PDF Agenda for CANCELED City Council Meeting - 10/20/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=ad76f2da042744179956fad95a6a6a60&amp;ip=False" title="HTML Agenda for CANCELED City Council Meeting - 10/20/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+                      </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/canceled-city-council-meeting-1" title="10/20/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="even">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-10-20T16:30:00-06:00">10/20/2026 - 4:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            CANCELED City Council Study Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-76d2aabdc2df46028a496ad5d5bf4745.pdf" title="PDF Agenda for CANCELED City Council Study Meeting - 10/20/2026 - 4:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=76d2aabdc2df46028a496ad5d5bf4745&amp;ip=False" title="HTML Agenda for CANCELED City Council Study Meeting - 10/20/2026 - 4:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+                      </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/canceled-city-council-study-meeting-2" title="10/20/2026 - 4:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="odd">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-10-13T18:30:00-06:00">10/13/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            Planning Commission Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-b0be30cc44c1482c966b5b5f4fb842f1.pdf" title="PDF Agenda for Planning Commission Meeting - 10/13/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=b0be30cc44c1482c966b5b5f4fb842f1&amp;ip=False" title="HTML Agenda for Planning Commission Meeting - 10/13/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Packet-b0be30cc44c1482c966b5b5f4fb842f1.pdf" title="PDF Agenda Packet for Planning Commission Meeting - 10/13/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=b0be30cc44c1482c966b5b5f4fb842f1&amp;ip=True" title="HTML Agenda Packet for Planning Commission Meeting - 10/13/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="HTML icon"></a>          </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Minutes-b0be30cc44c1482c966b5b5f4fb842f1.pdf" title="PDF Minutes for Planning Commission Meeting - 10/13/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a>          </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+            <a href="/bc-pc/page/planning-commission-meeting-5" title="Video for Planning Commission Meeting - 10/13/2026 - 6:30pm" target="_blank"><img class="meetings-icon video" src="/sites/default/files/video.svg" alt="Video icon"></a>          </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-pc/page/planning-commission-meeting-5" title="10/13/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="even">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-10-06T18:30:00-06:00">10/06/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            Combined City Council &amp; Municipal Building Authority Board Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-ed5445bf7fb2492ca866fca29a287485.pdf" title="PDF Agenda for Combined City Council &amp; Municipal Building Authority Board Meeting - 10/06/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=ed5445bf7fb2492ca866fca29a287485&amp;ip=False" title="HTML Agenda for Combined City Council &amp; Municipal Building Authority Board Meeting - 10/06/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Packet-ed5445bf7fb2492ca866fca29a287485.pdf" title="PDF Agenda Packet for Combined City Council &amp; Municipal Building Authority Board Meeting - 10/06/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=ed5445bf7fb2492ca866fca29a287485&amp;ip=True" title="HTML Agenda Packet for Combined City Council &amp; Municipal Building Authority Board Meeting - 10/06/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="HTML icon"></a>          </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+            <a href="/bc-citycouncil/page/combined-city-council-municipal-building-authority-board-meeting-0" title="Video for Combined City Council &amp; Municipal Building Authority Board Meeting - 10/06/2026 - 6:30pm" target="_blank"><img class="meetings-icon video" src="/sites/default/files/video.svg" alt="Video icon"></a>          </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/combined-city-council-municipal-building-authority-board-meeting-0" title="10/06/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="odd">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-10-06T16:30:00-06:00">10/06/2026 - 4:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            City Council Study Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-780cf03bc98541e2a742c5b54fc658c1.pdf" title="PDF Agenda for City Council Study Meeting - 10/06/2026 - 4:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=780cf03bc98541e2a742c5b54fc658c1&amp;ip=False" title="HTML Agenda for City Council Study Meeting - 10/06/2026 - 4:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+            <a href="/bc-citycouncil/page/city-council-study-meeting-6" title="Video for City Council Study Meeting - 10/06/2026 - 4:30pm" target="_blank"><img class="meetings-icon video" src="/sites/default/files/video.svg" alt="Video icon"></a>          </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/city-council-study-meeting-6" title="10/06/2026 - 4:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="even">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-09-22T18:30:00-06:00">09/22/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            Planning Commission Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-a91e3c5198a54f2f9d1fe1124cee52d4.pdf" title="PDF Agenda for Planning Commission Meeting - 09/22/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=a91e3c5198a54f2f9d1fe1124cee52d4&amp;ip=False" title="HTML Agenda for Planning Commission Meeting - 09/22/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Packet-a91e3c5198a54f2f9d1fe1124cee52d4.pdf" title="PDF Agenda Packet for Planning Commission Meeting - 09/22/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=a91e3c5198a54f2f9d1fe1124cee52d4&amp;ip=True" title="HTML Agenda Packet for Planning Commission Meeting - 09/22/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="HTML icon"></a>          </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Minutes-a91e3c5198a54f2f9d1fe1124cee52d4.pdf" title="PDF Minutes for Planning Commission Meeting - 09/22/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a>          </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+            <a href="/bc-pc/page/planning-commission-meeting-4" title="Video for Planning Commission Meeting - 09/22/2026 - 6:30pm" target="_blank"><img class="meetings-icon video" src="/sites/default/files/video.svg" alt="Video icon"></a>          </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-pc/page/planning-commission-meeting-4" title="09/22/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="odd">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-09-15T18:30:00-06:00">09/15/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            Combined City Council &amp; Municipal Building Authority Board Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-23a31deb33014f56be1d5bc7be91a005.pdf" title="PDF Agenda for Combined City Council &amp; Municipal Building Authority Board Meeting - 09/15/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=23a31deb33014f56be1d5bc7be91a005&amp;ip=False" title="HTML Agenda for Combined City Council &amp; Municipal Building Authority Board Meeting - 09/15/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Packet-23a31deb33014f56be1d5bc7be91a005.pdf" title="PDF Agenda Packet for Combined City Council &amp; Municipal Building Authority Board Meeting - 09/15/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=23a31deb33014f56be1d5bc7be91a005&amp;ip=True" title="HTML Agenda Packet for Combined City Council &amp; Municipal Building Authority Board Meeting - 09/15/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="HTML icon"></a>          </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+            <a href="/bc-citycouncil/page/combined-city-council-municipal-building-authority-board-meeting" title="Video for Combined City Council &amp; Municipal Building Authority Board Meeting - 09/15/2026 - 6:30pm" target="_blank"><img class="meetings-icon video" src="/sites/default/files/video.svg" alt="Video icon"></a>          </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/combined-city-council-municipal-building-authority-board-meeting" title="09/15/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="even">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-09-15T16:30:00-06:00">09/15/2026 - 4:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            City Council Study Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-6f7895ccb2c34d1eb30e429ee65109e2.pdf" title="PDF Agenda for City Council Study Meeting - 09/15/2026 - 4:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=6f7895ccb2c34d1eb30e429ee65109e2&amp;ip=False" title="HTML Agenda for City Council Study Meeting - 09/15/2026 - 4:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+            <a href="/bc-citycouncil/page/city-council-study-meeting-5" title="Video for City Council Study Meeting - 09/15/2026 - 4:30pm" target="_blank"><img class="meetings-icon video" src="/sites/default/files/video.svg" alt="Video icon"></a>          </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/city-council-study-meeting-5" title="09/15/2026 - 4:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="odd">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-09-08T18:30:00-06:00">09/08/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            Planning Commission Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-323a0743ce3f4f96abe258f7e5229e03.pdf" title="PDF Agenda for Planning Commission Meeting - 09/08/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=323a0743ce3f4f96abe258f7e5229e03&amp;ip=False" title="HTML Agenda for Planning Commission Meeting - 09/08/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Packet-323a0743ce3f4f96abe258f7e5229e03.pdf" title="PDF Agenda Packet for Planning Commission Meeting - 09/08/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=323a0743ce3f4f96abe258f7e5229e03&amp;ip=True" title="HTML Agenda Packet for Planning Commission Meeting - 09/08/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="HTML icon"></a>          </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Minutes-323a0743ce3f4f96abe258f7e5229e03.pdf" title="PDF Minutes for Planning Commission Meeting - 09/08/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a>          </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+            <a href="/bc-pc/page/planning-commission-meeting-3" title="Video for Planning Commission Meeting - 09/08/2026 - 6:30pm" target="_blank"><img class="meetings-icon video" src="/sites/default/files/video.svg" alt="Video icon"></a>          </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-pc/page/planning-commission-meeting-3" title="09/08/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="even">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-09-01T18:30:00-06:00">09/01/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            CANCELED City Council Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-a7f5e8faff9f4c399e243e53cf4596e2.pdf" title="PDF Agenda for CANCELED City Council Meeting - 09/01/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=a7f5e8faff9f4c399e243e53cf4596e2&amp;ip=False" title="HTML Agenda for CANCELED City Council Meeting - 09/01/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+                      </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/canceled-city-council-meeting-0" title="09/01/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="odd">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-09-01T16:30:00-06:00">09/01/2026 - 4:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            CANCELED City Council Study Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-faefca03aeea49fc8a862a85b03a90d1.pdf" title="PDF Agenda for CANCELED City Council Study Meeting - 09/01/2026 - 4:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=faefca03aeea49fc8a862a85b03a90d1&amp;ip=False" title="HTML Agenda for CANCELED City Council Study Meeting - 09/01/2026 - 4:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+                      </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/canceled-city-council-study-meeting-1" title="09/01/2026 - 4:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="even">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-08-25T18:30:00-06:00">08/25/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            Planning Commission Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-5b4d6f700d1c4e51a912e167ed0ebb5b.pdf" title="PDF Agenda for Planning Commission Meeting - 08/25/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=5b4d6f700d1c4e51a912e167ed0ebb5b&amp;ip=False" title="HTML Agenda for Planning Commission Meeting - 08/25/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Packet-5b4d6f700d1c4e51a912e167ed0ebb5b.pdf" title="PDF Agenda Packet for Planning Commission Meeting - 08/25/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=5b4d6f700d1c4e51a912e167ed0ebb5b&amp;ip=True" title="HTML Agenda Packet for Planning Commission Meeting - 08/25/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="HTML icon"></a>          </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Minutes-5b4d6f700d1c4e51a912e167ed0ebb5b.pdf" title="PDF Minutes for Planning Commission Meeting - 08/25/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a>          </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+            <a href="/bc-pc/page/planning-commission-meeting-2" title="Video for Planning Commission Meeting - 08/25/2026 - 6:30pm" target="_blank"><img class="meetings-icon video" src="/sites/default/files/video.svg" alt="Video icon"></a>          </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-pc/page/planning-commission-meeting-2" title="08/25/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="odd">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-08-18T18:30:00-06:00">08/18/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            City Council Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-fe756e6af7f94daca8128d7ac9e7f9b8.pdf" title="PDF Agenda for City Council Meeting - 08/18/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=fe756e6af7f94daca8128d7ac9e7f9b8&amp;ip=False" title="HTML Agenda for City Council Meeting - 08/18/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Packet-fe756e6af7f94daca8128d7ac9e7f9b8.pdf" title="PDF Agenda Packet for City Council Meeting - 08/18/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=fe756e6af7f94daca8128d7ac9e7f9b8&amp;ip=True" title="HTML Agenda Packet for City Council Meeting - 08/18/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="HTML icon"></a>          </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Minutes-fe756e6af7f94daca8128d7ac9e7f9b8.pdf" title="PDF Minutes for City Council Meeting - 08/18/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a>          </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+            <a href="/bc-citycouncil/page/city-council-meeting-3" title="Video for City Council Meeting - 08/18/2026 - 6:30pm" target="_blank"><img class="meetings-icon video" src="/sites/default/files/video.svg" alt="Video icon"></a>          </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/city-council-meeting-3" title="08/18/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="even">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-08-18T16:30:00-06:00">08/18/2026 - 4:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            City Council Study Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-37556b7e3947455784d6731bd09455b5.pdf" title="PDF Agenda for City Council Study Meeting - 08/18/2026 - 4:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=37556b7e3947455784d6731bd09455b5&amp;ip=False" title="HTML Agenda for City Council Study Meeting - 08/18/2026 - 4:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Minutes-37556b7e3947455784d6731bd09455b5.pdf" title="PDF Minutes for City Council Study Meeting - 08/18/2026 - 4:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a>          </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+            <a href="/bc-citycouncil/page/city-council-study-meeting-4" title="Video for City Council Study Meeting - 08/18/2026 - 4:30pm" target="_blank"><img class="meetings-icon video" src="/sites/default/files/video.svg" alt="Video icon"></a>          </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/city-council-study-meeting-4" title="08/18/2026 - 4:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="odd">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-08-11T18:30:00-06:00">08/11/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            CANCELED Planning Commission Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-29f3164684354e4aa2fe7ac52355ebbf.pdf" title="PDF Agenda for CANCELED Planning Commission Meeting - 08/11/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=29f3164684354e4aa2fe7ac52355ebbf&amp;ip=False" title="HTML Agenda for CANCELED Planning Commission Meeting - 08/11/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+                      </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+                      </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-pc/page/canceled-planning-commission-meeting-2" title="08/11/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="even">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-08-04T18:30:00-06:00">08/04/2026 - 6:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            City Council Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-6df1849269984f5097e628313edd075e.pdf" title="PDF Agenda for City Council Meeting - 08/04/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=6df1849269984f5097e628313edd075e&amp;ip=False" title="HTML Agenda for City Council Meeting - 08/04/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Packet-6df1849269984f5097e628313edd075e.pdf" title="PDF Agenda Packet for City Council Meeting - 08/04/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=6df1849269984f5097e628313edd075e&amp;ip=True" title="HTML Agenda Packet for City Council Meeting - 08/04/2026 - 6:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="HTML icon"></a>          </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Minutes-6df1849269984f5097e628313edd075e.pdf" title="PDF Minutes for City Council Meeting - 08/04/2026 - 6:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a>          </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+            <a href="/bc-citycouncil/page/city-council-meeting-2" title="Video for City Council Meeting - 08/04/2026 - 6:30pm" target="_blank"><img class="meetings-icon video" src="/sites/default/files/video.svg" alt="Video icon"></a>          </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/city-council-meeting-2" title="08/04/2026 - 6:30pm">View Details</a>          </td>
+              </tr>
+          <tr class="odd views-row-last">
+                  <td  data-th="Date">
+            <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-08-04T16:30:00-06:00">08/04/2026 - 4:30pm</span>          </td>
+                  <td class="views-field views-field-title"  data-th="Meeting">
+            City Council Study Meeting          </td>
+                  <td class="views-field views-field-field-agendas"  data-th="Agenda">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Agenda-3d3a7e7632ab488cb405f0904f03ad4f.pdf" title="PDF Agenda for City Council Study Meeting - 08/04/2026 - 4:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a> <a href="https://meetings.municode.com/adaHtmlDocument/index?cc=SOJORDANUT&amp;me=3d3a7e7632ab488cb405f0904f03ad4f&amp;ip=False" title="HTML Agenda for City Council Study Meeting - 08/04/2026 - 4:30pm"><img class="meetings-icon html" src="/sites/default/files/html.svg" alt="html icon"></a>          </td>
+                  <td class="views-field views-field-field-packets"  data-th="Agenda Packet">
+                      </td>
+                  <td class="views-field views-field-field-minutes"  data-th="Minutes">
+            <a href="https://mccmeetings.blob.core.usgovcloudapi.net/sojordanut-pubu/MEET-Minutes-3d3a7e7632ab488cb405f0904f03ad4f.pdf" title="PDF Minutes for City Council Study Meeting - 08/04/2026 - 4:30pm"><img class="meetings-icon pdf" src="/sites/default/files/pdf.svg" alt="PDF icon"></a>          </td>
+                  <td class="views-field views-field-field-audio-link"  data-th="">
+                      </td>
+                  <td class="views-field views-field-field-video-link"  data-th="Audio">
+            <a href="/bc-citycouncil/page/city-council-study-meeting-3" title="Video for City Council Study Meeting - 08/04/2026 - 4:30pm" target="_blank"><img class="meetings-icon video" src="/sites/default/files/video.svg" alt="Video icon"></a>          </td>
+                  <td class="views-field views-field-view-node"  data-th="View">
+            <a href="/bc-citycouncil/page/city-council-study-meeting-3" title="08/04/2026 - 4:30pm">View Details</a>          </td>
+              </tr>
+      </tbody>
+  </table>
+    </div>
+  
+      <ul class="pager pager--infinite-scroll ">
+  <li class="pager__item">
+    <a href="/meetings3?page=1">View Additional Meetings</a>  </li>
+</ul>
+  
+  
+  
+  
+  
+</div>    </div>
+</div>
+  </div>
+                </div></div>
+			</div></div>
+        	    	</div>
+	</div>
+	<!-- END CONTAINER 2-->
+
+
+	<!-- START CONTAINER 3-->  
+    <div class="container3-wrapper">
+    	<div class="container3">
+    		    		<div class="footer-wrapper">  <div class="region region-footer">
+    <div id="block-menu-block-2" class="block block-menu-block">
+    <div class='block-header'>
+                            </div>
+    <div class="block-content">
+    	<div class="menu-block-wrapper menu-block-2 menu-name-menu--utility-links-menu parent-mlid-0 menu-level-1">
+  <ul class="menu"><li class="first leaf active menu-mlid-611"><a href="/" class="active">Home</a></li>
+<li class="last leaf menu-mlid-614"><a href="/user/login?current=meetings3">Staff Login</a></li>
+</ul></div>
+    </div>
+</div>
+<div id="block-block-4" class="block block-block">
+    <div class='block-header'>
+                            </div>
+    <div class="block-content">
+    	<div id="site_credits"><a href="http://www.municode.com/meetings" target="_blank">Municode - Connecting You and Your Community</a></div>    </div>
+</div>
+  </div>
+</div>    	</div>
+    </div>
+	<!-- END CONTAINER 3-->
+ 
+</div> <!-- page-outer -->
+
+    <script type="text/javascript" src="https://southjordan-ut.municodemeetings.com/sites/southjordan-ut.municodemeetings.com/files/js/js_YL7b3A-CjzRWTpnrRmy4z7uvoW_isGaOjp6Py0SWjhU.js"></script>
+</body><!-- END OF PAGE -->
+</html>

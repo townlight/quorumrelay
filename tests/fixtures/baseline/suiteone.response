@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WATKINSVILLEGA Meeting Management</title>
+    <link href="/Content/css?v=co2yD-ApGAV4lSeOn6TzjeatTbtsSLPKSZImfonyAGo1" rel="stylesheet"/>
+
+    <link rel="stylesheet" type="text/css" href="/Content/style.css?v=639283143115618992" />
+    <link rel="stylesheet" type="text/css" href="/Content/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/select2.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/dataTables.bootstrap4.min.css" />
+    <script src="/bundles/modernizr?v=inCVuEFe6J4Q07A0AcRsbJic_UE5MwpRMNGcOtk94TE1"></script>
+
+    <script src="/bundles/jquery?v=8Oos0avDZyPg-cbyVzvkIfERIE1DGSe3sRQdCSYrgEQ1"></script>
+
+    <script src="/bundles/bootstrap?v=M4Nk6kIOwMFflsEKET0iPL9i5YBqbzMzvUOrd8gyCnw1"></script>
+
+    <script src="/bundles/bootbox?v=6_r-p0NcWW8Psun90RmKRVIepBozXj6igtD7M2KjWWw1"></script>
+
+    
+
+<style type="text/css">
+    /*configure custom colors*/
+    .section-row {
+        background-color: #2D3956 !important;
+        color: White !important;
+    }
+
+        .section-row a {
+            color: White !important;
+        }
+
+    .panel-heading {
+        background-color:#2D3956 !important;
+        color: White !important;
+    }
+
+    .panel-title small {
+        color: White !important;
+    }
+
+    .btn-warning, .btn-warning a {
+        background-color: #514F9D !important;
+        color: White !important;
+    }
+
+        .btn-warning:hover, .btn-warning a:hover {
+            background-color: #514F9D !important;
+        }
+
+    #lab-main, #lab-footer {
+        background: #F7F7F7 !important;
+    }
+</style>
+</head>
+<body id="home" class="sticky-bar menu-standard" onkeypress="handleEnter(event)">
+    
+    <div id="lab-main">
+        <!--Accessibility skip menu-->
+        <nav id="lab-skip-menu" role="navigation" tabindex="-1" aria-label="Skip Content menu">
+            <div class="lab-skip-menu">
+                <ul id="menu-skip-menu" class="menu">
+                    <li class="menu-item">
+                        <a href="#main" aria-label="Skip to main content">Skip to main content</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#upcomingEvents" aria-label="Skip to content">Skip to content</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#lab-main-menu" aria-label="Skip to main menu">Skip to main menu</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#lab-footer" aria-label="Skip to footer">Skip to footer</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--Accessibility skip menu end-->
+        <!--Header-->
+        <header id="lab-header" class="header-full topbar-mode-default topbar-shadow-default so-header" style="display:none;">
+            <div id="lab-header-in">
+                <div id="lab-logo-nav">
+                    <!--Header middle bar-->
+                    <div class="lab-container">
+                        <div id="lab-bar-left" class="so-header-left">
+                            
+                            
+                        </div>
+                        <div id="lab-bar-right" class="so-header-right">
+                            <nav id="lab-main-menu" class="so-menu-box" aria-label="SOE menu" style="display:none;">
+                                <div class="lab-main-menu">
+                                    <ul id="menu-main-menu" class="nav-menu so-menu">
+                                        <li class="menu-item current-menu-item">
+                                            <a href="/#home" class="" style="overflow: visible; height: 1.5em; font-size: 16px;">Home</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a class="" href="/#upcomingEvents" style="overflow: visible; height: 1.5em; font-size: 16px;">Upcoming Meetings</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a class="" href="/#recentEvents" style="overflow: visible; height: 1.5em; font-size: 16px;">Past Meetings</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div id="lab-offcanvas-button" class="so-mobile-btn">
+                                <button class="toggle-nav open menu-button" id="toggle-nav-open" title="Open menu" aria-label="Open menu" aria-expanded="false" aria-controls="lab-offcanvas-content">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                                        <path d="M 4 7 L 4 9 L 28 9 L 28 7 Z M 4 15 L 4 17 L 28 17 L 28 15 Z M 4 23 L 4 25 L 28 25 L 28 23 Z" />
+                                    </svg>
+                                    <span class="sr-only">Offcanvas Sidebar</span>
+                                </button>
+                            </div>
+                            <div id="lab-offcanvas" class="off-canvas-right">
+                                <div id="lab-offcanvas-toolbar">
+                                    <button class="toggle-nav-close close" id="toggle-nav-close" title="Close menu">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                                            <path d="M 7.21875 5.78125 L 5.78125 7.21875 L 14.5625 16 L 5.78125 24.78125 L 7.21875 26.21875 L 16 17.4375 L 24.78125 26.21875 L 26.21875 24.78125 L 17.4375 16 L 26.21875 7.21875 L 24.78125 5.78125 L 16 14.5625 Z" />
+                                        </svg>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                </div>
+                                <div id="lab-offcanvas-content" class="">
+                                    <div class="row">
+                                        <div class="lab-offcanvas-menu lab-widget">
+                                            <ul id="menu-main-menu-1" class="nav-menu">
+                                                <li class="menu-item">
+                                                    <a href="/#home" class="">Home</a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a class="" href="/#upcomingEvents">Upcoming Meetings</a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a class="" href="/#recentEvents">Past Meetings</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Header middle bar end-->
+                </div>
+            </div>
+        </header>
+        <!--Header end-->
+
+        <div hidden>
+            <span id="new-window">Opens in a new window</span>
+        </div>
+
+        
+
+
+
+<!--UpcomingEvents section-->
+<section id="upcomingEvents" class="section">
+    <div class="main-container">
+        <div class="inside-container" aria-label="Upcoming events">
+            <div class="row section-row">
+                <div class="col-12">
+                    <h1 class="section-header">Upcoming Meetings</h1>
+                </div>
+            </div>
+            <div class="row" style="overflow-x: auto;">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped upcomingEventsTable" style="width: 100%;">
+                            <caption class="is-hidden">
+                                Upcoming events
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th class="col-md-1">
+                                        Meeting
+                                    </th>
+                                    <th class="col-md-1 text-nowrap">
+                                        Date | Time
+                                    </th>
+                                        <th class="col-md-1">
+                                            Agenda
+                                        </th>
+                                        <th class="col-md-1">
+                                            Packet
+                                        </th>
+                                        <th class="col-md-1">
+                                            Minutes
+                                        </th>
+                                            <th class="col-md-1">
+                                                Documents
+                                            </th>
+                                        <th class="col-md-1">
+                                            Media
+                                        </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                            <td style="font-weight:bold;">
+                                                <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                <a href="/event/?id=2166" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target='_blank'>City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                            </td>
+                                            <td class="text-nowrap" data-sort="639306234000000000">
+                                                Nov 18, 2026 | 06:30 PM
+                                            </td>
+                                            <td aria-label="No data">
+                                            </td>
+                                            <td aria-label="No data">
+                                            </td>
+                                            <td aria-label="No data">
+                                            </td>
+                                                <td>
+                                                </td>
+                                            <td aria-label="No data">
+                                            </td>
+                                    </tr>
+                                    <tr>
+                                            <td style="font-weight:bold;">
+                                                <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                <a href="/event/?id=2167" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target='_blank'>City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                            </td>
+                                            <td class="text-nowrap" data-sort="639330426000000000">
+                                                Dec 16, 2026 | 06:30 PM
+                                            </td>
+                                            <td aria-label="No data">
+                                            </td>
+                                            <td aria-label="No data">
+                                            </td>
+                                            <td aria-label="No data">
+                                            </td>
+                                                <td>
+                                                </td>
+                                            <td aria-label="No data">
+                                            </td>
+                                    </tr>
+                                    <tr>
+                                            <td style="font-weight:bold;">
+                                                <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                <a href="/event/?id=2168" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target='_blank'>City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                            </td>
+                                            <td class="text-nowrap" data-sort="639360666000000000">
+                                                Jan 20, 2027 | 06:30 PM
+                                            </td>
+                                            <td aria-label="No data">
+                                            </td>
+                                            <td aria-label="No data">
+                                            </td>
+                                            <td aria-label="No data">
+                                            </td>
+                                                <td>
+                                                </td>
+                                            <td aria-label="No data">
+                                            </td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+<style>
+    .page-link {
+        border-color: lightgray !important;
+        background-color: white !important;
+        color: #1F5A8C !important;
+    }
+
+    .current {
+        border-color: #1F5A8C !important;
+        background-color: #1F5A8C !important;
+        color: white !important;
+    }
+</style>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!--UpcomingEvents section end-->
+
+<script>
+    $(document).ready(function () {
+        var mode = '0';
+        if (mode == 1) //if compact mode
+        {
+            $('.upcomingEventsTable').DataTable({
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                order: [[1, 'asc']],
+                "columnDefs": [
+                    { targets: [0], className: "dt-left", className: "column1", orderable: false },
+                    { targets: [1], className: "dt-center", className: "column2" },
+                ],
+            });
+        }
+        else {
+            $('.upcomingEventsTable').DataTable({
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                order: [[1, 'asc']],
+                "columnDefs": [
+                    { targets: [0], className: "dt-left", className: "column1", orderable: false },
+                    { targets: [1], className: "dt-center", className: "column2" },
+                    { targets: [2], className: "dt-center", className: "column3", orderable: false },
+                    { targets: [3], className: "dt-center", className: "column4", orderable: false },
+                    { targets: [4], className: "dt-center", className: "column5", orderable: false },
+                    { targets: [5], className: "dt-center", className: "column5", orderable: false },
+                ],
+            });
+        }
+    });
+</script>
+
+<!--RecentEvents section-->
+<section id="recentEvents" class="section">
+    <div class="main-container">
+        <div class="inside-container" aria-label="Recent events">
+            <div class="row" style="border: dashed silver 1px;padding:10px; ">
+                <h2>Search Meetings</h2>
+<form action="/Home/SearchEvents" id="searchEventsForm" method="get">                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group" style="width:100%">
+                                <label for="ev-search">Search</label>
+                                <input type="text" placeholder="by Keyword or Phrase" id="ev-search" name="ev-search" value="" class="form-control" aria-label="Keyword or Phrase" />
+                            </div>
+                        </div>
+                        <div class="form-group" style="">
+                            <div class="input-group" style="width:100%">
+                                <label for="dateFrom">Date From</label>
+                                <input type='text' class="form-control" id="dateFrom" placeholder="From" autocomplete="off" name="dateFrom" value="01/01/2025" aria-label="Date From" />
+                            </div>
+                        </div>
+                        <div class="form-group" style="">
+                            <div class="input-group" style="width:100%">
+                                <label for="dateTo">Date To</label>
+                                <input type='text' class="form-control" id="dateTo" name="dateTo" autocomplete="off" placeholder="To" value="" aria-label="Date To" />
+                            </div>
+                        </div>
+                        <div class="form-group evCategories">
+                            <label for="evCategories">Categories</label>
+                            <div class="input-group" style="width:100%; margin-top:4px;">
+                                <select id="evCategories" class="form-control select2 ev-categories" aria-label="Select Category" style="background-color:white;">
+                                    <option value="-1" selected>All Meetings</option>
+                                            <option value="26">
+                                                City Council
+                                            </option>
+                                            <option value="27">
+                                                City Council Work Session
+                                            </option>
+                                            <option value="24">
+                                                General
+                                            </option>
+                                            <option value="28">
+                                                Planning &amp; Zoning
+                                            </option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <input type="submit" class="btn btn-warning recentEvents-search" style="margin-top: 30px; margin-left: 5px; padding: 7px 30px;" id="ev-search-btn" value="search" title="Search" aria-label="Search" />
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $('#dateFrom').datepicker({ dateFormat: 'mm/dd/yy', changeMonth: true, changeYear: true });
+                                $('#dateTo').datepicker({ dateFormat: 'mm/dd/yy', changeMonth: true, changeYear: true, });
+
+                                $("#evCategories").select2({ placeholder: { id: '', text: "Select Category" }, allowClear: false});
+                                $(".select2-selection__rendered").attr("title", "");
+                            });
+                        </script>
+                        <div class="spinner-grow  text-info recent-ev-loader" aria-live="polite" style="display:none;" role="status">
+                            <span class="sr-only">Loading search results...</span>
+                        </div>
+                    </div>
+</form>            </div>
+            <div class="row section-row" style="padding: 5px;">
+                <div class="col-12">
+                    <h2 class="section-header">Past Meetings</h2>
+                    <nav style="padding-left:13px;">
+                        <span class="fa fa-folder-open" style="margin-right: 5px; color: silver;" aria-hidden="true"></span><a href="#" class="recEv-expandAll" role="button" title="expand all">Expand All</a> &nbsp; <span class="fa fa-folder" style="margin-right:5px;color:silver;" aria-hidden="true"></span><a href="#" class="recEv-closeAll" role="button" title="Close all">Close All</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="row" style="overflow-x: auto;">
+                    <div class="panel-group" id="ev-groups" style="margin-top: 5px;" aria-live="polite">
+                            <div class="recentEventsGroupDiv_CityCouncil">
+                                
+<div class="panel panel-default">
+    <div class="panel-heading" id="CityCouncil_heading">
+        <h3 class="panel-title">
+            <a class="collapsed groupLink" data-parent="#ev-groups_off" role="button" data-toggle="collapse" href="#CityCouncil_collapse" aria-expanded="false" aria-controls="CityCouncil_collapse">
+                City Council <small>(23)</small>
+            </a>
+        </h3>
+    </div>
+    <div id="CityCouncil_collapse" class="panel-collapse collapse " role="tabpanel" aria-labelledby="CityCouncil_collapse">
+        <div class="panel-body">
+            <ul class="nav nav-tabs" role="tablist">
+
+                    <li class="active">
+                        <a role="tab" tabindex="0" data-toggle="tab" href="#CityCouncil_2026">2026 <small>(11)</small></a>
+                    </li>
+                    <li class="">
+                        <a role="tab" tabindex="1" data-toggle="tab" href="#CityCouncil_2025">2025 <small>(12)</small></a>
+                    </li>
+                <li class="">
+                    <a href="#" role="tab" tabindex="2" class="older_meetings_click" id="older_meetings_Div_CityCouncil" data-yearFrom="2025" title="Load all events for City Council" data-groupId="1" data-uniqueId="CityCouncil" data-categoryId="26" data-groupName="City Council"><small>Older Meetings..</small></a>
+                </li>
+            </ul>
+            <div class="tab-content">
+
+                    <div role="tabpanel" id="CityCouncil_2026" class="tab-pane fade in active">
+                        <section id="CityCouncil_section_2026" class="">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped eventTable" style="width: 100%;">
+                                    <caption class="is-hidden">
+                                        Recent events
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-1">
+                                                Meeting
+                                            </th>
+                                            <th class="col-md-1 text-nowrap">
+                                                Date | Time
+                                            </th>
+                                                <th class="col-md-1">
+                                                    Agenda
+                                                </th>
+                                                <th class="col-md-1">
+                                                    Packet
+                                                </th>
+                                                <th class="col-md-1">
+                                                    Minutes
+                                                </th>
+                                                    <th class="col-md-1">
+                                                        Documents
+                                                    </th>
+                                                <th class="col-md-1">
+                                                    Media
+                                                </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2165" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="639282042000000000">
+                                                        Oct 21, 2026 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2218" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2165" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2164" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="639251802000000000">
+                                                        Sep 16, 2026 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2217" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=86" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2164" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2163" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="639227610000000000">
+                                                        Aug 19, 2026 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2215" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2163" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2161" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="639173178000000000">
+                                                        Jun 17, 2026 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2214" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2161" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2160" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="639148986000000000">
+                                                        May 20, 2026 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2213" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=84" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2160" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2173" title="Navigate to City Council Work Session" aria-label="Navigate to City Council Work Session" aria-describedby="new-window" target="_blank">City Council Work Session <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="639148932000000000">
+                                                        May 20, 2026 | 05:00 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2210" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Work Session" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=85" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Work Session" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2173" title="Navigate to City Council Work Session" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Work Session" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2159" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="639118746000000000">
+                                                        Apr 15, 2026 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2209" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=80" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2159" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2158" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="639094554000000000">
+                                                        Mar 18, 2026 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2208" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=77" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2158" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2156" title="Navigate to City Council Annual Retreat" aria-label="Navigate to City Council Annual Retreat" aria-describedby="new-window" target="_blank">City Council Annual Retreat <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="639074340000000000">
+                                                        Feb 23, 2026 | 09:00 AM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2206" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Annual Retreat" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2156" title="Navigate to City Council Annual Retreat" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Annual Retreat" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2137" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="639070362000000000">
+                                                        Feb 18, 2026 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2205" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=75" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2137" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2136" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="639046170000000000">
+                                                        Jan 21, 2026 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2202" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2136" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+                    <div role="tabpanel" id="CityCouncil_2025" class="tab-pane fade in ">
+                        <section id="CityCouncil_section_2025" class="">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped eventTable" style="width: 100%;">
+                                    <caption class="is-hidden">
+                                        Recent events
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-1">
+                                                Meeting
+                                            </th>
+                                            <th class="col-md-1 text-nowrap">
+                                                Date | Time
+                                            </th>
+                                                <th class="col-md-1">
+                                                    Agenda
+                                                </th>
+                                                <th class="col-md-1">
+                                                    Packet
+                                                </th>
+                                                <th class="col-md-1">
+                                                    Minutes
+                                                </th>
+                                                    <th class="col-md-1">
+                                                        Documents
+                                                    </th>
+                                                <th class="col-md-1">
+                                                    Media
+                                                </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2135" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="639015930000000000">
+                                                        Dec 17, 2025 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2201" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=73" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2135" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2134" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="638991738000000000">
+                                                        Nov 19, 2025 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2198" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=71" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2134" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2133" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="638961498000000000">
+                                                        Oct 15, 2025 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2197" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=67" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2133" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2132" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="638937306000000000">
+                                                        Sep 17, 2025 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2195" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=66" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2132" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2131" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="638913114000000000">
+                                                        Aug 20, 2025 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2194" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=59" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2131" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2129" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="638858682000000000">
+                                                        Jun 18, 2025 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2192" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=55" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2129" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2128" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="638834490000000000">
+                                                        May 21, 2025 | 06:30 PM
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=54" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2128" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2127" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="638804250000000000">
+                                                        Apr 16, 2025 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2187" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=49" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2127" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2126" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="638780058000000000">
+                                                        Mar 19, 2025 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2185" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2126" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2138" title="Navigate to City Council Annual Retreat" aria-label="Navigate to City Council Annual Retreat" aria-describedby="new-window" target="_blank">City Council Annual Retreat <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="638760708000000000">
+                                                        Feb 25, 2025 | 09:00 AM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2182" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Annual Retreat" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=42" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Annual Retreat" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2138" title="Navigate to City Council Annual Retreat" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Annual Retreat" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2125" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="638755866000000000">
+                                                        Feb 19, 2025 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2181" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2125" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2115" title="Navigate to City Council Regular Meeting" aria-label="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">City Council Regular Meeting <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="638725626000000000">
+                                                        Jan 15, 2025 | 06:30 PM
+                                                    </td>
+                                                    <td >
+
+
+        <div style="padding: 5px; display: inline;">
+            <a href="/event/GetAgendaFile/Agenda?aid=2180" title="download agenda file" aria-describedby="new-window" target="_blank">
+                <span aria-label="Download agenda file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download agenda file"></span><span class="is-hidden">(opens in new window)</span>
+            </a>
+        </div>
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=40" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for City Council Regular Meeting" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2115" title="Navigate to City Council Regular Meeting" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to City Council Regular Meeting" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+                            </div>
+                            <div class="recentEventsGroupDiv_General">
+                                
+<div class="panel panel-default">
+    <div class="panel-heading" id="General_heading">
+        <h3 class="panel-title">
+            <a class="collapsed groupLink" data-parent="#ev-groups_off" role="button" data-toggle="collapse" href="#General_collapse" aria-expanded="false" aria-controls="General_collapse">
+                General <small>(2)</small>
+            </a>
+        </h3>
+    </div>
+    <div id="General_collapse" class="panel-collapse collapse " role="tabpanel" aria-labelledby="General_collapse">
+        <div class="panel-body">
+            <ul class="nav nav-tabs" role="tablist">
+
+                    <li class="active">
+                        <a role="tab" tabindex="0" data-toggle="tab" href="#General_2025">2025 <small>(2)</small></a>
+                    </li>
+                <li class="">
+                    <a href="#" role="tab" tabindex="1" class="older_meetings_click" id="older_meetings_Div_General" data-yearFrom="2025" title="Load all events for General" data-groupId="2" data-uniqueId="General" data-categoryId="24" data-groupName="General"><small>Older Meetings..</small></a>
+                </li>
+            </ul>
+            <div class="tab-content">
+
+                    <div role="tabpanel" id="General_2025" class="tab-pane fade in active">
+                        <section id="General_section_2025" class="">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped eventTable" style="width: 100%;">
+                                    <caption class="is-hidden">
+                                        Recent events
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-1">
+                                                Meeting
+                                            </th>
+                                            <th class="col-md-1 text-nowrap">
+                                                Date | Time
+                                            </th>
+                                                <th class="col-md-1">
+                                                    Agenda
+                                                </th>
+                                                <th class="col-md-1">
+                                                    Packet
+                                                </th>
+                                                <th class="col-md-1">
+                                                    Minutes
+                                                </th>
+                                                    <th class="col-md-1">
+                                                        Documents
+                                                    </th>
+                                                <th class="col-md-1">
+                                                    Media
+                                                </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2142" title="Navigate to FY26 Budget Work Session" aria-label="Navigate to FY26 Budget Work Session" aria-describedby="new-window" target="_blank">FY26 Budget Work Session <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="638834436000000000">
+                                                        May 21, 2025 | 05:00 PM
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=53" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for FY26 Budget Work Session" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2142" title="Navigate to FY26 Budget Work Session" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to FY26 Budget Work Session" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td style="font-weight:bold;">
+                                                        <span class="fa fa-calendar" style="margin-right:10px;" aria-hidden="true"></span>
+                                                        <a href="/event/?id=2141" title="Navigate to Public Hearing . Proposed 2025 Millage Rate" aria-label="Navigate to Public Hearing . Proposed 2025 Millage Rate" aria-describedby="new-window" target="_blank">Public Hearing . Proposed 2025 Millage Rate <span class="is-hidden">(opens in new window)</span></a>
+                                                    </td>
+                                                    <td class="text-nowrap" data-sort="638834274000000000">
+                                                        May 21, 2025 | 12:30 PM
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                    <td >
+                                                                <a href="/event/GetAgendaPacketFile/Agenda%20Packet?apid=52" title="download agenda packet file" aria-describedby="new-window" target="_blank">
+                                                                    <span aria-label="Download agenda packet file for Public Hearing . Proposed 2025 Millage Rate" class="fa fa-file-pdf-o doc-icon" aria-hidden="true" title="download file"></span><span class="is-hidden">(opens in new window)</span>
+                                                                </a>
+                                                    </td>
+                                                    <td aria-label="No data">
+                                                    </td>
+                                                        <td aria-label="No data">
+                                                        </td>
+                                                    <td >
+                                                            <a href="/event/?id=2141" title="Navigate to Public Hearing . Proposed 2025 Millage Rate" aria-describedby="new-window" target="_blank">
+                                                                <span aria-label="Navigate to Public Hearing . Proposed 2025 Millage Rate" class="fa fa-video-camera fa-1x" aria-hidden="true"></span><span class="is-hidden">(opens in new window)</span>
+                                                            </a>
+                                                    </td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+                            </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--RecentEvents section end-->
+
+<script>
+    $(document).ready(function () {
+        var mode = '0';
+
+        if (mode == 1) //if compact mode
+            $('.eventTable').DataTable({
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                order: [[1, 'desc']],
+                "columnDefs": [
+                    { targets: [0], className: "dt-center", className: "column1", orderable: false },
+                    { targets: [1], className: "dt-center", className: "column2" },
+                ],
+            });
+        else {
+            $('.eventTable').DataTable({
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                order: [[1, 'desc']],
+                "columnDefs": [
+                    { targets: [0], className: "dt-center", className: "column1", orderable: false },
+                    { targets: [1], className: "dt-center", className: "column2" },
+                    { targets: [2], className: "dt-center", className: "column3", orderable: false },
+                    { targets: [3], className: "dt-center", className: "column4", orderable: false },
+                    { targets: [4], className: "dt-center", className: "column5", orderable: false },
+                    { targets: [5], className: "dt-center", className: "column5", orderable: false },
+                ],
+            });
+        }
+    });
+</script>
+<!-- Subscriptions section-->
+<section id="subscriptionEvents" class="section">
+    <div class="main-container">
+        <div class="inside-container" aria-label="Subscriptions">
+            <div class="row section-row">
+                <div class="col-12">
+                    <h2 class="section-header" style="display:inline;">My Subscriptions</h2>
+                    <div style="float:right;">
+
+
+                        <input type="button" class="btn btn-warning manageSubscrBtn" disabled style="margin-right:5px;" title="manage subscriptions" id="manageSubscrBtn" value="Manage" aria-label="Manage" />
+                            <input type="button" class="btn btn-warning loginBtn" style="" id="loginBtn" value="Login" aria-label="Login" title="log-in" />
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="overflow-x: auto;">
+                    <span aria-live="polite">You have not added any subscriptions. Log in and click the "Manage" button to enter your preferences. Media will show up here based on your settings.</span>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Subscriptions section end-->
+
+<script>
+    $(document).ready(function () {
+        var mode = '0';
+        if (mode == 1) //if compact mode
+        {
+            $('.subscriptionsTable').DataTable({
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                order: [[1, 'desc']],
+                "columnDefs": [
+                    { targets: [0], className: "dt-left", className: "column1", orderable: false },
+                    { targets: [1], className: "dt-center", className: "column2" },
+                ],
+            });
+        }
+        else {
+            $('.subscriptionsTable').DataTable({
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                order: [[1, 'desc']],
+                "columnDefs": [
+                    { targets: [0], className: "dt-left", className: "column1", orderable: false },
+                    { targets: [1], className: "dt-center", className: "column2" },
+                    { targets: [2], className: "dt-center", className: "column3", orderable: false },
+                    { targets: [3], className: "dt-center", className: "column4", orderable: false },
+                    { targets: [4], className: "dt-center", className: "column5", orderable: false },
+                    { targets: [5], className: "dt-center", className: "column5", orderable: false },
+                ],
+            });
+        }
+    });
+</script><!--Favorites section-->
+<section id="favoritesEvents" class="section">
+    <div class="main-container">
+        <div class="inside-container" aria-label="Favorite events">
+            <div class="row section-row">
+                <div class="col-12">
+                    <h2 class="section-header">My Favorites</h2>
+                </div>
+            </div>
+            <div class="row" style="overflow-x: auto;">
+                    <span aria-live="polite">You have not added any favorites. Click the "Add Favorite" button on any media page, and your favorites will show up here.</span>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Favorites section end-->
+
+<script>
+    $(document).ready(function () {
+        var mode = '0';
+        if (mode == 1) //if compact mode
+        {
+            $('.favoritesTable').DataTable({
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                order: [[1, 'desc']],
+                "columnDefs": [
+                    { targets: [0], className: "dt-left", className: "column1", orderable: false },
+                    { targets: [1], className: "dt-center", className: "column2" },
+                ],
+            });
+        }
+        else {
+            $('.favoritesTable').DataTable({
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                order: [[1, 'desc']],
+                "columnDefs": [
+                    { targets: [0], className: "dt-left", className: "column1", orderable: false },
+                    { targets: [1], className: "dt-center", className: "column2" },
+                    { targets: [2], className: "dt-center", className: "column3", orderable: false },
+                    { targets: [3], className: "dt-center", className: "column4", orderable: false },
+                    { targets: [4], className: "dt-center", className: "column5", orderable: false },
+                    { targets: [5], className: "dt-center", className: "column6", orderable: false },
+                ],
+            });
+        }
+    });
+</script>
+
+<section id="main" style="visibility:hidden;"></section>
+
+
+        <div id="portal-modal-box"></div>
+        <!--Footer-->
+        <footer id="lab-footer" class="page-footer footer-bg">
+            <!--Footer four columns-->
+            <div class="main-container">
+                <div class="inside-container" style="padding:0px;">
+                    <div class="row">
+                        <div class=" col-sm-6 col-lg-3 foot-col-padd">
+                            <div class="foot-logo">
+                                <img src="/Content/Images/logo/logo-suiteone.png" alt="Powered by SuiteOne" />
+                            </div>
+                        </div>
+                        <div class="foot-col-padd" style="float:right;padding-right:45px;">
+                            <a href="/Privacy" target="_blank" title="Privacy">Privacy <span class="is-hidden">(opens in new window)</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Footer four columns end-->
+        </footer>
+        <!--Footer end-->
+        <div class="cookie-consent" style="display: none;">
+            <span>This site uses cookies to enhance user experience. see <a href="/Privacy?cookies" target="_blank" class="text-decoration-none">Privacy policy <span class="is-hidden">(opens in new window)</span></a></span>
+            <div class="mt-2 d-flex align-items-center justify-content-center g-2" style="padding-top:5px;">
+                <button id="cookie-ok-button" class="allow-button mr-1">Allow cookies</button>
+                <button id="cookie-cancel-button" class="allow-button">cancel</button>
+            </div>
+        </div>
+    </div>
+    <script src="/Scripts/select2.min.js"></script>
+    <script src="/Scripts/jquery-ui.min.js"></script>
+    <script src="/Scripts/mixitup.min.js"></script>
+    <script src="/Scripts/js-cookie.js"></script>
+    <script src="/Scripts/dt/jquery.dataTables.min.js"></script>
+    <script src="/Scripts/main.js"></script>
+    <script src="/Scripts/SO-portal-shared.js"></script>
+    <script src="/Scripts/SO-events.js"></script>
+    
+</body>
+</html>

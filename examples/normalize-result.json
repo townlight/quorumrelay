@@ -1,0 +1,164 @@
+{
+  "status": "completed",
+  "data": {
+    "source": {
+      "provider": "legistar",
+      "url": "https://example.org/meetings",
+      "namespace": "//example.org",
+      "body": null,
+      "input_format": "meeting-export",
+      "options": {}
+    },
+    "records": [
+      {
+        "identity": {
+          "provider": "legistar",
+          "namespace": "//example.org",
+          "record_type": "meeting",
+          "external_id": "1",
+          "parent": null,
+          "derivation": "provider_or_legacy_reader",
+          "stability": "Stable according to the pinned input-format mapping; not an application identifier."
+        },
+        "normalized": {
+          "external_id": "1",
+          "title": "Synthetic council",
+          "scheduled_start": "2026-11-11T19:00:00Z",
+          "agenda_items": [
+            {
+              "external_id": "1-A",
+              "title": "Public hearing",
+              "department": "Clerk"
+            }
+          ],
+          "time_zone_status": "known_offset",
+          "agenda_items_availability": "supplied"
+        },
+        "source_url": "https://example.org/meetings",
+        "citation_urls": [
+          "https://example.org/meetings"
+        ],
+        "capture_sha256": "d29926c8f29f984cca21acd3ff05a8f7357fee62d171ad81d6150c21cf49caf8",
+        "captured_at": "2026-11-11T17:47:52.065957Z",
+        "normalized_sha256": "e37289e20402d1903e2d053b56e73ae8fdb8b93cb644b433980ad77a3f721ea8",
+        "source_revision": {
+          "kind": "not_supplied",
+          "value": null
+        },
+        "original": {
+          "MeetingId": 1,
+          "MeetingName": "Synthetic council",
+          "MeetingDate": "2026-11-11T19:00:00Z",
+          "AgendaItems": [
+            {
+              "FileNumber": "1-A",
+              "Title": "Public hearing",
+              "DepartmentName": "Clerk"
+            }
+          ],
+          "unknown_extension": {
+            "empty": "",
+            "null": null,
+            "false": false,
+            "zero": 0
+          }
+        },
+        "relationships": [
+          {
+            "relation": "agenda_item",
+            "value": {
+              "external_id": "1-A",
+              "title": "Public hearing",
+              "department": "Clerk"
+            }
+          }
+        ],
+        "text": [],
+        "extensions": {},
+        "schema_version": "2.0.0"
+      }
+    ],
+    "capture": {
+      "sha256": "d29926c8f29f984cca21acd3ff05a8f7357fee62d171ad81d6150c21cf49caf8",
+      "captured_at": "2026-11-11T17:47:52.065957Z",
+      "input_format": "meeting-export",
+      "content_base64": "eyJNZWV0aW5nSWQiOiAxLCAiTWVldGluZ05hbWUiOiAiU3ludGhldGljIGNvdW5jaWwiLCAiTWVldGluZ0RhdGUiOiAiMjAyNi0xMS0xMVQxOTowMDowMFoiLCAiQWdlbmRhSXRlbXMiOiBbeyJGaWxlTnVtYmVyIjogIjEtQSIsICJUaXRsZSI6ICJQdWJsaWMgaGVhcmluZyIsICJEZXBhcnRtZW50TmFtZSI6ICJDbGVyayJ9XSwgInVua25vd25fZXh0ZW5zaW9uIjogeyJlbXB0eSI6ICIiLCAibnVsbCI6IG51bGwsICJmYWxzZSI6IGZhbHNlLCAiemVybyI6IDB9fQ==",
+      "byte_length": 262,
+      "original_values": {
+        "MeetingId": 1,
+        "MeetingName": "Synthetic council",
+        "MeetingDate": "2026-11-11T19:00:00Z",
+        "AgendaItems": [
+          {
+            "FileNumber": "1-A",
+            "Title": "Public hearing",
+            "DepartmentName": "Clerk"
+          }
+        ],
+        "unknown_extension": {
+          "empty": "",
+          "null": null,
+          "false": false,
+          "zero": 0
+        }
+      },
+      "source_url": "https://example.org/meetings"
+    },
+    "compatibility": {
+      "version": 1,
+      "source": {
+        "connector": "legistar",
+        "url": "https://example.org/meetings",
+        "namespace": "//example.org",
+        "format": "meeting-export",
+        "sha256": "d29926c8f29f984cca21acd3ff05a8f7357fee62d171ad81d6150c21cf49caf8"
+      },
+      "meetings": [
+        {
+          "external_id": "1",
+          "title": "Synthetic council",
+          "scheduled_start": "2026-11-11T19:00:00Z",
+          "agenda_items": [
+            {
+              "external_id": "1-A",
+              "title": "Public hearing",
+              "department": "Clerk"
+            }
+          ]
+        }
+      ]
+    },
+    "extensions": {},
+    "schema_version": "2.0.0"
+  },
+  "errors": [],
+  "coverage": {
+    "sources": [
+      {
+        "provider": "legistar",
+        "url": "https://example.org/meetings",
+        "namespace": "//example.org",
+        "body": null,
+        "input_format": "meeting-export",
+        "options": {}
+      }
+    ],
+    "date_from": null,
+    "date_to": null,
+    "date_inclusivity": "both",
+    "actual_dates": [
+      "2026-11-11"
+    ],
+    "truncated": false,
+    "filtered_records": 0,
+    "unknown_date_records": [],
+    "input_records": 1,
+    "returned_records": 1,
+    "available_text": "metadata_and_supplied_text_only",
+    "failures": [],
+    "checkpoint": null,
+    "scope": "one saved capture, not a complete upstream catalog"
+  },
+  "operation_id": null,
+  "schema_version": "2.0.0"
+}
