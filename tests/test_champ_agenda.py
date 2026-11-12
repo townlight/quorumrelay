@@ -118,3 +118,49 @@ def test_ambiguous_parent_preserves_meeting_raw_and_legacy_items_without_claimin
     assert record["normalized"]["agenda_relationships_availability"] == "unmapped_ambiguous_source_binding"
     assert record["original"] == raw
     assert not any("parent_external_id" in i for i in record["normalized"]["agenda_items"])
+
+
+@pytest.mark.parametrize("agenda_present", [True, False])
+def test_supplied_event_bound_board_supports_exact_body_search(agenda_present):
+    raw = payload()
+    if not agenda_present:
+        raw.pop("Agenda")
+    result = normalize(raw)
+    record = result.data["records"][0]
+    assert record["normalized"]["body"] == "Planning and Zoning Commission"
+    assert record["normalized"]["body_external_id"] == "2"
+    assert record["normalized_sha256"] == canonical_hash(record["normalized"])
+    engine = create_engine()
+    found = engine.execute("search", {"bundle": result.data,
+        "query": {"body": "Planning and Zoning Commission", "terms": ["commission"]}})
+    assert found.status == "partial" and len(found.data["hits"]) == 1, found.public_dict()
+    assert not any(f.get("reason") == "body_not_supplied" for f in found.coverage["failures"])
+    wrong = engine.execute("search", {"bundle": result.data,
+        "query": {"body": "Other Board", "terms": ["commission"]}})
+    assert wrong.data["hits"] == []
+
+
+@pytest.mark.parametrize("board_id", [3, "2", True])
+def test_unbound_or_untyped_board_is_not_a_normalized_body(board_id):
+    raw = payload()
+    raw["Board"]["CustomerBoardID"] = board_id
+    record = normalize(raw).data["records"][0]
+    assert "body" not in record["normalized"]
+    assert record["original"]["Board"]["CustomerBoardID"] == board_id
+
+
+def test_configured_event_body_filter_uses_bound_source_board():
+    content = json.dumps(payload()).encode()
+
+    class Transport:
+        def request(self, url, **kwargs):
+            assert url == "https://playapi.champds.com/lakezurichil/event/164"
+            return Response(url, content, "application/json")
+
+    engine = create_engine(provider_transport=Transport())
+    for body, expected in (("Planning and Zoning Commission", 1), ("Other Board", 0)):
+        source = Source(SOURCE.provider, SOURCE.url, body=body, input_format=SOURCE.input_format)
+        result = engine.fetch(source)
+        assert result.status == "partial" and not result.errors, result.public_dict()
+        assert len(result.data["records"]) == expected
+        assert result.coverage["filtered_records"] == 1 - expected

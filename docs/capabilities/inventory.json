@@ -17003,10 +17003,10 @@
           "title": "Supplied native CHAMP agenda and timeline associations",
           "kind": "synthetic_engine_and_pinned_public_client",
           "proof_level": "synthetic_engine_execution_with_exact_captured_contract_and_offline_fixture",
-          "findings": "Twelve new synthetic engine/pin cases and six reused media cases pass. Existing saved event maps 14 native items/6 item document associations/11 timeline associations. Rich description search/export, parent/event identity and final normalized digest checked; legacy output unchanged.",
+          "findings": "Twelve agenda/pin cases plus six body-projection cases pass; six existing media cases are reused. Existing saved event maps 14 native items/6 item document associations/11 timeline associations. Rich description search/export, parent/event identity and final normalized digest checked; legacy output unchanged. Event-bound BoardName/body ID supports exact local body search and configured filters; missing/mismatched/untyped native board IDs are not promoted.",
           "limits": "Captured version, no new network request, transcript inference, playable bytes/catalog or write claim.",
           "receipt_path": "docs/verification/champ-agenda-relationships-2026-11-12.json",
-          "receipt_sha256": "75e748ac25450527fc251a0ae6a8eb21726cd54e05eb780880151c9f0543e7af",
+          "receipt_sha256": "dd76d9bf908cf888459744dd63ed2307bd941ec6136ae89bcfcd9ce33f8cd695",
           "observation_date": "2026-11-12"
         }
       ],
@@ -17064,7 +17064,7 @@
             "champ-yuma-event-json",
             "champ-rich-agenda-synthetic"
           ],
-          "details": "Public client and live response prove GET detail by customer ID/event ID, not event-catalog listing. No public catalog/index or pagination route verified on the two observed tenants. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference.",
+          "details": "Public client and live response prove GET detail by customer ID/event ID, not event-catalog listing. No public catalog/index or pagination route verified on the two observed tenants. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference. Native event-bound BoardName/body ID is projected for exact local body search and configured filtering; native ID mismatch is not inferred away.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
@@ -17096,7 +17096,7 @@
             "champ-supplied-hls-fetch-partial-2026-11-12",
             "champ-rich-agenda-synthetic"
           ],
-          "details": "Two public event details are engine-read verified. One supplied PDF and player HTML completed; a separate supplied HLS/media request remained partial. No playback, segment or catalog completeness is established. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference.",
+          "details": "Two public event details are engine-read verified. One supplied PDF and player HTML completed; a separate supplied HLS/media request remained partial. No playback, segment or catalog completeness is established. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference. Native event-bound BoardName/body ID is projected for exact local body search and configured filtering; native ID mismatch is not inferred away.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -17124,7 +17124,7 @@
             "quorumrelay-shared-core-operations",
             "champ-rich-agenda-synthetic"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference. Native event-bound BoardName/body ID is projected for exact local body search and configured filtering; native ID mismatch is not inferred away.",
           "dependencies": [
             "standalone extraction",
             "source revision pin"
@@ -17172,7 +17172,7 @@
             "quorumrelay-shared-core-operations",
             "champ-rich-agenda-synthetic"
           ],
-          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference. Native event-bound BoardName/body ID is projected for exact local body search and configured filtering; native ID mismatch is not inferred away.",
           "dependencies": [
             "shared capture/search engine"
           ],

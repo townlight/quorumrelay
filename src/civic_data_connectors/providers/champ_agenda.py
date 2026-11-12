@@ -115,6 +115,13 @@ def enrich_bundle(bundle):
                 or player.hostname != "play.champds.com" or player.port not in {None, 443}
                 or player.path.casefold() != f"/{customer}/event/{event}".casefold()):
             continue
+        board = raw.get("Board")
+        if (isinstance(board, dict) and _positive(board.get("CustomerBoardID"))
+                and type(raw["Event"].get("CustomerBoardID")) is int
+                and board["CustomerBoardID"] == raw["Event"]["CustomerBoardID"]
+                and isinstance(board.get("BoardName"), str) and board["BoardName"].strip()):
+            normalized["body"] = board["BoardName"]
+            normalized["body_external_id"] = str(board["CustomerBoardID"])
         try:
             result = _items(raw, event, normalized.get("documents", []))
         except (ValueError, TypeError):
@@ -122,6 +129,7 @@ def enrich_bundle(bundle):
             record["normalized_sha256"] = canonical_hash(normalized)
             continue
         if result is None:
+            record["normalized_sha256"] = canonical_hash(normalized)
             continue
         items, unassociated = result
         normalized.update(agenda_items=items, agenda_relationships_availability="supplied_native_items",
