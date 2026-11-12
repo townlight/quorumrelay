@@ -9155,5 +9155,21 @@
     "media": "media:group lists supplied HLS/RTMP/html5 variants; mapper accepts safe HTTPS supplied media only",
     "metadata": "cloudcast extension: program/episode/summary/id; actual namespace and numeric identity independently retained in pinned sample",
     "limits": "No paging continuation, meeting date/body semantics, binary playback, writes or organization-wide completeness is inferred."
+  },
+  "telvue_connect_playlist_items": {
+    "source": "docs/capabilities/evidence/telvue-connect-playlist-items/source.json",
+    "request": {
+      "api_resource": "playlist_items",
+      "playlist_id": "positive decimal string",
+      "external_id": "optional positive decimal item ID"
+    },
+    "routes": [
+      "GET /api/v2/playlists/{playlist_id}/playlist_items.json",
+      "GET /api/v2/playlists/{playlist_id}/playlist_items/{id}.json"
+    ],
+    "response": "playlist_items array or playlist_item object; nested playable type=media sample mapped, other types raw only",
+    "mapping": "Distinct playlist_item identity, supplied playlist parent, media playable relationship, sequence/windows and existing media projection; no meeting association",
+    "proof": "Seven synthetic engine/saved-input cases anchored to selected-field vendor example transcription; no live calls or pagination/current compatibility claim",
+    "vendor_reference_date": "December2022 (HTML December1, Markdown December2)"
   }
 }

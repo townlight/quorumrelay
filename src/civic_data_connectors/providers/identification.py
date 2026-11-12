@@ -30,7 +30,7 @@ ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json"
                       "boardable": ("boardable-public-meetings-json",),
                       "simbli": ("simbli-meeting-detail-json", "simbli-agenda-items-json"),
                       "telvue": ("telvue-cloudcast-mrss-xml", "telvue-connect-media-json", "telvue-connect-videos-json",
-                                 "telvue-connect-playlists-json"),
+                                 "telvue-connect-playlists-json", "telvue-connect-playlist_items-json"),
                       "municode-meetings": ("essential-multimedia-json",),
                       "novusagenda": ("novus-public-listing-html",),
                       "granicus": ("granicus-listing-html", "granicus-platform-soap-xml"),

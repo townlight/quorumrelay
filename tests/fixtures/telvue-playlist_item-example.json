@@ -1,0 +1,36 @@
+{
+  "playlist_item": {
+    "id": 37883,
+    "playlist_id": 837,
+    "sequence_number": 2,
+    "window_start": null,
+    "window_end": null,
+    "playable": {
+      "id": 32263,
+      "uuid": "4fd5ac55-fb35-4a24-b814-d3cdef28a92a",
+      "title": "shop around the corner 5 min",
+      "short_summary": "shop around the corner 5 min",
+      "episode_identifier": "",
+      "transcript": "",
+      "organization_id": 13,
+      "duration_in_milliseconds": 305877,
+      "duration_in_seconds": 306,
+      "published_at": "2016-12-05T14:36:08.695-05:00",
+      "submitted_at": "2016-12-05T14:36:08.695-05:00",
+      "syndicated_at": null,
+      "syndicated": false,
+      "syndication_groups": [],
+      "user_id": 24,
+      "sources": [
+        {
+          "url": "https://telvuepmd-a.akamaihd.net/vod/connect/ae9b0680-0b93-0133-e301-52540084dd42/4fd5ac55-fb35-4a24-b814-d3cdef28a92a/vod_solid/77f1b43a-9f08-4f12-964c-fb6e073153a8_2250.mp4",
+          "type": "http"
+        }
+      ],
+      "type": "media",
+      "updated_at": "2016-12-05T15:27:05.583-05:00",
+      "created_at": "2016-12-05T14:35:42.872-05:00",
+      "chapters": []
+    }
+  }
+}

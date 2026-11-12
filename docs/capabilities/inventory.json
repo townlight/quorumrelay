@@ -16200,6 +16200,16 @@
           "limits": "Published player content only; no general meeting-date/body inference, complete archive, playable stream, mutation, HyperCaster or native text-search claim.",
           "observation_date": "2026-11-12",
           "proof_level": "official_documentation"
+        },
+        {
+          "id": "telvue-connect-playlist-items-contract",
+          "url": "https://telvue.com/knowledgebase/json-rest-api-version-2-playlist-items/",
+          "title": "Connect v2 playlist items collection/detail and nested playable example",
+          "kind": "official_documentation",
+          "observation_date": "2026-11-12",
+          "proof_level": "official_documentation",
+          "findings": "Published December2022 GET routes, playlist_items/playlist_item envelopes, separate item/playlist/playable IDs, sequence/windows and nested media sources. Selected-field vendor example transcription pinned in evidence/telvue-connect-playlist-items/source.json; seven synthetic actual-engine/saved-normalize checks pass in tests/test_telvue_playlist_items.py.",
+          "limits": "No inferred meeting association, unknown playable type schema, pagination/total/order or write methods. Local direct documentation retrieval403; browser official reference read, not an exact page capture."
         }
       ],
       "tenants": [
@@ -16284,9 +16294,10 @@
             "telvue-media",
             "telvue-videos",
             "telvue-playlists-api",
-            "telvue-cloudcast-mrss-contract"
+            "telvue-cloudcast-mrss-contract",
+            "telvue-connect-playlist-items-contract"
           ],
-          "details": "Source implements explicit Connect v2 GET requests for media, videos and playlists, plus media/playlist detail routes, with exact documented CONNECT-ACCESS-KEY and CONNECT-SECRET-PASSPHRASE headers. The public examples define JSON envelopes and sample fields. Pagination/filter/rate limits remain undocumented; no account key or live read. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified.",
+          "details": "Source implements explicit Connect v2 GET requests for media, videos and playlists, plus media/playlist detail routes, with exact documented CONNECT-ACCESS-KEY and CONNECT-SECRET-PASSPHRASE headers. The public examples define JSON envelopes and sample fields. Pagination/filter/rate limits remain undocumented; no account key or live read. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified. Explicit api_resource=playlist_items plus playlist_id supports documented Connect v2 collection/detail; external_id selects the item. Separate playlist_item identity/playlist parent/media playable relation preserve native IDs, sequence/windows, supplied recordings and raw unknown fields. Seven synthetic engine/saved-response checks pass; published December2022 examples do not establish pagination or current deployment compatibility.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -16304,7 +16315,7 @@
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance",
-            "No provider account read acceptance; no automatic pagination beyond documented contract"
+            "Synthetic documented-route execution verified; live account reads optional and unrun. No automatic pagination inferred."
           ]
         },
         "parse": {
@@ -16314,9 +16325,10 @@
             "media-baseline",
             "media-reader-source",
             "quorumrelay-shared-core-operations",
-            "telvue-cloudcast-mrss-contract"
+            "telvue-cloudcast-mrss-contract",
+            "telvue-connect-playlist-items-contract"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified. Explicit api_resource=playlist_items plus playlist_id supports documented Connect v2 collection/detail; external_id selects the item. Separate playlist_item identity/playlist parent/media playable relation preserve native IDs, sequence/windows, supplied recordings and raw unknown fields. Seven synthetic engine/saved-response checks pass; published December2022 examples do not establish pagination or current deployment compatibility.",
           "dependencies": [
             "standalone extraction",
             "source revision pin"
@@ -16659,9 +16671,10 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "Documented Connect v2 reads are GET /api/v2/media[/{id}], /videos and /playlists[/{id}]. The source fetch adapter now implements explicitly requested account reads; live calls remain blocked because no Connect key/secret was supplied.",
+        "Documented Connect v2 reads are GET /api/v2/media[/{id}], /videos and /playlists[/{id}]. The source fetch adapter now implements explicitly requested account reads; synthetic documented-route verification is accepted; live calls are optional and unrun.",
         "Published pages show example JSON envelopes/fields but omit filters, pagination/cursor, caps and rate limits. Record these from a supplied authorized account response/current guide; do not claim catalog completeness.",
-        "Connect/CloudCast MRSS is implemented with explicit feed format and partial published-player coverage. Exact vendor page/sample pins and synthetic engine checks establish mapped fields, not full archives or playback. Connect v2 mutations still lack executable payload contracts in reviewed guides; HyperCaster APIs are a separate product and are not substituted."
+        "Connect/CloudCast MRSS is implemented with explicit feed format and partial published-player coverage. Exact vendor page/sample pins and synthetic engine checks establish mapped fields, not full archives or playback. Connect v2 mutations still lack executable payload contracts in reviewed guides; HyperCaster APIs are a separate product and are not substituted.",
+        "Connect v2 playlist-item relationships are implemented from December2022 vendor examples; no playlist write contract or meeting association is inferred. Mutation schema research remains required, not credential acquisition."
       ],
       "authentication": "Public playlists anonymous; Connect API requires client application access key + secret passphrase in custom headers, not Basic auth. Upload roles Contributor/Coordinator/Admin and account feature settings matter.",
       "write_findings": "Strong official UI evidence for recording creation/upload and metadata updates. Public v2 pages inspected document GET only, so a write adapter still needs a supported submission contract and authorized access.",
