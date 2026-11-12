@@ -86,6 +86,9 @@ def register(engine, *, transport: Transport | None = None,
     from .civicplus_search import native_search as civicplus_search
     engine.register_native_search("civicplus-select", tracked_handler("search", lambda engine, request, content, context:
                                   civicplus_search(engine, request, content, context, transport=transport)))
+    from .agendacenter_search import native_search as agendacenter_search
+    engine.register_native_search("civicplus-agenda-center", tracked_handler("search", lambda engine, request, content, context:
+                                  agendacenter_search(engine, request, content, context, transport=transport)))
     from .civicplus_export import export_historical
     engine.register_native_export("civicplus-select", tracked_handler("export", export_historical))
 
