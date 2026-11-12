@@ -36,6 +36,7 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_operation("identify", identify_handler)
     engine.register_operation("validate_source", validate_handler)
     for provider, input_format in (
+            ("iqm2", "iqm2-public-search-html"),
             ("utah-public-notice", "utah-public-search-html"),
             ("civicplus-select", "civicplus-search-json"),
             ("civicweb", "civicweb-detail-html"),
@@ -96,6 +97,9 @@ def register(engine, *, transport: Transport | None = None,
     from .utah_search import native_search as utah_search
     engine.register_native_search("utah-public-notice", tracked_handler("search", lambda engine, request, content, context:
                                   utah_search(engine, request, content, context, transport=transport)))
+    from .iqm2_search import native_search as iqm2_search
+    engine.register_native_search("iqm2", tracked_handler("search", lambda engine, request, content, context:
+                                  iqm2_search(engine, request, content, context, transport=transport)))
     from .civicplus_export import export_historical
     engine.register_native_export("civicplus-select", tracked_handler("export", export_historical))
 

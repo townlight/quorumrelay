@@ -119,3 +119,17 @@ def test_transfer_budget_covers_initial_form_and_response():
     result = native_search(create_engine(), request(transfer_bytes=len(FORM) + 1), None,
                            OperationContext(), transport=Transport())
     assert result.status == 'failed'
+
+
+def test_public_engine_registration_and_saved_parser_preserve_mixed_ids():
+    result = create_engine(provider_transport=Transport()).execute('search', request())
+    assert result.status == 'partial' and not result.errors
+    records = result.data['bundle']['records']
+    assert len(records) == 20
+    assert {r['identity']['record_type'] for r in records} == {
+        'attachment', 'communication', 'legislative_file'}
+    saved = create_engine().execute('normalize', {
+        'source': {**SOURCE, 'input_format': 'iqm2-public-search-html'}}, content=PAGE)
+    assert saved.status == 'completed', saved.public_dict()
+    assert [r['identity'] for r in saved.data['records']] == [r['identity'] for r in records]
+    assert saved.data['capture']['content_base64'] == result.data['bundle']['captures'][0]['content_base64']
