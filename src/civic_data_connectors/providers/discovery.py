@@ -398,7 +398,7 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
         raise ValueError("The provider listing exceeds the configured parser byte limit.")
     if input_format in {"legistar-events-json", "legistar-event-json", "wistia-api-media-json",
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
-                        "civicweb-detail-html", "swagit-listing-html", "onbase-public-listing-html",
+                        "civicweb-detail-html", "civicweb-filepro-soap-xml", "swagit-listing-html", "onbase-public-listing-html",
                         "digital-towpath-listing-html", "towncloud-public-listing-json", "telvue-cloudcast-mrss-xml",
                         "agendaquick-public-listing-html", "agendaquick-item-search-html", "civicplus-search-json",
                         "utah-public-search-html", "iqm2-public-search-html",
@@ -446,6 +446,9 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
         raise ValueError("The saved response exceeds the configured parser byte limit.")
     if source.provider == "granicus" and input_format == "granicus-platform-soap-xml" and saved is None:
         from .granicus_platform import read
+        return read(source, namespace, request, bounds, context, transport or PublicTransport(), discover=True)
+    if source.provider == "civicweb" and input_format == "civicweb-filepro-soap-xml" and saved is None:
+        from .civicweb_filepro import read
         return read(source, namespace, request, bounds, context, transport or PublicTransport(), discover=True)
     if (source.provider == "utah-public-notice" and saved is None
             and source.input_format in (None, "utah-public-search-html")

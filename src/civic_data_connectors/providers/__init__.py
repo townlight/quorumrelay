@@ -45,6 +45,7 @@ def register(engine, *, transport: Transport | None = None,
             ("utah-public-notice", "utah-public-search-html"),
             ("civicplus-select", "civicplus-search-json"),
             ("civicweb", "civicweb-detail-html"),
+            ("civicweb", "civicweb-filepro-soap-xml"),
             ("swagit", "swagit-listing-html"),
             ("onbase", "onbase-public-listing-html"),
             ("digital-towpath", "digital-towpath-listing-html"),
@@ -114,6 +115,9 @@ def register(engine, *, transport: Transport | None = None,
     from .novus import native_search as novus_search
     engine.register_native_search("novusagenda", tracked_handler("search", lambda engine, request, content, context:
                                   novus_search(engine, request, content, context, transport=transport)))
+    from .civicweb_filepro import native_search as civicweb_search
+    engine.register_native_search("civicweb", tracked_handler("search", lambda engine, request, content, context:
+                                  civicweb_search(engine, request, content, context, transport=transport)))
     engine.register_native_export("civicplus-select", tracked_handler("export", export_historical))
     from .onbase_export import export_dip
     engine.register_native_export("onbase", tracked_handler("export", export_dip))

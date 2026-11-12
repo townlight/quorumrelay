@@ -288,7 +288,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ## F11 iCompass CivicWeb (`civicweb`)
 
-- Current implementation: the dedicated supplied-ID CivicWeb detail fetch and saved detail layout are registered and labelled implemented. Existing print-PDF proof remains separate; complete catalog and native search contracts stay unresolved.
+- Current implementation: existing meeting detail/print PDF plus additive documented FilePro SOAP one-folder listing, original/PDF/supplied-meeting PDF retrieval, public native candidates/details and raw saved replay. Thirty-four distinct synthetic cases pass. Exact guide2014/WSDL2026 pins and field/action discrepancies are in `evidence/civicweb-filepro/source.json`; see `docs/CIVICWEB-FILEPRO.md`. This is document scope, not calendar create/update/upload or exhaustive catalog.
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
@@ -301,15 +301,15 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
-- One MeetingInformation.aspx record and supplied print PDF have been captured. Full meeting-type archive, continuation, adjacent-date coverage and agenda/minutes classification remain unknown.
-- The public product page/staff guide describe UI scheduling/document workflows but publish no machine schema. Obtain the tenant API/import specification and authorized write credentials before external create/update/upload.
+- One MeetingInformation.aspx record and supplied print PDF remain separate supporting evidence. FilePro search continuation and one-folder capture offsets are implemented; full meeting-type archive, recursive catalog, adjacent-date coverage and agenda/minutes classification remain unknown.
+- The vendor-hosted FilePro guide supplies exact read-only document SOAP schemas, confirmed against both supplied WSDLs. It does not specify calendar/meeting create/update/upload; continue vendor contract research for those actual fields. Synthetic execution is accepted; no test credentials/live writes are required.
 - Do not derive write fields from labels such as Meeting Type, Description or auto-assigned item/file numbers.
 
 ### Pagination contract
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "One explicit meeting detail and its supplied print PDF were fetched; full MeetingTypeList archive bounds and continuation remain unknown."
+  "details": "FilePro returns candidate IDs and details in <=50-ID batches; bounded one-folder/mid-batch continuations bind raw response hashes. No recursive or MeetingTypeList archive completeness claim."
 }
 
 ### Authorization restrictions

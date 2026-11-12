@@ -21,7 +21,7 @@ ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json"
                       "clerkbase": ("clerkbase-search-html", "clerkbase-public-tree-html"),
                       "iqm2": ("iqm2-public-search-html",),
                       "utah-public-notice": ("utah-public-search-html",),
-                      "civicweb": ("civicweb-detail-html",),
+                      "civicweb": ("civicweb-detail-html", "civicweb-filepro-soap-xml"),
                       "swagit": ("swagit-listing-html",),
                       "onbase": ("onbase-public-listing-html",),
                       "digital-towpath": ("digital-towpath-listing-html",),
@@ -174,6 +174,8 @@ def validate_source(source: Source, context: OperationContext | None = None,
         allowed_options.add("max_folder_depth")
     if source.provider == "tyler-meeting-manager":
         allowed_options.add("calendar_api_base")
+    if source.provider == "civicweb" and source.input_format == "civicweb-filepro-soap-xml":
+        allowed_options.update({"filepro_resource", "folder_id", "document_id", "meeting_id"})
     if not isinstance(source.options, dict) or set(source.options) - allowed_options:
         raise ValueError("Source options contain unrecognized provider configuration; credentials belong in context.")
     return namespace

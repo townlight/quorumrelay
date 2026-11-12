@@ -11123,6 +11123,19 @@
           "limits": "One print PDF only; agenda/minutes kind was not inferred, full archive/continuation and writes remain unverified.",
           "receipt_path": "docs/verification/civicweb-supplied-document-2026-11-12.json",
           "receipt_sha256": "fd2fe678d91df060fe04b3d0af6123ae501bf275a31a38f71990b4f0130a8251"
+        },
+        {
+          "id": "civicweb-filepro-wsdl-contract",
+          "url": "https://livetest-us-east-1.civicweb.net/document/4758/",
+          "title": "CivicWeb FilePro Connector public document SOAP guide and supplied tenant WSDLs",
+          "kind": "official_documentation",
+          "observation_date": "2026-11-12",
+          "proof_level": "official_documentation_and_synthetic_engine_execution",
+          "findings": [
+            "Historical 24 April 2014 vendor-hosted guide explicitly permits public document/search reads without login/cookies. Exact supplied Trail and Live Test WSDLs captured 2026-11-12 pin actions, field casing and response types.",
+            "Source implements bounded one-folder listing, original/PDF/supplied-meeting PDF retrieval, raw offline SOAP replay, candidate search plus at most50-ID details and exact local snippets. Thirty-four distinct synthetic binding/engine cases pass; exact source files/hashes and discrepancy resolution in docs/capabilities/evidence/civicweb-filepro/source.json."
+          ],
+          "limits": "FilePro documents only; no inferred meeting/date/body associations, full archive, universal deployment compatibility or calendar writes. Raw file results require caller/request document ID; HTML-only remains partial."
         }
       ],
       "tenants": [
@@ -11167,76 +11180,80 @@
           ]
         },
         "discover": {
-          "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "capability_status": "documented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "icompass-civicweb-tenant"
+            "icompass-civicweb-tenant",
+            "civicweb-filepro-wsdl-contract"
           ],
-          "details": "Public listing/navigation observed; not exhaustive discovery coverage.",
+          "details": "Source implements explicit civicweb-filepro-soap-xml one-folder GetChildList with fixed provider/empty state, typed native folder/document IDs, supplied folder parent and raw SOAP; bounded offset continuation binds caller/source/filters and exact response hash. Unknown date/body retained and labelled; no recursive calendar/archive completeness.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify full date/body bounds, continuation and checkpoints."
+            "Meeting archive/recursive catalog and calendar entity create/update/upload contracts remain distinct unresolved research; public deployment compatibility not universal."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "vendor_documented_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://csknowledgebase.civicweb.net/document/57754/",
             "https://ciindependenceor.civicweb.net/Portal/MeetingTypeList.aspx"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Vendor-documented synthetic execution accepted; no account/login required for these public reads.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
           ]
         },
         "fetch": {
-          "capability_status": "observed",
+          "capability_status": "documented",
           "implementation_status": "implemented",
           "evidence_ids": [
             "icompass-civicweb-tenant",
             "civicweb-supplied-print-pdf-2026-11-12",
-            "icompass-civicweb-detail"
+            "icompass-civicweb-detail",
+            "civicweb-filepro-wsdl-contract"
           ],
-          "details": "The dedicated CivicWeb fetch_record route maps a supplied meeting identifier into the guarded current detail path, validates returned identity and preserves exact HTML/original fields. A separately supplied print PDF completed; catalog and general native search remain unverified.",
+          "details": "Existing supplied meeting detail/print PDF remains. Additive public FilePro GetOriginalFile/GetPdfFile/GetMeetingAttachmentPdfFile returns exact file bytes/hash plus original HTML/extension/raw SOAP; PDF magic/extension checked, HTML-only partial. File results do not echo IDs: supplied request identity explicitly labelled, optional meeting parent only from explicit meetingId.",
           "dependencies": [],
           "remaining_verification": [
-            "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
-            "No complete catalog, provider-wide matching semantics or live write acceptance is claimed."
+            "Meeting archive/recursive catalog and calendar entity create/update/upload contracts remain distinct unresolved research; public deployment compatibility not universal."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "implemented_source_and_named_tests_with_bounded_observations_not_catalog_or_write_acceptance",
+          "evidence_level": "vendor_documented_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://csknowledgebase.civicweb.net/document/57754/",
             "https://ciindependenceor.civicweb.net/Portal/MeetingTypeList.aspx"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Vendor-documented synthetic execution accepted; no account/login required for these public reads.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
           ]
         },
         "parse": {
-          "capability_status": "baseline_source",
+          "capability_status": "documented",
           "implementation_status": "implemented",
           "evidence_ids": [
             "icompass-civicweb-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "civicweb-filepro-wsdl-contract"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "All original CivicWeb baseline outputs remain unchanged. Additive civicweb-filepro-soap-xml replays exact child/search/file SOAP offline without credentials; original-file result requires explicit options.document_id instead of invented identity. Unknown XML retained and source bytes preserved.",
           "dependencies": [
             "Extract shared engine preserving legacy behavior."
           ],
-          "remaining_verification": [],
+          "remaining_verification": [
+            "Meeting archive/recursive catalog and calendar entity create/update/upload contracts remain distinct unresolved research; public deployment compatibility not universal."
+          ],
           "acceptance_status": "not_run",
-          "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
+          "evidence_level": "vendor_documented_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://csknowledgebase.civicweb.net/document/57754/",
             "https://ciindependenceor.civicweb.net/Portal/MeetingTypeList.aspx"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Local source and saved-fixture contract coverage; no provider account access required.",
+          "test_access": "Vendor-documented synthetic execution accepted; no account/login required for these public reads.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -11244,23 +11261,24 @@
         },
         "native_search": {
           "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "icompass-civicweb-docs"
+            "icompass-civicweb-docs",
+            "civicweb-filepro-wsdl-contract"
           ],
-          "details": "Searchable records documented and VirtualLibrary link observed; no query submitted.",
+          "details": "Source implements documented public GetSearchResults (exactPhrase/allWords) and singular GetSearchResultDetails batches <=50 IDs. Exact local AND matches title/snippet/path only; candidate response and mid-batch hashes bind bounded query/caller/grant continuation. Full document body not asserted from snippets; no meeting association inferred.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify usable request route, permissions, result fields, exact/phrase semantics and pagination."
+            "Meeting archive/recursive catalog and calendar entity create/update/upload contracts remain distinct unresolved research; public deployment compatibility not universal."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "vendor_documented_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://csknowledgebase.civicweb.net/document/57754/",
             "https://ciindependenceor.civicweb.net/Portal/MeetingTypeList.aspx"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Vendor-documented synthetic execution accepted; no account/login required for these public reads.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -11664,17 +11682,18 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "One selected detail and supplied print PDF were fetched; full MeetingTypeList bounds, continuation and native search remain unknown."
+        "details": "FilePro search returns an ID array, detail requests max50 by guide. Local mid-batch/one-folder offset cursors bind candidate/response hashes, source/query/caller/current scope. Single folder listing does not establish recursive or meeting-type archive completeness."
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not supplied; authorized provider test tenant/credentials absent"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent",
+        "filepro_public_reads": "Guide explicitly says public documents/search require neither LoginUser nor session cookies; this implementation does not authenticate."
       },
       "restrictions": [],
       "remaining_research": [
-        "On Independence, one MeetingInformation.aspx?Id=11021 item and one supplied print PDF were fetched (120,193 bytes, application/pdf). The document kind was not inferred; full meeting-type archive, continuation, adjacent dates and native search remain unestablished.",
-        "Public product/staff documentation publishes no machine schema. Obtain tenant API/import specification and authorized write credentials before external create/update/upload.",
-        "Do not derive write fields from labels such as Meeting Type, Description or auto-assigned item/file numbers."
+        "Existing Independence meeting-detail/print-PDF proof stays separate. FilePro API maps documents/folders/search and supplied file bytes, not an exhaustive meeting calendar or inferred agenda/minutes kind.",
+        "Find vendor-documented meeting/agenda create/update/upload contract and supported fields; the read-only Document.asmx contract does not close outbound entity requirements. No credential acquisition/live tenant gate.",
+        "No file/folder traversal implies meeting association; explicit supplied meetingId on PDF variant is preserved only. Guide2014 and captured2026 WSDL provenance/version differences remain explicit."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "civicweb",

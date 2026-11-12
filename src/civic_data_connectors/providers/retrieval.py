@@ -42,6 +42,9 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     transport = transport or PublicTransport()
     content = _decode_content(request, content)
     attachment = request.get("attachment")
+    if source.provider == "civicweb" and source.input_format == "civicweb-filepro-soap-xml" and content is None:
+        from .civicweb_filepro import read
+        return read(source, namespace, request, bounds, context, transport)
     if source.provider == "granicus" and source.input_format == "granicus-platform-soap-xml" and content is None:
         if attachment is not None:
             raise ValueError("SOAP document retrieval requires its documented resource mapping; no arbitrary attachment URL.")

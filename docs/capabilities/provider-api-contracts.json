@@ -9180,5 +9180,27 @@
     "operation": "export",
     "model": "Explicit tags, encoding, documents[file_index,filename,document_type,file_type_number,keywords[tag,keyword_type,value]] and authorized files. Normal/noFTP index-directory resolution.",
     "proof": "Thirteen distinct synthetic engine cases verify emitted vendor layout/order, exact files/hash, private inputs/output and bounds. No remote vendor operation."
+  },
+  "civicweb_filepro": {
+    "product": "CivicWeb FilePro Connector document service",
+    "guide_date": "2014-04-24",
+    "guide_url": "https://livetest-us-east-1.civicweb.net/document/4758/",
+    "evidence_directory": "docs/capabilities/evidence/civicweb-filepro",
+    "packaged_contract": "src/civic_data_connectors/data/civicweb_filepro.json",
+    "transport": "SOAP1.1 POST /Global/WebServices/Document.asmx; exact SOAPAction http://civicweb.net/{method}; HTTPS configured tenant only/no redirects",
+    "public_auth": "Vendor guide explicitly public reads without login/cookies; no private session implemented",
+    "fields_and_types": "Pinned exact Trail/Live Test WSDLs, captured2026-11-12, schema parity tested independently. Guide method/controlID casing discrepancies resolved to WSDL.",
+    "engine_scope": [
+      "one folder/document listing with raw parent IDs",
+      "original bytes/HTML/extension and supplied PDF variants",
+      "document candidate search, details<=50, exact local returned snippets",
+      "offline exact SOAP replay; file result needs supplied document_id"
+    ],
+    "not_established": [
+      "calendar/meeting create/update/upload fields",
+      "recursive/exhaustive meeting catalog",
+      "universal deployment/current product compatibility"
+    ],
+    "synthetic_evidence": "34 distinct cases across tests/test_civicweb_soap.py and tests/test_civicweb_filepro.py; no live provider data/mutations required"
   }
 }

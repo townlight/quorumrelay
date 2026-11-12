@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://civicweb.net/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://civicweb.net/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://civicweb.net/">
+      <s:element name="GetChildList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="path" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeDocuments" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="documentProvider" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="controlId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetChildListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetChildListResult" type="tns:DocumentChildListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DocumentChildListResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ControlID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Path" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nodes" type="tns:ArrayOfDocumentTreeNodeInformation" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDocumentTreeNodeInformation">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DocumentTreeNodeInformation" nillable="true" type="tns:DocumentTreeNodeInformation" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DocumentTreeNodeInformation">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Path" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Folder" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsPublic" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="CanUpdate" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTitle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTitleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTitleResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOriginalFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOriginalFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOriginalFileResult" type="tns:DocumentFileResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DocumentFileResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Html" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileBytes" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="Extension" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPdfFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPdfFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPdfFileResult" type="tns:DocumentFileResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMeetingAttachmentPdfFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="documentId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="meetingId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMeetingAttachmentPdfFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMeetingAttachmentPdfFileResult" type="tns:DocumentFileResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSearchResults">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="exactPhrase" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="allWords" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="atLeastOneWord" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="wordsInProximity1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="wordsInProximity2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="wordsNotIncluded" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSearchResultsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSearchResultsResult" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSearchResultDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchResultsSubset" type="tns:ArrayOfInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="exactPhrase" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="allWords" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="atLeastOneWord" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="wordsInProximity1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="wordsInProximity2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="wordsNotIncluded" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSearchResultDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSearchResultDetailsResult" type="tns:ArrayOfDocumentSearchResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDocumentSearchResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DocumentSearchResult" nillable="true" type="tns:DocumentSearchResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DocumentSearchResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TitleHtml" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SampleHtml" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PathHtml" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSearchResultDetailsBySearchCriteria">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchResultsSubset" type="tns:ArrayOfInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="searchCriteria" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSearchResultDetailsBySearchCriteriaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSearchResultDetailsBySearchCriteriaResult" type="tns:ArrayOfDocumentSearchResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckLogin">
+        <s:complexType />
+      </s:element>
+      <s:element name="CheckLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckLoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckAuthenticatedLogOn">
+        <s:complexType />
+      </s:element>
+      <s:element name="CheckAuthenticatedLogOnResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckAuthenticatedLogOnResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DocumentChildListResult" nillable="true" type="tns:DocumentChildListResult" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="DocumentFileResult" nillable="true" type="tns:DocumentFileResult" />
+      <s:element name="ArrayOfInt" nillable="true" type="tns:ArrayOfInt" />
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetChildListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetChildList" />
+  </wsdl:message>
+  <wsdl:message name="GetChildListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetChildListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTitleSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTitle" />
+  </wsdl:message>
+  <wsdl:message name="GetTitleSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTitleResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOriginalFileSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOriginalFile" />
+  </wsdl:message>
+  <wsdl:message name="GetOriginalFileSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOriginalFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPdfFileSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPdfFile" />
+  </wsdl:message>
+  <wsdl:message name="GetPdfFileSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPdfFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMeetingAttachmentPdfFileSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMeetingAttachmentPdfFile" />
+  </wsdl:message>
+  <wsdl:message name="GetMeetingAttachmentPdfFileSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMeetingAttachmentPdfFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchResultsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSearchResults" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchResultsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSearchResultsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchResultDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSearchResultDetails" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchResultDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSearchResultDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchResultDetailsBySearchCriteriaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSearchResultDetailsBySearchCriteria" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchResultDetailsBySearchCriteriaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSearchResultDetailsBySearchCriteriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckLogin" />
+  </wsdl:message>
+  <wsdl:message name="CheckLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckAuthenticatedLogOnSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckAuthenticatedLogOn" />
+  </wsdl:message>
+  <wsdl:message name="CheckAuthenticatedLogOnSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckAuthenticatedLogOnResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetChildListHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="path" type="s:string" />
+    <wsdl:part name="includeDocuments" type="s:string" />
+    <wsdl:part name="documentProvider" type="s:string" />
+    <wsdl:part name="controlId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetChildListHttpGetOut">
+    <wsdl:part name="Body" element="tns:DocumentChildListResult" />
+  </wsdl:message>
+  <wsdl:message name="GetTitleHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTitleHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOriginalFileHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOriginalFileHttpGetOut">
+    <wsdl:part name="Body" element="tns:DocumentFileResult" />
+  </wsdl:message>
+  <wsdl:message name="GetPdfFileHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPdfFileHttpGetOut">
+    <wsdl:part name="Body" element="tns:DocumentFileResult" />
+  </wsdl:message>
+  <wsdl:message name="GetMeetingAttachmentPdfFileHttpGetIn">
+    <wsdl:part name="documentId" type="s:string" />
+    <wsdl:part name="meetingId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMeetingAttachmentPdfFileHttpGetOut">
+    <wsdl:part name="Body" element="tns:DocumentFileResult" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchResultsHttpGetIn">
+    <wsdl:part name="exactPhrase" type="s:string" />
+    <wsdl:part name="allWords" type="s:string" />
+    <wsdl:part name="atLeastOneWord" type="s:string" />
+    <wsdl:part name="wordsInProximity1" type="s:string" />
+    <wsdl:part name="wordsInProximity2" type="s:string" />
+    <wsdl:part name="wordsNotIncluded" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchResultsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfInt" />
+  </wsdl:message>
+  <wsdl:message name="CheckLoginHttpGetIn" />
+  <wsdl:message name="CheckLoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CheckAuthenticatedLogOnHttpGetIn" />
+  <wsdl:message name="CheckAuthenticatedLogOnHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetChildListHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="path" type="s:string" />
+    <wsdl:part name="includeDocuments" type="s:string" />
+    <wsdl:part name="documentProvider" type="s:string" />
+    <wsdl:part name="controlId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetChildListHttpPostOut">
+    <wsdl:part name="Body" element="tns:DocumentChildListResult" />
+  </wsdl:message>
+  <wsdl:message name="GetTitleHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTitleHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOriginalFileHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOriginalFileHttpPostOut">
+    <wsdl:part name="Body" element="tns:DocumentFileResult" />
+  </wsdl:message>
+  <wsdl:message name="GetPdfFileHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPdfFileHttpPostOut">
+    <wsdl:part name="Body" element="tns:DocumentFileResult" />
+  </wsdl:message>
+  <wsdl:message name="GetMeetingAttachmentPdfFileHttpPostIn">
+    <wsdl:part name="documentId" type="s:string" />
+    <wsdl:part name="meetingId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMeetingAttachmentPdfFileHttpPostOut">
+    <wsdl:part name="Body" element="tns:DocumentFileResult" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchResultsHttpPostIn">
+    <wsdl:part name="exactPhrase" type="s:string" />
+    <wsdl:part name="allWords" type="s:string" />
+    <wsdl:part name="atLeastOneWord" type="s:string" />
+    <wsdl:part name="wordsInProximity1" type="s:string" />
+    <wsdl:part name="wordsInProximity2" type="s:string" />
+    <wsdl:part name="wordsNotIncluded" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchResultsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfInt" />
+  </wsdl:message>
+  <wsdl:message name="CheckLoginHttpPostIn" />
+  <wsdl:message name="CheckLoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CheckAuthenticatedLogOnHttpPostIn" />
+  <wsdl:message name="CheckAuthenticatedLogOnHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="DocumentSoap">
+    <wsdl:operation name="GetChildList">
+      <wsdl:input message="tns:GetChildListSoapIn" />
+      <wsdl:output message="tns:GetChildListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTitle">
+      <wsdl:input message="tns:GetTitleSoapIn" />
+      <wsdl:output message="tns:GetTitleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOriginalFile">
+      <wsdl:input message="tns:GetOriginalFileSoapIn" />
+      <wsdl:output message="tns:GetOriginalFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPdfFile">
+      <wsdl:input message="tns:GetPdfFileSoapIn" />
+      <wsdl:output message="tns:GetPdfFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMeetingAttachmentPdfFile">
+      <wsdl:input message="tns:GetMeetingAttachmentPdfFileSoapIn" />
+      <wsdl:output message="tns:GetMeetingAttachmentPdfFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchResults">
+      <wsdl:input message="tns:GetSearchResultsSoapIn" />
+      <wsdl:output message="tns:GetSearchResultsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchResultDetails">
+      <wsdl:input message="tns:GetSearchResultDetailsSoapIn" />
+      <wsdl:output message="tns:GetSearchResultDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchResultDetailsBySearchCriteria">
+      <wsdl:input message="tns:GetSearchResultDetailsBySearchCriteriaSoapIn" />
+      <wsdl:output message="tns:GetSearchResultDetailsBySearchCriteriaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckLogin">
+      <wsdl:input message="tns:CheckLoginSoapIn" />
+      <wsdl:output message="tns:CheckLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckAuthenticatedLogOn">
+      <wsdl:input message="tns:CheckAuthenticatedLogOnSoapIn" />
+      <wsdl:output message="tns:CheckAuthenticatedLogOnSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="DocumentHttpGet">
+    <wsdl:operation name="GetChildList">
+      <wsdl:input message="tns:GetChildListHttpGetIn" />
+      <wsdl:output message="tns:GetChildListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTitle">
+      <wsdl:input message="tns:GetTitleHttpGetIn" />
+      <wsdl:output message="tns:GetTitleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOriginalFile">
+      <wsdl:input message="tns:GetOriginalFileHttpGetIn" />
+      <wsdl:output message="tns:GetOriginalFileHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPdfFile">
+      <wsdl:input message="tns:GetPdfFileHttpGetIn" />
+      <wsdl:output message="tns:GetPdfFileHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMeetingAttachmentPdfFile">
+      <wsdl:input message="tns:GetMeetingAttachmentPdfFileHttpGetIn" />
+      <wsdl:output message="tns:GetMeetingAttachmentPdfFileHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchResults">
+      <wsdl:input message="tns:GetSearchResultsHttpGetIn" />
+      <wsdl:output message="tns:GetSearchResultsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckLogin">
+      <wsdl:input message="tns:CheckLoginHttpGetIn" />
+      <wsdl:output message="tns:CheckLoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckAuthenticatedLogOn">
+      <wsdl:input message="tns:CheckAuthenticatedLogOnHttpGetIn" />
+      <wsdl:output message="tns:CheckAuthenticatedLogOnHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="DocumentHttpPost">
+    <wsdl:operation name="GetChildList">
+      <wsdl:input message="tns:GetChildListHttpPostIn" />
+      <wsdl:output message="tns:GetChildListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTitle">
+      <wsdl:input message="tns:GetTitleHttpPostIn" />
+      <wsdl:output message="tns:GetTitleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOriginalFile">
+      <wsdl:input message="tns:GetOriginalFileHttpPostIn" />
+      <wsdl:output message="tns:GetOriginalFileHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPdfFile">
+      <wsdl:input message="tns:GetPdfFileHttpPostIn" />
+      <wsdl:output message="tns:GetPdfFileHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMeetingAttachmentPdfFile">
+      <wsdl:input message="tns:GetMeetingAttachmentPdfFileHttpPostIn" />
+      <wsdl:output message="tns:GetMeetingAttachmentPdfFileHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchResults">
+      <wsdl:input message="tns:GetSearchResultsHttpPostIn" />
+      <wsdl:output message="tns:GetSearchResultsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckLogin">
+      <wsdl:input message="tns:CheckLoginHttpPostIn" />
+      <wsdl:output message="tns:CheckLoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckAuthenticatedLogOn">
+      <wsdl:input message="tns:CheckAuthenticatedLogOnHttpPostIn" />
+      <wsdl:output message="tns:CheckAuthenticatedLogOnHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DocumentSoap" type="tns:DocumentSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetChildList">
+      <soap:operation soapAction="http://civicweb.net/GetChildList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTitle">
+      <soap:operation soapAction="http://civicweb.net/GetTitle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOriginalFile">
+      <soap:operation soapAction="http://civicweb.net/GetOriginalFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPdfFile">
+      <soap:operation soapAction="http://civicweb.net/GetPdfFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeetingAttachmentPdfFile">
+      <soap:operation soapAction="http://civicweb.net/GetMeetingAttachmentPdfFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchResults">
+      <soap:operation soapAction="http://civicweb.net/GetSearchResults" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchResultDetails">
+      <soap:operation soapAction="http://civicweb.net/GetSearchResultDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchResultDetailsBySearchCriteria">
+      <soap:operation soapAction="http://civicweb.net/GetSearchResultDetailsBySearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckLogin">
+      <soap:operation soapAction="http://civicweb.net/CheckLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckAuthenticatedLogOn">
+      <soap:operation soapAction="http://civicweb.net/CheckAuthenticatedLogOn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DocumentSoap12" type="tns:DocumentSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetChildList">
+      <soap12:operation soapAction="http://civicweb.net/GetChildList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTitle">
+      <soap12:operation soapAction="http://civicweb.net/GetTitle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOriginalFile">
+      <soap12:operation soapAction="http://civicweb.net/GetOriginalFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPdfFile">
+      <soap12:operation soapAction="http://civicweb.net/GetPdfFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeetingAttachmentPdfFile">
+      <soap12:operation soapAction="http://civicweb.net/GetMeetingAttachmentPdfFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchResults">
+      <soap12:operation soapAction="http://civicweb.net/GetSearchResults" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchResultDetails">
+      <soap12:operation soapAction="http://civicweb.net/GetSearchResultDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchResultDetailsBySearchCriteria">
+      <soap12:operation soapAction="http://civicweb.net/GetSearchResultDetailsBySearchCriteria" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckLogin">
+      <soap12:operation soapAction="http://civicweb.net/CheckLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckAuthenticatedLogOn">
+      <soap12:operation soapAction="http://civicweb.net/CheckAuthenticatedLogOn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DocumentHttpGet" type="tns:DocumentHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetChildList">
+      <http:operation location="/GetChildList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTitle">
+      <http:operation location="/GetTitle" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOriginalFile">
+      <http:operation location="/GetOriginalFile" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPdfFile">
+      <http:operation location="/GetPdfFile" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeetingAttachmentPdfFile">
+      <http:operation location="/GetMeetingAttachmentPdfFile" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchResults">
+      <http:operation location="/GetSearchResults" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckLogin">
+      <http:operation location="/CheckLogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckAuthenticatedLogOn">
+      <http:operation location="/CheckAuthenticatedLogOn" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DocumentHttpPost" type="tns:DocumentHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetChildList">
+      <http:operation location="/GetChildList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTitle">
+      <http:operation location="/GetTitle" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOriginalFile">
+      <http:operation location="/GetOriginalFile" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPdfFile">
+      <http:operation location="/GetPdfFile" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeetingAttachmentPdfFile">
+      <http:operation location="/GetMeetingAttachmentPdfFile" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchResults">
+      <http:operation location="/GetSearchResults" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckLogin">
+      <http:operation location="/CheckLogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckAuthenticatedLogOn">
+      <http:operation location="/CheckAuthenticatedLogOn" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Document">
+    <wsdl:port name="DocumentSoap" binding="tns:DocumentSoap">
+      <soap:address location="http://livetest-us-east-1.civicweb.net/Global/WebServices/Document.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DocumentSoap12" binding="tns:DocumentSoap12">
+      <soap12:address location="http://livetest-us-east-1.civicweb.net/Global/WebServices/Document.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DocumentHttpGet" binding="tns:DocumentHttpGet">
+      <http:address location="http://livetest-us-east-1.civicweb.net/Global/WebServices/Document.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DocumentHttpPost" binding="tns:DocumentHttpPost">
+      <http:address location="http://livetest-us-east-1.civicweb.net/Global/WebServices/Document.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
