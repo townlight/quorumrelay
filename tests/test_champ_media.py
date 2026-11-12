@@ -151,3 +151,16 @@ def test_wrong_event_identity_is_not_enriched_and_repeated_enrichment_is_idempot
     assert len(second["records"][0]["normalized"]["recordings"]) == 2
     assert len(second["records"][0]["relationships"]) == 2
     assert second["records"][0]["normalized_sha256"] == first["records"][0]["normalized_sha256"]
+
+
+def test_discovery_wires_additive_playback_without_changing_saved_normalization():
+    from quorumrelay import Source, create_engine
+
+    engine = create_engine()
+    source = Source("champ", PLAYER, input_format="champ-event-json")
+    content = FIXTURE.read_bytes()
+    result = engine.execute("discover", {"source": source.public_dict()}, content=content)
+    assert result.data["records"], result.public_dict()
+    record = result.data["records"][0]
+    assert any(item.get("url") == MANIFEST for item in record["normalized"]["recordings"])
+    assert record["original"] == json.loads(content)

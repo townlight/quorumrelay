@@ -273,6 +273,10 @@ def _next(source, task, payload, size):
 
 
 def _enrich(bundle, provider):
+    if provider == "champ":
+        from .champ_media import enrich_bundle
+        bundle.update(enrich_bundle(bundle))
+        return
     for record in bundle["records"]:
         raw = record.get("original")
         if not isinstance(raw, dict):
