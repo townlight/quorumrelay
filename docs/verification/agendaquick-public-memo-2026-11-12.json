@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-12",
+  "operation": "agendaquick_supplied_memo_mapping",
+  "source_url": "https://public.destinyhosted.com/agenda_publish.cfm?id=98622&mt=ALL&get_month=11&get_year=2026&dsp=agm&seq=14719&rev=0&ag=1737&ln=70543&nseq=14740&nrev=0&pseq=&prev=",
+  "public_observation": {
+    "response_url": "https://public.destinyhosted.com/agenda_publish.cfm?id=98622&mt=ALL&get_month=11&get_year=2026&dsp=agm&seq=14719&rev=0&ag=1737&ln=70543&nseq=14740&nrev=0&pseq=&prev=",
+    "status": 200,
+    "media_type": "text/html",
+    "byte_length": 13777,
+    "sha256": "995a8e65f2da9dabdac848ccab23567d9e4de3d77711ccdf269f34369934afcd",
+    "method": "GET",
+    "byte_limit": 2097152,
+    "allow_redirects": false,
+    "deadline_seconds": 30
+  },
+  "fixture": {
+    "path": "tests/fixtures/agendaquick-memo-14719.capture.json",
+    "sha256": "2197e854510d5a3c9e96e53fa8e1dbf255e76997415e54411a799e653cf198e1",
+    "encoding": "exact response bytes in content_base64"
+  },
+  "synthetic_execution": {
+    "new_distinct_passed": 8,
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_agendaquick_memo.py -q (6 passed, two positive cases initially failed because the section recognizer omitted the mixed-case captured fiscal label)",
+      ".venv/Scripts/python.exe -m pytest tests/test_agendaquick_memo.py::test_exact_memo_maps_native_parent_sections_and_supplied_attachment_search_export tests/test_agendaquick_memo.py::test_configured_memo_discovery_and_separate_capture_bound_attachment -q (2 passed after exact section-label correction)"
+    ],
+    "covered": [
+      "Independent visible item/print/return/tenant identity binding",
+      "Six source-labelled sections including explicit empty values; no inferred adopted motion/vote",
+      "Exact selected-item supplied-text search and lossless neutral export",
+      "Default configured memo GET and separate capture-bound synthetic PDF transfer",
+      "Foreign tenant/meeting/item/revision, unsafe attachment and unknown template rejection"
+    ]
+  },
+  "limits": [
+    "One supplied public memo template; no universal deployment or archive completeness claim",
+    "PDF locator is not actual downloaded document bytes; transfer proof uses synthetic PDF",
+    "Source-labelled recommended motion is not an adopted motion or vote",
+    "No staff schema, vendor mutation, frozen rebuild or publication"
+  ]
+}

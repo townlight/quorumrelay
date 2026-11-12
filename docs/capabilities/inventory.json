@@ -15052,6 +15052,23 @@
           "limits": "One captured public meeting-notice template; no universal deployment compatibility claim; Only linked native memo items; unlinked headings have no invented IDs; Memo content, live packet bytes, complete archive and external write schema not established; Source cells preserved without motion/vote/speaker inference; No vendor mutation, credentials, frozen rebuild or publication",
           "receipt_path": "docs/verification/agendaquick-public-agenda-2026-11-12.json",
           "receipt_sha256": "535154adcf42149b5e1f1446f70f6ab4f37f40054fb2fa624652610b9ac9b26b"
+        },
+        {
+          "id": "agendaquick-public-memo-2026-11-12",
+          "url": "https://public.destinyhosted.com/agenda_publish.cfm?id=98622&mt=ALL&get_month=11&get_year=2026&dsp=agm&seq=14719&rev=0&ag=1737&ln=70543&nseq=14740&nrev=0&pseq=&prev=",
+          "title": "AgendaQuick supplied native memo content and attachment locator",
+          "kind": "public_tenant",
+          "observed": "One supplied public memo GET200/text-html/13777 bytes; eight distinct affected synthetic cases passed across initial negatives and corrected positive rerun.",
+          "observation_date": "2026-11-12",
+          "access_scope": "one_anonymous_guarded_GET_plus_offline_synthetic_engine_execution",
+          "proof_level": "bounded_public_capture_and_scoped_synthetic_engine_execution",
+          "findings": [
+            "Native item14719 parent meeting1737, placement70543 and revision0 independently bound by visible AIR and print/return controls.",
+            "Six labelled information sections preserve empty values; searchable supplied text, raw rows, one literal same-origin PDF locator and exact capture preserved."
+          ],
+          "limits": "One supplied public memo template; no universal deployment or archive completeness claim; PDF locator is not actual downloaded document bytes; transfer proof uses synthetic PDF; Source-labelled recommended motion is not an adopted motion or vote; No staff schema, vendor mutation, frozen rebuild or publication",
+          "receipt_path": "docs/verification/agendaquick-public-memo-2026-11-12.json",
+          "receipt_sha256": "17ac662a279bf82b1d55cbd204405a542c4f2d07b50e88a5db0f90d40efc8812"
         }
       ],
       "tenants": [
@@ -15102,9 +15119,10 @@
           "evidence_ids": [
             "destiny-yuma",
             "agendaquick-search-observed",
-            "agendaquick-public-agenda-2026-11-12"
+            "agendaquick-public-agenda-2026-11-12",
+            "agendaquick-public-memo-2026-11-12"
           ],
-          "details": "The configured Yuma public calendar maps supplied meeting identities and documents and follows bounded supplied period controls; full tenant archive and meeting-type coverage remain unverified. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download.",
+          "details": "The configured Yuma public calendar maps supplied meeting identities and documents and follows bounded supplied period controls; full tenant archive and meeting-type coverage remain unverified. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download. Current source also maps the supplied public memo template (agendaquick-public-memo-html): native item/meeting/line/revision controls, six labelled sections and supplied same-origin PDF locator; no implicit attachment fetch or inferred adopted motion/vote.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
@@ -15130,9 +15148,10 @@
           "implementation_status": "not_implemented",
           "evidence_ids": [
             "destiny-yuma",
-            "agendaquick-public-agenda-2026-11-12"
+            "agendaquick-public-agenda-2026-11-12",
+            "agendaquick-public-memo-2026-11-12"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. Public HTML/PDF export is not a vendor import contract. Roll call/votes are product features, not guaranteed structured fields in listing HTML. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download.",
+          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. Public HTML/PDF export is not a vendor import contract. Roll call/votes are product features, not guaranteed structured fields in listing HTML. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download. Current source also maps the supplied public memo template (agendaquick-public-memo-html): native item/meeting/line/revision controls, six labelled sections and supplied same-origin PDF locator; no implicit attachment fetch or inferred adopted motion/vote.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -15159,9 +15178,10 @@
             "media-baseline",
             "media-reader-source",
             "quorumrelay-shared-core-operations",
-            "agendaquick-public-agenda-2026-11-12"
+            "agendaquick-public-agenda-2026-11-12",
+            "agendaquick-public-memo-2026-11-12"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download. Current source also maps the supplied public memo template (agendaquick-public-memo-html): native item/meeting/line/revision controls, six labelled sections and supplied same-origin PDF locator; no implicit attachment fetch or inferred adopted motion/vote.",
           "dependencies": [
             "standalone extraction",
             "source revision pin"

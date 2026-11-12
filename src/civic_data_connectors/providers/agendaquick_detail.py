@@ -10,6 +10,7 @@ from .identification import validate_url
 from .native import make_bundle
 
 FORMAT = "agendaquick-public-agenda-html"
+MEMO_FORMAT = "agendaquick-public-memo-html"
 
 
 class Header(HTMLParser):
@@ -117,3 +118,97 @@ def parse_bundle(source, namespace, content):
         "agenda_items_availability": "supplied_linked_items_only"}
     raw = {"source_headers": page.headings, "tenant_id": tenant, "meeting_sequence": meeting}
     return make_bundle(source, namespace, content, FORMAT, [(normalized, raw, "meeting")])
+
+
+def parse_memo_bundle(source, namespace, content):
+    """One supplied memo; navigation and print controls independently bind its IDs."""
+    validate_url(source.url)
+    origin, query = urlsplit(source.url), _query(source.url)
+    tenant, item, meeting, line, revision = (query.get(k, "") for k in ("id", "seq", "ag", "ln", "rev"))
+    if (origin.scheme != "https" or origin.path != "/agenda_publish.cfm" or origin.fragment
+            or query.get("dsp") != "agm" or not re.fullmatch(r"[0-9]{1,12}", tenant)
+            or any(not re.fullmatch(r"[1-9][0-9]{0,18}", v) for v in (item, meeting, line))
+            or not re.fullmatch(r"[0-9]+", revision)):
+        raise ValueError("Select the supplied public memo URL with tenant, item, meeting, line and revision.")
+    html = content.decode("utf-8", errors="strict")
+    page, links = Header(), LinkList()
+    page.feed(html)
+    links.feed(html)
+    bindings = {"print": [], "return": []}
+    for link in links.links:
+        url = urljoin(source.url, link["href"])
+        target = urlsplit(url)
+        if target.scheme != "https" or target.netloc != origin.netloc or target.fragment:
+            continue
+        values = _query(url)
+        if target.path == "/print_ag_memo.cfm" and link["text"].strip() == "Print":
+            bindings["print"].append((values.get("id"), values.get("seq"), values.get("rev_num")))
+        if target.path == origin.path and link["text"].strip() == "Return":
+            bindings["return"].append((values.get("id"), values.get("ag"), values.get("ln"), values.get("dsp")))
+    rows = _table_rows(content)
+    cells = [[" ".join(c["text"].split()) for c in row] for row in rows]
+    if (page.tenants != [tenant] or bindings["print"] != [(tenant, item, revision)]
+            or bindings["return"] != [(tenant, meeting, line, "ag")]
+            or sum(row[0] == "AIR- " + item for row in cells if row) != 1):
+        raise ValueError("The memo controls do not establish the supplied tenant/item/meeting/revision binding.")
+    titles = [row[0][len("Title:"):].strip() for row in cells if len(row) == 1 and row[0].startswith("Title:")]
+    dates = [row[1] for row in cells if len(row) > 1 and row[0] == "Meeting Date:"]
+    if len(titles) != 1 or not titles[0] or len(dates) != 1:
+        raise ValueError("The supplied memo title/date structure is unavailable.")
+    day = datetime.strptime(dates[0], "%m/%d/%Y").date().isoformat()
+    section_labels = ("1. REQUESTED BOARD ACTION:", "2. SUMMARY:", "3. RECOMMENDED MOTION:",
+                      "4. FISCAL IMPACT: (Finance, OMB, & Human Res.)", "5. COUNTY ATTORNEY:",
+                      "6. COUNTY ADMINISTRATOR:")
+    sections = []
+    for index, row in enumerate(cells):
+        if len(row) == 1 and row[0] in section_labels:
+            if index + 1 >= len(cells) or len(cells[index + 1]) != 1:
+                raise ValueError("The supplied memo section is ambiguous.")
+            sections.append({"label": row[0], "text": cells[index + 1][0]})
+    if len(sections) != 6 or len({s["label"] for s in sections}) != 6:
+        raise ValueError("The supplied memo information sections are unavailable.")
+
+    class Attachments(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.paths = []
+
+        def handle_starttag(self, tag, attrs):
+            values = dict(attrs)
+            if tag == "a" and "popupAttachments" in values.get("onclick", ""):
+                match = re.fullmatch(r"popupAttachments\('([^'\\\r\n]+)','ATTACHMENTS'\)", values["onclick"])
+                if match is None:
+                    raise ValueError("The memo attachment declaration is not a literal supplied path.")
+                self.paths.append(match[1])
+
+    attachments = Attachments()
+    attachments.feed(html)
+    documents = []
+    for path in attachments.paths:
+        url = urljoin(source.url, path)
+        validate_url(url)
+        target = urlsplit(url)
+        if (not path.startswith("/") or path.startswith("//") or target.scheme != "https"
+                or target.netloc != origin.netloc or target.query or target.fragment
+                or not target.path.lower().endswith(".pdf")):
+            raise ValueError("The supplied memo attachment leaves its safe public source boundary.")
+        doc = {"kind": "supporting_document", "url": url, "media_type": "application/pdf",
+               "availability": "supplied_locator_not_fetched"}
+        if doc not in documents:
+            documents.append(doc)
+    normalized = {"external_id": item, "meeting_external_id": meeting, "title": titles[0],
+        "meeting_date": day, "time_zone_status": "unknown", "url": source.url,
+        "source_line_id": line, "source_revision_literal": revision, "sections": sections,
+        "documents": documents, "content_availability": "supplied_memo_sections_only"}
+    bundle = make_bundle(source, namespace, content, MEMO_FORMAT,
+                         [(normalized, {"source_rows": rows, "tenant_id": tenant}, "agenda_item")])
+    record = bundle["records"][0]
+    parent = {"provider": source.provider, "namespace": namespace, "record_type": "meeting", "external_id": meeting}
+    record["identity"]["parent"] = parent
+    record["relationships"].append({"relation": "meeting", "identity": parent})
+    record["text"] = [{"field": "memo.section", "label": section["label"], "text": section["text"],
+                       "citation_url": source.url, "completeness": "complete",
+                       "provenance": {"method": "supplied_memo_section", "scope": "selected_item",
+                                      "capture_sha256": record["capture_sha256"]}}
+                      for section in sections if section["text"]]
+    return bundle
