@@ -11,6 +11,29 @@ from .engine import source_identity_key
 from .models import Error, OperationResult
 
 
+def _merge_captured_civicplus_recordings(meeting, record):
+    """Carry discovery-only CivicClerk media into a matched legacy preview."""
+    if record.get("identity", {}).get("provider") != "civicplus-select":
+        return
+    original = record.get("original")
+    normalized = record.get("normalized")
+    if not isinstance(original, dict) or not isinstance(normalized, dict):
+        return
+    media_url = original.get("mediaStreamPath")
+    normalized_recordings = normalized.get("recordings")
+    if (not isinstance(media_url, str) or not media_url.startswith("https://")
+            or not isinstance(normalized_recordings, list)
+            or not any(isinstance(item, dict) and item.get("url") == media_url
+                       for item in normalized_recordings)):
+        return
+    recordings = meeting.get("recordings")
+    if not isinstance(recordings, list):
+        recordings = []
+    if any(isinstance(item, dict) and item.get("url") == media_url for item in recordings):
+        return
+    meeting["recordings"] = [*deepcopy(recordings), {"url": media_url}]
+
+
 @dataclass(frozen=True)
 class LegacyIdentityMapping:
     """Caller-owned, evidenced identity transition, never an inferred vendor alias."""
@@ -67,7 +90,9 @@ def legacy_previews(upstream: OperationResult | dict, *,
             })
             record = selected.get(key)
             if record and record["capture_sha256"] == source["sha256"] and key not in projected:
-                meetings.append(deepcopy(meeting))
+                projected_meeting = deepcopy(meeting)
+                _merge_captured_civicplus_recordings(projected_meeting, record)
+                meetings.append(projected_meeting)
                 projected.add(key)
         if meetings:
             previews.append({**deepcopy(preview), "meetings": meetings})

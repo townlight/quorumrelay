@@ -280,6 +280,30 @@ def _enrich(bundle, provider):
         normalized = record["normalized"]
         if provider == "civicplus-select":
             normalized["body"] = raw.get("categoryName")
+            # CivicClerk may publish a direct HTTPS video in mediaStreamPath
+            # while the unchanged compatibility reader only maps
+            # externalMediaUrl. Keep this enrichment discovery-only: relative
+            # storage paths are not expanded into guessed CDN URLs, and the
+            # fetch path still requires an explicit download-origin grant.
+            media_url = raw.get("mediaStreamPath")
+            if isinstance(media_url, str):
+                try:
+                    media_parts = urlsplit(media_url)
+                    validate_url(media_url)
+                except ValueError:
+                    media_parts = None
+                if media_parts is not None and media_parts.scheme == "https" and media_parts.netloc:
+                    recordings = normalized.setdefault("recordings", [])
+                    if isinstance(recordings, list):
+                        if not any(isinstance(item, dict) and item.get("url") == media_url
+                                   for item in recordings):
+                            recording = {"url": media_url}
+                            recordings.append(recording)
+                            relationships = list(record.get("relationships") or ())
+                            relationships.append({"relation": "recording", "value": deepcopy(recording)})
+                            record["relationships"] = relationships
+                        citations = list(record.get("citation_urls") or ())
+                        record["citation_urls"] = list(dict.fromkeys([*citations, media_url]))
             # The provider's public payload writes local wall time with Z for
             # observed tenants. Preserve Z but never assert its UTC interpretation.
             normalized["time_zone_status"] = "source_literal_unverified"

@@ -1,6 +1,7 @@
 """Deterministic provider contracts. No sockets, accounts, or live vendor writes."""
 
 import base64
+import hashlib
 import json
 from copy import deepcopy
 from pathlib import Path
@@ -151,6 +152,102 @@ def test_civicclerk_independent_captures_follow_all_four_pages():
                for r in result.data["records"])
     raw = result.data["records"][0]["original"]
     assert "publishedFiles" in raw and "secondaryIanaTimeZone" in raw
+
+
+def test_civicclerk_discovery_media_reaches_preview_and_guarded_retrieval():
+    from civic_data_connectors import imports as imports_api
+    from civic_data_connectors.engine import canonical_hash
+    from civic_data_connectors.legacy import legacy_previews
+
+    content = (BRIEF / "civicclerk-erie-events-2026-11-11-page1.json").read_bytes()
+    original_payload = json.loads(content)
+    original_event = next(row for row in original_payload["value"] if row["id"] == 1277)
+    media_url = "https://cpmedia.azureedge.net/erieco/6a41c49b6f.mp4"
+    media_bytes = b"captured fixture video bytes"
+    source = Source("civicplus-select", "https://erieco.api.civicclerk.com/v1/Events",
+                    input_format="civicplus-events-json")
+    engine, transport = make_engine(lambda url, _kw, _count: Response(url, media_bytes, "video/mp4"))
+    imports_api.register(engine)
+
+    # The fixed compatibility reader remains byte-for-byte behaviorally unchanged.
+    baseline = engine.normalize(source, content, input_format="civicplus-events-json")
+    baseline_record = next(row for row in baseline.data["records"] if row["identity"]["external_id"] == "1277")
+    baseline_meeting = next(row for row in baseline.data["compatibility"]["meetings"]
+                            if row["external_id"] == "1277")
+    assert baseline_record["normalized"]["recordings"] == []
+    assert baseline_meeting["recordings"] == []
+
+    discovered = engine.execute("discover", {
+        "source": source.public_dict(),
+        "bounds": {"date_from": "2026-11-01", "date_to": "2026-11-11"},
+    }, content=content)
+    assert discovered.status == "partial"  # One captured page is not a complete tenant catalog.
+    record = next(row for row in discovered.data["records"] if row["identity"]["external_id"] == "1277")
+    assert record["identity"]["namespace"] == "//erieco.api.civicclerk.com"
+    assert record["original"] == original_event
+    assert record["capture_sha256"] == hashlib.sha256(content).hexdigest()
+    assert discovered.data["bundles"][0]["capture"]["content_base64"] == base64.b64encode(content).decode()
+    assert record["normalized"]["recordings"] == [{"url": media_url}]
+    assert record["normalized_sha256"] == canonical_hash(record["normalized"])
+    assert media_url in record["citation_urls"]
+    assert {link["relation"] for link in record["relationships"]} >= {"document", "recording"}
+    assert any(link["relation"] == "recording" and link["value"] == {"url": media_url}
+               for link in record["relationships"])
+
+    projected = legacy_previews(discovered)
+    assert projected.status == "partial"
+    projected_preview = next(page for page in projected.data["previews"]
+                             if any(meeting["external_id"] == "1277" for meeting in page["meetings"]))
+    preview_meeting = next(meeting for meeting in projected_preview["meetings"]
+                           if meeting["external_id"] == "1277")
+    assert preview_meeting["recordings"] == [{"url": media_url}]
+    assert projected_preview["source"]["sha256"] == hashlib.sha256(content).hexdigest()
+
+    canonical = engine.execute("import_preview", {"result": discovered.public_dict()})
+    assert canonical.status == "partial", canonical.public_dict()
+    canonical_record = next(row for row in canonical.data["bundle"]["records"]
+                            if row["identity"]["external_id"] == "1277")
+    assert canonical_record["normalized"]["recordings"] == [{"url": media_url}]
+
+    fetch_source = Source(source.provider, source.url, input_format=source.input_format,
+                          options={"download_origins": ["https://cpmedia.azureedge.net"]})
+    fetched = engine.execute("fetch", {
+        "source": fetch_source.public_dict(),
+        "attachment": {"record_key": source_identity_key(record["identity"]),
+                       "index": 0, "kind": "recordings"},
+    }, content=content)
+    assert fetched.status == "completed", fetched.public_dict()
+    attachment = fetched.data["attachment"]
+    assert attachment["citation_url"] == media_url
+    assert attachment["sha256"] == hashlib.sha256(media_bytes).hexdigest()
+    assert base64.b64decode(attachment["content_base64"]) == media_bytes
+    assert transport.calls[0][0] == media_url
+    assert transport.calls[0][1]["allowed_origins"] == (
+        "https://erieco.api.civicclerk.com", "https://cpmedia.azureedge.net")
+
+
+@pytest.mark.parametrize("media_path", [None, "", "ERIECO/6a41c49b6f.mp4", 42,
+                                         {"url": "https://cpmedia.azureedge.net/erieco/6a41c49b6f.mp4"},
+                                         "http://cpmedia.azureedge.net/erieco/6a41c49b6f.mp4"])
+def test_civicclerk_unusable_media_path_is_not_reconstructed_or_lost(media_path):
+    payload = json.loads((BRIEF / "civicclerk-erie-events-2026-11-11-page1.json").read_text())
+    raw_event = next(row for row in payload["value"] if row["id"] == 1277)
+    raw_event["mediaStreamPath"] = media_path
+    raw_event["future_provider_field"] = {"nullable": [None, False, 0, ""]}
+    content = json.dumps(payload, ensure_ascii=False).encode()
+    engine, transport = make_engine()
+    result = engine.execute("discover", {
+        "source": {"provider": "civicplus-select",
+                   "url": "https://erieco.api.civicclerk.com/v1/Events",
+                   "input_format": "civicplus-events-json"},
+        "bounds": {"date_from": "2026-11-01", "date_to": "2026-11-11"},
+    }, content=content)
+    record = next(row for row in result.data["records"] if row["identity"]["external_id"] == "1277")
+    assert record["normalized"]["recordings"] == []
+    assert record["original"] == raw_event  # Unknown and malformed source fields stay in the raw record.
+    assert record["capture_sha256"] == hashlib.sha256(content).hexdigest()
+    assert result.data["bundles"][0]["capture"]["content_base64"] == base64.b64encode(content).decode()
+    assert transport.calls == []
 
 
 def test_escribe_real_capture_uses_post_and_inclusive_end_translation():
