@@ -8670,7 +8670,7 @@
       }
     },
     "typed_models": "src/civic_data_connectors/data/granicus_platform.json",
-    "verification": "Vendor-WSDL-shaped synthetic engine reads and coordinator CreateEvent/UpdateEvent/UpdateClip/UpdateMetaData transactions verified; private sessions, model parity, exact-plan/conflict/revocation/duplicate/uncertain readback checked. Other bound methods are not yet engine mappings. Four document URL setters and two single-call document uploads are now mapped with durable file, optional named-minutes and exact byte/hash readback tests; larger minutes use the documented SDK add/finish chunk protocol with verified normal, ambiguous-finish and ambiguous-add outcomes.",
+    "verification": "Vendor-WSDL-shaped synthetic engine reads and coordinator CreateEvent/UpdateEvent/UpdateClip/UpdateMetaData transactions verified; private sessions, model parity, exact-plan/conflict/revocation/duplicate/uncertain readback checked. Other bound methods are not yet engine mappings. Four document URL setters and two single-call document uploads are now mapped with durable file, optional named-minutes and exact byte/hash readback tests; larger minutes use the documented SDK add/finish chunk protocol with verified normal, ambiguous-finish and ambiguous-add outcomes. Supporting whole captions, three video locations, Document attachment bytes and minutes metadata are also actual engine fixture-verified; this still does not establish all 48 engine mappings.",
     "limits": [
       "Pinned official contract, not a live/current compatibility claim",
       "Vendor administration operations excluded",

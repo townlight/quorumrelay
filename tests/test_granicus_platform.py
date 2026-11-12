@@ -91,3 +91,54 @@ def test_engine_type_filter_and_unknown_body_are_explicit():
     assert result.status == "partial" and result.coverage["unknown_body_records"] == ["7"]
     result = engine.execute("fetch", {"source": SOURCE, "external_id": "7", "record_types": ["agenda_item"]}, context=context())
     assert result.status == "partial" and result.data["records"] == []
+
+
+class SupportingTransport(Transport):
+    def request(self, url, **kwargs):
+        import base64
+        method = kwargs["headers"]["SOAPAction"].split("#")[-1].strip('"')
+        # Parameters and wrapper names are the pinned vendor WSDL signatures.
+        bodies = {
+            "GetClipCaptions": "<captions>Entire supplied caption text</captions>",
+            "GetEventVideoLocation": "<url>https://synthetic-city.granicus.com/event.m3u8</url>",
+            "GetClipVideoLocation": "<url>https://synthetic-city.granicus.com/clip.mp4</url>",
+            "GetMetaDataVideoLocation": "<url>https://synthetic-city.granicus.com/clip.mp4?start=12</url>",
+            "FetchAttachment": "<Attachment><Description>Agenda attachment</Description><Location>retained raw</Location>"
+                "<FileExtension>pdf</FileExtension><FileContents>" + base64.b64encode(b"%PDF-synthetic").decode() + "</FileContents></Attachment>",
+            "GetClipMinutesDocuments": '<MinutesDocuments e:arrayType="g:MinutesDocumentData[1]"><item><UID>minutes-uid</UID>'
+                '<Name>Approved Minutes</Name><Type>pdf</Type><Published xsi:type="xsd:boolean">true</Published>'
+                '<Default xsi:type="xsd:boolean">false</Default></item></MinutesDocuments>',
+        }
+        if method in bodies:
+            self.calls.append(method)
+            return Response(url, envelope(method, bodies[method]))
+        return super().request(url, **kwargs)
+
+
+def test_supporting_reads_preserve_supplied_text_bytes_locations_and_relationships():
+    import hashlib
+    engine = create_engine(provider_transport=SupportingTransport())
+    for resource in ("clip_captions", "event_video", "clip_video", "item_video", "attachment", "clip_minutes"):
+        result = engine.execute("fetch", {"source": SOURCE, "external_id": "7", "api_resource": resource}, context=context())
+        assert result.status == "partial" and not result.errors, (resource, result.errors)
+        record = result.data["records"][0]
+        assert record["identity"]["parent"]["external_id"] == "7"
+        assert result.data["capture"]["content_base64"]
+        if resource == "clip_captions":
+            assert record["text"][0]["text"] == "Entire supplied caption text"
+        elif resource == "attachment":
+            assert record["normalized"]["document_sha256"] == hashlib.sha256(b"%PDF-synthetic").hexdigest()
+            assert record["original"]["Location"] == "retained raw"
+        elif resource == "clip_minutes":
+            assert record["identity"]["external_id"] == "minutes-uid"
+            assert record["original"]["Published"] is True
+        else:
+            assert record["normalized"]["recordings"][0]["url"].startswith("https://synthetic-city.granicus.com/")
+
+
+def test_generic_sdk_caption_method_uses_documented_whole_transcript():
+    from civic_data_connectors import Source
+    result = create_engine(provider_transport=SupportingTransport()).fetch_captions(
+        Source.from_dict(SOURCE), "7", context=context())
+    assert result.status == "partial" and not result.errors
+    assert result.data["records"][0]["identity"]["record_type"] == "caption"

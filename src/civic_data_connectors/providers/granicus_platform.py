@@ -1,6 +1,9 @@
 """Pinned vendor SOAP read mappings, separate from legacy Granicus captures."""
 
 from copy import deepcopy
+import base64
+import hashlib
+from urllib.parse import urlsplit
 from dataclasses import replace
 from datetime import datetime
 import xml.etree.ElementTree as ET
@@ -10,6 +13,14 @@ from .granicus_soap import RPC, SOAP, Session, contract, response_value
 from .native import make_bundle
 
 FORMAT = "granicus-platform-soap-xml"
+SUPPORTING = {
+    "clip_captions": ("GetClipCaptions", "ClipID", "recording", "caption"),
+    "event_video": ("GetEventVideoLocation", "EventID", "meeting", "recording"),
+    "clip_video": ("GetClipVideoLocation", "ClipID", "recording", "recording"),
+    "item_video": ("GetMetaDataVideoLocation", "MetaDataID", "agenda_item", "recording"),
+    "attachment": ("FetchAttachment", "MetaDataID", "agenda_item", "document"),
+    "clip_minutes": ("GetClipMinutesDocuments", "ClipID", "recording", "document"),
+}
 READS = {
     "event": ("GetEvent", "EventID", "meeting"),
     "clip": ("GetClip", "ClipID", "recording"),
@@ -87,13 +98,75 @@ def parse_bundle(source, namespace, content):
     return bundle
 
 
+def supporting_bundle(source, namespace, raw, resource, identity):
+    method, _, parent_kind, kind = SUPPORTING[resource]
+    values = response_value(method, raw, byte_limit=len(raw))
+    value = next(iter(values.values()))
+    rows = []
+    entries = value if resource == "clip_minutes" else [value]
+    if entries is None:
+        entries = []
+    if not isinstance(entries, list):
+        raise ValueError("A documented SOAP supporting collection is required.")
+    for entry in entries:
+        if resource == "clip_minutes":
+            if not isinstance(entry, dict) or not isinstance(entry.get("UID"), str) or not entry["UID"]:
+                raise ValueError("Minutes documents require their supplied UID.")
+            external = entry["UID"]
+        else:
+            external = resource + ":" + str(identity)
+        normalized = {"external_id": external, "url": source.url, "documents": [], "recordings": [],
+                      "time_zone_status": "unknown"}
+        if resource == "clip_captions":
+            if not isinstance(entry, str):
+                raise ValueError("The documented caption response is supplied text.")
+            normalized.update(title="Supplied clip captions", caption_text=entry)
+        elif resource.endswith("_video"):
+            if not isinstance(entry, str):
+                raise ValueError("The documented video location is a URI string.")
+            parsed = urlsplit(entry)
+            if (parsed.scheme not in {"https", "http"} or not parsed.hostname or parsed.username
+                    or parsed.password or any(c in entry for c in "\r\n\0")):
+                raise ValueError("The supplied video URI cannot become a public citation.")
+            normalized.update(title="Supplied video location", recordings=[{"url": entry}])
+        elif resource == "attachment":
+            if not isinstance(entry, dict) or not isinstance(entry.get("FileContents"), str):
+                raise ValueError("The documented Document requires base64 FileContents.")
+            data = base64.b64decode(entry["FileContents"], validate=True)
+            normalized.update(title=entry.get("Description"), document_extension=entry.get("FileExtension"),
+                              byte_length=len(data), document_sha256=hashlib.sha256(data).hexdigest())
+        else:
+            normalized.update(title=entry.get("Name"), document_type=entry.get("Type"),
+                              published=entry.get("Published"), default=entry.get("Default"))
+        rows.append((normalized, deepcopy(entry), kind))
+    bundle = make_bundle(source, namespace, raw, FORMAT, rows)
+    parent = {"provider": source.provider, "namespace": namespace, "record_type": parent_kind,
+              "external_id": str(identity), "parent": None}
+    for record in bundle["records"]:
+        record["identity"]["parent"] = deepcopy(parent)
+        record["relationships"].append({"relation": parent_kind, "identity": deepcopy(parent)})
+        if resource != "clip_minutes":
+            record["identity"].update(derivation="supplied_parent_and_documented_resource",
+                stability="Local composite resource key; no independent provider child ID supplied.")
+        if resource == "clip_captions" and record["normalized"]["caption_text"]:
+            record["text"] = [{"field": "caption_text", "text": record["normalized"]["caption_text"],
+                               "citation_url": source.url}]
+    bundle["extensions"]["vendor_contract"] = {"revision": contract()["source_revision"], "method": method,
+        "request_identity": str(identity), "api_resource": resource,
+        "limits": "One supplied parent/resource; no inferred caption format, media download or document URL."}
+    return bundle
+
+
 def read(source, namespace, request, bounds, context, transport, *, discover=False):
     record_types = request.get("record_types") or []
-    if not isinstance(record_types, list) or any(item not in {"meeting", "recording", "agenda_item"} for item in record_types):
-        raise ValueError("SOAP reads support meeting, recording and agenda_item record types.")
+    if not isinstance(record_types, list) or any(item not in {"meeting", "recording", "agenda_item", "caption", "document"} for item in record_types):
+        raise ValueError("SOAP reads support meeting, recording, agenda_item, caption and document record types.")
     if bounds.checkpoint is not None:
         raise ValueError("No paging token is documented for this SOAP operation; use explicit bounded requests.")
-    resource = request.get("api_resource", "events" if discover else "event")
+    default = "events" if discover else "clip_captions" if "caption_language" in request else "event"
+    resource = request.get("api_resource", default)
+    if resource == "clip_captions" and request.get("caption_language", "*") != "*":
+        raise ValueError("The pinned SOAP caption method supplies the entire transcript; no language filter is documented.")
     if resource == "events":
         parameters = request.get("api_parameters")
         # Preserve exact vendor dateTime values. Do not invent a timezone or
@@ -103,6 +176,9 @@ def read(source, namespace, request, bounds, context, transport, *, discover=Fal
         method = "GetEventsByDateRange"
     elif resource == "clips":
         parameters, method = {"FolderID": numeric_id(request.get("parent_id"))}, "GetClips"
+    elif resource in SUPPORTING:
+        method, key, _, _ = SUPPORTING[resource]
+        parameters = {key: numeric_id(request.get("external_id"))}
     elif resource in READS:
         method, key, _ = READS[resource]
         parameters = {key: numeric_id(request.get("external_id"))}
@@ -112,7 +188,8 @@ def read(source, namespace, request, bounds, context, transport, *, discover=Fal
     bundle, errors = None, []
     try:
         _, raw = session.call(method, parameters)
-        bundle = parse_bundle(source, namespace, raw)
+        bundle = (supporting_bundle(source, namespace, raw, resource, request["external_id"])
+                  if resource in SUPPORTING else parse_bundle(source, namespace, raw))
         if resource in {"event", "clip", "agenda_item"} and any(
                 record["identity"]["external_id"] != str(request["external_id"]) for record in bundle["records"]):
             raise ValueError("The SOAP response differs from the requested provider identity.")

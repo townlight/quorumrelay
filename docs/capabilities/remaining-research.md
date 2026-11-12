@@ -78,7 +78,7 @@ Official Platform SOAP SDK/WSDL is now pinned from Granicus/platform-api-net rev
 ### Remaining implementation
 
 - Four document URL setters and two single-call document uploads are now engine-mapped and synthetically verified. Inputs bind immutable file bytes; readback checks URL, optional minutes Name and uploaded content length/hash. Unverifiable bytes stay uncertain and are never replayed. Minutes over 7,000,000 bytes now use the SDK add/finish chunks and plan-bound UUID, capped at min(1GB, configured transfer ceiling); an ambiguous intermediate chunk remains uncertain with no duplicate send. Event agendas retain a 7MB adapter safety ceiling.
-- The 48-method low-level binding is not 48 completed engine mappings. Implement media upload registration and explicitly approved publication; metadata Add/Import; structured motions/attendees; supporting captions/minutes/attachments/video-location reads.
+- The 48-method low-level binding is not 48 completed engine mappings. Supporting captions, minutes metadata, exact Document attachment bytes and three video-location reads are now mapped and vendor-shaped engine fixtures pass. Implement media upload registration and explicitly approved publication; metadata Add/Import; meeting-bound motions/attendees; reconcile UID aliases/list variants against existing resource mappings.
 - Inspect vendor comments/examples for untyped Payload and native enum semantics. Do not invent nested schemas or automatically publish ingested media.
 - Pinned API version compatibility and provider-wide archive/search semantics remain qualified; delete and vendor administration stay outside the domain.
 
