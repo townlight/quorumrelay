@@ -252,7 +252,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 ### Remaining research
 
 - Calendar POST already implemented/proven; bounded Meeting.aspx HTML fetch completed and supplied FileStream PDF returned403 (correctly partial). No bypass/retry or complete agenda-item/catalog claim.
-- Usable current public searchData() DataTables POST route is verified by Council page1/page2 and single-token empty captures. Implement bounded native candidate paging/exact local metadata checks; provider matching is not exact/phrase semantics.
+- Public native search source implementation and bounded first/page2/resume are verified with partial coverage. Provider full-text/exact matching semantics, broader document visibility and catalog completeness remain unknown; no saved metadata search is mislabeled native.
 - The official product overview describes modules, not public API schemas. No customer API/import contract or authorized write tenant was supplied for meeting/item create/update/upload.
 
 ### Pagination contract

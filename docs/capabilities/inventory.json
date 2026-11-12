@@ -8273,6 +8273,62 @@
           "observed": "2026-11-12 bounded public read",
           "observation_date": "2026-11-12",
           "access_scope": "bounded_public_read_only"
+        },
+        {
+          "id": "escribe-public-search-live",
+          "url": "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council",
+          "title": "Oakville public grouped native search first/resume engine receipt",
+          "kind": "live_engine_bounded_read_receipt",
+          "findings": "Published searchData() sends same-origin DataTables form POST /GetSearchData.asmx/GetSearchMeetingData; current public language controls are derived, never hardcoded. Native engine returned13then3 distinct source-identified candidates over first/page2/resume, partial/noerrors. Exact local metadata/excerpt matching, source/caller/query-bound midpage hashes and overlap deduplication retained.",
+          "limits": "Mutable post-dev6 source only; no full document text/exact provider semantics/catalog/write acceptance. URL-derived agenda item keys explicitly are not native item IDs. Subsequent cursor-hardening tests are distinguished from reused live receipt.",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "receipt_path": "docs/verification/escribe-native-search-2026-11-12.json",
+          "receipt_sha256": "d0ecf8967492338232819ace15790e0086b897a3636c527046d56dc1c957215c",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
+        },
+        {
+          "id": "escribe-public-search-fixture-page-1",
+          "url": "https://pub-oakville.escribemeetings.com/GetSearchData.asmx/GetSearchMeetingData?Expanded=Council",
+          "title": "Exact public eSCRIBE grouped search page-1",
+          "kind": "public_tenant_capture",
+          "findings": "Current public language controls0,9,0,12; Council pages0/10 use10-match windows regrouped into HTML; single-token sentinel returns0. Raw group markup and provider counts are retained.",
+          "limits": "One public tenant/query; provider matching is not exact/phrase matching. Duplicate native documents across pages are deduplicated while raw pages remain intact.",
+          "proof_level": "saved_public_response_fixture_not_catalog_acceptance",
+          "fixture_path": "tests/fixtures/escribe-native-search/page-1.json",
+          "fixture_sha256": "9f5fc81202db21608d44329bf68b004dfd71d4956ea75b57b3d5c101b81703a6",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
+        },
+        {
+          "id": "escribe-public-search-fixture-page-2",
+          "url": "https://pub-oakville.escribemeetings.com/GetSearchData.asmx/GetSearchMeetingData?Expanded=Council",
+          "title": "Exact public eSCRIBE grouped search page-2",
+          "kind": "public_tenant_capture",
+          "findings": "Current public language controls0,9,0,12; Council pages0/10 use10-match windows regrouped into HTML; single-token sentinel returns0. Raw group markup and provider counts are retained.",
+          "limits": "One public tenant/query; provider matching is not exact/phrase matching. Duplicate native documents across pages are deduplicated while raw pages remain intact.",
+          "proof_level": "saved_public_response_fixture_not_catalog_acceptance",
+          "fixture_path": "tests/fixtures/escribe-native-search/page-2.json",
+          "fixture_sha256": "144e6e77852564bc589563e49cdb5871df06b216b55a3f152844c318979413c3",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
+        },
+        {
+          "id": "escribe-public-search-fixture-empty",
+          "url": "https://pub-oakville.escribemeetings.com/GetSearchData.asmx/GetSearchMeetingData?Expanded=Council",
+          "title": "Exact public eSCRIBE grouped search empty",
+          "kind": "public_tenant_capture",
+          "findings": "Current public language controls0,9,0,12; Council pages0/10 use10-match windows regrouped into HTML; single-token sentinel returns0. Raw group markup and provider counts are retained.",
+          "limits": "One public tenant/query; provider matching is not exact/phrase matching. Duplicate native documents across pages are deduplicated while raw pages remain intact.",
+          "proof_level": "saved_public_response_fixture_not_catalog_acceptance",
+          "fixture_path": "tests/fixtures/escribe-native-search/empty.json",
+          "fixture_sha256": "847245b641d6b5360b231529e7e0a5939f408aa93aaf854951ad6622a93e0f73",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
         }
       ],
       "tenants": [
@@ -8383,18 +8439,22 @@
         },
         "native_search": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "escribe-oakville-public"
+            "escribe-oakville-public",
+            "escribe-public-search-live",
+            "escribe-public-search-fixture-page-1",
+            "escribe-public-search-fixture-page-2",
+            "escribe-public-search-fixture-empty"
           ],
-          "details": "Current published searchData() sends DataTables form POST /GetSearchData.asmx/GetSearchMeetingData with searchText and explicit public filters. Council pages0/10 returned grouped HTML search rows; a single-token sentinel returned0. Verified required native-search implementation is queued in the coherent post-dev6 source batch; matching semantics remain provider-defined.",
+          "details": "Post-dev6 source implements observed public DataTables POST with current page-derived language visibility,10-match provider paging and grouped raw capture. FileStream DocumentId is native; item URLs get explicitly local URL-derived keys and supplied meeting-parent links. Exact local AND metadata/excerpt/date/type checks, source/query/caller-bound midpage hashes, duplicate handling, response/count-change rejection and bounded partial continuation are tested. Provider full text/exact semantics/catalog/account/write acceptance remains unverified.",
           "dependencies": [],
           "remaining_verification": [
             "Implementation contract validation",
             "Provider/tenant boundary and failure cases"
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_fixture_tests_and_bounded_live_read_not_full_provider_acceptance",
           "tenant_scope": [
             "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council"
           ],
@@ -8720,7 +8780,7 @@
       ],
       "remaining_research": [
         "Calendar POST already implemented/proven; bounded Meeting.aspx HTML fetch completed and supplied FileStream PDF returned403 (correctly partial). No bypass/retry or complete agenda-item/catalog claim.",
-        "Usable current public searchData() DataTables POST route is verified by Council page1/page2 and single-token empty captures. Implement bounded native candidate paging/exact local metadata checks; provider matching is not exact/phrase semantics.",
+        "Public native search source implementation and bounded first/page2/resume are verified with partial coverage. Provider full-text/exact matching semantics, broader document visibility and catalog completeness remain unknown; no saved metadata search is mislabeled native.",
         "The official product overview describes modules, not public API schemas. No customer API/import contract or authorized write tenant was supplied for meeting/item create/update/upload."
       ],
       "requirement_ids": [

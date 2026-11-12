@@ -1,0 +1,842 @@
+{
+  "source": {
+    "provider": "escribe",
+    "url": "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council"
+  },
+  "module_sha256": "d00dba0bdf79bc57298a854e33726fd838b36cc130dc689f664af4b66c57ccec",
+  "first": {
+    "status": "partial",
+    "errors": [],
+    "identities": [
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "document",
+        "external_id": "103599",
+        "parent": null,
+        "derivation": "provider_identifier",
+        "stability": "Provider-issued identifier within the configured namespace."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "document",
+        "external_id": "103653",
+        "parent": null,
+        "derivation": "provider_identifier",
+        "stability": "Provider-issued identifier within the configured namespace."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "document",
+        "external_id": "103437",
+        "parent": null,
+        "derivation": "provider_identifier",
+        "stability": "Provider-issued identifier within the configured namespace."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "document",
+        "external_id": "103616",
+        "parent": null,
+        "derivation": "provider_identifier",
+        "stability": "Provider-issued identifier within the configured namespace."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "document",
+        "external_id": "103560",
+        "parent": null,
+        "derivation": "provider_identifier",
+        "stability": "Provider-issued identifier within the configured namespace."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "agenda_item",
+        "external_id": "url:ae22939faa329e78fd0ee1234b01759e61d214fc84d907fb8a77a0a014a4712a",
+        "parent": {
+          "provider": "escribe",
+          "namespace": "//pub-oakville.escribemeetings.com",
+          "record_type": "meeting",
+          "external_id": "a41acc4d-33da-4003-9c14-8c4552888891"
+        },
+        "derivation": "supplied_url",
+        "stability": "Local URL key; item position/query changes may change identity. No native item ID was supplied."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "document",
+        "external_id": "103667",
+        "parent": null,
+        "derivation": "provider_identifier",
+        "stability": "Provider-issued identifier within the configured namespace."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "agenda_item",
+        "external_id": "url:c5ad0d1af26783679d5a14f74516cb4b2f12aa5e73810d3ed629b0e73377b484",
+        "parent": {
+          "provider": "escribe",
+          "namespace": "//pub-oakville.escribemeetings.com",
+          "record_type": "meeting",
+          "external_id": "81fad21a-f37f-41cf-93ec-368ed8499529"
+        },
+        "derivation": "supplied_url",
+        "stability": "Local URL key; item position/query changes may change identity. No native item ID was supplied."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "document",
+        "external_id": "103634",
+        "parent": null,
+        "derivation": "provider_identifier",
+        "stability": "Provider-issued identifier within the configured namespace."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "agenda_item",
+        "external_id": "url:dcc4104dd15933088940b810425103b4210d86374852e75e4dca054123dabe3b",
+        "parent": {
+          "provider": "escribe",
+          "namespace": "//pub-oakville.escribemeetings.com",
+          "record_type": "meeting",
+          "external_id": "81fad21a-f37f-41cf-93ec-368ed8499529"
+        },
+        "derivation": "supplied_url",
+        "stability": "Local URL key; item position/query changes may change identity. No native item ID was supplied."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "document",
+        "external_id": "103547",
+        "parent": null,
+        "derivation": "provider_identifier",
+        "stability": "Provider-issued identifier within the configured namespace."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "agenda_item",
+        "external_id": "url:c4f7599171120ef78377d5820ec55d1befc5a159787ed84fb37ee79b7ab80186",
+        "parent": {
+          "provider": "escribe",
+          "namespace": "//pub-oakville.escribemeetings.com",
+          "record_type": "meeting",
+          "external_id": "d3590626-4ef5-4083-a3dc-037e6a3bfcc3"
+        },
+        "derivation": "supplied_url",
+        "stability": "Local URL key; item position/query changes may change identity. No native item ID was supplied."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "document",
+        "external_id": "103518",
+        "parent": null,
+        "derivation": "provider_identifier",
+        "stability": "Provider-issued identifier within the configured namespace."
+      }
+    ],
+    "coverage": {
+      "sources": [
+        {
+          "provider": "escribe",
+          "url": "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council",
+          "namespace": "//pub-oakville.escribemeetings.com",
+          "body": null,
+          "input_format": null,
+          "options": {}
+        }
+      ],
+      "native_search": true,
+      "scope": "public grouped provider candidates; exact local metadata and supplied excerpt matching",
+      "provider_query_semantics": "provider-defined first expression; exact local AND",
+      "full_document_text_searched": false,
+      "catalog_complete": false,
+      "source_complete": false,
+      "server_date_filter": "not_applied; explicit date bounds checked locally",
+      "snapshot_consistency": "not_guaranteed",
+      "pages": 2,
+      "provider_candidates": 13,
+      "unmapped_links_omitted": 0,
+      "duplicate_records_skipped": 4,
+      "failed_pages": [],
+      "truncated": true,
+      "date_from": null,
+      "date_to": null,
+      "date_inclusivity": "both",
+      "actual_dates": [
+        "2026-10-28",
+        "2026-11-04",
+        "2026-11-09",
+        "2026-11-10",
+        "2026-11-11"
+      ],
+      "available_text": [
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "document",
+            "external_id": "103599",
+            "parent": null,
+            "derivation": "provider_identifier",
+            "stability": "Provider-issued identifier within the configured namespace."
+          },
+          "capture_sha256": "9f5fc81202db21608d44329bf68b004dfd71d4956ea75b57b3d5c101b81703a6",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt",
+            "normalized.documents[0].url",
+            "normalized.documents[0].title",
+            "normalized.documents[0].kind"
+          ],
+          "supplied_fields": [],
+          "unavailable": [
+            {
+              "citation_url": "https://pub-oakville.escribemeetings.com/FileStream.ashx?DocumentId=103599",
+              "reason": "linked_content_not_supplied"
+            }
+          ],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "document",
+            "external_id": "103653",
+            "parent": null,
+            "derivation": "provider_identifier",
+            "stability": "Provider-issued identifier within the configured namespace."
+          },
+          "capture_sha256": "9f5fc81202db21608d44329bf68b004dfd71d4956ea75b57b3d5c101b81703a6",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt",
+            "normalized.documents[0].url",
+            "normalized.documents[0].title",
+            "normalized.documents[0].kind"
+          ],
+          "supplied_fields": [],
+          "unavailable": [
+            {
+              "citation_url": "https://pub-oakville.escribemeetings.com/FileStream.ashx?DocumentId=103653",
+              "reason": "linked_content_not_supplied"
+            }
+          ],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "document",
+            "external_id": "103437",
+            "parent": null,
+            "derivation": "provider_identifier",
+            "stability": "Provider-issued identifier within the configured namespace."
+          },
+          "capture_sha256": "9f5fc81202db21608d44329bf68b004dfd71d4956ea75b57b3d5c101b81703a6",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt",
+            "normalized.documents[0].url",
+            "normalized.documents[0].title",
+            "normalized.documents[0].kind"
+          ],
+          "supplied_fields": [],
+          "unavailable": [
+            {
+              "citation_url": "https://pub-oakville.escribemeetings.com/FileStream.ashx?DocumentId=103437",
+              "reason": "linked_content_not_supplied"
+            }
+          ],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "document",
+            "external_id": "103616",
+            "parent": null,
+            "derivation": "provider_identifier",
+            "stability": "Provider-issued identifier within the configured namespace."
+          },
+          "capture_sha256": "9f5fc81202db21608d44329bf68b004dfd71d4956ea75b57b3d5c101b81703a6",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt",
+            "normalized.documents[0].url",
+            "normalized.documents[0].title",
+            "normalized.documents[0].kind"
+          ],
+          "supplied_fields": [],
+          "unavailable": [
+            {
+              "citation_url": "https://pub-oakville.escribemeetings.com/FileStream.ashx?DocumentId=103616",
+              "reason": "linked_content_not_supplied"
+            }
+          ],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "document",
+            "external_id": "103560",
+            "parent": null,
+            "derivation": "provider_identifier",
+            "stability": "Provider-issued identifier within the configured namespace."
+          },
+          "capture_sha256": "9f5fc81202db21608d44329bf68b004dfd71d4956ea75b57b3d5c101b81703a6",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt",
+            "normalized.documents[0].url",
+            "normalized.documents[0].title",
+            "normalized.documents[0].kind"
+          ],
+          "supplied_fields": [],
+          "unavailable": [
+            {
+              "citation_url": "https://pub-oakville.escribemeetings.com/FileStream.ashx?DocumentId=103560",
+              "reason": "linked_content_not_supplied"
+            }
+          ],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "agenda_item",
+            "external_id": "url:ae22939faa329e78fd0ee1234b01759e61d214fc84d907fb8a77a0a014a4712a",
+            "parent": {
+              "provider": "escribe",
+              "namespace": "//pub-oakville.escribemeetings.com",
+              "record_type": "meeting",
+              "external_id": "a41acc4d-33da-4003-9c14-8c4552888891"
+            },
+            "derivation": "supplied_url",
+            "stability": "Local URL key; item position/query changes may change identity. No native item ID was supplied."
+          },
+          "capture_sha256": "9f5fc81202db21608d44329bf68b004dfd71d4956ea75b57b3d5c101b81703a6",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt"
+          ],
+          "supplied_fields": [],
+          "unavailable": [],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "document",
+            "external_id": "103667",
+            "parent": null,
+            "derivation": "provider_identifier",
+            "stability": "Provider-issued identifier within the configured namespace."
+          },
+          "capture_sha256": "9f5fc81202db21608d44329bf68b004dfd71d4956ea75b57b3d5c101b81703a6",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt",
+            "normalized.documents[0].url",
+            "normalized.documents[0].title",
+            "normalized.documents[0].kind"
+          ],
+          "supplied_fields": [],
+          "unavailable": [
+            {
+              "citation_url": "https://pub-oakville.escribemeetings.com/FileStream.ashx?DocumentId=103667",
+              "reason": "linked_content_not_supplied"
+            }
+          ],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "agenda_item",
+            "external_id": "url:c5ad0d1af26783679d5a14f74516cb4b2f12aa5e73810d3ed629b0e73377b484",
+            "parent": {
+              "provider": "escribe",
+              "namespace": "//pub-oakville.escribemeetings.com",
+              "record_type": "meeting",
+              "external_id": "81fad21a-f37f-41cf-93ec-368ed8499529"
+            },
+            "derivation": "supplied_url",
+            "stability": "Local URL key; item position/query changes may change identity. No native item ID was supplied."
+          },
+          "capture_sha256": "9f5fc81202db21608d44329bf68b004dfd71d4956ea75b57b3d5c101b81703a6",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt"
+          ],
+          "supplied_fields": [],
+          "unavailable": [],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "document",
+            "external_id": "103634",
+            "parent": null,
+            "derivation": "provider_identifier",
+            "stability": "Provider-issued identifier within the configured namespace."
+          },
+          "capture_sha256": "144e6e77852564bc589563e49cdb5871df06b216b55a3f152844c318979413c3",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt",
+            "normalized.documents[0].url",
+            "normalized.documents[0].title",
+            "normalized.documents[0].kind"
+          ],
+          "supplied_fields": [],
+          "unavailable": [
+            {
+              "citation_url": "https://pub-oakville.escribemeetings.com/FileStream.ashx?DocumentId=103634",
+              "reason": "linked_content_not_supplied"
+            }
+          ],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "agenda_item",
+            "external_id": "url:dcc4104dd15933088940b810425103b4210d86374852e75e4dca054123dabe3b",
+            "parent": {
+              "provider": "escribe",
+              "namespace": "//pub-oakville.escribemeetings.com",
+              "record_type": "meeting",
+              "external_id": "81fad21a-f37f-41cf-93ec-368ed8499529"
+            },
+            "derivation": "supplied_url",
+            "stability": "Local URL key; item position/query changes may change identity. No native item ID was supplied."
+          },
+          "capture_sha256": "144e6e77852564bc589563e49cdb5871df06b216b55a3f152844c318979413c3",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt"
+          ],
+          "supplied_fields": [],
+          "unavailable": [],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "document",
+            "external_id": "103547",
+            "parent": null,
+            "derivation": "provider_identifier",
+            "stability": "Provider-issued identifier within the configured namespace."
+          },
+          "capture_sha256": "144e6e77852564bc589563e49cdb5871df06b216b55a3f152844c318979413c3",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt",
+            "normalized.documents[0].url",
+            "normalized.documents[0].title",
+            "normalized.documents[0].kind"
+          ],
+          "supplied_fields": [],
+          "unavailable": [
+            {
+              "citation_url": "https://pub-oakville.escribemeetings.com/FileStream.ashx?DocumentId=103547",
+              "reason": "linked_content_not_supplied"
+            }
+          ],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "agenda_item",
+            "external_id": "url:c4f7599171120ef78377d5820ec55d1befc5a159787ed84fb37ee79b7ab80186",
+            "parent": {
+              "provider": "escribe",
+              "namespace": "//pub-oakville.escribemeetings.com",
+              "record_type": "meeting",
+              "external_id": "d3590626-4ef5-4083-a3dc-037e6a3bfcc3"
+            },
+            "derivation": "supplied_url",
+            "stability": "Local URL key; item position/query changes may change identity. No native item ID was supplied."
+          },
+          "capture_sha256": "144e6e77852564bc589563e49cdb5871df06b216b55a3f152844c318979413c3",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt"
+          ],
+          "supplied_fields": [],
+          "unavailable": [],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "document",
+            "external_id": "103518",
+            "parent": null,
+            "derivation": "provider_identifier",
+            "stability": "Provider-issued identifier within the configured namespace."
+          },
+          "capture_sha256": "144e6e77852564bc589563e49cdb5871df06b216b55a3f152844c318979413c3",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt",
+            "normalized.documents[0].url",
+            "normalized.documents[0].title",
+            "normalized.documents[0].kind"
+          ],
+          "supplied_fields": [],
+          "unavailable": [
+            {
+              "citation_url": "https://pub-oakville.escribemeetings.com/FileStream.ashx?DocumentId=103518",
+              "reason": "linked_content_not_supplied"
+            }
+          ],
+          "full_source_searched": false
+        }
+      ],
+      "failures": [],
+      "searched_records": 13,
+      "match_policy": "Unicode casefold, collapsed whitespace, word boundaries; AND terms/phrases",
+      "incomplete_text": true,
+      "searched_sources": [
+        {
+          "provider": "escribe",
+          "namespace": "//pub-oakville.escribemeetings.com",
+          "url": "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council"
+        }
+      ],
+      "selected_providers": [],
+      "selected_namespaces": []
+    }
+  },
+  "resumed": {
+    "status": "partial",
+    "errors": [],
+    "identities": [
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "document",
+        "external_id": "103459",
+        "parent": null,
+        "derivation": "provider_identifier",
+        "stability": "Provider-issued identifier within the configured namespace."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "document",
+        "external_id": "103485",
+        "parent": null,
+        "derivation": "provider_identifier",
+        "stability": "Provider-issued identifier within the configured namespace."
+      },
+      {
+        "provider": "escribe",
+        "namespace": "//pub-oakville.escribemeetings.com",
+        "record_type": "agenda_item",
+        "external_id": "url:42ea1cbf8785dd97479bb3f0d18732967a90696852c9a026f5c190633caa040b",
+        "parent": {
+          "provider": "escribe",
+          "namespace": "//pub-oakville.escribemeetings.com",
+          "record_type": "meeting",
+          "external_id": "e9d71554-c342-4bab-aefb-b95be4cd0ba3"
+        },
+        "derivation": "supplied_url",
+        "stability": "Local URL key; item position/query changes may change identity. No native item ID was supplied."
+      }
+    ],
+    "coverage": {
+      "sources": [
+        {
+          "provider": "escribe",
+          "url": "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council",
+          "namespace": "//pub-oakville.escribemeetings.com",
+          "body": null,
+          "input_format": null,
+          "options": {}
+        }
+      ],
+      "native_search": true,
+      "scope": "public grouped provider candidates; exact local metadata and supplied excerpt matching",
+      "provider_query_semantics": "provider-defined first expression; exact local AND",
+      "full_document_text_searched": false,
+      "catalog_complete": false,
+      "source_complete": false,
+      "server_date_filter": "not_applied; explicit date bounds checked locally",
+      "snapshot_consistency": "not_guaranteed",
+      "pages": 1,
+      "provider_candidates": 3,
+      "unmapped_links_omitted": 0,
+      "duplicate_records_skipped": 0,
+      "failed_pages": [],
+      "truncated": true,
+      "date_from": null,
+      "date_to": null,
+      "date_inclusivity": "both",
+      "actual_dates": [
+        "2026-10-28"
+      ],
+      "available_text": [
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "document",
+            "external_id": "103459",
+            "parent": null,
+            "derivation": "provider_identifier",
+            "stability": "Provider-issued identifier within the configured namespace."
+          },
+          "capture_sha256": "144e6e77852564bc589563e49cdb5871df06b216b55a3f152844c318979413c3",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt",
+            "normalized.documents[0].url",
+            "normalized.documents[0].title",
+            "normalized.documents[0].kind"
+          ],
+          "supplied_fields": [],
+          "unavailable": [
+            {
+              "citation_url": "https://pub-oakville.escribemeetings.com/FileStream.ashx?DocumentId=103459",
+              "reason": "linked_content_not_supplied"
+            }
+          ],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "document",
+            "external_id": "103485",
+            "parent": null,
+            "derivation": "provider_identifier",
+            "stability": "Provider-issued identifier within the configured namespace."
+          },
+          "capture_sha256": "144e6e77852564bc589563e49cdb5871df06b216b55a3f152844c318979413c3",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt",
+            "normalized.documents[0].url",
+            "normalized.documents[0].title",
+            "normalized.documents[0].kind"
+          ],
+          "supplied_fields": [],
+          "unavailable": [
+            {
+              "citation_url": "https://pub-oakville.escribemeetings.com/FileStream.ashx?DocumentId=103485",
+              "reason": "linked_content_not_supplied"
+            }
+          ],
+          "full_source_searched": false
+        },
+        {
+          "identity": {
+            "provider": "escribe",
+            "namespace": "//pub-oakville.escribemeetings.com",
+            "record_type": "agenda_item",
+            "external_id": "url:42ea1cbf8785dd97479bb3f0d18732967a90696852c9a026f5c190633caa040b",
+            "parent": {
+              "provider": "escribe",
+              "namespace": "//pub-oakville.escribemeetings.com",
+              "record_type": "meeting",
+              "external_id": "e9d71554-c342-4bab-aefb-b95be4cd0ba3"
+            },
+            "derivation": "supplied_url",
+            "stability": "Local URL key; item position/query changes may change identity. No native item ID was supplied."
+          },
+          "capture_sha256": "144e6e77852564bc589563e49cdb5871df06b216b55a3f152844c318979413c3",
+          "status": "metadata_only",
+          "metadata_fields": [
+            "normalized.external_id",
+            "normalized.title",
+            "normalized.url",
+            "normalized.meeting_title",
+            "normalized.meeting_date",
+            "normalized.time_zone_status",
+            "normalized.search_excerpt"
+          ],
+          "supplied_fields": [],
+          "unavailable": [],
+          "full_source_searched": false
+        }
+      ],
+      "failures": [],
+      "searched_records": 3,
+      "match_policy": "Unicode casefold, collapsed whitespace, word boundaries; AND terms/phrases",
+      "incomplete_text": true,
+      "searched_sources": [
+        {
+          "provider": "escribe",
+          "namespace": "//pub-oakville.escribemeetings.com",
+          "url": "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council"
+        }
+      ],
+      "selected_providers": [],
+      "selected_namespaces": []
+    }
+  },
+  "requests": [
+    {
+      "url": "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council",
+      "method": "GET",
+      "status": 200,
+      "bytes": 488368,
+      "sha256": "72b822320a952911993076b58df878f0998e1caf138c78b6839650bec7815f1d"
+    },
+    {
+      "url": "https://pub-oakville.escribemeetings.com/GetSearchData.asmx/GetSearchMeetingData?Expanded=Council",
+      "method": "POST",
+      "status": 200,
+      "bytes": 10613,
+      "sha256": "9f5fc81202db21608d44329bf68b004dfd71d4956ea75b57b3d5c101b81703a6"
+    },
+    {
+      "url": "https://pub-oakville.escribemeetings.com/GetSearchData.asmx/GetSearchMeetingData?Expanded=Council",
+      "method": "POST",
+      "status": 200,
+      "bytes": 11777,
+      "sha256": "144e6e77852564bc589563e49cdb5871df06b216b55a3f152844c318979413c3"
+    },
+    {
+      "url": "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council",
+      "method": "GET",
+      "status": 200,
+      "bytes": 488368,
+      "sha256": "3c8cd3e41016a36437350baf5bb3ea34abf3e317284580215c4c962064103b69"
+    },
+    {
+      "url": "https://pub-oakville.escribemeetings.com/GetSearchData.asmx/GetSearchMeetingData?Expanded=Council",
+      "method": "POST",
+      "status": 200,
+      "bytes": 11777,
+      "sha256": "144e6e77852564bc589563e49cdb5871df06b216b55a3f152844c318979413c3"
+    }
+  ],
+  "limits": "Mutable post-dev6 source; exact local metadata/excerpt matching only, no full text/catalog/write acceptance.",
+  "subsequent_source_hardening": {
+    "module_sha256": "1a973f5759b84304a230673bf81daaf1e7d4e8e185514f18640d50edb7f9c70a",
+    "change": "Reject forged midpage state and repeated server pages; request, mapping and observed first/resume flow unchanged.",
+    "verification": "4focused fixture checks passed; prior live read above is reused, not represented as re-executed."
+  }
+}
