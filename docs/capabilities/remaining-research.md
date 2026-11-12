@@ -474,7 +474,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
-- On Yuma’s current AgendaQuick page, follow Previous/Next Period for one adjacent month and another meeting type; inspect agenda sequence 1737 and its supplied attachment/video URLs.
+- The supplied agenda sequence1737 is now captured/mapped:25 native linked memos with explicit meeting/line/revision bindings, displayed body/date/time, and one labelled packet locator. Seven new synthetic cases and two existing calendar cases pass. Memo contents, live packet bytes, other template variations and complete history remain unverified.
 - The bounded Yuma public agenda-item form and result are mapped by source/fixture tests. Live next-page behavior, provider phrase/full-text semantics and complete result coverage remain unverified.
 - Official feature copy describes staff scheduling/minute votes/uploads but no machine schema. No authorized credentials or vendor file-import contract were supplied.
 

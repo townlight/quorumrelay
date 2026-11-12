@@ -15035,6 +15035,23 @@
           "observation_date": "2026-11-12",
           "access_scope": "public_research_only",
           "proof_level": "public_source_and_fixture_not_live_engine_acceptance"
+        },
+        {
+          "id": "agendaquick-public-agenda-2026-11-12",
+          "url": "https://public.destinyhosted.com/agenda_publish.cfm?id=98622&mt=ALL&get_month=11&get_year=2026&dsp=ag&seq=1737",
+          "title": "AgendaQuick supplied public agenda native associations",
+          "kind": "public_tenant",
+          "observed": "One exact supplied public agenda GET200/59886 bytes; seven synthetic cases and two existing calendar cases passed.",
+          "observation_date": "2026-11-12",
+          "access_scope": "one_anonymous_guarded_GET_plus_offline_synthetic_engine_execution",
+          "proof_level": "bounded_public_capture_and_scoped_synthetic_engine_execution",
+          "findings": [
+            "Meeting1737 plus25 linked native memo IDs with explicit meeting/line/revision bindings, displayed body/date/time and one packet locator.",
+            "Additive saved format/default configured detail uses existing bounds, search metadata and attachment transfer."
+          ],
+          "limits": "One captured public meeting-notice template; no universal deployment compatibility claim; Only linked native memo items; unlinked headings have no invented IDs; Memo content, live packet bytes, complete archive and external write schema not established; Source cells preserved without motion/vote/speaker inference; No vendor mutation, credentials, frozen rebuild or publication",
+          "receipt_path": "docs/verification/agendaquick-public-agenda-2026-11-12.json",
+          "receipt_sha256": "535154adcf42149b5e1f1446f70f6ab4f37f40054fb2fa624652610b9ac9b26b"
         }
       ],
       "tenants": [
@@ -15084,9 +15101,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "destiny-yuma",
-            "agendaquick-search-observed"
+            "agendaquick-search-observed",
+            "agendaquick-public-agenda-2026-11-12"
           ],
-          "details": "The configured Yuma public calendar maps supplied meeting identities and documents and follows bounded supplied period controls; full tenant archive and meeting-type coverage remain unverified.",
+          "details": "The configured Yuma public calendar maps supplied meeting identities and documents and follows bounded supplied period controls; full tenant archive and meeting-type coverage remain unverified. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
@@ -15111,9 +15129,10 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "destiny-yuma"
+            "destiny-yuma",
+            "agendaquick-public-agenda-2026-11-12"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. Public HTML/PDF export is not a vendor import contract. Roll call/votes are product features, not guaranteed structured fields in listing HTML.",
+          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. Public HTML/PDF export is not a vendor import contract. Roll call/votes are product features, not guaranteed structured fields in listing HTML. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -15139,9 +15158,10 @@
           "evidence_ids": [
             "media-baseline",
             "media-reader-source",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "agendaquick-public-agenda-2026-11-12"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download.",
           "dependencies": [
             "standalone extraction",
             "source revision pin"

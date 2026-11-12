@@ -10,7 +10,7 @@ from copy import deepcopy
 from dataclasses import replace
 from datetime import date, timedelta
 from time import monotonic
-from urllib.parse import urlencode, urljoin, urlsplit
+from urllib.parse import parse_qs, urlencode, urljoin, urlsplit
 
 from ..engine import canonical_hash, source_identity_key
 from ..models import Bounds, Error, OperationResult
@@ -104,7 +104,8 @@ def _initial(source, bounds, input_format, saved):
     if input_format in {"meeting-export", "legistar-event-json", "wistia-media-detail-json", "wistia-caption-json",
                         "agendaquick-item-search-html", "civicplus-search-json"}:
         return []
-    if input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html", "town-hall-streams-event-html"}:
+    if input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html", "town-hall-streams-event-html",
+                        "agendaquick-public-agenda-html"}:
         return [{"kind": "static"}]
     if provider in NATIVE:
         if not bounds.date_from or not bounds.date_to:
@@ -404,7 +405,7 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
                         "civicweb-detail-html", "civicweb-filepro-soap-xml", "swagit-listing-html", "onbase-public-listing-html",
                         "digital-towpath-listing-html", "towncloud-public-listing-json", "telvue-cloudcast-mrss-xml",
-                        "agendaquick-public-listing-html", "agendaquick-item-search-html", "civicplus-search-json",
+                        "agendaquick-public-listing-html", "agendaquick-item-search-html", "agendaquick-public-agenda-html", "civicplus-search-json",
                         "utah-public-search-html", "iqm2-public-search-html",
                         "clerkbase-public-tree-html", "clerkbase-search-html"}:
         return parse_native(source, namespace, content, input_format), ()
@@ -441,7 +442,8 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
             input_format = "towncloud-public-listing-json"
     if (source.provider == "destiny-agendaquick" and source.input_format is None
             and urlsplit(source.url).path.lower() == "/agenda_publish.cfm"):
-        input_format = "agendaquick-public-listing-html"
+        input_format = ("agendaquick-public-agenda-html" if parse_qs(urlsplit(source.url).query).get("dsp") == ["ag"]
+                        else "agendaquick-public-listing-html")
     if (source.provider == "clerkbase" and source.input_format is None
             and urlsplit(source.url).path.rstrip("/").casefold() == "/southkingstown-ri"):
         input_format = "clerkbase-public-tree-html"
