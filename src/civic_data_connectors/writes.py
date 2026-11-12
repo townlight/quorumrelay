@@ -15,7 +15,7 @@ from .storage import operation_cancelled, update_operation
 from .write_adapters import (
     AmbiguousWrite, WriteChange, WriteFailure, check_write_adapter, default_adapters, sanitize,
 )
-from .write_files import open_write_file, resolve_write_files
+from .write_files import open_write_input, resolve_write_files
 
 
 def _now():
@@ -73,7 +73,7 @@ class WriteCoordinator:
             source, bounds = Source(**request["source"]), Bounds(**request.get("bounds", {}))
             adapter = self._adapter(source)
             if callable(getattr(adapter, "bind_files", None)):
-                adapter = adapter.bind_files(storage, context.scope)
+                adapter = adapter.bind_files(engine, context)
             adapter.validate_source(source, context)
             changes = request.get("changes")
             if not isinstance(changes, list) or not changes or len(changes) > bounds.max_records:
@@ -161,13 +161,13 @@ class WriteCoordinator:
             source, bounds = Source(**plan["source"]), Bounds(**plan["bounds"])
             adapter = self._adapter(source)
             if callable(getattr(adapter, "bind_files", None)):
-                adapter = adapter.bind_files(storage, context.scope)
+                adapter = adapter.bind_files(engine, context)
             if adapter.mock != plan["mock"]:
                 raise WriteFailure("plan_mismatch", "A plan cannot switch between mock and real transports.")
             for prepared in plan["changes"]:
                 adapter.authorize(source, WriteChange.from_dict(prepared["change"]), context)
                 for part in prepared["native"].get("files", ()):
-                    with open_write_file(storage, part["reference"], scope=context.scope):
+                    with open_write_input(engine, part["reference"], context=context):
                         pass
             if not context.allows("commit_write", source.namespace):
                 raise WriteFailure("permission_denied", "The trusted client policy denies commit to this namespace.")

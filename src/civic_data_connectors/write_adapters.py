@@ -23,19 +23,17 @@ from typing import Protocol, runtime_checkable
 from .engine import canonical_hash
 from .models import OperationContext, Source
 from .write_transport import PublicWriteTransport, WriteResponse, WriteTransport
-from .write_files import open_write_file
+from .write_files import open_write_input
 
 
 def _legistar_client(source):
-    """Keep URL client routing separate from canonical/legacy source identity."""
+    """Keep URL client routing separate from canonical or legacy source identity."""
     from .compat import source_namespace
     parsed = urlsplit(source.url)
     match = re.fullmatch(r"/v1/([A-Za-z0-9_-]+)(?:/.*)?", parsed.path)
     if parsed.hostname != "webapi.legistar.com" or match is None:
         raise ValueError("A Legistar write source must identify its exact API Client.")
     client = match.group(1)
-    # The canonical reader namespace remains authoritative for new shared sources.
-    # Original write-only configurations used the client slug and stay explicit.
     if source.namespace not in {client, source_namespace("legistar", parsed)}:
         raise ValueError("The Legistar source identity does not match its API Client.")
     return client
@@ -46,12 +44,32 @@ def _laserfiche_repository(source):
     from .compat import source_namespace
     parsed = urlsplit(source.url)
     match = re.match(r"/repository/v2/Repositories/([A-Za-z0-9_-]+)(?:/|$)", parsed.path)
-    if parsed.hostname != "api.laserfiche.com" or match is None:
-        raise ValueError("A Laserfiche write source must identify its exact Repository API.")
-    repository = match[1]
-    if source.namespace not in {repository, source_namespace("laserfiche-weblink", parsed)}:
+    repository = source.options.get("repository_id")
+    if parsed.hostname == "api.laserfiche.com" and match is not None:
+        if repository is not None and repository != match[1]:
+            raise ValueError("The repository option does not match the API URL.")
+        repository = match[1]
+    if not isinstance(repository, str) or re.fullmatch(r"[A-Za-z0-9_-]+", repository) is None:
+        raise ValueError("A Laserfiche write source requires its exact Repository API ID.")
+    legacy_repository = (repository if parsed.hostname == "api.laserfiche.com" and match else None)
+    if source.namespace not in {legacy_repository, source_namespace("laserfiche-weblink", parsed)}:
         raise ValueError("The Laserfiche source identity does not match its API repository.")
     return repository
+
+
+def _wistia_account(source):
+    from .compat import source_namespace
+    parsed = urlsplit(source.url)
+    match = re.fullmatch(r"([A-Za-z0-9_-]+)\.wistia\.(?:com|net)", parsed.hostname or "")
+    if match is None:
+        raise ValueError("The Wistia source is not an authorized provider/account origin.")
+    if match[1] in {"api", "upload", "fast"}:
+        # Published write-only configurations bind the account through exact
+        # server-side namespace policy while using a shared provider origin.
+        return source.namespace
+    if source.namespace not in {match[1], source_namespace("wistia", parsed)}:
+        raise ValueError("The Wistia source identity does not match its citation URL.")
+    return match[1]
 
 
 class WriteFailure(ValueError):
@@ -313,19 +331,19 @@ class WriteAdapter:
         self.provider = provider
         self.family = "laserfiche" if provider == "laserfiche-weblink" else provider
         self.transport = transport or PublicWriteTransport()
-        self.file_storage = None
-        self.file_scope = None
+        self.file_engine = None
+        self.file_context = None
 
-    def bind_files(self, storage, scope):
+    def bind_files(self, engine, context):
         """Return an isolated per-invocation binding, never mutate a shared adapter."""
         bound = copy(self)
-        bound.file_storage, bound.file_scope = storage, scope
+        bound.file_engine, bound.file_context = engine, context
         return bound
 
     def _open_file(self, part):
-        if self.file_storage is None or self.file_scope is None:
+        if self.file_engine is None or self.file_context is None:
             raise ValueError("The adapter requires a trusted scoped file resolver.")
-        return open_write_file(self.file_storage, part["reference"], scope=self.file_scope)
+        return open_write_input(self.file_engine, part["reference"], context=self.file_context)
 
     def _file_bytes(self, part):
         with self._open_file(part) as stream:
@@ -351,21 +369,21 @@ class WriteAdapter:
             raise WriteFailure("permission_denied", "A trusted application tenant is required for write isolation.")
         if context.allowed_namespaces is not None and source.namespace not in context.allowed_namespaces:
             raise WriteFailure("permission_denied", "The target namespace is outside the trusted client policy.")
-        if source.options:
+        if source.options and (self.family != "laserfiche" or set(source.options) - {"repository_id"}):
             raise ValueError("Write sources do not accept arbitrary options or credential overrides.")
+        config = self.credentials(source, context)
         if self.family == "legistar":
-            _legistar_client(source)
+            target, policy = _legistar_client(source), "allowed_clients"
         elif self.family == "wistia":
-            host = parsed.hostname
-            if host not in {"api.wistia.com", "upload.wistia.com", "fast.wistia.com"} and host not in {
-                f"{source.namespace}.wistia.com", f"{source.namespace}.wistia.net",
-            }:
-                raise ValueError("The Wistia source is not an authorized provider/account origin.")
+            target, policy = _wistia_account(source), "allowed_accounts"
         elif self.family == "laserfiche":
-            _laserfiche_repository(source)
+            target, policy = _laserfiche_repository(source), "allowed_repositories"
+            if parsed.hostname != "api.laserfiche.com" and policy not in config:
+                raise WriteFailure("permission_denied", "Public WebLink citations require an explicit repository allowlist.")
         else:
             raise WriteFailure("mapping_unverified", "No verified native write mapping is installed.")
-        self.credentials(source, context)
+        if policy in config and target not in config[policy]:
+            raise WriteFailure("permission_denied", "The native target is outside the provider credential policy.")
 
     def authorize(self, source, change, context):
         self.validate_source(source, context)

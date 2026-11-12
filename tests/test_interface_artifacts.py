@@ -233,7 +233,9 @@ def test_http_native_export_upload_download_current_policy_ttl_hash_and_legacy(t
         cfg.tokens[TOKEN_A] = identity
         stored = owner.storage.get("service_files", handle, scope=identity.context().scope)
         assert stored.value["purpose"] == "input"
-        assert stored.value["reference"] == stored.value["storage_reference"]
+        assert "reference" not in stored.value
+        assert stored.value["filename"] == "packet.pdf"
+        assert stored.value["content_type"] == "application/pdf"
         owner.storage.put("service_files", handle, {**stored.value, "sha256": "0" * 64},
                           scope=identity.context().scope, expected_version=stored.version)
         assert client.post("/v1/operations/export", headers=auth, json=request).json()["status"] == "failed"
@@ -242,7 +244,7 @@ def test_http_native_export_upload_download_current_policy_ttl_hash_and_legacy(t
                           scope=identity.context().scope, expected_version=changed.version)
         assert client.get("/v1/files/" + handle, headers=auth).status_code == 404
         assert client.post("/v1/operations/export", headers=auth, json=request).json()["status"] == "failed"
-        # Historical persisted handles retain exact scoped reads, without invented MIME or expiry.
+        # Legacy uploads retain their scoped, hash-verified read/parser contract.
         legacy = "a" * 64
         reference = owner.storage.save_capture(io.BytesIO(payload()), scope=identity.context().scope, max_bytes=65536)
         owner.storage.put("service_files", legacy, {"reference": reference}, scope=identity.context().scope)

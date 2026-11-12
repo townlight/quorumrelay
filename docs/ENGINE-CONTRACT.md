@@ -25,6 +25,8 @@ Engine construction does not start services, open a database, fetch data, or wri
 
 Public entry points use `from quorumrelay import create_engine`: `create_engine(*, storage=None, connectors=(), provider_transport=None, provider_browser=None, write_adapters=None, write_approval=None)`. This registers every standard module once. `write_adapters=None` includes real built-in adapters but grants no credentials/authorization; an explicit empty dictionary disables them. No implicit database or service starts.
 
+Native additive input formats require `create_engine()` or `providers.register(engine)`; an unextended bare `Engine()` supports only the 34 baseline formats.
+
 Missing implementation returns `unsupported` with reason explicitly distinguishing unavailable implementation from unsupported vendor capability. Unsupported fields/invalid input return `failed` plus typed errors. Every convenience call preserves the complete result envelope, not only its record list.
 
 ## Common serialization
@@ -32,6 +34,8 @@ Missing implementation returns `unsupported` with reason explicitly distinguishi
 `OperationResult`: `schema_version`, `status` (`completed|partial|cancelled|failed|unsupported`), `data`, `errors`, `coverage`, `operation_id`. Error: `code`, `message`, `retryable`, `source`, `details`. Public JSON never serializes OperationContext or credentials.
 
 `Source`: `provider`, `url`, optional `namespace`, `body`, `input_format`, `options` object. Namespace must equal evidenced provider-derived namespace, not an arbitrary user tenant label. `url` is a durable source/citation, never credentials. Options contain only provider-documented configuration, never arbitrary fetch targets or secrets.
+
+Source rejects recognized credential keys in URL queries and recursively in options, including case, hyphen and underscore variants. Errors identify the key path without its value and direct callers to private `OperationContext.credentials` using the provider-specific documented shape (for example, `legistar_token` for Legistar reads and nested provider objects for native writes). Generated record and text citations strip credential query parameters (and signed-transfer authentication); original captures and unknown upstream fields remain lossless.
 
 `Bounds`: optional inclusive `date_from`/`date_to` (`YYYY-MM-DD`); `max_records=1000`, `max_pages=25`, `parser_bytes=16777216`, `transfer_bytes=209715200`, `deadline_seconds=45`, optional `checkpoint`. Date filtering uses a source-supplied local calendar date when supplied, otherwise known scheduled date. Unknown dates remain explicit partial coverage, not silently excluded. API-specific ge/lt ranges must map the inclusive caller end date to the correct exclusive next-day boundary without inventing unknown time zones.
 

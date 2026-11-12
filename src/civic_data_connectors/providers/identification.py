@@ -62,7 +62,7 @@ def configured_source(value):
         raise ValueError("source must be a configured source object.")
     return Source.from_dict({**value, "provider": canonical_provider(value.get("provider"))})
 SENSITIVE_QUERY = re.compile(
-    r"^(?:token|access_token|id_token|password|secret|authorization|credential|"
+    r"^(?:token|access_token|id_token|password|secret|authorization|cookie|client[-_]?secret|credentials?|"
     r"api[-_]?key|signature|sig|x-amz-.*|x-goog-.*)$", re.I,
 )
 _HOSTS = (
