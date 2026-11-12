@@ -66,6 +66,9 @@ def register(engine, *, transport: Transport | None = None,
     from .primegov_search import native_search as primegov_search
     engine.register_native_search("primegov", tracked_handler("search", lambda engine, request, content, context:
                                   primegov_search(engine, request, content, context, transport=transport)))
+    from .escribe_search import native_search as escribe_search
+    engine.register_native_search("escribe", tracked_handler("search", lambda engine, request, content, context:
+                                  escribe_search(engine, request, content, context, transport=transport)))
     from .civicplus_export import export_historical
     engine.register_native_export("civicplus-select", tracked_handler("export", export_historical))
 
