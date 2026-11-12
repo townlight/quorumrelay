@@ -191,7 +191,7 @@ def test_node_independent_tarball_client_real_loopback_sequence(tmp_path):
 import assert from 'node:assert/strict';
 import {CivicConnectorClient, ServiceError} from 'quorumrelay-client';
 const client = new CivicConnectorClient({baseUrl:process.env.CIVIC_CONNECTOR_URL,token:process.env.CIVIC_CONNECTOR_TOKEN});
-const info = await client.info(); assert.equal(info.data.version,'0.1.0.dev4');
+const info = await client.info(); assert.equal(info.data.version,'0.1.0.dev5');
 const discovered = await client.execute('discover',JSON.parse(process.env.CIVIC_REQUEST));
 assert.equal(discovered.status,'partial'); assert.equal(discovered.data.records.length,1);
 const preview = await client.execute('import_preview',{result:discovered}); assert.equal(preview.data.persisted,false);

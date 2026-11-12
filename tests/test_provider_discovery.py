@@ -154,15 +154,18 @@ def test_civicclerk_independent_captures_follow_all_four_pages():
     assert "publishedFiles" in raw and "secondaryIanaTimeZone" in raw
 
 
-def test_civicclerk_discovery_media_reaches_preview_and_guarded_retrieval():
+@pytest.mark.parametrize("scheme", ["https://", "HTTPS://"])
+def test_civicclerk_discovery_media_reaches_preview_and_guarded_retrieval(scheme):
     from civic_data_connectors import imports as imports_api
     from civic_data_connectors.engine import canonical_hash
     from civic_data_connectors.legacy import legacy_previews
 
     content = (BRIEF / "civicclerk-erie-events-2026-11-11-page1.json").read_bytes()
+    media_url = scheme + "cpmedia.azureedge.net/erieco/6a41c49b6f.mp4"
+    if scheme != "https://":
+        content = content.replace(b"https://cpmedia.azureedge.net/erieco/6a41c49b6f.mp4", media_url.encode())
     original_payload = json.loads(content)
     original_event = next(row for row in original_payload["value"] if row["id"] == 1277)
-    media_url = "https://cpmedia.azureedge.net/erieco/6a41c49b6f.mp4"
     media_bytes = b"captured fixture video bytes"
     source = Source("civicplus-select", "https://erieco.api.civicclerk.com/v1/Events",
                     input_format="civicplus-events-json")

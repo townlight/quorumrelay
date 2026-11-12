@@ -16,12 +16,12 @@
     "other_product_applicability_unverified": 3,
     "neutral_standard_not_provider_write": 1
   },
-  "evidence_records": 248,
-  "distinct_evidence_urls": 172,
+  "evidence_records": 254,
+  "distinct_evidence_urls": 176,
   "exact_identity_lookups": 37,
   "original_SOURCE_FORMATS_independently_checked": true,
   "negative_checks_passed": 5,
   "errors": [],
-  "live_provider_acceptance": "Two bounded live-read receipts are verified: one Legistar event detail and two CHAMP event details. Receipt hashes and saved capture-fixture hashes are validated separately; CHAMP receipt response digests differ from the saved route-probe captures. Neither read proves catalog completeness. Provider write acceptance is NOT_RUN because no authorized provider test tenants or credentials were supplied.",
+  "live_provider_acceptance": "Three bounded receipt files document five public engine read calls: one Legistar event detail, two CHAMP event details, and first/resumed Granicus Superior Clip searches. This validator checks the Legistar and CHAMP receipt/capture relationships; the distinct Granicus receipt and page-fixture hashes are recorded separately and are not cross-compared. None proves catalog completeness. Provider write acceptance is NOT_RUN because no authorized provider test tenants or credentials were supplied.",
   "engine_status_reconciliation": "Owned independently by engine implementation owners"
 }

@@ -3724,6 +3724,48 @@
           "proof_level": "public_extracted_page_not_engine_acceptance"
         },
         {
+          "id": "granicus-native-search-first-page",
+          "url": "https://townofsuperior.granicus.com/ViewSearchResults.php?view_id=2",
+          "title": "Superior native Clip search first-page capture",
+          "kind": "public_tenant_capture",
+          "observed": "2026-11-12 bounded engine run",
+          "findings": "The observed same-origin form targets ViewSearchResults.php with numeric view_id=2, types[Clip]=on, and the first supplied expression in allwords. The captured response supplies Clip candidates; QuorumRelay locally checks title and meeting date.",
+          "limits": "Provider candidate semantics are unknown. This capture is one selected public tenant/page and does not establish full catalog coverage, other categories or agenda/document-text search.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "saved_public_response_fixture_not_catalog_acceptance",
+          "fixture_path": "tests/fixtures/granicus-native-search/planning-search.html",
+          "fixture_sha256": "b45599420fe6e733bc13ea04b8547c6d214526846d49c5f4400ba8207ab64b08"
+        },
+        {
+          "id": "granicus-native-search-page-two",
+          "url": "https://townofsuperior.granicus.com/ViewSearchResults.php?view_id=2&pagenumber=2",
+          "title": "Superior native Clip search continuation capture",
+          "kind": "public_tenant_capture",
+          "observed": "2026-11-12 bounded engine run",
+          "findings": "The same-origin Clip form uses numeric pagenumber continuation. The captured page is used to test bounded continuation and source/query/scope-bound checkpoint behavior.",
+          "limits": "A bounded continuation capture does not establish archive bounds, full catalog completeness or search semantics across tenants and product versions.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "saved_public_response_fixture_not_catalog_acceptance",
+          "fixture_path": "tests/fixtures/granicus-native-search/planning-page2.html",
+          "fixture_sha256": "9a582bcdff5612f8a894f60842082f6b168d151d753a49d3c7cf3f92baa6c18b"
+        },
+        {
+          "id": "granicus-native-search-live-final",
+          "url": "https://townofsuperior.granicus.com/ViewPublisher.php?view_id=2",
+          "title": "Superior bounded live native Clip search receipt",
+          "kind": "live_engine_bounded_read_receipt",
+          "observed": "2026-11-12 first and resumed engine reads",
+          "findings": "Both first and resumed calls returned five distinct Clip hits and status partial. Exact local AND applies to title/date metadata; candidate selection uses the provider's first supplied expression. Source/query/scope-bound continuation checks the saved page hash.",
+          "limits": "One public tenant and Clip category only. Provider candidate semantics, full catalog/source completeness, agenda/document text, transcripts and other categories remain unverified. This is bounded read evidence, not provider write acceptance.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_engine_read_no_write",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "receipt_path": "docs/verification/granicus-native-search-2026-11-12.json",
+          "receipt_sha256": "9bb80ad08cf99ff178739df8604476c6e812f3761aa0e4b7cd3143b551f5eb96"
+        },
+        {
           "id": "quorumrelay-shared-core-operations",
           "url": "https://github.com/townlight/quorumrelay/tree/main/tests",
           "title": "Shared QuorumRelay identity, baseline parser, search and interchange implementation paths",
@@ -3742,9 +3784,11 @@
       "tenants": [
         {
           "url": "https://townofsuperior.granicus.com/ViewPublisher.php?view_id=2",
-          "observation": "Public listing with meeting rows and links.",
+          "observation": "Public listing and native Clip search form; bounded search returned partial results.",
           "evidence_ids": [
-            "granicus-superior"
+            "granicus-superior",
+            "granicus-native-search-first-page",
+            "granicus-native-search-live-final"
           ]
         }
       ],
@@ -3775,13 +3819,15 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "granicus-superior"
+            "granicus-superior",
+            "granicus-native-search-first-page",
+            "granicus-native-search-live-final"
           ],
-          "details": "ViewPublisher tables/RSS/document/player links and keyword search UI observed; full archive/pagination/search request mechanics pending.",
+          "details": "A bounded native Clip search route is now implemented for the selected Superior ViewPublisher source. It is search, not general discovery: complete publisher archive/catalog traversal, RSS continuation and document/recording fetch remain separate and unverified.",
           "dependencies": [],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "Full publisher archive/catalog traversal and RSS continuation remain unverified.",
+            "Document/recording retrieval and cross-tenant behavior remain unverified."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -3843,23 +3889,26 @@
         },
         "native_search": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "granicus-superior"
+            "granicus-native-search-first-page",
+            "granicus-native-search-page-two",
+            "granicus-native-search-live-final",
+            "quorumrelay-shared-core-operations"
           ],
-          "details": "ViewPublisher tables/RSS/document/player links and keyword search UI observed; full archive/pagination/search request mechanics pending.",
+          "details": "For configured HTTPS Superior-style ViewPublisher sources on *.granicus.com, native search submits the observed same-origin ViewSearchResults.php Clip form with numeric view_id, types[Clip]=on, first supplied expression in allwords and pagenumber continuation. The provider selects candidates; local exact AND checks only supplied title/date metadata. Continuations bind source/query/scope and verify page content hashes. The bounded receipt records five distinct hits on each of the first and resumed reads, both partial.",
           "dependencies": [],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "Provider candidate semantics and behavior across tenants/product versions remain unverified.",
+            "Full catalog/source coverage, agenda/document text, transcripts, other categories and unidentified rows remain incomplete."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "bounded_live_read_plus_saved_contract_fixtures_and_named_tests_not_catalog_or_write_acceptance",
           "tenant_scope": [
             "https://townofsuperior.granicus.com/ViewPublisher.php?view_id=2"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Saved response contract tests plus docs/verification/granicus-native-search-2026-11-12.json: first and resumed public engine reads each returned five distinct Clip hits with partial coverage; no write acceptance.",
           "restrictions": [
             "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -4933,10 +4982,52 @@
           "kind": "official_documentation",
           "observed": "2026-11-11",
           "findings": "Historical consultant intake accepts PDF and MP4. Per event/meeting: up to five PDFs and one audio/video file. Stem format is MeetingBody_MeetingType_FileType_MM_DD_YYYY; examples are Agenda, Agenda Packet and Minutes. Files go in the Imports FTP main folder using project-lead credentials; consultant processes, spot-checks and releases the result.",
-          "limits": "No historical-import size limit, file-extension rule, or escaping rule is stated. FileType prose varies (Packet/Agenda Packet, Notice/Notices, Media/Audio-Video) and explicit examples cover only Agenda, Agenda Packet and Minutes. Article conflicts on ftp://imports.civicclerk.com vs ftp://important.civicclerk.com. No transfer or import was attempted; this is not a REST API. Agenda packets remain single PDFs and MP4 bookmarks/timestamps are lost.",
+          "limits": "No historical-import size limit, file-extension rule, or escaping rule is stated. The official-linked Filename Tester v3.5.9 classifies Notice/Notices as Notice, Packet/Agenda Packet as Agenda Packet, Media .mp4 as Video, and Other as Other; those are classifier results, not consultant acceptance. Article conflicts on ftp://imports.civicclerk.com vs ftp://important.civicclerk.com. No transfer or import was attempted; this is not a REST API. Agenda packets remain single PDFs and MP4 bookmarks/timestamps are lost.",
           "observation_date": "2026-11-11",
           "access_scope": "public_research_only",
           "proof_level": "official_documentation_or_ui_contract_not_live_acceptance"
+        },
+        {
+          "id": "select-filename-tester-html",
+          "url": "https://civicplus-lruiz.github.io/Historical-Import-Tester/Tester.html",
+          "title": "Official-linked Filename Tester v3.5.9 source capture",
+          "kind": "official_embedded_tool_source",
+          "observed": "2026-11-11",
+          "findings": "The official Historical Imports article embeds this filename classifier. Its HTML source is preserved as a byte-hashed evidence file.",
+          "limits": "Filename classification is not an FTP upload or consultant-import result. The article's explicit successful filename examples remain Agenda, Agenda Packet and Minutes.",
+          "observation_date": "2026-11-11",
+          "access_scope": "public_official_embedded_tool_capture",
+          "proof_level": "official_linked_tool_source_not_vendor_import_acceptance",
+          "fixture_path": "docs/capabilities/evidence/civicplus-official-filename-tester-v3.5.9.html",
+          "fixture_sha256": "9f056bcd6fbcd4002c18b302a57b8155acbaa81517f78d82e2a4d209fa4c5c0f"
+        },
+        {
+          "id": "select-filename-tester-cases",
+          "url": "https://civicplus-lruiz.github.io/Historical-Import-Tester/Tester.html",
+          "title": "Filename Tester v3.5.9 isolated classification cases",
+          "kind": "source_and_named_test_coverage",
+          "observed": "2026-11-11",
+          "findings": "The original determineFileType/norm JavaScript was executed in an isolated Node VM without upload. Captured cases classify Notice/Notices as Notice, Packet/Agenda Packet as Agenda Packet, Media .mp4 as Video, and Other as Other.",
+          "limits": "These are filename-classifier outputs, not evidence that a consultant or vendor accepted, processed or released any file. The implementation uses canonical tokens only and rejects the ambiguous aliases Packet, Notices and Audio/Video.",
+          "observation_date": "2026-11-11",
+          "access_scope": "official_linked_client_code_local_classification_only",
+          "proof_level": "official_linked_classifier_cases_not_vendor_acceptance",
+          "fixture_path": "docs/capabilities/evidence/civicplus-official-filename-tester-v3.5.9-cases.json",
+          "fixture_sha256": "e5b1a9c9b8ba1bb10bca63c0d37ff79f5d04dde8b8eab297f2f99676b4d42e07"
+        },
+        {
+          "id": "civicplus-media-discovery-1277",
+          "url": "https://erieco.api.civicclerk.com/v1/Events",
+          "title": "Erie CivicClerk captured Events page with event 1277 mediaStreamPath",
+          "kind": "public_tenant_capture",
+          "observed": "2026-11-11",
+          "findings": "The saved page contains provider event id 1277 and the literal HTTPS mediaStreamPath https://cpmedia.azureedge.net/erieco/6a41c49b6f.mp4. Discovery enrichment surfaces that exact captured URL as a recording, citation and relationship; malformed and relative paths are not expanded.",
+          "limits": "The fixture is a single saved page; the regression replays it locally with synthetic transport and does not establish live engine media retrieval, full catalog coverage, codec/playability or provider acceptance. Fetching the external origin requires an explicit download_origins grant.",
+          "observation_date": "2026-11-11",
+          "access_scope": "saved_public_capture_and_synthetic_fixture_tests",
+          "proof_level": "saved_public_capture_and_named_fixture_test_not_live_engine_acceptance",
+          "fixture_path": "tests/fixtures/brief-discovery/civicclerk-erie-events-2026-11-11-page1.json",
+          "fixture_sha256": "0ccdf5fb693d2a1de869b59d183a1a0b5ee49589580d37104c591e8e01c8bb07"
         },
         {
           "id": "select-create",
@@ -5073,24 +5164,27 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "select-lacey",
-            "select-search"
+            "select-search",
+            "civicplus-media-discovery-1277",
+            "quorumrelay-shared-core-operations"
           ],
-          "details": "Published portal event/items observed; exact live Events OData request and pagination require independent provider-response checks.",
+          "details": "The engine has a bounded CivicClerk Events collection route with guarded nextLink handling. Discovery-only enrichment surfaces an exact captured absolute HTTPS mediaStreamPath as a normalized recording, citation and relationship; relative/malformed paths are retained only in original data. A saved page remains partial and is not a full tenant catalog.",
           "dependencies": [],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "Full tenant catalog completeness, broader search and tenant-specific continuation remain unverified.",
+            "The event 1277 media regression uses a saved capture and synthetic transport; it is not a live engine retrieval or media-playability acceptance."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_and_saved_fixture_contract_test_not_provider_acceptance",
           "tenant_scope": [
-            "https://laceywa.portal.civicclerk.com/event/1077/files"
+            "https://laceywa.portal.civicclerk.com/event/1077/files",
+            "https://erieco.api.civicclerk.com/v1/Events"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "tests/test_provider_discovery.py covers saved CivicClerk pages and event 1277 enrichment with synthetic transport; no engine-mediated live media retrieval or write.",
           "restrictions": [
             "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -5098,24 +5192,25 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "select-lacey",
-            "select-search"
+            "civicplus-media-discovery-1277",
+            "quorumrelay-shared-core-operations"
           ],
-          "details": "Published portal event/items observed; exact live Events OData request and pagination require independent provider-response checks.",
+          "details": "Guarded attachment fetch can read a recording from the captured CivicClerk record by identity/index and returns the exact citation URL and bytes hash. External media origins require an explicit source.options.download_origins grant; the saved event 1277 regression uses synthetic transport.",
           "dependencies": [],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "Live connector fetch from the captured external media origin and media playability remain unverified.",
+            "Detail/readback coverage for all CivicClerk tenants and media types remains unverified."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_and_saved_fixture_contract_test_not_provider_acceptance",
           "tenant_scope": [
-            "https://laceywa.portal.civicclerk.com/event/1077/files"
+            "https://erieco.api.civicclerk.com/v1/Events"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "tests/test_provider_discovery.py tests the exact captured recording URL with explicit download_origins and synthetic media bytes; no live connector media fetch.",
           "restrictions": [
             "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -5213,22 +5308,24 @@
           "capability_status": "documented",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "select-import"
+            "select-import",
+            "select-filename-tester-html",
+            "select-filename-tester-cases"
           ],
-          "details": "The source engine registers a local historical-file preparation operation; 11 targeted tests pass for the three documented PDF filename examples and bounded output. The helper hashes exact local bytes and writes a ZIP wrapper plus loss manifest. It is not an FTP transfer or vendor ZIP import. MP4/file-type tokens remain unsupported until exact spelling is established; the dev3 wheel receipt predates this source follow-up.",
+          "details": "The source engine prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus a Media MP4. The official article gives literal successful filename examples for only Agenda, Agenda Packet and Minutes; its embedded Filename Tester v3.5.9 classifies Notice/Notices as Notice, Packet/Agenda Packet as Agenda Packet, Media .mp4 as Video, and Other as Other. The implementation checks full-filename classifier compatibility, PDF structure, bounded MP4 box framing, exact local bytes and hashes, file caps and projection losses. It rejects the ambiguous aliases Packet, Notices and Audio/Video. Its ZIP is a local wrapper, not a vendor ZIP importer or FTP transfer.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify exact vendor token spelling for Packet/Notice/Notices/Other/Media/Audio-Video before enabling those types; MP4 preparation remains incomplete.",
-            "Rebuild and verify the artifact containing the source follow-up; the existing dev3 wheel and installed receipt predate this helper.",
+            "The linked tester is preparation evidence only; backend acceptance of canonical Notice, Other and Media filenames remains unverified because no consultant or vendor import was performed.",
+            "MP4 box framing does not establish codec compatibility, playback, captions or post-import fidelity. Build and installed acceptance for the dev5 candidate remain incomplete.",
             "Resolve the conflicting FTP host and obtain project-lead credentials before any transfer; none was attempted or authorized in this research."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "official_file_format_plus_local_engine_fixture_tests_not_provider_acceptance",
+          "evidence_level": "official_file_format_and_linked_classifier_plus_local_fixture_tests_not_provider_acceptance",
           "tenant_scope": [
             "https://laceywa.portal.civicclerk.com/event/1077/files"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Local source engine helper; tests/test_civicplus_export.py: 11 passed. No FTP access, provider credentials or vendor import acceptance.",
+          "test_access": "Local source and interface fixtures cover canonical tokens, alias rejection, filename collisions, PDF parsing, bounded MP4 framing and exact local-byte preservation. No FTP access, provider credentials or vendor import acceptance.",
           "restrictions": [
             "No FTP connections or remote writes performed",
             "Local ZIP is a transport wrapper, not an established vendor ZIP import",
@@ -5720,7 +5817,7 @@
             {
               "normalized": "document_kind",
               "provider_field": "filename:FileType",
-              "notes": "Explicit filename examples are Agenda, Agenda Packet and Minutes. The same page also uses Packet, Notice/Notices, Other, Media and Audio/Video in prose; exact accepted token spellings outside the three examples remain unverified.",
+              "notes": "Canonical local mappings are Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4. Official literal successful filename examples cover only Agenda, Agenda Packet and Minutes. The linked v3.5.9 tester classifies Notice/Notices as Notice, Packet/Agenda Packet as Agenda Packet, Media .mp4 as Video and Other as Other; these classifier results do not prove consultant acceptance. Packet, Notices and Audio/Video aliases are rejected by the exporter.",
               "mapping_level": "documented_filename_or_file_format"
             },
             {
@@ -5737,13 +5834,15 @@
             }
           ],
           "evidence_ids": [
-            "select-import"
+            "select-import",
+            "select-filename-tester-html",
+            "select-filename-tester-cases"
           ],
           "account_requirements": "Imports FTP username/password are provided by CivicPlus project lead; none supplied. The page names two conflicting hosts; no connection or transfer was performed.",
           "authorized_test_access": "not_supplied;public_docs_only;no_FTP_access_or_transfer",
           "readback_receipt": "Consultant processes, spot-checks and releases the import; after release, manually review each expected meeting/file in Select. No transfer or consultant release occurred. PDF bytes may be optimized, so source hash equality is not a documented acceptance check.",
-          "verification_status": "implemented_fixture_tested_partial_tokens_not_live_accepted",
-          "notes": "The source engine helper creates a local ZIP wrapper and loss manifest for the explicit Agenda, Agenda Packet and Minutes PDF examples; tests/test_civicplus_export.py passes 11 tests. Packet/Notice/Notices/Other/Media/Audio-Video filename-token support remains unverified and returns unsupported. ZIP transport is a QuorumRelay wrapper, not a vendor ZIP importer. No FTP connection or vendor import was performed; current dev3 wheel predates this follow-up code.",
+          "verification_status": "implemented_fixture_tested_classifier_checked_not_live_accepted",
+          "notes": "The source engine prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4; local checks cover full-filename tester compatibility, PDF parsing, bounded MP4 box framing, caps, hashes and projection losses. The linked tester classifies Media .mp4 as Video; this is not vendor acceptance. Packet, Notices and Audio/Video aliases remain rejected. ZIP is a QuorumRelay local wrapper, not a vendor ZIP importer. No FTP connection or consultant/vendor import was performed; dev5 build and installed acceptance remain incomplete.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5754,7 +5853,7 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "referenced_contract_or_ui_documentation",
+          "evidence_level": "official_filename_format_linked_classifier_and_local_tests_not_vendor_acceptance",
           "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_file_import",
@@ -5785,8 +5884,8 @@
       ],
       "remaining_research": [
         "On the selected Lacey portal, capture the exact Events/OData request generated by date/type/keyword controls and one continuation response; existing evidence proves an event/file read, not search pagination.",
-        "The local historical exporter covers only Agenda, Agenda Packet and Minutes PDFs. Resolve Packet/Notice/Notices/Other/Media/AudioVideo spellings and MP4 naming from authoritative import examples before enabling them.",
-        "Historical FTP host is contradictory; credentials, transfer, consultant processing and readback are absent. Authenticated create/update/upload routes remain account-gated."
+        "The exporter now prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4; the official-linked v3.5.9 filename tester supplies classifier results for the latter categories but no backend acceptance. Confirm accepted filenames and post-import behavior with the consultant/vendor; MP4 codec/playability, captions and timestamp preservation remain unverified.",
+        "Historical FTP host is contradictory; project-lead credentials, transfer, consultant processing and readback are absent. Authenticated create/update/upload routes remain account-gated."
       ],
       "requirement_ids": [
         "C01",

@@ -1,0 +1,78 @@
+{
+  "observed_at": "2026-11-12T04:55:25.591223+00:00",
+  "candidate": "0.1.0.dev5",
+  "status": "passed_for_tested_source",
+  "checks": [
+    {
+      "command": ".venv/python -X utf8 -m pytest tests -q",
+      "passed": 450,
+      "failed": 2,
+      "skipped": 8,
+      "warnings": 1,
+      "seconds": 69.24,
+      "receipt": "workspace outputs/quorumrelay-dev5-pytest.log",
+      "failure_cause": "Two hardcoded prior dev4 version expectations; updated to exact dev5. Eight browser cases skipped because this environment lacked optional Playwright."
+    },
+    {
+      "command": "connector-interface-venv/python -X utf8 -m pytest tests/test_public_package.py tests/test_interfaces.py::test_node_independent_tarball_client_real_loopback_sequence tests/test_weblink_session.py -q",
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "warnings": 1,
+      "seconds": 9.29,
+      "receipt": "workspace outputs/quorumrelay-dev5-affected-checks.log",
+      "scope": "Covers both repaired expectations and all eight previously skipped browser cases; three already-passing cases overlap."
+    },
+    {
+      "command": "python -m ruff check src tests scripts examples",
+      "status": "passed",
+      "scope": "Final production, metadata validator and changed tests"
+    },
+    {
+      "command": "npm --prefix client run build",
+      "status": "passed"
+    },
+    {
+      "command": "npm --prefix client test",
+      "passed": 4
+    },
+    {
+      "command": "git diff --check -- excluding immutable raw fixtures",
+      "status": "passed"
+    },
+    {
+      "command": "pytest tests/test_provider_discovery.py -k civicclerk_discovery_media -q",
+      "passed": 2,
+      "seconds": 0.18,
+      "scope": "Both literal HTTPS scheme spellings through discovery/preview/retrieval; one added case."
+    },
+    {
+      "command": "Granicus native search plus existing native-search/discovery/storage affected suite",
+      "passed": 100,
+      "scope": "Five new Granicus tests, including resumed-page/query/scope binding, empty response, bounds/failures and durable cancellation; remaining cases overlap existing passes."
+    },
+    {
+      "command": "validate_capabilities.py --baseline-source <pinned original meeting_imports.py>",
+      "status": "passed",
+      "negative_checks": 5,
+      "source_sha256": "fac5775534f88d30c908d003e729601672985da5547f49972cdbe6968c963049",
+      "receipt": "docs/capabilities/research-validation.json"
+    },
+    {
+      "command": "pytest tests/test_capabilities.py -q",
+      "passed": 2,
+      "scope": "After final F05/F03 metadata sync"
+    },
+    {
+      "command": "pytest --collect-only -q",
+      "collected": 466
+    }
+  ],
+  "unique_pytest_cases_covered": 466,
+  "remaining_changed_inputs": [],
+  "limits": [
+    "No single uninterrupted 466-pass local run: full initial run and bounded affected recovery/addition checks cover all collected cases; original failures preserved.",
+    "Development source proof only; fresh artifact, required CI, installed consumers and provider live acceptance remain separate."
+  ],
+  "client_sha256": "9e53e23f6f862d5de32a131f4fc42eabf2dd22c8d00b67cf157a8f8467070f37"
+}

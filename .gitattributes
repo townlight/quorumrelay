@@ -1,4 +1,5 @@
 # Captures and expected outputs are byte-identity evidence, including original line endings.
 tests/fixtures/** -text
 docs/capabilities/inventory.json -text whitespace=cr-at-eol
+docs/capabilities/evidence/** -text
 docs/verification/*.json -text whitespace=cr-at-eol

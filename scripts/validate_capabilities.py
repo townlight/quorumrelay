@@ -319,10 +319,11 @@ def main():
         "negative_checks_passed": negative,
         "errors": errors,
         "live_provider_acceptance": (
-            "Two bounded live-read receipts are verified: one Legistar event detail and two CHAMP "
-            "event details. Receipt hashes and saved capture-fixture hashes are validated separately; "
-            "CHAMP receipt response digests differ from the saved route-probe captures. Neither read "
-            "proves catalog completeness. Provider write acceptance is NOT_RUN because no authorized "
+            "Three bounded receipt files document five public engine read calls: one Legistar event "
+            "detail, two CHAMP event details, and first/resumed Granicus Superior Clip searches. "
+            "This validator checks the Legistar and CHAMP receipt/capture relationships; the distinct "
+            "Granicus receipt and page-fixture hashes are recorded separately and are not cross-compared. "
+            "None proves catalog completeness. Provider write acceptance is NOT_RUN because no authorized "
             "provider test tenants or credentials were supplied."
         ),
         "engine_status_reconciliation": "Owned independently by engine implementation owners",

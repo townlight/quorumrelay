@@ -66,3 +66,5 @@ Every row supports baseline parsing, local search over actual captured fields, a
 ## Evidence boundaries
 
 `tests/test_baseline.py`, `test_baseline_search.py`, provider/discovery/detail/native-search tests, storage/import/interchange/write tests and the original matrix cover deterministic behavior. `docs/verification/legistar-detail-2026-11-11.json`, `champ-detail-2026-11-11.json` and `native-search-tyler-2026-11-11.json` preserve bounded public-read outcomes. Historical development wheels and their receipts remain immutable snapshots; dev4 identifies the current build in `verification/quorumrelay-development-04.json`; dev3 and earlier receipts remain historical snapshots.
+
+- **Granicus native Clip metadata search:** the observed Superior `ViewPublisher.php` form uses same-origin `ViewSearchResults.php` and numeric `pagenumber`. The provider chooses candidates using the first supplied expression; local matching applies exact AND to title/date metadata. Source/query/scope-bound continuations verify mid-page content hashes. Results remain partial with no catalog, full document, transcript or other category coverage; unidentified rows are omitted and counted.

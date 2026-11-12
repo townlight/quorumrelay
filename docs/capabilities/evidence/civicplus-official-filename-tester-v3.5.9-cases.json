@@ -1,0 +1,19 @@
+{
+  "official_article": "https://www.civicplus.help/meetings-select/docs/historical-imports",
+  "embedded_tool": "https://civicplus-lruiz.github.io/Historical-Import-Tester/Tester.html",
+  "captured_html": "civicplus-official-embedded-filename-tester.html",
+  "captured_utf8_sha256": "9f056bcd6fbcd4002c18b302a57b8155acbaa81517f78d82e2a4d209fa4c5c0f",
+  "tester_title": "Filename Tester — Meeting Import v3.5.9",
+  "method": "Executed original determineFileType and norm functions from captured client-side tester in isolated Node VM; no transfer or submission",
+  "cases": [
+    {"filename":"City Council_Regular Meeting_Media_12_18_2020.mp4","tester_type":"Video"},
+    {"filename":"City Council_Regular Meeting_Video_12_18_2020.mp4","tester_type":"Video"},
+    {"filename":"City Council_Regular Meeting_Notice_12_18_2020.pdf","tester_type":"Notice"},
+    {"filename":"City Council_Regular Meeting_Notices_12_18_2020.pdf","tester_type":"Notice"},
+    {"filename":"City Council_Regular Meeting_Packet_12_18_2020.pdf","tester_type":"Agenda Packet"},
+    {"filename":"City Council_Regular Meeting_Agenda Packet_12_18_2020.pdf","tester_type":"Agenda Packet"},
+    {"filename":"Agenda Review Board_Regular Meeting_Media_12_18_2020.mp4","tester_type":"Agenda"},
+    {"filename":"City Council_Regular Meeting_Other_12_18_2020.pdf","tester_type":"Other"}
+  ],
+  "limits": "Source labels date parser an exact port; file-type classifier is tester behavior, not independent proof of production consultant import acceptance. Article host instructions conflict; no FTP or vendor processing performed."
+}

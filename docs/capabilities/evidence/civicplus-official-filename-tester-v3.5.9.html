@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Filename Tester — Meeting Import v3.5.9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #f5f5f5;
+    color: #383938;
+    font-family: 'IBM Plex Mono', 'Fira Code', monospace;
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  input:focus { outline: none; }
+  button:active { transform: scale(0.97); }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .animated { animation: slideIn 0.2s ease; }
+
+  /* Header */
+  #header { text-align: center; margin-bottom: 32px; max-width: 640px; }
+  #header .label {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #CC0020; margin-bottom: 10px;
+  }
+  #header h1 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: clamp(22px, 4.5vw, 34px);
+    font-weight: 700; color: #383938; line-height: 1.2;
+  }
+  #header h1 span { color: #CC0020; }
+  #header p { color: #888888; margin-top: 8px; font-size: 12px; line-height: 1.6; }
+  #header p code { color: #666666; }
+
+  /* Main container */
+  #main { width: 100%; max-width: 640px; }
+
+  /* Input box */
+  #input-box {
+    background: #ffffff; border: 1px solid #e0e0e0;
+    border-radius: 10px; margin-bottom: 24px; overflow: hidden;
+  }
+  #input-box .input-label {
+    padding: 8px 14px 2px;
+    font-size: 10px; color: #999999;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  #input-row { display: flex; gap: 8px; padding: 4px 8px 8px; }
+  #filename-input {
+    flex: 1; background: transparent; border: none;
+    color: #383938; font-family: inherit; font-size: 13px;
+    padding: 8px 10px; border-radius: 6px;
+  }
+  #test-btn {
+    background: #CC0020; color: #ffffff; border: none;
+    border-radius: 7px; padding: 9px 18px;
+    font-family: inherit; font-weight: 700; font-size: 12px;
+    cursor: pointer; letter-spacing: 0.05em; white-space: nowrap;
+  }
+
+  /* Result area */
+  #result-area { margin-bottom: 28px; }
+
+  /* Warning banner */
+  #warning-banner {
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.35);
+    border-radius: 8px; padding: 12px 16px;
+    margin-bottom: 10px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  #warning-banner .warn-icon { font-size: 18px; flex-shrink: 0; }
+  #warning-banner .warn-title {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 700; color: #f87171; font-size: 13px; margin-bottom: 3px;
+  }
+  #warning-banner .warn-body { font-size: 12px; color: #777777; line-height: 1.6; }
+  #warning-banner .warn-body code { color: #fca5a5; }
+  #warning-banner .warn-body .good { color: #86efac; }
+
+  /* Result card */
+  #result-card { background: #ffffff; border-radius: 10px; overflow: hidden; }
+
+  /* Status bar */
+  #status-bar {
+    padding: 12px 16px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  #status-bar .status-icon { font-size: 17px; }
+  #status-bar .status-text {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 700; font-size: 14px;
+  }
+  #status-bar .ft-badge {
+    margin-left: auto;
+    border-radius: 5px; padding: 2px 10px;
+    font-size: 11px; font-weight: 700;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+
+  /* Card body */
+  #card-body { padding: 16px; }
+
+  .section-label {
+    font-size: 10px; color: #999999;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 5px;
+  }
+  #parsed-date-text {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 26px; font-weight: 700; color: #CC0020;
+    margin-bottom: 14px;
+  }
+
+  /* Match rows */
+  .match-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 10px; border-radius: 6px;
+    margin-bottom: 4px; flex-wrap: wrap;
+  }
+  .match-row .match-num { font-size: 11px; width: 14px; flex-shrink: 0; }
+  .match-row code { color: #CC0020; font-size: 12px; }
+  .match-row .arrow { color: #999999; font-size: 10px; }
+  .match-row .match-date { font-size: 12px; font-family: 'IBM Plex Sans', sans-serif; }
+  .match-row .match-pattern { margin-left: auto; color: #999999; font-size: 10px; }
+
+  /* No date message */
+  #no-date-msg { color: #666666; font-size: 12px; line-height: 1.8; margin-bottom: 12px; }
+  #no-date-msg code { color: #CC0020; }
+  #no-date-msg .warn-note { color: #ef4444; }
+  #no-date-msg .warn-note code { color: #fca5a5; }
+
+  /* Error message */
+  #error-msg { color: #f87171; font-size: 13px; }
+
+  /* Debug line */
+  #debug-line { padding-top: 10px; border-top: 1px solid #ececec; }
+  #debug-line .debug-label {
+    font-size: 10px; color: #bbbbbb;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  #debug-line code { font-size: 11px; color: #aaaaaa; }
+
+  /* Examples */
+  #examples-label {
+    font-size: 10px; color: #999999;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    margin-bottom: 9px;
+  }
+  #examples-list { display: grid; gap: 5px; }
+  .ex-btn {
+    background: #f9f9f9; border: 1px solid #e8e8e8;
+    border-radius: 7px; padding: 10px 14px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 12px; cursor: pointer; transition: all 0.15s;
+    text-align: left; color: #666666; font-family: inherit;
+  }
+  .ex-btn:hover { background: #f0f0f0; color: #383938; border-color: #cccccc; }
+  .ex-btn .ex-fn { font-size: 12px; }
+  .ex-btn .ex-note { font-size: 11px; color: #aaaaaa; white-space: nowrap; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>Will the script parse<br/><span>your filename?</span></h1>
+</div>
+
+<div id="main">
+  <div id="input-box">
+    <div class="input-label">Filename</div>
+    <div id="input-row">
+      <input id="filename-input" type="text"
+        placeholder="e.g. City Council - Jan 27 2026 - Agenda.pdf"/>
+      <button id="test-btn">Test ↵</button>
+    </div>
+  </div>
+
+  <div id="result-area" style="display:none"></div>
+
+  <div id="examples-label">Try an example</div>
+  <div id="examples-list"></div>
+</div>
+
+<script>
+// ============================================================
+//  DATE PARSING — exact port of Meeting_Import_Stable_v3_5_9.py
+// ============================================================
+const MONTHS_MAP = {
+  january:1,jan:1,february:2,feb:2,march:3,mar:3,
+  april:4,apr:4,may:5,june:6,jun:6,july:7,jul:7,
+  august:8,aug:8,september:9,sept:9,sep:9,
+  october:10,oct:10,november:11,nov:11,
+  december:12,dec:12,
+};
+const WEEKDAYS = new Set([
+  "monday","tuesday","wednesday","thursday","friday","saturday","sunday",
+  "mon","tues","tue","wed","thu","thur","thurs","fri","sat","sun",
+]);
+const THIS_YEAR = new Date().getFullYear();
+
+function pivotYear(y) {
+  if (y < 100) return y < 50 ? 2000 + y : 1900 + y;
+  return y;
+}
+function tryDate(y, m, d) {
+  if (m < 1 || m > 12 || d < 1 || d > 31) return null;
+  const dt = new Date(y, m - 1, d);
+  if (dt.getFullYear() !== y || dt.getMonth() !== m - 1 || dt.getDate() !== d) return null;
+  return dt;
+}
+
+function extractDateTime(filename) {
+  let text = filename.toLowerCase();
+  text = text.replace(/[,\-_.]+/g, " ");
+  text = text.replace(/(\d)(st|nd|rd|th)/g, "$1");
+  const parts = text.split(/\s+/).filter(p => !WEEKDAYS.has(p));
+  text = parts.join(" ");
+
+  const validDates = [];
+  let m;
+
+  // Pattern 1a: Written month, month-first (Jan 27 2026)
+  const p1re = /(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*[^0-9a-z]*?(\d{1,2})(?:[^0-9a-z]*?(\d{2,4}))?/g;
+  while ((m = p1re.exec(text)) !== null) {
+    const month = MONTHS_MAP[m[1].slice(0,3)] ?? 0;
+    const day = parseInt(m[2], 10);
+    let year = m[3] ? parseInt(m[3], 10) : THIS_YEAR;
+    if (year < 100) year = pivotYear(year);
+    if (year >= 1800 && year <= THIS_YEAR + 1 && month) {
+      const dt = tryDate(year, month, day);
+      if (dt) validDates.push({ date: dt, pattern: "Written month (month-first)", matched: m[0].trim() });
+    }
+  }
+
+  // Pattern 1b: Written month, day-first (27 Jan 2026)
+  const p1bre = /(\d{1,2})[^0-9a-z]*?(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*(?:[^0-9a-z]*?(\d{2,4}))?/g;
+  while ((m = p1bre.exec(text)) !== null) {
+    const day = parseInt(m[1], 10);
+    const month = MONTHS_MAP[m[2].slice(0,3)] ?? 0;
+    let year = m[3] ? parseInt(m[3], 10) : THIS_YEAR;
+    if (year < 100) year = pivotYear(year);
+    if (year >= 1800 && year <= THIS_YEAR + 1 && month) {
+      const dt = tryDate(year, month, day);
+      if (dt) validDates.push({ date: dt, pattern: "Written month (day-first)", matched: m[0].trim() });
+    }
+  }
+
+  // Pattern 2: Numeric triplets
+  const p2re = /(?<!\d)(?:\d{3,4}[._\-\s])?(\d{1,4})[._\-\s](\d{1,4})[._\-\s](\d{2,4})(?!\d)/g;
+  while ((m = p2re.exec(text)) !== null) {
+    const a = parseInt(m[1], 10), b = parseInt(m[2], 10);
+    let c = parseInt(m[3], 10);
+    if (c >= 100 && c < 1000) {
+      return { date: null, error: `Invalid 3-digit year detected: ${c} (should be 2-digit or 4-digit)`, debugText: text, allMatches: [] };
+    }
+    if (c < 100) c = pivotYear(c);
+    if (c > THIS_YEAR + 1) continue;
+    const dUS = tryDate(c, a, b);
+    const dEU = tryDate(c, b, a);
+    if (dUS) {
+      validDates.push({ date: dUS, pattern: "Numeric triplet (MM-DD-YYYY · US)", matched: m[0].trim() });
+    } else if (dEU) {
+      validDates.push({ date: dEU, pattern: "Numeric triplet (DD-MM-YYYY · fallback)", matched: m[0].trim() });
+    }
+  }
+
+  // Pattern 3: Year-first (1974_03_04, 2023_05_17)
+  const p3re = /((?:19|20)\d{2})[^\d]?(\d{1,2})[^\d]?(\d{1,2})(?!\d)/g;
+  while ((m = p3re.exec(text)) !== null) {
+    const y = parseInt(m[1], 10), mo = parseInt(m[2], 10), da = parseInt(m[3], 10);
+    if (mo >= 1 && mo <= 12 && da >= 1 && da <= 31 && y >= 1900 && y <= THIS_YEAR + 1) {
+      const dt = tryDate(y, mo, da);
+      if (dt) validDates.push({ date: dt, pattern: "Year-first (YYYY-MM-DD)", matched: m[0].trim() });
+    }
+  }
+
+  // Pattern 3.5: Pure 8-digit MMDDYYYY
+  const p35re = /\b(\d{8})\b/g;
+  while ((m = p35re.exec(text)) !== null) {
+    const raw = m[1];
+    const mm2 = parseInt(raw.slice(0,2), 10), dd2 = parseInt(raw.slice(2,4), 10), yyyy = parseInt(raw.slice(4,8), 10);
+    if (mm2 >= 1 && mm2 <= 12 && dd2 >= 1 && dd2 <= 31) {
+      const dt = tryDate(yyyy, mm2, dd2);
+      if (dt) validDates.push({ date: dt, pattern: "Compact 8-digit MMDDYYYY", matched: raw });
+    }
+  }
+
+  // Pattern 4: Compact YYMMDD / YYYYMMDD
+  const p4re = /\b(\d{6,8})\b/g;
+  while ((m = p4re.exec(text)) !== null) {
+    const s = m[1];
+    if (s.length === 8) {
+      const y4 = parseInt(s.slice(0,4), 10), mo4 = parseInt(s.slice(4,6), 10), da4 = parseInt(s.slice(6), 10);
+      if (y4 >= 1800 && y4 <= THIS_YEAR + 1) {
+        const dt = tryDate(y4, mo4, da4);
+        if (dt) { validDates.push({ date: dt, pattern: "Compact YYYYMMDD", matched: s }); continue; }
+      }
+    }
+    // 6-digit: MMDDYY (US) or DDMMYY (EU)
+    try {
+      const mo6 = parseInt(s.slice(0,2), 10), da6 = parseInt(s.slice(2,4), 10), y6 = parseInt(s.slice(4), 10);
+      const yFull = pivotYear(y6);
+      if (yFull <= THIS_YEAR + 1) {
+        const dt = tryDate(yFull, mo6, da6); // US: MMDDYY
+        if (dt) validDates.push({ date: dt, pattern: "Compact MMDDYY (US)", matched: s });
+      }
+    } catch(e) {}
+  }
+
+  if (validDates.length > 0) {
+    return { date: validDates[validDates.length - 1].date, allMatches: validDates, debugText: text, error: null };
+  }
+  return { date: null, allMatches: [], debugText: text, error: null };
+}
+
+// ============================================================
+//  FILE TYPE DETECTION
+// ============================================================
+function norm(s) {
+  if (!s) return "";
+  return s.toLowerCase().replace(/[._\\\-:/]+/g, " ").replace(/[^a-z0-9\s]/g, "").replace(/\s+/g, " ").trim();
+}
+function determineFileType(filename) {
+  const n = norm(filename);
+  if (["agenda packet","packet","packets"].some(k => n.includes(k))) return "Agenda Packet";
+  if (n.includes("agenda")) return "Agenda";
+  if (["minute","minutes","mins","meetingnotes"].some(k => n.includes(k))) return "Minutes";
+  if (n.includes("notice")) return "Notice";
+  if (filename.toLowerCase().endsWith(".mp4") || n.includes("video")) return "Video";
+  if (["caption","captions","transcript"].some(k => n.includes(k))) return "Close Caption";
+  return "Other";
+}
+
+// ============================================================
+//  HELPERS
+// ============================================================
+const MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const DAY_NAMES   = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+function fmtDate(dt) {
+  return `${DAY_NAMES[dt.getDay()]}, ${MONTH_NAMES[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`;
+}
+
+const FT_COLORS = {
+  "Agenda":"#60a5fa","Minutes":"#4ade80","Agenda Packet":"#c084fc",
+  "Video":"#fb923c","Notice":"#facc15","Close Caption":"#38bdf8","Other":"#94a3b8",
+};
+
+const EXAMPLES = [
+  { fn: "Regular City Council - 27 Jan 2026 - Agenda.pdf", note: "Day-first written" },
+  { fn: "Planning Committee Jan 27 2026 Minutes.pdf",       note: "Month-first written" },
+  { fn: "Budget Review 2026-01-27 Final.pdf",               note: "Year-first numeric" },
+  { fn: "Meeting_15-03-2025_Notes.pdf",                     note: "Numeric (US fallback)" },
+  { fn: "Council_05-07-2022_Agenda.pdf",                    note: "Ambiguous numeric" },
+  { fn: "Workshop 05072022 Agenda Packet.pdf",              note: "8-digit compact" },
+  { fn: "Council Meeting 050722 Agenda.pdf",               note: "6-digit compact (MMDDYY)" },
+  { fn: "Board Meeting March 5 2025.pdf",                   note: "Full month name" },
+  { fn: "NoDateHereAtAll_document.pdf",                     note: "❌ No date" },
+];
+
+// ============================================================
+//  RENDER RESULT
+// ============================================================
+function runTest(filename) {
+  const name = filename.trim();
+  if (!name) return;
+
+  const parsed = extractDateTime(name);
+  const fileType = determineFileType(name);
+  const ftColor = FT_COLORS[fileType] ?? "#94a3b8";
+  const area = document.getElementById('result-area');
+  area.style.display = 'block';
+  area.className = 'animated';
+  // Re-trigger animation
+  void area.offsetWidth;
+
+  let html = '';
+
+  // Card border colour
+  let borderColor;
+  if (parsed.error)       borderColor = 'rgba(239,68,68,0.4)';
+  else if (parsed.date)   borderColor = 'rgba(0,160,80,0.2)';
+  else                    borderColor = 'rgba(239,68,68,0.3)';
+
+  let statusBg, statusIcon, statusText, statusColor;
+  if (parsed.error) {
+    statusBg = 'rgba(239,68,68,0.1)'; statusIcon = '🚫';
+    statusText = 'Error — file blocked'; statusColor = '#f87171';
+  } else if (parsed.date) {
+    statusBg = 'rgba(0,160,80,0.06)'; statusIcon = '✅';
+    statusText = 'Date parsed successfully'; statusColor = '#4ade80';
+  } else {
+    statusBg = 'rgba(239,68,68,0.07)'; statusIcon = '❌';
+    statusText = 'No date found → Review/Ambiguous_Dates'; statusColor = '#ef4444';
+  }
+
+  let badgeHtml = '';
+  if (parsed.date) {
+    badgeHtml = `<span class="ft-badge" style="background:${ftColor}20;color:${ftColor};border:1px solid ${ftColor}40">${fileType}</span>`;
+  }
+
+  let bodyHtml = '';
+  if (parsed.error) {
+    bodyHtml = `<div id="error-msg">${parsed.error}</div>`;
+  } else if (parsed.date) {
+    let matchesHtml = '';
+    parsed.allMatches.forEach((mx, i) => {
+      const isLast = i === parsed.allMatches.length - 1;
+      const bg    = isLast ? 'rgba(204,0,32,0.05)' : '#0d1017';
+      const bord  = isLast ? 'rgba(204,0,32,0.25)' : '#1a2030';
+      const numColor  = isLast ? '#CC0020' : '#999999';
+      const dateColor = isLast ? '#e8eaf0' : '#6b7280';
+      matchesHtml += `<div class="match-row" style="background:${bg};border:1px solid ${bord}">
+        <span class="match-num" style="color:${numColor}">${isLast ? '★' : i+1}</span>
+        <code>${escHtml(mx.matched)}</code>
+        <span class="arrow">→</span>
+        <span class="match-date" style="color:${dateColor}">${fmtDate(mx.date)}</span>
+        <span class="match-pattern">${mx.pattern}</span>
+      </div>`;
+    });
+
+    const matchesLabel = parsed.allMatches.length > 1
+      ? `All ${parsed.allMatches.length} matches (★ = last, used)`
+      : 'Match found';
+
+    bodyHtml = `
+      <div class="section-label">Parsed date (last match wins)</div>
+      <div id="parsed-date-text">${fmtDate(parsed.date)}</div>
+      <div class="section-label">${matchesLabel}</div>
+      ${matchesHtml}
+    `;
+  } else {
+    bodyHtml = `<div id="no-date-msg">
+      Supported: <code>Jan 27 2026</code> · <code>January 27 2026</code> · <code>2026-01-27</code> · <code>01-27-2026</code> · <code>01272026</code><br/>
+      <span class="warn-note">Note: <code>27 Jan 2026</code> (day-before-month) may misparse.</span>
+    </div>`;
+  }
+
+  html += `<div id="result-card" style="border:1px solid ${borderColor}">
+    <div id="status-bar" style="background:${statusBg}">
+      <span class="status-icon">${statusIcon}</span>
+      <span class="status-text" style="color:${statusColor}">${statusText}</span>
+      ${badgeHtml}
+    </div>
+    <div id="card-body">
+      ${bodyHtml}
+      <div id="debug-line">
+        <span class="debug-label">Normalized → </span>
+        <code>${escHtml(parsed.debugText)}</code>
+      </div>
+    </div>
+  </div>`;
+
+  area.innerHTML = html;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ============================================================
+//  EXAMPLES
+// ============================================================
+const list = document.getElementById('examples-list');
+EXAMPLES.forEach(({fn, note}) => {
+  const btn = document.createElement('button');
+  btn.className = 'ex-btn';
+  btn.innerHTML = `<span class="ex-fn">${escHtml(fn)}</span><span class="ex-note">${escHtml(note)}</span>`;
+  btn.addEventListener('click', () => {
+    document.getElementById('filename-input').value = fn;
+    runTest(fn);
+  });
+  list.appendChild(btn);
+});
+
+// ============================================================
+//  EVENTS
+// ============================================================
+document.getElementById('test-btn').addEventListener('click', () => {
+  runTest(document.getElementById('filename-input').value);
+});
+document.getElementById('filename-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') runTest(e.target.value);
+});
+</script>
+</body>
+</html>

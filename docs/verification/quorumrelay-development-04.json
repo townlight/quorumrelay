@@ -130,5 +130,30 @@
     "Later source fixes require a new artifact and affected reruns."
   ],
   "command": "fresh-venv/python scripts/verify_installed_artifact.py --wheel <immutable-wheel> --output <report>",
-  "exit_status": 0
+  "exit_status": 0,
+  "source_commit": "58d609c960212b62504d4d320e11c238e5bb221e",
+  "provenance_check": {
+    "wheel_package_files_equal_working_tree_bytes": 100,
+    "git_source_content_diff_at_commit": "none",
+    "note": "Git text normalization is distinct from raw wheel bytes; no reproducible-build claim."
+  },
+  "ci": {
+    "run_id": 43145715013,
+    "conclusion": "success",
+    "head_sha": "58d609c960212b62504d4d320e11c238e5bb221e",
+    "url": "https://github.com/townlight/quorumrelay/actions/runs/43145715013"
+  },
+  "independent_examples": {
+    "status": "PASS",
+    "steps": 10,
+    "receipt_sha256": "c203255992a7c2212a1a8285c966552f2f4f8c4597763984ee50970e05107687",
+    "owned_server_terminal_exit": 1,
+    "upstream": "synthetic only"
+  },
+  "original_baseline": {
+    "passed": 34,
+    "total": 34,
+    "receipt_sha256": "eaadd70e832c0ea2af8f41dcd87ddc53e8cf89ccaa20ddf909c32f63ee656fb4",
+    "network_and_reference_imports": "blocked"
+  }
 }

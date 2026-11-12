@@ -82,3 +82,22 @@ Additive `novus-public-listing-html` reads the observed public ASP.NET form with
 The same dispatcher implements TelVue Connect GET media/videos/playlists and only the documented media/playlist detail routes, using the exact CONNECT access-key/passphrase headers. `telvue-connect-media-json`, `telvue-connect-videos-json`, and `telvue-connect-playlists-json` preserve original envelopes/bytes, IDs, transcript, chapters, sources, and unknown fields. No list continuation/end condition or video detail route is invented. Current explicit origin, application account namespace and caller tenant binding is required before credentials are sent. Public tenant legacy identity behavior stays unchanged.
 
 `providers/essential_write.py` maps meeting_multimedia:update only: patch typed documented full-model fields while preserving fixed structure/meeting/item identities and unknown values, then POST the full model with exact readback and durable uncertain-outcome handling. All account checks are synthetic in `tests/test_account_apis.py`; account credentials and live acceptance remain unavailable/NOT_RUN. These implementations do not establish API writes for TelVue, general agenda writes for Essential, token issuance, complete listing or live vendor acceptance.
+
+
+## CivicClerk captured media in discovery
+
+For `civicplus-select` discovery, an already supplied, valid absolute HTTPS
+`mediaStreamPath` is retained as a recording, relationship and citation. The
+observed Erie event1277 capture exercises this path. Relative storage names and
+malformed values remain in the original record but are never expanded into a
+constructed CDN address. This does not establish that every tenant supplies the
+same media format or that an attachment is reachable.
+
+The direct `normalize` compatibility contract remains unchanged. Discovery's
+selected-record projection adds the captured recording to the matching legacy
+meeting only when its identity and capture hash match; it preserves namespace,
+external ID and original capture bytes. Canonical import preview retains the
+same enriched record. Retrieving an external media origin still requires the
+source's explicit `options.download_origins` and all existing guarded network,
+current authorization and transfer bounds. A supplied URL is not a download
+permission or proof of a completed Station/transcription handoff.

@@ -1,6 +1,6 @@
 {
   "name": "quorumrelay-client",
-  "version": "0.1.0-dev.4",
+  "version": "0.1.0-dev.5",
   "description": "Explicitly configured HTTP client for the standalone civic connector engine",
   "type": "module",
   "exports": {".": {"types": "./dist/index.d.ts", "import": "./dist/index.js"}},

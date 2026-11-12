@@ -21,7 +21,7 @@ def _merge_captured_civicplus_recordings(meeting, record):
         return
     media_url = original.get("mediaStreamPath")
     normalized_recordings = normalized.get("recordings")
-    if (not isinstance(media_url, str) or not media_url.startswith("https://")
+    if (not isinstance(media_url, str) or not media_url.lower().startswith("https://")
             or not isinstance(normalized_recordings, list)
             or not any(isinstance(item, dict) and item.get("url") == media_url
                        for item in normalized_recordings)):

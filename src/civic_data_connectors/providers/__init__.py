@@ -60,6 +60,9 @@ def register(engine, *, transport: Transport | None = None,
     from .legistar import native_search as legistar_search
     engine.register_native_search("legistar", tracked_handler("search", lambda engine, request, content, context:
                                   legistar_search(engine, request, content, context, transport=transport)))
+    from .granicus_search import native_search as granicus_search
+    engine.register_native_search("granicus", tracked_handler("search", lambda engine, request, content, context:
+                                  granicus_search(engine, request, content, context, transport=transport)))
     from .civicplus_export import export_historical
     engine.register_native_export("civicplus-select", tracked_handler("export", export_historical))
 

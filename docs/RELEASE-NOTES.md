@@ -22,11 +22,14 @@ receipts. Neutral JSON/JSONL/ZIP exports retain original captures and verify
 hashes; CSV and iCalendar disclose projection losses. Large file inputs use
 separate parser and transfer bounds.
 
-Source work for the next development candidate includes Legistar supplied
+Current source includes Legistar supplied
 vote/attendance reads, Laserfiche Repository folder listings, and preparation
-of the documented CivicPlus historical PDF filenames. The latter produces a ZIP
-delivery wrapper containing named files and a loss manifest; it does not submit
-files, prove vendor ZIP import, or claim the unresolved MP4/filename mappings.
+of CivicPlus historical PDF/MP4 filenames. The latter produces a ZIP
+delivery wrapper containing named original files and a loss manifest. The
+official-linked filename tester supports additional Notice, Other and Media
+preparation, with a guard against whole-filename classification conflicts. It
+does not submit files or prove consultant import, video playback or vendor ZIP
+acceptance.
 Novus public listing postbacks preserve the observed window and opaque scoped
 continuations. Explicit Essential dev and TelVue Connect account routes retain
 unknown fields and schema/pagination limits; Essential multimedia changes use
@@ -46,6 +49,32 @@ integrations. Their source and isolated workflow checks do not substitute for
 the plan's installed Windows/profile/handoff and delivery requirements. Their
 current evidence and remaining work are identified in
 [the execution state](EXECUTION-STATE.md).
+
+## Development candidate 0.1.0.dev5
+
+This revision preserves CivicClerk's captured absolute HTTPS `mediaStreamPath`
+through discovery, canonical import preview and the matched legacy preview.
+Direct normalization keeps all 34 original compatibility outputs unchanged.
+Malformed and relative media paths remain raw evidence; no CDN URL is invented.
+Existing source grants and guarded retrieval still govern downloads.
+
+Historical-file preparation now includes canonical Notice and Other PDFs and
+Media MP4 alongside Agenda, Agenda Packet and Minutes. Generated filenames must
+match the official-linked tester's classification. MP4 checks verify bounded
+container framing only; bytes and hashes remain exact. No provider transfer or
+consultant acceptance is claimed. Credentials and the contradictory documented
+FTP hosts remain unresolved.
+
+Granicus native search now follows the observed same-origin Clip search form
+and verified page-number continuation. It preserves captured responses and
+stable clip identities, binds checkpoints to the source/query/caller and checks
+resumed-page hashes. Exact local title/date matching applies to provider-returned
+candidates. It remains explicitly partial metadata search; agenda text and
+complete source coverage are not claimed.
+
+Artifact and required-check receipts will identify the immutable build after
+verification. This remains a development candidate with the entire original
+first-release acceptance unchanged.
 
 ## Development checkpoint 0.1.0.dev4
 
