@@ -19606,6 +19606,23 @@
           "observation_date": "2026-11-12",
           "access_scope": "public_research_only",
           "proof_level": "public_source_and_fixture_not_live_engine_acceptance"
+        },
+        {
+          "id": "towncloud-agenda-associations-2026-11-12",
+          "url": "https://towncloud.io/go/bennett-co/agendas/1033",
+          "title": "TownCloud rendered agenda native attachment associations and capture-local hierarchy",
+          "kind": "public_tenant",
+          "observed": "Existing exact9839-byte capture reused; four new distinct synthetic engine cases passed across documented correction runs. No new network.",
+          "observation_date": "2026-11-12",
+          "access_scope": "saved_public_capture_and_synthetic_transfer_only",
+          "proof_level": "captured_contract_and_scoped_synthetic_engine_execution",
+          "findings": [
+            "Existing towncloud-agenda-html rich projection retains11 capture-local positions/three parent links/eight native attachment IDs; compatibility output remains equal to original reader.",
+            "Selected item-owned text search, neutral export, idempotence and rich revision proof; separate synthetic attachment read requires explicit configured download origin."
+          ],
+          "limits": "No native item IDs supplied; capture-local positions stable only within the exact captured version; Supplied S3 links are locators, not retrieved byte/playability proof; transfer response is synthetic; No inferred body/speaker/adopted motion/vote or timezone; No new network, vendor writes, frozen rebuild or publication",
+          "receipt_path": "docs/verification/towncloud-agenda-associations-2026-11-12.json",
+          "receipt_sha256": "b7d4f22c1acbc6212d39804e6b62ff86ea0c59199a533852fea92e9622ad74e6"
         }
       ],
       "tenants": [
@@ -19649,9 +19666,10 @@
           "evidence_ids": [
             "towncloud-woodford",
             "towncloud-detail",
-            "towncloud-published-observed"
+            "towncloud-published-observed",
+            "towncloud-agenda-associations-2026-11-12"
           ],
-          "details": "Explicit Woodford /agendas page contains a 200 embedded published_agendas.json response with 115 rows. The mapper preserves original fields and supplied agenda/document URLs; optional configured towncloud.io download origin remains explicit. No body/year pagination or full-history completeness is inferred.",
+          "details": "Explicit Woodford /agendas page contains a 200 embedded published_agendas.json response with 115 rows. The mapper preserves original fields and supplied agenda/document URLs; optional configured towncloud.io download origin remains explicit. No body/year pagination or full-history completeness is inferred. Existing agenda HTML now also enriches rich records with explicitly capture-local item hierarchy, item-owned supplied text and tenant-bound native attachment IDs/locators. No native item IDs, implicit attachment fetch or expanded origin authorization.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
@@ -19676,9 +19694,10 @@
           "implementation_status": "not_implemented",
           "evidence_ids": [
             "towncloud-woodford",
-            "towncloud-detail"
+            "towncloud-detail",
+            "towncloud-agenda-associations-2026-11-12"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. Downloadable packet output does not establish a TownCloud import file format. Do not infer table JSON write endpoint.",
+          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. Downloadable packet output does not establish a TownCloud import file format. Do not infer table JSON write endpoint. Existing agenda HTML now also enriches rich records with explicitly capture-local item hierarchy, item-owned supplied text and tenant-bound native attachment IDs/locators. No native item IDs, implicit attachment fetch or expanded origin authorization.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -19703,9 +19722,10 @@
           "evidence_ids": [
             "media-baseline",
             "media-reader-source",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "towncloud-agenda-associations-2026-11-12"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Existing agenda HTML now also enriches rich records with explicitly capture-local item hierarchy, item-owned supplied text and tenant-bound native attachment IDs/locators. No native item IDs, implicit attachment fetch or expanded origin authorization.",
           "dependencies": [
             "standalone extraction",
             "source revision pin"

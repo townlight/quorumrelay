@@ -653,6 +653,8 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
+- Existing captured agenda HTML now enriches the rich meeting with 11 capture-local item positions, three supplied parent links, eight native attachment IDs and item-owned text. Four affected synthetic engine cases pass; compatibility projection remains unchanged. No native item IDs, actual downloaded attachment bytes or archive completeness is claimed; S3 transfer still requires an explicit configured download origin.
+
 - Woodford /agendas embeds a published-agendas response containing 115 captured rows. Its source mapper preserves supplied IDs and links; public body/year controls and complete history remain unverified.
 - The observed published JSON is mapped; a next-page contract, retained-history completeness and native public search remain unverified.
 - No external write route or vendor file-import schema is in reviewed evidence; obtain tenant-supported documentation and an authorized account before write work.

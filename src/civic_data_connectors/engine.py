@@ -374,6 +374,9 @@ class Engine:
             if source.provider == "champ":
                 from .providers.champ_agenda import enrich_bundle
                 data = enrich_bundle(data)
+            elif source.provider == "towncloud":
+                from .providers.towncloud_detail import enrich_bundle
+                data = enrich_bundle(data)
             return OperationResult(status, data, coverage=coverage,
                                    operation_id=context.operation_id)
         except (compat.ImportInputError, ValueError, TypeError) as error:

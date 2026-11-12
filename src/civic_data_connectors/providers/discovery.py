@@ -312,6 +312,10 @@ def _next(source, task, payload, size):
 
 
 def _enrich(bundle, provider):
+    if provider == "towncloud":
+        from .towncloud_detail import enrich_bundle
+        bundle.update(enrich_bundle(bundle))
+        return
     if provider == "champ":
         from .champ_media import enrich_bundle
         from .champ_agenda import enrich_bundle as enrich_agenda

@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-12",
+  "operation": "towncloud_existing_agenda_rich_associations",
+  "source_url": "https://towncloud.io/go/bennett-co/agendas/1033",
+  "contract_basis": "Existing exact public rendered agenda capture; no new network request",
+  "fixture": {
+    "path": "tests/fixtures/baseline/towncloud-agenda.response",
+    "byte_length": 9839,
+    "sha256": "6dc4c41b94da012eec085fdcab30c64e83812af5f01aa4a381c3f4b31acf5a66"
+  },
+  "synthetic_execution": {
+    "new_distinct_passed": 4,
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_towncloud_detail.py -q (initial collection failed on wrong canonical_hash import; corrected to engine)",
+      "same command after import correction (3 passed; attachment case exposed expected explicit cross-origin authorization requirement)",
+      ".venv/Scripts/python.exe -m pytest tests/test_towncloud_detail.py::test_default_configured_agenda_preserves_item_attachment_association_for_separate_transfer -q (1 passed with denial asserted, followed by explicitly configured exact S3 download origin)"
+    ],
+    "outcome": {
+      "rendered_item_positions": 11,
+      "subitem_parents": 3,
+      "native_attachment_ids": 8,
+      "meeting_level_plus_item_documents": 10
+    },
+    "covered": [
+      "Legacy compatibility projection unchanged",
+      "Saved/default configured rich meeting/hierarchy/attachment associations",
+      "Capture-local unstable item identity distinct from native attachment IDs",
+      "Item-owned text excludes descendant item content; exact search and neutral roundtrip",
+      "Separate generic synthetic attachment fetch requires explicit current download origin",
+      "Foreign-tenant document not associated; rich digest and capture-local positions change with content revision; enrichment idempotent"
+    ]
+  },
+  "limits": [
+    "No native item IDs supplied; capture-local positions stable only within the exact captured version",
+    "Supplied S3 links are locators, not retrieved byte/playability proof; transfer response is synthetic",
+    "No inferred body/speaker/adopted motion/vote or timezone",
+    "No new network, vendor writes, frozen rebuild or publication"
+  ]
+}
