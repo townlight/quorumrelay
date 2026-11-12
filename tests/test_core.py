@@ -114,6 +114,39 @@ def test_tyler_rich_cancelled_and_adjourned_retained_legacy_filtered():
     assert result.data["records"][2]["normalized"]["time_zone_status"] == "unknown"
 
 
+@pytest.mark.parametrize("field", ["canceled", "adjourned"])
+def test_tyler_status_only_change_has_rich_digest_and_source_revision_outcome(tmp_path, field):
+    from civic_data_connectors import imports
+    from civic_data_connectors.engine import canonical_hash
+    from civic_data_connectors.storage import SQLiteStorage
+
+    engine = Engine(storage=SQLiteStorage(tmp_path / "tyler.sqlite"))
+    imports.register(engine)
+    source = Source("tyler-meeting-manager", "https://town.meetingmanager.tylerapp.com")
+    row = {"id": "native-1", "meetingTitle": "Council", "startDateTime": "2026-11-11",
+           "startTime": "07:00 PM", "isPublicVisibility": 1, "canceled": False,
+           "adjourned": False, "newMeetingDate": "2026-11-12", "unknown": {"x": False}}
+    first = engine.normalize(source, json.dumps([row]).encode(),
+                             input_format="tyler-public-calendar-json")
+    stored = engine.execute("import_bundle", {"bundle": first.data, "persist": True})
+    assert stored.status == "completed", stored.errors
+    changed = {**row, field: True}
+    second = engine.normalize(source, json.dumps([changed]).encode(),
+                              input_format="tyler-public-calendar-json")
+    a, b = first.data["records"][0], second.data["records"][0]
+    assert a["identity"] == b["identity"]
+    assert a["capture_sha256"] != b["capture_sha256"]
+    assert a["normalized_sha256"] != b["normalized_sha256"]
+    assert b["normalized_sha256"] == canonical_hash(b["normalized"])
+    assert b["source_revision"] == {"kind": "not_supplied", "value": None}
+    assert b["original"] == changed
+    assert b["normalized"]["source_status"][field] is True
+    assert not second.data["compatibility"]["meetings"]
+    preview = engine.execute("import_preview", {"bundle": second.data})
+    assert preview.status == "completed", preview.errors
+    assert preview.data["changes"][0]["outcome"] == "changed_source"
+
+
 def test_calendar_cancellation_and_timezone_parameters_preserved():
     capture = (b"BEGIN:VCALENDAR\nBEGIN:VEVENT\nUID:one\nSUMMARY:Cancelled council\n"
                b"DTSTART;TZID=America/Denver:20261111T190000\nSTATUS:CANCELLED\nEND:VEVENT\nEND:VCALENDAR\n")

@@ -599,3 +599,27 @@ def test_tyler_explicit_observed_calendar_api_uses_fixed_bounded_post_and_report
         req["source"]["options"]["calendar_api_base"] = base
         assert engine.execute("discover", req).status == "failed"
     assert len(transport.calls) == 1
+
+
+def test_tyler_discovery_retains_both_supplied_statuses_and_rich_digests():
+    from civic_data_connectors.engine import canonical_hash
+
+    rows = [{"id": str(index), "meetingTitle": "Council", "startDateTime": "2026-11-11",
+             "startTime": "07:00 PM", "isPublicVisibility": 1,
+             "canceled": index == 1, "adjourned": index == 2,
+             "newMeetingDate": "2026-11-12", "unknown": {"value": None}}
+            for index in (1, 2)]
+    engine, transport = make_engine(lambda *args: json.dumps(rows).encode())
+    source_url = "https://town.meetingmanager.tylerapp.com/"
+    req = request("tyler-meeting-manager", source_url,
+                  options={"calendar_api_base": source_url + "tylermmcalendar46612prod/"})
+    result = engine.execute("discover", req)
+    assert result.status == "partial", result.public_dict()
+    assert len(transport.calls) == 1
+    records = result.data["records"]
+    assert {record["identity"]["external_id"] for record in records} == {"1", "2"}
+    for record, raw in zip(records, rows, strict=True):
+        assert record["original"] == raw
+        assert record["normalized"]["source_status"] == {
+            "canceled": raw["canceled"], "adjourned": raw["adjourned"]}
+        assert record["normalized_sha256"] == canonical_hash(record["normalized"])

@@ -63,6 +63,8 @@ Identity: `provider`, `namespace`, `record_type`, `external_id`, optional `paren
 
 Normalized fields retain original v1 values, adding explicit timezone/agenda availability and supplied status. Unknown data stays original. HTML/PDF originals remain exact capture bytes with references. Rich Tyler and iCalendar records retain cancelled/adjourned entries even where compatibility filters them.
 
+Tyler saved-calendar normalization hashes the final rich normalized record, including supplied `source_status.canceled` and `source_status.adjourned`. A status-only change therefore keeps the same native identity while producing a different normalized digest and an import-preview `changed_source` outcome. Capture hashes identify the exact input bytes; no vendor revision is invented. Supplied reschedule, visibility and unknown fields remain in `original` without inferred status semantics. The compatibility reader and its filtering remain unchanged.
+
 Text segment: `field`, `text`, `citation_url`, optional `page`, `timestamp`, `language`, `provenance`, `completeness`. Supplied captions/notice text are initial segments. An extraction failure or scanned PDF is not complete text search. Durable source/citation URLs remain separate from short-lived attachment transfer URLs.
 
 ## Storage contract

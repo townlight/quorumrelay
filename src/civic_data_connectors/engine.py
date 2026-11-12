@@ -501,7 +501,8 @@ def _record(source, namespace, row, original, digest, captured_at):
     return Record(
         Identity(source.provider, namespace, "meeting", row["external_id"],
                  derivation=derivation, stability=stability),
-        normalized, source.url, citations, digest, captured_at, canonical_hash(row), revision,
+        normalized, source.url, citations, digest, captured_at,
+        canonical_hash(normalized if source.provider == "tyler-meeting-manager" else row), revision,
         original_row, relationships, tuple(text),
     )
 
