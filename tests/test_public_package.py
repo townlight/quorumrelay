@@ -9,7 +9,7 @@ import civic_data_connectors
 def test_public_sdk_compatibility_identity_and_engine():
     for name in quorumrelay.__all__:
         assert getattr(quorumrelay, name) is getattr(civic_data_connectors, name)
-    assert quorumrelay.__version__ == "0.1.0.dev5"
+    assert quorumrelay.__version__ == "0.1.0.dev6"
     engine = quorumrelay.create_engine()
     listed = engine.providers()
     assert listed.status == "completed"

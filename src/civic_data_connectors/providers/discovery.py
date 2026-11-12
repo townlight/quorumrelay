@@ -295,13 +295,21 @@ def _enrich(bundle, provider):
                 if media_parts is not None and media_parts.scheme == "https" and media_parts.netloc:
                     recordings = normalized.setdefault("recordings", [])
                     if isinstance(recordings, list):
-                        if not any(isinstance(item, dict) and item.get("url") == media_url
-                                   for item in recordings):
+                        recording = next((item for item in recordings
+                                          if isinstance(item, dict) and item.get("url") == media_url), None)
+                        if recording is None:
                             recording = {"url": media_url}
                             recordings.append(recording)
                             relationships = list(record.get("relationships") or ())
-                            relationships.append({"relation": "recording", "value": deepcopy(recording)})
+                            relationships.append({"relation": "recording", "value": recording})
                             record["relationships"] = relationships
+                        if media_parts.path.lower().endswith(".mp4"):
+                            recording["video_url"] = media_url
+                            for relationship in record.get("relationships") or ():
+                                value = relationship.get("value")
+                                if (relationship.get("relation") == "recording" and isinstance(value, dict)
+                                        and value.get("url") == media_url):
+                                    value["video_url"] = media_url
                         citations = list(record.get("citation_urls") or ())
                         record["citation_urls"] = list(dict.fromkeys([*citations, media_url]))
             # The provider's public payload writes local wall time with Z for

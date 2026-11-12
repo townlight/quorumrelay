@@ -190,11 +190,11 @@ def test_civicclerk_discovery_media_reaches_preview_and_guarded_retrieval(scheme
     assert record["original"] == original_event
     assert record["capture_sha256"] == hashlib.sha256(content).hexdigest()
     assert discovered.data["bundles"][0]["capture"]["content_base64"] == base64.b64encode(content).decode()
-    assert record["normalized"]["recordings"] == [{"url": media_url}]
+    assert record["normalized"]["recordings"] == [{"url": media_url, "video_url": media_url}]
     assert record["normalized_sha256"] == canonical_hash(record["normalized"])
     assert media_url in record["citation_urls"]
     assert {link["relation"] for link in record["relationships"]} >= {"document", "recording"}
-    assert any(link["relation"] == "recording" and link["value"] == {"url": media_url}
+    assert any(link["relation"] == "recording" and link["value"] == {"url": media_url, "video_url": media_url}
                for link in record["relationships"])
 
     projected = legacy_previews(discovered)
@@ -203,14 +203,14 @@ def test_civicclerk_discovery_media_reaches_preview_and_guarded_retrieval(scheme
                              if any(meeting["external_id"] == "1277" for meeting in page["meetings"]))
     preview_meeting = next(meeting for meeting in projected_preview["meetings"]
                            if meeting["external_id"] == "1277")
-    assert preview_meeting["recordings"] == [{"url": media_url}]
+    assert preview_meeting["recordings"] == [{"url": media_url, "video_url": media_url}]
     assert projected_preview["source"]["sha256"] == hashlib.sha256(content).hexdigest()
 
     canonical = engine.execute("import_preview", {"result": discovered.public_dict()})
     assert canonical.status == "partial", canonical.public_dict()
     canonical_record = next(row for row in canonical.data["bundle"]["records"]
                             if row["identity"]["external_id"] == "1277")
-    assert canonical_record["normalized"]["recordings"] == [{"url": media_url}]
+    assert canonical_record["normalized"]["recordings"] == [{"url": media_url, "video_url": media_url}]
 
     fetch_source = Source(source.provider, source.url, input_format=source.input_format,
                           options={"download_origins": ["https://cpmedia.azureedge.net"]})
@@ -227,6 +227,26 @@ def test_civicclerk_discovery_media_reaches_preview_and_guarded_retrieval(scheme
     assert transport.calls[0][0] == media_url
     assert transport.calls[0][1]["allowed_origins"] == (
         "https://erieco.api.civicclerk.com", "https://cpmedia.azureedge.net")
+
+
+@pytest.mark.parametrize("media_path", ["https://video.example/player", "https://video.example/player?file=clip.mp4"])
+def test_civicclerk_player_link_is_not_a_direct_mp4(media_path):
+    from civic_data_connectors.legacy import legacy_previews
+
+    payload = json.loads((BRIEF / "civicclerk-erie-events-2026-11-11-page1.json").read_text())
+    next(row for row in payload["value"] if row["id"] == 1277)["mediaStreamPath"] = media_path
+    engine, _ = make_engine()
+    result = engine.execute("discover", {
+        "source": {"provider": "civicplus-select", "url": "https://erieco.api.civicclerk.com/v1/Events",
+                   "input_format": "civicplus-events-json"},
+        "bounds": {"date_from": "2026-11-01", "date_to": "2026-11-11"},
+    }, content=json.dumps(payload).encode())
+    record = next(row for row in result.data["records"] if row["identity"]["external_id"] == "1277")
+    assert record["normalized"]["recordings"] == [{"url": media_path}]
+    preview = legacy_previews(result)
+    meeting = next(meeting for page in preview.data["previews"] for meeting in page["meetings"]
+                   if meeting["external_id"] == "1277")
+    assert meeting["recordings"] == [{"url": media_path}]
 
 
 @pytest.mark.parametrize("media_path", [None, "", "ERIECO/6a41c49b6f.mp4", 42,

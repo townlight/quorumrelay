@@ -7,7 +7,7 @@ const client = new QuorumRelayClient({
   token: process.env.CIVIC_CONNECTOR_TOKEN,
 });
 const info = await client.info();
-assert.equal(info.data.version, "0.1.0.dev5");
+assert.equal(info.data.version, "0.1.0.dev6");
 assert.equal(info.data.schema_version, "2.0.0");
 const raw = [{ EventId: 7, EventBodyName: "Council", EventDate: "2026-11-11T00:00:00",
   EventTime: "7:00 PM", EventComment: "Parks budget", EventRowVersion: "r7" }];

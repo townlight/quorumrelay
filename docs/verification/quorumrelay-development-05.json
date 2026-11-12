@@ -151,5 +151,12 @@
     "receipt_sha256": "b9af3c29b5fb05cf962f3374397ac48721a8ab3d65251af2fa49b9e430e03df0",
     "owned_server_terminal_exit": 1,
     "upstream": "synthetic only"
+  },
+  "ci": {
+    "run_id": 43158302883,
+    "conclusion": "success",
+    "head_sha": "a4bf1feb06c69ed6f54a158ba97f11827a41d301",
+    "url": "https://github.com/townlight/quorumrelay/actions/runs/43158302883",
+    "note": "Receipt/docs commit; packaged source matches artifact source3e7111f."
   }
 }

@@ -29,9 +29,19 @@ def _merge_captured_civicplus_recordings(meeting, record):
     recordings = meeting.get("recordings")
     if not isinstance(recordings, list):
         recordings = []
-    if any(isinstance(item, dict) and item.get("url") == media_url for item in recordings):
-        return
-    meeting["recordings"] = [*deepcopy(recordings), {"url": media_url}]
+    captured = next(item for item in normalized_recordings
+                    if isinstance(item, dict) and item.get("url") == media_url)
+    projected = {"url": media_url}
+    if captured.get("video_url") == media_url and urlsplit(media_url).path.lower().endswith(".mp4"):
+        projected["video_url"] = media_url
+    recordings = deepcopy(recordings)
+    for item in recordings:
+        if isinstance(item, dict) and item.get("url") == media_url:
+            item.update(projected)
+            break
+    else:
+        recordings.append(projected)
+    meeting["recordings"] = recordings
 
 
 @dataclass(frozen=True)

@@ -1,0 +1,42 @@
+{
+  "observed_at": "2026-11-12T05:05:22.402585+00:00",
+  "candidate": "0.1.0.dev6",
+  "status": "passed_for_affected_source",
+  "reason": "Installed Station requires a direct video_url; dev5 preserved url but did not carry the direct-MP4 field.",
+  "inherited_evidence": "quorumrelay-development-05-checks.json plus successful hosted CI43158302883 at a4bf1feb06c69ed6f54a158ba97f11827a41d301",
+  "checks": [
+    {
+      "command": "pytest tests/test_provider_discovery.py -q",
+      "passed": 78,
+      "scope": "Exact captured directMP4 field, projection/retrieval, pre-existing URL merge, player/non-MP4 negatives; original captures untouched."
+    },
+    {
+      "command": "pytest tests/test_legacy_projection.py tests/test_public_package.py tests/test_interfaces.py::test_node_independent_tarball_client_real_loopback_sequence -q",
+      "passed": 9,
+      "warnings": 1,
+      "seconds": 2.35
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    {
+      "command": "pytest --collect-only -q",
+      "collected": 468
+    },
+    {
+      "command": "compare immutable TSdev5/dev6 tarball members",
+      "status": "passed",
+      "scope": "All compiled JS/types/README bytes identical; package.json differs only in version. Reuse four transport passes for unchanged code."
+    }
+  ],
+  "client_sha256": "ab6439db9041a31acf70db8334089d2213346beda7fad40a6e4a184b561c07da",
+  "limits": [
+    "Affected source checks plus inherited unchanged evidence, not a new full local suite claim.",
+    "Fresh artifact/consumer/native/required hosted CI/live provider acceptance remain distinct."
+  ]
+}

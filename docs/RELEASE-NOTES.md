@@ -50,6 +50,20 @@ the plan's installed Windows/profile/handoff and delivery requirements. Their
 current evidence and remaining work are identified in
 [the execution state](EXECUTION-STATE.md).
 
+## Development candidate 0.1.0.dev6
+
+This revision carries the supplied CivicClerk direct MP4 through the existing
+`video_url` field as well as `url`, allowing consumers such as Townlight Station
+to distinguish a direct-file candidate from a player page. Only an already
+validated captured HTTPS `mediaStreamPath` with an MP4 URL path receives that
+field. Generic player links and `.mp4` appearing only in a query remain untyped.
+Guarded downloads and consumer file checks still apply. All 34 direct-normalize
+compatibility outputs remain unchanged.
+
+Dev5 and its complete verification receipts remain preserved. The new package
+and consumer pins will identify the immutable dev6 build after verification.
+No acceptance scope is reduced and no live provider write is claimed.
+
 ## Development candidate 0.1.0.dev5
 
 This revision preserves CivicClerk's captured absolute HTTPS `mediaStreamPath`

@@ -101,3 +101,9 @@ same enriched record. Retrieving an external media origin still requires the
 source's explicit `options.download_origins` and all existing guarded network,
 current authorization and transfer bounds. A supplied URL is not a download
 permission or proof of a completed Station/transcription handoff.
+
+A captured HTTPS `mediaStreamPath` whose URL path ends in `.mp4` additionally
+sets `video_url` in discovery and the matched legacy projection. This exposes
+the supplied direct-file candidate to consumers such as Station without
+classifying a generic player link as a downloadable MP4. Guarded retrieval and
+consumer file validation still apply; the path is not proof of playable bytes.
