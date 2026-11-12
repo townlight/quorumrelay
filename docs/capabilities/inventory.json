@@ -4646,7 +4646,7 @@
             "Provider containing-text candidate semantics and complete document text coverage remain unverified.",
             "Live search next-page traversal, broader windows, archived coverage and structured details remain unverified."
           ],
-          "acceptance_status": "live_read_passed",
+          "acceptance_status": "not_run",
           "evidence_level": "live_engine_bounded_read_receipt_not_write_acceptance",
           "tenant_scope": [
             "https://ebps.novusagenda.com/agendapublic/"
