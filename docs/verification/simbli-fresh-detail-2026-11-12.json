@@ -1,0 +1,56 @@
+{
+  "observed_at": "2026-11-12T19:07:35.302983+00:00",
+  "source": {
+    "provider": "simbli",
+    "url": "https://simbli.eboardsolutions.com/SB_Meetings/ViewMeeting.aspx?S=36031063&MID=4942"
+  },
+  "operation": "fresh_anonymous_meeting_agenda_read",
+  "status": "partial",
+  "errors": [],
+  "records": 42,
+  "record_types": {
+    "meeting": 1,
+    "agenda_item": 41
+  },
+  "meeting_ids": [
+    "4942"
+  ],
+  "captures": [
+    {
+      "input_format": "simbli-meeting-detail-json",
+      "sha256": "26ae02364dc033c7747d4ee742f88309989b7700548a23dcf30aaecc5a1af79d",
+      "byte_length": 1693
+    },
+    {
+      "input_format": "simbli-agenda-items-json",
+      "sha256": "f7d82f23f692f0eebfdb3c197bcac40fd16f99475d162359938abe57f3ca14a1",
+      "byte_length": 22055
+    },
+    {
+      "input_format": "simbli-public-response-json",
+      "sha256": "58afdea6b6ad6e1a371c85253eb4b1c772cd2c251ffb42e7f7ced34123448003",
+      "byte_length": 559
+    },
+    {
+      "input_format": "simbli-public-response-json",
+      "sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "byte_length": 4
+    }
+  ],
+  "coverage": {
+    "scope": "one anonymous meeting and supplied agenda tree; document/PDF links not inferred",
+    "source_complete": false,
+    "catalog_complete": false,
+    "requests": 5,
+    "transfer_bytes": 107757,
+    "truncated": false,
+    "unknown_time_zone": true,
+    "supporting_and_minutes_mapping": "raw supplied responses only",
+    "checkpoint": null
+  },
+  "limits": [
+    "Only one anonymous public meeting; no full catalog claim.",
+    "Attachment flags do not supply PDF/document links; supporting arrays empty and Minutes null in this observation.",
+    "Fresh opaque declaration values were not serialized in receipt or checkpoints."
+  ]
+}

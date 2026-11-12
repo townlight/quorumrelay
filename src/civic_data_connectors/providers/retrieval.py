@@ -63,6 +63,18 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if source.provider == "legistar":
             from .legistar import fetch_record
             return fetch_record(source, namespace, request["external_id"], bounds, context, transport)
+        if source.provider == "simbli":
+            from dataclasses import replace
+            from urllib.parse import parse_qs, urlencode
+            from .simbli_detail import fetch_detail
+            district = parse_qs(urlsplit(source.url).query).get("S", [])
+            external_id = request["external_id"]
+            if (len(district) != 1 or re.fullmatch(r"[1-9][0-9]{0,18}", district[0]) is None
+                    or not isinstance(external_id, str) or re.fullmatch(r"[1-9][0-9]{0,18}", external_id) is None):
+                raise ValueError("Simbli detail requires the configured district and supplied numeric meeting ID.")
+            target = replace(source, url=_origin(source.url) + "/SB_Meetings/ViewMeeting.aspx?" +
+                             urlencode({"S": district[0], "MID": external_id}))
+            return fetch_detail(target, namespace, bounds, context, transport)
         if source.provider == "civicweb":
             from .civicweb import fetch_record
             return fetch_record(source, namespace, request["external_id"], bounds, context, transport)
@@ -128,6 +140,9 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             "this does not establish that its upstream service lacks record retrieval."))
     if attachment is None:
         if content is None:
+            if source.provider == "simbli" and urlsplit(source.url).path == "/SB_Meetings/ViewMeeting.aspx":
+                from .simbli_detail import fetch_detail
+                return fetch_detail(source, namespace, bounds, context, transport)
             return discover(engine, request, None, context, transport=transport, browser=browser)
         selected = discover(engine, request, content, context, transport=transport, browser=browser)
         if selected.data and selected.data["bundles"]:

@@ -28,6 +28,7 @@ ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json"
                       "towncloud": ("towncloud-public-listing-json",),
                       "destiny-agendaquick": ("agendaquick-public-listing-html", "agendaquick-item-search-html"),
                       "boardable": ("boardable-public-meetings-json",),
+                      "simbli": ("simbli-meeting-detail-json", "simbli-agenda-items-json"),
                       "telvue": ("telvue-connect-media-json", "telvue-connect-videos-json",
                                  "telvue-connect-playlists-json"),
                       "municode-meetings": ("essential-multimedia-json",),

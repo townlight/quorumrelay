@@ -9086,6 +9086,24 @@
           "observed": "2026-11-12 bounded public read",
           "observation_date": "2026-11-12",
           "access_scope": "bounded_public_read_only"
+        },
+        {
+          "id": "simbli-fresh-detail-2026-11-12",
+          "url": "https://simbli.eboardsolutions.com/SB_Meetings/ViewMeeting.aspx?S=36031063&MID=4942",
+          "title": "Fresh anonymous Simbli meeting and agenda tree engine read",
+          "kind": "public_tenant",
+          "observed": "Guarded isolated public-page rendering established actual anonymous GETs; direct engine then obtained fresh page controls and the same meeting/agenda responses.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": [
+            "Meeting4942 and41 agenda items preserved with numeric IDs, nested parent links and raw response captures.",
+            "One direct engine call:partial/no errors,fiveGETs,107757bytes. Supporting Attachment/HyperLink arrays empty, Minutesnull.",
+            "Fresh opaque declarations remain per-call private; anonymous marker/plain district and meeting verified, no staff/login or POST requests."
+          ],
+          "limits": "One public meeting only. Attachment flags do not supply document links; item bodies/PDF retrieval, other meetings, catalog and writes remain unresolved.",
+          "receipt_path": "docs/verification/simbli-fresh-detail-2026-11-12.json",
+          "receipt_sha256": "774e19e5afe0c3f820638fdd72f7b292089222393715703d27730618e026df58"
         }
       ],
       "tenants": [
@@ -9146,11 +9164,12 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "simbli-tenant"
+            "simbli-tenant",
+            "simbli-fresh-detail-2026-11-12"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval.",
+          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Resumed local source maps fresh anonymous GetMeeting/GetItemsTreeDTO responses, with explicit simbli-meeting-detail-json and simbli-agenda-items-json saved formats. Integrated meeting4942 read returned1meeting/41items/partial/noerrors. Supporting/minutes responses retained raw; no document links inferred from flags.",
           "dependencies": [],
           "remaining_verification": [
             "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."

@@ -285,9 +285,11 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 - https://simbli.eboardsolutions.com/index.aspx?S=36031063: Oneida public Simbli landing page; Extracted landing page does not expose actual meeting list.
 
+- Resumed implementation: fresh anonymous ViewMeeting controls drive only observed GET meeting/agenda/supporting/minutes routes, verified district/meeting and anonymous user. One engine read returned meeting4942 plus41 agenda items/partial/no errors; exact raw responses and nested numeric IDs preserved. The two additive JSON formats do not replace the baseline reader. Empty supporting arrays and Minutesnull are scoped to this meeting; item bodies and PDF/document URLs remain unresolved.
+
 ### Remaining research
 
-- Working public menu/listing and page2 now verified and source implemented. Supplied ViewMeeting.aspx returned HTML; its hydrated agenda/detail/document chain remains a bounded current-source contract follow-up. Body filtering/search/full-catalog semantics remain unverified.
+- Working public menu/listing and page2 are verified and source implemented. Fresh anonymous ViewMeeting controls and observed GET routes now retrieve meeting metadata and the agenda tree; one integrated read retained42 records. Individual item content and document/PDF retrieval remain unresolved. Body filtering/search/full-catalog semantics remain unverified.
 - Reviewed current Simbli pages describe archive search and staff meeting/item/document workflows but publish no machine field schema. Obtain customer API specification before implementing writes or claiming absence.
 - No authorized provider test tenant, staff credentials or tenant-specific write configuration was supplied.
 
