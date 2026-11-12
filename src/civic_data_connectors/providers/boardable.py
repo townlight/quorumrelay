@@ -11,9 +11,9 @@ from urllib.parse import parse_qsl, urlencode, urlsplit
 from html.parser import HTMLParser
 
 from ..engine import canonical_hash, source_identity_key
-from ..models import Bounds, Error, OperationResult
+from ..models import Error, OperationResult
 from ..storage import operation_cancelled
-from .contracts import PublicTransport, RetrievalError, _origin
+from .contracts import RetrievalError, _origin
 from .discovery import _checkpoint, _resume
 from .identification import validate_source
 from .native import make_bundle

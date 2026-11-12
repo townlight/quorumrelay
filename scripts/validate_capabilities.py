@@ -319,12 +319,12 @@ def main():
         "negative_checks_passed": negative,
         "errors": errors,
         "live_provider_acceptance": (
-            "Three bounded receipt files document five public engine read calls: one Legistar event "
-            "detail, two CHAMP event details, and first/resumed Granicus Superior Clip searches. "
-            "This validator checks the Legistar and CHAMP receipt/capture relationships; the distinct "
-            "Granicus receipt and page-fixture hashes are recorded separately and are not cross-compared. "
-            "None proves catalog completeness. Provider write acceptance is NOT_RUN because no authorized "
-            "provider test tenants or credentials were supplied."
+            "The inventory records bounded public endpoint and integrated-engine read receipts, "
+            "saved contract fixtures, and source-level checks separately. This validator checks "
+            "the evidence references and declared receipt relationships; it does not execute reads "
+            "or establish catalog completeness, installed-consumer acceptance, or provider writes. "
+            "Provider write acceptance is NOT_RUN because no authorized provider test tenants "
+            "or credentials were supplied."
         ),
         "engine_status_reconciliation": "Owned independently by engine implementation owners",
     }

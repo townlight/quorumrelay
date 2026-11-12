@@ -1,0 +1,177 @@
+{
+  "observed_at": "2026-11-12T13:26:16.917974+00:00",
+  "scope": "one bounded integrated-engine read of an already-verified route; not catalog, installed-client or write acceptance",
+  "source_candidate": "0.1.0.dev7 working source",
+  "operation": "search",
+  "request": {
+    "native": true,
+    "source": {
+      "provider": "iqm2",
+      "url": "https://kentwa.iqm2.com/Citizens/default.aspx"
+    },
+    "query": {
+      "terms": [
+        "Council"
+      ]
+    },
+    "bounds": {
+      "max_pages": 1,
+      "max_records": 3,
+      "deadline_seconds": 20,
+      "parser_bytes": 2097152,
+      "transfer_bytes": 4194304
+    }
+  },
+  "status": "partial",
+  "errors": [],
+  "coverage": {
+    "sources": [
+      {
+        "provider": "iqm2",
+        "url": "https://kentwa.iqm2.com/Citizens/default.aspx",
+        "namespace": "//kentwa.iqm2.com",
+        "body": null,
+        "input_format": null,
+        "options": {}
+      }
+    ],
+    "native_search": true,
+    "scope": "mixed public search results; exact local metadata and displayed excerpt matching",
+    "native_fields": [
+      "title",
+      "description",
+      "meeting_date"
+    ],
+    "full_source_searched": false,
+    "catalog_complete": false,
+    "source_complete": false,
+    "query_window_exhausted": false,
+    "observed_page_exhausted": false,
+    "status": "partial",
+    "pages": 1,
+    "checkpoint_lifetime": "15 minutes; current engine process only",
+    "date_from": null,
+    "date_to": null,
+    "date_inclusivity": "both",
+    "actual_dates": [
+      "2019-06-18"
+    ],
+    "available_text": [
+      {
+        "identity": {
+          "provider": "iqm2",
+          "namespace": "//kentwa.iqm2.com",
+          "record_type": "attachment",
+          "external_id": "3511",
+          "parent": null,
+          "derivation": "provider_identifier",
+          "stability": "Provider-issued identifier within the configured namespace."
+        },
+        "capture_sha256": "138ae24974e32572c31ec1f89478ebefbc7e466a6318cbddcb70bde636545de2",
+        "status": "metadata_only",
+        "metadata_fields": [
+          "normalized.title",
+          "normalized.description"
+        ],
+        "supplied_fields": [],
+        "unavailable": [],
+        "full_source_searched": false
+      },
+      {
+        "identity": {
+          "provider": "iqm2",
+          "namespace": "//kentwa.iqm2.com",
+          "record_type": "communication",
+          "external_id": "1068",
+          "parent": null,
+          "derivation": "provider_identifier",
+          "stability": "Provider-issued identifier within the configured namespace."
+        },
+        "capture_sha256": "138ae24974e32572c31ec1f89478ebefbc7e466a6318cbddcb70bde636545de2",
+        "status": "metadata_only",
+        "metadata_fields": [
+          "normalized.title",
+          "normalized.description",
+          "normalized.meeting_date"
+        ],
+        "supplied_fields": [],
+        "unavailable": [],
+        "full_source_searched": false
+      },
+      {
+        "identity": {
+          "provider": "iqm2",
+          "namespace": "//kentwa.iqm2.com",
+          "record_type": "communication",
+          "external_id": "1069",
+          "parent": null,
+          "derivation": "provider_identifier",
+          "stability": "Provider-issued identifier within the configured namespace."
+        },
+        "capture_sha256": "138ae24974e32572c31ec1f89478ebefbc7e466a6318cbddcb70bde636545de2",
+        "status": "metadata_only",
+        "metadata_fields": [
+          "normalized.title",
+          "normalized.description",
+          "normalized.meeting_date"
+        ],
+        "supplied_fields": [],
+        "unavailable": [],
+        "full_source_searched": false
+      }
+    ],
+    "failures": [],
+    "truncated": false,
+    "searched_records": 3,
+    "match_policy": "Unicode casefold, collapsed whitespace, word boundaries; AND terms/phrases",
+    "incomplete_text": true,
+    "searched_sources": [
+      {
+        "provider": "iqm2",
+        "namespace": "//kentwa.iqm2.com",
+        "url": "https://kentwa.iqm2.com/Citizens/default.aspx"
+      }
+    ],
+    "selected_providers": [],
+    "selected_namespaces": [],
+    "input_status": "partial"
+  },
+  "has_checkpoint": true,
+  "record_identities": [
+    {
+      "provider": "iqm2",
+      "namespace": "//kentwa.iqm2.com",
+      "record_type": "attachment",
+      "external_id": "3511",
+      "parent": null,
+      "derivation": "provider_identifier",
+      "stability": "Provider-issued identifier within the configured namespace."
+    },
+    {
+      "provider": "iqm2",
+      "namespace": "//kentwa.iqm2.com",
+      "record_type": "communication",
+      "external_id": "1068",
+      "parent": null,
+      "derivation": "provider_identifier",
+      "stability": "Provider-issued identifier within the configured namespace."
+    },
+    {
+      "provider": "iqm2",
+      "namespace": "//kentwa.iqm2.com",
+      "record_type": "communication",
+      "external_id": "1069",
+      "parent": null,
+      "derivation": "provider_identifier",
+      "stability": "Provider-issued identifier within the configured namespace."
+    }
+  ],
+  "hits": 3,
+  "captures": [
+    {
+      "sha256": "138ae24974e32572c31ec1f89478ebefbc7e466a6318cbddcb70bde636545de2",
+      "byte_length": 12185,
+      "input_format": "iqm2-public-search-html"
+    }
+  ]
+}

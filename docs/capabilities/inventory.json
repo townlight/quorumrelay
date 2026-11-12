@@ -10317,6 +10317,20 @@
           "observation_date": "2026-11-12",
           "access_scope": "public_research_only",
           "proof_level": "public_source_and_fixture_not_live_engine_acceptance"
+        },
+        {
+          "id": "iqm2-native-search-engine-final",
+          "url": "https://kentwa.iqm2.com/Citizens/default.aspx",
+          "title": "Kent bounded mixed-kind native engine search",
+          "kind": "live_engine_bounded_read_receipt",
+          "findings": "Working dev7 source returned 3 records, 3 local hits, partial status and no errors, using already-verified public routes and explicit per-call bounds.",
+          "limits": "One bounded call only; no live pager, complete catalog, installed-client or provider write acceptance. Session state and opaque continuation values omitted.",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "receipt_path": "docs/verification/iqm2-native-search-engine-2026-11-12.json",
+          "receipt_sha256": "7f6bfd6aac50f1e475d5a85b1f9973f4e073ea91dc9ad9d5bf5a3aee38298219",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
         }
       ],
       "tenants": [
@@ -10426,9 +10440,10 @@
           "capability_status": "observed",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "iqm2-search-observed"
+            "iqm2-search-observed",
+            "iqm2-native-search-engine-final"
           ],
-          "details": "Kent public Search.aspx form uses fresh anonymous state; bounded source adapter maps observed mixed attachment, communication and legislative-file results with route-specific IDs and metadata/excerpt local matching. Supplied Next control is fixture-tested only; live next-page, full text and total catalog remain unverified.",
+          "details": "Kent public Search.aspx form uses fresh anonymous state; bounded source adapter maps observed mixed attachment, communication and legislative-file results with route-specific IDs and metadata/excerpt local matching. Supplied Next control is fixture-tested only; live next-page, full text and total catalog remain unverified. Final bounded integrated-engine read is recorded separately; status partial/no errors, not catalog or installed-client acceptance.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
@@ -12854,6 +12869,34 @@
           "observation_date": "2026-11-12",
           "access_scope": "public_research_only",
           "proof_level": "public_source_and_fixture_not_live_engine_acceptance"
+        },
+        {
+          "id": "utah-public-notice-discover-engine-final",
+          "url": "https://www.utah.gov/pmn/search.html",
+          "title": "Utah exact known body/date engine discovery",
+          "kind": "live_engine_bounded_read_receipt",
+          "findings": "Working dev7 source returned 1 records, 0 local hits, partial status and no errors, using already-verified public routes and explicit per-call bounds.",
+          "limits": "One bounded call only; no live pager, complete catalog, installed-client or provider write acceptance. Session state and opaque continuation values omitted.",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "receipt_path": "docs/verification/utah-bounded-engine-discovery-2026-11-12.json",
+          "receipt_sha256": "9f36a887d1133701c96ce60faf26fbd92be0032469227d7f4d014a95463dbff0",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
+        },
+        {
+          "id": "utah-public-notice-native-search-engine-final",
+          "url": "https://www.utah.gov/pmn/search.html",
+          "title": "Utah bounded Board title/body/date engine search",
+          "kind": "live_engine_bounded_read_receipt",
+          "findings": "Working dev7 source returned 1 records, 1 local hits, partial status and no errors, using already-verified public routes and explicit per-call bounds.",
+          "limits": "One bounded call only; no live pager, complete catalog, installed-client or provider write acceptance. Session state and opaque continuation values omitted.",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "receipt_path": "docs/verification/utah-native-search-engine-2026-11-12.json",
+          "receipt_sha256": "bced259ce94244c6baa4d515ad82bf2d21341e073846a654d7bbc00e1748d0b3",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
         }
       ],
       "tenants": [
@@ -12895,9 +12938,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "utah-notice",
-            "utah-search-observed"
+            "utah-search-observed",
+            "utah-public-notice-discover-engine-final"
           ],
-          "details": "Explicit Utah public body and inclusive dates drive the observed anonymous search form; exact local body/date filtering applies to returned notice metadata, with scope-bound continuation. The single-body response supplies one notice; full result paging and catalog completeness remain unverified.",
+          "details": "Explicit Utah public body and inclusive dates drive the observed anonymous search form; exact local body/date filtering applies to returned notice metadata, with scope-bound continuation. The single-body response supplies one notice; full result paging and catalog completeness remain unverified. Final bounded integrated-engine read is recorded separately; status partial/no errors, not catalog or installed-client acceptance.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
@@ -12973,9 +13017,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "utah-notice",
-            "utah-search-observed"
+            "utah-search-observed",
+            "utah-public-notice-native-search-engine-final"
           ],
-          "details": "The public form POST returns notice candidates for the first title expression; local title/date/body checks apply to returned metadata. Exact full-text/phrase semantics and live pagination are unverified; supplied pager handling has fixture coverage only.",
+          "details": "The public form POST returns notice candidates for the first title expression; local title/date/body checks apply to returned metadata. Exact full-text/phrase semantics and live pagination are unverified; supplied pager handling has fixture coverage only. Final bounded integrated-engine read is recorded separately; status partial/no errors, not catalog or installed-client acceptance.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog, live continuation and access-dependent operations remain unverified."

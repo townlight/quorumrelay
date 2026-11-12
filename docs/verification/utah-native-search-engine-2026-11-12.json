@@ -1,0 +1,117 @@
+{
+  "observed_at": "2026-11-12T13:27:16.204648+00:00",
+  "scope": "bounded integrated-engine read of previously verified supplied route; not full catalog, installed-client or write acceptance",
+  "source_candidate": "0.1.0.dev7 working source",
+  "operation": "search",
+  "request": {
+    "native": true,
+    "source": {
+      "provider": "utah-public-notice",
+      "url": "https://www.utah.gov/pmn/search.html",
+      "body": "Ridges Estates Infrastructure Financing District"
+    },
+    "query": {
+      "terms": [
+        "Board"
+      ]
+    },
+    "bounds": {
+      "date_from": "2026-11-11",
+      "date_to": "2026-11-11",
+      "max_pages": 1,
+      "max_records": 3,
+      "deadline_seconds": 20,
+      "parser_bytes": 2097152,
+      "transfer_bytes": 4194304
+    }
+  },
+  "status": "partial",
+  "errors": [],
+  "coverage": {
+    "sources": [
+      {
+        "provider": "utah-public-notice",
+        "url": "https://www.utah.gov/pmn/search.html",
+        "namespace": "//www.utah.gov",
+        "body": "Ridges Estates Infrastructure Financing District",
+        "input_format": null,
+        "options": {}
+      }
+    ],
+    "native_search": true,
+    "scope": "public notice metadata; exact body/date and local title matching",
+    "catalog_complete": false,
+    "source_complete": false,
+    "full_source_searched": false,
+    "status": "partial",
+    "pages": 1,
+    "checkpoint_lifetime": "15 minutes; current engine process only",
+    "query_window_exhausted": false,
+    "observed_page_exhausted": true,
+    "body": "Ridges Estates Infrastructure Financing District",
+    "date_from": "2026-11-11",
+    "date_to": "2026-11-11",
+    "date_inclusivity": "both",
+    "actual_dates": [
+      "2026-11-11"
+    ],
+    "available_text": [
+      {
+        "identity": {
+          "provider": "utah-public-notice",
+          "namespace": "//www.utah.gov",
+          "record_type": "meeting",
+          "external_id": "1120627",
+          "parent": null,
+          "derivation": "provider_identifier",
+          "stability": "Provider-issued identifier within the configured namespace."
+        },
+        "capture_sha256": "83d5905fe83c5d9acc31ce988c74b9d40e0a1aee3103464eba01035f5f837528",
+        "status": "metadata_only",
+        "metadata_fields": [
+          "normalized.title",
+          "normalized.meeting_date",
+          "normalized.body"
+        ],
+        "supplied_fields": [],
+        "unavailable": [],
+        "full_source_searched": false
+      }
+    ],
+    "failures": [],
+    "truncated": false,
+    "searched_records": 1,
+    "match_policy": "Unicode casefold, collapsed whitespace, word boundaries; AND terms/phrases",
+    "incomplete_text": true,
+    "searched_sources": [
+      {
+        "provider": "utah-public-notice",
+        "namespace": "//www.utah.gov",
+        "url": "https://www.utah.gov/pmn/search.html"
+      }
+    ],
+    "selected_providers": [],
+    "selected_namespaces": [],
+    "input_status": "partial"
+  },
+  "has_checkpoint": false,
+  "record_identities": [
+    {
+      "provider": "utah-public-notice",
+      "namespace": "//www.utah.gov",
+      "record_type": "meeting",
+      "external_id": "1120627",
+      "parent": null,
+      "derivation": "provider_identifier",
+      "stability": "Provider-issued identifier within the configured namespace."
+    }
+  ],
+  "hits": 1,
+  "captures": [
+    {
+      "sha256": "83d5905fe83c5d9acc31ce988c74b9d40e0a1aee3103464eba01035f5f837528",
+      "byte_length": 13597,
+      "input_format": "utah-public-search-html"
+    }
+  ]
+}

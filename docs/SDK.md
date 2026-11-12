@@ -1,6 +1,6 @@
 # Python SDK
 
-Install the QuorumRelay candidate wheel (`quorumrelay==0.1.0.dev6`) into a Python 3.11+ environment. The canonical import and CLI are `quorumrelay`; existing `civic_data_connectors` imports and the `civic-data-connectors` CLI remain compatible and use the same implementation objects. No reference application, HTTP server, model, hosted service, or database is required.
+Install the QuorumRelay candidate wheel (`quorumrelay==0.1.0.dev7`) into a Python 3.11+ environment. The canonical import and CLI are `quorumrelay`; existing `civic_data_connectors` imports and the `civic-data-connectors` CLI remain compatible and use the same implementation objects. No reference application, HTTP server, model, hosted service, or database is required.
 
 ```python
 from quorumrelay import Bounds, OperationContext, Query, Source, create_engine
@@ -191,3 +191,23 @@ Essential credentials use `token`. Its request uses `api_resource: meeting|item|
 TelVue credentials use `access_key` and `secret_passphrase`, sent as the documented CONNECT-ACCESS-KEY and CONNECT-SECRET-PASSPHRASE headers over verified TLS. Request `api_resource: media|videos|playlists`; only media/playlists accept an optional decimal `external_id`. The `.json` list/detail routes preserve the documented envelopes, provider IDs, transcript text, chapters, sources and unknown fields. HTTP(S) media sources can become recording relationships; RTMP values stay in original data. Upload/creation timestamps are not meeting dates. Additive replay formats are `telvue-connect-media-json`, `telvue-connect-videos-json`, and `telvue-connect-playlists-json`.
 
 All account reads remain partial coverage: list pagination/end conditions and account visibility are unverified. Caller byte, deadline, maximum-record and cancellation bounds apply; unsupported date/body filters and forged checkpoints fail explicitly. Account responses that echo configured credential material cannot be captured. No token service or live account mutation was called during fixture verification.
+
+
+## Bounded public native search
+
+The dev7 source candidate adds the verified public search forms for PrimeGov, eSCRIBE, Swagit, SuiteOne, CivicPlus Select, AgendaCenter, AgendaQuick, Utah, iQM2 and ClerkBase. These adapters apply only to their evidenced source routes/tenants; `providers` and the capability inventory distinguish them from the preserved saved-input formats. They submit the first term or phrase to the provider, then apply exact local matching to the returned metadata and explicitly supplied excerpts. Provider ranking/candidate selection is separate from the local match and is not a full-text or catalog-completeness promise.
+
+```python
+result = engine.execute("search", {
+    "native": True, "source": configured_source.public_dict(),
+    "query": {"terms": ["Council"], "limit": 20},
+    "bounds": {"date_from": "2026-11-01", "date_to": "2026-11-30",
+               "max_pages": 2, "max_records": 100},
+}, context=context)
+# Supply coverage.checkpoint in the next request's bounds, with the same
+# source/query/caller and current grants. Retain partial status and all errors.
+```
+
+Date/body requirements are adapter-specific. Utah requires explicit dates and the configured public body for discovery; native search supports only its observed form. iQM2 rejects a body filter whose mapping is unverified. AgendaCenter and Boardable retain unknown bodies explicitly. AgendaQuick meeting rows and agenda items, iQM2 mixed result kinds, Select parents and related children, and ClerkBase supplied-URL document keys preserve their separate identities; consumers must not treat every result as a meeting.
+
+Continuations are bounded by the current source/query/caller and policy. Process-private session cursors expire after 15 minutes and cannot survive an engine restart; cookies and CSRF state are not placed in public tokens. An expired, changed or unavailable continuation requires a fresh request. Exact raw captures remain available independently of normalized matching. No adapter bypasses captcha, login or staff controls. Fixture-only pager checks and bounded endpoint reads do not establish complete live traversal or installed-consumer acceptance.

@@ -166,3 +166,10 @@ it. Other account-backed reads, unresolved provider contracts, installed-product
 checks, signing where applicable, publication and post-delivery verification
 remain as recorded in the plan and execution state. Unknown support is not
 evidence that a vendor lacks a feature. No requirement has been waived.
+
+
+## Development candidate 0.1.0.dev7 (source freeze pending artifact)
+
+Preserves all 31 provider families and 34 original baseline formats. Adds the finite verified public-control batch: current layouts and supplied tree/year/group traversal, native metadata/excerpt search for PrimeGov, eSCRIBE, Swagit, SuiteOne, Select, AgendaCenter, AgendaQuick, Utah, iQM2 and ClerkBase, supplied PDF validation/resolvers, and precise supplied-media projection. Runtime registration now contains 28 additive parsers. Exact captures, native or explicitly supplied-URL identities, unknown fields and partial/failure coverage remain distinct.
+
+Small-page continuation fixes cover mutable provider rank/DOM IDs, process-private expiring sessions and current caller grants, cumulative transfer limits and deadlines. No captcha bypass, staff route, inferred parent relationship or full-catalog/full-text claim is introduced. Existing dev6 artifacts and signed Townlight 1.8.4 acceptance remain immutable evidence of their own inputs; dev7 build, installed-consumer acceptance and delivery are pending. Authorized vendor write acceptance remains unrun without supplied test access.

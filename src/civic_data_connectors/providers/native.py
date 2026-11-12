@@ -150,6 +150,15 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format == "boardable-public-meetings-json":
+        from .boardable import _meeting_row
+        payload = json.loads(content)
+        if not isinstance(payload, dict) or not isinstance(payload.get("data"), list):
+            raise ValueError("The saved Boardable listing must contain a data array.")
+        if any(not isinstance(row, dict) for row in payload["data"]):
+            raise ValueError("The saved Boardable listing contains an invalid row.")
+        return make_bundle(source, namespace, content, input_format,
+                           [_meeting_row(source, row) for row in payload["data"]])
     if input_format == "clerkbase-public-tree-html":
         from .clerkbase_listing import listing_bundle
         return listing_bundle(source, namespace, content)

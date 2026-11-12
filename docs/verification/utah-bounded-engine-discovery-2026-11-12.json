@@ -1,0 +1,67 @@
+{
+  "observed_at": "2026-11-12T13:26:15.703618+00:00",
+  "scope": "one bounded integrated-engine read of an already-verified route; not catalog, installed-client or write acceptance",
+  "source_candidate": "0.1.0.dev7 working source",
+  "operation": "discover",
+  "request": {
+    "source": {
+      "provider": "utah-public-notice",
+      "url": "https://www.utah.gov/pmn/search.html",
+      "body": "Ridges Estates Infrastructure Financing District"
+    },
+    "bounds": {
+      "date_from": "2026-11-11",
+      "date_to": "2026-11-11",
+      "max_pages": 1,
+      "max_records": 3,
+      "deadline_seconds": 20,
+      "parser_bytes": 2097152,
+      "transfer_bytes": 4194304
+    }
+  },
+  "status": "partial",
+  "errors": [],
+  "coverage": {
+    "sources": [
+      {
+        "provider": "utah-public-notice",
+        "url": "https://www.utah.gov/pmn/search.html",
+        "namespace": "//www.utah.gov",
+        "body": "Ridges Estates Infrastructure Financing District",
+        "input_format": null,
+        "options": {}
+      }
+    ],
+    "native_search": true,
+    "scope": "public notice metadata; exact body/date and local title matching",
+    "catalog_complete": false,
+    "source_complete": false,
+    "full_source_searched": false,
+    "status": "partial",
+    "pages": 1,
+    "checkpoint_lifetime": "15 minutes; current engine process only",
+    "query_window_exhausted": false,
+    "observed_page_exhausted": true,
+    "body": "Ridges Estates Infrastructure Financing District"
+  },
+  "has_checkpoint": false,
+  "record_identities": [
+    {
+      "provider": "utah-public-notice",
+      "namespace": "//www.utah.gov",
+      "record_type": "meeting",
+      "external_id": "1120627",
+      "parent": null,
+      "derivation": "provider_identifier",
+      "stability": "Provider-issued identifier within the configured namespace."
+    }
+  ],
+  "hits": 0,
+  "captures": [
+    {
+      "sha256": "fd7bf834ae8a9ee4afb9d1a695c81b56e1b45a11bd72583194a2785659f24042",
+      "byte_length": 13592,
+      "input_format": "utah-public-search-html"
+    }
+  ]
+}

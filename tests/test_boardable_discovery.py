@@ -258,3 +258,17 @@ def test_date_body_and_type_filters_keep_unknown_text_and_unknown_raw_fields():
     assert typed.data["records"] == []
     assert typed.coverage["unobserved_record_types"] == ["document"]
     assert typed.coverage["catalog_complete"] is False
+
+
+def test_saved_additive_listing_parser_is_available_without_network():
+    from quorumrelay import create_engine
+    engine = create_engine()
+    source = {"provider": "boardable", "url": ROOT_URL,
+              "input_format": "boardable-public-meetings-json"}
+    result = engine.execute("normalize", {"source": source}, content=PAGE_1)
+    assert result.status == "completed", result.public_dict()
+    assert len(result.data["records"]) == 10
+    assert base64.b64decode(result.data["capture"]["content_base64"]) == PAGE_1
+    assert result.data["capture"]["original_values"] == json.loads(PAGE_1)
+    assert result.data["records"][0]["original"] == json.loads(PAGE_1)["data"][0]
+    assert result.data["records"][0]["identity"]["record_type"] == "meeting"
