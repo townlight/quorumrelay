@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Princeton, TX Video Search</title>
+  <link rel="stylesheet" media="all" href="/assets/application-aa4ff702d50a0a36e731206cfd144303a3c3318d59628c1700eab86d9efa8a2b.css" data-turbolinks-track="false" />
+  <script src="/assets/application-84b1c92415b2ab208d522e647cfca26328d1b8e25e43fd8db4c69271e3a18c2d.js" data-turbolinks-track="false"></script>
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="vcBOqpYB8tx+dHHrjZxumKAdSAiqfPEQxqmNSLx7IF58ZnGzu1F7JPq58cEEX1eDLH4C8CLwaBWM4lEGKOotMA==" />
+  
+</head>
+<body>
+
+  <style>
+    body {
+      padding-top: 0px;
+    }
+  </style>
+
+<!--
+  <div class="container master-container">
+      <div class="row">
+        <div class="col-xs-12">
+-->
+    
+<style>
+  body {
+    font-size: 15px;
+  }
+  em {
+    font-style: normal;
+    font-weight: bold;
+  }
+  a {
+    text-decoration: underline;
+  }
+
+</style>
+
+<div class="container">
+  <div id="header" style="overflow:hidden;margin-top:10px;">
+    <img src="https://swagit-attachments.granicus.com/uploads/customer/header/484/princetontx-player-header.jpg">
+  </div>
+  <hr>
+<p id="notice"></p>
+
+  <form action="/videos/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+    <div class="input-group">
+  <input type="text" name="q" id="q" value="quorumrelayneverpresentqzxjvk" class="form-control" placeholder="Search..." />
+
+  <span class="input-group-btn">
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-search"></span>
+    </button>
+  </span>
+
+</div>
+
+</form>
+  <hr>
+
+  No results containing all your search terms were found.
+
+<p style="text-align: center; margin-bottom: 21px">
+
+
+</p>
+</div>
+<script>
+$(function () {
+  $(".video-title").on("keydown", function (e) {
+    if (e.key === "Enter" && e.ctrlKey) {
+      e.preventDefault();
+
+      let currentRow = $(this).closest("tr");
+      let nextRow = currentRow.next();
+      let nextNextRow = nextRow.next();
+
+      let containerRows = $();
+
+      if (!nextRow.hasClass("video-row")) {
+        containerRows = containerRows.add(nextRow);
+
+        if (nextNextRow.length && !nextNextRow.hasClass("video-row")) {
+          containerRows = containerRows.add(nextNextRow);
+        }
+      }
+
+      let links = containerRows.find("td").find("a, .soundsearch-link");
+
+      if (links.length) {
+        links.attr("tabindex", "0");
+        links.first().focus();
+        manageFocus(links, $(this));
+
+        $(document).off("click.resetTabIndex").on("click.resetTabIndex", function (event) {
+          if (!containerRows.has(event.target).length && !$(event.target).is(".video-title")) {
+            resetTabIndex(links);
+            $(document).off("click.resetTabIndex");
+          }
+        });
+      } else {
+        containerRows.focus();
+      }
+    }
+
+    if (e.key === "Tab" && e.shiftKey) {
+      e.preventDefault();  
+      let prevVideoTitle = $(this).closest("tr").prevAll(".video-row").first().find(".video-title");
+      if (prevVideoTitle.length) {
+        prevVideoTitle.focus();
+      }
+    }
+  });
+
+  function manageFocus(links, previousVideoTitle) {
+    links.first().on("keydown", function (e) {
+      if (e.key === "Tab" && e.shiftKey) {
+        e.preventDefault();
+        resetTabIndex(links);
+        previousVideoTitle.focus();
+      }
+    });
+
+    links.last().on("keydown", function (e) {
+      if (e.key === "Tab" && !e.shiftKey) {
+        e.preventDefault();
+        resetTabIndex(links);
+        let nextVideoTitle = previousVideoTitle.closest("tr").nextAll(".video-row").first().find(".video-title");
+        if (nextVideoTitle.length) {
+          nextVideoTitle.focus();
+        }
+      }
+    });
+  }
+
+  function resetTabIndex(links) {
+    links.attr("tabindex", "-1");
+    console.log(links)
+  }
+});
+</script>
+
+<!--
+        </div>
+    </div>
+  </div>
+-->
+</body>
+</html>
