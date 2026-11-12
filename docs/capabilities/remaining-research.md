@@ -242,7 +242,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
-- Calendar POST already implemented/proven; bounded Meeting.aspx HTML fetch completed and supplied FileStream PDF returned403 (correctly partial). No bypass/retry or complete agenda-item/catalog claim.
+- Additive rendered Meeting.aspx detail is now mapped from the existing saved HTML:1native meeting,12capture-local item positions and15associated supplied document links. Five scoped synthetic cases cover offline normalization and actual engine detail→document transfer; IDs/links/date/local-time/location are explicit, item keys are not stable native IDs. Calendar POST already implemented/proven; bounded Meeting.aspx HTML fetch completed and supplied FileStream PDF returned403 (correctly partial). No bypass/retry or complete agenda-item/catalog claim.
 - Public native search source implementation and bounded first/page2/resume are verified with partial coverage. Provider full-text/exact matching semantics, broader document visibility and catalog completeness remain unknown; no saved metadata search is mislabeled native.
 - The official product overview describes modules, not public API schemas. No customer API/import contract or authorized write tenant was supplied for meeting/item create/update/upload.
 

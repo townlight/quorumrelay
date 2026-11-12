@@ -9939,6 +9939,21 @@
           "observed": "2026-11-12 bounded public read",
           "observation_date": "2026-11-12",
           "access_scope": "bounded_public_read_only"
+        },
+        {
+          "id": "escribe-rendered-detail-2026-11-12",
+          "url": "https://pub-oakville.escribemeetings.com/Meeting.aspx?Id=4162e72f-daa8-4252-bfd5-fd54f125ebe4&Agenda=Agenda&lang=English",
+          "title": "Supplied eSCRIBE rendered agenda mapping and scoped synthetic transfer",
+          "kind": "vendor_public_rendered_contract_and_synthetic_engine",
+          "proof_level": "saved_public_capture_mapping_and_scoped_synthetic_engine_execution",
+          "observation_date": "2026-11-12",
+          "findings": [
+            "Existing HTML maps1native meeting plus12explicitly capture-local agenda positions and15supplied associated documents.",
+            "Five distinct synthetic cases cover configured GET, offline normalize, date/time/location, position stability limits, shell/duplicate refusal, foreign document exclusion and capture-verified engine transfer."
+          ],
+          "limits": "No live request or remote provider write executed in this batch.; Item keys are exact-capture-local and change when HTML changes; native item ID remains null. This is honest capture identity, not cross-revision native item matching.; No body/meeting timezone inferred from title; unrecognized source date/time retained raw, partial coverage explicit.; Only supplied same-origin FileStream links are mapped. Other private/public API controls, comments, media bytes, content fields absent in this capture and write contracts remain unresolved.",
+          "receipt_path": "docs/verification/escribe-rendered-detail-2026-11-12.json",
+          "receipt_sha256": "dc35dcedfe94fcfffd4785455931748573152cdfdefa4fc324031f19cbe02281"
         }
       ],
       "tenants": [
@@ -10005,9 +10020,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "escribe-oakville-public",
-            "escribe-public-detail-live"
+            "escribe-public-detail-live",
+            "escribe-rendered-detail-2026-11-12"
           ],
-          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced.",
+          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail→attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged.",
           "dependencies": [],
           "remaining_verification": [
             "Implementation contract validation",

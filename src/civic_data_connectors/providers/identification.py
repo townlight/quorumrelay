@@ -21,6 +21,7 @@ ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json"
                       "clerkbase": ("clerkbase-search-html", "clerkbase-public-tree-html"),
                       "iqm2": ("iqm2-public-search-html",),
                       "utah-public-notice": ("utah-public-search-html",),
+                      "escribe": ("escribe-meeting-detail-html",),
                       "civicweb": ("civicweb-detail-html", "civicweb-filepro-soap-xml"),
                       "swagit": ("swagit-listing-html",),
                       "onbase": ("onbase-public-listing-html",),
