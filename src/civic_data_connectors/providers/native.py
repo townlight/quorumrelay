@@ -156,7 +156,7 @@ def parse_native(source, namespace, content, input_format):
     if input_format == "granicus-platform-soap-xml":
         from .granicus_platform import parse_bundle
         return parse_bundle(source, namespace, content)
-    if input_format in {"simbli-meeting-detail-json", "simbli-agenda-items-json"}:
+    if input_format in {"simbli-meeting-detail-json", "simbli-agenda-items-json", "simbli-item-content-json"}:
         from .simbli_detail import parse_bundle
         return parse_bundle(source, namespace, content, input_format)
     if input_format == "boardable-public-meetings-json":

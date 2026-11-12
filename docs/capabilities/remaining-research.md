@@ -272,7 +272,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
-- Working public menu/listing and page2 are verified and source implemented. Fresh anonymous ViewMeeting controls and observed GET routes now retrieve meeting metadata and the agenda tree; one integrated read retained42 records. Individual item content and document/PDF retrieval remain unresolved. Body filtering/search/full-catalog semantics remain unverified.
+- Working public menu/listing and page2 are verified and source implemented. Fresh anonymous ViewMeeting controls and observed GET routes now retrieve meeting metadata and the agenda tree; one integrated read retained42 records. Selected public item content and supplied same-meeting attachment routes are now source implemented with scoped synthetic engine transfer checks; one separate endpoint probe returned an actual PDF. Aggregate agenda/minutes PDF generation and broader document coverage remain unresolved. Body filtering/search/full-catalog semantics remain unverified.
 - Reviewed current Simbli pages describe archive search and staff meeting/item/document workflows but publish no machine field schema. Obtain customer API specification before implementing writes or claiming absence.
 - No authorized provider test tenant, staff credentials or tenant-specific write configuration was supplied.
 

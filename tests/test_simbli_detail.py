@@ -7,7 +7,7 @@ from urllib.parse import parse_qs, urlsplit
 
 import pytest
 
-from quorumrelay import OperationContext, create_engine
+from quorumrelay import OperationContext, Source, create_engine
 from quorumrelay.providers.contracts import Response
 from civic_data_connectors.providers.simbli_detail import DETAIL, ITEMS
 
@@ -84,3 +84,109 @@ def test_partial_child_failure_limits_scope_and_revocation():
     assert len(limited.data["records"]) == 2 and limited.coverage["truncated"]
     assert create_engine(provider_transport=Transport()).execute("fetch", {"source": SOURCE},
         context=OperationContext(allowed_operations=frozenset())).status == "failed"
+
+
+class ContentTransport(Transport):
+    def __init__(self, *, mismatch=False, null=False):
+        super().__init__(FORM + b"var viewMode='publicview';")
+        self.mismatch, self.null = mismatch, null
+
+    def request(self, url, **kwargs):
+        if urlsplit(url).path != "/Services/api/MeetingView/GetMeetingItemDetailsModel/":
+            return super().request(url, **kwargs)
+        self.calls.append(url)
+        assert kwargs["allow_redirects"] is False
+        query = parse_qs(urlsplit(url).query, keep_blank_values=True)
+        assert query["enuid"] == [""] and query["view"] == ["publicview"]
+        assert query["stab"] == ["1"]
+        data = None if self.null else {"ItemDetails": {
+            "EncrID": "changed" if self.mismatch else query["enitemid"][0], "Title": "Supplied content"},
+            "ItemContents": [{"FieldName": "abstract", "ControlType": 11,
+                "Content": "<p>Actual supplied item text</p>", "HasData": True,
+                "Attachments": [{"AttachmentID": 131003, "Title": "Sign in sheet",
+                    "FileName": "sheet.pdf", "SchoolID": "36031063", "EnitityID": 4942, "SecurityToken": "private-synthetic-attachment"}]}]}
+        return Response(url, json.dumps(data).encode(), "application/json")
+
+
+def _selected_source():
+    tree = json.loads((ROOT / "items.json").read_bytes())
+    return {**SOURCE, "options": {"agenda_item_id": tree["Items"][0]["AgendaID"]}}
+
+
+def test_selected_content_uses_fresh_tree_identity_and_retains_raw_fields():
+    transport = ContentTransport()
+    result = create_engine(provider_transport=transport).execute("fetch", {"source": _selected_source()})
+    assert not result.errors, result.public_dict()
+    identities = [(r["identity"]["record_type"], r["identity"]["external_id"])
+                  for r in result.data["records"]]
+    assert len(identities) == len(set(identities))
+    content = result.data["bundles"][-1]
+    record = content["records"][0]
+    assert record["identity"]["parent"]["external_id"] == "4942"
+    assert record["normalized"]["level"] == json.loads((ROOT / "items.json").read_bytes())["Items"][0]["Level"]
+    assert record["normalized"]["content_fields"][0]["Content"] == "<p>Actual supplied item text</p>"
+    assert record["normalized"]["documents"][0]["external_id"] == "131003"
+    assert record["normalized"]["documents"][0]["url"] == "https://simbli.eboardsolutions.com/Meetings/Attachment.aspx?S=36031063&AID=131003&MID=4942"
+    assert "private-synthetic-attachment" not in json.dumps(record["normalized"])
+    assert content["capture"]["original_values"]["response"]["ItemContents"][0]["Attachments"][0]["SecurityToken"] == "private-synthetic-attachment"
+    saved = create_engine().execute("normalize", {"source": {**SOURCE,
+        "input_format": "simbli-item-content-json"}}, content=base64.b64decode(content["capture"]["content_base64"]))
+    assert saved.status == "completed"
+    assert saved.data["records"][0]["identity"] == record["identity"]
+
+
+@pytest.mark.parametrize("kwargs", [{"mismatch": True}, {"null": True}])
+def test_selected_content_rejects_wrong_identity_or_unavailable_response(kwargs):
+    result = create_engine(provider_transport=ContentTransport(**kwargs)).execute("fetch", {"source": _selected_source()})
+    assert result.status == "partial" and result.errors
+    assert len(result.data["bundles"]) == 2
+
+
+def test_unlisted_item_does_not_make_content_request():
+    transport = ContentTransport()
+    result = create_engine(provider_transport=transport).execute("fetch", {
+        "source": {**SOURCE, "options": {"agenda_item_id": 999999999}}})
+    assert result.errors and len(transport.calls) == 5
+
+
+def test_selected_content_respects_page_budget_before_item_request():
+    transport = ContentTransport()
+    result = create_engine(provider_transport=transport).execute("fetch", {
+        "source": _selected_source(), "bounds": {"max_pages": 4}})
+    assert result.errors and len(transport.calls) == 5
+    assert not any("GetMeetingItemDetailsModel" in call for call in transport.calls)
+
+
+def test_saved_content_never_maps_foreign_meeting_attachment_url():
+    source = {**SOURCE, "input_format": "simbli-item-content-json"}
+    payload = {"meeting_id": "4942", "agenda_item_id": 176766,
+        "response": {"ItemDetails": {"Title": "Captured item"}, "ItemContents": [{
+            "Attachments": [{"AttachmentID": 131003, "SchoolID": "36031063", "EnitityID": 4943}]}]}}
+    result = create_engine().execute("normalize", {"source": source}, content=json.dumps(payload).encode())
+    assert result.status == "completed"
+    assert "url" not in result.data["records"][0]["normalized"]["documents"][0]
+
+
+def test_selected_content_attachment_flows_through_capture_verified_engine_transfer():
+    pdf = b"%PDF-1.7 synthetic supplied attachment"
+
+    class FileTransport(ContentTransport):
+        def request(self, url, **kwargs):
+            if urlsplit(url).path == "/Meetings/Attachment.aspx":
+                self.calls.append(url)
+                assert parse_qs(urlsplit(url).query) == {
+                    "S": ["36031063"], "AID": ["131003"], "MID": ["4942"]}
+                assert kwargs["allowed_origins"] == ("https://simbli.eboardsolutions.com",)
+                return Response(url, pdf, "application/pdf")
+            return super().request(url, **kwargs)
+
+    transport = FileTransport()
+    engine = create_engine(provider_transport=transport)
+    result = engine.execute("fetch", {"source": _selected_source()})
+    bundle = result.data["bundles"][-1]
+    capture = base64.b64decode(bundle["capture"]["content_base64"])
+    fetched = engine.fetch_attachment(Source(**SOURCE, input_format="simbli-item-content-json"),
+        bundle["records"][0], capture=capture)
+    assert fetched.status == "completed", fetched.public_dict()
+    assert base64.b64decode(fetched.data["attachment"]["content_base64"]) == pdf
+    assert fetched.data["attachment"]["citation_url"].endswith("S=36031063&AID=131003&MID=4942")

@@ -1,0 +1,71 @@
+{
+  "scope": "Simbli selected public agenda item content and same-meeting supplied attachment; source candidate only, not frozen dev8.",
+  "contract": {
+    "feature_url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-XH3WJOAC.js",
+    "feature_sha256": "83f27320892cdabc91346a2d105bb36c6ac3afd4967531171077358c09248c09",
+    "attachment_component_url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-5FTFBQVD.js",
+    "attachment_component_sha256": "d4a26496d8b3f91696c19bf5991220f115e201df1341578bb8870a4ac2fe0cd6",
+    "selection": "ItemClick(row) -> SelectItem(row.ID) -> itemDetails.Init -> getMeetingItemDetailsModel(itemID, selectedTab=1); initial read is GET and anonymous enuid is empty.",
+    "attachment": "ViewDocument ModuleID=1: /Meetings/Attachment.aspx?S=SchoolID&AID=AttachmentID&MID=EnitityID; captured meeting page moduleID=1."
+  },
+  "raw_endpoint_observations": {
+    "source": "https://simbli.eboardsolutions.com/SB_Meetings/ViewMeeting.aspx?S=36031063&MID=4942",
+    "item_native_id": 176766,
+    "requests": [
+      {
+        "route": "/SB_Meetings/ViewMeeting.aspx",
+        "status": 200,
+        "bytes": 83447,
+        "sha256": "c7e6b371aa816afa0bf4f2e047815b0f6d5dff6539ac0ca9513bc1754418eeaf"
+      },
+      {
+        "route": "/Services/api/MeetingView/GetItemsTreeDTO/",
+        "status": 200,
+        "bytes": 22055,
+        "sha256": "f7d82f23f692f0eebfdb3c197bcac40fd16f99475d162359938abe57f3ca14a1"
+      },
+      {
+        "route": "/Services/api/MeetingView/GetMeetingItemDetailsModel/",
+        "status": 200,
+        "bytes": 5803,
+        "sha256": "fb65993ad64a49f17a711c9a0be08d4dc2c0d2056fddaf7e412d549849815eb7"
+      }
+    ],
+    "transfer_bytes": 111305,
+    "keys": [
+      "ItemDetails",
+      "ItemContents",
+      "HasAnyChild",
+      "PublicCommentConfiguration",
+      "CommentViewDTO",
+      "IsLoadContent",
+      "MinutesDto"
+    ],
+    "opaque_values": "fresh private request values omitted"
+  },
+  "supplied_document_observation": {
+    "url": "https://simbli.eboardsolutions.com/Meetings/Attachment.aspx?S=36031063&AID=131003&MID=4942",
+    "status": 200,
+    "content_type": "application/pdf",
+    "bytes": 175050,
+    "sha256": "89ee35195be1aadf199af621f4fa30f744ba0af7056be585bf9aca2cf66b95c8",
+    "pdf_magic": true,
+    "redirects": false,
+    "scope": "one supplied same-meeting attachment; no catalog or write claim"
+  },
+  "synthetic_engine_scope": {
+    "new_distinct_cases": 7,
+    "prior_detail_cases_reused": 7,
+    "results": "13 focused cases passed together; seventh new engine-transfer case passed separately. These are 14 distinct cases, not one final whole-file run. After preserving existing normalized tree level/sequence/flag/parent fields in the selected detail, the two affected successful content/transfer nodes passed again; no additional distinct case.",
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_simbli_detail.py -q (13 passed before final added case)",
+      ".venv/Scripts/python.exe -m pytest tests/test_simbli_detail.py::test_selected_content_attachment_flows_through_capture_verified_engine_transfer -q (1 passed)"
+    ],
+    "covered": "Fresh tree binding, same-meeting response identity, raw content preservation/offline normalization, no duplicate result identities, unavailable/wrong response, missing item, page budget, foreign attachment scope and capture-verified engine PDF transfer."
+  },
+  "limits": [
+    "Public endpoint probes are not integrated-engine live reads. Engine mapping and transfer were exercised synthetically.",
+    "No aggregate agenda/minutes PDF generation, native search, recursive document catalog, calendar completeness or write contract claimed.",
+    "Opaque request and attachment/session values are excluded from this receipt; exact responses remain private local raw captures."
+  ]
+}

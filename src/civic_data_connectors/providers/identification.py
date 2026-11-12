@@ -28,7 +28,7 @@ ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json"
                       "towncloud": ("towncloud-public-listing-json",),
                       "destiny-agendaquick": ("agendaquick-public-listing-html", "agendaquick-item-search-html"),
                       "boardable": ("boardable-public-meetings-json",),
-                      "simbli": ("simbli-meeting-detail-json", "simbli-agenda-items-json"),
+                      "simbli": ("simbli-meeting-detail-json", "simbli-agenda-items-json", "simbli-item-content-json"),
                       "telvue": ("telvue-cloudcast-mrss-xml", "telvue-connect-media-json", "telvue-connect-videos-json",
                                  "telvue-connect-playlists-json", "telvue-connect-playlist_items-json"),
                       "municode-meetings": ("essential-multimedia-json",),
@@ -166,6 +166,8 @@ def validate_source(source: Source, context: OperationContext | None = None,
             namespace not in context.allowed_namespaces):
         raise ValueError("The source namespace is outside the caller's authorized source scope.")
     allowed_options = {"download_origins"}
+    if source.provider == "simbli":
+        allowed_options.add("agenda_item_id")
     if source.provider in {"legistar", "wistia", "laserfiche-weblink"}:
         allowed_options.add("page_size")
     if source.provider == "wistia":

@@ -38,7 +38,7 @@ def register(engine, *, transport: Transport | None = None,
     for provider, input_format in (
             ("granicus", "granicus-platform-soap-xml"),
             ("boardable", "boardable-public-meetings-json"),
-            ("simbli", "simbli-meeting-detail-json"), ("simbli", "simbli-agenda-items-json"),
+            ("simbli", "simbli-meeting-detail-json"), ("simbli", "simbli-agenda-items-json"), ("simbli", "simbli-item-content-json"),
             ("clerkbase", "clerkbase-search-html"),
             ("clerkbase", "clerkbase-public-tree-html"),
             ("iqm2", "iqm2-public-search-html"),

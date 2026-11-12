@@ -10563,6 +10563,22 @@
           "limits": "One public meeting only. Attachment flags do not supply document links; item bodies/PDF retrieval, other meetings, catalog and writes remain unresolved.",
           "receipt_path": "docs/verification/simbli-fresh-detail-2026-11-12.json",
           "receipt_sha256": "774e19e5afe0c3f820638fdd72f7b292089222393715703d27730618e026df58"
+        },
+        {
+          "id": "simbli-item-content-2026-11-12",
+          "url": "https://simbli.eboardsolutions.com/SB_Meetings/ViewMeeting.aspx?S=36031063&MID=4942",
+          "title": "Public-client selected item and attachment contracts with scoped synthetic engine checks",
+          "kind": "vendor_public_client_and_synthetic_engine",
+          "proof_level": "public_client_contract_scoped_engine_tests_and_separate_live_endpoint_observations",
+          "observation_date": "2026-11-12",
+          "findings": [
+            "ItemClick(row) -> SelectItem(row.ID) -> itemDetails.Init -> getMeetingItemDetailsModel(itemID, selectedTab=1); initial read is GET and anonymous enuid is empty.",
+            "ViewDocument ModuleID=1: /Meetings/Attachment.aspx?S=SchoolID&AID=AttachmentID&MID=EnitityID; captured meeting page moduleID=1.",
+            "Seven new distinct synthetic cases plus seven reused detail cases; raw endpoint item176766 and separate supplied PDF175050bytes observed."
+          ],
+          "limits": "Public endpoint probes are not integrated-engine live reads. Engine mapping and transfer were exercised synthetically.; No aggregate agenda/minutes PDF generation, native search, recursive document catalog, calendar completeness or write contract claimed.; Opaque request and attachment/session values are excluded from this receipt; exact responses remain private local raw captures.",
+          "receipt_path": "docs/verification/simbli-item-content-2026-11-12.json",
+          "receipt_sha256": "117a4d7d6380d224bca337a3a4e43e9b0e9acc640c8ce7e3a292b1bb6207be7f"
         }
       ],
       "tenants": [
@@ -10626,12 +10642,13 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "simbli-tenant",
-            "simbli-fresh-detail-2026-11-12"
+            "simbli-fresh-detail-2026-11-12",
+            "simbli-item-content-2026-11-12"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Resumed local source maps fresh anonymous GetMeeting/GetItemsTreeDTO responses, with explicit simbli-meeting-detail-json and simbli-agenda-items-json saved formats. Integrated meeting4942 read returned1meeting/41items/partial/noerrors. Supporting/minutes responses retained raw; no document links inferred from flags.",
+          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Resumed local source maps fresh anonymous GetMeeting/GetItemsTreeDTO responses, with explicit simbli-meeting-detail-json and simbli-agenda-items-json saved formats. Integrated meeting4942 read returned1meeting/41items/partial/noerrors. Supporting/minutes responses retained raw; no document links inferred from flags. Optional agenda_item_id now reads only an item supplied by the fresh same-meeting tree, maps supplied content fields and stable same-district/meeting attachment URLs from the vendor public renderer; simbli-item-content-json supports offline explicit-context normalization. Scoped synthetic engine mapping→attachment transfer passed; separate public PDF probe returned175050bytes/application/pdf with PDF magic. No full-provider acceptance inferred.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
+            "Aggregate agenda/minutes PDF generation, broader item/document coverage and native search contracts remain unresolved; supplied item PDF mapping is covered by the named scoped synthetic engine case."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
