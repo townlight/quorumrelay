@@ -1,0 +1,57 @@
+{
+  "observed_at": "2026-11-12T00:47:15.681596+00:00",
+  "operation": "fetch_record",
+  "source": {
+    "provider": "legistar",
+    "url": "https://webapi.legistar.com/v1/olympia",
+    "namespace": null,
+    "body": null,
+    "input_format": null,
+    "options": {}
+  },
+  "listing_status": "partial",
+  "remote_writes": "NOT_PERFORMED",
+  "external_id": "7011",
+  "status": "completed",
+  "errors": [],
+  "coverage": {
+    "sources": [
+      {
+        "provider": "legistar",
+        "url": "https://webapi.legistar.com/v1/olympia",
+        "namespace": "//webapi.legistar.com/v1/olympia",
+        "body": null,
+        "input_format": null,
+        "options": {}
+      }
+    ],
+    "external_id": "7011",
+    "scope": "one provider event detail",
+    "catalog_complete": false,
+    "requested_fields": [
+      "EventItemAttachments",
+      "AgendaNote",
+      "EventItems",
+      "MinutesNote"
+    ],
+    "available_text": "metadata_and_supplied_text_only",
+    "failures": [],
+    "source_complete": true,
+    "returned_records": 1,
+    "agenda_items_availability": "supplied",
+    "date_from": null,
+    "date_to": null,
+    "date_inclusivity": "both",
+    "truncated": false,
+    "unknown_date_records": [],
+    "filtered_records": 0,
+    "input_records": 1
+  },
+  "fixture": "tests\\fixtures\\brief-discovery\\legistar-olympia-event-7011.json",
+  "sha256": "34e882748bb749339329d7013f5d0e3a1a41b6d714572f7711e572f178e69e85",
+  "byte_length": 18453,
+  "agenda_items": 10,
+  "documents": 9,
+  "relationships": 19,
+  "original_fields_preserved": true
+}

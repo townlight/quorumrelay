@@ -1,0 +1,24 @@
+{
+  "evidence": "two bounded public queries on same existing Olympia tenant; no writes",
+  "official_contract": "https://webapi.legistar.com/Home/Examples",
+  "queries": [
+    {
+      "term": "Council",
+      "url": "https://webapi.legistar.com/v1/olympia/Events?%24filter=EventDate+ge+datetime%272026-11-01%27+and+EventDate+lt+datetime%272026-12-01%27+and+substringof%28%27Council%27%2CEventBodyName%29&%24top=10&%24orderby=EventId",
+      "status": 200,
+      "count": 1,
+      "bodies": [
+        "City Council"
+      ],
+      "sha256": "00dc739ed993e73a19bdcfafe4f162db1eadcaadf41952e0e17fd3cdb25f3b73"
+    },
+    {
+      "term": "QuorumRelayNoMatchingBody20261111",
+      "url": "https://webapi.legistar.com/v1/olympia/Events?%24filter=EventDate+ge+datetime%272026-11-01%27+and+EventDate+lt+datetime%272026-12-01%27+and+substringof%28%27QuorumRelayNoMatchingBody20261111%27%2CEventBodyName%29&%24top=10&%24orderby=EventId",
+      "status": 200,
+      "count": 0,
+      "bodies": [],
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  ]
+}

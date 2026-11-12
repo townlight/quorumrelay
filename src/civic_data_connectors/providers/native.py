@@ -47,6 +47,15 @@ def legistar_row(source: Source, raw: dict) -> tuple[dict, str]:
                       "title": item.get("EventItemTitle"),
                       "agenda_number": item.get("EventItemAgendaNumber"),
                       "source_fields": deepcopy(item)})
+        for attachment in item.get("EventItemMatterAttachments") or []:
+            if not isinstance(attachment, dict):
+                continue
+            if link := _url(source, attachment.get("MatterAttachmentHyperlink")):
+                documents.append({"kind": "supporting_document", "url": link,
+                                  "title": attachment.get("MatterAttachmentName"),
+                                  "external_id": str(attachment.get("MatterAttachmentId") or ""),
+                                  "agenda_item_external_id": str(item.get("EventItemId") or ""),
+                                  "source_fields": deepcopy(attachment)})
     return {
         "external_id": str(raw["EventId"]),
         "title": str(raw.get("EventBodyName") or "Meeting"),
@@ -68,13 +77,22 @@ def wistia_row(source: Source, raw: dict) -> tuple[dict, str]:
     identity = raw.get("hashed_id")
     if not isinstance(identity, str) or not identity:
         raise ValueError("Wistia account media requires hashed_id.")
+    recordings = [{"url": f"https://fast.wistia.com/embed/medias/{identity}",
+                   "duration_seconds": raw.get("duration"), "media_type": raw.get("type"),
+                   "status": raw.get("status"), "thumbnail": raw.get("thumbnail")}]
+    for asset in raw.get("assets") or []:
+        if not isinstance(asset, dict):
+            continue
+        if link := _url(source, asset.get("url")):
+            recordings.append({"url": link, "asset_type": asset.get("type"),
+                               "content_type": asset.get("content_type"),
+                               "width": asset.get("width"), "height": asset.get("height"),
+                               "byte_length": asset.get("file_size"), "source_fields": deepcopy(asset)})
     return {
         "external_id": identity, "title": raw.get("name") or "Media",
         "description": raw.get("description"),
         "url": f"https://fast.wistia.com/embed/medias/{identity}",
-        "recordings": [{"url": f"https://fast.wistia.com/embed/medias/{identity}",
-                        "duration_seconds": raw.get("duration"), "media_type": raw.get("type"),
-                        "status": raw.get("status"), "thumbnail": raw.get("thumbnail")}],
+        "recordings": recordings,
         "time_zone_status": "unknown", "agenda_items_availability": "absent",
         # Upload time is not the meeting date.
         "source_created": raw.get("created"), "source_updated": raw.get("updated"),
@@ -142,6 +160,14 @@ def parse_native(source, namespace, content, input_format):
                     "Fallback for an attachment-free listing row; changes if source URL, date or title changes.")
         return bundle
     raw = json.loads(content)
+    if input_format == "wistia-caption-json":
+        return caption_bundle(source, namespace, content, raw)
+    if input_format in {"legistar-event-json", "wistia-media-detail-json"}:
+        if not isinstance(raw, dict):
+            raise ValueError("The provider detail response must be a JSON object.")
+        mapper = legistar_row if input_format == "legistar-event-json" else wistia_row
+        normalized, kind = mapper(source, raw)
+        return make_bundle(source, namespace, content, input_format, [(normalized, raw, kind)])
     if not isinstance(raw, list) or any(not isinstance(row, dict) for row in raw):
         raise ValueError("The provider API response must be a JSON array of objects.")
     mapper = {"legistar-events-json": legistar_row,
@@ -151,3 +177,47 @@ def parse_native(source, namespace, content, input_format):
         normalized, kind = mapper(source, item)
         rows.append((normalized, item, kind))
     return make_bundle(source, namespace, content, input_format, rows)
+
+
+def caption_bundle(source, namespace, content, original):
+    """Map only supplied Wistia caption tracks/cues, including nullable payloads."""
+    tracks = original if isinstance(original, list) else [original]
+    rows = []
+    for raw in tracks:
+        if (not isinstance(raw, dict) or any(not isinstance(raw.get(key), str) or not raw[key]
+                for key in ("id", "media_id", "language"))):
+            raise ValueError("A caption track requires its supplied ID, parent media ID and language.")
+        rows.append(({"external_id": raw["id"], "title": "Captions (" + raw["language"] + ")",
+                      "language": raw["language"], "media_id": raw["media_id"],
+                      "url": "https://fast.wistia.com/embed/medias/" + raw["media_id"],
+                      "source_status": {"is_draft": raw.get("is_draft")},
+                      "time_zone_status": "unknown", "agenda_items_availability": "absent"}, raw, "transcript"))
+    bundle = make_bundle(source, namespace, content, "wistia-caption-json", rows)
+    for record in bundle["records"]:
+        raw = record["original"]
+        parent = {"provider": source.provider, "namespace": namespace, "record_type": "recording",
+                  "external_id": raw["media_id"], "parent": None}
+        record["identity"]["parent"] = parent
+        record["relationships"] = [{"relation": "recording", "identity": parent,
+                                    "value": {"url": record["normalized"]["url"]}}]
+        record["source_revision"] = {"kind": "provider_supplied", "value": {"version": raw.get("version")}}
+        segments = raw.get("segments")
+        text = []
+        if segments is not None:
+            if not isinstance(segments, list):
+                raise ValueError("Supplied caption cues must be an array or null.")
+            for index, segment in enumerate(segments):
+                if (not isinstance(segment, dict) or not isinstance(segment.get("text"), str)
+                        or type(segment.get("start_ms")) is not int or type(segment.get("end_ms")) is not int
+                        or not 0 <= segment["start_ms"] <= segment["end_ms"]):
+                    raise ValueError("Supplied caption cues require valid text and millisecond bounds.")
+                text.append({**deepcopy(segment), "field": f"segments[{index}]",
+                             "timestamp_seconds": segment["start_ms"] / 1000,
+                             "citation_url": record["normalized"]["url"], "completeness": "complete"})
+        if not text and isinstance(raw.get("text"), str) and raw["text"]:
+            text.append({"field": "caption_srt", "text": raw["text"], "format": "srt",
+                         "citation_url": record["normalized"]["url"], "completeness": "complete"})
+        if not text:
+            text.append({"field": "caption_payload", "completeness": "unavailable"})
+        record["text"] = text
+    return bundle

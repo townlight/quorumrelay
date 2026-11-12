@@ -1,4 +1,4 @@
-# Engine contract, candidate 0.1.0.dev2 / schema 2.0.0
+# Engine contract, candidate 0.1.0.dev3 / schema 2.0.0
 
 Module ownership: core `models.py`, `engine.py`, `extensions.py`, `compat.py`, `normalization.py`, `fetch.py`; discovery `providers/`; storage/search/export `storage.py`, `search.py`, `interchange.py`, `imports.py`; writes `writes.py`; transports `transports/`, TypeScript `client/`. Do not edit another owner's modules without coordination.
 
@@ -14,6 +14,7 @@ engine = Engine(storage=None, connectors=())
 result = engine.execute(operation, request, content=None, context=None)
 result.public_dict()
 engine.normalize(source, content, input_format="meeting-export", bounds=None, context=None)
+engine.fetch_record(source, external_id, bounds=None, context=None)
 engine.register_operation(operation, handler)
 # handler(engine: Engine, request: dict, content: bytes | None,
 #         context: OperationContext) -> OperationResult
@@ -93,8 +94,14 @@ New requests default to the exact original origin; cross-origin GET redirects ne
 
 For a genuinely new configured source, explicit `new_source=True` keeps its validated durable URL namespace and provider-issued external IDs without claiming a legacy transition. Existing-source transitions need `LegacyIdentityMapping(provider, upstream_namespace, legacy_source_url, external_ids, evidence)` with explicit per-ID mappings; no hostname/client resemblance invents an alias. Missing evidence returns an actionable mapping-required failure rather than duplicating records.
 
-## Current verification
+## Historical extraction verification (dev1)
 
 Core validation: 132 tests PASS on Windows Python 3.13, including exact independent original-output hashes for all 34 formats/31 families, raw capture retention, unknown typed round trips, conformance signatures, scoped delegation, source projection and streamed 200 MiB/+1 boundaries. The unchanged original local-parser validator also reports 34 PASS through a test-only compatibility alias. Owned-module lint passes. The independent validator reports the frozen baseline wheel's full-JSON 34-format comparison passes in a clean environment with no reference-product imports.
 
-Frozen early extraction artifact: `dist/core-baseline/civic_data_connectors-0.1.0.dev2-py3-none-any.whl`, SHA256 `00f911a2ec2038fea1114424e7650617d7cec9e4a3c2fff0d0208addd9114f02`. Later source changes require a distinct final artifact and rerun; this early artifact stays intact. User direction is mock data, no live writes. These are not live-provider or installed-consumer release acceptance.
+Frozen early extraction artifact: `dist/core-baseline/civic_data_connectors-0.1.0.dev1-py3-none-any.whl`, SHA256 `00f911a2ec2038fea1114424e7650617d7cec9e4a3c2fff0d0208addd9114f02`. Later source changes require a distinct final artifact and rerun; this early artifact stays intact. That extraction snapshot used synthetic writes. It does not define the later authorized implementation scope. These historical checks do not establish current live-provider or installed-consumer release acceptance; see `ENGINE-COVERAGE.md` and current receipts.
+
+## Single-record detail and source formats
+
+`fetch` accepts `external_id` for an evidenced provider detail adapter. It cannot be combined with attachment selection or saved content. The Legistar adapter issues one fixed event-detail route with items/notes/attachment expansion flags and rejects response IDs that differ from the requested EventId. It uses the same exact source identity as event discovery. Missing/unimplemented detail adapters remain explicit, rather than returning a catalog or successful empty result for a specific record request.
+
+`providers.data.providers[].additional_formats` lists registered additive parser hooks independently of the preserved 34 baseline formats. This is runtime parser availability, not a live provider acceptance claim.

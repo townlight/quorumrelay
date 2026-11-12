@@ -10,7 +10,7 @@ MCP and a TypeScript HTTP client use the same engine and result contract.
 
 ## Development status
 
-The current candidate is **0.1.0.dev2**. It is not a completed first release.
+The current candidate is **0.1.0.dev3**. It is not a completed first release.
 All 31 source families and 34 original input-format combinations remain in scope,
 along with every interface and all four reference integrations. Provider research,
 implemented behavior, fixture tests, live reads, authorized write acceptance and

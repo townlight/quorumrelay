@@ -36,7 +36,9 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_operation("identify", identify_handler)
     engine.register_operation("validate_source", validate_handler)
     for provider, input_format in (
-            ("legistar", "legistar-events-json"), ("wistia", "wistia-api-media-json"),
+            ("legistar", "legistar-events-json"), ("legistar", "legistar-event-json"),
+            ("wistia", "wistia-api-media-json"), ("wistia", "wistia-media-detail-json"),
+            ("wistia", "wistia-caption-json"),
             ("granicus", "granicus-listing-html"), ("peak", "granicus-listing-html")):
         engine.register_parser(provider, input_format, _parse_saved_native)
     engine.register_operation(
@@ -45,6 +47,13 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_operation(
         "fetch", lambda engine, request, content, context:
         fetch(engine, request, content, context, transport=transport, browser=browser))
+    from .wistia import native_search
+    from ..storage import tracked_handler
+    engine.register_native_search("wistia", tracked_handler("search", lambda engine, request, content, context:
+                                  native_search(engine, request, content, context, transport=transport)))
+    from .legistar import native_search as legistar_search
+    engine.register_native_search("legistar", tracked_handler("search", lambda engine, request, content, context:
+                                  legistar_search(engine, request, content, context, transport=transport)))
 
 
 __all__ = ["FORMATS", "BrowserSession", "PublicTransport", "Response", "Transport", "register"]

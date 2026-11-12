@@ -160,12 +160,14 @@ def create_server(engine, principal: Principal | None = None, *, config: Service
 
     def upload_result(action):
         try:
-            return OperationResult("completed", data=action()).public_dict()
+            payload = OperationResult("completed", data=action()).public_dict()
         except (ValueError, TypeError):
-            return failure("invalid_file", "Upload is invalid, unavailable, outside policy, or exceeds its bounds.").public_dict()
+            payload = failure("invalid_file", "Upload is invalid, unavailable, outside policy, or exceeds its bounds.").public_dict()
+        return CallToolResult(content=[TextContent(type="text", text=json.dumps(payload))],
+                              structured_content=payload, is_error=payload["status"] != "completed")
 
     @server.tool()
-    async def upload_begin(filename: str, content_type: str, byte_length: int, ctx: Context) -> dict:
+    async def upload_begin(filename: str, content_type: str, byte_length: int, ctx: Context) -> CallToolResult:
         """Begin a scoped bounded file input. Not a provider write."""
         identity = caller(ctx)
         return upload_result(lambda: uploads.begin(filename=filename, content_type=content_type,
@@ -173,21 +175,21 @@ def create_server(engine, principal: Principal | None = None, *, config: Service
             (_ for _ in ()).throw(ValueError("Authentication required.")))
 
     @server.tool()
-    async def upload_chunk(upload_id: str, offset: int, content_base64: str, ctx: Context) -> dict:
+    async def upload_chunk(upload_id: str, offset: int, content_base64: str, ctx: Context) -> CallToolResult:
         """Append at most 256 KiB, with exact retry-safe byte offset."""
         identity = caller(ctx)
         return upload_result(lambda: uploads.chunk(upload_id, offset=offset, content_base64=content_base64,
             context=identity.context()) if identity else (_ for _ in ()).throw(ValueError("Authentication required.")))
 
     @server.tool()
-    async def upload_finish(upload_id: str, ctx: Context) -> dict:
+    async def upload_finish(upload_id: str, ctx: Context) -> CallToolResult:
         """Finish a scoped input and return its immutable file_handle and byte hash."""
         identity = caller(ctx)
         return upload_result(lambda: uploads.finish(upload_id, context=identity.context()) if identity else
             (_ for _ in ()).throw(ValueError("Authentication required.")))
 
     @server.tool()
-    async def upload_abort(upload_id: str, ctx: Context) -> dict:
+    async def upload_abort(upload_id: str, ctx: Context) -> CallToolResult:
         """Discard an incomplete upload without performing a provider write."""
         identity = caller(ctx)
         return upload_result(lambda: uploads.abort(upload_id, context=identity.context()) if identity else

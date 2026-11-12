@@ -1,6 +1,6 @@
 # Python SDK
 
-Install the QuorumRelay candidate wheel (`quorumrelay==0.1.0.dev2`) into a Python 3.11+ environment. The canonical import and CLI are `quorumrelay`; existing `civic_data_connectors` imports and the `civic-data-connectors` CLI remain compatible and use the same implementation objects. No reference application, HTTP server, model, hosted service, or database is required.
+Install the QuorumRelay candidate wheel (`quorumrelay==0.1.0.dev3`) into a Python 3.11+ environment. The canonical import and CLI are `quorumrelay`; existing `civic_data_connectors` imports and the `civic-data-connectors` CLI remain compatible and use the same implementation objects. No reference application, HTTP server, model, hosted service, or database is required.
 
 ```python
 from quorumrelay import Bounds, OperationContext, Query, Source, create_engine
@@ -65,3 +65,50 @@ brand_new = legacy_previews(native_api_result, new_source=True)
 Only mark a source new when the application has checked its existing import/configuration ledger. Existing portal/API transitions require an evidenced `LegacyIdentityMapping`; do not guess old export IDs equal live API IDs or infer aliases from similar hostnames.
 
 Typed `from_dict`/`public_dict` helpers preserve unknown schema fields. Exact original bytes, supplied fields, false/null/zero/empty values, relationships and source revision metadata remain separate from normalized projections. The optional store does not own canonical application records or change-resolution decisions.
+
+## Fetch one known record
+
+```python
+source = Source("legistar", "https://webapi.legistar.com/v1/olympia")
+detail = engine.fetch_record(source, "7011", bounds=Bounds(deadline_seconds=15))
+# Equivalently: engine.execute("fetch", {"source": source.public_dict(), "external_id": "7011"})
+```
+
+The evidenced Legistar detail route requests supplied agenda items, agenda/minutes notes and attachment metadata. It preserves the exact response bytes and all original values. Linked item attachments become documents with explicit item relationships; downloading those files remains a separate captured-attachment operation. `legistar-event-json` replays a saved single-event response; `legistar-events-json` remains the listing-array format. `providers` reports additive formats separately from the 34 historical combinations.
+
+One-event retrieval is bounded to that identity and does not claim full catalog coverage. An unimplemented provider detail mapping reports that gap explicitly. Credentials use trusted `OperationContext.credentials["legistar_token"]` when required; source URLs and returned captures do not contain that token.
+
+Legistar vote and roll-call writes use `entity="vote"` / `entity="roll_call"`, `operation="create"` / `"update"`, and `parent_id` for the event item. Each requires an explicitly authorized `meeting_id` relationship. Native `VotePersonId`/`VoteValueId` or `RollCallPersonId`/`RollCallValueId` are required when creating, with matching parent identifiers bound into the exact plan. Provider enum values, tenant access and live write readback acceptance remain access-dependent; synthetic adapter checks do not establish these outcomes.
+
+Official detail contract: https://webapi.legistar.com/Help/Api/GET-v1-Client-Events-EventId_EventItems_AgendaNote_MinutesNote_EventItemAttachments
+
+## Native search
+
+```python
+native = engine.execute("search", {
+    "native": True,
+    "source": {"provider": "wistia", "url": "https://api.wistia.com/modern/medias"},
+    "query": {"terms": ["water"], "phrases": ["budget was approved"]},
+}, context=OperationContext(credentials={"wistia_token": account_read_token}))
+```
+
+The Wistia adapter calls the documented `/modern/search` endpoint with media-only results. The provider chooses candidate matching semantics; QuorumRelay applies its exact local term/phrase rules to returned metadata and supplied transcript excerpts. Matches retain source timestamps. The response includes `data.bundle` for explicit preview/import. Provider limits (100 primary media plus up to 100 transcript-only matches, no pagination) and partial excerpt coverage remain explicit even below the cap. A video upload timestamp does not establish its meeting date. The account must permit this read route; missing/denied credentials produce a failure, never an empty success.
+
+Other unregistered native search routes report an implementation gap. `native=false` performs the existing local capture search. Connector extensions can supply their own typed `native_search` hook. Wistia live account acceptance remains unrun without authorized credentials; see the capability inventory.
+
+
+Legistar native search uses the same request shape with a configured Legistar source and explicit dates. It searches **EventBodyName metadata only**, using provider-side substring filters and exact local term/phrase checking on that field. It retains full original records but does not advertise searching agenda titles, document text or vote details. Coverage states the searched field and binds resumed pages to the exact source/query/scope.
+
+Wistia `fetch_record` supports the configured authenticated `https://api.wistia.com/modern/medias` source, with `wistia_token` in the trusted context. It preserves supplied Media fields/assets and has no invented caption body. Use `engine.fetch_captions(source, "mediaHashedId", language="eng", context=context)` for one supplied time-coded language, or omit language for the visible supplied track list. Track IDs retain their parent recording identity and source version. Existing cue timestamps remain searchable. An empty delegated-token track list is partial visibility. These GETs never request diarization, transcription or translation generation. Saved replay formats are `wistia-media-detail-json` and `wistia-caption-json`; the old public `wistia-media-json` remains unchanged.
+
+CHAMP event sources such as `https://play.champds.com/lakezurichil/event/164` retrieve their fixed public event JSON route. `fetch_record(source, "164")` returns the same baseline identity and supplied agenda/media metadata; discovery of one configured event is partial catalog coverage.
+
+Tyler Calendar POST needs the API base observed in that exact tenant's public application, not a guessed host. For the checked Ector tenant, configure:
+
+```json
+{"provider":"tyler-meeting-manager",
+ "url":"https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/",
+ "options":{"calendar_api_base":"https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/tylermmcalendar46612prod/"}}
+```
+
+Discovery requires explicit inclusive dates. The engine uses a fixed POST endpoint/body, enforces the same tenant hostname, and binds configuration into checkpoints. The checked live response was empty; nonempty live rows and complete catalog/pagination acceptance remain unresolved. Saved calendar input still works. The maintained [core coverage map](ENGINE-COVERAGE.md) distinguishes implemented paths from remaining research, code and access requirements across all 31 families.

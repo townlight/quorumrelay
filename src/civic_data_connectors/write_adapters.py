@@ -26,6 +26,21 @@ from .write_transport import PublicWriteTransport, WriteResponse, WriteTransport
 from .write_files import open_write_file
 
 
+def _legistar_client(source):
+    """Keep URL client routing separate from canonical/legacy source identity."""
+    from .compat import source_namespace
+    parsed = urlsplit(source.url)
+    match = re.fullmatch(r"/v1/([A-Za-z0-9_-]+)(?:/.*)?", parsed.path)
+    if parsed.hostname != "webapi.legistar.com" or match is None:
+        raise ValueError("A Legistar write source must identify its exact API Client.")
+    client = match.group(1)
+    # The canonical reader namespace remains authoritative for new shared sources.
+    # Original write-only configurations used the client slug and stay explicit.
+    if source.namespace not in {client, source_namespace("legistar", parsed)}:
+        raise ValueError("The Legistar source identity does not match its API Client.")
+    return client
+
+
 class WriteFailure(ValueError):
     def __init__(self, code: str, message: str):
         super().__init__(message)
@@ -169,6 +184,16 @@ HISTORY_FIELDS = _fields(
     "MatterHistoryMoverId MatterHistorySeconderId MatterHistoryMatterStatusId",
     dates="MatterHistoryLastModifiedUtc MatterHistoryActionDate", binaries="MatterHistoryRowVersion",
 )
+VOTE_FIELDS = _fields(
+    strings="VoteGuid VotePersonName VoteValueName",
+    integers="VoteId VotePersonId VoteValueId VoteSort VoteResult VoteEventItemId",
+    dates="VoteLastModifiedUtc", binaries="VoteRowVersion",
+)
+ROLL_CALL_FIELDS = _fields(
+    strings="RollCallGuid RollCallPersonName RollCallValueName",
+    integers="RollCallId RollCallPersonId RollCallValueId RollCallSort RollCallResult RollCallEventItemId",
+    dates="RollCallLastModifiedUtc", binaries="RollCallRowVersion",
+)
 LEGISTAR = {
     "event": (EVENT_FIELDS, "Event", "Events", ("EventDate",)),
     "event_item": (ITEM_FIELDS, "EventItem", "Events/{parent}/EventItems", ()),
@@ -178,6 +203,9 @@ LEGISTAR = {
                ("MatterTypeId", "MatterStatusId", "MatterBodyId")),
     "matter_text": (TEXT_FIELDS, "MatterText", "Matters/{parent}/Texts", ("MatterTextMatterId",)),
     "matter_history": (HISTORY_FIELDS, "MatterHistory", "Matters/{parent}/Histories", ()),
+    "vote": (VOTE_FIELDS, "Vote", "EventItems/{parent}/Votes", ("VotePersonId", "VoteValueId")),
+    "roll_call": (ROLL_CALL_FIELDS, "RollCall", "EventItems/{parent}/RollCalls",
+                  ("RollCallPersonId", "RollCallValueId")),
 }
 
 
@@ -313,10 +341,7 @@ class WriteAdapter:
         if source.options:
             raise ValueError("Write sources do not accept arbitrary options or credential overrides.")
         if self.family == "legistar":
-            if parsed.hostname != "webapi.legistar.com" or not parsed.path.startswith(
-                f"/v1/{safe_id(source.namespace)}/"
-            ):
-                raise ValueError("Legistar source and Client namespace do not match.")
+            _legistar_client(source)
         elif self.family == "wistia":
             host = parsed.hostname
             if host not in {"api.wistia.com", "upload.wistia.com", "fast.wistia.com"} and host not in {
@@ -513,7 +538,7 @@ class WriteAdapter:
         validate_fields(fields, schema, required=required if change.operation != "update" else ())
         if "{parent}" in path:
             path = path.format(parent=safe_id(change.parent_id))
-        root = f"https://webapi.legistar.com/v1/{safe_id(source.namespace)}/{path}"
+        root = f"https://webapi.legistar.com/v1/{_legistar_client(source)}/{path}"
         is_update = change.operation == "update"
         identity = prefix + "Id"
         if is_update:
@@ -530,6 +555,11 @@ class WriteAdapter:
             if "EventItemEventId" in fields and str(fields["EventItemEventId"]) != str(change.parent_id):
                 raise ValueError("EventItemEventId does not match the parent Event.")
             fields.setdefault("EventItemEventId", int(change.parent_id))
+        if change.entity in {"vote", "roll_call"}:
+            parent_field = prefix + "EventItemId"
+            if parent_field in fields and str(fields[parent_field]) != str(change.parent_id):
+                raise ValueError(f"{parent_field} does not match the parent EventItem.")
+            fields.setdefault(parent_field, int(change.parent_id))
         if change.entity == "matter_text":
             if str(fields.get("MatterTextMatterId", change.parent_id)) != str(change.parent_id):
                 raise ValueError("MatterTextMatterId does not match the parent Matter.")

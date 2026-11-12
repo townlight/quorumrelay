@@ -53,6 +53,31 @@ def test_lossless_unknown_schema_identity_capture_roundtrip(format):
     assert bounded.status == "failed"
 
 
+@pytest.mark.parametrize("format", ["json", "jsonl"])
+def test_text_export_resolves_stored_capture_portably(tmp_path, format):
+    bundle = sample()
+    raw = base64.b64decode(bundle["capture"].pop("content_base64"))
+    store = SQLiteStorage(tmp_path / "capture-export.sqlite")
+    bundle["capture"]["storage_reference"] = store.save_capture(io.BytesIO(raw), scope="scope", max_bytes=len(raw))
+    before = deepcopy(bundle)
+    target = io.BytesIO()
+    write_bundle(bundle, target, format=format, storage=store, scope="scope")
+    recovered = read_bundle(target.getvalue(), format=format)
+    assert recovered["records"] == bundle["records"]
+    assert base64.b64decode(recovered["capture"]["content_base64"]) == raw
+    assert recovered["capture"]["sha256"] == hashlib.sha256(raw).hexdigest()
+    assert bundle == before
+    with pytest.raises(ValueError):
+        write_bundle(bundle, io.BytesIO(), format=format, storage=store, scope="other")
+
+
+def test_provider_export_never_silently_becomes_neutral():
+    from civic_data_connectors import create_engine
+    result = create_engine().execute("export", {"bundle": sample(), "provider_specific": True})
+    assert result.status == "unsupported"
+    assert "does not establish" in result.errors[0].message
+
+
 def test_engine_import_search_export_roundtrip_no_remote_action(tmp_path):
     engine = Engine(storage=SQLiteStorage(tmp_path / "data.sqlite"))
     imports.register(engine)

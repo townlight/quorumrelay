@@ -276,6 +276,15 @@ def test_status_rechecks_current_source_and_original_operation_policy(engine):
         assert status.data is None
 
 
+def test_unmapped_native_search_does_not_silently_search_local_records(engine):
+    result = engine.execute("search", {"native": True, "records": sample()["records"], "query": {}})
+    assert result.status == "unsupported"
+    assert result.data is None
+    assert "does not establish" in result.errors[0].message
+    malformed = engine.execute("search", {"native": "true", "records": sample()["records"]})
+    assert malformed.status == "failed"
+
+
 def _text_pdf():
     # A standalone PDF with one supplied-text page and one blank/scanned-like
     # page. Text below is literal input, not produced by our extraction helper.

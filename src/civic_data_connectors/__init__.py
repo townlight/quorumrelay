@@ -4,5 +4,5 @@ from .engine import Engine
 from .factory import create_engine
 from .models import Bounds, OperationContext, OperationResult, Query, Source
 
-__version__ = "0.1.0.dev2"
+__version__ = "0.1.0.dev3"
 __all__ = ["Bounds", "Engine", "OperationContext", "OperationResult", "Query", "Source", "create_engine"]

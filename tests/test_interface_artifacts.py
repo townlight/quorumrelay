@@ -93,3 +93,92 @@ def test_http_write_planner_can_stage_input_without_read_grants(tmp_path):
         assert client.get("/v1/files/" + handle, headers=auth).status_code == 403
         cfg.tokens[TOKEN_A] = replace(cfg.tokens[TOKEN_A], operations=frozenset({"providers"}))
         assert client.post("/v1/files", headers=auth, content=b"denied").status_code == 403
+
+
+def test_cli_write_file_bound_exact_part_and_scope(tmp_path):
+    from test_write_providers import make_engine
+    owner, context, network, source = make_engine(tmp_path, "wistia", ["media:upload"])
+    cfg = tmp_path / "trusted.json"
+    cfg.write_text(json.dumps({"principal": {"principal": context.principal, "client_id": context.client_id,
+        "tenant": context.tenant, "operations": ["plan_write", "commit_write", "receipt"],
+        "authorization": sorted(context.authorization), "allowed_namespaces": sorted(context.allowed_namespaces),
+        "credentials": context.credentials}}), encoding="utf-8")
+    target = tmp_path / "synthetic.mp4"
+    target.write_bytes(b"x" * 20000)
+    request = {"source": source, "bounds": {"parser_bytes": 1024, "transfer_bytes": 65536},
+        "changes": [{"key": "media", "entity": "media", "operation": "upload", "meeting_id": "meeting1",
+            "fields": {"name": "Synthetic"}, "files": [{"part": "file", "filename": "synthetic.mp4",
+                                                          "content_type": "video/mp4"}]}]}
+    output = io.StringIO()
+    args = ["plan_write", "--config", str(cfg), "--file-root", str(tmp_path),
+            "--write-file", "media", "file", str(target)]
+    assert main(args, stdin=io.StringIO(json.dumps(request)), stdout=output,
+                stderr=io.StringIO(), engine=owner) == 0
+    plan = json.loads(output.getvalue())["data"]
+    commit_output = io.StringIO()
+    assert main(["commit_write", "--config", str(cfg)],
+                stdin=io.StringIO(json.dumps({key: plan[key] for key in ("plan_id", "plan_hash")})),
+                stdout=commit_output, stderr=io.StringIO(), engine=owner) == 0
+    committed = json.loads(commit_output.getvalue())
+    assert network.last_request is not None
+    assert committed["data"]["mock"] is True
+    receipt_output = io.StringIO()
+    assert main(["receipt", "--config", str(cfg)], stdin=io.StringIO(json.dumps({"plan_id": plan["plan_id"]})),
+                stdout=receipt_output, stderr=io.StringIO(), engine=owner) == 0
+    assert json.loads(receipt_output.getvalue())["data"] == committed["data"]
+    missing = [*args[:-3], "media", "absent", str(target)]
+    assert main(missing, stdin=io.StringIO(json.dumps(request)), stdout=io.StringIO(),
+                stderr=io.StringIO(), engine=owner) == 64
+
+
+def test_large_neutral_input_uses_transfer_bound_in_http_cli_and_mcp_staging(tmp_path):
+    from civic_data_connectors.interchange import Attachment, write_bundle
+    from civic_data_connectors.models import Bounds
+    from civic_data_connectors.transports.files import InputUploads
+    from test_storage_search_imports import sample
+    import base64
+
+    bundle = sample()
+    raw = os.urandom(17 * 1024 * 1024)
+    archive = tmp_path / "large-input.zip"
+    bounds = Bounds(parser_bytes=4096, transfer_bytes=40 * 1024 * 1024)
+    with archive.open("wb") as target:
+        write_bundle(bundle, target, bounds=bounds,
+                     attachments=[Attachment("doc", io.BytesIO(raw), "doc.bin", "https://example.org/doc")],
+                     authorized_attachments=frozenset({"doc"}))
+    owner, cfg = build_engine(database=tmp_path / "input.sqlite"), config(
+        parser_bytes=bounds.parser_bytes, transfer_bytes=bounds.transfer_bytes)
+    auth = {"Authorization": "Bearer " + TOKEN_A}
+    with TestClient(create_app(owner, cfg), base_url="http://127.0.0.1") as client:
+        with archive.open("rb") as source:
+            uploaded = client.post("/v1/files", headers=auth, files={"file": source}).json()
+        assert uploaded["status"] == "completed", uploaded
+        request = {"format": "zip", "file_handle": uploaded["data"]["file_handle"]}
+        result = client.post("/v1/operations/import_preview", headers=auth, json=request).json()
+        assert result["status"] == "completed", result
+        assert result["data"]["bundle"]["records"] == bundle["records"]
+        denied = client.post("/v1/operations/import_preview", json=request,
+                             headers={"Authorization": "Bearer " + TOKEN_B}).json()
+        assert denied["status"] == "failed"
+    out = io.StringIO()
+    assert main(["import_preview", "--content", str(archive), "--file-root", str(tmp_path)],
+                stdin=io.StringIO(json.dumps({"format": "zip", "bounds": {"parser_bytes": 4096}})),
+                stdout=out, stderr=io.StringIO()) == 0
+    assert json.loads(out.getvalue())["data"]["bundle"]["records"] == bundle["records"]
+    # The exact MCP upload manager stages the same opaque core input contract.
+    uploads = InputUploads(owner)
+    context = cfg.tokens[TOKEN_A].context()
+    pending = uploads.begin(filename="large.zip", content_type="application/zip",
+                            byte_length=archive.stat().st_size, context=context)
+    offset = 0
+    with archive.open("rb") as source:
+        while chunk := source.read(pending["max_chunk_bytes"]):
+            uploads.chunk(pending["upload_id"], offset=offset,
+                          content_base64=base64.b64encode(chunk).decode(), context=context)
+            offset += len(chunk)
+    staged = uploads.finish(pending["upload_id"], context=context)
+    result = owner.execute("import_preview", {"format": "zip", "file_handle": staged["file_handle"],
+        "bounds": {"parser_bytes": 4096}}, context=context)
+    assert result.status == "completed", result.public_dict()
+    assert result.data["bundle"]["records"] == bundle["records"]
+    uploads.close()

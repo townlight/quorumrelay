@@ -57,6 +57,30 @@ def _load(owner, request, content, context):
             raise ValueError("A neutral import accepts encoded content or a bundle, not both.")
         bounds = Bounds(**request.get("bounds", {}))
         limit = min(bounds.parser_bytes, bounds.transfer_bytes) if neutral_format == "json" else bounds.transfer_bytes
+        if "file_handle" in request:
+            if content is not None or "content_base64" in request:
+                raise ValueError("Supply a file_handle or inline content, not both.")
+            from .interchange import open_input, read_bundle
+            from .write_files import open_write_file
+            handle = request["file_handle"]
+            if not isinstance(handle, str) or len(handle) != 64 or any(c not in "0123456789abcdef" for c in handle):
+                raise ValueError("The file handle must be an opaque string.")
+            stored = owner.storage.get("service_files", handle, scope=context.scope) if owner.storage else None
+            if stored is not None and "reference" in stored.value:
+                reference = stored.value["reference"]
+                if reference["byte_length"] > limit:
+                    raise ValueError("Neutral import exceeds its configured input byte limit.")
+                stream = open_write_file(owner.storage, reference, scope=context.scope)
+            else:
+                metadata, stream = open_input(owner, handle, context=context)
+                if metadata["byte_length"] > limit:
+                    stream.close()
+                    raise ValueError("Neutral import exceeds its configured input byte limit.")
+            with stream:
+                bundle = read_bundle(stream, format=neutral_format, bounds=bounds,
+                                     capture_storage=owner.storage, scope=context.scope)
+            return _load(owner, {key: value for key, value in {**request, "bundle": bundle}.items()
+                                 if key not in {"format", "file_handle"}}, None, context)
         if content is not None and "content_base64" in request:
             raise ValueError("Supply content bytes or content_base64, not both.")
         if "content_base64" in request:
@@ -71,7 +95,8 @@ def _load(owner, request, content, context):
         if not isinstance(content, bytes) or len(content) > limit:
             raise ValueError("Neutral import exceeds its configured input byte limit.")
         from .interchange import read_bundle
-        bundle = read_bundle(content, format=neutral_format, bounds=bounds)
+        bundle = read_bundle(content, format=neutral_format, bounds=bounds,
+                             capture_storage=owner.storage, scope=context.scope)
         return _load(owner, {key: value for key, value in {**request, "bundle": bundle}.items()
                              if key not in {"format", "content_base64"}}, None, context)
     if "result" in request:

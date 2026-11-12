@@ -45,6 +45,21 @@ async def sequence(client):
     assert len(searched["data"]["hits"]) == 1
     exported = await call("export", {"bundle": imported["data"]["bundle"], "format": "zip"})
     assert base64.b64decode(exported["data"]["content_base64"]).startswith(b"PK")
+    async def upload_call(name, arguments):
+        result = await client.call_tool(name, arguments)
+        value = result.structured_content
+        assert value is not None, result
+        assert value["status"] == "completed", value
+        return value["data"]
+    payload = base64.b64decode(exported["data"]["content_base64"])
+    started = await upload_call("upload_begin", {"filename": "bundle.zip",
+        "content_type": "application/zip", "byte_length": len(payload)})
+    await upload_call("upload_chunk", {"upload_id": started["upload_id"], "offset": 0,
+        "content_base64": base64.b64encode(payload).decode()})
+    staged = await upload_call("upload_finish", {"upload_id": started["upload_id"]})
+    restored = await call("import_preview", {"format": "zip", "file_handle": staged["file_handle"]})
+    assert restored["status"] == "completed", restored
+    assert len(restored["data"]["bundle"]["records"]) == 1
     streamed = await call("export", {"bundle": imported["data"]["bundle"], "format": "zip", "stream": True})
     resource = await client.read_resource(f"civic-artifact://{streamed['data']['artifact_id']}/0")
     chunk = json.loads(resource.contents[0].text)

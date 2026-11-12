@@ -56,6 +56,7 @@ class Engine:
         self.connectors: dict[str, Connector] = {}
         self.handlers: dict[str, Handler] = {}
         self.parsers: dict[tuple[str, str], Parser] = {}
+        self.native_searches: dict[str, Handler] = {}
         for connector in connectors:
             self.register_connector(connector)
 
@@ -82,6 +83,12 @@ class Engine:
             raise ValueError("A parser must implement the typed parse hook.")
         self.parsers[key] = parser
 
+    def register_native_search(self, provider: str, handler: Handler) -> None:
+        provider = canonical_provider_id(provider, allow_extension=True)
+        if provider in self.native_searches or not callable(handler):
+            raise ValueError("A native search handler must be callable and registered once per provider.")
+        self.native_searches[provider] = handler
+
     def discover(self, source: Source, *, bounds: Bounds | None = None,
                  context: OperationContext | None = None) -> OperationResult:
         from dataclasses import asdict
@@ -104,6 +111,17 @@ class Engine:
             "source": source.public_dict(), "bounds": asdict(bounds or Bounds()),
             "attachment": {"record_key": source_identity_key(identity), "index": index, "kind": kind},
         }, content=capture, context=context)
+
+    def fetch_record(self, source: Source, external_id: str, *, bounds: Bounds | None = None,
+                     context: OperationContext | None = None) -> OperationResult:
+        """Retrieve one known provider identity through its evidenced detail route."""
+        return self.fetch(source, {"external_id": external_id}, bounds=bounds, context=context)
+
+    def fetch_captions(self, source: Source, external_id: str, *, language: str | None = None,
+                       bounds: Bounds | None = None, context: OperationContext | None = None) -> OperationResult:
+        """Read supplied caption tracks; this never requests transcription or diarization."""
+        return self.fetch(source, {"external_id": external_id, "caption_language": language or "*"},
+                          bounds=bounds, context=context)
 
     def search(self, query: Query, *, context: OperationContext | None = None) -> OperationResult:
         from dataclasses import asdict
@@ -135,6 +153,10 @@ class Engine:
         provider = source_data.get("provider") if isinstance(source_data, dict) else request.get("provider")
         connector = self.connectors.get(provider)
         if connector is None:
+            if operation == "search" and request.get("native") is True and provider:
+                handler = self.native_searches.get(canonical_provider_id(provider, allow_extension=True))
+                if handler is not None:
+                    return handler(self, request, content, context)
             return None
         if operation == "identify":
             return connector.identify(request["url"])
@@ -173,6 +195,8 @@ class Engine:
             capabilities = provider_capabilities(provider)
             rows.append({
                 "provider": provider, "aliases": capabilities["aliases"], "formats": formats,
+                "additional_formats": sorted(input_format for registered, input_format in self.parsers
+                                             if registered == provider),
                 "parse": {"implementation": "extracted_baseline", "acceptance": "fixture_passed",
                           "evidence": "all 34 baseline captures independently compared with pinned originals"},
                 "capabilities": capabilities,
@@ -181,7 +205,10 @@ class Engine:
             })
         for provider, connector in self.connectors.items():
             if provider not in providers:
-                rows.append({"provider": provider, "formats": [], "capabilities": connector.capabilities()})
+                rows.append({"provider": provider, "formats": [],
+                             "additional_formats": sorted(fmt for registered, fmt in self.parsers
+                                                          if registered == provider),
+                             "capabilities": connector.capabilities()})
         return OperationResult("completed", data={"providers": rows, "formats": compat.source_formats(),
                                                   "inventory": inventory_metadata()})
 

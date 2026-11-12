@@ -1,0 +1,104 @@
+{
+  "observed_at": "2026-11-12T01:03:47.998865+00:00",
+  "operation": "fetch_record",
+  "policy": "bounded public GET only; no writes, credentials or attachment downloads",
+  "results": [
+    {
+      "provider": "champ",
+      "source_url": "https://play.champds.com/lakezurichil/event/164",
+      "external_id": "164",
+      "status": "completed",
+      "errors": [],
+      "coverage": {
+        "sources": [
+          {
+            "provider": "champ",
+            "url": "https://play.champds.com/lakezurichil/event/164",
+            "namespace": "//champds.com/lakezurichil",
+            "body": null,
+            "input_format": "champ-event-json",
+            "options": {}
+          }
+        ],
+        "date_from": null,
+        "date_to": null,
+        "date_inclusivity": "both",
+        "record_types": [],
+        "body": null,
+        "actual_dates": [
+          "2025-08-20"
+        ],
+        "returned_records": 1,
+        "filtered_records": 0,
+        "pages": 1,
+        "failed_pages": [],
+        "failures": [],
+        "unknown_date_records": [],
+        "unknown_body_records": [],
+        "truncated": false,
+        "deadline_exceeded": false,
+        "checkpoint": null,
+        "unavailable_attachments": [],
+        "scope": "one provider event detail",
+        "available_text": "metadata_and_supplied_text_only",
+        "catalog_complete": false
+      },
+      "capture_sha256": "6fa4155f47b95f71312dbe68708615474bd029ce4a2dfea82b598ba3d9d57cd0",
+      "byte_length": 32223,
+      "agenda_items": 14,
+      "documents": 6,
+      "recordings": 1,
+      "original_fields_preserved": true
+    },
+    {
+      "provider": "champ",
+      "source_url": "https://play.champds.com/yumacoaz/event/657",
+      "external_id": "657",
+      "status": "completed",
+      "errors": [],
+      "coverage": {
+        "sources": [
+          {
+            "provider": "champ",
+            "url": "https://play.champds.com/yumacoaz/event/657",
+            "namespace": "//champds.com/yumacoaz",
+            "body": null,
+            "input_format": "champ-event-json",
+            "options": {}
+          }
+        ],
+        "date_from": null,
+        "date_to": null,
+        "date_inclusivity": "both",
+        "record_types": [],
+        "body": null,
+        "actual_dates": [
+          "2026-11-02"
+        ],
+        "returned_records": 1,
+        "filtered_records": 0,
+        "pages": 1,
+        "failed_pages": [],
+        "failures": [],
+        "unknown_date_records": [],
+        "unknown_body_records": [],
+        "truncated": false,
+        "deadline_exceeded": false,
+        "checkpoint": null,
+        "unavailable_attachments": [],
+        "scope": "one provider event detail",
+        "available_text": "metadata_and_supplied_text_only",
+        "catalog_complete": false
+      },
+      "capture_sha256": "c09a651649f1e1f55d990cf87a1a084771b19e33d403472a5ccae2a124b1e071",
+      "byte_length": 39079,
+      "agenda_items": 14,
+      "documents": 0,
+      "recordings": 1,
+      "original_fields_preserved": true
+    }
+  ],
+  "limits": [
+    "Public detail for two tenants only; no catalog, pagination or write acceptance claimed."
+  ]
+}

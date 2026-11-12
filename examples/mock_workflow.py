@@ -7,13 +7,13 @@ import base64
 import json
 from urllib.parse import parse_qs, urlsplit
 
-from civic_data_connectors import create_engine
-from civic_data_connectors.storage import SQLiteStorage
-from civic_data_connectors.transports.http import create_app
-from civic_data_connectors.transports.mcp import run_stdio
-from civic_data_connectors.transports.runtime import OPERATIONS, Principal, ServiceConfig
-from civic_data_connectors.write_adapters import default_adapters
-from civic_data_connectors.write_transport import WriteResponse
+from quorumrelay import create_engine
+from quorumrelay.storage import SQLiteStorage
+from quorumrelay.transports.http import create_app
+from quorumrelay.transports.mcp import run_stdio
+from quorumrelay.transports.runtime import OPERATIONS, Principal, ServiceConfig
+from quorumrelay.write_adapters import default_adapters
+from quorumrelay.write_transport import WriteResponse
 
 TOKEN = "synthetic-demo-token-never-for-deployment"
 CAPTURE = [{"EventId": 7, "EventBodyName": "Council", "EventDate": "2026-11-11T00:00:00",
@@ -70,6 +70,8 @@ def workflow(engine):
     preview = call("import_preview", {"result": discovered.public_dict()})
     imported = call("import_bundle", {"result": discovered.public_dict(), "persist": True})
     found = call("search", {"query": {"terms": ["Council"]}})
+    assert not preview.data["persisted"] and imported.data["persisted"]
+    assert len(discovered.data["records"]) == 1 and len(found.data["hits"]) >= 1
     exported = call("export", {"bundle": imported.data["bundle"], "format": "zip", "stream": True})
     planned = call("plan_write", WRITE)
     assert planned.data["plan"]["mock"] is True

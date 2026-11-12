@@ -447,6 +447,24 @@ def write_bundle(bundle: dict, destination: BinaryIO, *, format="zip", bounds=No
     bounds = bounds or Bounds()
     if not isinstance(bundle, dict) or not isinstance(bundle.get("records"), (list, tuple)):
         raise ValueError("Export requires a bundle with records.")
+    if format in {"json", "jsonl"}:
+        # Portable text formats carry the original bytes inline. Local storage
+        # references alone are neither portable nor a reason to reject small captures.
+        bundle = deepcopy(bundle)
+        materialized = 0
+        for _, capture in _capture_locations(bundle):
+            if "storage_reference" not in capture or "content_base64" in capture:
+                continue
+            with _capture_stream(capture, storage, scope) as original:
+                raw = original.read(bounds.parser_bytes + 1)
+            if len(raw) > bounds.parser_bytes:
+                raise ValueError("Original capture exceeds the text-format parser limit; use ZIP export.")
+            if len(raw) != capture["byte_length"] or hashlib.sha256(raw).hexdigest() != capture["sha256"]:
+                raise ValueError("Stored original capture does not match its hash/length.")
+            materialized += 4 * ((len(raw) + 2) // 3)
+            if materialized > bounds.parser_bytes:
+                raise ValueError("Original captures exceed the text-format parser limit; use ZIP export.")
+            capture["content_base64"] = base64.b64encode(raw).decode("ascii")
     sink = _LimitWriter(destination, bounds.transfer_bytes, bounds.deadline_seconds)
     manifest = {"interchange_version": INTERCHANGE_VERSION, "schema_version": SCHEMA_VERSION,
                 "format": format, "entries": [], "attachments": [], "not_included": [],
@@ -457,23 +475,31 @@ def write_bundle(bundle: dict, destination: BinaryIO, *, format="zip", bounds=No
             manifest["not_included"].append({"capture_sha256": record["capture_sha256"],
                                             "reason": "original_capture_not_supplied"})
     if format in {"json", "jsonl"}:
-        if any("storage_reference" in capture and "content_base64" not in capture
-               for _, capture in _capture_locations(bundle)):
-            raise ValueError("Stored captures must use ZIP export to resolve original bytes.")
         if attachments:
             raise ValueError("Attachments require ZIP interchange, not JSON/JSONL.")
         if format == "json":
+            emitted = 0
             for token in _ENCODER.iterencode({"interchange_version": INTERCHANGE_VERSION,
                                               "bundle": bundle, "manifest": manifest}):
-                sink.write(token.encode("utf-8"))
+                encoded = token.encode("utf-8")
+                emitted += len(encoded)
+                if emitted > bounds.parser_bytes:
+                    raise ValueError("JSON export exceeds its parser limit; use ZIP export.")
+                sink.write(encoded)
         else:
             metadata = {key: value for key, value in bundle.items() if key != "records"}
-            sink.write(_json({"type": "header", "interchange_version": INTERCHANGE_VERSION,
-                              "bundle": metadata}) + b"\n")
+            header = _json({"type": "header", "interchange_version": INTERCHANGE_VERSION,
+                            "bundle": metadata}) + b"\n"
+            if len(header) > bounds.parser_bytes:
+                raise ValueError("JSONL header exceeds its parser limit; use ZIP export.")
+            sink.write(header)
             for record in bundle["records"]:
                 if context is not None and context.check_cancelled():
                     raise InterruptedError("Export cancelled.")
-                sink.write(_json({"type": "record", "record": record}) + b"\n")
+                line = _json({"type": "record", "record": record}) + b"\n"
+                if len(line) > bounds.parser_bytes:
+                    raise ValueError("JSONL record exceeds its parser limit; use ZIP export.")
+                sink.write(line)
             sink.write(_json({"type": "manifest", "manifest": manifest}) + b"\n")
     elif format == "zip":
         metadata = deepcopy({key: value for key, value in bundle.items() if key != "records"})
@@ -857,6 +883,11 @@ def icalendar_projection(records):
 def register(engine) -> None:
     def export(owner, request, content, context):
         request = dict(request)
+        if request.get("provider_specific"):
+            return OperationResult.unsupported("export", reason=(
+                "A provider-specific export mapping is not implemented for this configured source. "
+                "This does not establish that the provider lacks an import format. "
+                "Select a neutral format explicitly or configure an evidenced connector extension."))
         upstream_errors = ()
         if "result" in request:
             upstream = request["result"]

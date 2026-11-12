@@ -454,3 +454,28 @@ def test_deadline_between_response_and_records_preserves_resumable_capture(monke
     assert result.data["records"] == []
     assert len(result.data["captures"]) == 1
     assert result.coverage["checkpoint"]
+
+def test_tyler_explicit_observed_calendar_api_uses_fixed_bounded_post_and_reports_partial():
+    case = next(row for row in CASES if row["connector"] == "tyler-meeting-manager")
+    raw = (BASELINE / case["file"]).read_bytes()
+    engine, transport = make_engine(lambda *args: raw)
+    host = urlsplit(case["source_url"]).hostname
+    req = request("tyler-meeting-manager", case["source_url"], input_format=case["input_format"],
+                  options={"calendar_api_base": f"https://{host}/tylermmcalendar46612prod/"})
+    req["bounds"] = {"date_from": "2020-01-01", "date_to": "2030-12-31"}
+    result = engine.execute("discover", req)
+    assert result.status == "partial", result.public_dict()
+    assert result.data["records"]
+    assert "completeness is unverified" in result.coverage["scope"]
+    url, kwargs = transport.calls[0]
+    assert url.endswith("/tylermmcalendar46612prod/meetingInformation/getMeetingInformationByDate")
+    assert kwargs["method"] == "POST"
+    assert json.loads(kwargs["body"]) == {"startDate": "01/01/2020", "endDate": "12/31/2030",
+                                           "meetingTypeIds": [-1]}
+    assert kwargs["allowed_origins"] == (f"https://{host}",)
+    for base in ("http://ectortmmapp.meetingmanager.tylerapp.com/tylermmcalendar46612prod/",
+                 "https://unrelated.example/tylermmcalendar46612prod/",
+                 "https://ectortmmapp.meetingmanager.tylerapp.com/arbitrary/"):
+        req["source"]["options"]["calendar_api_base"] = base
+        assert engine.execute("discover", req).status == "failed"
+    assert len(transport.calls) == 1

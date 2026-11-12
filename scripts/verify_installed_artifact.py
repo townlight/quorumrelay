@@ -31,7 +31,7 @@ def main():
     owner = create_engine()
     providers = owner.providers().data
     assert len(providers["providers"]) == 31 and len(providers["formats"]) == 34
-    assert len(owner.parsers) == 4
+    assert len(owner.parsers) == 7
     assert all(importlib.util.find_spec(name) is None for name in
                ("townlight_runtime", "townlight_core", "civiccast_brief", "townrecord"))
     original = [{"EventId": 1, "EventBodyName": "Synthetic council", "EventDate": "2026-11-11T00:00:00",

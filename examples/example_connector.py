@@ -1,7 +1,7 @@
 """Synthetic connector showing transport-independent extension registration."""
 
-from civic_data_connectors import Engine, OperationResult
-from civic_data_connectors.extensions import check_connector
+from quorumrelay import Engine, OperationResult
+from quorumrelay.extensions import check_connector
 
 
 class ExampleConnector:

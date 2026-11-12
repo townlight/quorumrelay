@@ -20,7 +20,7 @@ def generate() -> dict:
         "proof_policy": inventory["status_model"]["rule"],
         "release_completion": "incomplete",
         "research_snapshot": (
-            "researched-pass-2; research status is not current engine implementation or acceptance. "
+            f"{inventory['revision']}; research status is not current engine implementation or acceptance. "
             "Engine owners merge separately verified implementation status."
         ),
         "generated_from": "docs/capabilities/inventory.json",
@@ -40,8 +40,10 @@ def generate() -> dict:
         })
         runtime["providers"][-1]["evidence"] = [{
             key: evidence[key] for key in (
-                "id", "url", "title", "kind", "proof_level", "limits", "observation_date"
+                "id", "url", "title", "kind", "proof_level", "limits", "observation_date",
+                "receipt_path", "receipt_sha256", "fixture_path", "fixture_sha256",
             )
+            if key in evidence
         } for evidence in row["evidence"]]
     destination = ROOT / "src/civic_data_connectors/data"
     destination.mkdir(parents=True, exist_ok=True)

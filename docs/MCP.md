@@ -1,4 +1,4 @@
-# MCP reference, candidate 0.1.0.dev2
+# MCP reference, candidate 0.1.0.dev3
 
 The implementation uses the official Python SDK **mcp 2.3.0**, not hand-written
 JSON-RPC framing. Both transports call the same engine operations as Python,
@@ -93,6 +93,16 @@ from that hash. Examples refuse to commit unless the planned adapter is mock.
 Mock receipts retain `live_acceptance: "NOT_RUN"`.
 
 ## Large exported files
+
+For input files, use `upload_begin(filename, content_type, byte_length)`, append
+base64 chunks of at most 256 KiB with `upload_chunk(upload_id, offset, content_base64)`,
+then call `upload_finish(upload_id)`. Each returns the shared structured envelope.
+The final result contains an immutable scoped `file_handle`, length and SHA256.
+Pass that handle to `import_preview` or `import_bundle` with the neutral `format`
+(`json`, `jsonl`, or `zip`). This does not grant a provider write. Wrong-scope,
+expired, altered and oversized input is rejected. `upload_abort` discards an
+unfinished upload. Complete native provider capture normalization continues to
+use its documented parser input contract.
 
 Export with `stream: true` or `delivery: "storage"` returns an opaque
 `artifact_id` and manifest instead of large base64 data. The MCP tool also

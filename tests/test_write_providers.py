@@ -110,7 +110,8 @@ class DocumentedNetwork:
             return response(self.rows[parsed.path])
         # Determine the independent official model from the native route suffix.
         suffix = parsed.path.split("/fixture-city/", 1)[1]
-        entity = ("matter_attachment" if "/Attachments" in suffix else
+        entity = ("vote" if "/Votes" in suffix else "roll_call" if "/RollCalls" in suffix else
+                  "matter_attachment" if "/Attachments" in suffix else
                   "matter_text" if "/Texts" in suffix else "matter_history" if "/Histories" in suffix else
                   "event_item" if "/EventItems" in suffix else "event" if suffix.startswith("Events") else "matter")
         official = next(c for c in CONTRACTS["legistar"]
@@ -118,8 +119,11 @@ class DocumentedNetwork:
                         and (("Attachments" in c["method_path"]) == (entity == "matter_attachment"))
                         and (("Texts" in c["method_path"]) == (entity == "matter_text"))
                         and (("Histories" in c["method_path"]) == (entity == "matter_history"))
-                        and (("EventItems" in c["method_path"]) == (entity == "event_item"))
-                        and c["method_path"].split("/")[2] == ("Events" if entity.startswith("event") else "Matters"))
+                        and (("Votes" in c["method_path"]) == (entity == "vote"))
+                        and (("RollCalls" in c["method_path"]) == (entity == "roll_call"))
+                        and (("EventItems" in c["method_path"]) == (entity in {"event_item", "vote", "roll_call"}))
+                        and c["method_path"].split("/")[2] == ("EventItems" if entity in {"vote", "roll_call"}
+                            else "Events" if entity.startswith("event") else "Matters"))
         known = {f["name"]: f for f in official["model_fields"]}
         assert set(fields).issubset(known)
         for field in official["model_fields"]:
@@ -290,11 +294,13 @@ def run(engine, context, source, change, bounds=None):
     ("matter", {"MatterTypeId": 1, "MatterStatusId": 2, "MatterBodyId": 3, "MatterTitle": "Meeting matter"}),
     ("matter_text", {"MatterTextMatterId": 9, "MatterTextPlain": "Supplied meeting text"}),
     ("matter_history", {"MatterHistoryEventId": 9, "MatterHistoryActionText": "Supplied motion"}),
+    ("vote", {"VotePersonId": 2, "VoteValueId": 3, "VoteResult": 1}),
+    ("roll_call", {"RollCallPersonId": 2, "RollCallValueId": 3, "RollCallResult": 1}),
 ])
 @pytest.mark.parametrize("operation", ["create", "update"])
-def test_legistar_twelve_documented_entity_routes(tmp_path, entity, fields, operation):
+def test_legistar_sixteen_documented_entity_routes(tmp_path, entity, fields, operation):
     engine, context, network, source = make_engine(tmp_path, "legistar", [f"{entity}:create", f"{entity}:update"])
-    parent = 9 if entity in {"event_item", "matter_attachment", "matter_text", "matter_history"} else None
+    parent = 9 if entity in {"event_item", "matter_attachment", "matter_text", "matter_history", "vote", "roll_call"} else None
     change = {"key": "item", "entity": entity, "operation": "create", "fields": fields,
               "meeting_id": "9" if entity not in {"event", "event_item"} else None, "parent_id": parent}
     result, _ = run(engine, context, source, change)
@@ -515,3 +521,89 @@ def test_large_upload_cancellation_stops_before_import_finalization(tmp_path, pe
     assert result.status == "cancelled", result.public_dict()
     assert result.data["items"][0]["part_etags"] == ["etag-1"]
     assert not any(path.endswith("/ImportUploadedParts") for _, path in network.calls)
+
+@pytest.mark.parametrize("entity,prefix", [("vote", "Vote"), ("roll_call", "RollCall")])
+def test_vote_and_rollcall_parent_and_required_fields_are_bound(tmp_path, entity, prefix):
+    engine, context, network, source = make_engine(tmp_path, "legistar", [f"{entity}:create"])
+    base = {"key": "supplied", "entity": entity, "operation": "create", "parent_id": 8,
+            "meeting_id": "9", "fields": {prefix + "PersonId": 2, prefix + "ValueId": 3}}
+    for fields in ({prefix + "PersonId": 2}, {**base["fields"], prefix + "EventItemId": 99}):
+        result = engine.execute("plan_write", {"source": source, "changes": [{**base, "fields": fields}]},
+                                context=context)
+        assert result.status == "failed"
+        assert not network.calls
+    result, approval = run(engine, context, source, base)
+    assert result.status == "completed", result.public_dict()
+    assert result.data["items"][0]["readback"][prefix + "EventItemId"] == 8
+    again = engine.execute("commit_write", approval, context=context)
+    assert again.status == "completed"
+    assert sum(method == "POST" for method, _ in network.calls) == 1
+
+
+@pytest.mark.parametrize("entity,prefix", [("vote", "Vote"), ("roll_call", "RollCall")])
+def test_vote_and_rollcall_lost_create_reconciles_without_duplicate(tmp_path, entity, prefix):
+    engine, context, network, source = make_engine(tmp_path, "legistar", [f"{entity}:create"])
+    network.lose = True
+    result, approval = run(engine, context, source, {"key": "supplied", "entity": entity,
+        "operation": "create", "parent_id": 8, "meeting_id": "9",
+        "fields": {prefix + "PersonId": 2, prefix + "ValueId": 3}})
+    assert result.status == "partial"
+    assert result.data["items"][0]["state"] == "uncertain"
+    again = engine.execute("commit_write", approval, context=context)
+    assert again.status == "completed", again.public_dict()
+    assert sum(method == "POST" for method, _ in network.calls) == 1
+
+@pytest.mark.parametrize("expired", [False, True])
+def test_generic_mcp_input_handle_is_resolved_with_current_policy_and_ttl(tmp_path, expired):
+    import io
+    from civic_data_connectors.interchange import stage_input
+    engine, context, network, source = make_engine(tmp_path, "wistia", ["media:upload"])
+    context.allowed_operations = frozenset({"plan_write", "commit_write"})
+    staged = stage_input(engine, "mcp-upload", io.BytesIO(b"synthetic media"), filename="media.mp4",
+                         content_type="video/mp4", context=context, max_bytes=1024)
+    if expired:
+        value = engine.storage.get("service_files", staged["file_handle"], scope=context.scope)
+        engine.storage.put("service_files", staged["file_handle"], {**value.value, "expires_at": 0},
+                           scope=context.scope, expected_version=value.version)
+    change = {"key": "media", "entity": "media", "operation": "upload", "meeting_id": "meeting1",
+              "fields": {"name": "Synthetic"}, "files": [{"part": "file", "filename": "media.mp4",
+              "content_type": "video/mp4", "file_handle": staged["file_handle"]}]}
+    result = engine.execute("plan_write", {"source": source, "changes": [change]}, context=context)
+    assert result.status == ("failed" if expired else "completed"), result.public_dict()
+    if not expired:
+        assert "file_handle" not in json.dumps(result.data["plan"]["changes"])
+        assert result.data["plan"]["changes"][0]["native"]["files"][0]["reference"]["byte_length"] == 15
+
+def test_canonical_read_namespace_and_legacy_write_slug_route_same_client_without_identity_rewrite(tmp_path):
+    from dataclasses import replace
+    from civic_data_connectors import Source, create_engine
+    from civic_data_connectors.providers.contracts import Response
+
+    engine, context, network, legacy = make_engine(tmp_path, "legistar", ["event:create"])
+    stable = "//webapi.legistar.com/v1/fixture-city"
+    shared_source = {**legacy, "namespace": stable}
+    config = {**context.credentials["legistar"], "allowed_namespaces": [stable]}
+    canonical = replace(context, credentials={"legistar": config}, allowed_namespaces=frozenset({stable}))
+    class ReadTransport:
+        def request(self, url, **kwargs):
+            return Response(url, b'[{"EventId":9,"EventDate":"2026-11-11","EventBodyName":"Council"}]')
+    reader = create_engine(provider_transport=ReadTransport())
+    normalized = reader.normalize(Source.from_dict(shared_source),
+        b'[{"EventId":9,"EventDate":"2026-11-11","EventBodyName":"Council"}]',
+        input_format="legistar-events-json", context=canonical)
+    assert normalized.status == "completed", normalized.public_dict()
+    assert normalized.data["records"][0]["identity"]["namespace"] == stable
+    result, _ = run(engine, canonical, shared_source, {"key": "shared", "entity": "event",
+                         "operation": "create", "fields": {"EventDate": "2026-11-11"}})
+    assert result.status == "completed", result.public_dict()
+    assert ("POST", "/v1/fixture-city/Events") in network.calls
+    # Credential policy remains exact; a token authorized only for the historical
+    # slug does not silently gain access to the richer source identity.
+    denied = engine.execute("plan_write", {"source": shared_source, "changes": [{"key": "blocked",
+        "entity": "event", "operation": "create", "fields": {"EventDate": "2026-11-11"}}]}, context=context)
+    assert denied.status == "failed"
+    assert denied.errors[0].code == "permission_denied"
+    mismatch = {**shared_source, "url": "https://webapi.legistar.com/v1/other-city/events"}
+    denied = engine.execute("plan_write", {"source": mismatch, "changes": [{"key": "other",
+        "entity": "event", "operation": "create", "fields": {"EventDate": "2026-11-11"}}]}, context=canonical)
+    assert denied.status == "failed"

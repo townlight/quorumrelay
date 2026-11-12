@@ -1,7 +1,6 @@
-# Write adapter contract, draft
+# QuorumRelay write adapter contract
 
-Schema 2.0.0. Observation date: 2026-11-11. This run uses synthetic data only.
-There is no live mutation transport. A mock receipt never establishes vendor acceptance.
+Schema 2.0.0. Candidate 0.1.0.dev3. Observation date: 2026-11-11. The engine contains real native write mappings and `PublicWriteTransport`; it can change an upstream provider when an authorized caller supplies usable credentials and approves an exact plan. Deterministic checks inject synthetic transports into those same mappings. Live provider mutation/readback acceptance remains **NOT_RUN** because an authorized test tenant and credentials have not been supplied. A synthetic receipt does not establish vendor acceptance.
 
 ## Public operations
 
@@ -16,8 +15,8 @@ Planning request:
 {
   "source": {
     "provider": "legistar",
-    "url": "https://webapi.legistar.com/v1/mock-city/events",
-    "namespace": "mock-city"
+    "url": "https://webapi.legistar.com/v1/example-city/events",
+    "namespace": "//webapi.legistar.com/v1/example-city"
   },
   "changes": [{
     "key": "meeting-1",
@@ -60,27 +59,23 @@ Typed declarations live in `write_adapters.py`, not the discovery-owned
   expected version.
 - `NativeRequest`: method, fixed official origin/path, documented content type,
   safe non-secret headers, native body and file-part declarations.
-- `WriteAdapter`: capability lookup, source validation, field validation and
-  native mapping, synthetic readback, synthetic apply, uncertain-intent reconcile.
-- `MockWriteAdapter`: documents its synthetic state and never opens a network
-  connection. Server-side fixture configuration can deny permission, fail before
-  send, return a conflict, lose a response after applying, or leave an unknown
-  outcome. These controls are not public request members.
+- `WriteAdapter`: exact credential/source authorization, typed field validation, fixed native mapping, actual before/readback checks, apply and uncertain-intent reconciliation.
+- `WriteTransport` / `PublicWriteTransport`: bounded outgoing requests with public-network, TLS, origin and credential isolation. Synthetic tests inject the transport protocol; there is no production `MockWriteAdapter` class. The injected transport declares `mock=True`, which is bound to the plan and cannot change at commit.
+- `write_files.stage_write_file` and generic `interchange.stage_input`: caller-scoped file staging. `changes[].files[]` accepts `file_handle` or inline `content_base64`. A generic input handle is reopened through current operation-policy and expiry checks, then digest/length verified and bound to an immutable storage reference. The commit verifies the same bytes again, independently of a mutable handle head. Parser metadata and transfer limits remain separate.
 
 The server checks both local authorization and configured provider permission at
 plan and commit time. Unsupported or wrong-type fields are rejected before
-mutation. Caller-provided expected versions must match actual synthetic provider
-revision. A local state fingerprint is labeled as a local precondition, never as
+mutation. Caller-provided expected versions must match actual provider readback. A local state fingerprint is labeled as a local precondition, never as
 a provider revision or proof of remote compare-and-swap.
 
 ## State and retry safety
 
 Use the shared `Storage.put/get/list` protocol. Storage is optional for read-only
 engine use, but writes require an explicit store with atomic create/CAS semantics.
-Collections: `write_plans`, `receipts`, and synthetic provider state.
+Collections include `write_plans`, `receipts`, scoped operation state, and immutable file captures. No synthetic provider state is stored by the production engine.
 
-Persist per-item execution intent before applying even a mock mutation. Receipts
-hold each change's state, resource ID, mock provider revision, readback, and errors.
+Persist per-item execution intent before the first outbound mutation. Receipts
+hold each change's state, remote resource ID, provider revision when supplied, readback, and errors.
 Concurrent commits must atomically claim a receipt before sending. Duplicate
 commits return the same durable result. A crashed processing intent is uncertain,
 not a safe-to-repeat create. Retry reconciles the original intended identity and
@@ -88,13 +83,13 @@ state before it does anything else. If readback cannot identify exactly one
 matching effect, the receipt stays uncertain and requires review.
 
 Allowed item states are `planned`, `sending`, `succeeded`, `failed`, `conflict`,
-`uncertain`, and `cancelled`. Receipt state may also be `partial`. These are data
+`uncertain`, `pending` for asynchronous tasks, and `cancelled`. Receipt state may also be `partial`. These are data
 states, not additions to `OperationResult.status`. Standard envelope statuses
 remain `completed|partial|cancelled|failed|unsupported`. Successful siblings survive
 partial batches. No automatic deletion or rollback occurs. A cancelled batch does
 not begin remaining items; previously applied items remain in its receipt.
 
-## Verified native mappings to implement
+## Implemented native mappings and acceptance limits
 
 Mappings are additive as official evidence resolves. The initial inventory is
 not yet a complete outbound backlog and unresolved entries remain incomplete.
@@ -104,6 +99,8 @@ not yet a complete outbound backlog and unresolved entries remain incomplete.
 | Legistar | Event create/update | POST `/v1/{Client}/Events`; PUT `/v1/{Client}/Events/{EventId}`; JSON GranicusEvent, required EventDate, update requires matching EventId. JSON object response; only `Accept: text/plain` returns ID string. |
 | Legistar | Event item create/update | POST `/v1/{Client}/Events/{EventId}/EventItems`; PUT `/v1/{Client}/Events/{EventId}/EventItems/{EventItemId}`; JSON GranicusEventItem. |
 | Legistar | Matter-linked meeting document upload/update | POST `/v1/{Client}/Matters/{MatterId}/Attachments`; PUT same path plus `/{MatterAttachmentId}`; JSON GranicusMatterAttachment. Required MatterAttachmentName; create must not set auto-generated MatterAttachmentSort. Binary is base64 in JSON, not invented multipart. |
+| Legistar | Meeting matter/text/history create/update | JSON POST/PUT under `/Matters`, `/Matters/{MatterId}/Texts` and `/Matters/{MatterId}/Histories`; explicitly authorized meeting relationship required. |
+| Legistar | Supplied vote / roll-call create/update | POST/PUT `/v1/{Client}/EventItems/{EventItemId}/Votes[/{VoteId}]` or `/RollCalls[/{RollCallId}]`; required PersonId and ValueId native fields, matching EventItem parent and explicit authorized meeting relationship. |
 | Laserfiche WebLink family | Linked meeting document create/upload/update | Repository API v2 POST `Repositories/{repositoryId}/Entries/{parentEntryId}/Folder/Import`; PATCH `Repositories/{repositoryId}/Entries/{entryId}/Document`; multipart `request` JSON, optional `file`, optional `imageFiles`. Import returns 201 entry and Location; PATCH additive metadata/image append and replaces edoc only when supplied. |
 | Laserfiche WebLink family | Large linked meeting document upload/update | CreateMultipartUploadUrls returns uploadId/urls; chunk PUT returns ETags; ImportUploadedParts returns taskId; UpdateUploadedParts returns 202 taskId. Task success requires polling and entry readback, not merely accepting taskId. |
 | Wistia | Recording/media upload | POST `https://upload.wistia.com/`; multipart file or form URL; name/project_id/description/contact_id; Bearer authentication preferred, never serialize legacy access_token. Returns 200 Media with hashed_id. |
@@ -143,6 +140,11 @@ and are outside this release's no-new-OCR/ASR boundary.
 - https://docs.wistia.com/reference/post_medias-mediahashedid-captions-languagecode-edits.md
 - https://docs.wistia.com/reference/post_taggings-bulk-create.md
 
-Remaining acceptance: exact field-level implementation ledger and deterministic
-tests for every implemented adapter; independent lifecycle, transport parity and
-restart checks. All live write acceptance remains NOT_RUN under mock-only policy.
+Remaining acceptance includes provider-specific usable test credentials/permissions and live readback in an authorized test environment for every supported operation, along with each required consumer workflow and delivery outcome. Synthetic tests cover native wire contracts, duplicate commits, stale data, partial/denied outcomes, response loss/reconciliation, file handles and source isolation. These passed checks do not waive live acceptance or establish all provider capabilities. No mock-only scope reduction is inferred.
+
+
+## Source identity and credential routing
+
+For new Legistar sources, use the same stable namespace returned by read validation, such as `//webapi.legistar.com/v1/example-city`. The request Client comes from the validated `/v1/{Client}` URL; it is not extracted by treating the entire stable namespace as a path segment. Historical write-only configurations using the exact Client slug remain accepted. The engine does not rewrite either identity or implicitly grant credentials between them: `allowed_namespaces` and provider credential policy must authorize the exact configured source namespace. A source claiming one Client's namespace while routing to another Client fails before any mutation.
+
+Laserfiche Repository API account/repository identifiers and public WebLink source identities are distinct. A public WebLink source does not establish Repository OAuth access or an authorized repository mapping. Keep that prerequisite explicit rather than assuming that public meeting data authorizes repository mutations.

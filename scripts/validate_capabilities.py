@@ -21,10 +21,130 @@ OPERATIONS = {
     "identify", "discover", "fetch", "parse", "native_search", "local_search",
     "neutral_export", "vendor_file_export", "create", "update", "upload",
 }
+LIVE_READ_RECEIPTS = {
+    "legistar": {
+        "operation": "fetch",
+        "receipt_evidence_id": "legistar-event-detail-live",
+        "receipt_path": "docs/verification/legistar-detail-2026-11-11.json",
+        "required_capture_ids": {"legistar-event-detail-live"},
+    },
+    "champ": {
+        "operation": "fetch",
+        "receipt_evidence_id": "champ-live-engine-detail-receipt",
+        "receipt_path": "docs/verification/champ-detail-2026-11-11.json",
+        "required_capture_ids": {
+            "champ-public-player-js", "champ-lakezurich-event-json", "champ-yuma-event-json"
+        },
+    },
+}
 
 
 def load(path):
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _within_root(relative_path):
+    path = (ROOT / relative_path).resolve()
+    return path if ROOT.resolve() in path.parents else None
+
+
+def _live_read_receipt_errors(provider, operation, entry, evidence_by_id):
+    errors = []
+    rule = LIVE_READ_RECEIPTS.get(provider)
+    if rule is None or operation != rule["operation"]:
+        return [f"{provider}: live_read_passed is not allowed for {operation}"]
+    receipt_evidence = evidence_by_id.get(rule["receipt_evidence_id"])
+    if receipt_evidence is None or receipt_evidence.get("proof_level") != \
+            "live_engine_bounded_read_receipt_not_write_acceptance":
+        return [f"{provider}: live_read_passed lacks its exact bounded-read receipt evidence"]
+    if not rule["required_capture_ids"].issubset(entry["evidence_ids"]):
+        errors.append(f"{provider}: live_read_passed lacks the required captured source evidence")
+    receipt_path = receipt_evidence.get("receipt_path")
+    if receipt_path != rule["receipt_path"]:
+        return errors + [f"{provider}: bounded-read receipt path is not the pinned receipt"]
+    path = _within_root(receipt_path)
+    if path is None or not path.is_file():
+        return errors + [f"{provider}: bounded-read receipt is missing or escapes the repository"]
+    raw = path.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != receipt_evidence.get("receipt_sha256"):
+        errors.append(f"{provider}: bounded-read receipt hash does not match inventory evidence")
+    try:
+        receipt = json.loads(raw)
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return errors + [f"{provider}: bounded-read receipt is not valid JSON"]
+
+    if receipt.get("operation") != "fetch_record":
+        errors.append(f"{provider}: receipt is not a fetch_record operation")
+    if provider == "legistar":
+        coverage = receipt.get("coverage", {})
+        if (receipt.get("status") != "completed" or receipt.get("errors") != []
+                or receipt.get("remote_writes") != "NOT_PERFORMED"
+                or receipt.get("source", {}).get("provider") != provider
+                or receipt.get("external_id") != "7011"
+                or coverage.get("catalog_complete") is not False
+                or coverage.get("returned_records") != 1
+                or coverage.get("failures") != []
+                or receipt.get("original_fields_preserved") is not True):
+            errors.append("legistar: receipt does not prove the exact bounded public detail read")
+        capture = evidence_by_id.get("legistar-event-detail-live", {})
+        if capture.get("url") != "https://webapi.legistar.com/v1/olympia/events/7011?EventItems=1&AgendaNote=1&MinutesNote=1&EventItemAttachments=1":
+            errors.append("legistar: receipt evidence URL differs from the captured detail route")
+        _validate_capture_file("legistar", capture, receipt.get("fixture"),
+                               receipt.get("sha256"), errors)
+    elif provider == "champ":
+        rows = receipt.get("results", [])
+        if (len(rows) != 2
+                or receipt.get("operation") != "fetch_record"
+                or receipt.get("policy") != "bounded public GET only; no writes, credentials or attachment downloads"):
+            errors.append("champ: receipt must contain the two pinned bounded tenant reads")
+        expected = {
+            "champ-lakezurich-event-json": (
+                "164", "https://play.champds.com/lakezurichil/event/164",
+                "https://playapi.champds.com/lakezurichil/event/164",
+            ),
+            "champ-yuma-event-json": (
+                "657", "https://play.champds.com/yumacoaz/event/657",
+                "https://playapi.champds.com/yumacoaz/event/657",
+            ),
+        }
+        by_id = {row.get("external_id"): row for row in rows}
+        for evidence_id, (event_id, receipt_url, evidence_url) in expected.items():
+            evidence = evidence_by_id.get(evidence_id, {})
+            row = by_id.get(event_id)
+            if row is None or evidence.get("url") != evidence_url:
+                errors.append(f"champ: receipt is missing captured source {evidence_id}")
+                continue
+            coverage = row.get("coverage", {})
+            if (row.get("status") != "completed" or row.get("errors") != []
+                    or row.get("external_id") != event_id
+                    or row.get("source_url") != receipt_url
+                    or coverage.get("catalog_complete") is not False
+                    or coverage.get("returned_records") != 1
+                    or row.get("original_fields_preserved") is not True):
+                errors.append(f"champ: receipt row {evidence_id} does not prove a bounded detail read")
+            if (not isinstance(row.get("capture_sha256"), str)
+                    or len(row["capture_sha256"]) != 64
+                    or any(char not in "0123456789abcdef" for char in row["capture_sha256"])
+                    or not isinstance(row.get("byte_length"), int)
+                    or row["byte_length"] <= 0):
+                errors.append(f"champ: receipt row {evidence_id} lacks a valid response digest/length")
+            _validate_capture_file("champ", evidence, None, None, errors)
+    return errors
+
+
+def _validate_capture_file(provider, evidence, receipt_fixture, receipt_sha256, errors):
+    fixture = evidence.get("fixture_path")
+    expected_hash = evidence.get("fixture_sha256")
+    if not fixture or (receipt_fixture and fixture != Path(receipt_fixture).as_posix()):
+        errors.append(f"{provider}: receipt does not identify the pinned original capture fixture")
+        return
+    path = _within_root(fixture)
+    if path is None or not path.is_file():
+        errors.append(f"{provider}: original capture fixture is missing or escapes the repository")
+        return
+    actual_hash = hashlib.sha256(path.read_bytes()).hexdigest()
+    if actual_hash != expected_hash or (receipt_sha256 and actual_hash != receipt_sha256):
+        errors.append(f"{provider}: capture fixture hash differs from the receipt/inventory")
 
 
 def semantic_errors(data, identities):
@@ -42,6 +162,7 @@ def semantic_errors(data, identities):
         if set(row["operations"]) != OPERATIONS:
             errors.append(f"{name}: exactly11 independent operation entries required")
         refs = [e["id"] for e in row["evidence"]]
+        evidence_by_id = {e["id"]: e for e in row["evidence"]}
         if len(refs) != len(set(refs)):
             errors.append(f"{name}: duplicate provider-scoped evidence IDs")
         for evidence in row["evidence"]:
@@ -51,12 +172,22 @@ def semantic_errors(data, identities):
             if any(k.lower() in {"token", "access_token", "api_key", "apikey", "secret"}
                    for k, _ in parse_qsl(url.query)):
                 errors.append(f"{name}: secret-bearing evidence URL")
-        for entry in [*row["operations"].values(), *row["outbound_mappings"]]:
+        for operation, entry in row["operations"].items():
+            missing = set(entry["evidence_ids"]) - set(refs)
+            if missing:
+                errors.append(f"{name}: missing evidence refs {sorted(missing)}")
+            status = entry["acceptance_status"]
+            if status == "live_read_passed":
+                errors.extend(_live_read_receipt_errors(name, operation, entry,
+                                                        evidence_by_id))
+            elif status != "not_run":
+                errors.append(f"{name}: research snapshot cannot claim provider write acceptance")
+        for entry in row["outbound_mappings"]:
             missing = set(entry["evidence_ids"]) - set(refs)
             if missing:
                 errors.append(f"{name}: missing evidence refs {sorted(missing)}")
             if entry["acceptance_status"] != "not_run":
-                errors.append(f"{name}: research snapshot must not invent acceptance")
+                errors.append(f"{name}: outbound mapping cannot claim provider acceptance")
         for mapping in row["outbound_mappings"]:
             if mapping["operation"] not in OPERATIONS:
                 errors.append(f"{name}: unknown outbound operation")
@@ -118,7 +249,7 @@ def main():
     for entry in api["legistar"]:
         if not entry["model_fields"] or any("\n" in fmt for fmt in entry["request_formats"]):
             errors.append(f"Invalid extracted exact Legistar schema {entry['method_path']}")
-    if len(api["legistar"]) != 12 or len(api["wistia"]) != 8 or len(api["laserfiche"]) != 7:
+    if len(api["legistar"]) != 16 or len(api["wistia"]) != 12 or len(api["laserfiche"]) != 7:
         errors.append("Official API contract extraction count changed without review")
     negative = 0
     invalid = deepcopy(inventory)
@@ -131,6 +262,12 @@ def main():
     invalid["providers"][0]["operations"]["create"]["acceptance_status"] = "live_write_passed"
     if not semantic_errors(invalid, identities):
         errors.append("Negative check failed to reject invented live acceptance")
+    else:
+        negative += 1
+    invalid = deepcopy(inventory)
+    invalid["providers"][1]["operations"]["fetch"]["acceptance_status"] = "live_read_passed"
+    if not semantic_errors(invalid, identities):
+        errors.append("Negative check failed to reject unreceipted live read acceptance")
     else:
         negative += 1
     invalid = deepcopy(inventory)
@@ -154,7 +291,13 @@ def main():
         "original_SOURCE_FORMATS_independently_checked": original_checked,
         "negative_checks_passed": negative,
         "errors": errors,
-        "live_provider_acceptance": "NOT_RUN, user authorized mocks only",
+        "live_provider_acceptance": (
+            "Two bounded live-read receipts are verified: one Legistar event detail and two CHAMP "
+            "event details. Receipt hashes and saved capture-fixture hashes are validated separately; "
+            "CHAMP receipt response digests differ from the saved route-probe captures. Neither read "
+            "proves catalog completeness. Provider write acceptance is NOT_RUN because no authorized "
+            "provider test tenants or credentials were supplied."
+        ),
         "engine_status_reconciliation": "Owned independently by engine implementation owners",
     }
     print(json.dumps(report, indent=2))

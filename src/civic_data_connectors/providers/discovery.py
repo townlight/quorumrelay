@@ -19,7 +19,7 @@ from .identification import FORMATS, configured_source, validate_source, validat
 from .native import parse_native
 
 NATIVE = {"legistar", "primegov", "civicplus-select", "escribe"}
-SAVED_ONLY = {"novusagenda", "tyler-meeting-manager", "champ", "boarddocs"}
+SAVED_ONLY = {"novusagenda", "tyler-meeting-manager", "boarddocs"}
 DEFAULT_FORMAT = {provider: formats[-1] for provider, formats in FORMATS.items()}
 DEFAULT_FORMAT.update({"primegov": "primegov-portal-json", "granicus": "granicus-listing-html",
                        "peak": "granicus-listing-html",
@@ -99,7 +99,7 @@ def _initial(source, bounds, input_format, saved):
     if saved:
         return [{"kind": "saved", "offset": 0}]
     provider = source.provider
-    if input_format == "meeting-export":
+    if input_format in {"meeting-export", "legistar-event-json", "wistia-media-detail-json", "wistia-caption-json"}:
         return []
     if provider in NATIVE:
         if not bounds.date_from or not bounds.date_to:
@@ -112,6 +112,12 @@ def _initial(source, bounds, input_format, saved):
         return [{"kind": provider, "after": 0}] if provider == "legistar" else [{"kind": provider}]
     if provider == "wistia" and input_format == "wistia-api-media-json":
         return [{"kind": "wistia", "page": 1}]
+    if provider == "champ":
+        return [{"kind": "champ"}]
+    if provider == "tyler-meeting-manager" and source.options.get("calendar_api_base"):
+        if not bounds.date_from or not bounds.date_to:
+            raise ValueError("Tyler calendar retrieval requires explicit inclusive date bounds.")
+        return [{"kind": "tyler-calendar"}]
     if (provider in SAVED_ONLY and not (provider == "boarddocs" and
             urlsplit(source.url).path.lower().endswith(".pdf"))) or input_format == "meeting-export" or (
             provider == "towncloud" and input_format == "towncloud-table-json"):
@@ -139,6 +145,27 @@ def _request_spec(source, bounds, task, context):
     size = _page_size(source)
     if kind == "static":
         url = source.url
+    elif kind == "champ" and source.provider == kind:
+        event = re.fullmatch(r"/([A-Za-z0-9_-]+)/event/([0-9]+)/?", p.path)
+        if p.hostname != "play.champds.com" or event is None:
+            raise ValueError("CHAMP retrieval requires a configured public tenant event URL.")
+        url = f"https://playapi.champds.com/{event[1]}/event/{event[2]}"
+    elif kind == "tyler-calendar" and source.provider == "tyler-meeting-manager":
+        base = source.options.get("calendar_api_base")
+        if not isinstance(base, str):
+            raise ValueError("Configure the calendar API base observed for this exact Tyler tenant.")
+        validate_url(base)
+        target = urlsplit(base)
+        if (target.scheme != "https" or not target.hostname.endswith(".meetingmanager.tylerapp.com")
+                or target.hostname != p.hostname
+                or re.fullmatch(r"/tylermmcalendar[A-Za-z0-9]+/?", target.path) is None
+                or target.query or target.fragment):
+            raise ValueError("The configured Tyler calendar API base is not an evidenced endpoint shape.")
+        url = base.rstrip("/") + "/meetingInformation/getMeetingInformationByDate"
+        body = json.dumps({"startDate": date.fromisoformat(bounds.date_from).strftime("%m/%d/%Y"),
+                           "endDate": date.fromisoformat(bounds.date_to).strftime("%m/%d/%Y"),
+                           "meetingTypeIds": [-1]}, separators=(",", ":")).encode()
+        method, headers = "POST", {"Content-Type": "application/json", "Accept": "application/json"}
     elif kind == "legistar" and source.provider == kind:
         after = task.get("after", 0)
         if type(after) is not int or after < 0:
@@ -273,7 +300,8 @@ def _enrich(bundle, provider):
 def parse_page(engine, source, namespace, content, input_format, bounds, context):
     if len(content) > bounds.parser_bytes:
         raise ValueError("The provider listing exceeds the configured parser byte limit.")
-    if input_format in {"legistar-events-json", "wistia-api-media-json", "granicus-listing-html"}:
+    if input_format in {"legistar-events-json", "legistar-event-json", "wistia-api-media-json",
+                        "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html"}:
         return parse_native(source, namespace, content, input_format), ()
     result = engine.normalize(replace(source, body=None), content, input_format=input_format,
                               bounds=replace(bounds, date_from=None, date_to=None,

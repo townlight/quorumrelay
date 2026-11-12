@@ -40,7 +40,16 @@ def resolve_write_files(engine, files, *, context, bounds):
             item = storage.get("service_files", handle, scope=context.scope)
             if item is None:
                 raise ValueError("The file handle is unavailable in this caller scope.")
-            reference = item.value["reference"]
+            if item.value.get("purpose") == "input":
+                # HTTP/MCP generic inputs carry a different envelope from the
+                # original SDK write staging helper. Reuse their current policy,
+                # expiry and immutable-byte checks rather than trusting metadata.
+                from .interchange import open_input
+                _, stream = open_input(engine, handle, context=context)
+                stream.close()
+                reference = item.value["storage_reference"]
+            else:
+                reference = item.value["reference"]
         else:
             encoded = part["content_base64"]
             if not isinstance(encoded, str) or len(encoded) > ((bounds.transfer_bytes + 2) // 3) * 4:

@@ -57,3 +57,14 @@ Each dated document entry preserves its provider entryId as external_id, matchin
 `discover.data` contains `source`, aggregate `records`, exact page `captures`, and page `bundles`. Every page bundle retains its own source namespace and compatibility projection. Aggregation filters rich records but does not rewrite the original page compatibility output, so callers must not import unfiltered compatibility rows blindly.
 
 A shared legacy projection helper should project **the selected aggregate records**, restricted to meeting record_type, into a v1 `{version,source,meetings}` preview. It must retain the configured source namespace/URL and existing external IDs. A multi-page discovery has multiple capture hashes, so it cannot claim one page hash as the capture hash for all rows. Preserve per-record capture provenance separately and report discovery coverage through the consumer boundary.
+
+
+## Added detail, supplied captions and observed tenant paths
+
+`legistar-event-json` is the documented bare Event response, requesting supplied items, agenda/minutes notes and item attachment metadata. Native body search separately calls the bounded Events route with verified EventBodyName substring filters; it claims only body-field metadata coverage.
+
+`wistia-media-detail-json` is the authenticated bare Media object, distinct from the unchanged public baseline `wistia-media-json`. Supplied assets retain URL/type/dimensions/file size and original fields. Media detail defines no caption body. `wistia-caption-json` accepts documented supplied track objects or a track list: provider track ID plus parent Media ID, language and source version remain explicit. Supplied cue millisecond anchors and SRT text are preserved. Native `/modern/search` stores complete original responses, returns media-only candidates and matching supplied transcript excerpts, and marks provider caps/no-pagination/excerpt coverage partial. No read requests diarization generation.
+
+CHAMP fixed public `playapi.champds.com/{tenant}/event/{id}` retrieval uses the existing `champ-event-json` compatibility parser and namespace. The observed API returns JSON with an HTML MIME type; response content is still structurally checked as JSON and against the exact tenant/event identity. Two public tenant reads passed; event catalog discovery remains unresolved.
+
+Tyler `calendar_api_base` is an explicitly supplied, same-host application base observed for a tenant. The engine POSTs inclusive date strings and the observed all-meeting-type identifier to its fixed date-range endpoint. It reports partial catalog coverage; an empty live response does not establish live nonempty-row or paging acceptance.

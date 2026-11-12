@@ -204,6 +204,7 @@
         },
         "implementation_status": {
           "enum": [
+            "implemented",
             "not_implemented",
             "baseline_only",
             "blocked_access",

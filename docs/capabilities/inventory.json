@@ -2,10 +2,10 @@
   "schema_version": "1.0.0",
   "title": "Civic data connectors capability inventory",
   "observation_date": "2026-11-11",
-  "revision": "researched-pass-2",
+  "revision": "researched-pass-5",
   "release_completion": "incomplete",
   "research_completion": "partial: all 31 families researched in a bounded pass; exact contract, pagination, tier and access gaps remain explicit",
-  "test_policy": "synthetic/mock validation only; never claim live provider acceptance",
+  "test_policy": "Provider write validation uses synthetic/mock tests unless authorized access is provided. Bounded public reads may be recorded only with exact engine receipts and do not imply catalog completeness; never claim provider write acceptance.",
   "scope": {
     "provider_families": 31,
     "baseline_format_combinations": 34,
@@ -237,6 +237,70 @@
           "findings": "GranicusMatterHistory object to be updated. Note that MatterHistoryID is not required to be set.\n[GranicusMatterHistory](https://webapi.legistar.com/Help/ResourceModel?modelName=GranicusMatterHistory)",
           "limits": "Documentation/source contract only; no authorized upstream test environment or live write acceptance.",
           "proof_level": "official_machine_contract_documentation_not_live_acceptance"
+        },
+        {
+          "id": "legistar-votes-post",
+          "url": "https://webapi.legistar.com/Help/Api/POST-v1-Client-EventItems-EventItemId-Votes",
+          "title": "POST v1/{Client}/EventItems/{EventItemId}/Votes",
+          "kind": "official_documentation",
+          "observed": "Official endpoint page inspected",
+          "observation_date": "2026-11-11",
+          "access_scope": "public_research_only",
+          "findings": "Adds a Vote item under an EventItem. GranicusVote requires VotePersonId and VoteValueId; VoteId need not be set. JSON/XML accepted; text/plain Accept returns the created ID string, otherwise the created object.",
+          "limits": "Documentation only. Tenant-specific value IDs, write entitlement, conflict enforcement, idempotency and authorized test access remain unverified.",
+          "proof_level": "official_machine_contract_documentation_not_live_acceptance"
+        },
+        {
+          "id": "legistar-votes-put",
+          "url": "https://webapi.legistar.com/Help/Api/PUT-v1-Client-EventItems-EventItemId-Votes-VoteId",
+          "title": "PUT v1/{Client}/EventItems/{EventItemId}/Votes/{VoteId}",
+          "kind": "official_documentation",
+          "observed": "Official endpoint page inspected",
+          "observation_date": "2026-11-11",
+          "access_scope": "public_research_only",
+          "findings": "Updates a Vote item under an EventItem. EventItemId and VoteId are required path values; GranicusVote requires VotePersonId and VoteValueId. JSON/XML accepted; text/plain Accept returns the updated ID string, otherwise the updated object.",
+          "limits": "Documentation only. Tenant-specific value IDs, write entitlement, conflict enforcement, idempotency and authorized test access remain unverified.",
+          "proof_level": "official_machine_contract_documentation_not_live_acceptance"
+        },
+        {
+          "id": "legistar-rollcalls-post",
+          "url": "https://webapi.legistar.com/Help/Api/POST-v1-Client-EventItems-EventItemId-RollCalls",
+          "title": "POST v1/{Client}/EventItems/{EventItemId}/RollCalls",
+          "kind": "official_documentation",
+          "observed": "Official endpoint page inspected",
+          "observation_date": "2026-11-11",
+          "access_scope": "public_research_only",
+          "findings": "Adds a RollCall item under an EventItem. GranicusRollCall requires RollCallPersonId and RollCallValueId; RollCallId need not be set. JSON/XML accepted; text/plain Accept returns the created ID string, otherwise the created object.",
+          "limits": "Documentation only. Tenant-specific value IDs, write entitlement, conflict enforcement, idempotency and authorized test access remain unverified.",
+          "proof_level": "official_machine_contract_documentation_not_live_acceptance"
+        },
+        {
+          "id": "legistar-rollcalls-put",
+          "url": "https://webapi.legistar.com/Help/Api/PUT-v1-Client-EventItems-EventItemId-RollCalls-RollCallId",
+          "title": "PUT v1/{Client}/EventItems/{EventItemId}/RollCalls/{RollCallId}",
+          "kind": "official_documentation",
+          "observed": "Official endpoint page inspected",
+          "observation_date": "2026-11-11",
+          "access_scope": "public_research_only",
+          "findings": "Updates a RollCall item under an EventItem. EventItemId and RollCallId are required path values; GranicusRollCall requires RollCallPersonId and RollCallValueId. JSON/XML accepted; text/plain Accept returns the updated ID string, otherwise the updated object.",
+          "limits": "Documentation only. Tenant-specific value IDs, write entitlement, conflict enforcement, idempotency and authorized test access remain unverified.",
+          "proof_level": "official_machine_contract_documentation_not_live_acceptance"
+        },
+        {
+          "id": "legistar-event-detail-live",
+          "url": "https://webapi.legistar.com/v1/olympia/events/7011?EventItems=1&AgendaNote=1&MinutesNote=1&EventItemAttachments=1",
+          "title": "Olympia event 7011 fetched through the connector engine",
+          "kind": "public_tenant",
+          "observed": "2026-11-11",
+          "observation_date": "2026-11-11",
+          "access_scope": "bounded_public_read_only",
+          "findings": "Engine fetch_record completed for one public event detail using the official Events detail route and query flags for EventItems, AgendaNote, MinutesNote and EventItemAttachments. Receipt reports 10 agenda items, 9 linked documents, 19 relationships, all original fields preserved; fixture SHA-256 34e882748bb749339329d7013f5d0e3a1a41b6d714572f7711e572f178e69e85.",
+          "limits": "One record only; listing_status partial and catalog_complete false. This is a bounded read, not full catalog discovery or any provider write acceptance. Receipt: docs/verification/legistar-detail-2026-11-11.json; fixture: tests/fixtures/brief-discovery/legistar-olympia-event-7011.json.",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "receipt_path": "docs/verification/legistar-detail-2026-11-11.json",
+          "receipt_sha256": "6b9ccda4a5a628f5447679e6386efd2f65200629fc081b771beacefc2dafb76d",
+          "fixture_path": "tests/fixtures/brief-discovery/legistar-olympia-event-7011.json",
+          "fixture_sha256": "34e882748bb749339329d7013f5d0e3a1a41b6d714572f7711e572f178e69e85"
         }
       ],
       "tenants": [
@@ -245,6 +309,13 @@
           "observation": "One Events result fetched publicly; flattened extractor output is not raw JSON acceptance.",
           "evidence_ids": [
             "legistar-olympia"
+          ]
+        },
+        {
+          "url": "https://webapi.legistar.com/v1/olympia/events/7011?EventItems=1&AgendaNote=1&MinutesNote=1&EventItemAttachments=1",
+          "observation": "One engine fetch_record read returned the event, supplied agenda/minutes notes, 10 agenda items, 9 linked documents and 19 relationships; original fields preserved.",
+          "evidence_ids": [
+            "legistar-event-detail-live"
           ]
         }
       ],
@@ -301,27 +372,25 @@
         },
         "fetch": {
           "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "legistar-paging",
-            "legistar-olympia"
+            "legistar-olympia",
+            "legistar-event-detail-live"
           ],
-          "details": "HTTPS v1/{Client}/Events, Bodies, EventItems and linked attachments. Must validate client namespace and preserve per-page coverage.",
+          "details": "Engine fetched one bounded Events/{EventId} detail using EventItems=1, AgendaNote=1, MinutesNote=1 and EventItemAttachments=1; preserved the supplied meeting fields, 10 agenda items, 9 linked documents and 19 relationships. This single-record result does not establish catalog discovery completeness.",
           "dependencies": [],
-          "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
-          ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "remaining_verification": [],
+          "acceptance_status": "live_read_passed",
+          "evidence_level": "official_documentation_plus_live_engine_bounded_read_receipt",
           "tenant_scope": [
             "https://webapi.legistar.com/v1/olympia"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "one public Olympia event read through the engine; no provider write credentials or authorized write tenant supplied",
           "restrictions": [
             "No remote writes authorized",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "One detail read is not full discovery or provider write acceptance"
           ]
         },
         "parse": {
@@ -447,7 +516,7 @@
           ],
           "details": "Exact documented API contract is separate from live authorized capability. Events and EventItems create/update; linked MatterAttachment binary upload/update.",
           "dependencies": [
-            "User selects synthetic/mock data only",
+            "No authorized provider test tenant or credentials supplied",
             "Provider test tenant/write credentials and conflict semantics absent"
           ],
           "remaining_verification": [
@@ -476,7 +545,7 @@
           ],
           "details": "Exact documented API contract is separate from live authorized capability. Events and EventItems create/update; linked MatterAttachment binary upload/update.",
           "dependencies": [
-            "User selects synthetic/mock data only",
+            "No authorized provider test tenant or credentials supplied",
             "Provider test tenant/write credentials and conflict semantics absent"
           ],
           "remaining_verification": [
@@ -505,7 +574,7 @@
           ],
           "details": "Exact documented API contract is separate from live authorized capability. Events and EventItems create/update; linked MatterAttachment binary upload/update.",
           "dependencies": [
-            "User selects synthetic/mock data only",
+            "No authorized provider test tenant or credentials supplied",
             "Provider test tenant/write credentials and conflict semantics absent"
           ],
           "remaining_verification": [
@@ -1529,7 +1598,7 @@
           "evidence_ids": [
             "legistar-post-v1-client-matters"
           ],
-          "account_requirements": "Write credential scope/authorized tenant not supplied; mock-only.",
+          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
           "authorized_test_access": "not_supplied;synthetic_mock_only",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "official_contract_documented_not_live_accepted",
@@ -1637,7 +1706,7 @@
           "evidence_ids": [
             "legistar-put-v1-client-matters-matterid-"
           ],
-          "account_requirements": "Write credential scope/authorized tenant not supplied; mock-only.",
+          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
           "authorized_test_access": "not_supplied;synthetic_mock_only",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "official_contract_documented_not_live_accepted",
@@ -1721,7 +1790,7 @@
           "evidence_ids": [
             "legistar-post-v1-client-matters-matterid-texts"
           ],
-          "account_requirements": "Write credential scope/authorized tenant not supplied; mock-only.",
+          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
           "authorized_test_access": "not_supplied;synthetic_mock_only",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "official_contract_documented_not_live_accepted",
@@ -1805,7 +1874,7 @@
           "evidence_ids": [
             "legistar-put-v1-client-matters-matterid-texts-mattertextid-"
           ],
-          "account_requirements": "Write credential scope/authorized tenant not supplied; mock-only.",
+          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
           "authorized_test_access": "not_supplied;synthetic_mock_only",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "official_contract_documented_not_live_accepted",
@@ -2027,7 +2096,7 @@
           "evidence_ids": [
             "legistar-post-v1-client-matters-matterid-histories"
           ],
-          "account_requirements": "Write credential scope/authorized tenant not supplied; mock-only.",
+          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
           "authorized_test_access": "not_supplied;synthetic_mock_only",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "official_contract_documented_not_live_accepted",
@@ -2249,7 +2318,7 @@
           "evidence_ids": [
             "legistar-put-v1-client-matters-matterid-histories-matterhistoryid-"
           ],
-          "account_requirements": "Write credential scope/authorized tenant not supplied; mock-only.",
+          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
           "authorized_test_access": "not_supplied;synthetic_mock_only",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "official_contract_documented_not_live_accepted",
@@ -2275,6 +2344,418 @@
           ],
           "automatable_contract_verified": true,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "vote",
+          "operation": "create",
+          "endpoint_or_format": "POST https://webapi.legistar.com/v1/{Client}/EventItems/{EventItemId}/Votes",
+          "field_mappings": [
+            {
+              "normalized": "external_id",
+              "provider_field": "VoteId",
+              "notes": "Server-issued on create; parent-scoped path ID on update.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "person.external_id",
+              "provider_field": "VotePersonId",
+              "notes": "Required by request model.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "person.name",
+              "provider_field": "VotePersonName",
+              "notes": "Schema field; exact tenant behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "value.external_id",
+              "provider_field": "VoteValueId",
+              "notes": "Required by request model; value identifiers are tenant-specific and must be discovered/read back.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "value.name",
+              "provider_field": "VoteValueName",
+              "notes": "Schema field; no universal value enumeration assumed.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "sequence",
+              "provider_field": "VoteSort",
+              "notes": "Schema field; accepted ordering behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "result",
+              "provider_field": "VoteResult",
+              "notes": "Schema field; enum/meaning not established by this endpoint page.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "parent.external_id",
+              "provider_field": "VoteEventItemId",
+              "notes": "EventItemId is required in the URL path; preserve parent relationship.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "source_revision",
+              "provider_field": "VoteRowVersion",
+              "notes": "Version field exists; conflict enforcement is not established.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "source_guid",
+              "provider_field": "VoteGuid",
+              "notes": "Schema field; tenant behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "source_modified_at",
+              "provider_field": "VoteLastModifiedUtc",
+              "notes": "Schema field; tenant behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            }
+          ],
+          "evidence_ids": [
+            "legistar-votes-post",
+            "legistar-votes-put"
+          ],
+          "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific VoteValueId mapping are not supplied.",
+          "authorized_test_access": "not_supplied;synthetic_mock_only",
+          "readback_receipt": "Bind the exact approved plan and EventItemId; capture returned ID/object; independently GET the parent EventItem/Votes and verify the record and supplied revision before claiming acceptance. Reconcile an ambiguous create before retry.",
+          "verification_status": "official_contract_documented_not_live_accepted",
+          "implementation_status": "not_verified_by_inventory",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "notes": "Only a vote explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence.",
+          "api_version": "v1",
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "official_exact_endpoint_schema_or_guide",
+          "method": "POST",
+          "content_types": [
+            "application/json",
+            "application/xml"
+          ],
+          "automatable_contract_verified": true,
+          "domain_scope": "Vote attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "vote",
+          "operation": "update",
+          "endpoint_or_format": "PUT https://webapi.legistar.com/v1/{Client}/EventItems/{EventItemId}/Votes/{VoteId}",
+          "field_mappings": [
+            {
+              "normalized": "external_id",
+              "provider_field": "VoteId",
+              "notes": "Required as path identity; body identifier not required by endpoint description.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "person.external_id",
+              "provider_field": "VotePersonId",
+              "notes": "Required by request model.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "person.name",
+              "provider_field": "VotePersonName",
+              "notes": "Schema field; exact tenant behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "value.external_id",
+              "provider_field": "VoteValueId",
+              "notes": "Required by request model; value identifiers are tenant-specific and must be discovered/read back.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "value.name",
+              "provider_field": "VoteValueName",
+              "notes": "Schema field; no universal value enumeration assumed.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "sequence",
+              "provider_field": "VoteSort",
+              "notes": "Schema field; accepted ordering behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "result",
+              "provider_field": "VoteResult",
+              "notes": "Schema field; enum/meaning not established by this endpoint page.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "parent.external_id",
+              "provider_field": "VoteEventItemId",
+              "notes": "EventItemId is required in the URL path; preserve parent relationship.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "source_revision",
+              "provider_field": "VoteRowVersion",
+              "notes": "Version field exists; conflict enforcement is not established.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "source_guid",
+              "provider_field": "VoteGuid",
+              "notes": "Schema field; tenant behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "source_modified_at",
+              "provider_field": "VoteLastModifiedUtc",
+              "notes": "Schema field; tenant behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            }
+          ],
+          "evidence_ids": [
+            "legistar-votes-post",
+            "legistar-votes-put"
+          ],
+          "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific VoteValueId mapping are not supplied.",
+          "authorized_test_access": "not_supplied;synthetic_mock_only",
+          "readback_receipt": "Bind the exact approved plan and EventItemId/VoteId; capture response; independently GET the vote and verify the parent relationship and supplied revision before claiming acceptance.",
+          "verification_status": "official_contract_documented_not_live_accepted",
+          "implementation_status": "not_verified_by_inventory",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "notes": "Only a vote explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence.",
+          "api_version": "v1",
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "official_exact_endpoint_schema_or_guide",
+          "method": "PUT",
+          "content_types": [
+            "application/json",
+            "application/xml"
+          ],
+          "automatable_contract_verified": true,
+          "domain_scope": "Vote attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "roll_call",
+          "operation": "create",
+          "endpoint_or_format": "POST https://webapi.legistar.com/v1/{Client}/EventItems/{EventItemId}/RollCalls",
+          "field_mappings": [
+            {
+              "normalized": "external_id",
+              "provider_field": "RollCallId",
+              "notes": "Server-issued on create; parent-scoped path ID on update.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "person.external_id",
+              "provider_field": "RollCallPersonId",
+              "notes": "Required by request model.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "person.name",
+              "provider_field": "RollCallPersonName",
+              "notes": "Schema field; exact tenant behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "value.external_id",
+              "provider_field": "RollCallValueId",
+              "notes": "Required by request model; value identifiers are tenant-specific and must be discovered/read back.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "value.name",
+              "provider_field": "RollCallValueName",
+              "notes": "Schema field; no universal value enumeration assumed.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "sequence",
+              "provider_field": "RollCallSort",
+              "notes": "Schema field; accepted ordering behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "result",
+              "provider_field": "RollCallResult",
+              "notes": "Schema field; enum/meaning not established by this endpoint page.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "parent.external_id",
+              "provider_field": "RollCallEventItemId",
+              "notes": "EventItemId is required in the URL path; preserve parent relationship.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "source_revision",
+              "provider_field": "RollCallRowVersion",
+              "notes": "Version field exists; conflict enforcement is not established.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "source_guid",
+              "provider_field": "RollCallGuid",
+              "notes": "Schema field; tenant behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "source_modified_at",
+              "provider_field": "RollCallLastModifiedUtc",
+              "notes": "Schema field; tenant behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            }
+          ],
+          "evidence_ids": [
+            "legistar-rollcalls-post",
+            "legistar-rollcalls-put"
+          ],
+          "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific RollCallValueId mapping are not supplied.",
+          "authorized_test_access": "not_supplied;synthetic_mock_only",
+          "readback_receipt": "Bind the exact approved plan and EventItemId; capture returned ID/object; independently GET the parent EventItem/RollCalls and verify the record and supplied revision before claiming acceptance. Reconcile an ambiguous create before retry.",
+          "verification_status": "official_contract_documented_not_live_accepted",
+          "implementation_status": "not_verified_by_inventory",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "notes": "Only a roll-call item explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence.",
+          "api_version": "v1",
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "official_exact_endpoint_schema_or_guide",
+          "method": "POST",
+          "content_types": [
+            "application/json",
+            "application/xml"
+          ],
+          "automatable_contract_verified": true,
+          "domain_scope": "Roll-call item attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "roll_call",
+          "operation": "update",
+          "endpoint_or_format": "PUT https://webapi.legistar.com/v1/{Client}/EventItems/{EventItemId}/RollCalls/{RollCallId}",
+          "field_mappings": [
+            {
+              "normalized": "external_id",
+              "provider_field": "RollCallId",
+              "notes": "Required as path identity; body identifier not required by endpoint description.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "person.external_id",
+              "provider_field": "RollCallPersonId",
+              "notes": "Required by request model.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "person.name",
+              "provider_field": "RollCallPersonName",
+              "notes": "Schema field; exact tenant behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "value.external_id",
+              "provider_field": "RollCallValueId",
+              "notes": "Required by request model; value identifiers are tenant-specific and must be discovered/read back.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "value.name",
+              "provider_field": "RollCallValueName",
+              "notes": "Schema field; no universal value enumeration assumed.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "sequence",
+              "provider_field": "RollCallSort",
+              "notes": "Schema field; accepted ordering behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "result",
+              "provider_field": "RollCallResult",
+              "notes": "Schema field; enum/meaning not established by this endpoint page.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "parent.external_id",
+              "provider_field": "RollCallEventItemId",
+              "notes": "EventItemId is required in the URL path; preserve parent relationship.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "source_revision",
+              "provider_field": "RollCallRowVersion",
+              "notes": "Version field exists; conflict enforcement is not established.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "source_guid",
+              "provider_field": "RollCallGuid",
+              "notes": "Schema field; tenant behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            },
+            {
+              "normalized": "source_modified_at",
+              "provider_field": "RollCallLastModifiedUtc",
+              "notes": "Schema field; tenant behavior unverified.",
+              "mapping_level": "provider_schema_field_candidate_not_tenant_acceptance"
+            }
+          ],
+          "evidence_ids": [
+            "legistar-rollcalls-post",
+            "legistar-rollcalls-put"
+          ],
+          "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific RollCallValueId mapping are not supplied.",
+          "authorized_test_access": "not_supplied;synthetic_mock_only",
+          "readback_receipt": "Bind the exact approved plan and EventItemId/RollCallId; capture response; independently GET the roll-call item and verify the parent relationship and supplied revision before claiming acceptance.",
+          "verification_status": "official_contract_documented_not_live_accepted",
+          "implementation_status": "not_verified_by_inventory",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "notes": "Only a roll-call item explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence.",
+          "api_version": "v1",
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "official_exact_endpoint_schema_or_guide",
+          "method": "PUT",
+          "content_types": [
+            "application/json",
+            "application/xml"
+          ],
+          "automatable_contract_verified": true,
+          "domain_scope": "Roll-call item attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration."
         }
       ],
       "pagination": {
@@ -2286,7 +2767,7 @@
       },
       "auth": {
         "public_read": "Some clients public; others token query required. Tenant policy controls access.",
-        "outbound": "Write credential scope/authorized tenant not supplied; mock-only."
+        "outbound": "Write credential scope and authorized test tenant not supplied."
       },
       "restrictions": [
         "No remote writes authorized; no procurement or outreach.",
@@ -2295,9 +2776,9 @@
       "remaining_research": [
         "Write auth/token enablement and per-tenant field permissions",
         "EventRowVersion conflict semantics and idempotency not established",
-        "Other in-scope vote/rollcall/media write surfaces in Help require systematic endpoint review; not declared unsupported",
+        "Per-item Vote and RollCall POST/PUT routes and fields are documented; tenant value IDs, write permissions and live readback remain unverified",
         "Vendor-file import format unverified",
-        "Vote/rollcall exact endpoint models and other meeting-linked write paths remain to classify; no unsupported conclusion."
+        "Meeting media submission/replacement endpoints and their exact field/receipt contracts remain to classify; no unsupported conclusion."
       ],
       "requirement_ids": [
         "C01",
@@ -2331,7 +2812,7 @@
         "status": "unverified_unless_named_in_evidence",
         "details": {
           "public_read": "Some clients public; others token query required. Tenant policy controls access.",
-          "outbound": "Write credential scope/authorized tenant not supplied; mock-only."
+          "outbound": "Write credential scope and authorized test tenant not supplied."
         }
       },
       "official_docs_status": "inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked",
@@ -2589,10 +3070,10 @@
           "capability_status": "unverified",
           "implementation_status": "blocked_access",
           "evidence_ids": [],
-          "details": "Provider capability and machine interface unverified; use mock data only. No authorized remote writes or live acceptance.",
+          "details": "Provider capability and machine interface unverified. No authorized provider test tenant or credentials supplied; no remote writes or live acceptance.",
           "dependencies": [
             "Documented provider interface and explicit entity/field mapping",
-            "User directs mock data only",
+            "No authorized provider test tenant or credentials supplied",
             "Authorized provider test access required for live acceptance; not supplied"
           ],
           "remaining_verification": [
@@ -2615,10 +3096,10 @@
           "capability_status": "unverified",
           "implementation_status": "blocked_access",
           "evidence_ids": [],
-          "details": "Provider capability and machine interface unverified; use mock data only. No authorized remote writes or live acceptance.",
+          "details": "Provider capability and machine interface unverified. No authorized provider test tenant or credentials supplied; no remote writes or live acceptance.",
           "dependencies": [
             "Documented provider interface and explicit entity/field mapping",
-            "User directs mock data only",
+            "No authorized provider test tenant or credentials supplied",
             "Authorized provider test access required for live acceptance; not supplied"
           ],
           "remaining_verification": [
@@ -2641,10 +3122,10 @@
           "capability_status": "unverified",
           "implementation_status": "blocked_access",
           "evidence_ids": [],
-          "details": "Provider capability and machine interface unverified; use mock data only. No authorized remote writes or live acceptance.",
+          "details": "Provider capability and machine interface unverified. No authorized provider test tenant or credentials supplied; no remote writes or live acceptance.",
           "dependencies": [
             "Documented provider interface and explicit entity/field mapping",
-            "User directs mock data only",
+            "No authorized provider test tenant or credentials supplied",
             "Authorized provider test access required for live acceptance; not supplied"
           ],
           "remaining_verification": [
@@ -2782,7 +3263,7 @@
           "endpoint_or_format": "unknown",
           "field_mappings": [],
           "evidence_ids": [],
-          "account_requirements": "not_supplied; synthetic/mock data only",
+          "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
           "authorized_test_access": "not_supplied;synthetic_mock_only",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "official_contract_documented_not_live_accepted",
@@ -2811,7 +3292,7 @@
           "endpoint_or_format": "unknown",
           "field_mappings": [],
           "evidence_ids": [],
-          "account_requirements": "not_supplied; synthetic/mock data only",
+          "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
           "authorized_test_access": "not_supplied;synthetic_mock_only",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "official_contract_documented_not_live_accepted",
@@ -2840,7 +3321,7 @@
           "endpoint_or_format": "unknown",
           "field_mappings": [],
           "evidence_ids": [],
-          "account_requirements": "not_supplied; synthetic/mock data only",
+          "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
           "authorized_test_access": "not_supplied;synthetic_mock_only",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "official_contract_documented_not_live_accepted",
@@ -2870,7 +3351,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "No remote writes authorized; no procurement or outreach.",
@@ -2915,7 +3396,7 @@
         "status": "unverified_unless_named_in_evidence",
         "details": {
           "public_read": "unverified",
-          "outbound": "not_supplied; synthetic/mock data only"
+          "outbound": "not supplied; authorized provider test tenant/credentials absent"
         }
       },
       "official_docs_status": "inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked",
@@ -3457,7 +3938,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "No remote writes authorized; no procurement or outreach.",
@@ -3503,7 +3984,7 @@
         "status": "unverified_unless_named_in_evidence",
         "details": {
           "public_read": "unverified",
-          "outbound": "not_supplied; synthetic/mock data only"
+          "outbound": "not supplied; authorized provider test tenant/credentials absent"
         }
       },
       "official_docs_status": "inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked",
@@ -3559,10 +4040,12 @@
           "kind": "public_tenant",
           "observed": "FetchUrl public GET inspected; content/controls only, no writes.",
           "findings": [
-            "Date/type/location, agenda PDF DisplayAgendaPDF.ashx?MeetingID=996 and minutes MinutesMeetingID=670.",
-            "Containing Text/category/type/date controls; item pager sizes 10/15/20/50 and 180 items in 12 pages."
+            "GET East Brunswick page HTTP 200 text/html, 124337 B, SHA256 6423712a99fed083a971b148d5f13b0c3545cf7c62489ca998bb2656b4a7bb9a. Capture: outputs/provider-route-probes-2026-11-11/novus-eastbrunswick-public-index.body.",
+            "ASP.NET form POSTs to ./ with date-range, Meeting Type, Category, Containing Text and Search controls. Names include ddlDateRange, radCalendarFrom, radCalendarTo, ctl00, ctl01, ctl02 and imageButtonSearch; current __VIEWSTATE and related state are submitted.",
+            "One stateful read-only POST for \"Superintendent's report\" under date range 6ms returned HTTP 200 HTML, 84966 B, SHA256 b5e7fd2fc21a76650ec9682204ff0a2f7f87add1e698a772f084b67a384d01f7, with zero item rows. This does not establish search semantics or completeness.",
+            "Page showed server-rendered meeting/item grids. Prior bounded observation reported item sizes 10/15/20/50 and 180 rows in 12 pages; no traversal or PDF download."
           ],
-          "limits": "Initial response only; postback/search/paging not submitted and PDFs not downloaded.",
+          "limits": "One tenant only. This is server-rendered HTML/postback, not a documented JSON API. Search returned zero rows; query semantics, full page traversal and engine acceptance remain unverified.",
           "observation_date": "2026-11-11",
           "access_scope": "public_research_only",
           "proof_level": "public_extracted_page_not_engine_acceptance"
@@ -3571,7 +4054,7 @@
       "tenants": [
         {
           "url": "https://ebps.novusagenda.com/agendapublic/",
-          "observation": "East Brunswick public search; Initial response only; postback/search/paging not submitted and PDFs not downloaded.",
+          "observation": "East Brunswick public search: direct GET and one stateful search POST captured; server-rendered lists observed; no pagination traversal or PDF download.",
           "evidence_ids": [
             "novusagenda-tenant"
           ]
@@ -3605,10 +4088,10 @@
           "evidence_ids": [
             "novusagenda-tenant"
           ],
-          "details": "Public listing/navigation observed; not exhaustive discovery coverage.",
+          "details": "Public GET returns server-rendered meeting/item lists. One search postback was exercised and returned zero rows; this HTML workflow does not establish a complete catalog or JSON machine API.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify full date/body bounds, continuation and checkpoints."
+            "Confirm date/body bounds and complete meeting/item pager traversal from saved state; current evidence covers only displayed page."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -3676,10 +4159,10 @@
           "evidence_ids": [
             "novusagenda-tenant"
           ],
-          "details": "Containing Text, category, type and date search controls observed; no query submitted.",
+          "details": "Live POST ./ uses current ASP.NET __VIEWSTATE and related state, date controls radCalendarFrom/radCalendarTo, type ctl00, category ctl01, text ctl02 and imageButtonSearch. One \"Superintendent's report\" query rendered zero rows. Exact/phrase semantics and complete search coverage remain unresolved.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify usable request route, permissions, result fields, exact/phrase semantics and pagination."
+            "Confirm search rules and result behavior; implement bounded stateful postback only after the result contract is verified."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -4038,7 +4521,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [],
       "remaining_research": [
@@ -4946,7 +5429,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "No remote writes authorized; no procurement or outreach.",
@@ -4991,7 +5474,7 @@
         "status": "unverified_unless_named_in_evidence",
         "details": {
           "public_read": "unverified",
-          "outbound": "not_supplied; synthetic/mock data only"
+          "outbound": "not supplied; authorized provider test tenant/credentials absent"
         }
       },
       "official_docs_status": "inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked",
@@ -5652,7 +6135,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "SVG unsupported; PDF-only agendas do not accept structured items; item removal required before modification; approval/publishing rights."
@@ -6367,7 +6850,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "Essential end-of-life June 30, 2027; preserve legacy input and IDs.",
@@ -6997,7 +7480,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [],
       "remaining_research": [
@@ -7305,10 +7788,10 @@
           "capability_status": "unverified",
           "implementation_status": "blocked_access",
           "evidence_ids": [],
-          "details": "Provider capability and machine interface unverified; use mock data only. No authorized remote writes or live acceptance.",
+          "details": "Provider capability and machine interface unverified. No authorized provider test tenant or credentials supplied; no remote writes or live acceptance.",
           "dependencies": [
             "Documented provider interface and explicit entity/field mapping",
-            "User directs mock data only",
+            "No authorized provider test tenant or credentials supplied",
             "Authorized provider test access required for live acceptance; not supplied"
           ],
           "remaining_verification": [
@@ -7331,10 +7814,10 @@
           "capability_status": "unverified",
           "implementation_status": "blocked_access",
           "evidence_ids": [],
-          "details": "Provider capability and machine interface unverified; use mock data only. No authorized remote writes or live acceptance.",
+          "details": "Provider capability and machine interface unverified. No authorized provider test tenant or credentials supplied; no remote writes or live acceptance.",
           "dependencies": [
             "Documented provider interface and explicit entity/field mapping",
-            "User directs mock data only",
+            "No authorized provider test tenant or credentials supplied",
             "Authorized provider test access required for live acceptance; not supplied"
           ],
           "remaining_verification": [
@@ -7357,10 +7840,10 @@
           "capability_status": "unverified",
           "implementation_status": "blocked_access",
           "evidence_ids": [],
-          "details": "Provider capability and machine interface unverified; use mock data only. No authorized remote writes or live acceptance.",
+          "details": "Provider capability and machine interface unverified. No authorized provider test tenant or credentials supplied; no remote writes or live acceptance.",
           "dependencies": [
             "Documented provider interface and explicit entity/field mapping",
-            "User directs mock data only",
+            "No authorized provider test tenant or credentials supplied",
             "Authorized provider test access required for live acceptance; not supplied"
           ],
           "remaining_verification": [
@@ -7544,7 +8027,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "No remote writes authorized; no procurement or outreach.",
@@ -7588,7 +8071,7 @@
         "status": "unverified_unless_named_in_evidence",
         "details": {
           "public_read": "unverified",
-          "outbound": "not_supplied; synthetic/mock data only"
+          "outbound": "not supplied; authorized provider test tenant/credentials absent"
         }
       },
       "official_docs_status": "inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked",
@@ -8067,7 +8550,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [],
       "remaining_research": [
@@ -8739,7 +9222,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [],
       "remaining_research": [
@@ -9288,7 +9771,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "Preserve Scheduled/Cancelled; ignore self/# file placeholders; minutes may be embedded in following packet."
@@ -9794,7 +10277,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "No media playback, upload, API write, search submission or caption retrieval tested.",
@@ -10358,7 +10841,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "Uploaded media requires processing before public visibility; do not report upload completion as publication.",
@@ -11076,7 +11559,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [],
       "remaining_research": [
@@ -11612,7 +12095,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "Notice writes affect legally consequential public postings. Only authorized synthetic/test Body writes permitted; none attempted.",
@@ -12152,7 +12635,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "Public HTML/PDF export is not a vendor import contract. Roll call/votes are product features, not guaranteed structured fields in listing HTML.",
@@ -12684,7 +13167,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "No supplied captions/transcripts or direct playable media verified. Service statement 'no uploading' must not be reclassified as unavailable upload capability.",
@@ -13336,7 +13819,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "No authenticated API requests. Keep TLS verification even though old sample curl uses -k. HyperCaster API not assumed applicable. Legacy MRSS doc CAPTCHA-blocked.",
@@ -13493,14 +13976,78 @@
           "observation_date": "2026-11-11",
           "access_scope": "public_research_only",
           "proof_level": "public_extracted_page_not_engine_acceptance"
+        },
+        {
+          "id": "champ-public-player-js",
+          "url": "https://play.champds.com/_COMMON/js/cds.event.js?1794445126",
+          "title": "CHAMP public player event JavaScript",
+          "kind": "public_tenant",
+          "observation_date": "2026-11-11",
+          "proof_level": "public_client_route_observed_not_vendor_api_documentation",
+          "findings": [
+            "Public player JS getEventData builds PROTOCOL + // + HOST + / + CUSTOMER_ACCESS_ID + /event/ + EVENT_ID and calls CDSTools.getJSON using GET/dataType JSON. cds.common.js transforms play.champds.com to playapi.champds.com by appending api. to the first label.",
+            "Saved snapshot outputs/provider-route-probes-2026-11-11/champ-cds-event-js.body SHA256 155808993baa49ec4f68a2d3d49ceca4696ce99cad289148d4672212ff841849."
+          ],
+          "limits": "Client route establishes single-event detail only; no public catalog/index or paging route found."
+        },
+        {
+          "id": "champ-lakezurich-event-json",
+          "url": "https://playapi.champds.com/lakezurichil/event/164",
+          "title": "Lake Zurich IL event 164 public event detail",
+          "kind": "public_tenant",
+          "observation_date": "2026-11-11",
+          "proof_level": "live_public_single_event_detail_not_catalog_acceptance",
+          "findings": [
+            "Unauthenticated GET HTTP 200; Content-Type text/html but body parses as JSON; 32224 bytes SHA256 6754ddfb70e942b4595fa26cdb54e4c688fe52b3754a7320ed2011e4bb4e7764; exact body at outputs/provider-route-probes-2026-11-11/champ-lakezurich-event-json.body. Top-level fields include Customer, Event, Agenda, Timeline, MediaInfo, ServicesAndMachineInfo; Yuma adds Minutes and Extra.",
+            "Engine fetch_record receipt docs/verification/champ-detail-2026-11-11.json reports one completed event per tenant with original fields preserved; catalog_complete=false."
+          ],
+          "limits": "Known event detail only; no public index, pagination or catalog completeness. No attachment bytes downloaded.",
+          "fixture_path": "tests/fixtures/brief-discovery/champ-lakezurich-event-json.json",
+          "fixture_sha256": "6754ddfb70e942b4595fa26cdb54e4c688fe52b3754a7320ed2011e4bb4e7764"
+        },
+        {
+          "id": "champ-yuma-event-json",
+          "url": "https://playapi.champds.com/yumacoaz/event/657",
+          "title": "Yuma County AZ event 657 public event detail",
+          "kind": "public_tenant",
+          "observation_date": "2026-11-11",
+          "proof_level": "live_public_single_event_detail_not_catalog_acceptance",
+          "findings": [
+            "Unauthenticated GET HTTP 200; Content-Type text/html but body parses as JSON; 39079 bytes SHA256 1aeed5848a01db9289d5ffacd5d742e1c5a326c3a0b9603def96fe634444043e; exact body at outputs/provider-route-probes-2026-11-11/champ-yuma-event-json.body. Top-level fields include Customer, Event, Agenda, Timeline, MediaInfo, ServicesAndMachineInfo; Yuma adds Minutes and Extra.",
+            "Engine fetch_record receipt docs/verification/champ-detail-2026-11-11.json reports one completed event per tenant with original fields preserved; catalog_complete=false."
+          ],
+          "limits": "Known event detail only; no public index, pagination or catalog completeness. No attachment bytes downloaded.",
+          "fixture_path": "tests/fixtures/brief-discovery/champ-yuma-event-json.json",
+          "fixture_sha256": "1aeed5848a01db9289d5ffacd5d742e1c5a326c3a0b9603def96fe634444043e"
+        },
+        {
+          "id": "champ-live-engine-detail-receipt",
+          "url": "https://playapi.champds.com/lakezurichil/event/164",
+          "title": "Two bounded CHAMP public event details fetched through the connector engine",
+          "kind": "public_tenant",
+          "observation_date": "2026-11-11",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": "Engine fetch_record completed one event detail each for Lake Zurich IL event 164 and Yuma County AZ event 657; original fields preserved. Both receipt rows report returned_records=1 and catalog_complete=false.",
+          "limits": "Two public details only; this is not catalog completeness, attachment download acceptance or provider write acceptance.",
+          "receipt_path": "docs/verification/champ-detail-2026-11-11.json",
+          "receipt_sha256": "bd0af989faef119ca20324e5d995d7eabf7344823f42e52d63e31607bb9bb8a8"
         }
       ],
       "tenants": [
         {
           "url": "https://play.champds.com/yumacoaz/event/657",
-          "observation": "GET 200. Event title/date, agenda/minutes/timeline, Packet PDF, search agenda/minutes/timeline and download-media control visible. Limits: Response also says This Event is Not Yet Published and No media available; do not certify media availability or complete published JSON retrieval.",
+          "observation": "Public player tenant; direct and engine reads captured one detail only; catalog, pagination and media-byte availability not verified.",
           "evidence_ids": [
-            "champ-yuma"
+            "champ-public-player-js",
+            "champ-yuma-event-json"
+          ]
+        },
+        {
+          "url": "https://play.champds.com/lakezurichil/event/164",
+          "observation": "Public player tenant; direct and engine reads captured one detail only; catalog and pagination not verified.",
+          "evidence_ids": [
+            "champ-public-player-js",
+            "champ-lakezurich-event-json"
           ]
         }
       ],
@@ -13531,19 +14078,20 @@
           ]
         },
         "discover": {
-          "capability_status": "observed",
+          "capability_status": "unverified",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "champ-yuma"
+            "champ-public-player-js",
+            "champ-lakezurich-event-json",
+            "champ-yuma-event-json"
           ],
-          "details": "Baseline source validates CustomerAccessID, CustomerEventID, EventPublishStatusID=2 and agenda children in supplied JSON. Observed player path /{customer}/event/{id}; public listing and JSON GET route still require verification.",
+          "details": "Public client and live response prove GET detail by customer ID/event ID, not event-catalog listing. No public catalog/index or pagination route verified on the two observed tenants.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
           ],
           "remaining_verification": [
-            "Event detail is one record. Admin help search index says event list pages contain 15 events; that is not a verified public JSON pagination contract.",
-            "Build fixtures and verify complete bounded result traversal."
+            "Find/verify public event catalog/list route and bounded date/page traversal; admin event-list help describing 15 events is not a public JSON contract."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -13559,18 +14107,21 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "champ-yuma"
+            "champ-public-player-js",
+            "champ-lakezurich-event-json",
+            "champ-yuma-event-json",
+            "champ-live-engine-detail-receipt"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. Do not ingest unpublished JSON through baseline public path. Supplied media/captions only; player/download button not proof playable media.",
+          "details": "Engine fetch_record implements the public client-derived GET /{CustomerAccessID}/event/{EventID}; two bounded tenants returned one record each with originals preserved. Bodies parse as JSON despite text/html MIME. This does not imply attachment downloads or catalog completeness.",
           "dependencies": [
             "shared network safeguards"
           ],
           "remaining_verification": [
-            "Verify raw response MIME, redirects, document/media status and independent attachment failures."
+            "Public event catalog and page completeness remain open; attachment bytes/MIME have not been independently verified."
           ],
-          "acceptance_status": "not_run",
+          "acceptance_status": "live_read_passed",
           "evidence_level": "referenced_documentation_or_source_observation",
           "tenant_scope": [
             "https://play.champds.com/yumacoaz/event/657"
@@ -14010,7 +14561,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "Do not ingest unpublished JSON through baseline public path. Supplied media/captions only; player/download button not proof playable media.",
@@ -14018,7 +14569,7 @@
       ],
       "remaining_research": [
         "Pin baseline source commit and extract/test standalone readers.",
-        "Event detail is one record. Admin help search index says event list pages contain 15 events; that is not a verified public JSON pagination contract.",
+        "Engine live detail read is verified on the two existing tenants at GET https://playapi.champds.com/{CustomerAccessID}/event/{EventID}; JSON-shaped body is text/html MIME. No public catalog/list route found. Admin help says authenticated Events list has 15/page, which is not a public JSON pagination contract.",
         "Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.",
         "Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported."
       ],
@@ -14664,7 +15215,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [],
       "remaining_research": [
@@ -15078,7 +15629,7 @@
           "dependencies": [
             "Repository.Write granted and resource ACL allows action",
             "repositoryId,parentEntryId/entryId and authorized test access absent",
-            "Mock-only user decision"
+            "No authorized provider test tenant or credentials supplied"
           ],
           "remaining_verification": [
             "Implementation contract validation",
@@ -15111,7 +15662,7 @@
           "dependencies": [
             "Repository.Write granted and resource ACL allows action",
             "repositoryId,parentEntryId/entryId and authorized test access absent",
-            "Mock-only user decision"
+            "No authorized provider test tenant or credentials supplied"
           ],
           "remaining_verification": [
             "Implementation contract validation",
@@ -15144,7 +15695,7 @@
           "dependencies": [
             "Repository.Write granted and resource ACL allows action",
             "repositoryId,parentEntryId/entryId and authorized test access absent",
-            "Mock-only user decision"
+            "No authorized provider test tenant or credentials supplied"
           ],
           "remaining_verification": [
             "Implementation contract validation",
@@ -16247,7 +16798,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "Downloadable packet output does not establish a TownCloud import file format. Do not infer table JSON write endpoint.",
@@ -16779,7 +17330,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "PDF manual extraction blocked; indexed excerpts insufficient to claim upload/update API. Demo inconsistent minutes dates must not silently override page dates.",
@@ -17319,7 +17870,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [],
       "remaining_research": [
@@ -17908,7 +18459,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "No generic calendar-host write support. METHOD:PUBLISH and RFC property names do not grant upstream create/update/upload. Preserve floating/all-day/timezone/recurrence distinctions.",
@@ -18113,6 +18664,58 @@
           "findings": "This method accepts a list of medias to tag. It processes requests asynchronously and will return a background_job_status object rather than the typical Media response object.\n\nThe tags will be added to the existing tags on each media file, not replaced.\n\n## Requires api token with one of the following permissions\n```\nRead, update & delete anything\n```\n\nTokens with the \"Act with a team member's permissions\" permission\n(`all:delegate_to_contact_permissions` scope) can also be used. Requests\nmade with such a token are authorized using the permissions of the\ncontact assigned to the token.\n\nExpiring access tokens created with authorizations cannot be used; such\nrequests fail with a 403.\n",
           "limits": "Documentation/source contract only; no authorized upstream test environment or live write acceptance.",
           "proof_level": "official_machine_contract_documentation_not_live_acceptance"
+        },
+        {
+          "id": "wistia-search",
+          "url": "https://docs.wistia.com/reference/get_search.md",
+          "title": "Search media and transcripts",
+          "kind": "official_documentation",
+          "observation_date": "2026-11-11",
+          "proof_level": "official_machine_contract_documentation_not_live_acceptance",
+          "findings": [
+            "GET /modern/search requires q, X-Wistia-API-Version 2026-09 and Read all data or delegation; expiring access tokens return 403. Searches media and other resource types plus transcripts.",
+            "Response is {data:{folders,subfolders,medias,channels,channel_episodes,webinars}}; media transcript_matches contain text,start_time_seconds,start_time_formatted,thumbnail_url. 100 primary media plus up to 100 transcript-only matches, no pagination; exact/phrase semantics unspecified."
+          ],
+          "limits": "Official contract only; no token or municipal account acceptance."
+        },
+        {
+          "id": "wistia-media-detail",
+          "url": "https://docs.wistia.com/reference/get_medias-mediahashedid.md",
+          "title": "Get Media detail",
+          "kind": "official_documentation",
+          "observation_date": "2026-11-11",
+          "proof_level": "official_machine_contract_documentation_not_live_acceptance",
+          "findings": [
+            "GET /modern/medias/{mediaHashedId}; version 2026-09 and Bearer access. HTTP 200 is a bare media object, not a data envelope; standard media fields and assets are documented.",
+            "No caption/transcript body field on this endpoint. Asset fields include URL, dimensions, size, content_type and type."
+          ],
+          "limits": "Official contract only; no live account test."
+        },
+        {
+          "id": "wistia-caption-list",
+          "url": "https://docs.wistia.com/reference/get_medias-mediahashedid-captions.md",
+          "title": "List captions by Media",
+          "kind": "official_documentation",
+          "observation_date": "2026-11-11",
+          "proof_level": "official_machine_contract_documentation_not_live_acceptance",
+          "findings": [
+            "GET /modern/medias/{mediaHashedId}/captions returns a bare JSON array of language tracks; text is nullable SRT, language is ISO-639-2 3-char code, version may be null. include=segments adds start_ms/end_ms/text cues.",
+            "Requires Read all folder and media data or delegated access; an authorized expiring delegated token can use scoped edit-transcripts. Other delegated media permissions can return no captions."
+          ],
+          "limits": "Official contract only; no account token; adapter retrieval not implemented."
+        },
+        {
+          "id": "wistia-caption-show",
+          "url": "https://docs.wistia.com/reference/get_medias-mediahashedid-captions-languagecode.md",
+          "title": "Show captions for language",
+          "kind": "official_documentation",
+          "observation_date": "2026-11-11",
+          "proof_level": "official_machine_contract_documentation_not_live_acceptance",
+          "findings": [
+            "GET /modern/medias/{mediaHashedId}/captions/{languageCode} returns one bare caption object; JSON/SRT/VTT/TXT supported, with nullable SRT text/version and optional timed segments.",
+            "include=segments is read-only. Do not request include=diarized_segments by default because official docs say eligible reads may initiate speaker-data generation. Read all folder/media data or permitted delegated access is required."
+          ],
+          "limits": "Official contract only; no live account test or caption generation authorized."
         }
       ],
       "tenants": [
@@ -18180,17 +18783,21 @@
           ]
         },
         "fetch": {
-          "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "capability_status": "documented",
+          "implementation_status": "implemented",
           "evidence_ids": [
+            "wistia-media-detail",
             "wistia-public",
             "wistia-embed"
           ],
-          "details": "Known public media ID can fetch unprotected embed metadata; this is not account-wide discovery.",
-          "dependencies": [],
+          "details": "Core implements authenticated GET /modern/medias/{mediaHashedId} and preserves bare original media JSON. This route has no caption text. Separate caption list/per-language GET routes are documented but not wired; public embed example is not account-wide access.",
+          "dependencies": [
+            "Trusted server-side read token with access to requested media",
+            "Caption GET requires Read all folder and media data or permitted scoped delegation"
+          ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "No Wistia account token/tenant; live detail not accepted",
+            "Caption list/per-language adapter remains unimplemented; do not default to diarized_segments"
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -18198,7 +18805,7 @@
             "https://fast.wistia.com/embed/medias/26sk4lmiix.json"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "official_contract_only_no_account_token",
           "restrictions": [
             "No remote writes authorized",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -18231,17 +18838,20 @@
         },
         "native_search": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "wistia-list"
+            "wistia-search",
+            "wistia-list",
+            "wistia-auth"
           ],
-          "details": "Authenticated exact-name,tags,type/folder filters; not a general phrase/fulltext media search promise.",
+          "details": "Core implements GET /modern/search?q=...&resource_type[]=media, then exact local term/phrase checks on normalized metadata and provider transcript excerpts. Upstream semantics remain provider-defined; 100 primary plus up to 100 transcript-only cap, no cursor; excerpts are not full transcripts.",
           "dependencies": [
-            "Authorized read token/account"
+            "Trusted server-side token with Read all data or team-member delegation",
+            "Search does not accept expiring authorization tokens; official docs say those return 403"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "No account token/live behavior. Search implementation synthetic only.",
+            "Preserve partial coverage; exact local matching applies only to returned metadata and excerpt text/timestamps."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -18249,7 +18859,7 @@
             "https://fast.wistia.com/embed/medias/26sk4lmiix.json"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "official_contract_only_no_account_token",
           "restrictions": [
             "No remote writes authorized",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -18334,7 +18944,7 @@
           "dependencies": [
             "Upload token permission or Read,update&delete anything/eligible delegated resource permission",
             "Account media limits/features",
-            "Mock-only data; live access absent"
+            "No authorized provider test tenant or credentials supplied; live access absent"
           ],
           "remaining_verification": [
             "Implementation contract validation",
@@ -18367,7 +18977,7 @@
           "dependencies": [
             "Upload token permission or Read,update&delete anything/eligible delegated resource permission",
             "Account media limits/features",
-            "Mock-only data; live access absent"
+            "No authorized provider test tenant or credentials supplied; live access absent"
           ],
           "remaining_verification": [
             "Implementation contract validation",
@@ -18400,7 +19010,7 @@
           "dependencies": [
             "Upload token permission or Read,update&delete anything/eligible delegated resource permission",
             "Account media limits/features",
-            "Mock-only data; live access absent"
+            "No authorized provider test tenant or credentials supplied; live access absent"
           ],
           "remaining_verification": [
             "Implementation contract validation",
@@ -18735,7 +19345,7 @@
           "evidence_ids": [
             "wistia--medias-import-url"
           ],
-          "account_requirements": "not_supplied; synthetic/mock data only",
+          "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
           "authorized_test_access": "not_supplied;synthetic_mock_only",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "official_contract_documented_not_live_accepted",
@@ -18782,7 +19392,7 @@
           "evidence_ids": [
             "wistia--medias-mediaHashedId-captions-languageCode-edits"
           ],
-          "account_requirements": "not_supplied; synthetic/mock data only",
+          "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
           "authorized_test_access": "not_supplied;synthetic_mock_only",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "official_contract_documented_not_live_accepted",
@@ -18829,7 +19439,7 @@
           "evidence_ids": [
             "wistia--taggings-bulk-create"
           ],
-          "account_requirements": "not_supplied; synthetic/mock data only",
+          "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
           "authorized_test_access": "not_supplied;synthetic_mock_only",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "official_contract_documented_not_live_accepted",
@@ -18865,7 +19475,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "No remote writes authorized; no procurement or outreach.",
@@ -18875,9 +19485,11 @@
       ],
       "remaining_research": [
         "Account-tier upload/feature/media limits and modern schema vs older guide discrepancies",
-        "Provider-specific file-import package other than uploadAPI unverified",
-        "Live acceptance blocked by mock-only direction",
-        "Media swap/replacement official endpoint remains candidate; full fields/receipt and domain impact need review."
+        "Provider-specific import package other than Upload API unverified",
+        "No authorized Wistia account read token/tenant; live account search/detail and writes not accepted",
+        "Search capped at 100 primary media plus up to 100 transcript-only matches, no cursor; provider exact/phrase semantics unspecified",
+        "GET media detail implemented but not live-tested; caption list/per-language GET documented but adapter remains unimplemented. Avoid diarized_segments because its read may initiate speaker-data generation.",
+        "Media swap/replacement endpoint remains candidate; full fields/receipt and scope impact need review."
       ],
       "requirement_ids": [
         "C01",
@@ -18911,7 +19523,7 @@
         "status": "unverified_unless_named_in_evidence",
         "details": {
           "public_read": "unverified",
-          "outbound": "not_supplied; synthetic/mock data only"
+          "outbound": "not supplied; authorized provider test tenant/credentials absent"
         }
       },
       "official_docs_status": "inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked",
@@ -19489,7 +20101,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "Private document upload not public publication.",
@@ -20019,7 +20631,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "Keep cancelled titles/status indicators. Public city JSON response fields and PDF GET route are not writable API fields.",
@@ -20140,6 +20752,19 @@
           "observation_date": "2026-11-11",
           "access_scope": "public_research_only",
           "proof_level": "public_extracted_page_not_engine_acceptance"
+        },
+        {
+          "id": "diligent-boarddocs-colorado-direct-get",
+          "url": "https://go.boarddocs.com/co/cde/Board.nsf/Public",
+          "title": "Colorado BoardDocs public shell direct read attempt",
+          "kind": "public_tenant",
+          "observation_date": "2026-11-11",
+          "proof_level": "bounded_access_failure_not_unsupported",
+          "findings": [
+            "Current bounded unauthenticated direct GET returned HTTP 403 Forbidden; error recorded in outputs/provider-route-probes-2026-11-11/capture-index.json.",
+            "Earlier extraction observed a branded shell but did not extract dynamic meeting records."
+          ],
+          "limits": "HTTP 403 does not establish provider unavailability or unsupported features. No alternate route, credentials or third tenant attempted; no BoardDocs-specific public API contract found."
         }
       ],
       "tenants": [
@@ -20185,12 +20810,13 @@
           "capability_status": "unverified",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "diligent-boarddocs-tenant"
+            "diligent-boarddocs-tenant",
+            "diligent-boarddocs-colorado-direct-get"
           ],
-          "details": "Public JS shell fetched but actual meeting catalog not obtained. Resolve browser/session or supported public read contract; obtain numbered PDF fixture.",
+          "details": "Earlier extraction saw a BoardDocs-branded shell without meeting rows; current direct unauthenticated GET to the same Colorado URL returned HTTP 403. No public catalog/API request or pagination contract verified. This is unresolved, not unsupported.",
           "dependencies": [],
           "remaining_verification": [
-            "Resolve actual catalog; exercise bounded dates/page transitions and report partial failures."
+            "Resolve same-tenant access discrepancy and obtain catalog/numbered-PDF response; verify BoardDocs-specific read contract and date/page coverage."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -20713,7 +21339,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "Keep baseline unencrypted printed numbered PDF; JS shell is not equivalent.",
@@ -20721,7 +21347,7 @@
         "Respect post-approval edit lock and public/private visibility."
       ],
       "remaining_research": [
-        "Verify tenant-specific supported machine contract, authorization, rate/size limits and pagination.",
+        "Latest direct GET to the existing Colorado public shell returned HTTP 403, while earlier extraction saw only the shell. Dynamic catalog and BoardDocs-specific API remain unresolved; do not infer unsupported from access result.",
         "Obtain authorized non-production write access; validate duplicates, conflicts, ambiguous retries, approval/visibility and readback receipts.",
         "Preserve legacy IDs/namespaces/parent identities, unknown extensions, original fields, supplied revisions and missing timezone explicitly."
       ],
@@ -20835,6 +21461,20 @@
           "observation_date": "2026-11-11",
           "access_scope": "public_research_only",
           "proof_level": "public_extracted_page_not_engine_acceptance"
+        },
+        {
+          "id": "tyler-ector-public-calendar-query",
+          "url": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/tylermmcalendar46612prod/meetingInformation/getMeetingInformationByDate",
+          "title": "Ector Meeting Manager public calendar query",
+          "kind": "public_tenant",
+          "observation_date": "2026-11-11",
+          "proof_level": "live_public_route_and_client_contract_observed_not_engine_acceptance",
+          "findings": [
+            "Public main.f980238b7778fb2e.js sets tcmURL https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/tylermmcalendar46612prod/ and defines POST meetingInformation/getMeetingInformationByDate with JSON startDate,endDate,meetingTypeIds. Dates use MM/DD/YYYY; no type filter uses [-1].",
+            "Unauthenticated Nov 1-30 2026 POST returned HTTP 200 application/json [] (2 B), SHA256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945; Nov 9-15 was also empty.",
+            "Client bundle SHA256 6ea35d16c554c303cb2ba49810f9b7f41755f6787296f9913e55750be94db29b. Raw request/response and bundle captures are in outputs/provider-route-probes-2026-11-11."
+          ],
+          "limits": "Tenant-served client code, not published vendor API docs. Empty ranges reveal no record schema, paging, successful nonempty discovery or archive coverage. No credentials supplied."
         }
       ],
       "tenants": [
@@ -20847,9 +21487,10 @@
         },
         {
           "url": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/",
-          "observation": "GET 200; rendered calendar text visible. November public meetings, date/time/location, Agenda Posted, meeting-type filters, Search, Subscribe and list/day/week/month controls observed. Limits: XHR method/route and saved JSON not fetched; rendered UI is not API contract.",
+          "observation": "Ector anonymous SPA and client bundle expose date-range query; two bounded Nov 2026 requests returned empty arrays, so no nonempty record/paging contract verified.",
           "evidence_ids": [
-            "tyler-ector"
+            "tyler-ector",
+            "tyler-ector-public-calendar-query"
           ]
         }
       ],
@@ -20884,16 +21525,16 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "tyler-ector"
+            "tyler-ector",
+            "tyler-ector-public-calendar-query"
           ],
-          "details": "Configured public calendar, date/type bounds; use saved JSON baseline until calendar XHR method/contract verified. Ector host matches baseline .meetingmanager.tylerapp.com; alternate tylerhost.net variant needs explicit identification work.",
+          "details": "Ector live Angular client exposes POST https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/tylermmcalendar46612prod/meetingInformation/getMeetingInformationByDate with JSON {startDate,endDate,meetingTypeIds}; dates MM/DD/YYYY, all types [-1]. Two Nov 2026 probes returned HTTP 200 []; route candidate only, with no record schema or full discovery proven.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
           ],
           "remaining_verification": [
-            "Calendar month navigation/list/day/week visible; JSON paging, query ranges and archived completeness unverified.",
-            "Build fixtures and verify complete bounded result traversal."
+            "Obtain a successful nonempty response on this same tenant and establish record fields and date/page/archive completeness; tested ranges were empty."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -21356,7 +21997,7 @@
       },
       "auth": {
         "public_read": "unverified",
-        "outbound": "not_supplied; synthetic/mock data only"
+        "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
         "Baseline source skips cancelled/adjourned records and derives agenda item ids by position; new schema must preserve statuses and explain identity derivation rather than advertise baseline as full fidelity.",
@@ -21364,7 +22005,7 @@
       ],
       "remaining_research": [
         "Pin baseline source commit and extract/test standalone readers.",
-        "Calendar month navigation/list/day/week visible; JSON paging, query ranges and archived completeness unverified.",
+        "Calendar client route/body observed; Nov 2026 probes empty, leaving record schema, successful example, paging and archive coverage unresolved.",
         "Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.",
         "Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported."
       ],

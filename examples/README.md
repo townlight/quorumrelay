@@ -17,7 +17,8 @@ real-adapter mocked plan/commit/readback/receipt.
 ## CLI and HTTP/JSON
 
 `cli-workflow.ps1` drives installed CLI processes using stdin JSON and an
-explicit database. `http-workflow.ps1` sends the same requests over HTTP.
+explicit database. `http-workflow.ps1` pipes the same JSON requests to `curl.exe`
+over HTTP and downloads the streamed result with PowerShell.
 The scripts use saved synthetic provider-format data, preserve partial coverage,
 and never configure a live mutation transport.
 
@@ -42,13 +43,17 @@ In a new unrelated directory, install the generated `.tgz`; copy only
 `fifth-client.mjs` there. With the explicit URL/token above:
 
 ```powershell
-npm install C:\connectors\client\quorumrelay-client-0.1.0-dev.2.tgz
+npm install C:\connectors\client\quorumrelay-client-0.1.0-dev.3.tgz
 node C:\unrelated\fifth-client.mjs
 ```
 
 The client verifies the service version and runs saved discovery, import,
 search and a real streamed ZIP download. It neither starts a service nor
 assumes a reference application's filesystem layout.
+
+The curl and Node examples also plan, commit and reopen a synthetic write receipt
+against `mock_workflow.py serve`. Both refuse a plan unless `plan.mock` is true;
+the example server never sends mutations to a vendor.
 
 ## Both MCP transports and eras
 

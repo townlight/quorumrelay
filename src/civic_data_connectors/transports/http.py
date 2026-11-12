@@ -155,7 +155,9 @@ def create_app(engine, config: ServiceConfig | None = None, *, mcp_token_verifie
             context = principal.context()
             context.operation_id = uuid4().hex
             content = None
-            if "file_handle" in payload:
+            neutral_input = operation in {"import_preview", "import_bundle"} and payload.get("format") in {
+                "json", "jsonl", "zip"}
+            if "file_handle" in payload and not neutral_input:
                 if "content_base64" in payload:
                     raise ValueError("Supply either file_handle or content_base64, not both.")
                 item = scoped_file(payload.pop("file_handle"), context)

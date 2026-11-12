@@ -8,7 +8,7 @@ $request = @{
 }
 function Invoke-Connector([string]$Operation, $Request) {
   $wire = $Request | ConvertTo-Json -Depth 100 -Compress
-  $output = $wire | python -m civic_data_connectors $Operation --database $Database
+  $output = $wire | python -m quorumrelay $Operation --database $Database
   if ($LASTEXITCODE -notin @(0,2)) { throw "Connector $Operation failed." }
   return $output | ConvertFrom-Json -Depth 100
 }
@@ -18,5 +18,9 @@ $preview = Invoke-Connector import_preview @{result=$discovered}
 $imported = Invoke-Connector import_bundle @{result=$discovered;persist=$true}
 $found = Invoke-Connector search @{query=@{terms=@('Council')}}
 $exported = Invoke-Connector export @{bundle=$imported.data.bundle;format='zip'}
+if ($found.data.hits.Count -lt 1 -or $preview.data.persisted -or -not $imported.data.persisted) {
+  throw 'Import/search acceptance failed.'
+}
+if ($exported.status -notin @('completed','partial')) { throw 'Export acceptance failed.' }
 @{mode='synthetic';live_acceptance='NOT_RUN';hits=$found.data.hits.Count;preview_persisted=$preview.data.persisted;export=$exported.status} |
   ConvertTo-Json -Compress

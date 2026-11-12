@@ -1,6 +1,6 @@
-# Civic connector HTTP client
+# QuorumRelay HTTP client
 
-Requires Node 20+ and an explicitly configured running connector service.
+Requires Node 20.3+ and an explicitly configured running connector service.
 The owning application starts/stops the Python service, pins its version, owns
 its durable SQLite state, and supplies separate caller-scoped service tokens.
 This package never starts a service or discovers a localhost port.

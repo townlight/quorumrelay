@@ -1,8 +1,19 @@
 # QuorumRelay core continuation, 2026-11-11
 
-Current source candidate is `quorumrelay==0.1.0.dev2`, schema `2.0.0`. Scott lifted the implementation pause for the full approved plan. The historical handoff below is retained as dated evidence; its mock-only statement is not a scope reduction or a current authorization determination.
+Current source candidate is `quorumrelay==0.1.0.dev3`, schema `2.0.0`. Scott lifted the implementation pause for the full approved plan. The historical handoff below is retained as dated evidence; its mock-only statement is not a scope reduction or a current authorization determination.
 
 Canonical SDK imports and CLI use `quorumrelay`. Compatibility imports `civic_data_connectors` and CLI `civic-data-connectors` continue to work. Public facade modules reexport the same implementation objects, so Source/Record/Engine/storage classes are shared rather than duplicated. Wheel packaging includes both import trees. SDK and engine contract examples now use the approved identity.
+
+Current additions after the immutable dev2 development snapshot (see `docs/ENGINE-COVERAGE.md` for the remaining per-provider gap map):
+
+- Legistar `fetch_record` uses its documented event-detail expansion route, preserves complete original bytes and agenda items/attachment links, and rejects unsafe/mismatched IDs. Exact public Olympia event7011 fixture: ten agenda items, nine documents, nineteen relationships; bounded live read receipt `legistar-detail-2026-11-11.json`. Added `legistar-event-json`, bringing additive parser hooks to five at that point; baseline format count remains 34.
+- Eight Legistar write entities now have sixteen create/update wire mappings, including newly documented supplied votes/roll calls. Required native person/value fields and matching parent EventItem are enforced. Tests use the independent official field tables and cover idempotent exact commits and ambiguous-create reconciliation. Live provider write acceptance is still NOT_RUN.
+- Legistar canonical reader namespaces and API Client routing are separate: read-derived namespaces work for writes with exact current credential/source policy; historical write-only slug namespaces remain supported without identity rewrite or an implicit credential grant.
+- Generic MCP staged inputs now feed write file parts through current policy/TTL/hash verification before binding immutable storage references. Expired handles fail. Metadata parser and file transfer bounds stay separate.
+- Wistia native search is implemented from official `/modern/search` OpenAPI with media-only candidates, exact local filtering, preserved supplied transcript timestamps and original bundles. Its provider cap/no-pagination and excerpt-only text remain partial; account read credentials and live acceptance remain unresolved. Unmapped native search never silently downgrades to local search.
+- Wistia authenticated Media detail and supplied caption list/language reads preserve exact bytes, asset metadata, recording parent identity, source caption version and supplied millisecond cues. Seven additive parsers are now registered. No captions are invented from a Media response; no transcription or diarization is requested.
+- CHAMP fixed public event retrieval is implemented with live two-tenant detail receipts. Tyler explicit same-host calendar API POST is implemented with deterministic nonempty baseline fixtures and a live empty response; catalog completeness remains unresolved. Legistar native body-only search is implemented with explicit field coverage and query-bound keyset checkpoints.
+- Maintained SDK/engine/write docs describe actual behavior; synthetic tests do not imply absence of a real mutation transport or reduce the approved scope.
 
 Current checks:
 

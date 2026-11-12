@@ -1,4 +1,4 @@
-# External interfaces, candidate 0.1.0.dev2
+# External interfaces, candidate 0.1.0.dev3
 
 This candidate is local development software. Synthetic acceptance never proves
 live provider acceptance. No interface publishes stories or starts provider
@@ -13,7 +13,7 @@ Install the standalone package with its service extra, pinned to the same
 candidate as the client:
 
 ```powershell
-py -m pip install "quorumrelay[service]==0.1.0.dev2"
+py -m pip install "quorumrelay[service]==0.1.0.dev3"
 quorumrelay serve --config C:\app\connector-service.json --database C:\app\connector-state.sqlite
 ```
 
@@ -68,6 +68,15 @@ means one complete request/result per nonblank line, not an array silently
 split into records. `--content` selects saved parser bytes explicitly.
 `--file-root` restricts requested local input paths, resolving symlinks/junctions.
 The CLI does not expose server-side paths over HTTP.
+
+For large provider submissions, declare a file part's `part`, `filename` and
+`content_type` in the selected change, then use
+`--write-file CHANGE_KEY PART C:\captures\document.pdf` with `plan_write`.
+The CLI stages that explicit local file within `--file-root`, binds its hash and
+length into the scoped plan, and enforces transfer limits. It does not base64
+encode the file into request JSON or commit the plan. This requires configured
+durable storage and the caller's existing write policy. Each option must match
+one metadata-only file part; existing inline/handle inputs cannot be overwritten.
 `--config` is trusted process-owner policy; operation JSON cannot grant access.
 JSONL shares one engine/store within the process. Stdout contains JSON only;
 diagnostics go to stderr. Exit codes: completed 0, partial 2, cancelled 3,
@@ -85,6 +94,20 @@ Parser inputs default to 16 MiB; uploaded/downloaded documents default to
 200 MiB. A large authorized download is not evidence that it can be parsed.
 Both limits apply to actual bytes, not solely Content-Length.
 
+For a neutral interchange file, call `import_preview` or `import_bundle` with
+`{"format":"zip","file_handle":"..."}`. ZIP and JSONL inputs use the transfer
+ceiling while each metadata document/JSONL line retains its parser ceiling.
+The handle is resolved in the authenticated caller's storage scope and its bytes
+are verified before import. CLI equivalents use `--content C:\captures\bundle.zip`
+with `{"format":"zip"}` as the JSON request. Parser-only source captures retain
+their original limit. A `plan_write` caller may stage attachment inputs without
+receiving fetch, download or commit permission.
+
+JSON and JSONL exports resolve stored original captures into portable inline
+bytes, validating their recorded hash and size. Text-format parser limits still
+apply; ZIP carries large original files separately. Export never silently drops
+originals to fit a text format.
+
 `POST /v1/jobs/OPERATION` submits bounded work and returns HTTP 202 with a
 `partial` envelope, `operation_id`, and running data state. This is not
 completed acceptance. Poll shared `status` with that ID; final results remain
@@ -96,7 +119,7 @@ worker. Writes reconcile uncertain intents according to their core contract.
 
 ## TypeScript and an unrelated fifth client
 
-The package is `quorumrelay-client@0.1.0-dev.2`. For local development
+The package is `quorumrelay-client@0.1.0-dev.3`. For local development
 use a `file:` dependency to `client/`. To use it without this checkout or any
 reference product, build and `npm pack` the client, then install its `.tgz` in
 your own project. Generated types come from the packaged core schemas.

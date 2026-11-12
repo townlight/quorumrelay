@@ -13,12 +13,17 @@ from .transports.runtime import OPERATIONS, Principal, ServiceConfig, build_engi
 EXIT_CODES = {"completed": 0, "partial": 2, "cancelled": 3, "failed": 4, "unsupported": 5}
 
 
-def _read_path(name, root, limit):
+def _checked_path(name, root):
     path = Path(name).resolve(strict=True)
     if root is not None and not path.is_relative_to(Path(root).resolve(strict=True)):
         raise ValueError("The requested local file is outside --file-root.")
     if not path.is_file():
         raise ValueError("The requested input must be a regular file.")
+    return path
+
+
+def _read_path(name, root, limit):
+    path = _checked_path(name, root)
     with path.open("rb") as stream:
         data = stream.read(limit + 1)
     if len(data) > limit:
@@ -41,6 +46,8 @@ def main(argv=None, *, stdin=None, stdout=None, stderr=None, engine=None) -> int
     parser.add_argument("--request", help="Explicit JSON/JSONL file; otherwise stdin")
     parser.add_argument("--jsonl", action="store_true")
     parser.add_argument("--content", help="Explicit saved capture file")
+    parser.add_argument("--write-file", nargs=3, action="append", metavar=("CHANGE", "PART", "PATH"),
+                        help="Stage a local file into one declared plan_write file part; repeat for additional parts")
     parser.add_argument("--output", help="Export bytes to a new explicit file; stdout still carries JSON metadata")
     parser.add_argument("--file-root", help="Optional allowed local input root")
     parser.add_argument("--database", help="Application-owned optional SQLite state path")
@@ -67,9 +74,10 @@ def main(argv=None, *, stdin=None, stdout=None, stderr=None, engine=None) -> int
             from .transports.mcp import run_stdio
             run_stdio(engine or build_engine(database=args.database), principal)
             return 0
-        content = _read_path(args.content, args.file_root, 16 * 1024 * 1024) if args.content else None
         if args.output and (args.operation != "export" or args.jsonl):
             raise ValueError("--output requires a single export operation.")
+        if args.write_file and (args.operation != "plan_write" or args.jsonl):
+            raise ValueError("--write-file requires one plan_write request.")
         owner = engine or build_engine(database=args.database)
         if args.request:
             raw = _read_path(args.request, args.file_root, 24 * 1024 * 1024).decode("utf-8-sig")
@@ -92,6 +100,41 @@ def main(argv=None, *, stdin=None, stdout=None, stderr=None, engine=None) -> int
                 request = json.loads(line or "{}")
                 if not isinstance(request, dict):
                     raise ValueError("Each request must be a JSON object.")
+                if args.write_file:
+                    from .models import Bounds
+                    from .write_files import stage_write_file
+                    bounds = Bounds(**request.get("bounds", {}))
+                    used = set()
+                    for change_key, part_name, filename in args.write_file:
+                        if (change_key, part_name) in used:
+                            raise ValueError("Each --write-file must target a different declared part.")
+                        used.add((change_key, part_name))
+                        matches = [part for change in request.get("changes", []) if change.get("key") == change_key
+                                   for part in change.get("files", []) if part.get("part") == part_name]
+                        if len(matches) != 1 or set(matches[0]) != {"part", "filename", "content_type"}:
+                            raise ValueError("--write-file requires one matching metadata-only file part.")
+                        path = _checked_path(filename, args.file_root)
+                        with path.open("rb") as source:
+                            matches[0]["file_handle"] = stage_write_file(
+                                owner, source, context=principal.context(), max_bytes=bounds.transfer_bytes)
+                content = None
+                if args.content:
+                    if "file_handle" in request or "content_base64" in request:
+                        raise ValueError("Supply --content or an inline/handle input, not both.")
+                    if args.operation in {"import_preview", "import_bundle"} and request.get("format") in {
+                            "json", "jsonl", "zip"}:
+                        from .interchange import stage_input
+                        from .models import Bounds
+                        from uuid import uuid4
+                        bounds = Bounds(**request.get("bounds", {}))
+                        path = _checked_path(args.content, args.file_root)
+                        with path.open("rb") as source:
+                            staged = stage_input(owner, uuid4().hex, source, filename=path.name,
+                                                 content_type="application/octet-stream",
+                                                 context=principal.context(), max_bytes=bounds.transfer_bytes)
+                        request = {**request, "file_handle": staged["file_handle"]}
+                    else:
+                        content = _read_path(args.content, args.file_root, 16 * 1024 * 1024)
                 if args.output:
                     request = {**request, "stream": True}
                 result = execute(owner, principal, args.operation, request, content=content)

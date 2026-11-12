@@ -1,0 +1,309 @@
+{
+  "observed_at": "2026-11-12T01:11:49.494833+00:00",
+  "policy": "bounded public read-only provider queries; no writes or credentials",
+  "results": [
+    {
+      "request": {
+        "native": true,
+        "source": {
+          "provider": "legistar",
+          "url": "https://webapi.legistar.com/v1/olympia",
+          "options": {
+            "page_size": 2
+          }
+        },
+        "query": {
+          "terms": [
+            "Council"
+          ],
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-30"
+        },
+        "bounds": {
+          "max_pages": 1,
+          "max_records": 2,
+          "parser_bytes": 1048576,
+          "deadline_seconds": 15
+        }
+      },
+      "status": "partial",
+      "hit_count": 1,
+      "coverage": {
+        "sources": [
+          {
+            "provider": "legistar",
+            "url": "https://webapi.legistar.com/v1/olympia",
+            "namespace": "//webapi.legistar.com/v1/olympia",
+            "body": null,
+            "input_format": "legistar-events-json",
+            "options": {
+              "page_size": 2
+            }
+          }
+        ],
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-30",
+        "date_inclusivity": "both",
+        "record_types": [],
+        "body": null,
+        "actual_dates": [],
+        "returned_records": 1,
+        "filtered_records": 0,
+        "pages": 1,
+        "failed_pages": [],
+        "failures": [
+          {
+            "identity": {
+              "provider": "legistar",
+              "namespace": "//webapi.legistar.com/v1/olympia",
+              "record_type": "meeting",
+              "external_id": "7138",
+              "parent": null,
+              "derivation": "provider_identifier",
+              "stability": "Provider-issued identifier within the configured namespace."
+            },
+            "reason": "unknown_date"
+          }
+        ],
+        "unknown_date_records": [],
+        "unknown_body_records": [],
+        "truncated": false,
+        "deadline_exceeded": false,
+        "checkpoint": null,
+        "unavailable_attachments": [],
+        "scope": "native EventBodyName metadata only; exact local term/phrase filtering",
+        "available_text": [
+          {
+            "identity": {
+              "provider": "legistar",
+              "namespace": "//webapi.legistar.com/v1/olympia",
+              "record_type": "meeting",
+              "external_id": "7138",
+              "parent": null,
+              "derivation": "provider_identifier",
+              "stability": "Provider-issued identifier within the configured namespace."
+            },
+            "capture_sha256": "00dc739ed993e73a19bdcfafe4f162db1eadcaadf41952e0e17fd3cdb25f3b73",
+            "status": "metadata_only",
+            "metadata_fields": [
+              "normalized.body"
+            ],
+            "supplied_fields": [],
+            "unavailable": [],
+            "full_source_searched": false
+          }
+        ],
+        "status": "completed",
+        "native_search": true,
+        "native_fields": [
+          "EventBodyName"
+        ],
+        "searched_records": 1,
+        "match_policy": "Unicode casefold, collapsed whitespace, word boundaries; AND terms/phrases",
+        "incomplete_text": true,
+        "searched_sources": [
+          {
+            "provider": "legistar",
+            "namespace": "//webapi.legistar.com/v1/olympia",
+            "url": "https://webapi.legistar.com/v1/olympia"
+          }
+        ],
+        "selected_providers": [],
+        "selected_namespaces": [],
+        "catalog_complete": false,
+        "agenda_document_text_searched": false
+      },
+      "errors": [
+        {
+          "code": "search_coverage",
+          "message": "Some requested evidence was not fully searchable.",
+          "retryable": false,
+          "source": null,
+          "details": {
+            "failure": {
+              "identity": {
+                "provider": "legistar",
+                "namespace": "//webapi.legistar.com/v1/olympia",
+                "record_type": "meeting",
+                "external_id": "7138",
+                "parent": null,
+                "derivation": "provider_identifier",
+                "stability": "Provider-issued identifier within the configured namespace."
+              },
+              "reason": "unknown_date"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "request": {
+        "native": true,
+        "source": {
+          "provider": "legistar",
+          "url": "https://webapi.legistar.com/v1/olympia",
+          "options": {
+            "page_size": 2
+          }
+        },
+        "query": {
+          "terms": [
+            "NoSuchQuorumRelayBody987654"
+          ],
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-30"
+        },
+        "bounds": {
+          "max_pages": 1,
+          "max_records": 2,
+          "parser_bytes": 1048576,
+          "deadline_seconds": 15
+        }
+      },
+      "status": "partial",
+      "hit_count": 0,
+      "coverage": {
+        "sources": [
+          {
+            "provider": "legistar",
+            "url": "https://webapi.legistar.com/v1/olympia",
+            "namespace": "//webapi.legistar.com/v1/olympia",
+            "body": null,
+            "input_format": "legistar-events-json",
+            "options": {
+              "page_size": 2
+            }
+          }
+        ],
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-30",
+        "date_inclusivity": "both",
+        "record_types": [],
+        "body": null,
+        "actual_dates": [],
+        "returned_records": 0,
+        "filtered_records": 0,
+        "pages": 1,
+        "failed_pages": [],
+        "failures": [
+          {
+            "source": {
+              "provider": "legistar",
+              "url": "https://webapi.legistar.com/v1/olympia",
+              "namespace": "//webapi.legistar.com/v1/olympia",
+              "body": null,
+              "input_format": "legistar-events-json",
+              "options": {
+                "page_size": 2
+              }
+            },
+            "reason": "no_available_capture"
+          }
+        ],
+        "unknown_date_records": [],
+        "unknown_body_records": [],
+        "truncated": false,
+        "deadline_exceeded": false,
+        "checkpoint": null,
+        "unavailable_attachments": [],
+        "scope": "native EventBodyName metadata only; exact local term/phrase filtering",
+        "available_text": [],
+        "status": "completed",
+        "native_search": true,
+        "native_fields": [
+          "EventBodyName"
+        ],
+        "searched_records": 0,
+        "match_policy": "Unicode casefold, collapsed whitespace, word boundaries; AND terms/phrases",
+        "searched_sources": [],
+        "selected_providers": [],
+        "selected_namespaces": [],
+        "catalog_complete": false,
+        "agenda_document_text_searched": false
+      },
+      "errors": [
+        {
+          "code": "search_coverage",
+          "message": "Some requested evidence was not fully searchable.",
+          "retryable": false,
+          "source": null,
+          "details": {
+            "failure": {
+              "source": {
+                "provider": "legistar",
+                "url": "https://webapi.legistar.com/v1/olympia",
+                "namespace": "//webapi.legistar.com/v1/olympia",
+                "body": null,
+                "input_format": "legistar-events-json",
+                "options": {
+                  "page_size": 2
+                }
+              },
+              "reason": "no_available_capture"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "request": {
+        "source": {
+          "provider": "tyler-meeting-manager",
+          "url": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/",
+          "input_format": "tyler-public-calendar-json",
+          "options": {
+            "calendar_api_base": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/tylermmcalendar46612prod/"
+          }
+        },
+        "bounds": {
+          "date_from": "2026-11-01",
+          "date_to": "2026-11-30",
+          "max_records": 100,
+          "max_pages": 1,
+          "parser_bytes": 1048576,
+          "deadline_seconds": 15
+        }
+      },
+      "status": "partial",
+      "record_count": 0,
+      "coverage": {
+        "sources": [
+          {
+            "provider": "tyler-meeting-manager",
+            "url": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/",
+            "namespace": "//ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com",
+            "body": null,
+            "input_format": "tyler-public-calendar-json",
+            "options": {
+              "calendar_api_base": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/tylermmcalendar46612prod/"
+            }
+          }
+        ],
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-30",
+        "date_inclusivity": "both",
+        "record_types": [],
+        "body": null,
+        "actual_dates": [],
+        "returned_records": 0,
+        "filtered_records": 0,
+        "pages": 1,
+        "failed_pages": [],
+        "failures": [],
+        "unknown_date_records": [],
+        "unknown_body_records": [],
+        "truncated": false,
+        "deadline_exceeded": false,
+        "checkpoint": null,
+        "unavailable_attachments": [],
+        "scope": "configured capture only; upstream catalog completeness is unverified",
+        "available_text": "metadata_and_supplied_text_only"
+      },
+      "errors": []
+    }
+  ],
+  "limits": [
+    "Legistar body metadata only; no agenda/document text claim.",
+    "Tyler empty response does not establish nonempty row schema, pagination or complete discovery."
+  ]
+}

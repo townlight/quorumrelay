@@ -15,10 +15,10 @@ from ..models import OperationContext, OperationResult, Source
 FORMATS = {provider: tuple(row["input_format"] for row in compat.source_formats()
                            if row["connector"] == provider)
            for provider in dict.fromkeys(row["connector"] for row in compat.source_formats())}
-ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json",),
+ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json"),
                       "granicus": ("granicus-listing-html",),
                       "peak": ("granicus-listing-html",),
-                      "wistia": ("wistia-api-media-json",),
+                      "wistia": ("wistia-api-media-json", "wistia-media-detail-json", "wistia-caption-json"),
                       "laserfiche-weblink": ("laserfiche-listing-json",)}
 
 
@@ -149,6 +149,8 @@ def validate_source(source: Source, context: OperationContext | None = None,
         allowed_options.add("folder_id")
     if source.provider == "laserfiche-weblink":
         allowed_options.add("max_folder_depth")
+    if source.provider == "tyler-meeting-manager":
+        allowed_options.add("calendar_api_base")
     if not isinstance(source.options, dict) or set(source.options) - allowed_options:
         raise ValueError("Source options contain unrecognized provider configuration; credentials belong in context.")
     return namespace

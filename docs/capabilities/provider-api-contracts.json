@@ -2854,6 +2854,2542 @@
           ]
         }
       }
+    },
+    {
+      "file": "api-evidence-47.md",
+      "source_url": "https://docs.wistia.com/reference/get_search.md",
+      "spec": {
+        "openapi": "3.1.1",
+        "info": {
+          "title": "Data API",
+          "description": "Wistia Data API",
+          "version": "2026.09.0"
+        },
+        "servers": [
+          {
+            "url": "https://api.wistia.com/modern"
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": [
+          {
+            "name": "Search"
+          }
+        ],
+        "paths": {
+          "/search": {
+            "get": {
+              "summary": "Search",
+              "x-speakeasy-group": "search",
+              "x-speakeasy-name-override": "search",
+              "description": "Searches across folders, subfolders, medias, channels, channel episodes, and webinars.\nAlso searches through video transcripts, so media results may include transcript matches with\ntimestamps when the query matches spoken content.\n\n## Requires api token with one of the following permissions\n```\nRead all data\n```\n\nTokens with the \"Act with a team member's permissions\" permission\n(`all:delegate_to_contact_permissions` scope) can also be used. Requests\nmade with such a token are authorized using the permissions of the\ncontact assigned to the token.\n\n[Expiring access tokens](https://docs.wistia.com/reference/post_expiring-token)\ncreated with authorizations cannot be used: search responds with a 403,\nwhatever the authorizations grant.\n",
+              "parameters": [
+                {
+                  "name": "q",
+                  "in": "query",
+                  "description": "The search query string",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  },
+                  "example": "screencast"
+                },
+                {
+                  "name": "tags[]",
+                  "in": "query",
+                  "description": "Filter results by one or more tag names. When multiple tags are provided, results matching any of the specified tags are returned (OR logic).",
+                  "required": false,
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "explode": true,
+                  "style": "form"
+                },
+                {
+                  "name": "resource_type[]",
+                  "in": "query",
+                  "description": "Filter results by one or more resource types.",
+                  "required": false,
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "media",
+                        "folder",
+                        "subfolder",
+                        "channel",
+                        "channel_episode",
+                        "webinar"
+                      ]
+                    }
+                  },
+                  "explode": true,
+                  "style": "form"
+                },
+                {
+                  "name": "custom_metadata",
+                  "in": "query",
+                  "description": "Filter media by custom metadata field value, keyed by field key:\n`custom_metadata[<field_key>]=<value>`. Only available on accounts with access to\ncustom metadata (other accounts receive a 403 when this parameter is passed).\nCustom metadata only exists on media, so results contain media only and\n`resource_type` must include `media`. Use an empty `q` to match all media.\n\nThe value shape depends on the field's type:\n- Select and text fields take a value\n  (`custom_metadata[region]=emea`) or an array of values matched as OR\n  (`custom_metadata[region][]=emea&custom_metadata[region][]=amer`). Select fields\n  match on option keys.\n- Boolean fields take `true` or `false`.\n- Number and time fields take an exact number (`custom_metadata[year]=2026`)\n  or a range object (`custom_metadata[budget][min]=100&custom_metadata[budget][max]=500`;\n  either bound may be omitted).\n- Date and datetime fields take a `YYYY-MM-DD` date matching that UTC day, or a\n  range object with ISO8601 bounds (`custom_metadata[shoot_date][after]=2026-01-01`,\n  `custom_metadata[shoot_date][before]=2026-02-01T00:00:00Z`). A bare-date bound\n  covers its whole UTC day: `after` starts at the day's beginning and `before`\n  runs through the day's end.\n- Any field type accepts a presence filter: `custom_metadata[region][exists]=false`\n  returns media missing the field entirely (useful for metadata coverage audits),\n  and `exists=true` returns media that have any value for it.\n\nUnknown or archived field keys return a 400, as do select option keys that don't\nexist on the field. The primary match set holds at most 100 media with no\npagination; a non-blank `q` can add up to 100 more transcript-only matches, and\nan empty-`q` audit returns at most 100. Narrow large audits (e.g. with\n`created_after`/`created_before`) to complete full coverage.\n",
+                  "required": false,
+                  "schema": {
+                    "type": "object",
+                    "unevaluatedProperties": false,
+                    "additionalProperties": {
+                      "unevaluatedProperties": false,
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "min": {
+                              "type": "string"
+                            },
+                            "max": {
+                              "type": "string"
+                            },
+                            "after": {
+                              "type": "string"
+                            },
+                            "before": {
+                              "type": "string"
+                            },
+                            "exists": {
+                              "type": "string",
+                              "enum": [
+                                "true",
+                                "false"
+                              ]
+                            }
+                          },
+                          "unevaluatedProperties": false
+                        }
+                      ]
+                    }
+                  },
+                  "style": "deepObject",
+                  "explode": true
+                },
+                {
+                  "name": "include",
+                  "in": "query",
+                  "description": "Pass `custom_metadata` to include each media result's custom metadata field values (same shape as the Get Custom Metadata Field Values endpoint). Only available on accounts with access to custom metadata (other accounts receive a 403 when this parameter is passed).",
+                  "required": false,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "custom_metadata"
+                    ]
+                  }
+                },
+                {
+                  "name": "created_after",
+                  "in": "query",
+                  "description": "Filter results created on or after this datetime. Must be a valid ISO8601 timestamp in UTC (ending with 'Z').",
+                  "required": false,
+                  "schema": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                },
+                {
+                  "name": "created_before",
+                  "in": "query",
+                  "description": "Filter results created on or before this datetime. Must be a valid ISO8601 timestamp in UTC (ending with 'Z').",
+                  "required": false,
+                  "schema": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                },
+                {
+                  "name": "X-Wistia-API-Version",
+                  "in": "header",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "default": "2026-09"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Search results",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "data": {
+                            "unevaluatedProperties": false,
+                            "type": "object",
+                            "properties": {
+                              "folders": {
+                                "type": "array",
+                                "items": {
+                                  "unevaluatedProperties": false,
+                                  "type": "object",
+                                  "description": "A folder (previously called a project) is a container in which to organize media into. It can be\nused to set permissions that apply to all the media in the folder as well as\norganizing media into subfolders (previously called media groups).\n",
+                                  "properties": {
+                                    "id": {
+                                      "description": "A unique numeric identifier for the folder within the system.",
+                                      "type": "integer",
+                                      "examples": [
+                                        22570
+                                      ]
+                                    },
+                                    "name": {
+                                      "description": "The folder’s display name.",
+                                      "type": "string",
+                                      "examples": [
+                                        "My Folder Title"
+                                      ]
+                                    },
+                                    "description": {
+                                      "description": "The folder’s description.",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "examples": [
+                                        "About My Folder"
+                                      ]
+                                    },
+                                    "media_count": {
+                                      "description": "The number of different medias that have been uploaded to the folder.",
+                                      "type": "integer",
+                                      "examples": [
+                                        2
+                                      ]
+                                    },
+                                    "medias": {
+                                      "description": "A link to where you can fetch the medias for this folder.",
+                                      "unevaluatedProperties": false,
+                                      "type": "object",
+                                      "properties": {
+                                        "url": {
+                                          "description": "A URL for fetching all child records of the parent record.",
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "created": {
+                                      "description": "The date that the folder was originally created.",
+                                      "type": "string",
+                                      "format": "date-time",
+                                      "examples": [
+                                        "2010-08-13T18:47:39+00:00"
+                                      ]
+                                    },
+                                    "updated": {
+                                      "description": "The date that the folder was last updated.",
+                                      "type": "string",
+                                      "format": "date-time",
+                                      "examples": [
+                                        "2010-08-19T21:47:00+00:00"
+                                      ]
+                                    },
+                                    "hashed_id": {
+                                      "description": "A private hashed id, uniquely identifying the folder within the system.",
+                                      "type": "string",
+                                      "examples": [
+                                        "4d23503f70"
+                                      ]
+                                    },
+                                    "public": {
+                                      "description": "A boolean indicating whether the folder is available for public (anonymous) viewing.",
+                                      "type": "boolean",
+                                      "examples": [
+                                        false
+                                      ]
+                                    },
+                                    "public_id": {
+                                      "description": "If the folder is public, this field contains a string representing the ID used for referencing the folder in public URLs.",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "examples": [
+                                        "4bD"
+                                      ]
+                                    },
+                                    "anonymous_can_upload": {
+                                      "type": "boolean",
+                                      "examples": [
+                                        false
+                                      ]
+                                    },
+                                    "anonymous_can_download": {
+                                      "type": "boolean",
+                                      "examples": [
+                                        false
+                                      ]
+                                    },
+                                    "kind": {
+                                      "description": "Indicates the folder's access scope, relative to the requesting user. One of:\n- `library`: a library the requester owns. Libraries can still be shared with specific contacts or contact groups; the only restriction is that they cannot be shared with the whole account.\n- `shared`: a folder the requester has access to via a Contact or ContactGroup sharing — this includes both shared folders and another contact's library that the requester has been granted access to.\n- `account`: a folder shared with the whole account (everyone in the company can see it).\n",
+                                      "type": "string",
+                                      "enum": [
+                                        "library",
+                                        "shared",
+                                        "account"
+                                      ],
+                                      "examples": [
+                                        "shared"
+                                      ]
+                                    },
+                                    "personal_library": {
+                                      "description": "Whether this folder is someone's personal library (\"My Library\"). Unlike `kind`, this is a property of the folder itself and does not depend on who is requesting — it is `true` for a personal library even when that library has been shared with you (where `kind` would read `shared`). Use this, not `kind`, to tell whether a folder is a personal library.\n",
+                                      "type": "boolean",
+                                      "examples": [
+                                        false
+                                      ]
+                                    },
+                                    "cursor": {
+                                      "description": "A cursor for stable pagination based on current `sort_by` order. You can pass this to `cursor[before]` or `cursor[after]` as a parameter to fetch the records before or after this record in the same sort order. This is only populated if records were fetched with `cursor[enabled]`, or `cursor[before]` or `cursor[after]`.",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "name",
+                                    "media_count",
+                                    "created",
+                                    "updated",
+                                    "hashed_id",
+                                    "public",
+                                    "public_id",
+                                    "kind",
+                                    "personal_library",
+                                    "medias"
+                                  ]
+                                }
+                              },
+                              "subfolders": {
+                                "type": "array",
+                                "items": {
+                                  "unevaluatedProperties": false,
+                                  "allOf": [
+                                    {
+                                      "type": "object",
+                                      "description": "A subfolder within a folder that contains media.",
+                                      "properties": {
+                                        "hashed_id": {
+                                          "description": "A unique alphanumeric identifier for this subfolder.",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
+                                          "examples": [
+                                            "abc123def4"
+                                          ]
+                                        },
+                                        "name": {
+                                          "description": "The display name of the subfolder.",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
+                                          "examples": [
+                                            "Marketing Videos"
+                                          ]
+                                        },
+                                        "description": {
+                                          "description": "A description for the subfolder.",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
+                                          "examples": [
+                                            "Collection of all marketing and promotional videos"
+                                          ]
+                                        },
+                                        "position": {
+                                          "description": "The position of this subfolder within its folder, used for ordering.",
+                                          "type": [
+                                            "integer",
+                                            "null"
+                                          ],
+                                          "examples": [
+                                            1
+                                          ]
+                                        },
+                                        "created": {
+                                          "description": "The date when the subfolder was created.",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
+                                          "format": "date-time",
+                                          "examples": [
+                                            "2024-01-15T10:30:00+00:00"
+                                          ]
+                                        },
+                                        "updated": {
+                                          "description": "The date when the subfolder was last modified.",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
+                                          "format": "date-time",
+                                          "examples": [
+                                            "2024-01-20T14:45:00+00:00"
+                                          ]
+                                        },
+                                        "cursor": {
+                                          "description": "A cursor for stable pagination based on current `sort_by` order. You can pass this to `cursor[before]` or `cursor[after]` as a parameter to fetch the records before or after this record in the same sort order. This is only populated if records were fetched with `cursor[enabled]`, or `cursor[before]` or `cursor[after]`.",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "hashed_id",
+                                        "position",
+                                        "created",
+                                        "updated"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "medias": {
+                                "type": "array",
+                                "items": {
+                                  "unevaluatedProperties": false,
+                                  "allOf": [
+                                    {
+                                      "type": "object",
+                                      "description": "A media generally represents a video or an audio which can be embedded into your website.\n\nCDN-backed medias are accessible using this url structure: https://fast.wistia.com/embed/medias/{hashed_id}.m3u8.\nFor more information, see https://docs.wistia.com/docs/asset-urls#getting-hls-assets.\n",
+                                      "properties": {
+                                        "id": {
+                                          "description": "A unique numeric identifier for the media within the system.",
+                                          "type": "integer"
+                                        },
+                                        "name": {
+                                          "description": "The display name of the media.",
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "description": "A string representing what type of media this is.",
+                                          "type": "string",
+                                          "enum": [
+                                            "Video",
+                                            "Audio",
+                                            "Image",
+                                            "PdfDocument",
+                                            "MicrosoftOfficeDocument",
+                                            "Swf",
+                                            "UnknownType"
+                                          ]
+                                        },
+                                        "archived": {
+                                          "description": "Whether or not the media is archived, either true or false.",
+                                          "type": "boolean"
+                                        },
+                                        "created": {
+                                          "description": "The date when the media was originally uploaded.",
+                                          "type": "string",
+                                          "format": "date-time"
+                                        },
+                                        "updated": {
+                                          "description": "The date when the media was last changed.",
+                                          "type": "string",
+                                          "format": "date-time"
+                                        },
+                                        "duration": {
+                                          "unevaluatedProperties": false,
+                                          "description": "Specifies the length (in seconds) for audio and video files. Specifies number of pages in the document. Omitted for other types of media.",
+                                          "oneOf": [
+                                            {
+                                              "type": "number"
+                                            },
+                                            {
+                                              "type": "null"
+                                            }
+                                          ]
+                                        },
+                                        "embedCode": {
+                                          "description": "DEPRECATED: If you want to programmatically embed videos, follow the construct an embed code guide.\n",
+                                          "type": "string",
+                                          "deprecated": true
+                                        },
+                                        "hashed_id": {
+                                          "description": "A unique alphanumeric identifier for this media.",
+                                          "type": "string"
+                                        },
+                                        "description": {
+                                          "description": "A description for the media which usually appears near the top of the sidebar on the media's page.",
+                                          "type": "string"
+                                        },
+                                        "progress": {
+                                          "description": "A floating point value between 0 and 1 that indicates the progress of the processing for this file.",
+                                          "type": "number",
+                                          "maximum": 1,
+                                          "minimum": 0
+                                        },
+                                        "status": {
+                                          "description": "Post upload processing status. - `queued`: the file is waiting in the queue to be processed. - `processing`: the file is actively being processed. - `ready`: the file has been fully processed and is ready for embedding and viewing. - `failed`: the file was unable to be processed (usually a format or size error).\n",
+                                          "type": "string",
+                                          "enum": [
+                                            "queued",
+                                            "processing",
+                                            "ready",
+                                            "failed"
+                                          ]
+                                        },
+                                        "section": {
+                                          "unevaluatedProperties": false,
+                                          "description": "The title of the section in which the media appears. This attribute is omitted if the media is not in a section (default).",
+                                          "oneOf": [
+                                            {
+                                              "type": "string"
+                                            },
+                                            {
+                                              "type": "null"
+                                            }
+                                          ]
+                                        },
+                                        "thumbnail": {
+                                          "unevaluatedProperties": false,
+                                          "type": "object",
+                                          "properties": {
+                                            "url": {
+                                              "type": "string"
+                                            },
+                                            "width": {
+                                              "type": "integer"
+                                            },
+                                            "height": {
+                                              "type": "integer"
+                                            }
+                                          }
+                                        },
+                                        "protected": {
+                                          "description": "Whether the media is protected (e.g. requires a password or other authentication to view). Null if the media is not protected.",
+                                          "type": [
+                                            "boolean",
+                                            "null"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "folder_hashed_id": {
+                                          "description": "The hashed ID of the folder this media belongs to",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
+                                          "examples": [
+                                            "4d23503f70"
+                                          ]
+                                        },
+                                        "transcript_matches": {
+                                          "description": "Array of transcript matches with timestamps",
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "unevaluatedProperties": false,
+                                            "properties": {
+                                              "text": {
+                                                "type": "string",
+                                                "description": "The matched transcript text with context",
+                                                "example": "today we'll talk about product demo"
+                                              },
+                                              "start_time_seconds": {
+                                                "type": "number",
+                                                "description": "Start time of the match in seconds",
+                                                "example": 3
+                                              },
+                                              "start_time_formatted": {
+                                                "type": "string",
+                                                "description": "Human-readable start time (e.g., \"0:03\" or \"1:23:45\")",
+                                                "example": "0:03"
+                                              },
+                                              "thumbnail_url": {
+                                                "type": [
+                                                  "string",
+                                                  "null"
+                                                ],
+                                                "description": "Thumbnail URL at the match timestamp",
+                                                "example": "https://example.com/thumb.jpg?video_still_time=3.0"
+                                              }
+                                            },
+                                            "required": [
+                                              "text",
+                                              "start_time_seconds",
+                                              "start_time_formatted",
+                                              "thumbnail_url"
+                                            ]
+                                          }
+                                        },
+                                        "custom_metadata_field_values": {
+                                          "description": "The media's custom metadata field values, present only when the request passed `include=custom_metadata`. Same shape as the Get Custom Metadata Field Values endpoint.",
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "unevaluatedProperties": false,
+                                            "properties": {
+                                              "key": {
+                                                "description": "The field definition's immutable identifier. Use this (not the label) to address the field this value belongs to.",
+                                                "type": "string",
+                                                "examples": [
+                                                  "client"
+                                                ]
+                                              },
+                                              "field_type": {
+                                                "description": "The field definition's data type, which determines the shape of `value`.",
+                                                "type": "string",
+                                                "enum": [
+                                                  "text",
+                                                  "number",
+                                                  "date",
+                                                  "boolean",
+                                                  "single_select",
+                                                  "short_text",
+                                                  "url",
+                                                  "email",
+                                                  "money",
+                                                  "time",
+                                                  "datetime",
+                                                  "multi_select",
+                                                  "contact_ref",
+                                                  "contact_multi_ref"
+                                                ],
+                                                "examples": [
+                                                  "single_select"
+                                                ]
+                                              },
+                                              "value": {
+                                                "description": "The resolved, typed value for this field on this media. The type follows `field_type`:\na string for text-like types (text, short_text, url, email, money, time, datetime),\na number for `number`, an ISO 8601 date string for `date`, a boolean for `boolean`,\nthe selected option's key (a string) for `single_select`, an array of the\nselected options' keys for `multi_select`, a contact reference object\n`{\"type\": \"contact\" | \"contact_group\", \"id\": \"<hashed_id>\"}` for `contact_ref`,\nand an array of contact reference objects for `contact_multi_ref`. References to\ndeleted contacts or contact groups are omitted. Null when unset.\n",
+                                                "type": [
+                                                  "string",
+                                                  "number",
+                                                  "boolean",
+                                                  "array",
+                                                  "object",
+                                                  "null"
+                                                ],
+                                                "unevaluatedProperties": false,
+                                                "properties": {
+                                                  "type": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "contact",
+                                                      "contact_group"
+                                                    ]
+                                                  },
+                                                  "id": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "items": {
+                                                  "unevaluatedProperties": false,
+                                                  "oneOf": [
+                                                    {
+                                                      "type": "string"
+                                                    },
+                                                    {
+                                                      "type": "object",
+                                                      "unevaluatedProperties": false,
+                                                      "properties": {
+                                                        "type": {
+                                                          "type": "string",
+                                                          "enum": [
+                                                            "contact",
+                                                            "contact_group"
+                                                          ]
+                                                        },
+                                                        "id": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                },
+                                                "examples": [
+                                                  "high"
+                                                ]
+                                              },
+                                              "updated_at": {
+                                                "description": "The date that this value was last updated.",
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "examples": [
+                                                  "2026-07-17T21:47:00Z"
+                                                ]
+                                              },
+                                              "last_write": {
+                                                "description": "The most recent recorded write to this value on this media, with who made it and through which surface. Null when no write has been recorded; system-initiated writes (e.g. default-value backfills) are not recorded.\n",
+                                                "type": [
+                                                  "object",
+                                                  "null"
+                                                ],
+                                                "unevaluatedProperties": false,
+                                                "required": [
+                                                  "at",
+                                                  "source",
+                                                  "actor"
+                                                ],
+                                                "properties": {
+                                                  "at": {
+                                                    "description": "When the write happened.",
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "examples": [
+                                                      "2026-08-25T17:55:00Z"
+                                                    ]
+                                                  },
+                                                  "source": {
+                                                    "description": "The surface the write came through.",
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "ui",
+                                                      "api",
+                                                      "mcp"
+                                                    ],
+                                                    "examples": [
+                                                      "api"
+                                                    ]
+                                                  },
+                                                  "actor": {
+                                                    "description": "The contact who made the write, or null when the write had no acting contact.",
+                                                    "type": [
+                                                      "object",
+                                                      "null"
+                                                    ],
+                                                    "unevaluatedProperties": false,
+                                                    "required": [
+                                                      "type",
+                                                      "id",
+                                                      "name"
+                                                    ],
+                                                    "properties": {
+                                                      "type": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                          "contact"
+                                                        ]
+                                                      },
+                                                      "id": {
+                                                        "description": "The contact's hashed id.",
+                                                        "type": "string",
+                                                        "examples": [
+                                                          "abc123de"
+                                                        ]
+                                                      },
+                                                      "name": {
+                                                        "description": "The contact's display name.",
+                                                        "type": "string",
+                                                        "examples": [
+                                                          "Jane Doe"
+                                                        ]
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "folder_hashed_id",
+                                        "transcript_matches"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "channels": {
+                                "type": "array",
+                                "items": {
+                                  "unevaluatedProperties": false,
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "description": "A unique numeric identifier for the channel within the system.",
+                                      "type": "integer"
+                                    },
+                                    "hashed_id": {
+                                      "description": "A unique alphanumeric identifier for this channel.",
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "description": "The display name for the channel.",
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "description": "The channel's description.",
+                                      "type": "string"
+                                    },
+                                    "media_count": {
+                                      "description": "The number of medias in the channel.",
+                                      "type": "integer"
+                                    },
+                                    "created": {
+                                      "description": "The date when the channel was originally created.",
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "updated": {
+                                      "description": "The date when the channel was last updated.",
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "live_stream_event_count": {
+                                      "description": "The number of live stream events in the channel.",
+                                      "type": "integer"
+                                    },
+                                    "auto_publish_enabled": {
+                                      "description": "Whether episodes are automatically published when added to the channel.",
+                                      "type": [
+                                        "boolean",
+                                        "null"
+                                      ]
+                                    },
+                                    "podcast_enabled": {
+                                      "description": "Whether podcasting is enabled for the channel.",
+                                      "type": [
+                                        "boolean",
+                                        "null"
+                                      ]
+                                    },
+                                    "custom_url": {
+                                      "description": "The custom URL used when embedding the channel on your own site. Null if no custom URL is set.",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "hashed_id",
+                                    "name",
+                                    "description",
+                                    "media_count",
+                                    "created",
+                                    "updated"
+                                  ]
+                                }
+                              },
+                              "channel_episodes": {
+                                "type": "array",
+                                "items": {
+                                  "unevaluatedProperties": false,
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "description": "A unique numeric identifier for the channel episode within the system.",
+                                      "type": "integer"
+                                    },
+                                    "hashed_id": {
+                                      "description": "A unique alphanumeric identifier for this channel episode.",
+                                      "type": "string"
+                                    },
+                                    "title": {
+                                      "description": "The title of the channel episode.",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ]
+                                    },
+                                    "description": {
+                                      "description": "The episode notes for the channel episode.",
+                                      "type": "string"
+                                    },
+                                    "summary": {
+                                      "description": "The description of the channel episode.",
+                                      "type": "string"
+                                    },
+                                    "channel_hashed_id": {
+                                      "description": "The hashed ID of the channel this episode belongs to.",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ]
+                                    },
+                                    "media_hashed_id": {
+                                      "description": "The hashed ID of the media associated with this channel episode.",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ]
+                                    },
+                                    "live_stream_event_hashed_id": {
+                                      "description": "The hashed ID of the live stream event associated with this channel episode, if any.",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ]
+                                    },
+                                    "published": {
+                                      "description": "Whether the channel episode is published.",
+                                      "type": "boolean"
+                                    },
+                                    "created": {
+                                      "description": "The date when the channel episode was originally created.",
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "updated": {
+                                      "description": "The date when the channel episode was last updated.",
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "publish_at": {
+                                      "description": "The scheduled publish date (only present if scheduled).",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "format": "date-time"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "hashed_id",
+                                    "description",
+                                    "summary",
+                                    "channel_hashed_id",
+                                    "media_hashed_id",
+                                    "published",
+                                    "created",
+                                    "updated"
+                                  ]
+                                }
+                              },
+                              "webinars": {
+                                "type": "array",
+                                "items": {
+                                  "unevaluatedProperties": false,
+                                  "type": "object",
+                                  "description": "A webinar is an event which allows you to stream a video\nto multiple participants. See our [Webinars Guide](https://support.wistia.com/en/articles/8288501-getting-started-with-webinars)\nfor more info.\n",
+                                  "properties": {
+                                    "id": {
+                                      "description": "The hashed ID of the webinar",
+                                      "type": "string",
+                                      "examples": [
+                                        "abc123def456"
+                                      ]
+                                    },
+                                    "hashed_id": {
+                                      "description": "The hashed ID of the webinar. Identical to `id`, named to match every other Wistia resource.",
+                                      "type": "string",
+                                      "examples": [
+                                        "abc123def456"
+                                      ]
+                                    },
+                                    "title": {
+                                      "description": "The title of the webinar",
+                                      "type": "string",
+                                      "examples": [
+                                        "Wellness Session: Coping with Outie Memories"
+                                      ]
+                                    },
+                                    "description": {
+                                      "description": "The description of the webinar",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "examples": [
+                                        "A comprehensive session on managing work-life balance"
+                                      ]
+                                    },
+                                    "scheduled_for": {
+                                      "description": "The scheduled start time in W3C format with timezone",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "format": "date-time",
+                                      "examples": [
+                                        "2024-03-20T15:30:00-05:00"
+                                      ]
+                                    },
+                                    "event_duration": {
+                                      "description": "Duration of the webinar in minutes",
+                                      "type": [
+                                        "integer",
+                                        "null"
+                                      ],
+                                      "examples": [
+                                        60
+                                      ]
+                                    },
+                                    "time_zone": {
+                                      "description": "The IANA time zone identifier the webinar is scheduled in",
+                                      "type": "string",
+                                      "examples": [
+                                        "America/New_York"
+                                      ]
+                                    },
+                                    "lifecycle_status": {
+                                      "description": "The current lifecycle status of the webinar. This is a read-only, system-managed field that Wistia updates as the event moves through its lifecycle; it cannot be set or changed via the API.",
+                                      "type": "string",
+                                      "readOnly": true,
+                                      "enum": [
+                                        "pending",
+                                        "ready",
+                                        "starting",
+                                        "started",
+                                        "ended",
+                                        "vod_ready",
+                                        "failed"
+                                      ],
+                                      "examples": [
+                                        "ready"
+                                      ]
+                                    },
+                                    "registration_status": {
+                                      "description": "Registration status of the event",
+                                      "type": "string",
+                                      "examples": [
+                                        "published"
+                                      ]
+                                    },
+                                    "created_at": {
+                                      "description": "When the event was created (UTC)",
+                                      "type": "string",
+                                      "format": "date-time",
+                                      "examples": [
+                                        "2024-03-15T10:30:00Z"
+                                      ]
+                                    },
+                                    "updated_at": {
+                                      "description": "When the event was last updated (UTC)",
+                                      "type": "string",
+                                      "format": "date-time",
+                                      "examples": [
+                                        "2024-03-15T10:30:00Z"
+                                      ]
+                                    },
+                                    "audience_link": {
+                                      "description": "Link for the audience to join the event",
+                                      "type": "string",
+                                      "examples": [
+                                        "https://lumon-industries.wistia.com/live/events/abc123def456"
+                                      ]
+                                    },
+                                    "host_link": {
+                                      "description": "Link for the host to manage the event",
+                                      "type": "string",
+                                      "examples": [
+                                        "https://lumon-industries.wistia.com/live/events/abc123def456/onair"
+                                      ]
+                                    },
+                                    "panelist_link": {
+                                      "description": "Link for panelists to join the event",
+                                      "type": "string",
+                                      "examples": [
+                                        "https://lumon-industries.wistia.com/live/events/abc123def456/onair/a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                      ]
+                                    },
+                                    "thumbnail_url": {
+                                      "description": "URL of the webinar's custom thumbnail image, or null if no custom thumbnail has been set",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "examples": [
+                                        "https://embed-ssl.wistia.com/deliveries/abc123def456.jpg"
+                                      ]
+                                    },
+                                    "folder": {
+                                      "description": "The folder (project) this webinar belongs to",
+                                      "unevaluatedProperties": false,
+                                      "oneOf": [
+                                        {
+                                          "unevaluatedProperties": false,
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "description": "A unique alphanumeric identifier for the record.",
+                                              "type": "string"
+                                            },
+                                            "index_url": {
+                                              "description": "A URL for fetching all the records of the given record type. You can pass hashed_ids as a param with multiple values\nto do a batch fetch for this records type.\n",
+                                              "type": "string"
+                                            },
+                                            "url": {
+                                              "description": "A URL that can be used to fetch this record.",
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "index_url",
+                                            "url"
+                                          ]
+                                        },
+                                        {
+                                          "type": "null"
+                                        }
+                                      ]
+                                    },
+                                    "cursor": {
+                                      "description": "A cursor for stable pagination based on current `sort_by` order. You can pass this to `cursor[before]` or `cursor[after]` as a parameter to fetch the records before or after this record in the same sort order. This is only populated if records were fetched with `cursor[enabled]`, or `cursor[before]` or `cursor[after]`.",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "hashed_id",
+                                    "title",
+                                    "time_zone",
+                                    "lifecycle_status",
+                                    "registration_status",
+                                    "created_at",
+                                    "updated_at",
+                                    "audience_link",
+                                    "host_link",
+                                    "panelist_link"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "folders",
+                              "subfolders",
+                              "medias",
+                              "channels",
+                              "channel_episodes",
+                              "webinars"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "data"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Bad request",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "description": "Error message detailing the reason for the bad request.",
+                            "type": "string",
+                            "examples": [
+                              "Bad request"
+                            ]
+                          },
+                          "errors": {
+                            "description": "Array of error messages detailing the reasons for the bad request.",
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "Unauthorized, invalid or missing token",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "description": "A machine-readable identifier for the specific authorization failure.",
+                            "type": "string",
+                            "enum": [
+                              "unauthorized_credentials",
+                              "account_inactive",
+                              "unauthorized_scope",
+                              "unauthorized_params"
+                            ]
+                          },
+                          "error": {
+                            "type": "string",
+                            "examples": [
+                              "Invalid credentials."
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "403": {
+                  "description": "Forbidden, token is valid but account does not have access to feature",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "examples": [
+                              "Webinars are not available on your current plan"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "Internal server error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "examples": [
+                              "Internal server error"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "tags": [
+                "Search"
+              ],
+              "x-readme": {
+                "code-samples": [
+                  {
+                    "name": "Typescript (SDK)",
+                    "language": "javascript",
+                    "code": "import { Wistia } from \"@wistia/wistia-api-client\";\n\nconst wistia = new Wistia({\n  bearerAuth: process.env[\"WISTIA_BEARER_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await wistia.search.search({\n    q: \"screencast\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "components": {
+          "securitySchemes": {
+            "BearerAuth": {
+              "type": "http",
+              "scheme": "bearer"
+            }
+          }
+        },
+        "x-readme": {
+          "samples-languages": [
+            "javascript",
+            "shell",
+            "node",
+            "python",
+            "ruby"
+          ]
+        }
+      }
+    },
+    {
+      "file": "api-evidence-48.md",
+      "source_url": "https://docs.wistia.com/reference/get_medias-mediahashedid.md",
+      "spec": {
+        "openapi": "3.1.1",
+        "info": {
+          "title": "Data API",
+          "description": "Wistia Data API",
+          "version": "2026.09.0"
+        },
+        "servers": [
+          {
+            "url": "https://api.wistia.com/modern"
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": [
+          {
+            "name": "Media"
+          }
+        ],
+        "paths": {
+          "/medias/{mediaHashedId}": {
+            "get": {
+              "summary": "Show Media",
+              "x-speakeasy-group": "media",
+              "x-speakeasy-name-override": "get",
+              "description": "Fetches a single media by its hashed id.\n\n## Requires api token with one of the following permissions\n```\nRead all folder and media data\n```\n\nTokens with the \"Act with a team member's permissions\" permission\n(`all:delegate_to_contact_permissions` scope) can also be used. Requests\nmade with such a token are authorized using the permissions of the\ncontact assigned to the token.\n\nAn [expiring access token](https://docs.wistia.com/reference/post_expiring-token)\ncreated with the `all:delegate_to_contact_permissions` scope and an\nauthorization for this media can also be used; any permission granted on a\nmedia allows showing it.\n",
+              "parameters": [
+                {
+                  "name": "mediaHashedId",
+                  "in": "path",
+                  "description": "The hashed ID of the media.",
+                  "required": true,
+                  "schema": {
+                    "description": "Hashed ID of the media (e.g., \"4d23503f70\")",
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "description_format",
+                  "in": "query",
+                  "description": "Format for media descriptions",
+                  "required": false,
+                  "schema": {
+                    "type": "string",
+                    "examples": [
+                      "markdown"
+                    ],
+                    "const": "markdown"
+                  }
+                },
+                {
+                  "name": "include",
+                  "in": "query",
+                  "description": "Set to `speakers` to include active transcript speaker assignments used for diarization. Webinar hosts and panelists are not included.",
+                  "required": false,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "speakers"
+                    ]
+                  }
+                },
+                {
+                  "name": "X-Wistia-API-Version",
+                  "in": "header",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "default": "2026-09"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "description": "A media generally represents a video or an audio which can be embedded into your website.\n\nCDN-backed medias are accessible using this url structure: https://fast.wistia.com/embed/medias/{hashed_id}.m3u8.\nFor more information, see https://docs.wistia.com/docs/asset-urls#getting-hls-assets.\n",
+                            "properties": {
+                              "id": {
+                                "description": "A unique numeric identifier for the media within the system.",
+                                "type": "integer"
+                              },
+                              "name": {
+                                "description": "The display name of the media.",
+                                "type": "string"
+                              },
+                              "type": {
+                                "description": "A string representing what type of media this is.",
+                                "type": "string",
+                                "enum": [
+                                  "Video",
+                                  "Audio",
+                                  "Image",
+                                  "PdfDocument",
+                                  "MicrosoftOfficeDocument",
+                                  "Swf",
+                                  "UnknownType"
+                                ]
+                              },
+                              "archived": {
+                                "description": "Whether or not the media is archived, either true or false.",
+                                "type": "boolean"
+                              },
+                              "created": {
+                                "description": "The date when the media was originally uploaded.",
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "updated": {
+                                "description": "The date when the media was last changed.",
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "duration": {
+                                "unevaluatedProperties": false,
+                                "description": "Specifies the length (in seconds) for audio and video files. Specifies number of pages in the document. Omitted for other types of media.",
+                                "oneOf": [
+                                  {
+                                    "type": "number"
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              },
+                              "embedCode": {
+                                "description": "DEPRECATED: If you want to programmatically embed videos, follow the construct an embed code guide.\n",
+                                "type": "string",
+                                "deprecated": true
+                              },
+                              "hashed_id": {
+                                "description": "A unique alphanumeric identifier for this media.",
+                                "type": "string"
+                              },
+                              "description": {
+                                "description": "A description for the media which usually appears near the top of the sidebar on the media's page.",
+                                "type": "string"
+                              },
+                              "progress": {
+                                "description": "A floating point value between 0 and 1 that indicates the progress of the processing for this file.",
+                                "type": "number",
+                                "maximum": 1,
+                                "minimum": 0
+                              },
+                              "status": {
+                                "description": "Post upload processing status. - `queued`: the file is waiting in the queue to be processed. - `processing`: the file is actively being processed. - `ready`: the file has been fully processed and is ready for embedding and viewing. - `failed`: the file was unable to be processed (usually a format or size error).\n",
+                                "type": "string",
+                                "enum": [
+                                  "queued",
+                                  "processing",
+                                  "ready",
+                                  "failed"
+                                ]
+                              },
+                              "section": {
+                                "unevaluatedProperties": false,
+                                "description": "The title of the section in which the media appears. This attribute is omitted if the media is not in a section (default).",
+                                "oneOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              },
+                              "thumbnail": {
+                                "unevaluatedProperties": false,
+                                "type": "object",
+                                "properties": {
+                                  "url": {
+                                    "type": "string"
+                                  },
+                                  "width": {
+                                    "type": "integer"
+                                  },
+                                  "height": {
+                                    "type": "integer"
+                                  }
+                                }
+                              },
+                              "protected": {
+                                "description": "Whether the media is protected (e.g. requires a password or other authentication to view). Null if the media is not protected.",
+                                "type": [
+                                  "boolean",
+                                  "null"
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "folder": {
+                                "unevaluatedProperties": false,
+                                "oneOf": [
+                                  {
+                                    "unevaluatedProperties": false,
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "description": "A unique numeric identifier for the folder within the system.",
+                                        "type": "integer",
+                                        "examples": [
+                                          22570
+                                        ]
+                                      },
+                                      "name": {
+                                        "description": "The folder’s display name.",
+                                        "type": "string",
+                                        "examples": [
+                                          "My Folder Title"
+                                        ]
+                                      },
+                                      "hashed_id": {
+                                        "description": "A private hashed id, uniquely identifying the folder within the system.",
+                                        "type": "string",
+                                        "examples": [
+                                          "4d23503f70"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              }
+                            },
+                            "required": [
+                              "folder"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "assets": {
+                                "description": "An array of the assets available for this media.",
+                                "type": "array",
+                                "items": {
+                                  "unevaluatedProperties": false,
+                                  "type": "object",
+                                  "properties": {
+                                    "url": {
+                                      "description": "A direct-access URL to the content of the asset.",
+                                      "type": "string"
+                                    },
+                                    "width": {
+                                      "unevaluatedProperties": false,
+                                      "description": "The width of this specific asset, if applicable.",
+                                      "oneOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "null"
+                                        }
+                                      ]
+                                    },
+                                    "height": {
+                                      "unevaluatedProperties": false,
+                                      "description": "The height of this specific asset, if applicable.",
+                                      "oneOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "null"
+                                        }
+                                      ]
+                                    },
+                                    "file_size": {
+                                      "unevaluatedProperties": false,
+                                      "description": "The size of the asset file that’s referenced by url, measured in bytes.",
+                                      "oneOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "null"
+                                        }
+                                      ]
+                                    },
+                                    "content_type": {
+                                      "unevaluatedProperties": false,
+                                      "description": "The asset’s content type.",
+                                      "oneOf": [
+                                        {
+                                          "type": "string"
+                                        },
+                                        {
+                                          "type": "null"
+                                        }
+                                      ]
+                                    },
+                                    "type": {
+                                      "description": "The internal type of the asset, describing how the asset should be used. Values can include OriginalFile, FlashVideoFile, MdFlashVideoFile, HdFlashVideoFile, Mp4VideoFile, MdMp4VideoFile, HdMp4VideoFile, IPhoneVideoFile, StillImageFile, SwfFile, Mp3AudioFile, and LargeImageFile.\n",
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "subfolder": {
+                                "unevaluatedProperties": false,
+                                "description": "The subfolder (media group) in which the media appears. Null if the media is not in a subfolder.",
+                                "allOf": [
+                                  {
+                                    "type": "object",
+                                    "description": "A subfolder within a folder that contains media.",
+                                    "properties": {
+                                      "hashed_id": {
+                                        "description": "A unique alphanumeric identifier for this subfolder.",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
+                                        "examples": [
+                                          "abc123def4"
+                                        ]
+                                      },
+                                      "name": {
+                                        "description": "The display name of the subfolder.",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
+                                        "examples": [
+                                          "Marketing Videos"
+                                        ]
+                                      },
+                                      "description": {
+                                        "description": "A description for the subfolder.",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
+                                        "examples": [
+                                          "Collection of all marketing and promotional videos"
+                                        ]
+                                      },
+                                      "position": {
+                                        "description": "The position of this subfolder within its folder, used for ordering.",
+                                        "type": [
+                                          "integer",
+                                          "null"
+                                        ],
+                                        "examples": [
+                                          1
+                                        ]
+                                      },
+                                      "created": {
+                                        "description": "The date when the subfolder was created.",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
+                                        "format": "date-time",
+                                        "examples": [
+                                          "2024-01-15T10:30:00+00:00"
+                                        ]
+                                      },
+                                      "updated": {
+                                        "description": "The date when the subfolder was last modified.",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
+                                        "format": "date-time",
+                                        "examples": [
+                                          "2024-01-20T14:45:00+00:00"
+                                        ]
+                                      },
+                                      "cursor": {
+                                        "description": "A cursor for stable pagination based on current `sort_by` order. You can pass this to `cursor[before]` or `cursor[after]` as a parameter to fetch the records before or after this record in the same sort order. This is only populated if records were fetched with `cursor[enabled]`, or `cursor[before]` or `cursor[after]`.",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "hashed_id",
+                                      "position",
+                                      "created",
+                                      "updated"
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "tags": {
+                                "description": "Tags associated with this media.",
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "unevaluatedProperties": false,
+                                  "properties": {
+                                    "name": {
+                                      "description": "The display name of the tag.",
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "speakers": {
+                                "description": "Active transcript speaker assignments used for diarization. Webinar hosts and panelists are not included. Present when `include=speakers` is requested.",
+                                "type": "array",
+                                "items": {
+                                  "unevaluatedProperties": false,
+                                  "type": "object",
+                                  "properties": {
+                                    "media_speaker_id": {
+                                      "description": "The unique identifier for this transcript speaker assignment on the media.",
+                                      "type": "string"
+                                    },
+                                    "speaker_profile_id": {
+                                      "description": "The reusable account speaker profile assigned to the transcript speaker.",
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "description": "The assigned speaker profile's display name.",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "media_speaker_id",
+                                    "speaker_profile_id",
+                                    "name"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "Unauthorized, invalid or missing token",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "description": "A machine-readable identifier for the specific authorization failure.",
+                            "type": "string",
+                            "enum": [
+                              "unauthorized_credentials",
+                              "account_inactive",
+                              "unauthorized_scope",
+                              "unauthorized_params"
+                            ]
+                          },
+                          "error": {
+                            "type": "string",
+                            "examples": [
+                              "Invalid credentials."
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "404": {
+                  "description": "Resource not found",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "examples": [
+                              "Folder with ID 'fakeid' not found."
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "Internal server error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "examples": [
+                              "Internal server error"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "tags": [
+                "Media"
+              ],
+              "x-readme": {
+                "code-samples": [
+                  {
+                    "name": "Typescript (SDK)",
+                    "language": "javascript",
+                    "code": "import { Wistia } from \"@wistia/wistia-api-client\";\n\nconst wistia = new Wistia({\n  bearerAuth: process.env[\"WISTIA_BEARER_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await wistia.media.get({\n    mediaHashedId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "components": {
+          "securitySchemes": {
+            "BearerAuth": {
+              "type": "http",
+              "scheme": "bearer"
+            }
+          }
+        },
+        "x-readme": {
+          "samples-languages": [
+            "javascript",
+            "shell",
+            "node",
+            "python",
+            "ruby"
+          ]
+        }
+      }
+    },
+    {
+      "file": "api-evidence-49.md",
+      "source_url": "https://docs.wistia.com/reference/get_medias-mediahashedid-captions.md",
+      "spec": {
+        "openapi": "3.1.1",
+        "info": {
+          "title": "Data API",
+          "description": "Wistia Data API",
+          "version": "2026.09.0"
+        },
+        "servers": [
+          {
+            "url": "https://api.wistia.com/modern"
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": [
+          {
+            "name": "Captions"
+          }
+        ],
+        "paths": {
+          "/medias/{mediaHashedId}/captions": {
+            "get": {
+              "summary": "List Captions by Media",
+              "x-speakeasy-group": "captions",
+              "x-speakeasy-name-override": "list",
+              "description": "Lists captions belonging to a specific media.\n\n## Requires api token with one of the following permissions\n```\nRead all folder and media data\n```\n\nTokens with the \"Act with a team member's permissions\" permission\n(`all:delegate_to_contact_permissions` scope) can also be used. Requests\nmade with such a token are authorized using the permissions of the\ncontact assigned to the token.\n\nAn [expiring access token](https://docs.wistia.com/reference/post_expiring-token)\ncreated with the `all:delegate_to_contact_permissions` scope and an\nauthorization granting the `edit-transcripts` permission on this media can\nalso be used. A token granted any other permission on the media lists no\ncaptions.\n",
+              "parameters": [
+                {
+                  "name": "mediaHashedId",
+                  "in": "path",
+                  "description": "The hashed ID of the media for which captions are to be retrieved.",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "X-Wistia-API-Version",
+                  "in": "header",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "default": "2026-09"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Captions retrieval successful",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                          "unevaluatedProperties": false,
+                          "type": "object",
+                          "properties": {
+                            "english_name": {
+                              "description": "English name of the language.",
+                              "type": "string"
+                            },
+                            "native_name": {
+                              "description": "Native name of the language.",
+                              "type": "string"
+                            },
+                            "language": {
+                              "description": "A 3 character language code as specified by ISO-639–2.",
+                              "type": "string"
+                            },
+                            "text": {
+                              "description": "The text of the captions for the specified language in SRT format.",
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            },
+                            "is_draft": {
+                              "type": "boolean"
+                            },
+                            "id": {
+                              "description": "The unique hashed identifier of the time-coded transcript.",
+                              "type": "string"
+                            },
+                            "media_id": {
+                              "description": "The hashed ID of the media the captions belong to.",
+                              "type": "string"
+                            },
+                            "version": {
+                              "description": "The active caption payload version, or null when no payload is active.",
+                              "type": [
+                                "integer",
+                                "null"
+                              ]
+                            },
+                            "segments": {
+                              "description": "Time-coded caption cues when `include=segments`; null otherwise.",
+                              "type": [
+                                "array",
+                                "null"
+                              ],
+                              "items": {
+                                "unevaluatedProperties": false,
+                                "type": "object",
+                                "properties": {
+                                  "start_ms": {
+                                    "description": "The segment's start offset from the beginning of the media, in milliseconds.",
+                                    "type": "integer"
+                                  },
+                                  "end_ms": {
+                                    "description": "The segment's end offset from the beginning of the media, in milliseconds.",
+                                    "type": "integer"
+                                  },
+                                  "text": {
+                                    "description": "The segment's transcript text.",
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "start_ms",
+                                  "end_ms",
+                                  "text"
+                                ]
+                              }
+                            },
+                            "diarized_segments": {
+                              "description": "Transcript text split at speaker-turn boundaries when `include=diarized_segments`. The media-level speaker timeline is shared across language tracks.",
+                              "type": "array",
+                              "items": {
+                                "unevaluatedProperties": false,
+                                "type": "object",
+                                "properties": {
+                                  "start_ms": {
+                                    "description": "The speaker-turn segment's start offset from the beginning of the media, in milliseconds.",
+                                    "type": "integer"
+                                  },
+                                  "end_ms": {
+                                    "description": "The speaker-turn segment's end offset from the beginning of the media, in milliseconds.",
+                                    "type": "integer"
+                                  },
+                                  "text": {
+                                    "description": "Transcript text attributed to this speaker turn.",
+                                    "type": "string"
+                                  },
+                                  "speaker": {
+                                    "unevaluatedProperties": false,
+                                    "type": "object",
+                                    "properties": {
+                                      "media_speaker_id": {
+                                        "description": "The media-specific speaker assignment identifier, or null for an unidentified turn.",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      },
+                                      "speaker_profile_id": {
+                                        "description": "The reusable account speaker-profile identifier, or null for an unidentified turn.",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      },
+                                      "detected_speaker_id": {
+                                        "description": "The anonymous detected-speaker identifier that can be assigned, or null once resolved or when unknown.",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      },
+                                      "display_label": {
+                                        "description": "The resolved name, a display-only generic label, or `Unknown speaker`. Speakers are numbered by when they first appear in the transcript. Assigning a name does not renumber the other speakers, so generic labels may start at `Speaker 2` or skip numbers. Use `detected_speaker_id` as the identifier.",
+                                        "type": "string"
+                                      },
+                                      "name": {
+                                        "description": "The assigned speaker profile's name, or null for an unidentified turn.",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "media_speaker_id",
+                                      "speaker_profile_id",
+                                      "detected_speaker_id",
+                                      "display_label",
+                                      "name"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "start_ms",
+                                  "end_ms",
+                                  "text",
+                                  "speaker"
+                                ]
+                              }
+                            },
+                            "diarization_status": {
+                              "description": "Speaker-data availability when `include=diarized_segments`. Reading a derivable media\nwith no speaker data starts generating it and reports `processing`; read again shortly\nfor `ready`. `disabled` means the account has speaker identification turned off; an\naccount owner or manager can turn it on in Account Settings.\n",
+                              "type": "string",
+                              "enum": [
+                                "ready",
+                                "processing",
+                                "unavailable",
+                                "disabled"
+                              ]
+                            },
+                            "diarization_derivable": {
+                              "description": "Whether speaker data can be generated from the active default transcript when `include=diarized_segments`. When false, the media stays `unavailable`.",
+                              "type": "boolean"
+                            },
+                            "speaker_data_version": {
+                              "description": "The concurrency version for speaker assignments when `include=diarized_segments`, or null when speaker data is unavailable.",
+                              "type": [
+                                "integer",
+                                "null"
+                              ]
+                            },
+                            "cursor": {
+                              "description": "A cursor for stable pagination based on current `sort_by` order. You can pass this to `cursor[before]` or `cursor[after]` as a parameter to fetch the records before or after this record in the same sort order. This is only populated if records were fetched with `cursor[enabled]`, or `cursor[before]` or `cursor[after]`.",
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "language",
+                            "is_draft",
+                            "id",
+                            "media_id",
+                            "version",
+                            "segments"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "Unauthorized, invalid or missing token",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "description": "A machine-readable identifier for the specific authorization failure.",
+                            "type": "string",
+                            "enum": [
+                              "unauthorized_credentials",
+                              "account_inactive",
+                              "unauthorized_scope",
+                              "unauthorized_params"
+                            ]
+                          },
+                          "error": {
+                            "type": "string",
+                            "examples": [
+                              "Invalid credentials."
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "404": {
+                  "description": "Media not found"
+                },
+                "500": {
+                  "description": "Internal server error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "examples": [
+                              "Internal server error"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "tags": [
+                "Captions"
+              ],
+              "x-readme": {
+                "code-samples": [
+                  {
+                    "name": "Typescript (SDK)",
+                    "language": "javascript",
+                    "code": "import { Wistia } from \"@wistia/wistia-api-client\";\n\nconst wistia = new Wistia({\n  bearerAuth: process.env[\"WISTIA_BEARER_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await wistia.captions.list({\n    mediaHashedId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "components": {
+          "securitySchemes": {
+            "BearerAuth": {
+              "type": "http",
+              "scheme": "bearer"
+            }
+          }
+        },
+        "x-readme": {
+          "samples-languages": [
+            "javascript",
+            "shell",
+            "node",
+            "python",
+            "ruby"
+          ]
+        }
+      }
+    },
+    {
+      "file": "api-evidence-50.md",
+      "source_url": "https://docs.wistia.com/reference/get_medias-mediahashedid-captions-languagecode.md",
+      "spec": {
+        "openapi": "3.1.1",
+        "info": {
+          "title": "Data API",
+          "description": "Wistia Data API",
+          "version": "2026.09.0"
+        },
+        "servers": [
+          {
+            "url": "https://api.wistia.com/modern"
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": [
+          {
+            "name": "Captions"
+          }
+        ],
+        "paths": {
+          "/medias/{mediaHashedId}/captions/{languageCode}": {
+            "get": {
+              "summary": "Show Captions",
+              "x-speakeasy-group": "captions",
+              "x-speakeasy-name-override": "get",
+              "description": "Returns a media's captions in the specified language.\nSupports multiple formats: JSON (default), SRT, VTT, and TXT.\nUse file extensions (.srt, .vtt, .txt) or Accept headers to specify format.\n\n## Requires api token with one of the following permissions\n```\nRead all folder and media data\n```\n\nTokens with the \"Act with a team member's permissions\" permission\n(`all:delegate_to_contact_permissions` scope) can also be used. Requests\nmade with such a token are authorized using the permissions of the\ncontact assigned to the token.\n\nAn [expiring access token](https://docs.wistia.com/reference/post_expiring-token)\ncreated with the `all:delegate_to_contact_permissions` scope and an\nauthorization granting the `edit-transcripts` permission on this media can\nalso be used. For a token granted any other permission on the media the\ncaptions are not found.\n",
+              "parameters": [
+                {
+                  "name": "mediaHashedId",
+                  "in": "path",
+                  "description": "The hashed ID of the media from which captions are to be retrieved.",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "languageCode",
+                  "in": "path",
+                  "description": "The 3-character ISO 639-2 language code of the captions to be retrieved (e.g., `eng`, `fre`, `spa`). Some languages use extended IETF subtags (e.g., `zh-Hant`).",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "include",
+                  "in": "query",
+                  "description": "Set to `segments` for time-coded caption cues or `diarized_segments` for speaker-turn segments in JSON responses.",
+                  "required": false,
+                  "schema": {
+                    "description": "Set to `segments` to include time-coded caption cues.",
+                    "type": "string",
+                    "enum": [
+                      "segments",
+                      "diarized_segments"
+                    ]
+                  }
+                },
+                {
+                  "name": "include_speakers",
+                  "in": "query",
+                  "description": "For TXT responses, set to true to group the transcript by speaker turns and include speaker labels. Ignored for other response formats.",
+                  "required": false,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                },
+                {
+                  "name": "X-Wistia-API-Version",
+                  "in": "header",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "default": "2026-09"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful response containing captions in the requested format",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "english_name": {
+                            "description": "English name of the language.",
+                            "type": "string"
+                          },
+                          "native_name": {
+                            "description": "Native name of the language.",
+                            "type": "string"
+                          },
+                          "language": {
+                            "description": "A 3 character language code as specified by ISO-639–2.",
+                            "type": "string"
+                          },
+                          "text": {
+                            "description": "The text of the captions for the specified language in SRT format.",
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "is_draft": {
+                            "type": "boolean"
+                          },
+                          "id": {
+                            "description": "The unique hashed identifier of the time-coded transcript.",
+                            "type": "string"
+                          },
+                          "media_id": {
+                            "description": "The hashed ID of the media the captions belong to.",
+                            "type": "string"
+                          },
+                          "version": {
+                            "description": "The active caption payload version, or null when no payload is active.",
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          },
+                          "segments": {
+                            "description": "Time-coded caption cues when `include=segments`; null otherwise.",
+                            "type": [
+                              "array",
+                              "null"
+                            ],
+                            "items": {
+                              "unevaluatedProperties": false,
+                              "type": "object",
+                              "properties": {
+                                "start_ms": {
+                                  "description": "The segment's start offset from the beginning of the media, in milliseconds.",
+                                  "type": "integer"
+                                },
+                                "end_ms": {
+                                  "description": "The segment's end offset from the beginning of the media, in milliseconds.",
+                                  "type": "integer"
+                                },
+                                "text": {
+                                  "description": "The segment's transcript text.",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "start_ms",
+                                "end_ms",
+                                "text"
+                              ]
+                            }
+                          },
+                          "diarized_segments": {
+                            "description": "Transcript text split at speaker-turn boundaries when `include=diarized_segments`. The media-level speaker timeline is shared across language tracks.",
+                            "type": "array",
+                            "items": {
+                              "unevaluatedProperties": false,
+                              "type": "object",
+                              "properties": {
+                                "start_ms": {
+                                  "description": "The speaker-turn segment's start offset from the beginning of the media, in milliseconds.",
+                                  "type": "integer"
+                                },
+                                "end_ms": {
+                                  "description": "The speaker-turn segment's end offset from the beginning of the media, in milliseconds.",
+                                  "type": "integer"
+                                },
+                                "text": {
+                                  "description": "Transcript text attributed to this speaker turn.",
+                                  "type": "string"
+                                },
+                                "speaker": {
+                                  "unevaluatedProperties": false,
+                                  "type": "object",
+                                  "properties": {
+                                    "media_speaker_id": {
+                                      "description": "The media-specific speaker assignment identifier, or null for an unidentified turn.",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ]
+                                    },
+                                    "speaker_profile_id": {
+                                      "description": "The reusable account speaker-profile identifier, or null for an unidentified turn.",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ]
+                                    },
+                                    "detected_speaker_id": {
+                                      "description": "The anonymous detected-speaker identifier that can be assigned, or null once resolved or when unknown.",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ]
+                                    },
+                                    "display_label": {
+                                      "description": "The resolved name, a display-only generic label, or `Unknown speaker`. Speakers are numbered by when they first appear in the transcript. Assigning a name does not renumber the other speakers, so generic labels may start at `Speaker 2` or skip numbers. Use `detected_speaker_id` as the identifier.",
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "description": "The assigned speaker profile's name, or null for an unidentified turn.",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "media_speaker_id",
+                                    "speaker_profile_id",
+                                    "detected_speaker_id",
+                                    "display_label",
+                                    "name"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "start_ms",
+                                "end_ms",
+                                "text",
+                                "speaker"
+                              ]
+                            }
+                          },
+                          "diarization_status": {
+                            "description": "Speaker-data availability when `include=diarized_segments`. Reading a derivable media\nwith no speaker data starts generating it and reports `processing`; read again shortly\nfor `ready`. `disabled` means the account has speaker identification turned off; an\naccount owner or manager can turn it on in Account Settings.\n",
+                            "type": "string",
+                            "enum": [
+                              "ready",
+                              "processing",
+                              "unavailable",
+                              "disabled"
+                            ]
+                          },
+                          "diarization_derivable": {
+                            "description": "Whether speaker data can be generated from the active default transcript when `include=diarized_segments`. When false, the media stays `unavailable`.",
+                            "type": "boolean"
+                          },
+                          "speaker_data_version": {
+                            "description": "The concurrency version for speaker assignments when `include=diarized_segments`, or null when speaker data is unavailable.",
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          },
+                          "cursor": {
+                            "description": "A cursor for stable pagination based on current `sort_by` order. You can pass this to `cursor[before]` or `cursor[after]` as a parameter to fetch the records before or after this record in the same sort order. This is only populated if records were fetched with `cursor[enabled]`, or `cursor[before]` or `cursor[after]`.",
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "language",
+                          "is_draft",
+                          "id",
+                          "media_id",
+                          "version",
+                          "segments"
+                        ]
+                      }
+                    },
+                    "text/plain": {
+                      "schema": {
+                        "description": "Caption content in SRT or TXT format",
+                        "type": "string"
+                      }
+                    },
+                    "text/vtt": {
+                      "schema": {
+                        "description": "Caption content in VTT format",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "Unauthorized, invalid or missing token",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "description": "A machine-readable identifier for the specific authorization failure.",
+                            "type": "string",
+                            "enum": [
+                              "unauthorized_credentials",
+                              "account_inactive",
+                              "unauthorized_scope",
+                              "unauthorized_params"
+                            ]
+                          },
+                          "error": {
+                            "type": "string",
+                            "examples": [
+                              "Invalid credentials."
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "404": {
+                  "description": "Captions not found or media not found"
+                },
+                "500": {
+                  "description": "Internal server error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "unevaluatedProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "examples": [
+                              "Internal server error"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "tags": [
+                "Captions"
+              ],
+              "x-readme": {
+                "code-samples": [
+                  {
+                    "name": "Typescript (SDK)",
+                    "language": "javascript",
+                    "code": "import { Wistia } from \"@wistia/wistia-api-client\";\n\nconst wistia = new Wistia({\n  bearerAuth: process.env[\"WISTIA_BEARER_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await wistia.captions.get({\n    mediaHashedId: \"<id>\",\n    languageCode: \"<value>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "components": {
+          "securitySchemes": {
+            "BearerAuth": {
+              "type": "http",
+              "scheme": "bearer"
+            }
+          }
+        },
+        "x-readme": {
+          "samples-languages": [
+            "javascript",
+            "shell",
+            "node",
+            "python",
+            "ruby"
+          ]
+        }
+      }
     }
   ],
   "legistar": [
@@ -5088,6 +7624,338 @@
       "version": "v1",
       "concurrency": "RowVersion is documented model data; conflict enforcement not established by endpoint pages",
       "form_urlencoded_limitation": "Listed by provider help, but sample unavailable; JSON schema examples are the concrete tested-contract input source."
+    },
+    {
+      "source_url": "https://webapi.legistar.com/Help/Api/POST-v1-Client-EventItems-EventItemId-Votes",
+      "method_path": "POST v1/{Client}/EventItems/{EventItemId}/Votes",
+      "body_preamble": "GranicusVote object to be inserted. VoteId is not required to be set.",
+      "model_fields": [
+        {
+          "name": "VoteId",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteGuid",
+          "description": "",
+          "type": "string",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteLastModifiedUtc",
+          "description": "",
+          "type": "date",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteRowVersion",
+          "description": "",
+          "type": "Collection of byte",
+          "requirement": "None."
+        },
+        {
+          "name": "VotePersonId",
+          "description": "",
+          "type": "integer",
+          "requirement": "Required"
+        },
+        {
+          "name": "VotePersonName",
+          "description": "",
+          "type": "string",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteValueId",
+          "description": "",
+          "type": "integer",
+          "requirement": "Required"
+        },
+        {
+          "name": "VoteValueName",
+          "description": "",
+          "type": "string",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteSort",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteResult",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteEventItemId",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        }
+      ],
+      "request_formats": [
+        "application/json, text/json",
+        "application/xml, text/xml",
+        "application/x-www-form-urlencoded"
+      ],
+      "response_description": "Returns Id of a created Vote item as a string value when Accept header is text/plain; otherwise returns created Vote item as an object.",
+      "auth": "Write access/token policy, tenant entitlement and VoteValue identifiers unverified; no authorized test tenant supplied.",
+      "version": "v1",
+      "concurrency": "VoteRowVersion is documented model data; conflict enforcement is not established by this endpoint page.",
+      "form_urlencoded_limitation": "Help lists this format but supplies no sample; use documented JSON/XML body shapes pending authorized validation."
+    },
+    {
+      "source_url": "https://webapi.legistar.com/Help/Api/PUT-v1-Client-EventItems-EventItemId-Votes-VoteId",
+      "method_path": "PUT v1/{Client}/EventItems/{EventItemId}/Votes/{VoteId}",
+      "body_preamble": "GranicusVote object to be updated. EventItemId and VoteId are required in the path.",
+      "model_fields": [
+        {
+          "name": "VoteId",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteGuid",
+          "description": "",
+          "type": "string",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteLastModifiedUtc",
+          "description": "",
+          "type": "date",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteRowVersion",
+          "description": "",
+          "type": "Collection of byte",
+          "requirement": "None."
+        },
+        {
+          "name": "VotePersonId",
+          "description": "",
+          "type": "integer",
+          "requirement": "Required"
+        },
+        {
+          "name": "VotePersonName",
+          "description": "",
+          "type": "string",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteValueId",
+          "description": "",
+          "type": "integer",
+          "requirement": "Required"
+        },
+        {
+          "name": "VoteValueName",
+          "description": "",
+          "type": "string",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteSort",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteResult",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        },
+        {
+          "name": "VoteEventItemId",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        }
+      ],
+      "request_formats": [
+        "application/json, text/json",
+        "application/xml, text/xml",
+        "application/x-www-form-urlencoded"
+      ],
+      "response_description": "Returns Id of the updated Vote Item as a string value when Accept header is text/plain; otherwise returns updated Vote item as an object.",
+      "auth": "Write access/token policy, tenant entitlement and VoteValue identifiers unverified; no authorized test tenant supplied.",
+      "version": "v1",
+      "concurrency": "VoteRowVersion is documented model data; conflict enforcement is not established by this endpoint page.",
+      "form_urlencoded_limitation": "Help lists this format but supplies no sample; use documented JSON/XML body shapes pending authorized validation."
+    },
+    {
+      "source_url": "https://webapi.legistar.com/Help/Api/POST-v1-Client-EventItems-EventItemId-RollCalls",
+      "method_path": "POST v1/{Client}/EventItems/{EventItemId}/RollCalls",
+      "body_preamble": "GranicusRollCall object to be inserted. RollCallId is not required to be set.",
+      "model_fields": [
+        {
+          "name": "RollCallId",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallGuid",
+          "description": "",
+          "type": "string",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallLastModifiedUtc",
+          "description": "",
+          "type": "date",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallRowVersion",
+          "description": "",
+          "type": "Collection of byte",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallPersonId",
+          "description": "",
+          "type": "integer",
+          "requirement": "Required"
+        },
+        {
+          "name": "RollCallPersonName",
+          "description": "",
+          "type": "string",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallValueId",
+          "description": "",
+          "type": "integer",
+          "requirement": "Required"
+        },
+        {
+          "name": "RollCallValueName",
+          "description": "",
+          "type": "string",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallSort",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallResult",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallEventItemId",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        }
+      ],
+      "request_formats": [
+        "application/json, text/json",
+        "application/xml, text/xml",
+        "application/x-www-form-urlencoded"
+      ],
+      "response_description": "Returns Id of a created RollCall item as a string value when Accept header is text/plain; otherwise returns created RollCall item as an object.",
+      "auth": "Write access/token policy, tenant entitlement and RollCallValue identifiers unverified; no authorized test tenant supplied.",
+      "version": "v1",
+      "concurrency": "RollCallRowVersion is documented model data; conflict enforcement is not established by this endpoint page.",
+      "form_urlencoded_limitation": "Help lists this format but supplies no sample; use documented JSON/XML body shapes pending authorized validation."
+    },
+    {
+      "source_url": "https://webapi.legistar.com/Help/Api/PUT-v1-Client-EventItems-EventItemId-RollCalls-RollCallId",
+      "method_path": "PUT v1/{Client}/EventItems/{EventItemId}/RollCalls/{RollCallId}",
+      "body_preamble": "GranicusRollCall object to be updated. EventItemId and RollCallId are required in the path.",
+      "model_fields": [
+        {
+          "name": "RollCallId",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallGuid",
+          "description": "",
+          "type": "string",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallLastModifiedUtc",
+          "description": "",
+          "type": "date",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallRowVersion",
+          "description": "",
+          "type": "Collection of byte",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallPersonId",
+          "description": "",
+          "type": "integer",
+          "requirement": "Required"
+        },
+        {
+          "name": "RollCallPersonName",
+          "description": "",
+          "type": "string",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallValueId",
+          "description": "",
+          "type": "integer",
+          "requirement": "Required"
+        },
+        {
+          "name": "RollCallValueName",
+          "description": "",
+          "type": "string",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallSort",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallResult",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        },
+        {
+          "name": "RollCallEventItemId",
+          "description": "",
+          "type": "integer",
+          "requirement": "None."
+        }
+      ],
+      "request_formats": [
+        "application/json, text/json",
+        "application/xml, text/xml",
+        "application/x-www-form-urlencoded"
+      ],
+      "response_description": "Returns Id of the updated RollCall item as a string value when Accept header is text/plain; otherwise returns updated RollCall item as an object.",
+      "auth": "Write access/token policy, tenant entitlement and RollCallValue identifiers unverified; no authorized test tenant supplied.",
+      "version": "v1",
+      "concurrency": "RollCallRowVersion is documented model data; conflict enforcement is not established by this endpoint page.",
+      "form_urlencoded_limitation": "Help lists this format but supplies no sample; use documented JSON/XML body shapes pending authorized validation."
     }
   ],
   "laserfiche": [

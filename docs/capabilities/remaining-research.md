@@ -5,7 +5,7 @@ All operations remain mandatory where exposed in the bounded domain. Unknown is 
 ## F01 Legistar (`legistar`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"Some clients public; others token query required. Tenant policy controls access.","outbound":"Write credential scope/authorized tenant not supplied; mock-only."}}
+Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"Some clients public; others token query required. Tenant policy controls access.","outbound":"Write credential scope and authorized test tenant not supplied."}}
 Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
@@ -14,11 +14,12 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Write auth/token enablement and per-tenant field permissions
+- No authorized write credential or test tenant was supplied; write token scope, tenant entitlement and field permissions remain unverified
 - EventRowVersion conflict semantics and idempotency not established
-- Other in-scope vote/rollcall/media write surfaces in Help require systematic endpoint review; not declared unsupported
+- Vote and RollCall POST/PUT under EventItems are documented, with required PersonId and ValueId fields; tenant value IDs, permission scope, accepted enum values and readback remain unverified
+- Other in-scope meeting-media write surfaces in Help still need systematic endpoint review; no unsupported conclusion
 - Vendor-file import format unverified
-- Vote/rollcall exact endpoint models and other meeting-linked write paths remain to classify; no unsupported conclusion.
+- Vote and RollCall entity/field contracts are recorded in inventory.json and provider-api-contracts.json from the official v1 endpoint pages; they are documented contracts only, not accepted live writes.
 
 ### Pagination contract
 
@@ -38,7 +39,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ## F02 PrimeGov (`primegov`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not_supplied; synthetic/mock data only"}}
+Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
 Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
@@ -66,7 +67,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ## F03 Granicus (`granicus`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not_supplied; synthetic/mock data only"}}
+Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
 Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
@@ -100,7 +101,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Representative research observations
 
-- https://ebps.novusagenda.com/agendapublic/: East Brunswick public search; Initial response only; postback/search/paging not submitted and PDFs not downloaded.
+- https://ebps.novusagenda.com/agendapublic/: direct GET HTTP 200 HTML, 124337 B, SHA256 6423712a99fed083a971b148d5f13b0c3545cf7c62489ca998bb2656b4a7bb9a. Stateful ASP.NET search POST to ./ for "Superintendent's report" returned HTTP 200 HTML, zero item rows, SHA256 b5e7fd2fc21a76650ec9682204ff0a2f7f87add1e698a772f084b67a384d01f7. Raw captures are in outputs/provider-route-probes-2026-11-11. Form controls include dates, type, category, containing text and search; not a JSON API.
 
 ### Remaining research
 
@@ -112,7 +113,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "Observed item pager 10/15/20/50, 180 items in 12 pages; meeting paging and postback contract unverified."
+  "details": "Landing GET showed meeting/item grids; prior bounded scan reported 180 items across 12 pages and item page-size controls 10/15/20/50. No paging traversal; one query returned zero results, leaving semantics and coverage unresolved."
 }
 
 ### Authorization restrictions
@@ -121,7 +122,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ## F05 CivicPlus Agenda and Meeting Management Select (`civicplus-select`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not_supplied; synthetic/mock data only"}}
+Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
 Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
@@ -233,7 +234,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ## F09 eSCRIBE (`escribe`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not_supplied; synthetic/mock data only"}}
+Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
 Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
@@ -550,12 +551,13 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Representative research observations
 
-- https://play.champds.com/yumacoaz/event/657: GET 200. Event title/date, agenda/minutes/timeline, Packet PDF, search agenda/minutes/timeline and download-media control visible. Limits: Response also says This Event is Not Yet Published and No media available; do not certify media availability or complete published JSON retrieval.
+- Public player JS https://play.champds.com/_COMMON/js/cds.event.js?1794445126 derives GET https://playapi.champds.com/{CustomerAccessID}/event/{EventID} and expects JSON.
+- https://playapi.champds.com/lakezurichil/event/164 and https://playapi.champds.com/yumacoaz/event/657: unauthenticated GETs returned HTTP 200 JSON-shaped bodies served as text/html. Engine receipt docs/verification/champ-detail-2026-11-11.json reports completed one-event reads with original fields preserved (14 agenda items each; Lake Zurich 6 documents, Yuma 0; 1 recording each); catalog_complete=false. No attachment bytes downloaded. Direct hashes and snapshots: outputs/provider-route-probes-2026-11-11/capture-index.json.
 
 ### Remaining research
 
 - Pin baseline source commit and extract/test standalone readers.
-- Event detail is one record. Admin help search index says event list pages contain 15 events; that is not a verified public JSON pagination contract.
+- Public event detail is engine-live-read-verified on two existing tenants; no public catalog/list or pagination route found. Admin help says authenticated Events list has 15/page; that is not a public JSON pagination contract.
 - Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
 - Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
 
@@ -563,7 +565,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "Event detail is one record. Admin help search index says event list pages contain 15 events; that is not a verified public JSON pagination contract."
+  "details": "Public event detail is engine-live-read-verified on two existing tenants; no public catalog/list or pagination route found. Admin help says authenticated Events list has 15/page; that is not a public JSON pagination contract."
 }
 
 ### Authorization restrictions
@@ -747,7 +749,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ## F27 Wistia (`wistia`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not_supplied; synthetic/mock data only"}}
+Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
 Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
@@ -758,7 +760,10 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 - Account-tier upload/feature/media limits and modern schema vs older guide discrepancies
 - Provider-specific file-import package other than uploadAPI unverified
-- Live acceptance blocked by mock-only direction
+- No Wistia account token/tenant supplied; native search/media detail live acceptance not run
+- Caption list/per-language GET is documented but no retrieval adapter implemented
+- Search is capped at 100+100 with no cursor; exact/phrase semantics not specified
+- Provider write acceptance remains NOT_RUN because no authorized provider test tenants or credentials were supplied
 - Media swap/replacement official endpoint remains candidate; full fields/receipt and domain impact need review.
 
 ### Pagination contract
@@ -857,7 +862,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "Dynamic Lotus/NSF application; list/search/archive requests unknown."
+  "details": "Current direct unauthenticated GET to the existing Colorado shell returned HTTP 403, whereas earlier extraction only saw the branded shell. Dynamic meetings and any BoardDocs-specific public catalog/API remain unresolved; HTTP 403 is not unsupported evidence."
 }
 
 ### Authorization restrictions
@@ -874,13 +879,13 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Representative research observations
 
-- https://cityofmurraycityuttmmapp.tylerhost.net/7452prod/tylermm/calendar/: FetchUrl extraction service HTTP 500. Public URL found in search; no calendar response verified. Limits: Tool extraction failure is not proof tenant unavailable.
-- https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/: GET 200; rendered calendar text visible. November public meetings, date/time/location, Agenda Posted, meeting-type filters, Search, Subscribe and list/day/week/month controls observed. Limits: XHR method/route and saved JSON not fetched; rendered UI is not API contract.
+- https://cityofmurraycityuttmmapp.tylerhost.net/7452prod/tylermm/calendar/: prior FetchUrl extraction service HTTP 500; public URL found but no calendar response verified. This is not proof of tenant unavailability.
+- https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/: direct GET returned 1403-byte SPA shell; public bundle provides tcmURL and POST meetingInformation/getMeetingInformationByDate with JSON `{startDate,endDate,meetingTypeIds}`, dates MM/DD/YYYY, no type filter [-1]. Nov 9-15 and Nov 1-30, 2026 returned HTTP 200 `[]`; no nonempty row schema. Captures/hashes in outputs/provider-route-probes-2026-11-11.
 
 ### Remaining research
 
 - Pin baseline source commit and extract/test standalone readers.
-- Calendar month navigation/list/day/week visible; JSON paging, query ranges and archived completeness unverified.
+- Public Ector client bundle exposes a date-range JSON query; two bounded Nov 2026 requests returned empty arrays. Successful nonempty response, JSON record fields, date bounds, pagination and archive completeness remain unverified.
 - Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
 - Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
 
@@ -888,7 +893,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "Calendar month navigation/list/day/week visible; JSON paging, query ranges and archived completeness unverified."
+  "details": "Public Ector client bundle exposes a date-range JSON query; two bounded Nov 2026 requests returned empty arrays. Successful nonempty response, JSON record fields, date bounds, pagination and archive completeness remain unverified."
 }
 
 ### Authorization restrictions

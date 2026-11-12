@@ -42,6 +42,43 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     transport = transport or PublicTransport()
     content = _decode_content(request, content)
     attachment = request.get("attachment")
+    if "external_id" in request:
+        if attachment is not None or content is not None:
+            raise ValueError("Record detail retrieval cannot be combined with attachment or saved input.")
+        if "caption_language" in request and source.provider != "wistia":
+            return OperationResult.unsupported("fetch_captions", reason=(
+                "No verified supplied-caption retrieval mapping is registered for this provider."))
+        if source.provider == "legistar":
+            from .legistar import fetch_record
+            return fetch_record(source, namespace, request["external_id"], bounds, context, transport)
+        if source.provider == "wistia":
+            from .wistia import fetch_record
+            return fetch_record(source, namespace, request["external_id"], bounds, context, transport,
+                                caption_language=request.get("caption_language"))
+        if source.provider == "champ":
+            external_id = request["external_id"]
+            current = urlsplit(source.url)
+            event = re.fullmatch(r"/([A-Za-z0-9_-]+)/event/([0-9]+)/?", current.path)
+            if (current.hostname != "play.champds.com" or event is None
+                    or not isinstance(external_id, str) or re.fullmatch(r"[1-9][0-9]{0,18}", external_id) is None):
+                raise ValueError("CHAMP detail requires a public tenant event URL and a decimal event ID.")
+            from dataclasses import asdict, replace
+            target = replace(source, url=f"https://play.champds.com/{event[1]}/event/{external_id}",
+                             input_format="champ-event-json")
+            result = discover(engine, {"source": target.public_dict(), "bounds": asdict(bounds)}, None,
+                              context, transport=transport, browser=browser)
+            if result.data and result.data["bundles"]:
+                incomplete = any(result.coverage.get(field) for field in
+                                 ("failures", "truncated", "unknown_date_records", "unknown_body_records"))
+                status = result.status if result.status in {"failed", "cancelled"} else (
+                    "partial" if incomplete else "completed")
+                return OperationResult(status, result.data["bundles"][0], result.errors,
+                    {**result.coverage, "scope": "one provider event detail", "catalog_complete": False},
+                    context.operation_id)
+            return result
+        return OperationResult.unsupported("fetch_record", reason=(
+            "A single-record detail mapping is not verified for this provider; "
+            "this does not establish that its upstream service lacks record retrieval."))
     if attachment is None:
         if content is None:
             return discover(engine, request, None, context, transport=transport, browser=browser)

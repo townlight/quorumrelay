@@ -320,6 +320,13 @@ def register(engine) -> None:
 
     def search(owner, request, content, context):
         request = dict(request)
+        if "native" in request and type(request["native"]) is not bool:
+            raise ValueError("native must be a JSON boolean.")
+        if request.get("native") is True:
+            return OperationResult.unsupported("native_search", reason=(
+                "No verified native search mapping is registered for this source. "
+                "This does not establish that the provider lacks upstream search; "
+                "use an explicit local capture search or a registered connector hook."))
         if "result" in request:
             upstream = request["result"]
             if not isinstance(upstream, dict):
