@@ -1,0 +1,156 @@
+<!--RecentEvents section-->
+<section id="recentEvents" class="section">
+    <div class="main-container">
+        <div class="inside-container" aria-label="Recent events">
+            <div class="row" style="border: dashed silver 1px;padding:10px; ">
+                <h2>Search Meetings</h2>
+<form action="/Home/SearchEvents" id="searchEventsForm" method="get">                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group" style="width:100%">
+                                <label for="ev-search">Search</label>
+                                <input type="text" placeholder="by Keyword or Phrase" id="ev-search" name="ev-search" value="quorumrelayneverpresentqzxjvk" class="form-control" aria-label="Keyword or Phrase" />
+                            </div>
+                        </div>
+                        <div class="form-group" style="">
+                            <div class="input-group" style="width:100%">
+                                <label for="dateFrom">Date From</label>
+                                <input type='text' class="form-control" id="dateFrom" placeholder="From" autocomplete="off" name="dateFrom" value="01/01/2025" aria-label="Date From" />
+                            </div>
+                        </div>
+                        <div class="form-group" style="">
+                            <div class="input-group" style="width:100%">
+                                <label for="dateTo">Date To</label>
+                                <input type='text' class="form-control" id="dateTo" name="dateTo" autocomplete="off" placeholder="To" value="" aria-label="Date To" />
+                            </div>
+                        </div>
+                        <div class="form-group evCategories">
+                            <label for="evCategories">Categories</label>
+                            <div class="input-group" style="width:100%; margin-top:4px;">
+                                <select id="evCategories" class="form-control select2 ev-categories" aria-label="Select Category" style="background-color:white;">
+                                    <option value="-1" selected>All Meetings</option>
+                                            <option value="32">
+                                                Board of Zoning Appeals
+                                            </option>
+                                            <option value="46">
+                                                Charter Review Committee
+                                            </option>
+                                            <option value="26">
+                                                City Council
+                                            </option>
+                                            <option value="29">
+                                                Civil Service Commission
+                                            </option>
+                                            <option value="41">
+                                                Committe and Council Meeting
+                                            </option>
+                                            <option value="45">
+                                                Committee
+                                            </option>
+                                            <option value="34">
+                                                Finance Committee
+                                            </option>
+                                            <option value="24">
+                                                General
+                                            </option>
+                                            <option value="36">
+                                                Health &amp; Safety Committee
+                                            </option>
+                                            <option value="31">
+                                                Historic Design &amp; Review Board
+                                            </option>
+                                            <option value="35">
+                                                Legislative Committee
+                                            </option>
+                                            <option value="44">
+                                                Ordinances &amp; Resolutions (Adopted)
+                                            </option>
+                                            <option value="27">
+                                                Parks and Rec Board
+                                            </option>
+                                            <option value="30">
+                                                Planning Commission
+                                            </option>
+                                            <option value="28">
+                                                Port Authority
+                                            </option>
+                                            <option value="37">
+                                                Special City Council
+                                            </option>
+                                            <option value="42">
+                                                Stormwater Mgmt
+                                            </option>
+                                            <option value="38">
+                                                Streets, Buildings &amp; Grounds Committee
+                                            </option>
+                                            <option value="40">
+                                                Utilities Committee
+                                            </option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <input type="submit" class="btn btn-warning recentEvents-search" style="margin-top: 30px; margin-left: 5px; padding: 7px 30px;" id="ev-search-btn" value="search" title="Search" aria-label="Search" />
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $('#dateFrom').datepicker({ dateFormat: 'mm/dd/yy', changeMonth: true, changeYear: true });
+                                $('#dateTo').datepicker({ dateFormat: 'mm/dd/yy', changeMonth: true, changeYear: true, });
+
+                                $("#evCategories").select2({ placeholder: { id: '', text: "Select Category" }, allowClear: false});
+                                $(".select2-selection__rendered").attr("title", "");
+                            });
+                        </script>
+                        <div class="spinner-grow  text-info recent-ev-loader" aria-live="polite" style="display:none;" role="status">
+                            <span class="sr-only">Loading search results...</span>
+                        </div>
+                    </div>
+</form>            </div>
+            <div class="row section-row" style="padding: 5px;">
+                <div class="col-12">
+                    <h2 class="section-header">Past Meetings</h2>
+                    <nav style="padding-left:13px;">
+                        <span class="fa fa-folder-open" style="margin-right: 5px; color: silver;" aria-hidden="true"></span><a href="#" class="recEv-expandAll" role="button" title="expand all">Expand All</a> &nbsp; <span class="fa fa-folder" style="margin-right:5px;color:silver;" aria-hidden="true"></span><a href="#" class="recEv-closeAll" role="button" title="Close all">Close All</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="row" style="overflow-x: auto;">
+                    <span aria-live="polite">There are no events found for the selected options </span>
+            </div>
+        </div>
+    </div>
+</section>
+<!--RecentEvents section end-->
+
+<script>
+    $(document).ready(function () {
+        var mode = '0';
+
+        if (mode == 1) //if compact mode
+            $('.eventTable').DataTable({
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                order: [[1, 'desc']],
+                "columnDefs": [
+                    { targets: [0], className: "dt-center", className: "column1", orderable: false },
+                    { targets: [1], className: "dt-center", className: "column2" },
+                ],
+            });
+        else {
+            $('.eventTable').DataTable({
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                order: [[1, 'desc']],
+                "columnDefs": [
+                    { targets: [0], className: "dt-center", className: "column1", orderable: false },
+                    { targets: [1], className: "dt-center", className: "column2" },
+                    { targets: [2], className: "dt-center", className: "column3", orderable: false },
+                    { targets: [3], className: "dt-center", className: "column4", orderable: false },
+                    { targets: [4], className: "dt-center", className: "column5", orderable: false },
+                    { targets: [5], className: "dt-center", className: "column5", orderable: false },
+                ],
+            });
+        }
+    });
+</script>

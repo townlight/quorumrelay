@@ -79,6 +79,9 @@ def register(engine, *, transport: Transport | None = None,
     from .swagit_search import native_search as swagit_search
     engine.register_native_search("swagit", tracked_handler("search", lambda engine, request, content, context:
                                   swagit_search(engine, request, content, context, transport=transport)))
+    from .suiteone_search import native_search as suiteone_search
+    engine.register_native_search("suiteone-media", tracked_handler("search", lambda engine, request, content, context:
+                                  suiteone_search(engine, request, content, context, transport=transport)))
     from .civicplus_export import export_historical
     engine.register_native_export("civicplus-select", tracked_handler("export", export_historical))
 
