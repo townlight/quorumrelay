@@ -67,6 +67,8 @@ A shared legacy projection helper should project **the selected aggregate record
 
 CHAMP fixed public `playapi.champds.com/{tenant}/event/{id}` retrieval uses the existing `champ-event-json` compatibility parser and namespace. The observed API returns JSON with an HTML MIME type; response content is still structurally checked as JSON and against the exact tenant/event identity. Two public tenant reads passed; event catalog discovery remains unresolved.
 
+Later rich source normalization additionally preserves [CHAMP native agenda relationships](CHAMP-AGENDA.md), item descriptions/document IDs and captured-player timeline anchors. The compatibility projection remains unchanged. Supplied visible descriptions are searchable with citation/item provenance and a timestamp when exactly one validated interval is associated; this does not infer transcript text, speakers or media-byte verification.
+
 Tyler `calendar_api_base` is an explicitly supplied, same-host application base observed for a tenant. The engine POSTs inclusive date strings and the observed all-meeting-type identifier to its fixed date-range endpoint. It reports partial catalog coverage; an empty live response does not establish live nonempty-row or paging acceptance.
 
 

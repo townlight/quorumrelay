@@ -415,6 +415,7 @@ checkout containing the mapping; the frozen dev8 wheel is not silently updated.
 |---|---|
 | BoardBook public rendered agenda | [Native item hierarchy and document associations](BOARDBOOK-DETAIL.md) |
 | Town Hall Streams event | [Player citation and declared HLS locator](TOWN-HALL-STREAMS-DETAIL.md); a playlist is not verified media segments |
+| CHAMP event JSON | [Native agenda parents, documents and timeline anchors](CHAMP-AGENDA.md); no inferred transcript or speaker |
 | eSCRIBE rendered agenda | [Capture-local agenda positions and supplied documents](ESCRIBE-DETAIL.md) |
 | Simbli selected item | [Fresh item content and same-meeting attachment mapping](SIMBLI-ITEM-CONTENT.md) |
 | CivicWeb FilePro | [Pinned SOAP reads and saved-response mapping](CIVICWEB-FILEPRO.md) |

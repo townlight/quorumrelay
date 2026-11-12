@@ -313,7 +313,9 @@ def _next(source, task, payload, size):
 def _enrich(bundle, provider):
     if provider == "champ":
         from .champ_media import enrich_bundle
+        from .champ_agenda import enrich_bundle as enrich_agenda
         bundle.update(enrich_bundle(bundle))
+        bundle.update(enrich_agenda(bundle))
         return
     for record in bundle["records"]:
         raw = record.get("original")

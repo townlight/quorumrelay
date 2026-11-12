@@ -370,7 +370,11 @@ class Engine:
                 "failures": [], "checkpoint": None,
                 "scope": "one saved capture, not a complete upstream catalog",
             }
-            return OperationResult(status, bundle.public_dict(), coverage=coverage,
+            data = bundle.public_dict()
+            if source.provider == "champ":
+                from .providers.champ_agenda import enrich_bundle
+                data = enrich_bundle(data)
+            return OperationResult(status, data, coverage=coverage,
                                    operation_id=context.operation_id)
         except (compat.ImportInputError, ValueError, TypeError) as error:
             return OperationResult("failed", errors=(Error("invalid_capture", str(error), source=source.url),),

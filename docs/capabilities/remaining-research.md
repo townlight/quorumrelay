@@ -562,6 +562,8 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
+- Rich source mapping now preserves native agenda parents/descriptions/item-document IDs and event/item-bound timeline seconds using the existing event JSON plus exact vendor player bytes. Twelve new synthetic engine/pin cases and six reused media cases pass; normalize/search/neutral export preserve associations/provenance. See [CHAMP agenda mapping](../CHAMP-AGENDA.md) and `docs/verification/champ-agenda-relationships-2026-11-12.json`. No new network request or inferred transcript/speaker/motion; search remains partial for unavailable text.
+
 - Two public event detail GETs are engine-receipted, but no public event index/list or paging route is established. Continue only through existing tenant links if an index is visibly exposed.
 - One supplied Lake Zurich PDF is now fetched; a separate supplied HLS/media attempt remains partial and player HTML is not playback. Do not generalize these results to all attachments or events; Yuma reports no media.
 - CHAMP Help documents staff event/media/PDF workflows, not machine writes. API codecs, account roles and write/readback remain unverified without authorized credentials.
