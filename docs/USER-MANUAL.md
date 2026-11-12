@@ -304,7 +304,7 @@ Writes are separate from read, import, search and export. The default engine reg
 5. Read <code>receipt</code> for the durable outcome. If the response was lost or the receipt is uncertain, reconcile that receipt before deciding whether to retry.
 
 ~~~python
-from quorumrelay import create_engine
+from quorumrelay import OperationContext, create_engine
 from quorumrelay.storage import SQLiteStorage
 
 # Load this from protected operator configuration; its shape is provider-specific.
@@ -397,6 +397,7 @@ For an account API, configure provider-specific credentials only in trusted priv
 Check <code>GET /v1/info</code> and <code>GET /openapi.json</code>. Submit a shared engine request as JSON:
 
 ~~~powershell
+$Source = @{ provider = "legistar"; url = "https://webapi.legistar.com/v1/olympia/Events"; input_format = "legistar-events-json" }
 $Headers = @{ Authorization = "Bearer $env:QUORUMRELAY_TOKEN" }
 $Body = @{ source = $Source; bounds = @{ max_pages = 2; max_records = 50 } } | ConvertTo-Json -Depth 12
 Invoke-RestMethod -Method Post -Uri "$env:QUORUMRELAY_URL/v1/operations/discover" -Headers $Headers -ContentType "application/json" -Body $Body
