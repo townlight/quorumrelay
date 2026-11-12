@@ -1,0 +1,16 @@
+{
+  "source": "https://ciindependenceor.civicweb.net/Portal/MeetingInformation.aspx?Id=11021",
+  "capture_status": "completed",
+  "external_id": "11021",
+  "title": "City Council Work Session",
+  "document_status": "completed",
+  "attachment": {
+    "selected_url_field": "url",
+    "content_type": "application/pdf",
+    "byte_length": 120193,
+    "sha256": "781943f47d7af1b250ee3c6f4b69b862feeb369ac829d2a66e851b3426348643",
+    "text_availability": "not_extracted"
+  },
+  "errors": [],
+  "limits": "One supplied public print PDF only; document kind not inferred as agenda/minutes; no full meeting-type archive or native search acceptance."
+}

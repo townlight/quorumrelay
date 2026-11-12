@@ -4481,15 +4481,34 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "novus-public-controls-and-fetch-2026-11-12",
+          "url": "https://ebps.novusagenda.com/agendapublic/",
+          "title": "Novus public controls and one supplied agenda PDF",
+          "kind": "public_tenant",
+          "observed": "Read-only public control inspection plus one bounded generic engine fetch; no form submission, login or write.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": [
+            "The public aspnetForm posts to ./ and exposes date, meeting type, board, category and containing-text controls plus MeetingView.aspx, Coversheet.aspx and DisplayAgendaPDF.ashx link shapes.",
+            "Saved search-postback response was a date-validation error with no rows; successful native-search semantics remain unverified.",
+            "One supplied DisplayAgendaPDF.ashx?MeetingID=996 fetch completed as application/pdf, 28,849,631 bytes, SHA-256 90644aacdb5f3fc7bf0d82deff93edb5f51d60d5226344d1871fd6246eaf0c03. Prior listing remains 191 rows/12 pages/11 meetings, partial, catalog_complete=false."
+          ],
+          "limits": "One agenda PDF only; structured MeetingView/Coversheet, Minutes, search results, meeting-grid continuation, history bounds and writes remain unverified.",
+          "receipt_path": "docs/verification/novus-public-controls-and-fetch-2026-11-12.json",
+          "receipt_sha256": "c1fa02e44ab74e70ad98c60b5fda3fce0d0f08f49cc579b6d039fd609eb7d41e"
         }
       ],
       "tenants": [
         {
           "url": "https://ebps.novusagenda.com/agendapublic/",
-          "observation": "East Brunswick server-rendered form. Read-only item pager traversed 12 pages/180 rows for the exact form window 2026-08-11 through 2027-02-11; 11 meeting rows appeared in the current meeting grid. Search semantics and full history are unverified.",
+          "observation": "East Brunswick public listing remains 191 rows in the selected window, partial. Follow-up saw search/detail/document link shapes and fetched one supplied agenda PDF. The native-search postback yielded only a date-validation error; structured detail and full bounds remain unverified.",
           "evidence_ids": [
             "novusagenda-tenant",
-            "novusagenda-traversal"
+            "novusagenda-traversal",
+            "novus-public-controls-and-fetch-2026-11-12"
           ]
         }
       ],
@@ -4522,7 +4541,8 @@
           "evidence_ids": [
             "novusagenda-tenant",
             "novusagenda-traversal",
-            "novus-public-listing-live-partial"
+            "novus-public-listing-live-partial",
+            "novus-public-controls-and-fetch-2026-11-12"
           ],
           "details": "The source implements bounded public ASP.NET listing traversal. A live engine receipt returned 191 records (11 meetings, 180 items) over 12 pages for East Brunswick’s displayed 2026-08-11 through 2027-02-11 window. Receipt is partial; catalog/source completeness are false. This partial read is not provider acceptance.",
           "dependencies": [],
@@ -4550,13 +4570,14 @@
           "implementation_status": "not_implemented",
           "evidence_ids": [
             "novusagenda-tenant",
-            "novusagenda-traversal"
+            "novusagenda-traversal",
+            "novus-public-controls-and-fetch-2026-11-12"
           ],
-          "details": "Listing records preserve explicit provider meeting/item IDs only when a native link supplies them. In the bounded receipt, 75 items and 5 meetings had provider IDs; 105 items and 6 meetings required unstable capture-position-derived local keys. No Coversheet/detail or linked-document request has been made through fetch_record; the listing yields displayed metadata and links only.",
+          "details": "One supplied DisplayAgendaPDF.ashx agenda link was fetched successfully through the generic attachment path. No structured MeetingView/Coversheet detail fetch has been established; the listing yields displayed metadata and links only.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify one linked Coversheet response and exact document child links without downloading large media; preserve missing IDs for rows with no provider link",
-            "Verify document bytes, MIME, redirects, failure capture, network and byte limits"
+            "Verify a supplied Coversheet/MeetingView record and its exact document links; one agenda PDF was already fetched and should not be repeated.",
+            "Verify different document kinds only when supplied and preserve MIME/redirect/hash outcomes."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -4598,13 +4619,14 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "novusagenda-tenant"
+            "novusagenda-tenant",
+            "novus-public-controls-and-fetch-2026-11-12"
           ],
-          "details": "Current ASP.NET postback exposes date range, Meeting Type, Category, Containing Text and Search controls. One query for “Superintendent’s report” returned zero rows. Result matching, exact/phrase semantics, and query coverage are unverified.",
+          "details": "Public ASP.NET postback exposes date range, meeting type, category, containing-text and Search controls. A prior stateful POST returned zero item rows; the 2026-11-12 follow-up response was a date-validation error with no rows. Native query matching and coverage remain unverified.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify results for a provider-confirmed query using the existing public tenant or official docs; do not interpret a zero-row response as proof of query support or absence",
-            "Implement only after exact query and session-state behavior is established"
+            "Verify one successful provider-confirmed query with current form state on the existing public tenant; the saved date-validation error is not a successful search result.",
+            "Implement only after successful exact request and session-state behavior are established."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -4957,7 +4979,7 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "Observed item pager 10/15/20/50, 180 items in 12 pages; meeting paging and postback contract unverified."
+        "details": "Observed item pager 10/15/20/50, 180 items in 12 pages for 2026-08-11 through 2027-02-11; meeting grid showed 11 rows. Follow-up did not establish native search or meeting-grid continuation; full catalog bounds remain unknown."
       },
       "auth": {
         "public_read": "unverified",
@@ -4965,8 +4987,8 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "The bounded reader and partial engine receipt cover 12 pages/180 items and 11 meeting rows in East Brunswick’s displayed 2026-08-11 through 2027-02-11 window. Next public step: submit a known nonempty search with refreshed ASP.NET state, then GET one explicit Coversheet/MeetingView and a linked document with separate MIME/redirect/hash outcomes.",
-        "On this same tenant, establish date-window defaults, retained history and meeting-grid continuation. The receipt exhausts only the selected window; catalog/source completeness are false.",
+        "Selected window is traversed and one supplied agenda PDF fetched. Saved public search postback returned a date-validation error with no rows; native search semantics remain unverified. Structured MeetingView/Coversheet and Minutes retrieval remain unverified.",
+        "On the same tenant, establish default date range, retained history and meeting-grid continuation through valid public controls; current receipt exhausts only its selected window.",
         "No current machine create/update/upload route or authorized staff/test account was supplied; historical UI instructions are not API fields."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
@@ -6086,14 +6108,48 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "civicplus-agendacenter-year-2024",
+          "url": "https://www.effinghamcounty.org/AgendaCenter",
+          "title": "Effingham AgendaCenter year/category read",
+          "kind": "public_tenant",
+          "observed": "One bounded public year/category read; no staff action.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "bounded_public_read_not_provider_acceptance",
+          "findings": [
+            "Selection year=2024 and catID=3 returned HTTP 200 HTML, 86,555 bytes, with 35 mapped rows dated 2024-01-16 through 2024-12-03."
+          ],
+          "limits": "One selection only; other years/categories, continuation, full archive bounds and writes remain unverified.",
+          "receipt_path": "docs/verification/civicplus-agenda-center-year-2024-2026-11-12.json",
+          "receipt_sha256": "3c84b59bd2b0df57c601272bba66c6e949562d11312d61c2cf6f80d4dc28a6e9"
+        },
+        {
+          "id": "civicplus-viewfile-html-2026-11-12",
+          "url": "https://www.effinghamcounty.org/AgendaCenter",
+          "title": "AgendaCenter html=true ViewFile returned HTML",
+          "kind": "public_tenant",
+          "observed": "One engine retrieval of a supplied ViewFile link.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": [
+            "The supplied ViewFile?html=true response completed as text/html, 2,481 bytes, SHA-256 4d84e2d105bf4e452065aa75f6d845cc7700a5722e6eafaa21c1d59c18f88690; it is not PDF/binary proof."
+          ],
+          "limits": "PDF/download MIME and bytes and source-specific attachment support remain unverified.",
+          "receipt_path": "docs/verification/agendacenter-viewfile-html-2026-11-12.json",
+          "receipt_sha256": "5152ffa25335b4737be39b3358774b9b806add475961b536b219c6e46d619102"
         }
       ],
       "tenants": [
         {
           "url": "https://www.effinghamcounty.org/AgendaCenter",
-          "observation": "Effingham Agenda Center Archive; Initial archive page; year/filter requests and binary downloads untested.",
+          "observation": "Selected 2024/category 3 response yielded 35 rows. Supplied ViewFile?html=true retrieval returned text/html, not PDF; other years, categories and binaries remain unverified.",
           "evidence_ids": [
-            "civicplus-agenda-center-tenant"
+            "civicplus-agenda-center-tenant",
+            "civicplus-agendacenter-year-2024",
+            "civicplus-viewfile-html-2026-11-12"
           ]
         },
         {
@@ -6132,7 +6188,8 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "civicplus-agenda-center-tenant"
+            "civicplus-agenda-center-tenant",
+            "civicplus-agendacenter-year-2024"
           ],
           "details": "Public listing/navigation observed; not exhaustive discovery coverage.",
           "dependencies": [],
@@ -6156,12 +6213,13 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "civicplus-agenda-center-tenant"
+            "civicplus-agenda-center-tenant",
+            "civicplus-viewfile-html-2026-11-12"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval.",
+          "details": "A supplied ViewFile?html=true representation returned 2,481 bytes of text/html. It is not PDF/binary-document proof; source-specific binary attachment support remains unverified.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
+            "Verify a distinct supplied PDF/binary route and its MIME/redirect/bytes if exposed; do not count the completed HTML representation as PDF."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -6646,7 +6704,7 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "Year navigation/View More observed; page/date/search request parameters unknown."
+        "details": "One year/category selection (2024/category 3) returned 35 rows; continuation, other categories/years and full archive bounds remain unknown. ViewFile?html=true returned HTML, not PDF."
       },
       "auth": {
         "public_read": "unverified",
@@ -6656,9 +6714,9 @@
         "SVG unsupported; PDF-only agendas do not accept structured items; item removal required before modification; approval/publishing rights."
       ],
       "remaining_research": [
-        "On selected Effingham AgendaCenter, follow one year navigation and one linked Agenda/ViewFile document; capture actual request, bytes, MIME/redirect and previous-version links. Chino extraction failure is already recorded; do not add another tenant.",
-        "Official CivicPlus material describes the staff agenda/item UI but supplies no external machine request/response or file-import schema. Obtain tenant-supported API/integration specification and authorized test account.",
-        "If access is supplied, verify role/approval/visibility and duplicate/update/readback separately for meeting, item and file; no remote writes occurred."
+        "Effingham 2024/category 3 returned 35 rows. Supplied ViewFile?html=true returned text/html (2,481 bytes), so no PDF/binary proof exists. Other years/categories, previous-version links and archive completeness remain unresolved; do not repeat the same HTML route. Chino extraction failure remains recorded; add no tenant.",
+        "Official CivicPlus material describes staff UI but supplies no external machine request/response or import schema. A tenant-supported API/integration specification and authorized test account remain needed.",
+        "If authorized test access is supplied, verify role/approval/visibility and duplicate/update/readback separately for meeting, item and file; no remote writes occurred."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "civicplus-agenda-center",
@@ -9468,6 +9526,22 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "civicweb-supplied-print-pdf-2026-11-12",
+          "url": "https://ciindependenceor.civicweb.net/Portal/MeetingInformation.aspx?Id=11021",
+          "title": "Independence supplied public print PDF",
+          "kind": "public_tenant",
+          "observed": "One supplied public meeting document fetched; no staff operation.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": [
+            "MeetingInformation.aspx?Id=11021 was City Council Work Session. Supplied print file completed as application/pdf, 120,193 bytes, SHA-256 781943f47d7af1b250ee3c6f4b69b862feeb369ac829d2a66e851b3426348643."
+          ],
+          "limits": "One print PDF only; agenda/minutes kind was not inferred, full archive/continuation and writes remain unverified.",
+          "receipt_path": "docs/verification/civicweb-supplied-document-2026-11-12.json",
+          "receipt_sha256": "fd2fe678d91df060fe04b3d0af6123ae501bf275a31a38f71990b4f0130a8251"
         }
       ],
       "tenants": [
@@ -9480,9 +9554,10 @@
         },
         {
           "url": "https://ciindependenceor.civicweb.net/Portal/MeetingTypeList.aspx",
-          "observation": "Independence meeting-type listing; May be stale July 2025 content; not full catalog.",
+          "observation": "One explicit Independence detail supplied a completed 120,193-byte PDF; this is not a full meeting-type archive or agenda/minutes classification.",
           "evidence_ids": [
-            "icompass-civicweb-tenant"
+            "icompass-civicweb-tenant",
+            "civicweb-supplied-print-pdf-2026-11-12"
           ]
         }
       ],
@@ -9538,12 +9613,13 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "icompass-civicweb-tenant"
+            "icompass-civicweb-tenant",
+            "civicweb-supplied-print-pdf-2026-11-12"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval.",
+          "details": "One supplied public print document completed as a 120,193-byte application/pdf through the generic supplied-link fetch path. Its agenda/minutes kind and full archive completeness remain unverified.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
+            "Establish meeting-type/list completeness and separately classify documents only when source metadata supports the kind; the one supplied print PDF is already fetched."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -10005,7 +10081,7 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "Overview only three meetings/body; detail/type navigation required; continuation unknown."
+        "details": "One selected detail and supplied print PDF were fetched; full MeetingTypeList bounds, continuation and native search remain unknown."
       },
       "auth": {
         "public_read": "unverified",
@@ -10013,8 +10089,8 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "On the selected Independence tenant, request one MeetingTypeList.aspx for an explicit meeting type and follow a MeetingInformation.aspx record to agenda/minutes; capture continuation, attachment MIME and byte hashes.",
-        "The public product page/staff guide describe UI scheduling/document workflows but publish no machine schema. Obtain the tenant API/import specification and authorized write credentials before external create/update/upload.",
+        "On Independence, one MeetingInformation.aspx?Id=11021 item and one supplied print PDF were fetched (120,193 bytes, application/pdf). The document kind was not inferred; full meeting-type archive, continuation, adjacent dates and native search remain unestablished.",
+        "Public product/staff documentation publishes no machine schema. Obtain tenant API/import specification and authorized write credentials before external create/update/upload.",
         "Do not derive write fields from labels such as Meeting Type, Description or auto-assigned item/file numbers."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
@@ -10706,14 +10782,33 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "swagit-public-search-page2-2026-11-12",
+          "url": "https://princetontx.new.swagit.com/videos/search?q=Council",
+          "title": "Swagit Search Archives first two pages",
+          "kind": "public_tenant",
+          "observed": "One same-origin page-2 GET followed the saved public page-1 rel=next link.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "bounded_public_read_not_provider_acceptance",
+          "findings": [
+            "The public form uses GET /videos/search with q and utf8; pages 1 and 2 each returned 10 provider-ID rows with disjoint IDs. Page 1 had 357 Sound Search timestamp URLs and page 2 had 222.",
+            "Timestamp URLs are retained links, not transcript text. Provider query semantics were not independently established; bounded local exact matching uses available title/date fields.",
+            "The selected archive capture maps 482 rows; this does not establish full catalog completeness."
+          ],
+          "limits": "No third search page, full catalog, transcript text, playback or provider write acceptance.",
+          "receipt_path": "docs/verification/swagit-native-search-page2-2026-11-12.json",
+          "receipt_sha256": "e2eff82e22cd127122b765cab17c1ec2243881e37267bdb492bc16ca6f427ce2"
         }
       ],
       "tenants": [
         {
           "url": "https://princetontx.new.swagit.com/views/261/",
-          "observation": "GET 200; archive rows and links visible. Body/year archives expose title, date, duration, /videos/{id} and /videos/{id}/agenda links. Search Archives control visible. Limits: Player reported HLS playlist request error; media playback and search submission not tested.",
+          "observation": "Selected archive maps 482 rows. Public search pages 1 and 2 yielded 10 distinct provider IDs each; timestamp links are not transcript text, and full catalog/upstream query semantics remain unverified.",
           "evidence_ids": [
-            "swagit-princeton"
+            "swagit-princeton",
+            "swagit-public-search-page2-2026-11-12"
           ]
         }
       ],
@@ -10746,7 +10841,8 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "swagit-princeton"
+            "swagit-princeton",
+            "swagit-public-search-page2-2026-11-12"
           ],
           "details": "Follow configured /views/{id}/ archive by body and year, then /videos/{id}; do not treat live player failure as empty archive.",
           "dependencies": [
@@ -10773,14 +10869,15 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "swagit-princeton"
+            "swagit-princeton",
+            "swagit-public-search-page2-2026-11-12"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. No media playback, upload, API write, search submission or caption retrieval tested.",
+          "details": "Public GET captures document/page HTML and search results; no attachment-transfer or media playback acceptance is established. Timestamp links are not transcript text.",
           "dependencies": [
             "shared network safeguards"
           ],
           "remaining_verification": [
-            "Verify raw response MIME, redirects, document/media status and independent attachment failures."
+            "Verify a supplied agenda/document or media route with MIME/redirect and independent failure outcomes; do not infer transcripts from timestamp links."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -10824,12 +10921,13 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "swagit-princeton"
+            "swagit-princeton",
+            "swagit-public-search-page2-2026-11-12"
           ],
-          "details": "Search Archives UI observed; request contract and matching fields unverified.",
+          "details": "Public GET /videos/search?q=Council with utf8 returned 10 rows on each of the first two pages; provider query semantics remain unknown. Bounded exact matching is over available title/date metadata; Sound Search timestamps are retained links, not transcripts.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify request method/route, exact-term/phrase/date/body semantics, paging and incomplete/error outcomes."
+            "Verify semantics only through documented provider behavior or separately bounded public examples; fetch additional pages only when required and within the existing bounded scope."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -11088,7 +11186,7 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "Body/year sections observed; page/API pagination, caps and historical completeness unverified."
+        "details": "Selected archive capture maps 482 rows; pages 1 and 2 each returned 10 distinct provider-ID rows. No third page was fetched; full archive/query completeness is unknown."
       },
       "auth": {
         "public_read": "unverified",
@@ -11099,9 +11197,9 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "On Princeton’s /views/261 archive, traverse one displayed body/year plus /videos/{id} and agenda document link; record response MIME/redirect. The HLS playback error does not mean the archive is empty.",
-        "The Search Archives control has no captured request. Verify query/matching/paging only through a public-read submission on this same tenant.",
-        "Official Swagit integration documentation is login-gated and describes PrimeGov/MediaManager ID integration, not a general write API. Exact create/update/upload methods require customer documentation and authorized access."
+        "Princeton archive capture maps 482 rows; bounded Search Archives pages 1 and 2 yielded 10 provider-ID rows each. No third page/full catalog result was fetched. Provider query semantics remain unknown; exact local matching uses available title/date only.",
+        "Sound Search timestamp URLs are links, not transcripts. No transcript text or video playback is established.",
+        "Official Swagit integration documentation is login-gated and describes PrimeGov/MediaManager IDs, not general writes. Create/update/upload methods need customer docs and authorized access."
       ],
       "authentication": "Archive public without credentials; support article requires customer login. Swagit/MediaManager integration account prerequisites unverified.",
       "write_findings": "Swagit-to-MediaManager integration is documented at product level, but no publicly usable Swagit entity create/update/upload contract was verified.",
@@ -11216,14 +11314,49 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "suiteone-older-groups-engine-read-2026-11-12",
+          "url": "https://vermilionoh.suiteonemedia.com/",
+          "title": "SuiteOne root plus one supplied older group",
+          "kind": "public_tenant",
+          "observed": "Bounded engine traversal of the public root and one current supplied Older Meetings group request.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": [
+            "The engine returned 328 meeting records across the root and one Older Meetings group; 17 older groups were reported and continuation is present. Coverage is partial/truncated, catalog_complete=false and source_complete=false.",
+            "Selected dates span 2022-01-25 through 2026-11-17."
+          ],
+          "limits": "Only one of 17 older groups; remaining groups and full history are not enumerated. No provider write acceptance.",
+          "receipt_path": "docs/verification/suiteone-older-groups-2026-11-12.json",
+          "receipt_sha256": "2862cdecd305192b1920716a81374fa8b0d29092eef1ff7bd28db92feb79346b"
+        },
+        {
+          "id": "suiteone-older-group-request-2026-11-12",
+          "url": "https://vermilionoh.suiteonemedia.com/Home/GetRecentEventsGroup",
+          "title": "SuiteOne exact older-group request and response",
+          "kind": "public_tenant",
+          "observed": "One public group POST using fields from the current page; no staff operation.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "bounded_public_read_not_provider_acceptance",
+          "findings": [
+            "POST form yearFrom=2025, groupId=8, uniqueId=BoardofZoningAppeals, categoryId=32, groupName=Board of Zoning Appeals, psize=10 and page=0 returned HTTP 200 text/html, 165,886 bytes, 52 parsed meetings."
+          ],
+          "limits": "One group only; does not establish complete traversal.",
+          "receipt_path": "docs/verification/suiteone-older-group-request-2026-11-12.json",
+          "receipt_sha256": "73df1b17b2a60eea5ebfce705d57e67173f499338c6ec388a54c9b2779364a38"
         }
       ],
       "tenants": [
         {
           "url": "https://vermilionoh.suiteonemedia.com/",
-          "observation": "GET 200; upcoming/past meeting tables read. Tables grouped by category/year expose /event/?id=, agenda aid, packet apid, minutes mid download links. Search/date/category controls and Older Meetings links visible. Limits: Older Meetings lazy-load and search requests not exercised; document links observed, not downloaded.",
+          "observation": "Root plus one older group produced 328 partial rows; 17 older groups were reported and continuation remains.",
           "evidence_ids": [
-            "suiteone-vermilion"
+            "suiteone-vermilion",
+            "suiteone-older-groups-engine-read-2026-11-12",
+            "suiteone-older-group-request-2026-11-12"
           ]
         }
       ],
@@ -11256,16 +11389,16 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "suiteone-vermilion"
+            "suiteone-vermilion",
+            "suiteone-older-groups-engine-read-2026-11-12"
           ],
-          "details": "Read archive tables, category/year groups and event IDs; follow document links with independent attachment outcomes.",
+          "details": "Public archive root plus one current Older Meetings group POST returned 328 records; 17 older groups were reported and continuation is present. Coverage is partial/truncated.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
           ],
           "remaining_verification": [
-            "Older Meetings controls indicate additional history; loading endpoint, page size and completeness need verification.",
-            "Build fixtures and verify complete bounded result traversal."
+            "Continue remaining supplied Older Meetings groups within bounded checkpoints if needed; current evidence covers root plus one of 17 reported groups, not full history."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -11665,7 +11798,7 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "Older Meetings controls indicate additional history; loading endpoint, page size and completeness need verification."
+        "details": "Root plus one Older Meetings group yielded 328 records and reported 17 older groups with continuation retained. Coverage is partial/truncated; remaining groups and full historical bounds are unknown."
       },
       "auth": {
         "public_read": "unverified",
@@ -11676,8 +11809,8 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "On the selected Vermilion archive, exercise one Older Meetings control and one event/agenda/packet/minutes link; capture lazy-load request, date/category continuity, MIME and redirects.",
-        "The official SuiteOne guide names WMV and Liberty *_content.HTML intake with asynchronous processing, but no exact bookmark HTML schema. Obtain an authorized vendor-produced example before completing that file export.",
+        "On Vermilion, root and one supplied Older Meetings group were traversed (328 rows; 17 older groups reported; continuation retained). Remaining groups, full history and all meeting/document MIME/redirect outcomes remain unestablished.",
+        "The SuiteOne guide names WMV and Liberty *_content.HTML intake with asynchronous processing, but no exact bookmark HTML schema. An authorized vendor-produced example is still needed for that import.",
         "Admin UI steps are documented; no machine write contract, account credentials or publication/readback test is available."
       ],
       "authentication": "Public archive GET anonymous. Upload/update requires an authorized SuiteView Admin account; account tier not specified.",
@@ -11819,6 +11952,38 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "peak-lower-merion-capture-2026-11-12",
+          "url": "https://lowermerion.granicus.com/ViewPublisher.php?view_id=1",
+          "title": "Lower Merion Peak ViewPublisher capture",
+          "kind": "public_tenant",
+          "observed": "Bounded public capture of the existing Lower Merion source.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "bounded_public_read_not_provider_acceptance",
+          "findings": [
+            "HTTP 200, 198,380 bytes, SHA-256 e365421d12fcb979175c079d02d828bd05288e71570c386991060d30036c059f; 116 records dated 2025-10-08 through 2026-11-18. Parse status partial, no errors; no first document record identified."
+          ],
+          "limits": "One public capture only; no full archive or provider write acceptance.",
+          "receipt_path": "docs/verification/peak-lower-merion-capture-2026-11-12.json",
+          "receipt_sha256": "2225d1a7536b4d3ae207e229e92ffaa4fca0e12c8ea6ce1d4573da71b2cfa9d7"
+        },
+        {
+          "id": "peak-one-supplied-pdf-2026-11-12",
+          "url": "https://lowermerion.granicus.com/ViewPublisher.php?view_id=1",
+          "title": "Peak one supplied PDF outcome",
+          "kind": "public_tenant",
+          "observed": "One supplied PDF retrieval completed; receipt serialization failed afterward and the fetch was not repeated.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": [
+            "The completed supplied PDF has SHA-256 19994b412b91e3b6a41f77a7999971d8396c3d5bffaeb74290954e39e62db4cc."
+          ],
+          "limits": "One PDF only; no RSS schema, archive completeness, other media or write acceptance. Detailed receipt serialization limit is retained.",
+          "receipt_path": "docs/verification/peak-champ-supplied-artifacts-2026-11-12.json",
+          "receipt_sha256": "242605928b1f5edffd5deaaba0a04f32701708a8ea5407a8ceec3219c3ae579d"
         }
       ],
       "tenants": [
@@ -11831,9 +11996,11 @@
         },
         {
           "url": "https://lowermerion.granicus.com/ViewPublisher.php?view_id=1",
-          "observation": "Lower Merion public ViewPublisher; First extraction HTTP 500, retry succeeded; no submitted search or binary downloads.",
+          "observation": "Lower Merion selected capture yielded 116 rows and one supplied PDF completed; full archive and RSS remain unverified.",
           "evidence_ids": [
-            "granicus-peak-tenant"
+            "granicus-peak-tenant",
+            "peak-lower-merion-capture-2026-11-12",
+            "peak-one-supplied-pdf-2026-11-12"
           ]
         }
       ],
@@ -11865,7 +12032,8 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "granicus-peak-tenant"
+            "granicus-peak-tenant",
+            "peak-lower-merion-capture-2026-11-12"
           ],
           "details": "Public listing/navigation observed; not exhaustive discovery coverage.",
           "dependencies": [],
@@ -11889,12 +12057,13 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "granicus-peak-tenant"
+            "granicus-peak-tenant",
+            "peak-one-supplied-pdf-2026-11-12"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval.",
+          "details": "One separately supplied PDF completed with recorded SHA-256; receipt serialization failed afterward and the fetch was not repeated. This is one-document evidence, not archive/general media acceptance.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
+            "The one supplied PDF has been fetched; any further document/MIME outcome must be a separately supplied bounded item. The observed response does not establish general media support."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -12396,7 +12565,7 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "Upcoming/archive/RSS observed; full continuation unknown; ViewPublisher alone not unique Peak fingerprint."
+        "details": "The selected Lower Merion capture has 116 rows dated 2025-10-08 through 2026-11-18, partial; one supplied PDF completed separately. Full archive continuation is unknown."
       },
       "auth": {
         "public_read": "unverified",
@@ -12404,8 +12573,8 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "On the selected Lower Merion Peak ViewPublisher, retrieve one RSS feed and one archived page/document; record feed schema, query/date coverage and redirect behavior.",
-        "The Elko Peak manual gives authenticated UI fields, attachment privacy values and a 200 MB limit, but no external route/payload. Machine create/update/upload, role permissions and readback need a supported API contract and authorized Peak account.",
+        "Lower Merion capture returned 116 rows and one separately supplied PDF fetch completed. Detailed receipt serialization failed afterward; the fetch was not repeated. RSS schema, full archive continuation and other document/media outcomes remain unverified.",
+        "The Elko Peak manual gives authenticated UI fields and privacy values but no external route/payload. Machine create/update/upload, roles and readback still need supported API documentation and authorized Peak access.",
         "Do not use ViewPublisher fields as write parameters or reuse MediaManager/Legistar contracts."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
@@ -13639,14 +13808,48 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "town-hall-streams-bounded-listing-2026-11-12",
+          "url": "https://townhallstreams.com/town.php?id=72",
+          "title": "Hollis Town Hall Streams embedded event listing",
+          "kind": "public_tenant",
+          "observed": "Same public location page captured and parsed; embedded events required no continuation request.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": [
+            "HTTP 200, 87,874 bytes, SHA-256 83504145d3d0f7aa115c576600fa80751ecf4fddb64b3edbba85b95a455a7fd0; mapper returned 132 events with status partial. Event 74003 is Budget Committee on 2026-11-10; time zone unknown and agenda items absent."
+          ],
+          "limits": "Embedded rows only; no long-term completeness, stream bytes, PDF or write acceptance.",
+          "receipt_path": "docs/verification/town-hall-streams-capture-2026-11-12.json",
+          "receipt_sha256": "2b896e8e215d5ff7a808cfe49b335992fedbaaca1b8ba7cd381753eda915c7c9"
+        },
+        {
+          "id": "town-hall-streams-event-html-2026-11-12",
+          "url": "https://townhallstreams.com/stream.php?location_id=72&id=74003",
+          "title": "Town Hall Streams event detail HTML",
+          "kind": "public_tenant",
+          "observed": "One supplied event detail link fetched through the engine.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": [
+            "The detail returned completed text/html, 31,913 bytes, SHA-256 06bd5275933a68e2b41d629b820623da7fc09633773467d9e2016b494bf67bcb, with no supplied document links. HTML completion is not playable-media proof."
+          ],
+          "limits": "One detail HTML response only; no stream bytes or transcript.",
+          "receipt_path": "docs/verification/town-hall-stream-detail-2026-11-12.json",
+          "receipt_sha256": "f3bef42c620c611ac3d2aeba6e9681d4b21fdbe8886d635068ae835aa6377ad2"
         }
       ],
       "tenants": [
         {
           "url": "https://townhallstreams.com/town.php?id=72",
-          "observation": "GET 200. Upcoming and Previous Events grouped by year/month or meeting type; event title, date, time and EST label; stream.php?location_id=72&id=... links. Limits: EST label even on summer events must not silently become reliable DST offset. Completeness beyond retained history unknown.",
+          "observation": "Selected page returned 132 embedded events; event 74003 detail is HTML only, with no document or playable stream bytes.",
           "evidence_ids": [
-            "ths-hollis"
+            "ths-hollis",
+            "town-hall-streams-bounded-listing-2026-11-12",
+            "town-hall-streams-event-html-2026-11-12"
           ]
         }
       ],
@@ -13681,16 +13884,16 @@
           "implementation_status": "not_implemented",
           "evidence_ids": [
             "ths-hollis",
-            "ths-player"
+            "ths-player",
+            "town-hall-streams-bounded-listing-2026-11-12"
           ],
-          "details": "Configured town.php?id={location}; enumerate upcoming/previous event links and scoped location_id/event id.",
+          "details": "The selected public location page yielded 132 embedded event rows with status partial; one event detail HTML was fetched. No additional network continuation was observed and catalog/retention bounds remain unknown.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
           ],
           "remaining_verification": [
-            "Year/month and meeting-type groups observed; no paging API or long-term completeness verified. Advertised one-year retention is a service claim, not universal tenant cutoff.",
-            "Build fixtures and verify complete bounded result traversal."
+            "Establish only whether the current public page exposes additional explicit continuation/date controls; the selected embedded listing itself is partial and no full archive bounds are known."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -13709,9 +13912,10 @@
           "implementation_status": "not_implemented",
           "evidence_ids": [
             "ths-hollis",
-            "ths-player"
+            "ths-player",
+            "town-hall-streams-event-html-2026-11-12"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. No supplied captions/transcripts or direct playable media verified. Service statement 'no uploading' must not be reclassified as unavailable upload capability.",
+          "details": "One supplied event-detail link completed as text/html, with no supplied documents. HTML retrieval is not playable stream or media-byte acceptance.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -14044,7 +14248,7 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "Year/month and meeting-type groups observed; no paging API or long-term completeness verified. Advertised one-year retention is a service claim, not universal tenant cutoff."
+        "details": "132 embedded event rows were parsed from the selected page; no additional network continuation was observed. Long-term catalog/retention bounds remain unknown."
       },
       "auth": {
         "public_read": "unverified",
@@ -14055,8 +14259,8 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "On Hollis location id 72, follow one previous year/month group and one event detail; capture date bounds, event IDs and agenda/minutes URLs.",
-        "The selected player returned error 102630. Do not treat this as an empty archive or media acceptance; stream bytes and retention remain unverified.",
+        "The selected Hollis location page yielded 132 embedded rows; event 74003 detail yielded HTML only. No PDF/document links or playable stream bytes were available in this bounded capture; time zone remains unknown.",
+        "Do not treat an earlier player error or completed HTML fetch as an empty archive or media acceptance. Stream bytes and tenant retention remain unverified.",
         "Reviewed sources provide no public create/update/upload API or vendor import schema; provider/admin documentation is needed for write questions."
       ],
       "authentication": "Town archive public. Scheduling requires service account; tier/roles unknown.",
@@ -14954,6 +15158,38 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "champ-supplied-pdf-and-player-html-2026-11-12",
+          "url": "https://play.champds.com/lakezurichil/event/164",
+          "title": "CHAMP supplied document and player HTML",
+          "kind": "public_tenant",
+          "observed": "One supplied Lake Zurich document URL and player page fetched; no new tenant.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": [
+            "Supplied PDF completed as application/pdf, 1,933,081 bytes, SHA-256 36b3eea88e433672b37d5c383b74f4cc4b77c1da2f771a0cc809da151baf0a90. Player HTML completed, 10,785 bytes, SHA-256 d937d10c1721bb9e84371d6e9f49f79cb8704b57ad962ea1ea63bfd92d43cf0d; HTML does not prove playback."
+          ],
+          "limits": "One PDF and one player HTML only; no catalog or playable stream acceptance.",
+          "receipt_path": "docs/verification/champ-supplied-links-2026-11-12.json",
+          "receipt_sha256": "ac34d0ae2320eced2398ef240f34e76aa008fe1a295567bc6280680800a0bcaa"
+        },
+        {
+          "id": "champ-supplied-hls-fetch-partial-2026-11-12",
+          "url": "https://play.champds.com/lakezurichil/event/164",
+          "title": "CHAMP supplied HLS/media fetch remains partial",
+          "kind": "public_tenant",
+          "observed": "One supplied HLS/media attempt retained partial result; no retry/playback claim.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": [
+            "The preserved outcome is partial/attachment_unavailable. Public player source composes VOD2 when present, otherwise selects service 2048 or 8 and substitutes URLFilename; this describes URL selection only."
+          ],
+          "limits": "One supplied HLS/media attempt only; no playlist/segment/playable media acceptance.",
+          "receipt_path": "docs/verification/peak-champ-supplied-artifacts-2026-11-12.json",
+          "receipt_sha256": "242605928b1f5edffd5deaaba0a04f32701708a8ea5407a8ceec3219c3ae579d"
         }
       ],
       "tenants": [
@@ -14967,10 +15203,12 @@
         },
         {
           "url": "https://play.champds.com/lakezurichil/event/164",
-          "observation": "Public player tenant; direct and engine reads captured one detail only; catalog and pagination not verified.",
+          "observation": "Lake Zurich event 164 has one completed supplied PDF and player HTML; separate supplied HLS/media fetch is partial. No playback/catalog proof.",
           "evidence_ids": [
             "champ-public-player-js",
-            "champ-lakezurich-event-json"
+            "champ-lakezurich-event-json",
+            "champ-supplied-pdf-and-player-html-2026-11-12",
+            "champ-supplied-hls-fetch-partial-2026-11-12"
           ]
         }
       ],
@@ -15034,14 +15272,16 @@
             "champ-public-player-js",
             "champ-lakezurich-event-json",
             "champ-yuma-event-json",
-            "champ-live-engine-detail-receipt"
+            "champ-live-engine-detail-receipt",
+            "champ-supplied-pdf-and-player-html-2026-11-12",
+            "champ-supplied-hls-fetch-partial-2026-11-12"
           ],
-          "details": "Engine fetch_record implements the public client-derived GET /{CustomerAccessID}/event/{EventID}; two bounded tenants returned one record each with originals preserved. Bodies parse as JSON despite text/html MIME. This does not imply attachment downloads or catalog completeness.",
+          "details": "Two public event details are engine-read verified. One supplied PDF and player HTML completed; a separate supplied HLS/media request remained partial. No playback, segment or catalog completeness is established.",
           "dependencies": [
             "shared network safeguards"
           ],
           "remaining_verification": [
-            "Public event catalog and page completeness remain open; attachment bytes/MIME have not been independently verified."
+            "Do not generalize the one supplied PDF to other links. The separate HLS/media attempt is partial; playable stream/segment retrieval remains unverified."
           ],
           "acceptance_status": "live_read_passed",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -15478,7 +15718,7 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "Event detail is one record. Admin help search index says event list pages contain 15 events; that is not a verified public JSON pagination contract."
+        "details": "Single-record event details do not establish a public index/catalog or pagination route. Supplied-document/media outcomes are separate bounded reads and do not imply catalog or playback completeness."
       },
       "auth": {
         "public_read": "unverified",
@@ -15489,8 +15729,8 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "Two public event detail GETs are engine-receipted. The current player JS proves that detail route, but no public event index/list or paging route is established. Continue only through existing tenant links if an index is visibly exposed.",
-        "Verify one agenda/minutes document request and media availability separately; event JSON did not download attachments and Yuma reports no media.",
+        "Two public event details remain engine-read verified. One supplied Lake Zurich PDF completed (1,933,081 bytes); player HTML completed; a separate supplied HLS/media request remained partial. Public-player URL composition does not establish playback/segment acceptance. No public event index or paging contract is established.",
+        "Do not generalize the one PDF to other documents or event media. Yuma reports no media.",
         "CHAMP Help documents staff event/media/PDF workflows, not machine writes. API codecs, account roles and write/readback remain unverified without authorized credentials."
       ],
       "authentication": "Public player metadata observed; CHAMP login required for UI writes; role/tier and API credential contract unknown.",
@@ -15617,14 +15857,48 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "onbase-public-search-redirect-blocked-2026-11-12",
+          "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings",
+          "title": "Fitchburg OnBase public search redirect boundary",
+          "kind": "public_tenant",
+          "observed": "One anonymous public search form POST with fresh in-process anti-forgery state; redirect was rejected and not followed.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "bounded_public_request_not_provider_acceptance",
+          "findings": [
+            "The Council query and This Year date option ended in guarded_redirect_rejected; response Location/status and redirected method were not exposed. No results or native search semantics were established."
+          ],
+          "limits": "One guarded POST only; not evidence the route/search is unsupported.",
+          "receipt_path": "docs/verification/onbase-public-search-2026-11-12.json",
+          "receipt_sha256": "f1c714d7bf546d38a1c31d603287f7e1b12bc8b3af34992221685d02bed02aab"
+        },
+        {
+          "id": "onbase-pdf-link-returned-html-2026-11-12",
+          "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/",
+          "title": "OnBase supplied .pdf link returned HTML",
+          "kind": "public_tenant",
+          "observed": "Corrected MIME and PDF-magic check for one supplied link; no retry.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": [
+            "The supplied Downloadfile URL ending .pdf returned HTTP 200 text/html, 3,719 bytes, SHA-256 4c1f3f9b93f85603759a5237725ef71c7b5121e8603447de78f7cdeec08ec832, with no PDF magic. Corrected engine result is partial and retains the meeting."
+          ],
+          "limits": "Never count this response as a PDF success; one diagnostic only. Route unavailability and catalog completeness remain unknown.",
+          "receipt_path": "docs/verification/onbase-pdf-mismatch-2026-11-12.json",
+          "receipt_sha256": "679bd63668cb6dde806dac334e223173ec992a029b2ec9eee9784d932dad6e16"
         }
       ],
       "tenants": [
         {
           "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/",
-          "observation": "Fitchburg public listing; No archive/search traversal or binary download.",
+          "observation": "Current root mapping 30 rows; Meetings response maps 0; search redirect was blocked. Supplied .pdf response is HTML/no PDF magic and corrected as partial.",
           "evidence_ids": [
-            "hyland-onbase-agenda-online-tenant"
+            "hyland-onbase-agenda-online-tenant",
+            "onbase-public-search-redirect-blocked-2026-11-12",
+            "onbase-pdf-link-returned-html-2026-11-12"
           ]
         }
       ],
@@ -15655,7 +15929,8 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "hyland-onbase-agenda-online-tenant"
+            "hyland-onbase-agenda-online-tenant",
+            "onbase-public-search-redirect-blocked-2026-11-12"
           ],
           "details": "Public listing/navigation observed; not exhaustive discovery coverage.",
           "dependencies": [],
@@ -15678,12 +15953,13 @@
           "capability_status": "observed",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "hyland-onbase-agenda-online-tenant"
+            "hyland-onbase-agenda-online-tenant",
+            "onbase-pdf-link-returned-html-2026-11-12"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval.",
+          "details": "One supplied .pdf link returned HTTP 200 text/html without PDF magic. Corrected result is partial and retains the meeting; this is not a PDF success or unsupported-route finding.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
+            "Verify supplied document MIME and magic bytes before reporting a PDF. The one current URL yielded HTML and must remain partial; other links are unverified."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -15725,12 +16001,13 @@
           "capability_status": "documented",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "hyland-onbase-agenda-online-docs"
+            "hyland-onbase-agenda-online-docs",
+            "onbase-public-search-redirect-blocked-2026-11-12"
           ],
-          "details": "Authoring Meeting Search/Agenda Item Search documented; public portal search request not verified.",
+          "details": "The visible public search POST was attempted with a fresh in-process anti-forgery token, but guarded transport rejected the redirect before exposing the target or results. No native search semantics are established.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify usable request route, permissions, result fields, exact/phrase semantics and pagination."
+            "Resolve the redirect only if the guarded same-origin/host policy permits it; do not weaken redirect guards. No route or search capability is declared unsupported from this result."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -16145,7 +16422,7 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "Upcoming body/date filters; archive/year/search pagination unverified."
+        "details": "Current root mapping yielded 30 rows; Meetings tab returned a response but mapped zero rows. A search POST was blocked before following redirect. Archive/year/search continuation and catalog completeness remain unknown."
       },
       "auth": {
         "public_read": "unverified",
@@ -16153,8 +16430,8 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "On the selected Fitchburg Agenda Online tenant, follow visible meeting/date filters, one ViewMeeting id and one Documents/Downloadfile link; capture bytes, MIME, redirect and adjacent-date coverage. The separate Santa Cruz live-read receipt is a configured capture, not a Fitchburg attachment test.",
-        "Hyland Agenda Foundation 25.1 guidance is version/installation-scoped. Identify tenant deployment/version and entitlement before applying API or write operations to Agenda Online.",
+        "On Fitchburg, current root maps 30 rows; one Meetings response mapped zero, and guarded search POST was rejected before redirect details/results. One supplied .pdf returned HTTP 200 text/html (3,719 bytes) without PDF magic; corrected result is partial and retains the meeting. This is neither PDF success nor proof of unsupported route.",
+        "Hyland Agenda Foundation 25.1 guidance is version/installation-scoped. Identify deployment/version and entitlement before applying API/write operations to Agenda Online.",
         "No authorized deployment-matched staff/test account or integration contract was supplied for create/update/upload."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",

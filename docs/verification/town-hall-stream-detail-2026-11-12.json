@@ -1,0 +1,23 @@
+{
+  "source": "https://townhallstreams.com/town.php?id=72",
+  "identity": {
+    "provider": "town-hall-streams",
+    "namespace": "//townhallstreams.com?location_id=72",
+    "record_type": "meeting",
+    "external_id": "74003",
+    "parent": null,
+    "derivation": "provider_or_legacy_reader",
+    "stability": "Stable according to the pinned input-format mapping; not an application identifier."
+  },
+  "status": "completed",
+  "errors": [],
+  "attachment": {
+    "citation_url": "https://townhallstreams.com/stream.php?location_id=72&id=74003",
+    "content_type": "text/html",
+    "byte_length": 31913,
+    "sha256": "06bd5275933a68e2b41d629b820623da7fc09633773467d9e2016b494bf67bcb",
+    "text_availability": "not_extracted"
+  },
+  "supplied_document_links": [],
+  "limits": "HTML player retrieval only; not verified playable media. All observed year/month groups already embedded in town page, no network continuation observed."
+}

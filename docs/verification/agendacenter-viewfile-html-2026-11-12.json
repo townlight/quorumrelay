@@ -1,0 +1,33 @@
+[
+  {
+    "provider": "civicplus-agenda-center",
+    "status": "partial",
+    "records": 35,
+    "errors": [],
+    "external_id": "935",
+    "attachment_status": "completed",
+    "attachment": {
+      "citation_url": "https://www.effinghamcounty.org/AgendaCenter/ViewFile/Agenda/_05062025-935?html=true",
+      "selected_url_field": "url",
+      "content_type": "text/html",
+      "byte_length": 2481,
+      "sha256": "4d84e2d105bf4e452065aa75f6d845cc7700a5722e6eafaa21c1d59c18f88690",
+      "text_availability": "not_extracted"
+    },
+    "attachment_errors": []
+  },
+  {
+    "provider": "onbase",
+    "status": "failed",
+    "records": 0,
+    "errors": [
+      {
+        "code": "invalid_input",
+        "message": "The input format does not belong to the configured provider.",
+        "retryable": false,
+        "source": null,
+        "details": {}
+      }
+    ]
+  }
+]

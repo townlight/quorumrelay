@@ -1,0 +1,64 @@
+{
+  "observed_at": "2026-11-12T11:54:25Z",
+  "provider": "swagit",
+  "configured_source": "https://princetontx.new.swagit.com/views/261/",
+  "scope": "One existing Princeton anonymous public search page-2 GET from the rel=next link supplied by the saved page-1 capture. No new tenant, staff route, credential, or write.",
+  "public_form": {
+    "method": "GET",
+    "path": "/videos/search",
+    "fields": [
+      "utf8",
+      "q"
+    ],
+    "utf8_value": "\u2713"
+  },
+  "page1": {
+    "capture": "swagit-search.body",
+    "bytes": 209496,
+    "sha256": "0b98a678a066895e73407a6032beff8f1df86d489e2ec55c975ed56073cb7f89",
+    "rows": 10,
+    "provider_ids": 10,
+    "sound_timestamp_urls": 357,
+    "rel_next": "/videos/search?page=2&q=Council&utf8=%E2%9C%93"
+  },
+  "page2_request": {
+    "method": "GET",
+    "url": "https://princetontx.new.swagit.com/videos/search?page=2&q=Council&utf8=%E2%9C%93",
+    "allowed_origin": "https://princetontx.new.swagit.com",
+    "redirects_followed": false,
+    "byte_limit": 4194304,
+    "deadline_seconds": 25
+  },
+  "page2_response": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 135796,
+    "sha256": "7de3f8753f2560c401577a478656087751df9c6a30da675af98d64de41c5e1fe",
+    "rows": 10,
+    "provider_ids": 10,
+    "sound_timestamp_urls": 222,
+    "ids_disjoint_from_page1": true
+  },
+  "fixtures": {
+    "page1": {
+      "path": "tests/fixtures/swagit-native-search/page-1.html",
+      "sha256": "0b98a678a066895e73407a6032beff8f1df86d489e2ec55c975ed56073cb7f89"
+    },
+    "empty": {
+      "path": "tests/fixtures/swagit-native-search/empty.html",
+      "sha256": "52e676a0b3223ed361f80c45cfeca20625cdc89b2ddddf7cec1dd1cb6074a784"
+    },
+    "page2": {
+      "path": "tests/fixtures/swagit-native-search/page-2.html",
+      "sha256": "7de3f8753f2560c401577a478656087751df9c6a30da675af98d64de41c5e1fe"
+    }
+  },
+  "limits": {
+    "result_scope": "provider candidates followed by exact local matching on title and meeting_date",
+    "provider_query_semantics": "not independently established",
+    "sound_search": "timestamp URLs are retained as links; no transcript text is inferred",
+    "catalog_complete": false,
+    "source_complete": false,
+    "next_page_after_page2_fetched": false
+  }
+}

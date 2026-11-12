@@ -95,7 +95,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 Official documentation status: inspected_with_recorded_limits; the current search result is not a documented machine API.
 Account/tier: East Brunswick public page responded without credentials. Staff/test credentials were not supplied; no private access attempted.
-Test environment: public read-only capture only; no remote writes, credentials or attachment downloads.
+Test environment: bounded public reads only. One supplied agenda PDF was fetched on 2026-11-12; no credentials or remote writes were used.
 
 ### Representative research observations
 
@@ -103,10 +103,12 @@ Test environment: public read-only capture only; no remote writes, credentials o
 - Form values 2026-08-11 through 2027-02-11 returned a 12-page item pager: 180 item rows at 15 rows/page. All page bodies and SHA-256 values are in outputs/provider-route-probes-2026-11-11/novus-eastbrunswick-page-01-of-12.body through page-12-of-12.body and novus-eastbrunswick-page-traversal-2026-11-11.json. The meeting grid displayed 11 rows.
 - Item rows are `table[id*='radGridItems_ctl00'] tr.rgRow, table[id*='radGridItems_ctl00'] tr.rgAltRow`; meeting rows are `table[id*='radGridMeetings_ctl00'] tr.rgRow, table[id*='radGridMeetings_ctl00'] tr.rgAltRow`. Of 180 item rows, 75 had literal `Coversheet.aspx?ItemID=...&MeetingID=...` onclick targets (75 unique ID pairs); 105 rows had no such target, and no IDs were inferred.
 - A separate stateful read-only POST for “Superintendent’s report” returned HTTP 200 HTML with zero item rows. This does not establish exact/phrase semantics or a complete empty result.
+- 2026-11-12 follow-up: the saved postback response for a search candidate contained an ASP.NET date-validation error (“TO date must be after FROM date”) and no rows; no opaque form state was replayed. Visible form controls and MeetingView/Coversheet/DisplayAgendaPDF.ashx link shapes were recorded.
+- The engine fetched one supplied DisplayAgendaPDF.ashx?MeetingID=996 link as application/pdf, 28,849,631 bytes, SHA-256 90644aacdb5f3fc7bf0d82deff93edb5f51d60d5226344d1871fd6246eaf0c03. This is one supplied agenda only; no Minutes or structured detail read.
 
 ### Remaining research
 
-- The bounded reader and partial engine receipt cover 12 pages/180 items and 11 meeting rows in East Brunswick’s displayed 2026-08-11 through 2027-02-11 window. Next public step: submit a known nonempty search with refreshed ASP.NET state, then GET one explicit Coversheet/MeetingView and a linked document with separate MIME/redirect/hash outcomes.
+- The selected-window listing covers 12 pages/180 items and 11 meeting rows. One supplied agenda PDF has now been fetched. Successful native-search semantics, structured MeetingView/Coversheet retrieval and Minutes remain unverified; the saved postback error did not return rows.
 - On this same tenant, establish date-window defaults, retained history and meeting-grid continuation. The receipt exhausts only the selected window; catalog/source completeness are false.
 - No current machine create/update/upload route or authorized staff/test account was supplied; historical UI instructions are not API fields.
 
@@ -114,7 +116,7 @@ Test environment: public read-only capture only; no remote writes, credentials o
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "The item pager was traversed for the displayed form values 2026-08-11 through 2027-02-11: 12 pages, 180 rows, 15 per page. Meeting grid showed 11 rows. These observations do not establish retained-history or full-catalog bounds; the meeting grid’s own continuation behavior is unverified."
+  "details": "The item pager was traversed for the displayed form values 2026-08-11 through 2027-02-11: 12 pages, 180 rows, 15 per page. Meeting grid showed 11 rows. Follow-up did not establish successful native search or meeting-grid continuation; retained-history and full-catalog bounds remain unknown."
 }
 
 ### Authorization restrictions
@@ -163,12 +165,14 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Representative research observations
 
-- https://www.effinghamcounty.org/AgendaCenter: Effingham Agenda Center Archive; Initial archive page; year/filter requests and binary downloads untested.
+- https://www.effinghamcounty.org/AgendaCenter: selected year=2024/category=3 returned HTTP 200 HTML with 35 rows (2024-01-16 through 2024-12-03).
+- A supplied ViewFile URL ending `?html=true` returned 2,481 bytes of `text/html` (SHA-256 4d84e2d105bf4e452065aa75f6d845cc7700a5722e6eafaa21c1d59c18f88690); it is HTML, not a PDF/binary-document result.
+- Receipts: `docs/verification/civicplus-agenda-center-year-2024-2026-11-12.json` and `docs/verification/agendacenter-viewfile-html-2026-11-12.json`.
 - https://www.cityofchino.org/AgendaCenter: Chino candidate access failure; No directly fetched content; no unsupported conclusion.
 
 ### Remaining research
 
-- On selected Effingham AgendaCenter, follow one year navigation and one linked Agenda/ViewFile document; capture actual request, bytes, MIME/redirect and previous-version links. Chino extraction failure is already recorded; do not add another tenant.
+- Other Effingham years/categories, continuation, previous-version links and actual binary/PDF routes remain unresolved; the observed `html=true` representation must not be counted as a PDF. Chino extraction failure is already recorded; do not add another tenant.
 - Official CivicPlus material describes the staff agenda/item UI but supplies no external machine request/response or file-import schema. Obtain tenant-supported API/integration specification and authorized test account.
 - If access is supplied, verify role/approval/visibility and duplicate/update/readback separately for meeting, item and file; no remote writes occurred.
 
@@ -176,7 +180,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "Year navigation/View More observed; page/date/search request parameters unknown."
+  "details": "One selected year/category (2024/category 3) returned 35 rows. Continuation, other categories/years and full archive bounds remain unknown; ViewFile?html=true returned HTML, not PDF."
 }
 
 ### Authorization restrictions
@@ -302,11 +306,11 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 ### Representative research observations
 
 - https://csknowledgebase.civicweb.net/document/57754/: Milton staff guide hosted on CivicWeb knowledgebase; Tenant staff UI instructions not vendor API; deployment differences possible.
-- https://ciindependenceor.civicweb.net/Portal/MeetingTypeList.aspx: Independence meeting-type listing; May be stale July 2025 content; not full catalog.
+- https://ciindependenceor.civicweb.net/Portal/MeetingTypeList.aspx: Independence meeting-type listing; may be stale July 2025 content; not full catalog. One linked MeetingInformation.aspx?Id=11021 record was a City Council Work Session and supplied a completed print PDF (120,193 bytes, application/pdf; SHA-256 781943f47d7af1b250ee3c6f4b69b862feeb369ac829d2a66e851b3426348643). The document kind was not inferred as agenda/minutes. Receipt: `docs/verification/civicweb-supplied-document-2026-11-12.json`.
 
 ### Remaining research
 
-- On the selected Independence tenant, request one MeetingTypeList.aspx for an explicit meeting type and follow a MeetingInformation.aspx record to agenda/minutes; capture continuation, attachment MIME and byte hashes.
+- One MeetingInformation.aspx record and supplied print PDF have been captured. Full meeting-type archive, continuation, adjacent-date coverage and agenda/minutes classification remain unknown.
 - The public product page/staff guide describe UI scheduling/document workflows but publish no machine schema. Obtain the tenant API/import specification and authorized write credentials before external create/update/upload.
 - Do not derive write fields from labels such as Meeting Type, Description or auto-assigned item/file numbers.
 
@@ -314,7 +318,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "Overview only three meetings/body; detail/type navigation required; continuation unknown."
+  "details": "One explicit meeting detail and its supplied print PDF were fetched; full MeetingTypeList archive bounds and continuation remain unknown."
 }
 
 ### Authorization restrictions
@@ -355,19 +359,19 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Representative research observations
 
-- https://princetontx.new.swagit.com/views/261/: GET 200; archive rows and links visible. Body/year archives expose title, date, duration, /videos/{id} and /videos/{id}/agenda links. Search Archives control visible. Limits: Player reported HLS playlist request error; media playback and search submission not tested.
+- https://princetontx.new.swagit.com/views/261/: the selected archive capture maps 482 rows. GET /videos/search with q=Council returned 10 provider-ID rows on each of the first two pages; the page-2 request followed the supplied same-origin rel=next link and IDs were disjoint. Search query semantics remain unknown. Sound Search timestamp links were retained, not transcript text. Receipt: `docs/verification/swagit-native-search-page2-2026-11-12.json`.
 
 ### Remaining research
 
-- On Princeton’s /views/261 archive, traverse one displayed body/year plus /videos/{id} and agenda document link; record response MIME/redirect. The HLS playback error does not mean the archive is empty.
-- The Search Archives control has no captured request. Verify query/matching/paging only through a public-read submission on this same tenant.
+- The current archive capture maps 482 rows; only search pages 1 and 2 were fetched (10 provider-ID rows each). No third page or full archive boundary was established. The earlier player error remains separate from archive/search evidence.
+- The public Search Archives request is now observed for q=Council on pages 1 and 2. Upstream query semantics remain unverified; exact matching is limited to returned title/date metadata, so this does not prove all source matches are returned.
 - Official Swagit integration documentation is login-gated and describes PrimeGov/MediaManager ID integration, not a general write API. Exact create/update/upload methods require customer documentation and authorized access.
 
 ### Pagination contract
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "Body/year sections observed; page/API pagination, caps and historical completeness unverified."
+  "details": "Selected archive capture maps 482 rows. Search pages 1 and 2 each returned 10 disjoint provider-ID rows; no third page or full catalog boundary was tested."
 }
 
 ### Authorization restrictions
@@ -383,11 +387,11 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Representative research observations
 
-- https://vermilionoh.suiteonemedia.com/: GET 200; upcoming/past meeting tables read. Tables grouped by category/year expose /event/?id=, agenda aid, packet apid, minutes mid download links. Search/date/category controls and Older Meetings links visible. Limits: Older Meetings lazy-load and search requests not exercised; document links observed, not downloaded.
+- https://vermilionoh.suiteonemedia.com/: root plus one supplied Older Meetings POST returned 328 meeting rows total; 17 older groups were reported, continuation retained, and coverage remains partial/truncated. The selected dates span 2022-01-25 through 2026-11-17. The one POST returned 52 parsed meetings. Other groups and document downloads are not established. Receipts: `docs/verification/suiteone-older-groups-2026-11-12.json` and `docs/verification/suiteone-older-group-request-2026-11-12.json`.
 
 ### Remaining research
 
-- On the selected Vermilion archive, exercise one Older Meetings control and one event/agenda/packet/minutes link; capture lazy-load request, date/category continuity, MIME and redirects.
+- One Older Meetings group request and continuation checkpoint are now captured. Remaining groups and full history, plus separate event/agenda/packet/minutes MIME/redirect outcomes, remain unresolved.
 - The official SuiteOne guide names WMV and Liberty *_content.HTML intake with asynchronous processing, but no exact bookmark HTML schema. Obtain an authorized vendor-produced example before completing that file export.
 - Admin UI steps are documented; no machine write contract, account credentials or publication/readback test is available.
 
@@ -395,7 +399,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "Older Meetings controls indicate additional history; loading endpoint, page size and completeness need verification."
+  "details": "Root plus one Older Meetings group yielded 328 records with continuation retained; 17 older groups were reported. Remaining groups and full history are unresolved."
 }
 
 ### Authorization restrictions
@@ -412,11 +416,11 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 ### Representative research observations
 
 - https://elkocounty.granicus.com/DocumentViewer.php?file=elkocounty_297e107d2b4284d01a905ef2af7c24f9.pdf&view=1: Elko public copy of vendor-authored Peak manual; Historical 2015-era examples/browser requirements; current 200 MB limit must be reverified; not current API.
-- https://lowermerion.granicus.com/ViewPublisher.php?view_id=1: Lower Merion public ViewPublisher; First extraction HTTP 500, retry succeeded; no submitted search or binary downloads.
+- https://lowermerion.granicus.com/ViewPublisher.php?view_id=1: bounded capture returned 116 records dated 2025-10-08 through 2026-11-18, partial. One separately supplied PDF retrieval completed with SHA-256 19994b412b91e3b6a41f77a7999971d8396c3d5bffaeb74290954e39e62db4cc; detailed receipt serialization failed afterward and the fetch was not repeated. Receipts: `docs/verification/peak-lower-merion-capture-2026-11-12.json` and `docs/verification/peak-champ-supplied-artifacts-2026-11-12.json`.
 
 ### Remaining research
 
-- On the selected Lower Merion Peak ViewPublisher, retrieve one RSS feed and one archived page/document; record feed schema, query/date coverage and redirect behavior.
+- The selected capture and one supplied PDF are now recorded. RSS schema, full archive continuation and other document/media outcomes remain unverified; the receipt serialization failure is preserved and was not repaired by repeating the fetch.
 - The Elko Peak manual gives authenticated UI fields, attachment privacy values and a 200 MB limit, but no external route/payload. Machine create/update/upload, role permissions and readback need a supported API contract and authorized Peak account.
 - Do not use ViewPublisher fields as write parameters or reuse MediaManager/Legistar contracts.
 
@@ -424,7 +428,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "Upcoming/archive/RSS observed; full continuation unknown; ViewPublisher alone not unique Peak fingerprint."
+  "details": "The selected Lower Merion capture has 116 rows dated 2025-10-08 through 2026-11-18, partial; one supplied PDF completed separately. Full archive continuation is unknown."
 }
 
 ### Authorization restrictions
@@ -495,19 +499,19 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Representative research observations
 
-- https://townhallstreams.com/town.php?id=72: GET 200. Upcoming and Previous Events grouped by year/month or meeting type; event title, date, time and EST label; stream.php?location_id=72&id=... links. Limits: EST label even on summer events must not silently become reliable DST offset. Completeness beyond retained history unknown.
+- https://townhallstreams.com/town.php?id=72: GET 200, 87,874 bytes; 132 embedded event rows parsed with partial status. Event 74003 detail returned 31,913 bytes of text/html and no supplied document links; HTML is not playable-stream evidence. Time-zone status stays unknown and history bounds remain unverified. Receipts: `docs/verification/town-hall-streams-capture-2026-11-12.json` and `docs/verification/town-hall-stream-detail-2026-11-12.json`.
 
 ### Remaining research
 
-- On Hollis location id 72, follow one previous year/month group and one event detail; capture date bounds, event IDs and agenda/minutes URLs.
-- The selected player returned error 102630. Do not treat this as an empty archive or media acceptance; stream bytes and retention remain unverified.
+- The selected page already embeds 132 rows, and one supplied event detail is captured as HTML. No additional network group/page, PDF, agenda/minutes link or playable stream bytes were observed.
+- The earlier player error and later completed HTML response are not media acceptance. Stream bytes and tenant retention remain unverified.
 - Reviewed sources provide no public create/update/upload API or vendor import schema; provider/admin documentation is needed for write questions.
 
 ### Pagination contract
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "Year/month and meeting-type groups observed; no paging API or long-term completeness verified. Advertised one-year retention is a service claim, not universal tenant cutoff."
+  "details": "132 embedded event rows were parsed from the selected page; no additional network continuation was observed. Long-term catalog/retention bounds remain unknown."
 }
 
 ### Authorization restrictions
@@ -553,12 +557,12 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 ### Representative research observations
 
 - Public player JS https://play.champds.com/_COMMON/js/cds.event.js?1794445126 derives GET https://playapi.champds.com/{CustomerAccessID}/event/{EventID} and expects JSON.
-- https://playapi.champds.com/lakezurichil/event/164 and https://playapi.champds.com/yumacoaz/event/657: unauthenticated GETs returned HTTP 200 JSON-shaped bodies served as text/html. Engine receipt docs/verification/champ-detail-2026-11-11.json reports completed one-event reads with original fields preserved (14 agenda items each; Lake Zurich 6 documents, Yuma 0; 1 recording each); catalog_complete=false. No attachment bytes downloaded. Direct hashes and snapshots: outputs/provider-route-probes-2026-11-11/capture-index.json.
+- https://playapi.champds.com/lakezurichil/event/164 and https://playapi.champds.com/yumacoaz/event/657: two bounded detail reads remain complete with original fields preserved (14 agenda items each; Lake Zurich 6 documents, Yuma 0; one recording each); catalog_complete=false. Follow-up Lake Zurich supplied PDF completed (1,933,081 bytes, application/pdf) and player HTML completed, while a separate supplied HLS/media fetch was partial. The public client composes VOD2 first, otherwise service 2048 or 8 plus URLFilename; this is URL-selection evidence, not playable-stream proof. Receipts: `docs/verification/champ-detail-2026-11-11.json`, `docs/verification/champ-supplied-links-2026-11-12.json`, `docs/verification/peak-champ-supplied-artifacts-2026-11-12.json`.
 
 ### Remaining research
 
-- Two public event detail GETs are engine-receipted. The current player JS proves that detail route, but no public event index/list or paging route is established. Continue only through existing tenant links if an index is visibly exposed.
-- Verify one agenda/minutes document request and media availability separately; event JSON did not download attachments and Yuma reports no media.
+- Two public event detail GETs are engine-receipted, but no public event index/list or paging route is established. Continue only through existing tenant links if an index is visibly exposed.
+- One supplied Lake Zurich PDF is now fetched; a separate supplied HLS/media attempt remains partial and player HTML is not playback. Do not generalize these results to all attachments or events; Yuma reports no media.
 - CHAMP Help documents staff event/media/PDF workflows, not machine writes. API codecs, account roles and write/readback remain unverified without authorized credentials.
 
 ### Pagination contract
@@ -581,11 +585,11 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Representative research observations
 
-- https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/: Fitchburg public listing; No archive/search traversal or binary download.
+- https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/: current root maps 30 rows. A supplied Meetings response returned HTTP 200 but mapped zero; a guarded search POST was rejected before redirect details/results. One supplied `.pdf` link returned HTTP 200 `text/html`, 3,719 bytes, without PDF magic; corrected engine result is partial and retains the meeting. It is not a PDF success or unsupported-route finding. Receipts: `docs/verification/onbase-public-search-2026-11-12.json` and `docs/verification/onbase-pdf-mismatch-2026-11-12.json`.
 
 ### Remaining research
 
-- On the selected Fitchburg Agenda Online tenant, follow visible meeting/date filters, one ViewMeeting id and one Documents/Downloadfile link; capture bytes, MIME, redirect and adjacent-date coverage. The separate Santa Cruz live-read receipt is a configured capture, not a Fitchburg attachment test.
+- The current bounded follow-up covered root, Meetings response, guarded search attempt and one supplied Downloadfile route. Search results, redirect target/method and adjacent-date/archive completeness remain unresolved; the supplied `.pdf` response is HTML, not a PDF.
 - Hyland Agenda Foundation 25.1 guidance is version/installation-scoped. Identify tenant deployment/version and entitlement before applying API or write operations to Agenda Online.
 - No authorized deployment-matched staff/test account or integration contract was supplied for create/update/upload.
 
@@ -593,7 +597,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "Upcoming body/date filters; archive/year/search pagination unverified."
+  "details": "Current root mapping yielded 30 rows; Meetings response mapped zero. Search redirect was not followed, so archive/year/search continuation and completeness remain unknown."
 }
 
 ### Authorization restrictions

@@ -1,0 +1,12 @@
+{
+  "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings",
+  "method": "POST",
+  "query": "Council",
+  "date_range_option": {
+    "value": "7",
+    "label": "This Year"
+  },
+  "result": "guarded_redirect_rejected",
+  "error": "Redirects are disabled for this scoped request.",
+  "limits": "Fresh public anti-forgery cookie/token used only in process; exact response Location/status and redirected method were not returned by guarded transport. No search result or anonymous native search semantics established. No guard relaxation, redirect replay or further POST attempted."
+}

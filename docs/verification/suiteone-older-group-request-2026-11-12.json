@@ -1,0 +1,18 @@
+{
+  "url": "https://vermilionoh.suiteonemedia.com/Home/GetRecentEventsGroup",
+  "method": "POST",
+  "form": {
+    "yearFrom": "2025",
+    "groupId": "8",
+    "uniqueId": "BoardofZoningAppeals",
+    "categoryId": "32",
+    "groupName": "Board of Zoning Appeals",
+    "psize": 10,
+    "page": 0
+  },
+  "status": 200,
+  "content_type": "text/html",
+  "bytes": 165886,
+  "sha256": "9ec62f039022143f2655f2b60b14445981b783b26396ca9781c2cc5ee1b18cfd",
+  "parsed_meetings": 52
+}

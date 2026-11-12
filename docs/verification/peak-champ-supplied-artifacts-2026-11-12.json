@@ -1,0 +1,27 @@
+[
+  {
+    "provider": "peak",
+    "status": "completed",
+    "sha256": "19994b412b91e3b6a41f77a7999971d8396c3d5bffaeb74290954e39e62db4cc",
+    "limits": "One supplied PDF retrieved; terminal output preserved. Receipt serialization failed afterward; no repeat download."
+  },
+  {
+    "provider": "champ",
+    "source": "https://play.champds.com/lakezurichil/event/164",
+    "capture_sha256": "6754ddfb70e942b4595fa26cdb54e4c688fe52b3754a7320ed2011e4bb4e7764",
+    "records": 1,
+    "external_id": "164",
+    "status": "partial",
+    "errors": [
+      {
+        "code": "attachment_unavailable",
+        "message": "The captured attachment could not be retrieved; the record is retained.",
+        "retryable": true,
+        "source": "https://play.champds.com/lakezurichil/event/164",
+        "details": {}
+      }
+    ],
+    "attachment": {},
+    "limits": "One supplied PDF or HLS manifest only; no playback/segments/full-catalog acceptance."
+  }
+]

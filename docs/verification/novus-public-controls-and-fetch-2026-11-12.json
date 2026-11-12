@@ -1,0 +1,77 @@
+{
+  "observed_at": "2026-11-12T11:37:32Z",
+  "provider": "novusagenda",
+  "tenant": "https://ebps.novusagenda.com/agendapublic/",
+  "scope": "Existing East Brunswick public source only. No search form post, staff/login route, cookie replay, or vendor write was performed.",
+  "prior_public_discovery": {
+    "receipt": "docs/verification/novus-public-discovery-2026-11-11.json",
+    "receipt_sha256": "bbf92c3e5dc7a4185e347e05759a0643eaff49968bd0fadd4c5886ced3c533fc",
+    "pages": 12,
+    "records": 191,
+    "meetings": 11,
+    "agenda_items": 180,
+    "status": "partial",
+    "observed_window": [
+      "2026-08-11",
+      "2027-02-11"
+    ],
+    "listing_exhausted": true,
+    "catalog_complete": false
+  },
+  "captured_public_controls": {
+    "source_capture": "outputs/provider-route-probes-2026-11-11/novus-eastbrunswick-page-01-of-12.body",
+    "source_capture_bytes": 124337,
+    "source_capture_sha256": "b7fa369c1b5d5e35346fcb25e2ba51a13de34344185984b217701cf39f456220",
+    "form": {
+      "id": "aspnetForm",
+      "method": "POST",
+      "action": "./"
+    },
+    "visible_controls": [
+      "date range",
+      "from date",
+      "to date",
+      "meeting type",
+      "board",
+      "category",
+      "containing text",
+      "Search",
+      "Clear"
+    ],
+    "detail_link_shapes": [
+      "/agendapublic/MeetingView.aspx?MeetingID&MinutesMeetingID&doctype",
+      "/agendapublic/Coversheet.aspx?ItemID&MeetingID"
+    ],
+    "document_link_shapes": [
+      "/agendapublic/DisplayAgendaPDF.ashx?MeetingID",
+      "/agendapublic/DisplayAgendaPDF.ashx?MinutesMeetingID"
+    ]
+  },
+  "native_search": {
+    "verified_request_contract": false,
+    "reason": "The saved search-postback response is an ASP.NET date-validation error (TO date must be after FROM date) and contains no meeting or agenda-item rows. Its request status/body fields were not available as an accepted successful search receipt; no opaque form state was replayed.",
+    "saved_response": "outputs/provider-route-probes-2026-11-11/novus-eastbrunswick-search-postback.body",
+    "saved_response_bytes": 84966,
+    "saved_response_sha256": "b5e7fd2fc21a76650ec9682204ff0a2f7f87add1e698a772f084b67a384d01f7"
+  },
+  "bounded_generic_attachment_fetch": {
+    "method": "engine.fetch on an exact link supplied by the saved first-page capture",
+    "status": "completed",
+    "errors": [],
+    "byte_limit": 67108864,
+    "deadline_seconds": 40,
+    "source_capture_sha256": "b7fa369c1b5d5e35346fcb25e2ba51a13de34344185984b217701cf39f456220",
+    "citation_url": "https://ebps.novusagenda.com/agendapublic/DisplayAgendaPDF.ashx?MeetingID=996",
+    "content_type": "application/pdf",
+    "byte_length": 28849631,
+    "sha256": "90644aacdb5f3fc7bf0d82deff93edb5f51d60d5226344d1871fd6246eaf0c03",
+    "pdf_header_valid": true,
+    "limits": "One supplied agenda PDF only; no media, full archive, or Minutes document was fetched."
+  },
+  "plan_3_4_assessment": {
+    "listing_and_supplied_document_retrieval": "verified for the bounded observed listing and one supplied agenda PDF; partial catalog remains explicit",
+    "structured_detail_fetch": "meeting-view/coversheet links are observed, but no separate detail normalization/fetch acceptance was established here",
+    "provider_native_search": "public search controls are visible; a successful native search request/semantics remain unverified",
+    "local_search": "continues to operate over normalized fields/text already captured by the shared engine; this receipt does not claim wider Novus catalog coverage"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "provider": "onbase",
+  "source": {
+    "provider": "onbase",
+    "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/",
+    "namespace": null,
+    "body": null,
+    "input_format": "onbase-public-listing-html",
+    "options": {}
+  },
+  "records": 30,
+  "external_id": "3825",
+  "response": {
+    "status": 200,
+    "content_type": "text/html",
+    "byte_length": 3719,
+    "sha256": "4c1f3f9b93f85603759a5237725ef71c7b5121e8603447de78f7cdeec08ec832",
+    "pdf_magic": false
+  },
+  "attachment_status": "partial",
+  "retained_record": true,
+  "errors": [
+    {
+      "code": "attachment_unavailable",
+      "message": "The captured attachment could not be retrieved; the record is retained.",
+      "retryable": true,
+      "source": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/",
+      "details": {}
+    }
+  ],
+  "limits": "One named MIME/magic diagnostic after initial200text/html; no additional retries. Earlier completed byte fetch did not establish PDF availability."
+}

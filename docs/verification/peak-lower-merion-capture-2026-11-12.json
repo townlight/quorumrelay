@@ -1,0 +1,15 @@
+{
+  "source": "https://lowermerion.granicus.com/ViewPublisher.php?view_id=1",
+  "status": 200,
+  "bytes": 198380,
+  "sha256": "e365421d12fcb979175c079d02d828bd05288e71570c386991060d30036c059f",
+  "parse_status": "partial",
+  "errors": [],
+  "records": 116,
+  "date_range": [
+    "2025-10-08",
+    "2026-11-18"
+  ],
+  "controls": [],
+  "first_document_record": null
+}

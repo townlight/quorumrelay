@@ -1,0 +1,42 @@
+{
+  "source": "https://play.champds.com/lakezurichil/event/164",
+  "identity": {
+    "provider": "champ",
+    "namespace": "//champds.com/lakezurichil",
+    "record_type": "meeting",
+    "external_id": "164",
+    "parent": null,
+    "derivation": "provider_or_legacy_reader",
+    "stability": "Stable according to the pinned input-format mapping; not an application identifier."
+  },
+  "capture_sha256": "6754ddfb70e942b4595fa26cdb54e4c688fe52b3754a7320ed2011e4bb4e7764",
+  "results": [
+    {
+      "kind": "documents",
+      "index": 1,
+      "status": "completed",
+      "errors": [],
+      "attachment": {
+        "citation_url": "https://play.champds.com/ATT/lakezurichil/2025-08/da9d341f8f7ffa49ae591b9e0812ff9525ffcf00.pdf",
+        "content_type": "application/pdf",
+        "byte_length": 1933081,
+        "sha256": "36b3eea88e433672b37d5c383b74f4cc4b77c1da2f771a0cc809da151baf0a90",
+        "text_availability": "not_extracted"
+      }
+    },
+    {
+      "kind": "recordings",
+      "index": 0,
+      "status": "completed",
+      "errors": [],
+      "attachment": {
+        "citation_url": "https://play.champds.com/lakezurichil/event/164",
+        "content_type": "text/html",
+        "byte_length": 10785,
+        "sha256": "d937d10c1721bb9e84371d6e9f49f79cb8704b57ad962ea1ea63bfd92d43cf0d",
+        "text_availability": "not_extracted"
+      }
+    }
+  ],
+  "limits": "One supplied attachment and player HTML only; no playable stream, catalog or write acceptance."
+}
