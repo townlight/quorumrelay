@@ -46,7 +46,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
-- On the selected Reno portal, capture the exact request/response for visible keyword and agenda-item search and any continuation; the current receipt proves only ListUpcomingMeetings and ListArchivedMeetings?year=2026.
+- The observed Reno public `/api/v2/PublicPortal/search` form is source-implemented after dev6. Bounded first/resumed calls each returned three distinct records with partial coverage. Stable native-kind/id traversal handles provider tie-order changes and checks canonical row-set values while retaining exact captures; ranking is deliberately not retained. Exact local checks use supplied metadata/highlight excerpts only. Full document content, provider matching/caps and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.
 - Official release notes identify Meeting API, speaker endpoint and tracking-number search but no executable schema. Obtain PrimeGov account-specific API specification and enablement before coding those routes.
 - No provider write tenant/credentials were supplied; create/update/upload fields, permissions, readback and conflict semantics remain unverified.
 

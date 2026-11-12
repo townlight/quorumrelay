@@ -3141,6 +3141,60 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "primegov-public-search-client",
+          "url": "https://reno.primegov.com/Scripts/Custom/Public/_Search.js",
+          "title": "Reno published public search form client",
+          "kind": "public_tenant_capture",
+          "findings": "Published client POSTs form-encoded CommitteeId, MeetingDateFrom/To, MeetingType, ItemTypeId, ItemTitle, Sponsor, TrackingNo, Text and IsFromAdvanceSearch to /api/v2/PublicPortal/search; no page/cursor field is sent.",
+          "limits": "Observed public client only; no authenticated Meeting API, ranking/full-text semantics, server cap or catalog-completeness contract.",
+          "proof_level": "official_documentation_or_ui_contract_not_live_acceptance",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
+        },
+        {
+          "id": "primegov-search-council-fixture",
+          "url": "https://reno.primegov.com/api/v2/PublicPortal/search",
+          "title": "Reno bounded November Council search array",
+          "kind": "public_tenant_capture",
+          "findings": "Bounded November2026 query returned140 supplied Meeting/Item/Attachment rows, preserving native IDs, parent meetingId, dates, raw unknown fields and highlight excerpts.",
+          "limits": "One selected public tenant/date window. Snippets are not full document text; native ranking changes between identical requests.",
+          "proof_level": "saved_public_response_fixture_not_catalog_acceptance",
+          "fixture_path": "tests/fixtures/primegov-native-search/council.json",
+          "fixture_sha256": "0dd56ba2cec1ead321fc98ae38fc6309ae62e06d4b5b01b0641c931f22189b68",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
+        },
+        {
+          "id": "primegov-search-empty-fixture",
+          "url": "https://reno.primegov.com/api/v2/PublicPortal/search",
+          "title": "Reno bounded sentinel empty search array",
+          "kind": "public_tenant_capture",
+          "findings": "Same public form/date range with an improbable sentinel returned an empty JSON array.",
+          "limits": "Empty response only for this query/window; no broader absence claim.",
+          "proof_level": "saved_public_response_fixture_not_catalog_acceptance",
+          "fixture_path": "tests/fixtures/primegov-native-search/empty.json",
+          "fixture_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
+        },
+        {
+          "id": "primegov-native-search-live-final",
+          "url": "https://reno.primegov.com/public/portal",
+          "title": "Reno bounded first/resumed public search engine receipt",
+          "kind": "live_engine_bounded_read_receipt",
+          "findings": "Mutable post-dev6 source returned3distinct records on both first and resumed calls, statuspartial/noerrors. Stable native-kind/id traversal tolerates provider tie-order changes and verifies canonical full row-set values; exact captures retained.",
+          "limits": "Not frozendev6wheel acceptance. Provider rank deliberately not retained. Provider matching/caps, full text/catalog and authenticated operations remain unverified; no writes.",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "receipt_path": "docs/verification/primegov-native-search-2026-11-12.json",
+          "receipt_sha256": "dd82bef2c51747e0a8231935df263a6adbf61d423a7e555510878ad950fc7d76",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
         }
       ],
       "tenants": [
@@ -3177,16 +3231,15 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "primegov-meeting-api-release-notes",
             "primegov-reno"
           ],
-          "details": "Official release notes refer to a Meeting API; Reno portal HTML exposes public search/filter UI. No exact public meeting-list request/response contract, query semantics or paging has been captured.",
+          "details": "Existing date-bounded public ListUpcomingMeetings and ListArchivedMeetings?year listing routes are implemented; configured capture/document retrieval is separate. No standalone authenticated detail endpoint or complete catalog/search semantics are claimed.",
           "dependencies": [],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "Per-tenant completeness/paging and standalone detail contracts remain unresolved; existing bounded public listing receipt is not full catalog acceptance."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -3202,15 +3255,14 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "primegov-reno"
           ],
-          "details": "Public portal search/filter and meeting links observed; baseline JSON capture parser supports list/document metadata. Exact catalog/search request contract needs source mechanics plus public fixture.",
+          "details": "Existing date-bounded public ListUpcomingMeetings and ListArchivedMeetings?year listing routes are implemented; configured capture/document retrieval is separate. No standalone authenticated detail endpoint or complete catalog/search semantics are claimed.",
           "dependencies": [],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "Per-tenant completeness/paging and standalone detail contracts remain unresolved; existing bounded public listing receipt is not full catalog acceptance."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -3248,20 +3300,24 @@
         },
         "native_search": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "primegov-api-item-search-release-notes",
             "primegov-meeting-api-release-notes",
-            "primegov-reno"
+            "primegov-reno",
+            "primegov-public-search-client",
+            "primegov-search-council-fixture",
+            "primegov-search-empty-fixture",
+            "primegov-native-search-live-final"
           ],
-          "details": "Official release notes state a Meeting API date-search defect was fixed (2022) and an API was added to search items by tracking number (2021); neither note includes the method, route, body, response or current tenant scope. Portal search UI is not proof of native API semantics.",
+          "details": "For explicitly configured HTTPS public/portal sources, the observed public form POST returns Meeting/Item/Attachment candidates. The first expression is submitted; exact AND terms/phrases/date/type matching is local over supplied metadata and stripped highlight excerpts only. Explicit dates are required; body filtering is not established. Source/query/caller-bound traversal sorts native kind/id because observed provider rank changes, while canonical row-set fingerprints detect value changes. Raw captures/unknowns/meeting parents retained. First/resumed bounded mutable-source reads each returned3distinct records; catalog/source coverage remains partial.",
           "dependencies": [],
           "remaining_verification": [
-            "Inspect the existing Reno portal JavaScript/network route only to establish public listing/search method and response; no new tenant context needed.",
-            "Obtain exact authenticated Meeting API/search/speaker endpoint documentation from account contact if those developer routes are in scope; current release notes provide feature names only."
+            "Provider matching/ranking/cap semantics, full document search and cross-tenant behavior remain unverified.",
+            "Authenticated Meeting API/item tracking-number and speaker contracts need provider documentation/access; public search is separate."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "bounded_live_read_plus_saved_contract_fixtures_and_named_tests_not_catalog_or_write_acceptance",
           "tenant_scope": [
             "https://reno.primegov.com/public/portal"
           ],
@@ -3628,7 +3684,7 @@
         "Unverified and access-blocked are incomplete, not unsupported."
       ],
       "remaining_research": [
-        "On the selected Reno portal, capture the exact request/response for visible keyword and agenda-item search and any continuation; the current receipt proves only ListUpcomingMeetings and ListArchivedMeetings?year=2026.",
+        "Observed Reno public /api/v2/PublicPortal/search form is now source-implemented with exact local metadata/excerpt checks, stable native-ID continuation, raw/parent preservation and bounded first/resumed receipt. Full document content, provider matching/caps/rank and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.",
         "Official release notes identify Meeting API, speaker endpoint and tracking-number search but no executable schema. Obtain PrimeGov account-specific API specification and enablement before coding those routes.",
         "No provider write tenant/credentials were supplied; create/update/upload fields, permissions, readback and conflict semantics remain unverified."
       ],

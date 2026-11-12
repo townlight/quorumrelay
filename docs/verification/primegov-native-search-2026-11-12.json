@@ -1,0 +1,390 @@
+{
+  "observed_at": "2026-11-12T10:15:51.334801+00:00",
+  "basis": "mutable post-dev6 source; not frozen wheel acceptance",
+  "source_module_sha256": "845213c01f0c9841eb752016d08bce73691323a2f47ca58f4c748536a5117d80",
+  "results": [
+    {
+      "status": "partial",
+      "coverage": {
+        "sources": [
+          {
+            "provider": "primegov",
+            "url": "https://reno.primegov.com/public/portal",
+            "namespace": "//reno.primegov.com",
+            "body": null,
+            "input_format": null,
+            "options": {}
+          }
+        ],
+        "native_search": true,
+        "scope": "public provider candidates; exact local metadata and supplied excerpt matching",
+        "provider_query_semantics": "provider-defined first expression; exact local AND",
+        "full_document_text_searched": false,
+        "catalog_complete": false,
+        "source_complete": false,
+        "candidate_order": "stable native kind/id; provider ranking is not retained",
+        "provider_pagination": "no continuation in observed public request/array; completeness unknown",
+        "pages": 1,
+        "status": "partial",
+        "provider_returned_rows": 140,
+        "unmapped_rows_omitted": 0,
+        "checkpoint": "eyJ2IjoxLCJiaW5kaW5nIjoiMGUyZDBkYTU1OGVjZTE2MzA3OGRlMzIzYjMwMWFhYTI2NTFmZmNhZWFmZTNhOThkMjAwYzVmMjNhOWQ3YzcxZiIsInF1ZXVlIjpbeyJvZmZzZXQiOjMsInNoYTI1NiI6ImIyYmE3ODZmOTJmZDMyOTcwNWY4NDA3YWE4NjNhZjE4YjJjZjMwZDJmYmY1ZDk1YmNmNWQ4MDFmYTU3YTY0Y2UifV0sInNlZW4iOltdfQ==",
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-30",
+        "date_inclusivity": "both",
+        "actual_dates": [
+          "2026-11-04",
+          "2026-11-12"
+        ],
+        "available_text": [
+          {
+            "identity": {
+              "provider": "primegov",
+              "namespace": "//reno.primegov.com",
+              "record_type": "agenda_item",
+              "external_id": "32716",
+              "parent": {
+                "provider": "primegov",
+                "namespace": "//reno.primegov.com",
+                "record_type": "meeting",
+                "external_id": "2268"
+              },
+              "derivation": "provider_identifier",
+              "stability": "Provider-issued identifier within the configured namespace."
+            },
+            "capture_sha256": "870bcfeddae318991a539ea38d0c518d8578b69f70c77a32ae7b6b18c6047ac2",
+            "status": "metadata_only",
+            "metadata_fields": [
+              "normalized.external_id",
+              "normalized.title",
+              "normalized.meeting_date",
+              "normalized.meeting_title",
+              "normalized.source_date",
+              "normalized.time_zone_status",
+              "normalized.url",
+              "normalized.search_excerpt"
+            ],
+            "supplied_fields": [],
+            "unavailable": [],
+            "full_source_searched": false
+          },
+          {
+            "identity": {
+              "provider": "primegov",
+              "namespace": "//reno.primegov.com",
+              "record_type": "agenda_item",
+              "external_id": "33161",
+              "parent": {
+                "provider": "primegov",
+                "namespace": "//reno.primegov.com",
+                "record_type": "meeting",
+                "external_id": "2301"
+              },
+              "derivation": "provider_identifier",
+              "stability": "Provider-issued identifier within the configured namespace."
+            },
+            "capture_sha256": "870bcfeddae318991a539ea38d0c518d8578b69f70c77a32ae7b6b18c6047ac2",
+            "status": "metadata_only",
+            "metadata_fields": [
+              "normalized.external_id",
+              "normalized.title",
+              "normalized.meeting_date",
+              "normalized.meeting_title",
+              "normalized.source_date",
+              "normalized.time_zone_status",
+              "normalized.url",
+              "normalized.search_excerpt"
+            ],
+            "supplied_fields": [],
+            "unavailable": [],
+            "full_source_searched": false
+          },
+          {
+            "identity": {
+              "provider": "primegov",
+              "namespace": "//reno.primegov.com",
+              "record_type": "agenda_item",
+              "external_id": "33162",
+              "parent": {
+                "provider": "primegov",
+                "namespace": "//reno.primegov.com",
+                "record_type": "meeting",
+                "external_id": "2301"
+              },
+              "derivation": "provider_identifier",
+              "stability": "Provider-issued identifier within the configured namespace."
+            },
+            "capture_sha256": "870bcfeddae318991a539ea38d0c518d8578b69f70c77a32ae7b6b18c6047ac2",
+            "status": "metadata_only",
+            "metadata_fields": [
+              "normalized.external_id",
+              "normalized.title",
+              "normalized.meeting_date",
+              "normalized.meeting_title",
+              "normalized.source_date",
+              "normalized.time_zone_status",
+              "normalized.url",
+              "normalized.search_excerpt"
+            ],
+            "supplied_fields": [],
+            "unavailable": [],
+            "full_source_searched": false
+          }
+        ],
+        "failures": [],
+        "truncated": false,
+        "searched_records": 3,
+        "match_policy": "Unicode casefold, collapsed whitespace, word boundaries; AND terms/phrases",
+        "incomplete_text": true,
+        "searched_sources": [
+          {
+            "provider": "primegov",
+            "namespace": "//reno.primegov.com",
+            "url": "https://reno.primegov.com/public/portal"
+          }
+        ],
+        "selected_providers": [],
+        "selected_namespaces": [],
+        "input_status": "partial"
+      },
+      "errors": [],
+      "identities": [
+        {
+          "provider": "primegov",
+          "namespace": "//reno.primegov.com",
+          "record_type": "agenda_item",
+          "external_id": "32716",
+          "parent": {
+            "provider": "primegov",
+            "namespace": "//reno.primegov.com",
+            "record_type": "meeting",
+            "external_id": "2268"
+          },
+          "derivation": "provider_identifier",
+          "stability": "Provider-issued identifier within the configured namespace."
+        },
+        {
+          "provider": "primegov",
+          "namespace": "//reno.primegov.com",
+          "record_type": "agenda_item",
+          "external_id": "33161",
+          "parent": {
+            "provider": "primegov",
+            "namespace": "//reno.primegov.com",
+            "record_type": "meeting",
+            "external_id": "2301"
+          },
+          "derivation": "provider_identifier",
+          "stability": "Provider-issued identifier within the configured namespace."
+        },
+        {
+          "provider": "primegov",
+          "namespace": "//reno.primegov.com",
+          "record_type": "agenda_item",
+          "external_id": "33162",
+          "parent": {
+            "provider": "primegov",
+            "namespace": "//reno.primegov.com",
+            "record_type": "meeting",
+            "external_id": "2301"
+          },
+          "derivation": "provider_identifier",
+          "stability": "Provider-issued identifier within the configured namespace."
+        }
+      ],
+      "capture_sha256": "870bcfeddae318991a539ea38d0c518d8578b69f70c77a32ae7b6b18c6047ac2"
+    },
+    {
+      "status": "partial",
+      "coverage": {
+        "sources": [
+          {
+            "provider": "primegov",
+            "url": "https://reno.primegov.com/public/portal",
+            "namespace": "//reno.primegov.com",
+            "body": null,
+            "input_format": null,
+            "options": {}
+          }
+        ],
+        "native_search": true,
+        "scope": "public provider candidates; exact local metadata and supplied excerpt matching",
+        "provider_query_semantics": "provider-defined first expression; exact local AND",
+        "full_document_text_searched": false,
+        "catalog_complete": false,
+        "source_complete": false,
+        "candidate_order": "stable native kind/id; provider ranking is not retained",
+        "provider_pagination": "no continuation in observed public request/array; completeness unknown",
+        "pages": 1,
+        "status": "partial",
+        "provider_returned_rows": 140,
+        "unmapped_rows_omitted": 0,
+        "checkpoint": "eyJ2IjoxLCJiaW5kaW5nIjoiMGUyZDBkYTU1OGVjZTE2MzA3OGRlMzIzYjMwMWFhYTI2NTFmZmNhZWFmZTNhOThkMjAwYzVmMjNhOWQ3YzcxZiIsInF1ZXVlIjpbeyJvZmZzZXQiOjYsInNoYTI1NiI6ImIyYmE3ODZmOTJmZDMyOTcwNWY4NDA3YWE4NjNhZjE4YjJjZjMwZDJmYmY1ZDk1YmNmNWQ4MDFmYTU3YTY0Y2UifV0sInNlZW4iOltdfQ==",
+        "date_from": "2026-11-01",
+        "date_to": "2026-11-30",
+        "date_inclusivity": "both",
+        "actual_dates": [
+          "2026-11-04",
+          "2026-11-09",
+          "2026-11-10"
+        ],
+        "available_text": [
+          {
+            "identity": {
+              "provider": "primegov",
+              "namespace": "//reno.primegov.com",
+              "record_type": "agenda_item",
+              "external_id": "33172",
+              "parent": {
+                "provider": "primegov",
+                "namespace": "//reno.primegov.com",
+                "record_type": "meeting",
+                "external_id": "2301"
+              },
+              "derivation": "provider_identifier",
+              "stability": "Provider-issued identifier within the configured namespace."
+            },
+            "capture_sha256": "870bcfeddae318991a539ea38d0c518d8578b69f70c77a32ae7b6b18c6047ac2",
+            "status": "metadata_only",
+            "metadata_fields": [
+              "normalized.external_id",
+              "normalized.title",
+              "normalized.meeting_date",
+              "normalized.meeting_title",
+              "normalized.source_date",
+              "normalized.time_zone_status",
+              "normalized.url",
+              "normalized.search_excerpt"
+            ],
+            "supplied_fields": [],
+            "unavailable": [],
+            "full_source_searched": false
+          },
+          {
+            "identity": {
+              "provider": "primegov",
+              "namespace": "//reno.primegov.com",
+              "record_type": "agenda_item",
+              "external_id": "33510",
+              "parent": {
+                "provider": "primegov",
+                "namespace": "//reno.primegov.com",
+                "record_type": "meeting",
+                "external_id": "2327"
+              },
+              "derivation": "provider_identifier",
+              "stability": "Provider-issued identifier within the configured namespace."
+            },
+            "capture_sha256": "870bcfeddae318991a539ea38d0c518d8578b69f70c77a32ae7b6b18c6047ac2",
+            "status": "metadata_only",
+            "metadata_fields": [
+              "normalized.external_id",
+              "normalized.title",
+              "normalized.meeting_date",
+              "normalized.meeting_title",
+              "normalized.source_date",
+              "normalized.time_zone_status",
+              "normalized.url",
+              "normalized.search_excerpt"
+            ],
+            "supplied_fields": [],
+            "unavailable": [],
+            "full_source_searched": false
+          },
+          {
+            "identity": {
+              "provider": "primegov",
+              "namespace": "//reno.primegov.com",
+              "record_type": "agenda_item",
+              "external_id": "33520",
+              "parent": {
+                "provider": "primegov",
+                "namespace": "//reno.primegov.com",
+                "record_type": "meeting",
+                "external_id": "2328"
+              },
+              "derivation": "provider_identifier",
+              "stability": "Provider-issued identifier within the configured namespace."
+            },
+            "capture_sha256": "870bcfeddae318991a539ea38d0c518d8578b69f70c77a32ae7b6b18c6047ac2",
+            "status": "metadata_only",
+            "metadata_fields": [
+              "normalized.external_id",
+              "normalized.title",
+              "normalized.meeting_date",
+              "normalized.meeting_title",
+              "normalized.source_date",
+              "normalized.time_zone_status",
+              "normalized.url",
+              "normalized.search_excerpt"
+            ],
+            "supplied_fields": [],
+            "unavailable": [],
+            "full_source_searched": false
+          }
+        ],
+        "failures": [],
+        "truncated": false,
+        "searched_records": 3,
+        "match_policy": "Unicode casefold, collapsed whitespace, word boundaries; AND terms/phrases",
+        "incomplete_text": true,
+        "searched_sources": [
+          {
+            "provider": "primegov",
+            "namespace": "//reno.primegov.com",
+            "url": "https://reno.primegov.com/public/portal"
+          }
+        ],
+        "selected_providers": [],
+        "selected_namespaces": [],
+        "input_status": "partial"
+      },
+      "errors": [],
+      "identities": [
+        {
+          "provider": "primegov",
+          "namespace": "//reno.primegov.com",
+          "record_type": "agenda_item",
+          "external_id": "33172",
+          "parent": {
+            "provider": "primegov",
+            "namespace": "//reno.primegov.com",
+            "record_type": "meeting",
+            "external_id": "2301"
+          },
+          "derivation": "provider_identifier",
+          "stability": "Provider-issued identifier within the configured namespace."
+        },
+        {
+          "provider": "primegov",
+          "namespace": "//reno.primegov.com",
+          "record_type": "agenda_item",
+          "external_id": "33510",
+          "parent": {
+            "provider": "primegov",
+            "namespace": "//reno.primegov.com",
+            "record_type": "meeting",
+            "external_id": "2327"
+          },
+          "derivation": "provider_identifier",
+          "stability": "Provider-issued identifier within the configured namespace."
+        },
+        {
+          "provider": "primegov",
+          "namespace": "//reno.primegov.com",
+          "record_type": "agenda_item",
+          "external_id": "33520",
+          "parent": {
+            "provider": "primegov",
+            "namespace": "//reno.primegov.com",
+            "record_type": "meeting",
+            "external_id": "2328"
+          },
+          "derivation": "provider_identifier",
+          "stability": "Provider-issued identifier within the configured namespace."
+        }
+      ],
+      "capture_sha256": "870bcfeddae318991a539ea38d0c518d8578b69f70c77a32ae7b6b18c6047ac2"
+    }
+  ]
+}
