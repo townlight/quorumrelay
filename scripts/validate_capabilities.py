@@ -265,7 +265,8 @@ def main():
     for entry in api["legistar"]:
         if not entry["model_fields"] or any("\n" in fmt for fmt in entry["request_formats"]):
             errors.append(f"Invalid extracted exact Legistar schema {entry['method_path']}")
-    if len(api["legistar"]) != 16 or len(api["wistia"]) != 12 or len(api["laserfiche"]) != 7:
+    # Wistia includes the separately pinned swap and background-job contracts.
+    if len(api["legistar"]) != 16 or len(api["wistia"]) != 14 or len(api["laserfiche"]) != 7:
         errors.append("Official API contract extraction count changed without review")
     negative = 0
     invalid = deepcopy(inventory)

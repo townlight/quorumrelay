@@ -408,6 +408,9 @@ class WriteAdapter:
         if change.entity == "media_tags" and allowed is not None:
             if any(str(i) not in allowed for i in change.fields.get("hashed_ids", ())):
                 raise WriteFailure("permission_denied", "A tag target is outside the source policy.")
+        if change.entity == "media_swap" and allowed is not None:
+            if str(change.fields.get("replacement_media_id")) not in allowed:
+                raise WriteFailure("permission_denied", "The replacement media is outside the source policy.")
 
     def _call(self, source, context, native, bounds, deadline, *, raw=False, private_response=False):
         if context.check_cancelled():
@@ -529,7 +532,7 @@ class WriteAdapter:
         after.update(deepcopy(native.body))
         if change.entity == "caption_edits" and change.fields["expected_version"] != supplied:
             raise WriteFailure("conflict", "The caption expected_version differs from the active provider version.")
-        return {
+        prepared = {
             "change": asdict(change), "native": native.public_dict(), "before": before, "after": after,
             "before_fingerprint": canonical_hash(before), "expected_version": supplied,
             "page_parts_contract": 1 if change.entity == "document_pages" else None,
@@ -538,6 +541,14 @@ class WriteAdapter:
             "conflict_semantics": "provider_version" if change.entity == "caption_edits"
             else "preflight_read_compare_not_atomic_upstream_cas",
         }
+        if change.entity == "media_swap":
+            prepared["effects"] = {
+                "replaces_content_at_existing_embeds_and_urls": True,
+                "original_media_id": change.resource_id,
+                "replacement_media_id": change.fields["replacement_media_id"],
+                "completion": "queued_background_job_not_immediate_playable_media",
+            }
+        return prepared
 
     def _files(self, change, bounds):
         files, size = [], 0
@@ -609,7 +620,14 @@ class WriteAdapter:
         fields = deepcopy(change.fields)
         entity, op = change.entity, change.operation
         read_url, lookup, revision = None, None, "updated"
-        if entity == "media" and op == "update":
+        if entity == "media_swap" and op == "update":
+            validate_fields(fields, _fields(strings="replacement_media_id"), required=("replacement_media_id",))
+            original, replacement = safe_id(change.resource_id), safe_id(fields["replacement_media_id"])
+            if original == replacement or files:
+                raise ValueError("Media swap requires two distinct existing media IDs and no file parts.")
+            read_url = root + "/medias/" + original
+            url, method, content_type = read_url + "/swap", "PUT", "application/json"
+        elif entity == "media" and op == "update":
             validate_fields(fields, _fields(strings="name new_still_media_id description", arrays="tags",
                                            objects="custom_metadata"))
             if "tags" in fields and any(not isinstance(i, str) for i in fields["tags"]):
@@ -780,6 +798,16 @@ class WriteAdapter:
                 "id", "lastModifiedTime", read_url, None)
 
     def read_before(self, source, change, url, context, bounds, deadline, *, page_parts=True):
+        if change.entity == "media_swap":
+            original = self.read(source, url, context, bounds, deadline)
+            replacement = self.read(source, "https://api.wistia.com/modern/medias/"
+                                    + safe_id(change.fields["replacement_media_id"]), context, bounds, deadline)
+            if (not isinstance(original, dict) or not isinstance(replacement, dict)
+                    or original.get("hashed_id") != change.resource_id
+                    or replacement.get("hashed_id") != change.fields["replacement_media_id"]
+                    or not original.get("type") or original.get("type") != replacement.get("type")):
+                raise ValueError("Swap readback must identify both existing media with the same provider type.")
+            return {"original": original, "replacement": replacement, "updated": original.get("updated")}
         if change.entity == "media_tags":
             return {"media": [self.read(source, "https://api.wistia.com/modern/medias/" + safe_id(i),
                                         context, bounds, deadline) for i in change.fields["hashed_ids"]]}
@@ -1012,7 +1040,7 @@ class WriteAdapter:
         if change.entity == "document_large":
             return self.large_document(source, prepared, context, bounds, deadline, persist=persist)
         response = self._call(source, context, native, bounds, deadline)
-        if change.entity in {"media_import", "media_tags"}:
+        if change.entity in {"media_import", "media_tags", "media_swap"}:
             # Queued does not mean complete. Persist the job reference for receipt polling.
             if not isinstance(response, dict) or not isinstance(response.get("background_job_status"), dict):
                 raise AmbiguousWrite("The provider did not return its documented background job reference.")
@@ -1121,6 +1149,21 @@ class WriteAdapter:
             result = self.read(source, "https://api.wistia.com/modern/background_job_status/"
                                + safe_id(job_id), context, bounds, deadline)
             status = result.get("background_job_status", {})
+            if prepared["change"]["entity"] == "media_swap":
+                if (not isinstance(status, dict)
+                        or str(status.get("hashed_id") or status.get("id")) != str(job_id)):
+                    return {"state": "uncertain", "reason": "The exact swap job was not returned."}
+                if status.get("status") == "failed":
+                    return {"state": "failed", "job": status, "reason": "The provider swap job failed."}
+                if status.get("status") in {"queued", "started"}:
+                    return {"state": "pending", "job": status}
+                if status.get("status") == "finished":
+                    value = self.read(source, prepared["read_url"], context, bounds, deadline)
+                    return {"state": "uncertain", "job": status, "readback": value,
+                            "resource_id": prepared["change"]["resource_id"],
+                            "reason": "The job finished; documented readback does not independently identify "
+                                      "the replacement content. Do not repeat this swap."}
+                return {"state": "uncertain", "job": status, "reason": "Unknown swap job status."}
             if status.get("status") == "failed":
                 return {"state": "failed", "reason": "The provider background job failed.", "job": status}
             if status.get("status") == "finished" and prepared["change"]["entity"] == "media_tags":

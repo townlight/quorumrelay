@@ -21962,6 +21962,21 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "wistia-swap-contract-synthetic",
+          "url": "https://docs.wistia.com/reference/put_medias-mediahashedid-swap.md",
+          "title": "Wistia 2026-09 media swap and background job contracts with synthetic engine proof",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "public_vendor_documentation_and_local_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "findings": [
+            "Exact official Markdown/OpenAPI bytes and SHA256 pins: docs/capabilities/evidence/wistia-swap/source.json; PUT /modern/medias/{mediaHashedId}/swap JSON replacement_media_id; same media type; background_job_status response.",
+            "tests/test_wistia_swap.py:12 distinct passes; tests/test_write_providers.py:three affected existing media/tag/uncertain-receipt passes reused in this batch. Both media IDs/current policy/before fingerprints and explicit embedded-content effect bound to immutable approved plan; pending/failed/lost-ack/finished-uncertain receipts never resend."
+          ],
+          "limits": "No remote mutation. Finished job plus target GET does not independently identify replacement bytes; stays uncertain. This is swap, not undocumented overwrite or automatic caption/transcript generation."
         }
       ],
       "tenants": [
@@ -22212,7 +22227,8 @@
             "wistia-upload",
             "wistia-update",
             "wistia-caption-create",
-            "wistia-caption-update"
+            "wistia-caption-update",
+            "wistia-swap-contract-synthetic"
           ],
           "details": "Media upload/import and metadata/caption create/update have official versioned contracts; remote writes not authorized.",
           "dependencies": [
@@ -22705,6 +22721,49 @@
           ],
           "automatable_contract_verified": true,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "recording_replacement",
+          "operation": "update",
+          "endpoint_or_format": "PUT https://api.wistia.com/modern/medias/{mediaHashedId}/swap",
+          "field_mappings": [
+            {
+              "normalized": "fields.replacement_media_id",
+              "provider_field": "replacement_media_id",
+              "notes": "Explicit distinct existing media hashed ID with same provider type; replaces content at existing embeds and URLs.",
+              "mapping_level": "official_schema_synthetic_verified"
+            }
+          ],
+          "evidence_ids": [
+            "wistia-swap-contract-synthetic"
+          ],
+          "account_requirements": "Runtime Bearer update permission on both media and account feature; local media_swap:update grant plus meeting/resource allowlists.",
+          "authorized_test_access": "local_synthetic_execution_accepted_by_owner_amendment",
+          "readback_receipt": "Durable queued job, exact-job polling and target media GET; finished remains uncertain because documented result lacks independent replacement-content identity. Never replay uncertain send.",
+          "verification_status": "synthetic_engine_queued_and_recovery_verified_content_confirmation_unresolved",
+          "notes": "Engine entity media_swap/update. Plan explicitly names original/replacement IDs and impact on existing embeds. No deletion, purchase, generation, implicit publication or overwrite contract inferred.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "official_exact_endpoint_schema_or_guide",
+          "method": "PUT",
+          "api_version": "2026-09",
+          "content_types": [
+            "application/json"
+          ],
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         }
       ],
       "pagination": {
@@ -22727,7 +22786,8 @@
       "remaining_research": [
         "Core now implements authenticated media-detail and supplied-caption-list/per-language GETs plus native search. Complete account-level reads only after a trusted Wistia token and selected account are supplied; none was supplied.",
         "/modern/search is capped at 100 primary and 100 transcript-only candidates with no cursor and provider-defined exact/phrase candidate semantics. Local exact checks cover returned metadata/excerpts, not full transcripts.",
-        "Resolve account-tier limits and media replacement/swap behavior before those paths are claimed. Keep upload/import, media metadata, caption create/update and edits permission scopes separate; no remote writes occurred."
+        "Resolve account-tier limits and media replacement/swap behavior before those paths are claimed. Keep upload/import, media metadata, caption create/update and edits permission scopes separate; no remote writes occurred.",
+        "Media swap is source implemented and synthetic tested; pending jobs are preserved and finished jobs remain uncertain without independently provable replacement content. Overwrite is not inferred from swap. Wistia documented account-list discovery remains an executable implementation gap, not a credential gate."
       ],
       "requirement_ids": [
         "C01",
