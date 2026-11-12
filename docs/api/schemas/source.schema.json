@@ -1,0 +1,41 @@
+{
+  "title": "Civic data connectors source 2.0.0",
+  "type": "object",
+  "properties": {
+    "provider": {
+      "type": "string",
+      "minLength": 1
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://"
+    },
+    "namespace": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "body": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "input_format": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "options": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "provider",
+    "url"
+  ],
+  "additionalProperties": true
+}

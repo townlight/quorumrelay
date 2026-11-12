@@ -1,0 +1,47 @@
+{
+  "title": "Civic data connectors bounds 2.0.0",
+  "type": "object",
+  "properties": {
+    "date_from": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "date_to": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "max_records": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "max_pages": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "parser_bytes": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "transfer_bytes": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "deadline_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 3600
+    },
+    "checkpoint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [],
+  "additionalProperties": false
+}

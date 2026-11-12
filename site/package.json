@@ -1,0 +1,16 @@
+{
+  "name": "quorumrelay-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node dev.mjs",
+    "preview": "node dev.mjs --preview",
+    "check": "node check.mjs"
+  },
+  "dependencies": {
+    "esbuild": "0.28.2",
+    "marked": "18.2.0",
+    "mermaid": "12.3.0"
+  }
+}

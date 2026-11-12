@@ -1,0 +1,80 @@
+{
+  "title": "Civic data connectors capability 2.0.0",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "canonical_id": {
+      "type": "string"
+    },
+    "family_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "baseline_formats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "operations": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "capability_status": {
+            "type": "string"
+          },
+          "implementation_status": {
+            "type": "string"
+          },
+          "acceptance_status": {
+            "type": "string"
+          },
+          "evidence_level": {
+            "type": "string"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "capability_status",
+          "implementation_status",
+          "acceptance_status"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "outbound_mappings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "required": [
+    "canonical_id",
+    "operations",
+    "evidence"
+  ],
+  "additionalProperties": true
+}

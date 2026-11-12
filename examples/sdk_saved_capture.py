@@ -45,8 +45,6 @@ def main(argv=None):
         "coverage": {key: searched.coverage.get(key) for key in
                      ("scope", "truncated", "searched_records", "incomplete_text", "failures")},
     }))
-    if store:
-        store.close()
     return int(any(r.status in {"failed", "unsupported"} for r in (imported, searched, exported)))
 
 

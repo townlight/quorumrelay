@@ -1,0 +1,4712 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "QuorumRelay",
+    "version": "0.1.0.dev8"
+  },
+  "paths": {
+    "/v1/operations/providers": {
+      "post": {
+        "operationId": "providers",
+        "summary": "Execute shared providers operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/providers": {
+      "post": {
+        "operationId": "submit_providers",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/capabilities": {
+      "post": {
+        "operationId": "capabilities",
+        "summary": "Execute shared capabilities operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/capabilities": {
+      "post": {
+        "operationId": "submit_capabilities",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/identify": {
+      "post": {
+        "operationId": "identify",
+        "summary": "Execute shared identify operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/identify": {
+      "post": {
+        "operationId": "submit_identify",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/validate_source": {
+      "post": {
+        "operationId": "validate_source",
+        "summary": "Execute shared validate_source operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/validate_source": {
+      "post": {
+        "operationId": "submit_validate_source",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/discover": {
+      "post": {
+        "operationId": "discover",
+        "summary": "Execute shared discover operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/discover": {
+      "post": {
+        "operationId": "submit_discover",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/fetch": {
+      "post": {
+        "operationId": "fetch",
+        "summary": "Execute shared fetch operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/fetch": {
+      "post": {
+        "operationId": "submit_fetch",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/normalize": {
+      "post": {
+        "operationId": "normalize",
+        "summary": "Execute shared normalize operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/normalize": {
+      "post": {
+        "operationId": "submit_normalize",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/search": {
+      "post": {
+        "operationId": "search",
+        "summary": "Execute shared search operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/search": {
+      "post": {
+        "operationId": "submit_search",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/import_preview": {
+      "post": {
+        "operationId": "import_preview",
+        "summary": "Execute shared import_preview operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/import_preview": {
+      "post": {
+        "operationId": "submit_import_preview",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/import_bundle": {
+      "post": {
+        "operationId": "import_bundle",
+        "summary": "Execute shared import_bundle operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/import_bundle": {
+      "post": {
+        "operationId": "submit_import_bundle",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/export": {
+      "post": {
+        "operationId": "export",
+        "summary": "Execute shared export operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/export": {
+      "post": {
+        "operationId": "submit_export",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/plan_write": {
+      "post": {
+        "operationId": "plan_write",
+        "summary": "Execute shared plan_write operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/plan_write": {
+      "post": {
+        "operationId": "submit_plan_write",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/commit_write": {
+      "post": {
+        "operationId": "commit_write",
+        "summary": "Execute shared commit_write operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/commit_write": {
+      "post": {
+        "operationId": "submit_commit_write",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/receipt": {
+      "post": {
+        "operationId": "receipt",
+        "summary": "Execute shared receipt operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/receipt": {
+      "post": {
+        "operationId": "submit_receipt",
+        "summary": "Submit bounded work; inspect with status and cancel through shared operations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/status": {
+      "post": {
+        "operationId": "status",
+        "summary": "Execute shared status operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations/cancel": {
+      "post": {
+        "operationId": "cancel",
+        "summary": "Execute shared cancel operation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/files": {
+      "post": {
+        "operationId": "upload_file",
+        "summary": "Upload bytes to an opaque caller-scoped handle, never a filesystem path.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            },
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/files/{handle}": {
+      "get": {
+        "operationId": "download_file",
+        "parameters": [
+          {
+            "name": "handle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^([0-9a-f]{48}|[0-9a-f]{64})$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bounded byte stream.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/info": {
+      "get": {
+        "operationId": "service_info",
+        "responses": {
+          "200": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Complete engine result, including partial coverage and structured errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/result"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "serviceBearer": []
+    }
+  ],
+  "components": {
+    "schemas": {
+      "bounds": {
+        "title": "Civic data connectors bounds 2.0.0",
+        "type": "object",
+        "properties": {
+          "date_from": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "date_to": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "max_records": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "max_pages": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "parser_bytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "transfer_bytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "deadline_seconds": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 3600
+          },
+          "checkpoint": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "capability": {
+        "title": "Civic data connectors capability 2.0.0",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "canonical_id": {
+            "type": "string"
+          },
+          "family_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "baseline_formats": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "operations": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "capability_status": {
+                  "type": "string"
+                },
+                "implementation_status": {
+                  "type": "string"
+                },
+                "acceptance_status": {
+                  "type": "string"
+                },
+                "evidence_level": {
+                  "type": "string"
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "capability_status",
+                "implementation_status",
+                "acceptance_status"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "outbound_mappings": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "canonical_id",
+          "operations",
+          "evidence"
+        ],
+        "additionalProperties": true
+      },
+      "capture-bundle": {
+        "title": "Civic data connectors capture-bundle 2.0.0",
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "2.0.0"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "provider": {
+                "type": "string",
+                "minLength": 1
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https?://"
+              },
+              "namespace": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "body": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "input_format": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "options": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "provider",
+              "url"
+            ],
+            "additionalProperties": true
+          },
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "schema_version": {
+                  "const": "2.0.0"
+                },
+                "identity": {
+                  "type": "object",
+                  "properties": {
+                    "provider": {
+                      "type": "string"
+                    },
+                    "namespace": {
+                      "type": "string"
+                    },
+                    "record_type": {
+                      "type": "string"
+                    },
+                    "external_id": {
+                      "type": "string"
+                    },
+                    "parent": {
+                      "type": [
+                        "object",
+                        "null"
+                      ]
+                    },
+                    "derivation": {
+                      "type": "string"
+                    },
+                    "stability": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "provider",
+                    "namespace",
+                    "record_type",
+                    "external_id"
+                  ],
+                  "additionalProperties": true
+                },
+                "normalized": {
+                  "type": "object"
+                },
+                "source_url": {
+                  "type": "string"
+                },
+                "citation_urls": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "capture_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "captured_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "normalized_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "source_revision": {
+                  "type": "object"
+                },
+                "original": {},
+                "relationships": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "text": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "field": {
+                        "type": "string"
+                      },
+                      "text": {
+                        "type": "string"
+                      },
+                      "citation_url": {
+                        "type": "string"
+                      },
+                      "page": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "timestamp": {},
+                      "provenance": {},
+                      "completeness": {
+                        "type": "string"
+                      },
+                      "language": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "field",
+                      "text",
+                      "citation_url"
+                    ],
+                    "additionalProperties": true
+                  }
+                },
+                "extensions": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "schema_version",
+                "identity",
+                "normalized",
+                "source_url",
+                "citation_urls",
+                "capture_sha256",
+                "captured_at",
+                "normalized_sha256",
+                "source_revision"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "capture": {
+            "type": "object",
+            "properties": {
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "captured_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "input_format": {
+                "type": "string"
+              },
+              "content_base64": {
+                "type": "string",
+                "contentEncoding": "base64"
+              },
+              "byte_length": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "original_values": {},
+              "source_url": {
+                "type": "string"
+              },
+              "storage_reference": {}
+            },
+            "required": [
+              "sha256",
+              "captured_at",
+              "input_format",
+              "byte_length",
+              "source_url"
+            ],
+            "additionalProperties": true
+          },
+          "compatibility": {
+            "type": "object"
+          },
+          "extensions": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "schema_version",
+          "source",
+          "records",
+          "capture",
+          "compatibility"
+        ],
+        "additionalProperties": true
+      },
+      "capture": {
+        "title": "Civic data connectors capture 2.0.0",
+        "type": "object",
+        "properties": {
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "captured_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "input_format": {
+            "type": "string"
+          },
+          "content_base64": {
+            "type": "string",
+            "contentEncoding": "base64"
+          },
+          "byte_length": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "original_values": {},
+          "source_url": {
+            "type": "string"
+          },
+          "storage_reference": {}
+        },
+        "required": [
+          "sha256",
+          "captured_at",
+          "input_format",
+          "byte_length",
+          "source_url"
+        ],
+        "additionalProperties": true
+      },
+      "error": {
+        "title": "Civic data connectors error 2.0.0",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "retryable": {
+            "type": "boolean"
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "details": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "additionalProperties": true
+      },
+      "identity": {
+        "title": "Civic data connectors identity 2.0.0",
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string"
+          },
+          "record_type": {
+            "type": "string"
+          },
+          "external_id": {
+            "type": "string"
+          },
+          "parent": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "derivation": {
+            "type": "string"
+          },
+          "stability": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "provider",
+          "namespace",
+          "record_type",
+          "external_id"
+        ],
+        "additionalProperties": true
+      },
+      "query": {
+        "title": "Civic data connectors query 2.0.0",
+        "type": "object",
+        "properties": {
+          "terms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "phrases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "namespaces": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "record_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "body": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "date_from": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "date_to": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [],
+        "additionalProperties": true
+      },
+      "record": {
+        "title": "Civic data connectors record 2.0.0",
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "2.0.0"
+          },
+          "identity": {
+            "type": "object",
+            "properties": {
+              "provider": {
+                "type": "string"
+              },
+              "namespace": {
+                "type": "string"
+              },
+              "record_type": {
+                "type": "string"
+              },
+              "external_id": {
+                "type": "string"
+              },
+              "parent": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "derivation": {
+                "type": "string"
+              },
+              "stability": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "provider",
+              "namespace",
+              "record_type",
+              "external_id"
+            ],
+            "additionalProperties": true
+          },
+          "normalized": {
+            "type": "object"
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "citation_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "capture_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "captured_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "normalized_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "source_revision": {
+            "type": "object"
+          },
+          "original": {},
+          "relationships": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "text": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                },
+                "citation_url": {
+                  "type": "string"
+                },
+                "page": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "timestamp": {},
+                "provenance": {},
+                "completeness": {
+                  "type": "string"
+                },
+                "language": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "field",
+                "text",
+                "citation_url"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "extensions": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "schema_version",
+          "identity",
+          "normalized",
+          "source_url",
+          "citation_urls",
+          "capture_sha256",
+          "captured_at",
+          "normalized_sha256",
+          "source_revision"
+        ],
+        "additionalProperties": true
+      },
+      "result": {
+        "title": "Civic data connectors result 2.0.0",
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "2.0.0"
+          },
+          "status": {
+            "enum": [
+              "completed",
+              "partial",
+              "cancelled",
+              "failed",
+              "unsupported"
+            ]
+          },
+          "data": {},
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "retryable": {
+                  "type": "boolean"
+                },
+                "source": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "details": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "code",
+                "message"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "coverage": {
+            "type": "object"
+          },
+          "operation_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "schema_version",
+          "status",
+          "data",
+          "errors",
+          "coverage",
+          "operation_id"
+        ],
+        "additionalProperties": true
+      },
+      "source": {
+        "title": "Civic data connectors source 2.0.0",
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https?://"
+          },
+          "namespace": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "body": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "input_format": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "options": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "provider",
+          "url"
+        ],
+        "additionalProperties": true
+      },
+      "request": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/source"
+          },
+          "bounds": {
+            "$ref": "#/components/schemas/bounds"
+          },
+          "query": {
+            "$ref": "#/components/schemas/query"
+          },
+          "content_base64": {
+            "type": "string",
+            "contentEncoding": "base64"
+          },
+          "file_handle": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "stream": {
+            "type": "boolean",
+            "description": "Export to a scoped artifact, then stream the file handle."
+          }
+        },
+        "additionalProperties": true,
+        "description": "The operation-specific shared engine request, never a caller identity or grant."
+      }
+    },
+    "securitySchemes": {
+      "serviceBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Service token, not an upstream provider credential."
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "title": "Civic data connectors result 2.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "partial",
+        "cancelled",
+        "failed",
+        "unsupported"
+      ]
+    },
+    "data": {},
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "retryable": {
+            "type": "boolean"
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "details": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "coverage": {
+      "type": "object"
+    },
+    "operation_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "data",
+    "errors",
+    "coverage",
+    "operation_id"
+  ],
+  "additionalProperties": true
+}
