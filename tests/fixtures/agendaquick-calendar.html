@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+ <head> 
+  <title>Agenda - View Meetings (November, 2026) - All Meeting Types</title> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+  <meta name="robots" content="noindex,follow"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+ <style>
+	.easyReading {max-width:700px; margin:auto; line-height:2.5em;}
+
+	body {
+		margin:0; padding:0.6em;
+		background:#FFF;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:10pt; /* consider changing this to screen-friendly unit */
+	}
+	/* change the background color on required fields that don't get filled in */
+	.focus {background-color:#ffb;}
+
+	.label {font-weight:bold;}
+
+	.section label.rc {font-weight:normal;}	/* override 'normal' bold on section label */
+	span.red, .section span.red {
+		color:#F00;
+		float:none;
+		margin:0;
+	}
+
+	/* content + header + footer */
+	#wrap {
+		width:850px;
+		background:white;
+	}
+	#header h1 {
+		margin:0; padding:0.25em 0;
+		text-align:center;
+		font-size:2em;
+		border-bottom:1px solid;
+	}
+
+	#content {
+		padding:0 1em;
+		margin-left:12.5em;
+	}
+
+	#meeting-table td,
+	#meeting-table th {
+		white-space: nowrap;
+		padding-right:4ex;
+	}
+	#meeting-table td:nth-child(2),
+	#meeting-table th:nth-child(2) {
+		width:100%;
+		white-space:normal;
+	}
+
+	#footer {clear:both;}
+</style>
+<script>
+	function toggleEasyRead() {
+		bodyTag = document.getElementsByTagName("body")[0];
+		result = bodyTag.classList.toggle("easyReading");
+	}
+</script><link rel="stylesheet" href="/public/styles/global.css?v=2026-9-11">
+	<link rel="stylesheet" href="/public/styles/board_order.css">
+	<link rel="stylesheet" href="/public/styles/buttons.css"><style>
+		body { background-color: #FFF; }
+		a.ai_link { text-decoration: none; }
+		dt {
+			float: left;
+			clear: left;
+			width: 15px;
+		}
+		dd {
+			padding:0 0 .25em 1em;
+			margin-left:4em;
+		}
+		div#srchEngine {
+			text-align:right;
+			width:100%;
+			background-color:#FFC;
+			padding:.25em 0;
+			border-bottom:#000 solid 3px;
+		}
+		div#srchEngine h4 {
+			float:left;
+			margin:2px;
+			display:inline;
+		}
+
+		table { clear: both; }
+		tr.galter td { background-color: #f1f1f1; }
+
+		#nav td, .navclass td, #list td, .listclass td {padding-left:0.5em;}
+		#list thead td, .listclass thead td {padding-bottom:0.5em;}
+		#list tbody td, .listclass tbody td {padding:0.5em;}
+		#nav label, .navclass label {display:block; font-weight:bold; text-align:center;}
+		#nav td.relative, .navclass td.relative {white-space:nowrap; padding:0 2em;}
+		#nav, .navclass {margin-bottom:1em;}
+
+		/* use this to style the Logged in as Note Taker message */
+		#noteTaker {
+			text-align: center !important;
+			font-weight: bold !important;
+			background-color: yellow !important;
+		}
+		#go-Subscribe, #go-show, #go-hide, #go-Apply {
+			background: #E1E1E1 !important;
+			border: 1px solid #000;
+			border-top: 1px solid #000;
+			border-left: 1px solid #000;
+		}
+
+		.print-button {display:block; padding:5px; font-size:15px; font-weight:bold; color:#00f; background-color:#F5F5F5;}
+	</style>
+
+	<style media="print">
+		#print { display:none; }
+		div.xform { page-break-before: always; }
+	</style><script src="/public/js/destiny.js"></script>
+	<script src="/public/publish/js/agenda_publish.js"></script>
+	<script src="/public/js/swagitCopy.js?v=2"></script>
+	
+
+	<script>
+		
+		
+			var returnHash = '';
+		
+
+		function doReturn() {
+			if (returnHash != '' && window.location.hash.replace(/^#/,'') != returnHash)
+				window.location = "#" + returnHash;
+		}
+
+		function popupAttachments(iLink,iWindowName) {
+			if (!window.focus)
+				return true;
+
+			window.open(iLink, iWindowName, 'width=640,height=400,scrollbars=yes,resizable=yes');
+			return false;
+		}
+
+		function saveExtNotes(iAction,iReturn){
+			var df = document.form1;
+			df.formaction.value = iAction;
+			df.action = iReturn;
+			df.method = "POST";
+			df.submit();
+			return false;
+		}
+
+		function hsNote(iID,iMode) {
+			var fldS = 'sNote' + iID,
+				fldH = 'hNote' + iID;
+
+			if (iMode == 'hide') {
+				document.getElementById(fldS).style.display = "none";
+				document.getElementById(fldH).style.display = "";
+			}
+			else {
+				document.getElementById(fldS).style.display = "";
+				document.getElementById(fldH).style.display = "none";
+			}
+		}
+
+		function FieldSelected(aField, initValue) {
+			if (!aField.readOnly && aField.value == initValue)
+				aField.value = "";
+		}
+	</script></head> 
+ <body onload="doReturn();"> 
+  <div id="content"> 
+   <form action="/agenda_publish.cfm&#x3f;id&#x3d;98622&amp;mt&#x3d;ALL&amp;get_month&#x3d;11&amp;get_year&#x3d;2026" method="get" name="form1"> 
+    <noscript> 
+     <div class="aligncenter bold dtable marginauto warningmsg">
+       Warning: JavaScript has been disabled in this browser. 
+      <br>Some functionality on this page may not work as intended. 
+     </div> 
+    </noscript> 
+    <div class="ada-h1">
+      View Meetings 
+    </div> 
+    <br> 
+    <div class="aligncenter"> 
+     <table role="presentation" class="respTbl tableCollapsed buttons marginauto navclass"> 
+      <tbody> 
+       <tr> 
+        <td class="mediumText aligncenter"> 
+         <table role="presentation" class="aligncenter"> 
+          <tbody> 
+           <tr> 
+            <td class="aligncenter"> <label for="mt">Select Meeting Type</label> <select autofocus title="Select Meeting Type" name="mt" id="mt"> <option value="ALL">ALL</option> <option value="ADDBOT">Addendum YCEBT</option> <option value="BOA">BOA Meeting</option> <option value="BOE">Board of Equalization</option> <option value="ADDEXEC">BOS Addendum Executive Session</option> <option value="ADDREG">BOS Addendum Regular Session</option> <option value="BOSEX">BOS Executive Session</option> <option value="BOSJOINT">BOS Joint Session</option> <option value="MERIT">BOS Merit Award Board Meeting</option> <option value="BOSREG">BOS Regular Session</option> <option value="BOSRET">BOS Retreat</option> <option value="BOSRET211">BOS Retreat #2</option> <option value="BOSSPEC">BOS Special Session</option> <option value="BOSWORK">BOS Worksession</option> <option value="EAC">Employee Awards Ceremony</option> <option value="YCEBTEX">Executive Session YCEBT</option> <option value="PZ">P&Z Commission </option> <option value="PZCOMM">P&amp;Z Commission Meeting</option> <option value="PARC">Parks &amp; Recreation Advisory Commission</option> <option value="IPTA">Transportation Authority</option> <option value="BBOT">YCEBT Meeting</option> <option value="YCIPTA">YCIPTA</option> </select> </td> 
+            <td class="aligncenter"> <label for="m">Select Month</label> <select title="Select Month" name="get_month" id="m"> <option value="1">January</option> <option value="2">February</option> <option value="3">March</option> <option value="4">April</option> <option value="5">May</option> <option value="6">June</option> <option value="7">July</option> <option value="8">August</option> <option value="9">September</option> <option value="10">October</option> <option value="11" selected>November</option> <option value="12">December</option> </select> </td> 
+            <td class="aligncenter"> <label for="y">Select Year</label> <select title="Select Year" name="get_year" id="y"> <option value="2050">2050</option> <option value="2049">2049</option> <option value="2048">2048</option> <option value="2047">2047</option> <option value="2046">2046</option> <option value="2045">2045</option> <option value="2044">2044</option> <option value="2043">2043</option> <option value="2042">2042</option> <option value="2041">2041</option> <option value="2040">2040</option> <option value="2039">2039</option> <option value="2038">2038</option> <option value="2037">2037</option> <option value="2036">2036</option> <option value="2035">2035</option> <option value="2034">2034</option> <option value="2033">2033</option> <option value="2032">2032</option> <option value="2031">2031</option> <option value="2030">2030</option> <option value="2029">2029</option> <option value="2028">2028</option> <option value="2027">2027</option> <option value="2026" selected>2026</option> <option value="2025">2025</option> <option value="2024">2024</option> <option value="2023">2023</option> <option value="2022">2022</option> <option value="2021">2021</option> <option value="2020">2020</option> <option value="2019">2019</option> <option value="2018">2018</option> <option value="2017">2017</option> <option value="2016">2016</option> <option value="2015">2015</option> <option value="2014">2014</option> <option value="2013">2013</option> <option value="2012">2012</option> <option value="2011">2011</option> <option value="2010">2010</option> <option value="2009">2009</option> <option value="2008">2008</option> <option value="2007">2007</option> </select> </td> 
+           </tr> 
+          </tbody> 
+         </table> </td> 
+       </tr> 
+       <tr class="aligncenter"> 
+        <td class="relative" colspan="2"> <br><br> <a id="go-prev" href="/agenda_publish.cfm?id=98622&amp;mt=ALL&amp;get_month=10&amp;get_year=2026" class="nextprevbtn">Previous Period</a> <a id="go-curr" href="/agenda_publish.cfm?id=98622&mt=ALL" class="nextprevbtn">Current Month and Year</a> <a id="go-next" href="/agenda_publish.cfm?id=98622&amp;mt=ALL&amp;get_month=12&amp;get_year=2026" class="nextprevbtn">Next Period</a> </td> 
+       </tr> 
+      </tbody> 
+     </table> 
+    </div> 
+    <br> 
+    <div class="aligncenter"> 
+     <button type="submit" id="FindMeetings" class="bold meetingsbtn">Find Meetings</button> 
+    </div> 
+    <br> 
+    <div class="aligncenter" title="Click this button to subscribe to email notifications"> 
+     <a id="go-Subscribe" aria-label="Subscribe Button. Click this button to subscribe to email notifications" class="bold subscribebtn" title="Subscribe" href="/dsi_subscribe.cfm?mode=mtg&amp;id=98622">Subscribe</a> 
+    </div> 
+    <br> 
+    <div class="aligncenter bold monthyearhdr">
+      November, 2026 
+    </div> 
+    <br> 
+    <hr size="2" class="width100"> 
+    <table class="tableCollapsed formtable listclass" id="meeting-table" role="presentation"> 
+     <thead> 
+      <tr> 
+       <td class="mediumText">Agendas</td> 
+       <td class="mediumText">Meeting</td> 
+       <td class="mediumText">Minutes</td> 
+       <td class="mediumText">Other Links</td> 
+      </tr> 
+     </thead> 
+     <tbody class="nowrap smallText"> 
+      <tr style="background-color: #E8E8E8"> 
+       <td class="mediumText"> <a href="/agenda_publish.cfm&#x3f;id&#x3d;98622&amp;mt&#x3d;ALL&amp;get_month&#x3d;11&amp;get_year&#x3d;2026&amp;dsp&#x3d;ag&amp;seq&#x3d;1737" id="agendaID1" title="View Agenda for BOS Regular Agenda  (11/02/2026)">November 2, 2026</a> </td> 
+       <td class="mediumText">BOS Regular Agenda </td> 
+       <td class="mediumText"> <a href="/yumacdocs/2026/BOSREG/20261102_1741/1737_10-05-26&#x25;20R&#x25;20Signed&#x25;20Minutes.pdf" class="popup" title="View Minutes Document for BOS Regular Agenda  (11/02/2026) - opens in new window" target="_blank" aria-label="View Minutes Document for BOS Regular Agenda  (11/02/2026) - opens in new window - opens in new window">10-05-26 R Signed Minutes</a> </td> 
+       <td class="mediumText"> <a href="https://play.champds.com/yumacoaz/event/657" title="View Agenda Link for BOS Regular Agenda  (11/02/2026)" target="swagit">11-2-2026 VIDEO</a> </td> 
+      </tr> 
+     </tbody> 
+     <tfoot> 
+      <tr> 
+       <td colspan="4"> 
+        <hr class="width100" style="color:#000" size="3" noshade></td> 
+      </tr> 
+     </tfoot> 
+    </table> 
+    <input type="hidden" name="downloadFile" value=""> 
+    <input type="hidden" name="id" value="98622"> 
+    <input type="hidden" name="loc" value=""> 
+    <input type="hidden" name="term" value="N"> 
+   </form> 
+   <div class="formtable" style="background-color:#FFFFCC"> 
+    <form action="adv_search_results.cfm?fp=ADVSRCH&amp;id=98622" method="post" name="form2" onsubmit="return validateAgendaMinuteText()"> 
+     <h1 hidden>View Meetings</h1> 
+     <div class="ada-h1">
+       Search Agenda Items 
+     </div> 
+     <br> 
+     <div align="center"> 
+      <table id="nav" role="presentation"> 
+       <tbody> 
+        <tr> 
+         <td class="ada-text"><label for="beg_meetmth">From Month</label> <select style="font-size: 16px" name="beg_meetmth" id="beg_meetmth"> <option value="ALL">ALL</option> <option value="1">January</option> <option value="2">February</option> <option value="3">March</option> <option value="4">April</option> <option value="5">May</option> <option value="6">June</option> <option value="7">July</option> <option value="8">August</option> <option value="9">September</option> <option value="10">October</option> <option value="11" selected>November</option> <option value="12">December</option> </select> </td> 
+         <td class="ada-text"><label for="beg_meetyr">From Year</label> <select style="font-size: 16px" name="beg_meetyr" id="beg_meetyr"> <option value="2050">2050</option> <option value="2049">2049</option> <option value="2048">2048</option> <option value="2047">2047</option> <option value="2046">2046</option> <option value="2045">2045</option> <option value="2044">2044</option> <option value="2043">2043</option> <option value="2042">2042</option> <option value="2041">2041</option> <option value="2040">2040</option> <option value="2039">2039</option> <option value="2038">2038</option> <option value="2037">2037</option> <option value="2036">2036</option> <option value="2035">2035</option> <option value="2034">2034</option> <option value="2033">2033</option> <option value="2032">2032</option> <option value="2031">2031</option> <option value="2030">2030</option> <option value="2029">2029</option> <option value="2028">2028</option> <option value="2027">2027</option> <option value="2026" selected>2026</option> <option value="2025">2025</option> <option value="2024">2024</option> <option value="2023">2023</option> <option value="2022">2022</option> <option value="2021">2021</option> <option value="2020">2020</option> <option value="2019">2019</option> <option value="2018">2018</option> <option value="2017">2017</option> <option value="2016">2016</option> <option value="2015">2015</option> <option value="2014">2014</option> <option value="2013">2013</option> <option value="2012">2012</option> <option value="2011">2011</option> <option value="2010">2010</option> <option value="2009">2009</option> <option value="2008">2008</option> <option value="2007">2007</option> </select> </td> 
+         <td class="ada-text"><label for="end_meetmth">To Month</label> <select style="font-size: 16px" name="end_meetmth" id="end_meetmth"> <option value="ALL">ALL</option> <option value="1">January</option> <option value="2">February</option> <option value="3">March</option> <option value="4">April</option> <option value="5">May</option> <option value="6">June</option> <option value="7">July</option> <option value="8">August</option> <option value="9">September</option> <option value="10">October</option> <option value="11" selected>November</option> <option value="12">December</option> </select> </td> 
+         <td class="ada-text"><label for="end_meetyr">To Year</label> <select style="font-size: 16px" name="end_meetyr" id="end_meetyr"> <option value="2050">2050</option> <option value="2049">2049</option> <option value="2048">2048</option> <option value="2047">2047</option> <option value="2046">2046</option> <option value="2045">2045</option> <option value="2044">2044</option> <option value="2043">2043</option> <option value="2042">2042</option> <option value="2041">2041</option> <option value="2040">2040</option> <option value="2039">2039</option> <option value="2038">2038</option> <option value="2037">2037</option> <option value="2036">2036</option> <option value="2035">2035</option> <option value="2034">2034</option> <option value="2033">2033</option> <option value="2032">2032</option> <option value="2031">2031</option> <option value="2030">2030</option> <option value="2029">2029</option> <option value="2028">2028</option> <option value="2027">2027</option> <option value="2026" selected>2026</option> <option value="2025">2025</option> <option value="2024">2024</option> <option value="2023">2023</option> <option value="2022">2022</option> <option value="2021">2021</option> <option value="2020">2020</option> <option value="2019">2019</option> <option value="2018">2018</option> <option value="2017">2017</option> <option value="2016">2016</option> <option value="2015">2015</option> <option value="2014">2014</option> <option value="2013">2013</option> <option value="2012">2012</option> <option value="2011">2011</option> <option value="2010">2010</option> <option value="2009">2009</option> <option value="2008">2008</option> <option value="2007">2007</option> </select> </td> 
+         <td class="nowrap ada-text"><label for="sstr">Text to search for</label> <input style="font-size: 16px" type="text" name="sstr" id="sstr" value="" size="35" maxlength="100"> </td> 
+        </tr> 
+        <tr> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <div align="center"> 
+       <button id="go-srchai" type="submit" style="font-size:18px; font-weight: bold;">Start Search</button> 
+      </div> 
+      <span id="errorMessage" style="font-size:18px; font-weight: bold; color:blue" aria-label="No search text was entered! Use Shift Tab twice, to specify the text to search for."></span> 
+     </div> 
+     <br> 
+     <input type="hidden" name="rtn_agline_rowid" value=""> 
+     <input type="hidden" name="formaction" value=""> 
+     <input type="hidden" name="form_type" value="AG_MEMO"> 
+     <input type="hidden" name="mt" value="ALL"> 
+     <input type="hidden" name="id" value="98622"> 
+    </form> 
+   </div> 
+   <script>
+			function validateAgendaMinuteText() {
+				if (document.forms["form2"]["sstr"].value == "") {
+					e = document.getElementById("errorMessage");
+					e.innerHTML = "<p>Please enter search text!</p>";
+					e.focus();
+					return false;
+				}
+			}
+
+			function validateDocSearch() {
+				if (document.forms["srchEngine_form"]["criteria"].value == "") {
+					e = document.getElementById("errorMessage2");
+					e.innerHTML = "<p>Please enter search text!</p>";
+					e.focus();
+					return false;
+				}
+			}
+			</script> 
+   <br> 
+   <div class="aligncenter"> 
+    <button type="button" class="bold bottombtn" onclick="history.go(-1)">&nbsp;GO TO PREVIOUS PAGE&nbsp;</button> &nbsp;&nbsp;&nbsp;&nbsp; 
+    <button type="button" class="bold bottombtn" onclick="goToTop()">&nbsp;GO TO THE TOP OF THE PAGE&nbsp;</button> 
+   </div> 
+   <br> 
+   <script>
+		function goToTop() {
+			document.body.scrollTop = 0; 
+			document.documentElement.scrollTop = 0; 
+			document.getElementById( document.getElementById("pdf") ? "pdf" : "mt" ).focus();
+		}
+	</script> 
+   <div style="display:table; margin:0 auto; text-align:center;"> 
+    <a href="https://www.w3.org/WAI/WCAG2AA-Conformance" title="Explanation of WCAG 2.0 Level AA Conformance - opens in new window" target="_blank" aria-label="Explanation of WCAG 2.0 Level AA Conformance - opens in new window - opens in new window"> <img height="32" width="88" class="wcagimg" src="/public/images/wcag2AA.png" alt="Level double AA conformance, W3C WAI Web Content Accessibility Guidelines 2.0"> </a> 
+   </div> 
+   <p style="font-family:Verdana,Arial,Helvetica,sans-serif; margin:0; padding:2px 0; text-align:center; font-size:10px;">AgendaQuick &copy;2005&ndash;2026 Destiny Software Inc.<span class="mobile-break"> </span>All Rights Reserved.</p> 
+   <script>
+		if (true == "true")
+			document.getElementById('agendaID1').focus();
+		else if (document.getElementById("pdf"))
+			document.getElementById('pdf').focus();
+		else if (document.getElementById('nothingfound'))
+			document.getElementById('nothingFound').focus();
+	</script> 
+   <style></style> 
+  </div>  
+ </body>
+</html>

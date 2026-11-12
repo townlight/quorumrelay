@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+ <head> 
+  <title>Agenda</title> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+  <meta name="robots" content="noindex,follow"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+ </head> 
+ <body> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+  <title>Agenda Item Search</title> 
+  <link rel="stylesheet" type="text/css" media="all" href="/public/styles/buttons.css"> 
+  <style>
+	a.ai_link {text-decoration:none;}
+	
+	.remove { display: none; }
+	.hide { visibility: hidden; }
+
+	#toggle { float: left; width: 3em; margin: -2px 1em 0 0; }
+</style> 
+  <link rel="stylesheet" type="text/css" media="all" href="/public/styles/global.css?v=2026-9-11"> 
+  <script src="/public/js/buttons.js"></script> 
+  <script src="/public/js/destiny.js"></script> 
+  <script>
+	DESTINY.initialize();
+</script> 
+  <div id="content"> 
+   <script>
+		document.title="Agenda Item - Search Results";
+	</script> 
+   <form name="form1" method="post" action=""> 
+    <div align="center" class="ada-h1">
+      Search Results 
+    </div> 
+    <br> 
+    <table class="formtable tablecollapsed" width="750px" cellpadding="8" role="presentation"> 
+     <colgroup> 
+      <col width="12%"> 
+      <col width="64%"> 
+      <col width="12%"> 
+      <col width="12%"> 
+     </colgroup> 
+     <tbody> 
+      <tr class="buttons" style="font-weight:bold; font-size:15px"> 
+       <td colspan="4" class="center nowrap smallText"> <a href="/agenda_publish.cfm?id=98622&form_type=AG_MEMO&amp;beg_meetmth=1&amp;beg_meetyr=2025&amp;end_meetmth=12&amp;end_meetyr=2025&amp;mt=ALL&amp;sstr=quorumrelayneverpresentqzxjvk&amp;dept=ALL&amp;hartkeywords=&amp;sortby=f.form_num%2C+f.rev_num&amp;fp=ADVSRCH" id="return" class="highlighted" style="color:blue" aria-label="Return to the Search Page. Button.">Return to the Search Page</a> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="4" id="nothingfound" style="font-size:16px" aria-label="No records were found for the specified search criteria. Press Shift Tab twice, to go back to the Return Button."><strong>No records were found matching the search criteria.</strong></td> 
+      </tr> 
+      <tr> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <input type="hidden" name="formaction" value=""> 
+    <input type="hidden" name="chgfrm" value=""> 
+    <input type="hidden" name="chg_frm_type" value=""> 
+    <input type="hidden" name="apprv_val" value=""> 
+    <input type="hidden" name="retrn_val" value=""> 
+    <input type="hidden" name="apprv_list" value=""> 
+    <input type="hidden" name="retrn_list" value=""> 
+    <input type="hidden" name="prnt_list" value=""> 
+    <input type="hidden" name="prnt_revs" value=""> 
+    <input type="hidden" name="prnt_type" value=""> 
+    <input type="hidden" name="sortby" value="f.form_num, f.rev_num"> 
+    <input type="hidden" name="forms_list" value="AG_MEMO,AGENDA,MINUTES"> 
+   </form> 
+   <script>
+		function goToTop() {
+			document.body.scrollTop = 0; 
+			document.documentElement.scrollTop = 0; 
+
+			document.getElementById("return").focus();
+		}
+
+		switch("f.form_num, f.rev_num") {
+			case "name" :
+				document.getElementById('name').focus();
+				break;
+			case "meeting_dt,agt.meeting_type" :
+				document.getElementById('meet').focus();
+				break;
+			case "am.ag_title" :
+				document.getElementById('title').focus();
+				break;
+			case "dept_desc" :
+				document.getElementById('dept').focus();
+				break;
+			case "submitted_for" :
+				document.getElementById('sub').focus();
+				break;
+			default :
+				if(0 > 0)
+					document.getElementById('return').focus();
+				else if (document.getElementById('nothingfound'))
+					document.getElementById('nothingfound').focus();
+				break;
+		}
+	</script> 
+   <br> 
+   <div align="center"> 
+    <input type="button" style="font-weight:bold; font-size:15px" value="&nbsp;RETURN TO THE SEARCH PAGE&nbsp;" onclick="history.go(-1)">&nbsp;&nbsp;&nbsp;&nbsp; 
+    <input type="button" style="font-weight:bold; font-size:15px" value="&nbsp;GO TO THE TOP OF THE PAGE&nbsp;" onclick="goToTop()"> 
+    <div> 
+     <br> 
+     <div style="display:table; margin:0 auto; text-align:center;"> 
+      <a href="https://www.w3.org/WAI/WCAG2AA-Conformance" title="Explanation of WCAG 2.0 Level AA Conformance - opens in new window" target="_blank" aria-label="Explanation of WCAG 2.0 Level AA Conformance - opens in new window - opens in new window"> <img height="32" width="88" class="wcagimg" src="/public/images/wcag2AA.png" alt="Level double AA conformance, W3C WAI Web Content Accessibility Guidelines 2.0"> </a> 
+     </div> 
+     <p style="font-family:Verdana,Arial,Helvetica,sans-serif; margin:0; padding:2px 0; text-align:center; font-size:10px;">AgendaQuick &copy;2005&ndash;2026 Destiny Software Inc.<span class="mobile-break"> </span>All Rights Reserved.</p> 
+    </div> 
+   </div> 
+  </div>  
+ </body>
+</html>

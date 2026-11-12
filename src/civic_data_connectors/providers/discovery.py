@@ -101,7 +101,8 @@ def _initial(source, bounds, input_format, saved):
     if saved:
         return [{"kind": "saved", "offset": 0}]
     provider = source.provider
-    if input_format in {"meeting-export", "legistar-event-json", "wistia-media-detail-json", "wistia-caption-json"}:
+    if input_format in {"meeting-export", "legistar-event-json", "wistia-media-detail-json", "wistia-caption-json",
+                        "agendaquick-item-search-html"}:
         return []
     if provider in NATIVE:
         if not bounds.date_from or not bounds.date_to:
@@ -172,6 +173,9 @@ def _request_spec(source, bounds, task, context):
                 or re.fullmatch(r"/meetings/meetings/[^/]+/20[0-9]{2}", parts.path) is None
                 or parts.path.rsplit("/", 1)[-1] != fields["year"]):
             raise ValueError("The Digital Towpath year control left its supplied public route.")
+    elif kind == "agendaquick-period" and source.provider == "destiny-agendaquick":
+        from .agendaquick import calendar_url
+        url = calendar_url(source, task.get("fields"))
     elif kind == "champ" and source.provider == kind:
         event = re.fullmatch(r"/([A-Za-z0-9_-]+)/event/([0-9]+)/?", p.path)
         if p.hostname != "play.champds.com" or event is None:
@@ -390,7 +394,8 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
     if input_format in {"legistar-events-json", "legistar-event-json", "wistia-api-media-json",
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
                         "civicweb-detail-html", "swagit-listing-html", "onbase-public-listing-html",
-                        "digital-towpath-listing-html", "towncloud-public-listing-json"}:
+                        "digital-towpath-listing-html", "towncloud-public-listing-json",
+                        "agendaquick-public-listing-html", "agendaquick-item-search-html"}:
         return parse_native(source, namespace, content, input_format), ()
     result = engine.normalize(replace(source, body=None), content, input_format=input_format,
                               bounds=replace(bounds, date_from=None, date_to=None,
@@ -423,6 +428,9 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
         if (parts.path.rstrip("/") == "/agendas" or (parts.hostname == "towncloud.io" and
                 re.fullmatch(r"/go/[A-Za-z0-9_-]+/published_agendas\.json", parts.path))):
             input_format = "towncloud-public-listing-json"
+    if (source.provider == "destiny-agendaquick" and source.input_format is None
+            and urlsplit(source.url).path.lower() == "/agenda_publish.cfm"):
+        input_format = "agendaquick-public-listing-html"
     saved = _decode_content(request, content)
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")
@@ -489,13 +497,15 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                 page_content = saved
                 following = None
             else:
-                if task.get("kind") in {"suiteone-group", "agendacenter-year", "towpath-year"}:
+                if task.get("kind") in {"suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period"}:
                     if source.provider == "suiteone-media" and task["kind"] == "suiteone-group":
                         from .suiteone import controls
                     elif source.provider == "civicplus-agenda-center" and task["kind"] == "agendacenter-year":
                         from .agendacenter import controls
                     elif source.provider == "digital-towpath" and task["kind"] == "towpath-year":
                         from .towpath import controls
+                    elif source.provider == "destiny-agendaquick" and task["kind"] == "agendaquick-period":
+                        from .agendaquick import controls
                     else:
                         raise ValueError("The public control does not belong to this provider.")
                     # Continuations contain public control values, never trust a
@@ -519,7 +529,7 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                     byte_limit=bounds.parser_bytes, deadline_seconds=max(0.001, deadline - monotonic()),
                     allowed_origins=(origin,),
                     **({"allow_redirects": False} if task.get("kind") in {
-                        "suiteone-group", "agendacenter-year", "towpath-year"} else {}),
+                        "suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period"} else {}),
                 )
                 if _origin(response.url) != origin:
                     raise ValueError("Provider retrieval left its configured origin.")
@@ -606,6 +616,15 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                                  for values in public_controls
                                  if (not bounds.date_from or values["year"] >= bounds.date_from[:4])
                                  and (not bounds.date_to or values["year"] <= bounds.date_to[:4]))
+                elif (source.provider == "destiny-agendaquick" and task.get("kind") == "static"
+                        and input_format == "agendaquick-public-listing-html"
+                        and bounds.date_from and bounds.date_to):
+                    from .agendaquick import controls
+                    public_controls = controls(page_content)
+                    queue.extend({"kind": "agendaquick-period", "fields": values}
+                                 for values in public_controls
+                                 if bounds.date_from[:7] <= f'{values["get_year"]}-{int(values["get_month"]):02d}'
+                                 <= bounds.date_to[:7])
         except Exception as error:
             # Provider/network exceptions may contain request URLs or credentials.
             # Never expose arbitrary exception text through public errors.
@@ -654,6 +673,10 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "supplied dated meeting links and public Other Years links; detail documents not fetched",
             "control_validation": "current configured listing revalidated before resumed year GET"})
+    elif source.provider == "destiny-agendaquick" and input_format == "agendaquick-public-listing-html":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "configured public month and advertised month/year selections within requested bounds",
+            "control_validation": "current configured calendar revalidated before resumed period GET"})
     return OperationResult(status, {"source": source.public_dict(), "records": records,
                                    "captures": captures, "bundles": bundles},
                            tuple(errors), coverage, context.operation_id)
