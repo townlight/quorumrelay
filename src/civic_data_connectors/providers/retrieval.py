@@ -180,6 +180,10 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
                 raise ValueError("The provider has not made the captured document available.")
         else:
             transfer_url = url
+        resolution = None
+        if source.provider == "boardbook":
+            from .boardbook import resolve_document
+            transfer_url, resolution = resolve_document(url, transport, bounds, context, deadline)
         if context.check_cancelled():
             return OperationResult("cancelled", {"record": record, "bundle": bundle},
                                    operation_id=context.operation_id)
@@ -188,6 +192,8 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=allowed)
         if response.status != 200:
             raise ValueError("The captured attachment did not return HTTP 200.")
+        if resolution and not response.content.startswith(b"%PDF-"):
+            raise ValueError("The supplied BoardBook PDF download did not return PDF bytes.")
         if len(response.content) > bounds.transfer_bytes:
             raise ValueError("The document exceeds the configured transfer byte limit.")
         if _origin(response.url) not in allowed:
@@ -198,6 +204,7 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
                 "byte_length": len(response.content), "sha256": hashlib.sha256(response.content).hexdigest(),
                 "content_base64": base64.b64encode(response.content).decode("ascii"),
                 "text_availability": "not_extracted",
+                **({"resolution": resolution} if resolution else {}),
             },
         }, coverage={"sources": [source.public_dict()], "failures": [], "unavailable_attachments": []},
                                operation_id=context.operation_id)
