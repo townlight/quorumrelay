@@ -74,5 +74,7 @@
     "No single uninterrupted 466-pass local run: full initial run and bounded affected recovery/addition checks cover all collected cases; original failures preserved.",
     "Development source proof only; fresh artifact, required CI, installed consumers and provider live acceptance remain separate."
   ],
-  "client_sha256": "9e53e23f6f862d5de32a131f4fc42eabf2dd22c8d00b67cf157a8f8467070f37"
+  "client_sha256": "9e53e23f6f862d5de32a131f4fc42eabf2dd22c8d00b67cf157a8f8467070f37",
+  "wheel_sha256": "6a932d54cd24e3ead79ba9fe6921373e0eaaa6bc116fb10ae037eaa700c0b0d3",
+  "source_commit": "3e7111fe72d69b95e5a67d2a003cd8bd3a1386ab"
 }

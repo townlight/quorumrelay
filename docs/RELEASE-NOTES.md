@@ -72,9 +72,24 @@ resumed-page hashes. Exact local title/date matching applies to provider-returne
 candidates. It remains explicitly partial metadata search; agenda text and
 complete source coverage are not claimed.
 
-Artifact and required-check receipts will identify the immutable build after
-verification. This remains a development candidate with the entire original
-first-release acceptance unchanged.
+The immutable Python wheel SHA256 is
+`6a932d54cd24e3ead79ba9fe6921373e0eaaa6bc116fb10ae037eaa700c0b0d3`;
+the TypeScript `0.1.0-dev.5` tarball SHA256 is
+`9e53e23f6f862d5de32a131f4fc42eabf2dd22c8d00b67cf157a8f8467070f37`.
+Both correspond to source `3e7111fe72d69b95e5a67d2a003cd8bd3a1386ab`.
+
+The fresh Windows wheel environment passed its standalone checks and all 34
+independent original-output comparisons. All ten copied external examples
+passed, including both MCP transports and synthetic write workflows. Source
+checks and bounded affected reruns cover all 466 collected cases; the receipt
+preserves the initial stale-version failures and subsequent recovery rather
+than representing those as a single uninterrupted run. Required hosted CI and
+consumer acceptance remain separately recorded.
+
+See the [installed artifact receipt](verification/quorumrelay-development-05.json)
+and [source checks](verification/quorumrelay-development-05-checks.json).
+This remains a development candidate with the entire original first-release
+acceptance unchanged.
 
 ## Development checkpoint 0.1.0.dev4
 
