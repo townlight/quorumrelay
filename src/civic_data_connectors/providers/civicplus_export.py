@@ -19,8 +19,9 @@ from .identification import configured_source, validate_source
 
 FORMAT = "civicplus-historical-files"
 DOCUMENTATION = "https://www.civicplus.help/meetings-select/docs/historical-imports"
-VERIFIED_TOKENS = {"Agenda", "Agenda Packet", "Minutes"}
-UNRESOLVED_TOKENS = {"Packet", "Notice", "Notices", "Other", "Media", "Audio/Video"}
+VERIFIED_TOKENS = {"Agenda", "Agenda Packet", "Minutes", "Notice", "Other", "Media"}
+UNRESOLVED_TOKENS = {"Packet", "Notices", "Audio/Video"}
+TESTER = "https://civicplus-lruiz.github.io/Historical-Import-Tester/Tester.html"
 
 
 def _component(value):
@@ -41,6 +42,67 @@ def _validate_pdf(stream):
                 raise ValueError("A historical meeting PDF must contain a readable page tree.")
     except Exception:
         raise ValueError("The historical meeting PDF could not be parsed as a readable document.") from None
+    stream.seek(0)
+
+
+def _tester_file_type(filename):
+    """Port the official-linked tester's full-filename classification order."""
+    normalized = re.sub(r"[._\\\-:/]+", " ", filename.lower())
+    normalized = re.sub(r"[^a-z0-9\s]", "", normalized)
+    normalized = re.sub(r"\s+", " ", normalized).strip()
+    if any(word in normalized for word in ("agenda packet", "packet", "packets")):
+        return "Agenda Packet"
+    if "agenda" in normalized:
+        return "Agenda"
+    if any(word in normalized for word in ("minute", "minutes", "mins", "meetingnotes")):
+        return "Minutes"
+    if "notice" in normalized:
+        return "Notice"
+    if filename.lower().endswith(".mp4") or "video" in normalized:
+        return "Video"
+    if any(word in normalized for word in ("caption", "captions", "transcript")):
+        return "Close Caption"
+    return "Other"
+
+
+def _validate_mp4(stream, length, context, deadline):
+    """Check bounded top-level ISO BMFF framing, not codec/playback validity."""
+    position, count, found = 0, 0, set()
+    while position < length:
+        if context.check_cancelled():
+            raise InterruptedError
+        if monotonic() >= deadline or count >= 10000:
+            raise ValueError("MP4 validation exceeded its deadline or box limit.")
+        stream.seek(position)
+        header = stream.read(8)
+        if len(header) != 8:
+            raise ValueError("MP4 input has a truncated box header.")
+        size = int.from_bytes(header[:4], "big")
+        kind, header_size = header[4:], 8
+        if size == 1:
+            extended = stream.read(8)
+            if len(extended) != 8:
+                raise ValueError("MP4 input has a truncated extended box header.")
+            size, header_size = int.from_bytes(extended, "big"), 16
+        elif size == 0:
+            size = length - position
+        if size < header_size or size > length - position:
+            raise ValueError("MP4 input has an invalid box length.")
+        if kind == b"ftyp":
+            if position != 0 or size < header_size + 8 or (size - header_size) % 4:
+                raise ValueError("MP4 input requires an initial file type box.")
+            brand = stream.read(4)
+            if len(brand) != 4 or not all(32 <= char <= 126 for char in brand):
+                raise ValueError("MP4 input has an invalid major brand.")
+            found.add(kind)
+        elif kind in {b"moov", b"mdat"}:
+            if size <= header_size:
+                raise ValueError("MP4 input has an empty required box.")
+            found.add(kind)
+        position += size
+        count += 1
+    if found != {b"ftyp", b"moov", b"mdat"}:
+        raise ValueError("MP4 input requires file type, movie and media boxes.")
     stream.seek(0)
 
 
@@ -79,18 +141,19 @@ def export_historical(owner, request, content, context):
     if any(isinstance(part, dict) and part.get("file_type") in UNRESOLVED_TOKENS for part in files):
         return OperationResult("unsupported", errors=(Error("provider_filename_mapping_unverified",
             "The exact historical-import filename token is unverified for this file type. "
-            "Known examples map Agenda, Agenda Packet and Minutes. Obtain the exact provider token before preparing other file types.",
+            "Use an explicitly supported canonical file type.",
             source=source.url),), coverage={"scope": "filename mapping gap; no files exported",
             "vendor_import_accepted": False}, operation_id=context.operation_id)
     deadline, total, pdf_count, media_count = monotonic() + bounds.deadline_seconds, 0, 0, 0
     manifest = {"format": FORMAT, "provider": source.provider, "namespace": namespace,
                 "delivery_container": "ZIP wrapper; extract named files before consultant intake; vendor ZIP import is not established",
                 "meeting": meeting, "files": [], "documentation": DOCUMENTATION,
-                "vendor_transfer_performed": False, "vendor_import_accepted": False,
+                "vendor_transfer_performed": False, "vendor_import_accepted": False, "filename_tester": TESTER,
                 "projection_losses": ["Agenda item structure and bookmarks are not imported by this workflow.",
                     "Media timestamps, supplied captions, votes, relationships, revisions and other normalized fields have no filename mapping.",
                     "Meeting metadata beyond body/type/date is retained here only; it is not a vendor input field.",
-                    "MP4 filename tokens are not verified; media file preparation remains incomplete.",
+                    "The linked filename tester is preparation evidence, not consultant import acceptance.",
+                    "MP4 box framing is checked; playback, codecs and post-import fidelity are not verified.",
                     "Vendor optimization can change PDF bytes after import; local originals remain exact."],
                 "local_transfer_limit": bounds.transfer_bytes,
                 "vendor_size_limit": "not_documented", "consultant_processing_required": True}
@@ -141,6 +204,7 @@ def export_historical(owner, request, content, context):
                     media_count += 1
                     if token not in {"Media", "Audio/Video"}:
                         raise ValueError("The supplied PDF FileType cannot name an MP4 file.")
+                    _validate_mp4(stream, length, context, deadline)
                     extension = ".mp4"
                 else:
                     raise ValueError("Historical files require verified PDF or MP4 content.")
@@ -148,6 +212,9 @@ def export_historical(owner, request, content, context):
                     raise ValueError("One event permits at most five PDFs and one media file.")
                 target = f"{body}_{meeting_type}_{token}_{day_token}{extension}"
                 name = target
+                expected_type = "Video" if token == "Media" else token
+                if _tester_file_type(name) != expected_type:
+                    raise ValueError("The generated filename conflicts with the linked tester's file-type classification.")
                 if len(name.encode("utf-8")) > 240 or name.casefold() in names:
                     raise ValueError("The generated import filename collides or exceeds local portability bounds.")
                 names.add(name.casefold())
