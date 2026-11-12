@@ -104,7 +104,7 @@ def _initial(source, bounds, input_format, saved):
     if input_format in {"meeting-export", "legistar-event-json", "wistia-media-detail-json", "wistia-caption-json",
                         "agendaquick-item-search-html", "civicplus-search-json"}:
         return []
-    if provider == "escribe" and input_format == "escribe-meeting-detail-html":
+    if input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html"}:
         return [{"kind": "static"}]
     if provider in NATIVE:
         if not bounds.date_from or not bounds.date_to:
@@ -676,7 +676,8 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     cancelled = context.check_cancelled()
     timed_out = monotonic() >= deadline
     partial = bool(queue or failures or unknown_dates or unknown_bodies or saved is not None or
-                   source.provider not in NATIVE or input_format == "escribe-meeting-detail-html")
+                   source.provider not in NATIVE or
+                   input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html"})
     status = "cancelled" if cancelled else (
         "failed" if failures and not captures else "partial" if partial else "completed")
     checkpoint = _checkpoint(binding, queue, seen) if queue else None
@@ -694,7 +695,11 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
             "configured capture only; upstream catalog completeness is unverified"),
         "available_text": "metadata_and_supplied_text_only",
     }
-    if input_format == "escribe-meeting-detail-html":
+    if input_format == "boardbook-public-agenda-html":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one configured rendered public BoardBook agenda; no hidden loaders or archive claim",
+            "native_item_ids": True, "time_zone_status": "unknown"})
+    elif input_format == "escribe-meeting-detail-html":
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "one supplied public rendered agenda; item keys are capture-local display positions",
             "native_item_ids": False, "time_zone_status": "unknown"})

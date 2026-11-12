@@ -17,6 +17,7 @@ FORMATS = {provider: tuple(row["input_format"] for row in compat.source_formats(
            for provider in dict.fromkeys(row["connector"] for row in compat.source_formats())}
 ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json", "legistar-votes-json",
                                  "legistar-rollcalls-json"),
+                      "boardbook": ("boardbook-public-agenda-html",),
                       "civicplus-select": ("civicplus-search-json",),
                       "clerkbase": ("clerkbase-search-html", "clerkbase-public-tree-html"),
                       "iqm2": ("iqm2-public-search-html",),

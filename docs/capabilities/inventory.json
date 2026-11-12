@@ -9238,6 +9238,18 @@
           "observed": "2026-11-12 bounded public read",
           "observation_date": "2026-11-12",
           "access_scope": "bounded_public_read_only"
+        },
+        {
+          "id": "boardbook-rendered-agenda-synthetic",
+          "url": "https://meetings.boardbook.org/Public/Agenda/1807?meeting=775433",
+          "title": "Captured public agenda native item and document associations",
+          "kind": "synthetic_engine_and_saved_capture",
+          "findings": "Additive boardbook-public-agenda-html maps exact native meeting/item/document IDs, explicit parent classes and supplied links. Seven new synthetic cases plus three existing retrieval cases passed; saved123605-byte agenda maps1meeting/44items/34viewer links.",
+          "limits": "No new live request; viewer original bytes/catalog/API/write contracts not established.",
+          "receipt_path": "docs/verification/boardbook-rendered-agenda-2026-11-12.json",
+          "receipt_sha256": "c0697a4bd7977b4e6fdc6092d872e6263360d5ad29c5fc3d79d91c15451c740d",
+          "observation_date": "2026-11-12",
+          "proof_level": "synthetic_engine_execution_and_offline_actual_capture_not_live_download_acceptance"
         }
       ],
       "tenants": [
@@ -9277,9 +9289,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "boardbook-tenant",
-            "boardbook-public-document-live"
+            "boardbook-public-document-live",
+            "boardbook-rendered-agenda-synthetic"
           ],
-          "details": "Existing configured organization HTML retrieval/parser and bounded local continuation/date filtering map the supplied public table; selected Minneapolis page contained629meetings back to2010. No separate archive/page control observed; full catalog completeness unknown.",
+          "details": "Existing configured organization HTML retrieval/parser and bounded local continuation/date filtering map the supplied public table; selected Minneapolis page contained629meetings back to2010. No separate archive/page control observed; full catalog completeness unknown. Additive boardbook-public-agenda-html accepts saved/configured public Agenda HTML with native item parents and item-bound document IDs; exact raw capture retained. Viewer download semantics and full catalog remain unverified.",
           "dependencies": [],
           "remaining_verification": [
             "Verify full date/body bounds, continuation and checkpoints."
@@ -9301,9 +9314,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "boardbook-tenant",
-            "boardbook-public-document-live"
+            "boardbook-public-document-live",
+            "boardbook-rendered-agenda-synthetic"
           ],
-          "details": "Captured Agenda/Minutes links are source-authorized. Observed Agenda HTML supplied exact same-organization/meeting DownloadAgenda link; source resolver now retrieves guarded PDF with separate parser/transfer ceilings and retains durable agenda citation. Missing/forged download or unavailable bytes retains meeting as partial.",
+          "details": "Captured Agenda/Minutes links are source-authorized. Observed Agenda HTML supplied exact same-organization/meeting DownloadAgenda link; source resolver now retrieves guarded PDF with separate parser/transfer ceilings and retains durable agenda citation. Missing/forged download or unavailable bytes retains meeting as partial. Additive boardbook-public-agenda-html accepts saved/configured public Agenda HTML with native item parents and item-bound document IDs; exact raw capture retained. Viewer download semantics and full catalog remain unverified.",
           "dependencies": [],
           "remaining_verification": [
             "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
@@ -9325,9 +9339,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "boardbook-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "boardbook-rendered-agenda-synthetic"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive boardbook-public-agenda-html accepts saved/configured public Agenda HTML with native item parents and item-bound document IDs; exact raw capture retained. Viewer download semantics and full catalog remain unverified.",
           "dependencies": [
             "Extract shared engine preserving legacy behavior."
           ],
@@ -9739,7 +9754,7 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, detail relationships and complete catalog remain unverified; no new tenant/history survey implied.",
+        "Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied.",
         "Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.",
         "No authorized staff/test account was supplied for roles, API enablement, write/readback or conflict checks."
       ],

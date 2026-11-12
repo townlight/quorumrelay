@@ -217,6 +217,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 ### Remaining research
 
 - Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, detail relationships and complete catalog remain unverified; no new tenant/history survey implied.
+- Additive `boardbook-public-agenda-html` now maps saved/configured public agenda meeting/native item parents and associated document IDs from captured attributes. Seven new synthetic engine cases and three reused document cases pass; saved Minneapolis HTML maps one meeting/44 items/34 supplied viewer links. Hidden loaders are not invoked; original bytes behind those viewers and catalog completeness remain unverified. See [mapping guide](../BOARDBOOK-DETAIL.md) and `docs/verification/boardbook-rendered-agenda-2026-11-12.json`.
 - Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.
 - No authorized staff/test account was supplied for roles, API enablement, write/readback or conflict checks.
 
