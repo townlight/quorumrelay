@@ -8670,7 +8670,7 @@
       }
     },
     "typed_models": "src/civic_data_connectors/data/granicus_platform.json",
-    "verification": "Vendor-WSDL-shaped synthetic engine reads and coordinator CreateEvent/UpdateEvent/UpdateClip/UpdateMetaData transactions verified; private sessions, model parity, exact-plan/conflict/revocation/duplicate/uncertain readback checked. Other bound methods are not yet engine mappings. Four document URL setters and two single-call document uploads are now mapped with durable file, optional named-minutes and exact byte/hash readback tests; larger minutes use the documented SDK add/finish chunk protocol with verified normal, ambiguous-finish and ambiguous-add outcomes. Supporting whole captions, three video locations, Document attachment bytes and minutes metadata are also actual engine fixture-verified; this still does not establish all 48 engine mappings. SDK-explicit metadata Payload wrappers preserve AgendaItem, Note, Document, Rollcall, Motion and VoteRecord type/fields; WSDL parity roundtrips and a real coordinator meeting-bound Motion update pass. MediaVault literal binding (13 cases) and actual UploadFile coordinator (3 cases) verify private impersonation, exact bytes and identity/uncertain recovery. Coherent source batch adds six explicit publication cases, seven Event/Clip Add/Import/reconciliation cases, and two new UID/list read cases covering ten variants plus rejection; six prior read cases reused. Public/Not-Public readback is visibility only; other publication fields are submitted-only and Pending/missing acknowledgement remains uncertain. Import ClearExisting=true is excluded by project no-delete scope, not absent in the vendor API.",
+    "verification": "Vendor-WSDL-shaped synthetic engine reads and coordinator CreateEvent/UpdateEvent/UpdateClip/UpdateMetaData transactions verified; private sessions, model parity, exact-plan/conflict/revocation/duplicate/uncertain readback checked. Other bound methods are not yet engine mappings. Four document URL setters and two single-call document uploads are now mapped with durable file, optional named-minutes and exact byte/hash readback tests; larger minutes use the documented SDK add/finish chunk protocol with verified normal, ambiguous-finish and ambiguous-add outcomes. Supporting whole captions, three video locations, Document attachment bytes and minutes metadata are also actual engine fixture-verified; this still does not establish all 48 engine mappings. SDK-explicit metadata Payload wrappers preserve AgendaItem, Note, Document, Rollcall, Motion and VoteRecord type/fields; WSDL parity roundtrips and a real coordinator meeting-bound Motion update pass. MediaVault literal binding (13 cases) and actual UploadFile coordinator (3 cases) verify private impersonation, exact bytes and identity/uncertain recovery. Coherent source batch adds six explicit publication cases, seven Event/Clip Add/Import/reconciliation cases, and two new UID/list read cases covering ten variants plus rejection; six prior read cases reused. Public/Not-Public readback is visibility only; other publication fields are submitted-only and Pending/missing acknowledgement remains uncertain. Import ClearExisting=true is excluded by project no-delete scope, not absent in the vendor API. Generated minutes has four real-coordinator synthetic cases. MediaVault chunk/register/assign has ten cases including private durable plan binding, cancellation, stage-loss no-replay and hostile token reflection. Meeting-bound Event/Clip Attendees/MotionTypes have two field/readback cases; >7MB single agenda has exact full-byte proof. Raw record SOAP normalizes offline without credentials; supporting responses without parent IDs use neutral CaptureBundle fallback retaining exact XML/parent fields (two cases). Server-owned field patch denial and creation readback have two cases; identity/server fields are retained, not claimed writable.",
     "limits": [
       "Pinned official contract, not a live/current compatibility claim",
       "Vendor administration operations excluded",
@@ -8680,8 +8680,429 @@
     "contract_discrepancies": [
       "Original .NET WSDL PublishClip types are array placeholders while its SDK DTOs are structured. Per-type override explicitly uses the official Java WSDL revision548e20a5f25f9ca5472e168996fe116ab8bd1164, whose structured fields match the .NET SDK; both raw sources/hashes retained. No live/current-version compatibility inferred."
     ],
-    "media_upload_contract": "Pinned MediaVault.cs/SDK.asmx.wsdl normal UploadFile is engine-mapped. StartUpload/SendChunk/FinishUpload/RegisterUploadedFile/AssignUploadedFile are typed bindings, not yet engine workflows. SecurityHeader/current PHPSESSID and exact source/folder/interface policy stay private.",
+    "media_upload_contract": "All six pinned MediaVault methods are engine-used: UploadFile and explicit StartUpload/SendChunk/FinishUpload/RegisterUploadedFile/AssignUploadedFile workflows. Remote bucket GUID stays in caller/source/plan-bound private storage; no private PHP session persists. Unknown stage outcomes are surfaced without mutation replay. Finish checksum algorithm is unspecified and not treated as SHA/readback bytes.",
     "media_vault_binding": "src/civic_data_connectors/data/granicus_vault.json",
-    "private_control_operation": "GetFolderUploadInterface is an additional typed setup read for MediaVault, beyond the original48 in-domain bindings."
+    "private_control_operation": "GetFolderUploadInterface is an additional typed setup read for MediaVault, beyond the original48 in-domain bindings.",
+    "engine_method_assessment": {
+      "basis": "Outcome coverage, not an endpoint quota. Duplicate convenience/configuration/admin endpoints do not become new acceptance requirements. Pinned vendor methods remain intact.",
+      "platform_methods": {
+        "AddClipMetaData": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "AddEventMetaData": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "CreateAttendees": {
+          "status": "not_required_additional_endpoint",
+          "reason": "System-wide roster administration; meeting-bound Attendees are already mapped in EventData/ClipData."
+        },
+        "CreateClipGeneratedMinutesDocument": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "CreateEvent": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "CreateMotionActions": {
+          "status": "not_required_additional_endpoint",
+          "reason": "System-wide definitive motion registry; supplied meeting-bound MotionTypes/typed Motion are mapped."
+        },
+        "FetchAttachment": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetClip": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetClipByUID": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetClipCaptions": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetClipCaptionsByUID": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetClipIndices": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetClipIndicesByUID": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetClipMetaData": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetClipMetaDataByUID": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetClipMinutesDocuments": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetClipVideoLocation": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetClips": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetClipsByForeignID": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetEvent": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetEventByUID": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetEventMetaData": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetEventMetaDataByUID": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetEventVideoLocation": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetEventVideoLocationByUID": {
+          "status": "not_required_additional_endpoint",
+          "reason": "Redundant UID convenience; numeric video location and verified UID detail resolution already cover the outcome."
+        },
+        "GetEvents": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetEventsByDateRange": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetEventsByForeignID": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetMetaData": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetMetaDataByUID": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetMetaDataVideoLocation": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetMotionActions": {
+          "status": "not_required_additional_endpoint",
+          "reason": "Optional system-wide reference lookup; supplied meeting-bound values cover the agreed outcome."
+        },
+        "ImportClipMetaData": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "ImportEventMetaData": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "Login": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "Logout": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "PublishClip": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "RegisterClipUpload": {
+          "status": "not_required_additional_endpoint",
+          "reason": "SDK expressly warns against normal uploads; MediaVault UploadFile/RegisterUploadedFile implement the required outcome."
+        },
+        "SetClipAgendaURL": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "SetClipMinutesURL": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "SetClipMinutesURLWithName": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "SetEventAgendaURL": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "SetEventAgendaURLByUID": {
+          "status": "not_required_additional_endpoint",
+          "reason": "Redundant UID convenience; numeric agenda setter and verified UID detail resolution already cover the outcome."
+        },
+        "UpdateClip": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "UpdateEvent": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "UpdateMetaData": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "UploadClipMinutesDocument": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "UploadEventAgendaDocument": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "GetFolderUploadInterface": {
+          "status": "engine_mapped",
+          "reason": "Mapped source path; synthetic proof is recorded separately from binding parity."
+        },
+        "CreateCamera": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "CreateFolder": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "CreateGroup": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "CreateServer": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "CreateTemplate": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "CreateUser": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "CreateView": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "DeleteCamera": {
+          "status": "excluded_project_scope",
+          "reason": "Original project excludes deletes."
+        },
+        "DeleteClip": {
+          "status": "excluded_project_scope",
+          "reason": "Original project excludes deletes."
+        },
+        "DeleteEvent": {
+          "status": "excluded_project_scope",
+          "reason": "Original project excludes deletes."
+        },
+        "DeleteFolder": {
+          "status": "excluded_project_scope",
+          "reason": "Original project excludes deletes."
+        },
+        "DeleteGroup": {
+          "status": "excluded_project_scope",
+          "reason": "Original project excludes deletes."
+        },
+        "DeleteMetaData": {
+          "status": "excluded_project_scope",
+          "reason": "Original project excludes deletes."
+        },
+        "DeleteMinutesDocument": {
+          "status": "excluded_project_scope",
+          "reason": "Original project excludes deletes."
+        },
+        "DeleteServer": {
+          "status": "excluded_project_scope",
+          "reason": "Original project excludes deletes."
+        },
+        "DeleteUser": {
+          "status": "excluded_project_scope",
+          "reason": "Original project excludes deletes."
+        },
+        "GetCamera": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetCameraVideoLocation": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetCameras": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetChallenge": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetCurrentUserID": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetCurrentUserLogon": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetCurrentUserUID": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetFolder": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetFolders": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetFoldersByType": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetGroup": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetGroups": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetPermissionLevel": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetServer": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetServers": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetSettings": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetTemplate": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetTemplates": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetUser": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetUsers": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetView": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "GetViews": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "LogMessage": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "SendChallengeResponse": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "SetUserMemberships": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "UpdateCamera": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "UpdateFolder": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "UpdateGroup": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "UpdateServer": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "UpdateTemplate": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "UpdateUser": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        },
+        "UpdateView": {
+          "status": "additional_vendor_configuration_not_required",
+          "reason": "Camera/server/folder/user/group/template/view/settings or optional authentication/administration configuration; not an additional meeting/document/media data-outcome requirement."
+        }
+      },
+      "media_vault_methods": {
+        "UploadFile": "engine_mapped",
+        "StartUpload": "engine_mapped",
+        "SendChunk": "engine_mapped",
+        "FinishUpload": "engine_mapped",
+        "RegisterUploadedFile": "engine_mapped",
+        "AssignUploadedFile": "engine_mapped"
+      },
+      "excluded_parameters": {
+        "ImportEventMetaData.ClearExisting=true": "Vendor-supported destructive clearing excluded by original no-delete scope.",
+        "ImportClipMetaData.ClearExisting=true": "Vendor-supported destructive clearing excluded by original no-delete scope."
+      }
+    },
+    "saved_response_contract": "Credential-free normalize supports record-shaped raw SOAP. Parent-less caption/video/attachment/minutes XML requires the existing neutral CaptureBundle containing exact raw capture and supplied parent metadata; bare supporting XML fails explicitly instead of inventing identity.",
+    "read_only_fields": {
+      "all_updates": [
+        "ID",
+        "UID",
+        "LastModified"
+      ],
+      "EventData_additional": [
+        "Status",
+        "AgendaRolloverID",
+        "MeetingTime",
+        "AgendaPostedDate",
+        "NextStartDate"
+      ],
+      "basis": "Pinned APIEntities.cs explicitly describes EventData system-assigned/ignored fields; identity cannot change. Full models preserve these values, while patches reject them and readback retains actual server values."
+    }
   }
 }

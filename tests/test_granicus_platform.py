@@ -204,3 +204,36 @@ def test_uid_identity_mismatch_fails_without_returning_unverified_record():
         "source": SOURCE, "api_resource": "event_uid", "external_id": GUID}, context=context())
     assert result.status == "failed" and result.errors
     assert not result.data.get("records")
+
+
+def test_saved_record_soap_normalizes_offline_without_provider_credentials():
+    from civic_data_connectors import Source
+    raw = envelope("GetEvent", "<event>" + event() + "</event>")
+    engine = create_engine()
+    result = engine.normalize(Source.from_dict(SOURCE), raw, input_format="granicus-platform-soap-xml")
+    assert result.status == "completed", result.errors
+    assert result.data["records"][0]["identity"]["external_id"] == "7"
+    import base64
+    assert base64.b64decode(result.data["capture"]["content_base64"]) == raw
+
+
+def test_saved_supporting_response_uses_neutral_bundle_to_retain_request_parent_offline():
+    import io
+    from civic_data_connectors import Source
+    from civic_data_connectors.interchange import write_bundle
+    live_engine = create_engine(provider_transport=SupportingTransport())
+    offline = create_engine()
+    for resource in ("clip_captions", "attachment"):
+        fetched = live_engine.execute("fetch", {"source": SOURCE, "external_id": "7", "api_resource": resource}, context=context())
+        assert fetched.status == "partial" and not fetched.errors
+        output = io.BytesIO()
+        write_bundle(fetched.data, output, format="json")
+        imported = offline.execute("import_preview", {"format": "json"}, content=output.getvalue())
+        assert imported.status == "completed", imported.errors
+        assert imported.data["bundle"]["records"] == fetched.data["records"]
+        assert imported.data["bundle"]["capture"] == fetched.data["capture"]
+        # These SOAP responses carry no parent ID; raw-only normalization must
+        # fail explicitly rather than invent the request identity.
+        import base64
+        raw = base64.b64decode(fetched.data["capture"]["content_base64"])
+        assert offline.normalize(Source.from_dict(SOURCE), raw, input_format="granicus-platform-soap-xml").status == "failed"

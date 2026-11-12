@@ -20,6 +20,8 @@ MODELS = {
     "recording": ("ClipData", "GetClip", "ClipID", "UpdateClip", "clip"),
     "agenda_item": ("MetaDataData", "GetMetaData", "MetaDataID", "UpdateMetaData", "MetaData"),
 }
+# SDK EventData properties explicitly described as system-assigned/ignored.
+EVENT_SERVER_FIELDS = {"Status", "AgendaRolloverID", "MeetingTime", "AgendaPostedDate", "NextStartDate"}
 
 
 class _Bridge:
@@ -54,6 +56,14 @@ class GranicusWriteAdapter(WriteAdapter):
 
     def authorize(self, source, change, context):
         config = self.credentials(source, context)
+        if change.entity == "chunked_recording":
+            from .granicus_media import authorize
+            authorize(self, source, change, context)
+            return
+        if change.entity == "generated_minutes":
+            from .granicus_minutes import authorize
+            authorize(self, source, change, context)
+            return
         if change.entity == "agenda_tree":
             from .granicus_metadata import authorize
             authorize(self, source, change, context)
@@ -96,6 +106,12 @@ class GranicusWriteAdapter(WriteAdapter):
 
     def prepare(self, source, change, context, bounds, deadline):
         self.authorize(source, change, context)
+        if change.entity == "chunked_recording":
+            from .granicus_media import prepare
+            return prepare(self, source, change, context, bounds, deadline)
+        if change.entity == "generated_minutes":
+            from .granicus_minutes import prepare
+            return prepare(self, source, change, context, bounds, deadline)
         if change.entity == "agenda_tree":
             from .granicus_metadata import prepare
             return prepare(self, source, change, context, bounds, deadline)
@@ -106,8 +122,11 @@ class GranicusWriteAdapter(WriteAdapter):
         if change.entity == "document":
             return self._prepare_document(source, change, context, bounds, deadline)
         create = change.operation == "create"
-        if not isinstance(change.fields, dict) or not change.fields or ("ID" in change.fields and not create):
-            raise ValueError("Supply a nonempty documented patch without changing provider identity.")
+        read_only = {"ID", "UID", "LastModified"}
+        if change.entity == "event":
+            read_only |= EVENT_SERVER_FIELDS
+        if not isinstance(change.fields, dict) or not change.fields or (not create and set(change.fields) & read_only):
+            raise ValueError("Supply a nonempty documented patch without changing provider identity or server-owned fields.")
         model, _, _, operation, parameter = MODELS[change.entity]
         fields = contract()["types"][model]["fields"]
         if set(change.fields) - set(fields):
@@ -146,6 +165,12 @@ class GranicusWriteAdapter(WriteAdapter):
     def apply(self, source, prepared, context, bounds, deadline, *, persist=None):
         change = WriteChange.from_dict(prepared["change"])
         self.authorize(source, change, context)
+        if change.entity == "chunked_recording":
+            from .granicus_media import apply
+            return apply(self, source, prepared, context, bounds, deadline, persist=persist)
+        if change.entity == "generated_minutes":
+            from .granicus_minutes import apply
+            return apply(self, source, prepared, context, bounds, deadline, persist=persist)
         if change.entity == "agenda_tree":
             from .granicus_metadata import apply
             return apply(self, source, prepared, context, bounds, deadline, persist=persist)
@@ -189,6 +214,8 @@ class GranicusWriteAdapter(WriteAdapter):
         # Providers may update LastModified; require every planned patch value,
         # retain full readback and never pretend a server CAS was performed.
         ignored = {"LastModified", "ID", "UID"} if prepared["change"]["operation"] == "create" else {"LastModified"}
+        if prepared["change"]["entity"] == "event":
+            ignored |= EVENT_SERVER_FIELDS
         matches = all(actual.get(key) == value for key, value in prepared["after"].items() if key not in ignored)
         return {"state": "succeeded" if matches else "uncertain", "resource_id": actual.get("ID"),
                 "readback": actual, "reconciled": True,
@@ -198,6 +225,12 @@ class GranicusWriteAdapter(WriteAdapter):
     def reconcile(self, source, prepared, item, context, bounds, deadline):
         change = WriteChange.from_dict(prepared["change"])
         self.authorize(source, change, context)
+        if change.entity == "chunked_recording":
+            from .granicus_media import reconcile
+            return reconcile(self, source, prepared, item, context, bounds, deadline)
+        if change.entity == "generated_minutes":
+            from .granicus_minutes import reconcile
+            return reconcile(self, source, prepared, item, context, bounds, deadline)
         if change.entity == "agenda_tree":
             from .granicus_metadata import reconcile
             return reconcile(self, source, prepared, item, context, bounds, deadline)
@@ -375,15 +408,16 @@ class GranicusWriteAdapter(WriteAdapter):
                 params["Name"] = fields["Name"]
         else:
             part = prepared["native"]["files"][0]
-            # The vendor SDK documents 7,000,000-byte chunks and a 1GB total
-            # ceiling for minutes. Event agendas retain the adapter's safe 7MB ceiling.
-            maximum = 1_000_000_000 if fields["Kind"] == "minutes" else 7_000_000
+            # Minutes have a documented SDK chunk protocol/1GB ceiling.
+            # Agenda is a single SOAP Document; its encoded request remains
+            # caller-bounded, without inventing a vendor 7MB restriction.
+            maximum = 1_000_000_000 if fields["Kind"] == "minutes" else bounds.transfer_bytes
             if not 0 < part["reference"]["byte_length"] <= min(maximum, bounds.transfer_bytes):
                 raise ValueError("The SOAP document exceeds its documented/adapter safe byte ceiling.")
             if data is None:
-                with self._open_file(part) as stream:
-                    data = stream.read(7_000_000)
                 chunked = prepared["native"].get("chunked_upload")
+                with self._open_file(part) as stream:
+                    data = stream.read(7_000_000 if chunked else part["reference"]["byte_length"])
                 if chunked:
                     location = json.dumps({"action": "add", "id": chunked["id"]}, separators=(",", ":"))
             params["Document"] = {"Description": fields["Description"], "Location": location,

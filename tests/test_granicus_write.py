@@ -565,3 +565,96 @@ def test_publication_requires_explicit_visibility_and_separate_grant(tmp_path):
     context.credentials["granicus"]["permissions"] = ["recording:update", "recording:upload"]
     assert engine.execute("plan_write", {"source": SOURCE, "changes": [change]}, context=context).status == "failed"
     assert network.mutations == 0
+
+
+class MeetingFieldsNetwork(Network):
+    def _record(self, element):
+        super()._record(element)
+        for key in ("Attendees", "MotionTypes"):
+            field = element.find(key)
+            field.set(f"{{{ENC}}}arrayType", "g:Attendee[0]" if key == "Attendees" else "xsd:string[0]")
+            for value in self.values[key]:
+                item = ET.SubElement(field, "item")
+                if key == "MotionTypes":
+                    item.text = value
+                else:
+                    for name, typ in model_fields("Attendee").items():
+                        ET.SubElement(item, name, {f"{{{XSI}}}type": typ}).text = str(value[name]).lower() if type(value[name]) is bool else str(value[name])
+
+    def send(self, url, **kwargs):
+        action = kwargs["headers"]["SOAPAction"].split("#")[-1].strip('"')
+        response = super().send(url, **kwargs)
+        if action == self.write_method:
+            sent = ET.fromstring(kwargs["body"]).find(f"{{{SOAP}}}Body/{{{RPC}}}{action}/{self.parameter}")
+            attendees = []
+            for row in sent.find("Attendees"):
+                attendees.append({key: int(row.findtext(key)) if typ == "xsd:int" else
+                    row.findtext(key) == "true" if typ == "xsd:boolean" else row.findtext(key)
+                    for key, typ in model_fields("Attendee").items()})
+            self.values["Attendees"] = attendees
+            self.values["MotionTypes"] = [row.text for row in sent.find("MotionTypes")]
+        return response
+
+
+@pytest.mark.parametrize("entity,model,read,write,parameter", [
+    ("event", "EventData", "GetEvent", "UpdateEvent", "event"),
+    ("recording", "ClipData", "GetClip", "UpdateClip", "clip")])
+def test_meeting_bound_attendees_and_motion_types_exact_field_readback(tmp_path, entity, model, read, write, parameter):
+    network = MeetingFieldsNetwork(model, read, write, parameter)
+    engine, _, context, change = setup(tmp_path, network)
+    context.credentials["granicus"].update(permissions=[entity+":update"], meeting_ids=["11"])
+    attendee = {"ID": 91, "Name": "Supplied meeting attendee", "OrderID": 2, "Voting": True,
+                "Chair": False, "PersonUID": "supplied-person-reference"}
+    change.update(entity=entity, meeting_id="11", fields={"Attendees": [attendee], "MotionTypes": ["Supplied motion action"]})
+    request = plan(engine, context, change)
+    result = engine.execute("commit_write", request, context=context)
+    assert result.status == "completed", result.errors
+    assert result.data["items"][0]["readback"]["Attendees"] == [attendee]
+    assert result.data["items"][0]["readback"]["MotionTypes"] == ["Supplied motion action"]
+    assert network.mutations == 1
+
+
+def test_documented_single_agenda_preserves_above_prior_adapter_7mb_limit(tmp_path):
+    import io
+    from civic_data_connectors.write_files import stage_write_file
+    network = DocumentNetwork("event")
+    engine, _, context, change = setup(tmp_path, network)
+    context.credentials["granicus"].update(permissions=["document:upload"], meeting_ids=["11"])
+    data = b"%PDF-1.7\n" + b"a" * 7_000_001
+    handle = stage_write_file(engine, io.BytesIO(data), context=context, filename="agenda.pdf", content_type="application/pdf")
+    change.update(entity="document", operation="upload", meeting_id="11",
+        fields={"ParentType": "event", "Kind": "agenda", "Description": "Whole agenda"},
+        files=[{"part": "Document", "filename": "agenda.pdf", "content_type": "application/pdf", "file_handle": handle}])
+    request = plan(engine, context, change)
+    result = engine.execute("commit_write", request, context=context)
+    assert result.status == "completed", result.errors
+    assert network.file_bytes == data and network.mutations == 1
+
+
+def test_full_model_patch_rejects_identity_and_documented_server_owned_fields(tmp_path):
+    engine, network, context, change = setup(tmp_path)
+    for key, value in {"ID": 8, "UID": "another-id", "LastModified": "2026-11-12T18:00:00Z",
+                       "Status": "Public", "AgendaRolloverID": 9}.items():
+        change["fields"] = {key: value}
+        result = engine.execute("plan_write", {"source": SOURCE, "changes": [change]}, context=context)
+        assert result.status == "failed", key
+    assert network.mutations == 0
+
+
+def test_event_creation_retains_server_generated_fields_without_claiming_them_written(tmp_path):
+    engine, network, context, change = setup(tmp_path)
+    context.credentials["granicus"].update(permissions=["event:create"], foreign_ids=["9001"])
+    change.update(operation="create", resource_id=None,
+        fields={**deepcopy(network.values), "ID": 0, "UID": "", "ForeignID": 9001, "Name": "Created"})
+    request = plan(engine, context, change)
+    send = network.send
+    def generated(url, **kwargs):
+        result = send(url, **kwargs)
+        if kwargs["headers"]["SOAPAction"].endswith('CreateEvent"'):
+            network.values.update(Status="Pending", AgendaRolloverID=42, NextStartDate="2027-01-01T00:00:00Z")
+        return result
+    network.send = generated
+    result = engine.execute("commit_write", request, context=context)
+    assert result.status == "completed", result.errors
+    assert result.data["items"][0]["readback"]["Status"] == "Pending"
+    assert result.data["items"][0]["readback"]["AgendaRolloverID"] == 42

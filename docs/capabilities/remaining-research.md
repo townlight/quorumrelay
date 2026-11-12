@@ -1,6 +1,6 @@
 # Remaining provider research and access gaps
 
-All operations remain mandatory where exposed in the bounded domain. Unknown is not unsupported. The resumed full plan authorizes supported writes against explicitly authorized provider test tenants. No such test tenant or credentials were supplied, so live write acceptance remains access-blocked; no arbitrary public-city data was mutated. Procurement and outreach remain unauthorized.
+Current owner amendment (2026-11-12): vendor-documented synthetic execution, readback and receipts satisfy provider discovery/read/search/import/export/write acceptance. Live checks are optional supporting evidence; credential/test-account acquisition is not a completion gate. Actual reference-app persistence/isolation/authorization, signed Windows and authorized delivery proof remain required. Unknown contracts remain research/implementation work, not unsupported features. Dated observations below remain historical; older account/mocks-only statements do not override this amendment. No arbitrary public-city mutation, procurement or outreach is authorized.
 
 ## F01 Legistar (`legistar`)
 
@@ -16,9 +16,9 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
-- Follow-up exact Help-page review (2026-11-12 UTC) confirms attachment create/update JSON exposes `MatterAttachmentBinary` as base64 bytes, separate hyperlink/file-name fields, and visibility flags; create sort is server-generated and update sort cannot change. Existing `write_adapters.py` implements these fields, excludes sort and compares `/File` readback bytes. [Create contract](https://webapi.legistar.com/Help/Api/POST-v1-Client-Matters-MatterId-Attachments), [update contract](https://webapi.legistar.com/Help/Api/PUT-v1-Client-Matters-MatterId-Attachments-MatterAttachmentId), [file readback](https://webapi.legistar.com/Help/Api/GET-v1-Client-Matters-MatterId-Attachments-MatterAttachmentId-File). Provider byte limits, processing and tenant visibility behavior are not specified there and still need authorized acceptance.
+- Follow-up exact Help-page review (2026-11-12 UTC) confirms attachment create/update JSON exposes `MatterAttachmentBinary` as base64 bytes, separate hyperlink/file-name fields, and visibility flags; create sort is server-generated and update sort cannot change. Existing `write_adapters.py` implements these fields, excludes sort and compares `/File` readback bytes. [Create contract](https://webapi.legistar.com/Help/Api/POST-v1-Client-Matters-MatterId-Attachments), [update contract](https://webapi.legistar.com/Help/Api/PUT-v1-Client-Matters-MatterId-Attachments-MatterAttachmentId), [file readback](https://webapi.legistar.com/Help/Api/GET-v1-Client-Matters-MatterId-Attachments-MatterAttachmentId-File). Provider byte limits, processing and tenant visibility behavior are not specified there; document exact contract limits and use synthetic fixtures without claiming undocumented runtime behavior.
 - [Event creation contract](https://webapi.legistar.com/Help/Api/POST-v1-Client-Events) exposes `EventMedia` and `EventVideoPath` as strings, without file/upload semantics. Existing string mappings do not establish binary recording upload or replacement; those exact semantics remain unresolved. No additional media endpoint was inferred and no provider mutation was performed.
-- Olympia Event 7011 and the selected Vote/RollCall reads are bounded receipts, not catalog coverage. Write token, tenant permissions, accepted Vote/RollCall ValueId enumeration and RowVersion conflict behavior need an authorized test tenant; none was supplied.
+- Olympia Event 7011 and the selected Vote/RollCall reads are bounded receipts, not catalog coverage. Historical live write checks were not run. Synthetic fixtures must use documented Vote/RollCall models and supplied configured ValueIds; undocumented RowVersion conflict behavior must remain qualified rather than become a credential-acquisition gate.
 - The historical vendor import package/current media import path has no accepted file contract or authorized transfer evidence.
 
 ### Pagination contract
@@ -33,7 +33,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Authorization restrictions
 
-- Research boundary on 2026-11-11: read-only public captures. The resumed plan authorizes supported writes only on an explicitly authorized test tenant; no authorized test tenant or credentials have been supplied, so live acceptance remains access-blocked. Procurement and outreach remain unauthorized.
+- Research boundary on 2026-11-11: read-only public captures. That former test-tenant dependency is superseded by the owner amendment: documented synthetic verification is accepted, and live checks are optional. Procurement and outreach remain unauthorized.
 - Unverified and access-blocked are incomplete, not unsupported.
 
 ## F02 PrimeGov (`primegov`)
@@ -49,8 +49,8 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 ### Remaining research
 
 - The observed Reno public `/api/v2/PublicPortal/search` form is source-implemented after dev6. Bounded first/resumed calls each returned three distinct records with partial coverage. Stable native-kind/id traversal handles provider tie-order changes and checks canonical row-set values while retaining exact captures; ranking is deliberately not retained. Exact local checks use supplied metadata/highlight excerpts only. Full document content, provider matching/caps and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.
-- Official release notes identify Meeting API, speaker endpoint and tracking-number search but no executable schema. Obtain PrimeGov account-specific API specification and enablement before coding those routes.
-- No provider write tenant/credentials were supplied; create/update/upload fields, permissions, readback and conflict semantics remain unverified.
+- Official release notes identify Meeting API, speaker endpoint and tracking-number search but no executable schema. Locate exact vendor-provided Meeting API specification and fields before coding those routes; no account procurement or live test gate applies.
+- Exact vendor-documented create/update/upload fields, permissions and conflict/readback contracts remain research and synthetic implementation work; absence of live credentials is not the gap.
 
 ### Pagination contract
 
@@ -61,29 +61,20 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Authorization restrictions
 
-- Research boundary on 2026-11-11: read-only public captures. The resumed plan authorizes supported writes only on an explicitly authorized test tenant; no authorized test tenant or credentials have been supplied, so live acceptance remains access-blocked. Procurement and outreach remain unauthorized.
+- Research boundary on 2026-11-11: read-only public captures. That former test-tenant dependency is superseded by the owner amendment: documented synthetic verification is accepted, and live checks are optional. Procurement and outreach remain unauthorized.
 - Unverified and access-blocked are incomplete, not unsupported.
 
 ## F03 Granicus (`granicus`)
 
-Official Platform SOAP SDK/WSDL is now pinned from Granicus/platform-api-net revision ca7baf0768c32e5fd2ef9c5236fdefde3386934a, with exact evidence bytes/hashes under evidence/granicus-platform. This supersedes the earlier gated-SDK extract as the current contract source. It is Platform MediaManager SOAP1.x, not an inferred API for Legistar/Peak/Swagit/iQM2.
+Pinned official Platform SOAP SDK/WSDL ca7baf0768c32e5fd2ef9c5236fdefde3386934a and Java schema evidence548e20a5f25f9ca5472e168996fe116ab8bd1164 are retained under evidence/granicus-platform. This is MediaManager/MediaVault, not Legistar/Peak/Swagit/iQM2. The exact method-to-engine assessment is in provider-api-contracts.json; it is an outcome map, not a requirement to implement every vendor endpoint.
 
-### Implemented and verified
-
-- Existing public Superior Clip metadata native search remains separate and partial.
-- Explicit `granicus-platform-soap-xml` engine source maps date-range Events/folder Clips, supplied Event/Clip/MetaData and related metadata/indices. Exact raw XML, unknown values, revisions and supplied parents remain; date/type bounds and unknown body coverage are explicit. No SOAP catalog/paging completeness claim.
-- CreateEvent full EventData and UpdateEvent/UpdateClip/UpdateMetaData full-model patches use real coordinator exact plans, preflight full-state comparison, durable intent/readback and uncertain-response reconciliation. Independent vendor-WSDL-shaped fixtures verify these paths, including conflict, revocation and duplicate no-repeat behavior. Session passwords/cookies never enter stored plans/receipts.
-- Vendor-documented synthetic verification satisfies the owner amendment. Live account checks are optional, not a completion gate.
-
-### Remaining implementation
-
-- Four document URL setters and two single-call document uploads are now engine-mapped and synthetically verified. Inputs bind immutable file bytes; readback checks URL, optional minutes Name and uploaded content length/hash. Unverifiable bytes stay uncertain and are never replayed. Minutes over 7,000,000 bytes now use the SDK add/finish chunks and plan-bound UUID, capped at min(1GB, configured transfer ceiling); an ambiguous intermediate chunk remains uncertain with no duplicate send. Event agendas retain a 7MB adapter safety ceiling.
-- The 48-method low-level binding is not 48 completed engine mappings. Supporting captions, minutes metadata, exact Document attachment bytes and three video-location reads are now mapped and vendor-shaped engine fixtures pass. Implement media upload registration and explicitly approved publication; metadata Add/Import; meeting-bound motions/attendees; reconcile UID aliases/list variants against existing resource mappings.
-- Inspect vendor comments/examples for untyped Payload and native enum semantics. Do not invent nested schemas or automatically publish ingested media.
-- Pinned API version compatibility and provider-wide archive/search semantics remain qualified; delete and vendor administration stay outside the domain.
-
-- MediaVault UploadFile is now engine-mapped with13 literal binding cases and3 actual coordinator cases (success, lost readback, lost upload identity). Private session SecurityHeader never enters plans/receipts; no implicit publication. Chunk/registration/replacement workflows remain. RegisterClipUpload warns against normal upload use. Official Java WSDL supplies structured PublishClip DTOs matching the .NET SDK; per-type source override and both originals retained. Explicit publication now has six synthetic coordinator cases: separate grants/full Public input, independent default visibility, Pending uncertainty and no uncertain replay. Presentation fields remain submitted-only because no independent readback mapping is documented. Non-clearing metadata Add/Import has seven synthetic cases; UID/list reads add ten verified variants. Remaining engine work includes chunked MediaVault registration/replacement and generated minutes. ClearExisting=true is excluded by project no-delete scope, not vendor-unsupported.
-- CreateAttendees/CreateMotionActions are documented system-wide operations. Meeting-bound Attendees/MotionTypes and typed Motion/VoteRecord fields stay in scope; general contacts/administration do not.
+- Engine reads preserve Event/Clip/metadata, related parents/indices, supplied whole captions, video URIs, attachment bytes and minutes metadata; numeric/UID/ForeignID/list variants are bounded and fixture-verified. No archive or custom matching/status semantics are inferred.
+- Exact-plan creation/full-model updates, non-clearing metadata Add/Import, document URL/upload, explicit PublishClip and generated minutes are mapped. Destructive ClearExisting=true is vendor-supported but excluded by the original no-delete scope. Server-owned identity/revision/Event fields are preserved in full models and readback, not accepted as patches.
+- MediaVault UploadFile and StartUpload/SendChunk/FinishUpload/RegisterUploadedFile/AssignUploadedFile workflows are mapped. Remote bucket GUID is private durable caller/source/plan-bound state; current PHP session stays ephemeral. Unknown sends never replay; private state is not a promise of resumability. The vendor checksum algorithm is unspecified. Returned identity/status does not establish playable media or remote original-byte equality.
+- Generated minutes has four synthetic coordinator cases; chunk workflows have ten including loss/cancellation/private-state binding/reflection; meeting-bound Attendees/MotionTypes have two field/readback cases. Above7MB single-agenda full-byte proof removes an arbitrary adapter restriction while retaining encoded-request/caller bounds. Prior passed binding/model/document/publication tests are reused.
+- Raw record SOAP normalizes offline without credentials. Supporting responses with no parent ID use the existing neutral CaptureBundle fallback, retaining exact response XML and supplied parent/records; bare supporting XML fails rather than inventing identity. Two saved-input tests verify both paths.
+- PublishClip presentation fields and generated-minutes template selection/file bytes remain explicitly submitted-only where no independent readback is documented. Default visibility Pending stays uncertain; publication is always explicit. Version applicability, custom enums and unknown Payload shapes remain qualified.
+- System-wide roster/motion registries, deletes, vendor administration and duplicate convenience endpoints are not new project requirements. Existing meeting-bound typed Motion/VoteRecord/Attendees/MotionTypes paths remain in scope. See the exact assessment before inferring a missing endpoint requirement.
 
 ## F04 NovusAGENDA (`novusagenda`)
 
@@ -264,7 +255,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Authorization restrictions
 
-- Research boundary on 2026-11-11: read-only public captures. The resumed plan authorizes supported writes only on an explicitly authorized test tenant; no authorized test tenant or credentials have been supplied, so live acceptance remains access-blocked. Procurement and outreach remain unauthorized.
+- Research boundary on 2026-11-11: read-only public captures. That former test-tenant dependency is superseded by the owner amendment: documented synthetic verification is accepted, and live checks are optional. Procurement and outreach remain unauthorized.
 - Unverified and access-blocked are incomplete, not unsupported.
 
 ## F10 Simbli (`simbli`)
@@ -637,7 +628,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Authorization restrictions
 
-- Research boundary on 2026-11-11: read-only public captures. The resumed plan authorizes supported writes only on an explicitly authorized test tenant; no authorized test tenant or credentials have been supplied, so live acceptance remains access-blocked. Procurement and outreach remain unauthorized.
+- Research boundary on 2026-11-11: read-only public captures. That former test-tenant dependency is superseded by the owner amendment: documented synthetic verification is accepted, and live checks are optional. Procurement and outreach remain unauthorized.
 - Unverified and access-blocked are incomplete, not unsupported.
 - No DELETE or empty all-page replacement; move/copy/rotate and general repository administration not part of connector write scope.
 
@@ -782,7 +773,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Authorization restrictions
 
-- Research boundary on 2026-11-11: read-only public captures. The resumed plan authorizes supported writes only on an explicitly authorized test tenant; no authorized test tenant or credentials have been supplied, so live acceptance remains access-blocked. Procurement and outreach remain unauthorized.
+- Research boundary on 2026-11-11: read-only public captures. That former test-tenant dependency is superseded by the owner amendment: documented synthetic verification is accepted, and live checks are optional. Procurement and outreach remain unauthorized.
 - Unverified and access-blocked are incomplete, not unsupported.
 - No caption purchasing or ASR/transcription generation authorized.
 - Official older embed guide cautions audio/Channels,modern schemas include audio types; feature/version mismatch needs validation rather than unsupported claim.
