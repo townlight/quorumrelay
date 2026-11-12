@@ -8238,5 +8238,444 @@
       "live_status": "No authorized Connect client key/secret or account supplied; no live account request or write acceptance.",
       "proof": "Official TelVue Connect v2 reference pages and upload guide; response values/types are sampled from published JSON examples, not a complete JSON Schema."
     }
-  ]
+  ],
+  "granicus_platform": {
+    "official_source": "https://github.com/Granicus/platform-api-net",
+    "revision": "ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+    "wsdl_sha256": "ac21ee789510bc062ef0c87ecd1481e49f893e3276661b503272d6947b82c0e0",
+    "product_match": "Granicus MediaManager Platform SOAP API1.x; not govDelivery/Legistar/Peak by inference",
+    "evidence": "docs/capabilities/evidence/granicus-platform/source.json",
+    "endpoint_path": "/SDK/User/index.php",
+    "transport": "SOAP1.1 RPC/encoded, namespace urn:UserSDK, private Login/cookie/Logout session",
+    "operations": {
+      "AddClipMetaData": {
+        "soap_action": "urn:UserSDK#UserWebservice#AddClipMetaData",
+        "request": {
+          "ClipID": "xsd:int",
+          "MetaDataData": "ns5:MetaDataData"
+        },
+        "response": {
+          "KeyTable": "ns5:KeyTable"
+        }
+      },
+      "AddEventMetaData": {
+        "soap_action": "urn:UserSDK#UserWebservice#AddEventMetaData",
+        "request": {
+          "EventID": "xsd:int",
+          "MetaDataData": "ns5:MetaDataData"
+        },
+        "response": {
+          "KeyTable": "ns5:KeyTable"
+        }
+      },
+      "CreateAttendees": {
+        "soap_action": "urn:UserSDK#UserWebservice#CreateAttendees",
+        "request": {
+          "AttendeesData": "ns5:AttendeeCollection"
+        },
+        "response": {}
+      },
+      "CreateClipGeneratedMinutesDocument": {
+        "soap_action": "urn:UserSDK#UserWebservice#CreateClipGeneratedMinutesDocument",
+        "request": {
+          "clipUid": "xsd:string",
+          "name": "xsd:string",
+          "templateUid": "xsd:string",
+          "isPublished": "xsd:boolean",
+          "isDefault": "xsd:boolean"
+        },
+        "response": {}
+      },
+      "CreateEvent": {
+        "soap_action": "urn:UserSDK#UserWebservice#CreateEvent",
+        "request": {
+          "EventData": "ns5:EventData"
+        },
+        "response": {
+          "EventID": "xsd:int"
+        }
+      },
+      "CreateMotionActions": {
+        "soap_action": "urn:UserSDK#UserWebservice#CreateMotionActions",
+        "request": {
+          "MotionActions": "ns5:StringCollection"
+        },
+        "response": {}
+      },
+      "FetchAttachment": {
+        "soap_action": "urn:UserSDK#UserWebservice#FetchAttachment",
+        "request": {
+          "MetaDataID": "xsd:int"
+        },
+        "response": {
+          "Attachment": "ns5:Document"
+        }
+      },
+      "GetClip": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetClip",
+        "request": {
+          "ClipID": "xsd:int"
+        },
+        "response": {
+          "clip": "ns5:ClipData"
+        }
+      },
+      "GetClipByUID": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetClipByUID",
+        "request": {
+          "ClipUID": "xsd:string"
+        },
+        "response": {
+          "clip": "ns5:ClipData"
+        }
+      },
+      "GetClipCaptions": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetClipCaptions",
+        "request": {
+          "ClipID": "xsd:int"
+        },
+        "response": {
+          "captions": "xsd:string"
+        }
+      },
+      "GetClipCaptionsByUID": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetClipCaptionsByUID",
+        "request": {
+          "ClipUID": "xsd:string"
+        },
+        "response": {
+          "captions": "xsd:string"
+        }
+      },
+      "GetClipIndices": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetClipIndices",
+        "request": {
+          "ClipID": "xsd:int"
+        },
+        "response": {
+          "metadata": "ns5:MetaDataDataCollection"
+        }
+      },
+      "GetClipIndicesByUID": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetClipIndicesByUID",
+        "request": {
+          "ClipUID": "xsd:string"
+        },
+        "response": {
+          "metadata": "ns5:MetaDataDataCollection"
+        }
+      },
+      "GetClipMetaData": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetClipMetaData",
+        "request": {
+          "ClipID": "xsd:int"
+        },
+        "response": {
+          "metadata": "ns5:MetaDataDataCollection"
+        }
+      },
+      "GetClipMetaDataByUID": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetClipMetaDataByUID",
+        "request": {
+          "ClipUID": "xsd:string"
+        },
+        "response": {
+          "metadata": "ns5:MetaDataDataCollection"
+        }
+      },
+      "GetClipMinutesDocuments": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetClipMinutesDocuments",
+        "request": {
+          "ClipID": "xsd:int"
+        },
+        "response": {
+          "MinutesDocuments": "ns5:MinutesDocumentDataCollection"
+        }
+      },
+      "GetClipVideoLocation": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetClipVideoLocation",
+        "request": {
+          "ClipID": "xsd:int"
+        },
+        "response": {
+          "url": "xsd:string"
+        }
+      },
+      "GetClips": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetClips",
+        "request": {
+          "FolderID": "xsd:int"
+        },
+        "response": {
+          "clips": "ns5:ClipCollection"
+        }
+      },
+      "GetClipsByForeignID": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetClipsByForeignID",
+        "request": {
+          "ForeignID": "xsd:int"
+        },
+        "response": {
+          "clips": "ns5:ClipCollection"
+        }
+      },
+      "GetEvent": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetEvent",
+        "request": {
+          "EventID": "xsd:int"
+        },
+        "response": {
+          "event": "ns5:EventData"
+        }
+      },
+      "GetEventByUID": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetEventByUID",
+        "request": {
+          "EventUID": "xsd:string"
+        },
+        "response": {
+          "event": "ns5:EventData"
+        }
+      },
+      "GetEventMetaData": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetEventMetaData",
+        "request": {
+          "EventID": "xsd:int"
+        },
+        "response": {
+          "metadata": "ns5:MetaDataDataCollection"
+        }
+      },
+      "GetEventMetaDataByUID": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetEventMetaDataByUID",
+        "request": {
+          "EventUID": "xsd:string"
+        },
+        "response": {
+          "metadata": "ns5:MetaDataDataCollection"
+        }
+      },
+      "GetEventVideoLocation": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetEventVideoLocation",
+        "request": {
+          "EventID": "xsd:int"
+        },
+        "response": {
+          "url": "xsd:string"
+        }
+      },
+      "GetEventVideoLocationByUID": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetEventVideoLocationByUID",
+        "request": {
+          "EventUID": "xsd:string"
+        },
+        "response": {
+          "url": "xsd:string"
+        }
+      },
+      "GetEvents": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetEvents",
+        "request": {},
+        "response": {
+          "events": "ns5:EventCollection"
+        }
+      },
+      "GetEventsByDateRange": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetEventsByDateRange",
+        "request": {
+          "StartDate": "xsd:dateTime",
+          "EndDate": "xsd:dateTime"
+        },
+        "response": {
+          "events": "ns5:EventCollection"
+        }
+      },
+      "GetEventsByForeignID": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetEventsByForeignID",
+        "request": {
+          "ForeignID": "xsd:int"
+        },
+        "response": {
+          "events": "ns5:EventCollection"
+        }
+      },
+      "GetMetaData": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetMetaData",
+        "request": {
+          "MetaDataID": "xsd:int"
+        },
+        "response": {
+          "MetaData": "ns5:MetaDataData"
+        }
+      },
+      "GetMetaDataByUID": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetMetaDataByUID",
+        "request": {
+          "MetaDataUID": "xsd:string"
+        },
+        "response": {
+          "MetaData": "ns5:MetaDataData"
+        }
+      },
+      "GetMetaDataVideoLocation": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetMetaDataVideoLocation",
+        "request": {
+          "MetaDataID": "xsd:int"
+        },
+        "response": {
+          "url": "xsd:string"
+        }
+      },
+      "GetMotionActions": {
+        "soap_action": "urn:UserSDK#UserWebservice#GetMotionActions",
+        "request": {},
+        "response": {
+          "MotionActions": "ns5:StringCollection"
+        }
+      },
+      "ImportClipMetaData": {
+        "soap_action": "urn:UserSDK#UserWebservice#ImportClipMetaData",
+        "request": {
+          "ClipID": "xsd:int",
+          "MetaData": "ns5:MetaDataDataCollection",
+          "ClearExisting": "xsd:boolean",
+          "AsTree": "xsd:boolean"
+        },
+        "response": {
+          "KeyTable": "ns5:KeyTable"
+        }
+      },
+      "ImportEventMetaData": {
+        "soap_action": "urn:UserSDK#UserWebservice#ImportEventMetaData",
+        "request": {
+          "EventID": "xsd:int",
+          "MetaData": "ns5:MetaDataDataCollection",
+          "ClearExisting": "xsd:boolean",
+          "AsTree": "xsd:boolean"
+        },
+        "response": {
+          "KeyTable": "ns5:KeyTable"
+        }
+      },
+      "Login": {
+        "soap_action": "urn:UserSDK#UserWebservice#Login",
+        "request": {
+          "Username": "xsd:string",
+          "Password": "xsd:string"
+        },
+        "response": {}
+      },
+      "Logout": {
+        "soap_action": "urn:UserSDK#UserWebservice#Logout",
+        "request": {},
+        "response": {}
+      },
+      "PublishClip": {
+        "soap_action": "urn:UserSDK#UserWebservice#PublishClip",
+        "request": {
+          "PublishClipData": "ns5:PublishClipData"
+        },
+        "response": {
+          "PublishClipResult": "ns5:PublishClipResult"
+        }
+      },
+      "RegisterClipUpload": {
+        "soap_action": "urn:UserSDK#UserWebservice#RegisterClipUpload",
+        "request": {
+          "ClipData": "ns5:ClipData",
+          "ServerID": "xsd:int"
+        },
+        "response": {
+          "ClipID": "xsd:int"
+        }
+      },
+      "SetClipAgendaURL": {
+        "soap_action": "urn:UserSDK#UserWebservice#SetClipAgendaURL",
+        "request": {
+          "ClipID": "xsd:int",
+          "URL": "xsd:string"
+        },
+        "response": {}
+      },
+      "SetClipMinutesURL": {
+        "soap_action": "urn:UserSDK#UserWebservice#SetClipMinutesURL",
+        "request": {
+          "ClipID": "xsd:int",
+          "URL": "xsd:string"
+        },
+        "response": {}
+      },
+      "SetClipMinutesURLWithName": {
+        "soap_action": "urn:UserSDK#UserWebservice#SetClipMinutesURLWithName",
+        "request": {
+          "ClipID": "xsd:int",
+          "URL": "xsd:string",
+          "Name": "xsd:string"
+        },
+        "response": {}
+      },
+      "SetEventAgendaURL": {
+        "soap_action": "urn:UserSDK#UserWebservice#SetEventAgendaURL",
+        "request": {
+          "EventID": "xsd:int",
+          "URL": "xsd:string"
+        },
+        "response": {}
+      },
+      "SetEventAgendaURLByUID": {
+        "soap_action": "urn:UserSDK#UserWebservice#SetEventAgendaURLByUID",
+        "request": {
+          "EventUID": "xsd:string",
+          "URL": "xsd:string"
+        },
+        "response": {}
+      },
+      "UpdateClip": {
+        "soap_action": "urn:UserSDK#UserWebservice#UpdateClip",
+        "request": {
+          "clip": "ns5:ClipData"
+        },
+        "response": {}
+      },
+      "UpdateEvent": {
+        "soap_action": "urn:UserSDK#UserWebservice#UpdateEvent",
+        "request": {
+          "event": "ns5:EventData"
+        },
+        "response": {}
+      },
+      "UpdateMetaData": {
+        "soap_action": "urn:UserSDK#UserWebservice#UpdateMetaData",
+        "request": {
+          "MetaData": "ns5:MetaDataData"
+        },
+        "response": {}
+      },
+      "UploadClipMinutesDocument": {
+        "soap_action": "urn:UserSDK#UserWebservice#UploadClipMinutesDocument",
+        "request": {
+          "ClipID": "xsd:int",
+          "Document": "ns5:Document",
+          "Name": "xsd:string"
+        },
+        "response": {}
+      },
+      "UploadEventAgendaDocument": {
+        "soap_action": "urn:UserSDK#UserWebservice#UploadEventAgendaDocument",
+        "request": {
+          "EventID": "xsd:int",
+          "Document": "ns5:Document"
+        },
+        "response": {}
+      }
+    },
+    "typed_models": "src/civic_data_connectors/data/granicus_platform.json",
+    "verification": "18 focused synthetic binding/session checks; public engine/write registration not implemented yet",
+    "limits": [
+      "Pinned official contract, not a live/current compatibility claim",
+      "Vendor administration operations excluded",
+      "SDK annotations have known discrepancies against WSDL (for example date-range argument/action); binding follows pinned WSDL",
+      "Unknown source response values retained; untyped metadata object payloads not inferred"
+    ]
+  }
 }

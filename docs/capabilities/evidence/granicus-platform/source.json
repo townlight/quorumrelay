@@ -1,0 +1,33 @@
+{
+  "vendor": "Granicus",
+  "official_repository": "https://github.com/Granicus/platform-api-net",
+  "revision": "ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+  "captured": "2026-11-12",
+  "executed_vendor_code": false,
+  "files": [
+    {
+      "file": "APIEntities.cs",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/APIEntities.cs",
+      "bytes": 307600,
+      "sha256": "a521a377c55c3cd8c6e089d6a9630fd96a2e0708c9167648b7a08b105b930a47"
+    },
+    {
+      "file": "IMediaManager.cs",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/IMediaManager.cs",
+      "bytes": 4985,
+      "sha256": "69f021cdacb1b7a6ff78589ef7580b5f796fb9b5d4a27ebdfac410c6beaa5d25"
+    },
+    {
+      "file": "MediaManager.cs",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/MediaManager.cs",
+      "bytes": 104888,
+      "sha256": "d832a41304952c34b9a56f060cf76df0ac5fbee5724a8e058b43b49ad3bde709"
+    },
+    {
+      "file": "index.php.wsdl",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/index.php.wsdl",
+      "bytes": 94937,
+      "sha256": "ac21ee789510bc062ef0c87ecd1481e49f893e3276661b503272d6947b82c0e0"
+    }
+  ]
+}
