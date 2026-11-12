@@ -147,6 +147,46 @@ def _validate_capture_file(provider, evidence, receipt_fixture, receipt_sha256, 
         errors.append(f"{provider}: capture fixture hash differs from the receipt/inventory")
 
 
+def _synthetic_errors(provider, operation, entry, evidence_by_id):
+    """Validate attributed synthetic evidence, not execute or infer acceptance."""
+    for evidence_id in entry.get("evidence_ids", []):
+        evidence = evidence_by_id.get(evidence_id, {})
+        proof = evidence.get("synthetic_execution")
+        if (evidence.get("proof_level") != "vendor_contract_and_synthetic_engine_execution"
+                or not isinstance(proof, dict) or proof.get("provider") != provider):
+            continue
+        if (proof.get("status") != entry["acceptance_status"]
+                or operation not in proof.get("operations", [])
+                or (entry.get("entity") and entry["entity"] not in proof.get("entities", []))):
+            continue
+        checks = proof.get("checks")
+        if (not isinstance(checks, list) or not checks
+                or any(not isinstance(check, dict) or not isinstance(check.get("command"), str)
+                       or not check["command"].strip() or type(check.get("passed")) is not int
+                       or check["passed"] < 1 or check.get("failed") != 0 for check in checks)
+                or not proof.get("execution_provenance") or not proof.get("scope")):
+            continue
+        bindings = proof.get("bindings")
+        if not isinstance(bindings, list) or not {"vendor_contract", "test"}.issubset(
+                {b.get("kind") for b in bindings if isinstance(b, dict)}):
+            continue
+        valid = True
+        for binding in bindings:
+            if not isinstance(binding, dict) or not isinstance(binding.get("path"), str):
+                valid = False
+                break
+            path = _within_root(binding["path"])
+            if (path is None or not path.is_file()
+                    or (binding.get("kind") == "test"
+                        and (not binding["path"].startswith("tests/") or path.suffix != ".py"))
+                    or hashlib.sha256(path.read_bytes()).hexdigest() != binding.get("sha256")):
+                valid = False
+                break
+        if valid and entry.get("implementation_status") == "implemented":
+            return []
+    return [f"{provider}.{operation}: synthetic acceptance lacks matching executed scope and pinned contract/test evidence"]
+
+
 def semantic_errors(data, identities):
     errors = []
     status_model = data.get("status_model", {})
@@ -196,13 +236,17 @@ def semantic_errors(data, identities):
             if status == "live_read_passed":
                 errors.extend(_live_read_receipt_errors(name, operation, entry,
                                                         evidence_by_id))
+            elif status in {"mock_passed", "fixture_passed"}:
+                errors.extend(_synthetic_errors(name, operation, entry, evidence_by_id))
             elif status != "not_run":
                 errors.append(f"{name}: research snapshot cannot claim provider write acceptance")
         for entry in row["outbound_mappings"]:
             missing = set(entry["evidence_ids"]) - set(refs)
             if missing:
                 errors.append(f"{name}: missing evidence refs {sorted(missing)}")
-            if entry["acceptance_status"] != "not_run":
+            if entry["acceptance_status"] in {"mock_passed", "fixture_passed"}:
+                errors.extend(_synthetic_errors(name, entry["operation"], entry, evidence_by_id))
+            elif entry["acceptance_status"] != "not_run":
                 errors.append(f"{name}: outbound mapping cannot claim provider acceptance")
         for mapping in row["outbound_mappings"]:
             if mapping["operation"] not in OPERATIONS:

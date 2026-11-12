@@ -51,3 +51,18 @@ def test_changed_explicit_public_routes_have_implemented_labels_without_catalog_
         assert metadata["implementation_status"] == "implemented"
         assert metadata["acceptance_status"] == "not_run"
         assert metadata["evidence_ids"]
+
+
+def test_known_explicit_listing_and_native_write_labels_are_not_stale_access_gates():
+    from civic_data_connectors.write_adapters import default_adapters
+    for provider in ("legistar", "wistia"):
+        assert provider_capabilities(provider)["operations"]["discover"]["implementation_status"] == "implemented"
+    adapters = default_adapters()
+    for provider in ("legistar", "wistia", "laserfiche-weblink"):
+        assert provider in adapters
+        operations = provider_capabilities(provider)["operations"]
+        assert all(operations[operation]["implementation_status"] == "implemented"
+                   for operation in ("create", "update", "upload"))
+        # Registration and prior bounded checks never imply blanket field acceptance.
+        assert all(operations[operation]["acceptance_status"] == "not_run"
+                   for operation in ("create", "update", "upload"))

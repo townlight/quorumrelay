@@ -761,10 +761,10 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
-- Core now implements authenticated media-detail and supplied-caption-list/per-language GETs plus native search. Complete account-level reads only after a trusted Wistia token and selected account are supplied; none was supplied.
+- Core now implements authenticated media-detail and supplied-caption-list/per-language GETs plus native search. Runtime account access requires a trusted read token; documented synthetic execution is the accepted verification basis, not credential acquisition.
 - /modern/search is capped at 100 primary and 100 transcript-only candidates with no cursor and provider-defined exact/phrase candidate semantics. Local exact checks cover returned metadata/excerpts, not full transcripts.
 - Exact Wistia 2026-09 swap is now source-implemented as `media_swap/update`, with distinct original/replacement IDs, matching media-type readback, current resource grants and explicit existing-embed effects bound to the approved plan. Thirteen synthetic cases verify pinned request/response schema, durable queued-job/reopen, policy/conflict/lost-ack/no-replay and exact job matching. An exact finished job plus matching target identity/type readback confirms provider completion; the receipt explicitly excludes independent replacement-byte/playback verification. See [swap guide](../WISTIA-SWAP.md); overwrite is not inferred.
-- The documented account-list discovery route is an executable remaining implementation gap; no credential acquisition or live test is required for synthetic completion. Keep upload/import, media metadata, caption create/update and edits permission scopes separate.
+- Account/folder List Media offset discovery was already implemented in providers/discovery.py and its page2/version/private-token fixture passed in prior required checks; the stale blocked_access metadata has been corrected. No duplicate discovery implementation or mandatory cursor alternative was added. Keep upload/import, media metadata, caption create/update and edits permission scopes separate.
 
 ### Pagination contract
 

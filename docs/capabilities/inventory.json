@@ -46,7 +46,7 @@
       "live_read_passed",
       "live_write_passed"
     ],
-    "rule": "Capability, implementation and acceptance are independent. Documentation is not a live acceptance result; absence of public docs or credentials is not unsupported."
+    "rule": "Capability, source implementation and executed acceptance are independent. Vendor-documented mock_passed/fixture_passed records satisfy only their explicitly attributed synthetic scope and require pinned contract/test evidence; they never imply live execution or complete provider/catalog coverage. Runtime credentials are not an acceptance gate; undocumented contracts remain unresolved, not unsupported."
   },
   "providers": [
     {
@@ -438,16 +438,15 @@
         },
         "discover": {
           "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "legistar-paging",
             "legistar-olympia"
           ],
-          "details": "HTTPS v1/{Client}/Events, Bodies, EventItems and linked attachments. Must validate client namespace and preserve per-page coverage.",
+          "details": "Explicit Events keyset/date-bounded discovery in providers/discovery.py, with original native IDs and bounded checkpoints; tests/test_provider_discovery.py covers traversal.",
           "dependencies": [],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "Coverage remains bounded to configured source/window; no universal complete catalog claim."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -455,7 +454,7 @@
             "https://webapi.legistar.com/v1/olympia"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Existing documented-route synthetic discovery checks; live optional.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -603,20 +602,17 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "legistar-events-post"
           ],
-          "details": "Exact documented API contract is separate from live authorized capability. Events and EventItems create/update; linked MatterAttachment binary upload/update.",
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "No authorized provider test tenant or credentials supplied",
             "Provider test tenant/write credentials and conflict semantics absent"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -624,7 +620,7 @@
             "https://webapi.legistar.com/v1/olympia"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Vendor-documented synthetic verification accepted; no credential acquisition/live test required.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -632,20 +628,17 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "legistar-events-put"
           ],
-          "details": "Exact documented API contract is separate from live authorized capability. Events and EventItems create/update; linked MatterAttachment binary upload/update.",
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "No authorized provider test tenant or credentials supplied",
             "Provider test tenant/write credentials and conflict semantics absent"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -653,7 +646,7 @@
             "https://webapi.legistar.com/v1/olympia"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Vendor-documented synthetic verification accepted; no credential acquisition/live test required.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -661,20 +654,17 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "legistar-attachment-post"
           ],
-          "details": "Exact documented API contract is separate from live authorized capability. Events and EventItems create/update; linked MatterAttachment binary upload/update.",
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "No authorized provider test tenant or credentials supplied",
             "Provider test tenant/write credentials and conflict semantics absent"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -682,7 +672,7 @@
             "https://webapi.legistar.com/v1/olympia"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Vendor-documented synthetic verification accepted; no credential acquisition/live test required.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -1132,9 +1122,9 @@
             "legistar-events-post"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "",
           "requirement_ids": [
             "C01",
@@ -1147,7 +1137,7 @@
             "W10"
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -1254,9 +1244,9 @@
             "legistar-events-put"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "Do not infer idempotency or automatic RowVersion conflicts.",
           "requirement_ids": [
             "C01",
@@ -1269,7 +1259,7 @@
             "W10"
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -1394,9 +1384,9 @@
             "legistar-items-post"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "",
           "requirement_ids": [
             "C01",
@@ -1409,7 +1399,7 @@
             "W10"
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -1534,9 +1524,9 @@
             "legistar-items-put"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "",
           "requirement_ids": [
             "C01",
@@ -1549,7 +1539,7 @@
             "W10"
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -1620,9 +1610,9 @@
             "legistar-attachment-post"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "Only linked meeting/agenda-item matter attachments in bounded domain; arbitrary legislative administration excluded.",
           "requirement_ids": [
             "C01",
@@ -1635,7 +1625,7 @@
             "W10"
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -1706,9 +1696,9 @@
             "legistar-attachment-put"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "Never modify MatterAttachmentSort.",
           "requirement_ids": [
             "C01",
@@ -1721,7 +1711,7 @@
             "W10"
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -1816,10 +1806,10 @@
             "legistar-post-v1-client-matters"
           ],
           "account_requirements": "Write credential scope and authorized test tenant not supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -1924,10 +1914,10 @@
             "legistar-put-v1-client-matters-matterid-"
           ],
           "account_requirements": "Write credential scope and authorized test tenant not supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -2008,10 +1998,10 @@
             "legistar-post-v1-client-matters-matterid-texts"
           ],
           "account_requirements": "Write credential scope and authorized test tenant not supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -2092,10 +2082,10 @@
             "legistar-put-v1-client-matters-matterid-texts-mattertextid-"
           ],
           "account_requirements": "Write credential scope and authorized test tenant not supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -2314,10 +2304,10 @@
             "legistar-post-v1-client-matters-matterid-histories"
           ],
           "account_requirements": "Write credential scope and authorized test tenant not supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -2536,10 +2526,10 @@
             "legistar-put-v1-client-matters-matterid-histories-matterhistoryid-"
           ],
           "account_requirements": "Write credential scope and authorized test tenant not supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -2639,10 +2629,10 @@
             "legistar-votes-put"
           ],
           "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific VoteValueId mapping are not supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind the exact approved plan and EventItemId; capture returned ID/object; independently GET the parent EventItem/Votes and verify the record and supplied revision before claiming acceptance. Reconcile an ambiguous create before retry.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -2742,10 +2732,10 @@
             "legistar-votes-put"
           ],
           "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific VoteValueId mapping are not supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind the exact approved plan and EventItemId/VoteId; capture response; independently GET the vote and verify the parent relationship and supplied revision before claiming acceptance.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -2845,10 +2835,10 @@
             "legistar-rollcalls-put"
           ],
           "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific RollCallValueId mapping are not supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind the exact approved plan and EventItemId; capture returned ID/object; independently GET the parent EventItem/RollCalls and verify the record and supplied revision before claiming acceptance. Reconcile an ambiguous create before retry.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -2948,10 +2938,10 @@
             "legistar-rollcalls-put"
           ],
           "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific RollCallValueId mapping are not supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind the exact approved plan and EventItemId/RollCallId; capture response; independently GET the roll-call item and verify the parent relationship and supplied revision before claiming acceptance.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -18692,23 +18682,20 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "lf-import",
             "lf-update",
             "lf-auth"
           ],
-          "details": "Create/import document; replace electronic file and merge metadata/page uploads using version-specific official APIs. Only meeting-linked docs in scope.",
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Repository.Write granted and resource ACL allows action",
             "repositoryId,parentEntryId/entryId and authorized test access absent",
             "No authorized provider test tenant or credentials supplied"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -18717,7 +18704,7 @@
             "https://weblink.ci.northfield.mn.us/WebLink/Browse.aspx?dbid=0&startid=92&row=1&cr=1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Vendor-documented synthetic verification accepted; no credential acquisition/live test required.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -18725,23 +18712,20 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "lf-import",
             "lf-update",
             "lf-auth"
           ],
-          "details": "Create/import document; replace electronic file and merge metadata/page uploads using version-specific official APIs. Only meeting-linked docs in scope.",
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Repository.Write granted and resource ACL allows action",
             "repositoryId,parentEntryId/entryId and authorized test access absent",
             "No authorized provider test tenant or credentials supplied"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -18750,7 +18734,7 @@
             "https://weblink.ci.northfield.mn.us/WebLink/Browse.aspx?dbid=0&startid=92&row=1&cr=1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Vendor-documented synthetic verification accepted; no credential acquisition/live test required.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -18758,23 +18742,20 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "lf-import",
             "lf-update",
             "lf-auth"
           ],
-          "details": "Create/import document; replace electronic file and merge metadata/page uploads using version-specific official APIs. Only meeting-linked docs in scope.",
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Repository.Write granted and resource ACL allows action",
             "repositoryId,parentEntryId/entryId and authorized test access absent",
             "No authorized provider test tenant or credentials supplied"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -18783,7 +18764,7 @@
             "https://weblink.ci.northfield.mn.us/WebLink/Browse.aspx?dbid=0&startid=92&row=1&cr=1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Vendor-documented synthetic verification accepted; no credential acquisition/live test required.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -18934,9 +18915,9 @@
             "lf-import"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "Content type multipart/form-data with JSON request part; autoRename is naming behavior, not idempotency.",
           "requirement_ids": [
             "C01",
@@ -18949,7 +18930,7 @@
             "W10"
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -19013,9 +18994,9 @@
             "lf-import"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "Preserve uploadId,ordered partETags,taskId and final entry ID; uncertain completion must reconcile.",
           "requirement_ids": [
             "C01",
@@ -19028,7 +19009,7 @@
             "W10"
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -19128,9 +19109,9 @@
             "lf-update"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "Cloud v2 scope. Metadata merge semantics and file replacement; no inferred If-Match support.",
           "requirement_ids": [
             "C01",
@@ -19143,7 +19124,7 @@
             "W10"
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -19190,10 +19171,10 @@
             "lf-update"
           ],
           "account_requirements": "Cloud OAuth v2 scopes AND principal ACL; self-hosted API deployment/version separate. No access supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "HTTP202 Accepted returns taskId; GET /repository/v2/Repositories/{repositoryId}/Tasks?taskIds={taskId} until terminal, then GET document for exact revision/content receipt. Asynchronous single-version behavior is caller-managed; no automatic CheckOut/CheckIn.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -19249,10 +19230,10 @@
             "lf-page-submission"
           ],
           "account_requirements": "Cloud OAuth v2 scopes AND principal ACL; self-hosted API deployment/version separate. No access supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -19305,10 +19286,10 @@
             "lf-page-submission"
           ],
           "account_requirements": "Cloud OAuth v2 scopes AND principal ACL; self-hosted API deployment/version separate. No access supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -21976,7 +21957,58 @@
             "Exact official Markdown/OpenAPI bytes and SHA256 pins: docs/capabilities/evidence/wistia-swap/source.json; PUT /modern/medias/{mediaHashedId}/swap JSON replacement_media_id; same media type; background_job_status response.",
             "tests/test_wistia_swap.py:13 distinct passes; tests/test_write_providers.py:three affected existing media/tag/uncertain-receipt passes reused in this batch. Both media IDs/current policy/before fingerprints and explicit embedded-content effect bound to immutable approved plan; pending/failed/lost-ack/finished-confirmed receipts never resend."
           ],
-          "limits": "No remote mutation. Exact acknowledged finished job plus target identity/type GET confirms provider completion; bytes/playback are not independently verified. This is swap, not undocumented overwrite or automatic caption/transcript generation."
+          "limits": "No remote mutation. Exact acknowledged finished job plus target identity/type GET confirms provider completion; bytes/playback are not independently verified. This is swap, not undocumented overwrite or automatic caption/transcript generation.",
+          "synthetic_execution": {
+            "provider": "wistia",
+            "status": "mock_passed",
+            "operations": [
+              "update"
+            ],
+            "entities": [
+              "recording_replacement"
+            ],
+            "scope": "media_swap/update exact queued job, current policy, conflict, lost ack, finished confirmation with target identity/type and explicit no independent byte/playback verification",
+            "execution_provenance": "2026-11-12 local executions: initial9 cases; added3 identity/grant/job cases; narrow corrected4 job-state cases plus wrong-job and new target-mismatch case. Thirteen distinct tests, not the sum of overlapping reruns. Source73d1372 then9ec9631; current test binding reflects the final narrow completion-tier correction. No vendor mutation.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -m pytest tests/test_wistia_swap.py -q (initial nine cases)",
+                "passed": 9,
+                "failed": 0
+              },
+              {
+                "command": ".venv/Scripts/python.exe -m pytest tests/test_wistia_swap.py::test_swap_exact_targets_current_grant_and_exact_job -q",
+                "passed": 3,
+                "failed": 0
+              },
+              {
+                "command": ".venv/Scripts/python.exe -m pytest tests/test_wistia_swap.py::test_swap_queued_receipt_reconciliation_never_replays -q (after completion-tier correction)",
+                "passed": 4,
+                "failed": 0
+              },
+              {
+                "command": ".venv/Scripts/python.exe -m pytest tests/test_wistia_swap.py::test_finished_swap_wrong_target_readback_stays_uncertain tests/test_wistia_swap.py::test_swap_exact_targets_current_grant_and_exact_job[wrong_job] -q",
+                "passed": 2,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/wistia-swap/put_medias-mediahashedid-swap.md",
+                "sha256": "5a62ce17971f9589d500180db3bfc2ea4650114ebf00c88f4284679397888610"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/wistia-swap/get_background-job-status-backgroundjobstatusid.md",
+                "sha256": "0d4471b3046472564fb50a0bbdf61bd7c5cc2aaa289673076e64cb034a91604e"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_wistia_swap.py",
+                "sha256": "01206fe3340af638c2e5032149dfc9c2e54832e13452d5216c58a36ca1ee3cdb"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -22015,19 +22047,18 @@
         },
         "discover": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "wistia-list",
             "wistia-auth"
           ],
-          "details": "Authenticated account/folder media listing; arbitrary public municipal catalog from Wistia not established.",
+          "details": "Explicit /modern/medias offset listing with version header/private read token, optional folder_id, created ordering and local unknown-date labels; tests/test_provider_discovery.py::test_wistia_modern_version_bearer_page_and_unknown_meeting_date covers page2. Cursor mode is not required or claimed.",
           "dependencies": [
             "Read token/account folder scope for DataAPI",
             "Configured source page/known media IDs for public route"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "Coverage remains bounded to configured source/window; no universal complete catalog claim."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -22035,7 +22066,7 @@
             "https://fast.wistia.com/embed/medias/26sk4lmiix.json"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Existing documented-route synthetic discovery checks; live optional.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -22189,24 +22220,21 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "wistia-upload",
             "wistia-update",
             "wistia-caption-create",
             "wistia-caption-update"
           ],
-          "details": "Media upload/import and metadata/caption create/update have official versioned contracts; remote writes not authorized.",
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Upload token permission or Read,update&delete anything/eligible delegated resource permission",
             "Account media limits/features",
             "No authorized provider test tenant or credentials supplied; live access absent"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -22214,7 +22242,7 @@
             "https://fast.wistia.com/embed/medias/26sk4lmiix.json"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Vendor-documented synthetic verification accepted; no credential acquisition/live test required.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -22222,7 +22250,7 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "wistia-upload",
             "wistia-update",
@@ -22230,17 +22258,14 @@
             "wistia-caption-update",
             "wistia-swap-contract-synthetic"
           ],
-          "details": "Media upload/import and metadata/caption create/update have official versioned contracts; remote writes not authorized.",
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Upload token permission or Read,update&delete anything/eligible delegated resource permission",
             "Account media limits/features",
             "No authorized provider test tenant or credentials supplied; live access absent"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -22248,7 +22273,7 @@
             "https://fast.wistia.com/embed/medias/26sk4lmiix.json"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Vendor-documented synthetic verification accepted; no credential acquisition/live test required.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -22256,24 +22281,21 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "wistia-upload",
             "wistia-update",
             "wistia-caption-create",
             "wistia-caption-update"
           ],
-          "details": "Media upload/import and metadata/caption create/update have official versioned contracts; remote writes not authorized.",
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Upload token permission or Read,update&delete anything/eligible delegated resource permission",
             "Account media limits/features",
             "No authorized provider test tenant or credentials supplied; live access absent"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -22281,7 +22303,7 @@
             "https://fast.wistia.com/embed/medias/26sk4lmiix.json"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Vendor-documented synthetic verification accepted; no credential acquisition/live test required.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -22386,9 +22408,9 @@
             "wistia-upload"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "Separate UploadAPI1.0.0; no assumption modern-header semantics apply. Response media hashed_id/readback required; encoding may continue asynchronously.",
           "requirement_ids": [
             "C01",
@@ -22401,7 +22423,7 @@
             "W10"
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -22454,9 +22476,9 @@
             "wistia-update"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "Required X-Wistia-API-Version2026-09 and Bearer permission. No documented If-Match/idempotency assumed.",
           "requirement_ids": [
             "C01",
@@ -22469,7 +22491,7 @@
             "W10"
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -22503,9 +22525,9 @@
             "wistia-caption-create"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "Duplicate captions documented400; no purchase/ASR operation in scope.",
           "requirement_ids": [
             "C01",
@@ -22518,7 +22540,7 @@
             "W10"
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -22553,9 +22575,9 @@
             "wistia-caption-update"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "",
           "requirement_ids": [
             "C01",
@@ -22568,7 +22590,7 @@
             "W10"
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -22603,10 +22625,10 @@
             "wistia--medias-import-url"
           ],
           "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -22650,10 +22672,10 @@
             "wistia--medias-mediaHashedId-captions-languageCode-edits"
           ],
           "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -22697,10 +22719,10 @@
             "wistia--taggings-bulk-create"
           ],
           "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
-          "implementation_status": "not_verified_by_inventory",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -22738,9 +22760,9 @@
             "wistia-swap-contract-synthetic"
           ],
           "account_requirements": "Runtime Bearer update permission on both media and account feature; local media_swap:update grant plus meeting/resource allowlists.",
-          "authorized_test_access": "local_synthetic_execution_accepted_by_owner_amendment",
+          "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Durable queued job, exact-job polling and target media GET; exact finished job plus matching target identity/type confirms provider completion, without independent replacement-byte/playback verification. Never replay uncertain send.",
-          "verification_status": "synthetic_engine_swap_job_completion_and_recovery_verified",
+          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "notes": "Engine entity media_swap/update. Plan explicitly names original/replacement IDs and impact on existing embeds. No deletion, purchase, generation, implicit publication or overwrite contract inferred.",
           "requirement_ids": [
             "C01",
@@ -22754,7 +22776,7 @@
           ],
           "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "PUT",
@@ -22787,7 +22809,7 @@
         "Core now implements authenticated media-detail and supplied-caption-list/per-language GETs plus native search. Complete account-level reads only after a trusted Wistia token and selected account are supplied; none was supplied.",
         "/modern/search is capped at 100 primary and 100 transcript-only candidates with no cursor and provider-defined exact/phrase candidate semantics. Local exact checks cover returned metadata/excerpts, not full transcripts.",
         "Resolve account-tier limits and media replacement/swap behavior before those paths are claimed. Keep upload/import, media metadata, caption create/update and edits permission scopes separate; no remote writes occurred.",
-        "Media swap is source implemented and synthetic tested; pending jobs are preserved and exact finished jobs with target identity/type readback confirm provider completion without independent byte/playback claims. Overwrite is not inferred from swap. Wistia documented account-list discovery remains an executable implementation gap, not a credential gate."
+        "Media swap is source implemented and synthetic tested; pending jobs are preserved and exact finished jobs with target identity/type readback confirm provider completion without independent byte/playback claims. Overwrite is not inferred from swap. Account/folder offset discovery is already implemented; packaged status corrected from stale blocked_access."
       ],
       "requirement_ids": [
         "C01",
