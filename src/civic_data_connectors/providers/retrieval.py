@@ -104,9 +104,13 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     record_key = attachment.get("record_key")
     index = attachment.get("index", 0)
     kind = attachment.get("kind", "documents")
+    url_field = attachment.get("url_field", "url")
     if (not isinstance(record_key, str) or type(index) is not int or index < 0 or
             kind not in {"documents", "recordings"}):
         raise ValueError("Use a source identity record_key, nonnegative index and documents/recordings kind.")
+    if not isinstance(url_field, str) or url_field not in (
+            {"url", "audio_url", "video_url", "playback_url"} if kind == "recordings" else {"url"}):
+        raise ValueError("Select url, or a captured recording audio_url/video_url/playback_url field.")
     bundle = None
     if content is not None:
         bundle, _ = parse_page(engine, source, namespace, content,
@@ -130,7 +134,7 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     if index >= len(documents) or not isinstance(documents[index], dict):
         raise ValueError("The captured record has no attachment at the requested index.")
     document = documents[index]
-    url = document.get("url")
+    url = document.get(url_field)
     if not isinstance(url, str):
         raise ValueError("The captured attachment has no retrievable URL.")
     deadline = monotonic() + bounds.deadline_seconds
@@ -200,7 +204,8 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             raise ValueError("The document left its configured download origins.")
         return OperationResult("completed", {
             "record": record, "bundle": bundle, "attachment": {
-                "citation_url": url, "content_type": response.content_type,
+                "citation_url": document.get("citation_url") or document.get("url") or url,
+                "selected_url_field": url_field, "content_type": response.content_type,
                 "byte_length": len(response.content), "sha256": hashlib.sha256(response.content).hexdigest(),
                 "content_base64": base64.b64encode(response.content).decode("ascii"),
                 "text_availability": "not_extracted",

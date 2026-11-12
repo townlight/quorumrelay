@@ -110,13 +110,14 @@ class Engine:
 
     def fetch_attachment(self, source: Source, record: Record | dict, *, index: int = 0,
                          kind: str = "documents", capture: bytes | None = None, bounds: Bounds | None = None,
-                         context: OperationContext | None = None) -> OperationResult:
+                         context: OperationContext | None = None, url_field: str = "url") -> OperationResult:
         """Fetch only a captured attachment from scoped storage or supplied original capture."""
         from dataclasses import asdict
         identity = record.identity if isinstance(record, Record) else record["identity"]
         return self.execute("fetch", {
             "source": source.public_dict(), "bounds": asdict(bounds or Bounds()),
-            "attachment": {"record_key": source_identity_key(identity), "index": index, "kind": kind},
+            "attachment": {"record_key": source_identity_key(identity), "index": index, "kind": kind,
+                           "url_field": url_field},
         }, content=capture, context=context)
 
     def fetch_record(self, source: Source, external_id: str, *, bounds: Bounds | None = None,

@@ -51,6 +51,8 @@ document = engine.fetch_attachment(source, record, index=0, context=context)
 
 This helper uses the source identity and captured document index, plus scoped storage or an original capture. It preserves durable citations independently of signed download URLs. Check the full result for unavailable or unreadable content. Parser and transfer bounds are separate; the default transfer cap is 200 MiB.
 
+For a recording that supplies a direct `video_url`, `audio_url` or `playback_url`, select that captured field with `kind="recordings", url_field="video_url"`. The default `url_field="url"` preserves existing behavior, which may retrieve a player HTML page. A selected HLS URL returns the manifest only; it does not download its segments or establish playable-video acceptance. External media origins still require explicit `source.options.download_origins`. HTTP/CLI/MCP/TypeScript use the same `fetch` request attachment object: `{"record_key":"…","index":0,"kind":"recordings","url_field":"video_url"}`. The selector accepts only these known fields already present on the authorized captured record; it accepts no caller-supplied media URL.
+
 Export/import/search and write requests also use `engine.execute(operation, request, context=...)`. The transports and SDK share the same result/error contract. Writes require durable atomic storage, explicit `write:plan`/commit policy grants, server-side credentials, supported mappings and exact authorized plan approval. Importing a capture never writes upstream.
 
 For backward-compatible application imports:
