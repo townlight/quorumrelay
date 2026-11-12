@@ -38,5 +38,6 @@ class PublicWriteTransport:
             url, method=method, body=body, headers=headers, byte_limit=byte_limit,
             deadline_seconds=deadline_seconds,
             allowed_origins={f"{parsed.scheme}://{parsed.hostname}"},
+            allow_redirects=False,
         )
         return WriteResponse(response.status, response.content, response.headers)

@@ -149,6 +149,16 @@ def _validate_capture_file(provider, evidence, receipt_fixture, receipt_sha256, 
 
 def semantic_errors(data, identities):
     errors = []
+    status_model = data.get("status_model", {})
+    status_fields = ("capability_status", "implementation_status", "acceptance_status")
+    declared_statuses = {}
+    for field in status_fields:
+        values = status_model.get(field)
+        if not isinstance(values, list) or any(not isinstance(value, str) for value in values):
+            errors.append(f"status_model.{field} must declare a list of string labels")
+            declared_statuses[field] = set()
+        else:
+            declared_statuses[field] = set(values)
     rows = data["providers"]
     canonical = {row["canonical_id"] for row in rows}
     if len(canonical) != 31 or len(rows) != 31:
@@ -173,6 +183,12 @@ def semantic_errors(data, identities):
                    for k, _ in parse_qsl(url.query)):
                 errors.append(f"{name}: secret-bearing evidence URL")
         for operation, entry in row["operations"].items():
+            for field in status_fields:
+                if entry.get(field) not in declared_statuses[field]:
+                    errors.append(
+                        f"{name}.{operation}: {field} label {entry.get(field)!r} "
+                        f"is not declared by status_model.{field}"
+                    )
             missing = set(entry["evidence_ids"]) - set(refs)
             if missing:
                 errors.append(f"{name}: missing evidence refs {sorted(missing)}")
@@ -256,6 +272,17 @@ def main():
     invalid["providers"][0]["operations"] = {}
     if not list(validator.iter_errors(invalid)):
         errors.append("Negative schema check failed to reject missing operation statuses")
+    else:
+        negative += 1
+    invalid = deepcopy(inventory)
+    invalid["status_model"]["implementation_status"].remove("implemented")
+    undeclared_status_errors = semantic_errors(invalid, identities)
+    if not any(
+        "implementation_status label 'implemented' is not declared by status_model.implementation_status"
+        in error
+        for error in undeclared_status_errors
+    ):
+        errors.append("Negative check failed to reject an undeclared implementation status")
     else:
         negative += 1
     invalid = deepcopy(inventory)

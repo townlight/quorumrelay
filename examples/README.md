@@ -43,7 +43,7 @@ In a new unrelated directory, install the generated `.tgz`; copy only
 `fifth-client.mjs` there. With the explicit URL/token above:
 
 ```powershell
-npm install C:\connectors\client\quorumrelay-client-0.1.0-dev.3.tgz
+npm install C:\connectors\client\quorumrelay-client-0.1.0-dev.4.tgz
 node C:\unrelated\fifth-client.mjs
 ```
 
@@ -68,3 +68,7 @@ python C:\connectors\examples\mcp-client.py http --mode legacy --url http://127.
 The official SDK clients negotiate 2026-07-28 (modern) or 2025-11-25 (legacy).
 They also read a chunked export resource and exercise exact mock write approval.
 The example checks `plan.mock` before commit and refuses a non-mock plan.
+The MCP example sets a 90-second response deadline around the engine's default
+60-second operation bound, with a five-second connection timeout. A transport
+timeout does not prove a write failed; recover its existing plan/receipt before
+deciding whether an exact-plan retry is needed.

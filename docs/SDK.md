@@ -1,6 +1,6 @@
 # Python SDK
 
-Install the QuorumRelay candidate wheel (`quorumrelay==0.1.0.dev3`) into a Python 3.11+ environment. The canonical import and CLI are `quorumrelay`; existing `civic_data_connectors` imports and the `civic-data-connectors` CLI remain compatible and use the same implementation objects. No reference application, HTTP server, model, hosted service, or database is required.
+Install the QuorumRelay candidate wheel (`quorumrelay==0.1.0.dev4`) into a Python 3.11+ environment. The canonical import and CLI are `quorumrelay`; existing `civic_data_connectors` imports and the `civic-data-connectors` CLI remain compatible and use the same implementation objects. No reference application, HTTP server, model, hosted service, or database is required.
 
 ```python
 from quorumrelay import Bounds, OperationContext, Query, Source, create_engine
@@ -112,3 +112,76 @@ Tyler Calendar POST needs the API base observed in that exact tenant's public ap
 ```
 
 Discovery requires explicit inclusive dates. The engine uses a fixed POST endpoint/body, enforces the same tenant hostname, and binds configuration into checkpoints. The checked live response was empty; nonempty live rows and complete catalog/pagination acceptance remain unresolved. Saved calendar input still works. The maintained [core coverage map](ENGINE-COVERAGE.md) distinguishes implemented paths from remaining research, code and access requirements across all 31 families.
+
+
+## Related Legistar records and Repository folder reads
+
+```python
+# A supplied EventItem parent is mandatory; no tally or attendance is inferred.
+rows = engine.fetch_related(legistar_source, "102964", "vote", bounds=Bounds(max_records=20))
+row = engine.fetch_related(legistar_source, "102964", "vote", external_id="30763")
+# record_type="roll_call" uses the separate supplied RollCalls route.
+```
+
+Related collections return `data.records` and exact per-page `data.bundles`; one detail returns its capture bundle. ID-keyset checkpoints bind source, parent, entity and caller scope. Collection completeness refers only to the selected EventItem, with no snapshot guarantee across pages. Original person/value/result/row-version fields are preserved, and the agenda-item parent remains explicit. Saved replay formats are `legistar-votes-json` and `legistar-rollcalls-json`. The public Olympia receipt records seven supplied votes and seven attendance rows over three pages each; it does not establish live write acceptance.
+
+```python
+repository = Source("laserfiche-weblink",
+    "https://api.laserfiche.com/repository/v2/Repositories/r-city/Entries/54/Folder/Children")
+children = engine.discover(repository, bounds=Bounds(max_pages=5, max_records=100),
+    context=OperationContext(credentials={"laserfiche_token": repository_read_token}))
+```
+
+This distinct account API path requires `repository.Read` and an explicitly configured repository/folder URL. It lists direct children only and follows provider-issued same-folder OData nextLinks under byte/page/record/deadline bounds. No public WebLink-to-repository account relationship is guessed. Document, folder and shortcut IDs are repository-wide; current parent folder is a relationship so moving an entry does not change its identity. Creation/modification times and supplied fields remain metadata, never inferred meeting dates. File content, subtype expansion and recursive traversal are not requested by this operation. The saved format is `laserfiche-repository-entries-json`. Canonical account namespaces are `//api.laserfiche.com/repository/v2/Repositories/{repositoryId}`; writes route the repository separately while enforcing the exact configured namespace/credential grant, and retain explicit legacy write-only repository slug configurations. Public WebLink identities are unchanged. No authorized Repository account token has been supplied, so live account acceptance remains unrun.
+
+Official read contracts: [Legistar Votes](https://webapi.legistar.com/Help/Api/GET-v1-Client-EventItems-EventItemId-Votes), [Legistar RollCalls](https://webapi.legistar.com/Help/Api/GET-v1-Client-EventItems-EventItemId-RollCalls), [Laserfiche folder contents](https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_get-folder-listing/).
+
+
+## CivicPlus Select historical file preparation
+
+```python
+prepared = engine.execute("export", {
+    "provider_specific": True,
+    "source": {"provider": "civicplus-select", "url": "https://city.portal.civicclerk.com"},
+    "format": "civicplus-historical-files", "stream": True,
+    "meeting": {"body": "City Council", "meeting_type": "Regular Meeting", "meeting_date": "2020-12-18"},
+    "files": [{"file_type": "Agenda Packet", "file_handle": uploaded_pdf_handle}],
+}, context=export_context)
+```
+
+The caller must hold `export`, `export_attachments` and the exact configured source namespace grant. Scoped generic input handles retain current expiry/policy/integrity checks; small inline files can use `content_base64` and `content_type`. `stream:true` returns the usual scoped `artifact_id`; inline output returns `content_base64`. Caller byte/deadline limits apply. The historical import guide does not establish a vendor file-size limit.
+
+The portable ZIP contains named original PDFs plus a hash/loss manifest. Extract the named files for the documented consultant intake: ZIP itself is not an established vendor input. Literal mapped FileType values are `Agenda`, `Agenda Packet` and `Minutes`, from official examples such as `City Council_Regular Meeting_Agenda Packet_12_18_2020.pdf`. Body/type/date must be explicit; path characters, underscore delimiters, duplicate tokens/bytes and filename collisions are rejected without silent renaming. PDF structure is parsed before export. Meeting fields without a filename mapping are retained in the manifest and disclosed as projection losses; agenda item structure/bookmarks, captions, media timestamps, votes and source revisions are not reconstructed by this import workflow.
+
+`Packet`, `Notice`, `Notices`, `Other`, `Media` and `Audio/Video` lack an unambiguous verified filename token in the inspected guide. Those requests return `provider_filename_mapping_unverified` and no files, rather than inventing a usable provider filename. MP4 preparation therefore remains incomplete until its exact filename token is verified. The vendor permits at most five PDFs and one media file per event, but only the three evidenced PDF token mappings are currently prepared. Consultant processing, FTP hostname/credentials and live vendor import acceptance remain unresolved. No FTP action is performed. See the [official historical import guide](https://www.civicplus.help/meetings-select/docs/historical-imports).
+
+
+## Observed NovusAGENDA public listing
+
+```python
+source = Source("novusagenda", "https://ebps.novusagenda.com/agendapublic/")
+page = engine.discover(source, bounds=Bounds(max_records=25, max_pages=2,
+    date_from="2026-10-01", date_to="2026-10-31"))
+# Resume with the same engine, source, caller and filters; record/page bounds may change.
+next_page = engine.discover(source, bounds=Bounds(max_records=25, max_pages=2,
+    date_from="2026-10-01", date_to="2026-10-31", checkpoint=page.coverage["checkpoint"]))
+```
+
+The adapter reads the public `/agendapublic/` form and follows only its current validated Next Page controls. It retains a fresh anonymous cookie jar and form controls privately; no staff or search form action is submitted. Explicit date and record-type filters apply locally to displayed rows. A supplied body filter cannot infer a board from the tenant or meeting type: unmapped bodies remain in `unknown_body_records` with partial coverage.
+
+Continuation tokens are opaque and bind the exact caller/source/date/type selection. They expire after 15 minutes and work only in the current engine process; a restart explicitly invalidates them. Exact page bytes are interned across cursor snapshots under a 32 MiB accounted cache budget, so one-record traversal does not hit an arbitrary 32-cursor cap. Active other-caller cursors are not silently evicted. Capacity failures explicitly report that continuation is unavailable; expiry/restart requires a fresh read. This is a changing public listing, not a snapshot transaction.
+
+Meeting and agenda-item pager counters remain separate. Item paging does not create new derived meeting identities. Supplied ItemID/MeetingID links retain their parent relationships; rows without a provider ID use a page/row/field-derived ID whose stability limitation is explicit. Exact full HTML captures—including public hidden controls—remain intact, while anonymous cookies and separate session state are never exposed in errors or tokens.
+
+`novus-public-listing-html` is an additive saved-page format. The existing `meeting-export` parser remains the default for saved Novus meeting exports and is unchanged. One bounded public engine read of the existing East Brunswick tenant returned 180 agenda rows and 11 meeting rows over 12 pages without errors. Status remains partial: exhausting that displayed window proves neither complete archive coverage nor native search/detail semantics. See `docs/verification/novus-public-discovery-2026-11-11.json`.
+
+
+## Essential and TelVue account API reads (post-dev3 source)
+
+`engine.fetch(source, request, context=context)` routes these account APIs only from the documented fixed origins. Essential (`municode-meetings`) uses `https://meetingsgov.devmunicode.com`; production hosts and token issuance are not inferred. TelVue uses `https://connect.telvue.com`. Both require an explicit application-owned `Source.namespace`, plus trusted `context.credentials[provider]` binding `origin`, `tenant == context.tenant`, and exact `namespace` (or an explicit `allowed_namespaces` list). The current caller operation/namespace policy still applies. Saved additive format replay retains that namespace without needing account credentials.
+
+Essential credentials use `token`. Its request uses `api_resource: meeting|item|multimedia` with supplied `external_id`, or `api_resource: collection`, an explicit nonnegative `offset`, and the exact documented `filters` object (`Words`, `CreatedMeetingFromDate`, `CreatedMeetingToDate`, `ArchivedState`, `MeetingTypeIds`). No offset stride, automatic paging, response envelope, or exact text-search semantics is guessed. Meeting/item/collection responses return exact raw captures with partial schema coverage and zero inferred normalized rows. Multimedia uses the documented `meetingStructure` wrapper and additive `essential-multimedia-json` replay format. Timestamp integers remain supplied values; no undocumented units are assigned.
+
+TelVue credentials use `access_key` and `secret_passphrase`, sent as the documented CONNECT-ACCESS-KEY and CONNECT-SECRET-PASSPHRASE headers over verified TLS. Request `api_resource: media|videos|playlists`; only media/playlists accept an optional decimal `external_id`. The `.json` list/detail routes preserve the documented envelopes, provider IDs, transcript text, chapters, sources and unknown fields. HTTP(S) media sources can become recording relationships; RTMP values stay in original data. Upload/creation timestamps are not meeting dates. Additive replay formats are `telvue-connect-media-json`, `telvue-connect-videos-json`, and `telvue-connect-playlists-json`.
+
+All account reads remain partial coverage: list pagination/end conditions and account visibility are unverified. Caller byte, deadline, maximum-record and cancellation bounds apply; unsupported date/body filters and forged checkpoints fail explicitly. Account responses that echo configured credential material cannot be captured. No token service or live account mutation was called during fixture verification.

@@ -51,12 +51,16 @@ async def run(args):
     if args.transport == "stdio":
         params = StdioServerParameters(command=sys.executable,
             args=[str(Path(__file__).with_name("mock_workflow.py")), "stdio", "--database", args.database])
-        async with Client(params, mode=args.mode) as client:
+        async with Client(params, mode=args.mode, read_timeout_seconds=90) as client:
             await workflow(client)
     else:
-        async with httpx2.AsyncClient(headers={"Authorization": "Bearer " + os.environ.get("CIVIC_CONNECTOR_TOKEN", TOKEN)}) as http:
+        # The generic HTTP client's five-second read timeout is shorter than an
+        # engine operation's default sixty-second bound. Keep both client layers
+        # bounded, with time for the server to return its receipt or partial result.
+        async with httpx2.AsyncClient(timeout=httpx2.Timeout(90, connect=5, pool=5),
+                headers={"Authorization": "Bearer " + os.environ.get("CIVIC_CONNECTOR_TOKEN", TOKEN)}) as http:
             async with Client(streamable_http_client(args.url.rstrip("/") + "/mcp", http_client=http),
-                              mode=args.mode) as client:
+                              mode=args.mode, read_timeout_seconds=90) as client:
                 await workflow(client)
 
 

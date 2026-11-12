@@ -48,6 +48,8 @@ def main(argv=None, *, stdin=None, stdout=None, stderr=None, engine=None) -> int
     parser.add_argument("--content", help="Explicit saved capture file")
     parser.add_argument("--write-file", nargs=3, action="append", metavar=("CHANGE", "PART", "PATH"),
                         help="Stage a local file into one declared plan_write file part; repeat for additional parts")
+    parser.add_argument("--export-file", nargs=2, action="append", metavar=("INDEX", "PATH"),
+                        help="Stage a local file into a metadata-only export files entry at zero-based INDEX")
     parser.add_argument("--output", help="Export bytes to a new explicit file; stdout still carries JSON metadata")
     parser.add_argument("--file-root", help="Optional allowed local input root")
     parser.add_argument("--database", help="Application-owned optional SQLite state path")
@@ -78,6 +80,8 @@ def main(argv=None, *, stdin=None, stdout=None, stderr=None, engine=None) -> int
             raise ValueError("--output requires a single export operation.")
         if args.write_file and (args.operation != "plan_write" or args.jsonl):
             raise ValueError("--write-file requires one plan_write request.")
+        if args.export_file and (args.operation != "export" or args.jsonl):
+            raise ValueError("--export-file requires one export request.")
         owner = engine or build_engine(database=args.database)
         if args.request:
             raw = _read_path(args.request, args.file_root, 24 * 1024 * 1024).decode("utf-8-sig")
@@ -100,6 +104,27 @@ def main(argv=None, *, stdin=None, stdout=None, stderr=None, engine=None) -> int
                 request = json.loads(line or "{}")
                 if not isinstance(request, dict):
                     raise ValueError("Each request must be a JSON object.")
+                if args.export_file:
+                    from .interchange import stage_input
+                    from .models import Bounds
+                    from uuid import uuid4
+                    bounds = Bounds(**request.get("bounds", {}))
+                    files = request.get("files")
+                    used_indices = set()
+                    for index, filename in args.export_file:
+                        if (not index.isascii() or not index.isdecimal() or not isinstance(files, list)
+                                or int(index) >= len(files) or int(index) in used_indices):
+                            raise ValueError("--export-file requires a unique existing files index.")
+                        index = int(index)
+                        used_indices.add(index)
+                        if not isinstance(files[index], dict) or set(files[index]) != {"file_type", "content_type"}:
+                            raise ValueError("--export-file requires a metadata-only file entry.")
+                        path = _checked_path(filename, args.file_root)
+                        with path.open("rb") as source:
+                            staged = stage_input(owner, uuid4().hex, source, filename=path.name,
+                                content_type=files[index]["content_type"], context=principal.context(),
+                                max_bytes=bounds.transfer_bytes)
+                        files[index]["file_handle"] = staged["file_handle"]
                 if args.write_file:
                     from .models import Bounds
                     from .write_files import stage_write_file

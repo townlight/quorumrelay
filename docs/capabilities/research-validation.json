@@ -4,11 +4,11 @@
   "providers": 31,
   "baseline_formats": 34,
   "operation_entries": 341,
-  "outbound_mapping_entries": 145,
+  "outbound_mapping_entries": 146,
   "interface_types": {
     "documented_automated_api": 29,
     "unresolved": 28,
-    "gated_sdk_contract_unverified": 3,
+    "gated_sdk_contract_unverified": 4,
     "manual_ui_documented_machine_contract_unverified": 76,
     "documented_file_import": 1,
     "manual_ui_export_only_import_unverified": 1,
@@ -16,11 +16,11 @@
     "other_product_applicability_unverified": 3,
     "neutral_standard_not_provider_write": 1
   },
-  "evidence_records": 201,
-  "distinct_evidence_urls": 158,
+  "evidence_records": 248,
+  "distinct_evidence_urls": 172,
   "exact_identity_lookups": 37,
   "original_SOURCE_FORMATS_independently_checked": true,
-  "negative_checks_passed": 4,
+  "negative_checks_passed": 5,
   "errors": [],
   "live_provider_acceptance": "Two bounded live-read receipts are verified: one Legistar event detail and two CHAMP event details. Receipt hashes and saved capture-fixture hashes are validated separately; CHAMP receipt response digests differ from the saved route-probe captures. Neither read proves catalog completeness. Provider write acceptance is NOT_RUN because no authorized provider test tenants or credentials were supplied.",
   "engine_status_reconciliation": "Owned independently by engine implementation owners"

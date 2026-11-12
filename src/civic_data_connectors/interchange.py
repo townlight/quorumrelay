@@ -173,7 +173,8 @@ def _open_artifact(engine, collection, key, *, context):
 
 def _authorize_artifact(metadata, context):
     if metadata.get("purpose") == "input":
-        consumers = {"normalize", "import_preview", "import_bundle", "extract_text", "plan_write", "commit_write"}
+        consumers = {"normalize", "discover", "fetch", "import_preview", "import_bundle",
+                     "extract_text", "plan_write", "commit_write", "export"}
         if (metadata.get("expires_at", 0) <= time.time()
                 or (context.allowed_operations is not None and not context.allowed_operations & consumers)):
             raise ValueError("The input handle expired or file-input authorization was revoked.")

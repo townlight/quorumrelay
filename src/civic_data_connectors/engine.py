@@ -57,6 +57,7 @@ class Engine:
         self.handlers: dict[str, Handler] = {}
         self.parsers: dict[tuple[str, str], Parser] = {}
         self.native_searches: dict[str, Handler] = {}
+        self.native_exports: dict[str, Handler] = {}
         for connector in connectors:
             self.register_connector(connector)
 
@@ -88,6 +89,12 @@ class Engine:
         if provider in self.native_searches or not callable(handler):
             raise ValueError("A native search handler must be callable and registered once per provider.")
         self.native_searches[provider] = handler
+
+    def register_native_export(self, provider: str, handler: Handler) -> None:
+        provider = canonical_provider_id(provider, allow_extension=True)
+        if provider in self.native_exports or not callable(handler):
+            raise ValueError("A native export handler must be callable and registered once per provider.")
+        self.native_exports[provider] = handler
 
     def discover(self, source: Source, *, bounds: Bounds | None = None,
                  context: OperationContext | None = None) -> OperationResult:
@@ -123,6 +130,15 @@ class Engine:
         return self.fetch(source, {"external_id": external_id, "caption_language": language or "*"},
                           bounds=bounds, context=context)
 
+    def fetch_related(self, source: Source, parent_id: str, record_type: str, *,
+                      external_id: str | None = None, bounds: Bounds | None = None,
+                      context: OperationContext | None = None) -> OperationResult:
+        """Read an evidenced provider child collection or one supplied child ID."""
+        request = {"parent_id": parent_id, "record_type": record_type}
+        if external_id is not None:
+            request["external_id"] = external_id
+        return self.fetch(source, request, bounds=bounds, context=context)
+
     def search(self, query: Query, *, context: OperationContext | None = None) -> OperationResult:
         from dataclasses import asdict
         return self.execute("search", {"query": asdict(query)}, context=context)
@@ -153,6 +169,10 @@ class Engine:
         provider = source_data.get("provider") if isinstance(source_data, dict) else request.get("provider")
         connector = self.connectors.get(provider)
         if connector is None:
+            if operation == "export" and request.get("provider_specific") is True and provider:
+                handler = self.native_exports.get(canonical_provider_id(provider, allow_extension=True))
+                if handler is not None:
+                    return handler(self, request, content, context)
             if operation == "search" and request.get("native") is True and provider:
                 handler = self.native_searches.get(canonical_provider_id(provider, allow_extension=True))
                 if handler is not None:

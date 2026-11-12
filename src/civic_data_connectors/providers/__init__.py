@@ -36,7 +36,13 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_operation("identify", identify_handler)
     engine.register_operation("validate_source", validate_handler)
     for provider, input_format in (
+            ("municode-meetings", "essential-multimedia-json"),
+            ("telvue", "telvue-connect-media-json"), ("telvue", "telvue-connect-videos-json"),
+            ("telvue", "telvue-connect-playlists-json"),
             ("legistar", "legistar-events-json"), ("legistar", "legistar-event-json"),
+            ("legistar", "legistar-votes-json"), ("legistar", "legistar-rollcalls-json"),
+            ("novusagenda", "novus-public-listing-html"),
+            ("laserfiche-weblink", "laserfiche-repository-entries-json"),
             ("wistia", "wistia-api-media-json"), ("wistia", "wistia-media-detail-json"),
             ("wistia", "wistia-caption-json"),
             ("granicus", "granicus-listing-html"), ("peak", "granicus-listing-html")):
@@ -54,6 +60,8 @@ def register(engine, *, transport: Transport | None = None,
     from .legistar import native_search as legistar_search
     engine.register_native_search("legistar", tracked_handler("search", lambda engine, request, content, context:
                                   legistar_search(engine, request, content, context, transport=transport)))
+    from .civicplus_export import export_historical
+    engine.register_native_export("civicplus-select", tracked_handler("export", export_historical))
 
 
 __all__ = ["FORMATS", "BrowserSession", "PublicTransport", "Response", "Transport", "register"]

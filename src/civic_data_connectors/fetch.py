@@ -85,6 +85,7 @@ class PublicResponse:
     media_type: str
     status: int
     headers: dict[str, str] = field(default_factory=dict, repr=False)
+    set_cookie_headers: tuple[str, ...] = field(default=(), repr=False)
 
 
 def request_public_response(
@@ -92,6 +93,7 @@ def request_public_response(
     headers: dict[str, str] | None = None, allowed_origins: set[str] | tuple[str, ...] | None = None,
     destination: BinaryIO | None = None, deadline_seconds: float = 45,
     _legacy_public_redirects: bool = False,
+    allow_redirects: bool = True,
 ) -> PublicResponse:
     """Bounded provider request; resolve/validate the actual socket on every redirect.
 
@@ -172,6 +174,8 @@ def request_public_response(
                     connection.sock.settimeout(max(0.001, min(8, deadline - monotonic())))
                 with connection.getresponse() as response:
                     if response.status in {301, 302, 303, 307, 308} and response.getheader("Location"):
+                        if not allow_redirects:
+                            raise ImportInputError("Redirects are disabled for this scoped request.")
                         url = urljoin(url, response.getheader("Location"))
                         if response.status == 303:
                             method, body = "GET", None
@@ -217,7 +221,11 @@ def request_public_response(
                         value = response.getheader(name)
                         if value is not None:
                             metadata[name.lower()] = value
-                    return PublicResponse(url, bytes(content), media_type, response.status, metadata)
+                    # Keep distinct Set-Cookie fields for a scoped provider session.
+                    # They are private transport state, never public capture metadata.
+                    cookies = tuple(value for name, value in response.getheaders()
+                                    if name.lower() == "set-cookie")
+                    return PublicResponse(url, bytes(content), media_type, response.status, metadata, cookies)
             finally:
                 connection.close()
         except ImportInputError:

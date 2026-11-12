@@ -146,6 +146,49 @@ def test_cancellation_survives_progress_and_cross_scope_status(engine):
     assert result.status == "cancelled"
 
 
+def test_progress_recorder_bounds_slow_storage_and_flushes_latest(engine, monkeypatch):
+    # Even if every report is more than a second apart, count gates each write.
+    ticks = iter(range(2000))
+    monkeypatch.setattr(storage.time, "monotonic", lambda: next(ticks))
+    writes = []
+    real_update = storage.update_operation
+
+    def counted(*args, **kwargs):
+        writes.append(args[2])
+        return real_update(*args, **kwargs)
+
+    monkeypatch.setattr(storage, "update_operation", counted)
+    recorder = storage.ProgressRecorder(engine.storage, "bounded", scope="default", operation="discover")
+    for i in range(1, 416):
+        recorder({"operation": "normalize", "completed": i, "total": 500})
+    recorder.flush()
+    assert len(writes) <= 19
+    assert engine.storage.get("operations", "bounded", scope="default").value["progress"]["completed"] == 415
+    recorder({"operation": "discover", "pages": 1})
+    assert writes[-1]["progress"]["operation"] == "discover"
+    storage.update_operation(engine.storage, "bounded", {"cancel_requested": True}, scope="default")
+    recorder({"operation": "discover", "pages": 2})
+    recorder.flush()
+    assert engine.storage.get("operations", "bounded", scope="default").value["cancel_requested"] is True
+
+
+def test_tracked_handler_forwards_callbacks_and_flushes_on_error(engine):
+    seen = []
+    context = OperationContext(operation_id="error-progress", progress=seen.append)
+
+    def handler(owner, request, content, delegated):
+        for i in range(1, 101):
+            delegated.report(operation="normalize", completed=i, total=200)
+        raise ValueError("synthetic failure")
+
+    with pytest.raises(ValueError, match="synthetic failure"):
+        storage.tracked_handler("search", handler)(engine, {}, None, context)
+    assert len(seen) == 100
+    saved = engine.storage.get("operations", context.operation_id, scope=context.scope).value
+    assert saved["progress"]["completed"] == 100
+    assert saved["status"] == "failed"
+
+
 def test_exact_terms_phrases_filters_and_partial_empty(engine):
     record = sample()["records"][0]
     assert engine.execute("search", {"records": [record], "query": {"terms": ["bud"]}}).data["hits"] == []

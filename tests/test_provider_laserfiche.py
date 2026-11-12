@@ -82,6 +82,20 @@ def test_louisville_dated_document_fields_from_independent_capture():
                            for call in session.opened]
 
 
+def test_guarded_access_failure_has_actionable_safe_details():
+    from civic_data_connectors.providers.contracts import RetrievalError
+    session = Session(LOUISVILLE)
+    def denied(*args, **kwargs):
+        raise RetrievalError("weblink_access_required", status=403)
+    session.open_and_catch = denied
+    result = engine(session).execute("discover", request())
+    assert result.status == "failed"
+    assert result.errors[0].code == "weblink_access_required"
+    assert result.errors[0].details == {"http_status": 403}
+    assert result.errors[0].retryable is False
+    assert "saved capture" in result.errors[0].message
+
+
 def test_boulder_year_month_meeting_nesting_respects_boundary_dates():
     session = Session(BOULDER)
     result = engine(session).execute("discover", request(source(BOULDER, 47549, "LF8PROD2"),

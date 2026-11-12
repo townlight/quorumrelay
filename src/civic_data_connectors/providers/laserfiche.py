@@ -51,10 +51,14 @@ def _url(source, base, page, identifier, repo, dbid, key="id"):
         key: identifier, "dbid": dbid, "repo": repo})
 
 
-def _json_size(value, limit):
-    encoded = json.dumps(value, ensure_ascii=False, separators=(",", ":")).encode()
+def _json_size(value, limit, browser=None):
+    raw = getattr(browser, "captured_content", None)
+    encoded = raw if isinstance(raw, bytes) else json.dumps(
+        value, ensure_ascii=False, separators=(",", ":")).encode()
     if len(encoded) > limit:
         raise ValueError("WebLink response exceeds the configured parser byte limit.")
+    if raw is not None and json.loads(encoded) != value:
+        raise ValueError("WebLink captured bytes do not match the returned response.")
     return encoded
 
 
@@ -155,7 +159,7 @@ def discover_folders(engine, source, namespace, bounds, context, browser, *, rec
                     "repoName": repo, "folderId": folder, "getNewListing": True,
                     "start": start, "end": start + size, "sortColumn": "", "sortAscending": True,
                 }, HEADERS, byte_limit=bounds.parser_bytes, deadline_seconds=remaining)
-            content = _json_size(result, bounds.parser_bytes)
+            content = _json_size(result, bounds.parser_bytes, browser)
             digest = hashlib.sha256(content).hexdigest()
             if task.get("sha256") and task["sha256"] != digest:
                 raise ValueError("The resumed WebLink listing changed.")
@@ -234,10 +238,15 @@ def discover_folders(engine, source, namespace, bounds, context, browser, *, rec
             records.extend(bundle["records"])
             bundles.append(bundle)
             captures.append(bundle["capture"])
-        except Exception:
-            failures.append({"folder": folder, "start": start, "reason": "folder_listing_failed"})
-            errors.append(Error("folder_listing_failed", "A scoped WebLink folder listing could not be read.",
-                                retryable=True, source=source.url))
+        except Exception as error:
+            access = getattr(error, "code", None) == "weblink_access_required"
+            reason = "weblink_access_required" if access else "folder_listing_failed"
+            failures.append({"folder": folder, "start": start, "reason": reason})
+            errors.append(Error(reason,
+                "The source denied the guarded session; supply a saved capture or supported authorized access."
+                if access else "A scoped WebLink folder listing could not be read.",
+                retryable=not access, source=source.url,
+                details={"http_status": error.status} if access else {}))
             retry.append(task)
         context.report(operation="discover", pages=pages, returned_records=len(records))
     queue.extend(retry)
@@ -253,7 +262,7 @@ def discover_folders(engine, source, namespace, bounds, context, browser, *, rec
         "depth_limited_folders": depth_limited, "unclassified_entries": unclassified,
         "scope": "dated meeting documents in the configured WebLink folder subtree",
         "available_text": "metadata_only; viewer text requires separate page retrieval",
-        "browser_safety": "injected guarded session, not a package-provided live browser",
+        "browser_safety": "explicit isolated session with guarded transport; see session implementation",
     }
     return OperationResult(status, {"source": source.public_dict(), "records": records,
                                    "captures": captures, "bundles": bundles},
@@ -270,7 +279,7 @@ def scanned_text(source, url, bounds, context, browser):
     deadline = monotonic() + bounds.deadline_seconds
     info = browser.open_and_catch(url, base + INFO, byte_limit=bounds.parser_bytes,
                                  deadline_seconds=bounds.deadline_seconds)
-    _json_size(info, bounds.parser_bytes)
+    _json_size(info, bounds.parser_bytes, browser)
     count = info.get("data", {}).get("pageCount") if isinstance(info, dict) else None
     if type(count) is not int or count < 1:
         raise ValueError("WebLink supplied no document page count.")
@@ -283,7 +292,7 @@ def scanned_text(source, url, bounds, context, browser):
             "showAnn": True, "searchUuid": "",
         }, HEADERS, byte_limit=bounds.parser_bytes,
                                 deadline_seconds=max(0.001, deadline - monotonic()))
-        _json_size(data, bounds.parser_bytes)
+        _json_size(data, bounds.parser_bytes, browser)
         text = data.get("data", {}).get("text") if isinstance(data, dict) else None
         if not isinstance(text, str):
             raise ValueError("WebLink did not supply text for the requested page.")

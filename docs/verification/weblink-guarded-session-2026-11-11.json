@@ -1,0 +1,30 @@
+{
+  "observed_at": "2026-11-12T02:26:43.215841+00:00",
+  "kind": "guarded_weblink_browser_public_read",
+  "python": "3.13.5",
+  "synthetic_checks": "15 passed; real offline Chrome routing, synthetic response fixtures; not live acceptance",
+  "live_results": [
+    {
+      "url": "https://documents.bouldercolorado.gov/WebLink/Browse.aspx?id=47549&dbid=0&repo=LF8PROD2",
+      "status": "blocked",
+      "code": "weblink_guarded_request_failed",
+      "http_status": null
+    },
+    {
+      "url": "https://laserfiche.louisvilleco.gov/WebLink/Browse.aspx?id=8986&dbid=0&repo=Louisville",
+      "status": "blocked",
+      "code": "weblink_access_required",
+      "http_status": 403
+    }
+  ],
+  "live_write": "not_run",
+  "closed_all_owned_sessions": true,
+  "catalog_acceptance": "incomplete",
+  "source_sha256": "fd8127533f18ad73f3a69c81f152dad57065d6b84fd6c478764282f6935c35d9",
+  "subsequent_validation": {
+    "observed_at": "2026-11-12T02:28:46.130650+00:00",
+    "focused_tests": "17 passed in 7.93s; scoped Ruff passed",
+    "change_since_live_probe": "Cleanup closes owned proxy even when Playwright stop raises; denied-action/repository tests added. No live probe repeated.",
+    "source_sha256": "02abfca1e996e5e89dac4ee299ed5e57a5f3b1739032efc61b6192ab605752fc"
+  }
+}

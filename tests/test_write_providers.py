@@ -607,3 +607,32 @@ def test_canonical_read_namespace_and_legacy_write_slug_route_same_client_withou
     denied = engine.execute("plan_write", {"source": mismatch, "changes": [{"key": "other",
         "entity": "event", "operation": "create", "fields": {"EventDate": "2026-11-11"}}]}, context=canonical)
     assert denied.status == "failed"
+
+
+def test_repository_canonical_read_write_identity_preserves_exact_credential_scope(tmp_path):
+    from dataclasses import replace
+    from civic_data_connectors import Source, create_engine
+    engine, context, network, legacy = make_engine(tmp_path, "laserfiche", ["document:upload"])
+    namespace = "//api.laserfiche.com/repository/v2/Repositories/repo1"
+    source = {**legacy, "namespace": namespace}
+    config = {**context.credentials["laserfiche"], "allowed_namespaces": [namespace]}
+    canonical = replace(context, credentials={"laserfiche": config}, allowed_namespaces=frozenset({namespace}))
+    read_source = Source("laserfiche-weblink",
+        "https://api.laserfiche.com/repository/v2/Repositories/repo1/Entries/9/Folder/Children")
+    raw = b'{"value":[{"id":1,"parentId":9,"name":"packet.pdf","entryType":"Document"}]}'
+    parsed = create_engine().normalize(read_source, raw, input_format="laserfiche-repository-entries-json",
+                                       context=canonical)
+    assert parsed.status == "completed", parsed.public_dict()
+    assert parsed.data["records"][0]["identity"]["namespace"] == namespace
+    change = {"key": "doc", "entity": "document", "operation": "upload", "parent_id": 9,
+              "meeting_id": "meeting1", "fields": {"name": "packet.pdf"}, "files": [{
+                  "part": "file", "filename": "packet.pdf", "content_type": "application/pdf",
+                  "content_base64": base64.b64encode(b"synthetic scoped file").decode()}]}
+    result, _ = run(engine, canonical, source, change)
+    assert result.status == "completed", result.public_dict()
+    assert network.files["1"] == b"synthetic scoped file"
+    denied = engine.execute("plan_write", {"source": source, "changes": [change]}, context=context)
+    assert denied.status == "failed"
+    assert denied.errors[0].code == "permission_denied"
+    mismatch = {**source, "url": legacy["url"].replace("repo1", "repo2")}
+    assert engine.execute("plan_write", {"source": mismatch, "changes": [change]}, context=canonical).status == "failed"

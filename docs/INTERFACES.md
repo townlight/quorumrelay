@@ -1,4 +1,4 @@
-# External interfaces, candidate 0.1.0.dev3
+# External interfaces, candidate 0.1.0.dev4
 
 This candidate is local development software. Synthetic acceptance never proves
 live provider acceptance. No interface publishes stories or starts provider
@@ -13,12 +13,12 @@ Install the standalone package with its service extra, pinned to the same
 candidate as the client:
 
 ```powershell
-py -m pip install "quorumrelay[service]==0.1.0.dev3"
+py -m pip install "C:\connectors\quorumrelay-0.1.0.dev4-py3-none-any.whl[service]"
 quorumrelay serve --config C:\app\connector-service.json --database C:\app\connector-state.sqlite
 ```
 
-The package has not been published by this work. Before publication install
-the built wheel by its explicit path rather than the package-index command.
+The package has not been published by this work. Replace the example wheel path
+with the candidate whose hash you verified; it does not use a package index.
 For checkout development use `pip install -e ".[service]"` from this repository.
 `python -m quorumrelay` is equivalent to the console entry point.
 Keep the service in its own supervised process; Ctrl+C shuts it down locally.
@@ -119,7 +119,7 @@ worker. Writes reconcile uncertain intents according to their core contract.
 
 ## TypeScript and an unrelated fifth client
 
-The package is `quorumrelay-client@0.1.0-dev.3`. For local development
+The package is `quorumrelay-client@0.1.0-dev.4`. For local development
 use a `file:` dependency to `client/`. To use it without this checkout or any
 reference product, build and `npm pack` the client, then install its `.tgz` in
 your own project. Generated types come from the packaged core schemas.

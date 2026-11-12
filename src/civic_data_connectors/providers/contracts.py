@@ -13,6 +13,7 @@ class Response:
     content_type: str = "application/octet-stream"
     status: int = 200
     headers: dict[str, str] = field(default_factory=dict, repr=False)
+    set_cookie_headers: tuple[str, ...] = field(default=(), repr=False)
 
 
 class RetrievalError(ValueError):
@@ -28,7 +29,7 @@ class Transport(Protocol):
     def request(self, url: str, *, method: str = "GET", body: bytes | None = None,
                 headers: dict[str, str] | None = None, byte_limit: int,
                 deadline_seconds: float, allowed_origins: tuple[str, ...],
-                destination: BinaryIO | None = None) -> Response: ...
+                destination: BinaryIO | None = None, allow_redirects: bool = True) -> Response: ...
 
 
 class BrowserSession(Protocol):
@@ -52,7 +53,7 @@ class BrowserSession(Protocol):
 
 class PublicTransport:
     def request(self, url, *, method="GET", body=None, headers=None, byte_limit,
-                deadline_seconds, allowed_origins, destination=None):
+                deadline_seconds, allowed_origins, destination=None, allow_redirects=True):
         # Resolve lazily so consumers can import the SDK without opening sockets.
         from .. import fetch
         request = getattr(fetch, "request_public_response", None)
@@ -63,9 +64,10 @@ class PublicTransport:
                 url, method=method, body=body, headers=headers, byte_limit=byte_limit,
                 deadline_seconds=deadline_seconds, allowed_origins=allowed_origins,
                 destination=destination,
+                allow_redirects=allow_redirects,
             )
         return Response(response.url, response.content, response.media_type,
-                        response.status, response.headers)
+                        response.status, response.headers, response.set_cookie_headers)
 
 
 def _origin(url: str) -> str:

@@ -18,7 +18,7 @@ from mcp.server.transport_security import TransportSecuritySettings
 from mcp.types import CallToolResult, ResourceLink, TextContent, ToolAnnotations
 
 from .. import __version__
-from ..storage import update_operation
+from ..storage import ProgressRecorder, update_operation
 from .openapi import validate_result
 from .runtime import OPERATIONS, Principal, ServiceConfig, bound_request, execute, failure
 from .files import InputUploads
@@ -104,28 +104,40 @@ def create_server(engine, principal: Principal | None = None, *, config: Service
             def progress(value):
                 if context.cancellation.is_set():
                     return
-                if engine.storage is not None:
-                    update_operation(engine.storage, context.operation_id, {"progress": value}, scope=context.scope)
                 completed = value.get("completed", value.get("completed_steps", 0))
                 total = value.get("total", value.get("total_steps"))
                 anyio.from_thread.run(ctx.report_progress, float(completed),
                                       float(total) if total is not None else None,
                                       "operation_id=" + context.operation_id)
-            context.progress = progress
+            class MCPProgress(ProgressRecorder):
+                def __call__(self, value):
+                    if context.cancellation.is_set():
+                        return
+                    super().__call__(value)
+                    progress(value)
+            recorder = (MCPProgress(engine.storage, context.operation_id, scope=context.scope,
+                                    operation=operation) if engine.storage is not None else None)
+            context.progress = recorder or progress
 
             def work():
                 try:
                     result = execute(engine, identity, operation, request, context=context)
                     result = replace(result, operation_id=context.operation_id)
+                    if recorder is not None:
+                        recorder.flush()
                     if engine.storage is not None:
                         update_operation(engine.storage, context.operation_id,
                                          {"operation": operation, "state": result.status,
                                           "result": result.public_dict()}, scope=context.scope)
                     return validate_result(result.public_dict())
                 finally:
-                    done.set()
-                    with lock:
-                        active.pop((context.scope, context.operation_id), None)
+                    try:
+                        if recorder is not None:
+                            recorder.flush()
+                    finally:
+                        done.set()
+                        with lock:
+                            active.pop((context.scope, context.operation_id), None)
             with lock:
                 active[(context.scope, context.operation_id)] = context.cancellation
             try:

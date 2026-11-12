@@ -19,6 +19,117 @@ DETAIL_DOCUMENTATION = (
 )
 
 
+def fetch_related(source, namespace, request, bounds, context, transport):
+    """Read supplied Vote/RollCall rows under one explicitly selected EventItem.
+
+    Collections use the API's OData integer-ID keyset. Checkpoints bind the parent,
+    entity, tenant and caller scope; they are progress cursors, not snapshots.
+    """
+    from dataclasses import replace
+    from ..engine import canonical_hash
+    from .discovery import _checkpoint, _resume, _page_size
+    kind = request.get("record_type")
+    if kind not in {"vote", "roll_call"}:
+        raise ValueError("Legistar related reads require record_type vote or roll_call.")
+    parent, external_id = request.get("parent_id"), request.get("external_id")
+    for value in [parent, *([external_id] if external_id is not None else [])]:
+        if not isinstance(value, str) or re.fullmatch(r"[1-9][0-9]{0,18}", value) is None:
+            raise ValueError("Related Legistar IDs must be positive decimal strings.")
+    if external_id is not None and bounds.checkpoint:
+        raise ValueError("One related detail does not accept a collection checkpoint.")
+    if bounds.date_from or bounds.date_to or source.body:
+        raise ValueError("Related rows have no meeting date/body; select the parent EventItem explicitly.")
+    prefix, route, input_format = (("Vote", "Votes", "legistar-votes-json") if kind == "vote"
+                                   else ("RollCall", "RollCalls", "legistar-rollcalls-json"))
+    base = _api_source(source).removesuffix("/Events") + f"/EventItems/{parent}/{route}"
+    origin = _origin(base)
+    binding = canonical_hash({"source": source.public_dict(), "namespace": namespace,
+                              "parent": parent, "kind": kind, "scope": context.scope})
+    queue, seen = _resume(bounds.checkpoint, binding) if bounds.checkpoint else ([{"after": 0}], set())
+    if len(queue) > 1 or (queue and (set(queue[0]) != {"after"}
+            or type(queue[0]["after"]) is not int or queue[0]["after"] < 0)):
+        raise ValueError("Invalid related-read checkpoint task.")
+    coverage = {"sources": [{**source.public_dict(), "namespace": namespace}],
+                "scope": "one EventItem supplied " + route, "parent_id": parent,
+                "catalog_complete": False, "collection_complete": False,
+                "snapshot_consistency": "not_guaranteed", "failures": [], "pages": 0}
+    deadline, records, bundles, errors = monotonic() + bounds.deadline_seconds, [], [], []
+    try:
+        while queue and coverage["pages"] < bounds.max_pages and len(records) < bounds.max_records:
+            if context.check_cancelled():
+                return OperationResult("cancelled", {"records": records, "bundles": bundles},
+                                       coverage=coverage, operation_id=context.operation_id)
+            after = queue[0]["after"]
+            size = min(_page_size(source), bounds.max_records - len(records))
+            parameters = {} if external_id is not None else {
+                "$top": size, "$orderby": prefix + "Id", "$filter": prefix + "Id gt " + str(after)}
+            token = context.credentials.get("legistar_token")
+            if token is not None:
+                if not isinstance(token, str) or not token:
+                    raise ValueError("Invalid Legistar credential.")
+                parameters["token"] = token
+            url = base + ("/" + external_id if external_id is not None else "")
+            if parameters:
+                url += "?" + urlencode(parameters)
+            response = transport.request(url, headers={"Accept": "application/json"},
+                byte_limit=bounds.parser_bytes, deadline_seconds=max(0.001, deadline - monotonic()),
+                allowed_origins=(origin,))
+            if context.check_cancelled():
+                return OperationResult("cancelled", {"records": records, "bundles": bundles},
+                                       coverage=coverage, operation_id=context.operation_id)
+            if monotonic() >= deadline:
+                raise RetrievalError("provider_deadline_exceeded")
+            if response.status != 200:
+                raise RetrievalError("provider_http_error", status=response.status)
+            from urllib.parse import urlsplit
+            if (_origin(response.url) != origin or urlsplit(response.url).path != urlsplit(url).path
+                    or len(response.content) > bounds.parser_bytes):
+                raise ValueError("Related response exceeded its origin or parser bound.")
+            original = json.loads(response.content)
+            if external_id is not None:
+                if not isinstance(original, dict) or original.get(prefix + "Id") != int(external_id):
+                    raise ValueError("Related detail identity mismatch.")
+                entries = [original]
+            else:
+                if not isinstance(original, list) or len(original) > size:
+                    raise ValueError("Collection ignored the bounded query or returned an invalid shape.")
+                entries = original
+            ids = [row.get(prefix + "Id") if isinstance(row, dict) else None for row in entries]
+            if (any(type(value) is not int or value <= after for value in ids)
+                    or ids != sorted(set(ids)) or any(row.get(prefix + "EventItemId") != int(parent)
+                                                    for row in entries)):
+                raise ValueError("Related rows did not match their parent or advance their keyset.")
+            bundle = parse_native(replace(source, url=base), namespace, response.content, input_format)
+            parsed = _bounded_parser_result(OperationResult("completed", bundle), bounds, context)
+            if parsed.status != "completed":
+                raise ValueError("Related response exceeded normalized parser bounds.")
+            records.extend(bundle["records"])
+            bundles.append(bundle)
+            coverage["pages"] += 1
+            if external_id is not None or len(entries) < size:
+                queue.clear()
+            else:
+                queue[0] = {"after": ids[-1]}
+        coverage["returned_records"] = len(records)
+        coverage["collection_complete"] = not queue
+        coverage["source_complete"] = not queue
+        coverage["checkpoint"] = _checkpoint(binding, queue, seen) if queue else None
+        coverage["truncated"] = bool(queue)
+        return OperationResult("partial" if queue else "completed",
+            bundles[0] if external_id is not None and bundles else {"records": records, "bundles": bundles},
+            coverage=coverage, operation_id=context.operation_id)
+    except Exception as error:
+        code = error.code if isinstance(error, RetrievalError) else "provider_related_read_failed"
+        details = {"http_status": error.status} if isinstance(error, RetrievalError) and error.status else {}
+        errors.append(Error(code, "The related provider rows could not be retrieved or verified.",
+                            retryable=True, source=source.url, details=details))
+        coverage["failures"].append({"reason": code, **details})
+        coverage["checkpoint"] = _checkpoint(binding, queue, seen) if queue and external_id is None else None
+        return OperationResult("partial" if records else "failed",
+            {"records": records, "bundles": bundles} if records else None, tuple(errors), coverage,
+            context.operation_id)
+
+
 def fetch_record(source, namespace, external_id, bounds, context, transport):
     """Fetch one event with supplied items, notes and attachment metadata.
 

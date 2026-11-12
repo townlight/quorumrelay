@@ -1436,6 +1436,10 @@ def source_namespace(connector: str, source) -> str:
     if connector == "onbase":
         return site + "/" + source.path.lstrip("/").partition("/")[0].lower()
     if connector == "laserfiche-weblink":
+        if source.hostname == "api.laserfiche.com":
+            match = re.match(r"/repository/v2/Repositories/([A-Za-z0-9_-]+)(?:/|$)", source.path)
+            if match:
+                return site + "/repository/v2/Repositories/" + match[1]
         path = re.split(r"/(?:\d+/fol|browse\.aspx)", source.path, maxsplit=1, flags=re.I)[0]
         return site + path.rstrip("/").lower()
     if connector == "towncloud":

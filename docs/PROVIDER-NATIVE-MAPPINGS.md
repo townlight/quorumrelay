@@ -68,3 +68,17 @@ A shared legacy projection helper should project **the selected aggregate record
 CHAMP fixed public `playapi.champds.com/{tenant}/event/{id}` retrieval uses the existing `champ-event-json` compatibility parser and namespace. The observed API returns JSON with an HTML MIME type; response content is still structurally checked as JSON and against the exact tenant/event identity. Two public tenant reads passed; event catalog discovery remains unresolved.
 
 Tyler `calendar_api_base` is an explicitly supplied, same-host application base observed for a tenant. The engine POSTs inclusive date strings and the observed all-meeting-type identifier to its fixed date-range endpoint. It reports partial catalog coverage; an empty live response does not establish live nonempty-row or paging acceptance.
+
+
+## NovusAGENDA observed public listing
+
+Additive `novus-public-listing-html` reads the observed public ASP.NET form without evaluating source JavaScript. Displayed meeting and agenda-item cells, original link attributes, exact capture bytes and supplied ItemID/MeetingID parent links are retained. Missing provider IDs use explicit per-grid page/row/field derivation; meeting grid page remains unchanged while agenda-item pages advance. No board identity or complete archive/search semantics are invented. GET/POST requests stay on the exact configured HTTPS `/agendapublic/` endpoint; only a fresh validated Next Page target is posted with empty event argument. Cookie/header and form-control state stays private to the engine continuation cache. See the maintained SDK limits and public-read receipt.
+
+
+## Essential dev API and TelVue Connect (post-dev3 source)
+
+`providers/account_reads.py` implements explicit `fetch` requests for the documented Essential dev API meeting/item/multimedia GETs and single supplied-offset collection POST. Meeting/item/collection response models are undocumented: the result is a raw partial capture, without inferred normalized rows or automatic pagination. `essential-multimedia-json` maps only the documented meetingStructure wrapper. No exact native search semantics are claimed for Words.
+
+The same dispatcher implements TelVue Connect GET media/videos/playlists and only the documented media/playlist detail routes, using the exact CONNECT access-key/passphrase headers. `telvue-connect-media-json`, `telvue-connect-videos-json`, and `telvue-connect-playlists-json` preserve original envelopes/bytes, IDs, transcript, chapters, sources, and unknown fields. No list continuation/end condition or video detail route is invented. Current explicit origin, application account namespace and caller tenant binding is required before credentials are sent. Public tenant legacy identity behavior stays unchanged.
+
+`providers/essential_write.py` maps meeting_multimedia:update only: patch typed documented full-model fields while preserving fixed structure/meeting/item identities and unknown values, then POST the full model with exact readback and durable uncertain-outcome handling. All account checks are synthetic in `tests/test_account_apis.py`; account credentials and live acceptance remain unavailable/NOT_RUN. These implementations do not establish API writes for TelVue, general agenda writes for Essential, token issuance, complete listing or live vendor acceptance.

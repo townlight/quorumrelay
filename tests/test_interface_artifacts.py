@@ -182,3 +182,178 @@ def test_large_neutral_input_uses_transfer_bound_in_http_cli_and_mcp_staging(tmp
     assert result.status == "completed", result.public_dict()
     assert result.data["bundle"]["records"] == bundle["records"]
     uploads.close()
+
+
+def historical_request():
+    return {"provider_specific": True, "format": "civicplus-historical-files", "stream": True,
+        "source": {"provider": "civicplus-select", "url": "https://city.portal.civicclerk.com"},
+        "meeting": {"body": "City Council", "meeting_type": "Regular Meeting", "meeting_date": "2020-12-18"},
+        "files": [{"file_type": "Agenda Packet", "content_type": "application/pdf"}]}
+
+
+def historical_pdf():
+    from pathlib import Path
+    return (Path(__file__).parent / "fixtures" / "baseline" / "boarddocs-minooka.pdf").read_bytes()
+
+
+def verify_historical_archive(content, pdf):
+    name = "City Council_Regular Meeting_Agenda Packet_12_18_2020.pdf"
+    with zipfile.ZipFile(io.BytesIO(content)) as archive:
+        assert archive.read(name) == pdf
+        manifest = json.loads(archive.read("manifest.json"))
+    assert manifest["files"][0]["sha256"] == hashlib.sha256(pdf).hexdigest()
+    assert manifest["vendor_import_accepted"] is False
+
+
+def test_http_native_export_upload_download_current_policy_ttl_hash_and_legacy(tmp_path):
+    owner, cfg, pdf = build_engine(database=tmp_path / "native-http.sqlite"), config(parser_bytes=1024), historical_pdf()
+    identity = replace(cfg.tokens[TOKEN_A], operations=frozenset({"export", "normalize"}),
+                       authorization=frozenset({"export_attachments"}))
+    cfg.tokens[TOKEN_A] = identity
+    auth = {"Authorization": "Bearer " + TOKEN_A}
+    with TestClient(create_app(owner, cfg), base_url="http://127.0.0.1") as client:
+        uploaded = client.post("/v1/files", headers=auth, files={"file": ("packet.pdf", pdf, "application/pdf")})
+        assert uploaded.status_code == 200, uploaded.text
+        handle = uploaded.json()["data"]["file_handle"]
+        request = historical_request()
+        request["files"][0]["file_handle"] = handle
+        result = client.post("/v1/operations/export", headers=auth, json=request).json()
+        assert result["status"] == "completed", result
+        path = result["data"]["download_path"]
+        downloaded = client.get(path, headers=auth)
+        assert downloaded.status_code == 200
+        verify_historical_archive(downloaded.content, pdf)
+        assert client.post("/v1/operations/export", headers={"Authorization": "Bearer " + TOKEN_B},
+                           json=request).json()["status"] == "failed"
+        cfg.tokens[TOKEN_A] = replace(identity, authorization=frozenset())
+        assert client.get(path, headers=auth).status_code == 404
+        assert client.post("/v1/operations/export", headers=auth, json=request).json()["status"] == "failed"
+        cfg.tokens[TOKEN_A] = replace(identity, allowed_namespaces=frozenset({"//other.example"}))
+        assert client.get(path, headers=auth).status_code == 404
+        cfg.tokens[TOKEN_A] = identity
+        stored = owner.storage.get("service_files", handle, scope=identity.context().scope)
+        assert stored.value["purpose"] == "input"
+        assert stored.value["reference"] == stored.value["storage_reference"]
+        owner.storage.put("service_files", handle, {**stored.value, "sha256": "0" * 64},
+                          scope=identity.context().scope, expected_version=stored.version)
+        assert client.post("/v1/operations/export", headers=auth, json=request).json()["status"] == "failed"
+        changed = owner.storage.get("service_files", handle, scope=identity.context().scope)
+        owner.storage.put("service_files", handle, {**stored.value, "expires_at": 0},
+                          scope=identity.context().scope, expected_version=changed.version)
+        assert client.get("/v1/files/" + handle, headers=auth).status_code == 404
+        assert client.post("/v1/operations/export", headers=auth, json=request).json()["status"] == "failed"
+        # Historical persisted handles retain exact scoped reads, without invented MIME or expiry.
+        legacy = "a" * 64
+        reference = owner.storage.save_capture(io.BytesIO(payload()), scope=identity.context().scope, max_bytes=65536)
+        owner.storage.put("service_files", legacy, {"reference": reference}, scope=identity.context().scope)
+        assert client.get("/v1/files/" + legacy, headers=auth).content == payload()
+        parsed = client.post("/v1/operations/normalize", headers=auth, json={"file_handle": legacy,
+            "source": {"provider": "legistar", "url": "https://example.org"}}).json()
+        assert parsed["status"] == "completed", parsed
+        request["files"][0]["file_handle"] = legacy
+        legacy_export = client.post("/v1/operations/export", headers=auth, json=request).json()
+        assert legacy_export["status"] == "failed"
+        assert "new generic file upload" in legacy_export["errors"][0]["message"]
+        cfg.tokens[TOKEN_A] = replace(identity, operations=frozenset({"providers"}))
+        assert client.post("/v1/files", headers=auth, content=b"denied").status_code == 403
+
+
+def test_http_fetch_and_discover_only_uploads_consume_generic_handles(tmp_path):
+    from test_interfaces import CAPTURE, DISCOVER
+    owner, cfg = build_engine(database=tmp_path / "read-input.sqlite"), config()
+    original = cfg.tokens[TOKEN_A]
+    auth = {"Authorization": "Bearer " + TOKEN_A, "Content-Type": "application/octet-stream"}
+    with TestClient(create_app(owner, cfg), base_url="http://127.0.0.1") as client:
+        for operation in ("fetch", "discover"):
+            cfg.tokens[TOKEN_A] = replace(original, operations=frozenset({operation}))
+            uploaded = client.post("/v1/files", headers=auth, content=CAPTURE)
+            assert uploaded.status_code == 200, uploaded.text
+            result = client.post("/v1/operations/" + operation,
+                headers={"Authorization": auth["Authorization"]}, json={
+                    "source": DISCOVER["source"], "file_handle": uploaded.json()["data"]["file_handle"]}).json()
+            assert result["status"] in {"completed", "partial"}, result
+
+
+def test_http_progress_is_coalesced_but_latest_progress_and_terminal_state_persist(tmp_path):
+    from civic_data_connectors.models import OperationResult
+    owner, cfg = build_engine(database=tmp_path / "progress.sqlite"), config()
+    writes, original_put_many = [], owner.storage.put_many
+    def counted(changes, **kwargs):
+        changes = list(changes)
+        writes.extend(changes)
+        return original_put_many(changes, **kwargs)
+    owner.storage.put_many = counted
+    def reporting(owner, request, content, context):
+        for index in range(100):
+            context.report(stage="normalize", completed=index + 1, total=100)
+        return OperationResult("completed", data={"records": []})
+    owner.handlers["discover"] = reporting
+    with TestClient(create_app(owner, cfg), base_url="http://127.0.0.1") as client:
+        result = client.post("/v1/operations/discover", headers={"Authorization": "Bearer " + TOKEN_A}, json={}).json()
+        assert result["status"] == "completed", result
+        saved = owner.storage.get("operations", result["operation_id"], scope=cfg.tokens[TOKEN_A].context().scope)
+        assert saved.value["state"] == "completed"
+        assert saved.value["progress"]["completed"] == 100
+        assert len(writes) < 10
+
+
+def test_cli_native_export_file_output_exact_and_no_overwrite(tmp_path):
+    owner, pdf = build_engine(), historical_pdf()
+    trusted = tmp_path / "export-policy.json"
+    trusted.write_text(json.dumps({"principal": {"operations": ["export"],
+        "authorization": ["export_attachments"]}}), encoding="utf-8")
+    source, target = tmp_path / "packet.pdf", tmp_path / "historical.zip"
+    source.write_bytes(pdf)
+    request = historical_request()
+    request["bounds"] = {"parser_bytes": 1024}
+    args = ["export", "--config", str(trusted), "--file-root", str(tmp_path),
+            "--export-file", "0", str(source), "--output", str(target)]
+    stdout, stderr = io.StringIO(), io.StringIO()
+    assert main(args, stdin=io.StringIO(json.dumps(request)), stdout=stdout, stderr=stderr, engine=owner) == 0, stderr.getvalue()
+    verify_historical_archive(target.read_bytes(), pdf)
+    before = target.read_bytes()
+    assert main(args, stdin=io.StringIO(json.dumps(request)), stdout=io.StringIO(), stderr=io.StringIO(), engine=owner) == 64
+    assert target.read_bytes() == before
+
+
+def test_mcp_native_upload_export_resource_exact_and_revoked_grants():
+    import base64
+    import anyio
+    import pytest
+    from mcp import Client
+    from civic_data_connectors.transports.mcp import create_server
+    from civic_data_connectors.transports.runtime import Principal, ServiceConfig
+
+    owner, pdf = build_engine(), historical_pdf()
+    identity = Principal(operations=frozenset({"export"}), authorization=frozenset({"export_attachments"}))
+    cfg = ServiceConfig(local=identity, parser_bytes=1024)
+    server = create_server(owner, config=cfg)
+
+    async def run():
+        async with Client(server, read_timeout_seconds=15) as client:
+            started = await client.call_tool("upload_begin", {"filename": "packet.pdf", "content_type": "application/pdf", "byte_length": len(pdf)})
+            upload_id = started.structured_content["data"]["upload_id"]
+            chunked = await client.call_tool("upload_chunk", {"upload_id": upload_id, "offset": 0,
+                "content_base64": base64.b64encode(pdf).decode()})
+            assert chunked.structured_content["status"] == "completed"
+            staged = await client.call_tool("upload_finish", {"upload_id": upload_id})
+            request = historical_request()
+            request["files"][0]["file_handle"] = staged.structured_content["data"]["file_handle"]
+            exported = (await client.call_tool("export", {"request": request})).structured_content
+            assert exported["status"] == "completed", exported
+            uri = f"civic-artifact://{exported['data']['artifact_id']}/0"
+            resource = await client.read_resource(uri)
+            value = json.loads(resource.contents[0].text)
+            archive = base64.b64decode(value["content_base64"])
+            assert hashlib.sha256(archive).hexdigest() == value["sha256"]
+            verify_historical_archive(archive, pdf)
+            cfg.local = replace(identity, authorization=frozenset())
+            assert (await client.call_tool("export", {"request": request})).structured_content["status"] == "failed"
+            with pytest.raises(Exception):
+                await client.read_resource(uri)
+            cfg.local = replace(identity, principal="other")
+            assert (await client.call_tool("export", {"request": request})).structured_content["status"] == "failed"
+    try:
+        anyio.run(run)
+    finally:
+        server._civic_input_uploads.close()

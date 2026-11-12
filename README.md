@@ -10,7 +10,7 @@ MCP and a TypeScript HTTP client use the same engine and result contract.
 
 ## Development status
 
-The current candidate is **0.1.0.dev3**. It is not a completed first release.
+The current candidate is **0.1.0.dev4**. It is not a completed first release.
 All 31 source families and 34 original input-format combinations remain in scope,
 along with every interface and all four reference integrations. Provider research,
 implemented behavior, fixture tests, live reads, authorized write acceptance and
@@ -70,8 +70,10 @@ compatibility aliases to the same implementation.
 - [Write planning, authorization, receipts and recovery](docs/WRITE-CONTRACT.md)
 - [Provider capability evidence](docs/capabilities/README.md)
 - [Native source mappings and legacy identities](docs/PROVIDER-NATIVE-MAPPINGS.md)
+- [Optional guarded WebLink session and access limits](docs/WEBLINK-SESSION.md)
 - [Examples](examples/README.md), [TypeScript client](client/README.md)
 - [Pinned source baseline](docs/SOURCE-BASELINE.md)
+- [Release notes and development artifact boundaries](docs/RELEASE-NOTES.md)
 
 Townlight, TownReporter, CivicCast Brief and TownRecord are the four required
 reference integrations. Other applications can use QuorumRelay independently.

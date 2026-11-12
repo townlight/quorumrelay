@@ -1,0 +1,54 @@
+{
+  "observed_at": "2026-11-12T02:52:23.689599+00:00",
+  "candidate": "0.1.0.dev4",
+  "status": "passed_for_tested_source",
+  "checks": [
+    {
+      "command": "python -X utf8 -m pytest tests -q",
+      "passed": 443,
+      "warnings": 1,
+      "seconds": 100.88,
+      "session": 2394,
+      "note": "Includes installed Chrome tests with synthetic upstream responses; not live provider acceptance."
+    },
+    {
+      "command": "python -m ruff check src tests scripts examples",
+      "status": "passed"
+    },
+    {
+      "command": "npm --prefix client run build",
+      "status": "passed"
+    },
+    {
+      "command": "npm --prefix client test",
+      "passed": 4
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    {
+      "command": "python -X utf8 -m pytest tests/test_capabilities.py tests/test_public_package.py -q",
+      "passed": 4,
+      "seconds": 0.26,
+      "scope": "After status_model enum correction and synchronized metadata"
+    },
+    {
+      "command": "python -m ruff check scripts/validate_capabilities.py",
+      "status": "passed"
+    },
+    {
+      "command": "validate_capabilities.py with original baseline source",
+      "status": "passed",
+      "negative_checks": 5,
+      "source_sha256": "a6aae1719df000c755d2dca972059bcbe423eba8df7df7294fc4be71030c2c4d"
+    }
+  ],
+  "remaining_changed_inputs": [],
+  "limits": [
+    "Uncommitted coherent development candidate; not a first release.",
+    "Provider test access/live writes and installed consumer acceptance remain separate."
+  ],
+  "wheel_sha256": "f0f9bc97d549785458d8ac1d879258dc7750d5d420b1c9043d97026b41187ee1",
+  "client_sha256": "04e8cb799bc2d38632add738682a205d10c9b1e390cd9668910b19d026d60f11"
+}

@@ -150,6 +150,16 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format.startswith("telvue-connect-") or input_format == "essential-multimedia-json":
+        from .account_reads import essential_bundle, telvue_bundle
+        return (essential_bundle(source, namespace, content) if input_format == "essential-multimedia-json"
+                else telvue_bundle(source, namespace, content, input_format))
+    if input_format == "novus-public-listing-html":
+        from .novus import listing_bundle
+        return listing_bundle(source, namespace, content)[0]
+    if input_format == "laserfiche-repository-entries-json":
+        from .repository import entry_bundle
+        return entry_bundle(source, namespace, content)
     if input_format == "granicus-listing-html":
         from .granicus import listing_rows
         bundle = make_bundle(source, namespace, content, input_format, listing_rows(source, content))
@@ -160,6 +170,8 @@ def parse_native(source, namespace, content, input_format):
                     "Fallback for an attachment-free listing row; changes if source URL, date or title changes.")
         return bundle
     raw = json.loads(content)
+    if input_format in {"legistar-votes-json", "legistar-rollcalls-json"}:
+        return legistar_related_bundle(source, namespace, content, raw, input_format)
     if input_format == "wistia-caption-json":
         return caption_bundle(source, namespace, content, raw)
     if input_format in {"legistar-event-json", "wistia-media-detail-json"}:
@@ -177,6 +189,45 @@ def parse_native(source, namespace, content, input_format):
         normalized, kind = mapper(source, item)
         rows.append((normalized, item, kind))
     return make_bundle(source, namespace, content, input_format, rows)
+
+
+def legistar_related_bundle(source, namespace, content, original, input_format):
+    """Preserve supplied per-person votes and attendance, never infer a tally."""
+    from urllib.parse import urlsplit
+    from .discovery import _api_source
+    prefix, kind, route = (("Vote", "vote", "Votes") if input_format == "legistar-votes-json"
+                           else ("RollCall", "roll_call", "RollCalls"))
+    entries = original if isinstance(original, list) else [original]
+    rows = []
+    for raw in entries:
+        if (not isinstance(raw, dict) or any(type(raw.get(prefix + field)) is not int
+                for field in ("Id", "EventItemId", "PersonId", "ValueId"))
+                or any(raw[prefix + field] <= 0 for field in ("Id", "EventItemId"))):
+            raise ValueError("A related Legistar record requires supplied IDs and its parent item.")
+        base = _api_source(source).removesuffix("/Events")
+        citation = f"{base}/EventItems/{raw[prefix + 'EventItemId']}/{route}/{raw[prefix + 'Id']}"
+        # The citation is fixed from the validated configured tenant, never a response URL.
+        if urlsplit(citation).hostname != "webapi.legistar.com":
+            raise ValueError("Invalid related-record origin.")
+        rows.append(({"external_id": str(raw[prefix + "Id"]),
+                      "title": raw.get(prefix + "PersonName") or kind,
+                      "person_id": str(raw[prefix + "PersonId"]),
+                      "person_name": raw.get(prefix + "PersonName"),
+                      "value_id": str(raw[prefix + "ValueId"]), "value_name": raw.get(prefix + "ValueName"),
+                      "result": raw.get(prefix + "Result"), "sort": raw.get(prefix + "Sort"),
+                      "agenda_item_external_id": str(raw[prefix + "EventItemId"]),
+                      "url": citation, "time_zone_status": "unknown"}, raw, kind))
+    bundle = make_bundle(source, namespace, content, input_format, rows)
+    for record in bundle["records"]:
+        parent = {"provider": source.provider, "namespace": namespace, "record_type": "agenda_item",
+                  "external_id": record["normalized"]["agenda_item_external_id"], "parent": None}
+        record["identity"]["parent"] = parent
+        record["relationships"] = [{"relation": "agenda_item", "identity": parent}]
+        supplied = {key: deepcopy(record["original"][key]) for key in
+                    (prefix + "RowVersion", prefix + "LastModifiedUtc") if key in record["original"]}
+        record["source_revision"] = {"kind": "provider_supplied" if supplied else "not_supplied",
+                                     "value": supplied or None}
+    return bundle
 
 
 def caption_bundle(source, namespace, content, original):

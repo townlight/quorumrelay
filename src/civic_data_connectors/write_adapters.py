@@ -41,6 +41,19 @@ def _legistar_client(source):
     return client
 
 
+def _laserfiche_repository(source):
+    """Separate repository routing from canonical or explicit legacy identity."""
+    from .compat import source_namespace
+    parsed = urlsplit(source.url)
+    match = re.match(r"/repository/v2/Repositories/([A-Za-z0-9_-]+)(?:/|$)", parsed.path)
+    if parsed.hostname != "api.laserfiche.com" or match is None:
+        raise ValueError("A Laserfiche write source must identify its exact Repository API.")
+    repository = match[1]
+    if source.namespace not in {repository, source_namespace("laserfiche-weblink", parsed)}:
+        raise ValueError("The Laserfiche source identity does not match its API repository.")
+    return repository
+
+
 class WriteFailure(ValueError):
     def __init__(self, code: str, message: str):
         super().__init__(message)
@@ -349,10 +362,7 @@ class WriteAdapter:
             }:
                 raise ValueError("The Wistia source is not an authorized provider/account origin.")
         elif self.family == "laserfiche":
-            if parsed.hostname != "api.laserfiche.com" or not parsed.path.startswith(
-                f"/repository/v2/Repositories/{safe_id(source.namespace)}/"
-            ):
-                raise ValueError("Laserfiche source must identify the exact repository API namespace.")
+            _laserfiche_repository(source)
         else:
             raise WriteFailure("mapping_unverified", "No verified native write mapping is installed.")
         self.credentials(source, context)
@@ -669,7 +679,7 @@ class WriteAdapter:
                 "hashed_id", revision, read_url, lookup)
 
     def _laserfiche(self, source, change, files):
-        root = f"https://api.laserfiche.com/repository/v2/Repositories/{safe_id(source.namespace)}/Entries/"
+        root = f"https://api.laserfiche.com/repository/v2/Repositories/{safe_id(_laserfiche_repository(source))}/Entries/"
         fields = deepcopy(change.fields)
         entity, op = change.entity, change.operation
         schema = _fields(strings="name", booleans="autoRename importAsElectronicDocument generateImagePagesText",
@@ -751,7 +761,7 @@ class WriteAdapter:
         if not isinstance(entry, dict) or "id" not in entry:
             raise AmbiguousWrite("The repository readback did not identify a document entry.")
         entry = deepcopy(entry)
-        root = (f"https://api.laserfiche.com/repository/v2/Repositories/{safe_id(source.namespace)}"
+        root = (f"https://api.laserfiche.com/repository/v2/Repositories/{safe_id(_laserfiche_repository(source))}"
                 f"/Entries/{safe_id(entry['id'])}")
         metadata = change.fields.get("metadata", {})
         for field, suffix in (("fields", "Fields"), ("tags", "Tags"), ("links", "Links")):
@@ -870,7 +880,7 @@ class WriteAdapter:
         data = self._open_file(file)
         chunk_size = 8 * 1024 * 1024
         count = max(1, (file["reference"]["byte_length"] + chunk_size - 1) // chunk_size)
-        root = f"https://api.laserfiche.com/repository/v2/Repositories/{safe_id(source.namespace)}"
+        root = f"https://api.laserfiche.com/repository/v2/Repositories/{safe_id(_laserfiche_repository(source))}"
         upload_id, etags = None, []
         # The official guide obtains signed URLs in batches; URLs remain memory-only.
         for offset in range(0, count, 5):
@@ -942,7 +952,7 @@ class WriteAdapter:
                 read_url = "https://api.wistia.com/modern/medias/" + safe_id(identity)
             else:
                 read_url = (f"https://api.laserfiche.com/repository/v2/Repositories/"
-                            f"{safe_id(source.namespace)}/Entries/{safe_id(identity)}")
+                            f"{safe_id(_laserfiche_repository(source))}/Entries/{safe_id(identity)}")
         else:
             raise AmbiguousWrite("The provider response did not establish the remote resource identity.")
         if read_url is None:
@@ -1004,7 +1014,7 @@ class WriteAdapter:
         lookup = prepared.get("reconcile")
         identity = item.get("resource_id")
         if item.get("task_id") and self.family == "laserfiche":
-            root = f"https://api.laserfiche.com/repository/v2/Repositories/{safe_id(source.namespace)}"
+            root = f"https://api.laserfiche.com/repository/v2/Repositories/{safe_id(_laserfiche_repository(source))}"
             response = self.read(source, root + "/Tasks?" + urlencode({"taskIds": item["task_id"]}),
                                  context, bounds, deadline)
             tasks = response.get("value", []) if isinstance(response, dict) else []
@@ -1078,5 +1088,7 @@ class WriteAdapter:
 
 
 def default_adapters(transport=None):
-    return {name: WriteAdapter(name, transport)
-            for name in ("legistar", "wistia", "laserfiche", "laserfiche-weblink")}
+    from .providers.essential_write import EssentialWriteAdapter
+    return {**{name: WriteAdapter(name, transport)
+               for name in ("legistar", "wistia", "laserfiche", "laserfiche-weblink")},
+            "municode-meetings": EssentialWriteAdapter(transport)}

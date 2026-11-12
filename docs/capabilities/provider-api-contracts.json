@@ -8001,5 +8001,242 @@
       "extracted_guide": "# Manipulate Document Pages | Laserfiche Developer Documentation\n\nURL: https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_page-manipulation/\nObserved: 2026-11-11\nHTTP: 200\nEffective: https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_page-manipulation/\n\n\n\n# Manipulate Document Pages\n\n**Applies to**: Repository API v2 Cloud.\n\nA Laserfiche document is a composite object with three independent components: an optional electronic document (the original source file — PDF, DOCX, etc.), image pages (rasterized page images), and text pages (searchable text per page). Page manipulation operations in this guide target image and text pages only; the electronic document is covered by the [Update Documents guide](https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_updating-documents/).\n\nBoth page parts are independent and optional: a page can have an image only, text only, both, or neither (empty page). Writing either part is always a full overwrite — there is no partial update.\n\nAll page endpoints are scoped to a single document entry and rooted at:\n\n```\nv2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages\n```\n\n## Create Pages\n\nCreate one or more pages on a document. Images and text content are paired by index — the `N`th `imageFiles` entry and the `N`th `textPages` entry belong to the same page. Either array may be shorter (the corresponding page is created without that part) or absent (one empty page is created when both are empty).\n\n**Request Overview**\n\n```\nPOST https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages\n```\n\nThe request is `multipart/form-data`:\n\n- `imageFiles` (optional): up to 10 image files (TIFF, JPG, PNG), 100 MB aggregate.\n- `request` (optional): JSON part with `textPages: string[]` — one entry per text page.\n\nQuery parameters:\n\n- `pageNumber` (optional): 1-based insertion position. Omit to append at the end.\n- `generateText` (optional, default `false`): trigger OCR on the resulting image pages after creation. When `true`, any supplied `textPages` for those same indexes are ignored — OCR output would overwrite them.\n\n**Sample: append one image page and one text page**\n\n```\n{\n  \"textPages\": [\"Searchable text for the second page\"]\n}\n```\n\nAttach a PNG as `imageFiles[0]`; the JSON above as the `request` part; the result is two pages appended (image-only on page N, text-only on page N+1). To pair the image and text on a single page, supply a single `imageFiles` entry _and_ a single `textPages[0]`.\n\n**Sample: insert three empty pages at position 5**\n\n```\n{\n  \"textPages\": [\"\", \"\", \"\"]\n}\n```\n\nSet `?pageNumber=5`. Three empty pages are inserted at positions 5, 6, 7; existing page 5 and beyond shift down accordingly.\n\n### Create Pages — client libraries\n\n**JavaScript**\n\n```\nimport { RepositoryApiClient, PagesContentRequest } from '@laserfiche/lf-repository-api-client-v2';\n\nconst client = RepositoryApiClient.createFromAccessKey(servicePrincipalKey, accessKey);\nconst request = new PagesContentRequest();\nrequest.textPages = ['Searchable text for the page'];\n\nawait client.entriesClient.createPages({\n  repositoryId,\n  entryId,\n  imageFiles: [{ fileName: 'scan.png', data: pngBlob }],\n  request,\n});\n```\n\n**.NET**\n\n```\nusing Laserfiche.Repository.Api.Client;\n\nvar client = RepositoryApiClient.CreateFromAccessKey(servicePrincipalKey, accessKey);\n\nawait client.EntriesClient.CreatePagesAsync(new CreatePagesParameters\n{\n    RepositoryId = repositoryId,\n    EntryId = entryId,\n    ImageFiles = new List<FileParameter>\n    {\n        new FileParameter(pngStream, \"scan.png\", \"image/png\"),\n    },\n    Request = new PagesContentRequest\n    {\n        TextPages = new List<string> { \"Searchable text for the page\" },\n    },\n});\n```\n\n## Replace All Pages\n\nDelete every existing page on the document and create new pages from the supplied inputs — all in a single request, under one lock scope, producing one auto-version (if the document is under version control).\n\n```\nPUT https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages\n```\n\nSame multipart shape and pairing semantics as `POST Pages`. If both `imageFiles` and `textPages` are empty or absent, all pages are deleted.\n\n## Modify a Single Page\n\nOverwrite the image part, text part, or both of an existing page. Parts not provided are left unchanged.\n\n```\nPUT https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages/{pageNumber}\n```\n\nRequest parts:\n\n- `imageFile` (optional): single image file.\n- `request` (optional): JSON with `text: string`.\n\nAt least one of `imageFile` or `request.text` must be provided.\n\n**Sample: replace only the text on page 3**\n\n```\n{\n  \"text\": \"Corrected OCR text for page 3\"\n}\n```\n\n**.NET**\n\n```\nawait client.EntriesClient.WritePageAsync(new WritePageParameters\n{\n    RepositoryId = repositoryId,\n    EntryId = entryId,\n    PageNumber = 3,\n    Request = new WritePageTextRequest { Text = \"Corrected OCR text for page 3\" },\n});\n```\n\n## Delete Pages\n\nRemove a range or all pages on the document.\n\n```\nDELETE https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages?pageRange={range}\n```\n\n`pageRange` is a comma-separated mix of single values and hyphenated ranges: `\"1,3,5\"`, `\"2-4,7\"`, `\"1-3,5,8-10\"`. Omit to delete every page.\n\n## Move Pages Within a Document\n\nReorder pages within the same document.\n\n```\nPOST https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages/Move\n```\n\n```\n{\n  \"pageRange\": \"2-4\",\n  \"destinationPageNumber\": 8\n}\n```\n\nPages 2, 3, and 4 are removed from their current positions and reinserted starting at position 8 (in their original relative order).\n\n## Copy Pages Across Documents\n\nCopy pages from one document to another. The source document retains its pages; copies are inserted into the destination.\n\n```\nPOST https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{sourceEntryId}/Document/Pages/Copy\n```\n\n```\n{\n  \"pageRange\": \"1-3\",\n  \"destinationEntryId\": 12345,\n  \"destinationPageNumber\": 1\n}\n```\n\n## Rotate an Image Page\n\nRotate the image on a single page. Text on the page is unaffected.\n\n```\nPOST https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages/{pageNumber}/Image/Rotate\n```\n\n```\n{\n  \"rotationAngle\": 90\n}\n```\n\nAccepted angles: `0`, `90`, `180`, `270`.\n\n## Retrieve Page Content\n\nPer-page GETs return the image binary or the text content directly.\n\n```\nGET https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages/{pageNumber}/Image\nGET https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages/{pageNumber}/Text\n```\n\n`Image` returns a binary stream (typically TIFF, JPG, or PNG depending on how the page was produced). `Text` returns a JSON body with a `text` property.\n\n## List Page Metadata\n\nRetrieve per-page metadata (image presence, text presence, dimensions) without downloading the content.\n\n```\nGET https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages?pageRange={range}\n```\n\n`pageRange` is optional; when omitted, metadata is returned for every page.\n\n### Paginating page metadata\n\n`ListPageInfos` returns a paged OData collection. The default page size is **150**; the response envelope includes `value` (the list), `@odata.count` (total when `$count=true`), and `@odata.nextLink` when more pages remain.\n\n```\nGET .../Document/Pages?$top=50&$count=true\n```\n\n```\n{\n  \"@odata.count\": 1240,\n  \"value\": [ /* up to 50 PageInfoResponse items */ ],\n  \"@odata.nextLink\": \"https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages?%24skiptoken=...\"\n}\n```\n\nSupported query options: `$top`, `$count`, `$select`, `$skiptoken`. `$orderby` is not supported — pages are inherently ordered by page number. To set the page size via the OData header convention instead of `$top`, send `Prefer: odata.maxpagesize=N`.\n\n`pageRange` composes with paging — the range is applied first, then paging is applied to the filtered result. For example, fetch page metadata 100-300 in chunks of 50:\n\n```\nGET .../Document/Pages?pageRange=100-300&$top=50\n```\n\nTo page through, follow `@odata.nextLink` until it is no longer returned.\n\n## Generate Text for All Image Pages\n\nTrigger server-side OCR across every image page in the document. Existing text is overwritten per page.\n\n```\nPOST https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/GenerateText\n```\n\nReturns the updated document entry.\n\n## See also\n\n- [Update Documents](https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_updating-documents/) — electronic document, metadata, and image-page updates in a single request\n- [Document Lifecycle](https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_document-lifecycle/) — locks and version control\n- [Repository API V2 changelog](https://api.laserfiche.com/repository/v2/changelog) — authoritative endpoint reference\n\n* * *\n",
       "scope": "Meeting-linked document submission only. No delete/move/copy/rotate or arbitrary repository administration."
     }
+  ],
+  "civicplus_essential": [
+    {
+      "product": "Agenda and Meeting Management Essential (formerly Municode Meetings); separate from CivicPlus Select and Aha CMS",
+      "source_url": "https://www.civicplus.help/meetings-essential/docs/public-application-programming-interface-api",
+      "source_title": "Public Application Programming Interface (API)",
+      "source_published": "2025-07-22",
+      "source_updated": "2025-11-14",
+      "proof": "Official public documentation; no tenant token, API request, live read, or write acceptance",
+      "api_environment": {
+        "documented_test_base_url": "https://meetingsgov.devmunicode.com",
+        "production_base_url": "not specified; do not infer from the test base",
+        "token_url": "https://auth.devmunicode.com/connect/token",
+        "token_method": "POST application/x-www-form-urlencoded",
+        "token_fields": {
+          "grant_type": "client_credentials",
+          "client_id": "support-issued",
+          "client_secret": "support-issued"
+        },
+        "request_auth": "Bearer token",
+        "access_prerequisite": "Contact CivicPlus Support for API token; no token supplied, and token endpoint not called"
+      },
+      "routes": [
+        {
+          "operation": "discover_meetings",
+          "method": "POST",
+          "path": "/PublicApi/meeting/collection/{offset:int}",
+          "request_content_type": "application/json",
+          "path_parameters": {
+            "offset": "integer"
+          },
+          "request_body": {
+            "Words": "string",
+            "CreatedMeetingFromDate": {
+              "Day": "integer",
+              "Month": "integer",
+              "Year": "integer"
+            },
+            "CreatedMeetingToDate": {
+              "Day": "integer",
+              "Month": "integer",
+              "Year": "integer"
+            },
+            "ArchivedState": {
+              "type": "integer",
+              "enum": {
+                "None": -1,
+                "All": 0,
+                "UnArchived": 1,
+                "Archived": 2
+              }
+            },
+            "MeetingTypeIds": "array of strings"
+          },
+          "response": "Generic HttpResponseMessage; body and envelope are not specified on inspected page.",
+          "pagination": "Integer offset route documented. Page size, ordering, response total, terminal condition and offset increment semantics are unspecified."
+        },
+        {
+          "operation": "fetch_meeting",
+          "method": "GET",
+          "path": "/PublicApi/meeting/{id}",
+          "request_body": null,
+          "response": "Generic HttpResponseMessage; body fields/envelope unspecified."
+        },
+        {
+          "operation": "fetch_agenda_item",
+          "method": "GET",
+          "path": "/PublicApi/item/{itemId}",
+          "request_body": null,
+          "response": "Generic HttpResponseMessage; body fields/envelope unspecified."
+        },
+        {
+          "operation": "fetch_meeting_multimedia",
+          "method": "GET",
+          "path": "/PublicApi/meeting/multimedia/{meetingId:guid}",
+          "request_body": null,
+          "response_envelope": "{\"meetingStructure\": MeetingStructure}",
+          "response_model": "MeetingStructure {Id:Guid,MeetingId:Guid,AudioVideoDetails:AudioVideoDetails,PublishState:int,MultimediaItems:MultimediaItem[]}",
+          "response_note": "The official sample accesses jObject[\"meetingStructure\"]. No HTTP status/receipt/readback semantics are specified."
+        },
+        {
+          "operation": "update_meeting_multimedia_timestamping",
+          "method": "POST",
+          "path": "/PublicApi/meeting/multimedia/update/{meetingId:guid}",
+          "request_content_type": "application/json",
+          "path_parameters": {
+            "meetingId": "Guid"
+          },
+          "request_body": {
+            "MeetingStructure": {
+              "Id": "Guid",
+              "MeetingId": "Guid",
+              "AudioVideoDetails": {
+                "AudioVideoProviderType": "integer",
+                "AudioVideoUrl": "string"
+              },
+              "PublishState": "integer",
+              "MultimediaItems": [
+                {
+                  "EntityId": "Guid",
+                  "EntityName": "string",
+                  "EntityTypeName": "string",
+                  "TimeStamp": "integer",
+                  "MultimediaDisplayOptions": "integer",
+                  "CustomDisplay": "string",
+                  "IncludeNumbering": "boolean",
+                  "UseDefaultMultimediaSettings": "boolean",
+                  "MultimediaBaseUrl": "string"
+                }
+              ]
+            }
+          },
+          "documented_example": "GET multimedia wrapper, modify AudioVideoDetails.AudioVideoUrl and MultimediaItem.TimeStamp (also UseDefaultMultimediaSettings/MultimediaBaseUrl), POST full MeetingStructure back.",
+          "response": "Generic HttpResponseMessage; serialized response body shape, persistence confirmation, and readback consistency are unspecified."
+        }
+      ],
+      "not_documented_on_inspected_page": [
+        "Meeting create/update methods",
+        "Agenda-item create/update methods",
+        "Meeting-document upload/import methods",
+        "Production tenant base hostname",
+        "Meeting/item response schemas",
+        "Collection page size/terminal/total semantics",
+        "Conflict/idempotency and write readback semantics"
+      ],
+      "product_lifecycle": "The page states Essential end-of-life 2027-06-30.",
+      "source_lines": {
+        "access_and_auth": "28-40",
+        "collection": "42-62",
+        "meeting_and_item_get": "65-110",
+        "multimedia_get_and_update": "113-158",
+        "hosts_models_and_lifecycle": "160-180"
+      }
+    }
+  ],
+  "telvue": [
+    {
+      "product": "TelVue Connect v2 (not HyperCaster)",
+      "observation_date": "2026-11-11",
+      "source_urls": [
+        "https://telvue.com/knowledgebase/json-rest-api-version-2-media/",
+        "https://telvue.com/knowledgebase/json-rest-api-version-2-videos/",
+        "https://telvue.com/knowledgebase/json-rest-api-version-2-playlists/",
+        "https://telvue.com/knowledgebase/upload-content/"
+      ],
+      "authentication": {
+        "type": "Connect custom client application; not HTTP Basic user/password",
+        "provisioning": "Create a client application in the authenticated Connect web UI; application issues an access key and secret passphrase.",
+        "headers": {
+          "CONNECT-ACCESS-KEY": "issued access key",
+          "CONNECT-SECRET-PASSPHRASE": "issued secret passphrase"
+        },
+        "credentials_supplied": false
+      },
+      "server": "https://connect.telvue.com",
+      "routes": [
+        {
+          "method": "GET",
+          "path": "/api/v2/media[.json]",
+          "response_example": "{ \"media\": [ Media, ... ] }",
+          "item_fields_sampled": {
+            "id": "integer",
+            "uuid": "string",
+            "title": "string",
+            "short_summary": "string",
+            "episode_identifier": "string",
+            "transcript": "string",
+            "organization_id": "integer",
+            "duration_in_milliseconds": "integer",
+            "duration_in_seconds": "integer",
+            "published_at": "timestamp string",
+            "submitted_at": "timestamp string",
+            "syndicated_at": "timestamp string or null",
+            "syndicated": "boolean",
+            "syndication_groups": "array",
+            "user_id": "integer",
+            "thumbnail_large/medium/small/tiny": "URL strings",
+            "sources": "array of {url:string,type:string}",
+            "type": "string",
+            "updated_at/created_at": "timestamp strings",
+            "chapters": "array of chapter objects"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/v2/media/{id}[.json]",
+          "response_example": "{ \"medium\": Media }",
+          "path_id": "documented Connect medium ID"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v2/videos[.json]",
+          "response_example": "{ \"videos\": [ Video, ... ] }",
+          "item_fields_sampled": {
+            "id": "integer",
+            "type": "string (examples media, stream)",
+            "title": "string",
+            "short_summary": "string",
+            "related_links_count/file_attachments_count/chapters_count": "integer",
+            "thumbnail_large/medium/small/tiny": "URL strings",
+            "created_at/updated_at": "timestamp strings",
+            "duration_in_seconds": "integer",
+            "sources": "array of {url:string,type:string}"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/v2/playlists[.json]",
+          "response_example": "{ \"playlists\": [ Playlist, ... ] }",
+          "item_fields_sampled": {
+            "id": "integer",
+            "name": "string",
+            "description": "string",
+            "user_id/organization_id": "integer",
+            "thumbnail_large/medium/small/tiny": "URL strings",
+            "playables_count": "integer"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/v2/playlists/{id}[.json]",
+          "response_example": "{ \"playlist\": Playlist }",
+          "path_id": "documented Connect playlist ID"
+        }
+      ],
+      "pagination_and_filters": {
+        "status": "undocumented in reviewed pages",
+        "known": "No page size, cursor, total-count, filter, sort, rate-limit or terminal-page contract was found; the adapter does not invent continuation."
+      },
+      "write_scope": {
+        "documented_api_routes": "Only the listed GET routes in these three v2 guides.",
+        "upload_guide": "Separate Connect UI workflow: upload into Media Library or a Series; metadata entry can proceed during asynchronous transcode; visibility varies by role.",
+        "machine_create_update_upload": "No REST method/path/body contract is supplied by the reviewed pages; do not infer unsupported from omission."
+      },
+      "live_status": "No authorized Connect client key/secret or account supplied; no live account request or write acceptance.",
+      "proof": "Official TelVue Connect v2 reference pages and upload guide; response values/types are sampled from published JSON examples, not a complete JSON Schema."
+    }
   ]
 }

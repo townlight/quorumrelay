@@ -329,12 +329,21 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     saved = _decode_content(request, content)
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")
+    if source.provider == "novusagenda" and (source.input_format == "novus-public-listing-html" or
+                                            (saved is None and source.input_format is None)):
+        from .novus import discover_public
+        return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport(),
+                               saved=saved, record_types=request.get("record_types"))
+    if source.provider == "laserfiche-weblink" and urlsplit(source.url).hostname == "api.laserfiche.com":
+        from .repository import discover_children
+        return discover_children(source, namespace, bounds, context, transport or PublicTransport(),
+                                 saved=saved, record_types=request.get("record_types"))
     if source.provider == "laserfiche-weblink" and saved is None and browser is not None:
         from .laserfiche import discover_folders
         return discover_folders(engine, source, namespace, bounds, context, browser,
                                 record_types=request.get("record_types"))
     types = request.get("record_types") or []
-    if not isinstance(types, list) or any(value not in {"meeting", "recording", "document", "agenda_item"}
+    if not isinstance(types, list) or any(value not in {"meeting", "recording", "document", "agenda_item", "transcript"}
                                           for value in types):
         raise ValueError("record_types must be a list of supported civic record types.")
     binding = canonical_hash([_binding(source, bounds, context, input_format), types])

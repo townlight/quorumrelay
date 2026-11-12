@@ -9,14 +9,14 @@ import civic_data_connectors
 def test_public_sdk_compatibility_identity_and_engine():
     for name in quorumrelay.__all__:
         assert getattr(quorumrelay, name) is getattr(civic_data_connectors, name)
-    assert quorumrelay.__version__ == "0.1.0.dev3"
+    assert quorumrelay.__version__ == "0.1.0.dev4"
     engine = quorumrelay.create_engine()
     listed = engine.providers()
     assert listed.status == "completed"
     assert len(listed.data["providers"]) == 31
     assert len(listed.data["formats"]) == 34
     legistar = next(row for row in listed.data["providers"] if row["provider"] == "legistar")
-    assert legistar["additional_formats"] == ["legistar-event-json", "legistar-events-json"]
+    assert legistar["additional_formats"] == ["legistar-event-json", "legistar-events-json", "legistar-rollcalls-json", "legistar-votes-json"]
 
 
 def test_public_submodule_classes_and_schema_resources():

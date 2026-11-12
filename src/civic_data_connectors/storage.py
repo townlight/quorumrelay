@@ -10,6 +10,8 @@ import hashlib
 import json
 import sqlite3
 import tempfile
+import threading
+import time
 from functools import wraps
 from contextlib import contextmanager
 from dataclasses import dataclass
@@ -244,6 +246,51 @@ def update_operation(storage: Storage, operation_id: str, patch: dict, *, scope:
     raise StorageConflict("Operation progress is busy; retry without discarding state.")
 
 
+class ProgressRecorder:
+    """Coalesce telemetry only; callers must still persist terminal state separately.
+
+    The count and time thresholds are both required: slow storage must not make
+    every subsequent report immediately eligible for another durable write.
+    """
+
+    def __init__(self, storage: Storage, operation_id: str, *, scope: str, operation: str | None = None):
+        self.storage, self.operation_id, self.scope, self.operation = storage, operation_id, scope, operation
+        self._lock = threading.Lock()
+        self._pending = None
+        self._stage = None
+        self._count = 0
+        self._last_write = None
+
+    def __call__(self, value: dict) -> None:
+        with self._lock:
+            self._pending = dict(value)
+            self._count += 1
+            stage = value.get("operation")
+            now = time.monotonic()
+            completed, total = value.get("completed"), value.get("total")
+            final = (isinstance(completed, (int, float)) and isinstance(total, (int, float))
+                     and total > 0 and completed >= total)
+            if (self._last_write is None or stage != self._stage or final or
+                    (self._count >= 25 and now - self._last_write >= 1)):
+                self._flush(now)
+
+    def _flush(self, now: float) -> None:
+        if self._pending is None:
+            return
+        patch = {"progress": self._pending}
+        if self.operation is not None:
+            patch["operation"] = self.operation
+        update_operation(self.storage, self.operation_id, patch, scope=self.scope)
+        self._stage = self._pending.get("operation")
+        self._pending = None
+        self._count = 0
+        self._last_write = now
+
+    def flush(self) -> None:
+        with self._lock:
+            self._flush(time.monotonic())
+
+
 def operation_cancelled(storage, context) -> bool:
     if context.check_cancelled():
         return True
@@ -322,10 +369,13 @@ def tracked_handler(operation, handler):
         if operation_cancelled(owner.storage, context):
             return OperationResult("cancelled", operation_id=context.operation_id)
         previous = context.progress
+        shared = (isinstance(previous, ProgressRecorder) and previous.storage is owner.storage
+                  and previous.operation_id == context.operation_id and previous.scope == context.scope)
+        recorder = previous if shared else ProgressRecorder(
+            owner.storage, context.operation_id, scope=context.scope, operation=operation)
         def progress(value):
-            update_operation(owner.storage, context.operation_id,
-                             {"operation": operation, "progress": value}, scope=context.scope)
-            if previous:
+            recorder(value)
+            if previous and not shared:
                 previous(value)
         class ScopedCancellation:
             def is_set(self):
@@ -338,9 +388,11 @@ def tracked_handler(operation, handler):
         try:
             result = handler(owner, request, content, delegated)
         except Exception:
+            recorder.flush()
             update_operation(owner.storage, context.operation_id,
                              {"operation": operation, "status": "failed"}, scope=context.scope)
             raise
+        recorder.flush()
         update_operation(owner.storage, context.operation_id,
                          {"operation": operation, "status": result.status,
                           "coverage": result.coverage,

@@ -1,0 +1,138 @@
+{
+  "observed_at": "2026-11-12T02:34:14.157893+00:00",
+  "policy": "One bounded historical public-calendar query; no credentials or writes; nonempty/schema/search/full-catalog acceptance not implied.",
+  "request": {
+    "source": {
+      "provider": "tyler-meeting-manager",
+      "url": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/",
+      "input_format": "tyler-public-calendar-json",
+      "options": {
+        "calendar_api_base": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/tylermmcalendar46612prod/"
+      }
+    },
+    "bounds": {
+      "date_from": "2025-01-01",
+      "date_to": "2025-12-31",
+      "max_records": 20,
+      "max_pages": 1,
+      "parser_bytes": 2097152,
+      "deadline_seconds": 20
+    }
+  },
+  "result": {
+    "status": "partial",
+    "data": {
+      "source": {
+        "provider": "tyler-meeting-manager",
+        "url": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/",
+        "namespace": null,
+        "body": null,
+        "input_format": "tyler-public-calendar-json",
+        "options": {
+          "calendar_api_base": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/tylermmcalendar46612prod/"
+        }
+      },
+      "records": [],
+      "captures": [
+        {
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "captured_at": "2026-11-12T02:34:14.157676Z",
+          "input_format": "tyler-public-calendar-json",
+          "content_base64": "W10=",
+          "byte_length": 2,
+          "original_values": [],
+          "source_url": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/"
+        }
+      ],
+      "bundles": [
+        {
+          "source": {
+            "provider": "tyler-meeting-manager",
+            "url": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/",
+            "namespace": "//ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com",
+            "body": null,
+            "input_format": "tyler-public-calendar-json",
+            "options": {
+              "calendar_api_base": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/tylermmcalendar46612prod/"
+            }
+          },
+          "records": [],
+          "capture": {
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "captured_at": "2026-11-12T02:34:14.157676Z",
+            "input_format": "tyler-public-calendar-json",
+            "content_base64": "W10=",
+            "byte_length": 2,
+            "original_values": [],
+            "source_url": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/"
+          },
+          "compatibility": {
+            "version": 1,
+            "source": {
+              "connector": "tyler-meeting-manager",
+              "url": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/",
+              "namespace": "//ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com",
+              "format": "tyler-public-calendar-json",
+              "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "meetings": []
+          },
+          "extensions": {},
+          "schema_version": "2.0.0"
+        }
+      ]
+    },
+    "errors": [],
+    "coverage": {
+      "sources": [
+        {
+          "provider": "tyler-meeting-manager",
+          "url": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/",
+          "namespace": "//ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com",
+          "body": null,
+          "input_format": "tyler-public-calendar-json",
+          "options": {
+            "calendar_api_base": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/tylermmcalendar46612prod/"
+          }
+        }
+      ],
+      "date_from": "2025-01-01",
+      "date_to": "2025-12-31",
+      "date_inclusivity": "both",
+      "record_types": [],
+      "body": null,
+      "actual_dates": [],
+      "returned_records": 0,
+      "filtered_records": 0,
+      "pages": 1,
+      "failed_pages": [],
+      "failures": [],
+      "unknown_date_records": [],
+      "unknown_body_records": [],
+      "truncated": false,
+      "deadline_exceeded": false,
+      "checkpoint": null,
+      "unavailable_attachments": [],
+      "scope": "configured capture only; upstream catalog completeness is unverified",
+      "available_text": "metadata_and_supplied_text_only"
+    },
+    "operation_id": null,
+    "schema_version": "2.0.0"
+  },
+  "requests": [
+    {
+      "url": "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/tylermmcalendar46612prod/meetingInformation/getMeetingInformationByDate",
+      "method": "POST",
+      "body": {
+        "startDate": "01/01/2025",
+        "endDate": "12/31/2025",
+        "meetingTypeIds": [
+          -1
+        ]
+      },
+      "status": 200,
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  ]
+}

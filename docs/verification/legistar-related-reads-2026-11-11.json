@@ -1,0 +1,73 @@
+{
+  "observed_at": "2026-11-12T01:38:48.665149+00:00",
+  "candidate": "post-dev3-source",
+  "scope": "one existing public Olympia tenant; bounded read only; no mutations",
+  "outcomes": [
+    {
+      "parent_id": "102887",
+      "record_type": "roll_call",
+      "status": "completed",
+      "returned_records": 7,
+      "pages": 3,
+      "collection_complete": true,
+      "capture_pages": [
+        {
+          "url": "https://webapi.legistar.com/v1/olympia/EventItems/102887/RollCalls?%24top=3&%24orderby=RollCallId&%24filter=RollCallId+gt+0",
+          "status": 200,
+          "byte_length": 918,
+          "sha256": "acc86baf85f172624442007c7cb55a04b0275f7ad7faafb2d48e98c0f8432b84"
+        },
+        {
+          "url": "https://webapi.legistar.com/v1/olympia/EventItems/102887/RollCalls?%24top=3&%24orderby=RollCallId&%24filter=RollCallId+gt+38206",
+          "status": 200,
+          "byte_length": 924,
+          "sha256": "caaf1b097d5cd56e40b4f332c9b459e53a9a0efdc063b88a05be74bdd9d2e91f"
+        },
+        {
+          "url": "https://webapi.legistar.com/v1/olympia/EventItems/102887/RollCalls?%24top=3&%24orderby=RollCallId&%24filter=RollCallId+gt+38209",
+          "status": 200,
+          "byte_length": 309,
+          "sha256": "869d6df273663bbdcb9c89cacb97fb656a9d929a6174be0a9b7f14bc2b8cfc1b"
+        }
+      ],
+      "first_page_fixture": "tests\\fixtures\\brief-discovery\\legistar-olympia-roll_call-page.json",
+      "detail_id": "38204",
+      "detail_status": "completed",
+      "detail_fixture": "tests\\fixtures\\brief-discovery\\legistar-olympia-roll_call-detail.json",
+      "detail_sha256": "abae3e3d5da1ef48bdbbbc0453507b16e40f88a27bb8d5deafb593dbbc6542a1"
+    },
+    {
+      "parent_id": "102964",
+      "record_type": "vote",
+      "status": "completed",
+      "returned_records": 7,
+      "pages": 3,
+      "collection_complete": true,
+      "capture_pages": [
+        {
+          "url": "https://webapi.legistar.com/v1/olympia/EventItems/102964/Votes?%24top=3&%24orderby=VoteId&%24filter=VoteId+gt+0",
+          "status": 200,
+          "byte_length": 876,
+          "sha256": "45499f4d858159245edbc9d5b1d273d0ff5ca8c3687250faff4ba8c11d64a13b"
+        },
+        {
+          "url": "https://webapi.legistar.com/v1/olympia/EventItems/102964/Votes?%24top=3&%24orderby=VoteId&%24filter=VoteId+gt+30765",
+          "status": 200,
+          "byte_length": 883,
+          "sha256": "084546df5e2f0626708e5afab7b573a1239c3f2fb501eead9220ddd77cd43ef0"
+        },
+        {
+          "url": "https://webapi.legistar.com/v1/olympia/EventItems/102964/Votes?%24top=3&%24orderby=VoteId&%24filter=VoteId+gt+30768",
+          "status": 200,
+          "byte_length": 294,
+          "sha256": "43ef9235a9e9c4ccb67e0769479787d14bc9055641f679f7ef67b0bfa41598d4"
+        }
+      ],
+      "first_page_fixture": "tests\\fixtures\\brief-discovery\\legistar-olympia-vote-page.json",
+      "detail_id": "30763",
+      "detail_status": "completed",
+      "detail_fixture": "tests\\fixtures\\brief-discovery\\legistar-olympia-vote-detail.json",
+      "detail_sha256": "3d098504099785e04a36d52e2a603c57e50e871fa5ec2ef2dcae6061e64ffb11"
+    }
+  ]
+}

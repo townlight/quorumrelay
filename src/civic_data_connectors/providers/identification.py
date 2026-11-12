@@ -15,11 +15,16 @@ from ..models import OperationContext, OperationResult, Source
 FORMATS = {provider: tuple(row["input_format"] for row in compat.source_formats()
                            if row["connector"] == provider)
            for provider in dict.fromkeys(row["connector"] for row in compat.source_formats())}
-ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json"),
+ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json", "legistar-votes-json",
+                                 "legistar-rollcalls-json"),
+                      "telvue": ("telvue-connect-media-json", "telvue-connect-videos-json",
+                                 "telvue-connect-playlists-json"),
+                      "municode-meetings": ("essential-multimedia-json",),
+                      "novusagenda": ("novus-public-listing-html",),
                       "granicus": ("granicus-listing-html",),
                       "peak": ("granicus-listing-html",),
                       "wistia": ("wistia-api-media-json", "wistia-media-detail-json", "wistia-caption-json"),
-                      "laserfiche-weblink": ("laserfiche-listing-json",)}
+                      "laserfiche-weblink": ("laserfiche-listing-json", "laserfiche-repository-entries-json")}
 
 
 @lru_cache(maxsize=1)
@@ -55,6 +60,7 @@ _HOSTS = (
     ("civicplus-select", r"[^.]+\.(?:portal|api)\.civicclerk\.com"),
     ("escribe", r"pub-[^.]+\.escribemeetings\.com"),
     ("municode-meetings", r"[^.]+\.municodemeetings\.com"),
+    ("municode-meetings", r"meetingsgov\.devmunicode\.com"),
     ("boardbook", r"meetings\.boardbook\.org"),
     ("simbli", r"simbli\.eboardsolutions\.com"),
     ("civicweb", r"[^.]+\.civicweb\.net"),
@@ -64,7 +70,9 @@ _HOSTS = (
     ("destiny-agendaquick", r"(?:public\.)?destinyhosted\.com"),
     ("town-hall-streams", r"(?:www\.)?townhallstreams\.com"),
     ("telvue", r"videoplayer\.telvue\.com"),
+    ("telvue", r"connect\.telvue\.com"),
     ("champ", r"play\.champds\.com"),
+    ("laserfiche-weblink", r"api\.laserfiche\.com"),
     ("towncloud", r"towncloud\.io"),
     ("clerkbase", r"(?:[^.]+\.)?(?:clerkbase\.com|clerkshq\.com)"),
     ("wistia", r"(?:[^.]+\.)?wistia\.(?:com|net)"),
@@ -136,8 +144,11 @@ def validate_source(source: Source, context: OperationContext | None = None,
     valid_formats = FORMATS[source.provider] + ADDITIONAL_FORMATS.get(source.provider, ())
     if source.input_format is not None and source.input_format not in valid_formats:
         raise ValueError("The input format does not belong to the configured provider.")
-    namespace = compat.source_namespace(source.provider, urlsplit(source.url))
-    if source.namespace is not None and namespace != source.namespace:
+    from .account_api import account_namespace, is_account_api
+    account_api = is_account_api(source)
+    namespace = (account_namespace(source) if account_api else
+                 compat.source_namespace(source.provider, urlsplit(source.url)))
+    if not account_api and source.namespace is not None and namespace != source.namespace:
         raise ValueError("The configured namespace does not match the provider-derived source namespace.")
     if (context is not None and context.allowed_namespaces is not None and
             namespace not in context.allowed_namespaces):

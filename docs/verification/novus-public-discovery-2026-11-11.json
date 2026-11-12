@@ -1,0 +1,137 @@
+{
+  "observed_at": "2026-11-12T02:15:08.190096+00:00",
+  "candidate": "post-dev3-source",
+  "provider": "novusagenda",
+  "tenant_url": "https://ebps.novusagenda.com/agendapublic/",
+  "scope": "existing East Brunswick public listing window only; no staff or search submission; no vendor data mutations",
+  "elapsed_seconds": 9.008,
+  "status": "partial",
+  "returned_records": 191,
+  "meeting_records": 11,
+  "agenda_item_records": 180,
+  "derived_ids": 111,
+  "coverage": {
+    "sources": [
+      {
+        "provider": "novusagenda",
+        "url": "https://ebps.novusagenda.com/agendapublic/",
+        "namespace": "//ebps.novusagenda.com",
+        "body": null,
+        "input_format": "novus-public-listing-html",
+        "options": {}
+      }
+    ],
+    "scope": "observed public listing window only; complete archive/search semantics unverified",
+    "catalog_complete": false,
+    "source_complete": false,
+    "listing_exhausted": true,
+    "observed_window": [
+      "2026-08-11",
+      "2027-02-11"
+    ],
+    "date_from": null,
+    "date_to": null,
+    "body": null,
+    "record_types": [],
+    "pages": 12,
+    "returned_records": 191,
+    "filtered_records": 0,
+    "unknown_date_records": [],
+    "unknown_body_records": [],
+    "failures": [],
+    "failed_pages": [],
+    "truncated": false,
+    "checkpoint_lifetime": "15 minutes; current engine process only",
+    "snapshot_consistency": "not_guaranteed",
+    "deadline_exceeded": false,
+    "available_text": "displayed_metadata_and_links_only"
+  },
+  "errors": [],
+  "pages": [
+    {
+      "method": "GET",
+      "url": "https://ebps.novusagenda.com/agendapublic/",
+      "status": 200,
+      "byte_length": 124337,
+      "sha256": "cdcc1dc86a959e26a192258b1b95c32915dc704c40fb1b61806f6851e283b7ff"
+    },
+    {
+      "method": "POST",
+      "url": "https://ebps.novusagenda.com/agendapublic/",
+      "status": 200,
+      "byte_length": 126197,
+      "sha256": "18f7c526a62c9dfda601e6bc7afd97ae32a457e30e6575a814d144617caa6220"
+    },
+    {
+      "method": "POST",
+      "url": "https://ebps.novusagenda.com/agendapublic/",
+      "status": 200,
+      "byte_length": 127708,
+      "sha256": "106e5aa562bda280ec711c64e9ccd83bc849bf5c024f15807770df2dae953293"
+    },
+    {
+      "method": "POST",
+      "url": "https://ebps.novusagenda.com/agendapublic/",
+      "status": 200,
+      "byte_length": 125780,
+      "sha256": "435594c5c6e0facb257fd3b1731a8e1829a84db364d002b5704a589e71a35702"
+    },
+    {
+      "method": "POST",
+      "url": "https://ebps.novusagenda.com/agendapublic/",
+      "status": 200,
+      "byte_length": 124352,
+      "sha256": "c9737b5e6c81df84b07374f09553ea9ce489d6c95e4367f62626dd60d02c8cc9"
+    },
+    {
+      "method": "POST",
+      "url": "https://ebps.novusagenda.com/agendapublic/",
+      "status": 200,
+      "byte_length": 125689,
+      "sha256": "eb247de145bbc4e49a46c01579622e91045e4bb9855368de0c2655a9f9dc8f3e"
+    },
+    {
+      "method": "POST",
+      "url": "https://ebps.novusagenda.com/agendapublic/",
+      "status": 200,
+      "byte_length": 124548,
+      "sha256": "98dbbc6130385396bee109d63f82f8d88faefc33b09977044f52408e4dfe1f1b"
+    },
+    {
+      "method": "POST",
+      "url": "https://ebps.novusagenda.com/agendapublic/",
+      "status": 200,
+      "byte_length": 126855,
+      "sha256": "08414c84c909934be7b597e62edb3cfb5829fce2850b489ec7322cd45dd510e4"
+    },
+    {
+      "method": "POST",
+      "url": "https://ebps.novusagenda.com/agendapublic/",
+      "status": 200,
+      "byte_length": 124337,
+      "sha256": "a2406b03562f3ac539282f83ce2ba92ad1bde60ef2e1d1dba6c1b6ea99c0db46"
+    },
+    {
+      "method": "POST",
+      "url": "https://ebps.novusagenda.com/agendapublic/",
+      "status": 200,
+      "byte_length": 127457,
+      "sha256": "bf3b3bf633d68e516d817e78cd3367498dbe83978256962f558bfbbda9f3ca02"
+    },
+    {
+      "method": "POST",
+      "url": "https://ebps.novusagenda.com/agendapublic/",
+      "status": 200,
+      "byte_length": 126084,
+      "sha256": "52fd809ba64df8da054ccf37f9a1a5e1d7149e6fa39fbed6278ab9a96dbceb4a"
+    },
+    {
+      "method": "POST",
+      "url": "https://ebps.novusagenda.com/agendapublic/",
+      "status": 200,
+      "byte_length": 126210,
+      "sha256": "6e681553b109b10e62cc80d139c23c52d633925cb86a3ac54c990295ae12fbf7"
+    }
+  ],
+  "session_policy": "anonymous cookies and full form controls retained privately in process only; opaque continuation unusable after restart"
+}

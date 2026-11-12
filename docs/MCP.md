@@ -1,4 +1,4 @@
-# MCP reference, candidate 0.1.0.dev3
+# MCP reference, candidate 0.1.0.dev4
 
 The implementation uses the official Python SDK **mcp 2.3.0**, not hand-written
 JSON-RPC framing. Both transports call the same engine operations as Python,

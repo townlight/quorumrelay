@@ -1,12 +1,12 @@
 # Remaining provider research and access gaps
 
-All operations remain mandatory where exposed in the bounded domain. Unknown is not unsupported. No credentials, live writes or new provider acceptance were supplied.
+All operations remain mandatory where exposed in the bounded domain. Unknown is not unsupported. The resumed full plan authorizes supported writes against explicitly authorized provider test tenants. No such test tenant or credentials were supplied, so live write acceptance remains access-blocked; no arbitrary public-city data was mutated. Procurement and outreach remain unauthorized.
 
 ## F01 Legistar (`legistar`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"Some clients public; others token query required. Tenant policy controls access.","outbound":"Write credential scope and authorized test tenant not supplied."}}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -14,12 +14,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- No authorized write credential or test tenant was supplied; write token scope, tenant entitlement and field permissions remain unverified
-- EventRowVersion conflict semantics and idempotency not established
-- Vote and RollCall POST/PUT under EventItems are documented, with required PersonId and ValueId fields; tenant value IDs, permission scope, accepted enum values and readback remain unverified
-- Other in-scope meeting-media write surfaces in Help still need systematic endpoint review; no unsupported conclusion
-- Vendor-file import format unverified
-- Vote and RollCall entity/field contracts are recorded in inventory.json and provider-api-contracts.json from the official v1 endpoint pages; they are documented contracts only, not accepted live writes.
+- Complete exact Help-page review for EventMedia/EventVideoPath and MatterAttachment file methods: file versus URL behavior, content type/byte limits, visibility, processing and readback. The Help index does not settle recording replacement.
+- Olympia Event 7011 and the selected Vote/RollCall reads are bounded receipts, not catalog coverage. Write token, tenant permissions, accepted Vote/RollCall ValueId enumeration and RowVersion conflict behavior need an authorized test tenant; none was supplied.
+- The historical vendor import package/current media import path has no accepted file contract or authorized transfer evidence.
 
 ### Pagination contract
 
@@ -33,14 +30,14 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Authorization restrictions
 
-- No remote writes authorized; no procurement or outreach.
+- Research boundary on 2026-11-11: read-only public captures. The resumed plan authorizes supported writes only on an explicitly authorized test tenant; no authorized test tenant or credentials have been supplied, so live acceptance remains access-blocked. Procurement and outreach remain unauthorized.
 - Unverified and access-blocked are incomplete, not unsupported.
 
 ## F02 PrimeGov (`primegov`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -48,9 +45,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Official machine create/update/upload/import contracts and account tiers unverified
-- Public meeting-list endpoint request/pagination semantics must be proven separately
-- Portal search UI does not prove usable native-search API
+- On the selected Reno portal, capture the exact request/response for visible keyword and agenda-item search and any continuation; the current receipt proves only ListUpcomingMeetings and ListArchivedMeetings?year=2026.
+- Official release notes identify Meeting API, speaker endpoint and tracking-number search but no executable schema. Obtain PrimeGov account-specific API specification and enablement before coding those routes.
+- No provider write tenant/credentials were supplied; create/update/upload fields, permissions, readback and conflict semantics remain unverified.
 
 ### Pagination contract
 
@@ -61,14 +58,14 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Authorization restrictions
 
-- No remote writes authorized; no procurement or outreach.
+- Research boundary on 2026-11-11: read-only public captures. The resumed plan authorizes supported writes only on an explicitly authorized test tenant; no authorized test tenant or credentials have been supplied, so live acceptance remains access-blocked. Procurement and outreach remain unauthorized.
 - Unverified and access-blocked are incomplete, not unsupported.
 
 ## F03 Granicus (`granicus`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -76,10 +73,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Official API/import/export documentation
-- At most two public tenants where available
-- Explicit entity/field mappings and supported create/update/upload routes
-- Credential/account-tier and readback/conflict semantics
+- On the selected Superior ViewPublisher tenant, GET one RSS link and one older-year page; record exact feed URL/schema, date coverage and document/video MIME/redirect behavior. Search semantics remain untested.
+- The official MediaManager SDK article names Event creation, uploads and Agenda/Minutes operations but is behind customer support login. Obtain the readable version matching the configured product/version.
+- Keep ViewPublisher, MediaManager, Legistar, Peak, Swagit and iQM2 separate; no authorized write account was supplied.
 
 ### Pagination contract
 
@@ -90,70 +86,78 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Authorization restrictions
 
-- No remote writes authorized; no procurement or outreach.
+- Research boundary on 2026-11-11: read-only public captures. The resumed plan authorizes supported writes only on an explicitly authorized test tenant; no authorized test tenant or credentials have been supplied, so live acceptance remains access-blocked. Procurement and outreach remain unauthorized.
 - Unverified and access-blocked are incomplete, not unsupported.
 
 ## F04 NovusAGENDA (`novusagenda`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Official documentation status: inspected_with_recorded_limits; the current search result is not a documented machine API.
+Account/tier: East Brunswick public page responded without credentials. Staff/test credentials were not supplied; no private access attempted.
+Test environment: public read-only capture only; no remote writes, credentials or attachment downloads.
 
 ### Representative research observations
 
-- https://ebps.novusagenda.com/agendapublic/: direct GET HTTP 200 HTML, 124337 B, SHA256 6423712a99fed083a971b148d5f13b0c3545cf7c62489ca998bb2656b4a7bb9a. Stateful ASP.NET search POST to ./ for "Superintendent's report" returned HTTP 200 HTML, zero item rows, SHA256 b5e7fd2fc21a76650ec9682204ff0a2f7f87add1e698a772f084b67a384d01f7. Raw captures are in outputs/provider-route-probes-2026-11-11. Form controls include dates, type, category, containing text and search; not a JSON API.
+- https://ebps.novusagenda.com/agendapublic/: GET returned 124337 B HTML. The stateful form posts to `./`. Search fields include `ctl00$ContentPlaceHolder1$SearchAgendasMeetings$ddlDateRange`, `$radCalendarFrom`, `$radCalendarFrom$dateInput`, `$radCalendarTo`, `$radCalendarTo$dateInput`, `$ctl00` (meeting type), `$ctl01` (category), `$ctl02` (containing text) and the Search image control. Page-size control is `...$radGridItems$ctl00$ctl03$ctl01$PageSizeComboBox`. Carry current ASP.NET `__VIEWSTATE`, Telerik client state and returned session cookies; the current response’s Next Page `__doPostBack` target changes across the traversal. Cookie values were not saved.
+- Form values 2026-08-11 through 2027-02-11 returned a 12-page item pager: 180 item rows at 15 rows/page. All page bodies and SHA-256 values are in outputs/provider-route-probes-2026-11-11/novus-eastbrunswick-page-01-of-12.body through page-12-of-12.body and novus-eastbrunswick-page-traversal-2026-11-11.json. The meeting grid displayed 11 rows.
+- Item rows are `table[id*='radGridItems_ctl00'] tr.rgRow, table[id*='radGridItems_ctl00'] tr.rgAltRow`; meeting rows are `table[id*='radGridMeetings_ctl00'] tr.rgRow, table[id*='radGridMeetings_ctl00'] tr.rgAltRow`. Of 180 item rows, 75 had literal `Coversheet.aspx?ItemID=...&MeetingID=...` onclick targets (75 unique ID pairs); 105 rows had no such target, and no IDs were inferred.
+- A separate stateful read-only POST for “Superintendent’s report” returned HTTP 200 HTML with zero item rows. This does not establish exact/phrase semantics or a complete empty result.
 
 ### Remaining research
 
-- Verify tenant-specific supported machine contract, authorization, rate/size limits and pagination.
-- Obtain authorized non-production write access; validate duplicates, conflicts, ambiguous retries, approval/visibility and readback receipts.
-- Preserve legacy IDs/namespaces/parent identities, unknown extensions, original fields, supplied revisions and missing timezone explicitly.
+- The bounded reader and partial engine receipt cover 12 pages/180 items and 11 meeting rows in East Brunswick’s displayed 2026-08-11 through 2027-02-11 window. Next public step: submit a known nonempty search with refreshed ASP.NET state, then GET one explicit Coversheet/MeetingView and a linked document with separate MIME/redirect/hash outcomes.
+- On this same tenant, establish date-window defaults, retained history and meeting-grid continuation. The receipt exhausts only the selected window; catalog/source completeness are false.
+- No current machine create/update/upload route or authorized staff/test account was supplied; historical UI instructions are not API fields.
 
 ### Pagination contract
 
 {
   "status": "partly_observed_or_unverified",
-  "details": "Landing GET showed meeting/item grids; prior bounded scan reported 180 items across 12 pages and item page-size controls 10/15/20/50. No paging traversal; one query returned zero results, leaving semantics and coverage unresolved."
+  "details": "The item pager was traversed for the displayed form values 2026-08-11 through 2027-02-11: 12 pages, 180 rows, 15 per page. Meeting grid showed 11 rows. These observations do not establish retained-history or full-catalog bounds; the meeting grid’s own continuation behavior is unverified."
 }
 
 ### Authorization restrictions
 
+- No credentials or remote writes were used in the 2026-11-11 research capture; no document bytes were downloaded.
+- Preserve provider-issued IDs only when present in link targets; rows without linked IDs remain without IDs.
+- Unknown search, retention and continuation behavior is incomplete, not unsupported.
 
 ## F05 CivicPlus Agenda and Meeting Management Select (`civicplus-select`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Official documentation status: historical file-import article and authenticated UI guides inspected; no external REST contract verified.
+Account/tier: public Lacey portal evidence only. Historical FTP credentials are project-lead supplied and were not available.
+Test environment: documentation and public read-only observation; no FTP access or transfer.
 
 ### Representative research observations
 
-- https://laceywa.portal.civicclerk.com/event/1077/files: Public published agenda/items observed.
+- https://www.civicplus.help/meetings-select/docs/historical-imports (updated October 29, 2026): PDF/MP4 only; up to five PDFs plus one audio/video file per event/meeting. Filename stem `MeetingBody_MeetingType_FileType_MM_DD_YYYY`; explicit examples use `Agenda`, `Agenda Packet`, `Minutes`. Files are placed in the Imports FTP main folder, then a CivicPlus consultant processes, spot-checks and releases the import.
+- Exact names in prose vary: `Packet` versus `Agenda Packet`, `Notice` versus `Notices`, and `Media` versus `Audio/Video`. Only the three filename examples establish exact input tokens in the page. It omits file extensions, component escaping rules and a historical FTP size ceiling.
+- The article contradicts itself on host: `ftp://imports.civicclerk.com` in credential instructions and `ftp://important.civicclerk.com` in FileZilla instructions. Project-lead username/password were not supplied; no host probe or transfer occurred.
+- Agenda packets are imported as indivisible PDFs; MP4 bookmarks/timestamps are not carried over. A separate UI upload-size page does not establish the historical FTP limits.
 
 ### Remaining research
 
-- Exact Events/search/write API documentation, auth and pagination
-- Historical FTP host typo and project-specific permitted filename labels
-- UI media/caption/transcript upload contract and feature permissions
+- On the selected Lacey portal, capture the exact Events/OData request generated by date/type/keyword controls and one continuation response; existing evidence proves an event/file read, not search pagination.
+- The local historical exporter covers only Agenda, Agenda Packet and Minutes PDFs. Resolve Packet/Notice/Notices/Other/Media/AudioVideo spellings and MP4 naming from authoritative import examples before enabling them.
+- Historical FTP host is contradictory; credentials, transfer, consultant processing and readback are absent. Authenticated create/update/upload routes remain account-gated.
 
 ### Pagination contract
 
 {
   "status": "unverified",
-  "details": "Provider-specific bounds/pagination and date coverage pending."
+  "details": "The historical import article documents named-file intake, not a paged catalog. Select public portal OData request and pagination remain unverified."
 }
 
 ### Authorization restrictions
 
-- No remote writes authorized; no procurement or outreach.
-- Unverified and access-blocked are incomplete, not unsupported.
-- Historical-import host conflict requires clarification; no FTP attempted.
-- Source PDF bytes may change through vendor optimization; preserve local original/capture, do not promise upstream byte equality.
+- The 2026-11-11 research capture made no remote writes or FTP connections and used no credentials or consultant contact; authorized test-tenant acceptance remains blocked pending supplied access.
+- Do not use unrelated Select UI size limits as historical FTP acceptance limits.
+- Vendor PDF optimization may change bytes; preserve local source hashes and do not promise post-import hash equality.
 
 ## F06 CivicPlus Agenda Center (`civicplus-agenda-center`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -162,9 +166,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Verify tenant-specific supported machine contract, authorization, rate/size limits and pagination.
-- Obtain authorized non-production write access; validate duplicates, conflicts, ambiguous retries, approval/visibility and readback receipts.
-- Preserve legacy IDs/namespaces/parent identities, unknown extensions, original fields, supplied revisions and missing timezone explicitly.
+- On selected Effingham AgendaCenter, follow one year navigation and one linked Agenda/ViewFile document; capture actual request, bytes, MIME/redirect and previous-version links. Chino extraction failure is already recorded; do not add another tenant.
+- Official CivicPlus material describes the staff agenda/item UI but supplies no external machine request/response or file-import schema. Obtain tenant-supported API/integration specification and authorized test account.
+- If access is supplied, verify role/approval/visibility and duplicate/update/readback separately for meeting, item and file; no remote writes occurred.
 
 ### Pagination contract
 
@@ -181,7 +185,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -189,9 +193,11 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Verify tenant-specific supported machine contract, authorization, rate/size limits and pagination.
-- Obtain authorized non-production write access; validate duplicates, conflicts, ambiguous retries, approval/visibility and readback receipts.
-- Preserve legacy IDs/namespaces/parent identities, unknown extensions, original fields, supplied revisions and missing timezone explicitly.
+- Source now implements explicit-offset POST collection and GET meeting/item/multimedia capture on the documented support-gated dev origin. Only the multimedia `{meetingStructure:...}` response is schema-mapped; meeting/item/collection bodies remain raw partial captures with zero inferred normalized records.
+- Collection offset is caller-supplied; page size, ordering, total/terminal condition and offset progression remain undocumented. Live request validation needs a support-issued token/account; none was supplied.
+- The documented multimedia update is source-implemented and fixture-tested. Official examples demonstrate URL/timestamp/default/baseURL changes, but other enum/mutability constraints and update response/readback/version conflicts remain unverified without an authorized tenant.
+- The inspected API page has no meeting/item create/update or document upload route; obtain applicable current support API documentation before coding those routes or treating omission as unsupported. No token was issued, and the test host is not a production host.
+- Essential reaches end-of-life on 2027-06-30. Keep this product row separate from Select and Aha CMS.
 
 ### Pagination contract
 
@@ -209,7 +215,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -217,9 +223,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Verify tenant-specific supported machine contract, authorization, rate/size limits and pagination.
-- Obtain authorized non-production write access; validate duplicates, conflicts, ambiguous retries, approval/visibility and readback receipts.
-- Preserve legacy IDs/namespaces/parent identities, unknown extensions, original fields, supplied revisions and missing timezone explicitly.
+- On the sole selected Minneapolis organization, follow existing detail Previous/Next and archive/year controls; record route/date coverage and whether the separately described 13-month archive is publicly visible. Do not add a third tenant.
+- Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.
+- No authorized staff/test account was supplied for roles, API enablement, write/readback or conflict checks.
 
 ### Pagination contract
 
@@ -235,7 +241,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -243,10 +249,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Official API/import/export documentation
-- At most two public tenants where available
-- Explicit entity/field mappings and supported create/update/upload routes
-- Credential/account-tier and readback/conflict semantics
+- The selected Oakville request is evidenced: POST /MeetingsCalendarView.aspx/GetCalendarMeetings with calendarStartDate/calendarEndDate returned 4 rows for 2026-11-01 through 2026-11-12. Implement and fixture-test that response, then verify continuation and one Meeting.aspx detail plus FileStream.ashx document response.
+- Oakville’s keyword/date/document-type controls are visible, but no successful native-search request or exact matching/paging semantics is captured.
+- The official product overview describes modules, not public API schemas. No customer API/import contract or authorized write tenant was supplied for meeting/item create/update/upload.
 
 ### Pagination contract
 
@@ -257,14 +262,14 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Authorization restrictions
 
-- No remote writes authorized; no procurement or outreach.
+- Research boundary on 2026-11-11: read-only public captures. The resumed plan authorizes supported writes only on an explicitly authorized test tenant; no authorized test tenant or credentials have been supplied, so live acceptance remains access-blocked. Procurement and outreach remain unauthorized.
 - Unverified and access-blocked are incomplete, not unsupported.
 
 ## F10 Simbli (`simbli`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -272,9 +277,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Verify tenant-specific supported machine contract, authorization, rate/size limits and pagination.
-- Obtain authorized non-production write access; validate duplicates, conflicts, ambiguous retries, approval/visibility and readback receipts.
-- Preserve legacy IDs/namespaces/parent identities, unknown extensions, original fields, supplied revisions and missing timezone explicitly.
+- On the selected Oneida landing page, follow its actual Meetings/archive links and scripts; the candidate MeetingsListing.aspx returned the product Invalid URL page. Capture one working list/detail/attachment chain and date/type continuation.
+- Reviewed current Simbli pages describe archive search and staff meeting/item/document workflows but publish no machine field schema. Obtain customer API specification before implementing writes or claiming absence.
+- No staff/test credentials or remote-write authorization were supplied.
 
 ### Pagination contract
 
@@ -290,7 +295,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -299,9 +304,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Verify tenant-specific supported machine contract, authorization, rate/size limits and pagination.
-- Obtain authorized non-production write access; validate duplicates, conflicts, ambiguous retries, approval/visibility and readback receipts.
-- Preserve legacy IDs/namespaces/parent identities, unknown extensions, original fields, supplied revisions and missing timezone explicitly.
+- On the selected Independence tenant, request one MeetingTypeList.aspx for an explicit meeting type and follow a MeetingInformation.aspx record to agenda/minutes; capture continuation, attachment MIME and byte hashes.
+- The public product page/staff guide describe UI scheduling/document workflows but publish no machine schema. Obtain the tenant API/import specification and authorized write credentials before external create/update/upload.
+- Do not derive write fields from labels such as Meeting Type, Description or auto-assigned item/file numbers.
 
 ### Pagination contract
 
@@ -317,7 +322,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -325,9 +330,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Verify tenant-specific supported machine contract, authorization, rate/size limits and pagination.
-- Obtain authorized non-production write access; validate duplicates, conflicts, ambiguous retries, approval/visibility and readback receipts.
-- Preserve legacy IDs/namespaces/parent identities, unknown extensions, original fields, supplied revisions and missing timezone explicitly.
+- On the existing Kent iQM2 tenant, follow one list/calendar entry to Detail_Meeting and FileOpen routes; capture date/body filters and older-record navigation. Pre-2007 records are reported elsewhere, not in this portal.
+- Current Granicus/iQM2 help pages describe authenticated locations/types/meeting and streaming-media workflows, not an iQM2 external API. Get deployment-specific customer documentation/account enablement.
+- No tenant API credentials, upload limits, write schema or write acceptance were supplied; do not reuse Legistar contracts.
 
 ### Pagination contract
 
@@ -344,7 +349,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Archive public without credentials; support article requires customer login. Swagit/MediaManager integration account prerequisites unverified."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -352,10 +357,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Pin baseline source commit and extract/test standalone readers.
-- Body/year sections observed; page/API pagination, caps and historical completeness unverified.
-- Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
-- Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
+- On Princeton’s /views/261 archive, traverse one displayed body/year plus /videos/{id} and agenda document link; record response MIME/redirect. The HLS playback error does not mean the archive is empty.
+- The Search Archives control has no captured request. Verify query/matching/paging only through a public-read submission on this same tenant.
+- Official Swagit integration documentation is login-gated and describes PrimeGov/MediaManager ID integration, not a general write API. Exact create/update/upload methods require customer documentation and authorized access.
 
 ### Pagination contract
 
@@ -367,13 +371,13 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ### Authorization restrictions
 
 - No media playback, upload, API write, search submission or caption retrieval tested.
-- Public credentials or authorized mutation access not supplied. No remote writes, outreach, procurement or credential handling performed.
+- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F14 SuiteOne Media (`suiteone-media`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public archive GET anonymous. Upload/update requires an authorized SuiteView Admin account; account tier not specified."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -381,10 +385,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Pin baseline source commit and extract/test standalone readers.
-- Older Meetings controls indicate additional history; loading endpoint, page size and completeness need verification.
-- Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
-- Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
+- On the selected Vermilion archive, exercise one Older Meetings control and one event/agenda/packet/minutes link; capture lazy-load request, date/category continuity, MIME and redirects.
+- The official SuiteOne guide names WMV and Liberty *_content.HTML intake with asynchronous processing, but no exact bookmark HTML schema. Obtain an authorized vendor-produced example before completing that file export.
+- Admin UI steps are documented; no machine write contract, account credentials or publication/readback test is available.
 
 ### Pagination contract
 
@@ -396,13 +399,13 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ### Authorization restrictions
 
 - Uploaded media requires processing before public visibility; do not report upload completion as publication.
-- Public credentials or authorized mutation access not supplied. No remote writes, outreach, procurement or credential handling performed.
+- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F15 Granicus Peak (`peak`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -411,9 +414,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Verify tenant-specific supported machine contract, authorization, rate/size limits and pagination.
-- Obtain authorized non-production write access; validate duplicates, conflicts, ambiguous retries, approval/visibility and readback receipts.
-- Preserve legacy IDs/namespaces/parent identities, unknown extensions, original fields, supplied revisions and missing timezone explicitly.
+- On the selected Lower Merion Peak ViewPublisher, retrieve one RSS feed and one archived page/document; record feed schema, query/date coverage and redirect behavior.
+- The Elko Peak manual gives authenticated UI fields, attachment privacy values and a 200 MB limit, but no external route/payload. Machine create/update/upload, role permissions and readback need a supported API contract and authorized Peak account.
+- Do not use ViewPublisher fields as write parameters or reuse MediaManager/Legistar contracts.
 
 ### Pagination contract
 
@@ -429,7 +432,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Reads public. Writes require Utah login and approved poster/owner rights for target Body; publish permission distinct from draft edit."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -437,10 +440,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Pin baseline source commit and extract/test standalone readers.
-- No public search paging contract verified. Detail is one notice; per-notice iCalendar link is not a complete notice catalog.
-- Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
-- Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
+- On the existing Utah Public Notice site, submit bounded government/body/date/ZIP searches and capture continuation/result cap plus one notice document/iCalendar response; notice 1120627 is only one detail.
+- Admin Help documents notice draft/publish and attachments as UI steps; no external API or import schema is published. Obtain a supported integration contract and authorized test account.
+- Notice publication has legal timing/visibility consequences; future writes require explicit authorization and planned readback.
 
 ### Pagination contract
 
@@ -452,13 +454,13 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ### Authorization restrictions
 
 - Notice writes affect legally consequential public postings. Only authorized synthetic/test Body writes permitted; none attempted.
-- Public credentials or authorized mutation access not supplied. No remote writes, outreach, procurement or credential handling performed.
+- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F17 Destiny AgendaQuick (`destiny-agendaquick`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Yuma list public; staff publishing/editing requires authorized installation account. Hosted and client-installed deployment supported; no API credentials supplied."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -467,10 +469,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Pin baseline source commit and extract/test standalone readers.
-- Previous/Next Period explicitly observed; month/year and meeting-type coverage must be bounded. Not all tenants return same public shell.
-- Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
-- Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
+- On Yuma’s current AgendaQuick page, follow Previous/Next Period for one adjacent month and another meeting type; inspect agenda sequence 1737 and its supplied attachment/video URLs.
+- The public Keyword Search and Search Agenda Items controls have no captured successful query route/response. Verify method, matching and paging on this same tenant.
+- Official feature copy describes staff scheduling/minute votes/uploads but no machine schema. No authorized credentials or vendor file-import contract were supplied.
 
 ### Pagination contract
 
@@ -482,13 +483,13 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ### Authorization restrictions
 
 - Public HTML/PDF export is not a vendor import contract. Roll call/votes are product features, not guaranteed structured fields in listing HTML.
-- Public credentials or authorized mutation access not supplied. No remote writes, outreach, procurement or credential handling performed.
+- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F18 Town Hall Streams (`town-hall-streams`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Town archive public. Scheduling requires service account; tier/roles unknown."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -496,10 +497,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Pin baseline source commit and extract/test standalone readers.
-- Year/month and meeting-type groups observed; no paging API or long-term completeness verified. Advertised one-year retention is a service claim, not universal tenant cutoff.
-- Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
-- Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
+- On Hollis location id 72, follow one previous year/month group and one event detail; capture date bounds, event IDs and agenda/minutes URLs.
+- The selected player returned error 102630. Do not treat this as an empty archive or media acceptance; stream bytes and retention remain unverified.
+- Reviewed sources provide no public create/update/upload API or vendor import schema; provider/admin documentation is needed for write questions.
 
 ### Pagination contract
 
@@ -511,13 +511,13 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ### Authorization restrictions
 
 - No supplied captions/transcripts or direct playable media verified. Service statement 'no uploading' must not be reclassified as unavailable upload capability.
-- Public credentials or authorized mutation access not supplied. No remote writes, outreach, procurement or credential handling performed.
+- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F19 TelVue (`telvue`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public playlists anonymous; Connect API requires client application access key + secret passphrase in custom headers, not Basic auth. Upload roles Contributor/Coordinator/Admin and account feature settings matter."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -526,10 +526,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Pin baseline source commit and extract/test standalone readers.
-- API examples do not specify paging, filtering or limits; playlist counts require verification against enumerated media, not assumed exhaustive single page.
-- Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
-- Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
+- Documented Connect v2 reads are GET /api/v2/media[/{id}], /videos and /playlists[/{id}]. The source fetch adapter now implements explicitly requested account reads; live calls remain blocked because no Connect key/secret was supplied.
+- Published pages show example JSON envelopes/fields but omit filters, pagination/cursor, caps and rate limits. Record these from a supplied authorized account response/current guide; do not claim catalog completeness.
+- The upload article documents UI drag-and-drop only. No REST mutation route was found in the cited v2 pages; other write paths remain unresolved, not unsupported. CloudCast MRSS CAPTCHA and HyperCaster are separate.
 
 ### Pagination contract
 
@@ -541,13 +540,13 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ### Authorization restrictions
 
 - No authenticated API requests. Keep TLS verification even though old sample curl uses -k. HyperCaster API not assumed applicable. Legacy MRSS doc CAPTCHA-blocked.
-- Public credentials or authorized mutation access not supplied. No remote writes, outreach, procurement or credential handling performed.
+- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F20 CHAMP (`champ`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public player metadata observed; CHAMP login required for UI writes; role/tier and API credential contract unknown."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -556,10 +555,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Pin baseline source commit and extract/test standalone readers.
-- Public event detail is engine-live-read-verified on two existing tenants; no public catalog/list or pagination route found. Admin help says authenticated Events list has 15/page; that is not a public JSON pagination contract.
-- Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
-- Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
+- Two public event detail GETs are engine-receipted. The current player JS proves that detail route, but no public event index/list or paging route is established. Continue only through existing tenant links if an index is visibly exposed.
+- Verify one agenda/minutes document request and media availability separately; event JSON did not download attachments and Yuma reports no media.
+- CHAMP Help documents staff event/media/PDF workflows, not machine writes. API codecs, account roles and write/readback remain unverified without authorized credentials.
 
 ### Pagination contract
 
@@ -571,13 +569,13 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ### Authorization restrictions
 
 - Do not ingest unpublished JSON through baseline public path. Supplied media/captions only; player/download button not proof playable media.
-- Public credentials or authorized mutation access not supplied. No remote writes, outreach, procurement or credential handling performed.
+- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F21 Hyland OnBase Agenda Online (`onbase`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -585,9 +583,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Verify tenant-specific supported machine contract, authorization, rate/size limits and pagination.
-- Obtain authorized non-production write access; validate duplicates, conflicts, ambiguous retries, approval/visibility and readback receipts.
-- Preserve legacy IDs/namespaces/parent identities, unknown extensions, original fields, supplied revisions and missing timezone explicitly.
+- On the selected Fitchburg Agenda Online tenant, follow visible meeting/date filters, one ViewMeeting id and one Documents/Downloadfile link; capture bytes, MIME, redirect and adjacent-date coverage. The separate Santa Cruz live-read receipt is a configured capture, not a Fitchburg attachment test.
+- Hyland Agenda Foundation 25.1 guidance is version/installation-scoped. Identify tenant deployment/version and entitlement before applying API or write operations to Agenda Online.
+- No authorized deployment-matched staff/test account or integration contract was supplied for create/update/upload.
 
 ### Pagination contract
 
@@ -603,7 +601,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"WebLink cookie/browser session may be required; saved capture baseline remains.","outbound":"Cloud OAuth v2 scopes AND principal ACL; self-hosted API deployment/version separate. No access supplied."}}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -612,13 +610,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- RepositoryAPI v2 full pagination continuation and limits
-- Self-hosted tenant equivalent API/deployment/version and auth
-- WebLink official API/download/search contract vs saved HTML
-- Rename/metadata template update/version conflict semantics
-- Native vendor import/export-file format beyond API file import unverified
-- CreatePages indexed-pair prose/sample contradiction needs authoritative resolution or authorized test evidence; mocks cannot settle.
-- ImportUploadedParts exact request content type conflicts in guide prose/sample (multipart/form vs shown JSON); resolve before automatic submission.
+- Guarded offline-Chrome WebLink session is implemented with PublicTransport routing; synthetic/browser checks are separate from live acceptance. Current Boulder request is blocked at the cross-origin redirect boundary and Louisville returns HTTP 403. No catalog was obtained; both tenant contexts have been used.
+- Repository v2 child-list GET is implemented from the official route and supports returned nextLinks, but live reads need a supplied repository.Read OAuth tenant token; no account credentials were supplied.
+- Resolve the official ImportUploadedParts multipart-vs-JSON and CreatePages image/text pairing conflicts from authoritative documentation or an authorized sandbox. Do not infer Repository API identity/access from WebLink repository name.
 
 ### Pagination contract
 
@@ -629,7 +623,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Authorization restrictions
 
-- No remote writes authorized; no procurement or outreach.
+- Research boundary on 2026-11-11: read-only public captures. The resumed plan authorizes supported writes only on an explicitly authorized test tenant; no authorized test tenant or credentials have been supplied, so live acceptance remains access-blocked. Procurement and outreach remain unauthorized.
 - Unverified and access-blocked are incomplete, not unsupported.
 - No DELETE or empty all-page replacement; move/copy/rotate and general repository administration not part of connector write scope.
 
@@ -637,7 +631,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Published agenda detail public. Editing/publication requires authorized TownCloud account; API access and tier unknown."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -645,10 +639,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Pin baseline source commit and extract/test standalone readers.
-- Homepage recent groups only; table JSON request method, pagination/search/date filtering and full history remain unverified.
-- Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
-- Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
+- On the existing Woodford public agenda and detail, inspect the actual list/table request source and one body/year control; the current detail shows items and document links only.
+- The exact list JSON query, next-page token, retained history and public search request remain unverified; record the actual request/response before claiming discovery completeness.
+- No external write route or vendor file-import schema is in reviewed evidence; obtain tenant-supported documentation and an authorized account before write work.
 
 ### Pagination contract
 
@@ -660,13 +653,13 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ### Authorization restrictions
 
 - Downloadable packet output does not establish a TownCloud import file format. Do not infer table JSON write endpoint.
-- Public credentials or authorized mutation access not supplied. No remote writes, outreach, procurement or credential handling performed.
+- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F24 Digital Towpath (`digital-towpath`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Demo reads public; dashboard required for administration. Customer credentials and account roles not supplied."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -674,10 +667,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Pin baseline source commit and extract/test standalone readers.
-- Demo Other Years navigation observed. Legacy Brutus category URL moved; no numeric paging or complete archive verified.
-- Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
-- Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
+- On the selected Digital Towpath demo, follow Other Years from Meetings and Minutes and capture date/category continuity, one meeting detail and one PDF URL/MIME. The old Brutus category URL is a moved path, not a current executable route.
+- Demo search query semantics and archive bounds remain unknown; HTML success does not establish PDF extraction or attachment availability.
+- The indexed Meetings Module guide describes staff entry without a machine payload. No vendor API/import contract or test account was supplied.
 
 ### Pagination contract
 
@@ -689,13 +681,13 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ### Authorization restrictions
 
 - PDF manual extraction blocked; indexed excerpts insufficient to claim upload/update API. Demo inconsistent minutes dates must not silently override page dates.
-- Public credentials or authorized mutation access not supplied. No remote writes, outreach, procurement or credential handling performed.
+- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F25 ClerkBase (`clerkbase`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -703,9 +695,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Verify tenant-specific supported machine contract, authorization, rate/size limits and pagination.
-- Obtain authorized non-production write access; validate duplicates, conflicts, ambiguous retries, approval/visibility and readback receipts.
-- Preserve legacy IDs/namespaces/parent identities, unknown extensions, original fields, supplied revisions and missing timezone explicitly.
+- On the sole South Kingstown public context, follow the public tree and one Quick/Advanced Search link if exposed; retrieve one meeting-document/video link and preserve query and identity details.
+- Current vendor pages distinguish ClerkBase Meeting Center/OnBoardGOV from ClerkMate. Obtain a current ClerkBase-specific API/import contract before implementing writes.
+- No staff/API credentials supplied; roles, page caps, write permissions and readback remain gated. Do not substitute another product route.
 
 ### Pagination contract
 
@@ -721,7 +713,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Observed feed public. Publication/admin credentials and hosting CMS are separate, unknown contracts."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -729,10 +721,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Pin baseline source commit and extract/test standalone readers.
-- iCalendar defines no universal pagination. Tenant export window is bounded/implementation-specific; observed month endpoint omitted past early-month events.
-- Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
-- Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
+- On the existing Logan Township feed, compare /events/month/?ical=1 across one adjacent month and inspect UID, recurrence, timezone and updated-event behavior; current saved response contains five events.
+- RFC 5545 defines event serialization, not universal feed paging or a write endpoint. Establish the published feed horizon/update behavior; do not infer mutation from subscription URLs.
+- Keep neutral iCalendar export separate from writing to a municipality calendar; no provider-specific import/write contract is supplied.
 
 ### Pagination contract
 
@@ -744,13 +735,13 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ### Authorization restrictions
 
 - No generic calendar-host write support. METHOD:PUBLISH and RFC property names do not grant upstream create/update/upload. Preserve floating/all-day/timezone/recurrence distinctions.
-- Public credentials or authorized mutation access not supplied. No remote writes, outreach, procurement or credential handling performed.
+- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F27 Wistia (`wistia`)
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -758,13 +749,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Account-tier upload/feature/media limits and modern schema vs older guide discrepancies
-- Provider-specific file-import package other than uploadAPI unverified
-- No Wistia account token/tenant supplied; native search/media detail live acceptance not run
-- Caption list/per-language GET is documented but no retrieval adapter implemented
-- Search is capped at 100+100 with no cursor; exact/phrase semantics not specified
-- Provider write acceptance remains NOT_RUN because no authorized provider test tenants or credentials were supplied
-- Media swap/replacement official endpoint remains candidate; full fields/receipt and domain impact need review.
+- Core now implements authenticated media-detail and supplied-caption-list/per-language GETs plus native search. Complete account-level reads only after a trusted Wistia token and selected account are supplied; none was supplied.
+- /modern/search is capped at 100 primary and 100 transcript-only candidates with no cursor and provider-defined exact/phrase candidate semantics. Local exact checks cover returned metadata/excerpts, not full transcripts.
+- Resolve account-tier limits and media replacement/swap behavior before those paths are claimed. Keep upload/import, media metadata, caption create/update and edits permission scopes separate; no remote writes occurred.
 
 ### Pagination contract
 
@@ -778,7 +765,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Authorization restrictions
 
-- No remote writes authorized; no procurement or outreach.
+- Research boundary on 2026-11-11: read-only public captures. The resumed plan authorizes supported writes only on an explicitly authorized test tenant; no authorized test tenant or credentials have been supplied, so live acceptance remains access-blocked. Procurement and outreach remain unauthorized.
 - Unverified and access-blocked are incomplete, not unsupported.
 - No caption purchasing or ASR/transcription generation authorized.
 - Official older embed guide cautions audio/Channels,modern schemas include audio types; feature/version mismatch needs validation rather than unsupported claim.
@@ -787,7 +774,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -795,9 +782,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Verify tenant-specific supported machine contract, authorization, rate/size limits and pagination.
-- Obtain authorized non-production write access; validate duplicates, conflicts, ambiguous retries, approval/visibility and readback receipts.
-- Preserve legacy IDs/namespaces/parent identities, unknown extensions, original fields, supplied revisions and missing timezone explicitly.
+- On the existing VCCCD Public Site, follow View All and one Previous/Next path; capture the actual date/page parameters and GET one supplied document URL with MIME/redirect/hash. Preserve the timezone display discrepancy in detail versus landing.
+- Official Boardable guides describe UI create/edit and public-page document upload, not external API or import fields. Notification, visibility and approval effects need an authorized account/manual.
+- No Boardable staff/test credentials or API token supplied; write permissions and readback remain access-blocked.
 
 ### Pagination contract
 
@@ -816,7 +803,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -824,10 +811,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Pin baseline source commit and extract/test standalone readers.
-- One static public JSON blob observed; no next-page token. Retained history/update frequency and maximum blob size unknown.
-- Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
-- Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
+- On Galena’s current public city JSON, enumerate displayed rows/agenda/minutes flags and GET one available PDF of each kind; record status, MIME, redirect and hash. The current response has no next-page token.
+- Establish update frequency, retained history and payload maximum using repeated bounded captures or current official docs; a single static JSON response cannot prove those limits.
+- The FrontDesk builder describes staff UI, not an external write schema. No vendor API or authorized test credentials supplied.
 
 ### Pagination contract
 
@@ -839,35 +825,38 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ### Authorization restrictions
 
 - Keep cancelled titles/status indicators. Public city JSON response fields and PDF GET route are not writable API fields.
-- Public credentials or authorized mutation access not supplied. No remote writes, outreach, procurement or credential handling performed.
+- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
 
 ## F30 Diligent BoardDocs (`boarddocs`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Official documentation status: current BoardDocs product/support materials inspected; historical official-hosted proposal surfaced through public search indexing; no current API/feed specification found.
+Account/tier: the Colorado public shell was previously extracted but its latest unauthenticated GET returned 403. Las Positas evidence is a staff workflow guide, not a public API. No staff/test credentials were supplied.
+Test environment: two bounded tenant contexts only; no remote writes or private access.
 
 ### Representative research observations
 
-- https://www.laspositascollege.edu/gv/assets/docs/INSTRUCTIONS%20-%20Submitting%20Agenda%20Items%20-%20Final.pdf: Las Positas BoardDocs submitting agenda items; Tenant UI workflow not vendor API; permissions/approval/visibility must be preserved.
-- https://go.boarddocs.com/co/cde/Board.nsf/Public: Colorado Board of Education BoardDocs shell; Dynamic meetings not extracted; shell not printed numbered PDF fixture.
+- Current Diligent BoardDocs page says BoardDocs remains supported for existing customers and describes search, agendas and document/minutes management, but gives no machine endpoint or payload.
+- Official-hosted 2017 BoardDocs LT proposal (https://go.boarddocs.com/pa/lewi/Board.nsf/files/AU2Q6567B2FC/%24file/BoardDocs%2006%2008%2017.pdf) is visible in search-indexed text and says subscribers could access public data through RSS/XML. Direct PDF open returned 403. The proposal supplies no feed URL, request/response fields, pagination, permissions or current product-tier applicability.
+- https://www.laspositascollege.edu/gv/assets/docs/INSTRUCTIONS%20-%20Submitting%20Agenda%20Items%20-%20Final.pdf: tenant staff guide documents Meeting, Category, Subject, Access, Recommended Action, Approval Tree, Public Content and Public Files UI labels, with submit/approval constraints. These are UI labels, not request keys.
+- https://go.boarddocs.com/co/cde/Board.nsf/Public: earlier extraction saw a branded shell and print controls without dynamic meeting rows; latest bounded direct unauthenticated GET returned HTTP 403. Do not bypass or infer unsupported from this result.
 
 ### Remaining research
 
-- Verify tenant-specific supported machine contract, authorization, rate/size limits and pagination.
-- Obtain authorized non-production write access; validate duplicates, conflicts, ambiguous retries, approval/visibility and readback receipts.
-- Preserve legacy IDs/namespaces/parent identities, unknown extensions, original fields, supplied revisions and missing timezone explicitly.
+- Two bounded BoardDocs contexts are used: Colorado direct GET currently returns HTTP 403, and the other evidence is a staff-guide document. Do not probe a third tenant. Capture an exact RSS/XML URL only if a current public link appears in either existing context; the 2017 proposal itself has no route/schema.
+- Current Diligent BoardDocs materials give features but no API/search request schema. Current tier applicability, public catalog access and the 403 path remain unresolved pending supported endpoint/access evidence.
+- No authorized BoardDocs non-production account supplied for role/approval, create/update/upload, readback or conflict checks.
 
 ### Pagination contract
 
 {
-  "status": "partly_observed_or_unverified",
-  "details": "Current direct unauthenticated GET to the existing Colorado shell returned HTTP 403, whereas earlier extraction only saw the branded shell. Dynamic meetings and any BoardDocs-specific public catalog/API remain unresolved; HTTP 403 is not unsupported evidence."
+  "status": "unverified",
+  "details": "Historical 2017 proposal makes a product-level RSS/XML claim but gives no route or page contract. One Colorado shell GET returned 403; the second tenant context is a staff PDF. No current public meeting catalog or pagination contract was verified."
 }
 
 ### Authorization restrictions
 
-- Keep baseline unencrypted printed numbered PDF; JS shell is not equivalent.
+- Stay within the two inspected tenant contexts; do not test a third tenant.
+- Keep baseline unencrypted printed numbered-PDF input; a JS shell is not equivalent.
 - Do not substitute Diligent Community/Boards APIs.
 - Respect post-approval edit lock and public/private visibility.
 
@@ -875,7 +864,7 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Ector public calendar anonymous. Staff functions need authorized Tyler account and configured workflow; API tier/access unknown."}
-Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
 
 ### Representative research observations
 
@@ -884,10 +873,9 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 
 ### Remaining research
 
-- Pin baseline source commit and extract/test standalone readers.
-- Public Ector client bundle exposes a date-range JSON query; two bounded Nov 2026 requests returned empty arrays. Successful nonempty response, JSON record fields, date bounds, pagination and archive completeness remain unverified.
-- Resolve supported machine write/import contract separately from documented UI operations; do not infer absent capability from missing access.
-- Run authorized test-tenant create/update/upload and required receipt/conflict/idempotency cases where supported.
+- The Ector bundle exposes POST /tylermmcalendar46612prod/meetingInformation/getMeetingInformationByDate with JSON startDate/endDate/meetingTypeIds (MM/DD/YYYY; [-1] all types). The added 2025 historical query returned HTTP 200 and `[]` (2 bytes); all observed ranges are empty, so record schema/paging cannot yet be established.
+- A nonempty public result on Ector is the next executable dependency before validating record fields, agenda/minutes/media links, status fidelity and archive completeness. The other bounded Murray context had a fetch-extraction failure; no third tenant.
+- Official Tyler product features describe staff scheduling, item/document, minutes and video workflows but no machine write/import schema. No authorized credentials/test tenant supplied.
 
 ### Pagination contract
 
@@ -899,4 +887,4 @@ Test environment: {"mode":"synthetic_mock_only","authorized_remote_writes":false
 ### Authorization restrictions
 
 - Baseline source skips cancelled/adjourned records and derives agenda item ids by position; new schema must preserve statuses and explain identity derivation rather than advertise baseline as full fidelity.
-- Public credentials or authorized mutation access not supplied. No remote writes, outreach, procurement or credential handling performed.
+- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.

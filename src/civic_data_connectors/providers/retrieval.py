@@ -42,6 +42,18 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     transport = transport or PublicTransport()
     content = _decode_content(request, content)
     attachment = request.get("attachment")
+    from .account_api import is_account_api
+    if is_account_api(source) and attachment is None and content is None:
+        from .account_reads import fetch_account
+        return fetch_account(source, namespace, request, bounds, context, transport)
+    if "parent_id" in request or "record_type" in request:
+        if attachment is not None or content is not None:
+            raise ValueError("Related record retrieval cannot be combined with attachment or saved input.")
+        if source.provider == "legistar":
+            from .legistar import fetch_related
+            return fetch_related(source, namespace, request, bounds, context, transport)
+        return OperationResult.unsupported("fetch_related", reason=(
+            "No verified related-record retrieval mapping is registered for this provider."))
     if "external_id" in request:
         if attachment is not None or content is not None:
             raise ValueError("Record detail retrieval cannot be combined with attachment or saved input.")

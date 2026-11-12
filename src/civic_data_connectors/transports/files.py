@@ -9,7 +9,7 @@ from threading import Lock
 from uuid import uuid4
 
 CHUNK_BYTES = 256 * 1024
-FILE_OPERATIONS = frozenset({"normalize", "discover", "fetch", "import_preview", "import_bundle", "plan_write"})
+FILE_OPERATIONS = frozenset({"normalize", "discover", "fetch", "import_preview", "import_bundle", "plan_write", "export"})
 
 
 def allowed(context):

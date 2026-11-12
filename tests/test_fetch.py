@@ -14,6 +14,9 @@ class Response:
     def getheader(self, name, default=None):
         return self.headers.get(name, default)
 
+    def getheaders(self):
+        return list(self.headers.items())
+
     def read1(self, size):
         return self.data.read(size)
 
@@ -60,6 +63,27 @@ def test_post_body_headers_and_actual_validated_socket(monkeypatch):
     assert data == b'{"ok":true}' and url.endswith("/calendar")
     assert calls[0][1:4] == ("POST", "/calendar", b"range")
     assert sockets.call_args.args[0] == ("8.8.8.8", 443)
+    assert connections[0].closed
+
+
+def test_distinct_session_cookies_remain_private_transport_state(monkeypatch):
+    response = Response()
+    cookies = ("ASP.NET_SessionId=synthetic; Path=/; Secure", "balance=fixture; Path=/; Secure")
+    response.getheaders = lambda: [("Set-Cookie", value) for value in cookies]
+    install(monkeypatch, [response])
+    result = fetch.request_public_response("https://provider.example/list", byte_limit=100)
+    assert result.set_cookie_headers == cookies
+    assert "set-cookie" not in result.headers
+    assert "synthetic" not in repr(result) and "balance" not in repr(result)
+
+
+def test_explicit_no_redirect_policy_stops_before_any_second_socket(monkeypatch):
+    calls, connections, sockets = install(monkeypatch, [
+        Response(status=302, headers={"Location": "/WebLink/Browse.aspx?id=2&repo=Other"})])
+    with pytest.raises(ImportInputError, match="Redirects are disabled"):
+        fetch.request_public_response("https://provider.example/WebLink/Browse.aspx?id=1&repo=Public",
+                                      byte_limit=100, allow_redirects=False)
+    assert len(calls) == len(connections) == sockets.call_count == 1
     assert connections[0].closed
 
 

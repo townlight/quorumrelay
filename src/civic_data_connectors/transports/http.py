@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 import tempfile
+import time
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import asynccontextmanager
 from dataclasses import replace
@@ -23,7 +24,7 @@ from starlette.routing import Mount, Route
 
 from .. import __version__
 from ..models import OperationResult
-from ..storage import update_operation
+from ..storage import ProgressRecorder, update_operation
 from .openapi import document, validate_result
 from .runtime import OPERATIONS, ServiceConfig, bound_request, execute, failure
 from .files import allowed as file_input_allowed
@@ -120,6 +121,8 @@ def create_app(engine, config: ServiceConfig | None = None, *, mcp_token_verifie
             result = failure("internal_error", "The operation failed; inspect protected service diagnostics.",
                              operation_id=context.operation_id)
         if engine.storage is not None:
+            if isinstance(context.progress, ProgressRecorder):
+                context.progress.flush()
             update_operation(engine.storage, context.operation_id, {
                 "operation": operation, "state": result.status, "result": result.public_dict(),
             }, scope=context.scope)
@@ -131,7 +134,16 @@ def create_app(engine, config: ServiceConfig | None = None, *, mcp_token_verifie
         item = engine.storage.get("service_files", handle, scope=context.scope)
         if item is None:
             raise ValueError("The file handle is unavailable in this caller scope.")
-        return item.value
+        if not file_input_allowed(context) or item.value.get("expires_at", float("inf")) <= time.time():
+            raise ValueError("The file input expired or its current authorization was revoked.")
+        if item.value.get("purpose") == "input":
+            from ..interchange import open_input
+            _, stream = open_input(engine, handle, context=context)
+            return {**item.value, "reference": item.value["storage_reference"]}, stream
+        # Historical uploads had no purpose/expiry metadata. Preserve those
+        # scoped immutable references, verifying their bytes before consumption.
+        from ..write_files import open_write_file
+        return item.value, open_write_file(engine.storage, item.value["reference"], scope=context.scope)
 
     async def dispatch(request: Request):
         principal, denied = authenticate(request)
@@ -160,10 +172,10 @@ def create_app(engine, config: ServiceConfig | None = None, *, mcp_token_verifie
             if "file_handle" in payload and not neutral_input:
                 if "content_base64" in payload:
                     raise ValueError("Supply either file_handle or content_base64, not both.")
-                item = scoped_file(payload.pop("file_handle"), context)
-                if item["reference"]["byte_length"] > config.parser_bytes:
-                    raise ValueError("This parser operation exceeds its configured parser byte limit.")
-                with engine.storage.open_capture(item["reference"], scope=context.scope) as stream:
+                item, stream = scoped_file(payload.pop("file_handle"), context)
+                with stream:
+                    if item["reference"]["byte_length"] > config.parser_bytes:
+                        raise ValueError("This parser operation exceeds its configured parser byte limit.")
                     content = stream.read(config.parser_bytes + 1)
                 if len(content) > config.parser_bytes:
                     raise ValueError("This parser operation exceeds its configured parser byte limit.")
@@ -180,8 +192,8 @@ def create_app(engine, config: ServiceConfig | None = None, *, mcp_token_verifie
                 update_operation(engine.storage, context.operation_id, {
                     "operation": operation, "state": "running", "cancel_requested": False,
                 }, scope=context.scope)
-                context.progress = lambda p: update_operation(
-                    engine.storage, context.operation_id, {"progress": p}, scope=context.scope)
+                context.progress = ProgressRecorder(engine.storage, context.operation_id,
+                                                    scope=context.scope, operation=operation)
             with jobs_lock:
                 jobs[(context.scope, context.operation_id)] = context.cancellation
 
@@ -227,10 +239,12 @@ def create_app(engine, config: ServiceConfig | None = None, *, mcp_token_verifie
                     uploaded = form.get("file")
                     if not isinstance(uploaded, UploadFile):
                         raise ValueError("multipart upload requires exactly one file part named file.")
+                    filename, content_type = uploaded.filename or "upload.bin", uploaded.content_type or "application/octet-stream"
                     reference = await anyio.to_thread.run_sync(
                         lambda: engine.storage.save_capture(uploaded.file, scope=context.scope,
                                                             max_bytes=config.transfer_bytes))
             elif kind == "application/octet-stream":
+                filename, content_type = "upload.bin", "application/octet-stream"
                 with tempfile.TemporaryFile() as staging:
                     size = 0
                     async for chunk in request.stream():
@@ -245,9 +259,17 @@ def create_app(engine, config: ServiceConfig | None = None, *, mcp_token_verifie
             else:
                 return response(failure("content_type", "Use multipart/form-data or application/octet-stream."), 415)
             handle = uuid4().hex + uuid4().hex
-            engine.storage.put("service_files", handle, {"reference": reference},
+            if (len(filename) > 255 or "\0" in filename or len(content_type) > 255
+                    or any(char in content_type for char in "\r\n")):
+                raise ValueError("Invalid upload filename or content type metadata.")
+            engine.storage.put("service_files", handle, {
+                "reference": reference, "storage_reference": reference, "purpose": "input",
+                "file_handle": handle, "filename": filename, "content_type": content_type,
+                "max_bytes": config.transfer_bytes, "sha256": reference["sha256"],
+                "byte_length": reference["byte_length"], "expires_at": time.time() + 3600},
                                scope=context.scope, create_only=True)
-            return response(OperationResult("completed", data={"file_handle": handle, **reference}))
+            return response(OperationResult("completed", data={"file_handle": handle, **reference,
+                "filename": filename, "content_type": content_type}))
         except ValueError as error:
             if str(error) == "transport_byte_limit":
                 raise
@@ -277,11 +299,12 @@ def create_app(engine, config: ServiceConfig | None = None, *, mcp_token_verifie
                     "Content-Disposition": 'attachment; filename="export.bin"',
                     "Content-Length": str(metadata["byte_length"]), "X-Content-Type-Options": "nosniff",
                 })
-            item = scoped_file(request.path_params["handle"], context)
+            item, source = scoped_file(request.path_params["handle"], context)
             if item["reference"]["byte_length"] > config.transfer_bytes:
+                source.close()
                 raise ValueError("File exceeds the configured transfer byte limit.")
             def chunks():
-                with engine.storage.open_capture(item["reference"], scope=context.scope) as stream:
+                with source as stream:
                     while chunk := stream.read(1024 * 1024):
                         yield chunk
             return StreamingResponse(chunks(), media_type="application/octet-stream", headers={
