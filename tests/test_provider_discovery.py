@@ -444,7 +444,7 @@ def test_attachment_failed_fetch_retains_meeting_and_no_arbitrary_proxy():
 
 def test_transfer_limit_is_separate_from_parser_limit():
     raw = json.dumps([dict(event(1), EventAgendaFile="https://webapi.legistar.com/agenda.pdf")]).encode()
-    packet = b"%PDF" + b"x" * 5000
+    packet = b"%PDF-1.7\n" + b"x" * 5000
     engine, transport = make_engine(lambda *args: packet)
     source = {"provider": "legistar", "url": "https://webapi.legistar.com/v1/city/Events",
               "input_format": "legistar-events-json"}

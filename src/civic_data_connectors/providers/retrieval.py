@@ -199,8 +199,11 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=allowed)
         if response.status != 200:
             raise ValueError("The captured attachment did not return HTTP 200.")
-        if resolution and not response.content.startswith(b"%PDF-"):
-            raise ValueError("The supplied BoardBook PDF download did not return PDF bytes.")
+        pdf_expected = (kind == "documents" and (
+            urlsplit(transfer_url).path.lower().endswith(".pdf") or
+            response.content_type.split(";", 1)[0].strip().lower() == "application/pdf"))
+        if (resolution or pdf_expected) and not response.content.startswith(b"%PDF-"):
+            raise ValueError("The supplied PDF download did not return PDF bytes.")
         if len(response.content) > bounds.transfer_bytes:
             raise ValueError("The document exceeds the configured transfer byte limit.")
         if _origin(response.url) not in allowed:

@@ -29,3 +29,18 @@ def test_onbase_retains_meeting_without_files_and_rejects_mixed_ids():
         pass
     else:
         raise AssertionError('Conflicting supplied IDs cannot be silently merged.')
+
+
+def test_html_error_at_supplied_pdf_link_is_partial_and_retains_meeting():
+    from quorumrelay.providers.contracts import Response
+
+    class Transport:
+        def request(self,url,**kwargs):
+            return Response(url,b"<html><title>Document unavailable</title></html>","text/html")
+
+    engine=create_engine(provider_transport=Transport())
+    record=engine.execute("discover",{"source":SOURCE.public_dict()},content=HTML).data["records"][0]
+    result=engine.fetch_attachment(SOURCE,record,capture=HTML)
+    assert result.status=="partial" and result.data["attachment"] is None
+    assert result.data["record"]["identity"]==record["identity"]
+    assert result.coverage["unavailable_attachments"][0]["citation_url"].endswith("documentType=1&meetingId=3825")
