@@ -225,15 +225,15 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
-- On the sole selected Minneapolis organization, follow existing detail Previous/Next and archive/year controls; record route/date coverage and whether the separately described 13-month archive is publicly visible. Do not add a third tenant.
+- Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, detail relationships and complete catalog remain unverified; no new tenant/history survey implied.
 - Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.
 - No authorized staff/test account was supplied for roles, API enablement, write/readback or conflict checks.
 
 ### Pagination contract
 
 {
-  "status": "partly_observed_or_unverified",
-  "details": "Type/committee controls; default 13-month separate archive documented; full traversal unknown."
+  "status": "observed_single_page_with_local_continuation",
+  "details": "629meetings in selected organization HTML; no separate archive pager exposed. Existing local checkpoint/date bounds apply; no catalog completeness guarantee."
 }
 
 ### Authorization restrictions
@@ -251,8 +251,8 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
-- The selected Oakville request is evidenced: POST /MeetingsCalendarView.aspx/GetCalendarMeetings with calendarStartDate/calendarEndDate returned 4 rows for 2026-11-01 through 2026-11-12. Implement and fixture-test that response, then verify continuation and one Meeting.aspx detail plus FileStream.ashx document response.
-- Oakville’s keyword/date/document-type controls are visible, but no successful native-search request or exact matching/paging semantics is captured.
+- Calendar POST already implemented/proven; bounded Meeting.aspx HTML fetch completed and supplied FileStream PDF returned403 (correctly partial). No bypass/retry or complete agenda-item/catalog claim.
+- Usable current public searchData() DataTables POST route is verified by Council page1/page2 and single-token empty captures. Implement bounded native candidate paging/exact local metadata checks; provider matching is not exact/phrase semantics.
 - The official product overview describes modules, not public API schemas. No customer API/import contract or authorized write tenant was supplied for meeting/item create/update/upload.
 
 ### Pagination contract
@@ -279,15 +279,15 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
-- On the selected Oneida landing page, follow its actual Meetings/archive links and scripts; the candidate MeetingsListing.aspx returned the product Invalid URL page. Capture one working list/detail/attachment chain and date/type continuation.
+- Working public menu/listing and page2 now verified and source implemented. Supplied ViewMeeting.aspx returned HTML; its hydrated agenda/detail/document chain remains a bounded current-source contract follow-up. Body filtering/search/full-catalog semantics remain unverified.
 - Reviewed current Simbli pages describe archive search and staff meeting/item/document workflows but publish no machine field schema. Obtain customer API specification before implementing writes or claiming absence.
-- No staff/test credentials or remote-write authorization were supplied.
+- No authorized provider test tenant, staff credentials or tenant-specific write configuration was supplied.
 
 ### Pagination contract
 
 {
-  "status": "partly_observed_or_unverified",
-  "details": "Unknown; actual list not obtained."
+  "status": "observed_and_source_implemented",
+  "details": "First50 embedded rows; published POST /Services/api/GetMeetingListing uses current anonymous controls, RecordCount50 and RecordStart51,101,...; bounded opaque scoped cursor retains midpage position, seen IDs and private cookie state for15minutes in one engine process. No public full-catalog claim."
 }
 
 ### Authorization restrictions

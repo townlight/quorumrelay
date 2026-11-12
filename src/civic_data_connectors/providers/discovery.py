@@ -323,6 +323,30 @@ def _enrich(bundle, provider):
                 normalized["body"] = re.sub(
                     r"\s+-\s+(?:regular|special|study|joint|work)?\s*(?:meeting|session|hearing)\s*$",
                     "", name, flags=re.I)
+            # The public calendar explicitly labels Video/Audio links. Preserve
+            # them as player citations, never infer direct media download bytes.
+            for item in raw.get("MeetingDocumentLink") or []:
+                if not isinstance(item, dict) or str(item.get("Type", "")).casefold() not in {"video", "audio"}:
+                    continue
+                value = item.get("Url")
+                if not isinstance(value, str) or not value:
+                    continue
+                url = urljoin(bundle["source"]["url"], value)
+                try:
+                    validate_url(url)
+                except ValueError:
+                    continue
+                recording = {"url": url, "title": item.get("Title"),
+                    "media_type": item["Type"].casefold(), "availability": "supplied_player_link",
+                    "source_fields": deepcopy(item)}
+                recordings = normalized.setdefault("recordings", [])
+                if any(existing.get("url") == url for existing in recordings):
+                    continue
+                recordings.append(recording)
+                record["relationships"] = [*record.get("relationships", []),
+                    {"relation": "recording", "value": deepcopy(recording)}]
+            normalized["source_status"] = {key: raw[key] for key in (
+                "HasAgenda", "HasVideo", "HasLiveVideo", "HasVideoLivePassed", "MeetingPassed") if key in raw}
         elif provider == "primegov":
             if raw.get("committeeName"):
                 normalized["body"] = raw["committeeName"]

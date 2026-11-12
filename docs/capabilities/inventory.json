@@ -7614,6 +7614,20 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "boardbook-public-document-live",
+          "url": "https://meetings.boardbook.org/public/organization/1807",
+          "title": "Minneapolis existing listing and supplied PDF engine fetch",
+          "kind": "live_engine_bounded_read_receipt",
+          "findings": "Existing parser mapped629meetings dating2010-02-09..2026-11-10 from one public organization page; no separate archive pager exposed. Supplied Agenda HTML→DownloadAgenda PDF resolver preserved citation; exact12,716,801byte PDF SHA b57324a8948c384b91d0ad594a32353d43c97d71511ce6864d7b578c46f9f61e completed.3focused+78affected retrieval tests passed.",
+          "limits": "One selected public agenda/PDF; source addition after dev6, not frozen wheel acceptance. No provider-wide catalog, API/write or retention guarantee.",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "receipt_path": "docs/verification/boardbook-public-document-2026-11-12.json",
+          "receipt_sha256": "51289d68bfcc58b70cefa97d83241af6e6ce41227ee948934371aba2c243a162",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
         }
       ],
       "tenants": [
@@ -7650,17 +7664,18 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "boardbook-tenant"
+            "boardbook-tenant",
+            "boardbook-public-document-live"
           ],
-          "details": "Public listing/navigation observed; not exhaustive discovery coverage.",
+          "details": "Existing configured organization HTML retrieval/parser and bounded local continuation/date filtering map the supplied public table; selected Minneapolis page contained629meetings back to2010. No separate archive/page control observed; full catalog completeness unknown.",
           "dependencies": [],
           "remaining_verification": [
             "Verify full date/body bounds, continuation and checkpoints."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "bounded_live_read_and_source_fixture_tests_not_full_provider_acceptance",
           "tenant_scope": [
             "https://meetings.boardbook.org/public/organization/1807"
           ],
@@ -7673,17 +7688,18 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "boardbook-tenant"
+            "boardbook-tenant",
+            "boardbook-public-document-live"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval.",
+          "details": "Captured Agenda/Minutes links are source-authorized. Observed Agenda HTML supplied exact same-organization/meeting DownloadAgenda link; source resolver now retrieves guarded PDF with separate parser/transfer ceilings and retains durable agenda citation. Missing/forged download or unavailable bytes retains meeting as partial.",
           "dependencies": [],
           "remaining_verification": [
             "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "bounded_live_read_and_source_fixture_tests_not_full_provider_acceptance",
           "tenant_scope": [
             "https://meetings.boardbook.org/public/organization/1807"
           ],
@@ -8104,8 +8120,8 @@
         }
       ],
       "pagination": {
-        "status": "partly_observed_or_unverified",
-        "details": "Type/committee controls; default 13-month separate archive documented; full traversal unknown."
+        "status": "observed_single_page_with_local_continuation",
+        "details": "629meetings in selected organization HTML; no separate archive pager exposed. Existing local checkpoint/date bounds apply; no catalog completeness guarantee."
       },
       "auth": {
         "public_read": "unverified",
@@ -8113,7 +8129,7 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "On the sole selected Minneapolis organization, follow existing detail Previous/Next and archive/year controls; record route/date coverage and whether the separately described 13-month archive is publicly visible. Do not add a third tenant.",
+        "Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, detail relationships and complete catalog remain unverified; no new tenant/history survey implied.",
         "Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.",
         "No authorized staff/test account was supplied for roles, API enablement, write/readback or conflict checks."
       ],
@@ -8243,6 +8259,20 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "escribe-public-detail-live",
+          "url": "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council",
+          "title": "Oakville calendar and supplied agenda HTML/PDF boundary",
+          "kind": "live_engine_bounded_read_receipt",
+          "findings": "Existing calendar POST and saved-capture replay preserve supplied FileStream/Meeting.aspx citations. Engine fetched one supplied Meeting.aspx agenda HTML114444bytes; supplied FileStream PDF was partial/unavailable. Separate guarded diagnostic confirmed HTTP403, no bypass. Calendar supplied Video player field receives source-only typed recording enrichment, without inferring binary video URL.",
+          "limits": "Post-dev6 source proof only; public document denial does not mean unsupported. HTML retrieval is not full agenda-item extraction/catalog acceptance; no live write acceptance.",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "receipt_path": "docs/verification/escribe-public-documents-2026-11-12.json",
+          "receipt_sha256": "af5728f7d8f3f5a2ced87dd4905d0a896efab3762efb9f949bcac182d9c02a4a",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
         }
       ],
       "tenants": [
@@ -8280,19 +8310,20 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "escribe-oakville-public",
-            "escribe-oakville-calendar-live-read"
+            "escribe-oakville-calendar-live-read",
+            "escribe-public-detail-live"
           ],
-          "details": "The Oakville public client and bounded read report establish POST /MeetingsCalendarView.aspx/GetCalendarMeetings with JSON calendarStartDate/calendarEndDate. One 2026-11-01 through 2026-11-12 request returned 4 records. This is one bounded tenant window, not complete discovery or standalone engine acceptance.",
+          "details": "Existing bounded calendar POST /MeetingsCalendarView.aspx/GetCalendarMeetings retrieves configured explicit dates, preserves calendar raw fields and supplied documents, and supports local continuation/date bounds. Post-dev6 discovery enrichment additionally types supplied Video/Audio player links as recordings; baseline34 normalization remains unchanged.",
           "dependencies": [],
           "remaining_verification": [
             "Implementation contract validation",
             "Provider/tenant boundary and failure cases"
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "bounded_live_read_and_source_fixture_tests_not_full_provider_acceptance",
           "tenant_scope": [
             "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council"
           ],
@@ -8305,18 +8336,19 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "escribe-oakville-public"
+            "escribe-oakville-public",
+            "escribe-public-detail-live"
           ],
-          "details": "Public HTML list, meeting/document links and keyword filters observed; JSON calendar POST mechanics in reusable source need contract validation.",
+          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced.",
           "dependencies": [],
           "remaining_verification": [
             "Implementation contract validation",
             "Provider/tenant boundary and failure cases"
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "bounded_live_read_and_source_fixture_tests_not_full_provider_acceptance",
           "tenant_scope": [
             "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council"
           ],
@@ -8355,7 +8387,7 @@
           "evidence_ids": [
             "escribe-oakville-public"
           ],
-          "details": "Public HTML list, meeting/document links and keyword filters observed; JSON calendar POST mechanics in reusable source need contract validation.",
+          "details": "Current published searchData() sends DataTables form POST /GetSearchData.asmx/GetSearchMeetingData with searchText and explicit public filters. Council pages0/10 returned grouped HTML search rows; a single-token sentinel returned0. Verified required native-search implementation is queued in the coherent post-dev6 source batch; matching semantics remain provider-defined.",
           "dependencies": [],
           "remaining_verification": [
             "Implementation contract validation",
@@ -8687,8 +8719,8 @@
         "Unverified and access-blocked are incomplete, not unsupported."
       ],
       "remaining_research": [
-        "The selected Oakville request is evidenced: POST /MeetingsCalendarView.aspx/GetCalendarMeetings with calendarStartDate/calendarEndDate returned 4 rows for 2026-11-01 through 2026-11-12. Implement and fixture-test that response, then verify continuation and one Meeting.aspx detail plus FileStream.ashx document response.",
-        "Oakville’s keyword/date/document-type controls are visible, but no successful native-search request or exact matching/paging semantics is captured.",
+        "Calendar POST already implemented/proven; bounded Meeting.aspx HTML fetch completed and supplied FileStream PDF returned403 (correctly partial). No bypass/retry or complete agenda-item/catalog claim.",
+        "Usable current public searchData() DataTables POST route is verified by Council page1/page2 and single-token empty captures. Implement bounded native candidate paging/exact local metadata checks; provider matching is not exact/phrase semantics.",
         "The official product overview describes modules, not public API schemas. No customer API/import contract or authorized write tenant was supplied for meeting/item create/update/upload."
       ],
       "requirement_ids": [
@@ -8829,6 +8861,20 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "simbli-public-pagination-live",
+          "url": "https://simbli.eboardsolutions.com/index.aspx?S=36031063",
+          "title": "Oneida anonymous menu/listing/pager engine read",
+          "kind": "live_engine_bounded_read_receipt",
+          "findings": "Current anonymous menu supplies SB_MeetingListing.aspx. Public first50 embedded rows and published GetMeetingListing POST RecordStart51/Count50 traversed; engine returned60 then10distinct resumed records with no errors. Exact captures/unknown row fields/native IDs retained; local dates supported.",
+          "limits": "Mutable post-dev6 source only; no full catalog/search/account/write acceptance. Opaque anonymous controls/cookies remain in bounded15minute in-process scoped continuations; restart/expiry require restart. No authenticated session accepted.",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "receipt_path": "docs/verification/simbli-public-discovery-2026-11-12.json",
+          "receipt_sha256": "5ff176f6335d3a9161bac3c6c9a88369bf94068bd6b5c8c0e279c16f1f612490",
+          "observed": "2026-11-12 bounded public read",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only"
         }
       ],
       "tenants": [
@@ -8865,17 +8911,18 @@
         },
         "discover": {
           "capability_status": "unverified",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "simbli-tenant"
+            "simbli-tenant",
+            "simbli-public-pagination-live"
           ],
-          "details": "Landing page/instructions found; actual meeting list not retrieved. Resolve real navigation URL; do not ship rejected guessed path.",
+          "details": "Observed anonymous index/menu→district listing→50-row public POST pager, local date filters and private source/caller-bound TTL cursors implemented. Baseline saved HTML parser unchanged. No body-field mapping or complete catalog/search proof.",
           "dependencies": [],
           "remaining_verification": [
             "Resolve actual catalog; exercise bounded dates/page transitions and report partial failures."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "bounded_live_read_and_source_fixture_tests_not_full_provider_acceptance",
           "tenant_scope": [
             "https://simbli.eboardsolutions.com/index.aspx?S=36031063"
           ],
@@ -9211,18 +9258,18 @@
         }
       ],
       "pagination": {
-        "status": "partly_observed_or_unverified",
-        "details": "Unknown; actual list not obtained."
+        "status": "observed_and_source_implemented",
+        "details": "First50 embedded rows; published POST /Services/api/GetMeetingListing uses current anonymous controls, RecordCount50 and RecordStart51,101,...; bounded opaque scoped cursor retains midpage position, seen IDs and private cookie state for15minutes in one engine process. No public full-catalog claim."
       },
       "auth": {
-        "public_read": "unverified",
+        "public_read": "Observed anonymous current-page controls only; authenticated auth_Token sessions fail closed.",
         "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [],
       "remaining_research": [
-        "On the selected Oneida landing page, follow its actual Meetings/archive links and scripts; the candidate MeetingsListing.aspx returned the product Invalid URL page. Capture one working list/detail/attachment chain and date/type continuation.",
+        "Working public menu/listing and page2 now verified and source implemented. Supplied ViewMeeting.aspx returned HTML; its hydrated agenda/detail/document chain remains a bounded current-source contract follow-up. Body filtering/search/full-catalog semantics remain unverified.",
         "Reviewed current Simbli pages describe archive search and staff meeting/item/document workflows but publish no machine field schema. Obtain customer API specification before implementing writes or claiming absence.",
-        "No staff/test credentials or remote-write authorization were supplied."
+        "No authorized provider test tenant, staff credentials or tenant-specific write configuration was supplied."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "simbli",

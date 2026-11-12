@@ -1,0 +1,35 @@
+{
+  "source": "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council",
+  "identity": {
+    "provider": "escribe",
+    "namespace": "//pub-oakville.escribemeetings.com",
+    "record_type": "meeting",
+    "external_id": "4162e72f-daa8-4252-bfd5-fd54f125ebe4",
+    "parent": null,
+    "derivation": "provider_or_legacy_reader",
+    "stability": "Stable according to the pinned input-format mapping; not an application identifier."
+  },
+  "results": [
+    {
+      "index": 0,
+      "status": "partial",
+      "errors": [
+        "attachment_unavailable"
+      ],
+      "attachment": {}
+    },
+    {
+      "index": 1,
+      "status": "completed",
+      "errors": [],
+      "attachment": {
+        "citation_url": "https://pub-oakville.escribemeetings.com/Meeting.aspx?Id=4162e72f-daa8-4252-bfd5-fd54f125ebe4&Agenda=Agenda&lang=English",
+        "content_type": "text/html",
+        "byte_length": 114444,
+        "sha256": "dce58357679d08be11669ba114e6d7f237d53e576295fe82a3f0a2c230ff0414",
+        "text_availability": "not_extracted"
+      }
+    }
+  ],
+  "limits": "One supplied agenda PDF and Meeting.aspx HTML; no full catalog/search/write acceptance."
+}

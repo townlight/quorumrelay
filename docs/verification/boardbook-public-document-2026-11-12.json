@@ -1,0 +1,46 @@
+{
+  "source": "https://meetings.boardbook.org/public/organization/1807",
+  "status": "completed",
+  "errors": [],
+  "listing": {
+    "records": 629,
+    "earliest_date": "2010-02-09",
+    "sha256": "395f19b8a548fdcb8b22a99eac5566bc51b47d5da361a1c29d35c3c1bc00f7b5"
+  },
+  "identity": {
+    "provider": "boardbook",
+    "namespace": "//meetings.boardbook.org/public/organization/1807",
+    "record_type": "meeting",
+    "external_id": "775433",
+    "parent": null,
+    "derivation": "provider_or_legacy_reader",
+    "stability": "Stable according to the pinned input-format mapping; not an application identifier."
+  },
+  "attachment": {
+    "citation_url": "https://meetings.boardbook.org/Public/Agenda/1807?meeting=775433",
+    "content_type": "application/pdf",
+    "byte_length": 12716801,
+    "sha256": "b57324a8948c384b91d0ad594a32353d43c97d71511ce6864d7b578c46f9f61e",
+    "text_availability": "not_extracted",
+    "resolution": {
+      "kind": "supplied_public_download_link",
+      "page_sha256": "2a6aeb6371bf4c33fd4141636d19b244db58113d735bbb584da243603f9c36cc",
+      "page_byte_length": 123605
+    }
+  },
+  "coverage": {
+    "sources": [
+      {
+        "provider": "boardbook",
+        "url": "https://meetings.boardbook.org/public/organization/1807",
+        "namespace": null,
+        "body": null,
+        "input_format": null,
+        "options": {}
+      }
+    ],
+    "failures": [],
+    "unavailable_attachments": []
+  },
+  "limits": "One supplied public agenda and PDF, not full catalog/account/write acceptance."
+}
