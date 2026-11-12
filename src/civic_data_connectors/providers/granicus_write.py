@@ -54,6 +54,13 @@ class GranicusWriteAdapter(WriteAdapter):
 
     def authorize(self, source, change, context):
         config = self.credentials(source, context)
+        if change.entity == "agenda_tree":
+            from .granicus_metadata import authorize
+            authorize(self, source, change, context)
+            return
+        if change.entity == "recording_publication":
+            self._publication_policy(source, change, context)
+            return
         if change.entity == "recording" and change.operation == "upload":
             self._media_policy(source, change, context)
             return
@@ -89,6 +96,11 @@ class GranicusWriteAdapter(WriteAdapter):
 
     def prepare(self, source, change, context, bounds, deadline):
         self.authorize(source, change, context)
+        if change.entity == "agenda_tree":
+            from .granicus_metadata import prepare
+            return prepare(self, source, change, context, bounds, deadline)
+        if change.entity == "recording_publication":
+            return self._prepare_publication(source, change, context, bounds, deadline)
         if change.entity == "recording" and change.operation == "upload":
             return self._prepare_media(source, change, context, bounds, deadline)
         if change.entity == "document":
@@ -134,6 +146,11 @@ class GranicusWriteAdapter(WriteAdapter):
     def apply(self, source, prepared, context, bounds, deadline, *, persist=None):
         change = WriteChange.from_dict(prepared["change"])
         self.authorize(source, change, context)
+        if change.entity == "agenda_tree":
+            from .granicus_metadata import apply
+            return apply(self, source, prepared, context, bounds, deadline, persist=persist)
+        if change.entity == "recording_publication":
+            return self._apply_publication(source, prepared, context, bounds, deadline, persist=persist)
         if change.entity == "recording" and change.operation == "upload":
             return self._apply_media(source, prepared, context, bounds, deadline, persist=persist)
         if change.entity == "document":
@@ -181,6 +198,15 @@ class GranicusWriteAdapter(WriteAdapter):
     def reconcile(self, source, prepared, item, context, bounds, deadline):
         change = WriteChange.from_dict(prepared["change"])
         self.authorize(source, change, context)
+        if change.entity == "agenda_tree":
+            from .granicus_metadata import reconcile
+            return reconcile(self, source, prepared, item, context, bounds, deadline)
+        if change.entity == "recording_publication":
+            session = self._session(source, context, bounds, deadline)
+            try:
+                return self._publication_outcome(session, prepared, item.get("publication_result"))
+            finally:
+                self._close_document_session(session)
         if change.entity == "recording" and change.operation == "upload":
             identity = item.get("resource_id")
             if identity is None:
@@ -208,6 +234,82 @@ class GranicusWriteAdapter(WriteAdapter):
         finally:
             session.close()
 
+
+    def _publication_policy(self, source, change, context):
+        config = self.credentials(source, context)
+        fields = change.fields
+        if (change.operation != "update" or change.files
+                or set(fields) != set(contract()["types"]["PublishClipData"]["fields"])
+                or type(fields.get("Public")) is not bool
+                or str(numeric_id(fields.get("ClipID"))) != str(numeric_id(change.resource_id))):
+            raise ValueError("Publication requires the full documented PublishClipData and explicit Public boolean for the exact clip.")
+        if ("recording_publication:update" not in config.get("permissions", ())
+                or str(change.resource_id) not in config.get("resource_ids", ())
+                or not change.meeting_id or str(change.meeting_id) not in config.get("meeting_ids", ())):
+            raise WriteFailure("permission_denied", "Publication requires explicit resource, meeting and publication grants.")
+
+    @staticmethod
+    def _publication_read(session, prepared):
+        identity = numeric_id(prepared["change"]["resource_id"])
+        values, _ = session.call("GetClip", {"ClipID": identity})
+        actual = values.get("clip")
+        if not isinstance(actual, dict) or str(actual.get("ID")) != str(identity):
+            raise ValueError("Publication readback differs from the exact clip identity.")
+        return actual
+
+    def _prepare_publication(self, source, change, context, bounds, deadline):
+        fields = deepcopy(change.fields)
+        request_xml("PublishClip", {"PublishClipData": fields}, byte_limit=bounds.transfer_bytes)
+        prepared = {"change": asdict(change)}
+        session = self._session(source, context, bounds, deadline)
+        try:
+            before = self._publication_read(session, prepared)
+        finally:
+            self._close_document_session(session)
+        fingerprint = canonical_hash(before)
+        if change.expected_version is not None and change.expected_version != fingerprint:
+            raise WriteFailure("conflict", "Publication baseline differs from the expected clip state.")
+        return {**prepared, "native": {"method": "POST", "url": session.url,
+            "soap_method": "PublishClip", "body": {"PublishClipData": fields},
+            "content_type": "text/xml", "headers": {}, "files": []},
+            "before": before, "before_fingerprint": fingerprint, "expected_version": fingerprint,
+            "after": fields, "contract_revision": contract()["source_revision"],
+            "publication_effect": "Public visibility requested" if fields["Public"] else "Non-public visibility requested",
+            "conflict_semantics": "preflight_clip_compare_not_atomic_provider_cas"}
+
+    def _apply_publication(self, source, prepared, context, bounds, deadline, *, persist):
+        session = self._session(source, context, bounds, deadline)
+        try:
+            if canonical_hash(self._publication_read(session, prepared)) != prepared["before_fingerprint"]:
+                raise WriteFailure("conflict", "The clip changed after publication was planned.")
+            if persist:
+                persist({"resource_id": prepared["change"]["resource_id"]})
+            try:
+                result, _ = session.call("PublishClip", prepared["native"]["body"])
+            except ValueError:
+                raise AmbiguousWrite() from None
+            acknowledgement = result.get("PublishClipResult")
+            if persist:
+                persist({"publication_result": acknowledgement})
+            return self._publication_outcome(session, prepared, acknowledgement)
+        finally:
+            self._close_document_session(session)
+
+    def _publication_outcome(self, session, prepared, acknowledgement):
+        actual = self._publication_read(session, prepared)
+        # Status is the SDK's visibility state, not a media processing guarantee.
+        wanted = "Public" if prepared["after"]["Public"] else "Not-Public"
+        acknowledged = (isinstance(acknowledgement, dict)
+            and str(acknowledgement.get("ClipID")) == str(actual["ID"]))
+        matched = actual.get("Status") == wanted
+        return {"state": "succeeded" if acknowledged and matched else "uncertain",
+            "resource_id": actual["ID"], "readback": actual, "provider_status": actual.get("Status"),
+            "publication_result": acknowledgement, "reconciled": True,
+            "publication_requested": prepared["after"]["Public"], "playable_media_verified": False,
+            "readback_verified_fields": ["ClipID", "Public"] if matched else ["ClipID"],
+            "submitted_only_fields": ["Name", "Title", "TextField", "TemplateID", "MetaID"],
+            "verification_scope": "PublishClip acknowledgement and independent clip identity/visibility only; other publication fields are submitted exactly but have no documented independent readback mapping.",
+            **({} if acknowledged and matched else {"reason": "Publication acknowledgement or requested visibility is unverified; no mutation replay."})}
 
     def _document_policy(self, source, change, context):
         config = self.credentials(source, context)

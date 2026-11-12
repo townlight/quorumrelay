@@ -478,3 +478,90 @@ def test_media_vault_real_coordinator_upload_identity_and_no_uncertain_replay(tm
         assert result.data["items"][0]["publication_requested"] is False
         assert result.data["items"][0]["provider_status"] == "Pending"
         assert result.data["items"][0]["playable_media_verified"] is False
+
+JAVA_WSDL = ET.fromstring((Path(__file__).parents[1] / "docs/capabilities/evidence/granicus-platform/java-granicus.wsdl").read_bytes())
+
+
+class PublicationNetwork(Network):
+    def __init__(self):
+        super().__init__("ClipData", "GetClip", "UpdateClip", "clip")
+        self.values["Status"] = "Pending"
+        self.loss = "none"
+        self.keep_pending = False
+        self.read_after_publish = False
+        self.submitted = None
+
+    def send(self, url, **kwargs):
+        action = kwargs["headers"]["SOAPAction"].split("#")[-1].strip('"')
+        if action == "GetClip" and self.read_after_publish and self.loss == "readback":
+            self.loss = "none"
+            raise TimeoutError("Synthetic readback loss")
+        if action != "PublishClip":
+            return super().send(url, **kwargs)
+        assert kwargs["headers"]["Cookie"] == "SID=synthetic-private-session"
+        sent = ET.fromstring(kwargs["body"]).find(f"{{{SOAP}}}Body/{{{RPC}}}PublishClip/PublishClipData")
+        # Independent official Java WSDL, not adapter-generated expectation.
+        typ = JAVA_WSDL.find('.//x:complexType[@name="PublishClipData"]', NS)
+        expected = {node.get("name"): node.get("type") for node in typ.find("x:all", NS)}
+        assert {node.tag for node in sent} == set(expected)
+        self.submitted = {node.tag: node.text or "" for node in sent}
+        assert self.submitted["ClipID"] == "7"
+        assert self.submitted["Public"] in {"true", "false"}
+        self.mutations += 1
+        self.values["Status"] = ("Pending" if self.keep_pending else
+                                  "Public" if self.submitted["Public"] == "true" else "Not-Public")
+        self.read_after_publish = True
+        if self.loss == "reply":
+            self.loss = "none"
+            raise TimeoutError("Synthetic publish acknowledgement loss")
+        body = ET.Element(f"{{{SOAP}}}Envelope")
+        response = ET.SubElement(ET.SubElement(body, f"{{{SOAP}}}Body"), f"{{{RPC}}}PublishClipResponse")
+        result = ET.SubElement(response, "PublishClipResult")
+        ET.SubElement(result, "ClipID", {f"{{{XSI}}}type": "xsd:int"}).text = "7"
+        ET.SubElement(result, "URL").text = "https://synthetic-city.granicus.com/player/clip/7"
+        ET.SubElement(result, "PublishPoint").text = "synthetic-publish-point"
+        return WriteResponse(200, ET.tostring(body))
+
+
+def publication_setup(tmp_path):
+    network = PublicationNetwork()
+    engine, _, context, change = setup(tmp_path, network)
+    context.credentials["granicus"].update(permissions=["recording_publication:update"], meeting_ids=["11"])
+    change.update(entity="recording_publication", meeting_id="11", fields={
+        "ClipID": 7, "Public": True, "Name": "Approved publication", "Title": "Approved title",
+        "TextField": "Approved description", "TemplateID": 0, "MetaID": 0})
+    return engine, network, context, change
+
+
+@pytest.mark.parametrize("public,loss,pending", [(True, "none", False), (False, "none", False),
+    (True, "reply", False), (True, "readback", False), (True, "none", True)])
+def test_explicit_publication_visibility_acknowledgement_and_no_replay(tmp_path, public, loss, pending):
+    engine, network, context, change = publication_setup(tmp_path)
+    change["fields"]["Public"] = public
+    request = plan(engine, context, change)
+    assert network.mutations == 0
+    stored = engine.storage.get("write_plans", request["plan_id"], scope=context.scope).value
+    assert stored["plan"]["changes"][0]["after"]["Public"] is public
+    network.loss, network.keep_pending = loss, pending
+    first = engine.execute("commit_write", request, context=context)
+    assert first.status == ("partial" if loss != "none" or pending else "completed"), first.errors
+    result = engine.execute("commit_write", request, context=context)
+    assert result.status == ("partial" if loss == "reply" or pending else "completed"), result.errors
+    assert network.mutations == 1
+    assert network.submitted["Title"] == change["fields"]["Title"]
+    item = result.data["items"][0]
+    assert item["publication_requested"] is public
+    assert item["playable_media_verified"] is False
+    assert item["submitted_only_fields"] == ["Name", "Title", "TextField", "TemplateID", "MetaID"]
+    assert item["provider_status"] == ("Pending" if pending else "Public" if public else "Not-Public")
+    assert "synthetic-private-session" not in json.dumps(result.public_dict())
+
+
+def test_publication_requires_explicit_visibility_and_separate_grant(tmp_path):
+    engine, network, context, change = publication_setup(tmp_path)
+    del change["fields"]["Public"]
+    assert engine.execute("plan_write", {"source": SOURCE, "changes": [change]}, context=context).status == "failed"
+    change["fields"]["Public"] = True
+    context.credentials["granicus"]["permissions"] = ["recording:update", "recording:upload"]
+    assert engine.execute("plan_write", {"source": SOURCE, "changes": [change]}, context=context).status == "failed"
+    assert network.mutations == 0

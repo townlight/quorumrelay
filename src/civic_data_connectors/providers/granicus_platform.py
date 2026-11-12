@@ -3,6 +3,7 @@
 from copy import deepcopy
 import base64
 import hashlib
+import uuid
 from urllib.parse import urlsplit
 from dataclasses import replace
 from datetime import datetime
@@ -28,6 +29,15 @@ READS = {
     "event_items": ("GetEventMetaData", "EventID", "agenda_item"),
     "clip_items": ("GetClipMetaData", "ClipID", "agenda_item"),
     "clip_indices": ("GetClipIndices", "ClipID", "agenda_item"),
+}
+UID_READS = {
+    "event_uid": ("GetEventByUID", "EventUID", "event"),
+    "clip_uid": ("GetClipByUID", "ClipUID", "clip"),
+    "agenda_item_uid": ("GetMetaDataByUID", "MetaDataUID", "agenda_item"),
+    "event_items_uid": ("GetEventMetaDataByUID", "EventUID", "event_items"),
+    "clip_items_uid": ("GetClipMetaDataByUID", "ClipUID", "clip_items"),
+    "clip_indices_uid": ("GetClipIndicesByUID", "ClipUID", "clip_indices"),
+    "clip_captions_uid": ("GetClipCaptionsByUID", "ClipUID", "clip_captions"),
 }
 
 
@@ -55,7 +65,9 @@ def parse_bundle(source, namespace, content):
         raise ValueError("No mapped SOAP response.")
     operation = tag.rsplit("}", 1)[1].removesuffix("Response")
     kinds = {value[0]: value[2] for value in READS.values()}
-    kinds.update(GetEvents="meeting", GetEventsByDateRange="meeting", GetClips="recording")
+    kinds.update({method: READS[base][2] for method, _, base in UID_READS.values() if base in READS})
+    kinds.update(GetEvents="meeting", GetEventsByDateRange="meeting", GetClips="recording",
+                 GetEventsByForeignID="meeting", GetClipsByForeignID="recording")
     if operation not in kinds:
         raise ValueError("This SOAP response has no normalized record mapping.")
     values = response_value(operation, content, byte_limit=len(content))
@@ -98,8 +110,9 @@ def parse_bundle(source, namespace, content):
     return bundle
 
 
-def supporting_bundle(source, namespace, raw, resource, identity):
+def supporting_bundle(source, namespace, raw, resource, identity, *, method_override=None):
     method, _, parent_kind, kind = SUPPORTING[resource]
+    method = method_override or method
     values = response_value(method, raw, byte_limit=len(raw))
     value = next(iter(values.values()))
     rows = []
@@ -165,7 +178,7 @@ def read(source, namespace, request, bounds, context, transport, *, discover=Fal
         raise ValueError("No paging token is documented for this SOAP operation; use explicit bounded requests.")
     default = "events" if discover else "clip_captions" if "caption_language" in request else "event"
     resource = request.get("api_resource", default)
-    if resource == "clip_captions" and request.get("caption_language", "*") != "*":
+    if resource in {"clip_captions", "clip_captions_uid"} and request.get("caption_language", "*") != "*":
         raise ValueError("The pinned SOAP caption method supplies the entire transcript; no language filter is documented.")
     if resource == "events":
         parameters = request.get("api_parameters")
@@ -174,6 +187,17 @@ def read(source, namespace, request, bounds, context, transport, *, discover=Fal
         if not isinstance(parameters, dict) or set(parameters) != {"StartDate", "EndDate"}:
             raise ValueError("Event discovery requires explicit documented StartDate and EndDate dateTime values.")
         method = "GetEventsByDateRange"
+    elif resource == "events_all":
+        parameters, method = {}, "GetEvents"
+    elif resource in {"events_foreign_id", "clips_foreign_id"}:
+        parameters = {"ForeignID": numeric_id(request.get("external_id"))}
+        method = "GetEventsByForeignID" if resource == "events_foreign_id" else "GetClipsByForeignID"
+    elif resource in UID_READS:
+        method, key, _ = UID_READS[resource]
+        supplied = request.get("external_id")
+        if not isinstance(supplied, str) or str(uuid.UUID(supplied)).lower() != supplied.lower():
+            raise ValueError("UID reads require a supplied canonical GUID, never a numeric identity alias.")
+        parameters = {key: supplied}
     elif resource == "clips":
         parameters, method = {"FolderID": numeric_id(request.get("parent_id"))}, "GetClips"
     elif resource in SUPPORTING:
@@ -187,21 +211,45 @@ def read(source, namespace, request, bounds, context, transport, *, discover=Fal
     session = Session(replace(source, namespace=namespace), context, bounds, transport)
     bundle, errors = None, []
     try:
+        resolution = None
+        base = UID_READS[resource][2] if resource in UID_READS else resource
+        identity = request.get("external_id")
+        if resource in UID_READS and base in {"event_items", "clip_items", "clip_indices", "clip_captions"}:
+            parent_method = "GetEventByUID" if base == "event_items" else "GetClipByUID"
+            parent_key = "EventUID" if base == "event_items" else "ClipUID"
+            parent_values, parent_raw = session.call(parent_method, {parent_key: identity})
+            parent_record = next(iter(parent_values.values()))
+            if not isinstance(parent_record, dict) or str(parent_record.get("UID", "")).lower() != identity.lower():
+                raise ValueError("The UID response did not verify the supplied parent UID.")
+            identity = str(numeric_id(parent_record.get("ID")))
+            resolution = {"method": parent_method, "record": deepcopy(parent_record),
+                "sha256": hashlib.sha256(parent_raw).hexdigest(), "byte_length": len(parent_raw),
+                "content_base64": base64.b64encode(parent_raw).decode("ascii")}
         _, raw = session.call(method, parameters)
-        bundle = (supporting_bundle(source, namespace, raw, resource, request["external_id"])
-                  if resource in SUPPORTING else parse_bundle(source, namespace, raw))
+        bundle = (supporting_bundle(source, namespace, raw, base, identity, method_override=method)
+                  if base in SUPPORTING else parse_bundle(source, namespace, raw))
+        if resolution is not None:
+            bundle["extensions"]["parent_resolution"] = resolution
+        if resource in {"event_uid", "clip_uid", "agenda_item_uid"}:
+            if len(bundle["records"]) != 1 or str(bundle["records"][0]["original"].get("UID", "")).lower() != identity.lower():
+                raise ValueError("The UID response differs from the supplied resource UID.")
         if resource in {"event", "clip", "agenda_item"} and any(
                 record["identity"]["external_id"] != str(request["external_id"]) for record in bundle["records"]):
             raise ValueError("The SOAP response differs from the requested provider identity.")
-        if resource in {"event_items", "clip_items", "clip_indices"}:
+        if resource in {"events_foreign_id", "clips_foreign_id"} and any(
+                str(record["original"].get("ForeignID")) != str(request["external_id"])
+                for record in bundle["records"]):
+            raise ValueError("The SOAP response differs from the requested source ForeignID.")
+        if base in {"event_items", "clip_items", "clip_indices"}:
             parent = {"provider": source.provider, "namespace": namespace,
-                      "record_type": "meeting" if resource == "event_items" else "recording",
-                      "external_id": str(request["external_id"]), "parent": None}
+                      "record_type": "meeting" if base == "event_items" else "recording",
+                      "external_id": str(identity), "parent": None}
             for record in bundle["records"]:
                 record["identity"]["parent"] = deepcopy(parent)
-                record["relationships"].append({"relation": "meeting" if resource == "event_items" else "recording",
+                record["relationships"].append({"relation": "meeting" if base == "event_items" else "recording",
                                                 "identity": deepcopy(parent)})
     except Exception:
+        bundle = None
         errors.append(Error("granicus_soap_read_unavailable", "The bounded SOAP read could not be verified.",
                             source=source.url, retryable=True))
     finally:

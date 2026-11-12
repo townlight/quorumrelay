@@ -3928,7 +3928,7 @@
             "granicus-superior",
             "granicus-platform-pinned-soap-synthetic"
           ],
-          "details": "Supplied-ID GetEvent/GetClip/GetMetaData and related Event/Clip metadata/Clip indices map raw exact XML and unknown fields, revision and parent identities. Requires explicit granicus-platform-soap-xml source; legacy public captures unchanged. Supporting reads now expose whole supplied Clip captions, Event/Clip/MetaData video URIs, exact FetchAttachment Document bytes and Clip minutes UID metadata. Request parent identities are explicit; locally composed child keys are labeled. Generic SDK fetch_captions uses the entire transcript without inferred language selection.",
+          "details": "Supplied-ID GetEvent/GetClip/GetMetaData and related Event/Clip metadata/Clip indices map raw exact XML and unknown fields, revision and parent identities. Requires explicit granicus-platform-soap-xml source; legacy public captures unchanged. Supporting reads now expose whole supplied Clip captions, Event/Clip/MetaData video URIs, exact FetchAttachment Document bytes and Clip minutes UID metadata. Request parent identities are explicit; locally composed child keys are labeled. Generic SDK fetch_captions uses the entire transcript without inferred language selection. Pinned UID detail/related/caption aliases and GetEvents/GetEventsByForeignID/GetClipsByForeignID are implemented. UID child reads first verify the supplied parent GUID and preserve its raw resolution response, then retain numeric canonical identities; GUID mismatch fails without returning unverified records.",
           "dependencies": [],
           "remaining_verification": [
             "Remaining documented in-domain SOAP methods are not yet all mapped; see outbound mappings and remaining research."
@@ -4065,7 +4065,7 @@
             "granicus-sdk-search",
             "granicus-platform-pinned-soap-synthetic"
           ],
-          "details": "CreateEvent full documented EventData, authorized unique ForeignID, exact-plan guard, readback and lost-response reconciliation are implemented and synthetically exercised. Other create mappings remain incomplete.",
+          "details": "CreateEvent full documented EventData, authorized unique ForeignID, exact-plan guard, readback and lost-response reconciliation are implemented and synthetically exercised. Other create mappings remain incomplete. AddEventMetaData/AddClipMetaData create explicit agenda trees under authorized parent/meeting/ForeignIDs with independent field/key/relationship readback.",
           "dependencies": [],
           "remaining_verification": [
             "Remaining documented in-domain SOAP methods are not yet all mapped; see outbound mappings and remaining research."
@@ -4089,7 +4089,7 @@
             "granicus-sdk-search",
             "granicus-platform-pinned-soap-synthetic"
           ],
-          "details": "Full-model EventData/ClipData/MetaDataData updates use exact documented operations, full before hash preflight, durable intent, readback and uncertain-response reconciliation. This is a preflight comparison, not atomic vendor CAS. Four documented document URL methods are also mapped, with exact URL and optional named-minutes readback.",
+          "details": "Full-model EventData/ClipData/MetaDataData updates use exact documented operations, full before hash preflight, durable intent, readback and uncertain-response reconciliation. This is a preflight comparison, not atomic vendor CAS. Four documented document URL methods are also mapped, with exact URL and optional named-minutes readback. Explicit PublishClip mapping requires a separate publication grant and approved Public boolean; receipts distinguish verified identity/visibility from submitted-only fields and preserve Pending uncertainty. Add/Import Event/Clip metadata also map full trees, unique ForeignIDs and provider parent IDs; destructive ClearExisting=true is excluded by project scope.",
           "dependencies": [],
           "remaining_verification": [
             "Remaining documented in-domain SOAP methods are not yet all mapped; see outbound mappings and remaining research."
@@ -5366,9 +5366,269 @@
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
         {
-          "entity": "media/metadata/motions/attendees",
+          "entity": "recording_publication",
+          "operation": "update",
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 PublishClip",
+          "field_mappings": [
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "ClipID",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "Public",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "Name",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "Title",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "TextField",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "TemplateID",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "MetaID",
+              "mapping_level": "exact_native_parameter"
+            }
+          ],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Explicit recording_publication:update, resource and meeting allowlists; full PublishClipData with mandatory Public boolean. No implicit publication from upload.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "Documented acknowledgement plus independent GetClip identity and default Status visibility; Pending stays uncertain. Name/Title/TextField/TemplateID/MetaID are exactly submitted but not independently verified; missing acknowledgement never replays.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "PublishClip",
+          "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "agenda_tree",
+          "operation": "create",
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 AddEventMetaData",
+          "field_mappings": [
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "EventID",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "MetaDataData",
+              "mapping_level": "exact_native_parameter"
+            }
+          ],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Exact agenda_tree create/update, parent resource, meeting and every supplied ForeignID grants. Full metadata models; Import requires explicit AsTree and ClearExisting=false. Vendor destructive true-branch excluded by project no-delete scope.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "Independent parent metadata fields, unique supplied ForeignIDs, assigned provider IDs and parent relationships; returned KeyTable checked when available. Lost acknowledgement reconciles only by exact independent readback, never replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "AddEventMetaData",
+          "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "agenda_tree",
+          "operation": "create",
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 AddClipMetaData",
+          "field_mappings": [
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "ClipID",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "MetaDataData",
+              "mapping_level": "exact_native_parameter"
+            }
+          ],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Exact agenda_tree create/update, parent resource, meeting and every supplied ForeignID grants. Full metadata models; Import requires explicit AsTree and ClearExisting=false. Vendor destructive true-branch excluded by project no-delete scope.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "Independent parent metadata fields, unique supplied ForeignIDs, assigned provider IDs and parent relationships; returned KeyTable checked when available. Lost acknowledgement reconciles only by exact independent readback, never replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "AddClipMetaData",
+          "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "agenda_tree",
+          "operation": "update",
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 ImportEventMetaData",
+          "field_mappings": [
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "EventID",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "MetaData",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "ClearExisting",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "AsTree",
+              "mapping_level": "exact_native_parameter"
+            }
+          ],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Exact agenda_tree create/update, parent resource, meeting and every supplied ForeignID grants. Full metadata models; Import requires explicit AsTree and ClearExisting=false. Vendor destructive true-branch excluded by project no-delete scope.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "Independent parent metadata fields, unique supplied ForeignIDs, assigned provider IDs and parent relationships; returned KeyTable checked when available. Lost acknowledgement reconciles only by exact independent readback, never replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "ImportEventMetaData",
+          "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "agenda_tree",
+          "operation": "update",
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 ImportClipMetaData",
+          "field_mappings": [
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "ClipID",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "MetaData",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "ClearExisting",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit approved vendor field",
+              "provider_field": "AsTree",
+              "mapping_level": "exact_native_parameter"
+            }
+          ],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Exact agenda_tree create/update, parent resource, meeting and every supplied ForeignID grants. Full metadata models; Import requires explicit AsTree and ClearExisting=false. Vendor destructive true-branch excluded by project no-delete scope.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "Independent parent metadata fields, unique supplied ForeignIDs, assigned provider IDs and parent relationships; returned KeyTable checked when available. Lost acknowledgement reconciles only by exact independent readback, never replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "ImportClipMetaData",
+          "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "media/generated minutes/meeting-bound field proof",
           "operation": "upload",
-          "endpoint_or_format": "Remaining pinned Platform WSDL media/metadata/motion/attendee methods",
+          "endpoint_or_format": "Remaining pinned MediaVault chunk/registration/replacement and Platform CreateClipGeneratedMinutesDocument methods",
           "field_mappings": [],
           "evidence_ids": [
             "granicus-platform-pinned-soap-synthetic"
@@ -5411,12 +5671,11 @@
         "Unverified and access-blocked are incomplete, not unsupported."
       ],
       "remaining_research": [
-        "Map remaining documented in-domain SDK methods: RegisterClipUpload/PublishClip (publication explicit only), metadata Add/Import, and meeting-bound motion/attendee semantics. UID aliases and broad list/query variants remain to reconcile against equivalent mapped resource paths.",
+        "Remaining Granicus engine workflows: chunked MediaVault registration/replacement and CreateClipGeneratedMinutesDocument; reconcile meeting-bound Attendees/MotionTypes field proof. UID/list reads, explicit publication and metadata Add/Import are now implemented; publication fields without documented independent readback remain labeled submitted-only. ClearExisting=true is vendor-supported but excluded by project no-delete scope; RegisterClipUpload is not the documented normal media upload path.",
         "Inspect pinned vendor comments/examples for untyped Payload/native enum semantics; do not invent values.",
         "Keep Platform SOAP distinct from ViewPublisher, Legistar, Peak, Swagit and iQM2; no cross-product endpoint inference.",
         "CreateAttendees and CreateMotionActions are described as system-wide roster/definitive motion-action list operations. Event/Clip Attendees/MotionTypes and typed MetaDataData Motion/VoteRecord already support meeting-bound fields; do not expand into general contacts/administration.",
-        "Normal single-call MediaVault UploadFile is implemented. Map remaining documented chunk/registration/replacement methods; preserve private upload state, current source policy and uncertain no-repeat semantics.",
-        "Publication schema discrepancy is resolved using independently pinned official Java WSDL matching .NET DTOs. Explicit Public input and operation-specific publication/readback/reconciliation engine mapping remain implementation work."
+        "Normal single-call MediaVault UploadFile is implemented. Map remaining documented chunk/registration/replacement methods; preserve private upload state, current source policy and uncertain no-repeat semantics."
       ],
       "requirement_ids": [
         "C01",

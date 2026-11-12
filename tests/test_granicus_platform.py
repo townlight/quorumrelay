@@ -142,3 +142,65 @@ def test_generic_sdk_caption_method_uses_documented_whole_transcript():
         Source.from_dict(SOURCE), "7", context=context())
     assert result.status == "partial" and not result.errors
     assert result.data["records"][0]["identity"]["record_type"] == "caption"
+
+GUID = "2e70d279-5765-4f42-bd56-58b3d5208a3c"
+
+
+class AliasTransport(Transport):
+    def __init__(self, wrong_uid=False):
+        super().__init__()
+        self.wrong_uid = wrong_uid
+
+    def request(self, url, **kwargs):
+        import xml.etree.ElementTree as ET
+        method = kwargs["headers"]["SOAPAction"].split("#")[-1].strip('"')
+        if method in {"Login", "Logout"}:
+            return super().request(url, **kwargs)
+        self.calls.append(method)
+        assert kwargs["allow_redirects"] is False
+        request = ET.fromstring(kwargs["body"]).find(f"{{{SOAP}}}Body/{{{RPC}}}{method}")
+        # Parameter names follow the pinned SDK's published signatures.
+        key = ("MetaDataUID" if method == "GetMetaDataByUID" else
+               "EventUID" if "Event" in method and method.endswith("ByUID") else "ClipUID")
+        if method.endswith("ByUID"):
+            assert request.findtext(key) == GUID
+        elif method in {"GetEventsByForeignID", "GetClipsByForeignID"}:
+            assert request.findtext("ForeignID") == "123"
+        elif method == "GetEvents":
+            assert not list(request)
+        uid = "a0000000-0000-0000-0000-000000000000" if self.wrong_uid else GUID
+        item = f'<ID xsi:type="xsd:int">7</ID><UID>{uid}</UID><ForeignID xsi:type="xsd:int">123</ForeignID><Name>Supplied alias</Name>'
+        if method in {"GetEventByUID", "GetClipByUID", "GetMetaDataByUID"}:
+            field = "event" if method == "GetEventByUID" else "clip" if method == "GetClipByUID" else "MetaData"
+            payload = f'<{field}>{item}</{field}>'
+        elif method == "GetClipCaptionsByUID":
+            payload = "<captions>Whole supplied caption text</captions>"
+        else:
+            field = "events" if method.startswith("GetEvents") else "clips" if method == "GetClipsByForeignID" else "metadata"
+            payload = f'<{field} e:arrayType="g:MetaDataData[1]"><item>{item}</item></{field}>'
+        return Response(url, envelope(method, payload))
+
+
+def test_documented_uid_and_foreign_id_aliases_preserve_numeric_canonical_identity():
+    resources = ["event_uid", "clip_uid", "agenda_item_uid", "event_items_uid", "clip_items_uid",
+                 "clip_indices_uid", "clip_captions_uid", "events_all", "events_foreign_id", "clips_foreign_id"]
+    for resource in resources:
+        transport = AliasTransport()
+        result = create_engine(provider_transport=transport).execute("fetch", {"source": SOURCE,
+            "api_resource": resource, "external_id": "123" if "foreign_id" in resource else GUID}, context=context())
+        assert result.status == "partial" and not result.errors, (resource, result.errors)
+        record = result.data["records"][0]
+        assert record["identity"]["external_id"] == ("clip_captions:7" if resource == "clip_captions_uid" else "7")
+        if resource in {"event_items_uid", "clip_items_uid", "clip_indices_uid", "clip_captions_uid"}:
+            assert record["identity"]["parent"]["external_id"] == "7"
+            assert transport.calls[1] in {"GetEventByUID", "GetClipByUID"}
+            assert result.data["extensions"]["parent_resolution"]["record"]["UID"] == GUID
+            assert result.data["extensions"]["parent_resolution"]["content_base64"]
+        assert result.coverage["catalog_complete"] is False
+
+
+def test_uid_identity_mismatch_fails_without_returning_unverified_record():
+    result = create_engine(provider_transport=AliasTransport(wrong_uid=True)).execute("fetch", {
+        "source": SOURCE, "api_resource": "event_uid", "external_id": GUID}, context=context())
+    assert result.status == "failed" and result.errors
+    assert not result.data.get("records")
