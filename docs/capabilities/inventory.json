@@ -3851,7 +3851,8 @@
             "Writes: CreateEvent full EventData plus unique authorized ForeignID; UpdateEvent/EventData, UpdateClip/ClipData and UpdateMetaData/MetaDataData full-model read/patch/readback. Actual coordinator duplicate/conflict/revocation/uncertain-response cases execute synthetically.",
             "Private login/cookies remain transport state, excluded from stored plans/receipts; exact-origin requests prohibit redirects.",
             "Tests: test_granicus_soap.py, test_granicus_platform.py, test_granicus_write.py; independently pinned WSDL field/method assertions.",
-            "Document URL/update and single-call agenda/minutes upload mappings execute through actual coordinator with immutable file references; expired input handles do not expire plans, lost mutation responses reconcile without resend, and altered file readback remains uncertain. Six exact vendor methods mapped; tests/test_granicus_write.py."
+            "Document URL/update and single-call agenda/minutes upload mappings execute through actual coordinator with immutable file references; expired input handles do not expire plans, lost mutation responses reconcile without resend, and altered file readback remains uncertain. Six exact vendor methods mapped; tests/test_granicus_write.py.",
+            "Pinned MediaManager.cs UploadClipMinutesDocumentXL independently defines 7,000,000-byte add/finish chunks and a 1GB ceiling. Actual coordinator tests verify >7MB complete bytes, final-response-loss reconciliation and intermediate-response-loss uncertainty without repeating a chunk."
           ],
           "limits": "Pinned SDK1.x contract, not a live/current compatibility claim. Document uploads/URLs, media upload registration/publication, metadata add/import and structured motion/attendee engine mappings remain implementation work; no delete/admin scope."
         }
@@ -4107,10 +4108,10 @@
           "evidence_ids": [
             "granicus-platform-pinned-soap-synthetic"
           ],
-          "details": "UploadEventAgendaDocument and UploadClipMinutesDocument bind immutable scoped files into typed SOAP Document at send time. Single-call mapper ceiling 7,000,000 bytes; exact independent GET byte/hash readback or uncertain receipt with no mutation replay. Larger SDK chunking remains unmapped.",
+          "details": "UploadEventAgendaDocument and UploadClipMinutesDocument bind immutable scoped files into typed SOAP Document at send time. Minutes over 7,000,000 bytes use the pinned vendor SDK add/finish protocol with a plan-bound upload UUID, 7,000,000-byte chunks and min(1GB, configured transfer ceiling). Event agenda uploads retain a 7MB adapter safety ceiling. Exact independent GET byte/hash readback or uncertain receipt; ambiguous add/finish responses are never replayed.",
           "dependencies": [],
           "remaining_verification": [
-            "Implement documented chunked minutes (>7,000,000 bytes) and media upload registration/publishing; map remaining supporting operations."
+            "Media upload registration/publication and remaining supporting read mappings."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -5288,7 +5289,7 @@
           "evidence_ids": [
             "granicus-platform-pinned-soap-synthetic"
           ],
-          "account_requirements": "Explicit document operation/resource/meeting allowlists and exact allowed HTTPS document origins. Single-call upload mapper safe ceiling 7,000,000 bytes; larger chunked SDK path remains incomplete.",
+          "account_requirements": "Explicit document operation/resource/meeting allowlists and allowed HTTPS document origins. Documented SDK chunking above 7,000,000 bytes, up to min(1GB, configured transfer ceiling); no ambiguous chunk replay.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
           "readback_receipt": "URL methods verify AgendaFile/MinutesFile and optional minutes Name via GetClipMinutesDocuments. Uploads additionally GET the supplied readback URL without SOAP credentials and require exact planned length/SHA256; otherwise uncertain, no replay.",
           "verification_status": "synthetic_contract_verified",
@@ -5315,7 +5316,7 @@
         {
           "entity": "media/metadata/motions/attendees",
           "operation": "upload",
-          "endpoint_or_format": "Remaining pinned Platform WSDL methods including chunked minutes upload",
+          "endpoint_or_format": "Remaining pinned Platform WSDL media/metadata/motion/attendee methods",
           "field_mappings": [],
           "evidence_ids": [
             "granicus-platform-pinned-soap-synthetic"
@@ -5358,7 +5359,7 @@
         "Unverified and access-blocked are incomplete, not unsupported."
       ],
       "remaining_research": [
-        "Map remaining documented in-domain SDK methods: chunked minutes upload, RegisterClipUpload/PublishClip (publication explicit only), metadata Add/Import, motion/attendee creation and supporting captions/minutes/attachment/video-location reads.",
+        "Map remaining documented in-domain SDK methods: RegisterClipUpload/PublishClip (publication explicit only), metadata Add/Import, motion/attendee creation and supporting captions/minutes/attachment/video-location reads.",
         "Inspect pinned vendor comments/examples for untyped Payload/native enum semantics; do not invent values.",
         "Keep Platform SOAP distinct from ViewPublisher, Legistar, Peak, Swagit and iQM2; no cross-product endpoint inference."
       ],

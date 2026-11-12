@@ -4,6 +4,8 @@ from copy import deepcopy
 from dataclasses import asdict
 import base64
 import hashlib
+import json
+import uuid
 from time import monotonic
 from urllib.parse import urlsplit
 
@@ -245,7 +247,7 @@ class GranicusWriteAdapter(WriteAdapter):
         except ValueError:
             pass
 
-    def _document_parameters(self, prepared, bounds):
+    def _document_parameters(self, prepared, bounds, *, data=None, location=""):
         change = WriteChange.from_dict(prepared["change"])
         fields = change.fields
         params = {"EventID" if fields["ParentType"] == "event" else "ClipID": numeric_id(change.resource_id)}
@@ -255,12 +257,18 @@ class GranicusWriteAdapter(WriteAdapter):
                 params["Name"] = fields["Name"]
         else:
             part = prepared["native"]["files"][0]
-            # The SDK documents single-call minutes uploads up to 7,000,000 bytes.
-            # The same adapter ceiling for event agendas is a safety bound, not a vendor limit.
-            if not 0 < part["reference"]["byte_length"] <= min(7_000_000, bounds.transfer_bytes):
-                raise ValueError("This single-call SOAP mapper accepts 1..7,000,000 bytes; chunked SDK upload remains separate.")
-            data = self._file_bytes(part)
-            params["Document"] = {"Description": fields["Description"], "Location": "",
+            # The vendor SDK documents 7,000,000-byte chunks and a 1GB total
+            # ceiling for minutes. Event agendas retain the adapter's safe 7MB ceiling.
+            maximum = 1_000_000_000 if fields["Kind"] == "minutes" else 7_000_000
+            if not 0 < part["reference"]["byte_length"] <= min(maximum, bounds.transfer_bytes):
+                raise ValueError("The SOAP document exceeds its documented/adapter safe byte ceiling.")
+            if data is None:
+                with self._open_file(part) as stream:
+                    data = stream.read(7_000_000)
+                chunked = prepared["native"].get("chunked_upload")
+                if chunked:
+                    location = json.dumps({"action": "add", "id": chunked["id"]}, separators=(",", ":"))
+            params["Document"] = {"Description": fields["Description"], "Location": location,
                                   "FileContents": base64.b64encode(data).decode("ascii"), "FileExtension": part["filename"].rsplit(".", 1)[-1]}
             if fields["Kind"] == "minutes":
                 params["Name"] = fields["Name"]
@@ -290,6 +298,9 @@ class GranicusWriteAdapter(WriteAdapter):
             "expected_version": fingerprint, "read_url": session.url,
             "contract_revision": contract()["source_revision"],
             "conflict_semantics": "preflight_full_parent_compare_not_atomic_provider_cas"}
+        if files and fields["Kind"] == "minutes" and files[0]["reference"]["byte_length"] > 7_000_000:
+            prepared["native"]["chunked_upload"] = {"id": str(uuid.uuid4()), "chunk_bytes": 7_000_000,
+                "count": (files[0]["reference"]["byte_length"] + 6_999_999) // 7_000_000}
         request_xml(method, self._document_parameters(prepared, bounds), byte_limit=bounds.transfer_bytes)
         return prepared
 
@@ -303,7 +314,22 @@ class GranicusWriteAdapter(WriteAdapter):
             if persist:
                 persist({"resource_id": change.resource_id, "read_url": session.url})
             try:
-                session.call(prepared["native"]["soap_method"], parameters)
+                chunked = prepared["native"].get("chunked_upload")
+                if chunked:
+                    # Mirror the pinned SDK: add chunks, finish on the last.
+                    # Any uncertain response goes to readback only; never add a
+                    # chunk twice or restart a partially received document.
+                    with self._open_file(prepared["native"]["files"][0]) as stream:
+                        for index in range(chunked["count"]):
+                            data = stream.read(chunked["chunk_bytes"])
+                            location = json.dumps({"action": "finish" if index == chunked["count"]-1 else "add",
+                                                   "id": chunked["id"]}, separators=(",", ":"))
+                            parameters = self._document_parameters(prepared, bounds, data=data, location=location)
+                            session.call(prepared["native"]["soap_method"], parameters)
+                            if persist:
+                                persist({"completed_chunks": index+1, "upload_id": chunked["id"]})
+                else:
+                    session.call(prepared["native"]["soap_method"], parameters)
             except ValueError:
                 raise AmbiguousWrite() from None
             return self._document_outcome(source, prepared, context, bounds, deadline, session)

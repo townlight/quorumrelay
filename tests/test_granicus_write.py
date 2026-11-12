@@ -241,9 +241,20 @@ class DocumentNetwork(Network):
                 if action.startswith("Upload"):
                     document = sent.find("Document")
                     assert set(child.tag for child in document) == {"Description", "Location", "FileContents", "FileExtension"}
-                    assert document.findtext("Location") in {None, ""}
+                    location = document.findtext("Location")
                     assert document.findtext("FileExtension") == "pdf"
-                    self.file_bytes = base64.b64decode(document.findtext("FileContents"), validate=True)
+                    data = base64.b64decode(document.findtext("FileContents"), validate=True)
+                    if location:
+                        info = json.loads(location)
+                        assert set(info) == {"action", "id"} and info["action"] in {"add", "finish"}
+                        assert len(data) <= 7_000_000
+                        if not hasattr(self, "chunks"):
+                            self.chunks, self.chunk_id = [], info["id"]
+                        assert info["id"] == self.chunk_id
+                        self.chunks.append(data)
+                        self.file_bytes = b"".join(self.chunks) if info["action"] == "finish" else b""
+                    else:
+                        self.file_bytes = data
                     self.document_name = sent.findtext("Name") or ""
                     self.values[field] = "https://synthetic-city.granicus.com/document.pdf"
                 else:
@@ -330,3 +341,40 @@ def test_named_minutes_url_uses_documented_method_and_name_readback(tmp_path):
     result = engine.execute("commit_write", request, context=context)
     assert result.status == "completed", result.errors
     assert network.mutations == 1 and network.document_name == "Approved named Minutes"
+
+
+@pytest.mark.parametrize("lost_final", [False, True, "first"])
+def test_vendor_sdk_chunked_minutes_add_finish_exact_bytes(tmp_path, lost_final):
+    import io
+    from civic_data_connectors.write_files import stage_write_file
+    network = DocumentNetwork("clip")
+    engine, _, context, change = setup(tmp_path, network)
+    context.credentials["granicus"].update(permissions=["document:upload"], meeting_ids=["11"])
+    data = b"%PDF-1.7\n" + b"x" * 7_000_031
+    handle = stage_write_file(engine, io.BytesIO(data), context=context, filename="large.pdf", content_type="application/pdf")
+    change.update(entity="document", operation="upload", meeting_id="11", fields={"ParentType": "clip",
+        "Kind": "minutes", "Description": "Full document", "Name": "Large Minutes"},
+        files=[{"part": "Document", "filename": "large.pdf", "content_type": "application/pdf", "file_handle": handle}])
+    request = plan(engine, context, change)
+    original_send = network.send
+    def send(url, **kwargs):
+        # ElementTree emits JSON quotes unescaped inside element text.
+        body = kwargs.get("body") or b""
+        if (lost_final is True and b'"finish"' in body) or (lost_final == "first" and b'"add"' in body):
+            network.lose_response = True
+        return original_send(url, **kwargs)
+    network.send = send
+    result = engine.execute("commit_write", request, context=context)
+    assert result.status == ("partial" if lost_final else "completed"), result.errors
+    if lost_final:
+        result = engine.execute("commit_write", request, context=context)
+    if lost_final == "first":
+        assert result.status == "partial" and network.mutations == 1
+        assert engine.execute("commit_write", request, context=context).status == "partial"
+        assert network.mutations == 1  # Never duplicate an ambiguously received add chunk.
+        return
+    assert result.status == "completed", result.errors
+    assert network.mutations == 2 and network.file_bytes == data
+    assert [len(chunk) for chunk in network.chunks] == [7_000_000, len(data)-7_000_000]
+    assert engine.execute("commit_write", request, context=context).status == "completed"
+    assert network.mutations == 2
