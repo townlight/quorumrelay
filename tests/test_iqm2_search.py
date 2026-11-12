@@ -133,3 +133,12 @@ def test_public_engine_registration_and_saved_parser_preserve_mixed_ids():
     assert saved.status == 'completed', saved.public_dict()
     assert [r['identity'] for r in saved.data['records']] == [r['identity'] for r in records]
     assert saved.data['capture']['content_base64'] == result.data['bundle']['captures'][0]['content_base64']
+
+
+def test_existing_kent_default_source_uses_same_fixed_search_route():
+    item = request(max_pages=1)
+    item['source'] = {**SOURCE, 'url': 'https://kentwa.iqm2.com/Citizens/default.aspx'}
+    transport = Transport()
+    result = native_search(create_engine(), item, None, OperationContext(), transport=transport)
+    assert result.status == 'partial' and len(result.data['bundle']['records']) == 20
+    assert transport.calls[0][0] == 'https://kentwa.iqm2.com/Citizens/Search.aspx'

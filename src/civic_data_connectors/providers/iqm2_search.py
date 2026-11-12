@@ -253,7 +253,7 @@ def native_search(engine, request, content, context, *, transport=None):
         return OperationResult("failed", errors=(Error("permission_denied", "Source namespace is not authorized."),))
     p = urlsplit(source.url)
     if (source.provider != "iqm2" or p.scheme != "https" or p.netloc != "kentwa.iqm2.com"
-            or p.path.casefold() not in {"/citizens/calendar.aspx", "/citizens/search.aspx"} or p.query or p.fragment):
+            or p.path.casefold() not in {"/citizens/calendar.aspx", "/citizens/search.aspx", "/citizens/default.aspx"} or p.query or p.fragment):
         raise ValueError("Public search requires the observed Kent iQM2 source.")
     query, bounds = _query(request.get("query", {})), Bounds(**request.get("bounds", {}))
     lower = max(filter(None, (query.date_from, bounds.date_from)), default=None)
