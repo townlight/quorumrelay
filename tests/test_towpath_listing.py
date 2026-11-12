@@ -56,3 +56,14 @@ def test_towpath_empty_published_listing_is_not_an_invented_record():
         content=b'<div class="dtp-meetings-list">No meetings</div>',
     )
     assert result.status == "partial" and result.data["records"] == []
+
+
+def test_towpath_single_numeric_detail_reuses_original_reader_and_preserves_id():
+    detail=b'<h3 class="dtp-meeting-title">Regular Meeting</h3><time datetime="2025-08-12">August 12</time><a title="Download the minutes" href="/application/files/minutes.pdf">Minutes PDF</a>'
+    class DetailTransport:
+        def request(self,url,**kwargs):
+            assert url=="https://digitaltowpath.digitaltowpath.net/meetings/detail/27"
+            return Response(url,detail,"text/html")
+    result=create_engine(provider_transport=DetailTransport()).fetch_record(SOURCE,"27")
+    assert result.status=="partial" and result.data["records"][0]["identity"]["external_id"]=="27"
+    assert result.data["records"][0]["normalized"]["documents"][0]["kind"]=="minutes"

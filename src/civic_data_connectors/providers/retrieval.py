@@ -66,6 +66,38 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if source.provider == "civicweb":
             from .civicweb import fetch_record
             return fetch_record(source, namespace, request["external_id"], bounds, context, transport)
+        if source.provider == "digital-towpath":
+            external_id = request["external_id"]
+            if (not isinstance(external_id, str) or re.fullmatch(r"[1-9][0-9]{0,18}", external_id) is None
+                    or bounds.checkpoint is not None):
+                raise ValueError("Digital Towpath single-detail reads require a numeric supplied meeting ID and no checkpoint.")
+            from dataclasses import replace
+            target = replace(source, url=_origin(source.url) + "/meetings/detail/" + external_id,
+                             input_format="digital-towpath-detail-html")
+            coverage = {"scope": "one numeric public meeting detail; supplied documents only",
+                        "catalog_complete": False, "source_complete": False}
+            if context.check_cancelled():
+                return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
+            started = monotonic()
+            try:
+                response = transport.request(target.url, byte_limit=bounds.parser_bytes,
+                    deadline_seconds=bounds.deadline_seconds, allowed_origins=(_origin(target.url),),
+                    allow_redirects=False)
+                if context.check_cancelled():
+                    return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
+                if (response.status != 200 or response.url != target.url
+                        or len(response.content) > bounds.parser_bytes
+                        or monotonic() - started >= bounds.deadline_seconds):
+                    raise ValueError("The requested detail is unavailable or left its bounds.")
+                bundle, errors = parse_page(engine, target, namespace, response.content,
+                                            target.input_format, bounds, context)
+                if any(record["identity"]["external_id"] != external_id for record in bundle["records"]):
+                    raise ValueError("The public detail does not match the requested meeting ID.")
+                return OperationResult("partial", bundle, errors, coverage, context.operation_id)
+            except Exception:
+                return OperationResult("failed", errors=(Error("provider_detail_unavailable",
+                    "The requested public detail could not be retrieved or validated.", source=target.url),),
+                    coverage=coverage, operation_id=context.operation_id)
         if source.provider == "wistia":
             from .wistia import fetch_record
             return fetch_record(source, namespace, request["external_id"], bounds, context, transport,
