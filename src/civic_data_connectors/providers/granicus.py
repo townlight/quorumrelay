@@ -6,10 +6,23 @@ from urllib.parse import parse_qs, urljoin, urlsplit
 
 from .. import compat
 from ..engine import canonical_hash
+from .identification import validate_url
+
+
+class _ListingRows(compat.ViewPublisherRows):
+    """Add supplied Peak packet links without changing the baseline reader."""
+
+    def handle_starttag(self, tag, attrs):
+        super().handle_starttag(tag, attrs)
+        if tag != "a" or self.row is None or self.cell != "AgendaPacketLink":
+            return
+        href = dict(attrs).get("href") or ""
+        if href:
+            self.row.setdefault("packet_links", []).append(href)
 
 
 def listing_rows(source, content):
-    parser = compat.ViewPublisherRows()
+    parser = _ListingRows()
     parser.feed(content.decode("utf-8", errors="replace"))
     rows = []
     seen = set()
@@ -47,6 +60,19 @@ def listing_rows(source, content):
         seen.add(identity)
         documents = [{"kind": kind, "url": urljoin(source.url, raw[kind])}
                      for kind in ("agenda", "minutes") if raw.get(kind)]
+        for href in raw.get("packet_links", []):
+            url = urljoin(source.url, href)
+            try:
+                validate_url(url)
+            except ValueError:
+                continue
+            parts = urlsplit(url)
+            if (parts.scheme != "https" or parts.fragment
+                    or not parts.path.lower().endswith(".pdf")):
+                continue
+            document = {"kind": "packet", "url": url}
+            if document not in documents:
+                documents.append(document)
         recordings = [{"url": player}] if player else []
         if recordings:
             recordings[0].update({f"{kind}_url": urljoin(source.url, raw[kind])
