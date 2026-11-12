@@ -1,6 +1,6 @@
 # QuorumRelay write adapter contract
 
-Schema 2.0.0. Candidate 0.1.0.dev3. Observation date: 2026-11-11. The engine contains real native write mappings and `PublicWriteTransport`; it can change an upstream provider when an authorized caller supplies usable credentials and approves an exact plan. Deterministic checks inject synthetic transports into those same mappings. Live provider mutation/readback acceptance remains **NOT_RUN** because an authorized test tenant and credentials have not been supplied. A synthetic receipt does not establish vendor acceptance.
+Schema 2.0.0. Candidate 0.1.0.dev8. Current status: 2026-11-12. The engine contains real native write mappings and `PublicWriteTransport`; it can change an upstream provider when an authorized caller supplies usable credentials and approves an exact plan. Deterministic checks inject synthetic transports into those same mappings. Live provider mutation/readback acceptance remains **NOT_RUN** because an authorized test tenant and credentials have not been supplied. A synthetic receipt does not establish vendor acceptance.
 
 ## Public operations
 

@@ -1,3 +1,9 @@
+# QuorumRelay current continuation and historical handoff
+
+Current immutable candidate is `quorumrelay==0.1.0.dev8`, schema `2.0.0`, with 31 providers, 34 baseline formats and 28 additive parsers. Frozen source is `3862e5f4ad7064aee722e09bb438899c3566477f`; exact artifacts, current four consumer heads, required CI and remaining acceptance are maintained in [EXECUTION-STATE](../EXECUTION-STATE.md). The final signed Townlight 1.8.5 candidate has passed independent signature/provenance verification; its preserved-profile 1.8.4â†’1.8.5 upgrade, retained-ID checks and affected installed TownCloud UI/export readback passed. Required hosted installer lifecycle CI passed. Full live provider acceptance/public release remains incomplete as listed in current state. Live vendor write/account acceptance remains incomplete without authorized access.
+
+The remainder is dated historical evidence. Counts, versions, ownership and job statements below describe their recorded snapshots and do not override current state or reduce the approved scope.
+
 # QuorumRelay core continuation, 2026-11-11
 
 Immutable integration snapshot is `quorumrelay==0.1.0.dev3`, schema `2.0.0`. Source now includes post-dev3 related Legistar reads and authenticated Repository folder discovery; next candidate version is root-owned and pending. Scott lifted the implementation pause for the full approved plan. The historical handoff below is retained as dated evidence; its mock-only statement is not a scope reduction or a current authorization determination.
