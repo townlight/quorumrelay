@@ -17,6 +17,7 @@ FORMATS = {provider: tuple(row["input_format"] for row in compat.source_formats(
            for provider in dict.fromkeys(row["connector"] for row in compat.source_formats())}
 ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json", "legistar-votes-json",
                                  "legistar-rollcalls-json"),
+                      "boardable": ("boardable-public-meetings-json",),
                       "telvue": ("telvue-connect-media-json", "telvue-connect-videos-json",
                                  "telvue-connect-playlists-json"),
                       "municode-meetings": ("essential-multimedia-json",),

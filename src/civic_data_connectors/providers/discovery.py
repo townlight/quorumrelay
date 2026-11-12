@@ -361,6 +361,17 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     saved = _decode_content(request, content)
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")
+    if source.provider == "simbli" and saved is None and urlsplit(source.url).path.lower() in {
+            "/index.aspx", "/sb_meetings/sb_meetinglisting.aspx"}:
+        from .simbli import discover_public
+        return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport(),
+                               record_types=request.get("record_types"))
+    if source.provider == "boardable" and saved is None:
+        path = urlsplit(source.url).path.strip("/").split("/")
+        if len(path) == 1 or (len(path) == 2 and path[1] == "meetings"):
+            from .boardable import discover_public
+            return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport(),
+                                   record_types=request.get("record_types"))
     if source.provider == "novusagenda" and (source.input_format == "novus-public-listing-html" or
                                             (saved is None and source.input_format is None)):
         from .novus import discover_public
