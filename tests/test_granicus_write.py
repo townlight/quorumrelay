@@ -214,3 +214,119 @@ def test_related_full_model_updates_use_documented_methods(tmp_path, entity, mod
     assert result.status == "completed", result.errors
     assert result.data["items"][0]["readback"]["Name"] == "After"
     assert network.mutations == 1
+
+
+class DocumentNetwork(Network):
+    def __init__(self, parent_type="event"):
+        super().__init__(*( () if parent_type == "event" else ("ClipData", "GetClip", "UpdateClip", "clip") ))
+        self.file_bytes = b""
+        self.document_name = ""
+
+    def send(self, url, **kwargs):
+        import base64
+        if kwargs["method"] == "GET":
+            assert kwargs["headers"] == {}  # No private SOAP cookies on document origin.
+            return WriteResponse(200, b"altered" if getattr(self, "corrupt_readback", False) else self.file_bytes)
+        action = kwargs["headers"]["SOAPAction"].split("#")[-1].strip('"')
+        if action.startswith("Set") or action.startswith("Upload") or action == "GetClipMinutesDocuments":
+            assert kwargs["headers"].get("Cookie") == "SID=synthetic-private-session"
+            body = ET.Element(f"{{{SOAP}}}Envelope")
+            response = ET.SubElement(ET.SubElement(body, f"{{{SOAP}}}Body"), f"{{{RPC}}}{action}Response")
+            sent = ET.fromstring(kwargs["body"]).find(f"{{{SOAP}}}Body/{{{RPC}}}{action}")
+            field = "MinutesFile" if "Minutes" in action else "AgendaFile"
+            if action == "GetClipMinutesDocuments":
+                rows = ET.SubElement(response, "MinutesDocuments", {f"{{{ENC}}}arrayType": "g:MinutesDocumentData[1]"})
+                ET.SubElement(ET.SubElement(rows, "item"), "Name").text = self.document_name
+            else:
+                if action.startswith("Upload"):
+                    document = sent.find("Document")
+                    assert set(child.tag for child in document) == {"Description", "Location", "FileContents", "FileExtension"}
+                    assert document.findtext("Location") in {None, ""}
+                    assert document.findtext("FileExtension") == "pdf"
+                    self.file_bytes = base64.b64decode(document.findtext("FileContents"), validate=True)
+                    self.document_name = sent.findtext("Name") or ""
+                    self.values[field] = "https://synthetic-city.granicus.com/document.pdf"
+                else:
+                    self.values[field] = sent.findtext("URL")
+                    self.document_name = sent.findtext("Name") or ""
+                self.mutations += 1
+                if self.lose_response:
+                    self.lose_response = False
+                    raise TimeoutError("Synthetic lost document mutation response")
+            return WriteResponse(200, ET.tostring(body))
+        return super().send(url, **kwargs)
+
+
+@pytest.mark.parametrize("parent,kind", [("event", "agenda"), ("clip", "agenda"), ("clip", "minutes")])
+def test_exact_document_url_plans_and_readback(tmp_path, parent, kind):
+    network = DocumentNetwork(parent)
+    engine, _, context, change = setup(tmp_path, network)
+    context.credentials["granicus"].update(permissions=["document:update"], meeting_ids=["11"])
+    change.update(entity="document", meeting_id="11", fields={"ParentType": parent, "Kind": kind,
+                  "URL": "https://synthetic-city.granicus.com/supplied.pdf"})
+    request = plan(engine, context, change)
+    stored = engine.storage.get("write_plans", request["plan_id"], scope=context.scope)
+    expected_method = {("event", "agenda"): "SetEventAgendaURL", ("clip", "agenda"): "SetClipAgendaURL",
+                       ("clip", "minutes"): "SetClipMinutesURL"}[parent, kind]
+    assert stored.value["plan"]["changes"][0]["native"]["soap_method"] == expected_method
+    result = engine.execute("commit_write", request, context=context)
+    assert result.status == "completed", result.errors
+    assert network.mutations == 1
+    assert engine.execute("commit_write", request, context=context).status == "completed"
+    assert network.mutations == 1
+
+
+@pytest.mark.parametrize("parent,kind", [("event", "agenda"), ("clip", "minutes")])
+@pytest.mark.parametrize("lost", [False, True])
+def test_document_upload_immutable_bytes_expiry_and_uncertain_reconciliation(tmp_path, parent, kind, lost):
+    import io
+    import hashlib
+    from civic_data_connectors.write_files import stage_write_file
+    network = DocumentNetwork(parent)
+    engine, _, context, change = setup(tmp_path, network)
+    context.credentials["granicus"].update(permissions=["document:upload"], meeting_ids=["11"])
+    data = b"%PDF-1.7\nsynthetic documented file input\n%%EOF"
+    handle = stage_write_file(engine, io.BytesIO(data), context=context, filename="agenda.pdf", content_type="application/pdf")
+    fields = {"ParentType": parent, "Kind": kind, "Description": "Approved document"}
+    if kind == "minutes":
+        fields["Name"] = "Approved Minutes"
+    change.update(entity="document", operation="upload", meeting_id="11", fields=fields,
+                  files=[{"part": "Document", "filename": "agenda.pdf", "content_type": "application/pdf", "file_handle": handle}])
+    request = plan(engine, context, change)
+    item = engine.storage.get("service_files", handle, scope=context.scope)
+    engine.storage.put("service_files", handle, {**item.value, "expires_at": "2000-01-01T00:00:00Z"}, scope=context.scope)
+    network.lose_response = lost
+    result = engine.execute("commit_write", request, context=context)
+    assert result.status == ("partial" if lost else "completed"), result.errors
+    if lost:
+        network.corrupt_readback = True
+        assert engine.execute("commit_write", request, context=context).status == "partial"
+        assert network.mutations == 1
+        network.corrupt_readback = False
+        result = engine.execute("commit_write", request, context=context)
+    assert result.status == "completed" and network.mutations == 1
+    assert result.data["items"][0]["document_sha256"] == hashlib.sha256(data).hexdigest()
+    assert network.file_bytes == data
+
+
+def test_document_cross_origin_policy_prevents_send(tmp_path):
+    network = DocumentNetwork()
+    engine, _, context, change = setup(tmp_path, network)
+    context.credentials["granicus"].update(permissions=["document:update"], meeting_ids=["11"])
+    change.update(entity="document", meeting_id="11", fields={"ParentType": "event", "Kind": "agenda", "URL": "https://other.granicus.com/file.pdf"})
+    assert engine.execute("plan_write", {"source": SOURCE, "changes": [change]}, context=context).status == "failed"
+    assert network.mutations == 0
+
+
+def test_named_minutes_url_uses_documented_method_and_name_readback(tmp_path):
+    network = DocumentNetwork("clip")
+    engine, _, context, change = setup(tmp_path, network)
+    context.credentials["granicus"].update(permissions=["document:update"], meeting_ids=["11"])
+    change.update(entity="document", meeting_id="11", fields={"ParentType": "clip", "Kind": "minutes",
+                  "Name": "Approved named Minutes", "URL": "https://synthetic-city.granicus.com/minutes.pdf"})
+    request = plan(engine, context, change)
+    stored = engine.storage.get("write_plans", request["plan_id"], scope=context.scope)
+    assert stored.value["plan"]["changes"][0]["native"]["soap_method"] == "SetClipMinutesURLWithName"
+    result = engine.execute("commit_write", request, context=context)
+    assert result.status == "completed", result.errors
+    assert network.mutations == 1 and network.document_name == "Approved named Minutes"

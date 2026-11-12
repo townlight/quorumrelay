@@ -3850,7 +3850,8 @@
             "Engine reads: date-range Events, folder Clips, supplied Event/Clip/MetaData, Event/Clip metadata and Clip indices; raw XML, provider identities, unknown fields, revision and related parents retained.",
             "Writes: CreateEvent full EventData plus unique authorized ForeignID; UpdateEvent/EventData, UpdateClip/ClipData and UpdateMetaData/MetaDataData full-model read/patch/readback. Actual coordinator duplicate/conflict/revocation/uncertain-response cases execute synthetically.",
             "Private login/cookies remain transport state, excluded from stored plans/receipts; exact-origin requests prohibit redirects.",
-            "Tests: test_granicus_soap.py, test_granicus_platform.py, test_granicus_write.py; independently pinned WSDL field/method assertions."
+            "Tests: test_granicus_soap.py, test_granicus_platform.py, test_granicus_write.py; independently pinned WSDL field/method assertions.",
+            "Document URL/update and single-call agenda/minutes upload mappings execute through actual coordinator with immutable file references; expired input handles do not expire plans, lost mutation responses reconcile without resend, and altered file readback remains uncertain. Six exact vendor methods mapped; tests/test_granicus_write.py."
           ],
           "limits": "Pinned SDK1.x contract, not a live/current compatibility claim. Document uploads/URLs, media upload registration/publication, metadata add/import and structured motion/attendee engine mappings remain implementation work; no delete/admin scope."
         }
@@ -4083,7 +4084,7 @@
             "granicus-sdk-search",
             "granicus-platform-pinned-soap-synthetic"
           ],
-          "details": "Full-model EventData/ClipData/MetaDataData updates use exact documented operations, full before hash preflight, durable intent, readback and uncertain-response reconciliation. This is a preflight comparison, not atomic vendor CAS.",
+          "details": "Full-model EventData/ClipData/MetaDataData updates use exact documented operations, full before hash preflight, durable intent, readback and uncertain-response reconciliation. This is a preflight comparison, not atomic vendor CAS. Four documented document URL methods are also mapped, with exact URL and optional named-minutes readback.",
           "dependencies": [],
           "remaining_verification": [
             "Remaining documented in-domain SOAP methods are not yet all mapped; see outbound mappings and remaining research."
@@ -4102,14 +4103,14 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "granicus-platform-pinned-soap-synthetic"
           ],
-          "details": "Pinned WSDL specifies UploadEventAgendaDocument, UploadClipMinutesDocument and RegisterClipUpload. Binding exists; durable-file engine mapping remains implementation work.",
+          "details": "UploadEventAgendaDocument and UploadClipMinutesDocument bind immutable scoped files into typed SOAP Document at send time. Single-call mapper ceiling 7,000,000 bytes; exact independent GET byte/hash readback or uncertain receipt with no mutation replay. Larger SDK chunking remains unmapped.",
           "dependencies": [],
           "remaining_verification": [
-            "Implement documented upload/URL mappings with immutable file binding, exact-plan readback and uncertain receipts."
+            "Implement documented chunked minutes (>7,000,000 bytes) and media upload registration/publishing; map remaining supporting operations."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -5014,9 +5015,307 @@
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
         {
-          "entity": "agenda/minutes/media/metadata/motions/attendees",
+          "entity": "document",
+          "operation": "update",
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 SetEventAgendaURL",
+          "field_mappings": [
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "EventID",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "URL",
+              "mapping_level": "exact_native_parameter"
+            }
+          ],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Explicit document operation/resource/meeting allowlists and exact allowed HTTPS document origins. Single-call upload mapper safe ceiling 7,000,000 bytes; larger chunked SDK path remains incomplete.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "URL methods verify AgendaFile/MinutesFile and optional minutes Name via GetClipMinutesDocuments. Uploads additionally GET the supplied readback URL without SOAP credentials and require exact planned length/SHA256; otherwise uncertain, no replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "SetEventAgendaURL",
+          "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "document",
+          "operation": "update",
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 SetClipAgendaURL",
+          "field_mappings": [
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "ClipID",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "URL",
+              "mapping_level": "exact_native_parameter"
+            }
+          ],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Explicit document operation/resource/meeting allowlists and exact allowed HTTPS document origins. Single-call upload mapper safe ceiling 7,000,000 bytes; larger chunked SDK path remains incomplete.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "URL methods verify AgendaFile/MinutesFile and optional minutes Name via GetClipMinutesDocuments. Uploads additionally GET the supplied readback URL without SOAP credentials and require exact planned length/SHA256; otherwise uncertain, no replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "SetClipAgendaURL",
+          "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "document",
+          "operation": "update",
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 SetClipMinutesURL",
+          "field_mappings": [
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "ClipID",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "URL",
+              "mapping_level": "exact_native_parameter"
+            }
+          ],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Explicit document operation/resource/meeting allowlists and exact allowed HTTPS document origins. Single-call upload mapper safe ceiling 7,000,000 bytes; larger chunked SDK path remains incomplete.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "URL methods verify AgendaFile/MinutesFile and optional minutes Name via GetClipMinutesDocuments. Uploads additionally GET the supplied readback URL without SOAP credentials and require exact planned length/SHA256; otherwise uncertain, no replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "SetClipMinutesURL",
+          "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "document",
+          "operation": "update",
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 SetClipMinutesURLWithName",
+          "field_mappings": [
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "ClipID",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "URL",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "Name",
+              "mapping_level": "exact_native_parameter"
+            }
+          ],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Explicit document operation/resource/meeting allowlists and exact allowed HTTPS document origins. Single-call upload mapper safe ceiling 7,000,000 bytes; larger chunked SDK path remains incomplete.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "URL methods verify AgendaFile/MinutesFile and optional minutes Name via GetClipMinutesDocuments. Uploads additionally GET the supplied readback URL without SOAP credentials and require exact planned length/SHA256; otherwise uncertain, no replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "SetClipMinutesURLWithName",
+          "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "document",
           "operation": "upload",
-          "endpoint_or_format": "Pinned Platform WSDL methods; see provider-api-contracts.json granicus_platform",
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 UploadEventAgendaDocument",
+          "field_mappings": [
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "EventID",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "Document.Description",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "Document.Location",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "Document.FileContents",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "Document.FileExtension",
+              "mapping_level": "exact_native_parameter"
+            }
+          ],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Explicit document operation/resource/meeting allowlists and exact allowed HTTPS document origins. Single-call upload mapper safe ceiling 7,000,000 bytes; larger chunked SDK path remains incomplete.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "URL methods verify AgendaFile/MinutesFile and optional minutes Name via GetClipMinutesDocuments. Uploads additionally GET the supplied readback URL without SOAP credentials and require exact planned length/SHA256; otherwise uncertain, no replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "UploadEventAgendaDocument",
+          "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "document",
+          "operation": "upload",
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 UploadClipMinutesDocument",
+          "field_mappings": [
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "ClipID",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "Document.Description",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "Document.Location",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "Document.FileContents",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "Document.FileExtension",
+              "mapping_level": "exact_native_parameter"
+            },
+            {
+              "normalized": "explicit caller metadata or immutable file",
+              "provider_field": "Name",
+              "mapping_level": "exact_native_parameter"
+            }
+          ],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Explicit document operation/resource/meeting allowlists and exact allowed HTTPS document origins. Single-call upload mapper safe ceiling 7,000,000 bytes; larger chunked SDK path remains incomplete.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "URL methods verify AgendaFile/MinutesFile and optional minutes Name via GetClipMinutesDocuments. Uploads additionally GET the supplied readback URL without SOAP credentials and require exact planned length/SHA256; otherwise uncertain, no replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "UploadClipMinutesDocument",
+          "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "media/metadata/motions/attendees",
+          "operation": "upload",
+          "endpoint_or_format": "Remaining pinned Platform WSDL methods including chunked minutes upload",
           "field_mappings": [],
           "evidence_ids": [
             "granicus-platform-pinned-soap-synthetic"
@@ -5059,7 +5358,7 @@
         "Unverified and access-blocked are incomplete, not unsupported."
       ],
       "remaining_research": [
-        "Map remaining documented in-domain SDK methods: agenda/minutes upload and URL setters, RegisterClipUpload/PublishClip (publication explicit only), metadata Add/Import, motion/attendee creation and supporting captions/minutes/attachment/video-location reads.",
+        "Map remaining documented in-domain SDK methods: chunked minutes upload, RegisterClipUpload/PublishClip (publication explicit only), metadata Add/Import, motion/attendee creation and supporting captions/minutes/attachment/video-location reads.",
         "Inspect pinned vendor comments/examples for untyped Payload/native enum semantics; do not invent values.",
         "Keep Platform SOAP distinct from ViewPublisher, Legistar, Peak, Swagit and iQM2; no cross-product endpoint inference."
       ],

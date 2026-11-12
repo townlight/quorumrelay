@@ -2,6 +2,10 @@
 
 from copy import deepcopy
 from dataclasses import asdict
+import base64
+import hashlib
+from time import monotonic
+from urllib.parse import urlsplit
 
 from ..engine import canonical_hash
 from ..write_adapters import AmbiguousWrite, WriteAdapter, WriteChange, WriteFailure
@@ -48,6 +52,9 @@ class GranicusWriteAdapter(WriteAdapter):
 
     def authorize(self, source, change, context):
         config = self.credentials(source, context)
+        if change.entity == "document":
+            self._document_policy(source, change, context)
+            return
         create = change.entity == "event" and change.operation == "create"
         if change.entity not in MODELS or (change.operation != "update" and not create) or change.files:
             raise WriteFailure("mapping_unverified", "This adapter currently maps documented full-model event/recording/agenda_item updates.")
@@ -77,6 +84,8 @@ class GranicusWriteAdapter(WriteAdapter):
 
     def prepare(self, source, change, context, bounds, deadline):
         self.authorize(source, change, context)
+        if change.entity == "document":
+            return self._prepare_document(source, change, context, bounds, deadline)
         create = change.operation == "create"
         if not isinstance(change.fields, dict) or not change.fields or ("ID" in change.fields and not create):
             raise ValueError("Supply a nonempty documented patch without changing provider identity.")
@@ -118,6 +127,8 @@ class GranicusWriteAdapter(WriteAdapter):
     def apply(self, source, prepared, context, bounds, deadline, *, persist=None):
         change = WriteChange.from_dict(prepared["change"])
         self.authorize(source, change, context)
+        if change.entity == "document":
+            return self._apply_document(source, prepared, context, bounds, deadline, persist=persist)
         session = self._session(source, context, bounds, deadline)
         try:
             if change.operation == "create":
@@ -161,6 +172,12 @@ class GranicusWriteAdapter(WriteAdapter):
     def reconcile(self, source, prepared, item, context, bounds, deadline):
         change = WriteChange.from_dict(prepared["change"])
         self.authorize(source, change, context)
+        if change.entity == "document":
+            session = self._session(source, context, bounds, deadline)
+            try:
+                return self._document_outcome(source, prepared, context, bounds, deadline, session)
+            finally:
+                self._close_document_session(session)
         session = self._session(source, context, bounds, deadline)
         try:
             if change.operation == "create":
@@ -172,3 +189,158 @@ class GranicusWriteAdapter(WriteAdapter):
             return self._outcome(prepared, self._read(session, change))
         finally:
             session.close()
+
+
+    def _document_policy(self, source, change, context):
+        config = self.credentials(source, context)
+        fields = change.fields
+        if (change.operation not in {"update", "upload"} or not isinstance(fields, dict)
+                or fields.get("ParentType") not in {"event", "clip"}
+                or fields.get("Kind") not in {"agenda", "minutes"}
+                or (fields["ParentType"] == "event" and fields["Kind"] != "agenda")):
+            raise ValueError("Use an event agenda or clip agenda/minutes document operation.")
+        if (f"document:{change.operation}" not in config.get("permissions", ())
+                or str(numeric_id(change.resource_id)) not in config.get("resource_ids", ())
+                or not change.meeting_id or str(change.meeting_id) not in config.get("meeting_ids", ())):
+            raise WriteFailure("permission_denied", "Document operation/resource/meeting exceeds exact server policy.")
+        if change.operation == "update":
+            allowed = {"ParentType", "Kind", "URL"}
+            if fields["ParentType"] == "clip" and fields["Kind"] == "minutes" and "Name" in fields:
+                allowed.add("Name")
+            if set(fields) != allowed or change.files:
+                raise ValueError("Document URL updates require only ParentType, Kind and URL, without files.")
+            self._document_url(source, fields["URL"], config)
+        elif (set(fields) != ({"ParentType", "Kind", "Description", "Name"}
+                              if fields["Kind"] == "minutes" else {"ParentType", "Kind", "Description"})
+              or len(change.files) != 1 or (fields["ParentType"], fields["Kind"]) == ("clip", "agenda")):
+            raise ValueError("UploadEventAgendaDocument or UploadClipMinutesDocument requires explicit description, optional documented minutes Name, and one file.")
+
+    @staticmethod
+    def _document_url(source, value, config):
+        if not isinstance(value, str):
+            raise ValueError("A supplied document HTTPS URL is required.")
+        parsed = urlsplit(value)
+        origin = f"{parsed.scheme}://{parsed.hostname}"
+        allowed = [f"https://{urlsplit(source.url).hostname}", *config.get("document_origins", ())]
+        if (parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password
+                or parsed.port not in {None, 443} or parsed.fragment or origin not in allowed
+                or any(c in value for c in "\r\n\0")):
+            raise ValueError("The document URL is outside the explicit HTTPS origin policy.")
+        return value
+
+    @staticmethod
+    def _document_read(session, change):
+        event = change.fields["ParentType"] == "event"
+        value, _ = session.call("GetEvent" if event else "GetClip",
+                                {"EventID" if event else "ClipID": numeric_id(change.resource_id)})
+        record = next(iter(value.values()))
+        if not isinstance(record, dict) or str(record.get("ID")) != str(change.resource_id):
+            raise ValueError("Document parent readback has a different identity.")
+        return record
+
+    @staticmethod
+    def _close_document_session(session):
+        try:
+            session.close()
+        except ValueError:
+            pass
+
+    def _document_parameters(self, prepared, bounds):
+        change = WriteChange.from_dict(prepared["change"])
+        fields = change.fields
+        params = {"EventID" if fields["ParentType"] == "event" else "ClipID": numeric_id(change.resource_id)}
+        if change.operation == "update":
+            params["URL"] = fields["URL"]
+            if "Name" in fields:
+                params["Name"] = fields["Name"]
+        else:
+            part = prepared["native"]["files"][0]
+            # The SDK documents single-call minutes uploads up to 7,000,000 bytes.
+            # The same adapter ceiling for event agendas is a safety bound, not a vendor limit.
+            if not 0 < part["reference"]["byte_length"] <= min(7_000_000, bounds.transfer_bytes):
+                raise ValueError("This single-call SOAP mapper accepts 1..7,000,000 bytes; chunked SDK upload remains separate.")
+            data = self._file_bytes(part)
+            params["Document"] = {"Description": fields["Description"], "Location": "",
+                                  "FileContents": base64.b64encode(data).decode("ascii"), "FileExtension": part["filename"].rsplit(".", 1)[-1]}
+            if fields["Kind"] == "minutes":
+                params["Name"] = fields["Name"]
+        return params
+
+    def _prepare_document(self, source, change, context, bounds, deadline):
+        files = self._files(change, bounds)
+        if files and (files[0]["part"] != "Document" or "." not in files[0]["filename"]):
+            raise ValueError("The file part must be Document with an explicit filename extension.")
+        fields = change.fields
+        event = fields["ParentType"] == "event"
+        method = ("UploadEventAgendaDocument" if event else "UploadClipMinutesDocument") if change.operation == "upload" else (
+            "SetEventAgendaURL" if event else "SetClipAgendaURL" if fields["Kind"] == "agenda" else "SetClipMinutesURL")
+        if change.operation == "update" and "Name" in fields:
+            method = "SetClipMinutesURLWithName"
+        session = self._session(source, context, bounds, deadline)
+        try:
+            before = self._document_read(session, change)
+        finally:
+            self._close_document_session(session)
+        fingerprint = canonical_hash(before)
+        if change.expected_version is not None and change.expected_version != fingerprint:
+            raise WriteFailure("conflict", "The document parent differs from its expected state.")
+        prepared = {"change": asdict(change), "native": {"method": "POST", "url": session.url,
+            "content_type": "text/xml", "headers": {}, "body": deepcopy(fields), "files": list(files),
+            "soap_method": method}, "before": before, "before_fingerprint": fingerprint,
+            "expected_version": fingerprint, "read_url": session.url,
+            "contract_revision": contract()["source_revision"],
+            "conflict_semantics": "preflight_full_parent_compare_not_atomic_provider_cas"}
+        request_xml(method, self._document_parameters(prepared, bounds), byte_limit=bounds.transfer_bytes)
+        return prepared
+
+    def _apply_document(self, source, prepared, context, bounds, deadline, *, persist):
+        change = WriteChange.from_dict(prepared["change"])
+        session = self._session(source, context, bounds, deadline)
+        try:
+            if canonical_hash(self._document_read(session, change)) != prepared["before_fingerprint"]:
+                raise WriteFailure("conflict", "The document parent changed after planning.")
+            parameters = self._document_parameters(prepared, bounds)
+            if persist:
+                persist({"resource_id": change.resource_id, "read_url": session.url})
+            try:
+                session.call(prepared["native"]["soap_method"], parameters)
+            except ValueError:
+                raise AmbiguousWrite() from None
+            return self._document_outcome(source, prepared, context, bounds, deadline, session)
+        finally:
+            self._close_document_session(session)
+
+    def _document_outcome(self, source, prepared, context, bounds, deadline, session):
+        change = WriteChange.from_dict(prepared["change"])
+        actual = self._document_read(session, change)
+        value = actual.get("AgendaFile" if change.fields["Kind"] == "agenda" else "MinutesFile")
+        matches = value == change.fields.get("URL") if change.operation == "update" else False
+        digest = None
+        if change.operation == "upload":
+            try:
+                url = self._document_url(source, value, self.credentials(source, context))
+                remaining = min(bounds.transfer_bytes - session.transferred,
+                                prepared["native"]["files"][0]["reference"]["byte_length"] + 1)
+                if context.check_cancelled() or monotonic() >= deadline or remaining <= 0:
+                    raise ValueError("Readback bounds exhausted.")
+                # Document reads never receive private SOAP cookies or authorization headers.
+                response = self.transport.send(url, method="GET", body=None, headers={},
+                    byte_limit=remaining, deadline_seconds=max(0.001, deadline-monotonic()))
+                content = response.content
+                session.transferred += len(content)
+                session.requests += 1
+                if len(content) > remaining or monotonic() >= deadline:
+                    raise ValueError("Document readback exceeded bounds.")
+                reference = prepared["native"]["files"][0]["reference"]
+                digest = hashlib.sha256(content).hexdigest()
+                matches = response.status == 200 and len(content) == reference["byte_length"] and digest == reference["sha256"]
+
+            except Exception:
+                matches = False
+        if matches and "Name" in change.fields:
+            docs, _ = session.call("GetClipMinutesDocuments", {"ClipID": numeric_id(change.resource_id)})
+            matches = any(isinstance(item, dict) and item.get("Name") == change.fields["Name"]
+                          for item in docs.get("MinutesDocuments", []))
+        return {"state": "succeeded" if matches else "uncertain", "resource_id": actual["ID"],
+                "readback": actual, "reconciled": True, "document_sha256": digest,
+                **({} if matches else {"reason": "The exact planned document could not be independently verified; no upload replay."})}
