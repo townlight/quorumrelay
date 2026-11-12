@@ -1,0 +1,55 @@
+{
+  "observed_at": "2026-11-12T18:44:01.273506+00:00",
+  "source": "https://ebps.novusagenda.com/agendapublic/",
+  "operation": "native_search",
+  "query": {
+    "terms": [
+      "Board"
+    ],
+    "limit": 2
+  },
+  "status": "partial",
+  "hits": 2,
+  "record_ids": [
+    "derived:d6fdbb4144e86381daac435e472ebdc385115d4110f093566af944b60fdaf1c1",
+    "derived:9b18786bb50b51e25b584d32ad10a068044f1a0008838673b2f963104c4dbfad"
+  ],
+  "errors": [],
+  "coverage": {
+    "scope": "public containing-text candidates in the displayed window; exact local metadata matching",
+    "catalog_complete": false,
+    "source_complete": false,
+    "listing_exhausted": false,
+    "observed_window": [
+      "2026-08-12",
+      "2027-02-12"
+    ],
+    "date_from": null,
+    "date_to": null,
+    "body": null,
+    "record_types": [],
+    "pages": 1,
+    "returned_records": 2,
+    "filtered_records": 0,
+    "unknown_date_records": [],
+    "unknown_body_records": [],
+    "failures": [],
+    "failed_pages": [],
+    "truncated": true,
+    "checkpoint_lifetime": "15 minutes; current engine process only",
+    "snapshot_consistency": "not_guaranteed",
+    "deadline_exceeded": false,
+    "available_text": "displayed_metadata_and_links_only",
+    "native_search": true,
+    "provider_query_semantics": "not independently established; first expression selects candidates",
+    "full_document_text_searched": false
+  },
+  "continuation_returned": true,
+  "capture_hashes": [
+    "515eefb044d9a23affe99f8cb127f1123dafdd47ade31670c3486505975bdf50"
+  ],
+  "limitations": [
+    "Only displayed metadata checked; provider candidate semantics and full catalog unverified.",
+    "No native search pager live read in this probe; existing listing pager separately evidenced."
+  ]
+}

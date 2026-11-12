@@ -107,6 +107,9 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_native_search("clerkbase", tracked_handler("search", lambda engine, request, content, context:
                                   clerkbase_search(engine, request, content, context, transport=transport)))
     from .civicplus_export import export_historical
+    from .novus import native_search as novus_search
+    engine.register_native_search("novusagenda", tracked_handler("search", lambda engine, request, content, context:
+                                  novus_search(engine, request, content, context, transport=transport)))
     engine.register_native_export("civicplus-select", tracked_handler("export", export_historical))
 
 

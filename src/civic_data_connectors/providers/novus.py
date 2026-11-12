@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from datetime import datetime
+from dataclasses import asdict, replace
 import hashlib
 from copy import deepcopy
 from email.message import Message
@@ -15,7 +16,8 @@ from urllib.parse import parse_qs, urlencode, urljoin, urlsplit
 from urllib.request import Request
 
 from ..engine import canonical_hash, source_identity_key
-from ..models import Error, OperationResult
+from ..models import Bounds, Error, OperationResult
+from ..search import search_records
 from .contracts import RetrievalError, _origin
 from .native import make_bundle
 
@@ -116,11 +118,15 @@ class Listing(HTMLParser):
         self.action = None
         self.current_pages, self.current_anchor, self.anchor_text = {}, None, []
         self.invalid_next = False
+        self.search_button = False
         self.feed(content.decode("utf-8-sig"))
         self.close()
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if (self.form and tag == "input" and attrs.get("type") == "image"
+                and attrs.get("name") == "ctl00$ContentPlaceHolder1$SearchAgendasMeetings$imageButtonSearch"):
+            self.search_button = True
         if tag == "form" and attrs.get("id") == "aspnetForm":
             self.form, self.action = True, attrs.get("action")
         if self.form and tag == "input" and attrs.get("name") and "disabled" not in attrs:
@@ -284,7 +290,8 @@ def _source_url(source):
     return source.url
 
 
-def discover_public(engine, source, namespace, bounds, context, transport, *, saved=None, record_types=None):
+def discover_public(engine, source, namespace, bounds, context, transport, *, saved=None, record_types=None,
+                    search_query=None):
     """Traverse only fresh public Next Page controls, with local explicit filters."""
     url = _source_url(source)
     types = record_types or []
@@ -292,6 +299,7 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, sa
         raise ValueError("Novus record_types must select meeting or agenda_item.")
     binding = canonical_hash({"source": source.public_dict(), "scope": context.scope,
         "date_from": bounds.date_from, "date_to": bounds.date_to, "record_types": types,
+        "search_query": asdict(search_query) if search_query else None,
         "saved_sha256": hashlib.sha256(saved).hexdigest() if saved is not None else None})
     cache = _sessions(engine)
     state = cache.get(bounds.checkpoint, binding) if bounds.checkpoint else {
@@ -299,6 +307,20 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, sa
         "seen": set(), "exhausted": set(), "pending": None}
     deadline, records, bundles, errors, failures = monotonic() + bounds.deadline_seconds, [], [], [], []
     pages, filtered, unknown_dates, unknown_bodies = 0, 0, [], []
+    transferred = 0
+
+    def request_page(**kwargs):
+        nonlocal transferred
+        remaining = bounds.transfer_bytes - transferred
+        if remaining <= 0:
+            raise ValueError("The public form transfer budget is exhausted.")
+        kwargs["byte_limit"] = min(kwargs["byte_limit"], remaining)
+        response = transport.request(url, **kwargs)
+        transferred += len(response.content)
+        if transferred > bounds.transfer_bytes:
+            raise ValueError("The public form transfer budget is exhausted.")
+        return response
+
     observed_window, finished, previous_signature = [None, None], False, None
     try:
         while pages < bounds.max_pages and len(records) < bounds.max_records:
@@ -327,9 +349,34 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, sa
                     state["cookies"].add_cookie_header(cookie_request)
                     if cookie_request.has_header("Cookie"):
                         headers["Cookie"] = cookie_request.get_header("Cookie")
-                    response = transport.request(url, method=method, body=body, headers=headers,
+                    response = request_page(method=method, body=body, headers=headers,
                         byte_limit=bounds.parser_bytes, deadline_seconds=max(0.001, deadline - monotonic()),
-                        allowed_origins=(_origin(url),))
+                        allowed_origins=(_origin(url),), allow_redirects=False)
+                    if search_query is not None and state["content"] is None:
+                        if (response.status != 200 or response.url != url
+                                or len(response.content) > bounds.parser_bytes or monotonic() >= deadline):
+                            raise ValueError("The public search form was not returned at its exact endpoint.")
+                        form = Listing(response.content)
+                        prefix = "ctl00$ContentPlaceHolder1$SearchAgendasMeetings$"
+                        if (not form.search_button or prefix + "ctl02" not in form.controls
+                                or urljoin(url, form.action or "") != url):
+                            raise ValueError("The current public search form changed.")
+                        _cookies(state["cookies"], response, url)
+                        controls = {**form.controls, prefix + "ctl02":
+                            (search_query.terms or search_query.phrases)[0],
+                            prefix + "imageButtonSearch.x": "10", prefix + "imageButtonSearch.y": "10",
+                            "__EVENTTARGET": "", "__EVENTARGUMENT": ""}
+                        body = urlencode(controls).encode()
+                        if len(body) > bounds.parser_bytes or monotonic() >= deadline:
+                            raise ValueError("The public search form exceeds request bounds.")
+                        cookie_request = Request(url)
+                        state["cookies"].add_cookie_header(cookie_request)
+                        headers = {"Accept": "text/html", "Content-Type": "application/x-www-form-urlencoded"}
+                        if cookie_request.has_header("Cookie"):
+                            headers["Cookie"] = cookie_request.get_header("Cookie")
+                        response = request_page(method="POST", body=body, headers=headers,
+                            byte_limit=bounds.parser_bytes, deadline_seconds=max(0.001, deadline - monotonic()),
+                            allowed_origins=(_origin(url),), allow_redirects=False)
                     if response.status != 200:
                         raise RetrievalError("provider_http_error", status=response.status)
                     if response.url != url:
@@ -340,6 +387,8 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, sa
                 if context.check_cancelled():
                     break
                 parsed = Listing(content)
+                if search_query is not None and b"TO date must be after FROM date" in content:
+                    raise ValueError("The provider rejected its public search dates.")
                 if urljoin(url, parsed.action or "") != url:
                     raise ValueError("Public form action left the configured endpoint.")
                 if state["pending"] is not None:
@@ -380,6 +429,13 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, sa
                     unknown_dates.append(record["identity"]["external_id"])
                 if source.body and not body:
                     unknown_bodies.append(record["identity"]["external_id"])
+                if search_query is not None:
+                    matched = search_records([record], search_query,
+                        bounds=replace(bounds, checkpoint=None,
+                            deadline_seconds=max(0.001, deadline - monotonic())), context=context)
+                    if not matched.data.get("hits"):
+                        filtered += 1
+                        continue
                 selected.append(record)
                 records.append(record)
             bundle["records"] = selected
@@ -425,3 +481,34 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, sa
     return OperationResult(status, {"source": source.public_dict(), "records": records, "bundles": bundles,
                                    "captures": [bundle["capture"] for bundle in bundles]}, tuple(errors), coverage,
                            context.operation_id)
+
+
+def native_search(engine, request, content, context, *, transport=None):
+    """Observed anonymous containing-text candidates; exact local displayed metadata only."""
+    from ..search import _query
+    from .identification import configured_source, validate_source
+    from .contracts import PublicTransport
+    source = configured_source(request.get("source"))
+    namespace = validate_source(source, context)
+    if not context.allows("search", namespace):
+        return OperationResult("failed", errors=(Error("permission_denied", "Source search is not authorized."),))
+    if content is not None:
+        raise ValueError("Native Novus search requires its current public form, not a saved capture.")
+    query = _query(request.get("query", {}))
+    expressions = query.terms or query.phrases
+    if not expressions or len(expressions[0]) > 512:
+        raise ValueError("Novus search requires a term or phrase of at most 512 characters.")
+    bounds = Bounds(**request.get("bounds", {}))
+    deadline = monotonic() + bounds.deadline_seconds
+    bounds = replace(bounds, max_records=min(bounds.max_records, query.limit))
+    result = discover_public(engine, source, namespace, bounds, context, transport or PublicTransport(),
+                             record_types=list(query.record_types), search_query=query)
+    coverage = {**result.coverage, "native_search": True,
+        "scope": "public containing-text candidates in the displayed window; exact local metadata matching",
+        "provider_query_semantics": "not independently established; first expression selects candidates",
+        "full_document_text_searched": False}
+    searched = search_records(result.data.get("records", []), query,
+        bounds=replace(bounds, checkpoint=None, deadline_seconds=max(0.001, deadline - monotonic())),
+        context=context, inherited_coverage=coverage)
+    return OperationResult(result.status, {**searched.data, "bundle": result.data},
+                           result.errors + searched.errors, coverage, context.operation_id)

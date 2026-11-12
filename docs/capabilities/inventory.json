@@ -4499,6 +4499,23 @@
           "limits": "One agenda PDF only; structured MeetingView/Coversheet, Minutes, search results, meeting-grid continuation, history bounds and writes remain unverified.",
           "receipt_path": "docs/verification/novus-public-controls-and-fetch-2026-11-12.json",
           "receipt_sha256": "c1fa02e44ab74e70ad98c60b5fda3fce0d0f08f49cc579b6d039fd609eb7d41e"
+        },
+        {
+          "id": "novus-native-search-2026-11-12",
+          "url": "https://ebps.novusagenda.com/agendapublic/",
+          "title": "Novus fresh public form and bounded engine native metadata search",
+          "kind": "public_tenant",
+          "observed": "Fresh default-date GET and Search image POST; engine Board query returned two locally exact metadata hits, partial with no errors.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
+          "findings": [
+            "Current form dates were preserved; no date-validation error.",
+            "Source/caller/query-bound private session continuations and bounded exact local matching are source/fixture tested."
+          ],
+          "limits": "Only the displayed window and metadata; provider candidate/full-document semantics, live search pager and full catalog unverified.",
+          "receipt_path": "docs/verification/novus-native-search-2026-11-12.json",
+          "receipt_sha256": "36a9ef4d05d622efedb40f009c805ad3dbcbfdb51393638b96da23eafba5ac80"
         }
       ],
       "tenants": [
@@ -4617,24 +4634,25 @@
         },
         "native_search": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "novusagenda-tenant",
-            "novus-public-controls-and-fetch-2026-11-12"
+            "novus-public-controls-and-fetch-2026-11-12",
+            "novus-native-search-2026-11-12"
           ],
-          "details": "Public ASP.NET postback exposes date range, meeting type, category, containing-text and Search controls. A prior stateful POST returned zero item rows; the 2026-11-12 follow-up response was a date-validation error with no rows. Native query matching and coverage remain unverified.",
+          "details": "Fresh anonymous default-date form GET and Search image POST, with current controls/private cookies and exact endpoint. Existing bounded Next pager/session is reused; query-bound cursor and exact displayed metadata matching. Local tests plus one partial live engine search; no complete provider text/catalog claim.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify one successful provider-confirmed query with current form state on the existing public tenant; the saved date-validation error is not a successful search result.",
-            "Implement only after successful exact request and session-state behavior are established."
+            "Provider containing-text candidate semantics and complete document text coverage remain unverified.",
+            "Live search next-page traversal, broader windows, archived coverage and structured details remain unverified."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "live_read_passed",
+          "evidence_level": "live_engine_bounded_read_receipt_not_write_acceptance",
           "tenant_scope": [
             "https://ebps.novusagenda.com/agendapublic/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "anonymous_partial_engine_search_on_existing_tenant",
           "restrictions": [
             "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
             "Docs/UI and source-baseline evidence are not acceptance"

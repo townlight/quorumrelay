@@ -110,7 +110,8 @@ Test environment: bounded public reads only. One supplied agenda PDF was fetched
 
 ### Remaining research
 
-- The selected-window listing covers 12 pages/180 items and 11 meeting rows. One supplied agenda PDF has now been fetched. Successful native-search semantics, structured MeetingView/Coversheet retrieval and Minutes remain unverified; the saved postback error did not return rows.
+- Resumed source now implements fresh default-date containing-text Search image POST plus exact local metadata matching. One integrated engine Board query returned two hits/partial/no errors; query-bound continuations remain process-local. Provider full-text semantics, live search pager and catalog completeness remain unverified.
+- The selected-window listing covers 12 pages/180 items and 11 meeting rows. One supplied agenda PDF has now been fetched. Provider query semantics, structured MeetingView/Coversheet retrieval and Minutes remain unverified; the historical failed postback is retained separately from the new successful bounded search.
 - On this same tenant, establish date-window defaults, retained history and meeting-grid continuation. The receipt exhausts only the selected window; catalog/source completeness are false.
 - No current machine create/update/upload route or authorized staff/test account was supplied; historical UI instructions are not API fields.
 
