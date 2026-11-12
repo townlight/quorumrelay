@@ -60,3 +60,17 @@ def test_refuses_unbound_or_multiple_embedded_sources():
     script = f'<script type="application/json" sveltekit:data-url="{PUBLISHED}">{wrapper}</script>'
     with pytest.raises(ValueError, match="Expected one"):
         listing_rows(source("https://woodfordvt.org/agendas"), (script + script).encode())
+
+
+def test_real_engine_registration_handles_canonical_listing_and_ssr_source():
+    from quorumrelay import create_engine
+
+    engine=create_engine()
+    canonical=engine.execute("discover",{"source":source().public_dict()},content=FIXTURE.read_bytes())
+    assert canonical.status=="partial" and len(canonical.data["records"])==115
+    assert canonical.data["records"][0]["identity"]["namespace"]=="//towncloud.io/go/woodford-vt"
+    wrapper={"status":200,"body":FIXTURE.read_text(encoding="utf-8")}
+    html=('<script type="application/json" sveltekit:data-url="'+PUBLISHED+'">'+json.dumps(wrapper)+'</script>').encode()
+    ssr=engine.execute("discover",{"source":source("https://woodfordvt.org/agendas").public_dict()},content=html)
+    assert len(ssr.data["records"])==115
+    assert ssr.data["records"][0]["normalized"]==canonical.data["records"][0]["normalized"]

@@ -390,7 +390,7 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
     if input_format in {"legistar-events-json", "legistar-event-json", "wistia-api-media-json",
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
                         "civicweb-detail-html", "swagit-listing-html", "onbase-public-listing-html",
-                        "digital-towpath-listing-html"}:
+                        "digital-towpath-listing-html", "towncloud-public-listing-json"}:
         return parse_native(source, namespace, content, input_format), ()
     result = engine.normalize(replace(source, body=None), content, input_format=input_format,
                               bounds=replace(bounds, date_from=None, date_to=None,
@@ -418,6 +418,11 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     if (source.provider == "digital-towpath" and source.input_format is None
             and re.fullmatch(r"/meetings/detail/[0-9]+/?", urlsplit(source.url).path) is None):
         input_format = "digital-towpath-listing-html"
+    if source.provider == "towncloud" and source.input_format is None:
+        parts = urlsplit(source.url)
+        if (parts.path.rstrip("/") == "/agendas" or (parts.hostname == "towncloud.io" and
+                re.fullmatch(r"/go/[A-Za-z0-9_-]+/published_agendas\.json", parts.path))):
+            input_format = "towncloud-public-listing-json"
     saved = _decode_content(request, content)
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")
