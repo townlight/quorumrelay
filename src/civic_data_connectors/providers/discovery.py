@@ -146,6 +146,13 @@ def _request_spec(source, bounds, task, context):
     size = _page_size(source)
     if kind == "static":
         url = source.url
+    elif kind == "suiteone-group" and source.provider == "suiteone-media":
+        if p.scheme != "https" or p.path not in {"", "/"} or p.query:
+            raise ValueError("SuiteOne older groups require the configured public HTTPS root.")
+        from .suiteone import form_body
+        url = _origin(source.url) + "/Home/GetRecentEventsGroup"
+        method, body = "POST", form_body(task.get("fields"))
+        headers = {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
     elif kind == "champ" and source.provider == kind:
         event = re.fullmatch(r"/([A-Za-z0-9_-]+)/event/([0-9]+)/?", p.path)
         if p.hostname != "play.champds.com" or event is None:
@@ -436,6 +443,7 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     records, bundles, captures, failures, errors, retry = [], [], [], [], [], []
     pages = filtered = 0
     unknown_dates, unknown_bodies, visited = [], [], set()
+    suiteone_controls = None
     while queue and pages < bounds.max_pages and len(records) < bounds.max_records:
         if context.check_cancelled() or monotonic() >= deadline:
             break
@@ -453,6 +461,22 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                 page_content = saved
                 following = None
             else:
+                if task.get("kind") == "suiteone-group":
+                    from .suiteone import controls
+                    # Continuations contain public control values, never trust a
+                    # caller-modified group absent from the current root page.
+                    if suiteone_controls is None:
+                        root = transport.request(source.url, byte_limit=bounds.parser_bytes,
+                            deadline_seconds=max(.001, deadline - monotonic()),
+                            allowed_origins=(_origin(source.url),), allow_redirects=False)
+                        if (root.status != 200 or root.url != source.url
+                                or len(root.content) > bounds.parser_bytes):
+                            raise ValueError("The public SuiteOne control page is unavailable.")
+                        suiteone_controls = controls(root.content)
+                    if task.get("fields") not in suiteone_controls:
+                        raise ValueError("The SuiteOne group is not a current public root control.")
+                    if context.check_cancelled() or monotonic() >= deadline:
+                        raise RetrievalError("provider_deadline_or_cancellation")
                 url, method, body, headers, size = _request_spec(source, bounds, task, context)
                 origin = _origin(url)
                 response = transport.request(
@@ -523,6 +547,12 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                 following = _next(source, task, payload, size)
                 if following:
                     queue.insert(0, following)
+                if (source.provider == "suiteone-media" and task.get("kind") == "static"
+                        and urlsplit(source.url).path in {"", "/"}):
+                    from .suiteone import controls
+                    suiteone_controls = controls(page_content)
+                    queue.extend({"kind": "suiteone-group", "fields": values}
+                                 for values in suiteone_controls)
         except Exception as error:
             # Provider/network exceptions may contain request URLs or credentials.
             # Never expose arbitrary exception text through public errors.
@@ -557,6 +587,11 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
             "configured capture only; upstream catalog completeness is unverified"),
         "available_text": "metadata_and_supplied_text_only",
     }
+    if source.provider == "suiteone-media" and saved is None:
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "configured public root and its supplied Older Meetings groups; catalog extent unverified",
+            "older_groups": len(suiteone_controls or []),
+            "control_validation": "current public root revalidated before resumed group POST"})
     return OperationResult(status, {"source": source.public_dict(), "records": records,
                                    "captures": captures, "bundles": bundles},
                            tuple(errors), coverage, context.operation_id)
