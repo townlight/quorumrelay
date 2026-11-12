@@ -23,6 +23,8 @@ XSI = "http://www.w3.org/2001/XMLSchema-instance"
 XSD = "http://www.w3.org/2001/XMLSchema"
 MODEL = "http://granicus.com/xsd"
 RPC = "urn:UserSDK"
+# Explicit valid MetaDataData.Payload types listed by the pinned vendor SDK.
+PAYLOAD_TYPES = frozenset({"AgendaItem", "Note", "Document", "Rollcall", "Motion", "VoteRecord"})
 for prefix, namespace in (("soap", SOAP), ("enc", ENC), ("xsi", XSI), ("g", MODEL), ("rpc", RPC)):
     ET.register_namespace(prefix, namespace)
 
@@ -70,8 +72,15 @@ def _encode(element, value, type_name, depth=0):
         return
     if prefix == "xsd":
         if kind == "anyType":
-            # The official metadata Payload is extensible. Never guess its
-            # vendor object schema; callers must supply a primitive explicitly.
+            # SDK APIEntities.cs explicitly enumerates these six payloads.
+            # A type tag is mandatory; never infer a motion/vote from dict keys.
+            if isinstance(value, dict) and set(value) == {"$type", "value"}:
+                name, fields = value["$type"], value["value"]
+                if (not isinstance(name, str) or name not in PAYLOAD_TYPES
+                        or not isinstance(fields, dict) or set(fields) != set(contract()["types"][name]["fields"])):
+                    raise ValueError("A typed Payload requires every field of an explicit vendor-supported model.")
+                _encode(element, fields, "ns5:" + name, depth + 1)
+                return
             if type(value) is bool:
                 kind = "boolean"
             elif type(value) is int:
@@ -140,13 +149,13 @@ def response_value(operation, raw, *, byte_limit):
     if result is None:
         raise ValueError("The SOAP response does not match the requested method.")
 
-    def decode(node, active=(), depth=0):
+    def decode(node, active=(), depth=0, payload=False):
         if depth > 32:
             raise ValueError("SOAP response nesting exceeds the binding limit.")
         if href := node.get("href"):
             if not href.startswith("#") or href[1:] not in ids or href in active:
                 raise ValueError("External, missing or cyclic SOAP reference.")
-            return decode(ids[href[1:]], (*active, href), depth + 1)
+            return decode(ids[href[1:]], (*active, href), depth + 1, payload=payload)
         if node.get(f"{{{XSI}}}nil") in {"true", "1"}:
             return None
         children = list(node)
@@ -158,7 +167,10 @@ def response_value(operation, raw, *, byte_limit):
                 key = child.tag.rsplit("}", 1)[-1]
                 if key in value:
                     raise ValueError("Duplicate SOAP object field.")
-                value[key] = decode(child, active, depth + 1)
+                value[key] = decode(child, active, depth + 1, payload=key == "Payload")
+            kind = node.get(f"{{{XSI}}}type", "").split(":")[-1]
+            if payload and kind in PAYLOAD_TYPES:
+                return {"$type": kind, "value": value}
             return value
         text = node.text or ""
         kind = node.get(f"{{{XSI}}}type", "").split(":")[-1]

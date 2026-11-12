@@ -82,6 +82,9 @@ Official Platform SOAP SDK/WSDL is now pinned from Granicus/platform-api-net rev
 - Inspect vendor comments/examples for untyped Payload and native enum semantics. Do not invent nested schemas or automatically publish ingested media.
 - Pinned API version compatibility and provider-wide archive/search semantics remain qualified; delete and vendor administration stay outside the domain.
 
+- MediaVault.cs/SDK.asmx.wsdl now provide the normal media upload contract. RegisterClipUpload warns against normal upload use. PublishClip has conflicting array types in pinned WSDL versus structured SDK DTO including Public; resolve against matching vendor reference rather than selecting a guessed schema.
+- CreateAttendees/CreateMotionActions are documented system-wide operations. Meeting-bound Attendees/MotionTypes and typed Motion/VoteRecord fields stay in scope; general contacts/administration do not.
+
 ## F04 NovusAGENDA (`novusagenda`)
 
 Official documentation status: inspected_with_recorded_limits; the current search result is not a documented machine API.

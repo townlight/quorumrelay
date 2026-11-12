@@ -47,7 +47,11 @@ class Network:
         for key, typ in model_fields(self.model_name).items():
             field = ET.SubElement(event, key)
             value = self.values[key]
-            if isinstance(value, list):
+            if key == "Payload" and isinstance(value, dict):
+                field.set(f"{{{XSI}}}type", "g:" + value["$type"])
+                for name, item in value["value"].items():
+                    ET.SubElement(field, name).text = item
+            elif isinstance(value, list):
                 field.set(f"{{{ENC}}}arrayType", "xsd:string[0]")
             else:
                 field.set(f"{{{XSI}}}type", typ)
@@ -87,6 +91,10 @@ class Network:
             assert set(child.tag for child in sent) == set(model_fields(self.model_name))
             assert sent.findtext("ID") == "7"
             self.values["Name"] = sent.findtext("Name")
+            payload = sent.find("Payload")
+            if payload is not None and list(payload):
+                self.values["Payload"] = {"$type": payload.get(f"{{{XSI}}}type").split(":")[-1],
+                                          "value": {child.tag: child.text for child in payload}}
             self.values["LastModified"] = "2026-11-12T19:00:00Z"
             self.mutations += 1
             if self.lose_response:
@@ -378,3 +386,18 @@ def test_vendor_sdk_chunked_minutes_add_finish_exact_bytes(tmp_path, lost_final)
     assert [len(chunk) for chunk in network.chunks] == [7_000_000, len(data)-7_000_000]
     assert engine.execute("commit_write", request, context=context).status == "completed"
     assert network.mutations == 2
+
+
+def test_meeting_bound_motion_payload_updates_preserve_type_and_readback(tmp_path):
+    network = Network("MetaDataData", "GetMetaData", "UpdateMetaData", "MetaData")
+    before = {"Mover": "Provided mover", "Seconder": "Provided seconder", "Type": "Provided motion action", "MotionText": "Before"}
+    network.values["Payload"] = {"$type": "Motion", "value": before}
+    engine, _, context, change = setup(tmp_path, network)
+    context.credentials["granicus"].update(permissions=["agenda_item:update"], meeting_ids=["11"])
+    after = {**before, "MotionText": "Approve supplied resolution"}
+    change.update(entity="agenda_item", meeting_id="11", fields={"Payload": {"$type": "Motion", "value": after}})
+    request = plan(engine, context, change)
+    result = engine.execute("commit_write", request, context=context)
+    assert result.status == "completed", result.errors
+    assert result.data["items"][0]["readback"]["Payload"] == {"$type": "Motion", "value": after}
+    assert network.mutations == 1

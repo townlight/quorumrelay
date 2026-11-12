@@ -3853,7 +3853,8 @@
             "Tests: test_granicus_soap.py, test_granicus_platform.py, test_granicus_write.py; independently pinned WSDL field/method assertions.",
             "Document URL/update and single-call agenda/minutes upload mappings execute through actual coordinator with immutable file references; expired input handles do not expire plans, lost mutation responses reconcile without resend, and altered file readback remains uncertain. Six exact vendor methods mapped; tests/test_granicus_write.py.",
             "Pinned MediaManager.cs UploadClipMinutesDocumentXL independently defines 7,000,000-byte add/finish chunks and a 1GB ceiling. Actual coordinator tests verify >7MB complete bytes, final-response-loss reconciliation and intermediate-response-loss uncertainty without repeating a chunk.",
-            "Six supporting read methods run through the actual engine in vendor-shaped fixtures: GetClipCaptions, GetEventVideoLocation, GetClipVideoLocation, GetMetaDataVideoLocation, FetchAttachment and GetClipMinutesDocuments. Exact raw XML/Document base64 and byte hash retained; no inferred document URL or caption format. Generic SDK fetch_captions is exercised separately."
+            "Six supporting read methods run through the actual engine in vendor-shaped fixtures: GetClipCaptions, GetEventVideoLocation, GetClipVideoLocation, GetMetaDataVideoLocation, FetchAttachment and GetClipMinutesDocuments. Exact raw XML/Document base64 and byte hash retained; no inferred document URL or caption format. Generic SDK fetch_captions is exercised separately.",
+            "APIEntities.cs MetaDataData.Payload explicitly lists AgendaItem/Note/Document/Rollcall/Motion/VoteRecord. An explicit $type/value wrapper validates full pinned fields, preserves SOAP xsi:type on readback and supports actual meeting-bound Motion update. Generic untyped object schemas remain rejected."
           ],
           "limits": "Pinned SDK1.x contract, not a live/current compatibility claim. Document uploads/URLs, media upload registration/publication, metadata add/import and structured motion/attendee engine mappings remain implementation work; no delete/admin scope."
         }
@@ -5362,7 +5363,10 @@
       "remaining_research": [
         "Map remaining documented in-domain SDK methods: RegisterClipUpload/PublishClip (publication explicit only), metadata Add/Import, and meeting-bound motion/attendee semantics. UID aliases and broad list/query variants remain to reconcile against equivalent mapped resource paths.",
         "Inspect pinned vendor comments/examples for untyped Payload/native enum semantics; do not invent values.",
-        "Keep Platform SOAP distinct from ViewPublisher, Legistar, Peak, Swagit and iQM2; no cross-product endpoint inference."
+        "Keep Platform SOAP distinct from ViewPublisher, Legistar, Peak, Swagit and iQM2; no cross-product endpoint inference.",
+        "MediaVault normal upload is documented separately in pinned MediaVault.cs/SDK.asmx.wsdl; RegisterClipUpload warns against normal upload use. Implement the normal file upload path with private session impersonation state.",
+        "Resolve PublishClip WSDL-versus-SDK DTO disagreement with matching official version/reference before engine publication mapping; Public cannot be guessed or implicit.",
+        "CreateAttendees and CreateMotionActions are described as system-wide roster/definitive motion-action list operations. Event/Clip Attendees/MotionTypes and typed MetaDataData Motion/VoteRecord already support meeting-bound fields; do not expand into general contacts/administration."
       ],
       "requirement_ids": [
         "C01",

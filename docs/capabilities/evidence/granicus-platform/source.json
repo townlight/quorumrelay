@@ -28,6 +28,24 @@
       "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/index.php.wsdl",
       "bytes": 94937,
       "sha256": "ac21ee789510bc062ef0c87ecd1481e49f893e3276661b503272d6947b82c0e0"
+    },
+    {
+      "file": "IMediaVault.cs",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/IMediaVault.cs",
+      "bytes": 640,
+      "sha256": "4bba6abf74c50fcf674d1f3efe5eb86bb6cb8dbf3fd1e2742963e78f19984f7f"
+    },
+    {
+      "file": "MediaVault.cs",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/MediaVault.cs",
+      "bytes": 25156,
+      "sha256": "ab7da09c74529bccada03fcf144ba08636c3a40a69452ad142170afec56dee6c"
+    },
+    {
+      "file": "SDK.asmx.wsdl",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/SDK.asmx.wsdl",
+      "bytes": 12321,
+      "sha256": "07326cbec0146d5f0e7d2b4a6fcfc0321d5066adbed9e10d6720661c6f536135"
     }
   ]
 }

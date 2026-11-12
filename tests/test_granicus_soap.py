@@ -134,3 +134,37 @@ def test_private_login_cookie_and_readback_use_same_guarded_transport():
 def test_credential_scope_mismatch_never_contacts_transport(policy):
     with pytest.raises(ValueError, match="policy"):
         setup_session(object(), **policy)
+
+
+@pytest.mark.parametrize("name,fields", [
+    ("AgendaItem", {"Department": "Planning", "Actions": "Supplied action"}),
+    ("Note", {"NoteText": "Supplied note", "EditorsNotes": "Approved", "Private": False}),
+    ("Document", {"Description": "PDF", "Location": "", "FileContents": "JVBERg==", "FileExtension": "pdf"}),
+    ("Rollcall", {"Attendees": []}),
+    ("Motion", {"Mover": "Supplied mover", "Seconder": "Supplied seconder", "Type": "Supplied type", "MotionText": "Approve"}),
+    ("VoteRecord", {"MotionID": 91, "Passed": True, "Votes": []}),
+])
+def test_explicit_vendor_metadata_payload_models_roundtrip(name, fields):
+    import xml.etree.ElementTree as ET
+    # Independent expectation: exact field names are pinned in the vendor WSDL,
+    # and the allowed Payload list is explicitly documented in APIEntities.cs.
+    path = Path(__file__).parents[1] / "docs/capabilities/evidence/granicus-platform/index.php.wsdl"
+    wsdl = ET.fromstring(path.read_bytes())
+    model = wsdl.find(f'.//{{http://www.w3.org/2001/XMLSchema}}complexType[@name="{name}"]')
+    expected = {node.attrib["name"] for node in model.find("{http://www.w3.org/2001/XMLSchema}all")}
+    assert set(fields) == expected
+    raw, _ = request_xml("UpdateMetaData", {"MetaData": {"ID": 7, "Payload": {"$type": name, "value": fields}}}, byte_limit=10000)
+    root = ET.fromstring(raw)
+    payload = root.find(f"{{{SOAP}}}Body/{{{RPC}}}UpdateMetaData/MetaData/Payload")
+    assert payload.get("{http://www.w3.org/2001/XMLSchema-instance}type") == "g:" + name
+    assert {node.tag for node in payload} == expected
+    # Use the independent SOAP response wrapper, reusing only the DTO XML to
+    # check preservation of its explicit xsi:type instead of losing semantics.
+    result = response_value("GetMetaData", response('<r:GetMetaDataResponse><MetaData><ID xsi:type="xsd:int">7</ID>'
+        + ET.tostring(payload, encoding="unicode") + '</MetaData></r:GetMetaDataResponse>'), byte_limit=10000)
+    assert result["MetaData"]["Payload"] == {"$type": name, "value": fields}
+
+
+def test_metadata_payload_types_are_not_inferred_or_allowed_to_drop_fields():
+    with pytest.raises(ValueError):
+        request_xml("UpdateMetaData", {"MetaData": {"Payload": {"$type": "Motion", "value": {"MotionText": "Only field"}}}}, byte_limit=10000)
