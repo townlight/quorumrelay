@@ -66,32 +66,20 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ## F03 Granicus (`granicus`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+Official Platform SOAP SDK/WSDL is now pinned from Granicus/platform-api-net revision ca7baf0768c32e5fd2ef9c5236fdefde3386934a, with exact evidence bytes/hashes under evidence/granicus-platform. This supersedes the earlier gated-SDK extract as the current contract source. It is Platform MediaManager SOAP1.x, not an inferred API for Legistar/Peak/Swagit/iQM2.
 
-### Representative research observations
+### Implemented and verified
 
-- https://townofsuperior.granicus.com/ViewPublisher.php?view_id=2: Public listing with meeting rows and links.
-- 2026-11-12 bounded native Clip search: same-origin `ViewSearchResults.php` form uses numeric `view_id`, `types[Clip]=on`, first supplied expression in `allwords`, and numeric `pagenumber`. First and resumed engine reads returned five distinct hits each with partial coverage; receipt `docs/verification/granicus-native-search-2026-11-12.json`.
+- Existing public Superior Clip metadata native search remains separate and partial.
+- Explicit `granicus-platform-soap-xml` engine source maps date-range Events/folder Clips, supplied Event/Clip/MetaData and related metadata/indices. Exact raw XML, unknown values, revisions and supplied parents remain; date/type bounds and unknown body coverage are explicit. No SOAP catalog/paging completeness claim.
+- CreateEvent full EventData and UpdateEvent/UpdateClip/UpdateMetaData full-model patches use real coordinator exact plans, preflight full-state comparison, durable intent/readback and uncertain-response reconciliation. Independent vendor-WSDL-shaped fixtures verify these paths, including conflict, revocation and duplicate no-repeat behavior. Session passwords/cookies never enter stored plans/receipts.
+- Vendor-documented synthetic verification satisfies the owner amendment. Live account checks are optional, not a completion gate.
 
-### Remaining research
+### Remaining implementation
 
-- On the selected Superior ViewPublisher tenant, GET one RSS link and one older-year page; record exact feed URL/schema, date coverage and document/video MIME/redirect behavior. Provider candidate semantics, other tenants and full archive/catalog coverage remain unverified; the implemented search checks only Clip title/date metadata.
-- The official MediaManager SDK article names Event creation, uploads and Agenda/Minutes operations but is behind customer support login. Obtain the readable version matching the configured product/version.
-- Keep ViewPublisher, MediaManager, Legistar, Peak, Swagit and iQM2 separate; no authorized write account was supplied.
-
-### Pagination contract
-
-{
-  "status": "partial",
-  "details": "The selected ViewSearchResults.php Clip form uses numeric pagenumber and guarded continuation; the bounded first/resumed receipt returns five distinct hits per call. Publisher archive bounds, cross-tenant behavior and full catalog coverage remain unverified."
-}
-
-### Authorization restrictions
-
-- Research boundary on 2026-11-11: read-only public captures. The resumed plan authorizes supported writes only on an explicitly authorized test tenant; no authorized test tenant or credentials have been supplied, so live acceptance remains access-blocked. Procurement and outreach remain unauthorized.
-- Unverified and access-blocked are incomplete, not unsupported.
+- The 48-method low-level binding is not 48 completed engine mappings. Implement agenda/minutes uploads and URL setters; media upload registration and explicitly approved publication; metadata Add/Import; structured motions/attendees; supporting captions/minutes/attachments/video-location reads.
+- Inspect vendor comments/examples for untyped Payload and native enum semantics. Do not invent nested schemas or automatically publish ingested media.
+- Pinned API version compatibility and provider-wide archive/search semantics remain qualified; delete and vendor administration stay outside the domain.
 
 ## F04 NovusAGENDA (`novusagenda`)
 

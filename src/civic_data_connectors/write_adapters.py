@@ -301,13 +301,13 @@ def _public_url(url):
 def sanitize(value, credentials=None):
     """Remove credentials even from a hostile provider response before persistence."""
     secrets = []
-    for key in ("token", "access_token", "authorization", "api_key"):
+    for key in ("token", "access_token", "authorization", "api_key", "username", "password"):
         secret = (credentials or {}).get(key)
         if isinstance(secret, str) and secret:
             secrets.append(secret)
     if isinstance(value, dict):
         return {k: sanitize(v, credentials) for k, v in value.items()
-                if k.lower() not in {"token", "access_token", "authorization", "api_key", "cookie", "set-cookie"}}
+                if k.lower() not in {"token", "access_token", "authorization", "api_key", "cookie", "set-cookie", "password"}}
     if isinstance(value, (list, tuple)):
         return [sanitize(v, credentials) for v in value]
     if isinstance(value, str):
@@ -1107,6 +1107,7 @@ class WriteAdapter:
 
 def default_adapters(transport=None):
     from .providers.essential_write import EssentialWriteAdapter
+    from .providers.granicus_write import GranicusWriteAdapter
     return {**{name: WriteAdapter(name, transport)
                for name in ("legistar", "wistia", "laserfiche", "laserfiche-weblink")},
-            "municode-meetings": EssentialWriteAdapter(transport)}
+            "municode-meetings": EssentialWriteAdapter(transport), "granicus": GranicusWriteAdapter(transport)}

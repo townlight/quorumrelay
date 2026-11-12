@@ -36,6 +36,7 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_operation("identify", identify_handler)
     engine.register_operation("validate_source", validate_handler)
     for provider, input_format in (
+            ("granicus", "granicus-platform-soap-xml"),
             ("boardable", "boardable-public-meetings-json"),
             ("simbli", "simbli-meeting-detail-json"), ("simbli", "simbli-agenda-items-json"),
             ("clerkbase", "clerkbase-search-html"),

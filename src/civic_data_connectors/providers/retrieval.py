@@ -42,6 +42,11 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     transport = transport or PublicTransport()
     content = _decode_content(request, content)
     attachment = request.get("attachment")
+    if source.provider == "granicus" and source.input_format == "granicus-platform-soap-xml" and content is None:
+        if attachment is not None:
+            raise ValueError("SOAP document retrieval requires its documented resource mapping; no arbitrary attachment URL.")
+        from .granicus_platform import read
+        return read(source, namespace, request, bounds, context, transport)
     from .account_api import is_account_api
     if is_account_api(source) and attachment is None and content is None:
         from .account_reads import fetch_account

@@ -8670,7 +8670,7 @@
       }
     },
     "typed_models": "src/civic_data_connectors/data/granicus_platform.json",
-    "verification": "18 focused synthetic binding/session checks; public engine/write registration not implemented yet",
+    "verification": "Vendor-WSDL-shaped synthetic engine reads and coordinator CreateEvent/UpdateEvent/UpdateClip/UpdateMetaData transactions verified; private sessions, model parity, exact-plan/conflict/revocation/duplicate/uncertain readback checked. Other bound methods are not yet engine mappings.",
     "limits": [
       "Pinned official contract, not a live/current compatibility claim",
       "Vendor administration operations excluded",

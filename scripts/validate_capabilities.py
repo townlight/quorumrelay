@@ -209,7 +209,7 @@ def semantic_errors(data, identities):
                 errors.append(f"{name}: unknown outbound operation")
             if mapping["interface_type"] == "documented_automated_api":
                 if not mapping["evidence_ids"] or name not in {
-                    "legistar", "laserfiche-weblink", "wistia"
+                    "legistar", "laserfiche-weblink", "wistia", "granicus"
                 }:
                     errors.append(f"{name}: automatic API claim lacks reviewed exact product evidence")
             if mapping.get("method") == "DELETE":
@@ -323,8 +323,9 @@ def main():
             "saved contract fixtures, and source-level checks separately. This validator checks "
             "the evidence references and declared receipt relationships; it does not execute reads "
             "or establish catalog completeness, installed-consumer acceptance, or provider writes. "
-            "Provider write acceptance is NOT_RUN because no authorized provider test tenants "
-            "or credentials were supplied."
+            "Vendor-documented synthetic execution is the accepted provider verification basis "
+            "under the owner amendment; live checks are optional supporting evidence. This "
+            "metadata validator itself does not execute those synthetic transactions."
         ),
         "engine_status_reconciliation": "Owned independently by engine implementation owners",
     }

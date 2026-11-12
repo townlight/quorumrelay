@@ -3835,6 +3835,24 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "granicus-platform-pinned-soap-synthetic",
+          "url": "https://github.com/Granicus/platform-api-net/tree/ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "title": "Pinned official Platform SOAP WSDL and SDK with synthetic engine transactions",
+          "kind": "official_vendor_contract_and_synthetic_execution",
+          "observed": "Exact official WSDL, DTOs and SDK retained with hashes; independent WSDL-shaped fixtures exercise actual engine/coordinator paths.",
+          "observation_date": "2026-11-12",
+          "access_scope": "public_official_source_and_local_synthetic_execution",
+          "proof_level": "vendor_documented_synthetic_contract_verification",
+          "findings": [
+            "48 in-domain methods have typed bounded SOAP bindings; this does not mean all 48 have engine mappings.",
+            "Engine reads: date-range Events, folder Clips, supplied Event/Clip/MetaData, Event/Clip metadata and Clip indices; raw XML, provider identities, unknown fields, revision and related parents retained.",
+            "Writes: CreateEvent full EventData plus unique authorized ForeignID; UpdateEvent/EventData, UpdateClip/ClipData and UpdateMetaData/MetaDataData full-model read/patch/readback. Actual coordinator duplicate/conflict/revocation/uncertain-response cases execute synthetically.",
+            "Private login/cookies remain transport state, excluded from stored plans/receipts; exact-origin requests prohibit redirects.",
+            "Tests: test_granicus_soap.py, test_granicus_platform.py, test_granicus_write.py; independently pinned WSDL field/method assertions."
+          ],
+          "limits": "Pinned SDK1.x contract, not a live/current compatibility claim. Document uploads/URLs, media upload registration/publication, metadata add/import and structured motion/attendee engine mappings remain implementation work; no delete/admin scope."
         }
       ],
       "tenants": [
@@ -3867,58 +3885,58 @@
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
           "test_access": "Local source and saved-fixture contract coverage; no provider account access required.",
           "restrictions": [
-            "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Pinned product/version and explicit tenant/namespace policy apply.",
+            "Vendor-documented synthetic verification is the accepted basis; optional live checks are not a completion gate."
           ]
         },
         "discover": {
-          "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "capability_status": "documented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "granicus-superior",
             "granicus-native-search-first-page",
-            "granicus-native-search-live-final"
+            "granicus-native-search-live-final",
+            "granicus-platform-pinned-soap-synthetic"
           ],
-          "details": "A bounded native Clip search route is now implemented for the selected Superior ViewPublisher source. It is search, not general discovery: complete publisher archive/catalog traversal, RSS continuation and document/recording fetch remain separate and unverified.",
+          "details": "Explicit Platform SOAP date-range Event discovery requires exact StartDate/EndDate dateTime parameters; folder Clip listing requires supplied FolderID. Local date/type/record bounds; unknown body coverage retained. No SOAP pagination/catalog completeness inferred.",
           "dependencies": [],
           "remaining_verification": [
-            "Full publisher archive/catalog traversal and RSS continuation remain unverified.",
-            "Document/recording retrieval and cross-tenant behavior remain unverified."
+            "Remaining documented in-domain SOAP methods are not yet all mapped; see outbound mappings and remaining research."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
           "tenant_scope": [
             "https://townofsuperior.granicus.com/ViewPublisher.php?view_id=2"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Synthetic vendor-contract fixtures through real engine/coordinator; no provider account required.",
           "restrictions": [
-            "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Pinned product/version and explicit tenant/namespace policy apply.",
+            "Vendor-documented synthetic verification is the accepted basis; optional live checks are not a completion gate."
           ]
         },
         "fetch": {
-          "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "capability_status": "documented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "granicus-superior"
+            "granicus-superior",
+            "granicus-platform-pinned-soap-synthetic"
           ],
-          "details": "ViewPublisher tables/RSS/document/player links and keyword search UI observed; full archive/pagination/search request mechanics pending.",
+          "details": "Supplied-ID GetEvent/GetClip/GetMetaData and related Event/Clip metadata/Clip indices map raw exact XML and unknown fields, revision and parent identities. Requires explicit granicus-platform-soap-xml source; legacy public captures unchanged.",
           "dependencies": [],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "Remaining documented in-domain SOAP methods are not yet all mapped; see outbound mappings and remaining research."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
           "tenant_scope": [
             "https://townofsuperior.granicus.com/ViewPublisher.php?view_id=2"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Synthetic vendor-contract fixtures through real engine/coordinator; no provider account required.",
           "restrictions": [
-            "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Pinned product/version and explicit tenant/namespace policy apply.",
+            "Vendor-documented synthetic verification is the accepted basis; optional live checks are not a completion gate."
           ]
         },
         "parse": {
@@ -3939,8 +3957,8 @@
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
           "test_access": "Local source and saved-fixture contract coverage; no provider account access required.",
           "restrictions": [
-            "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Pinned product/version and explicit tenant/namespace policy apply.",
+            "Vendor-documented synthetic verification is the accepted basis; optional live checks are not a completion gate."
           ]
         },
         "native_search": {
@@ -3966,8 +3984,8 @@
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
           "test_access": "Saved response contract tests plus docs/verification/granicus-native-search-2026-11-12.json: first and resumed public engine reads each returned five distinct Clip hits with partial coverage; no write acceptance.",
           "restrictions": [
-            "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Pinned product/version and explicit tenant/namespace policy apply.",
+            "Vendor-documented synthetic verification is the accepted basis; optional live checks are not a completion gate."
           ]
         },
         "local_search": {
@@ -3987,8 +4005,8 @@
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
           "test_access": "Local source and saved-fixture contract coverage; no provider account access required.",
           "restrictions": [
-            "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Pinned product/version and explicit tenant/namespace policy apply.",
+            "Vendor-documented synthetic verification is the accepted basis; optional live checks are not a completion gate."
           ]
         },
         "neutral_export": {
@@ -4008,8 +4026,8 @@
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
           "test_access": "Local source and saved-fixture contract coverage; no provider account access required.",
           "restrictions": [
-            "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Pinned product/version and explicit tenant/namespace policy apply.",
+            "Vendor-documented synthetic verification is the accepted basis; optional live checks are not a completion gate."
           ]
         },
         "vendor_file_export": {
@@ -4030,84 +4048,68 @@
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
           "test_access": "bounded_public_research_not_engine_acceptance",
           "restrictions": [
-            "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Pinned product/version and explicit tenant/namespace policy apply.",
+            "Vendor-documented synthetic verification is the accepted basis; optional live checks are not a completion gate."
           ]
         },
         "create": {
-          "capability_status": "unverified",
-          "implementation_status": "blocked_access",
+          "capability_status": "documented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "granicus-sdk-search"
+            "granicus-sdk-search",
+            "granicus-platform-pinned-soap-synthetic"
           ],
-          "details": "Official indexed MediaManager SDK1.1 excerpt describes Events and agenda/minutes manipulation; exact methods/fields are login-gated and current ViewPublisher tenant applicability is unverified.",
-          "dependencies": [
-            "Authenticated official SDK/API docs",
-            "Correct provider account and authorized test site; not supplied"
-          ],
+          "details": "CreateEvent full documented EventData, authorized unique ForeignID, exact-plan guard, readback and lost-response reconciliation are implemented and synthetically exercised. Other create mappings remain incomplete.",
+          "dependencies": [],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Remaining documented in-domain SOAP methods are not yet all mapped; see outbound mappings and remaining research."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
           "tenant_scope": [
             "https://townofsuperior.granicus.com/ViewPublisher.php?view_id=2"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Synthetic vendor-contract fixtures through real engine/coordinator; no provider account required.",
           "restrictions": [
-            "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Pinned product/version and explicit tenant/namespace policy apply.",
+            "Vendor-documented synthetic verification is the accepted basis; optional live checks are not a completion gate."
           ]
         },
         "update": {
-          "capability_status": "unverified",
-          "implementation_status": "blocked_access",
+          "capability_status": "documented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "granicus-sdk-search"
+            "granicus-sdk-search",
+            "granicus-platform-pinned-soap-synthetic"
           ],
-          "details": "Official indexed MediaManager SDK1.1 excerpt describes agenda/minutes manipulation; no exact method/field schema or tenant entitlement available in the public extract.",
-          "dependencies": [
-            "Authenticated official SDK/API docs",
-            "Correct provider account and authorized test site; not supplied"
-          ],
+          "details": "Full-model EventData/ClipData/MetaDataData updates use exact documented operations, full before hash preflight, durable intent, readback and uncertain-response reconciliation. This is a preflight comparison, not atomic vendor CAS.",
+          "dependencies": [],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Remaining documented in-domain SOAP methods are not yet all mapped; see outbound mappings and remaining research."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
           "tenant_scope": [
             "https://townofsuperior.granicus.com/ViewPublisher.php?view_id=2"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Synthetic vendor-contract fixtures through real engine/coordinator; no provider account required.",
           "restrictions": [
-            "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Pinned product/version and explicit tenant/namespace policy apply.",
+            "Vendor-documented synthetic verification is the accepted basis; optional live checks are not a completion gate."
           ]
         },
         "upload": {
-          "capability_status": "unverified",
-          "implementation_status": "blocked_access",
+          "capability_status": "documented",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
-            "granicus-sdk-search"
+            "granicus-platform-pinned-soap-synthetic"
           ],
-          "details": "Official indexed MediaManager SDK1.1 excerpt mentions file upload; method, binary protocol, limits and target tenant product are not accessible in the public extract.",
-          "dependencies": [
-            "Authenticated official SDK/API docs",
-            "Correct provider account and authorized test site; not supplied"
-          ],
+          "details": "Pinned WSDL specifies UploadEventAgendaDocument, UploadClipMinutesDocument and RegisterClipUpload. Binding exists; durable-file engine mapping remains implementation work.",
+          "dependencies": [],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Implement documented upload/URL mappings with immutable file binding, exact-plan readback and uncertain receipts."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -4115,10 +4117,10 @@
             "https://townofsuperior.granicus.com/ViewPublisher.php?view_id=2"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Vendor-contract synthetic execution is accepted; no test account required.",
           "restrictions": [
-            "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Pinned product/version and explicit tenant/namespace policy apply.",
+            "Vendor-documented synthetic verification is the accepted basis; optional live checks are not a completion gate."
           ]
         }
       },
@@ -4220,19 +4222,218 @@
       ],
       "outbound_mappings": [
         {
-          "entity": "meeting/agenda/minutes/media",
+          "entity": "event",
           "operation": "create",
-          "endpoint_or_format": "Granicus MediaManager SDK1.1/SOAP candidate, exact methods and fields unverified",
-          "field_mappings": [],
-          "evidence_ids": [
-            "granicus-sdk-search"
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 CreateEvent",
+          "field_mappings": [
+            {
+              "normalized": "fields.ID",
+              "provider_field": "EventData.ID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.UID",
+              "provider_field": "EventData.UID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.ForeignID",
+              "provider_field": "EventData.ForeignID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.Name",
+              "provider_field": "EventData.Name",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Description",
+              "provider_field": "EventData.Description",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.CameraID",
+              "provider_field": "EventData.CameraID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.FolderID",
+              "provider_field": "EventData.FolderID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.Status",
+              "provider_field": "EventData.Status",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.AgendaType",
+              "provider_field": "EventData.AgendaType",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.AgendaFile",
+              "provider_field": "EventData.AgendaFile",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.PlayerTemplateID",
+              "provider_field": "EventData.PlayerTemplateID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.ArchiveStatus",
+              "provider_field": "EventData.ArchiveStatus",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Duration",
+              "provider_field": "EventData.Duration",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.Broadcast",
+              "provider_field": "EventData.Broadcast",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:boolean"
+            },
+            {
+              "normalized": "fields.Record",
+              "provider_field": "EventData.Record",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:boolean"
+            },
+            {
+              "normalized": "fields.AutoStart",
+              "provider_field": "EventData.AutoStart",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:boolean"
+            },
+            {
+              "normalized": "fields.StartTime",
+              "provider_field": "EventData.StartTime",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            },
+            {
+              "normalized": "fields.LastModified",
+              "provider_field": "EventData.LastModified",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            },
+            {
+              "normalized": "fields.Attendees",
+              "provider_field": "EventData.Attendees",
+              "mapping_level": "exact_native_dto",
+              "native_type": "ns5:AttendeeCollection"
+            },
+            {
+              "normalized": "fields.MotionTypes",
+              "provider_field": "EventData.MotionTypes",
+              "mapping_level": "exact_native_dto",
+              "native_type": "ns5:StringCollection"
+            },
+            {
+              "normalized": "fields.Street1",
+              "provider_field": "EventData.Street1",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Street2",
+              "provider_field": "EventData.Street2",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.City",
+              "provider_field": "EventData.City",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.State",
+              "provider_field": "EventData.State",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Zip",
+              "provider_field": "EventData.Zip",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.AgendaTitle",
+              "provider_field": "EventData.AgendaTitle",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.MeetingTime",
+              "provider_field": "EventData.MeetingTime",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            },
+            {
+              "normalized": "fields.AgendaPostedDate",
+              "provider_field": "EventData.AgendaPostedDate",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            },
+            {
+              "normalized": "fields.NextStartDate",
+              "provider_field": "EventData.NextStartDate",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            },
+            {
+              "normalized": "fields.AgendaRolloverID",
+              "provider_field": "EventData.AgendaRolloverID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.ConsentAgenda",
+              "provider_field": "EventData.ConsentAgenda",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.LinkedVideoStreamUrl",
+              "provider_field": "EventData.LinkedVideoStreamUrl",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Views",
+              "provider_field": "EventData.Views",
+              "mapping_level": "exact_native_dto",
+              "native_type": "ns5:IntegerCollection"
+            }
           ],
-          "account_requirements": "Valid username/password on configured MediaManager site; authenticated SDK docs and tenant version required",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Exact method response identity and independent provider readback pending contract",
-          "verification_status": "unverified_contract_docs_access_blocked",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Explicit origin/namespace/application tenant plus private username/password; exact operation/resource or ForeignID server policy.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "Actual coordinator persists exact model plan and intent; provider-shaped readback/unique ForeignID reconciliation, no uncertain mutation replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -4244,27 +4445,226 @@
             "W09",
             "W10"
           ],
-          "interface_type": "gated_sdk_contract_unverified",
-          "contract_confidence": "official_indexed_feature_claim_only",
-          "method": null,
-          "api_version": "SDK1.1 mentioned; current applicability unknown",
-          "automatable_contract_verified": false,
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "CreateEvent",
+          "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
         {
-          "entity": "meeting/agenda/minutes/media",
+          "entity": "event",
           "operation": "update",
-          "endpoint_or_format": "Granicus MediaManager SDK1.1/SOAP candidate, exact methods and fields unverified",
-          "field_mappings": [],
-          "evidence_ids": [
-            "granicus-sdk-search"
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 UpdateEvent",
+          "field_mappings": [
+            {
+              "normalized": "fields.ID",
+              "provider_field": "EventData.ID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.UID",
+              "provider_field": "EventData.UID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.ForeignID",
+              "provider_field": "EventData.ForeignID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.Name",
+              "provider_field": "EventData.Name",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Description",
+              "provider_field": "EventData.Description",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.CameraID",
+              "provider_field": "EventData.CameraID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.FolderID",
+              "provider_field": "EventData.FolderID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.Status",
+              "provider_field": "EventData.Status",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.AgendaType",
+              "provider_field": "EventData.AgendaType",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.AgendaFile",
+              "provider_field": "EventData.AgendaFile",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.PlayerTemplateID",
+              "provider_field": "EventData.PlayerTemplateID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.ArchiveStatus",
+              "provider_field": "EventData.ArchiveStatus",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Duration",
+              "provider_field": "EventData.Duration",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.Broadcast",
+              "provider_field": "EventData.Broadcast",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:boolean"
+            },
+            {
+              "normalized": "fields.Record",
+              "provider_field": "EventData.Record",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:boolean"
+            },
+            {
+              "normalized": "fields.AutoStart",
+              "provider_field": "EventData.AutoStart",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:boolean"
+            },
+            {
+              "normalized": "fields.StartTime",
+              "provider_field": "EventData.StartTime",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            },
+            {
+              "normalized": "fields.LastModified",
+              "provider_field": "EventData.LastModified",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            },
+            {
+              "normalized": "fields.Attendees",
+              "provider_field": "EventData.Attendees",
+              "mapping_level": "exact_native_dto",
+              "native_type": "ns5:AttendeeCollection"
+            },
+            {
+              "normalized": "fields.MotionTypes",
+              "provider_field": "EventData.MotionTypes",
+              "mapping_level": "exact_native_dto",
+              "native_type": "ns5:StringCollection"
+            },
+            {
+              "normalized": "fields.Street1",
+              "provider_field": "EventData.Street1",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Street2",
+              "provider_field": "EventData.Street2",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.City",
+              "provider_field": "EventData.City",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.State",
+              "provider_field": "EventData.State",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Zip",
+              "provider_field": "EventData.Zip",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.AgendaTitle",
+              "provider_field": "EventData.AgendaTitle",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.MeetingTime",
+              "provider_field": "EventData.MeetingTime",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            },
+            {
+              "normalized": "fields.AgendaPostedDate",
+              "provider_field": "EventData.AgendaPostedDate",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            },
+            {
+              "normalized": "fields.NextStartDate",
+              "provider_field": "EventData.NextStartDate",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            },
+            {
+              "normalized": "fields.AgendaRolloverID",
+              "provider_field": "EventData.AgendaRolloverID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.ConsentAgenda",
+              "provider_field": "EventData.ConsentAgenda",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.LinkedVideoStreamUrl",
+              "provider_field": "EventData.LinkedVideoStreamUrl",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Views",
+              "provider_field": "EventData.Views",
+              "mapping_level": "exact_native_dto",
+              "native_type": "ns5:IntegerCollection"
+            }
           ],
-          "account_requirements": "Valid username/password on configured MediaManager site; authenticated SDK docs and tenant version required",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Exact method response identity and independent provider readback pending contract",
-          "verification_status": "unverified_contract_docs_access_blocked",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Explicit origin/namespace/application tenant plus private username/password; exact operation/resource or ForeignID server policy.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "Actual coordinator persists exact model plan and intent; provider-shaped readback/unique ForeignID reconciliation, no uncertain mutation replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -4276,27 +4676,202 @@
             "W09",
             "W10"
           ],
-          "interface_type": "gated_sdk_contract_unverified",
-          "contract_confidence": "official_indexed_feature_claim_only",
-          "method": null,
-          "api_version": "SDK1.1 mentioned; current applicability unknown",
-          "automatable_contract_verified": false,
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "UpdateEvent",
+          "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
         {
-          "entity": "meeting/agenda/minutes/media",
-          "operation": "upload",
-          "endpoint_or_format": "Granicus MediaManager SDK1.1/SOAP candidate, exact methods and fields unverified",
-          "field_mappings": [],
-          "evidence_ids": [
-            "granicus-sdk-search"
+          "entity": "recording",
+          "operation": "update",
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 UpdateClip",
+          "field_mappings": [
+            {
+              "normalized": "fields.ID",
+              "provider_field": "ClipData.ID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.UID",
+              "provider_field": "ClipData.UID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.EventUID",
+              "provider_field": "ClipData.EventUID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.ForeignID",
+              "provider_field": "ClipData.ForeignID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.Type",
+              "provider_field": "ClipData.Type",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Name",
+              "provider_field": "ClipData.Name",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Description",
+              "provider_field": "ClipData.Description",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Keywords",
+              "provider_field": "ClipData.Keywords",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Date",
+              "provider_field": "ClipData.Date",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            },
+            {
+              "normalized": "fields.CameraID",
+              "provider_field": "ClipData.CameraID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.FolderID",
+              "provider_field": "ClipData.FolderID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.FileName",
+              "provider_field": "ClipData.FileName",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.MinutesType",
+              "provider_field": "ClipData.MinutesType",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.MinutesFile",
+              "provider_field": "ClipData.MinutesFile",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.AgendaType",
+              "provider_field": "ClipData.AgendaType",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.AgendaFile",
+              "provider_field": "ClipData.AgendaFile",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Duration",
+              "provider_field": "ClipData.Duration",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.Status",
+              "provider_field": "ClipData.Status",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.StartTime",
+              "provider_field": "ClipData.StartTime",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            },
+            {
+              "normalized": "fields.LastModified",
+              "provider_field": "ClipData.LastModified",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            },
+            {
+              "normalized": "fields.Attendees",
+              "provider_field": "ClipData.Attendees",
+              "mapping_level": "exact_native_dto",
+              "native_type": "ns5:AttendeeCollection"
+            },
+            {
+              "normalized": "fields.MotionTypes",
+              "provider_field": "ClipData.MotionTypes",
+              "mapping_level": "exact_native_dto",
+              "native_type": "ns5:StringCollection"
+            },
+            {
+              "normalized": "fields.Street1",
+              "provider_field": "ClipData.Street1",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Street2",
+              "provider_field": "ClipData.Street2",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.City",
+              "provider_field": "ClipData.City",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.State",
+              "provider_field": "ClipData.State",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Zip",
+              "provider_field": "ClipData.Zip",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.AgendaTitle",
+              "provider_field": "ClipData.AgendaTitle",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.AgendaPostedDate",
+              "provider_field": "ClipData.AgendaPostedDate",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:dateTime"
+            }
           ],
-          "account_requirements": "Valid username/password on configured MediaManager site; authenticated SDK docs and tenant version required",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Exact method response identity and independent provider readback pending contract",
-          "verification_status": "unverified_contract_docs_access_blocked",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Explicit origin/namespace/application tenant plus private username/password; exact operation/resource or ForeignID server policy.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "Actual coordinator persists exact model plan and intent; provider-shaped readback/unique ForeignID reconciliation, no uncertain mutation replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -4308,11 +4883,166 @@
             "W09",
             "W10"
           ],
-          "interface_type": "gated_sdk_contract_unverified",
-          "contract_confidence": "official_indexed_feature_claim_only",
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "UpdateClip",
+          "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "agenda_item",
+          "operation": "update",
+          "endpoint_or_format": "https://{tenant}.granicus.com/SDK/User/index.php SOAP1.1 UpdateMetaData",
+          "field_mappings": [
+            {
+              "normalized": "fields.ID",
+              "provider_field": "MetaDataData.ID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.UID",
+              "provider_field": "MetaDataData.UID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.ParentID",
+              "provider_field": "MetaDataData.ParentID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.ParentUID",
+              "provider_field": "MetaDataData.ParentUID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.ForeignID",
+              "provider_field": "MetaDataData.ForeignID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.SourceID",
+              "provider_field": "MetaDataData.SourceID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.Name",
+              "provider_field": "MetaDataData.Name",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.TimeStamp",
+              "provider_field": "MetaDataData.TimeStamp",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.OrderID",
+              "provider_field": "MetaDataData.OrderID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.Payload",
+              "provider_field": "MetaDataData.Payload",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:anyType"
+            },
+            {
+              "normalized": "fields.Consent",
+              "provider_field": "MetaDataData.Consent",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.ConsentVoteUID",
+              "provider_field": "MetaDataData.ConsentVoteUID",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.ClosedSession",
+              "provider_field": "MetaDataData.ClosedSession",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:int"
+            },
+            {
+              "normalized": "fields.Visibility",
+              "provider_field": "MetaDataData.Visibility",
+              "mapping_level": "exact_native_dto",
+              "native_type": "xsd:string"
+            },
+            {
+              "normalized": "fields.Children",
+              "provider_field": "MetaDataData.Children",
+              "mapping_level": "exact_native_dto",
+              "native_type": "ns5:MetaDataDataCollection"
+            }
+          ],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Explicit origin/namespace/application tenant plus private username/password; exact operation/resource or ForeignID server policy.",
+          "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
+          "readback_receipt": "Actual coordinator persists exact model plan and intent; provider-shaped readback/unique ForeignID reconciliation, no uncertain mutation replay.",
+          "verification_status": "synthetic_contract_verified",
+          "evidence_level": "vendor_documented_synthetic_contract_verification",
+          "implementation_status": "implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
+          "method": "UpdateMetaData",
+          "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "agenda/minutes/media/metadata/motions/attendees",
+          "operation": "upload",
+          "endpoint_or_format": "Pinned Platform WSDL methods; see provider-api-contracts.json granicus_platform",
+          "field_mappings": [],
+          "evidence_ids": [
+            "granicus-platform-pinned-soap-synthetic"
+          ],
+          "account_requirements": "Private configured Platform session; no account acquisition required for accepted synthetic verification.",
+          "authorized_test_access": "synthetic_basis_accepted",
+          "readback_receipt": "Engine mapping and operation-specific readback/reconciliation still required.",
+          "verification_status": "documented_binding_engine_mapping_incomplete",
+          "evidence_level": "referenced_contract_or_ui_documentation",
+          "implementation_status": "not_implemented",
+          "acceptance_status": "not_run",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "pinned_official_wsdl_and_sdk",
           "method": null,
           "api_version": "SDK1.1 mentioned; current applicability unknown",
-          "automatable_contract_verified": false,
+          "automatable_contract_verified": true,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         }
       ],
@@ -4329,9 +5059,9 @@
         "Unverified and access-blocked are incomplete, not unsupported."
       ],
       "remaining_research": [
-        "On the selected Superior ViewPublisher tenant, GET one RSS link and one older-year page; record exact feed URL/schema, date coverage and document/video MIME/redirect behavior. Search semantics remain untested.",
-        "The official MediaManager SDK article names Event creation, uploads and Agenda/Minutes operations but is behind customer support login. Obtain the readable version matching the configured product/version.",
-        "Keep ViewPublisher, MediaManager, Legistar, Peak, Swagit and iQM2 separate; no authorized write account was supplied."
+        "Map remaining documented in-domain SDK methods: agenda/minutes upload and URL setters, RegisterClipUpload/PublishClip (publication explicit only), metadata Add/Import, motion/attendee creation and supporting captions/minutes/attachment/video-location reads.",
+        "Inspect pinned vendor comments/examples for untyped Payload/native enum semantics; do not invent values.",
+        "Keep Platform SOAP distinct from ViewPublisher, Legistar, Peak, Swagit and iQM2; no cross-product endpoint inference."
       ],
       "requirement_ids": [
         "C01",

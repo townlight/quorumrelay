@@ -444,6 +444,9 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     saved = _decode_content(request, content)
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")
+    if source.provider == "granicus" and input_format == "granicus-platform-soap-xml" and saved is None:
+        from .granicus_platform import read
+        return read(source, namespace, request, bounds, context, transport or PublicTransport(), discover=True)
     if (source.provider == "utah-public-notice" and saved is None
             and source.input_format in (None, "utah-public-search-html")
             and urlsplit(source.url).path in {"/pmn/", "/pmn/search.html"}):

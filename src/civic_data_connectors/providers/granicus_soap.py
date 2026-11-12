@@ -228,7 +228,9 @@ class Session:
             value = response_value(operation, response.content, byte_limit=self.bounds.parser_bytes)
             if not private:
                 decoded = json.dumps(value, ensure_ascii=False)
-                if any(self._config[k] in decoded for k in ("username", "password")):
+                secrets = [self._config[k] for k in ("username", "password")]
+                secrets.extend(cookie.value for cookie in self.jar if cookie.value)
+                if any(secret in decoded for secret in secrets):
                     raise ValueError("Credential material cannot become a source capture.")
             self._cookies(self.jar, response, self.url)
             return value, response.content
