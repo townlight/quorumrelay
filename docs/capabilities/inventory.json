@@ -394,6 +394,108 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "legistar-documented-entity-synthetic-subset",
+          "url": "https://webapi.legistar.com/Help/Api/POST-v1-Client-Events",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/current-source-required-checks-2026-11-12.json",
+          "receipt_sha256": "8c3be946419ea4231059d675af2de603a5c4b65ce5beea13767d3851b41589d1",
+          "limits": "Only the explicit fixture fields/routes and coordinator outcomes below are accepted, not all model fields, tenant behavior, catalogs or live transactions. Current test-file bindings are provenance references; the named test ASTs match the executed source.",
+          "synthetic_execution": {
+            "provider": "legistar",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "agenda_item",
+              "agenda_item_linked_matter",
+              "agenda_item_supplied_matter_text",
+              "linked_meeting_document",
+              "meeting",
+              "meeting_item_action_history",
+              "roll_call",
+              "vote"
+            ],
+            "scope": "Eight native entity types, create/update wire routes and coordinator plan/commit/readback; fixture sample fields only (event date/location, item title/parent, attachment name/binary, matter type/status/body/title, matter text, history action, vote/rollcall person/value/result). Does not execute public upload spelling or prove every declared field.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
+                "passed": 16,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_write_providers.py::test_legistar_sixteen_documented_entity_routes (16 parametrizations)"
+                ],
+                "scope": "named passing subset of recorded full execution, not total suite result"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/provider-api-contracts.json",
+                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_write_providers.py",
+                "sha256": "6038d98ff21b633874f90c18ba0f47fd4d8af030ca8454948c41c8912f93600a"
+              }
+            ]
+          }
+        },
+        {
+          "id": "legistar-public-dispatch-synthetic-attribution",
+          "url": "https://webapi.legistar.com/Help/Api/POST-v1-Client-Matters-MatterId-Attachments",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "limits": "Public matter_attachment/upload: approved parent/native binary fields, exact file readback and duplicate receipt replay without another network request.",
+          "synthetic_execution": {
+            "provider": "legistar",
+            "status": "mock_passed",
+            "operations": [
+              "upload"
+            ],
+            "entities": [
+              "linked_meeting_document"
+            ],
+            "scope": "Public matter_attachment/upload: approved parent/native binary fields, exact file readback and duplicate receipt replay without another network request.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
+                "passed": 1,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_outbound_attribution.py::test_legistar_public_upload_exact_binary_and_replay"
+                ],
+                "scope": "named subset of the four-case execution"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/provider-api-contracts.json",
+                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_outbound_attribution.py",
+                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -604,18 +706,16 @@
           "capability_status": "documented",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "legistar-events-post"
+            "legistar-events-post",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
-          "dependencies": [
-            "No authorized provider test tenant or credentials supplied",
-            "Provider test tenant/write credentials and conflict semantics absent"
-          ],
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields. Existing 16-case documented synthetic engine subset verifies create/update sample fields and readback, as attributed by evidence; not whole-model or live acceptance.",
+          "dependencies": [],
           "remaining_verification": [
-            "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
+            "Only entity fixture sample fields are attributed; broader model-field coverage and undocumented media binary import semantics are not inferred."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://webapi.legistar.com/v1/olympia"
           ],
@@ -630,18 +730,16 @@
           "capability_status": "documented",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "legistar-events-put"
+            "legistar-events-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
-          "dependencies": [
-            "No authorized provider test tenant or credentials supplied",
-            "Provider test tenant/write credentials and conflict semantics absent"
-          ],
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields. Existing 16-case documented synthetic engine subset verifies create/update sample fields and readback, as attributed by evidence; not whole-model or live acceptance.",
+          "dependencies": [],
           "remaining_verification": [
-            "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
+            "Only entity fixture sample fields are attributed; broader model-field coverage and undocumented media binary import semantics are not inferred."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://webapi.legistar.com/v1/olympia"
           ],
@@ -659,10 +757,7 @@
             "legistar-attachment-post"
           ],
           "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
-          "dependencies": [
-            "No authorized provider test tenant or credentials supplied",
-            "Provider test tenant/write credentials and conflict semantics absent"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
           ],
@@ -1119,13 +1214,14 @@
             }
           ],
           "evidence_ids": [
-            "legistar-events-post"
+            "legistar-events-post",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
-          "notes": "",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
+          "notes": " Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -1136,9 +1232,9 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "referenced_contract_or_ui_documentation",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "POST",
@@ -1241,13 +1337,14 @@
             }
           ],
           "evidence_ids": [
-            "legistar-events-put"
+            "legistar-events-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
-          "notes": "Do not infer idempotency or automatic RowVersion conflicts.",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
+          "notes": "Do not infer idempotency or automatic RowVersion conflicts. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -1258,9 +1355,9 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "referenced_contract_or_ui_documentation",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "PUT",
@@ -1381,13 +1478,14 @@
             }
           ],
           "evidence_ids": [
-            "legistar-items-post"
+            "legistar-items-post",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
-          "notes": "",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
+          "notes": " Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -1398,9 +1496,9 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "referenced_contract_or_ui_documentation",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "POST",
@@ -1521,13 +1619,14 @@
             }
           ],
           "evidence_ids": [
-            "legistar-items-put"
+            "legistar-items-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
-          "notes": "",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
+          "notes": " Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -1538,9 +1637,9 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "referenced_contract_or_ui_documentation",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "PUT",
@@ -1607,13 +1706,14 @@
             }
           ],
           "evidence_ids": [
-            "legistar-attachment-post"
+            "legistar-attachment-post",
+            "legistar-public-dispatch-synthetic-attribution"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
           "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
-          "notes": "Only linked meeting/agenda-item matter attachments in bounded domain; arbitrary legislative administration excluded.",
+          "notes": "Only linked meeting/agenda-item matter attachments in bounded domain; arbitrary legislative administration excluded. Binary attachment create is tested; the public upload spelling is not separately attributed by this reconciliation. Acceptance remains not_run.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -1626,7 +1726,7 @@
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "POST",
@@ -1636,7 +1736,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Public matter_attachment/upload: approved parent/native binary fields, exact file readback and duplicate receipt replay without another network request."
         },
         {
           "entity": "linked_meeting_document",
@@ -1693,13 +1794,14 @@
             }
           ],
           "evidence_ids": [
-            "legistar-attachment-put"
+            "legistar-attachment-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
-          "notes": "Never modify MatterAttachmentSort.",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
+          "notes": "Never modify MatterAttachmentSort. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -1710,9 +1812,9 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "referenced_contract_or_ui_documentation",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "PUT",
@@ -1803,14 +1905,15 @@
             }
           ],
           "evidence_ids": [
-            "legistar-post-v1-client-matters"
+            "legistar-post-v1-client-matters",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -1820,7 +1923,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default.",
+          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -1830,7 +1933,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "agenda_item_linked_matter",
@@ -1911,14 +2015,15 @@
             }
           ],
           "evidence_ids": [
-            "legistar-put-v1-client-matters-matterid-"
+            "legistar-put-v1-client-matters-matterid-",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -1928,7 +2033,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default.",
+          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -1938,7 +2043,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "agenda_item_supplied_matter_text",
@@ -1995,14 +2101,15 @@
             }
           ],
           "evidence_ids": [
-            "legistar-post-v1-client-matters-matterid-texts"
+            "legistar-post-v1-client-matters-matterid-texts",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2012,7 +2119,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default.",
+          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2022,7 +2129,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "agenda_item_supplied_matter_text",
@@ -2079,14 +2187,15 @@
             }
           ],
           "evidence_ids": [
-            "legistar-put-v1-client-matters-matterid-texts-mattertextid-"
+            "legistar-put-v1-client-matters-matterid-texts-mattertextid-",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2096,7 +2205,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default.",
+          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2106,7 +2215,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "meeting_item_action_history",
@@ -2301,14 +2411,15 @@
             }
           ],
           "evidence_ids": [
-            "legistar-post-v1-client-matters-matterid-histories"
+            "legistar-post-v1-client-matters-matterid-histories",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2318,7 +2429,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default.",
+          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2328,7 +2439,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "meeting_item_action_history",
@@ -2523,14 +2635,15 @@
             }
           ],
           "evidence_ids": [
-            "legistar-put-v1-client-matters-matterid-histories-matterhistoryid-"
+            "legistar-put-v1-client-matters-matterid-histories-matterhistoryid-",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2540,7 +2653,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default.",
+          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2550,7 +2663,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "vote",
@@ -2626,14 +2740,15 @@
           ],
           "evidence_ids": [
             "legistar-votes-post",
-            "legistar-votes-put"
+            "legistar-votes-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific VoteValueId mapping are not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind the exact approved plan and EventItemId; capture returned ID/object; independently GET the parent EventItem/Votes and verify the record and supplied revision before claiming acceptance. Reconcile an ambiguous create before retry.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2643,7 +2758,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only a vote explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence.",
+          "notes": "Only a vote explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2653,7 +2768,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Vote attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration."
+          "domain_scope": "Vote attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "vote",
@@ -2729,14 +2845,15 @@
           ],
           "evidence_ids": [
             "legistar-votes-post",
-            "legistar-votes-put"
+            "legistar-votes-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific VoteValueId mapping are not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind the exact approved plan and EventItemId/VoteId; capture response; independently GET the vote and verify the parent relationship and supplied revision before claiming acceptance.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2746,7 +2863,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only a vote explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence.",
+          "notes": "Only a vote explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2756,7 +2873,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Vote attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration."
+          "domain_scope": "Vote attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "roll_call",
@@ -2832,14 +2950,15 @@
           ],
           "evidence_ids": [
             "legistar-rollcalls-post",
-            "legistar-rollcalls-put"
+            "legistar-rollcalls-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific RollCallValueId mapping are not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind the exact approved plan and EventItemId; capture returned ID/object; independently GET the parent EventItem/RollCalls and verify the record and supplied revision before claiming acceptance. Reconcile an ambiguous create before retry.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2849,7 +2968,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only a roll-call item explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence.",
+          "notes": "Only a roll-call item explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2859,7 +2978,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Roll-call item attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration."
+          "domain_scope": "Roll-call item attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "roll_call",
@@ -2935,14 +3055,15 @@
           ],
           "evidence_ids": [
             "legistar-rollcalls-post",
-            "legistar-rollcalls-put"
+            "legistar-rollcalls-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific RollCallValueId mapping are not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind the exact approved plan and EventItemId/RollCallId; capture response; independently GET the roll-call item and verify the parent relationship and supplied revision before claiming acceptance.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2952,7 +3073,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only a roll-call item explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence.",
+          "notes": "Only a roll-call item explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2962,7 +3083,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Roll-call item attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration."
+          "domain_scope": "Roll-call item attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         }
       ],
       "pagination": {
@@ -3849,6 +3971,106 @@
             "Official Java WSDL revision548e20a5f25f9ca5472e168996fe116ab8bd1164 supplies structured PublishClipData/PublishClipResult matching .NET SDK DTOs. Explicit per-type source overrides retain and qualify the original conflicting array definitions; two independent provenance checks pass."
           ],
           "limits": "Pinned SDK1.x contract, not a live/current compatibility claim. Document uploads/URLs, media upload registration/publication, metadata add/import and structured motion/attendee engine mappings remain implementation work; no delete/admin scope."
+        },
+        {
+          "id": "granicus-attributed-outbound-synthetic-subset",
+          "url": "https://github.com/Granicus/platform-api-net/tree/ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/current-source-required-checks-2026-11-12.json",
+          "receipt_sha256": "8c3be946419ea4231059d675af2de603a5c4b65ce5beea13767d3851b41589d1",
+          "limits": "Only the explicit fixture fields/routes and coordinator outcomes below are accepted, not all model fields, tenant behavior, catalogs or live transactions. Current test-file bindings are provenance references; the named test ASTs match the executed source.",
+          "synthetic_execution": {
+            "provider": "granicus",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update",
+              "upload"
+            ],
+            "entities": [
+              "agenda_item",
+              "agenda_tree",
+              "chunked_recording",
+              "document",
+              "event",
+              "generated_minutes",
+              "recording",
+              "recording_publication"
+            ],
+            "scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
+                "passed": 57,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_granicus_write.py::test_exact_plan_commit_readback_and_duplicate_replay (1 cases)",
+                  "tests/test_granicus_write.py::test_conflict_and_revoked_scope_do_not_mutate (1 cases)",
+                  "tests/test_granicus_write.py::test_lost_mutation_response_reconciles_without_repeat (1 cases)",
+                  "tests/test_granicus_write.py::test_unknown_model_fields_are_not_silently_dropped (1 cases)",
+                  "tests/test_granicus_write.py::test_create_full_event_model_and_foreign_id_reconciliation (2 cases)",
+                  "tests/test_granicus_write.py::test_private_write_response_cookies_remain_transport_only (1 cases)",
+                  "tests/test_granicus_write.py::test_related_full_model_updates_use_documented_methods (2 cases)",
+                  "tests/test_granicus_write.py::test_exact_document_url_plans_and_readback (3 cases)",
+                  "tests/test_granicus_write.py::test_document_upload_immutable_bytes_expiry_and_uncertain_reconciliation (4 cases)",
+                  "tests/test_granicus_write.py::test_document_cross_origin_policy_prevents_send (1 cases)",
+                  "tests/test_granicus_write.py::test_named_minutes_url_uses_documented_method_and_name_readback (1 cases)",
+                  "tests/test_granicus_write.py::test_vendor_sdk_chunked_minutes_add_finish_exact_bytes (3 cases)",
+                  "tests/test_granicus_write.py::test_meeting_bound_motion_payload_updates_preserve_type_and_readback (1 cases)",
+                  "tests/test_granicus_write.py::test_media_vault_real_coordinator_upload_identity_and_no_uncertain_replay (3 cases)",
+                  "tests/test_granicus_write.py::test_explicit_publication_visibility_acknowledgement_and_no_replay (5 cases)",
+                  "tests/test_granicus_write.py::test_publication_requires_explicit_visibility_and_separate_grant (1 cases)",
+                  "tests/test_granicus_write.py::test_meeting_bound_attendees_and_motion_types_exact_field_readback (2 cases)",
+                  "tests/test_granicus_write.py::test_documented_single_agenda_preserves_above_prior_adapter_7mb_limit (1 cases)",
+                  "tests/test_granicus_write.py::test_full_model_patch_rejects_identity_and_documented_server_owned_fields (1 cases)",
+                  "tests/test_granicus_write.py::test_event_creation_retains_server_generated_fields_without_claiming_them_written (1 cases)",
+                  "tests/test_granicus_metadata.py::test_documented_add_import_exact_nodes_ids_and_parent_readback (4 cases)",
+                  "tests/test_granicus_metadata.py::test_metadata_lost_reply_reconciles_unique_foreign_ids_without_replay (2 cases)",
+                  "tests/test_granicus_metadata.py::test_metadata_rejects_destructive_clearing_and_duplicate_keys (1 cases)",
+                  "tests/test_granicus_minutes.py::test_generated_minutes_are_approved_creation_with_scoped_readback_and_no_replay (3 cases)",
+                  "tests/test_granicus_minutes.py::test_generated_minutes_reject_missing_flags_and_uid_parent_mismatch (1 cases)",
+                  "tests/test_granicus_media.py::test_chunked_registration_private_durable_state_and_uncertain_no_replay (6 cases)",
+                  "tests/test_granicus_media.py::test_chunked_assignment_exact_existing_clip_and_no_uncertain_replay (2 cases)",
+                  "tests/test_granicus_media.py::test_chunk_cancellation_stops_after_acknowledged_chunk_without_restarting (1 cases)",
+                  "tests/test_granicus_media.py::test_chunk_private_state_binding_and_reflected_bucket_never_become_receipt (1 cases)"
+                ],
+                "scope": "named passing subset of recorded full execution, not total suite result"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/granicus-platform/source.json",
+                "sha256": "18bd4b79b0debe950ea2da4e5c51dd086f0307bcccd4b4f43741108f7e6661ee"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_granicus_media.py",
+                "sha256": "ac2b75d36d9a275b7dbe7521389ab656051b28eaa51193fa4f568135936a6868"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_granicus_metadata.py",
+                "sha256": "5e16c1614591016ccb80484cc2ae0a62c2e70ac2eeae983ab5aad61208b3ba75"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_granicus_minutes.py",
+                "sha256": "fd7965b5d9ddc47130cae5b9d99b33170dbdd79c9a92bffb6e486a8d30846d21"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_granicus_write.py",
+                "sha256": "6ca689b72ea411562de22de806c77e46243a22ce3e0adc1a46797fa027a1b55f"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -4422,7 +4644,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Explicit origin/namespace/application tenant plus private username/password; exact operation/resource or ForeignID server policy.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -4430,7 +4653,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -4446,7 +4669,8 @@
           "method": "CreateEvent",
           "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "event",
@@ -4653,7 +4877,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Explicit origin/namespace/application tenant plus private username/password; exact operation/resource or ForeignID server policy.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -4661,7 +4886,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -4677,7 +4902,8 @@
           "method": "UpdateEvent",
           "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "recording",
@@ -4860,7 +5086,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Explicit origin/namespace/application tenant plus private username/password; exact operation/resource or ForeignID server policy.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -4868,7 +5095,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -4884,7 +5111,8 @@
           "method": "UpdateClip",
           "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "agenda_item",
@@ -4983,7 +5211,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Explicit origin/namespace/application tenant plus private username/password; exact operation/resource or ForeignID server policy.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -4991,7 +5220,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5007,7 +5236,8 @@
           "method": "UpdateMetaData",
           "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "document",
@@ -5026,7 +5256,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Explicit document operation/resource/meeting allowlists and exact allowed HTTPS document origins. Single-call upload mapper safe ceiling 7,000,000 bytes; larger chunked SDK path remains incomplete.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5034,7 +5265,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5050,7 +5281,8 @@
           "method": "SetEventAgendaURL",
           "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "document",
@@ -5069,7 +5301,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Explicit document operation/resource/meeting allowlists and exact allowed HTTPS document origins. Single-call upload mapper safe ceiling 7,000,000 bytes; larger chunked SDK path remains incomplete.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5077,7 +5310,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5093,7 +5326,8 @@
           "method": "SetClipAgendaURL",
           "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "document",
@@ -5112,7 +5346,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Explicit document operation/resource/meeting allowlists and exact allowed HTTPS document origins. Single-call upload mapper safe ceiling 7,000,000 bytes; larger chunked SDK path remains incomplete.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5120,7 +5355,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5136,7 +5371,8 @@
           "method": "SetClipMinutesURL",
           "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "document",
@@ -5160,7 +5396,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Explicit document operation/resource/meeting allowlists and exact allowed HTTPS document origins. Single-call upload mapper safe ceiling 7,000,000 bytes; larger chunked SDK path remains incomplete.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5168,7 +5405,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5184,7 +5421,8 @@
           "method": "SetClipMinutesURLWithName",
           "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "document",
@@ -5218,7 +5456,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Exact document/resource/meeting grants and allowed HTTPS origins; single SOAP Document bounded by caller transfer/request limit. No invented vendor7MB ceiling.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5226,7 +5465,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5242,7 +5481,8 @@
           "method": "UploadEventAgendaDocument",
           "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "document",
@@ -5281,7 +5521,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Explicit document operation/resource/meeting allowlists and allowed HTTPS document origins. Documented SDK chunking above 7,000,000 bytes, up to min(1GB, configured transfer ceiling); no ambiguous chunk replay.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5289,7 +5530,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5305,7 +5546,8 @@
           "method": "UploadClipMinutesDocument",
           "api_version": "Platform SOAP SDK1.x pinned ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "recording",
@@ -5329,7 +5571,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Explicit recording:upload, folder_ids, meeting_ids and HTTPS media_origin policy matching GetFolderUploadInterface. Private current PHPSESSID impersonation; never included in plan or receipt.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5337,7 +5580,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5353,7 +5596,8 @@
           "method": "UploadFile",
           "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "recording_publication",
@@ -5397,7 +5641,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Explicit recording_publication:update, resource and meeting allowlists; full PublishClipData with mandatory Public boolean. No implicit publication from upload.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5405,7 +5650,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5421,7 +5666,8 @@
           "method": "PublishClip",
           "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "agenda_tree",
@@ -5440,7 +5686,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Exact agenda_tree create/update, parent resource, meeting and every supplied ForeignID grants. Full metadata models; Import requires explicit AsTree and ClearExisting=false. Vendor destructive true-branch excluded by project no-delete scope.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5448,7 +5695,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5464,7 +5711,8 @@
           "method": "AddEventMetaData",
           "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "agenda_tree",
@@ -5483,7 +5731,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Exact agenda_tree create/update, parent resource, meeting and every supplied ForeignID grants. Full metadata models; Import requires explicit AsTree and ClearExisting=false. Vendor destructive true-branch excluded by project no-delete scope.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5491,7 +5740,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5507,7 +5756,8 @@
           "method": "AddClipMetaData",
           "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "agenda_tree",
@@ -5536,7 +5786,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Exact agenda_tree create/update, parent resource, meeting and every supplied ForeignID grants. Full metadata models; Import requires explicit AsTree and ClearExisting=false. Vendor destructive true-branch excluded by project no-delete scope.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5544,7 +5795,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5560,7 +5811,8 @@
           "method": "ImportEventMetaData",
           "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "agenda_tree",
@@ -5589,7 +5841,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Exact agenda_tree create/update, parent resource, meeting and every supplied ForeignID grants. Full metadata models; Import requires explicit AsTree and ClearExisting=false. Vendor destructive true-branch excluded by project no-delete scope.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5597,7 +5850,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5613,7 +5866,8 @@
           "method": "ImportClipMetaData",
           "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "generated_minutes",
@@ -5647,7 +5901,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Exact operation/resource/folder/meeting server grants; explicit publication/default booleans for generated minutes. Vendor-documented synthetic verification accepted; no account acquisition gate.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5655,7 +5910,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5671,7 +5926,8 @@
           "method": "CreateClipGeneratedMinutesDocument",
           "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "chunked_recording",
@@ -5700,7 +5956,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Exact operation/resource/folder/meeting server grants; explicit publication/default booleans for generated minutes. Vendor-documented synthetic verification accepted; no account acquisition gate.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5708,7 +5965,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5724,7 +5981,8 @@
           "method": "RegisterUploadedFile",
           "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         },
         {
           "entity": "chunked_recording",
@@ -5748,7 +6006,8 @@
             }
           ],
           "evidence_ids": [
-            "granicus-platform-pinned-soap-synthetic"
+            "granicus-platform-pinned-soap-synthetic",
+            "granicus-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Exact operation/resource/folder/meeting server grants; explicit publication/default booleans for generated minutes. Vendor-documented synthetic verification accepted; no account acquisition gate.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
@@ -5756,7 +6015,7 @@
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -5772,7 +6031,8 @@
           "method": "AssignUploadedFile",
           "api_version": "MediaVault SDK.asmx.wsdl pinned official ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Pinned SOAP/MediaVault fixture fields/routes: event/clip/metadata, document URLs/bytes, explicit publication, nonclearing agenda Add/Import, generated minutes and chunk registration/assignment. Processing/pending acknowledgements are not playable-media proof; uncertain responses never justify replay; private sessions stay private. Destructive ClearExisting excluded."
         }
       ],
       "pagination": {
@@ -6770,6 +7030,57 @@
           "limits": "One tenant/query and bounded page snapshot only; exact upstream candidate semantics, complete catalog/full text and restart-persistent continuation are not established. No provider write acceptance.",
           "receipt_path": "docs/verification/civicplus-select-native-search-2026-11-12.json",
           "receipt_sha256": "f6f0728694dea71e46591059021535749b0ea25636104cfaaeb5865a01f0b103"
+        },
+        {
+          "id": "civicplus-select-attributed-outbound-synthetic-subset",
+          "url": "https://www.civicplus.help/meetings-select/docs/historical-imports",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/current-source-required-checks-2026-11-12.json",
+          "receipt_sha256": "8c3be946419ea4231059d675af2de603a5c4b65ce5beea13767d3851b41589d1",
+          "limits": "Only the explicit fixture fields/routes and coordinator outcomes below are accepted, not all model fields, tenant behavior, catalogs or live transactions. Current test-file bindings are provenance references; the named test ASTs match the executed source.",
+          "synthetic_execution": {
+            "provider": "civicplus-select",
+            "status": "mock_passed",
+            "operations": [
+              "vendor_file_export"
+            ],
+            "entities": [
+              "meeting_document_or_media"
+            ],
+            "scope": "PREPARED OUTPUT only: official filename examples/classifier mappings, five PDFs and one MP4, exact emitted bytes/hashes. No FTP transfer, consultant acceptance, remote import or meeting association.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
+                "passed": 7,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_civicplus_export.py::test_official_example_filenames_exact_bytes_hashes_and_disclosed_losses (3 cases)",
+                  "tests/test_civicplus_export.py::test_linked_tester_canonical_pdf_tokens (2 cases)",
+                  "tests/test_civicplus_export.py::test_mp4_framing_and_exact_bytes_with_no_vendor_acceptance (1 cases)",
+                  "tests/test_civicplus_export.py::test_five_pdfs_and_one_media_are_prepared_without_extra_files (1 cases)"
+                ],
+                "scope": "named passing subset of recorded full execution, not total suite result"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/civicplus-official-filename-tester-v3.5.9.html",
+                "sha256": "9f056bcd6fbcd4002c18b302a57b8155acbaa81517f78d82e2a4d209fa4c5c0f"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_civicplus_export.py",
+                "sha256": "8d492e9154722ef67910699f505414d9748ae6e98c85cb0ff6ff2c43c2cb56e6"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -7482,7 +7793,8 @@
           "evidence_ids": [
             "select-import",
             "select-filename-tester-html",
-            "select-filename-tester-cases"
+            "select-filename-tester-cases",
+            "civicplus-select-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Imports FTP username/password are provided by CivicPlus project lead; none supplied. The page names two conflicting hosts; no connection or transfer was performed.",
           "authorized_test_access": "not_supplied;public_docs_only;no_FTP_access_or_transfer",
@@ -7501,7 +7813,7 @@
           ],
           "evidence_level": "official_filename_format_linked_classifier_and_local_tests_not_vendor_acceptance",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_file_import",
           "contract_confidence": "official_filename_format_and_manual_consultant_intake",
           "method": null,
@@ -7511,7 +7823,8 @@
           ],
           "api_version": "not_applicable",
           "automatable_contract_verified": false,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "PREPARED OUTPUT only: official filename examples/classifier mappings, five PDFs and one MP4, exact emitted bytes/hashes. No FTP transfer, consultant acceptance, remote import or meeting association."
         }
       ],
       "pagination": {
@@ -8499,6 +8812,57 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "essential-multimedia-documented-synthetic-subset",
+          "url": "https://www.civicplus.help/meetings-essential/docs/public-application-programming-interface-api",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/current-source-required-checks-2026-11-12.json",
+          "receipt_sha256": "8c3be946419ea4231059d675af2de603a5c4b65ce5beea13767d3851b41589d1",
+          "limits": "Only the explicit fixture fields/routes and coordinator outcomes below are accepted, not all model fields, tenant behavior, catalogs or live transactions. Current test-file bindings are provenance references; the named test ASTs match the executed source.",
+          "synthetic_execution": {
+            "provider": "municode-meetings",
+            "status": "mock_passed",
+            "operations": [
+              "update"
+            ],
+            "entities": [
+              "meeting.multimedia"
+            ],
+            "scope": "Exact documented multimedia POST and GET readback; submitted URL/timestamp/default/base URL plus PublishState/provider and item display/name/type/numbering sample patches, fixed ID denial, unknown preservation, conflict/revocation/duplicate/uncertain response recovery. Does not cover meeting/item create, document upload, inferred enum semantics or unknown production hosts.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
+                "passed": 4,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_account_apis.py::test_essential_write_full_preservation_conflict_receipt_and_no_replay",
+                  "tests/test_account_apis.py::test_essential_changed_before_and_lost_mutation_response_reconcile_without_resend",
+                  "tests/test_account_apis.py::test_essential_write_policy_and_unmapped_operations_fail_without_mutation",
+                  "tests/test_account_apis.py::test_essential_full_documented_model_field_patches_and_fixed_identity"
+                ],
+                "scope": "named passing subset of recorded full execution, not total suite result"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/provider-api-contracts.json",
+                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_account_apis.py",
+                "sha256": "cb90af8707061ce48a92c4e583db0a7a0cfba085eefd9882cc9d3a881071c7b6"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -8702,18 +9066,17 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "municode-meetings-docs",
             "municode-meetings-items"
           ],
           "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
-            "Supported integration route and conflict/idempotency contract unresolved."
+            "Exact in-domain API/file request/response contract not established by the existing Essential public API page; UI support alone is not a machine contract."
           ],
           "remaining_verification": [
-            "Validate exact entity/field permissions and plan-bound commit/readback; do not invent API payloads."
+            "Establish the original-product machine contract before implementing/testing this operation; do not infer it from multimedia update or UI workflows."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -8721,7 +9084,7 @@
             "https://meetings.municode.com/PublishPage/index?cid=EFFINGHAM&ppid=9639c19d-1d1f-4201-b8ff-163a28a35f08&p=1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Synthetic vendor-contract verification is accepted; no credential acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -8732,45 +9095,37 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "municode-essential-public-api",
-            "municode-meetings-docs",
-            "municode-meetings-items",
-            "municode-meetings-uploads"
+            "essential-multimedia-documented-synthetic-subset"
           ],
-          "details": "Source implements the documented POST /PublicApi/meeting/multimedia/update/{meetingId:guid} under EssentialWriteAdapter, patching typed submitted model fields while preserving fixed Id/MeetingId/EntityId identities and unknown fields. The public example demonstrates URL/timestamp/default/baseURL changes; other enum/mutability rules remain live-unverified. No account token or authorized test tenant was supplied.",
-          "dependencies": [
-            "Authorized test tenant/account not supplied.",
-            "Supported integration route and conflict/idempotency contract unresolved."
-          ],
+          "details": "Exact Essential multimedia typed-model update and GET readback are implemented and attributed to four existing passing synthetic coordinator cases. Fixed Id/MeetingId/EntityId and unknown fields are preserved; only submitted documented sample fields are verified, without inferred enum meaning or production hostname.",
+          "dependencies": [],
           "remaining_verification": [
-            "Keep UI-based meeting edits distinct from exact documented multimedia metadata update API",
-            "Provider token, permissions, exact response/readback and live acceptance are not supplied"
+            "No expansion to UI-only meeting/item mutations or file uploads. Vendor enum semantics not supplied by contract remain unknown."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "official_contract_and_fixture_tested_source_implementation_no_live_write_acceptance",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://meetings.municode.com/PublishPage/index?cid=EFFINGHAM&ppid=9639c19d-1d1f-4201-b8ff-163a28a35f08&p=1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Fixture-only source checks; no support-issued token or authorized test tenant.",
+          "test_access": "Vendor-documented synthetic execution/readback accepted; runtime bearer configuration remains required for actual network use.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance",
-            "Live write acceptance remains access-blocked; no tenant token or test account supplied"
+            "Docs/UI and source-baseline evidence are not acceptance"
           ]
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "municode-meetings-uploads"
           ],
           "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
-            "Supported integration route and conflict/idempotency contract unresolved."
+            "Exact in-domain API/file request/response contract not established by the existing Essential public API page; UI support alone is not a machine contract."
           ],
           "remaining_verification": [
-            "Validate exact entity/field permissions and plan-bound commit/readback; do not invent API payloads."
+            "Establish the original-product machine contract before implementing/testing this operation; do not infer it from multimedia update or UI workflows."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -8778,7 +9133,7 @@
             "https://meetings.municode.com/PublishPage/index?cid=EFFINGHAM&ppid=9639c19d-1d1f-4201-b8ff-163a28a35f08&p=1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Synthetic vendor-contract verification is accepted; no credential acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -9089,15 +9444,16 @@
             }
           ],
           "evidence_ids": [
-            "municode-essential-public-api"
+            "municode-essential-public-api",
+            "essential-multimedia-documented-synthetic-subset"
           ],
-          "account_requirements": "CivicPlus Support-issued API client id/secret to obtain a bearer token; guide example uses https://meetingsgov.devmunicode.com only. No token or production host supplied.",
-          "authorized_test_access": "not_supplied; support token/tenant absent; no live mutation",
-          "readback_receipt": "GET /PublicApi/meeting/multimedia/{meetingId:guid} is implemented as the documented readback route; no provider response/version-conflict receipt because no authorized account token was supplied.",
-          "verification_status": "official_contract_source_implemented_fixture_tested_live_acceptance_pending_access",
-          "evidence_level": "official_contract_and_fixture_tested_source_no_live_acceptance",
-          "implementation_status": "implemented_fixture_tested",
-          "acceptance_status": "not_run",
+          "account_requirements": "Runtime client credentials/Bearer and exact configured dev/example or separately established deployment origin; not a request to acquire an account.",
+          "authorized_test_access": "Vendor-documented synthetic execution/readback accepted; no account acquisition/live mutation requirement.",
+          "readback_receipt": "Documented GET multimedia readback after exact approved POST is verified in synthetic coordinator transactions, including uncertain acknowledgement reconciliation/no resend.",
+          "verification_status": "official_contract_and_scoped_synthetic_engine_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -9108,12 +9464,12 @@
             "W09",
             "W10"
           ],
-          "interface_type": "gated_sdk_contract_unverified",
+          "interface_type": "documented_automated_api",
           "contract_confidence": "exact_method_path_and_request_model_on_published_dev_host; response_and_production_tenant_not_verified",
           "method": "POST",
           "api_version": "Agenda and Meeting Management Essential Public API; numeric version not stated",
           "automatable_contract_verified": true,
-          "domain_scope": "Existing meeting multimedia URL and timestamp metadata only; no deletes, video binary uploads, meeting or agenda item mutation, or arbitrary administration."
+          "domain_scope": "Existing meeting multimedia typed model fields and item metadata only, with fixed meeting/item IDs; no meeting/item create, document or video binary upload, deletes or administration."
         }
       ],
       "pagination": {
@@ -17921,6 +18277,57 @@
           "proof_level": "official_documentation",
           "findings": "Official tagged example/settings and Default Keyword/Field Order guides establish explicit configured tags, exclusive document boundaries, numeric destination File Type before File Name, ordinary repeated keywords and index-directory file resolution for Normal/noFTP DIP. Vendor-linked example GIF is byte/hash pinned under evidence/onbase-dip; local HTML captures are SPA shells, expressly not contract text. Thirteen synthetic export cases independently check emitted layout, exact bytes/hash, mappings and safeguards.",
           "limits": "Prepared file/index only; no Agenda entity creation/association, remote DIP execution, Test Only report or batch commit. Destination Document Type/file format/keyword/encoding configuration is explicit; no type IDs inferred."
+        },
+        {
+          "id": "onbase-attributed-outbound-synthetic-subset",
+          "url": "https://docs.hyland.com/r/OnBase/Document-Import-Processor/Foundation-26.1/Document-Import-Processor/Import-Index-File/Import-Index-Parameters/Examples-of-DIP-Format-Process-Settings-and-Field-Order/Tagged-DIP-Example",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/current-source-required-checks-2026-11-12.json",
+          "receipt_sha256": "8c3be946419ea4231059d675af2de603a5c4b65ce5beea13767d3851b41589d1",
+          "limits": "Only the explicit fixture fields/routes and coordinator outcomes below are accepted, not all model fields, tenant behavior, catalogs or live transactions. Current test-file bindings are provenance references; the named test ASTs match the executed source.",
+          "synthetic_execution": {
+            "provider": "onbase",
+            "status": "mock_passed",
+            "operations": [
+              "vendor_file_export"
+            ],
+            "entities": [
+              "linked_meeting_document"
+            ],
+            "scope": "PREPARED OUTPUT only: independently asserted Normal Tagged DIP index bytes, configured destination types/keywords and exact linked files/hash manifest. No remote import, Agenda API or meeting association.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
+                "passed": 4,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_onbase_export.py::test_emitted_layout_bytes_and_destination_configuration_are_explicit (1 cases)",
+                  "tests/test_onbase_export.py::test_multiple_documents_repeated_keywords_unknown_metadata_and_collision (1 cases)",
+                  "tests/test_onbase_export.py::test_scoped_streamed_files_and_revoked_output_policy (1 cases)",
+                  "tests/test_onbase_export.py::test_independent_vendor_example_figure_is_pinned_separately_from_spa_shells (1 cases)"
+                ],
+                "scope": "named passing subset of recorded full execution, not total suite result"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/onbase-dip/source.json",
+                "sha256": "d721a839f2dcfb4750bdef8ed1021e3365e691adab60b4fa457b835cba2d5e9c"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_onbase_export.py",
+                "sha256": "79087e2871999dd10c0f492e86bb66b0db51ed5926e50a9c64af7d58dd9b3b6a"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -18490,7 +18897,8 @@
             }
           ],
           "evidence_ids": [
-            "onbase-tagged-dip-contract"
+            "onbase-tagged-dip-contract",
+            "onbase-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Existing destination Normal Tagged DIP process with explicit Document Types, numeric file formats and keyword/encoding mappings. No account provisioning or remote execution required for preparation.",
           "authorized_test_access": "synthetic explicit destination configuration; no remote vendor action",
@@ -18509,7 +18917,7 @@
           ],
           "evidence_level": "official_format_and_synthetic_engine_checks",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_file_import",
           "contract_confidence": "official_tagged_layout_and_configuration_rules",
           "method": null,
@@ -18518,7 +18926,8 @@
           ],
           "api_version": "not_applicable",
           "automatable_contract_verified": true,
-          "domain_scope": "Linked meeting-document preparation only; no Agenda entity changes, deletes or provider administration."
+          "domain_scope": "Linked meeting-document preparation only; no Agenda entity changes, deletes or provider administration.",
+          "synthetic_acceptance_scope": "PREPARED OUTPUT only: independently asserted Normal Tagged DIP index bytes, configured destination types/keywords and exact linked files/hash manifest. No remote import, Agenda API or meeting association."
         }
       ],
       "pagination": {
@@ -18739,6 +19148,113 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "laserfiche-weblink-attributed-outbound-synthetic-subset",
+          "url": "https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_importing-documents/",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/current-source-required-checks-2026-11-12.json",
+          "receipt_sha256": "8c3be946419ea4231059d675af2de603a5c4b65ce5beea13767d3851b41589d1",
+          "limits": "Only the explicit fixture fields/routes and coordinator outcomes below are accepted, not all model fields, tenant behavior, catalogs or live transactions. Current test-file bindings are provenance references; the named test ASTs match the executed source.",
+          "synthetic_execution": {
+            "provider": "laserfiche-weblink",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update",
+              "upload"
+            ],
+            "entities": [
+              "linked_meeting_document",
+              "linked_meeting_document_supplied_page"
+            ],
+            "scope": "Small/multipart new-document upload, additive metadata, supplied page text create/update and indexed image/text pairing. Not document create spelling or existing-document UpdateUploadedParts.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
+                "passed": 7,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_write_providers.py::test_laserfiche_file_submission_readback_and_durable_task (2 cases)",
+                  "tests/test_write_providers.py::test_laserfiche_metadata_additive_patch_readback (1 cases)",
+                  "tests/test_write_providers.py::test_laserfiche_supplied_page_text_create_and_update (1 cases)",
+                  "tests/test_laserfiche_page_parts.py::test_actual_coordinator_retains_index_pairing_and_unmatched_parts (3 cases)"
+                ],
+                "scope": "named passing subset of recorded full execution, not total suite result"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/laserfiche-repository/source.json",
+                "sha256": "75c2e6bb1c09ba262344234f68e4259c1ff9ad9b0cb9734f01b155cf20fdfb9b"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_laserfiche_page_parts.py",
+                "sha256": "c11af47120da758e9b878d72d92281deb3d9778ea480b371acddb6dc471a256e"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_write_providers.py",
+                "sha256": "6038d98ff21b633874f90c18ba0f47fd4d8af030ca8454948c41c8912f93600a"
+              }
+            ]
+          }
+        },
+        {
+          "id": "laserfiche-weblink-public-dispatch-synthetic-attribution",
+          "url": "https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_importing-documents/",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "limits": "Public document/create through Folder/Import and document_large/update through existing target Document/UpdateUploadedParts, exact approved file bytes/readback, multipart signed transfer, asynchronous task reconciliation; no inferred meeting association.",
+          "synthetic_execution": {
+            "provider": "laserfiche-weblink",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "linked_meeting_document"
+            ],
+            "scope": "Public document/create through Folder/Import and document_large/update through existing target Document/UpdateUploadedParts, exact approved file bytes/readback, multipart signed transfer, asynchronous task reconciliation; no inferred meeting association.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
+                "passed": 2,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_outbound_attribution.py::test_laserfiche_public_document_create_exact_file_readback",
+                  "tests/test_outbound_attribution.py::test_laserfiche_existing_document_multipart_update_exact_target_and_file"
+                ],
+                "scope": "named subset of the four-case execution"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/provider-api-contracts.json",
+                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_outbound_attribution.py",
+                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -19191,7 +19707,8 @@
             }
           ],
           "evidence_ids": [
-            "lf-import"
+            "lf-import",
+            "laserfiche-weblink-public-dispatch-synthetic-attribution"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
@@ -19210,7 +19727,7 @@
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "POST",
@@ -19219,7 +19736,8 @@
             "multipart/form-data"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Public document/create through Folder/Import and document_large/update through existing target Document/UpdateUploadedParts, exact approved file bytes/readback, multipart signed transfer, asynchronous task reconciliation; no inferred meeting association."
         },
         {
           "entity": "linked_meeting_document",
@@ -19270,7 +19788,8 @@
             }
           ],
           "evidence_ids": [
-            "lf-import"
+            "lf-import",
+            "laserfiche-weblink-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
@@ -19289,7 +19808,7 @@
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "POST",
@@ -19346,7 +19865,8 @@
           ],
           "contract_caveats": [
             "ImportUploadedParts guide describes multipart/form while showing JSON body. Keep this content-type conflict unresolved; do not guess."
-          ]
+          ],
+          "synthetic_acceptance_scope": "Small/multipart new-document upload, additive metadata, supplied page text create/update and indexed image/text pairing. Not document create spelling or existing-document UpdateUploadedParts."
         },
         {
           "entity": "linked_meeting_document",
@@ -19385,7 +19905,8 @@
             }
           ],
           "evidence_ids": [
-            "lf-update"
+            "lf-update",
+            "laserfiche-weblink-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
@@ -19404,7 +19925,7 @@
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "PATCH",
@@ -19413,11 +19934,12 @@
             "multipart/form-data"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Small/multipart new-document upload, additive metadata, supplied page text create/update and indexed image/text pairing. Not document create spelling or existing-document UpdateUploadedParts."
         },
         {
           "entity": "linked_meeting_document",
-          "operation": "upload",
+          "operation": "update",
           "endpoint_or_format": "POST https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/UpdateUploadedParts",
           "field_mappings": [
             {
@@ -19447,14 +19969,15 @@
           ],
           "evidence_ids": [
             "lf-import",
-            "lf-update"
+            "lf-update",
+            "laserfiche-weblink-public-dispatch-synthetic-attribution"
           ],
           "account_requirements": "Cloud OAuth v2 scopes AND principal ACL; self-hosted API deployment/version separate. No access supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "HTTP202 Accepted returns taskId; GET /repository/v2/Repositories/{repositoryId}/Tasks?taskIds={taskId} until terminal, then GET document for exact revision/content receipt. Asynchronous single-version behavior is caller-managed; no automatic CheckOut/CheckIn.",
           "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -19473,7 +19996,8 @@
             "application/json"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Public document/create through Folder/Import and document_large/update through existing target Document/UpdateUploadedParts, exact approved file bytes/readback, multipart signed transfer, asynchronous task reconciliation; no inferred meeting association."
         },
         {
           "entity": "linked_meeting_document_supplied_page",
@@ -19506,14 +20030,15 @@
             }
           ],
           "evidence_ids": [
-            "lf-page-submission"
+            "lf-page-submission",
+            "laserfiche-weblink-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Cloud OAuth v2 scopes AND principal ACL; self-hosted API deployment/version separate. No access supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -19535,7 +20060,8 @@
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
           "contract_caveats": [
             "Image/text pairing prose/sample conflict retained; endpoint known, combined pairing semantics unaccepted."
-          ]
+          ],
+          "synthetic_acceptance_scope": "Small/multipart new-document upload, additive metadata, supplied page text create/update and indexed image/text pairing. Not document create spelling or existing-document UpdateUploadedParts."
         },
         {
           "entity": "linked_meeting_document_supplied_page",
@@ -19562,14 +20088,15 @@
             }
           ],
           "evidence_ids": [
-            "lf-page-submission"
+            "lf-page-submission",
+            "laserfiche-weblink-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Cloud OAuth v2 scopes AND principal ACL; self-hosted API deployment/version separate. No access supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -19588,7 +20115,8 @@
             "multipart/form-data"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Small/multipart new-document upload, additive metadata, supplied page text create/update and indexed image/text pairing. Not document create spelling or existing-document UpdateUploadedParts."
         }
       ],
       "pagination": {
@@ -22358,6 +22886,108 @@
               }
             ]
           }
+        },
+        {
+          "id": "wistia-attributed-outbound-synthetic-subset",
+          "url": "https://docs.wistia.com/reference/post_.md",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/current-source-required-checks-2026-11-12.json",
+          "receipt_sha256": "8c3be946419ea4231059d675af2de603a5c4b65ce5beea13767d3851b41589d1",
+          "limits": "Only the explicit fixture fields/routes and coordinator outcomes below are accepted, not all model fields, tenant behavior, catalogs or live transactions. Current test-file bindings are provenance references; the named test ASTs match the executed source.",
+          "synthetic_execution": {
+            "provider": "wistia",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update",
+              "upload"
+            ],
+            "entities": [
+              "recording",
+              "recording_metadata",
+              "supplied_caption"
+            ],
+            "scope": "Upload-server URL/file submission with processing readback; name/tags, captions, versioned edits and additive tags job/readback. Not modern import_url, playable output or every field.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
+                "passed": 9,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_write_providers.py::test_wistia_media_update_official_modern_body_and_tags (1 cases)",
+                  "tests/test_write_providers.py::test_wistia_upload_uses_documented_distinct_server_and_form (2 cases)",
+                  "tests/test_write_providers.py::test_wistia_captions_json_or_file_empty_success_response_then_actual_get (4 cases)",
+                  "tests/test_write_providers.py::test_wistia_caption_atomic_expected_version_and_readback (1 cases)",
+                  "tests/test_write_providers.py::test_wistia_async_additive_tags_wait_then_read_every_target (1 cases)"
+                ],
+                "scope": "named passing subset of recorded full execution, not total suite result"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/provider-api-contracts.json",
+                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_write_providers.py",
+                "sha256": "6038d98ff21b633874f90c18ba0f47fd4d8af030ca8454948c41c8912f93600a"
+              }
+            ]
+          }
+        },
+        {
+          "id": "wistia-public-dispatch-synthetic-attribution",
+          "url": "https://docs.wistia.com/reference/post_medias-import-url.md",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "limits": "Public media_import/create: exact supplied URL bound in plan, documented modern import_url POST, queued job retained, finished job supplies created media ID, exact target GET; processing readback is not playable-media confirmation.",
+          "synthetic_execution": {
+            "provider": "wistia",
+            "status": "mock_passed",
+            "operations": [
+              "create"
+            ],
+            "entities": [
+              "recording"
+            ],
+            "scope": "Public media_import/create: exact supplied URL bound in plan, documented modern import_url POST, queued job retained, finished job supplies created media ID, exact target GET; processing readback is not playable-media confirmation.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
+                "passed": 1,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_outbound_attribution.py::test_wistia_modern_import_url_pending_then_exact_job_resource_readback"
+                ],
+                "scope": "named subset of the four-case execution"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/provider-api-contracts.json",
+                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_outbound_attribution.py",
+                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -22754,7 +23384,8 @@
             }
           ],
           "evidence_ids": [
-            "wistia-upload"
+            "wistia-upload",
+            "wistia-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
@@ -22773,7 +23404,7 @@
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "POST",
@@ -22783,7 +23414,8 @@
             "application/x-www-form-urlencoded"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Upload-server URL/file submission with processing readback; name/tags, captions, versioned edits and additive tags job/readback. Not modern import_url, playable output or every field."
         },
         {
           "entity": "recording",
@@ -22822,7 +23454,8 @@
             }
           ],
           "evidence_ids": [
-            "wistia-update"
+            "wistia-update",
+            "wistia-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
@@ -22841,7 +23474,7 @@
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "PUT",
@@ -22850,7 +23483,8 @@
             "application/json"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Upload-server URL/file submission with processing readback; name/tags, captions, versioned edits and additive tags job/readback. Not modern import_url, playable output or every field."
         },
         {
           "entity": "supplied_caption",
@@ -22871,7 +23505,8 @@
             }
           ],
           "evidence_ids": [
-            "wistia-caption-create"
+            "wistia-caption-create",
+            "wistia-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
@@ -22890,7 +23525,7 @@
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "POST",
@@ -22900,7 +23535,8 @@
             "multipart/form-data"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Upload-server URL/file submission with processing readback; name/tags, captions, versioned edits and additive tags job/readback. Not modern import_url, playable output or every field."
         },
         {
           "entity": "supplied_caption",
@@ -22921,7 +23557,8 @@
             }
           ],
           "evidence_ids": [
-            "wistia-caption-update"
+            "wistia-caption-update",
+            "wistia-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
@@ -22940,7 +23577,7 @@
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "PUT",
@@ -22950,11 +23587,12 @@
             "multipart/form-data"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Upload-server URL/file submission with processing readback; name/tags, captions, versioned edits and additive tags job/readback. Not modern import_url, playable output or every field."
         },
         {
           "entity": "recording",
-          "operation": "upload",
+          "operation": "create",
           "endpoint_or_format": "POST https://api.wistia.com/modern/medias/import_url",
           "field_mappings": [
             {
@@ -22971,14 +23609,15 @@
             }
           ],
           "evidence_ids": [
-            "wistia--medias-import-url"
+            "wistia--medias-import-url",
+            "wistia-public-dispatch-synthetic-attribution"
           ],
           "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -22997,7 +23636,8 @@
             "application/json"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Public media_import/create: exact supplied URL bound in plan, documented modern import_url POST, queued job retained, finished job supplies created media ID, exact target GET; processing readback is not playable-media confirmation."
         },
         {
           "entity": "supplied_caption",
@@ -23018,14 +23658,15 @@
             }
           ],
           "evidence_ids": [
-            "wistia--medias-mediaHashedId-captions-languageCode-edits"
+            "wistia--medias-mediaHashedId-captions-languageCode-edits",
+            "wistia-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -23044,7 +23685,8 @@
             "application/json"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Upload-server URL/file submission with processing readback; name/tags, captions, versioned edits and additive tags job/readback. Not modern import_url, playable output or every field."
         },
         {
           "entity": "recording_metadata",
@@ -23065,14 +23707,15 @@
             }
           ],
           "evidence_ids": [
-            "wistia--taggings-bulk-create"
+            "wistia--taggings-bulk-create",
+            "wistia-attributed-outbound-synthetic-subset"
           ],
           "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -23091,7 +23734,8 @@
             "application/json"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Upload-server URL/file submission with processing readback; name/tags, captions, versioned edits and additive tags job/readback. Not modern import_url, playable output or every field."
         },
         {
           "entity": "recording_replacement",

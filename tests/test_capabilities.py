@@ -63,6 +63,25 @@ def test_known_explicit_listing_and_native_write_labels_are_not_stale_access_gat
         operations = provider_capabilities(provider)["operations"]
         assert all(operations[operation]["implementation_status"] == "implemented"
                    for operation in ("create", "update", "upload"))
-        # Registration and prior bounded checks never imply blanket field acceptance.
-        assert all(operations[operation]["acceptance_status"] == "not_run"
-                   for operation in ("create", "update", "upload"))
+        # Registration is not acceptance. Only attributed Legistar sample routes
+        # have synthetic proof; every other entry keeps its existing status.
+        for operation in ("create", "update", "upload"):
+            expected = "mock_passed" if provider == "legistar" and operation != "upload" else "not_run"
+            assert operations[operation]["acceptance_status"] == expected
+    essential = provider_capabilities("municode-meetings")
+    assert essential["operations"]["update"]["acceptance_status"] == "mock_passed"
+    multimedia = [row for row in essential["outbound_mappings"] if row["acceptance_status"] == "mock_passed"]
+    assert len(multimedia) == 1 and multimedia[0]["entity"] == "meeting.multimedia"
+    assert all(row["acceptance_status"] == "not_run"
+               for row in provider_capabilities("telvue")["outbound_mappings"])
+
+
+def test_attributed_outbound_subsets_match_exact_public_dispatches():
+    accepted = {"granicus": 19, "wistia": 8, "laserfiche-weblink": 6,
+                "civicplus-select": 1, "onbase": 1}
+    for provider, count in accepted.items():
+        rows = provider_capabilities(provider)["outbound_mappings"]
+        assert sum(row["acceptance_status"] == "mock_passed" for row in rows) == count
+    assert provider_capabilities("legistar")["outbound_mappings"][4]["acceptance_status"] == "mock_passed"
+    assert provider_capabilities("wistia")["outbound_mappings"][4]["operation"] == "create"
+    assert provider_capabilities("laserfiche-weblink")["outbound_mappings"][3]["operation"] == "update"
