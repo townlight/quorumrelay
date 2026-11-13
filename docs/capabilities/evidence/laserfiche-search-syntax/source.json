@@ -1,0 +1,25 @@
+{
+  "source_url": "https://answers.laserfiche.com/files/downloader/190101?save=True",
+  "title": "Laserfiche Advanced Search Syntax 10.3 White Paper, October 2018",
+  "observed_utc": "2026-11-13T07:44:42.897216+00:00",
+  "bytes": 1490806,
+  "sha256": "1dcc51b9101bfdbc1dfc121a659bd79691e70e25e2307a059617e47a7cecb441",
+  "pages": 79,
+  "selected_zero_based_pages": [
+    4,
+    6,
+    14,
+    33
+  ],
+  "findings": [
+    "Numeric LookIn value is interpreted as folder ID; Subfolders=0/N restricts direct children.",
+    "Double quotation marks inside quoted literals are doubled.",
+    "Wildcards [, ], ?, backslash and * have backslash escapes.",
+    "Indexed ~= syntax doubles apostrophes and backslash-escapes tilde."
+  ],
+  "applicability_limit": "Historical vendor search grammar; combine with current Repository v2 guide/SDK. Basic phrase semantics still require careful mapping and scope-specific synthetic checks.",
+  "additional_authoritative_urls": [
+    "https://doc.laserfiche.com/laserfiche.documentation/11/userguide/en-us/Subsystems/client_wa/Content/Search/Advanced/Basic_Search.htm",
+    "https://doc.laserfiche.com/laserfiche.documentation/11/userguide/en-us/Subsystems/client_wa/Content/Search/Advanced/Folder_Specific.htm"
+  ]
+}
