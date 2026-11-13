@@ -31,7 +31,7 @@ def main():
     owner = create_engine()
     providers = owner.providers().data
     assert len(providers["providers"]) == 31 and len(providers["formats"]) == 34
-    assert civic_data_connectors.__version__ == "0.1.0.dev10"
+    assert civic_data_connectors.__version__ == "0.1.0.dev11"
     assert len(owner.parsers) == 42
     assert len(owner.native_searches) == 15
     assert all(importlib.util.find_spec(name) is None for name in

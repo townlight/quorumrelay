@@ -1,6 +1,6 @@
 # Developer integration guide
 
-Local test candidate: **0.1.0.dev10** / TypeScript **0.1.0-dev.10**, schema **2.0.0**, prepared from core source `fc51f90777ae692bcaa600724da694dbcf16a10f` plus candidate version/package-verifier changes. This candidate includes the later source mappings described below: 31 families, 34 baseline formats, 42 additive parsers and 15 native-search handlers. It is not published or a full-plan completion claim. The dev8 artifact/publication and installed evidence below remain historical and unchanged; new artifact hashes and installed checks are recorded separately.
+Local test candidate: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**, prepared from core source `fc51f90777ae692bcaa600724da694dbcf16a10f` plus candidate version/package-verifier changes. This candidate includes the later source mappings described below: 31 families, 34 baseline formats, 42 additive parsers and 15 native-search handlers. It is not published or a full-plan completion claim. The dev8 artifact/publication and installed evidence below remain historical and unchanged; new artifact hashes and installed checks are recorded separately.
 
 QuorumRelay is a standalone civic-data engine for your own application, service,
 script or agent. It does not require a Townlight installation, an application
@@ -302,7 +302,7 @@ npm ci
 npm run build
 npm pack
 # In your own application:
-npm install /path/to/quorumrelay-client-0.1.0-dev.10.tgz
+npm install /path/to/quorumrelay-client-0.1.0-dev.11.tgz
 ```
 
 ```typescript
@@ -314,7 +314,7 @@ const client = new QuorumRelayClient({
   timeoutMs: 90_000,
 });
 const info = await client.info();
-if (info.data.version !== "0.1.0.dev10") throw new Error("Service pin mismatch");
+if (info.data.version !== "0.1.0.dev11") throw new Error("Service pin mismatch");
 try {
   const result = await client.execute("providers", {});
   console.log(result.status, result.data, result.errors, result.coverage);
