@@ -295,14 +295,13 @@ def test_essential_full_documented_model_field_patches_and_fixed_identity(tmp_pa
 
 
 def test_public_write_transport_disables_redirects_before_forwarding_account_auth(monkeypatch):
-    from types import SimpleNamespace
     from quorumrelay.write_transport import PublicWriteTransport
     from civic_data_connectors import fetch
     calls = []
 
     def request(url, **kwargs):
         calls.append((url, kwargs))
-        return SimpleNamespace(status=302, content=b"", headers={"Location": "/other-account"})
+        return fetch.PublicResponse(url, b"", "text/plain", 302, {"location": "/other-account"})
 
     monkeypatch.setattr(fetch, "request_public_response", request)
     response = PublicWriteTransport().send(ESSENTIAL + "/PublicApi/meeting/multimedia/" + MEETING,

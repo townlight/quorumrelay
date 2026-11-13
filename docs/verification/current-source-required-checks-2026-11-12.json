@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-12",
+  "basis": "Required current-source workflow checks, not rebuilt package/installed acceptance",
+  "executed_clean_core_head": "ae098d22c940c689a7587ba0edb8fe3e5cbab0f4",
+  "workflow": ".github/workflows/ci.yml",
+  "environment": {
+    "python": "3.13.5 existing isolated .venv; no installation",
+    "pytest": "9.2.0",
+    "mcp": "2.3.0",
+    "starlette": "0.52.1",
+    "uvicorn": "0.54.0",
+    "jsonschema": "4.26.0",
+    "ruff": "0.17.4"
+  },
+  "full_suite": {
+    "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
+    "passed": 977,
+    "skipped": 8,
+    "failed": 1,
+    "elapsed_seconds": 518.39,
+    "log_output": "outputs/current-source-required-checks-20261112/pytest.log",
+    "log_sha256": "ae6e3f356a36065f00e1c6c81e13f211f59d5187729975c73a03ce3894490ba9",
+    "ownership": {
+      "source_head": "ae098d22c940c689a7587ba0edb8fe3e5cbab0f4",
+      "source_clean": true,
+      "wrapper_pid": 48172,
+      "pytest_pid": 52344,
+      "started": "2026-11-13T01:18:32.275093+00:00",
+      "command": [
+        "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\civic-data-connectors\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\files-pasted-by-the-user-read\\outputs\\current-source-required-checks-20261112\\pytest.log",
+      "expected_terminal": "required current-source Python CI suite summary and exitcode",
+      "next_action": "diagnose named failures only; full Ruff after terminal",
+      "cancellation": "verify wrapper/pytest PID start and descendants before cancelling owned tree; no unrelated processes",
+      "free_ram_probe_kib": 33818320,
+      "ended": "2026-11-13T01:27:11.348724+00:00",
+      "elapsed_seconds": 519.07,
+      "exit_code": 1,
+      "status": "failed"
+    },
+    "failed_node": "tests/test_account_apis.py::test_public_write_transport_disables_redirects_before_forwarding_account_auth"
+  },
+  "correction": {
+    "kind": "test fixture only",
+    "description": "Use actual fetch.PublicResponse instead of SimpleNamespace missing optional private set_cookie_headers; redirect/auth assertions unchanged. Production transport untouched.",
+    "path": "tests/test_account_apis.py",
+    "tested_corrected_file_sha256": "cb90af8707061ce48a92c4e583db0a7a0cfba085eefd9882cc9d3a881071c7b6",
+    "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests/test_account_apis.py::test_public_write_transport_disables_redirects_before_forwarding_account_auth -q",
+    "passed": 1,
+    "elapsed_seconds": 0.12
+  },
+  "aggregate_distinct": {
+    "passed": 978,
+    "skipped": 8,
+    "failed_unresolved": 0,
+    "explanation": "977 unchanged full-run passes plus the one corrected node; no second full-suite claim"
+  },
+  "public_interfaces": "Full run includes actual CLI saved/stdin/JSONL, HTTP/schema/auth/multipart, official modern+legacy MCP stdio and Streamable HTTP, cancellation, independent Node client, artifacts/files and extension conformance. Unchanged earlier external examples remain separate evidence.",
+  "ruff": {
+    "command": ".venv/Scripts/python.exe -m ruff check src tests scripts examples",
+    "result": "all checks passed"
+  },
+  "static_api_downloads": {
+    "method": "In-memory source document()/schemas() compared structurally against checked-in docs/api JSON, no regeneration",
+    "openapi_equal": true,
+    "schemas_equal": 10
+  },
+  "reused_unchanged": {
+    "client": "Entire client/ tree byte-unchanged against frozen source3862e5f; retain prior build and four client-test evidence. No npm install/build.",
+    "optional_guarded_browser": "Eight cases skipped because Playwright absent in this venv. GuardedWebLinkSession source byte-unchanged against frozen3862e5f; previous actual guarded Chrome evidence retained, no skip promoted to a fresh pass.",
+    "examples": "examples/ unchanged against published2539660; prior external executable proof retained."
+  },
+  "terminal": "Wrapper48172, pytest launcher52344, actual Python56868 terminal; no matching owned children remain. Test fixture finalizers closed services.",
+  "limits": [
+    "No wheel/client archive/MSI build, signing, install, Sandbox restart or frozen-artifact modification",
+    "No pushed/hosted CI claimed; local workflow checks only",
+    "No claim all vendor contracts or original plan complete; coherent candidate/pins/authorized delivery remain separate"
+  ]
+}
