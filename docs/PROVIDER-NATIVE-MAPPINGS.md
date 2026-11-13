@@ -65,6 +65,15 @@ retrieves file content or treats creation/modification time as a meeting date.
 See [the SDK example](SDK.md#related-legistar-records-and-repository-folder-reads)
 and [scoped synthetic evidence](verification/laserfiche-entry-metadata-2026-11-13.json).
 
+Original electronic files have a separate attachment operation: the documented
+Repository `/Export` POST with `part=Edoc` returns a private single-use download
+link. The connector revalidates the current parent folder, requires configured
+download origins, sends no bearer header to the download, and retains the durable
+entry citation and fresh metadata revision. Byte/deadline bounds and cancellation
+apply across the steps; a retry creates a new export. This does not extract text,
+export image pages or infer WebLink account access. See
+[synthetic content evidence](verification/laserfiche-document-content-2026-11-13.json).
+
 ## Discovery output and v1 ownership
 
 `discover.data` contains `source`, aggregate `records`, exact page `captures`, and page `bundles`. Every page bundle retains its own source namespace and compatibility projection. Aggregation filters rich records but does not rewrite the original page compatibility output, so callers must not import unfiltered compatibility rows blindly.

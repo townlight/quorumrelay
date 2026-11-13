@@ -6,6 +6,7 @@ modification times are preserved as metadata, never treated as meeting dates.
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
 import re
@@ -144,6 +145,97 @@ def fetch_entry(source, namespace, external_id, bounds, context, transport):
         return OperationResult("failed", errors=(Error(code,
             "Repository entry metadata could not be retrieved or verified.", retryable=True,
             source=url, details=details),), coverage={**coverage, "failures": [code]},
+            operation_id=context.operation_id)
+
+
+def fetch_document(source, namespace, record, bundle, bounds, context, transport):
+    """Export one captured document's original Edoc; never expose its single-use URL."""
+    from .account_api import reject_credential_echo
+    from .identification import validate_url
+    from .retrieval import _download_origins
+
+    _, parent_id, base = repository_source(source)
+    identity = record["identity"]
+    external_id = identity.get("external_id")
+    original = record.get("original", {})
+    if (not isinstance(external_id, str) or re.fullmatch(r"[1-9][0-9]{0,18}", external_id) is None
+            or type(original.get("parentId")) is not int or original["parentId"] != parent_id
+            or type(original.get("id")) is not int or str(original["id"]) != external_id
+            or original.get("entryType") != "Document"):
+        raise ValueError("Repository content requires a captured document in the configured folder.")
+    citation = base.split("/Entries/", 1)[0] + "/Entries/" + external_id
+    coverage = {"sources": [source.public_dict()], "scope": "one original electronic document",
+                "catalog_complete": False, "content_fetched": False, "export_part": "Edoc",
+                "text_availability": "not_extracted", "failures": []}
+    retained = {"record": record, "bundle": bundle, "attachment": None}
+    deadline = monotonic() + bounds.deadline_seconds
+
+    def cancelled():
+        return OperationResult("cancelled", retained, coverage=coverage, operation_id=context.operation_id)
+
+    def remaining():
+        seconds = deadline - monotonic()
+        if seconds <= 0:
+            raise ValueError("Repository content deadline expired.")
+        return seconds
+
+    if context.check_cancelled():
+        return cancelled()
+    try:
+        # A stored capture alone cannot authorize an entry moved outside this folder.
+        detail = fetch_entry(source, namespace, external_id,
+                             replace(bounds, deadline_seconds=remaining()), context, transport)
+        if detail.status == "cancelled":
+            return cancelled()
+        if detail.status != "completed" or detail.data["records"][0]["identity"]["record_type"] != "document":
+            raise ValueError("Repository document no longer matches the configured scope.")
+        token = context.credentials["laserfiche_token"]
+        if context.check_cancelled():
+            return cancelled()
+        export_url = citation + "/Export"
+        exported = transport.request(export_url, method="POST", body=b'{"part":"Edoc"}',
+            headers={"Authorization": "Bearer " + token, "Accept": "application/json",
+                     "Content-Type": "application/json"}, byte_limit=bounds.parser_bytes,
+            deadline_seconds=remaining(), allowed_origins=("https://api.laserfiche.com",),
+            allow_redirects=False)
+        if context.check_cancelled():
+            return cancelled()
+        if exported.status != 200 or exported.url != export_url or len(exported.content) > bounds.parser_bytes:
+            raise ValueError("Repository export did not return a bounded successful response.")
+        reject_credential_echo(exported.content, {"token": token})
+        block = json.loads(exported.content)
+        signed = block.get("value") if isinstance(block, dict) else None
+        if not isinstance(signed, str) or len(signed) > 16384 or urlsplit(signed).scheme != "https":
+            raise ValueError("Repository export returned an invalid download link.")
+        # Source citations forbid credential query keys; this private transfer is
+        # intentionally signed. Validate its address without persisting its query.
+        validate_url(urlsplit(signed)._replace(query="").geturl())
+        allowed = _download_origins(source, signed)
+        response = transport.request(signed, headers={}, byte_limit=bounds.transfer_bytes,
+            deadline_seconds=remaining(), allowed_origins=allowed, allow_redirects=False)
+        if context.check_cancelled():
+            return cancelled()
+        remaining()
+        if response.status != 200 or response.url != signed or len(response.content) > bounds.transfer_bytes:
+            raise ValueError("Repository download exceeded its response contract.")
+        if (response.content_type.split(";", 1)[0].strip().lower() == "application/pdf"
+                and not response.content.startswith(b"%PDF-")):
+            raise ValueError("Repository download did not return the declared PDF content.")
+        reject_credential_echo(response.content, {"token": token})
+        attachment = {"citation_url": citation, "selected_url_field": "url",
+                      "content_type": response.content_type, "byte_length": len(response.content),
+                      "sha256": hashlib.sha256(response.content).hexdigest(),
+                      "content_base64": base64.b64encode(response.content).decode("ascii"),
+                      "text_availability": "not_extracted", "export_part": "Edoc",
+                      "metadata_revision": detail.data["records"][0]["source_revision"],
+                      "metadata_capture_sha256": detail.data["capture"]["sha256"]}
+        return OperationResult("completed", {**retained, "attachment": attachment},
+            coverage={**coverage, "content_fetched": True}, operation_id=context.operation_id)
+    except Exception:
+        # Never include raw provider errors, export JSON or ephemeral URLs in public output.
+        return OperationResult("partial", retained, errors=(Error("attachment_unavailable",
+            "The Repository original document could not be retrieved; the record is retained.",
+            retryable=True, source=citation),), coverage={**coverage, "failures": ["attachment_unavailable"]},
             operation_id=context.operation_id)
 
 

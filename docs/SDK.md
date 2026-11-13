@@ -146,6 +146,21 @@ a meeting date. The existing `laserfiche-repository-entries-json` parser replays
 both children responses and single Entry responses offline. Namespace, caller,
 response URL, token privacy and byte/deadline bounds remain enforced.
 
+For original electronic-document bytes, call `engine.fetch_attachment(repository,
+document_record, capture=original_capture, context=...)`, or omit `capture` when
+the record is persisted in the caller's scoped engine storage. This selects the
+document itself at index zero. Configure `repository.options["download_origins"]`
+with the exact HTTPS origins permitted for provider-issued downloads; a returned
+URL does not automatically authorize a new origin. The connector rechecks the
+entry's current parent, POSTs `{"part":"Edoc"}` to its documented `/Export`
+route, and downloads the single-use link once without bearer headers or redirects.
+Retries start a new export. The result contains bounded bytes as `content_base64`,
+SHA-256, durable entry citation and fresh metadata revision/capture hash; the
+signed link is never returned. Download failure retains the record as partial.
+This is original-file retrieval, not text extraction, page-image/Text export or
+asynchronous export polling. Synthetic verification is accepted; live account
+execution remains unobserved.
+
 Official read contracts: [Legistar Votes](https://webapi.legistar.com/Help/Api/GET-v1-Client-EventItems-EventItemId-Votes), [Legistar RollCalls](https://webapi.legistar.com/Help/Api/GET-v1-Client-EventItems-EventItemId-RollCalls), [Laserfiche folder contents](https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_get-folder-listing/).
 
 

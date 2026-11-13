@@ -19339,6 +19339,21 @@
           "limits": "Metadata only. Parent must match the configured folder. Does not prove file content, WebLink authorization mapping or whole-provider acceptance.",
           "receipt_path": "docs/verification/laserfiche-entry-metadata-2026-11-13.json",
           "receipt_sha256": "9d81e0c25288ce93d98c2a876f1ee218d931059e081e94ffedaa80cebd10a03c"
+        },
+        {
+          "id": "lf-repository-edoc-content-2026-11-13",
+          "url": "https://raw.githubusercontent.com/Laserfiche/lf-api-js/3a40996613f6f1a1b2fa90cd7d31c512a149ee25/packages/lf-repository-api-client-v2/index.ts",
+          "title": "Pinned official Repository Export Edoc and scoped synthetic engine retrieval",
+          "kind": "official_documentation",
+          "observation_date": "2026-11-13",
+          "proof_level": "vendor_documented_contract_and_synthetic_engine_execution",
+          "findings": [
+            "Original electronic file bytes retrieved through public fetch_attachment with fresh folder validation.",
+            "Eighteen new synthetic cases and affected regressions passed; no vendor requests."
+          ],
+          "limits": "Original Edoc only; no text extraction, image/Text export, async polling, live account or whole-provider completion.",
+          "receipt_path": "docs/verification/laserfiche-document-content-2026-11-13.json",
+          "receipt_sha256": "75eae7de1ba07eaa3c3305398eafbfb02570fc9338e5ea446cfa616b658de724"
         }
       ],
       "tenants": [
@@ -19418,16 +19433,16 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "lf-export",
-            "lf-repository-get-entry-2026-11-12"
+            "lf-repository-get-entry-2026-11-12",
+            "lf-repository-edoc-content-2026-11-13"
           ],
-          "details": "Repository v2 fetch_record now implements the pinned vendor GetEntry contract for one exact supplied entry ID within its configured folder, preserving metadata, original fields and raw capture. A trusted repository.Read token is required at runtime; synthetic verification does not require an account. Separate guarded/saved WebLink routes retain their own scope. No original file content is fetched by this new metadata operation.",
+          "details": "Repository v2 fetch_record implements exact GetEntry metadata within its configured folder. fetch_attachment selects a captured Document itself at index zero, revalidates the current parent, POSTs part=Edoc to Export and downloads the single-use link once with no bearer headers or redirects. Explicit download_origins, caller scope, byte/deadline bounds and cancellation apply. Durable citation and fresh metadata revision are returned; signed URLs remain private. Original file retrieval is not text extraction. Separate WebLink routes retain their own scope.",
           "dependencies": [
             "Cloud repository ID/OAuth scoped access or authorized self-hosted API version",
             "WebLink cookie/browser capture for public folders"
           ],
           "remaining_verification": [
-            "Broader original-file/content retrieval and guarded WebLink outcomes remain separate from this completed metadata contract.",
-            "Whole-provider field/tenant completeness is not established by one scoped entry contract."
+            "Supplied page Text/image and asynchronous export paths remain separate; guarded WebLink outcomes retain their documented limits."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "vendor_documented_get_entry_and_scoped_synthetic_engine_execution; historical_weblink_observations",

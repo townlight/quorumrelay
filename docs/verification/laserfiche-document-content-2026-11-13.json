@@ -1,0 +1,45 @@
+{
+  "status": "PASS_SYNTHETIC_SCOPED_ORIGINAL_DOCUMENT_CONTENT",
+  "source_baseline": "e50c3ba8f1eff9de70dde2de435dad0855fd3244",
+  "contract": {
+    "path": "docs/capabilities/evidence/laserfiche-repository/index.ts",
+    "sha256": "de9970a4b12c8b1fa73dcc9cf51bc4bc24618774f9b20ce40ceab9a3d386b762",
+    "vendor_method": "exportEntry",
+    "sdk_lines": "7414-7481; 24562-24685",
+    "method": "POST /repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Export",
+    "request": {
+      "part": "Edoc"
+    },
+    "response": "value: single-use download URL",
+    "oauth_scope": "repository.Read"
+  },
+  "source_sha256": {
+    "src/civic_data_connectors/providers/repository.py": "8548bb0c74b062d7ce412ca81c16dd4ef0ecd6a44e242fe9f98f0c8e4d76671f",
+    "src/civic_data_connectors/providers/retrieval.py": "a3738ec2a4b872a280af856a4a092d7203a1eeb7b44e013215a3d48ecf0c4b38",
+    "tests/test_repository_content.py": "8f80c97f378d133772c9f536a1247f99d3503a88307b8cbe7b32ea1de5f9f6df"
+  },
+  "execution": {
+    "new_cases_passed": 18,
+    "total_passed": 49,
+    "command": "pytest tests/test_repository_content.py tests/test_repository_fetch.py tests/test_repository_discovery.py tests/test_recording_retrieval.py tests/test_boardbook_documents.py tests/test_capabilities.py -q",
+    "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\repository-content.log",
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\repository-content.xml",
+    "checks": [
+      "exact metadata revalidation and configured parent",
+      "single-use URL never persisted/returned",
+      "no download bearer headers; explicit origin authorization",
+      "PDF bytes/hash, byte limits, caller grants, cancellation and redirect rejection",
+      "SQLite persist/reopen and retry starts a fresh export",
+      "existing Repository metadata/discovery and shared attachment/capability regressions"
+    ],
+    "ruff": "Full repository ruff check passed"
+  },
+  "limitations": [
+    "Synthetic transport; no vendor requests or remote mutations",
+    "Edoc only: supplied page text/image and asynchronous exports remain separate",
+    "Bounded in-memory attachment envelope, no new streaming claim",
+    "No inferred WebLink relationship, catalog completeness or installed acceptance",
+    "Fresh metadata revision describes the pre-export read; no atomic snapshot guarantee"
+  ],
+  "completed_local_date": "2026-11-13"
+}

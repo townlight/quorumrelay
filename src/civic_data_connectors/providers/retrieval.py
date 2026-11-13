@@ -197,6 +197,11 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     identity = record.get("identity") or {}
     if identity.get("provider") != source.provider or identity.get("namespace") != namespace:
         raise ValueError("The attachment belongs to a different provider or tenant.")
+    if source.provider == "laserfiche-weblink" and urlsplit(source.url).hostname == "api.laserfiche.com":
+        if kind != "documents" or index != 0 or url_field != "url" or identity.get("record_type") != "document":
+            raise ValueError("Repository original content selects document index zero only.")
+        from .repository import fetch_document
+        return fetch_document(source, namespace, record, bundle, bounds, context, transport)
     documents = record.get("normalized", {}).get(kind) or []
     if index >= len(documents) or not isinstance(documents[index], dict):
         raise ValueError("The captured record has no attachment at the requested index.")
