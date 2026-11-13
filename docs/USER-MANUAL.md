@@ -1,5 +1,7 @@
 # QuorumRelay user manual
 
+Local test candidate: **0.1.0.dev9** / TypeScript **0.1.0-dev.9**, schema **2.0.0**, prepared from core source `cf1fe35a6d48910e4252df9250e77c29ff6d8e65` plus candidate version/package-verifier changes. This candidate includes the later source mappings described below: 31 families, 34 baseline formats, 42 additive parsers and 15 native-search handlers. It is not published or a full-plan completion claim. The dev8 artifact/publication and installed evidence below remain historical and unchanged; new artifact hashes and installed checks are recorded separately.
+
 Frozen candidate <code>0.1.0.dev8</code> · schema <code>2.0.0</code>. Later local source mappings are identified in the [developer guide](DEVELOPER-GUIDE.md#later-local-source-mapping-guides); they are not additions to the immutable wheel.
 
 QuorumRelay is a standalone engine for identifying configured civic-data sources, reading or parsing bounded captures, normalizing meeting records, searching captured material, preparing neutral exports, and executing a small set of explicitly authorized provider writes. It does not require Townlight, TownReporter, TownRecord, Brief, a hosted service, or a particular application database. Those projects are examples of consumers; the engine API is intended for other products as well.
