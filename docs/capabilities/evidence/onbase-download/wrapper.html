@@ -1,0 +1,115 @@
+
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+	<meta http-equiv="x-ua-compatible" content="IE=Edge" />
+    <title>Downloading, Please wait...</title>
+</head>
+<body>
+    <div id="divDownloadIndicator" style="text-align: center;" >
+		<span>Downloading, Please wait...</span><br />
+		<img src="/OnBaseAgendaOnline/Images/Loading_Dots_290x60.gif" />
+    </div>
+
+	<script src="/OnBaseAgendaOnline/bundles/jquery?v=CzTCZaJP74FdTPeEHdBm9wqQQzwMcKC-OuKZz8b62dI1"></script>
+
+
+	<script type="text/javascript">
+		var g_documentStreamId = '';
+
+		var g_documentType = 1;
+        var g_documentTypeMaxEnum = 7;
+		var g_documentMeetingId = 3825;
+		var g_documentItemId = 0;
+		var g_documentPublishId = 0;
+		var g_documentIsAttachment = false;
+		var g_documentIsSection = false;
+		var g_documentName = 'Commission_on_Aging_Well_3825_Agenda_11_12_2026_8_30_00_AM.pdf';
+
+		function startDownloadDocument(id, meetingId, documentType, isAttachment, itemId, isSection, publishId)
+		{
+		    if (g_documentStreamId && g_documentStreamId.length > 0)
+			{
+				return;
+			}
+
+			var url ='';
+
+			if (isAttachment)
+			{
+			    url = '/OnBaseAgendaOnline/Documents/InvokeDownloadAttachment/DOCUMENTNAME?meetingId=MEETINGIDVALUE&itemId=ITEMIDVALUE&publishId=PUBLISHIDVALUE&isSection=ISSECTIONVALUE&documentType=AGENDATYPEVALUE'
+						.replace("DOCUMENTNAME", encodeURIComponent(id))
+						.replace("MEETINGIDVALUE", encodeURIComponent(meetingId))
+						.replace("ITEMIDVALUE", encodeURIComponent(itemId))
+						.replace('PUBLISHIDVALUE', encodeURIComponent(publishId))
+						.replace("ISSECTIONVALUE", isSection ? "true" : "false")
+						.replace('AGENDATYPEVALUE', encodeURIComponent(documentType));
+			}
+			else
+			{
+				url = '/OnBaseAgendaOnline/Documents/InvokeDownloadMeetingDocument/DOCUMENTNAME?meetingId=MEETINGIDVALUE&documentType=DOCUMENTTYPEVALUE'
+						.replace("DOCUMENTNAME", encodeURIComponent(id))
+						.replace("MEETINGIDVALUE", encodeURIComponent(meetingId))
+						.replace("DOCUMENTTYPEVALUE", encodeURIComponent(documentType));
+			}
+
+			$.post
+			(
+				url,
+				function (data)
+				{
+					if (data)
+					{
+						setTimeout(function () 
+						{
+							viewDocument(data);
+						}, 1000);
+					}
+				}
+			);
+		}
+
+		function viewDocument(data)
+		{
+			var url = '/OnBaseAgendaOnline/Documents/ViewDocument/DOCUMENTNAME?meetingId=MEETINGIDVALUE&documentType=DOCUMENTTYPEVALUE&itemId=ITEMIDVALUE&publishId=PUBLISHIDVALUE&isSection=ISSECTIONVALUE'
+						.replace("DOCUMENTNAME", encodeURIComponent(data.DocumentName))
+						.replace("MEETINGIDVALUE", encodeURIComponent(data.MeetingId))
+						.replace("DOCUMENTTYPEVALUE", encodeURIComponent(data.DocumentType))
+						.replace("ITEMIDVALUE", encodeURIComponent(data.ItemId))
+						.replace('PUBLISHIDVALUE', encodeURIComponent(data.PublishId))
+						.replace("ISSECTIONVALUE", data.IsSection ? "true" : "false");
+
+			$('title').text(data.DocumentName);
+
+			window.location.replace(url);
+		}
+
+		$(document).ready
+		(
+			function (e)
+			{
+				$("#divDownloadIndicator").css("margin-top", ($(document).height() / 2) - ($("#divDownloadIndicator").height() / 2));
+
+				if (g_documentType > 0 && g_documentType < g_documentTypeMaxEnum)
+				{
+					startDownloadDocument(g_documentName, g_documentMeetingId, g_documentType, g_documentIsAttachment, g_documentItemId, g_documentIsSection, g_documentPublishId);
+				}
+			}
+		);
+
+		$(window).resize
+		(
+			function (e)
+			{
+				$("#divDownloadIndicator").css("margin-top", ($(document).height() / 2) - ($("#divDownloadIndicator").height() / 2));
+			}
+		);
+	</script>
+</body>
+</html>

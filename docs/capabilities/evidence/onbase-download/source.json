@@ -1,0 +1,10 @@
+{
+  "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Documents/Downloadfile/Agenda.pdf?documentType=1&meetingId=3825",
+  "observation_date": "2026-11-12",
+  "original_capture": "agendacenter-onbase-followup-20261112/onbase-supplied-file-response.body",
+  "path": "docs/capabilities/evidence/onbase-download/wrapper.html",
+  "sha256": "4c1f3f9b93f85603759a5237725ef71c7b5121e8603447de78f7cdeec08ec832",
+  "byte_length": 3719,
+  "contract": "Published tenant-generated OnBase JavaScript: exact same-meeting InvokeDownloadMeetingDocument POST then ViewDocument GET after 1000ms; no script execution.",
+  "scope": "Meeting-document branch only; preparation JSON members taken from viewDocument(data). No live preparation response or final PDF captured."
+}

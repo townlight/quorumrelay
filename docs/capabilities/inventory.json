@@ -18391,6 +18391,21 @@
               }
             ]
           }
+        },
+        {
+          "id": "onbase-meeting-document-wrapper-2026-11-13",
+          "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Documents/Downloadfile/Agenda.pdf?documentType=1&meetingId=3825",
+          "title": "Published Agenda Online document-wrapper protocol and scoped synthetic execution",
+          "kind": "public_tenant",
+          "observation_date": "2026-11-13",
+          "proof_level": "published_provider_client_contract_and_synthetic_engine_execution",
+          "findings": [
+            "Recorded vendor-authored wrapper declares exact meeting-document preparation POST and final GET.",
+            "Twenty-one new synthetic cases plus affected regressions passed; actual raw-capture SQLite/ZIP persistence."
+          ],
+          "limits": "No real preparation POST/final PDF; only recognized meeting-document branch, not full Agenda API or association.",
+          "receipt_path": "docs/verification/onbase-meeting-document-2026-11-13.json",
+          "receipt_sha256": "520606756035b75a184b71c717306201850abe383da3d57db8f49624db69dee3"
         }
       ],
       "tenants": [
@@ -18454,23 +18469,24 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "hyland-onbase-agenda-online-tenant",
-            "onbase-pdf-link-returned-html-2026-11-12"
+            "onbase-pdf-link-returned-html-2026-11-12",
+            "onbase-meeting-document-wrapper-2026-11-13"
           ],
-          "details": "One supplied .pdf link returned HTTP 200 text/html without PDF magic. Corrected result is partial and retains the meeting; this is not a PDF success or unsupported-route finding.",
+          "details": "Captured OnBase meeting-document Downloadfile links either return PDF bytes or a recognized vendor-authored wrapper. Exact meeting/type/name constants and declared InvokeDownloadMeetingDocument POST/ViewDocument GET templates are validated. Preparation JSON must match selected meeting/type and non-item/non-section scope; final MIME/PDF magic, same-origin exact URL, no redirects, cumulative parser/transfer/request/deadline bounds and cancellation apply. Scoped cookies remain in memory. Verified wrapper/preparation captures and unknown response fields survive partial failure and explicit persistence/ZIP; durable citation stays the supplied link. Actual live file availability and broader detail/search/association remain unverified.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify supplied document MIME and magic bytes before reporting a PDF. The one current URL yielded HTML and must remain partial; other links are unverified."
+            "Native search, broader meeting detail/association and other wrapper/deployment shapes remain separate unresolved requirements."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "published_provider_client_contract_and_scoped_synthetic_engine_execution",
           "tenant_scope": [
             "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Synthetic replay of pinned public tenant wrapper and synthetic preparation/PDF responses, with real local SQLite/ZIP. No account or real provider POST required.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -18684,6 +18700,31 @@
           "mapping_source_ref": "baseline-field-contracts.json#/contracts(provider=onbase)",
           "source_commit": "d4470aeae662c759351f63140b035edac10d9a52",
           "notes": "Exact original normalized-field assignments and source inputs are preserved in the linked function excerpt for every baseline format. Not a vendor-official schema or standalone test pass."
+        },
+        {
+          "entity": "supplied_meeting_document_wrapper",
+          "input_format": "observed_public_html_and_preparation_json",
+          "field_mappings": [
+            {
+              "normalized": "attachment.citation_url",
+              "provider_field": "captured Downloadfile URL",
+              "notes": "Never replace durable citation with preparation/view endpoint."
+            },
+            {
+              "normalized": "attachment.resolution.meeting_id/document_type",
+              "provider_field": "g_documentMeetingId/g_documentType and data.MeetingId/DocumentType",
+              "notes": "Both must match selected captured record/document."
+            },
+            {
+              "normalized": "captures",
+              "provider_field": "exact wrapper HTML and verified preparation JSON bytes",
+              "notes": "Cookie headers excluded; raw unknown JSON fields preserved."
+            }
+          ],
+          "evidence_ids": [
+            "onbase-meeting-document-wrapper-2026-11-13"
+          ],
+          "notes": "Not an input parser registration; meeting-document branch only, no item/section association or import."
         }
       ],
       "outbound_mappings": [

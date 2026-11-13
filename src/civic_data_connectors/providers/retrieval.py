@@ -211,6 +211,15 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     if not isinstance(url, str):
         raise ValueError("The captured attachment has no retrievable URL.")
     deadline = monotonic() + bounds.deadline_seconds
+    supplemental = []
+
+    def retained_data():
+        if supplemental and bundle is not None:
+            saved_captures = bundle.setdefault("captures", [])
+            hashes = {capture["sha256"] for capture in saved_captures}
+            saved_captures.extend(capture for capture in supplemental if capture["sha256"] not in hashes)
+        return {"record": record, "bundle": bundle, **({"captures": supplemental} if supplemental else {})}
+
     try:
         validate_url(url)
         allowed = _download_origins(source, url)
@@ -276,9 +285,14 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         response = transport.request(
             transfer_url, byte_limit=remaining_transfer,
             deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=allowed,
-            **({"allow_redirects": False} if boardable_viewer else {}))
+            **({"allow_redirects": False} if boardable_viewer or source.provider == "onbase" else {}))
         if response.status != 200:
             raise ValueError("The captured attachment did not return HTTP 200.")
+        if (source.provider == "onbase" and kind == "documents" and not response.content.startswith(b"%PDF-")
+                and response.content_type.split(";", 1)[0].strip().lower() in {"text/html", "application/xhtml+xml"}):
+            from .onbase_documents import resolve_document
+            response, resolution = resolve_document(source, url, record, response, bounds, context, transport, deadline,
+                                                     captures=supplemental)
         pdf_expected = (kind == "documents" and (
             urlsplit(transfer_url).path.lower().endswith(".pdf") or
             (boardable_viewer and str(document.get("title", "")).lower().endswith(".pdf")) or
@@ -294,7 +308,7 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if _origin(response.url) not in allowed:
             raise ValueError("The document left its configured download origins.")
         return OperationResult("completed", {
-            "record": record, "bundle": bundle, "attachment": {
+            **retained_data(), "attachment": {
                 "citation_url": document.get("citation_url") or document.get("url") or url,
                 "selected_url_field": url_field, "content_type": response.content_type,
                 "byte_length": len(response.content), "sha256": hashlib.sha256(response.content).hexdigest(),
@@ -304,8 +318,12 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             },
         }, coverage={"sources": [source.public_dict()], "failures": [], "unavailable_attachments": []},
                                operation_id=context.operation_id)
+    except InterruptedError:
+        return OperationResult("cancelled", {**retained_data(), "attachment": None},
+                               coverage={"sources": [source.public_dict()], "cancelled": True},
+                               operation_id=context.operation_id)
     except Exception:
-        return OperationResult("partial", {"record": record, "bundle": bundle, "attachment": None},
+        return OperationResult("partial", {**retained_data(), "attachment": None},
                                (Error("attachment_unavailable",
                                       "The captured attachment could not be retrieved; the record is retained.",
                                       retryable=True, source=source.url),),

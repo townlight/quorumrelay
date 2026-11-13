@@ -141,6 +141,32 @@ failure and SQLite import/ZIP export. Saved discovery captures initiate no field
 requests; the option does not affect attachment export's internal membership
 check. See [synthetic field evidence](verification/laserfiche-fields-2026-11-13.json).
 
+## OnBase Agenda Online supplied meeting-document wrappers
+
+The recorded Fitchburg `Documents/Downloadfile/...pdf` response is a vendor-authored
+HTML download wrapper, not PDF bytes. Its exact captured JavaScript declares
+`InvokeDownloadMeetingDocument` (POST with no data) and `ViewDocument` (GET after
+a one-second preparation delay). The mapped reader treats this page as data;
+it does not execute JavaScript or follow arbitrary supplied routes.
+
+Only captured HTTPS same-tenant meeting documents are mapped. The wrapper's
+meeting/type/name constants, meeting-document branch and exact route templates
+must agree with the selected record and link. Preparation JSON must identify the
+same meeting, document type/name, zero item/publish IDs and non-section scope.
+Final bytes require PDF magic and a PDF/octet-stream media type. Item/section
+attachments and changed/unknown wrappers remain partial, with the meeting retained.
+
+Cookies stay in one call's memory and are never returned in captures. Requests
+disable redirects, retain public-network safeguards and share the original
+deadline/transfer budget; HTML/JSON also share a parser budget. At least three
+request slots are needed. Verified wrapper/preparation captures survive a later
+failure and are returned in `data.captures`; supplied capture bundles include them
+for explicit persistence and export. The original supplied link stays the citation.
+The [pinned wrapper](capabilities/evidence/onbase-download/source.json) and
+[synthetic execution receipt](verification/onbase-meeting-document-2026-11-13.json)
+establish this narrow mapping. They do not establish live PDF availability,
+native search, detail schemas, meeting-associated import or full Agenda coverage.
+
 ## Discovery output and v1 ownership
 
 `discover.data` contains `source`, aggregate `records`, exact page `captures`, and page `bundles`. Every page bundle retains its own source namespace and compatibility projection. Aggregation filters rich records but does not rewrite the original page compatibility output, so callers must not import unfiltered compatibility rows blindly.
