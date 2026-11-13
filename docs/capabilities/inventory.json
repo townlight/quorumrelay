@@ -450,6 +450,52 @@
               }
             ]
           }
+        },
+        {
+          "id": "legistar-public-dispatch-synthetic-attribution",
+          "url": "https://webapi.legistar.com/Help/Api/POST-v1-Client-Matters-MatterId-Attachments",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "limits": "Public matter_attachment/upload: approved parent/native binary fields, exact file readback and duplicate receipt replay without another network request.",
+          "synthetic_execution": {
+            "provider": "legistar",
+            "status": "mock_passed",
+            "operations": [
+              "upload"
+            ],
+            "entities": [
+              "linked_meeting_document"
+            ],
+            "scope": "Public matter_attachment/upload: approved parent/native binary fields, exact file readback and duplicate receipt replay without another network request.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
+                "passed": 1,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_outbound_attribution.py::test_legistar_public_upload_exact_binary_and_replay"
+                ],
+                "scope": "named subset of the four-case execution"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/provider-api-contracts.json",
+                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_outbound_attribution.py",
+                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -1660,7 +1706,8 @@
             }
           ],
           "evidence_ids": [
-            "legistar-attachment-post"
+            "legistar-attachment-post",
+            "legistar-public-dispatch-synthetic-attribution"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
@@ -1679,7 +1726,7 @@
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "POST",
@@ -1689,7 +1736,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Public matter_attachment/upload: approved parent/native binary fields, exact file readback and duplicate receipt replay without another network request."
         },
         {
           "entity": "linked_meeting_document",
@@ -19159,6 +19207,54 @@
               }
             ]
           }
+        },
+        {
+          "id": "laserfiche-weblink-public-dispatch-synthetic-attribution",
+          "url": "https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_importing-documents/",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "limits": "Public document/create through Folder/Import and document_large/update through existing target Document/UpdateUploadedParts, exact approved file bytes/readback, multipart signed transfer, asynchronous task reconciliation; no inferred meeting association.",
+          "synthetic_execution": {
+            "provider": "laserfiche-weblink",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "linked_meeting_document"
+            ],
+            "scope": "Public document/create through Folder/Import and document_large/update through existing target Document/UpdateUploadedParts, exact approved file bytes/readback, multipart signed transfer, asynchronous task reconciliation; no inferred meeting association.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
+                "passed": 2,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_outbound_attribution.py::test_laserfiche_public_document_create_exact_file_readback",
+                  "tests/test_outbound_attribution.py::test_laserfiche_existing_document_multipart_update_exact_target_and_file"
+                ],
+                "scope": "named subset of the four-case execution"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/provider-api-contracts.json",
+                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_outbound_attribution.py",
+                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -19611,7 +19707,8 @@
             }
           ],
           "evidence_ids": [
-            "lf-import"
+            "lf-import",
+            "laserfiche-weblink-public-dispatch-synthetic-attribution"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
@@ -19630,7 +19727,7 @@
           ],
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "POST",
@@ -19639,7 +19736,8 @@
             "multipart/form-data"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Public document/create through Folder/Import and document_large/update through existing target Document/UpdateUploadedParts, exact approved file bytes/readback, multipart signed transfer, asynchronous task reconciliation; no inferred meeting association."
         },
         {
           "entity": "linked_meeting_document",
@@ -19841,7 +19939,7 @@
         },
         {
           "entity": "linked_meeting_document",
-          "operation": "upload",
+          "operation": "update",
           "endpoint_or_format": "POST https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/UpdateUploadedParts",
           "field_mappings": [
             {
@@ -19871,14 +19969,15 @@
           ],
           "evidence_ids": [
             "lf-import",
-            "lf-update"
+            "lf-update",
+            "laserfiche-weblink-public-dispatch-synthetic-attribution"
           ],
           "account_requirements": "Cloud OAuth v2 scopes AND principal ACL; self-hosted API deployment/version separate. No access supplied.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "HTTP202 Accepted returns taskId; GET /repository/v2/Repositories/{repositoryId}/Tasks?taskIds={taskId} until terminal, then GET document for exact revision/content receipt. Asynchronous single-version behavior is caller-managed; no automatic CheckOut/CheckIn.",
           "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -19897,7 +19996,8 @@
             "application/json"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Public document/create through Folder/Import and document_large/update through existing target Document/UpdateUploadedParts, exact approved file bytes/readback, multipart signed transfer, asynchronous task reconciliation; no inferred meeting association."
         },
         {
           "entity": "linked_meeting_document_supplied_page",
@@ -22842,6 +22942,52 @@
               }
             ]
           }
+        },
+        {
+          "id": "wistia-public-dispatch-synthetic-attribution",
+          "url": "https://docs.wistia.com/reference/post_medias-import-url.md",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "limits": "Public media_import/create: exact supplied URL bound in plan, documented modern import_url POST, queued job retained, finished job supplies created media ID, exact target GET; processing readback is not playable-media confirmation.",
+          "synthetic_execution": {
+            "provider": "wistia",
+            "status": "mock_passed",
+            "operations": [
+              "create"
+            ],
+            "entities": [
+              "recording"
+            ],
+            "scope": "Public media_import/create: exact supplied URL bound in plan, documented modern import_url POST, queued job retained, finished job supplies created media ID, exact target GET; processing readback is not playable-media confirmation.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
+                "passed": 1,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_outbound_attribution.py::test_wistia_modern_import_url_pending_then_exact_job_resource_readback"
+                ],
+                "scope": "named subset of the four-case execution"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/provider-api-contracts.json",
+                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_outbound_attribution.py",
+                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -23446,7 +23592,7 @@
         },
         {
           "entity": "recording",
-          "operation": "upload",
+          "operation": "create",
           "endpoint_or_format": "POST https://api.wistia.com/modern/medias/import_url",
           "field_mappings": [
             {
@@ -23463,14 +23609,15 @@
             }
           ],
           "evidence_ids": [
-            "wistia--medias-import-url"
+            "wistia--medias-import-url",
+            "wistia-public-dispatch-synthetic-attribution"
           ],
           "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
           "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -23489,7 +23636,8 @@
             "application/json"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "synthetic_acceptance_scope": "Public media_import/create: exact supplied URL bound in plan, documented modern import_url POST, queued job retained, finished job supplies created media ID, exact target GET; processing readback is not playable-media confirmation."
         },
         {
           "entity": "supplied_caption",

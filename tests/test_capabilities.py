@@ -76,13 +76,12 @@ def test_known_explicit_listing_and_native_write_labels_are_not_stale_access_gat
                for row in provider_capabilities("telvue")["outbound_mappings"])
 
 
-def test_attributed_outbound_subsets_preserve_unexecuted_paths():
-    accepted = {"granicus": 19, "wistia": 7, "laserfiche-weblink": 4,
+def test_attributed_outbound_subsets_match_exact_public_dispatches():
+    accepted = {"granicus": 19, "wistia": 8, "laserfiche-weblink": 6,
                 "civicplus-select": 1, "onbase": 1}
     for provider, count in accepted.items():
         rows = provider_capabilities(provider)["outbound_mappings"]
         assert sum(row["acceptance_status"] == "mock_passed" for row in rows) == count
-    for provider, indexes in {"legistar": [4], "wistia": [4],
-                              "laserfiche-weblink": [0, 3]}.items():
-        rows = provider_capabilities(provider)["outbound_mappings"]
-        assert all(rows[i]["acceptance_status"] == "not_run" for i in indexes)
+    assert provider_capabilities("legistar")["outbound_mappings"][4]["acceptance_status"] == "mock_passed"
+    assert provider_capabilities("wistia")["outbound_mappings"][4]["operation"] == "create"
+    assert provider_capabilities("laserfiche-weblink")["outbound_mappings"][3]["operation"] == "update"
