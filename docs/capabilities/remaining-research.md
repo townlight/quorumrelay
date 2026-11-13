@@ -934,3 +934,6 @@ Current source follow-up (2026-11-13): the pinned Repository Export contract now
 
 
 Current source follow-up (2026-11-13): opt-in Repository GetEntry page-text enrichment now follows documented page-info nextLinks and reads existing page text without generation. Exact supplemental captures, page anchors and partial coverage survive scoped persistence/search/ZIP roundtrip; see `docs/verification/laserfiche-page-text-2026-11-13.json`. This closes supplied page-text retrieval only. Native search still requires verified search-command grammar/folder scoping before implementation; the pinned SDK documents both potentially truncated SimpleSearches and full asynchronous SearchAsync/Tasks/Results/ContextHits. Image/alternate/text-file exports, async export and broad WebLink outcomes remain separate.
+
+
+Current source follow-up (2026-11-13): synchronous Repository export now maps Image/Text/AlternateEdoc in addition to original Edoc, using explicit source options. Redactions/annotations remain included; TIFF AsStored and alternate-name restrictions follow the pinned SDK. Synthetic mapping/opaque byte-relay and image signature checks: `docs/verification/laserfiche-export-variants-2026-11-13.json`. This is not live rendering or full codec validation. Asynchronous export and native search remain incomplete.

@@ -179,6 +179,9 @@ def validate_source(source: Source, context: OperationContext | None = None,
         allowed_options.add("folder_id")
     if source.provider == "laserfiche-weblink":
         allowed_options.add("max_folder_depth")
+        if urlsplit(source.url).hostname == "api.laserfiche.com":
+            allowed_options.update({"repository_export_part", "repository_image_format",
+                                    "repository_alternate_edoc_name"})
     if source.provider == "tyler-meeting-manager":
         allowed_options.add("calendar_api_base")
     if source.provider == "civicweb" and source.input_format == "civicweb-filepro-soap-xml":

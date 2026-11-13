@@ -74,6 +74,14 @@ apply across the steps; a retry creates a new export. This does not extract text
 export image pages or infer WebLink account access. See
 [synthetic content evidence](verification/laserfiche-document-content-2026-11-13.json).
 
+The same scoped attachment path now supports explicit Image, Text and AlternateEdoc
+export options from the pinned SDK. Edoc remains the default. Image PDF/TIFF/PNG/JPEG
+choices retain included annotations/redactions; TIFF uses AsStored compression.
+Text retains redactions. AlternateEdoc names are validated against the vendor's
+restricted character/length contract. Download results disclose the selected
+representation, preserve exact returned bytes and use the durable entry citation.
+See [variant mapping evidence](verification/laserfiche-export-variants-2026-11-13.json).
+
 Opt-in `fetch_record(..., include_text=True)` enriches that document with existing
 page text from the pinned SDK's ListPageInfos and GetPageText contracts. Supplied
 page IDs and numbers remain anchors within the document, not new meeting IDs.

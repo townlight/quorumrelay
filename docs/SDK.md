@@ -177,9 +177,18 @@ route, and downloads the single-use link once without bearer headers or redirect
 Retries start a new export. The result contains bounded bytes as `content_base64`,
 SHA-256, durable entry citation and fresh metadata revision/capture hash; the
 signed link is never returned. Download failure retains the record as partial.
-This is original-file retrieval, not text extraction, page-image/Text export or
-asynchronous export polling. Synthetic verification is accepted; live account
-execution remains unobserved.
+The default is original-file retrieval. To select another documented representation,
+set `Source.options["repository_export_part"]` to `Image`, `Text` or `AlternateEdoc`.
+Image export defaults to PDF; `repository_image_format` also accepts MultiPageTIFF,
+SinglePageTIFF, PNG and JPEG. TIFF exports use the documented `AsStored` encoding.
+Image annotations and image/text redactions remain included. AlternateEdoc requires
+`repository_alternate_edoc_name`, using the vendor's restricted 1–15 character
+name. Irrelevant or invalid options fail before network access. Results disclose
+the exact `export_part` and `export_options`; files may be a vendor-created archive
+for formats containing multiple files. No local conversion is performed. Text-file
+export does not imply page-anchored extraction; use `include_text` for that path.
+Asynchronous export polling remains separate. Synthetic verification is accepted;
+live account execution remains unobserved.
 
 Official read contracts: [Legistar Votes](https://webapi.legistar.com/Help/Api/GET-v1-Client-EventItems-EventItemId-Votes), [Legistar RollCalls](https://webapi.legistar.com/Help/Api/GET-v1-Client-EventItems-EventItemId-RollCalls), [Laserfiche folder contents](https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_get-folder-listing/).
 

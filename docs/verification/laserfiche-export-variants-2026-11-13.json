@@ -1,0 +1,46 @@
+{
+  "status": "PASS_SYNTHETIC_SCOPED_EXPORT_VARIANT_MAPPING",
+  "source_baseline": "db285d25250615dadc8ca6a5d8e5b11394cb6051",
+  "contract": {
+    "path": "docs/capabilities/evidence/laserfiche-repository/index.ts",
+    "sha256": "de9970a4b12c8b1fa73dcc9cf51bc4bc24618774f9b20ce40ceab9a3d386b762",
+    "vendor_method": "exportEntry",
+    "sdk_lines": "7414-7481; 23424-23541; 23631-23685; 24604-24685",
+    "method": "POST /repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Export",
+    "parts": [
+      "Edoc",
+      "Image",
+      "Text",
+      "AlternateEdoc"
+    ],
+    "oauth_scope": "repository.Read"
+  },
+  "source_sha256": {
+    "src/civic_data_connectors/providers/repository.py": "497853baa99c7346a6749e940cffd292c0979e67f2fb59f651773cf19c230485",
+    "src/civic_data_connectors/providers/identification.py": "03b36b3f2b80170dbcbedb45f006feac93d80498be23f8fabfa27bfe6525f797",
+    "tests/test_repository_export_variants.py": "0ff60820f5867de8f2738fd79dd02f22dd517e96c7ad016d529d223fc8ec6e1c"
+  },
+  "execution": {
+    "new_cases_passed": 19,
+    "total_passed": 79,
+    "command": "pytest tests/test_repository_export_variants.py tests/test_repository_content.py tests/test_repository_text.py tests/test_repository_fetch.py tests/test_repository_discovery.py tests/test_capabilities.py -q",
+    "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\repository-export-variants.log",
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\repository-export-variants.xml",
+    "scope": [
+      "exact Image/Text/AlternateEdoc request mapping and returned byte preservation",
+      "PDF/TIFF/PNG/JPEG choices; AsStored on TIFF only; annotations/redactions included",
+      "restricted alternate name and irrelevant/invalid options rejected before network",
+      "image signature mismatch rejected while retaining document",
+      "existing private transfer, entry metadata, supplied text, storage/search/interchange and capability regressions"
+    ],
+    "ruff": "Full repository ruff check passed"
+  },
+  "limitations": [
+    "Synthetic provider contract mapping and opaque byte relay, not live rendering/codec acceptance",
+    "Signature checks identify expected file/container prefixes; no full image/archive decoder validation",
+    "No text generation, local image conversion or inferred WebLink relationship",
+    "Provider asynchronous export tasks and native search remain incomplete",
+    "No package/native build, signing, installation or delivery claim"
+  ],
+  "completed_local_date": "2026-11-13"
+}

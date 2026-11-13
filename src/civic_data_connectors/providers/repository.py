@@ -152,12 +152,35 @@ def fetch_entry(source, namespace, external_id, bounds, context, transport, *, i
 
 
 def fetch_document(source, namespace, record, bundle, bounds, context, transport):
-    """Export one captured document's original Edoc; never expose its single-use URL."""
+    """Export a captured document representation without exposing its single-use URL."""
     from .account_api import reject_credential_echo
     from .identification import validate_url
     from .retrieval import _download_origins
 
     _, parent_id, base = repository_source(source)
+    part = source.options.get("repository_export_part", "Edoc")
+    if not isinstance(part, str) or part not in {"Edoc", "Image", "Text", "AlternateEdoc"}:
+        raise ValueError("repository_export_part must be Edoc, Image, Text or AlternateEdoc.")
+    export_request = {"part": part}
+    if part == "Image":
+        image_format = source.options.get("repository_image_format", "PDF")
+        if not isinstance(image_format, str) or image_format not in {"PDF", "MultiPageTIFF", "SinglePageTIFF", "PNG", "JPEG"}:
+            raise ValueError("Select a documented Repository image format.")
+        export_request["imageOptions"] = {"format": image_format, "includeRedactions": True,
+                                          "includeAnnotations": True}
+        if image_format in {"MultiPageTIFF", "SinglePageTIFF"}:
+            export_request["imageOptions"]["encoding"] = "AsStored"
+    elif "repository_image_format" in source.options:
+        raise ValueError("repository_image_format applies only to Image export.")
+    if part == "Text":
+        export_request["textOptions"] = {"includeRedactions": True}
+    alternate = source.options.get("repository_alternate_edoc_name")
+    if part == "AlternateEdoc":
+        if not isinstance(alternate, str) or re.fullmatch(r"[A-Za-z0-9!@#$%^&()\-+={}\[\]_~]{1,15}", alternate) is None:
+            raise ValueError("AlternateEdoc requires a documented 1-15 character alternate name.")
+        export_request["alternateEdocName"] = alternate
+    elif "repository_alternate_edoc_name" in source.options:
+        raise ValueError("An alternate document name applies only to AlternateEdoc export.")
     identity = record["identity"]
     external_id = identity.get("external_id")
     original = record.get("original", {})
@@ -167,8 +190,8 @@ def fetch_document(source, namespace, record, bundle, bounds, context, transport
             or original.get("entryType") != "Document"):
         raise ValueError("Repository content requires a captured document in the configured folder.")
     citation = base.split("/Entries/", 1)[0] + "/Entries/" + external_id
-    coverage = {"sources": [source.public_dict()], "scope": "one original electronic document",
-                "catalog_complete": False, "content_fetched": False, "export_part": "Edoc",
+    coverage = {"sources": [source.public_dict()], "scope": "one document export representation",
+                "catalog_complete": False, "content_fetched": False, "export_part": part,
                 "text_availability": "not_extracted", "failures": []}
     retained = {"record": record, "bundle": bundle, "attachment": None}
     deadline = monotonic() + bounds.deadline_seconds
@@ -196,7 +219,7 @@ def fetch_document(source, namespace, record, bundle, bounds, context, transport
         if context.check_cancelled():
             return cancelled()
         export_url = citation + "/Export"
-        exported = transport.request(export_url, method="POST", body=b'{"part":"Edoc"}',
+        exported = transport.request(export_url, method="POST", body=json.dumps(export_request).encode(),
             headers={"Authorization": "Bearer " + token, "Accept": "application/json",
                      "Content-Type": "application/json"}, byte_limit=bounds.parser_bytes,
             deadline_seconds=remaining(), allowed_origins=("https://api.laserfiche.com",),
@@ -221,15 +244,24 @@ def fetch_document(source, namespace, record, bundle, bounds, context, transport
         remaining()
         if response.status != 200 or response.url != signed or len(response.content) > bounds.transfer_bytes:
             raise ValueError("Repository download exceeded its response contract.")
-        if (response.content_type.split(";", 1)[0].strip().lower() == "application/pdf"
+        if ((response.content_type.split(";", 1)[0].strip().lower() == "application/pdf"
+                or (part == "Image" and export_request["imageOptions"]["format"] == "PDF"))
                 and not response.content.startswith(b"%PDF-")):
             raise ValueError("Repository download did not return the declared PDF content.")
+        if part == "Image":
+            prefixes = {"PDF": (b"%PDF-",), "MultiPageTIFF": (b"II*\x00", b"MM\x00*"),
+                        "SinglePageTIFF": (b"PK\x03\x04", b"PK\x05\x06"),
+                        "PNG": (b"\x89PNG\r\n\x1a\n", b"PK\x03\x04"),
+                        "JPEG": (b"\xff\xd8\xff", b"PK\x03\x04")}
+            if not response.content.startswith(prefixes[export_request["imageOptions"]["format"]]):
+                raise ValueError("Repository image export did not return its declared representation.")
         reject_credential_echo(response.content, {"token": token})
         attachment = {"citation_url": citation, "selected_url_field": "url",
                       "content_type": response.content_type, "byte_length": len(response.content),
                       "sha256": hashlib.sha256(response.content).hexdigest(),
                       "content_base64": base64.b64encode(response.content).decode("ascii"),
-                      "text_availability": "not_extracted", "export_part": "Edoc",
+                      "text_availability": "not_extracted", "export_part": part,
+                      "export_options": {key: value for key, value in export_request.items() if key != "part"},
                       "metadata_revision": detail.data["records"][0]["source_revision"],
                       "metadata_capture_sha256": detail.data["capture"]["sha256"]}
         return OperationResult("completed", {**retained, "attachment": attachment},
