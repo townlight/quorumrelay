@@ -70,3 +70,71 @@ def test_changed_form_attachment_context_origin_or_missing_subject_is_rejected(o
     assert old in CAPTURE
     result = create_engine().normalize(SOURCE, CAPTURE.replace(old, new), input_format=SOURCE.input_format)
     assert result.status == "failed", result.public_dict()
+
+
+MEETING_EVIDENCE = json.loads((Path(__file__).parent / "fixtures/novus-meetingview-996.capture.json").read_bytes())
+MEETING_CAPTURE = base64.b64decode(MEETING_EVIDENCE["content_base64"], validate=True)
+MEETING_SOURCE = Source("novusagenda", MEETING_EVIDENCE["url"], input_format="novus-public-listing-html")
+
+
+def test_saved_meeting_view_exact_context_native_children_text_search_export():
+    assert len(MEETING_CAPTURE) == MEETING_EVIDENCE["bytes"] == 784159
+    assert hashlib.sha256(MEETING_CAPTURE).hexdigest() == MEETING_EVIDENCE["sha256"]
+    engine = create_engine()
+    result = engine.normalize(MEETING_SOURCE, MEETING_CAPTURE, input_format=MEETING_SOURCE.input_format)
+    assert result.status == "completed", result.public_dict()
+    meeting, *items = result.data["records"]
+    value = meeting["normalized"]
+    assert meeting["identity"]["external_id"] == "996" and len(items) == 20
+    assert value["body"] == "East Brunswick Board of Education"
+    assert value["title"] == "Board Meeting Agenda" and value["source_start"] == "2026-10-29T18:30:00"
+    assert value["time_zone_status"] == "unknown" and value["source_minutes_meeting_id"] == "-1"
+    assert len({r["identity"]["external_id"] for r in items}) == 20
+    assert all(r["identity"]["parent"] == meeting["identity"] for r in items)
+    assert all(r["normalized"]["meeting_external_id"] == "996" for r in items)
+    assert all(r["normalized"]["documents"][0]["kind"] == "linked_source" for r in items)
+    assert "votes" not in value and "motions" not in value
+    assert base64.b64decode(result.data["capture"]["content_base64"]) == MEETING_CAPTURE
+    found = engine.execute("search", {"bundle": result.data, "query": {"record_types": ["meeting"], "terms": ["Snow Plowing"]}})
+    assert len(found.data["hits"]) == 1, found.public_dict()
+    exported = engine.execute("export", {"bundle": result.data, "format": "json"})
+    assert read_bundle(base64.b64decode(exported.data["content_base64"]), format="json") == result.data
+
+
+def test_default_meeting_view_configured_discovery_and_fetch():
+    class Transport:
+        def __init__(self): self.calls = []
+
+        def request(self, url, **kwargs):
+            self.calls.append(url)
+            return Response(url, MEETING_CAPTURE, "text/html")
+
+    transport = Transport()
+    engine = create_engine(provider_transport=transport)
+    result = engine.discover(replace(MEETING_SOURCE, input_format=None))
+    assert result.status == "partial" and len(result.data["records"]) == 21, result.public_dict()
+    fetched = engine.execute("fetch", {"source": replace(MEETING_SOURCE, input_format=None).public_dict()})
+    assert fetched.status == "partial" and len(fetched.data["records"]) == 21, fetched.public_dict()
+    assert transport.calls == [MEETING_SOURCE.url, MEETING_SOURCE.url]
+
+
+def test_observed_cover_sheet_case_variant_preserves_native_identity():
+    alternate = replace(SOURCE, url=SOURCE.url.replace("Coversheet.aspx", "CoverSheet.aspx"))
+    raw = CAPTURE.replace(b'action="./Coversheet.aspx?', b'action="./CoverSheet.aspx?')
+    engine = create_engine()
+    before = engine.normalize(SOURCE, CAPTURE, input_format=SOURCE.input_format)
+    after = engine.normalize(alternate, raw, input_format=alternate.input_format)
+    assert after.status == "completed", after.public_dict()
+    assert before.data["records"][0]["identity"] == after.data["records"][0]["identity"]
+
+
+@pytest.mark.parametrize("old,new", [
+    (b'action="./MeetingView.aspx?MeetingID=996&amp;MinutesMeetingID=-1&amp;doctype=Agenda"', b'action="./MeetingView.aspx?MeetingID=996&amp;MinutesMeetingID=670&amp;doctype=Agenda"'),
+    (b'CoverSheet.aspx?ItemID=12435&amp;MeetingID=996', b'CoverSheet.aspx?ItemID=12435&amp;MeetingID=995'),
+    (b'CoverSheet.aspx?ItemID=12512&amp;MeetingID=996', b'CoverSheet.aspx?ItemID=12435&amp;MeetingID=996'),
+    (b'href="CoverSheet.aspx?', b'href="https://other.novusagenda.com/agendapublic/CoverSheet.aspx?'),
+])
+def test_changed_meeting_context_item_parent_duplicate_and_foreign_origin_rejected(old, new):
+    assert old in MEETING_CAPTURE
+    result = create_engine().normalize(MEETING_SOURCE, MEETING_CAPTURE.replace(old, new), input_format=MEETING_SOURCE.input_format)
+    assert result.status == "failed", result.public_dict()

@@ -39,6 +39,30 @@ Six new distinct cases cover saved/default configured reads, native relationship
 text search, neutral export, synthetic attachment transfer and changed-context
 denials; one existing saved-listing regression is reused. The initial configured
 case exposed a listing-only dispatch branch and passed after the scoped correction.
-One public page/template is covered. MeetingView, other cover-sheet templates,
+One public cover-sheet template is covered. Other cover-sheet templates,
 Minutes, automatic listing-to-detail traversal and arbitrary-ID retrieval are not
 claimed by this route. No script/form action is executed by the parser.
+
+## Supplied MeetingView agendas
+
+The existing `novus-public-listing-html` format also recognizes an exact supplied
+`/agendapublic/MeetingView.aspx?MeetingID=...&MinutesMeetingID=...&doctype=Agenda`
+source. Default configured discovery/fetch selects this route. The complete query
+context must agree with the public form action. `-1` is retained as a literal
+source minutes-context value, not interpreted as a native minutes identity.
+
+The captured heading supplies the governing body, title, local date and time; no
+timezone is inferred. Whole meeting text is preserved, while only same-origin
+supplied `CoverSheet.aspx`/`Coversheet.aspx` links with the current MeetingID and
+native ItemID become agenda-item records. Items retain their supplied title/link
+and sequence among linked items; unlinked headings do not acquire invented native
+IDs, and adjacent description/recommendation prose is not assigned to item records.
+The complete capture preserves those remaining details. Meeting/item relationships
+are explicit. Neither automatic detail crawling nor arbitrary-ID retrieval is added.
+
+[MeetingView capture and checks](verification/novus-public-meetingview-2026-11-12.json)
+cover saved/default configured paths, search/export, native relationships, exact
+form context, duplicate/foreign item guards and the two observed cover-sheet path
+case variants. Seven new distinct cases pass; the six existing cover-sheet cases
+are reused. This is Agenda template coverage only, with no Minutes rendering,
+cast-vote/action inference, complete catalog or downloaded-document claim.

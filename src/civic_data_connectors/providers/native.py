@@ -7,7 +7,7 @@ import hashlib
 import json
 from copy import deepcopy
 from datetime import datetime, timezone
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit
 
 from ..engine import canonical_hash
 from ..models import CaptureBundle, Identity, Record, Source
@@ -233,6 +233,9 @@ def parse_native(source, namespace, content, input_format):
         return (essential_bundle(source, namespace, content) if input_format == "essential-multimedia-json"
                 else telvue_bundle(source, namespace, content, input_format))
     if input_format == "novus-public-listing-html":
+        if urlsplit(source.url).path == "/agendapublic/MeetingView.aspx":
+            from .novus_detail import parse_meeting_bundle
+            return parse_meeting_bundle(source, namespace, content)
         from .novus import listing_bundle
         return listing_bundle(source, namespace, content)[0]
     if input_format == "laserfiche-repository-entries-json":

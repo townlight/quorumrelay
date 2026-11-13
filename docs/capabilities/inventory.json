@@ -5992,6 +5992,23 @@
           "limits": "One captured public template, no complete catalog or universal deployment claim; Attachment is supplied locator; synthetic PDF transfer does not establish actual downloaded document bytes; Rendered recommendation/blank voting form preserved as text, not inferred motion/votes; Standalone exact configured Coversheet URL, not root-listing detail crawling or arbitrary-ID fetch_record; Local source only; immutable dev8/1.8.5 unchanged",
           "receipt_path": "docs/verification/novus-public-coversheet-2026-11-12.json",
           "receipt_sha256": "24c168ee187cbff20216d675b857bd7e7cd64653f58b8512836edf9968512afe"
+        },
+        {
+          "id": "novus-public-meetingview-2026-11-12",
+          "url": "https://ebps.novusagenda.com/agendapublic/MeetingView.aspx?MeetingID=996&MinutesMeetingID=-1&doctype=Agenda",
+          "title": "Novus supplied MeetingView Agenda and same-meeting native item links",
+          "kind": "public_tenant",
+          "observed": "Exact supplied GET200/784159 bytes; seven new distinct synthetic cases plus six existing cover-sheet cases pass across recorded test-only HTML-entity corrections.",
+          "observation_date": "2026-11-12",
+          "access_scope": "one_public_capture_and_offline_synthetic_engine_execution",
+          "proof_level": "bounded_public_capture_plus_scoped_synthetic_engine_execution",
+          "findings": [
+            "Meeting996/minutes-1/Agenda context, declared heading/date/localtime and20 same-meeting native item links.",
+            "Existing novus-public-listing-html uses exact MeetingView URL dispatch; observed cover-sheet case variants supported without new format."
+          ],
+          "limits": "One captured Agenda template; no Minutes rendering or universal deployment/catalog claim; Only supplied native links become items; unlinked agenda headings/content retained in whole meeting text without inferred native identities/hierarchy; No neighboring prose assigned as item description and no motion/vote/attendance actions inferred; Cover-sheet locators are not fetched documents; automatic detail crawling/arbitrary-ID fetch_record not introduced; Local source only; frozen dev8/1.8.5 unchanged",
+          "receipt_path": "docs/verification/novus-public-meetingview-2026-11-12.json",
+          "receipt_sha256": "48cb86b702f268361f1f26d9a031edeb70c6156ddb40120aa78a7e83fd60e461"
         }
       ],
       "tenants": [
@@ -6035,9 +6052,10 @@
             "novusagenda-tenant",
             "novusagenda-traversal",
             "novus-public-listing-live-partial",
-            "novus-public-controls-and-fetch-2026-11-12"
+            "novus-public-controls-and-fetch-2026-11-12",
+            "novus-public-meetingview-2026-11-12"
           ],
-          "details": "The source implements bounded public ASP.NET listing traversal. A live engine receipt returned 191 records (11 meetings, 180 items) over 12 pages for East Brunswick’s displayed 2026-08-11 through 2027-02-11 window. Receipt is partial; catalog/source completeness are false. This partial read is not provider acceptance.",
+          "details": "The source implements bounded public ASP.NET listing traversal. A live engine receipt returned 191 records (11 meetings, 180 items) over 12 pages for East Brunswick’s displayed 2026-08-11 through 2027-02-11 window. Receipt is partial; catalog/source completeness are false. This partial read is not provider acceptance. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup.",
           "dependencies": [],
           "remaining_verification": [
             "Implement a bounded stateful form reader only if session/hidden-state behavior can be preserved and tested against the saved bodies",
@@ -6065,13 +6083,14 @@
             "novusagenda-tenant",
             "novusagenda-traversal",
             "novus-public-controls-and-fetch-2026-11-12",
-            "novus-public-coversheet-2026-11-12"
+            "novus-public-coversheet-2026-11-12",
+            "novus-public-meetingview-2026-11-12"
           ],
-          "details": "Configured supplied Coversheet URL maps native item/meeting IDs, rendered subject/date/text/sections and exact item-bound AttachmentViewer locators. Saved normalization/default discovery/configured fetch, search/export and separate synthetic PDF transfer are checked. Existing supplied agenda PDF success is separate. No root-to-detail crawl or arbitrary-ID fetch_record claim.",
+          "details": "Configured supplied Coversheet URL maps native item/meeting IDs, rendered subject/date/text/sections and exact item-bound AttachmentViewer locators. Saved normalization/default discovery/configured fetch, search/export and separate synthetic PDF transfer are checked. Existing supplied agenda PDF success is separate. No root-to-detail crawl or arbitrary-ID fetch_record claim. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup.",
           "dependencies": [],
           "remaining_verification": [
-            "MeetingView structured detail and Minutes remain unresolved.",
-            "Other public cover-sheet templates and actual supplied attachment file response are not established by the one captured page."
+            "Minutes rendering and other public meeting/cover-sheet templates remain unresolved.",
+            "Actual supplied cover-sheet attachment file response is not established by synthetic PDF transfer."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "bounded_public_capture_plus_scoped_synthetic_engine_execution",
@@ -6090,9 +6109,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "novusagenda-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "novus-public-meetingview-2026-11-12"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup.",
           "dependencies": [
             "Extract shared engine preserving legacy behavior."
           ],
