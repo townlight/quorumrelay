@@ -103,22 +103,47 @@ def test_body_filter_uses_the_portal_meeting_type_name():
     assert {r["normalized"]["body"] for r in result.data["records"]} == {"Planning Commission"}
 
 
-def test_calendar_and_notice_meeting_types_are_not_meetings():
+def _with_calendar_row():
     rows = json.loads(MEETINGS)
     rows.append({"ExternalCalendar": False, "Id": 222, "MeetingDate": "2026-11-06", "MeetingDateTime": "2026-11-06 00:00",
                  "MeetingLocation": "", "MeetingTime": "", "Name": "Rolling Calendar - Updated 11-6-26",
                  "Published": True, "TypeId": 36, "VideoIcon": ""})
-    result, _ = discover(Transport(meetings=json.dumps(rows).encode()))
+    return Transport(meetings=json.dumps(rows).encode())
+
+
+def test_calendar_and_notice_meeting_types_are_flagged_not_dropped_by_default():
+    result, _ = discover(_with_calendar_row())
+    assert "222" in ids(result) and "18421" in ids(result)
+    values = {r["identity"]["external_id"]: r["normalized"] for r in result.data["records"]}
+    assert values["222"]["likely_not_a_meeting"] is True
+    assert values["222"]["likely_not_a_meeting_type"] == "Rolling Calendar"
+    assert values["18421"]["likely_not_a_meeting"] is False and values["18421"]["likely_not_a_meeting_type"] is None
+    assert result.coverage["flagged_meeting_types"] == [{"id": "36", "name": "Rolling Calendar"}]
+    assert result.coverage["likely_non_meeting_omitted"] == 0 and result.coverage["exclude_likely_non_meetings"] is False
+
+
+def test_exclude_likely_non_meetings_is_an_explicit_option_and_is_counted():
+    result, _ = discover(_with_calendar_row(), request={"exclude_likely_non_meetings": True})
     assert "222" not in ids(result) and "18421" in ids(result)
-    assert result.coverage["non_meeting_omitted"] == 1
-    assert result.coverage["omitted_meeting_types"] == [{"id": "36", "name": "Rolling Calendar"}]
+    assert result.coverage["likely_non_meeting_omitted"] == 1
+    assert result.coverage["flagged_meeting_types"] == [{"id": "36", "name": "Rolling Calendar"}]
+    bad, _ = discover(request={"exclude_likely_non_meetings": "yes"})
+    assert bad.status == "failed"
+
+
+def test_a_real_body_with_a_flagged_word_in_its_type_name_is_still_returned():
+    types = TYPES.replace(b">Planning Commission<", b">Budget Committee<")
+    result, _ = discover(Transport(types=types))
+    assert {"18182", "18181", "18183"} <= set(ids(result))
+    flagged = {r["normalized"]["body"]: r["normalized"]["likely_not_a_meeting"] for r in result.data["records"]}
+    assert flagged["Budget Committee"] is True
 
 
 def test_meeting_type_page_failure_is_reported_and_does_not_hide_meetings():
     result, _ = discover(Transport(fail=("MeetingTypeList",)))
     assert result.status == "partial" and "18421" in ids(result)
     assert result.coverage["meeting_types"] == "unavailable_request_failed"
-    assert result.coverage["non_meeting_filter"] == "not_applied_meeting_types_unavailable"
+    assert result.coverage["non_meeting_flagging"] == "not_applied_meeting_types_unavailable"
     assert result.errors and result.errors[0].code == "provider_http_error"
     council = next(r for r in result.data["records"] if r["identity"]["external_id"] == "18421")
     assert council["normalized"]["body"] == "LOVELAND CITY COUNCIL MEETING"

@@ -9629,7 +9629,7 @@
           "proof_level": "implemented_source_and_saved_public_captures_with_unreceipted_bounded_live_read_not_acceptance",
           "findings": [
             "The list returned JSON rows with Id, MeetingDate, MeetingDateTime, Name, TypeId and Published; a row with Published=false is not listed by the reader.",
-            "MeetingTypeList.aspx names each TypeId; the Rolling Calendar and Public Meetings Notice types are calendar/notice entries, not meetings, and are left out."
+            "MeetingTypeList.aspx names each TypeId; the Rolling Calendar and Public Meetings Notice types read as calendar/notice entries, so their meetings are flagged likely_not_a_meeting (not dropped)."
           ],
           "limits": "One tenant and one short date range. No receipt file was written, so acceptance stays not_run. The service is not vendor-documented here; its stability, paging and rate limits are unknown."
         },
@@ -9706,11 +9706,11 @@
             "civicweb-meetings-service-loveland-2026-11-12",
             "civicweb-meeting-documents-loveland-2026-11-12"
           ],
-          "details": "Date-range meeting list from the public MeetingsService with each meeting's meeting type (body) from MeetingTypeList.aspx; calendar and notice types and unpublished meetings are left out and counted. record_types may add each meeting's document list (links only). Bounded by page/record/deadline limits with a resumable checkpoint. A tenant root URL or input_format civicweb-meetings-json selects it; a MeetingTypeList.aspx URL keeps the original saved-page route.",
+          "details": "Date-range meeting list from the public MeetingsService with each meeting's meeting type (body) from MeetingTypeList.aspx; unpublished meetings are left out and counted; meetings of calendar/notice-style meeting types are kept and flagged likely_not_a_meeting, with an explicit request option exclude_likely_non_meetings to omit them. record_types may add each meeting's document list (links only). Bounded by page/record/deadline limits with a resumable checkpoint. A tenant root URL or input_format civicweb-meetings-json selects it; a MeetingTypeList.aspx URL keeps the original saved-page route.",
           "dependencies": [],
           "remaining_verification": [
             "Only Loveland, CO was read (one short date range); other tenants and the service's paging, rate limits and stability are unverified.",
-            "Meeting-type names are taken as body names; a real body whose type name contains a word such as notice, report or budget would be left out as a non-meeting (it is listed in coverage.omitted_meeting_types).",
+            "Meeting-type names are taken as body names; a real body whose type name contains a word such as notice, report or budget is flagged likely_not_a_meeting, not dropped (types are listed in coverage.flagged_meeting_types).",
             "No complete catalog or archive is claimed; unpublished meetings are not returned and document content is not read."
           ],
           "acceptance_status": "not_run",

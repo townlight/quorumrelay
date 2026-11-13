@@ -37,7 +37,8 @@ _ID = re.compile(r"[1-9][0-9]{0,18}")
 _TENANT = re.compile(r"[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.civicweb\.net")
 _DATE_SUFFIX = re.compile(r"\s*-\s*\d{1,2} [A-Za-z]{3,9} \d{4}\s*$")
 _CANCEL_MARK = re.compile(r"^[\s*\-]*cancel{1,2}ed\b[\s*\-]*|[\s*\-]*\bcancel{1,2}ed[\s*\-]*$", re.I)
-# Calendar and notice meeting types are not meetings ("Rolling Calendar", "Public Meetings Notice").
+# Meeting types whose names read as calendars or notices ("Rolling Calendar", "Public Meetings Notice") are
+# likely not meetings. They are flagged, never dropped by default: a public record is not hidden by a name guess.
 _NOT_MEETINGS = re.compile(
     r"\b(?:notices?|reports?|budgets?|ordinances?|financials?|newsletters?|messages?|profile|"
     r"applications?|articles?)\b|\bcalendar\b", re.I)
@@ -232,7 +233,8 @@ def _task(value):
     raise ValueError("The CivicWeb continuation task is invalid.")
 
 
-def discover_public(engine, source, namespace, bounds, context, transport, *, record_types=None):
+def discover_public(engine, source, namespace, bounds, context, transport, *, record_types=None,
+                    exclude_likely_non_meetings=False):
     """List a tenant's public meetings in an explicit date range, and optionally their documents.
 
     ``record_types`` of ``["meeting"]`` (the default) lists meetings; adding ``"document"`` also reads
@@ -251,10 +253,13 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, re
     record_types = [] if record_types is None else record_types
     if not isinstance(record_types, list) or any(value not in _RECORD_TYPES for value in record_types):
         raise ValueError("record_types must be a list of supported civic record types.")
+    if type(exclude_likely_non_meetings) is not bool:
+        raise ValueError("exclude_likely_non_meetings must be true or false.")
     want_meetings = not record_types or "meeting" in record_types
     want_documents = "document" in record_types
     binding = canonical_hash({"source": source.public_dict(), "namespace": namespace, "body": source.body,
                               "dates": [bounds.date_from, bounds.date_to], "record_types": record_types,
+                              "exclude_likely_non_meetings": exclude_likely_non_meetings,
                               "scope": context.scope, "semantics": "civicweb-meetings-service/v1"})
     if bounds.checkpoint:
         saved, seen = _resume(bounds.checkpoint, binding)
@@ -264,8 +269,8 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, re
     deadline = monotonic() + bounds.deadline_seconds
     records, bundles, captures, errors, failures = [], [], [], [], []
     pages = filtered = 0
-    stats = {"unpublished_omitted": 0, "malformed_rows_omitted": 0, "non_meeting_omitted": 0}
-    omitted_types, type_status, type_names = {}, "not_requested_by_checkpoint", None
+    stats = {"unpublished_omitted": 0, "malformed_rows_omitted": 0, "likely_non_meeting_omitted": 0}
+    flagged_types, type_status, type_names = {}, "not_requested_by_checkpoint", None
     query = urlencode({"from": bounds.date_from, "to": bounds.date_to})
 
     def budget():
@@ -320,10 +325,17 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, re
                     stats["malformed_rows_omitted"] += 1
                 elif item.get("Published") is not True:
                     stats["unpublished_omitted"] += 1
-                elif type_names and (name := type_names.get(str(item.get("TypeId")))) and _NOT_MEETINGS.search(name):
-                    stats["non_meeting_omitted"] += 1
-                    omitted_types[str(item["TypeId"])] = name
                 else:
+                    name = (type_names or {}).get(str(item.get("TypeId")))
+                    likely = bool(name and _NOT_MEETINGS.search(name))
+                    if type_names:
+                        row[0]["likely_not_a_meeting"] = likely
+                        row[0]["likely_not_a_meeting_type"] = name if likely else None
+                    if likely:
+                        flagged_types[str(item["TypeId"])] = name
+                        if exclude_likely_non_meetings:
+                            stats["likely_non_meeting_omitted"] += 1
+                            continue
                     candidates.append(row)
             candidates.sort(key=lambda row: (row[0]["source_start"] or row[0]["meeting_date"],
                                              int(row[0]["external_id"])), reverse=True)
@@ -377,9 +389,9 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, re
         "unknown_date_records": [], "unknown_body_records": [],
         "pages": pages, "failed_pages": failures, "failures": failures,
         "meeting_types": type_status,
-        "non_meeting_filter": ("meeting types matching notice/report/calendar-style names are left out"
-                               if type_status == "applied" else "not_applied_meeting_types_unavailable"),
-        "omitted_meeting_types": [{"id": key, "name": name} for key, name in sorted(omitted_types.items())],
+        "non_meeting_flagging": ("applied" if type_status == "applied" else "not_applied_meeting_types_unavailable"),
+        "exclude_likely_non_meetings": exclude_likely_non_meetings,
+        "flagged_meeting_types": [{"id": key, "name": name} for key, name in sorted(flagged_types.items())],
         **stats,
         "listing_exhausted": not queue and not failures,
         "catalog_complete": False, "source_complete": False,

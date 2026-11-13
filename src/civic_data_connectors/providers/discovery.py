@@ -462,7 +462,8 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
             or (source.input_format is None and urlsplit(source.url).path in {"", "/"}))):
         from .civicweb_listing import discover_public
         return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport(),
-                               record_types=request.get("record_types"))
+                               record_types=request.get("record_types"),
+                               exclude_likely_non_meetings=request.get("exclude_likely_non_meetings", False))
     if source.provider == "boardable" and saved is None:
         path = urlsplit(source.url).path.strip("/").split("/")
         if len(path) == 1 or (len(path) == 2 and path[1] == "meetings"):
