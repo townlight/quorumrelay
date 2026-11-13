@@ -184,9 +184,12 @@ metadata and recording references/relationships when agenda data is composed,
 and the compatibility meeting projection is synchronized to the final record.
 The same `onbase-public-listing-html` format parses the exact supplied
 `Meetings/ViewMeetingAgendaItem` variant with
-`isSection=false&type=agenda`. `fetch_related` lists sections or items; selected
-item detail additionally requires current-agenda membership and the exact literal
-item route declared by the meeting page. Selected section detail is not mapped.
+`isSection=false&type=agenda` for an item and `isSection=true&type=agenda` for
+a section. `fetch_related` lists sections or items; selected detail requires
+current-agenda membership in the requested record type and the exact literal
+route declared by the meeting page. Section IDs retain section identity even if
+an item has the same number. The observed section response supplies only its
+rendered title; attachments and additional section content are not established.
 
 Original supplied fields, HTML captures and citation URLs are retained. Rendered
 text has partial completeness; timezone remains unknown. Attachment native IDs,
@@ -202,6 +205,10 @@ ZIP roundtrip; this is not whole-provider or live API acceptance. Native search,
 meetings absent from the current listing, other Agenda variants, broader APIs
 and remote import or association to an existing application meeting remain
 unresolved.
+
+The subsequent [section capture](capabilities/evidence/onbase-detail/section-source.json)
+and [section receipt](verification/onbase-section-detail-2026-11-13.json) extend
+selected detail to native sections under the same bounds and partial semantics.
 
 ## OnBase selected item attachment retrieval
 

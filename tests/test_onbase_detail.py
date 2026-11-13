@@ -14,18 +14,20 @@ from quorumrelay.storage import SQLiteStorage
 from test_onbase_listing import HTML, SOURCE
 
 DIRECTORY = Path(__file__).parents[1] / 'docs/capabilities/evidence/onbase-detail'
-MEETING, AGENDA, ITEM = [(DIRECTORY / (name + '.html')).read_bytes() for name in ('meeting', 'agenda', 'item')]
+MEETING, AGENDA, ITEM, SECTION = [(DIRECTORY / (name + '.html')).read_bytes()
+                                  for name in ('meeting', 'agenda', 'item', 'section')]
 ROOT = SOURCE.url.rstrip('/')
 MEETING_URL = ROOT + '/Meetings/ViewMeeting?id=3825&doctype=1'
 AGENDA_URL = ROOT + '/Meetings/ViewMeetingAgenda?meetingId=3825&type=agenda'
 ITEM_URL = ROOT + '/Meetings/ViewMeetingAgendaItem?meetingId=3825&itemId=88173&isSection=false&type=agenda'
+SECTION_URL = ROOT + '/Meetings/ViewMeetingAgendaItem?meetingId=3825&itemId=54973&isSection=true&type=agenda'
 FORMAT = 'onbase-public-listing-html'
 
 
 class Transport:
     def __init__(self, *, on_read=None):
         self.calls, self.on_read = [], on_read
-        self.pages = {SOURCE.url: HTML, MEETING_URL: MEETING, AGENDA_URL: AGENDA, ITEM_URL: ITEM}
+        self.pages = {SOURCE.url: HTML, MEETING_URL: MEETING, AGENDA_URL: AGENDA, ITEM_URL: ITEM, SECTION_URL: SECTION}
         self.statuses, self.urls = {}, {}
 
     def request(self, url, **kwargs):
@@ -192,13 +194,11 @@ def test_bounds_and_cancel_preserve_partial_and_limit_network():
     assert transport.calls[-1][1]['byte_limit'] == 1
 
 
-def test_section_collection_and_no_selected_section_guess_or_absent_meeting_success():
+def test_section_collection_and_absent_meeting():
     owner = create_engine(provider_transport=Transport())
     sections = owner.fetch_related(SOURCE, '3825', 'agenda_section')
     assert sections.status == 'partial' and len(sections.data['records']) == 9
     transport = Transport()
-    unsupported = create_engine(provider_transport=transport).fetch_related(SOURCE, '3825', 'agenda_section', external_id='54973')
-    assert unsupported.status == 'unsupported' and not transport.calls
     missing = create_engine(provider_transport=transport).fetch_record(SOURCE, '9999')
     assert missing.status == 'failed' and missing.data is None
 
@@ -216,3 +216,102 @@ def test_http_parent_selector_and_native_child_result_contract():
     result = response.json()
     assert result['status'] == 'partial' and result['data']['records'][0]['identity']['parent']['external_id'] == '3825', result
     assert json.loads(json.dumps(result)) == result
+
+
+def test_selected_section_capture_membership_and_storage_roundtrip(tmp_path):
+    parsed = normalize(SECTION_URL, SECTION)
+    assert parsed.status == 'completed', parsed.public_dict()
+    section = parsed.data['records'][0]
+    assert section['identity']['record_type'] == 'agenda_section'
+    assert section['identity']['external_id'] == '54973'
+    assert section['identity']['parent']['external_id'] == '3825'
+    assert section['normalized']['title'] == 'Approval Of Minutes'
+    assert section['normalized']['documents'] == []
+    assert base64.b64decode(parsed.data['capture']['content_base64']) == SECTION
+    assert parsed.data['capture']['sha256'] == '68c0fe67270a2cc774e49f517975e12b2d035b495e122be87d253c25c89eeafb'
+    transport = Transport()
+    result = create_engine(provider_transport=transport).fetch_related(
+        SOURCE, '3825', 'agenda_section', external_id='54973')
+    assert result.status == 'partial' and not result.errors, result.public_dict()
+    assert [url for url, _ in transport.calls] == [SOURCE.url, MEETING_URL, AGENDA_URL, SECTION_URL]
+    section = result.data['records'][0]
+    assert section['identity'] == parsed.data['records'][0]['identity']
+    assert section['normalized']['meeting_date'] == '2026-11-12'
+    assert section['normalized']['content_availability'] == 'selected_rendered_section'
+    assert section['text'][0]['citation_url'] == SECTION_URL
+    assert len(result.data['captures']) == 3
+    owner = create_engine(storage=SQLiteStorage(tmp_path / 'source.sqlite'))
+    imported = owner.execute('import_bundle', {'result': result.public_dict(), 'persist': True})
+    assert imported.data['persisted'], imported.public_dict()
+    reopened = create_engine(storage=SQLiteStorage(tmp_path / 'source.sqlite'))
+    stored = reopened.storage.get('records', source_identity_key(section['identity']), scope=OperationContext().scope)
+    assert stored and stored.value['identity'] == section['identity']
+    exported = reopened.execute('export', {'bundle': result.data, 'format': 'zip'})
+    destination = create_engine(storage=SQLiteStorage(tmp_path / 'destination.sqlite'))
+    restored = destination.execute('import_bundle', {'format': 'zip', 'persist': True},
+                                  content=base64.b64decode(exported.data['content_base64']))
+    assert restored.status == 'completed', restored.public_dict()
+    assert restored.data['bundle']['records'][0] == section
+    for capture in [restored.data['bundle']['capture'], *restored.data['bundle']['captures']]:
+        with destination.storage.open_capture(capture['storage_reference'], scope=OperationContext().scope) as stream:
+            assert hashlib.sha256(stream.read()).hexdigest() == capture['sha256']
+
+
+@pytest.mark.parametrize('mutation', ['absent', 'opposite_kind', 'title', 'context', 'attachment', 'http'])
+def test_selected_section_rejects_unverified_detail_and_retains_membership(mutation):
+    transport = Transport()
+    if mutation == 'absent':
+        transport.pages[AGENDA_URL] = AGENDA.replace(b'loadAgendaSection(54973)', b'loadAgendaSection(99999)')
+    elif mutation == 'opposite_kind':
+        transport.pages[AGENDA_URL] = AGENDA.replace(b'loadAgendaSection(54973)', b'loadAgendaItem(54973)')
+    elif mutation == 'title':
+        transport.pages[SECTION_URL] = SECTION.replace(b'Approval Of Minutes', b'Foreign Section')
+    elif mutation == 'context':
+        transport.urls[SECTION_URL] = SECTION_URL.replace('3825', '9999')
+    elif mutation == 'attachment':
+        transport.pages[SECTION_URL] = SECTION.replace(b'</section>', b'<a id="lnkAttachment_1" href="/x">x</a></section>')
+    elif mutation == 'http':
+        transport.statuses[SECTION_URL] = 403
+    result = create_engine(provider_transport=transport).fetch_related(
+        SOURCE, '3825', 'agenda_section', external_id='54973')
+    assert result.errors and result.status in {'partial', 'failed'}, result.public_dict()
+    if mutation in {'absent', 'opposite_kind'}:
+        assert SECTION_URL not in [url for url, _ in transport.calls]
+    else:
+        assert result.status == 'partial'
+        assert result.data['records'][0]['normalized']['content_availability'] == 'supplied_title_only'
+        assert len(result.data['captures']) == 2
+
+
+def test_selected_section_bounds_and_cancellation():
+    transport = Transport()
+    result = create_engine(provider_transport=transport).fetch_related(
+        SOURCE, '3825', 'agenda_section', external_id='54973', bounds=Bounds(max_pages=3))
+    assert result.status == 'partial' and result.coverage['truncated'] and len(transport.calls) == 3
+    caller = OperationContext()
+    transport = Transport(on_read=lambda url: caller.cancellation.set() if url == SECTION_URL else None)
+    result = create_engine(provider_transport=transport).fetch_related(
+        SOURCE, '3825', 'agenda_section', external_id='54973', context=caller)
+    assert result.status == 'cancelled' and len(transport.calls) == 4
+    assert result.data['records'][0]['identity']['external_id'] == '54973'
+
+
+def test_selected_nested_section_keeps_agenda_parent_relation():
+    transport = Transport()
+    text = AGENDA.decode('utf-8')
+    start = text.index('loadAgendaSection(54972)')
+    boundary = text.index('<div class="accessible-section accessible-section-level-1">', start)
+    before = text[:boundary]
+    closing = before.rfind('</div>')
+    text = before[:closing] + before[closing + len('</div>'):] + text[boundary:]
+    third = text.index('<div class="accessible-section accessible-section-level-1">',
+                       text.index('loadAgendaSection(54973)'))
+    text = text[:third] + '</div>' + text[third:]
+    transport.pages[AGENDA_URL] = text.encode('utf-8')
+    result = create_engine(provider_transport=transport).fetch_related(
+        SOURCE, '3825', 'agenda_section', external_id='54973')
+    assert result.status == 'partial' and not result.errors, result.public_dict()
+    section = result.data['records'][0]
+    assert section['normalized']['parent_section_external_id'] == '54972'
+    assert any(relation['relation'] == 'parent_agenda_section' and
+               relation['identity']['external_id'] == '54972' for relation in section['relationships'])

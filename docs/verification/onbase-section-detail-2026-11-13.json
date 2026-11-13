@@ -1,0 +1,43 @@
+{
+  "status": "PASS_SCOPED_SECTION_CAPTURE_AND_SYNTHETIC_DETAIL",
+  "source_baseline": "cbccda5059cbecd8fbf5230c86f4762c8489be10",
+  "contract": {
+    "path": "docs/capabilities/evidence/onbase-detail/section-source.json",
+    "sha256": "1891744c032c4a7e12609d21b57007e88c08557a36c6521c3e00048751106079",
+    "observation": "Actual exact anonymous guarded public GET for native section54973 using the pinned wrapper route and captured agenda section ID. Response200 text/html2261bytes, title Approval Of Minutes, no attachment links. Exact bytes pinned separately; historical three-capture manifest unchanged."
+  },
+  "source_sha256": {
+    "src/civic_data_connectors/providers/onbase_detail.py": "c076a8aa98d94bc81271a82c5d72ee21d3bfdddbbed8170e8b6f3d9b15caf113",
+    "tests/test_onbase_detail.py": "cba1a47b9519d2ffe19506c40872c73254c99cc6d764ff7e394f0156cf82ee68"
+  },
+  "execution": {
+    "new_section_cases_passed": 9,
+    "affected_cases_passed": 74,
+    "command": "pytest -q tests/test_onbase_detail.py tests/test_onbase_item_documents.py tests/test_onbase_documents.py tests/test_onbase_listing.py",
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\onbase-section-affected.xml",
+    "junit_sha256": "35be8813f70260080922a86859082aad67c895e55117604200f65c8f5c0c5197",
+    "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\onbase-section-affected.log",
+    "scope": [
+      "actual section HTML normalization with native section identity and canonical meeting parent",
+      "synthetic selected section four-GET composition, membership by requested record type, exact declared isSection=true route and matching title",
+      "unknown timezone, date and supplied nested parent-section relationship retained; native identity unaffected",
+      "opposite item kind, absent membership, wrong title/response URL, HTTP failure and unmapped section attachment rejection",
+      "partial metadata/captures retained, request page bound and cancellation",
+      "actual SQLite reopen and ZIP restore preserve record and exact scoped raw-capture stream hashes",
+      "existing item detail, item-document and meeting-document/listing regressions"
+    ],
+    "count_policy": "74 affected cases include existing cases; do not add this run to earlier100 as independent coverage."
+  },
+  "checks": {
+    "ruff": "PASS src tests scripts examples (implementation agent)",
+    "other_30_provider_rows": "unchanged"
+  },
+  "limitations": [
+    "Only selected current-listing Agenda sections and supplied title/rendered text; coverage remains partial.",
+    "One actual section page GET; multi-page composition/fault responses synthetic, no live full fetch orchestration or account.",
+    "Section attachments explicitly unmapped; no extra content or attachment availability inferred.",
+    "Native search, archive traversal, other Agenda variants, broader staff APIs/import association, other full-plan outcomes remain incomplete.",
+    "No provider POST/download, package/native build/sign/install or push/publication."
+  ],
+  "completed_local_date": "2026-11-13"
+}

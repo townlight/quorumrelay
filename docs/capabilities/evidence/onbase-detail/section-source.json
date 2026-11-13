@@ -1,0 +1,15 @@
+{
+  "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings/ViewMeetingAgendaItem?meetingId=3825&itemId=54973&isSection=true&type=agenda",
+  "source_lead": "Pinned ViewMeeting literal item template plus captured loadAgendaSection(54973), isSection=true",
+  "status": 200,
+  "content_type": "text/html",
+  "exact_url": true,
+  "bytes": 2261,
+  "sha256": "68c0fe67270a2cc774e49f517975e12b2d035b495e122be87d253c25c89eeafb",
+  "contains_form_token": false,
+  "observation_date": "2026-11-13",
+  "method": "GET",
+  "redirects": false,
+  "path": "docs/capabilities/evidence/onbase-detail/section.html",
+  "scope": "Exact supplied section route plus native section ID from captured hierarchy; rendered section title only. No attachment link in this response; no full agenda/body or section-attachment contract inferred."
+}

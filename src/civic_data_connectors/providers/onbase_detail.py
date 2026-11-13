@@ -180,8 +180,9 @@ def agenda_bundle(source, namespace, content):
 def item_bundle(source, namespace, content):
     prefix, meeting, values = _context(source, "ViewMeetingAgendaItem", {"meetingId", "itemId", "isSection", "type"})
     item = values["itemId"]
-    if not _positive(item) or values["isSection"] != "false" or values["type"] != "agenda":
-        raise ValueError("Only the supplied non-section agenda item variant is mapped.")
+    if not _positive(item) or values["isSection"] not in {"false", "true"} or values["type"] != "agenda":
+        raise ValueError("Only the supplied agenda item/section variants are mapped.")
+    section = values["isSection"] == "true"
     main = _page(content)
     titles = [node.text() for node in main.walk() if "item-view-title-text" in node.classes()]
     if len(titles) != 1 or not titles[0]:
@@ -190,6 +191,8 @@ def item_bundle(source, namespace, content):
     for link in main.walk():
         if link.tag != "a" or not link.attrs.get("id", "").startswith("lnkAttachment_"):
             continue
+        if section:
+            raise ValueError("Section attachment semantics are not established.")
         identity = link.attrs["id"].removeprefix("lnkAttachment_")
         target = urljoin(source.url, link.attrs.get("href", ""))
         parsed, query = urlsplit(target), _query(target)
@@ -208,12 +211,13 @@ def item_bundle(source, namespace, content):
         links.append({"attributes": deepcopy(link.attrs), "text": link.text()})
     bundle = make_bundle(source, namespace, content, FORMAT, [({"external_id": item, "title": titles[0],
         "url": source.url, "meeting_external_id": meeting, "documents": documents,
-        "content_availability": "selected_rendered_item", "time_zone_status": "unknown"},
-        {"title": titles[0], "links": links}, "agenda_item")])
+        "content_availability": "selected_rendered_section" if section else "selected_rendered_item",
+        "time_zone_status": "unknown"},
+        {"title": titles[0], "links": links}, "agenda_section" if section else "agenda_item")])
     record = bundle["records"][0]
     record["identity"]["parent"] = _parent(source, namespace, meeting)
     record["relationships"].append({"relation": "meeting", "identity": deepcopy(record["identity"]["parent"])})
-    _text(record, main.text(), "item.rendered_text")
+    _text(record, main.text(), "section.rendered_text" if section else "item.rendered_text")
     return bundle
 
 
@@ -232,15 +236,15 @@ def fetch_detail(source, namespace, request, bounds, context, transport):
     kind, child = request.get("record_type"), request.get("external_id") if related else None
     if not _positive(meeting) or (child is not None and not _positive(child)):
         raise ValueError("OnBase detail requires supplied native meeting/item ID strings.")
-    if related and (kind not in {"agenda_item", "agenda_section"} or (kind == "agenda_section" and child is not None)):
-        return OperationResult.unsupported("onbase_related_detail", reason="Agenda item/section lists and selected item detail are mapped; selected section detail is not verified.")
+    if related and kind not in {"agenda_item", "agenda_section"}:
+        return OperationResult.unsupported("onbase_related_detail", reason="Only supplied agenda item/section detail is mapped.")
     if source.body or bounds.date_from or bounds.date_to or bounds.checkpoint:
         raise ValueError("Selected OnBase detail accepts no body/date/checkpoint filter.")
     parsed = urlsplit(source.url)
     if parsed.scheme != "https" or parsed.query or not re.fullmatch(r"/OnBaseAgendaOnline/?", parsed.path, re.I):
         raise ValueError("Configure the exact public OnBase root; detail membership is revalidated from its listing.")
     deadline, remaining = monotonic() + bounds.deadline_seconds, min(bounds.parser_bytes, bounds.transfer_bytes)
-    coverage = {"sources": [{**source.public_dict(), "namespace": namespace}], "scope": "one current-listing meeting and supplied Agenda hierarchy/item",
+    coverage = {"sources": [{**source.public_dict(), "namespace": namespace}], "scope": "one current-listing meeting and supplied Agenda hierarchy/selected detail",
         "catalog_complete": False, "source_complete": False, "snapshot_consistency": "not_guaranteed",
         "pages": 0, "truncated": False, "failures": []}
     bundle, captures = None, []
@@ -312,7 +316,7 @@ def fetch_detail(source, namespace, request, bounds, context, transport):
                 template = prefix + "/Meetings/ViewMeetingAgendaItem?meetingId=" + meeting + "&itemId=ITEMIDVALUE&isSection=ISSECTIONVALUE&type=AGENDATYPEVALUE"
                 if "'" + template + "'" not in wrapper_content.decode("utf-8-sig"):
                     raise ValueError("The meeting view does not declare this item route.")
-                item_url = _origin(source.url) + template.replace("ITEMIDVALUE", child).replace("ISSECTIONVALUE", "false").replace("AGENDATYPEVALUE", "agenda")
+                item_url = _origin(source.url) + template.replace("ITEMIDVALUE", child).replace("ISSECTIONVALUE", "true" if kind == "agenda_section" else "false").replace("AGENDATYPEVALUE", "agenda")
                 detail = item_bundle(replace(source, url=item_url, input_format=FORMAT), namespace, read(item_url))
                 current = detail["records"][0]
                 if current["normalized"]["title"] != chosen["normalized"]["title"]:

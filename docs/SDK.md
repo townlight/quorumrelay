@@ -92,6 +92,7 @@ onbase = Source("onbase", "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/")
 meeting = engine.fetch_record(onbase, "3825")
 items = engine.fetch_related(onbase, "3825", "agenda_item")
 item = engine.fetch_related(onbase, "3825", "agenda_item", external_id="88173")
+section = engine.fetch_related(onbase, "3825", "agenda_section", external_id="54973")
 ```
 
 `fetch_record` revalidates the native meeting ID against the current public
@@ -100,8 +101,11 @@ accessible `ViewMeetingAgenda?type=agenda` route. It returns the native meeting,
 agenda sections and agenda items. The selected listing metadata and recording
 references/relationships remain on the meeting result, and its compatibility
 meeting projection reflects that final record. `fetch_related` lists supplied sections/items;
-a selected item is fetched only after current agenda membership and its exact
-declared `ViewMeetingAgendaItem?isSection=false&type=agenda` route are verified.
+selected item/section detail is fetched only after membership in the requested
+record type and its exact declared `ViewMeetingAgendaItem` route are verified.
+The route uses `isSection=false` for an item and `isSection=true` for a section.
+The captured section response supplies a title only; it does not establish
+section attachments or additional section content.
 Native child IDs retain the meeting parent, and items retain a supplied parent
 section relationship. Rendered text is partial, timezone remains unknown, and
 supporting attachment IDs, publish IDs and links remain metadata locators; the
@@ -109,12 +113,14 @@ detail call itself does not fetch attachment bytes. Exact page captures and
 citations are preserved.
 Reads use cumulative byte, page and deadline bounds, cancellation checks and
 same-origin exact-URL GETs with redirects disabled. Coverage remains partial.
-Only the supplied Agenda variant and selected non-section item are mapped;
-selected section detail, archived meetings absent from the current listing,
+Only the supplied Agenda variant and selected item/section detail are mapped;
+archived meetings absent from the current listing,
 native search and broader Agenda APIs remain unresolved. The three pinned public
 detail-page GETs and scoped synthetic composition, persistence, search and ZIP
 evidence are recorded in [the OnBase detail receipt](verification/onbase-detail-2026-11-13.json)
 and [the pinned captures](capabilities/evidence/onbase-detail/source.json).
+The separately captured section response and scoped synthetic verification are
+recorded in [the section receipt](verification/onbase-section-detail-2026-11-13.json).
 
 After persisting the selected agenda-item record in the engine's scoped storage,
 retrieve its supplied supporting document with the separate attachment operation,
