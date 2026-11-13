@@ -923,3 +923,5 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 - Baseline source skips cancelled/adjourned records and derives agenda item ids by position; new schema must preserve statuses and explain identity derivation rather than advertise baseline as full fidelity.
 - As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
+
+Current outbound attribution (2026-11-12): existing required-suite evidence now covers the scoped Granicus19, Wistia6, Laserfiche4, Select1 and OnBase1 outbound rows. Select/OnBase acceptance is prepared-output only, never remote import or meeting association. Four implemented public paths still need explicit executed attribution: Legistar upload spelling, Wistia modern import_url, Laserfiche document create spelling and existing-document UpdateUploadedParts. No whole-provider/all-field acceptance is implied. Frozen dev9 artifacts remain unchanged.
