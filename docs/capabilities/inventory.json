@@ -446,7 +446,9 @@
               {
                 "kind": "test",
                 "path": "tests/test_write_providers.py",
-                "sha256": "6038d98ff21b633874f90c18ba0f47fd4d8af030ca8454948c41c8912f93600a"
+                "sha256": "6038d98ff21b633874f90c18ba0f47fd4d8af030ca8454948c41c8912f93600a",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "aaeb3889dee83238ff3fe31d5b135c49648d29f8d1505dacd2eb833ea87ef98b"
               }
             ]
           }
@@ -492,7 +494,9 @@
               {
                 "kind": "test",
                 "path": "tests/test_outbound_attribution.py",
-                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d"
+                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "ba0bbf9c9b5b5a2eaa37cb86e31b22360a613d5ab8d43f209ba45c35ef97bece"
               }
             ]
           }
@@ -4052,22 +4056,30 @@
               {
                 "kind": "test",
                 "path": "tests/test_granicus_media.py",
-                "sha256": "ac2b75d36d9a275b7dbe7521389ab656051b28eaa51193fa4f568135936a6868"
+                "sha256": "ac2b75d36d9a275b7dbe7521389ab656051b28eaa51193fa4f568135936a6868",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "57fc2749abe4e2c97c9f5e56bb8e71ff2313e8b5f312831013dfb4e3107e94a1"
               },
               {
                 "kind": "test",
                 "path": "tests/test_granicus_metadata.py",
-                "sha256": "5e16c1614591016ccb80484cc2ae0a62c2e70ac2eeae983ab5aad61208b3ba75"
+                "sha256": "5e16c1614591016ccb80484cc2ae0a62c2e70ac2eeae983ab5aad61208b3ba75",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "4dc8c00a11a0bde66ee266c08f5c3aed2fd08d4ed5470140e313322b09432f9c"
               },
               {
                 "kind": "test",
                 "path": "tests/test_granicus_minutes.py",
-                "sha256": "fd7965b5d9ddc47130cae5b9d99b33170dbdd79c9a92bffb6e486a8d30846d21"
+                "sha256": "fd7965b5d9ddc47130cae5b9d99b33170dbdd79c9a92bffb6e486a8d30846d21",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "6f233ebbfe6aab0348a1392c8ba83a05a17b311b92d309e7d1d3de8400ffebc0"
               },
               {
                 "kind": "test",
                 "path": "tests/test_granicus_write.py",
-                "sha256": "6ca689b72ea411562de22de806c77e46243a22ce3e0adc1a46797fa027a1b55f"
+                "sha256": "6ca689b72ea411562de22de806c77e46243a22ce3e0adc1a46797fa027a1b55f",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "7c088900a0d4173e74a42861d0515acb94aa4d5a1d6a2588207c5239b8136c55"
               }
             ]
           }
@@ -7077,7 +7089,9 @@
               {
                 "kind": "test",
                 "path": "tests/test_civicplus_export.py",
-                "sha256": "8d492e9154722ef67910699f505414d9748ae6e98c85cb0ff6ff2c43c2cb56e6"
+                "sha256": "8d492e9154722ef67910699f505414d9748ae6e98c85cb0ff6ff2c43c2cb56e6",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "3e386eda7f6e7c041a9e1761390051eb2dd768dc3cc9e1132e952038b3a1014a"
               }
             ]
           }
@@ -8859,7 +8873,9 @@
               {
                 "kind": "test",
                 "path": "tests/test_account_apis.py",
-                "sha256": "cb90af8707061ce48a92c4e583db0a7a0cfba085eefd9882cc9d3a881071c7b6"
+                "sha256": "cb90af8707061ce48a92c4e583db0a7a0cfba085eefd9882cc9d3a881071c7b6",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "cb90af8707061ce48a92c4e583db0a7a0cfba085eefd9882cc9d3a881071c7b6"
               }
             ]
           }
@@ -18324,7 +18340,9 @@
               {
                 "kind": "test",
                 "path": "tests/test_onbase_export.py",
-                "sha256": "79087e2871999dd10c0f492e86bb66b0db51ed5926e50a9c64af7d58dd9b3b6a"
+                "sha256": "79087e2871999dd10c0f492e86bb66b0db51ed5926e50a9c64af7d58dd9b3b6a",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "79087e2871999dd10c0f492e86bb66b0db51ed5926e50a9c64af7d58dd9b3b6a"
               }
             ]
           }
@@ -19198,12 +19216,16 @@
               {
                 "kind": "test",
                 "path": "tests/test_laserfiche_page_parts.py",
-                "sha256": "c11af47120da758e9b878d72d92281deb3d9778ea480b371acddb6dc471a256e"
+                "sha256": "c11af47120da758e9b878d72d92281deb3d9778ea480b371acddb6dc471a256e",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "5d6ae6451e6b2d5a7723246cd51ebe67cafd1c44af898655895eb73421a347c5"
               },
               {
                 "kind": "test",
                 "path": "tests/test_write_providers.py",
-                "sha256": "6038d98ff21b633874f90c18ba0f47fd4d8af030ca8454948c41c8912f93600a"
+                "sha256": "6038d98ff21b633874f90c18ba0f47fd4d8af030ca8454948c41c8912f93600a",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "aaeb3889dee83238ff3fe31d5b135c49648d29f8d1505dacd2eb833ea87ef98b"
               }
             ]
           }
@@ -19251,7 +19273,9 @@
               {
                 "kind": "test",
                 "path": "tests/test_outbound_attribution.py",
-                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d"
+                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "ba0bbf9c9b5b5a2eaa37cb86e31b22360a613d5ab8d43f209ba45c35ef97bece"
               }
             ]
           }
@@ -22882,7 +22906,9 @@
               {
                 "kind": "test",
                 "path": "tests/test_wistia_swap.py",
-                "sha256": "01206fe3340af638c2e5032149dfc9c2e54832e13452d5216c58a36ca1ee3cdb"
+                "sha256": "01206fe3340af638c2e5032149dfc9c2e54832e13452d5216c58a36ca1ee3cdb",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "75d61e5ec8364b2a892a68d6f39e8be578a9b5df6e46b5f0038993a6d9e0927f"
               }
             ]
           }
@@ -22938,7 +22964,9 @@
               {
                 "kind": "test",
                 "path": "tests/test_write_providers.py",
-                "sha256": "6038d98ff21b633874f90c18ba0f47fd4d8af030ca8454948c41c8912f93600a"
+                "sha256": "6038d98ff21b633874f90c18ba0f47fd4d8af030ca8454948c41c8912f93600a",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "aaeb3889dee83238ff3fe31d5b135c49648d29f8d1505dacd2eb833ea87ef98b"
               }
             ]
           }
@@ -22984,7 +23012,9 @@
               {
                 "kind": "test",
                 "path": "tests/test_outbound_attribution.py",
-                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d"
+                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "ba0bbf9c9b5b5a2eaa37cb86e31b22360a613d5ab8d43f209ba45c35ef97bece"
               }
             ]
           }
