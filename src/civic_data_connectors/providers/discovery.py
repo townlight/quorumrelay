@@ -398,7 +398,8 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
         raise ValueError("The provider listing exceeds the configured parser byte limit.")
     if input_format in {"legistar-events-json", "legistar-event-json", "wistia-api-media-json",
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
-                        "civicweb-detail-html", "swagit-listing-html", "onbase-public-listing-html",
+                        "civicweb-detail-html", "civicweb-meetings-json", "civicweb-meeting-documents-json",
+                        "swagit-listing-html", "onbase-public-listing-html",
                         "digital-towpath-listing-html", "towncloud-public-listing-json",
                         "agendaquick-public-listing-html", "agendaquick-item-search-html", "civicplus-search-json",
                         "utah-public-search-html", "iqm2-public-search-html",
@@ -456,6 +457,13 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
         from .simbli import discover_public
         return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport(),
                                record_types=request.get("record_types"))
+    if (source.provider == "civicweb" and saved is None and (
+            source.input_format == "civicweb-meetings-json"
+            or (source.input_format is None and urlsplit(source.url).path in {"", "/"}))):
+        from .civicweb_listing import discover_public
+        return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport(),
+                               record_types=request.get("record_types"),
+                               exclude_likely_non_meetings=request.get("exclude_likely_non_meetings", False))
     if source.provider == "boardable" and saved is None:
         path = urlsplit(source.url).path.strip("/").split("/")
         if len(path) == 1 or (len(path) == 2 and path[1] == "meetings"):

@@ -52,6 +52,9 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if source.provider == "legistar":
             from .legistar import fetch_related
             return fetch_related(source, namespace, request, bounds, context, transport)
+        if source.provider == "civicweb":
+            from .civicweb_listing import fetch_related
+            return fetch_related(source, namespace, request, bounds, context, transport)
         return OperationResult.unsupported("fetch_related", reason=(
             "No verified related-record retrieval mapping is registered for this provider."))
     if "external_id" in request:

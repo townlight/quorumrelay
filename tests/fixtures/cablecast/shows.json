@@ -1,0 +1,149 @@
+{
+  "meta": {
+    "offset": 0,
+    "pageSize": 50,
+    "count": 751
+  },
+  "shows": [
+    {
+      "location": 1,
+      "id": 750,
+      "title": "Council Study Session 11-10-2026",
+      "eventDate": "2026-11-10T00:00:00-07:00",
+      "vods": [
+        533
+      ],
+      "hasCaptions": true
+    },
+    {
+      "location": 1,
+      "id": 749,
+      "title": "LURA Nov 10 2026",
+      "eventDate": "2026-11-10T00:00:00-07:00",
+      "vods": [
+        534
+      ],
+      "hasCaptions": true
+    },
+    {
+      "location": 1,
+      "id": 748,
+      "title": "Planning Commission November 9, 2026",
+      "eventDate": "2026-11-09T00:00:00-07:00",
+      "vods": [
+        532
+      ],
+      "hasCaptions": true
+    },
+    {
+      "location": 1,
+      "id": 745,
+      "title": "cc",
+      "eventDate": "2026-11-04T22:22:05.3-07:00",
+      "vods": [],
+      "hasCaptions": true
+    },
+    {
+      "location": 1,
+      "id": 746,
+      "title": "City Council Meeting November 4, 2026",
+      "eventDate": "2026-11-04T00:00:00-07:00",
+      "vods": [
+        530
+      ],
+      "hasCaptions": true
+    },
+    {
+      "location": 1,
+      "id": 743,
+      "title": "City Council Study Session October 27, 2026",
+      "eventDate": "2026-10-27T20:34:51.017-06:00",
+      "vods": [],
+      "hasCaptions": true
+    },
+    {
+      "location": 1,
+      "id": 742,
+      "title": "City Council Study Session October 27, 2026",
+      "eventDate": "2026-10-27T20:33:57.787-06:00",
+      "vods": [],
+      "hasCaptions": true
+    },
+    {
+      "location": 1,
+      "id": 744,
+      "title": "City Council Study Session October 27, 2026",
+      "eventDate": "2026-10-27T00:00:00-06:00",
+      "vods": [
+        529
+      ],
+      "hasCaptions": true
+    },
+    {
+      "location": 1,
+      "id": 740,
+      "title": "City Council - Oct 20 2026",
+      "eventDate": "2026-10-20T00:00:00-06:00",
+      "vods": [
+        527
+      ],
+      "hasCaptions": true
+    },
+    {
+      "location": 1,
+      "id": 736,
+      "title": "City Council Meeting October 6, 2026",
+      "eventDate": "2026-10-06T23:07:02.303-06:00",
+      "vods": [],
+      "hasCaptions": true
+    },
+    {
+      "location": 1,
+      "id": 737,
+      "title": "City Council Meeting October 6, 2026",
+      "eventDate": "2026-10-06T00:00:00-06:00",
+      "vods": [
+        525
+      ],
+      "hasCaptions": true
+    },
+    {
+      "location": 1,
+      "id": 732,
+      "title": "Planning Commission August 24, 2026",
+      "eventDate": "2026-09-16T00:00:00-06:00",
+      "vods": [
+        521
+      ],
+      "hasCaptions": true
+    },
+    {
+      "location": 1,
+      "id": 726,
+      "title": "Planning Commission August 24, 2026",
+      "eventDate": "2026-08-24T00:00:00-06:00",
+      "vods": [
+        516
+      ],
+      "hasCaptions": false
+    },
+    {
+      "location": 1,
+      "id": 665,
+      "title": "City Council Meeting January 27, 2026",
+      "eventDate": "2026-01-28T00:30:19.163-07:00",
+      "vods": [
+        474
+      ],
+      "hasCaptions": true
+    },
+    {
+      "location": 1,
+      "id": 664,
+      "title": "City Council Meeting January 27, 2026",
+      "eventDate": "2026-01-28T00:29:03.053-07:00",
+      "vods": [],
+      "hasCaptions": true
+    }
+  ]
+}

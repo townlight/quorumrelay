@@ -192,6 +192,12 @@ def parse_native(source, namespace, content, input_format):
     if input_format == "swagit-listing-html":
         from .swagit import listing_rows
         return make_bundle(source, namespace, content, input_format, listing_rows(source, content))
+    if input_format == "civicweb-meetings-json":
+        from .civicweb_listing import meetings_bundle
+        return meetings_bundle(source, namespace, content)
+    if input_format == "civicweb-meeting-documents-json":
+        from .civicweb_listing import documents_bundle
+        return documents_bundle(source, namespace, content)
     if input_format == "civicweb-detail-html":
         from .civicweb import detail_bundle
         return detail_bundle(source, namespace, content)

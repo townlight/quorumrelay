@@ -9617,6 +9617,36 @@
           "limits": "One print PDF only; agenda/minutes kind was not inferred, full archive/continuation and writes remain unverified.",
           "receipt_path": "docs/verification/civicweb-supplied-document-2026-11-12.json",
           "receipt_sha256": "fd2fe678d91df060fe04b3d0af6123ae501bf275a31a38f71990b4f0130a8251"
+        },
+        {
+          "id": "civicweb-meetings-service-loveland-2026-11-12",
+          "url": "https://cilovelandco.civicweb.net/Services/MeetingsService.svc/meetings?from=2026-11-01&to=2026-11-12",
+          "title": "Loveland, CO CivicWeb MeetingsService date-range meeting list",
+          "kind": "public_tenant",
+          "observed": "Public GET of the date-range meeting list and the Meeting Type List page by the QuorumRelay reader; saved public captures used as test fixtures. No staff operation, no write.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "implemented_source_and_saved_public_captures_with_unreceipted_bounded_live_read_not_acceptance",
+          "findings": [
+            "The list returned JSON rows with Id, MeetingDate, MeetingDateTime, Name, TypeId and Published; a row with Published=false is not listed by the reader.",
+            "MeetingTypeList.aspx names each TypeId; the Rolling Calendar and Public Meetings Notice types read as calendar/notice entries, so their meetings are flagged likely_not_a_meeting (not dropped)."
+          ],
+          "limits": "One tenant and one short date range. No receipt file was written, so acceptance stays not_run. The service is not vendor-documented here; its stability, paging and rate limits are unknown."
+        },
+        {
+          "id": "civicweb-meeting-documents-loveland-2026-11-12",
+          "url": "https://cilovelandco.civicweb.net/Services/MeetingsService.svc/meetings/18421/meetingDocuments",
+          "title": "Loveland, CO CivicWeb meetingDocuments list for one meeting",
+          "kind": "public_tenant",
+          "observed": "Public GET of one meeting's document list per listed meeting; saved public captures used as test fixtures. Links only; no document body downloaded.",
+          "observation_date": "2026-11-12",
+          "access_scope": "bounded_public_read_only",
+          "proof_level": "implemented_source_and_saved_public_captures_with_unreceipted_bounded_live_read_not_acceptance",
+          "findings": [
+            "Rows carry Id, MeetingId, DocumentType, Name, IsPublic and an inline Html body. Agenda (type 1) rows were public; agenda packet (type 4) rows were IsPublic=false, so no link is offered for them.",
+            "A document opens at /document/{id}/{name}.html or .pdf; DocumentType 1 and 9 are HTML, 4, 10 and 53 are PDF in the portal's own use."
+          ],
+          "limits": "One tenant. Link shapes for document types other than 1, 4, 9, 10 and 53 are not mapped (the bare /document/{id}/ route is used). Document content, minutes availability and full archives are unverified."
         }
       ],
       "tenants": [
@@ -9633,6 +9663,14 @@
           "evidence_ids": [
             "icompass-civicweb-tenant",
             "civicweb-supplied-print-pdf-2026-11-12"
+          ]
+        },
+        {
+          "url": "https://cilovelandco.civicweb.net/",
+          "observation": "Loveland, CO public MeetingsService date-range list and per-meeting document lists read with saved fixtures and one unreceipted bounded live read; not a full archive.",
+          "evidence_ids": [
+            "civicweb-meetings-service-loveland-2026-11-12",
+            "civicweb-meeting-documents-loveland-2026-11-12"
           ]
         }
       ],
@@ -9662,23 +9700,28 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "icompass-civicweb-tenant"
+            "icompass-civicweb-tenant",
+            "civicweb-meetings-service-loveland-2026-11-12",
+            "civicweb-meeting-documents-loveland-2026-11-12"
           ],
-          "details": "Public listing/navigation observed; not exhaustive discovery coverage.",
+          "details": "Date-range meeting list from the public MeetingsService with each meeting's meeting type (body) from MeetingTypeList.aspx; unpublished meetings are left out and counted; meetings of calendar/notice-style meeting types are kept and flagged likely_not_a_meeting, with an explicit request option exclude_likely_non_meetings to omit them. record_types may add each meeting's document list (links only). Bounded by page/record/deadline limits with a resumable checkpoint. A tenant root URL or input_format civicweb-meetings-json selects it; a MeetingTypeList.aspx URL keeps the original saved-page route.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify full date/body bounds, continuation and checkpoints."
+            "Only Loveland, CO was read (one short date range); other tenants and the service's paging, rate limits and stability are unverified.",
+            "Meeting-type names are taken as body names; a real body whose type name contains a word such as notice, report or budget is flagged likely_not_a_meeting, not dropped (types are listed in coverage.flagged_meeting_types).",
+            "No complete catalog or archive is claimed; unpublished meetings are not returned and document content is not read."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "implemented_source_and_named_tests_with_saved_public_captures_and_unreceipted_bounded_live_read_not_catalog_or_write_acceptance",
           "tenant_scope": [
             "https://csknowledgebase.civicweb.net/document/57754/",
-            "https://ciindependenceor.civicweb.net/Portal/MeetingTypeList.aspx"
+            "https://ciindependenceor.civicweb.net/Portal/MeetingTypeList.aspx",
+            "https://cilovelandco.civicweb.net/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Saved public Loveland captures in tests/fixtures/civicweb-listing; no provider account access required.",
           "restrictions": [
             "No provider test tenant/credentials were supplied; live write acceptance remains access-blocked.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -9690,9 +9733,10 @@
           "evidence_ids": [
             "icompass-civicweb-tenant",
             "civicweb-supplied-print-pdf-2026-11-12",
-            "icompass-civicweb-detail"
+            "icompass-civicweb-detail",
+            "civicweb-meeting-documents-loveland-2026-11-12"
           ],
-          "details": "The dedicated CivicWeb fetch_record route maps a supplied meeting identifier into the guarded current detail path, validates returned identity and preserves exact HTML/original fields. A separately supplied print PDF completed; catalog and general native search remain unverified.",
+          "details": "The dedicated CivicWeb fetch_record route maps a supplied meeting identifier into the guarded current detail path, validates returned identity and preserves exact HTML/original fields. A separately supplied print PDF completed; catalog and general native search remain unverified. A related read (record_type document, parent_id = meeting ID) returns one meeting's document list as links.",
           "dependencies": [],
           "remaining_verification": [
             "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
@@ -9718,7 +9762,7 @@
             "icompass-civicweb-baseline",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive saved-capture formats civicweb-meetings-json and civicweb-meeting-documents-json parse supplied MeetingsService responses; the 34 baseline formats are unchanged.",
           "dependencies": [
             "Extract shared engine preserving legacy behavior."
           ],
@@ -10158,7 +10202,7 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "One selected detail and supplied print PDF were fetched; full MeetingTypeList bounds, continuation and native search remain unknown."
+        "details": "MeetingsService returns the whole date range in one response; the reader pages its own work (meeting list, then one document list per meeting) with a checkpoint. Service-side paging limits for very large ranges are unknown."
       },
       "auth": {
         "public_read": "unverified",

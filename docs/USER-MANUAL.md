@@ -67,6 +67,8 @@ The package contains 31 canonical provider families. These are identifiers accep
 | <code>boardable</code> | <code>gworks</code> | <code>boarddocs</code> |
 | <code>tyler-meeting-manager</code> |  |  |
 
+One further provider, <code>cablecast</code> (Tightrope "Reflect" meeting video, hosts ending <code>.cablecast.tv</code>), is registered by <code>create_engine()</code> as a built-in typed connector. It is outside the fixed 31 baseline families: it has no baseline format, <code>providers</code> lists it with an empty <code>formats</code> array, and it is not part of the 34-format compatibility baseline.
+
 Ask the installed engine for the authoritative provider-specific choices:
 
 ~~~python
@@ -156,6 +158,37 @@ result = engine.discover(
 ~~~
 
 Dates are inclusive. The connector may support fewer filters than the shared model, may require explicit date or body information, or may report unknown dates. Check <code>status</code>, <code>errors</code>, and <code>coverage</code> before using any records. <code>partial</code> means the result may contain useful records with a known limit; it is not a successful-complete catalog. A provider returning an empty page does not by itself prove that the source has no records.
+
+### Meeting lists and meeting video: CivicWeb and Cablecast
+
+Two additive readers list meetings from public tenant services. Both make only public GET requests, honor the same bounds, return <code>partial</code> with a <code>checkpoint</code> when a bound stops them, and never claim a complete archive.
+
+**CivicWeb (iCompass) meeting list.** Configure the tenant root, <code>https://{tenant}.civicweb.net/</code> (or any tenant URL with <code>input_format="civicweb-meetings-json"</code>), and supply explicit <code>date_from</code> and <code>date_to</code>. A <code>MeetingTypeList.aspx</code> URL without that format keeps the original saved-page route. <code>i.civicweb.net</code> is iCompass's own host, not a tenant, and is not recognized.
+
+~~~python
+source = Source("civicweb", "https://cilovelandco.civicweb.net/")
+result = engine.execute("discover", {
+    "source": source.public_dict(),
+    "bounds": {"date_from": "2026-11-01", "date_to": "2026-11-12", "max_pages": 25},
+    "record_types": ["meeting", "document"],   # omit "document" to list meetings only
+}, context=context)
+~~~
+
+Each <code>meeting</code> record carries the provider meeting ID, title, local date and start literal (time zone unknown), the meeting type ID and its name as <code>body</code> (taken from the portal's meeting-type list, else from the title with its date removed, labelled in <code>body_source</code>), the location and the portal page URL. Set <code>source.body</code> to keep one body. Meetings the portal has not published are left out and counted; a cancelled meeting is kept and flagged in <code>source_status.title_marks_cancelled</code>. No published meeting is hidden by a name guess. Meetings whose meeting-type name reads like a calendar or notice (for example "Rolling Calendar", "Public Meetings Notice", or a type containing a word such as notice, report or budget) are returned with <code>likely_not_a_meeting: true</code> and the matched name in <code>likely_not_a_meeting_type</code>, and <code>coverage.flagged_meeting_types</code> lists those types. Add <code>"exclude_likely_non_meetings": true</code> to the discover request to omit the flagged meetings instead; they are then counted in <code>coverage.likely_non_meeting_omitted</code>. The default is off. If the meeting-type page cannot be read, no meeting is flagged and coverage says so.
+
+With <code>"document"</code> in <code>record_types</code>, each returned meeting's document list is read (one request each, counted in <code>max_pages</code>, resumable by checkpoint). A <code>document</code> record has its parent meeting identity, kind (<code>agenda</code>, <code>agenda_packet</code>, <code>minutes</code>, <code>minutes_adopted</code> or <code>document</code>), format and a link in the portal's <code>/document/{id}/{name}.html</code> or <code>.pdf</code> shape. A document the portal marks not public is listed with no link. Nothing is downloaded, and document text is not extracted. One meeting's documents can also be read with <code>engine.fetch_related(source, "18421", "document")</code>.
+
+**Cablecast meeting video.** Configure <code>https://{host}/</code> for a <code>*.cablecast.tv</code> host. Dates are optional but bound the read.
+
+~~~python
+source = Source("cablecast", "https://reflect-cityofloveland-co.cablecast.tv/")
+shows = engine.discover(source, bounds=Bounds(date_from="2026-11-01", date_to="2026-11-12"))
+detail = engine.fetch_record(source, "750")   # a show ID
+~~~
+
+Discovery reads the public shows list. A show without a video is left out and counted. The meeting day is the day the title names ("November 4, 2026", "Nov 10 2026", "11-10-2026"), else the show's event date; <code>date_source</code> says which. Cablecast keeps a show per airing, so one meeting can appear twice: when copies share a title and day, the reader keeps the copy whose video has a caption playlist (it reads each copy's video record and <code>vod.m3u8</code>, counted in <code>max_pages</code>), lists the other show IDs in <code>duplicate_show_ids</code>, and states how it chose in <code>copy_selection</code>. If the page budget ends first, the first-listed copy is kept and marked <code>first_listed_unprobed</code>. The list's own <code>hasCaptions</code> flag is kept as supplied but is not used; copies of one meeting disagree.
+
+A show record's <code>recordings</code> entry links the watch page (<code>/internetchannel/show/{id}</code>); <code>fetch_record</code> adds the video file URL, the HLS playlist URL and length, and a <code>captions</code> entry naming the caption playlist (<code>captions.en.m3u8</code>) with its language and segment count. QuorumRelay returns these as records and links only. It does not download or cut audio or video, does not read the WebVTT caption segments, and does not transcribe. <code>fetch_captions</code>, attachment downloads and native search are reported <code>unsupported</code>.
 
 ### Normalize a saved capture
 

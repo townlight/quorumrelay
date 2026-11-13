@@ -56,7 +56,8 @@ def test_cli_saved_file_stdin_jsonl_and_exit_codes(tmp_path):
     stdout = io.StringIO()
     assert main(["providers", "--request", str(saved), "--file-root", str(tmp_path)],
                 stdout=stdout, stderr=stderr, engine=owner) == 0
-    assert len(json.loads(stdout.getvalue())["data"]["providers"]) == 31
+    listed = json.loads(stdout.getvalue())["data"]["providers"]
+    assert len([row for row in listed if row["formats"]]) == 31 and len(listed) == 32
     stdout, stderr = io.StringIO(), io.StringIO()
     assert main(["providers", "--jsonl"], stdin=io.StringIO("{}\ninvalid\n{}\n"),
                 stdout=stdout, stderr=stderr, engine=owner) == 64
