@@ -125,6 +125,10 @@ def parse_bundle(source, namespace, content):
                       "documents": [], "content_availability": "supplied_title_and_link_only"},
                      {"supplied_link": value}, "legislative_file"))
     bundle = make_bundle(source, namespace, content, FORMAT, rows)
+    bundle["records"][0]["text"] = [{"field": "rendered_agenda_rows", "text": main.text(),
+        "citation_url": source.url, "completeness": "supplied_rendered_html_only",
+        "provenance": {"method": "iqm2_public_meeting_detail", "scope": "selected_meeting_detail",
+                       "capture_sha256": bundle["capture"]["sha256"]}}]
     parent = bundle["records"][0]["identity"]
     for record in bundle["records"][1:]:
         record["identity"]["parent"] = parent

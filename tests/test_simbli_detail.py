@@ -125,6 +125,9 @@ def test_selected_content_uses_fresh_tree_identity_and_retains_raw_fields():
     assert record["identity"]["parent"]["external_id"] == "4942"
     assert record["normalized"]["level"] == json.loads((ROOT / "items.json").read_bytes())["Items"][0]["Level"]
     assert record["normalized"]["content_fields"][0]["Content"] == "<p>Actual supplied item text</p>"
+    assert record["text"][0]["text"] == "Actual supplied item text"
+    assert record["text"][0]["provenance"]["source_control_type"] == 11
+    assert record["text"][0]["provenance"]["capture_sha256"] == content["capture"]["sha256"]
     assert record["normalized"]["documents"][0]["external_id"] == "131003"
     assert record["normalized"]["documents"][0]["url"] == "https://simbli.eboardsolutions.com/Meetings/Attachment.aspx?S=36031063&AID=131003&MID=4942"
     assert "private-synthetic-attachment" not in json.dumps(record["normalized"])
@@ -165,6 +168,24 @@ def test_saved_content_never_maps_foreign_meeting_attachment_url():
     result = create_engine().execute("normalize", {"source": source}, content=json.dumps(payload).encode())
     assert result.status == "completed"
     assert "url" not in result.data["records"][0]["normalized"]["documents"][0]
+
+
+def test_only_supplied_available_rich_text_controls_emit_text_without_script_execution():
+    fields = [
+        {"ControlType": 11, "HasData": True, "FieldName": "description",
+         "Content": "<p>Supplied description</p><script>not supplied prose</script>"},
+        {"ControlType": 99, "HasData": True, "Content": "unknown control content"},
+        {"ControlType": 11, "HasData": False, "Content": "unavailable control content"},
+    ]
+    payload = {"meeting_id": "4942", "agenda_item_id": 176766,
+        "response": {"ItemDetails": {"Title": "Captured item"}, "ItemContents": fields}}
+    result = create_engine().execute("normalize", {
+        "source": {**SOURCE, "input_format": "simbli-item-content-json"}}, content=json.dumps(payload).encode())
+    assert result.status == "completed", result.public_dict()
+    record = result.data["records"][0]
+    assert [s["text"] for s in record["text"]] == ["Supplied description"]
+    assert record["normalized"]["content_fields"][1]["Content"] == "unknown control content"
+    assert result.data["capture"]["original_values"] == payload
 
 
 def test_selected_content_attachment_flows_through_capture_verified_engine_transfer():

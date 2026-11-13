@@ -39,6 +39,8 @@ def test_exact_public_detail_keeps_native_meeting_files_documents_and_other_meet
     assert all(r["identity"]["record_type"] == "legislative_file" and r["identity"]["parent"] == meeting["identity"] for r in records[1:])
     assert all(not r["normalized"]["documents"] for r in records[1:])  # FileOpen has meeting context, no explicit file-parent ID.
     assert len(normalized["rendered_agenda_rows"]) == 142
+    assert "Landscape Structures" in meeting["text"][0]["text"]
+    assert meeting["text"][0]["provenance"]["capture_sha256"] == EVIDENCE["sha256"]
     assert "motion" not in normalized and "vote" not in normalized
     assert base64.b64decode(result.data["capture"]["content_base64"]) == CAPTURE
     found = engine.execute("search", {"bundle": result.data, "query": {"record_types": ["legislative_file"], "terms": ["Landscape Structures"]}})

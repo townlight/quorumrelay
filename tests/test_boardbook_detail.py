@@ -29,6 +29,9 @@ def test_saved_native_item_parents_documents_and_exact_capture():
     assert parent["identity"]["parent"] == meeting["identity"]
     assert child["identity"]["parent"] == parent["identity"]
     assert child["normalized"]["source_fields"]["Description"] == ["Supplied discussion"]
+    assert child["text"][0]["text"] == "Supplied discussion"
+    assert child["text"][0]["provenance"]["capture_sha256"] == result.data["capture"]["sha256"]
+    assert parent["text"] == []
     assert child["normalized"]["documents"][0]["external_id"] == "99"
     assert child["original"]["attributes"]["data-agendaitemid"] == "11"
     assert base64.b64decode(result.data["capture"]["content_base64"]) == HTML

@@ -476,3 +476,5 @@ and the [user manual](USER-MANUAL.md) for operational troubleshooting.
 The local source also supports a supplied Novus cover sheet through `novus-public-coversheet-html`; see [native item/meeting and attachment bindings](NOVUS-COVERSHEET.md). This additive route is not in frozen dev8.
 
 Existing `clerkbase-document-html` now retains supplied [document body/paragraph text](CLERKBASE-DOCUMENT.md) in local source for search and neutral export, preserving original compatibility output. Frozen dev8 is unchanged.
+
+Supplied source prose is also retained as capture-bound `record.text` segments in Novus cover sheets/meeting views, iQM2 meeting detail, BoardBook description/discussion fields and Simbli available rich-text controls. These are source text, not OCR/ASR or inferred actions. [Affected source and actual Brief/TownRecord source-only checks](verification/source-text-reference-clients-2026-11-12.json) distinguish persistence/retry/search/export/reopen proof from frozen installed-candidate acceptance.

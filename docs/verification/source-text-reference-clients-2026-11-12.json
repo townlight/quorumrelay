@@ -1,0 +1,118 @@
+{
+  "date": "2026-11-12",
+  "scope": "Current source-only reference workflows and supplied-text segment repairs; no frozen/installed equivalence",
+  "core_base_head": "0ce4f6034be16754ffceccbf67165c1038c96a5e",
+  "source_repairs": {
+    "novus": "Rendered cover-sheet and MeetingView content now emitted as capture-bound supplied TextSegments, not only normalized.text.",
+    "iqm2": "Selected public meeting detail text segment, not item-neighbor inference.",
+    "boardbook": "Only native item Description/Discussion source fields become text segments.",
+    "simbli": "Only ControlType11/HasData=true/string Content becomes parsed rich-text segment; raw unknown controls preserved."
+  },
+  "affected_checks": {
+    "passed_distinct": 6,
+    "reused_nodes": 5,
+    "new_cases": 1,
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_novus_detail.py::test_saved_cover_sheet_native_item_parent_text_search_and_export tests/test_novus_detail.py::test_saved_meeting_view_exact_context_native_children_text_search_export -q (2 passed; an earlier command named a nonexistent node and executed no tests)",
+      ".venv/Scripts/python.exe -m pytest tests/test_iqm2_detail.py::test_exact_public_detail_keeps_native_meeting_files_documents_and_other_meeting_references tests/test_boardbook_detail.py::test_saved_native_item_parents_documents_and_exact_capture tests/test_simbli_detail.py::test_selected_content_uses_fresh_tree_identity_and_retains_raw_fields -q (3 passed)",
+      ".venv/Scripts/python.exe -m pytest tests/test_simbli_detail.py::test_only_supplied_available_rich_text_controls_emit_text_without_script_execution -q (1 passed)"
+    ]
+  },
+  "brief": {
+    "consumer_head": "3fcb2b9ca69468d4fb52535d12cd907401642911",
+    "executed_clean_core_head": "0ce4f6034be16754ffceccbf67165c1038c96a5e",
+    "receipt_output": "outputs/current-source-brief-20261112/result.json",
+    "receipt_sha256": "64817a3fc5903c098e2ecd6fa57aeb8a67f62d8a291b1f976039c8c79cc8bb13",
+    "loaded_modules": [
+      {
+        "path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\civic-data-connectors\\src\\civic_data_connectors\\engine.py",
+        "sha256": "703a7c4ad1c0cab6da458321eeb495c740037d4e0c8b17e9a4ac09dfe897a056"
+      },
+      {
+        "path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\reference-integrations\\civiccast-brief\\src\\civiccast_brief\\connectors.py",
+        "sha256": "e647b9e9617c619f50b8a16344f1d4899037c60392bf230168a4bc7609e11b48"
+      },
+      {
+        "path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\civic-data-connectors\\src\\civic_data_connectors\\providers\\clerkbase_detail.py",
+        "sha256": "69cbf1097a5166bcda8431e02cb4d8e27ef96d20d8cee60d70508a3a5a4efb20"
+      }
+    ],
+    "hash_provenance": "Post-run hashes; these tracked module contents are unchanged from the clean executed core/consumer heads. Novus-only and other later unrelated mapper edits do not affect the ClerkBase path.",
+    "outcomes": [
+      "Actual CivicSources configured discovery/retry retained one record; rich minutes text searchable",
+      "Actual supplied HTML preparation and producer-review staging retained one unapproved review item through retry/reopen",
+      "ZIP exported/read back source identity and text; persisted search/review reopen passed"
+    ],
+    "export_bytes": 609581,
+    "export_sha256": "0ef0b290de3d1fe8a719582d9e67234889dbd8fa40b1c52856324082a9ed1e32",
+    "coverage": "partial; cross-origin recording unavailable under existing policy",
+    "harness_correction": "Initial inline run completed discover/retry/search/prepare/stage but stopped assuming export() returned result; resumed same profile using actual result/metadata/stream tuple and partial coverage, no mutation replay"
+  },
+  "townrecord": {
+    "consumer_head": "4057d5e1ae65ca0793b2a5235719371b8b3ca461",
+    "core_head_at_execution": "0ce4f6034be16754ffceccbf67165c1038c96a5e",
+    "dirty_at_execution": [
+      "M src/civic_data_connectors/providers/novus_detail.py",
+      " M tests/test_novus_detail.py"
+    ],
+    "receipt_output": "outputs/current-source-townrecord-20261112/result.json",
+    "receipt_sha256": "393fadff2508a15683d2224d753a9830611fa742c0b92b3e311113d5d106f7bb",
+    "loaded_modules": [
+      {
+        "path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\civic-data-connectors\\src\\civic_data_connectors\\engine.py",
+        "sha256": "703a7c4ad1c0cab6da458321eeb495c740037d4e0c8b17e9a4ac09dfe897a056"
+      },
+      {
+        "path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\civic-data-connectors\\src\\civic_data_connectors\\providers\\novus_detail.py",
+        "sha256": "76f75c647be63e6a5641ee035b657f1375e98f43d2afb2748f770fd92a7244ed"
+      },
+      {
+        "path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\reference-integrations\\townrecord\\core\\src\\townrecord\\connectors.py",
+        "sha256": "9fcc44c10b23e090484e3d9f1fa043e9ab615b53785e99443365fa36f6e3c22a"
+      }
+    ],
+    "outcomes": [
+      "read-only source configuration denied; writer config/sync accepted",
+      "initial mismatched local body correctly rejected with capture retained/no meeting; matching fixture body configuration allowed subsequent two syncs",
+      "one meeting/20 agenda items/one source-text record persist without duplicate",
+      "authenticated FTS search and ZIP export preserve21 native records/text provenance; actual file DB reopen and API reopen search passed"
+    ],
+    "counts": {
+      "meetings": 1,
+      "agenda_items": 20,
+      "records": 1
+    },
+    "export_bytes": 58255,
+    "export_sha256": "ae03ec923f69c234bd2641498003f5a2972051bf2188a7016094578184c00523",
+    "harness_corrections": [
+      "Test fixture initially named City Council while source names East Brunswick Board of Education; corrected only local fixture body",
+      "ZIP readback initially omitted required capture_storage for stored captures; resumed existing export using owned portable-import.db; no sync replay"
+    ],
+    "alignment": "Two downstream alignment jobs paused because no agenda file was supplied; no queued/running jobs or alignment/model completion claim"
+  },
+  "limits": [
+    "Synthetic provider transport through actual current source application paths; no provider mutations",
+    "Existing configured-capture partial and unavailable-media outcomes retained",
+    "Supplied HTML/rich text is source content, not OCR/ASR or inferred votes/motions/attendance",
+    "Townlight/TownReporter current-source candidate acceptance remains separate; frozen original proof reused only where unchanged",
+    "No package build/install/signing/Sandbox restart/frozen artifact/publication"
+  ],
+  "tested_repair_modules": [
+    {
+      "path": "src/civic_data_connectors/providers/novus_detail.py",
+      "sha256": "76f75c647be63e6a5641ee035b657f1375e98f43d2afb2748f770fd92a7244ed"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/iqm2_detail.py",
+      "sha256": "a15ce2c1c1d170ab6f86f9ace85d038b4019ddab144d10d2487db0630e7e6a93"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/boardbook_detail.py",
+      "sha256": "d2504e114962b6fade3c95fea64c08881ecf539e4121938a12329755b29a0806"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/simbli_detail.py",
+      "sha256": "f65d74a9370cab3443f6e7c583d07eca736af944b1701857e6bedb7b744e5e48"
+    }
+  ]
+}

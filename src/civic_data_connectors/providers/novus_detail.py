@@ -22,6 +22,13 @@ def _positive(value):
     return isinstance(value, str) and re.fullmatch(r"[1-9][0-9]{0,18}", value) is not None
 
 
+def _supplied_text(record, text, method):
+    record["text"] = [{"field": "text", "text": text, "citation_url": record["source_url"],
+                       "completeness": "supplied_rendered_html_only",
+                       "provenance": {"method": method, "capture_sha256": record["capture_sha256"],
+                                      "scope": "selected_public_document"}}]
+
+
 def parse_bundle(source, namespace, content):
     validate_url(source.url)
     origin, values = urlsplit(source.url), _query(source.url)
@@ -77,6 +84,7 @@ def parse_bundle(source, namespace, content):
     parent = {"provider": source.provider, "namespace": namespace, "record_type": "meeting",
               "external_id": meeting, "parent": None}
     record = bundle["records"][0]
+    _supplied_text(record, normalized["text"], "novus_cover_sheet_text")
     record["identity"]["parent"] = parent
     record["relationships"].append({"relation": "meeting", "identity": parent})
     return bundle
@@ -144,6 +152,7 @@ def parse_meeting_bundle(source, namespace, content):
     rows = [(normalized, {"source_heading": lines, "source_context": values}, "meeting")]
     rows.extend((item, {"supplied_link": item["url"]}, "agenda_item") for item in items)
     bundle = make_bundle(source, namespace, content, "novus-public-listing-html", rows)
+    _supplied_text(bundle["records"][0], normalized["text"], "novus_meeting_view_text")
     parent = bundle["records"][0]["identity"]
     for record in bundle["records"][1:]:
         record["identity"]["parent"] = parent

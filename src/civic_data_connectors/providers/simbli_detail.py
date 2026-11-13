@@ -11,6 +11,7 @@ from urllib.request import Request
 
 from ..models import Error, OperationResult
 from .native import make_bundle
+from .escribe_detail import Page
 from .novus import _cookies
 from .simbli import HOST, _literal
 
@@ -120,6 +121,19 @@ def parse_bundle(source, namespace, content, input_format):
     for record in bundle["records"]:
         if record["identity"]["record_type"] != "agenda_item":
             continue
+        if input_format == CONTENT:
+            for field in record["normalized"]["content_fields"]:
+                if (field.get("ControlType") != 11 or field.get("HasData") is not True
+                        or not isinstance(field.get("Content"), str)):
+                    continue
+                html = Page()
+                html.feed(field["Content"])
+                if text := html.root.text():
+                    record["text"].append({"field": "content_fields.Content", "text": text,
+                        "citation_url": source.url, "completeness": "supplied_rich_text_field_only",
+                        "provenance": {"method": "simbli_public_item_rich_text",
+                            "source_field": field.get("FieldName"), "source_control_type": 11,
+                            "capture_sha256": bundle["capture"]["sha256"]}})
         parent = {"provider": source.provider, "namespace": namespace, "record_type": "meeting",
                   "external_id": meeting, "parent": None}
         record["identity"]["parent"] = parent

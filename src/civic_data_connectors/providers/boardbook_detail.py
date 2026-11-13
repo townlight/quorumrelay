@@ -105,6 +105,12 @@ def parse_bundle(source, namespace, content):
         return identities[identity]
 
     for identity, record in items.items():
+        record["text"] = [{"field": "source_fields." + field, "text": text,
+            "citation_url": source.url, "completeness": "supplied_rendered_field_only",
+            "provenance": {"method": "boardbook_public_agenda_field", "source_field": field,
+                           "capture_sha256": bundle["capture"]["sha256"]}}
+            for field in ("Description", "Discussion")
+            for text in record["normalized"]["source_fields"][field] if text]
         record["identity"] = item_identity(identity)
         parent = record["identity"]["parent"]
         record["relationships"].append({"relation": "meeting", "identity": dict(meeting_identity)})

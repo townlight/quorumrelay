@@ -29,6 +29,8 @@ def test_saved_cover_sheet_native_item_parent_text_search_and_export():
     assert value["meeting_date"] == "2026-10-29"
     assert value["title"] == "Personnel Actions (Roll Call - Majority of Full Board Required)"
     assert "collective bargaining agreements" in value["text"]
+    assert record["text"][0]["text"] == value["text"]
+    assert record["text"][0]["provenance"]["capture_sha256"] == EVIDENCE["sha256"]
     assert len(value["documents"]) == 1
     assert value["documents"][0]["external_id"] == "11729"
     assert value["documents"][0]["agenda_item_external_id"] == "12406"
@@ -94,6 +96,8 @@ def test_saved_meeting_view_exact_context_native_children_text_search_export():
     assert all(r["normalized"]["meeting_external_id"] == "996" for r in items)
     assert all(r["normalized"]["documents"][0]["kind"] == "linked_source" for r in items)
     assert "votes" not in value and "motions" not in value
+    assert meeting["text"][0]["text"] == value["text"]
+    assert meeting["text"][0]["provenance"]["capture_sha256"] == MEETING_EVIDENCE["sha256"]
     assert base64.b64decode(result.data["capture"]["content_base64"]) == MEETING_CAPTURE
     found = engine.execute("search", {"bundle": result.data, "query": {"record_types": ["meeting"], "terms": ["Snow Plowing"]}})
     assert len(found.data["hits"]) == 1, found.public_dict()

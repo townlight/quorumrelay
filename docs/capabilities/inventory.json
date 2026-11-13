@@ -6009,6 +6009,22 @@
           "limits": "One captured Agenda template; no Minutes rendering or universal deployment/catalog claim; Only supplied native links become items; unlinked agenda headings/content retained in whole meeting text without inferred native identities/hierarchy; No neighboring prose assigned as item description and no motion/vote/attendance actions inferred; Cover-sheet locators are not fetched documents; automatic detail crawling/arbitrary-ID fetch_record not introduced; Local source only; frozen dev8/1.8.5 unchanged",
           "receipt_path": "docs/verification/novus-public-meetingview-2026-11-12.json",
           "receipt_sha256": "48cb86b702f268361f1f26d9a031edeb70c6156ddb40120aa78a7e83fd60e461"
+        },
+        {
+          "id": "source-text-reference-clients-2026-11-12-novusagenda",
+          "url": "https://github.com/townlight/quorumrelay",
+          "title": "Capture-bound supplied text and current-source reference-client execution",
+          "kind": "source",
+          "observed": "Six affected source cases passed; actual Brief and TownRecord source-only persistence/retry/search/export/reopen passed with separately recorded limits and loaded module hashes.",
+          "observation_date": "2026-11-12",
+          "access_scope": "offline_synthetic_provider_execution_through_actual_application_source",
+          "proof_level": "scoped_synthetic_execution_not_installed_frozen_equivalence",
+          "findings": [
+            "Rendered cover-sheet and MeetingView content now emitted as capture-bound supplied TextSegments, not only normalized.text; actual TownRecord source workflow executed this path."
+          ],
+          "limits": "Synthetic provider transport through actual current source application paths; no provider mutations; Existing configured-capture partial and unavailable-media outcomes retained; Supplied HTML/rich text is source content, not OCR/ASR or inferred votes/motions/attendance; Townlight/TownReporter current-source candidate acceptance remains separate; frozen original proof reused only where unchanged; No package build/install/signing/Sandbox restart/frozen artifact/publication",
+          "receipt_path": "docs/verification/source-text-reference-clients-2026-11-12.json",
+          "receipt_sha256": "e63ea7c82cab254385469e3965f4d052e368120de62bb4f8d853cd625504cd16"
         }
       ],
       "tenants": [
@@ -6110,7 +6126,8 @@
           "evidence_ids": [
             "novusagenda-baseline",
             "quorumrelay-shared-core-operations",
-            "novus-public-meetingview-2026-11-12"
+            "novus-public-meetingview-2026-11-12",
+            "source-text-reference-clients-2026-11-12-novusagenda"
           ],
           "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup.",
           "dependencies": [
@@ -6160,7 +6177,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "novusagenda-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "source-text-reference-clients-2026-11-12-novusagenda"
           ],
           "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [
@@ -9288,6 +9306,22 @@
           "receipt_sha256": "c0697a4bd7977b4e6fdc6092d872e6263360d5ad29c5fc3d79d91c15451c740d",
           "observation_date": "2026-11-12",
           "proof_level": "synthetic_engine_execution_and_offline_actual_capture_not_live_download_acceptance"
+        },
+        {
+          "id": "source-text-reference-clients-2026-11-12-boardbook",
+          "url": "https://github.com/townlight/quorumrelay",
+          "title": "Capture-bound supplied text and current-source reference-client execution",
+          "kind": "source",
+          "observed": "Six affected source cases passed; actual Brief and TownRecord source-only persistence/retry/search/export/reopen passed with separately recorded limits and loaded module hashes.",
+          "observation_date": "2026-11-12",
+          "access_scope": "offline_synthetic_provider_execution_through_actual_application_source",
+          "proof_level": "scoped_synthetic_execution_not_installed_frozen_equivalence",
+          "findings": [
+            "Only native item Description/Discussion source fields become text segments."
+          ],
+          "limits": "Synthetic provider transport through actual current source application paths; no provider mutations; Existing configured-capture partial and unavailable-media outcomes retained; Supplied HTML/rich text is source content, not OCR/ASR or inferred votes/motions/attendance; Townlight/TownReporter current-source candidate acceptance remains separate; frozen original proof reused only where unchanged; No package build/install/signing/Sandbox restart/frozen artifact/publication",
+          "receipt_path": "docs/verification/source-text-reference-clients-2026-11-12.json",
+          "receipt_sha256": "e63ea7c82cab254385469e3965f4d052e368120de62bb4f8d853cd625504cd16"
         }
       ],
       "tenants": [
@@ -9378,7 +9412,8 @@
           "evidence_ids": [
             "boardbook-baseline",
             "quorumrelay-shared-core-operations",
-            "boardbook-rendered-agenda-synthetic"
+            "boardbook-rendered-agenda-synthetic",
+            "source-text-reference-clients-2026-11-12-boardbook"
           ],
           "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive boardbook-public-agenda-html accepts saved/configured public Agenda HTML with native item parents and item-bound document IDs; exact raw capture retained. Viewer download semantics and full catalog remain unverified.",
           "dependencies": [
@@ -9423,7 +9458,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "boardbook-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "source-text-reference-clients-2026-11-12-boardbook"
           ],
           "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [
@@ -10648,6 +10684,22 @@
           "limits": "Public endpoint probes are not integrated-engine live reads. Engine mapping and transfer were exercised synthetically.; No aggregate agenda/minutes PDF generation, native search, recursive document catalog, calendar completeness or write contract claimed.; Opaque request and attachment/session values are excluded from this receipt; exact responses remain private local raw captures.",
           "receipt_path": "docs/verification/simbli-item-content-2026-11-12.json",
           "receipt_sha256": "117a4d7d6380d224bca337a3a4e43e9b0e9acc640c8ce7e3a292b1bb6207be7f"
+        },
+        {
+          "id": "source-text-reference-clients-2026-11-12-simbli",
+          "url": "https://github.com/townlight/quorumrelay",
+          "title": "Capture-bound supplied text and current-source reference-client execution",
+          "kind": "source",
+          "observed": "Six affected source cases passed; actual Brief and TownRecord source-only persistence/retry/search/export/reopen passed with separately recorded limits and loaded module hashes.",
+          "observation_date": "2026-11-12",
+          "access_scope": "offline_synthetic_provider_execution_through_actual_application_source",
+          "proof_level": "scoped_synthetic_execution_not_installed_frozen_equivalence",
+          "findings": [
+            "Only ControlType11/HasData=true/string Content becomes parsed rich-text segment; raw unknown controls preserved."
+          ],
+          "limits": "Synthetic provider transport through actual current source application paths; no provider mutations; Existing configured-capture partial and unavailable-media outcomes retained; Supplied HTML/rich text is source content, not OCR/ASR or inferred votes/motions/attendance; Townlight/TownReporter current-source candidate acceptance remains separate; frozen original proof reused only where unchanged; No package build/install/signing/Sandbox restart/frozen artifact/publication",
+          "receipt_path": "docs/verification/source-text-reference-clients-2026-11-12.json",
+          "receipt_sha256": "e63ea7c82cab254385469e3965f4d052e368120de62bb4f8d853cd625504cd16"
         }
       ],
       "tenants": [
@@ -10736,7 +10788,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "simbli-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "source-text-reference-clients-2026-11-12-simbli"
           ],
           "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
           "dependencies": [
@@ -10783,7 +10836,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "simbli-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "source-text-reference-clients-2026-11-12-simbli"
           ],
           "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [
@@ -11951,6 +12005,22 @@
           "limits": "One captured public template; no universal deployment or complete archive guarantee; Documents remain locators; attachment transfer uses synthetic PDF, no actual downloaded bytes claim; Legislative files have meeting parent only; no inferred agenda-item IDs or document-to-file parents; No staff action/script execution, credential acquisition, vendor mutation, frozen rebuild or publication",
           "receipt_path": "docs/verification/iqm2-public-detail-2026-11-12.json",
           "receipt_sha256": "5b4ffa9e2438dfe99ebc3dfb68b522d9c5305635b20b01f598322f008dc8cbd6"
+        },
+        {
+          "id": "source-text-reference-clients-2026-11-12-iqm2",
+          "url": "https://github.com/townlight/quorumrelay",
+          "title": "Capture-bound supplied text and current-source reference-client execution",
+          "kind": "source",
+          "observed": "Six affected source cases passed; actual Brief and TownRecord source-only persistence/retry/search/export/reopen passed with separately recorded limits and loaded module hashes.",
+          "observation_date": "2026-11-12",
+          "access_scope": "offline_synthetic_provider_execution_through_actual_application_source",
+          "proof_level": "scoped_synthetic_execution_not_installed_frozen_equivalence",
+          "findings": [
+            "Selected public meeting detail text segment, not item-neighbor inference."
+          ],
+          "limits": "Synthetic provider transport through actual current source application paths; no provider mutations; Existing configured-capture partial and unavailable-media outcomes retained; Supplied HTML/rich text is source content, not OCR/ASR or inferred votes/motions/attendance; Townlight/TownReporter current-source candidate acceptance remains separate; frozen original proof reused only where unchanged; No package build/install/signing/Sandbox restart/frozen artifact/publication",
+          "receipt_path": "docs/verification/source-text-reference-clients-2026-11-12.json",
+          "receipt_sha256": "e63ea7c82cab254385469e3965f4d052e368120de62bb4f8d853cd625504cd16"
         }
       ],
       "tenants": [
@@ -12040,7 +12110,8 @@
           "evidence_ids": [
             "iqm2-baseline",
             "quorumrelay-shared-core-operations",
-            "iqm2-public-detail-2026-11-12"
+            "iqm2-public-detail-2026-11-12",
+            "source-text-reference-clients-2026-11-12-iqm2"
           ],
           "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim.",
           "dependencies": [
@@ -12088,7 +12159,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "iqm2-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "source-text-reference-clients-2026-11-12-iqm2"
           ],
           "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [
@@ -20870,6 +20942,22 @@
           "limits": "Static HTML body text only, no CSS/script/rendered accessibility claim; No inferred governing body, agenda hierarchy, motions or votes from minutes prose; No new document download, native search semantics or provider write claim; Local source only, frozen dev8/1.8.5 unchanged",
           "receipt_path": "docs/verification/clerkbase-document-text-2026-11-12.json",
           "receipt_sha256": "f377dd69a95d2a9b326ffffe4e1898980b164d30051c40ec6ee5f21f43d4257e"
+        },
+        {
+          "id": "source-text-reference-clients-2026-11-12-clerkbase",
+          "url": "https://github.com/townlight/quorumrelay",
+          "title": "Capture-bound supplied text and current-source reference-client execution",
+          "kind": "source",
+          "observed": "Six affected source cases passed; actual Brief and TownRecord source-only persistence/retry/search/export/reopen passed with separately recorded limits and loaded module hashes.",
+          "observation_date": "2026-11-12",
+          "access_scope": "offline_synthetic_provider_execution_through_actual_application_source",
+          "proof_level": "scoped_synthetic_execution_not_installed_frozen_equivalence",
+          "findings": [
+            "Existing ClerkBase text segment path exercised through actual Brief source."
+          ],
+          "limits": "Synthetic provider transport through actual current source application paths; no provider mutations; Existing configured-capture partial and unavailable-media outcomes retained; Supplied HTML/rich text is source content, not OCR/ASR or inferred votes/motions/attendance; Townlight/TownReporter current-source candidate acceptance remains separate; frozen original proof reused only where unchanged; No package build/install/signing/Sandbox restart/frozen artifact/publication",
+          "receipt_path": "docs/verification/source-text-reference-clients-2026-11-12.json",
+          "receipt_sha256": "e63ea7c82cab254385469e3965f4d052e368120de62bb4f8d853cd625504cd16"
         }
       ],
       "tenants": [
@@ -20961,7 +21049,8 @@
           "evidence_ids": [
             "clerkbase-baseline",
             "quorumrelay-shared-core-operations",
-            "clerkbase-document-text-2026-11-12"
+            "clerkbase-document-text-2026-11-12",
+            "source-text-reference-clients-2026-11-12-clerkbase"
           ],
           "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Existing clerkbase-document-html additionally retains static document body/paragraph text with capture provenance; four scoped synthetic cases cover saved/default configured reads, local text search/export, revision hashing and exclusion guards without changing original output.",
           "dependencies": [
@@ -21015,7 +21104,8 @@
           "evidence_ids": [
             "clerkbase-baseline",
             "quorumrelay-shared-core-operations",
-            "clerkbase-document-text-2026-11-12"
+            "clerkbase-document-text-2026-11-12",
+            "source-text-reference-clients-2026-11-12-clerkbase"
           ],
           "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Existing clerkbase-document-html additionally retains static document body/paragraph text with capture provenance; four scoped synthetic cases cover saved/default configured reads, local text search/export, revision hashing and exclusion guards without changing original output.",
           "dependencies": [
