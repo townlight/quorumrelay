@@ -119,7 +119,8 @@ def test_system_document_locator_uses_published_client_type_and_native_id_only()
     assert document["url"] == "https://reno.primegov.com/api/portal/DownloadSystemItemAttachedDocToBrowser/" + str(actual["id"])
     assert document["availability"] == "vendor_client_locator_not_fetched"
     assert selected["identity"]["parent"]["external_id"] == str(actual["meetingId"])
-    assert all("documents" not in row["normalized"] for row in records if row["original"] != actual)
+    assert all("documents" not in row["normalized"] for row in records
+               if row["original"].get("id") in {-1, 123457, 10**19})
     assert not result.coverage["source_complete"] and not result.coverage["catalog_complete"]
     assert result.coverage["unmapped_rows_omitted"] == 1  # bool is not a native integer ID
     alternate = request(max_records=200)
@@ -128,3 +129,25 @@ def test_system_document_locator_uses_published_client_type_and_native_id_only()
     found = next(row for row in other.data["bundle"]["records"] if row["original"] == actual)
     assert found["normalized"]["documents"][0]["url"].startswith("https://example.primegov.com/")
     assert found["identity"]["namespace"] != selected["identity"]["namespace"]
+
+
+def test_previous_identity_contract_checkpoint_requires_restart(monkeypatch):
+    import civic_data_connectors.providers.primegov_search as implementation
+
+    transport = Transport()
+    engine = create_engine(provider_transport=transport)
+    current_hash = implementation.canonical_hash
+
+    def previous_contract(value):
+        if isinstance(value, dict) and value.get("contract") == "primegov-public-search/v2":
+            value = {**value, "contract": "primegov-public-search/v1"}
+        return current_hash(value)
+
+    with monkeypatch.context() as old:
+        old.setattr(implementation, "canonical_hash", previous_contract)
+        token = engine.execute("search", request(max_records=1)).coverage["checkpoint"]
+    assert token
+    calls = len(transport.calls)
+    resumed = engine.execute("search", request(max_records=1, checkpoint=token))
+    assert resumed.status == "failed"
+    assert len(transport.calls) == calls

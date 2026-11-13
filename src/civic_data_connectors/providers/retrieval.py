@@ -285,13 +285,20 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             remaining_transfer -= resolution["viewer_capture"]["byte_length"]
             if remaining_transfer <= 0:
                 raise ValueError("The document viewer exhausted the transfer budget.")
-        if context.check_cancelled():
-            return OperationResult("cancelled", {"record": record, "bundle": bundle},
-                                   operation_id=context.operation_id)
-        response = transport.request(
-            transfer_url, byte_limit=remaining_transfer,
-            deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=allowed,
-            **({"allow_redirects": False} if boardable_viewer or source.provider == "onbase" else {}))
+        primegov_selected = (source.provider == "primegov" and kind == "documents"
+                             and (record.get("original") or {}).get("info") == "Attachment")
+        if primegov_selected:
+            from .primegov_documents import resolve_document
+            response, resolution = resolve_document(source, url, record, document, bounds, context, transport,
+                                                    deadline, _download_origins, supplemental)
+        else:
+            if context.check_cancelled():
+                return OperationResult("cancelled", {"record": record, "bundle": bundle},
+                                       operation_id=context.operation_id)
+            response = transport.request(
+                transfer_url, byte_limit=remaining_transfer,
+                deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=allowed,
+                **({"allow_redirects": False} if boardable_viewer or source.provider == "onbase" else {}))
         if response.status != 200:
             raise ValueError("The captured attachment did not return HTTP 200.")
         if (source.provider == "onbase" and kind == "documents" and not response.content.startswith(b"%PDF-")
@@ -303,7 +310,7 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             urlsplit(transfer_url).path.lower().endswith(".pdf") or
             (boardable_viewer and str(document.get("title", "")).lower().endswith(".pdf")) or
             response.content_type.split(";", 1)[0].strip().lower() == "application/pdf"))
-        if ((resolution and not boardable_viewer) or pdf_expected) and not response.content.startswith(b"%PDF-"):
+        if ((resolution and not boardable_viewer and not primegov_selected) or pdf_expected) and not response.content.startswith(b"%PDF-"):
             raise ValueError("The supplied PDF download did not return PDF bytes.")
         if boardable_viewer and (response.content_type.split(";", 1)[0].strip().lower() in {
                 "text/html", "application/xhtml+xml"} or response.content.lstrip().lower().startswith(
@@ -311,18 +318,19 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             raise ValueError("The document download returned another HTML viewer, not original file bytes.")
         if len(response.content) > remaining_transfer:
             raise ValueError("The document exceeds the configured transfer byte limit.")
-        if _origin(response.url) not in allowed:
+        if not primegov_selected and _origin(response.url) not in allowed:
             raise ValueError("The document left its configured download origins.")
         return OperationResult("completed", {
             **retained_data(), "attachment": {
-                "citation_url": document.get("citation_url") or document.get("url") or url,
+                "citation_url": document.get("citation_url") or (record.get("normalized", {}).get("url") if primegov_selected else None) or document.get("url") or url,
                 "selected_url_field": url_field, "content_type": response.content_type,
                 "byte_length": len(response.content), "sha256": hashlib.sha256(response.content).hexdigest(),
                 "content_base64": base64.b64encode(response.content).decode("ascii"),
                 "text_availability": "not_extracted",
                 **({"resolution": resolution} if resolution else {}),
             },
-        }, coverage={"sources": [source.public_dict()], "failures": [], "unavailable_attachments": []},
+        }, coverage={"sources": [source.public_dict()], "failures": [], "unavailable_attachments": [],
+                     **({"catalog_complete": False, "source_complete": False} if primegov_selected else {})},
                                operation_id=context.operation_id)
     except InterruptedError:
         return OperationResult("cancelled", {**retained_data(), "attachment": None},

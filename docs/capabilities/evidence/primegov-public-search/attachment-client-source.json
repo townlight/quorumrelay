@@ -1,0 +1,143 @@
+{
+  "source_url": "https://reno.primegov.com/Scripts/Custom/Public/_Search.js",
+  "source_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\files-pasted-by-the-user-read\\outputs\\primegov-followup-20261112\\search.js",
+  "source_bytes": 40780,
+  "source_sha256": "59d8325d7adcff9451b9140acd3fe4acf1dcbecaa2b5a7ae3c1d80d63b0e6b70",
+  "extract_file": "attachment-client-extract.txt",
+  "extract_bytes": 12714,
+  "extract_sha256": "238d59c733abe2c9b5cf3ca9468a316242df6391f2f1a063908163344dfc0388",
+  "extract_method": "Concatenate the listed source slices byte-for-byte in listed order; original source line endings and source bytes are retained; no labels or separator bytes are inserted.",
+  "source_slices": [
+    {
+      "name": "meeting_result_grouping",
+      "source_lines_1_based_inclusive": {
+        "start": 239,
+        "end": 269
+      },
+      "extract_bytes_0_based_start_inclusive_end_exclusive": {
+        "start": 0,
+        "end": 2118
+      }
+    },
+    {
+      "name": "meeting_parent_table_binding",
+      "source_lines_1_based_inclusive": {
+        "start": 293,
+        "end": 296
+      },
+      "extract_bytes_0_based_start_inclusive_end_exclusive": {
+        "start": 2118,
+        "end": 2367
+      }
+    },
+    {
+      "name": "table_parent_parameter",
+      "source_lines_1_based_inclusive": {
+        "start": 371,
+        "end": 371
+      },
+      "extract_bytes_0_based_start_inclusive_end_exclusive": {
+        "start": 2367,
+        "end": 2435
+      }
+    },
+    {
+      "name": "row_id_and_type_dispatch",
+      "source_lines_1_based_inclusive": {
+        "start": 428,
+        "end": 431
+      },
+      "extract_bytes_0_based_start_inclusive_end_exclusive": {
+        "start": 2435,
+        "end": 2576
+      }
+    },
+    {
+      "name": "type_1_system_item_attachment",
+      "source_lines_1_based_inclusive": {
+        "start": 459,
+        "end": 497
+      },
+      "extract_bytes_0_based_start_inclusive_end_exclusive": {
+        "start": 2576,
+        "end": 6291
+      }
+    },
+    {
+      "name": "type_2_system_document",
+      "source_lines_1_based_inclusive": {
+        "start": 498,
+        "end": 535
+      },
+      "extract_bytes_0_based_start_inclusive_end_exclusive": {
+        "start": 6291,
+        "end": 9933
+      }
+    },
+    {
+      "name": "type_3_section_and_type_4_compiled_document",
+      "source_lines_1_based_inclusive": {
+        "start": 536,
+        "end": 551
+      },
+      "extract_bytes_0_based_start_inclusive_end_exclusive": {
+        "start": 9933,
+        "end": 11819
+      }
+    },
+    {
+      "name": "type_1_and_type_4_download_helpers",
+      "source_lines_1_based_inclusive": {
+        "start": 791,
+        "end": 815
+      },
+      "extract_bytes_0_based_start_inclusive_end_exclusive": {
+        "start": 11819,
+        "end": 12714
+      }
+    }
+  ],
+  "client_contract": {
+    "result_parent_binding": "Renderer input rows are grouped on result.meetingId; that grouped meetingId is passed to createSearchMeetingTable and captured by the row renderer. Type 3 uses it in its direct download URL.",
+    "type_1_fields": [
+      "row.id",
+      "row.isWordDocument",
+      "row.systemItemUUId",
+      "row.systemItemIsPublic",
+      "row.systemItemId",
+      "row.itemsSearchResultsDefaultLinkOnMeetingPortal"
+    ],
+    "type_1_download": {
+      "request": "$.getJSON GET /api/systemitemattachment/GetPublicPdfDownloadUrl/{row.id}",
+      "callback": "window.location = data"
+    },
+    "type_2_fields": [
+      "row.id",
+      "row.isWordDocument",
+      "row.systemItemUUId",
+      "row.systemItemIsPublic",
+      "row.systemItemId",
+      "row.itemsSearchResultsDefaultLinkOnMeetingPortal"
+    ],
+    "type_2_download": "Direct link /api/portal/DownloadSystemItemAttachedDocToBrowser/{row.id}; optional preview /viewer/preview?id={row.id}&type=5.",
+    "type_3_fields": [
+      "row.id",
+      "row.isWordDocument",
+      "grouped meetingId"
+    ],
+    "type_3_download": "Direct target=_blank link /api/meetingSectionAttachment/DownloadPublicPdf?id={row.id}&meetingId={grouped meetingId}; optional preview /viewer/preview?id={row.id}&type=4.",
+    "type_4_fields": [
+      "row.id",
+      "row.compileOutputType",
+      "row.isWordDocument"
+    ],
+    "type_4_download": "downloadCompiledMeetingDoc(row.id, row.compileOutputType); outputType == 3 opens /Portal/Meeting?compiledMeetingDocumentFileId={row.id}; otherwise $.getJSON GET /api/Meeting/getcompiledfiledownloadurl?compiledFileId={row.id}.",
+    "type_4_preview": "/viewer/preview?id={row.id}&type=3 when row.isWordDocument is false."
+  },
+  "response_string_inference": "Both $.getJSON callbacks assign callback data directly to window.location. This supports the inference that the JSON value is a URL string; the captured client does not establish the server response schema independently.",
+  "limits": [
+    "The script specifies no request body for either $.getJSON resolver call.",
+    "Direct href/window.open navigation is shown by the client; server response MIME, redirects, status semantics, and download authorization are not established by these slices.",
+    "No network request or JavaScript execution is part of this evidence."
+  ]
+}

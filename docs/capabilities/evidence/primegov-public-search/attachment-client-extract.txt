@@ -1,0 +1,158 @@
+            results.forEach(function (result) {
+                if (meetingList["meeting-" + result.meetingId] == null) {
+                    meetingList["meeting-" + result.meetingId] = {};
+                    meetingList["meeting-" + result.meetingId].meetingTitle = result.meetingTitle;
+                    meetingList["meeting-" + result.meetingId].meetingId = result.meetingId;
+                    meetingList["meeting-" + result.meetingId].meetingDateDisplay = result.meetingDateDisplay;
+                    meetingList["meeting-" + result.meetingId].allowPublicSpeakers = result.allowPublicSpeakers;
+                    meetingList["meeting-" + result.meetingId].allowPublicComment = result.allowPublicComment;
+                    meetingList["meeting-" + result.meetingId].documentList = result.documentList;
+                    meetingList["meeting-" + result.meetingId].data = [];
+                } else {
+                    meetingList["meeting-" + result.meetingId].allowPublicSpeakers =
+                        meetingList["meeting-" + result.meetingId].allowPublicSpeakers || result.allowPublicSpeakers;
+                    meetingList["meeting-" + result.meetingId].allowPublicComment =
+                        meetingList["meeting-" + result.meetingId].allowPublicComment || result.allowPublicComment;
+                }
+
+                // search returns results for matches on meeting, we don't want those results in the accordion datatable with items and attachments.
+                if (result.info != "Meeting") {
+                    meetingList["meeting-" + result.meetingId].data.push(result);
+                }
+            });
+
+            for (var meetingsId in meetingList) {
+                var row = meetingList[meetingsId];
+                let meetingId = row.meetingId;
+                var meetingTitle = row.meetingTitle;
+                var meetingDateDisplay = row.meetingDateDisplay;
+                var allowPublicSpeakers = row.allowPublicSpeakers;
+                var allowPublicComment = row.allowPublicComment;
+                let data = row.data;
+                if (data.length > 0) {
+                    $('#meetingResult' + meetingId).click(function () { 
+                        createSearchMeetingTable("#table-search-" + meetingId + " table", data, meetingId); 
+                    });
+    function createSearchMeetingTable(selector, data, meetingId) {
+                    var attachmentID = row.id;
+                    var subscriptionString = '';
+
+                    switch (row.type) {
+                        case 1:
+                            //System Item Attachment
+                            var str = '<a class="download_attachment" title="' + _Common.DownloadAttachment + '" href="javascript: downloadAttachmentAsPdf(' + attachmentID + ')" aria-label="' + _Common.DownloadAttachment + '"><span class="glyphicon iconColour glyphicon-download"></span></a>';
+
+                            if (!row.isWordDocument) {
+                                str += ' ';
+                                str += '<a class="search_view_attachment " title="' + _Common.ViewAttachment + '" target="_blank" href="/viewer/preview?id=' + attachmentID + '&type=2" aria-label="' + _Common.ViewItemDetails + ' - ' + _Common.NewWindow + '"><span class="glyphicon iconColour glyphicon-eye-open"></span></a>';
+                            }
+
+                            str += ' ';
+
+                            if (row.itemsSearchResultsDefaultLinkOnMeetingPortal == "/portal/item/" && !isNullOrEmpty(row.systemItemUUId)) {
+                                str += `<a title="${_Common.ViewItemDetails}" target="_blank" href="${row.itemsSearchResultsDefaultLinkOnMeetingPortal}?systemItemId=${row.systemItemUUId}" aria-label="${_Common.ViewItemDetails} - ${_Common.NewWindow}">` +
+                                    `<span class="glyphicon iconColour glyphicon-info-sign" style="top:2px!important"></span>` +
+                                    `</a>`;
+                            }
+                            else if (!isNullOrEmpty(row.systemItemUUId) && row.systemItemIsPublic == true) {
+                                str += `<a title="${_Common.ViewItemDetails}" target="_blank" href="${row.itemsSearchResultsDefaultLinkOnMeetingPortal}${row.systemItemId}" aria-label="${_Common.ViewItemDetails} - ${_Common.NewWindow}">` +
+                                    `<span class="glyphicon iconColour glyphicon-info-sign" style="top:2px!important"></span>` +
+                                    `</a>`;
+                            }
+                            else if ((!isNullOrEmpty(row.systemItemUUId) || isNullOrEmpty(row.systemItemUUId)) && row.systemItemIsPublic == false) {
+                                str += `<span title="${_Common.ViewItemNoDetails}" aria-label="${_Common.ViewItemNoDetails}" id="noDetailsContainer_${row.id}" class="noDetailsContainer">` +
+                                    `<span class="glyphicon noDetailsIconColour glyphicon-info-sign" style="top:2px!important"></span>` +
+                                    `</span>` +
+                                    `<div class="noDetailsTooltip" id="noDetailsToolTip_${row.id}">` +
+                                    `<span class="noDetailsTooltipText" id="noDetailsTooltipText_${row.id}">${_Common.ViewItemNoDetails}</span>` +
+                                    `</div>`;
+                            }
+                            else {
+                                str += `<span title="${_Common.ViewItemNoDetails}" aria-label="${_Common.ViewItemNoDetails}" id="noDetailsContainer_${row.id}" class="noDetailsContainer">` +
+                                    `<span class="glyphicon noDetailsIconColour glyphicon-info-sign" style="top:2px!important"></span>` +
+                                    `</span>` +
+                                    `<div class="noDetailsTooltip" id="noDetailsToolTip_${row.id}">` +
+                                    `<span class="noDetailsTooltipText" id="noDetailsTooltipText_${row.id}">${_Common.ViewItemNoDetails}</span>` +
+                                    `</div>`;
+                            }
+
+                            return subscriptionString + str;
+                        case 2:
+                            //System Document
+                            var str = '<a class="download_attachment" title="' + _Common.DownloadAttachment + '" href="/api/portal/DownloadSystemItemAttachedDocToBrowser/' + attachmentID + '" aria-label="' + _Common.DownloadAttachment + '"><span class="glyphicon iconColour glyphicon-download"></span></a>';
+                            if (!row.isWordDocument) {
+                                str += ' ';
+                                str += '<a class="search_view_attachment " title="' + _Common.ViewAttachment + '" target="_blank" href="/viewer/preview?id=' + attachmentID + '&type=5" aria-label="' + _Common.ViewItemDetails + ' - ' + _Common.NewWindow + '"><span class="glyphicon iconColour glyphicon-eye-open"></span></a>';
+                            }
+
+                            str += ' ';
+
+                            if (row.itemsSearchResultsDefaultLinkOnMeetingPortal == "/portal/item/" && !isNullOrEmpty(row.systemItemUUId)) {
+                                str += `<a title="${_Common.ViewItemDetails}" target="_blank" href="${row.itemsSearchResultsDefaultLinkOnMeetingPortal}?systemItemId=${row.systemItemUUId}" aria-label="${_Common.ViewItemDetails} - ${_Common.NewWindow}">` +
+                                    `<span class="glyphicon iconColour glyphicon-info-sign"></span>` +
+                                    `</a>`;
+                            }
+                            else if (!isNullOrEmpty(row.systemItemUUId) && row.systemItemIsPublic == true) {
+                                str += `<a title="${_Common.ViewItemDetails}" target="_blank" href="${row.itemsSearchResultsDefaultLinkOnMeetingPortal}${row.systemItemId}" aria-label="${_Common.ViewItemDetails} - ${_Common.NewWindow}">` +
+                                    `<span class="glyphicon iconColour glyphicon-info-sign" style="top:2px!important"></span>` +
+                                    `</a>`;
+                            }
+                            else if ((!isNullOrEmpty(row.systemItemUUId) || isNullOrEmpty(row.systemItemUUId)) && row.systemItemIsPublic == false) {
+                                str += `<span title="${_Common.ViewItemNoDetails}" aria-label="${_Common.ViewItemNoDetails}" id="noDetailsContainer_${row.id}" class="noDetailsContainer">` +
+                                    `<span class="glyphicon noDetailsIconColour glyphicon-info-sign"></span>` +
+                                    `</span>` +
+                                    `<div class="noDetailsTooltip" id="noDetailsToolTip_${row.id}">` +
+                                    `<span class="noDetailsTooltipText" id="noDetailsTooltipText_${row.id}">${_Common.ViewItemNoDetails}</span>` +
+                                    `</div>`;
+                            }
+                            else {
+                                str += `<span title="${_Common.ViewItemNoDetails}" aria-label="${_Common.ViewItemNoDetails}" id="noDetailsContainer_${row.id}" class="noDetailsContainer">` +
+                                    `<span class="glyphicon noDetailsIconColour glyphicon-info-sign"></span>` +
+                                    `</span>` +
+                                    `<div class="noDetailsTooltip" id="noDetailsToolTip_${row.id}">` +
+                                    `<span class="noDetailsTooltipText" id="noDetailsTooltipText_${row.id}">${_Common.ViewItemNoDetails}</span>` +
+                                    `</div>`;
+                            }
+
+                            return subscriptionString + str;
+                        case 3:
+                            //Section Attachment
+                            var str = '<a class="download_attachment" title="' + _Common.DownloadAttachment + '" target="_blank" href="/api/meetingSectionAttachment/DownloadPublicPdf?id=' + attachmentID + '&meetingId=' + meetingId + '" aria-label="' + _Common.DownloadAttachment + '"><span class="glyphicon iconColour glyphicon - download"></span></a>';
+                            if (!row.isWordDocument) {
+                                str += ' ';
+                                str += '<a  title="' + _Common.ViewItemDetails + '" target="_blank" href="/viewer/preview?id=' + attachmentID + '&type=4" aria-label="' + _Common.ViewItemDetails + ' - ' + _Common.NewWindow + '"><span class="glyphicon iconColour glyphicon-eye-open"></span></a>';
+                            }
+                            return subscriptionString + str;
+                        case 4:
+                            //Compiled Document                            
+                            var str = '<a class="download_attachment" title="' + _Common.DownloadAttachment + '" href="javascript:downloadCompiledMeetingDoc(' + attachmentID + ',' + row.compileOutputType + ')" aria-label="' + _Common.DownloadAttachment + '"><span class="glyphicon iconColour glyphicon-download"></span></a>';
+                            if (!row.isWordDocument) {
+                                str += ' ';
+                                str += '<a class="search_view_attachment " title="' + _Common.ViewAttachment + '" target="_blank" href="/viewer/preview?id=' + attachmentID + '&type=3" aria-label="' + _Common.ViewItemDetails + ' - ' + _Common.NewWindow + '" ><span class="glyphicon iconColour glyphicon-eye-open"></span></a>';
+                            }
+                            return subscriptionString + str;
+function downloadAttachmentAsPdf(id) {
+    $.getJSON('/api/systemitemattachment/GetPublicPdfDownloadUrl/' + id, null, function (data) {
+        window.location = data;
+    })
+        .fail(function (jqXHR, status, error) {
+            alert('Error downloading attachment pdf.');
+        });
+}
+
+function downloadCompiledMeetingDoc(id, outputType) {
+    if (isOutputTypeHtml(outputType)) {
+        window.open("/Portal/Meeting?compiledMeetingDocumentFileId=" + id);
+    } else {
+        $.getJSON('/api/Meeting/getcompiledfiledownloadurl?compiledFileId=' + id, null, function (data) {
+            window.location = data;
+        })
+            .fail(function (jqXHR, status, error) {
+                handleError(_Common.Error + ':' + jqXHR.responseJSON.exceptionMessage, jqXHR);
+            });
+    }
+}
+
+function isOutputTypeHtml(outputType) {
+    return outputType == 3;
+}

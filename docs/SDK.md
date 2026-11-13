@@ -351,7 +351,7 @@ All account reads remain partial coverage: list pagination/end conditions and ac
 
 ## Bounded public native search
 
-The dev7 source candidate adds the verified public search forms for PrimeGov, eSCRIBE, Swagit, SuiteOne, CivicPlus Select, AgendaCenter, AgendaQuick, Utah, iQM2 and ClerkBase. These adapters apply only to their evidenced source routes/tenants; `providers` and the capability inventory distinguish them from the preserved saved-input formats. They submit the first term or phrase to the provider, then apply exact local matching to the returned metadata and explicitly supplied excerpts. Provider ranking/candidate selection is separate from the local match and is not a full-text or catalog-completeness promise. For a PrimeGov search result identified as a type-2 system document, the current source candidate also retains the public vendor-client download locator under `normalized.documents`; the locator is not fetched by search and its availability remains unverified. Other attachment types and authenticated Meeting API schemas are not implied.
+The dev7 source candidate adds the verified public search forms for PrimeGov, eSCRIBE, Swagit, SuiteOne, CivicPlus Select, AgendaCenter, AgendaQuick, Utah, iQM2 and ClerkBase. These adapters apply only to their evidenced source routes/tenants; `providers` and the capability inventory distinguish them from the preserved saved-input formats. They submit the first term or phrase to the provider, then apply exact local matching to the returned metadata and explicitly supplied excerpts. Provider ranking/candidate selection is separate from the local match and is not a full-text or catalog-completeness promise. Current PrimeGov source also declares the public client document branches below; search preserves locators without fetching their files. Authenticated Meeting API schemas remain unresolved.
 
 ```python
 result = engine.execute("search", {
@@ -363,6 +363,19 @@ result = engine.execute("search", {
 # Supply coverage.checkpoint in the next request's bounds, with the same
 # source/query/caller and current grants. Retain partial status and all errors.
 ```
+
+PrimeGov public search attachments can be explicitly retrieved with `engine.fetch_attachment(source, record, context=context)` after importing the search bundle into that engine's scoped storage. The configured source remains its HTTPS `public/portal` URL. The selected record must retain its original type, native document ID, meeting parent, namespace and declared document URL.
+
+| Vendor search type | Selected document behavior |
+|---|---|
+| 1, system-item attachment | Exact public PDF URL resolver, then a bounded PDF-byte fetch |
+| 2, system document | Exact public original-file route |
+| 3, section attachment | Exact public PDF route including its native meeting ID |
+| 4, compiled document | Exact file URL resolver for supplied numeric non-HTML output types; HTML type 3 and unknown output types remain unmapped |
+
+The captured client assigns each JSON resolver's callback value to `window.location`. Accepting a JSON URL string is an explicit inference from that code, verified with synthetic responses; it is not an observed server response schema. Relative URL strings resolve against the configured public page. Every request rejects redirects and obeys the deadline, parser/request and cumulative transfer limits. Another download origin requires explicit `download_origins`. Received bounded resolver bytes survive subsequent failures; attachment citations use the durable meeting page rather than a resolved transient file URL. PDF signatures establish supplied byte shape, not rendering or live availability.
+
+Types 1, 3 and 4 now use identity external IDs `type:<type>:<native-id>` to distinguish resources with overlapping numeric IDs. Native IDs remain unchanged in original fields and document metadata, and the canonical meeting parent remains part of identity. Existing type-2 and all baseline identities are preserved. This corrects the unpublished source's previously unqualified generic search identities for types 1/3/4; already stored unqualified records are retained and are not automatically migrated or reconciled. Earlier public-search checkpoints must restart because their identity contract has changed. See [the selected-document receipt](verification/primegov-selected-documents-2026-11-13.json) for the executed scope.
 
 Date/body requirements are adapter-specific. Utah requires explicit dates and the configured public body for discovery; native search supports only its observed form. iQM2 rejects a body filter whose mapping is unverified. AgendaCenter and Boardable retain unknown bodies explicitly. AgendaQuick meeting rows and agenda items, iQM2 mixed result kinds, Select parents and related children, and ClerkBase supplied-URL document keys preserve their separate identities; consumers must not treat every result as a meeting.
 

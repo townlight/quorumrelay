@@ -58,12 +58,11 @@ def _rows(original, source):
                       "meeting_date": day, "meeting_title": raw.get("meetingTitle"),
                       "source_date": raw["meetingDate"], "time_zone_status": "unknown",
                       "url": _origin(source.url) + "/Portal/Meeting?" + urlencode({"meetingId": raw["meetingId"]})}
-        if (kind == "document" and type(raw.get("type")) is int and raw["type"] == 2
-                and 0 < raw["id"] <= 9999999999999999999):
-            normalized["documents"] = [{"kind": "system_document", "external_id": str(raw["id"]),
-                "title": raw.get("title"), "url": _origin(source.url) +
-                "/api/portal/DownloadSystemItemAttachedDocToBrowser/" + str(raw["id"]),
-                "availability": "vendor_client_locator_not_fetched"}]
+        if kind == "document":
+            from .primegov_documents import declared_document
+            document = declared_document(source, raw, normalized["url"])
+            if document:
+                normalized["documents"] = [document]
         if isinstance(excerpt, str):
             normalized["search_excerpt"] = "".join(_Excerpt(excerpt).parts)
         rows.append((normalized, raw, kind))
@@ -94,7 +93,7 @@ def native_search(engine, request, content, context, *, transport=None):
     if len(candidate.encode("utf-8")) > min(1024, bounds.parser_bytes):
         raise ValueError("The provider search expression exceeds its local bound.")
     binding = canonical_hash({"source": source.public_dict(), "query": asdict(query), "scope": context.scope,
-                              "contract": "primegov-public-search/v1"})
+                              "contract": "primegov-public-search/v2"})
     queue, seen = _resume(bounds.checkpoint, binding) if bounds.checkpoint else ([{"offset": 0}], set())
     if (len(queue) != 1 or set(queue[0]) - {"offset", "sha256"} or seen
             or type(queue[0].get("offset")) is not int or not 0 <= queue[0]["offset"] <= 10000):
@@ -138,6 +137,12 @@ def native_search(engine, request, content, context, *, transport=None):
         bundle = make_bundle(source, namespace, response.content, "primegov-search-json", rows[offset:end])
         bundle["capture"]["retrieval_url"] = url
         for record in bundle["records"]:
+            raw = record["original"]
+            if (record["identity"]["record_type"] == "document" and
+                    type(raw.get("type")) is int and raw["type"] in {1, 3, 4}):
+                record["identity"]["external_id"] = f"type:{raw['type']}:{raw['id']}"
+                record["identity"]["derivation"] = "provider_attachment_type_and_identifier"
+                record["identity"]["stability"] = "Provider attachment type and native ID within the meeting parent and configured namespace."
             if record["identity"]["record_type"] != "meeting":
                 record["identity"]["parent"] = {"provider": source.provider, "namespace": namespace,
                     "record_type": "meeting", "external_id": str(record["original"]["meetingId"])}

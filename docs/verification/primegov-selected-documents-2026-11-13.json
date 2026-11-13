@@ -1,0 +1,69 @@
+{
+  "scope": "Exact captured PrimeGov public client selected-document branches 1/2/3/4 with synthetic execution; not authenticated Meeting API or live file acceptance",
+  "base_commit": "41757e64bdafdda516db3707e39b30b52dd87267",
+  "files": {
+    "src/civic_data_connectors/providers/primegov_documents.py": {
+      "working_tree_sha256": "c8178958e721a51d03fe29987a34f78d8d43a29d6c5ad3d38a0f03fc6ea74480",
+      "canonical_lf_sha256": "41c6efaf29c0fcb73f96ec6e39a7a3100686467f56084eb73d8dc8bd978ae52a"
+    },
+    "src/civic_data_connectors/providers/primegov_search.py": {
+      "working_tree_sha256": "002d1edda83d9b76c183e59c0ce9dd2863ae0e21e6d999ad985f942843d771a2",
+      "canonical_lf_sha256": "2907a3fa200ed638d0b8d64caabd1784d7e1a2c296678697b995157995aa7729"
+    },
+    "src/civic_data_connectors/providers/retrieval.py": {
+      "working_tree_sha256": "56d52bcc9af0a1fcfe410f2ba017be423a8b3973a3f4e27ccbd85187daa0f51b",
+      "canonical_lf_sha256": "286df2ad502e932a0591b7d8ec0e53dddd9ff14e752ce67a5c8eca27e993a8ae"
+    },
+    "tests/test_primegov_documents.py": {
+      "working_tree_sha256": "b53e2801324d4f164176beb5cb76212a019a17995a0aa59a0b2c604b183702f8",
+      "canonical_lf_sha256": "dccb3eca544d44d3f504a1f5c76428340bf9108a60d5a169608385d36d7801cd"
+    },
+    "tests/test_primegov_native_search.py": {
+      "working_tree_sha256": "4c9030052fe5ca6028dc02eee87fbade98359b1f96a38fd0b7ae05fa4062aea6",
+      "canonical_lf_sha256": "028b24f4317693785be4f677072eef708c47100d048dc6868e86401ded6adbae"
+    },
+    "docs/capabilities/evidence/primegov-public-search/attachment-client-source.json": {
+      "working_tree_sha256": "21ddacd5d550510fecf631b88b574d0eb0d99e098212e6e4dbd72c705d999ee7",
+      "canonical_lf_sha256": "a30b3b22394fe44d17f395e21ce737ea1db43b7f97929b5aba21b0ad770c86e1"
+    },
+    "docs/capabilities/evidence/primegov-public-search/attachment-client-extract.txt": {
+      "working_tree_sha256": "238d59c733abe2c9b5cf3ca9468a316242df6391f2f1a063908163344dfc0388",
+      "canonical_lf_sha256": "c9fd5e70aa30720c8246de039532cce01a51a94b76fc93def9b6ab982eadbea1"
+    }
+  },
+  "evidence": "59d8325d7adcff9451b9140acd3fe4acf1dcbecaa2b5a7ae3c1d80d63b0e6b70",
+  "verification": {
+    "primegov-document-affected": {
+      "tests": 82,
+      "failures": 0,
+      "artifacts": {
+        "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\primegov-document-affected.log": "7b093031b4f46c8340f274c4bc78e216e45c349f49fd30338ae1d587d0b953e2",
+        "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\primegov-document-affected.xml": "10ca7d4796feb6fa647a0a8b412b5808e4fc0eb4a89da2f4d23814f3a8114e87"
+      }
+    },
+    "primegov-document-v2-final": {
+      "tests": 33,
+      "failures": 0,
+      "artifacts": {
+        "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\primegov-document-v2-final.log": "4979b6797c3ed228a93563d7b47f4d6d76ae2f967b563804a553e88b7554c78f",
+        "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\primegov-document-v2-final.xml": "b4ca7681bc2ea058fdd1db5f5c82569b62bb43ed106b3897faf56890a749b158"
+      }
+    }
+  },
+  "verification_reuse": "82 affected tests before helper corrections; final33 changed PrimeGov cases rerun after corrections and v2 checkpoint binding. Unaffected OnBase/Boardable/recording evidence reused; overlapping counts are not additive.",
+  "checks": [
+    "native search -> scoped SQLite import/reopen -> selected retrieval",
+    "4 attachment types with overlapping native ID across 2 meeting parents; repeated import unchanged; unmapped compiled HTML metadata retains distinct identity",
+    "resolver raw bytes survive cancellation/invalid JSON/blocked target/late file failure and ZIP readback",
+    "strict route/type/parent/tenant bindings and no redirects",
+    "relative and explicit cross-origin targets; parser/aggregate transfer/request/deadline bounds",
+    "PDF prefix for types1/3; compiled nonPDF allowed and HTML rejected",
+    "v1 search checkpoints fail before network and require restart under v2 identity contract"
+  ],
+  "identity_compatibility": "Type2 and all baseline IDs unchanged. Newly mapped1/3/4 use type:<type>:<native-id> within canonical meeting parent; raw native IDs preserved. Previously stored unqualified1/3/4 records are retained, not automatically reconciled.",
+  "limits": [
+    "JSON URL-string schema is an explicit inference from window.location callback, verified synthetically, not an observed server contract.",
+    "Type4 HTML3/unknown output unmapped; bytes do not prove PDF rendering or live availability.",
+    "No live provider request, staff account, package/native build, install or delivery."
+  ]
+}
