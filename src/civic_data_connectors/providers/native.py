@@ -188,6 +188,9 @@ def parse_native(source, namespace, content, input_format):
         from .iqm2_search import _rows
         rows, _ = _rows(source, content)
         return make_bundle(source, namespace, content, input_format, rows)
+    if input_format == "iqm2-meeting-detail-html":
+        from .iqm2_detail import parse_bundle
+        return parse_bundle(source, namespace, content)
     if input_format == "utah-public-search-html":
         from .utah_public import search_rows
         return make_bundle(source, namespace, content, input_format, search_rows(source, content))

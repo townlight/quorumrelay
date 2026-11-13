@@ -11896,6 +11896,23 @@
           "observed": "2026-11-12 bounded public read",
           "observation_date": "2026-11-12",
           "access_scope": "bounded_public_read_only"
+        },
+        {
+          "id": "iqm2-public-detail-2026-11-12",
+          "url": "https://santamonicacityca.iqm2.com/Citizens/Detail_Meeting.aspx?ID=1496",
+          "title": "iQM2 supplied public meeting detail and FileOpen associations",
+          "kind": "public_tenant",
+          "observed": "One exact supplied meeting detail GET200/text-html/89973 bytes; eight new distinct synthetic cases passed across documented correction runs.",
+          "observation_date": "2026-11-12",
+          "access_scope": "one_anonymous_guarded_GET_plus_offline_synthetic_engine_execution",
+          "proof_level": "bounded_public_capture_and_scoped_synthetic_engine_execution",
+          "findings": [
+            "Native meeting1496/17 explicitly same-meeting legislative-file links/63 supplied FileOpen locators/14 other-meeting references.",
+            "Meeting/date/status and rendered row hierarchy cues retained; native agenda1476 binds Type14/1 controls. No inferred document-to-file parents or motion/vote."
+          ],
+          "limits": "One captured public template; no universal deployment or complete archive guarantee; Documents remain locators; attachment transfer uses synthetic PDF, no actual downloaded bytes claim; Legislative files have meeting parent only; no inferred agenda-item IDs or document-to-file parents; No staff action/script execution, credential acquisition, vendor mutation, frozen rebuild or publication",
+          "receipt_path": "docs/verification/iqm2-public-detail-2026-11-12.json",
+          "receipt_sha256": "5b4ffa9e2438dfe99ebc3dfb68b522d9c5305635b20b01f598322f008dc8cbd6"
         }
       ],
       "tenants": [
@@ -11935,9 +11952,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "iqm2-tenant",
-            "iqm2-search-observed"
+            "iqm2-search-observed",
+            "iqm2-public-detail-2026-11-12"
           ],
-          "details": "Configured Kent calendar response can be parsed into 185 observed rows; it is a bounded listing, not proven archive completeness or date/body traversal.",
+          "details": "Configured Kent calendar response can be parsed into 185 observed rows; it is a bounded listing, not proven archive completeness or date/body traversal. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
@@ -11956,11 +11974,12 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "iqm2-tenant"
+            "iqm2-tenant",
+            "iqm2-public-detail-2026-11-12"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval.",
+          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim.",
           "dependencies": [],
           "remaining_verification": [
             "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
@@ -11982,9 +12001,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "iqm2-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "iqm2-public-detail-2026-11-12"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim.",
           "dependencies": [
             "Extract shared engine preserving legacy behavior."
           ],

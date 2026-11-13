@@ -417,6 +417,7 @@ checkout containing the mapping; the frozen dev8 wheel is not silently updated.
 | Boardable known listing record | [Scoped capture-bound detail retrieval](BOARDABLE-DETAIL.md); no guessed slugs or implicit document download |
 | AgendaQuick supplied public agenda | [Native linked memo IDs and packet locator](AGENDAQUICK-DETAIL.md); supplied memo sections/PDF locator, no inferred adopted motion/vote |
 | TownCloud rendered agenda | [Capture-local hierarchy and native attachment links](TOWNCLOUD-AGENDA.md); existing format and explicit download origins |
+| iQM2 supplied meeting detail | [Native meeting/files and contextual FileOpen controls](IQM2-DETAIL.md); historical references kept separate |
 | Town Hall Streams event | [Player citation and declared HLS locator](TOWN-HALL-STREAMS-DETAIL.md); a playlist is not verified media segments |
 | CHAMP event JSON | [Native agenda parents, documents and timeline anchors](CHAMP-AGENDA.md); no inferred transcript or speaker |
 | eSCRIBE rendered agenda | [Capture-local agenda positions and supplied documents](ESCRIBE-DETAIL.md) |

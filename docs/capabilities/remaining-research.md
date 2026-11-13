@@ -329,9 +329,9 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ### Remaining research
 
-- The bounded Kent calendar and first native search result are observed; broader date/body and archive coverage, Detail_Meeting and FileOpen byte retrieval, and live supplied Next remain unverified. Pre-2007 records are reported elsewhere, not in this portal.
-- Current Granicus/iQM2 help pages describe authenticated locations/types/meeting and streaming-media workflows, not an iQM2 external API. Get deployment-specific customer documentation/account enablement.
-- No tenant API credentials, upload limits, write schema or write acceptance were supplied; do not reuse Legistar contracts.
+- The bounded Kent calendar and first native search result are observed; broader date/body and archive coverage remain unverified. A supplied Santa Monica detail1496 now maps heading/control identities,17 same-meeting native legislative files,63 document locators and14 other-meeting references; eight focused synthetic cases pass including configured discovery/fetch/search/export and separate synthetic FileOpen transfer. Actual file bytes, other detail templates and live supplied Next remain unverified. Pre-2007 records are reported elsewhere, not in this portal.
+- Current Granicus/iQM2 help pages describe authenticated locations/types/meeting and streaming-media workflows, not an iQM2 external API. An exact product-matched machine contract remains to establish from vendor documentation.
+- Exact product-matched create/update/upload schemas and documented limits remain unresolved; do not reuse Legistar contracts. Vendor-contract synthetic execution is the required verification basis, not credential acquisition.
 
 ### Pagination contract
 
