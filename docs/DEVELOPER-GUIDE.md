@@ -161,6 +161,18 @@ continuation belongs to its source/query/caller/current grants; some public-form
 adapters keep private process-local sessions and expire after 15 minutes. Restart
 or expiry can require beginning a fresh bounded operation. Never edit a token.
 
+CivicWeb and Cablecast meeting lists use the same call (see the
+[user manual](USER-MANUAL.md#meeting-lists-and-meeting-video-civicweb-and-cablecast)).
+CivicWeb's reader is a dedicated route inside the shared `discover`
+(`providers/civicweb_listing.py`, selected by a tenant-root URL or the additive
+`civicweb-meetings-json` input format) and adds the `civicweb-meetings-json` and
+`civicweb-meeting-documents-json` parsers beside, not replacing, the 34 baseline
+formats. Cablecast is not a baseline family: `providers/cablecast.py` is a built-in typed
+`Connector` that `create_engine()` registers with the engine's transport, so
+`providers` lists it with empty `formats` and the 31-family inventory is unchanged.
+Both parse saved captures through `engine.normalize` with no network. Pass your own
+`provider_transport=` to supply saved responses in tests.
+
 Fetch a linked attachment using the returned record and document index:
 `engine.fetch_attachment(source, record, index=0, context=context)`. Retain its
 original capture in scoped storage, or supply the original capture bytes through

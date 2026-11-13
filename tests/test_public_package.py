@@ -13,7 +13,9 @@ def test_public_sdk_compatibility_identity_and_engine():
     engine = quorumrelay.create_engine()
     listed = engine.providers()
     assert listed.status == "completed"
-    assert len(listed.data["providers"]) == 31
+    # 31 fixed baseline families, plus Cablecast as a built-in additive typed connector with no baseline format.
+    assert len([row for row in listed.data["providers"] if row["formats"]]) == 31
+    assert [row["provider"] for row in listed.data["providers"] if not row["formats"]] == ["cablecast"]
     assert len(listed.data["formats"]) == 34
     legistar = next(row for row in listed.data["providers"] if row["provider"] == "legistar")
     assert legistar["additional_formats"] == ["legistar-event-json", "legistar-events-json", "legistar-rollcalls-json", "legistar-votes-json"]

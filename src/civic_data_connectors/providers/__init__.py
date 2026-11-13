@@ -33,6 +33,9 @@ def _parse_saved_native(source, content, input_format, bounds, context):
 def register(engine, *, transport: Transport | None = None,
              browser: BrowserSession | None = None) -> None:
     """Compose operations once; injected transports are an SDK/server trust boundary."""
+    from .cablecast import CablecastConnector
+    if "cablecast" not in engine.connectors:
+        engine.register_connector(CablecastConnector(transport))
     engine.register_operation("identify", identify_handler)
     engine.register_operation("validate_source", validate_handler)
     for provider, input_format in (
@@ -43,6 +46,8 @@ def register(engine, *, transport: Transport | None = None,
             ("utah-public-notice", "utah-public-search-html"),
             ("civicplus-select", "civicplus-search-json"),
             ("civicweb", "civicweb-detail-html"),
+            ("civicweb", "civicweb-meetings-json"),
+            ("civicweb", "civicweb-meeting-documents-json"),
             ("swagit", "swagit-listing-html"),
             ("onbase", "onbase-public-listing-html"),
             ("digital-towpath", "digital-towpath-listing-html"),

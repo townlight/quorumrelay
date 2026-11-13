@@ -45,7 +45,8 @@ def test_registered_native_search_implementations_have_honest_packaged_labels():
 
 def test_changed_explicit_public_routes_have_implemented_labels_without_catalog_acceptance():
     pairs = [("swagit", "discover"), ("peak", "discover"), ("onbase", "discover"),
-             ("digital-towpath", "discover"), ("digital-towpath", "fetch"), ("civicweb", "fetch")]
+             ("digital-towpath", "discover"), ("digital-towpath", "fetch"), ("civicweb", "fetch"),
+             ("civicweb", "discover")]
     for provider, operation in pairs:
         metadata = provider_capabilities(provider)["operations"][operation]
         assert metadata["implementation_status"] == "implemented"
