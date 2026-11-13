@@ -2,7 +2,7 @@
 
 Integrated development source retains dev11 and the approved CivicWeb/Cablecast readers: 32 registered providers, 31 baseline families, 34 baseline formats and 44 additive parser hooks. CivicWeb document continuation and Cablecast page/filter handling are repaired in source. No successor package or Windows release has been delivered.
 
-Local test candidate: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**, prepared from core source `fc51f90777ae692bcaa600724da694dbcf16a10f` plus candidate version/package-verifier changes. This candidate includes the later source mappings described below: 31 families, 34 baseline formats, 42 additive parsers and 15 native-search handlers. It is not published or a full-plan completion claim. The dev8 artifact/publication and installed evidence below remain historical and unchanged; new artifact hashes and installed checks are recorded separately.
+Preserved package baseline: Python **0.1.0.dev11**, TypeScript **0.1.0-dev.11**, schema **2.0.0**. Those immutable packages precede the integrated reader fixes. The frozen dev8 artifacts remain historical evidence.
 
 Civic records, with their source. QuorumRelay is a standalone civic-data connector engine for applications, scripts and agents. A project of [Townlight](https://github.com/townlight).
 
@@ -12,7 +12,7 @@ Identify configured sources, discover and retrieve records, normalize saved capt
 
 ## Start from source
 
-Python 3.11 or newer is required. The source checkout is the public installation path; this development candidate is not published to a package registry.
+Python 3.11 or newer is required. The public repository supplies the published preview; remote main does not yet contain this local integration. These clone commands install that public preview. To evaluate the integrated source, use the approved local checkout and run the same venv/install commands there. No package-index release is claimed.
 
 ```powershell
 git clone https://github.com/townlight/quorumrelay.git
@@ -27,7 +27,7 @@ Installing the package does not start a service or install a consumer applicatio
 
 ## Current coverage
 
-The current development candidate is **0.1.0.dev8**, schema **2.0.0**. It retains 31 provider families and 34 original input-format combinations, plus additive parsers. These counts describe the implemented scope, not universal operation or tenant support. Every result retains status, coverage, errors and provenance; partial results must remain visibly partial in consuming applications.
+The integrated source reports version **0.1.0.dev11**, schema **2.0.0**, while successor packaging is pending. It retains 31 baseline provider families and 34 original input-format combinations, adds Cablecast as a typed connector, and registers 44 additive parser hooks. These counts describe the implemented scope, not universal operation or tenant support. Every result retains status, coverage, errors and provenance; partial results must remain visibly partial in consuming applications.
 
 The public dev8 source/documentation publication is separate from later local source additions, which are listed in the [developer mapping guides](docs/DEVELOPER-GUIDE.md#later-local-source-mapping-guides). Those additions do not change the immutable dev8 wheel or its installed-consumer evidence. Vendor-documented synthetic execution is accepted verification for the provider operations and fields it covers; it is not a claim of actual tenant transactions. Live provider writes, some authenticated account reads and broader catalog claims remain unobserved or incomplete as stated. See the [capability inventory](docs/capabilities/README.md), [coverage map](docs/ENGINE-COVERAGE.md) and [execution state](docs/EXECUTION-STATE.md).
 

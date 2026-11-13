@@ -1,4 +1,8 @@
-# MCP reference, candidate 0.1.0.dev8
+# MCP reference
+
+Integrated source reports 0.1.0.dev11 / schema 2.0.0; successor packaging and
+delivery remain pending. Protocol evidence below applies to its stated transport
+and revision, independently of the historical dev8 package identity.
 
 The implementation uses the official Python SDK **mcp 2.3.0**, not hand-written
 JSON-RPC framing. Both transports call the same engine operations as Python,

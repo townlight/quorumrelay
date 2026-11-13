@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "source": "C:\\Users\\scott\\Documents\\Codex\\qr9\\integrated",
+  "python": "C:\\Users\\scott\\Documents\\Codex\\qr9\\env-sdk\\Scripts\\python.exe",
+  "script_sha256": "d631037435bef174a713d3ee580750545a8191ae8a9767e38da59726597b3917",
+  "outcomes": {
+    "save": "completed",
+    "search": "partial",
+    "export": "completed"
+  },
+  "limits": "Source selected explicitly via PYTHONPATH. Reuses existing SDK-only dev11 environment; not a successor installed wheel or native application. Script executed once, output parser corrected from JSON to literal dicts without re-execution.",
+  "core_only_cli": "PASS 32 registered providers /34 baseline formats",
+  "sdk_environment_service_extras": {
+    "mcp": false,
+    "starlette": false,
+    "uvicorn": false
+  },
+  "preserved_dev11_wheel_sha256_rechecked": "93c1736ab71bc1310c371d44a2a01d56425621625f012c8e4bc0ef4eddc25551",
+  "capability_validator": "PASS schema, identities, evidence relationships and five negative cases; not whole-provider acceptance",
+  "documentation_changes": "Public preview separated from local integrated source and immutable dev11 wheel; stale install/version pins corrected without altering historical receipts; CivicWeb FilePro and MeetingsService scope descriptions reconciled.",
+  "remaining": "Public delivery and exact successor installation still pending; full 19-task objective incomplete."
+}

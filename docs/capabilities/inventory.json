@@ -11728,7 +11728,7 @@
             "civicweb-meetings-service-loveland-2026-11-12",
             "civicweb-meeting-documents-loveland-2026-11-12"
           ],
-          "details": "Source implements explicit civicweb-filepro-soap-xml one-folder GetChildList with fixed provider/empty state, typed native folder/document IDs, supplied folder parent and raw SOAP; bounded offset continuation binds caller/source/filters and exact response hash. Unknown date/body retained and labelled; no recursive calendar/archive completeness. Also: Date-range meeting list from the public MeetingsService with each meeting's meeting type (body) from MeetingTypeList.aspx; unpublished meetings are left out and counted; meetings of calendar/notice-style meeting types are kept and flagged likely_not_a_meeting, with an explicit request option exclude_likely_non_meetings to omit them. record_types may add each meeting's document list (links only). Bounded by page/record/deadline limits with a resumable checkpoint. A tenant root URL or input_format civicweb-meetings-json selects it; a MeetingTypeList.aspx URL keeps the original saved-page route.",
+          "details": "Two scoped read paths are implemented. Vendor-documented FilePro one-folder GetChildList retains typed folder/document IDs, supplied parents and raw SOAP with response-bound continuation. The observed Loveland MeetingsService lists an explicit date range, obtains meeting-type/body names, preserves published calendar/notice-style rows with flags by default, and optionally reads document links. Root URLs or civicweb-meetings-json select MeetingsService; explicit civicweb-filepro-soap-xml selects FilePro. Both preserve bounded partial coverage; neither establishes a complete meeting archive.",
           "dependencies": [],
           "remaining_verification": [
             "Meeting archive/recursive catalog and calendar entity create/update/upload contracts remain distinct unresolved research; public deployment compatibility not universal.",
@@ -11737,14 +11737,14 @@
             "No complete catalog or archive is claimed; unpublished meetings are not returned and document content is not read."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "vendor_documented_contract_and_synthetic_engine_execution Also: implemented_source_and_named_tests_with_saved_public_captures_and_unreceipted_bounded_live_read_not_catalog_or_write_acceptance",
+          "evidence_level": "vendor_documented_filepro_contract_and_synthetic_execution; observed_meetings_service_saved_fixture_execution; historical_unreceipted_live_read",
           "tenant_scope": [
             "https://csknowledgebase.civicweb.net/document/57754/",
             "https://ciindependenceor.civicweb.net/Portal/MeetingTypeList.aspx",
             "https://cilovelandco.civicweb.net/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Vendor-documented synthetic execution accepted; no account/login required for these public reads. Also: Saved public Loveland captures in tests/fixtures/civicweb-listing; no provider account access required.",
+          "test_access": "Vendor-documented synthetic execution is accepted for its attributed FilePro scope. Saved public Loveland captures exercise MeetingsService. No account acquisition is required for either synthetic path; real deployments still enforce current runtime access policy.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -11760,7 +11760,7 @@
             "civicweb-filepro-wsdl-contract",
             "civicweb-meeting-documents-loveland-2026-11-12"
           ],
-          "details": "Existing supplied meeting detail/print PDF remains. Additive public FilePro GetOriginalFile/GetPdfFile/GetMeetingAttachmentPdfFile returns exact file bytes/hash plus original HTML/extension/raw SOAP; PDF magic/extension checked, HTML-only partial. File results do not echo IDs: supplied request identity explicitly labelled, optional meeting parent only from explicit meetingId. Also: The dedicated CivicWeb fetch_record route maps a supplied meeting identifier into the guarded current detail path, validates returned identity and preserves exact HTML/original fields. A separately supplied print PDF completed; catalog and general native search remain unverified. A related read (record_type document, parent_id = meeting ID) returns one meeting's document list as links.",
+          "details": "Supplied meeting detail and print-PDF retrieval retain exact identity/capture checks. Vendor-documented FilePro GetOriginalFile/GetPdfFile/GetMeetingAttachmentPdfFile returns checked file bytes and raw SOAP; identity is explicitly supplied because those responses do not echo IDs. The observed MeetingsService related-document read returns one selected meeting's document links without downloading content or inferring meeting associations for FilePro documents.",
           "dependencies": [],
           "remaining_verification": [
             "Meeting archive/recursive catalog and calendar entity create/update/upload contracts remain distinct unresolved research; public deployment compatibility not universal."
@@ -11786,7 +11786,7 @@
             "quorumrelay-shared-core-operations",
             "civicweb-filepro-wsdl-contract"
           ],
-          "details": "All original CivicWeb baseline outputs remain unchanged. Additive civicweb-filepro-soap-xml replays exact child/search/file SOAP offline without credentials; original-file result requires explicit options.document_id instead of invented identity. Unknown XML retained and source bytes preserved. Also: The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive saved-capture formats civicweb-meetings-json and civicweb-meeting-documents-json parse supplied MeetingsService responses; the 34 baseline formats are unchanged.",
+          "details": "The historical civicweb-html compatibility reader is preserved. civicweb-filepro-soap-xml replays supplied child/search/file SOAP offline; original-file results require explicit options.document_id. civicweb-meetings-json and civicweb-meeting-documents-json replay saved MeetingsService responses. Original capture bytes remain available; these parsers establish no live catalog completeness.",
           "dependencies": [
             "Extract shared engine preserving legacy behavior."
           ],
@@ -12229,7 +12229,7 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "FilePro search returns an ID array, detail requests max50 by guide. Local mid-batch/one-folder offset cursors bind candidate/response hashes, source/query/caller/current scope. Single folder listing does not establish recursive or meeting-type archive completeness. Also: MeetingsService returns the whole date range in one response; the reader pages its own work (meeting list, then one document list per meeting) with a checkpoint. Service-side paging limits for very large ranges are unknown."
+        "details": "FilePro search returns candidate IDs with batches of at most50 detail IDs; one-folder/mid-batch cursors bind response hashes, filters and caller scope. MeetingsService supplies a date-range response; local meeting and per-meeting document positions are checkpointed, including positions within a document list. Service-side limits and full archive completeness remain unknown."
       },
       "auth": {
         "public_read": "unverified",

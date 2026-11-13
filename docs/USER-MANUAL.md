@@ -2,22 +2,21 @@
 
 Preserved package baseline: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The integrated development source retains that baseline and the approved CivicWeb/Cablecast readers, with 32 registered providers, 31 baseline families, 34 baseline formats, 44 additive parser hooks and 15 native-search handlers. It has not been packaged as a successor or delivered. Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
 
-Frozen candidate <code>0.1.0.dev8</code> · schema <code>2.0.0</code>. Later local source mappings are identified in the [developer guide](DEVELOPER-GUIDE.md#later-local-source-mapping-guides); they are not additions to the immutable wheel.
+This manual describes the integrated development source. Immutable dev8 and dev11 packages are separate historical candidates; the retained readers and repairs have not been packaged into a successor.
 
 QuorumRelay is a standalone engine for identifying configured civic-data sources, reading or parsing bounded captures, normalizing meeting records, searching captured material, preparing neutral exports, and executing a small set of explicitly authorized provider writes. It does not require Townlight, TownReporter, TownRecord, Brief, a hosted service, or a particular application database. Those projects are examples of consumers; the engine API is intended for other products as well.
 
-This is a development candidate. The verified Python wheel is <code>quorumrelay-0.1.0.dev8-py3-none-any.whl</code>, SHA-256 <code>bcfe691b4d1eb0de162f5f94985d0242a97b5d3d89bd5eeb9306d1ef28caf692</code>, built from source commit <code>3862e5f4ad7064aee722e09bb438899c3566477f</code>. It is not published to a Python package index. The candidate verification proves package contents and fixture/baseline behavior; it does not prove live provider acceptance, complete provider catalogs, or live write acceptance. See [the development 08 receipt](verification/quorumrelay-development-08.json), [the baseline equality receipt](verification/quorumrelay-development-08-equality.json), and [the capability matrix](capabilities/README.md).
+The preserved dev11 wheel is <code>quorumrelay-0.1.0.dev11-py3-none-any.whl</code>, SHA-256 <code>93c1736ab71bc1310c371d44a2a01d56425621625f012c8e4bc0ef4eddc25551</code>, from core <code>b71e9450b1742c1f87d5c7cdcb5cf212381cebed</code>. It does not contain the later reader integration. Its package evidence does not prove a new Windows release, whole-provider coverage or actual tenant transactions. Historical dev8 evidence remains in [its receipt](verification/quorumrelay-development-08.json) and [baseline receipt](verification/quorumrelay-development-08-equality.json). See the [capability matrix](capabilities/README.md) for operation-specific limits.
 
 ## 1. Install and verify the candidate
 
-QuorumRelay requires Python 3.11 or newer. Use the public source checkout at the verified commit for this publication. The dev8 wheel is documented as verification evidence but is not a public download asset; use a wheel only if your operator already has the matching immutable artifact. Do not use a package-index install command for this candidate.
+QuorumRelay requires Python 3.11 or newer. For this integrated source, use the operator-provided approved checkout. Public main currently provides an older preview. Neither candidate has a package-index release; use source or an explicitly transferred, hash-verified wheel.
 
-### Install from the public Git repository
+### Install from an approved source checkout
 
 ~~~powershell
-git clone https://github.com/townlight/quorumrelay.git C:\work\quorumrelay
+# Set this to the approved source checkout supplied by your operator.
 Set-Location C:\work\quorumrelay
-git checkout 3862e5f4ad7064aee722e09bb438899c3566477f
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 py -m pip install -e .
@@ -36,8 +35,8 @@ The <code>service</code> extra installs the MCP, Starlette, Uvicorn, multipart a
 This repository does not offer a public wheel download for the candidate. If your operator has already transferred the exact immutable wheel into an approved artifact store, verify its digest before installing it:
 
 ~~~powershell
-Get-FileHash .\quorumrelay-0.1.0.dev8-py3-none-any.whl -Algorithm SHA256
-py -m pip install .\quorumrelay-0.1.0.dev8-py3-none-any.whl
+Get-FileHash .\quorumrelay-0.1.0.dev11-py3-none-any.whl -Algorithm SHA256
+py -m pip install .\quorumrelay-0.1.0.dev11-py3-none-any.whl
 ~~~
 
 Use only the immutable artifact whose hash is recorded above; rebuilding from source produces a different artifact identity. To run the HTTP or MCP service from source, install the matching checkout’s <code>.[service]</code> extra as shown above.
@@ -49,7 +48,7 @@ py -c "import quorumrelay; print(quorumrelay.__version__)"
 '{}' | quorumrelay providers
 ~~~
 
-The version command should print <code>0.1.0.dev8</code>. The <code>providers</code> command returns the installed provider and format manifest as JSON. In an embedded deployment, also request <code>GET /v1/info</code> and compare the installed version and schema version with the application’s approved pin.
+The version command should print <code>0.1.0.dev11</code> for the preserved dev11 package or this integrated source. The version alone does not distinguish them: verify the approved source commit or wheel SHA-256 as well. The <code>providers</code> command returns the installed provider and format manifest as JSON. In an embedded deployment, also request <code>GET /v1/info</code> and compare the installed version and schema version with the application’s approved pin.
 
 ## 2. Choose a provider and input format
 

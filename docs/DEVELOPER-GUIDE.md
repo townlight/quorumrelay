@@ -7,8 +7,9 @@ script or agent. It does not require a Townlight installation, an application
 database, a model provider or a hosted QuorumRelay account. Use the Python API in
 process, or run the optional service for HTTP, TypeScript and MCP consumers.
 
-The frozen development preview is **0.1.0.dev8**, schema **2.0.0**; this checkout
-also documents later local source mappings, which are not in that immutable wheel.
+The frozen public preview is **0.1.0.dev8**; preserved dev11 packages and this
+integrated source are later, distinct candidates. Public main does not yet contain
+this integration. Neither older immutable wheel gains these source changes.
 Provider coverage varies by operation. Vendor-documented synthetic execution is
 accepted verification for its evidenced provider-operation scope. Live account
 and vendor-write observations remain unrun where stated; publishing code or
@@ -43,6 +44,10 @@ python -m venv .venv
 python -m pip install -e ".[service]"
 quorumrelay providers
 ```
+
+The clone commands above obtain the public preview. For this integrated source,
+start in the operator-provided approved checkout and run the venv/install steps
+there; do not expect its local commit to be available from the public remote.
 
 For an application deployment, pin a reviewed commit or explicit wheel rather
 than following a moving branch. Install the core without extras for an in-process

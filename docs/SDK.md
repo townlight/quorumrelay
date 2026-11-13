@@ -1,6 +1,6 @@
 # Python SDK
 
-Install the QuorumRelay candidate wheel (`quorumrelay==0.1.0.dev11`) into a Python 3.11+ environment. The canonical import and CLI are `quorumrelay`; existing `civic_data_connectors` imports and the `civic-data-connectors` CLI remain compatible and use the same implementation objects. No reference application, HTTP server, model, hosted service, or database is required.
+Install the approved source checkout with `python -m pip install -e .` into a Python 3.11+ environment. The integrated source currently reports `quorumrelay==0.1.0.dev11`; it has not been delivered as a successor wheel. An operator may supply the preserved hash-verified dev11 wheel, which predates the reader integration. The canonical import and CLI are `quorumrelay`; existing `civic_data_connectors` imports and the `civic-data-connectors` CLI remain compatible and use the same implementation objects. No reference application, HTTP server, model, hosted service, or database is required.
 
 ```python
 from quorumrelay import Bounds, OperationContext, Query, Source, create_engine
