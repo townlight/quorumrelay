@@ -94,8 +94,8 @@
     "Synthetic provider transport through actual current source application paths; no provider mutations",
     "Existing configured-capture partial and unavailable-media outcomes retained",
     "Supplied HTML/rich text is source content, not OCR/ASR or inferred votes/motions/attendance",
-    "Townlight/TownReporter current-source candidate acceptance remains separate; frozen original proof reused only where unchanged",
-    "No package build/install/signing/Sandbox restart/frozen artifact/publication"
+    "No package build/install/signing/Sandbox restart/frozen artifact/publication",
+    "Townlight current-source proof covers Python workspace/canonical persistence only; TownReporter covers real HTTP/TS/newsroom persistence. Neither proves a rebuilt/installed candidate. Unchanged original signed/native handoff proof reused separately."
   ],
   "tested_repair_modules": [
     {
@@ -114,5 +114,94 @@
       "path": "src/civic_data_connectors/providers/simbli_detail.py",
       "sha256": "f65d74a9370cab3443f6e7c583d07eca736af944b1701857e6bedb7b744e5e48"
     }
-  ]
+  ],
+  "brief_native_text_review": {
+    "receipt_output": "outputs/current-source-brief-novus-20261112/review-source-text-result.json",
+    "receipt_sha256": "b50c52c3eb580e9b39a4f1536ca69bd8e3b178a162c7a7371e78beb6ced7bcfd",
+    "executed_result": {
+      "evidence_basis": "source-only actual Brief review persistence; exact saved Novus provider capture; no network/model/publication",
+      "core_head": "288bd5d5dccb328459dafe5ecdcdf66d0e1f2141",
+      "consumer_head": "3fcb2b9ca69468d4fb52535d12cd907401642911",
+      "consumer_dirty_module": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\reference-integrations\\civiccast-brief\\src\\civiccast_brief\\connectors.py",
+      "consumer_module_sha256": "84e05a5d101ed971a50b203210806f29a4194592cb2920ed1c67f12adcf94cb5",
+      "core_novus_module_sha256": "76f75c647be63e6a5641ee035b657f1375e98f43d2afb2748f770fd92a7244ed",
+      "review_item": 1,
+      "paragraphs": 1,
+      "citation_urls": [
+        "https://ebps.novusagenda.com/agendapublic/MeetingView.aspx?MeetingID=996&MinutesMeetingID=-1&doctype=Agenda"
+      ],
+      "review_reopen_retry": "passed; one unapproved item, checks incomplete",
+      "limitations": "Not installed/frozen candidate proof; no transcription, model recap or publication."
+    },
+    "resulting_local_commit": "28de369b089bc057e4f4eff434dcf36f2629a49d",
+    "affected_checks": {
+      "distinct_passed": 5,
+      "commands": [
+        ".venv/Scripts/python.exe -m pytest tests/test_connectors.py -k 'supplied_text_without_files or metadata_only_review or same_external_id_isolated or native_discovery_real_weekly_review_search_export_and_reopen' -q (2 existing cases passed; 3 new fixture mistakes failed)",
+        ".venv/Scripts/python.exe -m pytest tests/test_connectors.py -k 'supplied_text_without_files or metadata_only_review' -q (3 passed after fixture-only corrections)"
+      ],
+      "scoped_ruff_and_format": "passed",
+      "staged_diff_check": "passed"
+    }
+  },
+  "townreporter": {
+    "receipt_output": "outputs/current-source-townreporter-20261112/result.json",
+    "receipt_sha256": "971ad70daab0c030c6cca502c98c532891620bbc0d1d1a586723cc036064b9d0",
+    "executed_result": {
+      "status": "PASS",
+      "basis": "current source; saved exact Novus HTML through actual HTTP/TS/newsroom functions, not installed/frozen candidate",
+      "coreHead": "288bd5d5dccb328459dafe5ecdcdf66d0e1f2141",
+      "consumerHead": "6e4edc944248bb252f5047c810af7680a9351755",
+      "moduleHashes": {
+        "C:/Users/scott/Documents/Codex/2026-11-11/civic-data-connectors/src/civic_data_connectors/engine.py": "703a7c4ad1c0cab6da458321eeb495c740037d4e0c8b17e9a4ac09dfe897a056",
+        "C:/Users/scott/Documents/Codex/2026-11-11/civic-data-connectors/src/civic_data_connectors/providers/novus_detail.py": "76f75c647be63e6a5641ee035b657f1375e98f43d2afb2748f770fd92a7244ed",
+        "C:/Users/scott/Documents/Codex/2026-11-11/reference-integrations/townreporter/src/lib/news/civic-connectors.ts": "093dc861af72846f03a4328c04551936419941ab62c64284eceb7d344aa530aa"
+      },
+      "records": 21,
+      "search": "native Plowing text",
+      "isolation": true,
+      "retry": true,
+      "serviceRestart": true,
+      "reviewLead": "explicit idempotent filing only",
+      "publication": "none",
+      "export": {
+        "bytes": 96829,
+        "sha256": "7a3d4aa6c1956d1a93307287c5bd5b00ec06ec3783dd1767efac705b8828fbaa",
+        "status": "completed"
+      }
+    }
+  },
+  "townlight": {
+    "receipt_output": "outputs/current-source-townlight-20261112/result.json",
+    "receipt_sha256": "baf3a45a58bd35bda534de43bdf1b92adc8d27d820fb6da78546a8d07175f7e1",
+    "executed_result": {
+      "status": "PASS",
+      "basis": "current Python source workspace + real canonical Meetings SQLite; saved exact provider capture; no installed/native equivalence",
+      "core_head": "288bd5d5dccb328459dafe5ecdcdf66d0e1f2141",
+      "consumer_head": "4d5d910f09c845ba1d7d63e47533ce4cfdd1664f",
+      "meetings_head": "c988c1a86e47836d48f189b2c4cc9e8fd622004a",
+      "loaded_modules": {
+        "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\reference-integrations\\townlight\\desktop\\runtime\\python-services\\townlight_runtime\\connectors.py": "e40a0dac8f3cde98d4f50a964d8242f37009ca0cc1339f6e26fbc68a00c852cb",
+        "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\civic-data-connectors\\src\\civic_data_connectors\\engine.py": "703a7c4ad1c0cab6da458321eeb495c740037d4e0c8b17e9a4ac09dfe897a056",
+        "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\civic-data-connectors\\src\\civic_data_connectors\\providers\\novus_detail.py": "76f75c647be63e6a5641ee035b657f1375e98f43d2afb2748f770fd92a7244ed",
+        "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\quorumrelay-build-inputs\\meetings\\townlight_meetings\\imported_meetings.py": "03c051947b67f3479326b660ee56dd9c762f6f5b3307fa0c22afa3a2e1c94390"
+      },
+      "records": 21,
+      "meeting_id": "43653381-e0a0-4b5f-a1f6-7b0606a083e7",
+      "canonical_save_retry": "created then unchanged",
+      "reopen": "new workspace; stored source records and canonical meeting read back",
+      "search": "native Plowing text",
+      "export": {
+        "bytes": 2437528,
+        "sha256": "0829b4734058fe4245b49ccf583c6252bd27883ddc5fd6eb0806e95ffb2a28e9",
+        "format": "json",
+        "status": "partial",
+        "scope": "one saved capture, not a complete upstream catalog",
+        "native_text_and_capture_hash": true
+      },
+      "provider_requests": 0,
+      "harness_corrections": "initial test venv missing Meetings resolved via explicit existing source paths; export partial expectation corrected and resumed same profile without discovery/save replay",
+      "limits": "No Rust/UI/installed proof; unchanged baseline roles/downstream handoffs reused, not rerun."
+    }
+  }
 }
