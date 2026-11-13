@@ -4,7 +4,7 @@ Current owner amendment (2026-11-12): vendor-documented synthetic execution, rea
 
 ## F01 Legistar (`legistar`)
 
-- Current acceptance reconciliation: 16 existing documented synthetic engine cases verify eight create/update entity routes with their explicit sample fields and readback. These are now attributed as `mock_passed`, not whole-model or live proof. Public attachment `upload` spelling remains implemented but not separately execution-attributed; tested binary attachment `create` is not silently relabelled upload.
+- Current acceptance reconciliation: 16 existing documented synthetic engine cases verify eight create/update entity routes with their explicit sample fields and readback. These are attributed as `mock_passed`, not whole-model or live proof. The separate `legistar-public-dispatch-synthetic-attribution` evidence also verifies public attachment `upload`, exact binary readback and replay; attachment `create` is not silently relabelled upload. Six additional field-level cases verify event media-reference strings and hyperlink-only attachment create/update, preserved omitted native fields, visibility-flag values and persistent mismatches without duplicate creates. See [the field-level receipt](../verification/legistar-media-link-writes-2026-11-13.json); this does not prove media processing or effective public visibility.
 
 - Current implementation: bounded EventBodyName native OData search is registered and labelled implemented; source/fixture coverage and the existing public query probe do not establish general agenda/full-text semantics or live writes.
 

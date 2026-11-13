@@ -500,6 +500,57 @@
               }
             ]
           }
+        },
+        {
+          "id": "legistar-media-link-field-execution-2026-11-13",
+          "url": "https://webapi.legistar.com/Help/Api/POST-v1-Client-Events",
+          "title": "Event media-string and attachment hyperlink/visibility JSON field execution",
+          "kind": "official_contract_and_synthetic_execution",
+          "observation_date": "2026-11-13",
+          "observed": "Official exact Help pages inspected; synthetic field execution only",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/legistar-media-link-writes-2026-11-13.json",
+          "receipt_sha256": "42b9538b5d9c2ce24ba2ef00a05970d8c799edb9cd69dc5b51d8c4a6b79d8f0a",
+          "synthetic_execution": {
+            "provider": "legistar",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "meeting",
+              "linked_meeting_document"
+            ],
+            "scope": "Existing documented Legistar JSON field handling through public plan/approval/commit/readback/receipt; no new runtime behavior or live provider transaction",
+            "execution_provenance": "Six final named cases executed locally with actual public plan/commit/readback/receipt and synthetic provider HTTP; exact test/log/XML hashes in receipt.",
+            "checks": [
+              {
+                "command": "python -m pytest -q tests/test_legistar_media_link_writes.py",
+                "passed": 6,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/legistar-media-attachments/contract.json",
+                "sha256": "91ac0fe93859e59aa9a6e98bea232e5ef76638b6b3d3b90f9e3080cbf0234fdb"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_legistar_media_link_writes.py",
+                "sha256": "227f244f6d14dd9dc3cb9597060622384a3bb98a8bb0b096c99ed76b1f9fc4bb",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "227f244f6d14dd9dc3cb9597060622384a3bb98a8bb0b096c99ed76b1f9fc4bb"
+              }
+            ]
+          },
+          "limits": [
+            "Contract JSON is human-extracted official Help facts, not raw page capture/full schema.",
+            "Synthetic JSON-field readback does not establish media URL fetching/playback, byte recording upload/replacement, server processing, effective visibility, or live tenant behavior.",
+            "Historical vendor import package and undocumented MIME/size/processing semantics remain unresolved."
+          ]
         }
       ],
       "tenants": [
@@ -711,9 +762,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "legistar-events-post",
-            "legistar-documented-entity-synthetic-subset"
+            "legistar-documented-entity-synthetic-subset",
+            "legistar-media-link-field-execution-2026-11-13"
           ],
-          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields. Existing 16-case documented synthetic engine subset verifies create/update sample fields and readback, as attributed by evidence; not whole-model or live acceptance.",
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields. Existing 16-case documented synthetic engine subset verifies create/update sample fields and readback, as attributed by evidence; not whole-model or live acceptance. Additional scoped synthetic evidence covers exact EventMedia/EventVideoPath string metadata and attachment hyperlink/visibility JSON values; no recording upload/replacement/processing or effective visibility claim.",
           "dependencies": [],
           "remaining_verification": [
             "Only entity fixture sample fields are attributed; broader model-field coverage and undocumented media binary import semantics are not inferred."
@@ -735,9 +787,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "legistar-events-put",
-            "legistar-documented-entity-synthetic-subset"
+            "legistar-documented-entity-synthetic-subset",
+            "legistar-media-link-field-execution-2026-11-13"
           ],
-          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields. Existing 16-case documented synthetic engine subset verifies create/update sample fields and readback, as attributed by evidence; not whole-model or live acceptance.",
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields. Existing 16-case documented synthetic engine subset verifies create/update sample fields and readback, as attributed by evidence; not whole-model or live acceptance. Additional scoped synthetic evidence covers exact EventMedia/EventVideoPath string metadata and attachment hyperlink/visibility JSON values; no recording upload/replacement/processing or effective visibility claim.",
           "dependencies": [],
           "remaining_verification": [
             "Only entity fixture sample fields are attributed; broader model-field coverage and undocumented media binary import semantics are not inferred."
@@ -1219,7 +1272,8 @@
           ],
           "evidence_ids": [
             "legistar-events-post",
-            "legistar-documented-entity-synthetic-subset"
+            "legistar-documented-entity-synthetic-subset",
+            "legistar-media-link-field-execution-2026-11-13"
           ],
           "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
@@ -1342,7 +1396,8 @@
           ],
           "evidence_ids": [
             "legistar-events-put",
-            "legistar-documented-entity-synthetic-subset"
+            "legistar-documented-entity-synthetic-subset",
+            "legistar-media-link-field-execution-2026-11-13"
           ],
           "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
@@ -1799,7 +1854,8 @@
           ],
           "evidence_ids": [
             "legistar-attachment-put",
-            "legistar-documented-entity-synthetic-subset"
+            "legistar-documented-entity-synthetic-subset",
+            "legistar-media-link-field-execution-2026-11-13"
           ],
           "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
@@ -3107,9 +3163,9 @@
         "Unverified and access-blocked are incomplete, not unsupported."
       ],
       "remaining_research": [
-        "Complete exact Help-page review for EventMedia/EventVideoPath and MatterAttachment file methods: file versus URL behavior, content type/byte limits, visibility, processing and readback. The Help index does not settle recording replacement.",
-        "Olympia Event 7011 and the selected Vote/RollCall reads are bounded receipts, not catalog coverage. Write token, tenant permissions, accepted Vote/RollCall ValueId enumeration and RowVersion conflict behavior need an authorized test tenant; none was supplied.",
-        "The historical vendor import package/current media import path has no accepted file contract or authorized transfer evidence."
+        "Exact Event and MatterAttachment POST/PUT/File Help review completed2026-11-13; existing binary JSON/file-readback evidence and new media-reference string/hyperlink/visibility-field synthetic cases are attributed separately. Help pages do not define recording-byte upload/replacement, media URL interpretation, MIME/byte limits, processing or effective tenant visibility.",
+        "Olympia Event7011 and selected Vote/RollCall reads remain bounded, not catalog proof. Caller supplies documented ValueIds/permissions; undocumented enum meanings and RowVersion server conflict behavior remain qualified, not a credential-acquisition gate.",
+        "Historical vendor import package/current media import path still has no accepted file contract or transfer evidence; API field handling does not substitute for import."
       ],
       "requirement_ids": [
         "C01",

@@ -1,0 +1,80 @@
+{
+  "record_kind": "human-extracted-contract-facts",
+  "raw_page_capture": false,
+  "full_schema": false,
+  "inspected_on": "2026-11-13",
+  "host": "https://webapi.legistar.com",
+  "contracts": [
+    {
+      "url": "https://webapi.legistar.com/Help/Api/POST-v1-Client-Events",
+      "method": "POST",
+      "route": "/v1/{Client}/Events",
+      "body": "GranicusEvent; application/json or text/json documented",
+      "required": {"Client": "string URI parameter", "EventDate": "date body field"},
+      "optional_identity": {"EventId": "integer body field; not required on create"},
+      "selected_fields": {"EventMedia": "string", "EventVideoPath": "string"},
+      "response": "Not extracted in this record"
+    },
+    {
+      "url": "https://webapi.legistar.com/Help/Api/PUT-v1-Client-Events-EventId",
+      "method": "PUT",
+      "route": "/v1/{Client}/Events/{EventId}",
+      "body": "GranicusEvent; application/json or text/json documented",
+      "required": {"Client": "string URI parameter", "EventId_path": "integer URI parameter", "EventId_body": "required body field", "EventDate": "date body field"},
+      "selected_fields": {"EventMedia": "string", "EventVideoPath": "string"},
+      "response": "Not extracted in this record"
+    },
+    {
+      "url": "https://webapi.legistar.com/Help/Api/POST-v1-Client-Matters-MatterId-Attachments",
+      "method": "POST",
+      "route": "/v1/{Client}/Matters/{MatterId}/Attachments",
+      "body": "GranicusMatterAttachment; application/json, text/json, application/xml, and text/xml documented",
+      "required": {"Client": "string URI parameter", "MatterId": "integer URI parameter", "MatterAttachmentName": "required body string"},
+      "body_identity_and_sort": {"MatterAttachmentId": "not required on create", "MatterAttachmentSort": "server-generated; should not be set"},
+      "selected_fields": {
+        "MatterAttachmentBinary": {"type": "Collection<byte>", "json_example": "QEA=", "encoding_note": "Shown as base64 text in the JSON sample; the XML sample also contains base64 text."},
+        "MatterAttachmentHyperlink": "string",
+        "MatterAttachmentFileName": "string",
+        "MatterAttachmentIsHyperlink": "boolean",
+        "MatterAttachmentIsSupportingDocument": "boolean",
+        "MatterAttachmentShowOnInternetPage": "boolean",
+        "MatterAttachmentIsMinuteOrder": "boolean",
+        "MatterAttachmentIsBoardLetter": "boolean",
+        "MatterAttachmentPrintWithReports": "boolean",
+        "MatterAttachmentDescription": "string"
+      },
+      "response": "Created ID as a string when Accept is text/plain; otherwise created MatterAttachment object"
+    },
+    {
+      "url": "https://webapi.legistar.com/Help/Api/PUT-v1-Client-Matters-MatterId-Attachments-MatterAttachmentId",
+      "method": "PUT",
+      "route": "/v1/{Client}/Matters/{MatterId}/Attachments/{MatterAttachmentId}",
+      "body": "GranicusMatterAttachment; application/json, text/json, application/xml, and text/xml documented",
+      "required": {"Client": "string URI parameter", "MatterAttachmentId": "integer URI parameter"},
+      "body_identity_and_sort": {"MatterAttachmentId": "not required in update body", "MatterAttachmentSort": "cannot be changed"},
+      "selected_fields": {
+        "MatterAttachmentName": "required body string",
+        "MatterAttachmentBinary": {"type": "Collection<byte>", "json_example": "QEA=", "encoding_note": "Shown as base64 text in the JSON sample; the XML sample also contains base64 text."},
+        "MatterAttachmentHyperlink": "string",
+        "MatterAttachmentFileName": "string",
+        "MatterAttachmentIsHyperlink": "boolean",
+        "MatterAttachmentShowOnInternetPage": "boolean"
+      },
+      "response": "Updated ID as a string when Accept is text/plain; otherwise updated MatterAttachment object"
+    },
+    {
+      "url": "https://webapi.legistar.com/Help/Api/GET-v1-Client-Matters-MatterId-Attachments-MatterAttachmentId-File",
+      "method": "GET",
+      "route": "/v1/{Client}/Matters/{MatterId}/Attachments/{MatterAttachmentId}/File",
+      "required": {"Client": "string URI parameter", "MatterId": "integer URI parameter", "MatterAttachmentId": "integer URI parameter"},
+      "body": "None",
+      "response": "Described as file content; schema is generic HttpResponseMessage, with no specific content type, disposition, or byte limit stated"
+    }
+  ],
+  "limits": [
+    "EventMedia and EventVideoPath are documented only as strings; these pages do not specify binary recording upload/replacement or their URL-versus-file semantics.",
+    "No attachment MIME type, byte limit, processing behavior, or effective visibility behavior is documented here. Visibility-related fields are listed, including MatterAttachmentShowOnInternetPage, but their effects are not explained.",
+    "No historical Legistar import package contract is established by these pages.",
+    "This semantic extraction is not a raw capture of the Help pages and is not a full schema transcription."
+  ]
+}
