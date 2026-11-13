@@ -52,12 +52,21 @@ def _page_url(base, value):
 def entry_bundle(source, namespace, content):
     _, parent_id, base = repository_source(source)
     original = json.loads(content)
-    if not isinstance(original, dict) or not isinstance(original.get("value"), list):
-        raise ValueError("Repository children require an OData object with a value array.")
+    if not isinstance(original, dict):
+        raise ValueError("Repository entries require a JSON object.")
+    if type(original.get("id")) is int:
+        # The pinned SDK's GetEntry returns one Entry, not a children wrapper.
+        # Preserve unknown Entry extensions, including a future field named value.
+        entries = [original]
+    elif isinstance(original.get("value"), list):
+        entries = original["value"]
+    else:
+        raise ValueError("Repository entries require one Entry or an OData value array.")
     rows = []
-    for raw in original["value"]:
+    for raw in entries:
         if (not isinstance(raw, dict) or type(raw.get("id")) is not int or raw["id"] < 0
-                or raw.get("parentId") != parent_id or not isinstance(raw.get("name"), str)):
+                or type(raw.get("parentId")) is not int or raw["parentId"] != parent_id
+                or not isinstance(raw.get("name"), str)):
             raise ValueError("Repository entries require supplied identity, name and matching parent folder.")
         kind = {"Document": "document", "Folder": "folder", "Shortcut": "shortcut"}.get(raw.get("entryType"))
         if kind is None:
@@ -81,6 +90,61 @@ def entry_bundle(source, namespace, content):
         record["source_revision"] = {"kind": "provider_supplied" if supplied else "not_supplied",
                                      "value": supplied or None}
     return bundle
+
+
+def fetch_entry(source, namespace, external_id, bounds, context, transport):
+    """GetEntry from the pinned vendor SDK; metadata only, within the configured folder."""
+    from .account_api import reject_credential_echo
+
+    _, parent_id, base = repository_source(source)
+    if not isinstance(external_id, str) or re.fullmatch(r"[1-9][0-9]{0,18}", external_id) is None:
+        raise ValueError("Repository entry detail requires a positive decimal entry ID string.")
+    if source.body or bounds.date_from or bounds.date_to or bounds.checkpoint:
+        raise ValueError("Repository entry metadata accepts no meeting body/date or continuation filter.")
+    token = context.credentials.get("laserfiche_token")
+    if not isinstance(token, str) or not token or any(c in token for c in "\r\n\0"):
+        raise ValueError("Repository metadata retrieval requires a trusted repository.Read token.")
+    coverage = {"sources": [{**source.public_dict(), "namespace": namespace}],
+                "scope": "one Repository entry's metadata in the configured folder",
+                "external_id": external_id, "parent_folder_id": str(parent_id),
+                "catalog_complete": False, "content_fetched": False, "pages": 0, "failures": []}
+    if context.check_cancelled():
+        return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
+    url = base.split("/Entries/", 1)[0] + "/Entries/" + external_id
+    deadline = monotonic() + bounds.deadline_seconds
+    try:
+        response = transport.request(url, headers={"Accept": "application/json",
+            "Authorization": "Bearer " + token}, byte_limit=bounds.parser_bytes,
+            deadline_seconds=bounds.deadline_seconds,
+            allowed_origins=("https://api.laserfiche.com",), allow_redirects=False)
+        coverage["pages"] = 1
+        if context.check_cancelled():
+            return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
+        if response.status != 200:
+            raise RetrievalError("provider_http_error", status=response.status)
+        if (response.url != url or len(response.content) > bounds.parser_bytes
+                or monotonic() >= deadline):
+            raise ValueError("Repository detail response exceeded its URL/byte/deadline contract.")
+        reject_credential_echo(response.content, {"token": token})
+        value = json.loads(response.content)
+        if not isinstance(value, dict) or type(value.get("id")) is not int or value["id"] != int(external_id):
+            raise ValueError("Repository entry response did not identify the requested entry.")
+        bundle = entry_bundle(source, namespace, response.content)
+        if (len(bundle["records"]) != 1
+                or bundle["records"][0]["identity"]["external_id"] != external_id):
+            raise ValueError("Repository detail must normalize exactly the requested entry.")
+        bundle["capture"]["retrieval_url"] = url
+        result = _bounded_parser_result(OperationResult("completed", bundle), bounds, context)
+        if result.status != "completed":
+            raise ValueError("Repository normalized entry exceeded configured bounds.")
+        return OperationResult("completed", bundle, coverage=coverage, operation_id=context.operation_id)
+    except Exception as error:
+        code = error.code if isinstance(error, RetrievalError) else "repository_entry_failed"
+        details = {"http_status": error.status} if isinstance(error, RetrievalError) and error.status else {}
+        return OperationResult("failed", errors=(Error(code,
+            "Repository entry metadata could not be retrieved or verified.", retryable=True,
+            source=url, details=details),), coverage={**coverage, "failures": [code]},
+            operation_id=context.operation_id)
 
 
 def discover_children(source, namespace, bounds, context, transport, *, saved=None, record_types=None):

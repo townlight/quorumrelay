@@ -136,6 +136,16 @@ children = engine.discover(repository, bounds=Bounds(max_pages=5, max_records=10
 
 This distinct account API path requires `repository.Read` and an explicitly configured repository/folder URL. It lists direct children only and follows provider-issued same-folder OData nextLinks under byte/page/record/deadline bounds. No public WebLink-to-repository account relationship is guessed. Document, folder and shortcut IDs are repository-wide; current parent folder is a relationship so moving an entry does not change its identity. Creation/modification times and supplied fields remain metadata, never inferred meeting dates. File content, subtype expansion and recursive traversal are not requested by this operation. The saved format is `laserfiche-repository-entries-json`. Canonical account namespaces are `//api.laserfiche.com/repository/v2/Repositories/{repositoryId}`; writes route the repository separately while enforcing the exact configured namespace/credential grant, and retain explicit legacy write-only repository slug configurations. Public WebLink identities are unchanged. No authorized Repository account token has been supplied, so live account acceptance remains unrun.
 
+For a selected child, `engine.fetch_record(repository, "71", context=...)` reads
+`GET /repository/v2/Repositories/{repositoryId}/Entries/{entryId}` from the pinned
+vendor SDK. Use the same trusted `repository.Read` token context shown above.
+The response must identify entry 71 and parent folder 54; an entry moved elsewhere
+requires an explicitly updated source folder. This returns metadata and an exact
+capture, with `content_fetched: false`; it does not download the document or infer
+a meeting date. The existing `laserfiche-repository-entries-json` parser replays
+both children responses and single Entry responses offline. Namespace, caller,
+response URL, token privacy and byte/deadline bounds remain enforced.
+
 Official read contracts: [Legistar Votes](https://webapi.legistar.com/Help/Api/GET-v1-Client-EventItems-EventItemId-Votes), [Legistar RollCalls](https://webapi.legistar.com/Help/Api/GET-v1-Client-EventItems-EventItemId-RollCalls), [Laserfiche folder contents](https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_get-folder-listing/).
 
 

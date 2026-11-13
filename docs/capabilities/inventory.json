@@ -19324,6 +19324,21 @@
               }
             ]
           }
+        },
+        {
+          "id": "lf-repository-get-entry-2026-11-12",
+          "url": "https://raw.githubusercontent.com/Laserfiche/lf-api-js/3a40996613f6f1a1b2fa90cd7d31c512a149ee25/packages/lf-repository-api-client-v2/index.ts",
+          "title": "Pinned official Repository SDK GetEntry and scoped synthetic engine execution",
+          "kind": "official_documentation",
+          "observation_date": "2026-11-13",
+          "proof_level": "vendor_documented_contract_and_synthetic_engine_execution",
+          "findings": [
+            "GET of one supplied entry ID in an explicitly configured Repository folder preserves raw metadata and stable repository-wide identity.",
+            "Eleven new synthetic cases plus eight existing discovery cases pass; no provider requests were made."
+          ],
+          "limits": "Metadata only. Parent must match the configured folder. Does not prove file content, WebLink authorization mapping or whole-provider acceptance.",
+          "receipt_path": "docs/verification/laserfiche-entry-metadata-2026-11-13.json",
+          "receipt_sha256": "9d81e0c25288ce93d98c2a876f1ee218d931059e081e94ffedaa80cebd10a03c"
         }
       ],
       "tenants": [
@@ -19400,27 +19415,28 @@
         },
         "fetch": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "lf-export"
+            "lf-export",
+            "lf-repository-get-entry-2026-11-12"
           ],
-          "details": "Authenticated Repository v2 path documented; separate browser/saved WebLink route required for older public tenant. No credentialed acceptance.",
+          "details": "Repository v2 fetch_record now implements the pinned vendor GetEntry contract for one exact supplied entry ID within its configured folder, preserving metadata, original fields and raw capture. A trusted repository.Read token is required at runtime; synthetic verification does not require an account. Separate guarded/saved WebLink routes retain their own scope. No original file content is fetched by this new metadata operation.",
           "dependencies": [
             "Cloud repository ID/OAuth scoped access or authorized self-hosted API version",
             "WebLink cookie/browser capture for public folders"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "Broader original-file/content retrieval and guarded WebLink outcomes remain separate from this completed metadata contract.",
+            "Whole-provider field/tenant completeness is not established by one scoped entry contract."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "vendor_documented_get_entry_and_scoped_synthetic_engine_execution; historical_weblink_observations",
           "tenant_scope": [
             "https://miweblink.metro-inet.us/sapublic/Browse.aspx?startid=207&cr=1",
             "https://weblink.ci.northfield.mn.us/WebLink/Browse.aspx?dbid=0&startid=92&row=1&cr=1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Synthetic GetEntry and negative cases executed locally from the pinned official SDK contract. No vendor account requested or live mutation performed.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"

@@ -617,6 +617,9 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 
 ## F22 Laserfiche WebLink (`laserfiche-weblink`)
 
+Current source follow-up: the pinned official Repository SDK GetEntry contract is implemented for one exact selected entry in the configured folder, with synthetic metadata/readback and offline replay evidence in `docs/verification/laserfiche-entry-metadata-2026-11-13.json`. This closes only that metadata retrieval gap. It adds no file download, native search, inferred WebLink account mapping or live-tenant acceptance claim.
+
+
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"WebLink cookie/browser session may be required; saved capture baseline remains.","outbound":"Cloud OAuth v2 scopes AND principal ACL; self-hosted API deployment/version separate. No access supplied."}}
 Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}

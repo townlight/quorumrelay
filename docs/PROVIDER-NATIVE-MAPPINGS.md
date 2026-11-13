@@ -52,6 +52,19 @@ Input format: `laserfiche-listing-json`, based on independently captured public 
 
 Each dated document entry preserves its provider entryId as external_id, matching the legacy per-document identity model. The document name provides meeting_date with `meeting_date_derivation=dated_document_name`. ElectronicFile.aspx versus DocView.aspx follows supplied isEdoc. Original entry fields are retained. Undated or nonmeeting entries remain explicit unclassified coverage. Folder failures/depth/page/date bounds cannot become a complete catalog.
 
+## Laserfiche Repository entry metadata
+
+The account API is separate from WebLink. Given an explicit configured v2 folder
+Children URL, `fetch_record` uses the same repository and one caller-supplied
+positive entry ID. The pinned vendor SDK documents GetEntry and repository.Read.
+Both returned entry ID and parent folder must match; the repository-wide source
+identity keeps its parent as a relationship. Unknown fields, supplied revisions
+and exact response bytes are retained. `laserfiche-repository-entries-json`
+normalizes either the OData children wrapper or one Entry object. Neither path
+retrieves file content or treats creation/modification time as a meeting date.
+See [the SDK example](SDK.md#related-legistar-records-and-repository-folder-reads)
+and [scoped synthetic evidence](verification/laserfiche-entry-metadata-2026-11-13.json).
+
 ## Discovery output and v1 ownership
 
 `discover.data` contains `source`, aggregate `records`, exact page `captures`, and page `bundles`. Every page bundle retains its own source namespace and compatibility projection. Aggregation filters rich records but does not rewrite the original page compatibility output, so callers must not import unfiltered compatibility rows blindly.

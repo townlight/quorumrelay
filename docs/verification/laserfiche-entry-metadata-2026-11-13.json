@@ -1,0 +1,41 @@
+{
+  "status": "PASS_SYNTHETIC_SCOPED_ENTRY_METADATA",
+  "source_baseline": "24c81cb",
+  "contract": {
+    "source_url": "https://raw.githubusercontent.com/Laserfiche/lf-api-js/3a40996613f6f1a1b2fa90cd7d31c512a149ee25/packages/lf-repository-api-client-v2/index.ts",
+    "sha256": "de9970a4b12c8b1fa73dcc9cf51bc4bc24618774f9b20ce40ceab9a3d386b762",
+    "method": "GET /repository/v2/Repositories/{repositoryId}/Entries/{entryId}",
+    "vendor_method": "getEntry",
+    "sdk_lines": "7057-7140",
+    "oauth_scope": "repository.Read"
+  },
+  "source_sha256": {
+    "src/civic_data_connectors/providers/repository.py": "aa3753bc25fdf3e219ccaeb06a1b84c8191896e91c2a21ecec7faf7aa3905ab7",
+    "src/civic_data_connectors/providers/retrieval.py": "26a95e51aa13500b2a73e16aa188e4dbdc8535327697db0b939250b86536aa86",
+    "tests/test_repository_fetch.py": "5f0d071487aea925a0db397fb4d9f311ef4df108588e68c3af9e1e9a962df4dc"
+  },
+  "execution": {
+    "new_cases_passed": 11,
+    "unchanged_repository_discovery_cases_passed": 8,
+    "total_passed": 25,
+    "command": "pytest tests/test_repository_fetch.py tests/test_repository_discovery.py tests/test_capabilities.py -q",
+    "log": "C:/Users/scott/Documents/Codex/2026-11-12/re/work/quorumrelay/repository-fetch.log",
+    "scope": [
+      "exact entry/parent/namespace identity and unknown fields",
+      "raw capture and offline single-entry replay",
+      "invalid IDs and wrong identity/type/parent rejected",
+      "denied scopes/missing tokens/cancellation/byte bounds/response URL",
+      "credential echo rejection and unsupported filters",
+      "existing folder discovery regression",
+      "Unknown single-entry fields, including a field named value, are retained without being mistaken for a collection."
+    ],
+    "metadata_capability_regression_cases_passed": 6
+  },
+  "limitations": [
+    "Synthetic transport only; no live provider request",
+    "Entry metadata only, not original document bytes or supplied page text",
+    "Configured folder parent must match; no inferred WebLink relationship",
+    "No whole-provider/catalog/field completeness or installed acceptance claim"
+  ],
+  "completed_local_date": "2026-11-13"
+}
