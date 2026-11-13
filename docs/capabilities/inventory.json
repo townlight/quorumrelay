@@ -14611,6 +14611,19 @@
           "observed": "2026-11-12 bounded public read",
           "observation_date": "2026-11-12",
           "access_scope": "bounded_public_read_only"
+        },
+        {
+          "id": "utah-supplied-detail-2026-11-12",
+          "url": "https://www.utah.gov/pmn/sitemap/notice/1101977.html",
+          "title": "Pinned Utah notice supplied labeled fields",
+          "kind": "implementation_evidence",
+          "observed": "Four distinct focused saved/default, search/export, revision and source/capture-binding cases passed across runs. No live request.",
+          "findings": "explicit Public Body name; Entity and Government Type; literal Notice Type(s), Notice Posted On, Notice Last Edited On; Meeting Location prose excluding map-link button labels; labeled fields/attributes/link attributes retained without inferring staff workflow or vote semantics",
+          "limits": "Saved/default supplied detail only; not full catalog, remote writes or provider-wide schema acceptance; No inferred notice status enum, timezone, item hierarchy, actions, votes or parent meeting; No frozen wheel or installed candidate equivalence",
+          "receipt_path": "docs/verification/utah-supplied-detail-2026-11-12.json",
+          "receipt_sha256": "3ee751e202389c751d48db4e16472561439d8920da6280b5a98d51d752671d78",
+          "observation_date": "2026-11-12",
+          "proof_level": "synthetic_saved_capture_engine_not_live_acceptance"
         }
       ],
       "tenants": [

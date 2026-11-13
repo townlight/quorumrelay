@@ -383,6 +383,9 @@ class Engine:
             elif source.provider == "digital-towpath":
                 from .providers.towpath_detail import enrich_bundle
                 data = enrich_bundle(data)
+            elif source.provider == "utah-public-notice":
+                from .providers.utah_detail import enrich_bundle
+                data = enrich_bundle(data)
             return OperationResult(status, data, coverage=coverage,
                                    operation_id=context.operation_id)
         except (compat.ImportInputError, ValueError, TypeError) as error:
