@@ -13,7 +13,7 @@ from time import monotonic
 from urllib.parse import parse_qs, urlencode, urljoin, urlsplit
 
 from ..engine import canonical_hash, source_identity_key
-from ..models import Bounds, Error, OperationResult
+from ..models import Bounds, Error, OperationResult, Source
 from .contracts import PublicTransport, RetrievalError, _origin
 from .identification import FORMATS, configured_source, validate_source, validate_url
 from .native import parse_native
@@ -438,9 +438,9 @@ def record_day(record):
             (normalized.get("scheduled_start") or normalized.get("source_start") or "")[:10])
 
 
-def discover(engine, request, content, context, *, transport=None, browser=None):
-    source = configured_source(request["source"])
-    namespace = validate_source(source, context, content)
+def discover(engine, request, content, context, *, transport=None, browser=None, validated_namespace=None):
+    source = Source.from_dict(request["source"]) if validated_namespace is not None else configured_source(request["source"])
+    namespace = validated_namespace if validated_namespace is not None else validate_source(source, context, content)
     bounds = Bounds(**request.get("bounds", {}))
     input_format = source.input_format or DEFAULT_FORMAT[source.provider]
     if (source.provider == "novusagenda" and source.input_format is None

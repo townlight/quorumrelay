@@ -55,9 +55,11 @@ def check_connector(connector: Connector) -> list[str]:
         failures.append("provider must be a nonempty string")
     arities = {"capabilities": 0, "identify": 1, "discover": 3, "fetch": 4, "parse": 5,
                "native_search": 4, "export": 3, "plan_write": 3, "commit_write": 3}
-    # Optional request-aware discovery preserves the original Connector protocol.
+    # Optional discovery hooks preserve the original Connector protocol.
     if hasattr(connector, "discover_request"):
         arities["discover_request"] = 4
+    if hasattr(connector, "discover_content"):
+        arities["discover_content"] = 6
     for method, arity in arities.items():
         hook = getattr(connector, method, None)
         if not callable(hook):

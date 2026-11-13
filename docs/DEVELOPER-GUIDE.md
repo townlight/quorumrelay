@@ -473,6 +473,17 @@ discovery request fields such as `record_types` may additionally implement
 optional hook, and `check_connector` checks its four-argument shape when present.
 Cablecast uses it to return only requested meeting records; requests containing
 only other record types return `unsupported` without fetching the listing.
+For supplied saved bytes, an extension may also implement
+`discover_content(engine, source, request, content, bounds, context)`. The engine
+prefers this hook when direct `content` bytes or a `content_base64` request field
+are supplied; the hook receives direct bytes in `content` and the original request
+(including encoded content, if provided). It must validate encoded content before
+use. With neither supplied, normal request-aware or legacy discovery is unchanged.
+`check_connector` validates its six-argument shape when present. Cablecast uses
+this hook to parse saved show/list captures without a provider network request,
+with shared selection, filters, bounds and checkpoints; coverage is partial and
+does not claim a complete upstream catalog. This is current source behavior, not
+a claim about an older installed package.
 An additive parser can be registered with `engine.register_parser`; baseline
 formats cannot be replaced through this path. The runnable
 [example connector](../examples/example_connector.py) demonstrates registration.

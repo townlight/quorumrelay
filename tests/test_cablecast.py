@@ -299,3 +299,35 @@ def test_no_native_search_write_or_export_is_claimed():
     assert plan.status in {"unsupported", "failed"}
     search = engine.execute("search", {"native": True, "source": SOURCE.public_dict(), "query": {"terms": ["council"]}})
     assert search.status == "unsupported"
+
+
+def test_saved_discovery_uses_no_network_and_preserves_capture_filters_and_checkpoint():
+    import base64
+    from dataclasses import replace
+
+    class NoNetwork:
+        def request(self, *args, **kwargs):
+            raise AssertionError("saved capture must not use network")
+
+    engine = create_engine(provider_transport=NoNetwork())
+    source = replace(SOURCE, input_format="cablecast-shows-json")
+    request = {"source": source.public_dict(), "bounds": {"max_records": 1}, "record_types": ["meeting"]}
+    first = engine.execute("discover", request, content=SHOWS)
+    assert first.status == "partial" and len(first.data["records"]) == 1
+    assert first.data["captures"][0]["sha256"] == hashlib.sha256(SHOWS).hexdigest()
+    assert first.coverage["checkpoint"] and "not a complete upstream catalog" in first.coverage["scope"]
+    assert first.coverage["catalog_complete"] is False and first.coverage["source_complete"] is False
+    resumed = engine.execute("discover", {**request, "bounds": {"max_records": 1,
+        "checkpoint": first.coverage["checkpoint"]}, "content_base64": base64.b64encode(SHOWS).decode()})
+    assert resumed.status == "partial" and len(resumed.data["records"]) == 1
+    assert resumed.data["records"][0]["identity"] != first.data["records"][0]["identity"]
+    filtered = engine.execute("discover", {"source": source.public_dict(), "record_types": ["document"],
+        "bounds": {"date_from": "2026-11-01", "date_to": "2026-11-30"}}, content=SHOWS)
+    assert filtered.status == "partial" and not filtered.data["records"]
+    assert filtered.coverage["filtered_records"] > 0
+    limited = engine.execute("discover", {"source": source.public_dict(), "bounds": {"parser_bytes": 10}}, content=SHOWS)
+    assert limited.status == "failed"
+    invalid = engine.execute("discover", {"source": source.public_dict(), "content_base64": "%%%"})
+    assert invalid.status == "failed"
+    malformed = engine.execute("discover", {"source": source.public_dict()}, content=b"not-json")
+    assert malformed.status == "failed" and malformed.errors

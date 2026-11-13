@@ -86,6 +86,17 @@ Write plans/receipts need create/CAS before sending requests. Persist exact immu
 
 `Connector` protocol in `extensions.py` declares provider, `capabilities`, `identify`, `discover`, `fetch`, `parse`, `native_search`, `export`, `plan_write`, `commit_write`. `check_connector()` validates signatures/callability without network actions. Unsupported hooks return explicit `OperationResult.unsupported`, not fake success. Registration requires no transport edits. Provider discovery owner can expose richer orchestration through registered operation handlers while implementing these hooks.
 
+The optional `discover_request(source, request, bounds, context)` hook receives
+request-aware live discovery. The optional six-argument
+`discover_content(engine, source, request, content, bounds, context)` hook takes
+precedence when direct content bytes or a `content_base64` field are supplied;
+encoded content remains in the request for the hook to validate and decode. Absent
+saved content, the request-aware hook or original three-argument `discover` is
+used. Neither hook is required by the original Connector protocol, and
+`check_connector` checks each optional hook when present. Cablecast saved show and
+list capture discovery uses no provider network request and reports that the
+capture does not establish upstream catalog completeness.
+
 Registered custom source providers dispatch identify/discover/fetch/parse directly; `search` with `native:true` invokes native search, and `export` with `provider_specific:true` invokes provider export. Restricted custom requests require an explicit configured namespace. Write hooks cannot bypass the shared write coordinator: register a typed WriteAdapter as well for supported writes. The synthetic example connector proves read registration without transport changes.
 
 ## Safe request extensions

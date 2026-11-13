@@ -200,6 +200,9 @@ class Engine:
             return OperationResult(identified.status, {"source": source.public_dict()},
                                    identified.errors, identified.coverage, context.operation_id)
         if operation == "discover":
+            content_hook = getattr(connector, "discover_content", None)
+            if callable(content_hook) and (content is not None or "content_base64" in request):
+                return content_hook(self, source, request, content, bounds, context)
             request_hook = getattr(connector, "discover_request", None)
             if callable(request_hook):
                 return request_hook(source, request, bounds, context)

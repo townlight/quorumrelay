@@ -1,0 +1,85 @@
+{
+  "status": "PASS_SOURCE_SAVED_DISCOVERY_AND_REFERENCE_CLIENT_BOUNDARY",
+  "core_baseline": "ca395eb21fe1c1a4dee859598f9d0ec66881a1a2",
+  "reporter_commit": "c3578e01c66f39567d7cd7b2f7a7672d1923858a",
+  "core_sha256": {
+    "src/civic_data_connectors/engine.py": "86a8c5ec503284831a821981731bd460558d59b484130de56645e898933adf12",
+    "src/civic_data_connectors/extensions.py": "c93e9edd49909e83a826c14a05d0e66279c96aaaa0399d2fc0c6a2662cf66213",
+    "src/civic_data_connectors/providers/discovery.py": "ad57fe97c925fa594db7ee2dcfedc0e09676c861285b7c59fd35edeef10eb2ed",
+    "src/civic_data_connectors/providers/cablecast.py": "960424b83ae7c57244a3bd1e1018b7e76cb2ec139aa083ee3f06485f1f01c05c",
+    "tests/test_cablecast.py": "209e8c322a898608a62f6a4e9f84d389a986d76add935ec42f7a6f663b59e4d0",
+    "tests/test_extension_dispatch.py": "d2e0f6c8b7a467fb267fe7f2778e8062ec6368b7f406c0b848792c46e8f3e2b5"
+  },
+  "reporter_sha256": {
+    "src/lib/news/civic-connectors.ts": "9f78117b937a12e2cf6aadf0ed572ad1d5210a956942f19b9c053b3790519337",
+    "scripts/civic-connectors-integration.mjs": "0335a6590e38b44e990d283d7398db948a77d630f2c6daa1ddbc016b3949c6e7",
+    "scripts/civic-connectors-service.fixture.py": "9aff35613a0b0dd92aafd3628d574c81897f91eb30acd69184bc1b066cf18814",
+    "docs/civic-connectors.md": "6fad52582e8bf60b311a6824b4807498084e6e9048c124792be3f3dc95e90a7d"
+  },
+  "reproductions": [
+    "Actual TownReporter account fetch sent bounds:{} despite five configured numeric ceilings; recorded reporter-bounds-repro.log.",
+    "Approved Cablecast saved-read via runConnectorRead attempted provider network instead of supplied capture; fixture denied it. Direct normalize was not accepted as a substitute."
+  ],
+  "implementation": [
+    "TownReporter forwards numeric bounds for fetch and omits discovery-only dates/checkpoint; separate provider resource/ID/offset/filters preserved.",
+    "Optional six-argument discover_content hook receives direct/encoded saved content; original mandatory Connector protocol and legacy discovery unchanged. Conformance validates optional callable/signature.",
+    "Cablecast validates namespace and reuses shared saved parsing/selection/filter/bounds/checkpoint logic without provider requests, always disclosing incomplete upstream catalog/source scope.",
+    "Reporter preserves all31baselineproviderIDs and34formatidentities while allowing only approved Cablecast additive provider. Runtime provider count is reported accurately."
+  ],
+  "core_checks": [
+    {
+      "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\cablecast-saved-affected.xml",
+      "sha256": "2d3af6d3ebc4d8cf7d41f6a901a7495e79db73a2bb1987483e8c676e2e6ba156",
+      "passed": 31,
+      "count_policy": "Overlapping affected runs, not additive."
+    },
+    {
+      "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\cablecast-hook-final.xml",
+      "sha256": "4147980b725e8fdf0fc1586db9a8a8263a24f917eef76ccd105eec551e826dbf",
+      "passed": 30,
+      "count_policy": "Overlapping affected runs, not additive."
+    }
+  ],
+  "core_commands": [
+    "pytest -q tests/test_cablecast.py tests/test_extension_dispatch.py tests/test_reader_storage_workflows.py",
+    "pytest -q tests/test_cablecast.py tests/test_extension_dispatch.py",
+    "ruff check src tests scripts examples"
+  ],
+  "reporter_checks": {
+    "focused_integration_log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\reporter-retained-reader-integration.log",
+    "log_sha256": "04e2be231b314b1de5d14eb0b8040675d478667010adf60df9c9ff50afb03798",
+    "result": {
+      "status": "PASS",
+      "originalFormats": 0,
+      "providers": 32,
+      "cablecastCaptureSha256": "ed6ffbe01b366f3eae1f38abbedcba6ad1dc08881de79e2eeef6576f1b9f520a",
+      "partialCoverage": true,
+      "isolation": true,
+      "duplicateRetry": true,
+      "serviceRestart": true,
+      "explicitMockWriteReceipt": true,
+      "publication": "none",
+      "reviewLead": "explicit idempotent action only",
+      "liveAcceptance": "NOT_RUN"
+    },
+    "affected_tests": "7 passed using safe runner; reporter-bounds-tests.log",
+    "typecheck": "PASS npm run typecheck and npm run typecheck:test",
+    "affected_eslint": "PASS applicable TS/MJS; Python not an ESLint input",
+    "boundary": "Actual PGlite -> pinned Node client -> loopback Python current source -> persistence/reopen/search/ZIP; no provider network for Cablecast. All5numericbounds asserted in serialized HTTP request, byte/deadline limits also observed by synthetic provider.",
+    "new_account_cases": 3,
+    "baseline_scope": "34 identity checks only in focused run, no reexecution of all34 format workflows."
+  },
+  "capture": {
+    "path": "tests/fixtures/cablecast/show-746.json",
+    "sha256": "ed6ffbe01b366f3eae1f38abbedcba6ad1dc08881de79e2eeef6576f1b9f520a",
+    "native_id": "746"
+  },
+  "postcheck_metadata_only_changes": "Capability description clarified live versus saved scope; final blank line removed from integration script. Behavioral paths unchanged after passing checks.",
+  "limits": [
+    "Source evidence, not new packaged/installed/published release; dev11 client pin unchanged and older service artifacts lack new source.",
+    "Capture metadata/text and links only; no video/caption download, rendering, transcription or Cablecast writes.",
+    "No full required/hosted CI or native acceptance; other vendor contracts/four final consumer/package/delivery outcomes remain incomplete.",
+    "Fixture services stopped and owned failed-run scratch paths removed by implementing agent."
+  ],
+  "completed_local_date": "2026-11-13"
+}

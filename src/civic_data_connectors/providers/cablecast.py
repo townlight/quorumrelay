@@ -460,8 +460,10 @@ class CablecastConnector:
             "aliases": [], "baseline_formats": [], "roster": "additive_typed_connector_outside_the_31_baseline_families",
             "operations": {
                 "identify": {**reads, "details": "*.cablecast.tv host shape; no network request."},
-                "discover": {**reads, "details": "Bounded public shows listing with date filter; recordings are "
-                             "watch-page links; copies of one meeting collapse to the copy with a caption playlist."},
+                "discover": {**reads, "details": "Bounded live shows listing with date filter; recordings are "
+                             "watch-page links; live copies of one meeting collapse to the copy with a caption playlist. "
+                             "Saved show/list captures use bounded filtering and checkpoints without provider network "
+                             "requests; capture coverage does not establish a complete upstream catalog."},
                 "fetch": {**reads, "details": "One show by ID: video file, HLS and caption playlist links."},
                 "parse": {**reads, "details": "Saved shows list JSON (cablecast-shows-json) and one show "
                           "JSON (cablecast-show-json); metadata and links, not caption text."},
@@ -490,6 +492,16 @@ class CablecastConnector:
 
     def discover(self, source, bounds, context):
         return self.discover_request(source, {}, bounds, context)
+
+    def discover_content(self, engine, source, request, content, bounds, context):
+        # Reuse the shared saved-capture selection, filtering and checkpoint semantics.
+        namespace = self._namespace(source)
+        from .discovery import discover
+        if source.input_format is None:
+            request = {**request, "source": {**request["source"], "input_format": SHOWS_FORMAT}}
+        result = discover(engine, request, content, context, validated_namespace=namespace)
+        result.coverage.update({"catalog_complete": False, "source_complete": False})
+        return result
 
     def discover_request(self, source, request, bounds, context):
         namespace = self._namespace(source)

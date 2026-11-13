@@ -56,3 +56,32 @@ def test_optional_discovery_hook_must_accept_the_declared_arguments():
     plugin.discover_request = lambda: None
     assert check_connector(plugin) == [
         "discover_request must accept the 4 positional arguments declared by Connector"]
+
+
+def test_content_aware_discovery_is_opt_in_and_receives_original_bytes():
+    plugin = connector()
+    received = []
+
+    def discover_content(engine, source, request, content, bounds, context):
+        received.append((request, content))
+        return OperationResult("partial", {"saved": True})
+
+    plugin.discover_content = discover_content
+    owner = Engine(connectors=(plugin,))
+    request = {"source": {"provider": plugin.provider, "url": "https://example.org"}}
+    assert owner.execute("discover", request, content=b"saved").data == {"saved": True}
+    assert received == [(request, b"saved")]
+    assert owner.execute("discover", request).status == "completed"
+
+
+def test_optional_content_discovery_hook_conformance():
+    from civic_data_connectors.extensions import check_connector
+
+    plugin = connector()
+    plugin.discover_content = lambda: None
+    assert check_connector(plugin) == [
+        "discover_content must accept the 6 positional arguments declared by Connector"]
+    plugin.discover_content = None
+    assert check_connector(plugin) == ["discover_content must be callable"]
+    plugin.discover_content = lambda engine, source, request, content, bounds, context: None
+    assert check_connector(plugin) == []
