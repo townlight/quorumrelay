@@ -1,4 +1,10 @@
-# QuorumRelay execution state
+# Historical dev8 build and publication snapshot
+
+This file preserves the November 12 dev8/1.8.5 build and publication record below; its "current", "in progress", guest-lifecycle and access-gate statements describe that historical checkpoint. They are not the current development authorization or completion verdict. Subsequent source work and Sandbox cleanup do not rewrite the immutable artifact identities or the evidence recorded here.
+
+The later owner amendment accepts vendor-documented synthetic execution as verification for provider discovery, read, search, import, export and write operations. Live provider observations are optional supporting evidence; credential acquisition and live-tenant testing are not completion gates. Actual reference-application persistence/isolation/authorization, applicable Windows installed/signature/recovery proof and authorized delivery remain required. See the current [write contract](WRITE-CONTRACT.md) and [developer guide](DEVELOPER-GUIDE.md) for source-level semantics and limits. Current source includes post-dev8 work that has not been rebuilt into these frozen artifacts; unresolved vendor contracts and coherent current-source integration/delivery remain incomplete. No new release or publication is claimed by this historical record.
+
+## Original snapshot (preserved)
 
 Updated 2026-11-12. Scott authorized public repository visibility, comprehensive documentation and deployment of the landing website. Sol owns publication; Terra owns the site and Pages workflow; Luna owns the manual and architecture. Provider test-tenant/write verification is deferred follow-up, not a publication gate. Existing immutable dev8 and signed Townlight 1.8.5 artifacts remain unchanged. The previous finite implementation batch and installed acceptance are complete within their recorded limits.
 
