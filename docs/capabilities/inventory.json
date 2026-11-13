@@ -394,6 +394,62 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "legistar-documented-entity-synthetic-subset",
+          "url": "https://webapi.legistar.com/Help/Api/POST-v1-Client-Events",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/current-source-required-checks-2026-11-12.json",
+          "receipt_sha256": "8c3be946419ea4231059d675af2de603a5c4b65ce5beea13767d3851b41589d1",
+          "limits": "Only the explicit fixture fields/routes and coordinator outcomes below are accepted, not all model fields, tenant behavior, catalogs or live transactions. Current test-file bindings are provenance references; the named test ASTs match the executed source.",
+          "synthetic_execution": {
+            "provider": "legistar",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "agenda_item",
+              "agenda_item_linked_matter",
+              "agenda_item_supplied_matter_text",
+              "linked_meeting_document",
+              "meeting",
+              "meeting_item_action_history",
+              "roll_call",
+              "vote"
+            ],
+            "scope": "Eight native entity types, create/update wire routes and coordinator plan/commit/readback; fixture sample fields only (event date/location, item title/parent, attachment name/binary, matter type/status/body/title, matter text, history action, vote/rollcall person/value/result). Does not execute public upload spelling or prove every declared field.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
+                "passed": 16,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_write_providers.py::test_legistar_sixteen_documented_entity_routes (16 parametrizations)"
+                ],
+                "scope": "named passing subset of recorded full execution, not total suite result"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/provider-api-contracts.json",
+                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_write_providers.py",
+                "sha256": "6038d98ff21b633874f90c18ba0f47fd4d8af030ca8454948c41c8912f93600a"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -604,18 +660,16 @@
           "capability_status": "documented",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "legistar-events-post"
+            "legistar-events-post",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
-          "dependencies": [
-            "No authorized provider test tenant or credentials supplied",
-            "Provider test tenant/write credentials and conflict semantics absent"
-          ],
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields. Existing 16-case documented synthetic engine subset verifies create/update sample fields and readback, as attributed by evidence; not whole-model or live acceptance.",
+          "dependencies": [],
           "remaining_verification": [
-            "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
+            "Only entity fixture sample fields are attributed; broader model-field coverage and undocumented media binary import semantics are not inferred."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://webapi.legistar.com/v1/olympia"
           ],
@@ -630,18 +684,16 @@
           "capability_status": "documented",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "legistar-events-put"
+            "legistar-events-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
-          "dependencies": [
-            "No authorized provider test tenant or credentials supplied",
-            "Provider test tenant/write credentials and conflict semantics absent"
-          ],
+          "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields. Existing 16-case documented synthetic engine subset verifies create/update sample fields and readback, as attributed by evidence; not whole-model or live acceptance.",
+          "dependencies": [],
           "remaining_verification": [
-            "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
+            "Only entity fixture sample fields are attributed; broader model-field coverage and undocumented media binary import semantics are not inferred."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://webapi.legistar.com/v1/olympia"
           ],
@@ -659,10 +711,7 @@
             "legistar-attachment-post"
           ],
           "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
-          "dependencies": [
-            "No authorized provider test tenant or credentials supplied",
-            "Provider test tenant/write credentials and conflict semantics absent"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
           ],
@@ -1119,13 +1168,14 @@
             }
           ],
           "evidence_ids": [
-            "legistar-events-post"
+            "legistar-events-post",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
-          "notes": "",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
+          "notes": " Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -1136,9 +1186,9 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "referenced_contract_or_ui_documentation",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "POST",
@@ -1241,13 +1291,14 @@
             }
           ],
           "evidence_ids": [
-            "legistar-events-put"
+            "legistar-events-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
-          "notes": "Do not infer idempotency or automatic RowVersion conflicts.",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
+          "notes": "Do not infer idempotency or automatic RowVersion conflicts. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -1258,9 +1309,9 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "referenced_contract_or_ui_documentation",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "PUT",
@@ -1381,13 +1432,14 @@
             }
           ],
           "evidence_ids": [
-            "legistar-items-post"
+            "legistar-items-post",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
-          "notes": "",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
+          "notes": " Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -1398,9 +1450,9 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "referenced_contract_or_ui_documentation",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "POST",
@@ -1521,13 +1573,14 @@
             }
           ],
           "evidence_ids": [
-            "legistar-items-put"
+            "legistar-items-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
-          "notes": "",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
+          "notes": " Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -1538,9 +1591,9 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "referenced_contract_or_ui_documentation",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "PUT",
@@ -1613,7 +1666,7 @@
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
           "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
-          "notes": "Only linked meeting/agenda-item matter attachments in bounded domain; arbitrary legislative administration excluded.",
+          "notes": "Only linked meeting/agenda-item matter attachments in bounded domain; arbitrary legislative administration excluded. Binary attachment create is tested; the public upload spelling is not separately attributed by this reconciliation. Acceptance remains not_run.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -1693,13 +1746,14 @@
             }
           ],
           "evidence_ids": [
-            "legistar-attachment-put"
+            "legistar-attachment-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
-          "notes": "Never modify MatterAttachmentSort.",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
+          "notes": "Never modify MatterAttachmentSort. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -1710,9 +1764,9 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "referenced_contract_or_ui_documentation",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
           "method": "PUT",
@@ -1803,14 +1857,15 @@
             }
           ],
           "evidence_ids": [
-            "legistar-post-v1-client-matters"
+            "legistar-post-v1-client-matters",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -1820,7 +1875,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default.",
+          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -1830,7 +1885,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "agenda_item_linked_matter",
@@ -1911,14 +1967,15 @@
             }
           ],
           "evidence_ids": [
-            "legistar-put-v1-client-matters-matterid-"
+            "legistar-put-v1-client-matters-matterid-",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -1928,7 +1985,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default.",
+          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -1938,7 +1995,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "agenda_item_supplied_matter_text",
@@ -1995,14 +2053,15 @@
             }
           ],
           "evidence_ids": [
-            "legistar-post-v1-client-matters-matterid-texts"
+            "legistar-post-v1-client-matters-matterid-texts",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2012,7 +2071,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default.",
+          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2022,7 +2081,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "agenda_item_supplied_matter_text",
@@ -2079,14 +2139,15 @@
             }
           ],
           "evidence_ids": [
-            "legistar-put-v1-client-matters-matterid-texts-mattertextid-"
+            "legistar-put-v1-client-matters-matterid-texts-mattertextid-",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2096,7 +2157,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default.",
+          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2106,7 +2167,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "meeting_item_action_history",
@@ -2301,14 +2363,15 @@
             }
           ],
           "evidence_ids": [
-            "legistar-post-v1-client-matters-matterid-histories"
+            "legistar-post-v1-client-matters-matterid-histories",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2318,7 +2381,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default.",
+          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2328,7 +2391,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "meeting_item_action_history",
@@ -2523,14 +2587,15 @@
             }
           ],
           "evidence_ids": [
-            "legistar-put-v1-client-matters-matterid-histories-matterhistoryid-"
+            "legistar-put-v1-client-matters-matterid-histories-matterhistoryid-",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Write credential scope and authorized test tenant not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2540,7 +2605,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default.",
+          "notes": "Only explicit relationship to an in-scope meeting/agenda item. Do not create or administer unrelated legislation. EventItemEventId/linked MatterId relationship must be preserved and read back; broad legislative/admin fields not enabled by default. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2550,7 +2615,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "vote",
@@ -2626,14 +2692,15 @@
           ],
           "evidence_ids": [
             "legistar-votes-post",
-            "legistar-votes-put"
+            "legistar-votes-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific VoteValueId mapping are not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind the exact approved plan and EventItemId; capture returned ID/object; independently GET the parent EventItem/Votes and verify the record and supplied revision before claiming acceptance. Reconcile an ambiguous create before retry.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2643,7 +2710,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only a vote explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence.",
+          "notes": "Only a vote explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2653,7 +2720,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Vote attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration."
+          "domain_scope": "Vote attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "vote",
@@ -2729,14 +2797,15 @@
           ],
           "evidence_ids": [
             "legistar-votes-post",
-            "legistar-votes-put"
+            "legistar-votes-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific VoteValueId mapping are not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind the exact approved plan and EventItemId/VoteId; capture response; independently GET the vote and verify the parent relationship and supplied revision before claiming acceptance.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2746,7 +2815,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only a vote explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence.",
+          "notes": "Only a vote explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2756,7 +2825,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Vote attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration."
+          "domain_scope": "Vote attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "roll_call",
@@ -2832,14 +2902,15 @@
           ],
           "evidence_ids": [
             "legistar-rollcalls-post",
-            "legistar-rollcalls-put"
+            "legistar-rollcalls-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific RollCallValueId mapping are not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind the exact approved plan and EventItemId; capture returned ID/object; independently GET the parent EventItem/RollCalls and verify the record and supplied revision before claiming acceptance. Reconcile an ambiguous create before retry.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2849,7 +2920,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only a roll-call item explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence.",
+          "notes": "Only a roll-call item explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2859,7 +2930,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Roll-call item attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration."
+          "domain_scope": "Roll-call item attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         },
         {
           "entity": "roll_call",
@@ -2935,14 +3007,15 @@
           ],
           "evidence_ids": [
             "legistar-rollcalls-post",
-            "legistar-rollcalls-put"
+            "legistar-rollcalls-put",
+            "legistar-documented-entity-synthetic-subset"
           ],
-          "account_requirements": "Legistar API client and tenant write credential/entitlement with permission for this EventItem; token and tenant-specific RollCallValueId mapping are not supplied.",
+          "account_requirements": "Runtime provider-authorized account/tenant and resource permissions; credential acquisition/live testing is not a completion gate.",
           "authorized_test_access": "Vendor-documented synthetic execution accepted; live checks optional.",
           "readback_receipt": "Bind the exact approved plan and EventItemId/RollCallId; capture response; independently GET the roll-call item and verify the parent relationship and supplied revision before claiming acceptance.",
-          "verification_status": "source_mapping_with_prior_affected_synthetic_checks; see exact entity and test attribution",
+          "verification_status": "documented_sample_fields_synthetic_engine_verified",
           "implementation_status": "implemented",
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "W01",
@@ -2952,7 +3025,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Only a roll-call item explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence.",
+          "notes": "Only a roll-call item explicitly attached to an in-scope meeting agenda item. No delete or unrelated legislative administration. Required value IDs and tenant permissions need authorized read/acceptance evidence. Synthetic acceptance covers only the matching fixture sample fields, not every field_mappings entry. See attributed test/provenance.",
           "api_version": "v1",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -2962,7 +3035,8 @@
             "application/xml"
           ],
           "automatable_contract_verified": true,
-          "domain_scope": "Roll-call item attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration."
+          "domain_scope": "Roll-call item attached to an in-scope meeting agenda item; no deletes or arbitrary provider administration.",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution"
         }
       ],
       "pagination": {
@@ -8499,6 +8573,57 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "essential-multimedia-documented-synthetic-subset",
+          "url": "https://www.civicplus.help/meetings-essential/docs/public-application-programming-interface-api",
+          "title": "Documented contract and attributed existing synthetic engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-12",
+          "observation_date": "2026-11-12",
+          "access_scope": "local_synthetic_execution_no_vendor_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/current-source-required-checks-2026-11-12.json",
+          "receipt_sha256": "8c3be946419ea4231059d675af2de603a5c4b65ce5beea13767d3851b41589d1",
+          "limits": "Only the explicit fixture fields/routes and coordinator outcomes below are accepted, not all model fields, tenant behavior, catalogs or live transactions. Current test-file bindings are provenance references; the named test ASTs match the executed source.",
+          "synthetic_execution": {
+            "provider": "municode-meetings",
+            "status": "mock_passed",
+            "operations": [
+              "update"
+            ],
+            "entities": [
+              "meeting.multimedia"
+            ],
+            "scope": "Exact documented multimedia POST and GET readback; submitted URL/timestamp/default/base URL plus PublishState/provider and item display/name/type/numbering sample patches, fixed ID denial, unknown preservation, conflict/revocation/duplicate/uncertain response recovery. Does not cover meeting/item create, document upload, inferred enum semantics or unknown production hosts.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then.",
+            "checks": [
+              {
+                "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
+                "passed": 4,
+                "failed": 0,
+                "attributed_test_nodes": [
+                  "tests/test_account_apis.py::test_essential_write_full_preservation_conflict_receipt_and_no_replay",
+                  "tests/test_account_apis.py::test_essential_changed_before_and_lost_mutation_response_reconcile_without_resend",
+                  "tests/test_account_apis.py::test_essential_write_policy_and_unmapped_operations_fail_without_mutation",
+                  "tests/test_account_apis.py::test_essential_full_documented_model_field_patches_and_fixed_identity"
+                ],
+                "scope": "named passing subset of recorded full execution, not total suite result"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/provider-api-contracts.json",
+                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_account_apis.py",
+                "sha256": "cb90af8707061ce48a92c4e583db0a7a0cfba085eefd9882cc9d3a881071c7b6"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -8702,18 +8827,17 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "municode-meetings-docs",
             "municode-meetings-items"
           ],
           "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
-            "Supported integration route and conflict/idempotency contract unresolved."
+            "Exact in-domain API/file request/response contract not established by the existing Essential public API page; UI support alone is not a machine contract."
           ],
           "remaining_verification": [
-            "Validate exact entity/field permissions and plan-bound commit/readback; do not invent API payloads."
+            "Establish the original-product machine contract before implementing/testing this operation; do not infer it from multimedia update or UI workflows."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -8721,7 +8845,7 @@
             "https://meetings.municode.com/PublishPage/index?cid=EFFINGHAM&ppid=9639c19d-1d1f-4201-b8ff-163a28a35f08&p=1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Synthetic vendor-contract verification is accepted; no credential acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -8732,45 +8856,37 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "municode-essential-public-api",
-            "municode-meetings-docs",
-            "municode-meetings-items",
-            "municode-meetings-uploads"
+            "essential-multimedia-documented-synthetic-subset"
           ],
-          "details": "Source implements the documented POST /PublicApi/meeting/multimedia/update/{meetingId:guid} under EssentialWriteAdapter, patching typed submitted model fields while preserving fixed Id/MeetingId/EntityId identities and unknown fields. The public example demonstrates URL/timestamp/default/baseURL changes; other enum/mutability rules remain live-unverified. No account token or authorized test tenant was supplied.",
-          "dependencies": [
-            "Authorized test tenant/account not supplied.",
-            "Supported integration route and conflict/idempotency contract unresolved."
-          ],
+          "details": "Exact Essential multimedia typed-model update and GET readback are implemented and attributed to four existing passing synthetic coordinator cases. Fixed Id/MeetingId/EntityId and unknown fields are preserved; only submitted documented sample fields are verified, without inferred enum meaning or production hostname.",
+          "dependencies": [],
           "remaining_verification": [
-            "Keep UI-based meeting edits distinct from exact documented multimedia metadata update API",
-            "Provider token, permissions, exact response/readback and live acceptance are not supplied"
+            "No expansion to UI-only meeting/item mutations or file uploads. Vendor enum semantics not supplied by contract remain unknown."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "official_contract_and_fixture_tested_source_implementation_no_live_write_acceptance",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://meetings.municode.com/PublishPage/index?cid=EFFINGHAM&ppid=9639c19d-1d1f-4201-b8ff-163a28a35f08&p=1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Fixture-only source checks; no support-issued token or authorized test tenant.",
+          "test_access": "Vendor-documented synthetic execution/readback accepted; runtime bearer configuration remains required for actual network use.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance",
-            "Live write acceptance remains access-blocked; no tenant token or test account supplied"
+            "Docs/UI and source-baseline evidence are not acceptance"
           ]
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "municode-meetings-uploads"
           ],
           "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
-            "Supported integration route and conflict/idempotency contract unresolved."
+            "Exact in-domain API/file request/response contract not established by the existing Essential public API page; UI support alone is not a machine contract."
           ],
           "remaining_verification": [
-            "Validate exact entity/field permissions and plan-bound commit/readback; do not invent API payloads."
+            "Establish the original-product machine contract before implementing/testing this operation; do not infer it from multimedia update or UI workflows."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -8778,7 +8894,7 @@
             "https://meetings.municode.com/PublishPage/index?cid=EFFINGHAM&ppid=9639c19d-1d1f-4201-b8ff-163a28a35f08&p=1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Synthetic vendor-contract verification is accepted; no credential acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -9089,15 +9205,16 @@
             }
           ],
           "evidence_ids": [
-            "municode-essential-public-api"
+            "municode-essential-public-api",
+            "essential-multimedia-documented-synthetic-subset"
           ],
-          "account_requirements": "CivicPlus Support-issued API client id/secret to obtain a bearer token; guide example uses https://meetingsgov.devmunicode.com only. No token or production host supplied.",
-          "authorized_test_access": "not_supplied; support token/tenant absent; no live mutation",
-          "readback_receipt": "GET /PublicApi/meeting/multimedia/{meetingId:guid} is implemented as the documented readback route; no provider response/version-conflict receipt because no authorized account token was supplied.",
-          "verification_status": "official_contract_source_implemented_fixture_tested_live_acceptance_pending_access",
-          "evidence_level": "official_contract_and_fixture_tested_source_no_live_acceptance",
-          "implementation_status": "implemented_fixture_tested",
-          "acceptance_status": "not_run",
+          "account_requirements": "Runtime client credentials/Bearer and exact configured dev/example or separately established deployment origin; not a request to acquire an account.",
+          "authorized_test_access": "Vendor-documented synthetic execution/readback accepted; no account acquisition/live mutation requirement.",
+          "readback_receipt": "Documented GET multimedia readback after exact approved POST is verified in synthetic coordinator transactions, including uncertain acknowledgement reconciliation/no resend.",
+          "verification_status": "official_contract_and_scoped_synthetic_engine_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -9108,12 +9225,12 @@
             "W09",
             "W10"
           ],
-          "interface_type": "gated_sdk_contract_unverified",
+          "interface_type": "documented_automated_api",
           "contract_confidence": "exact_method_path_and_request_model_on_published_dev_host; response_and_production_tenant_not_verified",
           "method": "POST",
           "api_version": "Agenda and Meeting Management Essential Public API; numeric version not stated",
           "automatable_contract_verified": true,
-          "domain_scope": "Existing meeting multimedia URL and timestamp metadata only; no deletes, video binary uploads, meeting or agenda item mutation, or arbitrary administration."
+          "domain_scope": "Existing meeting multimedia typed model fields and item metadata only, with fixed meeting/item IDs; no meeting/item create, document or video binary upload, deletes or administration."
         }
       ],
       "pagination": {

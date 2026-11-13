@@ -63,6 +63,14 @@ def test_known_explicit_listing_and_native_write_labels_are_not_stale_access_gat
         operations = provider_capabilities(provider)["operations"]
         assert all(operations[operation]["implementation_status"] == "implemented"
                    for operation in ("create", "update", "upload"))
-        # Registration and prior bounded checks never imply blanket field acceptance.
-        assert all(operations[operation]["acceptance_status"] == "not_run"
-                   for operation in ("create", "update", "upload"))
+        # Registration is not acceptance. Only attributed Legistar sample routes
+        # have synthetic proof; every other entry keeps its existing status.
+        for operation in ("create", "update", "upload"):
+            expected = "mock_passed" if provider == "legistar" and operation != "upload" else "not_run"
+            assert operations[operation]["acceptance_status"] == expected
+    essential = provider_capabilities("municode-meetings")
+    assert essential["operations"]["update"]["acceptance_status"] == "mock_passed"
+    multimedia = [row for row in essential["outbound_mappings"] if row["acceptance_status"] == "mock_passed"]
+    assert len(multimedia) == 1 and multimedia[0]["entity"] == "meeting.multimedia"
+    assert all(row["acceptance_status"] == "not_run"
+               for row in provider_capabilities("telvue")["outbound_mappings"])

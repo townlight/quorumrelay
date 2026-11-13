@@ -4,6 +4,8 @@ Current owner amendment (2026-11-12): vendor-documented synthetic execution, rea
 
 ## F01 Legistar (`legistar`)
 
+- Current acceptance reconciliation: 16 existing documented synthetic engine cases verify eight create/update entity routes with their explicit sample fields and readback. These are now attributed as `mock_passed`, not whole-model or live proof. Public attachment `upload` spelling remains implemented but not separately execution-attributed; tested binary attachment `create` is not silently relabelled upload.
+
 - Current implementation: bounded EventBodyName native OData search is registered and labelled implemented; source/fixture coverage and the existing public query probe do not establish general agenda/full-text semantics or live writes.
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
@@ -175,6 +177,8 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 - SVG unsupported; PDF-only agendas do not accept structured items; item removal required before modification; approval/publishing rights.
 
 ## F07 Municode Meetings (`municode-meetings`)
+
+- Current acceptance reconciliation: exact Essential multimedia typed-model POST/GET readback has four attributed existing synthetic engine cases, including full documented sample patches, fixed-ID preservation, conflict/uncertain recovery and no replay. This closes that scoped synthetic outcome. Meeting/item UI edits and document uploads are separate unknown API contracts; no live account is a completion gate.
 
 Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
 Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
