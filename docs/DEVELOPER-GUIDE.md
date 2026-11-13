@@ -1,6 +1,6 @@
 # Developer integration guide
 
-Preserved package baseline: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The integrated development source retains that baseline and the approved CivicWeb/Cablecast readers, with 32 registered providers, 31 baseline families, 34 baseline formats, 44 additive parser hooks and 15 native-search handlers. It has not been packaged as a successor or delivered. Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
+Preserved package baseline: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The integrated development source retains that baseline and the approved CivicWeb/Cablecast readers, with 32 registered providers, 31 baseline families, 34 baseline formats, 46 additive parser hooks and 15 native-search handlers. It has not been packaged as a successor or delivered. Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
 
 QuorumRelay is a standalone civic-data engine for your own application, service,
 script or agent. It does not require a Townlight installation, an application

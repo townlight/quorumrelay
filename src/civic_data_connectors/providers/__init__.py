@@ -33,9 +33,12 @@ def _parse_saved_native(source, content, input_format, bounds, context):
 def register(engine, *, transport: Transport | None = None,
              browser: BrowserSession | None = None) -> None:
     """Compose operations once; injected transports are an SDK/server trust boundary."""
-    from .cablecast import CablecastConnector
+    from .cablecast import CablecastConnector, SHOW_FORMAT, SHOWS_FORMAT
     if "cablecast" not in engine.connectors:
-        engine.register_connector(CablecastConnector(transport))
+        cablecast = CablecastConnector(transport)
+        engine.register_connector(cablecast)
+        for input_format in (SHOW_FORMAT, SHOWS_FORMAT):
+            engine.register_parser("cablecast", input_format, cablecast.parse)
     engine.register_operation("identify", identify_handler)
     engine.register_operation("validate_source", validate_handler)
     for provider, input_format in (
