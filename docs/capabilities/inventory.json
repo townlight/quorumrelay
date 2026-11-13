@@ -20833,6 +20833,23 @@
           "limits": "The request was capped at two pages and three records. Nested trees, full catalog extent, linked document bytes/MIME and provider write acceptance remain unverified.",
           "receipt_path": "docs/verification/clerkbase-tree-engine-discovery-2026-11-12.json",
           "receipt_sha256": "ea6897717c5ca69d34bc222a596209608dea60b14a354ce3626af823c1e68c46"
+        },
+        {
+          "id": "clerkbase-document-text-2026-11-12",
+          "url": "https://clerkshq.com/Content/Richmond-ri/council/2022/apr19_22tc.htm",
+          "title": "ClerkBase existing published minutes body text preservation",
+          "kind": "public_tenant",
+          "observed": "Existing pinned323415-byte published minutes retained as rich text/paragraphs; four new distinct synthetic cases pass after test-only compatibility-key correction. No new network request.",
+          "observation_date": "2026-11-12",
+          "access_scope": "existing_public_capture_and_synthetic_configured_transport",
+          "proof_level": "scoped_synthetic_engine_execution_from_pinned_original_capture",
+          "findings": [
+            "Original URL-path meeting identity and compatibility output unchanged.",
+            "Static document body/paragraph text with capture provenance now supports local search and neutral export; source-text revision changes rich digest."
+          ],
+          "limits": "Static HTML body text only, no CSS/script/rendered accessibility claim; No inferred governing body, agenda hierarchy, motions or votes from minutes prose; No new document download, native search semantics or provider write claim; Local source only, frozen dev8/1.8.5 unchanged",
+          "receipt_path": "docs/verification/clerkbase-document-text-2026-11-12.json",
+          "receipt_sha256": "f377dd69a95d2a9b326ffffe4e1898980b164d30051c40ec6ee5f21f43d4257e"
         }
       ],
       "tenants": [
@@ -20923,9 +20940,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "clerkbase-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "clerkbase-document-text-2026-11-12"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Existing clerkbase-document-html additionally retains static document body/paragraph text with capture provenance; four scoped synthetic cases cover saved/default configured reads, local text search/export, revision hashing and exclusion guards without changing original output.",
           "dependencies": [
             "Extract shared engine preserving legacy behavior."
           ],
@@ -20976,9 +20994,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "clerkbase-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "clerkbase-document-text-2026-11-12"
           ],
-          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Existing clerkbase-document-html additionally retains static document body/paragraph text with capture provenance; four scoped synthetic cases cover saved/default configured reads, local text search/export, revision hashing and exclusion guards without changing original output.",
           "dependencies": [
             "Shared schema, capture/text store and search engine."
           ],

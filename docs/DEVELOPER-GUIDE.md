@@ -474,3 +474,5 @@ those separately. See [release notes](RELEASE-NOTES.md) for development artifact
 and the [user manual](USER-MANUAL.md) for operational troubleshooting.
 
 The local source also supports a supplied Novus cover sheet through `novus-public-coversheet-html`; see [native item/meeting and attachment bindings](NOVUS-COVERSHEET.md). This additive route is not in frozen dev8.
+
+Existing `clerkbase-document-html` now retains supplied [document body/paragraph text](CLERKBASE-DOCUMENT.md) in local source for search and neutral export, preserving original compatibility output. Frozen dev8 is unchanged.

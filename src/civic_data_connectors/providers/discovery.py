@@ -312,6 +312,10 @@ def _next(source, task, payload, size):
 
 
 def _enrich(bundle, provider):
+    if provider == "clerkbase":
+        from .clerkbase_detail import enrich_bundle
+        bundle.update(enrich_bundle(bundle))
+        return
     if provider == "towncloud":
         from .towncloud_detail import enrich_bundle
         bundle.update(enrich_bundle(bundle))

@@ -715,6 +715,7 @@ Test environment (2026-11-11 bounded research snapshot; not current permissions)
 ### Remaining research
 
 - Bounded ClerkBase tree discovery and native search are implemented and have separate partial live engine receipts: tree discovery returned three URL-keyed records over two pages; native search returned three URL-keyed records and three local hits from one capped page. Saved-fixture tests cover guards and mapping. The raw page-two search receipt is a route probe, not proof of an engine page-two search resume. A linked document has not been fetched and verified by bytes/MIME/hash; nested-tree/full catalog coverage and exact provider phrase/wildcard semantics remain unresolved.
+- The existing pinned Richmond published minutes capture now contributes rich static body/paragraph text and capture provenance through clerkbase-document-html; local supplied-text search/export/revision and legacy parity are synthetically checked (docs/CLERKBASE-DOCUMENT.md). No new download is claimed.
 - Current vendor pages distinguish ClerkBase Meeting Center/OnBoardGOV from ClerkMate. Obtain a current ClerkBase-specific API/import contract before implementing writes.
 - No staff/API credentials supplied; roles, page caps, write permissions and readback remain gated. Do not substitute another product route.
 
