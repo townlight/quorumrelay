@@ -1,0 +1,57 @@
+{
+  "status": "PASS_LOCAL_SOURCE_INTEGRATION",
+  "parents": [
+    "b71e9450b1742c1f87d5c7cdcb5cf212381cebed",
+    "31805e7688dca565ca20ee08ce95ba756e89969f"
+  ],
+  "branch": "candidate/quorumrelay-readers-integrated",
+  "scope": "Retain dev11 plus approved CivicWeb/Cablecast readers and fix three named defects; not final release acceptance",
+  "source_sha256": {
+    "src/civic_data_connectors/data/capabilities.json": "8166e33e057a684f5dadabf12eb64e75e62f7615d7d522679d6fcbff950a6672",
+    "src/civic_data_connectors/engine.py": "2ee7aa403d4fbb9e68e9d0de421fca0d2191782f3605bb8b585a2f4aa82e9f28",
+    "src/civic_data_connectors/extensions.py": "d3885092ed956c5c8f81a34d433d1d1725395eaa48a80cc3b143e7cc0347fd8b",
+    "src/civic_data_connectors/providers/__init__.py": "3a7c27c18af89d490bab81eeb4b01f2509c10fa6598fa1d7e9251f110c9b1436",
+    "src/civic_data_connectors/providers/cablecast.py": "f4422724e8dc95bb1b95770896660e9a7ffeeff92990954116165f591da17c89",
+    "src/civic_data_connectors/providers/civicweb_listing.py": "4c7fd8610c01a3d7899bd9d590e7f50873573d3cb3dc4d677fed398c77eb7888",
+    "src/civic_data_connectors/providers/discovery.py": "a1f5be620939030ea4d696eab27a381e59170d4e7e3f76b3665df6762783bd39",
+    "src/civic_data_connectors/providers/identification.py": "231905b2524564e2b6b77c99b50592d30984e164c5ed990f33eb505f697aa871",
+    "src/civic_data_connectors/providers/native.py": "2a44896d0a10ebb5f2277078afec7b5abf87f6bdab7eb6685c528022f20f345a",
+    "src/civic_data_connectors/providers/retrieval.py": "217739489dae571237ae92cbdedc123d05fd86a8e18fc42d583de810b533fa5c",
+    "src/quorumrelay/providers/cablecast.py": "e479ce9c564d36ff07f6ba40642a63be32d2eca699f445af373682ca6e8c2a9e",
+    "src/quorumrelay/providers/civicweb_listing.py": "ef28b55949ee8354b507206280aca7b6afc1ad8ac20592436556ba6effe886f7",
+    "tests/test_cablecast.py": "b987c20e754f41a47572217a412aba05aa7750d672e9b0bf3c9a134af6be4f49",
+    "tests/test_capabilities.py": "96e22e32c49d7c35bbd9f7f00088a74a2072458064c203739d4a28370e5c557e",
+    "tests/test_civicweb_listing.py": "7d9df2800ff3bc012c58274fd3f09bda07098e34ae5b1728da4ec9fb5a60b667",
+    "tests/test_extension_dispatch.py": "c6af5d7e6f6b832eca615a752d617dd1b41ee0a8f4014c963c3df895edb3b040",
+    "tests/test_interfaces.py": "1289e9046c6c84324520335ce9dc1d4e50fa7c045d183c54ddb2caa389fcb8f5",
+    "tests/test_public_package.py": "f4f0b99c32e10cdc80550e9c119cce6e0091c87a55bf19af182b93c27f1a4743"
+  },
+  "preservation": {
+    "other_30_provider_rows_unchanged": true,
+    "new_fixture_files_byte_identical_to_reader_merge": 16,
+    "original_dev11_checkout_unchanged": true,
+    "client_source_unchanged": true,
+    "client_dist_reused_from": "qr9/core/client/dist"
+  },
+  "checks": {
+    "distinct_affected_cases_passed": 78,
+    "initial_reproductions": "six failures demonstrate three defects",
+    "affected_run": "77 passed; Node child selected old dev8 installation",
+    "source_bound_interface_recheck": "5 passed with PYTHONPATH=integrated/src; replaces failed Node result",
+    "ruff": "PASS src tests scripts examples",
+    "inventory_validator": "PASS 31 families /34 baseline /347 evidence records /five negative cases",
+    "runtime_counts": {
+      "providers": 32,
+      "baseline_formats": 34,
+      "additional_parsers": 44
+    },
+    "diff_check": "PASS code/docs; immutable raw capture fixtures excluded from whitespace checks, independently byte-compared with reader merge"
+  },
+  "logs": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay",
+  "limits": [
+    "No final hosted CI",
+    "No new wheel/client package or Windows build/sign/install/recovery acceptance",
+    "Provider contract gaps and remaining 19-task plan outcomes remain incomplete",
+    "No push/publication"
+  ]
+}

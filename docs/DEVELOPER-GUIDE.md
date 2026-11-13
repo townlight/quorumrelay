@@ -165,6 +165,18 @@ continuation belongs to its source/query/caller/current grants; some public-form
 adapters keep private process-local sessions and expire after 15 minutes. Restart
 or expiry can require beginning a fresh bounded operation. Never edit a token.
 
+CivicWeb and Cablecast meeting lists use the same call (see the
+[user manual](USER-MANUAL.md#meeting-lists-and-meeting-video-civicweb-and-cablecast)).
+CivicWeb's reader is a dedicated route inside the shared `discover`
+(`providers/civicweb_listing.py`, selected by a tenant-root URL or the additive
+`civicweb-meetings-json` input format) and adds the `civicweb-meetings-json` and
+`civicweb-meeting-documents-json` parsers beside, not replacing, the 34 baseline
+formats. Cablecast is not a baseline family: `providers/cablecast.py` is a built-in typed
+`Connector` that `create_engine()` registers with the engine's transport, so
+`providers` lists it with empty `formats` and the 31-family inventory is unchanged.
+Both parse saved captures through `engine.normalize` with no network. Pass your own
+`provider_transport=` to supply saved responses in tests.
+
 Fetch a linked attachment using the returned record and document index:
 `engine.fetch_attachment(source, record, index=0, context=context)`. Retain its
 original capture in scoped storage, or supply the original capture bytes through
@@ -450,6 +462,12 @@ Implement `Connector` from `quorumrelay.extensions`, run
 The conformance helper checks hook shape/capability return type without opening
 provider sockets or performing writes. It does not certify a provider contract.
 New connectors use the same record/result/security boundary across all transports.
+Existing connectors keep `discover(source, bounds, context)`. A connector needing
+discovery request fields such as `record_types` may additionally implement
+`discover_request(source, request, bounds, context)`. The engine prefers this
+optional hook, and `check_connector` checks its four-argument shape when present.
+Cablecast uses it to return only requested meeting records; requests containing
+only other record types return `unsupported` without fetching the listing.
 An additive parser can be registered with `engine.register_parser`; baseline
 formats cannot be replaced through this path. The runnable
 [example connector](../examples/example_connector.py) demonstrates registration.

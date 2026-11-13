@@ -22,6 +22,25 @@ receipts. Neutral JSON/JSONL/ZIP exports retain original captures and verify
 hashes; CSV and iCalendar disclose projection losses. Large file inputs use
 separate parser and transfer bounds.
 
+The integrated development source retains dev11 and adds two public meeting readers. CivicWeb can now list a
+tenant's meetings for an explicit date range with their meeting types and, on
+request, each meeting's document links (`civicweb-meetings-json` and
+`civicweb-meeting-documents-json`, additive to the 34 baseline formats).
+Cablecast (Tightrope "Reflect") is a new built-in typed connector, outside the
+31 baseline families, that lists shows with video, collapses duplicate copies to
+the one with a caption playlist and returns video and caption-playlist links.
+Both are bounded, return `partial` with checkpoints, and are fixture-verified on
+saved public Loveland, CO captures. Neither downloads media or documents; no audio
+is handled and nothing is transcribed. A bounded live read of Loveland is noted in
+[engine coverage](ENGINE-COVERAGE.md); no complete catalog is claimed.
+
+CivicWeb document discovery now honors the remaining record budget and resumes
+inside a document list, rejecting changed response bytes on continuation.
+Cablecast continuation avoids duplicate pending pages, and discovery preserves
+requested record types through an optional request-aware connector hook. Existing
+three-argument extension discovery remains compatible. These are source changes,
+not a new package or installed Windows release.
+
 Current source includes Legistar supplied
 vote/attendance reads, Laserfiche Repository folder listings, and preparation
 of CivicPlus historical PDF/MP4 filenames. The latter produces a ZIP

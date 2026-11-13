@@ -197,6 +197,9 @@ class Engine:
             return OperationResult(identified.status, {"source": source.public_dict()},
                                    identified.errors, identified.coverage, context.operation_id)
         if operation == "discover":
+            request_hook = getattr(connector, "discover_request", None)
+            if callable(request_hook):
+                return request_hook(source, request, bounds, context)
             return connector.discover(source, bounds, context)
         if operation == "fetch":
             return connector.fetch(source, request, bounds, context)
