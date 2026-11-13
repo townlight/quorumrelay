@@ -120,6 +120,27 @@ and confirmed cancellation remain separate. No cross-call task cursor, WebLink
 account inference, generated text or live-tenant acceptance is claimed. See
 [synthetic search evidence](verification/laserfiche-native-search-2026-11-13.json).
 
+Source option `repository_include_fields: true` enriches selected entry detail,
+discovery records and native-search candidates from the pinned SDK's paginated
+`GET Entries/{id}/Fields` route. Listing/search field projections can contain only
+the first value; this route obtains assigned field objects and their supplied
+multi-values. Values are unformatted strings, with missing/null/empty values and
+unknown properties preserved. A field named Date is not promoted to a meeting
+date. Already captured `Entry.fields` are also retained in searchable normalized
+metadata without any additional network request.
+
+Field reads keep exact supplementary captures and normalized change detection.
+They are opt-in and do not alter the original GetEntry/list/search capture or
+record identity. `field_metadata` coverage distinguishes complete, unavailable,
+truncated and unknown/more-value responses. Collection pages, field count,
+cumulative supplemental bytes, caller cancellation and the original deadline
+are bounded. Native search shares its existing task API-byte budget; combined
+detail field/page-text reads share their supplemental byte budget. Partial field
+reads keep obtained values and metadata, including through later discovery
+failure and SQLite import/ZIP export. Saved discovery captures initiate no field
+requests; the option does not affect attachment export's internal membership
+check. See [synthetic field evidence](verification/laserfiche-fields-2026-11-13.json).
+
 ## Discovery output and v1 ownership
 
 `discover.data` contains `source`, aggregate `records`, exact page `captures`, and page `bundles`. Every page bundle retains its own source namespace and compatibility projection. Aggregation filters rich records but does not rewrite the original page compatibility output, so callers must not import unfiltered compatibility rows blindly.

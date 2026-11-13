@@ -122,6 +122,16 @@ context retrieval fails. Meeting date/body filters and task-resume checkpoints
 are rejected; WebLink public sources do not imply Repository API access. Search
 tasks are cleaned up within the call; there is no automatic background worker.
 
+For assigned Repository metadata, set source option
+`"repository_include_fields": true` on API-folder sources. Selected entry detail,
+discovery and native-search candidates then read the documented `/Fields`
+collection, preserving supplied multi-values rather than relying on a listing's
+first-value projection. Inspect `coverage.field_metadata` and each record's
+`extensions.repository_field_coverage`; missing/more values and bounded partial
+reads remain explicit. Searchable values appear in
+`normalized.repository_fields`, and raw supplementary captures survive explicit
+import/export. This option performs no template administration or field writes.
+
 
 Legistar native search uses the same request shape with a configured Legistar source and explicit dates. It searches **EventBodyName metadata only**, using provider-side substring filters and exact local term/phrase checking on that field. It retains full original records but does not advertise searching agenda titles, document text or vote details. Coverage states the searched field and binds resumed pages to the exact source/query/scope.
 

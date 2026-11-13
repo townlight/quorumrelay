@@ -19414,6 +19414,21 @@
           "limits": "Available metadata/excerpts only, not full-text/catalog completeness or whole-provider acceptance; no live task started.",
           "receipt_path": "docs/verification/laserfiche-native-search-2026-11-13.json",
           "receipt_sha256": "4cbda2d7af4bf9d72c6a4531435c4aadb92b14ceaf017d7ebaca24b4541535cd"
+        },
+        {
+          "id": "lf-repository-assigned-fields-2026-11-13",
+          "url": "https://raw.githubusercontent.com/Laserfiche/lf-api-js/3a40996613f6f1a1b2fa90cd7d31c512a149ee25/packages/lf-repository-api-client-v2/index.ts",
+          "title": "Repository ListFields assigned metadata and scoped synthetic read/persistence evidence",
+          "kind": "official_documentation",
+          "observation_date": "2026-11-13",
+          "proof_level": "vendor_documented_contract_and_synthetic_engine_execution",
+          "findings": [
+            "Opt-in assigned field reads preserve multivalues, unknown fields, captures and partial coverage.",
+            "Twenty-one new cases plus affected reads/search/export passed, including real SQLite/ZIP."
+          ],
+          "limits": "Synthetic scoped metadata only, no atomic snapshot, domain date inference, provider mutation or whole-provider acceptance.",
+          "receipt_path": "docs/verification/laserfiche-fields-2026-11-13.json",
+          "receipt_sha256": "54a201bb5a0d8fcd209b44b033e99f5568b4cf5bc3e7bb207a76ecbcf3adb018"
         }
       ],
       "tenants": [
@@ -19462,9 +19477,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "lf-children",
-            "weblink-guarded-session-current-probes"
+            "weblink-guarded-session-current-probes",
+            "lf-repository-assigned-fields-2026-11-13"
           ],
-          "details": "An optional explicit guarded WebLink session supports offline-Chrome public read navigation with browser requests routed through PublicTransport and origin/path restrictions. Synthetic checks exercise it. The two current guarded public probes did not yield a catalog: Boulder was blocked at the cross-origin redirect boundary and Louisville returned HTTP 403; catalog acceptance is incomplete.",
+          "details": "An optional explicit guarded WebLink session supports offline-Chrome public read navigation with browser requests routed through PublicTransport and origin/path restrictions. Synthetic checks exercise it. The two current guarded public probes did not yield a catalog: Boulder was blocked at the cross-origin redirect boundary and Louisville returned HTTP 403; catalog acceptance is incomplete. Source option repository_include_fields=true retrieves assigned entry field collections with unformatted multiple values, exact raw captures and per-field capture/citation provenance. Page/field-count/cumulative-byte/deadline limits and partial/unknown completeness are explicit; field dates are not inferred meeting dates. Saved captures initiate no field requests.",
           "dependencies": [
             "Cloud repository ID/OAuth scoped access or authorized self-hosted API version",
             "WebLink cookie/browser capture for public folders"
@@ -19497,9 +19513,10 @@
             "lf-repository-edoc-content-2026-11-13",
             "lf-repository-page-text-2026-11-13",
             "lf-repository-export-variants-2026-11-13",
-            "lf-repository-async-export-2026-11-13"
+            "lf-repository-async-export-2026-11-13",
+            "lf-repository-assigned-fields-2026-11-13"
           ],
-          "details": "Repository v2 fetch_record implements exact GetEntry metadata within its configured folder. fetch_attachment selects a captured Document itself at index zero, revalidates the current parent, POSTs part=Edoc to Export and downloads the single-use link once with no bearer headers or redirects. Explicit download_origins, caller scope, byte/deadline bounds and cancellation apply. Durable citation and fresh metadata revision are returned; signed URLs remain private. Original file retrieval is not text extraction. Separate WebLink routes retain their own scope. Optional include_text=true on entry detail reads existing page-info and supplied page text, retaining raw supplemental captures, page anchors, source identity and normalized text change detection. Cumulative parser/transfer bytes, page count, same-document continuation and shared deadline apply; missing text and truncation remain partial through persistence/search/export. No generation or atomic snapshot. Explicit source options also select Image, Text or AlternateEdoc through the same guarded export path. Image format choices retain annotations/redactions, TIFF uses AsStored; Text includes redactions. Alternate names are validated, file bytes/citation are retained, and declared image/container signatures are checked. Optional repository_export_async selects the documented owned ExportAsync/Tasks lifecycle. Exact task type/ID and optional result entry are verified; polls/time/API bytes are bounded with cleanup reserves. Cancellation acknowledgement is distinct from terminal confirmation; unresolved cleanup retains its task reference, never raw errors or signed URLs.",
+          "details": "Repository v2 fetch_record implements exact GetEntry metadata within its configured folder. fetch_attachment selects a captured Document itself at index zero, revalidates the current parent, POSTs part=Edoc to Export and downloads the single-use link once with no bearer headers or redirects. Explicit download_origins, caller scope, byte/deadline bounds and cancellation apply. Durable citation and fresh metadata revision are returned; signed URLs remain private. Original file retrieval is not text extraction. Separate WebLink routes retain their own scope. Optional include_text=true on entry detail reads existing page-info and supplied page text, retaining raw supplemental captures, page anchors, source identity and normalized text change detection. Cumulative parser/transfer bytes, page count, same-document continuation and shared deadline apply; missing text and truncation remain partial through persistence/search/export. No generation or atomic snapshot. Explicit source options also select Image, Text or AlternateEdoc through the same guarded export path. Image format choices retain annotations/redactions, TIFF uses AsStored; Text includes redactions. Alternate names are validated, file bytes/citation are retained, and declared image/container signatures are checked. Optional repository_export_async selects the documented owned ExportAsync/Tasks lifecycle. Exact task type/ID and optional result entry are verified; polls/time/API bytes are bounded with cleanup reserves. Cancellation acknowledgement is distinct from terminal confirmation; unresolved cleanup retains its task reference, never raw errors or signed URLs. Source option repository_include_fields=true retrieves assigned entry field collections with unformatted multiple values, exact raw captures and per-field capture/citation provenance. Page/field-count/cumulative-byte/deadline limits and partial/unknown completeness are explicit; field dates are not inferred meeting dates. Saved captures initiate no field requests.",
           "dependencies": [
             "Cloud repository ID/OAuth scoped access or authorized self-hosted API version",
             "WebLink cookie/browser capture for public folders"
@@ -19548,9 +19565,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "lf-search",
-            "lf-repository-native-search-2026-11-13"
+            "lf-repository-native-search-2026-11-13",
+            "lf-repository-assigned-fields-2026-11-13"
           ],
-          "details": "Explicit Repository v2 API folder uses SearchAsync with numeric direct-child LookIn restriction and escaped literal Basic first-expression candidates. Exact shared AND terms/phrases match only returned metadata/context excerpts; source/catalog/full-document completeness remains false. Results, context raw bytes, unknown fields and page/citation anchors are preserved. Parent/task/type/result route, page/count identities, record/page/time/cumulative API bytes and exact owned-task cleanup are guarded. Metadata survives context failure. No meeting-date/body inference or cross-call task cursor. Public WebLink native search remains unmapped.",
+          "details": "Explicit Repository v2 API folder uses SearchAsync with numeric direct-child LookIn restriction and escaped literal Basic first-expression candidates. Exact shared AND terms/phrases match only returned metadata/context excerpts; source/catalog/full-document completeness remains false. Results, context raw bytes, unknown fields and page/citation anchors are preserved. Parent/task/type/result route, page/count identities, record/page/time/cumulative API bytes and exact owned-task cleanup are guarded. Metadata survives context failure. No meeting-date/body inference or cross-call task cursor. Public WebLink native search remains unmapped. Source option repository_include_fields=true retrieves assigned entry field collections with unformatted multiple values, exact raw captures and per-field capture/citation provenance. Page/field-count/cumulative-byte/deadline limits and partial/unknown completeness are explicit; field dates are not inferred meeting dates. Saved captures initiate no field requests.",
           "dependencies": [
             "Explicit configured Repository v2 API folder; trusted repository.Read token at runtime"
           ],
@@ -19817,6 +19835,26 @@
           "mapping_source_ref": "baseline-field-contracts.json#/contracts(provider=laserfiche-weblink)",
           "source_commit": "d4470aeae662c759351f63140b035edac10d9a52",
           "notes": "Exact original normalized-field assignments and source inputs are preserved in the linked function excerpt for every baseline format. Not a vendor-official schema or standalone test pass."
+        },
+        {
+          "entity": "repository_assigned_field_metadata",
+          "input_format": "repository_v2",
+          "field_mappings": [
+            {
+              "normalized": "repository_fields",
+              "provider_field": "Entry.fields or ListFields.value[]",
+              "notes": "Preserve supplied field objects, multi-values and missing/null/empty/unknown properties; no date/body inference."
+            },
+            {
+              "normalized": "extensions.repository_field_provenance",
+              "provider_field": "ListFields response capture and field index/id/name",
+              "notes": "Exact supplemental byte hash, durable entry citation and exact retrieval URL."
+            }
+          ],
+          "evidence_ids": [
+            "lf-repository-assigned-fields-2026-11-13"
+          ],
+          "notes": "Opt-in reads for selected API-folder entries. Completeness/partial failures in extensions.repository_field_coverage."
         }
       ],
       "outbound_mappings": [

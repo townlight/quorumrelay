@@ -81,6 +81,9 @@ def entry_bundle(source, namespace, content):
                       "time_zone_status": "unknown", "content_availability": "not_requested"}, raw, kind))
     bundle = make_bundle(source, namespace, content, "laserfiche-repository-entries-json", rows)
     for record in bundle["records"]:
+        if "fields" in record["original"]:
+            from .repository_fields import captured_fields
+            captured_fields(record, record["original"]["fields"])
         parent = {"provider": source.provider, "namespace": namespace, "record_type": "folder",
                   "external_id": str(parent_id), "parent": None}
         # Entry IDs are repository-wide: its current folder is a relationship,
@@ -96,8 +99,10 @@ def entry_bundle(source, namespace, content):
 def fetch_entry(source, namespace, external_id, bounds, context, transport, *, include_text=False):
     """GetEntry from the pinned vendor SDK; metadata only, within the configured folder."""
     from .account_api import reject_credential_echo
+    from .repository_fields import FieldReader, requested
 
     _, parent_id, base = repository_source(source)
+    include_fields = requested(source)
     if not isinstance(external_id, str) or re.fullmatch(r"[1-9][0-9]{0,18}", external_id) is None:
         raise ValueError("Repository entry detail requires a positive decimal entry ID string.")
     if source.body or bounds.date_from or bounds.date_to or bounds.checkpoint:
@@ -138,10 +143,30 @@ def fetch_entry(source, namespace, external_id, bounds, context, transport, *, i
         result = _bounded_parser_result(OperationResult("completed", bundle), bounds, context)
         if result.status != "completed":
             raise ValueError("Repository normalized entry exceeded configured bounds.")
+        field_errors = ()
+        if include_fields:
+            fields = FieldReader(source, bounds, context, transport, deadline)
+            fields.enrich(bundle["records"][0], bundle)
+            coverage["field_metadata"] = fields.states
+            coverage["failures"].extend(fields.failures)
+            if fields.failures:
+                field_errors = (Error("field_metadata_incomplete", "Only available assigned fields are returned.",
+                                      source=url, retryable=True),)
         if include_text:
             from .repository_text import enrich_text
+            if include_fields:
+                if fields.remaining <= 0:
+                    coverage["failures"].append({"reason": "page_text_byte_budget_exhausted"})
+                    return OperationResult("partial", bundle, (Error("page_text_incomplete",
+                        "Assigned field reads exhausted the supplementary byte budget; page text was not read.",
+                        source=url, retryable=True),), coverage, context.operation_id)
+                bounds = replace(bounds, parser_bytes=fields.remaining, transfer_bytes=fields.remaining)
             return enrich_text(source, bundle, bounds, context, transport, deadline, coverage)
-        return OperationResult("completed", bundle, coverage=coverage, operation_id=context.operation_id)
+        return OperationResult("partial" if field_errors else "completed", bundle, field_errors,
+                               coverage=coverage, operation_id=context.operation_id)
+    except InterruptedError:
+        return OperationResult("cancelled", bundle if "bundle" in locals() else None,
+                               coverage=coverage, operation_id=context.operation_id)
     except Exception as error:
         code = error.code if isinstance(error, RetrievalError) else "repository_entry_failed"
         details = {"http_status": error.status} if isinstance(error, RetrievalError) and error.status else {}
@@ -212,7 +237,9 @@ def fetch_document(source, namespace, record, bundle, bounds, context, transport
         return cancelled()
     try:
         # A stored capture alone cannot authorize an entry moved outside this folder.
-        detail = fetch_entry(source, namespace, external_id,
+        metadata_source = replace(source, options={key: value for key, value in source.options.items()
+                                                   if key != "repository_include_fields"})
+        detail = fetch_entry(metadata_source, namespace, external_id,
                              replace(bounds, deadline_seconds=remaining()), context, transport)
         if detail.status == "cancelled":
             return cancelled()
@@ -286,7 +313,10 @@ def fetch_document(source, namespace, record, bundle, bounds, context, transport
 def discover_children(source, namespace, bounds, context, transport, *, saved=None, record_types=None):
     """Follow only provider-issued same-folder nextLinks under current caller bounds."""
     from .discovery import _checkpoint, _resume
+    from .repository_fields import FieldReader, requested
+    from .account_api import reject_credential_echo
     _, parent_id, base = repository_source(source)
+    include_fields = requested(source)
     if source.body or bounds.date_from or bounds.date_to:
         raise ValueError("Repository entries have no mapped meeting body/date; select a folder explicitly.")
     types = record_types or []
@@ -296,7 +326,7 @@ def discover_children(source, namespace, bounds, context, transport, *, saved=No
     if type(size) is not int or not 1 <= size <= 150:
         raise ValueError("Repository page_size must be between 1 and 150.")
     token = context.credentials.get("laserfiche_token")
-    if saved is None and (not isinstance(token, str) or not token):
+    if saved is None and (not isinstance(token, str) or not token or any(c in token for c in "\r\n\0")):
         raise ValueError("Authenticated Repository discovery requires a trusted laserfiche_token with repository.Read.")
     binding = canonical_hash({"source": source.public_dict(), "namespace": namespace, "scope": context.scope,
                               "record_types": types, "saved_hash": hashlib.sha256(saved).hexdigest() if saved is not None else None})
@@ -310,10 +340,18 @@ def discover_children(source, namespace, bounds, context, transport, *, saved=No
                 "recursive": False, "content_fetched": False, "pages": 0,
                 "snapshot_consistency": "not_guaranteed", "failures": failures}
     deadline = monotonic() + bounds.deadline_seconds
+    fields = FieldReader(source, bounds, context, transport, deadline) if include_fields and saved is None else None
+    if fields:
+        coverage["field_metadata"] = fields.states
+
+    def result_data():
+        return {"records": records, "bundles": bundles,
+                "captures": [capture for bundle in bundles for capture in bundle.get("captures", [])]}
+
     try:
         while queue and coverage["pages"] < bounds.max_pages and len(records) < bounds.max_records:
             if context.check_cancelled():
-                return OperationResult("cancelled", {"records": records, "bundles": bundles},
+                return OperationResult("cancelled", result_data(),
                                        coverage=coverage, operation_id=context.operation_id)
             url = _page_url(base, queue[0]["url"])
             if url in visited:
@@ -326,15 +364,16 @@ def discover_children(source, namespace, bounds, context, transport, *, saved=No
                 response = transport.request(url, headers={"Accept": "application/json",
                     "Authorization": "Bearer " + token, "Prefer": "odata.maxpagesize=" + str(limit)},
                     byte_limit=bounds.parser_bytes, deadline_seconds=max(0.001, deadline - monotonic()),
-                    allowed_origins=("https://api.laserfiche.com",))
+                    allowed_origins=("https://api.laserfiche.com",), allow_redirects=False)
                 if context.check_cancelled():
-                    return OperationResult("cancelled", {"records": records, "bundles": bundles},
+                    return OperationResult("cancelled", result_data(),
                                            coverage=coverage, operation_id=context.operation_id)
                 if response.status != 200:
                     raise RetrievalError("provider_http_error", status=response.status)
                 if _page_url(base, response.url) != url:
                     raise ValueError("Repository response did not match the requested page.")
                 content = response.content
+                reject_credential_echo(content, {"token": token})
             if len(content) > bounds.parser_bytes or monotonic() >= deadline:
                 raise ValueError("Repository response exceeded parser/deadline bounds.")
             original = json.loads(content)
@@ -357,6 +396,10 @@ def discover_children(source, namespace, bounds, context, transport, *, saved=No
             seen.update(page_keys)
             records.extend(bundle["records"])
             bundles.append(bundle)
+            if fields:
+                for record in bundle["records"]:
+                    fields.enrich(record, bundle)
+                failures[:] = fields.failures
             coverage["pages"] += 1
             queue = [{"url": next_link}] if next_link else []
             if saved is not None:
@@ -364,13 +407,17 @@ def discover_children(source, namespace, bounds, context, transport, *, saved=No
         coverage.update({"returned_records": len(records), "source_complete": not queue,
                          "collection_complete": not queue, "truncated": bool(queue),
                          "checkpoint": _checkpoint(binding, queue, seen) if queue else None})
-        return OperationResult("partial" if queue else "completed", {"records": records, "bundles": bundles},
+        return OperationResult("partial" if queue or failures else "completed",
+                               result_data(),
                                coverage=coverage, operation_id=context.operation_id)
+    except InterruptedError:
+        return OperationResult("cancelled", result_data(),
+            coverage=coverage, operation_id=context.operation_id)
     except Exception as error:
         code = error.code if isinstance(error, RetrievalError) else "repository_discovery_failed"
         details = {"http_status": error.status} if isinstance(error, RetrievalError) and error.status else {}
         failures.append({"reason": code, **details})
         coverage["checkpoint"] = _checkpoint(binding, queue, seen) if queue else None
-        return OperationResult("partial" if records else "failed", {"records": records, "bundles": bundles} if records else None,
+        return OperationResult("partial" if records else "failed", result_data() if records else None,
             (Error(code, "Repository folder children could not be retrieved or verified.",
                    source=source.url, retryable=True, details=details),), coverage, context.operation_id)

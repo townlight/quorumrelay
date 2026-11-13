@@ -16,6 +16,7 @@ from .contracts import PublicTransport
 from .identification import configured_source, validate_source
 from .repository import entry_bundle, repository_source
 from .repository_export import run_task
+from .repository_fields import FieldReader, requested
 
 
 def _literal(value):
@@ -35,6 +36,7 @@ def native_search(engine, request, content, context, *, transport=None):
         return OperationResult.unsupported("native_search", reason=(
             "Repository search requires an explicit account API folder; no WebLink relationship is inferred."))
     _, parent_id, base = repository_source(source)
+    include_fields = requested(source)
     if content is not None or any(key in request for key in ("records", "bundle", "result", "content_base64")):
         raise ValueError("Native search retrieves provider candidates; saved captures use local search.")
     query, bounds = _query(request.get("query", {})), Bounds(**request.get("bounds", {}))
@@ -126,6 +128,9 @@ def native_search(engine, request, content, context, *, transport=None):
         coverage["truncated"] = True
 
     def consume(result, task_id, read):
+        fields = FieldReader(source, bounds, context, transport, deadline, read=read) if include_fields else None
+        if fields:
+            coverage["field_metadata"] = fields.states
         result_url = root + "/Searches/" + quote(task_id, safe="") + "/Results"
         if result.get("uri") != result_url:
             raise ValueError("Search task result left its exact configured repository/task route.")
@@ -141,6 +146,10 @@ def native_search(engine, request, content, context, *, transport=None):
             bundle["captures"] = []
             for record in bundle["records"]:
                 records.append(record)
+                if fields:
+                    before = len(fields.failures)
+                    fields.enrich(record, bundle)
+                    failures.extend(fields.failures[before:])
                 coverage["provider_candidates"] = len(records)
                 segments = []
                 try:

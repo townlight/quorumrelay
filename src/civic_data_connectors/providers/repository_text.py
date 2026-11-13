@@ -16,9 +16,9 @@ def enrich_text(source, bundle, bounds, context, transport, deadline, inherited)
     record = bundle["records"][0]
     citation = record["normalized"]["url"]
     base = citation + "/Document/Pages"
-    captures = []
+    captures = list(bundle.get("captures", []))
     segments = []
-    failures = []
+    failures = list(inherited.get("failures", []))
     coverage = {**inherited, "scope": "one document's supplied page text",
                 "text_complete": False, "truncated": False, "pages": 0,
                 "snapshot_consistency": "not_guaranteed", "failures": failures,
@@ -135,7 +135,7 @@ def enrich_text(source, bundle, bounds, context, transport, deadline, inherited)
         "text_complete": coverage["text_complete"], "truncated": coverage["truncated"],
         "failures": list(failures), "snapshot_consistency": "not_guaranteed"}
     bundle["captures"] = captures
-    status = "cancelled" if coverage.get("cancelled") else "completed" if coverage["text_complete"] else "partial"
+    status = "cancelled" if coverage.get("cancelled") else "completed" if coverage["text_complete"] and not failures else "partial"
     errors = (Error("page_text_incomplete", "Only available supplied page text is returned; metadata is retained.",
                     source=citation, retryable=True),) if status == "partial" else ()
     return OperationResult(status, bundle, errors, coverage, context.operation_id)
