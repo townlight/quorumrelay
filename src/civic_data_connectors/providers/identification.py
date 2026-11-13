@@ -35,7 +35,7 @@ ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json"
                       "telvue": ("telvue-cloudcast-mrss-xml", "telvue-connect-media-json", "telvue-connect-videos-json",
                                  "telvue-connect-playlists-json", "telvue-connect-playlist_items-json"),
                       "municode-meetings": ("essential-multimedia-json",),
-                      "novusagenda": ("novus-public-listing-html",),
+                      "novusagenda": ("novus-public-listing-html", "novus-public-coversheet-html"),
                       "granicus": ("granicus-listing-html", "granicus-platform-soap-xml"),
                       "peak": ("granicus-listing-html",),
                       "wistia": ("wistia-api-media-json", "wistia-media-detail-json", "wistia-caption-json"),

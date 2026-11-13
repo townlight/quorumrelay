@@ -5975,6 +5975,23 @@
           "limits": "Only the displayed window and metadata; provider candidate/full-document semantics, live search pager and full catalog unverified.",
           "receipt_path": "docs/verification/novus-native-search-2026-11-12.json",
           "receipt_sha256": "36a9ef4d05d622efedb40f009c805ad3dbcbfdb51393638b96da23eafba5ac80"
+        },
+        {
+          "id": "novus-public-coversheet-2026-11-12",
+          "url": "https://ebps.novusagenda.com/agendapublic/Coversheet.aspx?ItemID=12406&MeetingID=996",
+          "title": "Novus supplied public native-item cover sheet and attachment association",
+          "kind": "public_tenant",
+          "observed": "One supplied Coversheet GET200/30741 bytes; six new distinct synthetic cases passed across the recorded routing correction plus one existing listing regression.",
+          "observation_date": "2026-11-12",
+          "access_scope": "one_anonymous_guarded_GET_plus_offline_synthetic_engine_execution",
+          "proof_level": "bounded_public_capture_and_scoped_synthetic_engine_execution",
+          "findings": [
+            "Native item12406 parent meeting996; one native attachment11729 bound to item12406.",
+            "Rendered subject/date/text/sections and unknown source bytes retained; no inferred votes or motion."
+          ],
+          "limits": "One captured public template, no complete catalog or universal deployment claim; Attachment is supplied locator; synthetic PDF transfer does not establish actual downloaded document bytes; Rendered recommendation/blank voting form preserved as text, not inferred motion/votes; Standalone exact configured Coversheet URL, not root-listing detail crawling or arbitrary-ID fetch_record; Local source only; immutable dev8/1.8.5 unchanged",
+          "receipt_path": "docs/verification/novus-public-coversheet-2026-11-12.json",
+          "receipt_sha256": "24c168ee187cbff20216d675b857bd7e7cd64653f58b8512836edf9968512afe"
         }
       ],
       "tenants": [
@@ -6043,25 +6060,26 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "novusagenda-tenant",
             "novusagenda-traversal",
-            "novus-public-controls-and-fetch-2026-11-12"
+            "novus-public-controls-and-fetch-2026-11-12",
+            "novus-public-coversheet-2026-11-12"
           ],
-          "details": "One supplied DisplayAgendaPDF.ashx agenda link was fetched successfully through the generic attachment path. No structured MeetingView/Coversheet detail fetch has been established; the listing yields displayed metadata and links only.",
+          "details": "Configured supplied Coversheet URL maps native item/meeting IDs, rendered subject/date/text/sections and exact item-bound AttachmentViewer locators. Saved normalization/default discovery/configured fetch, search/export and separate synthetic PDF transfer are checked. Existing supplied agenda PDF success is separate. No root-to-detail crawl or arbitrary-ID fetch_record claim.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify a supplied Coversheet/MeetingView record and its exact document links; one agenda PDF was already fetched and should not be repeated.",
-            "Verify different document kinds only when supplied and preserve MIME/redirect/hash outcomes."
+            "MeetingView structured detail and Minutes remain unresolved.",
+            "Other public cover-sheet templates and actual supplied attachment file response are not established by the one captured page."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "bounded_public_capture_plus_scoped_synthetic_engine_execution",
           "tenant_scope": [
             "https://ebps.novusagenda.com/agendapublic/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Saved exact public response plus synthetic engine execution; live optional.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"

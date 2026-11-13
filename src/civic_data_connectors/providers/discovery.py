@@ -105,7 +105,7 @@ def _initial(source, bounds, input_format, saved):
                         "agendaquick-item-search-html", "civicplus-search-json"}:
         return []
     if input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html", "town-hall-streams-event-html",
-                        "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "iqm2-meeting-detail-html"}:
+                        "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "iqm2-meeting-detail-html", "novus-public-coversheet-html"}:
         return [{"kind": "static"}]
     if provider in NATIVE:
         if not bounds.date_from or not bounds.date_to:
@@ -410,7 +410,7 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
                         "civicweb-detail-html", "civicweb-filepro-soap-xml", "swagit-listing-html", "onbase-public-listing-html",
                         "digital-towpath-listing-html", "towncloud-public-listing-json", "telvue-cloudcast-mrss-xml",
                         "agendaquick-public-listing-html", "agendaquick-item-search-html", "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "civicplus-search-json",
-                        "utah-public-search-html", "iqm2-public-search-html", "iqm2-meeting-detail-html",
+                        "utah-public-search-html", "iqm2-public-search-html", "iqm2-meeting-detail-html", "novus-public-coversheet-html",
                         "clerkbase-public-tree-html", "clerkbase-search-html"}:
         return parse_native(source, namespace, content, input_format), ()
     result = engine.normalize(replace(source, body=None), content, input_format=input_format,
@@ -436,6 +436,9 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     namespace = validate_source(source, context, content)
     bounds = Bounds(**request.get("bounds", {}))
     input_format = source.input_format or DEFAULT_FORMAT[source.provider]
+    if (source.provider == "novusagenda" and source.input_format is None
+            and urlsplit(source.url).path == "/agendapublic/Coversheet.aspx"):
+        input_format = "novus-public-coversheet-html"
     if (source.provider == "iqm2" and source.input_format is None
             and urlsplit(source.url).path == "/Citizens/Detail_Meeting.aspx"):
         input_format = "iqm2-meeting-detail-html"
@@ -482,7 +485,7 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
             from .boardable import discover_public
             return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport(),
                                    record_types=request.get("record_types"))
-    if source.provider == "novusagenda" and (source.input_format == "novus-public-listing-html" or
+    if source.provider == "novusagenda" and input_format != "novus-public-coversheet-html" and (source.input_format == "novus-public-listing-html" or
                                             (saved is None and source.input_format is None)):
         from .novus import discover_public
         return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport(),

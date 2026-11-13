@@ -472,3 +472,5 @@ automatically prove your deployment's credentials, provider access, reverse prox
 OAuth authority, installed application or live write/readback behavior. Record
 those separately. See [release notes](RELEASE-NOTES.md) for development artifacts
 and the [user manual](USER-MANUAL.md) for operational troubleshooting.
+
+The local source also supports a supplied Novus cover sheet through `novus-public-coversheet-html`; see [native item/meeting and attachment bindings](NOVUS-COVERSHEET.md). This additive route is not in frozen dev8.
