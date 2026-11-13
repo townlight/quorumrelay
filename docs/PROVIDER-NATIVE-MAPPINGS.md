@@ -153,8 +153,10 @@ Only captured HTTPS same-tenant meeting documents are mapped. The wrapper's
 meeting/type/name constants, meeting-document branch and exact route templates
 must agree with the selected record and link. Preparation JSON must identify the
 same meeting, document type/name, zero item/publish IDs and non-section scope.
-Final bytes require PDF magic and a PDF/octet-stream media type. Item/section
-attachments and changed/unknown wrappers remain partial, with the meeting retained.
+Final bytes require PDF magic and a PDF/octet-stream media type. Section
+attachments and changed/unknown wrappers remain partial, with the meeting
+retained. Selected non-section agenda-item attachments use the separate explicit
+`fetch_attachment` mapping below.
 
 Cookies stay in one call's memory and are never returned in captures. Requests
 disable redirects, retain public-network safeguards and share the original
@@ -164,8 +166,66 @@ failure and are returned in `data.captures`; supplied capture bundles include th
 for explicit persistence and export. The original supplied link stays the citation.
 The [pinned wrapper](capabilities/evidence/onbase-download/source.json) and
 [synthetic execution receipt](verification/onbase-meeting-document-2026-11-13.json)
-establish this narrow mapping. They do not establish live PDF availability,
-native search, detail schemas, meeting-associated import or full Agenda coverage.
+establish this narrow wrapper mapping. They do not establish live PDF
+availability, native search, Agenda detail, meeting-associated import or full
+Agenda coverage. This existing meeting-document retrieval path is unchanged.
+
+## OnBase current-listing meeting and Agenda detail
+
+From the configured HTTPS `/OnBaseAgendaOnline/` root, `fetch_record` first
+revalidates the supplied native meeting ID against the current listing. It then
+accepts only the exact supplied `Meetings/ViewMeeting?id=<id>&doctype=1` page,
+checks its declared accessible agenda URL, and reads only
+`Meetings/ViewMeetingAgenda?meetingId=<id>&type=agenda`. The result carries the
+native meeting plus supplied `agenda_section` and `agenda_item` records. Child
+IDs use the meeting as their canonical parent; supplied items also preserve the
+parent-section relationship. The meeting keeps current-listing normalized
+metadata and recording references/relationships when agenda data is composed,
+and the compatibility meeting projection is synchronized to the final record.
+The same `onbase-public-listing-html` format parses the exact supplied
+`Meetings/ViewMeetingAgendaItem` variant with
+`isSection=false&type=agenda`. `fetch_related` lists sections or items; selected
+item detail additionally requires current-agenda membership and the exact literal
+item route declared by the meeting page. Selected section detail is not mapped.
+
+Original supplied fields, HTML captures and citation URLs are retained. Rendered
+text has partial completeness; timezone remains unknown. Attachment native IDs,
+publish IDs and supplied links remain locators and are not fetched by this path.
+Reads enforce cumulative parser/transfer bytes, page and deadline bounds,
+cancellation, same-origin exact response URLs and disabled redirects. Successful
+results remain partial, with no catalog/source completeness or snapshot guarantee.
+The three actual public detail-page GET captures are pinned in
+[the evidence manifest](capabilities/evidence/onbase-detail/source.json). The
+[scoped receipt](verification/onbase-detail-2026-11-13.json) records 17 new
+synthetic cases and 70 affected cases passed, including SQLite reopen, search and
+ZIP roundtrip; this is not whole-provider or live API acceptance. Native search,
+meetings absent from the current listing, other Agenda variants, broader APIs
+and remote import or association to an existing application meeting remain
+unresolved.
+
+## OnBase selected item attachment retrieval
+
+The detail and related-record calls return supporting-document native IDs,
+publish IDs and supplied URLs as locators; they do not fetch the attachment.
+`fetch_attachment` separately resolves a supplied locator on a selected
+`agenda_item` record. The locator, canonical meeting parent, item ID, publish ID,
+document type `1`, `isSection=false` and `isAttachment=true` must agree with the
+record. The captured wrapper must declare the exact same-tenant
+`InvokeDownloadAttachment` POST and `ViewDocument` GET, with a safe `.pdf`
+filename. Preparation JSON must echo the selected meeting/item/publish/type and
+non-section scope; the returned body must have PDF magic and a PDF or
+octet-stream media type. The call uses strict same-origin exact-URL requests,
+disabled redirects, cumulative bounds, deadline/cancellation checks and
+in-memory cookies. The result returns the file bytes; supplemental captures retain
+the verified wrapper and preparation responses without cookie values.
+
+The observed published attachment branch is pinned with the existing wrapper
+evidence. Its item-specific wrapper and PDF response are synthetic composition;
+no real item wrapper or PDF response was captured, so live file availability and
+rendering are unverified. Only the selected non-section Agenda item branch is
+mapped; section attachments and packet routes remain unmapped. The receipt records
+24 new synthetic cases, including reopened-item retrieval and capture
+persistence/ZIP roundtrip: [item-document receipt](verification/onbase-item-document-2026-11-13.json).
 
 ## Discovery output and v1 ownership
 

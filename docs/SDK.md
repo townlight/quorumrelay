@@ -84,6 +84,53 @@ Legistar vote and roll-call writes use `entity="vote"` / `entity="roll_call"`, `
 
 Official detail contract: https://webapi.legistar.com/Help/Api/GET-v1-Client-Events-EventId_EventItems_AgendaNote_MinutesNote_EventItemAttachments
 
+OnBase Agenda Online supports a bounded selected-detail path from its configured
+HTTPS root:
+
+```python
+onbase = Source("onbase", "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/")
+meeting = engine.fetch_record(onbase, "3825")
+items = engine.fetch_related(onbase, "3825", "agenda_item")
+item = engine.fetch_related(onbase, "3825", "agenda_item", external_id="88173")
+```
+
+`fetch_record` revalidates the native meeting ID against the current public
+listing, then follows only its supplied `ViewMeeting?doctype=1` page and literal
+accessible `ViewMeetingAgenda?type=agenda` route. It returns the native meeting,
+agenda sections and agenda items. The selected listing metadata and recording
+references/relationships remain on the meeting result, and its compatibility
+meeting projection reflects that final record. `fetch_related` lists supplied sections/items;
+a selected item is fetched only after current agenda membership and its exact
+declared `ViewMeetingAgendaItem?isSection=false&type=agenda` route are verified.
+Native child IDs retain the meeting parent, and items retain a supplied parent
+section relationship. Rendered text is partial, timezone remains unknown, and
+supporting attachment IDs, publish IDs and links remain metadata locators; the
+detail call itself does not fetch attachment bytes. Exact page captures and
+citations are preserved.
+Reads use cumulative byte, page and deadline bounds, cancellation checks and
+same-origin exact-URL GETs with redirects disabled. Coverage remains partial.
+Only the supplied Agenda variant and selected non-section item are mapped;
+selected section detail, archived meetings absent from the current listing,
+native search and broader Agenda APIs remain unresolved. The three pinned public
+detail-page GETs and scoped synthetic composition, persistence, search and ZIP
+evidence are recorded in [the OnBase detail receipt](verification/onbase-detail-2026-11-13.json)
+and [the pinned captures](capabilities/evidence/onbase-detail/source.json).
+
+After persisting the selected agenda-item record in the engine's scoped storage,
+retrieve its supplied supporting document with the separate attachment operation,
+for example
+`engine.fetch_attachment(onbase, item_record, index=0, context=context)`. This
+path accepts the exact same-tenant item locator only when its meeting, item,
+publish ID, Agenda document type and non-section attachment flags match both the
+record and the captured wrapper. It checks the declared safe PDF filename,
+performs the exact empty-body preparation POST and declared `ViewDocument` GET,
+and validates the returned PDF type and magic bytes. Redirects are disabled;
+cookies remain in call memory. The item wrapper and returned PDF are synthetic
+in this verification: no real item wrapper/PDF response was captured, and no
+live file availability or rendering is established. Section attachments and
+packet branches remain unmapped. See the separate
+[item-document receipt](verification/onbase-item-document-2026-11-13.json).
+
 ## Native search
 
 ```python

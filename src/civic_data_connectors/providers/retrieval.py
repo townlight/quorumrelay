@@ -63,6 +63,9 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if source.provider == "civicweb":
             from .civicweb_listing import fetch_related
             return fetch_related(source, namespace, request, bounds, context, transport)
+        if source.provider == "onbase":
+            from .onbase_detail import fetch_detail
+            return fetch_detail(source, namespace, request, bounds, context, transport)
         return OperationResult.unsupported("fetch_related", reason=(
             "No verified related-record retrieval mapping is registered for this provider."))
     if "external_id" in request:
@@ -71,6 +74,9 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if "caption_language" in request and source.provider != "wistia":
             return OperationResult.unsupported("fetch_captions", reason=(
                 "No verified supplied-caption retrieval mapping is registered for this provider."))
+        if source.provider == "onbase":
+            from .onbase_detail import fetch_detail
+            return fetch_detail(source, namespace, request, bounds, context, transport)
         if source.provider == "laserfiche-weblink" and urlsplit(source.url).hostname == "api.laserfiche.com":
             from .repository import fetch_entry
             return fetch_entry(source, namespace, request["external_id"], bounds, context, transport,

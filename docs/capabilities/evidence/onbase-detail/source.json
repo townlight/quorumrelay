@@ -1,0 +1,42 @@
+{
+  "observation_date": "2026-11-13",
+  "contract": "Tenant-published meeting wrapper, accessible agenda hierarchy and selected-item HTML, parsed as data without JavaScript execution.",
+  "captures": [
+    {
+      "path": "docs/capabilities/evidence/onbase-detail/meeting.html",
+      "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings/ViewMeeting?id=3825&doctype=1",
+      "lead": "exact ViewMeeting link supplied by existing captured listing for meeting3825",
+      "method": "GET",
+      "redirects": false,
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 12426,
+      "sha256": "9ba12b38fa556960843903177a1e0b304bee3b59ebda3c5ff4c65b26c72a1833",
+      "exact_url": true,
+      "contains_form_token": false
+    },
+    {
+      "path": "docs/capabilities/evidence/onbase-detail/agenda.html",
+      "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings/ViewMeetingAgenda?meetingId=3825&type=agenda",
+      "source_lead": "literal accessible agenda URL in fresh selected ViewMeeting HTML",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 6635,
+      "sha256": "7ddec24ed1ce338cf506dfdc43fd00a05f85b4be3d3fc2d3bf00cc10038eeaa0",
+      "contains_form_token": false,
+      "exact_url": true
+    },
+    {
+      "path": "docs/capabilities/evidence/onbase-detail/item.html",
+      "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings/ViewMeetingAgendaItem?meetingId=3825&itemId=88173&isSection=false&type=agenda",
+      "source_lead": "ViewMeeting literal item route plus supplied accessible item88173",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 2870,
+      "sha256": "db8b36eb00a7a08cbb4a19e66f1b1e5db3cb5506cc2502de45993fcd409e1832",
+      "contains_form_token": false,
+      "exact_url": true
+    }
+  ],
+  "scope": "Three exact public guarded GET observations; orchestration, fault and storage acceptance below use synthetic transport. No API writes, new account, search POST, provider preparation POST or attachment download."
+}

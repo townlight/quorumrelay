@@ -18406,6 +18406,36 @@
           "limits": "No real preparation POST/final PDF; only recognized meeting-document branch, not full Agenda API or association.",
           "receipt_path": "docs/verification/onbase-meeting-document-2026-11-13.json",
           "receipt_sha256": "520606756035b75a184b71c717306201850abe383da3d57db8f49624db69dee3"
+        },
+        {
+          "id": "onbase-supplied-agenda-detail-2026-11-13",
+          "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings/ViewMeeting?id=3825&doctype=1",
+          "title": "Supplied public Agenda hierarchy/item contracts and bounded synthetic detail execution",
+          "kind": "public_tenant",
+          "observation_date": "2026-11-13",
+          "proof_level": "published_provider_client_contract_and_synthetic_engine_execution",
+          "findings": [
+            "Three exact primary public HTML captures pinned with hashes; native meeting/section/item/attachment identifiers and supplied routes.",
+            "17 new detail cases and 70 affected cases passed, including local HTTP and real SQLite/search/ZIP."
+          ],
+          "limits": "Current-listing meeting, supplied Agenda hierarchy and selected item only; synthetic orchestration. No supporting-file download, full catalog, search, staff API or association/write claim.",
+          "receipt_path": "docs/verification/onbase-detail-2026-11-13.json",
+          "receipt_sha256": "6b15afc6b32bb44a61096665c4c715c67e9edad8221e6d02c2510004c986e95e"
+        },
+        {
+          "id": "onbase-item-document-wrapper-2026-11-13",
+          "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/",
+          "title": "Selected agenda-item supporting document protocol and synthetic acceptance",
+          "kind": "public_tenant",
+          "observation_date": "2026-11-13",
+          "proof_level": "published_provider_client_contract_and_synthetic_engine_execution",
+          "findings": [
+            "Pinned vendor client attachment branch and captured exact supporting link bind meeting/item/publish/type to selected stored item.",
+            "24 new item cases; final combined 100 affected/capability cases passed, including exact SQLite/ZIP byte readback."
+          ],
+          "limits": "Synthetic attachment wrapper/preparation/PDF only; no live attachment bytes/rendering, section/packet branch or whole-provider acceptance.",
+          "receipt_path": "docs/verification/onbase-item-document-2026-11-13.json",
+          "receipt_sha256": "ce34d4c7b7f1e63b113f6628741f355a3627e694b091c0ceb106561af2dce853"
         }
       ],
       "tenants": [
@@ -18473,12 +18503,14 @@
           "evidence_ids": [
             "hyland-onbase-agenda-online-tenant",
             "onbase-pdf-link-returned-html-2026-11-12",
-            "onbase-meeting-document-wrapper-2026-11-13"
+            "onbase-meeting-document-wrapper-2026-11-13",
+            "onbase-supplied-agenda-detail-2026-11-13",
+            "onbase-item-document-wrapper-2026-11-13"
           ],
-          "details": "Captured OnBase meeting-document Downloadfile links either return PDF bytes or a recognized vendor-authored wrapper. Exact meeting/type/name constants and declared InvokeDownloadMeetingDocument POST/ViewDocument GET templates are validated. Preparation JSON must match selected meeting/type and non-item/non-section scope; final MIME/PDF magic, same-origin exact URL, no redirects, cumulative parser/transfer/request/deadline bounds and cancellation apply. Scoped cookies remain in memory. Verified wrapper/preparation captures and unknown response fields survive partial failure and explicit persistence/ZIP; durable citation stays the supplied link. Actual live file availability and broader detail/search/association remain unverified.",
+          "details": "Captured OnBase meeting-document Downloadfile links either return PDF bytes or a recognized vendor-authored wrapper. Exact meeting/type/name constants and declared InvokeDownloadMeetingDocument POST/ViewDocument GET templates are validated. Preparation JSON must match selected meeting/type and non-item/non-section scope; final MIME/PDF magic, same-origin exact URL, no redirects, cumulative parser/transfer/request/deadline bounds and cancellation apply. Scoped cookies remain in memory. Verified wrapper/preparation captures and unknown response fields survive partial failure and explicit persistence/ZIP; durable citation stays the supplied link. Actual live file availability and broader detail/search/association remain unverified. Selected fetch_record from the configured HTTPS root revalidates current listing membership, follows the exact declared Agenda view and returns native agenda sections/items with parent context. fetch_related lists items/sections or verifies and fetches a selected non-section item. Raw fields, hierarchy, supplied partial rendered text/citations and exact supplemental captures survive local persistence/search/ZIP. Supporting-document native attachment/publish IDs and links remain metadata only. Explicit fetch_attachment from a scoped persisted selected agenda_item now additionally maps the exact published InvokeDownloadAttachment branch for supporting documents: canonical parent meeting, item, selected URL/document metadata, publish ID, type and non-section context bind wrapper constants and typed preparation JSON before final PDF GET. Detail itself still returns locators; download requires this separate explicit operation. Durable citation and capture bytes/hashes retained.",
           "dependencies": [],
           "remaining_verification": [
-            "Native search, broader meeting detail/association and other wrapper/deployment shapes remain separate unresolved requirements."
+            "Native search, archive meetings absent from the current root, selected section detail, other agenda variants/deployment shapes, and staff API/import association remain unresolved."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "published_provider_client_contract_and_scoped_synthetic_engine_execution",
@@ -18486,7 +18518,7 @@
             "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Synthetic replay of pinned public tenant wrapper and synthetic preparation/PDF responses, with real local SQLite/ZIP. No account or real provider POST required.",
+          "test_access": "Synthetic replay of pinned public tenant wrapper and synthetic preparation/PDF responses, with real local SQLite/ZIP. No account or real provider POST required. Three exact anonymous public GET captures plus synthetic bounded detail orchestration; no credentials or provider writes. Item attachment wrapper/constants, preparation and PDF responses are synthetic from pinned client branch; scoped SQLite and ZIP byte readback are actual local execution.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -18497,9 +18529,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "hyland-onbase-agenda-online-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "onbase-supplied-agenda-detail-2026-11-13"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Existing onbase-public-listing-html additionally dispatches exact supplied ViewMeeting, ViewMeetingAgenda and ViewMeetingAgendaItem URL variants, retaining unknown fields in raw captures and native hierarchy without changing the baseline parser.",
           "dependencies": [
             "Extract shared engine preserving legacy behavior."
           ],
@@ -18725,6 +18758,61 @@
             "onbase-meeting-document-wrapper-2026-11-13"
           ],
           "notes": "Not an input parser registration; meeting-document branch only, no item/section association or import."
+        },
+        {
+          "entity": "supplied_agenda_hierarchy_and_item",
+          "input_format": "onbase-public-listing-html",
+          "field_mappings": [
+            {
+              "normalized": "identity.external_id",
+              "provider_field": "meetingId/id; loadAgendaSection/Item native ID; lnkAttachment native ID",
+              "notes": "Native IDs; section is distinct from item, child parent is canonical meeting."
+            },
+            {
+              "normalized": "relationships.parent_agenda_section",
+              "provider_field": "supplied accessible-section DOM hierarchy",
+              "notes": "Section membership is a relationship, not a replacement for native item identity."
+            },
+            {
+              "normalized": "source_start/time_zone_status",
+              "provider_field": "accessible agenda rendered header",
+              "notes": "Preserve literal time; timezone unknown, not inferred."
+            },
+            {
+              "normalized": "documents",
+              "provider_field": "bound selected-item attachment href and publishId",
+              "notes": "Supplied locators only, not retrieved files."
+            },
+            {
+              "normalized": "original/text/captures",
+              "provider_field": "rendered titles/text, link attributes and exact captured bytes",
+              "notes": "Partial text only; citations and hashes retained."
+            }
+          ],
+          "evidence_ids": [
+            "onbase-supplied-agenda-detail-2026-11-13"
+          ],
+          "notes": "No new registered parser/count. Exact selected current-listing meeting; no catalog or write/association completeness."
+        },
+        {
+          "entity": "selected_item_supporting_document_wrapper",
+          "input_format": "published_wrapper_html_and_preparation_json",
+          "field_mappings": [
+            {
+              "normalized": "attachment.resolution.meeting_id/item_id/publish_id",
+              "provider_field": "selected captured query and wrapper constants/data.MeetingId/ItemId/PublishId",
+              "notes": "Bind to stored canonical parent, native item and selected supporting-document metadata."
+            },
+            {
+              "normalized": "attachment.citation_url/captures",
+              "provider_field": "original supporting link; exact verified wrapper/preparation bytes",
+              "notes": "No cookie persistence. Partial failure retains only verified captures."
+            }
+          ],
+          "evidence_ids": [
+            "onbase-item-document-wrapper-2026-11-13"
+          ],
+          "notes": "Explicit scoped attachment retrieval, not import/write or section/packet mapping. Synthetic wrapper/prepared/PDF acceptance only."
         }
       ],
       "outbound_mappings": [
@@ -19047,7 +19135,8 @@
         "On Fitchburg, current root maps 30 rows; one Meetings response mapped zero, and guarded search POST was rejected before redirect details/results. One supplied .pdf returned HTTP 200 text/html (3,719 bytes) without PDF magic; corrected result is partial and retains the meeting. This is neither PDF success nor proof of unsupported route.",
         "Hyland Agenda Foundation 25.1 guidance is version/installation-scoped. Identify deployment/version and entitlement before applying API/write operations to Agenda Online.",
         "No authorized deployment-matched staff/test account or integration contract was supplied for create/update/upload.",
-        "Normal Tagged DIP linked-document file/index preparation is implemented with exact destination mappings and synthetic emitted-layout proof; no Agenda meeting association or remote processing is inferred. OnBase API SDK remains an actual vendor surface; sdk.onbase.com redirected to Hyland identity, and public REST help describes per-deployment published operations rather than a universal Agenda schema. Continue exact API contract research without credential acquisition."
+        "Normal Tagged DIP linked-document file/index preparation is implemented with exact destination mappings and synthetic emitted-layout proof; no Agenda meeting association or remote processing is inferred. OnBase API SDK remains an actual vendor surface; sdk.onbase.com redirected to Hyland identity, and public REST help describes per-deployment published operations rather than a universal Agenda schema. Continue exact API contract research without credential acquisition.",
+        "Current-listing Agenda hierarchy and selected item detail now mapped with pinned captures and scoped synthetic execution. Archive traversal, native search, selected section detail, non-agenda variants, other attachment branches and staff import/meeting association remain unresolved; no additional public requests in this acceptance run."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "onbase",

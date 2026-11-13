@@ -47,13 +47,36 @@ def resolve_document(source, url, record, first, bounds, context, transport, dea
     selected, configured = urlsplit(url), urlsplit(source.url)
     match = re.fullmatch(r"(.+)/Documents/Downloadfile/[^/]+\.pdf", selected.path, re.I)
     query = parse_qs(selected.query, keep_blank_values=True)
+    identity = record.get("identity") or {}
+    normalized = record.get("normalized") or {}
+    item_scope = identity.get("record_type") == "agenda_item"
+    def positive(v):
+        return isinstance(v, str) and re.fullmatch(r"[1-9][0-9]{0,18}", v) is not None
     if (selected.scheme != "https" or _origin(url) != _origin(source.url) or selected.fragment
             or match is None or configured.path.rstrip("/") != match[1]
-            or set(query) != {"meetingId", "documentType"}
-            or any(len(value) != 1 for value in query.values())
-            or query["meetingId"][0] != record["identity"]["external_id"]
-            or not re.fullmatch(r"[1-9][0-9]{0,18}", query["meetingId"][0])
-            or query["documentType"][0] not in {"1", "2", "3", "5", "6"}):
+            or any(len(value) != 1 for value in query.values())):
+        raise ValueError("Only a captured same-tenant document download is mapped.")
+    if item_scope:
+        parent = identity.get("parent") or {}
+        meeting, item = parent.get("external_id"), identity.get("external_id")
+        documents = [d for d in normalized.get("documents", []) if isinstance(d, dict) and d.get("url") == url]
+        if (set(query) != {"meetingId", "itemId", "publishId", "documentType", "isSection", "isAttachment"}
+                or parent != {"provider": identity.get("provider"), "namespace": identity.get("namespace"),
+                              "record_type": "meeting", "external_id": meeting, "parent": None}
+                or not all(positive(v) for v in (meeting, item, query["publishId"][0]))
+                or query["meetingId"][0] != meeting or query["itemId"][0] != item
+                or query["documentType"][0] != "1" or query["isSection"][0].lower() != "false"
+                or query["isAttachment"][0].lower() != "true" or len(documents) != 1
+                or normalized.get("meeting_external_id") != meeting
+                or documents[0].get("kind") != "supporting_document"
+                or not positive(documents[0].get("external_id"))
+                or documents[0].get("meeting_external_id") != meeting
+                or documents[0].get("agenda_item_external_id") != item
+                or documents[0].get("publish_id") != query["publishId"][0]):
+            raise ValueError("The selected supporting document does not match its item and meeting.")
+    elif (identity.get("record_type") != "meeting" or set(query) != {"meetingId", "documentType"}
+            or query["meetingId"][0] != identity.get("external_id")
+            or not positive(query["meetingId"][0]) or query["documentType"][0] not in {"1", "2", "3", "5", "6"}):
         raise ValueError("Only a captured same-tenant meeting-document download is mapped.")
     if (first.status != 200 or first.url != url or len(first.content) > bounds.parser_bytes
             or len(first.content) >= bounds.transfer_bytes or bounds.max_pages < 3):
@@ -70,12 +93,14 @@ def resolve_document(source, url, record, first, bounds, context, transport, dea
 
     meeting = int(value("g_documentMeetingId", r"[0-9]+"))
     kind = int(value("g_documentType", r"[0-9]+"))
+    item_id = int(query["itemId"][0]) if item_scope else 0
+    publish_id = int(query["publishId"][0]) if item_scope else 0
     if (str(meeting) != query["meetingId"][0] or str(kind) != query["documentType"][0]
             or value("g_documentStreamId", r"''") != "''"
             or value("g_documentTypeMaxEnum", r"[0-9]+") != "7"
-            or value("g_documentItemId", r"[0-9]+") != "0"
-            or value("g_documentPublishId", r"[0-9]+") != "0"
-            or value("g_documentIsAttachment", r"true|false") != "false"
+            or value("g_documentItemId", r"[0-9]+") != str(item_id)
+            or value("g_documentPublishId", r"[0-9]+") != str(publish_id)
+            or value("g_documentIsAttachment", r"true|false") != ("true" if item_scope else "false")
             or value("g_documentIsSection", r"true|false") != "false"):
         raise ValueError("The wrapper did not match the selected meeting-document scope.")
     name = value("g_documentName", r"'[^'\\\r\n]+'")[1:-1]
@@ -88,6 +113,8 @@ def resolve_document(source, url, record, first, bounds, context, transport, dea
 
     prefix = match[1]
     invoke_template = prefix + "/Documents/InvokeDownloadMeetingDocument/DOCUMENTNAME?meetingId=MEETINGIDVALUE&documentType=DOCUMENTTYPEVALUE"
+    if item_scope:
+        invoke_template = prefix + "/Documents/InvokeDownloadAttachment/DOCUMENTNAME?meetingId=MEETINGIDVALUE&itemId=ITEMIDVALUE&publishId=PUBLISHIDVALUE&isSection=ISSECTIONVALUE&documentType=AGENDATYPEVALUE"
     view_template = prefix + "/Documents/ViewDocument/DOCUMENTNAME?meetingId=MEETINGIDVALUE&documentType=DOCUMENTTYPEVALUE&itemId=ITEMIDVALUE&publishId=PUBLISHIDVALUE&isSection=ISSECTIONVALUE"
     if (not valid_name(name) or "'" + invoke_template + "'" not in script
             or "'" + view_template + "'" not in script
@@ -111,7 +138,8 @@ def resolve_document(source, url, record, first, bounds, context, transport, dea
             "original_values": original})
 
     _cookies(jar, first, url)
-    retain(first, "onbase-document-wrapper-html", {"meeting_id": meeting, "document_type": kind, "document_name": name})
+    retain(first, "onbase-document-wrapper-html", {"meeting_id": meeting, "document_type": kind, "document_name": name,
+        **({"item_id": item_id, "publish_id": publish_id} if item_scope else {})})
 
     def read(target, *, method="GET", control=False):
         nonlocal remaining_transfer, remaining_parser
@@ -142,21 +170,24 @@ def resolve_document(source, url, record, first, bounds, context, transport, dea
             reject_credential_echo(response.content, {"token": cookie.value})
         return response
 
-    invoke = origin + prefix + "/Documents/InvokeDownloadMeetingDocument/" + quote(name, safe="")
-    prepared = read(invoke + "?" + urlencode({"meetingId": meeting, "documentType": kind}), method="POST", control=True)
+    invoke = origin + prefix + ("/Documents/InvokeDownloadAttachment/" if item_scope else "/Documents/InvokeDownloadMeetingDocument/") + quote(name, safe="")
+    params = ({"meetingId": meeting, "itemId": item_id, "publishId": publish_id, "isSection": "false", "documentType": kind}
+              if item_scope else {"meetingId": meeting, "documentType": kind})
+    prepared = read(invoke + "?" + urlencode(params), method="POST", control=True)
     data = json.loads(prepared.content)
     if (not isinstance(data, dict) or data.get("DocumentName") != name
             or any(type(data.get(key)) is not int or data[key] != expected for key, expected in
-                   (("MeetingId", meeting), ("DocumentType", kind), ("ItemId", 0), ("PublishId", 0)))
+                   (("MeetingId", meeting), ("DocumentType", kind), ("ItemId", item_id), ("PublishId", publish_id)))
             or data.get("IsSection") is not False):
         raise ValueError("Prepared document did not match the selected meeting/type.")
-    retain(prepared, "onbase-prepared-meeting-document-json", data)
+    retain(prepared, "onbase-prepared-item-document-json" if item_scope else "onbase-prepared-meeting-document-json", data)
     _wait(context, deadline)
     target = origin + prefix + "/Documents/ViewDocument/" + quote(name, safe="") + "?" + urlencode({
-        "meetingId": meeting, "documentType": kind, "itemId": 0, "publishId": 0, "isSection": "false"})
+        "meetingId": meeting, "documentType": kind, "itemId": item_id, "publishId": publish_id, "isSection": "false"})
     document = read(target)
     if (not document.content.startswith(b"%PDF-") or document.content_type.split(";", 1)[0].lower().strip()
             not in {"application/pdf", "application/octet-stream"}):
         raise ValueError("The prepared document did not return PDF bytes.")
-    return document, {"kind": "onbase_supplied_meeting_document_wrapper", "meeting_id": str(meeting),
+    return document, {"kind": "onbase_supplied_item_document_wrapper" if item_scope else "onbase_supplied_meeting_document_wrapper", "meeting_id": str(meeting),
+        **({"item_id": str(item_id), "publish_id": str(publish_id)} if item_scope else {}),
         "document_type": kind, "captures": captures, "requests": 3, "catalog_complete": False}

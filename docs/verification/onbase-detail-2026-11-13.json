@@ -1,0 +1,47 @@
+{
+  "status": "PASS_SCOPED_PUBLIC_CAPTURE_AND_SYNTHETIC_DETAIL",
+  "source_baseline": "0e3db5d2c823c5133b4f2f5473b10a2cf4018d03",
+  "contract_path": "docs/capabilities/evidence/onbase-detail/source.json",
+  "contract_sha256": "4c1a0ab545aa6bef779941645c80ed39779fd2fe31fc3bee9a05d8b3881748a5",
+  "source_sha256": {
+    "src/civic_data_connectors/providers/onbase_detail.py": "8e9a359f5bf362b5d16e408b16db3fbca5b8732902ee3d836dcccfc17d3f1dac",
+    "src/civic_data_connectors/providers/native.py": "5fa73257de482fb921bb73f14aa02851803c9c5923542fceb0f5fa3ece8b8f0c",
+    "src/civic_data_connectors/providers/retrieval.py": "6a24000558d3c0803e5678c77aba941191d7e246aa4bd9428455ab3e66b7534f",
+    "tests/test_onbase_detail.py": "da262fd4547fbbf40cdf40b66c41b01b8dee850b7df94dcfda31b9b4928bbf55"
+  },
+  "execution": {
+    "new_detail_cases_passed": 17,
+    "affected_cases_passed": 70,
+    "command": "pytest tests/test_onbase_detail.py tests/test_onbase_documents.py tests/test_onbase_listing.py tests/test_onbase_export.py tests/test_provider_record.py tests/test_recording_retrieval.py -q --tb=short",
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\onbase-detail-affected.xml",
+    "junit_sha256": "ee95f7baf30637a235cc7a2055c7810424dce4763f7bc47ceec16b945dd69b73",
+    "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\onbase-detail-affected.log",
+    "scope": [
+      "actual pinned HTML: 9 native sections, 2 native items, exact parent meeting and section relationships",
+      "selected item retains supporting-document native identity, publish ID and supplied URL without fetching",
+      "synthetic exact listing/wrapper/agenda/item GET composition with no redirects or credentials",
+      "membership/template/foreign attachment/title/response URL failures; bounds and cancellation",
+      "actual SQLite import, repeat idempotency, reopen, cited partial text search and ZIP raw-capture roundtrip",
+      "actual local HTTP related-record boundary; existing document/listing/export/recording regressions"
+    ],
+    "initial_failure": "One test compared a canonical parent reference with a full identity including derivation/stability descriptions. Corrected to existing source_identity_key comparison; production identity semantics unchanged.",
+    "preservation_regression": "Strengthened existing composition case with supplied View Media link; reproduced missing recordings KeyError, merged root metadata and recording relationships, refreshed retained-record compatibility projection. Final 70-case affected run passed; counts overlap prior run."
+  },
+  "limitations": [
+    "No full archive/catalog completeness or atomic snapshot; selected meeting must be in current root listing.",
+    "Only supplied agenda variant and selected non-section item detail; selected section detail, minutes/summary variants remain unmapped.",
+    "Supporting attachment URLs are locators only; existing meeting-document PDF path is separate.",
+    "Rendered text is partial available content, unknown timezone remains explicit.",
+    "Native search, broader Agenda API, import/meeting association, other providers, final consumer/package/CI/native/delivery acceptance remain incomplete.",
+    "Historical 16-pass/1-fail run was not completion. No whole-provider acceptance claim."
+  ],
+  "completed_local_date": "2026-11-13",
+  "checks": {
+    "capability_tests_passed": 6,
+    "distinct_cases_this_checkpoint": 76,
+    "ruff": "PASS src tests scripts examples",
+    "inventory_validator": "PASS zero errors; five negative cases",
+    "diff_check": "PASS",
+    "other_30_provider_rows": "unchanged"
+  }
+}

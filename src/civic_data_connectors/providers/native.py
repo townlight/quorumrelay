@@ -220,6 +220,9 @@ def parse_native(source, namespace, content, input_format):
         from .towpath import listing_bundle
         return listing_bundle(source, namespace, content)
     if input_format == "onbase-public-listing-html":
+        if "/meetings/viewmeeting" in urlsplit(source.url).path.lower():
+            from .onbase_detail import parse_bundle
+            return parse_bundle(source, namespace, content)
         from .onbase import listing_rows
         return make_bundle(source, namespace, content, input_format, listing_rows(source, content))
     if input_format == "swagit-listing-html":
