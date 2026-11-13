@@ -147,6 +147,18 @@ def _validate_capture_file(provider, evidence, receipt_fixture, receipt_sha256, 
         errors.append(f"{provider}: capture fixture hash differs from the receipt/inventory")
 
 
+def _binding_hash_matches(path, binding):
+    policy = binding.get("hash_policy", "raw")
+    content = path.read_bytes()
+    if policy == "raw":
+        return hashlib.sha256(content).hexdigest() == binding.get("sha256")
+    if policy == "test_source_crlf_to_lf" and binding.get("kind") == "test":
+        # Keep the recorded raw digest; only explicit test-source bindings use
+        # a separate portable digest. Vendor contracts always remain byte-exact.
+        return hashlib.sha256(content.replace(b"\r\n", b"\n")).hexdigest() == binding.get("canonical_lf_sha256")
+    return False
+
+
 def _synthetic_errors(provider, operation, entry, evidence_by_id):
     """Validate attributed synthetic evidence, not execute or infer acceptance."""
     for evidence_id in entry.get("evidence_ids", []):
@@ -179,7 +191,7 @@ def _synthetic_errors(provider, operation, entry, evidence_by_id):
             if (path is None or not path.is_file()
                     or (binding.get("kind") == "test"
                         and (not binding["path"].startswith("tests/") or path.suffix != ".py"))
-                    or hashlib.sha256(path.read_bytes()).hexdigest() != binding.get("sha256")):
+                    or not _binding_hash_matches(path, binding)):
                 valid = False
                 break
         if valid and entry.get("implementation_status") == "implemented":

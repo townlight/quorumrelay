@@ -92,3 +92,24 @@ def test_packaged_synthetic_claim_retains_the_attributed_proof():
     assert wistia["operations"]["discover"]["implementation_status"] == "implemented"
     # Executed swap evidence is deliberately not blanket whole-provider acceptance.
     assert wistia["operations"]["update"]["acceptance_status"] == "not_run"
+
+
+@pytest.mark.parametrize("case", ["crlf", "changed", "unknown", "raw", "vendor"])
+def test_explicit_test_source_line_ending_policy_is_narrow(evidence, case):
+    entry, refs = evidence
+    proof = refs["synthetic"]["synthetic_execution"]
+    binding = proof["bindings"][0 if case == "vendor" else 1]
+    path = validator.ROOT / binding["path"]
+    original = b"first\nsecond\n"
+    binding["sha256"] = hashlib.sha256(original).hexdigest()
+    binding.update(hash_policy="test_source_crlf_to_lf",
+                   canonical_lf_sha256=hashlib.sha256(original).hexdigest())
+    path.write_bytes(original.replace(b"\n", b"\r\n"))
+    if case == "changed":
+        path.write_bytes(b"first\r\nchanged\r\n")
+    elif case == "unknown":
+        binding["hash_policy"] = "ignore_all_whitespace"
+    elif case == "raw":
+        binding.pop("hash_policy")
+    errors = validator._synthetic_errors("wistia", "update", entry, refs)
+    assert bool(errors) == (case != "crlf")
