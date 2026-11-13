@@ -19399,6 +19399,21 @@
           "limits": "Synthetic owned-task lifecycle only; no live task, resumable cursor, native-search or whole-provider acceptance.",
           "receipt_path": "docs/verification/laserfiche-async-export-2026-11-13.json",
           "receipt_sha256": "6465b2efdae04e2fd47e2a20bd38fccb1019de8f8e50c7f0780962a646d67362"
+        },
+        {
+          "id": "lf-repository-native-search-2026-11-13",
+          "url": "https://developer.laserfiche.com/docs/guides/search/guide_search/",
+          "title": "Repository v2 configured-folder search with attributable context and scoped synthetic execution",
+          "kind": "official_documentation",
+          "observation_date": "2026-11-13",
+          "proof_level": "vendor_documented_contract_and_synthetic_engine_execution",
+          "findings": [
+            "SearchAsync/Tasks/Results/ContextHits implemented with documented folder restriction and literal escaping.",
+            "Twenty-eight new synthetic cases and affected export/read regressions passed, including real SQLite/ZIP and HTTP boundary."
+          ],
+          "limits": "Available metadata/excerpts only, not full-text/catalog completeness or whole-provider acceptance; no live task started.",
+          "receipt_path": "docs/verification/laserfiche-native-search-2026-11-13.json",
+          "receipt_sha256": "4cbda2d7af4bf9d72c6a4531435c4aadb92b14ceaf017d7ebaca24b4541535cd"
         }
       ],
       "tenants": [
@@ -19490,7 +19505,7 @@
             "WebLink cookie/browser capture for public folders"
           ],
           "remaining_verification": [
-            "Native search and guarded WebLink outcomes remain separate; no whole-provider completeness claim."
+            "Guarded WebLink outcomes and whole-provider coverage remain separate unresolved requirements."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "vendor_documented_get_entry_and_scoped_synthetic_engine_execution; historical_weblink_observations",
@@ -19530,30 +19545,29 @@
         },
         "native_search": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "lf-search"
+            "lf-search",
+            "lf-repository-native-search-2026-11-13"
           ],
-          "details": "Authenticated Repository v2 path documented; separate browser/saved WebLink route required for older public tenant. No credentialed acceptance.",
+          "details": "Explicit Repository v2 API folder uses SearchAsync with numeric direct-child LookIn restriction and escaped literal Basic first-expression candidates. Exact shared AND terms/phrases match only returned metadata/context excerpts; source/catalog/full-document completeness remains false. Results, context raw bytes, unknown fields and page/citation anchors are preserved. Parent/task/type/result route, page/count identities, record/page/time/cumulative API bytes and exact owned-task cleanup are guarded. Metadata survives context failure. No meeting-date/body inference or cross-call task cursor. Public WebLink native search remains unmapped.",
           "dependencies": [
-            "Cloud repository ID/OAuth scoped access or authorized self-hosted API version",
-            "WebLink cookie/browser capture for public folders"
+            "Explicit configured Repository v2 API folder; trusted repository.Read token at runtime"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases"
+            "Broader WebLink native search and whole-provider coverage remain separate unresolved requirements."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "vendor_documented_contract_and_scoped_synthetic_engine_execution",
           "tenant_scope": [
-            "https://miweblink.metro-inet.us/sapublic/Browse.aspx?startid=207&cr=1",
-            "https://weblink.ci.northfield.mn.us/WebLink/Browse.aspx?dbid=0&startid=92&row=1&cr=1"
+            "Explicit configured https://api.laserfiche.com/repository/v2/Repositories/{repositoryId}/Entries/{folderId}/Folder/Children"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Executed synthetic provider transport with real SQLite, ZIP and local HTTP boundary; owner amendment accepts this provider verification basis. No vendor account required.",
           "restrictions": [
-            "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Search excerpts and available metadata only; not a full-document exact-search or catalog completeness claim.",
+            "No inferred public WebLink-to-account mapping; no dates/bodies or task-resume cursor.",
+            "Provider transport synthetic; broad acceptance_status remains not_run rather than claiming whole-provider completion."
           ]
         },
         "local_search": {

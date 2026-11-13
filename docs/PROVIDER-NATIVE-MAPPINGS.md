@@ -101,6 +101,25 @@ participate in normalized change detection. Missing streams and bounds remain
 explicit through local search. No generation, OCR or atomic snapshot is claimed.
 See [scoped text evidence](verification/laserfiche-page-text-2026-11-13.json).
 
+Repository native search uses the explicit configured API folder, trusted
+`laserfiche_token`, and the pinned SearchAsync/Tasks/Results/ContextHits contract.
+The first literal term or phrase obtains Basic-search candidates across document
+text, fields, annotations and names; numeric LookIn plus Subfolders=N restricts
+the query to direct children. Quotes and wildcard/indexed-string characters are
+escaped using the pinned vendor syntax paper. The shared local matcher applies
+all requested exact terms/phrases to the metadata and excerpts actually returned.
+This is not a full-document exact-search or catalog-completeness claim.
+
+Result and context pages preserve original bytes, unknown fields, supplied row/hit
+identities and page anchors. Parent IDs, task type/identity and the exact result
+route are verified. Record/page/time and cumulative API-byte bounds apply;
+failed context reads retain metadata with partial coverage. Dates/bodies cannot
+be inferred from repository creation times. Search tasks are removed using only
+the issued task ID, including after successful reads; cleanup acknowledgement
+and confirmed cancellation remain separate. No cross-call task cursor, WebLink
+account inference, generated text or live-tenant acceptance is claimed. See
+[synthetic search evidence](verification/laserfiche-native-search-2026-11-13.json).
+
 ## Discovery output and v1 ownership
 
 `discover.data` contains `source`, aggregate `records`, exact page `captures`, and page `bundles`. Every page bundle retains its own source namespace and compatibility projection. Aggregation filters rich records but does not rewrite the original page compatibility output, so callers must not import unfiltered compatibility rows blindly.

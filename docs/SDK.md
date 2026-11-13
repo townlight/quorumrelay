@@ -98,6 +98,30 @@ The Wistia adapter calls the documented `/modern/search` endpoint with media-onl
 
 Other unregistered native search routes report an implementation gap. `native=false` performs the existing local capture search. Connector extensions can supply their own typed `native_search` hook. Wistia live account acceptance remains unrun without authorized credentials; see the capability inventory.
 
+Laserfiche Repository v2 native search accepts the same `native=true` request
+with an explicitly configured folder Children source and trusted
+`OperationContext(credentials={"laserfiche_token": token})`. For example:
+
+```python
+result = engine.execute("search", {
+    "native": True,
+    "source": {"provider": "laserfiche-weblink",
+        "url": "https://api.laserfiche.com/repository/v2/Repositories/REPOSITORY/Entries/54/Folder/Children"},
+    "query": {"terms": ["park"], "phrases": ["funding was approved"]},
+    "bounds": {"max_records": 100, "max_pages": 10}
+}, context=context)
+```
+
+The provider supplies first-expression candidates within that folder's direct
+children; all exact terms/phrases are then checked against returned metadata and
+context excerpts. Results remain partial because excerpts are not whole-document
+text. Inspect coverage for candidate/context truncation, failures and task cleanup.
+Use the full `result` for explicit import to preserve records, page/context
+captures and partial coverage. Metadata-only records remain available even when
+context retrieval fails. Meeting date/body filters and task-resume checkpoints
+are rejected; WebLink public sources do not imply Repository API access. Search
+tasks are cleaned up within the call; there is no automatic background worker.
+
 
 Legistar native search uses the same request shape with a configured Legistar source and explicit dates. It searches **EventBodyName metadata only**, using provider-side substring filters and exact local term/phrase checking on that field. It retains full original records but does not advertise searching agenda titles, document text or vote details. Coverage states the searched field and binds resumed pages to the exact source/query/scope.
 

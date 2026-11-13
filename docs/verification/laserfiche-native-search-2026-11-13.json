@@ -1,0 +1,64 @@
+{
+  "status": "PASS_SYNTHETIC_SCOPED_NATIVE_SEARCH",
+  "source_baseline": "a6f5d943a9c0365100607523866a2da5f1c5c17b",
+  "contract": {
+    "sdk_path": "docs/capabilities/evidence/laserfiche-repository/index.ts",
+    "sdk_sha256": "de9970a4b12c8b1fa73dcc9cf51bc4bc24618774f9b20ce40ceab9a3d386b762",
+    "sdk_lines": "13200-13775; 14927-15130; 28551-28830",
+    "guide": "https://developer.laserfiche.com/docs/guides/search/guide_search/",
+    "guide_local": "docs/capabilities/provider-api-contracts.json: extracted_guide starting # Search | Laserfiche",
+    "syntax_path": "docs/capabilities/evidence/laserfiche-search-syntax/advanced-search-syntax-10.3.pdf",
+    "syntax_sha256": "1dcc51b9101bfdbc1dfc121a659bd79691e70e25e2307a059617e47a7cecb441",
+    "syntax_zero_based_pages": [
+      4,
+      6,
+      14,
+      33
+    ],
+    "oauth_scope": "repository.Read in trusted caller context",
+    "routes": [
+      "POST Searches/SearchAsync",
+      "GET Tasks?taskIds={ownedTaskId}",
+      "GET Searches/{ownedTaskId}/Results?$top=&$skip=&$count=true",
+      "GET Searches/{ownedTaskId}/Results/{rowNumber}/ContextHits?$top=&$skip=&$count=true",
+      "DELETE Tasks?taskIds={ownedTaskId}"
+    ],
+    "http_status_resolution": "Pinned SDK listTasks uses 200; guide example shows 202. Implementation follows SDK 200."
+  },
+  "source_sha256": {
+    "src/civic_data_connectors/providers/repository_search.py": "4c096f2dcd9cd1286886d1258c3c3777901780f7acf6c84e348630dee122cc28",
+    "src/civic_data_connectors/providers/repository_export.py": "0c778a6db06cef2a0c20e35d11eed2187d81ff615dab3735de7d7c876fb86677",
+    "src/civic_data_connectors/providers/__init__.py": "772a2255217ad2dae40c10c01c5e5b9ef048d0056ebba30666258f76a6d861e8",
+    "tests/test_repository_search.py": "d01e09a7da0a11cd765166d0f7b53524c28f7a14d3f47e35b82e3cacec8be4c0",
+    "tests/test_repository_async_export.py": "470d9a64691678ac7131ba07faff155035017ffcbedd178fc853d88dbc6d6b30"
+  },
+  "execution": {
+    "new_cases_passed": 28,
+    "affected_cases_passed": 118,
+    "command": "pytest tests/test_repository_search.py tests/test_repository_async_export.py tests/test_repository_export_variants.py tests/test_repository_content.py tests/test_repository_text.py tests/test_repository_fetch.py tests/test_repository_discovery.py -q",
+    "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\repository-search.log",
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\repository-search.xml",
+    "junit_sha256": "8463bff5e21b0b1fe4777add2bedad30ee45047c4b717aa5f1abb4f3c41f364e",
+    "ruff": "Full repository ruff check passed",
+    "scope": [
+      "numeric direct-folder restriction and escaped first-expression Basic candidate query",
+      "exact shared AND matching on available metadata/excerpts; supplied page/citation/provenance",
+      "results/context paging/count/identity validation, exact parent/task/result route",
+      "record/page/time/cumulative API-byte bounds, exact owned-task cleanup and unconfirmed state",
+      "invalid query/access/token/malformed/credential-echo/HTTP failure remains explicit",
+      "partial metadata retention, empty scoped response, raw captures/unknown fields",
+      "actual SQLite import/reopen/local search/ZIP round-trip; HTTP trusted credential boundary",
+      "existing asynchronous export and affected content/text/detail/discovery regressions"
+    ]
+  },
+  "limitations": [
+    "Synthetic provider transport only; no actual provider task/request was started",
+    "Vendor Basic semantics produce candidates; exact local matches cover returned fields/excerpts only",
+    "Result-set completion is not full-text or repository/catalog completeness",
+    "Direct configured API-folder children only; no WebLink account or self-hosted inference",
+    "Meeting date/body filters and cross-call task continuation are not mapped",
+    "Cleanup can remain unconfirmed after transport failure or exhausted bounds; reported with owned task ID",
+    "No whole-provider acceptance, package build, installed behavior or delivery claim"
+  ],
+  "completed_local_date": "2026-11-13"
+}

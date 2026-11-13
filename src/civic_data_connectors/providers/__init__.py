@@ -85,6 +85,9 @@ def register(engine, *, transport: Transport | None = None,
         fetch(engine, request, content, context, transport=transport, browser=browser))
     from .wistia import native_search
     from ..storage import tracked_handler
+    from .repository_search import native_search as repository_search
+    engine.register_native_search("laserfiche-weblink", tracked_handler("search", lambda engine, request, content, context:
+                                  repository_search(engine, request, content, context, transport=transport)))
     engine.register_native_search("wistia", tracked_handler("search", lambda engine, request, content, context:
                                   native_search(engine, request, content, context, transport=transport)))
     from .legistar import native_search as legistar_search
