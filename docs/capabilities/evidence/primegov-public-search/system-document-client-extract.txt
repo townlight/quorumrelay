@@ -1,0 +1,6 @@
+// Non-contiguous excerpts from the same public vendor client; omitted cases unchanged.
+var attachmentID = row.id;
+                    case 2:
+                            //System Document
+                            var str = '<a class="download_attachment" title="' + _Common.DownloadAttachment + '" href="/api/portal/DownloadSystemItemAttachedDocToBrowser/' + attachmentID + '" aria-label="' + _Common.DownloadAttachment + '"><span class="glyphicon iconColour glyphicon-download"></span></a>';
+                            

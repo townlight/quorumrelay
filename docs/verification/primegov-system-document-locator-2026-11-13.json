@@ -1,0 +1,24 @@
+{
+  "scope": "PrimeGov public search type-2 system-document locator only; no document fetch or authenticated Meeting API claim",
+  "base_commit": "f6ed5195727ddaea3a2580890a1c88a4f6cd1a78",
+  "vendor_client_url": "https://reno.primegov.com/Scripts/Custom/Public/_Search.js",
+  "vendor_client_sha256": "59d8325d7adcff9451b9140acd3fe4acf1dcbecaa2b5a7ae3c1d80d63b0e6b70",
+  "files": {
+    "src/civic_data_connectors/providers/primegov_search.py": "b8f275b10738f8408ce6e04d31998d47e07ed561e3a521f929e9c7ecc77d82d6",
+    "tests/test_primegov_native_search.py": "c3570757b29dd8672c2fb02033eb9ec8090838df46cc3594ee86e74ed0b2c030",
+    "tests/test_provider_native_search.py": "d5bf987f93dba47039eefb0d43f3a1dc47155215ed0536835472631208569ff9",
+    "docs/capabilities/evidence/primegov-public-search/system-document-client-extract.txt": "31ce0ea2dbdbf1e8dcd313454185385fc708c67bc8ecc54a801d4e7bc404705b",
+    "docs/capabilities/evidence/primegov-public-search/system-document-source.json": "c4b240e6eab26e03668a9c5f7889921068bb40c0c1cc43f4ebc473ae04662072",
+    "tests/fixtures/primegov-native-search/council.json": "0dd56ba2cec1ead321fc98ae38fc6309ae62e06d4b5b01b0641c931f22189b68"
+  },
+  "verification": {
+    "command": "python -m pytest -q tests/test_primegov_native_search.py tests/test_provider_native_search.py",
+    "tests": 9,
+    "failures": 0,
+    "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\primegov-document-locator.log",
+    "log_sha256": "d6ee9741dff12c7970e6ef8fb5f90c9739dd411eb6c5b8435f29c2e7075fa715",
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\primegov-document-locator.xml",
+    "junit_sha256": "e3747308a0332c07d19b4e6f776bc2a99951b8d73204a8784b1080e72efb614b"
+  },
+  "limits": "Captured Reno client and fixture plus synthetic response replay; no provider document GET, file content, other attachment branch, authenticated Meeting API, or catalog completeness established."
+}

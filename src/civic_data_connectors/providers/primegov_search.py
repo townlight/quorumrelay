@@ -58,6 +58,12 @@ def _rows(original, source):
                       "meeting_date": day, "meeting_title": raw.get("meetingTitle"),
                       "source_date": raw["meetingDate"], "time_zone_status": "unknown",
                       "url": _origin(source.url) + "/Portal/Meeting?" + urlencode({"meetingId": raw["meetingId"]})}
+        if (kind == "document" and type(raw.get("type")) is int and raw["type"] == 2
+                and 0 < raw["id"] <= 9999999999999999999):
+            normalized["documents"] = [{"kind": "system_document", "external_id": str(raw["id"]),
+                "title": raw.get("title"), "url": _origin(source.url) +
+                "/api/portal/DownloadSystemItemAttachedDocToBrowser/" + str(raw["id"]),
+                "availability": "vendor_client_locator_not_fetched"}]
         if isinstance(excerpt, str):
             normalized["search_excerpt"] = "".join(_Excerpt(excerpt).parts)
         rows.append((normalized, raw, kind))

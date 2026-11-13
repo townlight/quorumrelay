@@ -351,7 +351,7 @@ All account reads remain partial coverage: list pagination/end conditions and ac
 
 ## Bounded public native search
 
-The dev7 source candidate adds the verified public search forms for PrimeGov, eSCRIBE, Swagit, SuiteOne, CivicPlus Select, AgendaCenter, AgendaQuick, Utah, iQM2 and ClerkBase. These adapters apply only to their evidenced source routes/tenants; `providers` and the capability inventory distinguish them from the preserved saved-input formats. They submit the first term or phrase to the provider, then apply exact local matching to the returned metadata and explicitly supplied excerpts. Provider ranking/candidate selection is separate from the local match and is not a full-text or catalog-completeness promise.
+The dev7 source candidate adds the verified public search forms for PrimeGov, eSCRIBE, Swagit, SuiteOne, CivicPlus Select, AgendaCenter, AgendaQuick, Utah, iQM2 and ClerkBase. These adapters apply only to their evidenced source routes/tenants; `providers` and the capability inventory distinguish them from the preserved saved-input formats. They submit the first term or phrase to the provider, then apply exact local matching to the returned metadata and explicitly supplied excerpts. Provider ranking/candidate selection is separate from the local match and is not a full-text or catalog-completeness promise. For a PrimeGov search result identified as a type-2 system document, the current source candidate also retains the public vendor-client download locator under `normalized.documents`; the locator is not fetched by search and its availability remains unverified. Other attachment types and authenticated Meeting API schemas are not implied.
 
 ```python
 result = engine.execute("search", {

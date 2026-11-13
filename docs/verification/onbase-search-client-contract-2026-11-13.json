@@ -1,0 +1,55 @@
+{
+  "status": "OBSERVED_CLIENT_SOURCE_ONLY",
+  "observed_date": "2026-11-13",
+  "saved_meetings_page": {
+    "path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\files-pasted-by-the-user-read\\outputs\\agendacenter-onbase-followup-20261112\\onbase-meetings.body",
+    "bytes": 10094,
+    "sha256": "0c2c5838b3ca83b51db7407b234ebd3f62bc864852246bb825a1676f376dd575"
+  },
+  "literal_script_observation": {
+    "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/bundles/corescripts?v=6h0g3m818gbdrW57_Q6xLaHjZitU5RtArUxI7lFhH9E1",
+    "source_lead": "Literal script src in the saved Meetings HTML",
+    "method": "GET",
+    "status": 200,
+    "final_url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/bundles/corescripts?v=6h0g3m818gbdrW57_Q6xLaHjZitU5RtArUxI7lFhH9E1",
+    "content_type": "text/javascript",
+    "bytes": 291171,
+    "sha256": "f3e20660f5b284f88e48abf66e3bc45453759832b8a958b027e2828fb2bbe9d4",
+    "raw_file": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\onbase-corescripts.body",
+    "probe_metadata_file": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\onbase-corescripts-probe.json"
+  },
+  "form_source_findings": {
+    "action": "/OnBaseAgendaOnline/Meetings",
+    "method": "POST (observed in markup; not executed in this follow-up)",
+    "fields": [
+      "Keywords",
+      "MeetingTypeIDs",
+      "DateRangeOptionID",
+      "DateRangeCustomStartDate",
+      "DateRangeCustomEndDate"
+    ],
+    "date_range_options": {
+      "7": "This Year",
+      "11": "Custom Date Range"
+    },
+    "custom_date_format": "%n/%j/%Y",
+    "meeting_type_submission": "Selected meeting-type IDs are serialized as a comma-separated hidden MeetingTypeIDs value."
+  },
+  "script_review": {
+    "searchTerm_literal_found": false,
+    "dropid_literal_found": false,
+    "meetings_search_route_found": false,
+    "provider_paging_route": "not identified"
+  },
+  "prior_redirect_receipt": {
+    "path": "docs/verification/onbase-public-search-2026-11-12.json",
+    "sha256": "f1c714d7bf546d38a1c31d603287f7e1b12bc8b3af34992221685d02bed02aab",
+    "outcome": "guarded_redirect_rejected",
+    "limit": "The response Location, HTTP status and redirected method were not returned by guarded transport."
+  },
+  "limits": [
+    "The saved form and literal client bundle identify source UI/client behavior only; they do not establish POST field acceptance, result schema, search semantics or paging.",
+    "No query POST, repeat GET, source/runtime mapping or implementation was performed.",
+    "This receipt does not claim that OnBase search is unsupported or that provider acceptance is complete."
+  ]
+}

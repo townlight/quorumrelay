@@ -1,0 +1,9 @@
+{
+  "url": "https://reno.primegov.com/Scripts/Custom/Public/_Search.js",
+  "source_lead": "literal script src in captured public/portal HTML",
+  "full_script_sha256": "59d8325d7adcff9451b9140acd3fe4acf1dcbecaa2b5a7ae3c1d80d63b0e6b70",
+  "full_script_bytes": 40780,
+  "extract_file": "system-document-client-extract.txt",
+  "extract_sha256": "31ce0ea2dbdbf1e8dcd313454185385fc708c67bc8ecc54a801d4e7bc404705b",
+  "scope": "literal renderer assignment and case 2 link; no execution or document retrieval"
+}

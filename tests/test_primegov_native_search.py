@@ -99,3 +99,32 @@ def test_unknown_rows_are_explicit_and_hidden_markup_is_not_search_text():
     result = create_engine(provider_transport=transport).execute("search", request())
     assert result.data["hits"] == []
     assert result.data["bundle"]["records"][0]["original"]["highlights"].startswith("<script>")
+
+
+def test_system_document_locator_uses_published_client_type_and_native_id_only():
+    transport = Transport()
+    data = json.loads(transport.content)
+    actual = next(row for row in data if row.get("info") == "Attachment" and row.get("type") == 2)
+    variants = [actual, {**actual, "id": 123456, "type": 1},
+                {**actual, "id": 123457, "type": True}, {**actual, "id": 123458, "type": 3},
+                {**actual, "id": -1, "type": 2}, {**actual, "id": True, "type": 2},
+                {**actual, "id": 10**19, "type": 2}]
+    transport.content = json.dumps(variants).encode()
+    result = create_engine(provider_transport=transport).execute("search", request(max_records=200))
+    assert result.status == "partial" and len(transport.calls) == 1, result.public_dict()
+    records = result.data["bundle"]["records"]
+    selected = next(record for record in records if record["original"] == actual)
+    document = selected["normalized"]["documents"][0]
+    assert document["external_id"] == str(actual["id"])
+    assert document["url"] == "https://reno.primegov.com/api/portal/DownloadSystemItemAttachedDocToBrowser/" + str(actual["id"])
+    assert document["availability"] == "vendor_client_locator_not_fetched"
+    assert selected["identity"]["parent"]["external_id"] == str(actual["meetingId"])
+    assert all("documents" not in row["normalized"] for row in records if row["original"] != actual)
+    assert not result.coverage["source_complete"] and not result.coverage["catalog_complete"]
+    assert result.coverage["unmapped_rows_omitted"] == 1  # bool is not a native integer ID
+    alternate = request(max_records=200)
+    alternate["source"] = {"provider": "primegov", "url": "https://example.primegov.com/public/portal"}
+    other = create_engine(provider_transport=transport).execute("search", alternate)
+    found = next(row for row in other.data["bundle"]["records"] if row["original"] == actual)
+    assert found["normalized"]["documents"][0]["url"].startswith("https://example.primegov.com/")
+    assert found["identity"]["namespace"] != selected["identity"]["namespace"]
