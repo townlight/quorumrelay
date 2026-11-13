@@ -1,6 +1,6 @@
 # QuorumRelay user manual
 
-Local test candidate: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**, prepared from core source `fc51f90777ae692bcaa600724da694dbcf16a10f` plus candidate version/package-verifier changes. This candidate includes the later source mappings described below: 31 families, 34 baseline formats, 42 additive parsers and 15 native-search handlers. It is not published or a full-plan completion claim. The dev8 artifact/publication and installed evidence below remain historical and unchanged; new artifact hashes and installed checks are recorded separately.
+Preserved package baseline: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The integrated development source retains that baseline and the approved CivicWeb/Cablecast readers, with 32 registered providers, 31 baseline families, 34 baseline formats, 44 additive parser hooks and 15 native-search handlers. It has not been packaged as a successor or delivered. Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
 
 Frozen candidate <code>0.1.0.dev8</code> · schema <code>2.0.0</code>. Later local source mappings are identified in the [developer guide](DEVELOPER-GUIDE.md#later-local-source-mapping-guides); they are not additions to the immutable wheel.
 
@@ -83,7 +83,7 @@ for provider in manifest["data"]["providers"]:
           provider.get("additional_formats", []))
 ~~~
 
-The fixed compatibility baseline contains 34 provider/input-format pairs. The additive parser hooks expose 28 more provider-specific captured formats in this candidate. A baseline format keeps its exact historical reader behavior; additive formats replay other captured details or API responses. An additive parser is a saved-capture capability and does not imply that QuorumRelay can discover that provider live. Use the exact <code>input_format</code> returned for the provider. Do not choose a parser by guessing from a filename.
+The fixed compatibility baseline contains 34 provider/input-format pairs. The integrated source registers 44 additional parser hooks beside those baseline pairs. Cablecast also parses its saved shows/show JSON through its typed connector; those two formats are separate from the registered parser-hook count. A baseline format keeps its exact historical reader behavior; additive formats replay other captured details or API responses. An additive parser is a saved-capture capability and does not imply that QuorumRelay can discover that provider live. Use the exact <code>input_format</code> returned for the provider. Do not choose a parser by guessing from a filename.
 
 Use <code>capabilities</code> for the provider’s operation-level implementation and acceptance information:
 

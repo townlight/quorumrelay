@@ -1,5 +1,7 @@
 # QuorumRelay
 
+Integrated development source retains dev11 and the approved CivicWeb/Cablecast readers: 32 registered providers, 31 baseline families, 34 baseline formats and 44 additive parser hooks. CivicWeb document continuation and Cablecast page/filter handling are repaired in source. No successor package or Windows release has been delivered.
+
 Local test candidate: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**, prepared from core source `fc51f90777ae692bcaa600724da694dbcf16a10f` plus candidate version/package-verifier changes. This candidate includes the later source mappings described below: 31 families, 34 baseline formats, 42 additive parsers and 15 native-search handlers. It is not published or a full-plan completion claim. The dev8 artifact/publication and installed evidence below remain historical and unchanged; new artifact hashes and installed checks are recorded separately.
 
 Civic records, with their source. QuorumRelay is a standalone civic-data connector engine for applications, scripts and agents. A project of [Townlight](https://github.com/townlight).

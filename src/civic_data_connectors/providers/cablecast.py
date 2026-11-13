@@ -463,7 +463,8 @@ class CablecastConnector:
                 "discover": {**reads, "details": "Bounded public shows listing with date filter; recordings are "
                              "watch-page links; copies of one meeting collapse to the copy with a caption playlist."},
                 "fetch": {**reads, "details": "One show by ID: video file, HLS and caption playlist links."},
-                "parse": {**reads, "details": "Saved shows list JSON (cablecast-shows-json)."},
+                "parse": {**reads, "details": "Saved shows list JSON (cablecast-shows-json) and one show "
+                          "JSON (cablecast-show-json); metadata and links, not caption text."},
                 "native_search": none, "local_search": {**reads, "details": "Shared local search over captured records."},
                 "neutral_export": {**reads, "details": "Shared neutral export of captured records."},
                 "vendor_file_export": none, "create": none, "update": none},
