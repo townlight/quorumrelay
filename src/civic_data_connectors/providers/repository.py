@@ -93,7 +93,7 @@ def entry_bundle(source, namespace, content):
     return bundle
 
 
-def fetch_entry(source, namespace, external_id, bounds, context, transport):
+def fetch_entry(source, namespace, external_id, bounds, context, transport, *, include_text=False):
     """GetEntry from the pinned vendor SDK; metadata only, within the configured folder."""
     from .account_api import reject_credential_echo
 
@@ -138,6 +138,9 @@ def fetch_entry(source, namespace, external_id, bounds, context, transport):
         result = _bounded_parser_result(OperationResult("completed", bundle), bounds, context)
         if result.status != "completed":
             raise ValueError("Repository normalized entry exceeded configured bounds.")
+        if include_text:
+            from .repository_text import enrich_text
+            return enrich_text(source, bundle, bounds, context, transport, deadline, coverage)
         return OperationResult("completed", bundle, coverage=coverage, operation_id=context.operation_id)
     except Exception as error:
         code = error.code if isinstance(error, RetrievalError) else "repository_entry_failed"

@@ -1,0 +1,55 @@
+{
+  "status": "PASS_SYNTHETIC_SCOPED_SUPPLIED_PAGE_TEXT",
+  "source_baseline": "c5615d84e2bfdb7a8b46aa34ce27e5cd69a51905",
+  "contract": {
+    "path": "docs/capabilities/evidence/laserfiche-repository/index.ts",
+    "sha256": "de9970a4b12c8b1fa73dcc9cf51bc4bc24618774f9b20ce40ceab9a3d386b762",
+    "methods": [
+      "GET /repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages",
+      "GET /repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Document/Pages/{pageNumber}/Text"
+    ],
+    "vendor_methods": [
+      "listPageInfos",
+      "getPageText"
+    ],
+    "sdk_lines": "9383-9450; 10606-10665; 26079-26100; 26364-26405",
+    "oauth_scope": "repository.Read"
+  },
+  "source_sha256": {
+    "src/civic_data_connectors/engine.py": "234c43784acf92bb38bbe44e1749e3c4984b1e800e2c3aaf3ec11fb99cf796ba",
+    "src/civic_data_connectors/providers/repository.py": "78b4c68132e7a07c8c4c0ea6c734f7833e66f370b19bf0dded65ec4db2885908",
+    "src/civic_data_connectors/providers/retrieval.py": "d1188ba31ca93cbd84916c699a76f213a1d84e9d49cc31b20f9561f268af6177",
+    "src/civic_data_connectors/providers/repository_text.py": "02d12c33469c661401dd9298e548a39080de365fe6a40a694e4874f5de72ef47",
+    "tests/test_repository_text.py": "0d39fb5ddca34f1aa32e3f85cb94f30c40866ad0cb2b646517110caea19b842c"
+  },
+  "execution": {
+    "new_cases_passed": 17,
+    "total_passed": 65,
+    "command": "pytest tests/test_repository_text.py tests/test_repository_content.py tests/test_repository_fetch.py tests/test_repository_discovery.py tests/test_interfaces.py tests/test_capabilities.py -q",
+    "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\repository-text.log",
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\repository-text.xml",
+    "scope": [
+      "paginated existing page text; exact parent, entry and page validation",
+      "raw/unknown-field capture preservation and page citations",
+      "SQLite import/idempotency/reopen/search; changed text preserves identity and changes normalized hash",
+      "ZIP roundtrip retains exact original supplemental bytes as scoped stored captures",
+      "partial results remain incomplete in local search",
+      "missing text, 404, bad identity/type, cycle, foreign nextLink and token echo",
+      "page/cumulative-byte bounds, cancellation, boolean opt-in and other-provider rejection",
+      "HTTP flag with trusted provider credential; existing CLI/MCP/Node boundary regressions"
+    ],
+    "ruff": "Full repository ruff check passed"
+  },
+  "limitations": [
+    "Synthetic provider transport only; no vendor request or mutation",
+    "Existing text only; no OCR/transcription/text-generation operation",
+    "No atomic metadata/pages/text snapshot guarantee",
+    "max_pages truncation is explicit; retry with larger bounds, no enrichment checkpoint",
+    "No native-search, image export, async export or whole-provider acceptance claim"
+  ],
+  "next_contract_trace": {
+    "native_search": "Pinned SDK SimpleSearches POST is documented as possibly truncated; full SearchAsync/Tasks/Results/ContextHits also exist.",
+    "search_command": "Pinned request models require vendor searchCommand syntax. Verify documented folder restriction and query escaping before implementing; do not invent grammar."
+  },
+  "completed_local_date": "2026-11-13"
+}

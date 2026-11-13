@@ -73,7 +73,8 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
                 "No verified supplied-caption retrieval mapping is registered for this provider."))
         if source.provider == "laserfiche-weblink" and urlsplit(source.url).hostname == "api.laserfiche.com":
             from .repository import fetch_entry
-            return fetch_entry(source, namespace, request["external_id"], bounds, context, transport)
+            return fetch_entry(source, namespace, request["external_id"], bounds, context, transport,
+                               include_text=request.get("include_text", False))
         if source.provider == "legistar":
             from .legistar import fetch_record
             return fetch_record(source, namespace, request["external_id"], bounds, context, transport)

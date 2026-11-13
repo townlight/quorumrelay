@@ -121,9 +121,12 @@ class Engine:
         }, content=capture, context=context)
 
     def fetch_record(self, source: Source, external_id: str, *, bounds: Bounds | None = None,
-                     context: OperationContext | None = None) -> OperationResult:
+                     context: OperationContext | None = None, include_text: bool = False) -> OperationResult:
         """Retrieve one known provider identity through its evidenced detail route."""
-        return self.fetch(source, {"external_id": external_id}, bounds=bounds, context=context)
+        request = {"external_id": external_id}
+        if include_text is not False:
+            request["include_text"] = include_text
+        return self.fetch(source, request, bounds=bounds, context=context)
 
     def fetch_captions(self, source: Source, external_id: str, *, language: str | None = None,
                        bounds: Bounds | None = None, context: OperationContext | None = None) -> OperationResult:
@@ -247,6 +250,19 @@ class Engine:
         try:
             if not isinstance(request, dict):
                 raise ValueError("The operation request must be a JSON object.")
+            if operation == "fetch" and "include_text" in request:
+                if type(request["include_text"]) is not bool:
+                    raise ValueError("include_text must be a JSON boolean.")
+                if request["include_text"]:
+                    from urllib.parse import urlsplit
+                    source = Source.from_dict(request["source"])
+                    if not (source.provider == "laserfiche-weblink"
+                            and urlsplit(source.url).hostname == "api.laserfiche.com"
+                            and "external_id" in request and "parent_id" not in request
+                            and "record_type" not in request and "attachment" not in request
+                            and content is None and "content_base64" not in request):
+                        return OperationResult.unsupported("fetch_record_text", reason=(
+                            "Explicit page-text enrichment is currently mapped only for Repository entry detail."))
             if operation == "providers":
                 return self.providers()
             if operation == "capabilities":

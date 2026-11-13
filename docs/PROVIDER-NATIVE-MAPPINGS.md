@@ -74,6 +74,15 @@ apply across the steps; a retry creates a new export. This does not extract text
 export image pages or infer WebLink account access. See
 [synthetic content evidence](verification/laserfiche-document-content-2026-11-13.json).
 
+Opt-in `fetch_record(..., include_text=True)` enriches that document with existing
+page text from the pinned SDK's ListPageInfos and GetPageText contracts. Supplied
+page IDs and numbers remain anchors within the document, not new meeting IDs.
+Exact page response captures use the standard supplemental `captures` location;
+the document's original metadata capture and fields remain intact. Text hashes
+participate in normalized change detection. Missing streams and bounds remain
+explicit through local search. No generation, OCR or atomic snapshot is claimed.
+See [scoped text evidence](verification/laserfiche-page-text-2026-11-13.json).
+
 ## Discovery output and v1 ownership
 
 `discover.data` contains `source`, aggregate `records`, exact page `captures`, and page `bundles`. Every page bundle retains its own source namespace and compatibility projection. Aggregation filters rich records but does not rewrite the original page compatibility output, so callers must not import unfiltered compatibility rows blindly.

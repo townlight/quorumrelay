@@ -146,6 +146,26 @@ a meeting date. The existing `laserfiche-repository-entries-json` parser replays
 both children responses and single Entry responses offline. Namespace, caller,
 response URL, token privacy and byte/deadline bounds remain enforced.
 
+Use `engine.fetch_record(repository, "71", include_text=True, context=...)` to
+also read existing supplied page text. The equivalent operation request contains
+`"external_id":"71", "include_text":true` on SDK `fetch`, CLI, HTTP or MCP.
+The flag requires a boolean and is explicitly unavailable for other providers.
+The connector follows the documented page-info collection's same-document
+nextLinks and GETs text only for pages advertising `hasText`. It never requests
+OCR, text generation or transcription. `max_pages` limits document pages;
+supplementary responses share a cumulative `min(parser_bytes, transfer_bytes)`
+budget and the metadata request's original deadline. A bounded partial response
+can be retried with a larger bound; this enrichment has no continuation cursor.
+
+Page segments retain page numbers, supplied page IDs, citations and response
+hashes. Raw page-info/text captures occupy the bundle's standard `captures`
+collection, so scoped persistence and ZIP interchange preserve them. Missing
+text, failed pages and truncation keep the result and subsequent local search
+partial. Normalized change detection includes the page-text hash while the
+document identity and provider-supplied revision remain distinct. The reads do
+not form an atomic snapshot; `text_complete` describes the returned page
+collection and supplied text, not every kind of content in the document.
+
 For original electronic-document bytes, call `engine.fetch_attachment(repository,
 document_record, capture=original_capture, context=...)`, or omit `capture` when
 the record is persisted in the caller's scoped engine storage. This selects the

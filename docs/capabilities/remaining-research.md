@@ -931,3 +931,6 @@ Current outbound attribution (2026-11-12): existing required-suite evidence now 
 
 
 Current source follow-up (2026-11-13): the pinned Repository Export contract now supplies bounded original Edoc content through fetch_attachment, after fresh entry/parent validation and explicit download-origin authorization. Synthetic bytes, hashes, scoped persistence/reopen, retry, cancellation and failure evidence: `docs/verification/laserfiche-document-content-2026-11-13.json`. No signed URL is retained. Supplied page Text/image, asynchronous export, native search, WebLink account mapping and whole-provider acceptance remain separate.
+
+
+Current source follow-up (2026-11-13): opt-in Repository GetEntry page-text enrichment now follows documented page-info nextLinks and reads existing page text without generation. Exact supplemental captures, page anchors and partial coverage survive scoped persistence/search/ZIP roundtrip; see `docs/verification/laserfiche-page-text-2026-11-13.json`. This closes supplied page-text retrieval only. Native search still requires verified search-command grammar/folder scoping before implementation; the pinned SDK documents both potentially truncated SimpleSearches and full asynchronous SearchAsync/Tasks/Results/ContextHits. Image/alternate/text-file exports, async export and broad WebLink outcomes remain separate.
