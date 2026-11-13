@@ -20309,6 +20309,19 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "towpath-supplied-detail-2026-11-12",
+          "url": "https://townofberkshireny.gov/meetings/detail/64",
+          "title": "Pinned supplied Digital Towpath detail rich fields",
+          "kind": "implementation_evidence",
+          "observed": "Four distinct focused saved/default engine, search/export, revision and binding/script cases passed across runs. No live request.",
+          "findings": "category (not inferred governing body); venue/address parts and joined location; declared local wall time with unknown timezone; supplied description as capture-provenance TextSegment; explicit rendered agenda/minutes section states, including minutes pending",
+          "limits": "Saved/default configured meeting detail only; not broader calendar discovery/search API or writes; No timezone, votes, speaker, motion, transcript or complete-catalog inference; No frozen wheel/installed candidate equivalence",
+          "receipt_path": "docs/verification/towpath-supplied-detail-2026-11-12.json",
+          "receipt_sha256": "387eac04ba5eb1e5c86bae63d187a4c90d8542a18def4ea702101ad9b0915a71",
+          "observation_date": "2026-11-12",
+          "proof_level": "synthetic_saved_capture_engine_not_live_acceptance"
         }
       ],
       "tenants": [

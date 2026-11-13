@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-12",
+  "scope": "Rich-only existing Digital Towpath detail format from pinned supplied HTML; no new network request",
+  "source_url": "https://townofberkshireny.gov/meetings/detail/64",
+  "capture_path": "tests/fixtures/baseline/digital-towpath-detail.response",
+  "capture_sha256": "f02d3b5b393cf3935cef44d1d574d95bccd29779bef390353f051b8c037f3e3a",
+  "native_meeting_id": "64",
+  "mapped_fields": [
+    "category (not inferred governing body)",
+    "venue/address parts and joined location",
+    "declared local wall time with unknown timezone",
+    "supplied description as capture-provenance TextSegment",
+    "explicit rendered agenda/minutes section states, including minutes pending"
+  ],
+  "preserved": [
+    "exact capture bytes",
+    "native source identity",
+    "pinned entire compatibility output digest",
+    "supplied document URLs only; no invented minutes file",
+    "rich normalized digest changes when description changes"
+  ],
+  "checks": {
+    "distinct_passed": 4,
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_towpath_detail.py -q (2 passed, 2 fixture-assertion mistakes failed: pinned hash covers whole compatibility, source capture digest necessarily changes on revision)",
+      ".venv/Scripts/python.exe -m pytest tests/test_towpath_detail.py::test_saved_native_detail_fields_text_search_export_and_pinned_compatibility tests/test_towpath_detail.py::test_description_revision_changes_rich_hash_not_legacy_output_or_identity tests/test_towpath_detail.py::test_default_configured_detail_uses_exact_supplied_get -q (3 passed; default case rechecked after category mapping clarification)"
+    ],
+    "scoped_ruff": "passed"
+  },
+  "limits": [
+    "Saved/default configured meeting detail only; not broader calendar discovery/search API or writes",
+    "No timezone, votes, speaker, motion, transcript or complete-catalog inference",
+    "No frozen wheel/installed candidate equivalence"
+  ]
+}
