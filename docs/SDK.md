@@ -187,8 +187,23 @@ name. Irrelevant or invalid options fail before network access. Results disclose
 the exact `export_part` and `export_options`; files may be a vendor-created archive
 for formats containing multiple files. No local conversion is performed. Text-file
 export does not imply page-anchored extraction; use `include_text` for that path.
-Asynchronous export polling remains separate. Synthetic verification is accepted;
-live account execution remains unobserved.
+Set `repository_export_async: true` in source options for the documented
+`/ExportAsync` task path. The default remains synchronous. The connector validates
+the issued task ID/type and optional result entry ID, polls only that exact task,
+then downloads its single-use `result.uri` through the same guarded transfer.
+`max_pages` bounds task polls in this mode; `deadline_seconds` covers metadata,
+start, polling, cleanup and download. Task responses share a bounded parser-byte
+budget, with time and bytes reserved for cleanup. Increasing the deadline supports
+longer exports without an unbounded background worker.
+
+If polling stops early, the connector requests cancellation for its own task and
+checks terminal status. It never submits a cancel-all request or changes document
+content. `coverage.export_task` distinguishes cancellation requested/accepted from
+terminal confirmation. A timeout can leave cleanup unconfirmed; the task ID and
+next action are returned explicitly, while raw task errors and signed URLs remain
+private. A retry starts a new export; no resumable task cursor is claimed. An
+unconfirmed start is reported when no safe task reference was returned. Synthetic
+verification is accepted; live account execution remains unobserved.
 
 Official read contracts: [Legistar Votes](https://webapi.legistar.com/Help/Api/GET-v1-Client-EventItems-EventItemId-Votes), [Legistar RollCalls](https://webapi.legistar.com/Help/Api/GET-v1-Client-EventItems-EventItemId-RollCalls), [Laserfiche folder contents](https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_get-folder-listing/).
 

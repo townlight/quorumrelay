@@ -19384,6 +19384,21 @@
           "limits": "Mapping and byte-relay proof; not live rendering, full image decoding, async export or whole-provider acceptance.",
           "receipt_path": "docs/verification/laserfiche-export-variants-2026-11-13.json",
           "receipt_sha256": "fea6a74543f7e5ed8c7af7d76e3bdcc5d53a0eb032e1dc4f9b8c48f1c3801afc"
+        },
+        {
+          "id": "lf-repository-async-export-2026-11-13",
+          "url": "https://raw.githubusercontent.com/Laserfiche/lf-api-js/3a40996613f6f1a1b2fa90cd7d31c512a149ee25/packages/lf-repository-api-client-v2/index.ts",
+          "title": "Pinned Repository ExportAsync task lifecycle and scoped synthetic execution",
+          "kind": "official_documentation",
+          "observation_date": "2026-11-13",
+          "proof_level": "vendor_documented_contract_and_synthetic_engine_execution",
+          "findings": [
+            "Owned export task polling/cancellation and single-use download preserve scope and privacy.",
+            "Seventeen new synthetic cases and affected regressions passed; no provider requests."
+          ],
+          "limits": "Synthetic owned-task lifecycle only; no live task, resumable cursor, native-search or whole-provider acceptance.",
+          "receipt_path": "docs/verification/laserfiche-async-export-2026-11-13.json",
+          "receipt_sha256": "6465b2efdae04e2fd47e2a20bd38fccb1019de8f8e50c7f0780962a646d67362"
         }
       ],
       "tenants": [
@@ -19466,15 +19481,16 @@
             "lf-repository-get-entry-2026-11-12",
             "lf-repository-edoc-content-2026-11-13",
             "lf-repository-page-text-2026-11-13",
-            "lf-repository-export-variants-2026-11-13"
+            "lf-repository-export-variants-2026-11-13",
+            "lf-repository-async-export-2026-11-13"
           ],
-          "details": "Repository v2 fetch_record implements exact GetEntry metadata within its configured folder. fetch_attachment selects a captured Document itself at index zero, revalidates the current parent, POSTs part=Edoc to Export and downloads the single-use link once with no bearer headers or redirects. Explicit download_origins, caller scope, byte/deadline bounds and cancellation apply. Durable citation and fresh metadata revision are returned; signed URLs remain private. Original file retrieval is not text extraction. Separate WebLink routes retain their own scope. Optional include_text=true on entry detail reads existing page-info and supplied page text, retaining raw supplemental captures, page anchors, source identity and normalized text change detection. Cumulative parser/transfer bytes, page count, same-document continuation and shared deadline apply; missing text and truncation remain partial through persistence/search/export. No generation or atomic snapshot. Explicit source options also select Image, Text or AlternateEdoc through the same guarded export path. Image format choices retain annotations/redactions, TIFF uses AsStored; Text includes redactions. Alternate names are validated, file bytes/citation are retained, and declared image/container signatures are checked.",
+          "details": "Repository v2 fetch_record implements exact GetEntry metadata within its configured folder. fetch_attachment selects a captured Document itself at index zero, revalidates the current parent, POSTs part=Edoc to Export and downloads the single-use link once with no bearer headers or redirects. Explicit download_origins, caller scope, byte/deadline bounds and cancellation apply. Durable citation and fresh metadata revision are returned; signed URLs remain private. Original file retrieval is not text extraction. Separate WebLink routes retain their own scope. Optional include_text=true on entry detail reads existing page-info and supplied page text, retaining raw supplemental captures, page anchors, source identity and normalized text change detection. Cumulative parser/transfer bytes, page count, same-document continuation and shared deadline apply; missing text and truncation remain partial through persistence/search/export. No generation or atomic snapshot. Explicit source options also select Image, Text or AlternateEdoc through the same guarded export path. Image format choices retain annotations/redactions, TIFF uses AsStored; Text includes redactions. Alternate names are validated, file bytes/citation are retained, and declared image/container signatures are checked. Optional repository_export_async selects the documented owned ExportAsync/Tasks lifecycle. Exact task type/ID and optional result entry are verified; polls/time/API bytes are bounded with cleanup reserves. Cancellation acknowledgement is distinct from terminal confirmation; unresolved cleanup retains its task reference, never raw errors or signed URLs.",
           "dependencies": [
             "Cloud repository ID/OAuth scoped access or authorized self-hosted API version",
             "WebLink cookie/browser capture for public folders"
           ],
           "remaining_verification": [
-            "Asynchronous export tasks and guarded WebLink outcomes remain separate; native search is not implemented."
+            "Native search and guarded WebLink outcomes remain separate; no whole-provider completeness claim."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "vendor_documented_get_entry_and_scoped_synthetic_engine_execution; historical_weblink_observations",

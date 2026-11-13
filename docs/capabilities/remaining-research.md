@@ -937,3 +937,6 @@ Current source follow-up (2026-11-13): opt-in Repository GetEntry page-text enri
 
 
 Current source follow-up (2026-11-13): synchronous Repository export now maps Image/Text/AlternateEdoc in addition to original Edoc, using explicit source options. Redactions/annotations remain included; TIFF AsStored and alternate-name restrictions follow the pinned SDK. Synthetic mapping/opaque byte-relay and image signature checks: `docs/verification/laserfiche-export-variants-2026-11-13.json`. This is not live rendering or full codec validation. Asynchronous export and native search remain incomplete.
+
+
+Current source follow-up (2026-11-13): Repository ExportAsync/Tasks is now implemented as an explicit attachment source option, reusing scoped entry validation and private single-use download. Synthetic task identity, completion, timeout/cancellation and unconfirmed-cleanup evidence: `docs/verification/laserfiche-async-export-2026-11-13.json`. No real provider task was started. Native search remains incomplete. The selected existing official search guide contains an LF:Basic/LOOKIN folder-path example and SearchAsync/Tasks/Results/ContextHits flow; verify exact query grammar, folder restriction and escaping from that authoritative lead before implementation.

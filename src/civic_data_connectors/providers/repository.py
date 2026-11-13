@@ -159,6 +159,9 @@ def fetch_document(source, namespace, record, bundle, bounds, context, transport
 
     _, parent_id, base = repository_source(source)
     part = source.options.get("repository_export_part", "Edoc")
+    asynchronous = source.options.get("repository_export_async", False)
+    if type(asynchronous) is not bool:
+        raise ValueError("repository_export_async must be a JSON boolean.")
     if not isinstance(part, str) or part not in {"Edoc", "Image", "Text", "AlternateEdoc"}:
         raise ValueError("repository_export_part must be Edoc, Image, Text or AlternateEdoc.")
     export_request = {"part": part}
@@ -218,19 +221,23 @@ def fetch_document(source, namespace, record, bundle, bounds, context, transport
         token = context.credentials["laserfiche_token"]
         if context.check_cancelled():
             return cancelled()
-        export_url = citation + "/Export"
-        exported = transport.request(export_url, method="POST", body=json.dumps(export_request).encode(),
-            headers={"Authorization": "Bearer " + token, "Accept": "application/json",
-                     "Content-Type": "application/json"}, byte_limit=bounds.parser_bytes,
-            deadline_seconds=remaining(), allowed_origins=("https://api.laserfiche.com",),
-            allow_redirects=False)
+        if asynchronous:
+            from .repository_export import export_async
+            signed = export_async(citation, export_request, bounds, context, transport, deadline, coverage)
+        else:
+            export_url = citation + "/Export"
+            exported = transport.request(export_url, method="POST", body=json.dumps(export_request).encode(),
+                headers={"Authorization": "Bearer " + token, "Accept": "application/json",
+                         "Content-Type": "application/json"}, byte_limit=bounds.parser_bytes,
+                deadline_seconds=remaining(), allowed_origins=("https://api.laserfiche.com",),
+                allow_redirects=False)
+            if exported.status != 200 or exported.url != export_url or len(exported.content) > bounds.parser_bytes:
+                raise ValueError("Repository export did not return a bounded successful response.")
+            reject_credential_echo(exported.content, {"token": token})
+            block = json.loads(exported.content)
+            signed = block.get("value") if isinstance(block, dict) else None
         if context.check_cancelled():
             return cancelled()
-        if exported.status != 200 or exported.url != export_url or len(exported.content) > bounds.parser_bytes:
-            raise ValueError("Repository export did not return a bounded successful response.")
-        reject_credential_echo(exported.content, {"token": token})
-        block = json.loads(exported.content)
-        signed = block.get("value") if isinstance(block, dict) else None
         if not isinstance(signed, str) or len(signed) > 16384 or urlsplit(signed).scheme != "https":
             raise ValueError("Repository export returned an invalid download link.")
         # Source citations forbid credential query keys; this private transfer is
@@ -266,6 +273,8 @@ def fetch_document(source, namespace, record, bundle, bounds, context, transport
                       "metadata_capture_sha256": detail.data["capture"]["sha256"]}
         return OperationResult("completed", {**retained, "attachment": attachment},
             coverage={**coverage, "content_fetched": True}, operation_id=context.operation_id)
+    except InterruptedError:
+        return cancelled()
     except Exception:
         # Never include raw provider errors, export JSON or ephemeral URLs in public output.
         return OperationResult("partial", retained, errors=(Error("attachment_unavailable",

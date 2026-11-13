@@ -82,6 +82,16 @@ restricted character/length contract. Download results disclose the selected
 representation, preserve exact returned bytes and use the durable entry citation.
 See [variant mapping evidence](verification/laserfiche-export-variants-2026-11-13.json).
 
+The explicit `repository_export_async` source option selects the documented
+ExportAsync/Tasks lifecycle for any of those representations. Only the task ID
+issued by the current call is polled or cancelled. Status, task type and optional
+result entry identity are checked; completed export `result.uri` remains private
+and single-use. Early exit requests exact-task cancellation and independently
+checks terminal state within reserved time/bytes. Unconfirmed cleanup remains
+explicit, with the task ID available for follow-up. There is no cancel-all request,
+document mutation, background worker or task-resume cursor. See
+[synthetic task evidence](verification/laserfiche-async-export-2026-11-13.json).
+
 Opt-in `fetch_record(..., include_text=True)` enriches that document with existing
 page text from the pinned SDK's ListPageInfos and GetPageText contracts. Supplied
 page IDs and numbers remain anchors within the document, not new meeting IDs.

@@ -1,0 +1,52 @@
+{
+  "status": "PASS_SYNTHETIC_SCOPED_ASYNCHRONOUS_EXPORT",
+  "source_baseline": "980b8fbe13a4d6ea56f45044b41789fd5216cd67",
+  "contract": {
+    "path": "docs/capabilities/evidence/laserfiche-repository/index.ts",
+    "sha256": "de9970a4b12c8b1fa73dcc9cf51bc4bc24618774f9b20ce40ceab9a3d386b762",
+    "vendor_methods": [
+      "startExportEntry",
+      "listTasks",
+      "cancelTasks"
+    ],
+    "sdk_lines": "6724-6800; 14927-15115; 22888-22925; 29118-29370",
+    "routes": [
+      "POST /repository/v2/Repositories/{repositoryId}/Entries/{entryId}/ExportAsync",
+      "GET /repository/v2/Repositories/{repositoryId}/Tasks?taskIds={ownedTaskId}",
+      "DELETE /repository/v2/Repositories/{repositoryId}/Tasks?taskIds={ownedTaskId}"
+    ],
+    "oauth_scope": "repository.Read for export; task operations use same trusted token"
+  },
+  "source_sha256": {
+    "src/civic_data_connectors/providers/repository.py": "329c043bd67c3a6c2f0f197515f07951a0b9f9634b940dc112d29436cfc43dcc",
+    "src/civic_data_connectors/providers/repository_export.py": "637e8a0f04af3849e83ec17790eeb060cdc8c00129ac2af630679192a5b4b340",
+    "src/civic_data_connectors/providers/identification.py": "efe8a025b9df5ed975978a1a047b2cf156b4c35bf704938b59519d300d0efc84",
+    "tests/test_repository_async_export.py": "470d9a64691678ac7131ba07faff155035017ffcbedd178fc853d88dbc6d6b30"
+  },
+  "execution": {
+    "new_cases_passed": 17,
+    "total_passed": 96,
+    "command": "pytest tests/test_repository_async_export.py tests/test_repository_export_variants.py tests/test_repository_content.py tests/test_repository_text.py tests/test_repository_fetch.py tests/test_repository_discovery.py tests/test_capabilities.py -q",
+    "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\repository-async-export.log",
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\repository-async-export.xml",
+    "scope": [
+      "start once, exact ExportEntry task/type and optional entry identity",
+      "bounded poll and private single-use download; no bearer on download",
+      "wrong/missing task/result, errors, token echo and invalid flag rejected",
+      "poll bound requests cancellation only for owned task, verifies terminal state",
+      "cancellation acknowledgement remains distinct from unconfirmed completion",
+      "timeout preserves cleanup-byte reserve; late start retains task ID for cleanup",
+      "existing synchronous variants, content, supplied-text, metadata/discovery and capability regressions"
+    ],
+    "ruff": "Full repository ruff check passed"
+  },
+  "limitations": [
+    "Synthetic provider transport only; no actual provider task was started",
+    "No resumable task cursor; retries start a fresh export",
+    "Timeout/budget/transport failure can leave remote cleanup unconfirmed; reported explicitly",
+    "No automatic synchronous-to-async retry or full-provider acceptance claim",
+    "No new large-file streaming claim; existing bounded attachment byte envelope is retained",
+    "Native search and broader WebLink outcomes remain incomplete"
+  ],
+  "completed_local_date": "2026-11-13"
+}
