@@ -42,6 +42,7 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_operation("identify", identify_handler)
     engine.register_operation("validate_source", validate_handler)
     for provider, input_format in (
+            ("boarddocs", "boarddocs-public-meetings-json"),
             ("boardbook", "boardbook-public-agenda-html"),
             ("town-hall-streams", "town-hall-streams-event-html"),
             ("escribe", "escribe-meeting-detail-html"),
@@ -102,6 +103,9 @@ def register(engine, *, transport: Transport | None = None,
     from .primegov_search import native_search as primegov_search
     engine.register_native_search("primegov", tracked_handler("search", lambda engine, request, content, context:
                                   primegov_search(engine, request, content, context, transport=transport)))
+    from .tyler_search import native_search as tyler_search
+    engine.register_native_search("tyler-meeting-manager", tracked_handler("search", lambda engine, request, content, context:
+                                  tyler_search(engine, request, content, context, transport=transport)))
     from .escribe_search import native_search as escribe_search
     engine.register_native_search("escribe", tracked_handler("search", lambda engine, request, content, context:
                                   escribe_search(engine, request, content, context, transport=transport)))

@@ -101,6 +101,9 @@ def _initial(source, bounds, input_format, saved):
     if saved:
         return [{"kind": "saved", "offset": 0}]
     provider = source.provider
+    if (provider == "boarddocs" and input_format == "boarddocs-public-meetings-json"
+            and source.options.get("boarddocs_committee_id")):
+        return [{"kind": "boarddocs-public"}]
     if (provider == "novusagenda" and input_format == "novus-public-listing-html"
             and urlsplit(source.url).path == "/agendapublic/MeetingView.aspx"):
         return [{"kind": "static"}]
@@ -127,6 +130,10 @@ def _initial(source, bounds, input_format, saved):
         if not bounds.date_from or not bounds.date_to:
             raise ValueError("Tyler calendar retrieval requires explicit inclusive date bounds.")
         return [{"kind": "tyler-calendar"}]
+    if (provider == "onbase" and bounds.date_from and bounds.date_to
+            and urlsplit(source.url).path.rstrip('/').lower() in {
+                '/onbaseagendaonline', '/onbaseagendaonline/meetings'}):
+        return [{"kind": "onbase-window"}]
     if (provider in SAVED_ONLY and not (provider == "boarddocs" and
             urlsplit(source.url).path.lower().endswith(".pdf"))) or input_format == "meeting-export" or (
             provider == "towncloud" and input_format == "towncloud-table-json"):
@@ -154,6 +161,13 @@ def _request_spec(source, bounds, task, context):
     size = _page_size(source)
     if kind == "static":
         url = source.url
+    elif kind == "onbase-window" and source.provider == "onbase":
+        from .onbase import window_url
+        url = window_url(source, bounds.date_from, bounds.date_to)
+    elif kind == "boarddocs-public" and source.provider == "boarddocs":
+        from .boarddocs_public import request_specs
+        spec = request_specs(source)['listing']
+        url, method, body, headers = (spec[k] for k in ('url', 'method', 'body', 'headers'))
     elif kind == "clerkbase-tree" and source.provider == "clerkbase":
         fields = task.get("fields")
         if not isinstance(fields, dict) or set(fields) != {"url"}:
@@ -204,9 +218,13 @@ def _request_spec(source, bounds, task, context):
                 or target.query or target.fragment):
             raise ValueError("The configured Tyler calendar API base is not an evidenced endpoint shape.")
         url = base.rstrip("/") + "/meetingInformation/getMeetingInformationByDate"
+        meeting_types = source.options.get("meeting_type_ids", [-1])
+        if (not isinstance(meeting_types, list) or len(meeting_types) > 100
+                or any(type(value) is not int or value < -1 or value > 2147483647 for value in meeting_types)):
+            raise ValueError("meeting_type_ids must be a bounded list of native integer IDs.")
         body = json.dumps({"startDate": date.fromisoformat(bounds.date_from).strftime("%m/%d/%Y"),
                            "endDate": date.fromisoformat(bounds.date_to).strftime("%m/%d/%Y"),
-                           "meetingTypeIds": [-1]}, separators=(",", ":")).encode()
+                           "meetingTypeIds": meeting_types}, separators=(",", ":")).encode()
         method, headers = "POST", {"Content-Type": "application/json", "Accept": "application/json"}
     elif kind == "legistar" and source.provider == kind:
         after = task.get("after", 0)
@@ -334,7 +352,13 @@ def _enrich(bundle, provider):
         if not isinstance(raw, dict):
             continue
         normalized = record["normalized"]
-        if provider == "civicplus-select":
+        if provider == "tyler-meeting-manager" and bundle['source'].get('options', {}).get('calendar_api_base'):
+            from .tyler_public import documents
+            supplied = documents(Source.from_dict(bundle['source']), raw)
+            if supplied:
+                normalized['documents'] = supplied
+                record['relationships'].extend({'relation': 'document', 'value': deepcopy(item)} for item in supplied)
+        elif provider == "civicplus-select":
             normalized["body"] = raw.get("categoryName")
             # CivicClerk may publish a direct HTTPS video in mediaStreamPath
             # while the unchanged compatibility reader only maps
@@ -412,7 +436,7 @@ def _enrich(bundle, provider):
 def parse_page(engine, source, namespace, content, input_format, bounds, context):
     if len(content) > bounds.parser_bytes:
         raise ValueError("The provider listing exceeds the configured parser byte limit.")
-    if input_format in {"legistar-events-json", "legistar-event-json", "wistia-api-media-json",
+    if input_format in {"boarddocs-public-meetings-json", "legistar-events-json", "legistar-event-json", "wistia-api-media-json",
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
                         "civicweb-detail-html", "civicweb-filepro-soap-xml", "civicweb-meetings-json", "civicweb-meeting-documents-json", "swagit-listing-html", "onbase-public-listing-html",
                         "digital-towpath-listing-html", "towncloud-public-listing-json", "telvue-cloudcast-mrss-xml",
@@ -443,6 +467,9 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
     namespace = validated_namespace if validated_namespace is not None else validate_source(source, context, content)
     bounds = Bounds(**request.get("bounds", {}))
     input_format = source.input_format or DEFAULT_FORMAT[source.provider]
+    if (source.provider == 'boarddocs' and source.input_format is None
+            and source.options.get('boarddocs_committee_id')):
+        input_format = 'boarddocs-public-meetings-json'
     if (source.provider == "novusagenda" and source.input_format is None
             and urlsplit(source.url).path in {"/agendapublic/Coversheet.aspx", "/agendapublic/CoverSheet.aspx"}):
         input_format = "novus-public-coversheet-html"
@@ -588,18 +615,25 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
                 origin = _origin(url)
                 response = transport.request(
                     url, method=method, body=body, headers=headers or None,
-                    byte_limit=bounds.parser_bytes, deadline_seconds=max(0.001, deadline - monotonic()),
+                    byte_limit=(min(bounds.parser_bytes, bounds.transfer_bytes)
+                                if task.get("kind") in {"onbase-window", "boarddocs-public"} else bounds.parser_bytes),
+                    deadline_seconds=max(0.001, deadline - monotonic()),
                     allowed_origins=(origin,),
                     **({"allow_redirects": False} if task.get("kind") in {
-                        "suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period", "clerkbase-tree"} else {}),
+                        "suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period", "clerkbase-tree",
+                        "onbase-window", "boarddocs-public"} else {}),
                 )
                 if _origin(response.url) != origin:
                     raise ValueError("Provider retrieval left its configured origin.")
+                if task.get("kind") in {"onbase-window", "boarddocs-public"} and response.url != url:
+                    raise ValueError("The OnBase response left its exact requested window.")
                 if response.status != 200:
                     raise RetrievalError("provider_http_error", status=response.status)
                 page_content = response.content
                 if len(page_content) > bounds.parser_bytes:
                     raise ValueError("The provider listing exceeds its parser byte limit.")
+                if task.get("kind") in {"onbase-window", "boarddocs-public"} and len(page_content) > bounds.transfer_bytes:
+                    raise ValueError("The OnBase window exceeds its transfer byte limit.")
                 try:
                     payload = json.loads(page_content)
                 except (ValueError, UnicodeError):
@@ -767,6 +801,16 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "configured public month and advertised month/year selections within requested bounds",
             "control_validation": "current configured calendar revalidated before resumed period GET"})
+    if source.provider == "onbase" and input_format == "onbase-public-listing-html":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one captured public OnBase listing/date window; server truncation and paging unverified",
+            "pagination": "no undocumented GetMoreFullTextResults traversal",
+            "unmapped_submodels": ["nonempty Documents", "Media"]})
+    if source.provider == "boarddocs" and input_format == "boarddocs-public-meetings-json":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "third-party-source-backed public committee list; no paging or complete-catalog claim",
+            "provider_contract": "undocumented; pinned LlamaIndex source and synthetic execution",
+            "detail_and_files": "explicit selected detail only; linked files not downloaded"})
     return OperationResult(status, {"source": source.public_dict(), "records": records,
                                    "captures": captures, "bundles": bundles},
                            tuple(errors), coverage, context.operation_id)

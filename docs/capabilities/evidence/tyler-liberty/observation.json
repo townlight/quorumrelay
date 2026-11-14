@@ -1,0 +1,81 @@
+{
+  "observed_date": "2026-11-13",
+  "scope": "Public anonymous bounded reads; not complete catalog or staff API",
+  "calendar_url": "https://libertycountytxapp.meetingmanager.tylerapp.com/392259prod/tylermm/calendar/",
+  "calendar_html_sha256": "2cd0790c1a752f4f69a525ecb31d5b46c647ed1954373c2dfbdef88d2308c625",
+  "literal_client_url": "https://libertycountytxapp.meetingmanager.tylerapp.com/392259prod/tylermm/calendar/main.f980238b7778fb2e.js",
+  "client_sha256": "2dcf06fa376a06f48571e959f11ba0b4c62386112feb3344475e18a330e039bd",
+  "client_work_file": "C:/Users/scott/Documents/Codex/2026-11-12/re/work/quorumrelay/tyler-liberty-main.js",
+  "requests": [
+    {
+      "file": "calendar.json",
+      "method": "POST",
+      "url": "https://libertycountytxapp.meetingmanager.tylerapp.com/tylermmcalendar392259prod/meetingInformation/getMeetingInformationByDate",
+      "body": {
+        "startDate": "10/01/2026",
+        "endDate": "10/31/2026",
+        "meetingTypeIds": []
+      },
+      "status": 200,
+      "bytes": 224264,
+      "sha256": "e93f8cae527398998b3316aa41d2016e9b23c41b6e9659d394931b54f871d1f2"
+    },
+    {
+      "file": "detail.json",
+      "method": "POST",
+      "url": "https://libertycountytxapp.meetingmanager.tylerapp.com/tylermmcalendar392259prod/meetingInformation/getMeeting",
+      "body": {
+        "meetingId": 3007,
+        "recurringId": 3027,
+        "activity": "View"
+      },
+      "status": 200,
+      "bytes": 79938,
+      "sha256": "ace54029a5934c586c2e9e5600db91414f55dd2dc033c488f6247b0885bfffbc"
+    },
+    {
+      "file": "search.json",
+      "method": "POST",
+      "url": "https://libertycountytxapp.meetingmanager.tylerapp.com/tylermmcalendar392259prod/meetingCalendarSearch/search",
+      "body": {
+        "lastPage": false,
+        "searchKeyword": "court",
+        "pageNo": 1,
+        "pageSize": 20,
+        "filter": {
+          "startDate": "10/01/2026",
+          "endDate": "10/31/2026",
+          "meetingTypeIds": [],
+          "agendaPosted": false,
+          "minutesPosted": false,
+          "videoPosted": false
+        }
+      },
+      "status": 200,
+      "bytes": 224616,
+      "sha256": "ab0ecfdb133674cc1fe23a1070932c7fdd54cfc1bfc58594b5a44ad9d832d007"
+    }
+  ],
+  "comparison": {
+    "meetingTypeIds": [
+      -1
+    ],
+    "status": 200,
+    "bytes": 2,
+    "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "body": "[]"
+  },
+  "agenda_pdf": {
+    "url": "https://libertycountytxapp.meetingmanager.tylerapp.com/tylermmcalendar392259prod/meetingInformation/Agenda/false/2409",
+    "status": 200,
+    "content_type": "application/pdf",
+    "bytes": 867566,
+    "sha256": "be4d47758feded4e4d5cdddec1e0d34dc54ec36deb67a22502978bfbeec7dc7a",
+    "work_file": "C:/Users/scott/Documents/Codex/2026-11-12/re/work/quorumrelay/tyler-liberty-agenda.body"
+  },
+  "client_extract": {
+    "path": "docs/capabilities/evidence/tyler-liberty/client-extract.txt",
+    "sha256": "fcfdc19f41420bd2ba60d88da87e5175f3502f2d2f50235ee93a0dcbe9a63c70",
+    "scope": "exact byte slices at declared read-route constants and tenant API base; full vendor client remains local evidence"
+  }
+}

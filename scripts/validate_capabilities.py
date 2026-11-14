@@ -265,7 +265,8 @@ def semantic_errors(data, identities):
                 errors.append(f"{name}: unknown outbound operation")
             if mapping["interface_type"] == "documented_automated_api":
                 if not mapping["evidence_ids"] or name not in {
-                    "legistar", "laserfiche-weblink", "wistia", "granicus", "municode-meetings"
+                    "legistar", "laserfiche-weblink", "wistia", "granicus", "municode-meetings",
+                    "civicplus-select"
                 }:
                     errors.append(f"{name}: automatic API claim lacks reviewed exact product evidence")
             if mapping.get("method") == "DELETE":

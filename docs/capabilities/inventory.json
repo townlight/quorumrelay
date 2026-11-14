@@ -7265,6 +7265,71 @@
               }
             ]
           }
+        },
+        {
+          "id": "select-official-detail-section-execution",
+          "url": "https://fishersin.api.civicclerk.com/swagger/v1/swagger.json",
+          "title": "Verified public contract leads and executed scoped engine checks",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observed": "2026-11-13",
+          "observation_date": "2026-11-13",
+          "access_scope": "public_source_read_and_local_mock_execution_no_remote_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/public-contract-leads-2026-11-13.json",
+          "receipt_sha256": "0a2a1a3c1157b3ff7f18c293fa68b166e675d313efbac3b5981d1a196d8a35bb",
+          "limits": "Official Select/CivicClerk v1 spec. Published stored event agendaId binds selected Meeting detail/files. Section create/update through exact plan approval, scoped readback/replay. Independent meeting/agenda policy lists; no verified upstream association, no atomic CAS, no live writes. Event date/time transformation and item/upload contracts are not implemented.",
+          "synthetic_execution": {
+            "provider": "civicplus-select",
+            "status": "fixture_passed",
+            "operations": [
+              "fetch",
+              "create",
+              "update"
+            ],
+            "entities": [
+              "agenda_section"
+            ],
+            "scope": "Official Select/CivicClerk v1 spec. Published stored event agendaId binds selected Meeting detail/files. Section create/update through exact plan approval, scoped readback/replay. Independent meeting/agenda policy lists; no verified upstream association, no atomic CAS, no live writes. Event date/time transformation and item/upload contracts are not implemented.",
+            "execution_provenance": "Separate affected runs overlap. Distinct node count deduplicates classname/name. Earlier runs precede additive changes in other handlers; final 109-test integration checks shared dispatch, provider interfaces, package and new BoardDocs/Select write paths. No claim these separate runs are one full-suite execution.",
+            "checks": [
+              {
+                "command": "python -m pytest (exact nodes in docs/verification/public-contract-leads-2026-11-13.json#runs/civicclerk-section-write-final)",
+                "passed": 103,
+                "failed": 0
+              },
+              {
+                "command": "python -m pytest (exact nodes in docs/verification/public-contract-leads-2026-11-13.json#runs/civicclerk-detail-affected)",
+                "passed": 163,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/civicclerk-openapi/swagger.json",
+                "sha256": "d242638b2a6fd2b4dc2ef295ea000a52b146a1de63b7298ba463acd8d94ce62a"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/civicclerk-openapi/metadata.xml",
+                "sha256": "8582821af15a446e0998ed8f1003eaaa5f171723d4695de67be9de9f62786efb"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_civicclerk_detail.py",
+                "sha256": "b0613bf53af88113b5c23b18917294f51a0a4a1beba2e18c69e4bb24121eab99",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "b0613bf53af88113b5c23b18917294f51a0a4a1beba2e18c69e4bb24121eab99"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_civicclerk_section_write.py",
+                "sha256": "ff03a8dfaa27fa90c536e1b927602d9602928874ab326a1ff7b04a879509ff2d",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "ff03a8dfaa27fa90c536e1b927602d9602928874ab326a1ff7b04a879509ff2d"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -7273,6 +7338,13 @@
           "observation": "Public published agenda/items observed.",
           "evidence_ids": [
             "select-lacey"
+          ]
+        },
+        {
+          "url": "https://fishersin.api.civicclerk.com/swagger/v1/swagger.json",
+          "observation": "Public official OpenAPI and OData enums; synthetic engine execution, no live writes.",
+          "evidence_ids": [
+            "select-official-detail-section-execution"
           ]
         }
       ],
@@ -7329,26 +7401,26 @@
           ]
         },
         "fetch": {
-          "capability_status": "observed",
+          "capability_status": "documented",
           "implementation_status": "implemented",
           "evidence_ids": [
             "select-lacey",
             "civicplus-media-discovery-1277",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "select-official-detail-section-execution"
           ],
-          "details": "Guarded attachment fetch can read a recording from the captured CivicClerk record by identity/index and returns the exact citation URL and bytes hash. External media origins require an explicit source.options.download_origins grant; the saved event 1277 regression uses synthetic transport.",
+          "details": "Official selected Meetings/{agendaId} read from stored published Event; retains supplied items/raw fields and exact published file IDs. Explicit file stream requires stored membership; no rendered text/playback claim.",
           "dependencies": [],
           "remaining_verification": [
-            "Live connector fetch from the captured external media origin and media playability remain unverified.",
-            "Detail/readback coverage for all CivicClerk tenants and media types remains unverified."
+            "Provider-wide catalog and live acceptance are not claimed."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "source_and_saved_fixture_contract_test_not_provider_acceptance",
+          "acceptance_status": "fixture_passed",
+          "evidence_level": "attributed_contract_and_synthetic_execution",
           "tenant_scope": [
             "https://erieco.api.civicclerk.com/v1/Events"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "tests/test_provider_discovery.py tests the exact captured recording URL with explicit download_origins and synthetic media bytes; no live connector media fetch.",
+          "test_access": "Local source and executed scoped fixtures; no account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -7475,32 +7547,30 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "select-create",
             "select-items",
             "select-upload",
-            "select-update"
+            "select-update",
+            "select-official-detail-section-execution"
           ],
-          "details": "Official authenticated UI supports in-scope operations; exact external API contract is unverified. Historical import is consultant-mediated, not an automatic write API.",
+          "details": "Only agenda_section create is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
             "Verified machine interface or authorized UI automation test environment",
             "No provider test tenant or credentials supplied"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Provider-wide catalog and live acceptance are not claimed."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "fixture_passed",
+          "evidence_level": "attributed_contract_and_synthetic_execution",
           "tenant_scope": [
             "https://laceywa.portal.civicclerk.com/event/1077/files"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Local source and executed scoped fixtures; no account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -7508,32 +7578,30 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "select-create",
             "select-items",
             "select-upload",
-            "select-update"
+            "select-update",
+            "select-official-detail-section-execution"
           ],
-          "details": "Official authenticated UI supports in-scope operations; exact external API contract is unverified. Historical import is consultant-mediated, not an automatic write API.",
+          "details": "Only agenda_section update is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
             "Verified machine interface or authorized UI automation test environment",
             "No provider test tenant or credentials supplied"
           ],
           "remaining_verification": [
-            "Implementation contract validation",
-            "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Provider-wide catalog and live acceptance are not claimed."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "fixture_passed",
+          "evidence_level": "attributed_contract_and_synthetic_execution",
           "tenant_scope": [
             "https://laceywa.portal.civicclerk.com/event/1077/files"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Local source and executed scoped fixtures; no account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -8009,6 +8077,106 @@
           "automatable_contract_verified": false,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
           "synthetic_acceptance_scope": "PREPARED OUTPUT only: official filename examples/classifier mappings, five PDFs and one MP4, exact emitted bytes/hashes. No FTP transfer, consultant acceptance, remote import or meeting association."
+        },
+        {
+          "entity": "agenda_section",
+          "operation": "create",
+          "endpoint_or_format": "POST /v1/Sections",
+          "field_mappings": [
+            {
+              "normalized": "fields.sectionName",
+              "provider_field": "sectionName",
+              "mapping_level": "exact_API_key"
+            },
+            {
+              "normalized": "fields.sectionText",
+              "provider_field": "sectionText",
+              "mapping_level": "exact_API_key"
+            },
+            {
+              "normalized": "parent_id",
+              "provider_field": "agendaId",
+              "notes": "Create only; update readback validates existing agenda parent.",
+              "mapping_level": "exact_API_key"
+            }
+          ],
+          "evidence_ids": [
+            "select-official-detail-section-execution"
+          ],
+          "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
+          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
+          "verification_status": "documented_and_synthetically_executed_not_live",
+          "notes": "Only sectionName/sectionText; create requires agendaId. Update preserves omitted fields; no parent move, no upstream atomic CAS. meeting_ids and parent_ids are independent trusted allowlists, not upstream relationship proof.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "evidence_level": "attributed_contract_and_synthetic_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "fixture_passed",
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "official_OpenAPI_exact_models",
+          "method": "POST",
+          "api_version": "v1",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "agenda_section",
+          "operation": "update",
+          "endpoint_or_format": "PUT /v1/Sections/{key}; GET /v1/Sections/{key}",
+          "field_mappings": [
+            {
+              "normalized": "fields.sectionName",
+              "provider_field": "sectionName",
+              "mapping_level": "exact_API_key"
+            },
+            {
+              "normalized": "fields.sectionText",
+              "provider_field": "sectionText",
+              "mapping_level": "exact_API_key"
+            },
+            {
+              "normalized": "parent_id",
+              "provider_field": "agendaId",
+              "notes": "Create only; update readback validates existing agenda parent.",
+              "mapping_level": "exact_API_key"
+            }
+          ],
+          "evidence_ids": [
+            "select-official-detail-section-execution"
+          ],
+          "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
+          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
+          "verification_status": "documented_and_synthetically_executed_not_live",
+          "notes": "Only sectionName/sectionText; create requires agendaId. Update preserves omitted fields; no parent move, no upstream atomic CAS. meeting_ids and parent_ids are independent trusted allowlists, not upstream relationship proof.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "evidence_level": "attributed_contract_and_synthetic_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "fixture_passed",
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "official_OpenAPI_exact_models",
+          "method": "PUT",
+          "api_version": "v1",
+          "automatable_contract_verified": true,
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         }
       ],
       "pagination": {
@@ -8028,7 +8196,8 @@
       "remaining_research": [
         "A bounded Lacey CivicClerk native-search engine read and in-process resume is captured in docs/verification/civicplus-select-native-search-2026-11-12.json: partial/no-error pages yielded three then two local hits; the first request made one network call and resume reused the exact in-process snapshot with zero additional calls. Provider candidate semantics, broader search/full catalog, full text and restart-persistent continuation remain unverified.",
         "The exporter prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4. The official-linked filename tester classifies the additional tokens, but backend acceptance and post-import behavior remain unverified. MP4 framing does not establish codec/playability, captions or timestamp fidelity; ambiguous Packet, Notices and Audio/Video aliases remain rejected.",
-        "Historical FTP host is contradictory; project-lead credentials, transfer, consultant processing and readback are absent. Authenticated create/update/upload routes remain account-gated."
+        "Historical FTP host is contradictory; project-lead credentials, transfer, consultant processing and readback are absent. Authenticated create/update/upload routes remain account-gated.",
+        "Official Fishers spec and metadata now pin Event/Section models and publication enum0/1/2; section writes are implemented with scoped synthetic execution. Event date/time/template readback equivalence remains unresolved, and no item create/update or document upload model is established. No account acquisition gate."
       ],
       "requirement_ids": [
         "C01",
@@ -18621,6 +18790,56 @@
           "limits": "No section attachments, full section content/catalog, archive, native search or write/import association claim.",
           "receipt_path": "docs/verification/onbase-section-detail-2026-11-13.json",
           "receipt_sha256": "cb98b3005dcee5ee07d4776b7b519b05f9fcefa42b85e7fb186f9db55cdaca64"
+        },
+        {
+          "id": "onbase-akron-model-window-execution",
+          "url": "https://onlinedocs.akronohio.gov/OnBaseAgendaOnline/",
+          "title": "Verified public contract leads and executed scoped engine checks",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observed": "2026-11-13",
+          "observation_date": "2026-11-13",
+          "access_scope": "public_source_read_and_local_mock_execution_no_remote_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/public-contract-leads-2026-11-13.json",
+          "receipt_sha256": "0a2a1a3c1157b3ff7f18c293fa68b166e675d313efbac3b5981d1a196d8a35bb",
+          "limits": "Literal embedded SearchResults and exact observed custom date-window GET. Three Akron records and six declared document flags/types. NoMoreResults=false; no inferred pager/archive completeness or nonempty Documents/Media mapping.",
+          "synthetic_execution": {
+            "provider": "onbase",
+            "status": "fixture_passed",
+            "operations": [
+              "discover",
+              "parse"
+            ],
+            "entities": [],
+            "scope": "Literal embedded SearchResults and exact observed custom date-window GET. Three Akron records and six declared document flags/types. NoMoreResults=false; no inferred pager/archive completeness or nonempty Documents/Media mapping.",
+            "execution_provenance": "Separate affected runs overlap. Distinct node count deduplicates classname/name. Earlier runs precede additive changes in other handlers; final 109-test integration checks shared dispatch, provider interfaces, package and new BoardDocs/Select write paths. No claim these separate runs are one full-suite execution.",
+            "checks": [
+              {
+                "command": "python -m pytest (exact nodes in docs/verification/public-contract-leads-2026-11-13.json#runs/onbase-model-affected)",
+                "passed": 103,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/onbase-search-model/client-extract.txt",
+                "sha256": "180a3c8560d2b05d7f2ed6adf9be62a84e1b9d2b50db000d6cc5c80253be5d63"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/onbase-search-model/search-model.json",
+                "sha256": "75111da479d2bc1c3f346dbc3678fa5320ebb42ca53019677ff7f8031c6e2b22"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_onbase_search_model.py",
+                "sha256": "adb53e69e0b364a8f010d751d0b717a4dbe7c703952346cfc194f1bb611e5c6d",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "adb53e69e0b364a8f010d751d0b717a4dbe7c703952346cfc194f1bb611e5c6d"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -18631,6 +18850,13 @@
             "hyland-onbase-agenda-online-tenant",
             "onbase-public-search-redirect-blocked-2026-11-12",
             "onbase-pdf-link-returned-html-2026-11-12"
+          ]
+        },
+        {
+          "url": "https://onlinedocs.akronohio.gov/OnBaseAgendaOnline/",
+          "observation": "Official council-linked modern deployment, three October2026 meetings; NoMoreResults=false.",
+          "evidence_ids": [
+            "onbase-akron-model-window-execution"
           ]
         }
       ],
@@ -18662,21 +18888,21 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "hyland-onbase-agenda-online-tenant",
-            "onbase-public-search-redirect-blocked-2026-11-12"
+            "onbase-public-search-redirect-blocked-2026-11-12",
+            "onbase-akron-model-window-execution"
           ],
-          "details": "The registered onbase-public-listing-html layout maps 30 captured current-listing rows through bounded configured retrieval. This does not implement the redirected native search route or establish full catalog coverage.",
+          "details": "Existing rendered listing plus observed modern embedded model; explicit bounds map root/Meetings to exact date-window GET. Continuation slices the captured window, not an undocumented upstream pager.",
           "dependencies": [],
           "remaining_verification": [
-            "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
-            "No complete catalog, provider-wide matching semantics or live write acceptance is claimed."
+            "Provider-wide catalog and live acceptance are not claimed."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "implemented_source_and_named_tests_with_bounded_observations_not_catalog_or_write_acceptance",
+          "acceptance_status": "fixture_passed",
+          "evidence_level": "attributed_contract_and_synthetic_execution",
           "tenant_scope": [
             "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Local source and executed scoped fixtures; no account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -18711,26 +18937,29 @@
           ]
         },
         "parse": {
-          "capability_status": "baseline_source",
+          "capability_status": "observed",
           "implementation_status": "implemented",
           "evidence_ids": [
             "hyland-onbase-agenda-online-baseline",
             "quorumrelay-shared-core-operations",
             "onbase-supplied-agenda-detail-2026-11-13",
-            "onbase-selected-section-detail-2026-11-13"
+            "onbase-selected-section-detail-2026-11-13",
+            "onbase-akron-model-window-execution"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Existing onbase-public-listing-html additionally dispatches exact supplied ViewMeeting, ViewMeetingAgenda and ViewMeetingAgendaItem URL variants, retaining unknown fields in raw captures and native hierarchy without changing the baseline parser. ViewMeetingAgendaItem with exact isSection=true maps native agenda_section identity and supplied rendered text; section attachments remain unmapped.",
+          "details": "Legacy baseline remains intact; additive listing parser handles literal embedded JSON without executing JS, preserves raw unknown fields and maps only declared document flags/names.",
           "dependencies": [
             "Extract shared engine preserving legacy behavior."
           ],
-          "remaining_verification": [],
-          "acceptance_status": "not_run",
-          "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
+          "remaining_verification": [
+            "Provider-wide catalog and live acceptance are not claimed."
+          ],
+          "acceptance_status": "fixture_passed",
+          "evidence_level": "attributed_contract_and_synthetic_execution",
           "tenant_scope": [
             "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Local source and saved-fixture contract coverage; no provider account access required.",
+          "test_access": "Local source and executed scoped fixtures; no account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -19343,7 +19572,8 @@
         "Hyland Agenda Foundation 25.1 guidance is version/installation-scoped. Identify deployment/version and entitlement before applying API/write operations to Agenda Online.",
         "No authorized deployment-matched staff/test account or integration contract was supplied for create/update/upload.",
         "Normal Tagged DIP linked-document file/index preparation is implemented with exact destination mappings and synthetic emitted-layout proof; no Agenda meeting association or remote processing is inferred. OnBase API SDK remains an actual vendor surface; sdk.onbase.com redirected to Hyland identity, and public REST help describes per-deployment published operations rather than a universal Agenda schema. Continue exact API contract research without credential acquisition.",
-        "Current-listing Agenda hierarchy and selected item detail now mapped with pinned captures and scoped synthetic execution. Archive traversal, native search, non-agenda variants, other attachment branches and staff import/meeting association remain unresolved; no additional public requests in this acceptance run."
+        "Current-listing Agenda hierarchy and selected item detail now mapped with pinned captures and scoped synthetic execution. Archive traversal, native search, non-agenda variants, other attachment branches and staff import/meeting association remain unresolved; no additional public requests in this acceptance run.",
+        "Akron modern window is now implemented/tested; nonempty Documents/Media, native keyword search, complete archive and remote Agenda association/import remain unverified."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "onbase",
@@ -25837,6 +26067,19 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "boarddocs-pinned-reader-synthetic-execution",
+          "url": "https://github.com/run-llama/llama_index/tree/26c7dc3e9846045864cf93ab92cb13bc80a3394e/llama-index-integrations/readers/llama-index-readers-boarddocs",
+          "title": "Pinned third-party public reader and local synthetic workflow",
+          "kind": "third_party_source_and_synthetic_tests",
+          "observed": "2026-11-13",
+          "observation_date": "2026-11-13",
+          "access_scope": "third_party_source_read_and_local_mock_execution",
+          "proof_level": "third_party_source_and_synthetic_engine_execution_not_official_vendor_acceptance",
+          "receipt_path": "docs/verification/public-contract-leads-2026-11-13.json",
+          "receipt_sha256": "0a2a1a3c1157b3ff7f18c293fa68b166e675d313efbac3b5981d1a196d8a35bb",
+          "limits": "Direct vendor portal returned403. No workaround. No official contract/live provider acceptance; supplied public-file href strings are not downloaded."
         }
       ],
       "tenants": [
@@ -25881,76 +26124,79 @@
         },
         "discover": {
           "capability_status": "unverified",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "diligent-boarddocs-tenant",
             "diligent-boarddocs-colorado-direct-get",
-            "diligent-boarddocs-historical-rss-xml-proposal"
+            "diligent-boarddocs-historical-rss-xml-proposal",
+            "boarddocs-pinned-reader-synthetic-execution"
           ],
-          "details": "Current Diligent materials identify BoardDocs as supported for existing customers but give no API route. A historical 2017 BoardDocs LT proposal mentions RSS/XML access to public data without an endpoint/schema. The Colorado shell previously rendered branding but current direct unauthenticated GET is HTTP 403; the other bounded tenant evidence is a staff guide. Exact current public catalog/feed contract remains unverified.",
+          "details": "Explicit boarddocs_committee_id opt-in enables pinned-reader listing POST with source/scope-bound local continuation. Original baseline path unchanged.",
           "dependencies": [],
           "remaining_verification": [
-            "Find a current vendor-supported feed/API contract or visible public RSS/XML link in one of the two already inspected tenant contexts; do not derive routes from the historical proposal",
-            "If an ordinary public route becomes accessible, capture exact meeting/item response fields and page/date continuation; current 403 and staff guide do not establish an endpoint",
-            "Current product-tier applicability, authorization, rate/size limits and full-history coverage remain unknown"
+            "Provider-wide catalog and live acceptance are not claimed."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "third_party_source_and_synthetic_execution_not_vendor_acceptance",
           "tenant_scope": [
             "https://www.laspositascollege.edu/gv/assets/docs/INSTRUCTIONS%20-%20Submitting%20Agenda%20Items%20-%20Final.pdf",
             "https://go.boarddocs.com/co/cde/Board.nsf/Public"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Local source and executed scoped fixtures; no account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
           ]
         },
         "fetch": {
-          "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "capability_status": "unverified",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "diligent-boarddocs-tenant"
+            "diligent-boarddocs-tenant",
+            "boarddocs-pinned-reader-synthetic-execution"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval.",
+          "details": "Selected stored listing meeting enables exact printable agenda POST; retains title/date/rendered text and raw response. No item-tree or file transfer mapping.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
+            "Provider-wide catalog and live acceptance are not claimed."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "third_party_source_and_synthetic_execution_not_vendor_acceptance",
           "tenant_scope": [
             "https://www.laspositascollege.edu/gv/assets/docs/INSTRUCTIONS%20-%20Submitting%20Agenda%20Items%20-%20Final.pdf",
             "https://go.boarddocs.com/co/cde/Board.nsf/Public"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Local source and executed scoped fixtures; no account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
           ]
         },
         "parse": {
-          "capability_status": "baseline_source",
+          "capability_status": "unverified",
           "implementation_status": "implemented",
           "evidence_ids": [
             "diligent-boarddocs-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "boarddocs-pinned-reader-synthetic-execution"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "Baseline numbered PDF remains unchanged; additive boarddocs-public-meetings-json retains JSON listing rows and identities. Printable detail requires captured selected identity and is not a standalone advertised parser.",
           "dependencies": [
             "Extract shared engine preserving legacy behavior."
           ],
-          "remaining_verification": [],
+          "remaining_verification": [
+            "Provider-wide catalog and live acceptance are not claimed."
+          ],
           "acceptance_status": "not_run",
-          "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
+          "evidence_level": "third_party_source_and_synthetic_execution_not_vendor_acceptance",
           "tenant_scope": [
             "https://www.laspositascollege.edu/gv/assets/docs/INSTRUCTIONS%20-%20Submitting%20Agenda%20Items%20-%20Final.pdf",
             "https://go.boarddocs.com/co/cde/Board.nsf/Public"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Local source and saved-fixture contract coverage; no provider account access required.",
+          "test_access": "Local source and executed scoped fixtures; no account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -26421,9 +26667,8 @@
         "Respect post-approval edit lock and public/private visibility."
       ],
       "remaining_research": [
-        "Two bounded BoardDocs contexts are used: Colorado direct GET currently returns HTTP 403, and the other evidence is a staff-guide document. Do not probe a third tenant. Capture an exact RSS/XML URL only if a current public link appears in either existing context; the 2017 proposal itself has no route/schema.",
-        "Current Diligent BoardDocs materials give features but no API/search request schema. Current tier applicability, public catalog access and the 403 path remain unresolved pending supported endpoint/access evidence.",
-        "No authorized BoardDocs non-production account supplied for role/approval, create/update/upload, readback or conflict checks."
+        "Opt-in public listing/print detail is implemented with pinned third-party source and18synthetic helper/workflow cases; official/live contract acceptance remains unverified (403 observed).",
+        "Public file hrefs remain strings only; item hierarchy, attachment transfer, native search, staff writes and vendor import remain unresolved."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "boarddocs",
@@ -26582,6 +26827,62 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "tyler-liberty-public-contract-execution",
+          "url": "https://libertycountytxapp.meetingmanager.tylerapp.com/392259prod/tylermm/calendar/",
+          "title": "Verified public contract leads and executed scoped engine checks",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observed": "2026-11-13",
+          "observation_date": "2026-11-13",
+          "access_scope": "public_source_read_and_local_mock_execution_no_remote_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/public-contract-leads-2026-11-13.json",
+          "receipt_sha256": "0a2a1a3c1157b3ff7f18c293fa68b166e675d313efbac3b5981d1a196d8a35bb",
+          "limits": "Explicit tenant API base and meeting type selection, stored selected detail and document identity; exact local metadata search of bounded provider candidates. No complete catalog, universal type/status semantics, full content search or playback.",
+          "synthetic_execution": {
+            "provider": "tyler-meeting-manager",
+            "status": "fixture_passed",
+            "operations": [
+              "discover",
+              "fetch",
+              "native_search"
+            ],
+            "entities": [],
+            "scope": "Explicit tenant API base and meeting type selection, stored selected detail and document identity; exact local metadata search of bounded provider candidates. No complete catalog, universal type/status semantics, full content search or playback.",
+            "execution_provenance": "Separate affected runs overlap. Distinct node count deduplicates classname/name. Earlier runs precede additive changes in other handlers; final 109-test integration checks shared dispatch, provider interfaces, package and new BoardDocs/Select write paths. No claim these separate runs are one full-suite execution. Exact source URL binding was then fixed and the final13Tyler cases executed separately; no earlier run is claimed to contain that fix.",
+            "checks": [
+              {
+                "command": "python -m pytest (exact nodes in docs/verification/public-contract-leads-2026-11-13.json#runs/tyler-liberty-affected)",
+                "passed": 169,
+                "failed": 0
+              },
+              {
+                "command": "python -m pytest -q tests/test_tyler_liberty.py --junitxml=.../tyler-source-binding-final.xml",
+                "passed": 13,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/tyler-liberty/client-extract.txt",
+                "sha256": "fcfdc19f41420bd2ba60d88da87e5175f3502f2d2f50235ee93a0dcbe9a63c70"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/tyler-liberty/observation.json",
+                "sha256": "9c6118da97ff28a5e5c5ed8328e931fb3a37a152f083a12264fdb2dc95fb8af6"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_tyler_liberty.py",
+                "sha256": "20272971319cb4f9829599d9bcca89864926d2b35d797d959e31d95af00889bb",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "20272971319cb4f9829599d9bcca89864926d2b35d797d959e31d95af00889bb"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -26598,6 +26899,13 @@
           "evidence_ids": [
             "tyler-ector",
             "tyler-ector-public-calendar-query"
+          ]
+        },
+        {
+          "url": "https://libertycountytxapp.meetingmanager.tylerapp.com/392259prod/tylermm/calendar/",
+          "observation": "Three Oct2026 rows with [] meeting types; same request [-1] empty. Detail/search and selected agenda PDF observed.",
+          "evidence_ids": [
+            "tyler-liberty-public-contract-execution"
           ]
         }
       ],
@@ -26629,28 +26937,29 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "tyler-ector",
             "tyler-ector-public-calendar-query",
-            "tyler-ector-historical-empty-read"
+            "tyler-ector-historical-empty-read",
+            "tyler-liberty-public-contract-execution"
           ],
-          "details": "Ector client code exposes the date-range POST; two November 2026 windows and a 2025 historical range returned HTTP 200 with empty arrays. The 2025 engine receipt is partial, zero rows, and has no errors; it does not establish a successful nonempty record schema or complete discovery.",
+          "details": "Observed nonempty Liberty calendar with explicit meeting_type_ids []; legacy default [-1] preserved. Scoped date window and raw fields retained.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
           ],
           "remaining_verification": [
-            "Obtain a successful nonempty response on this same tenant and establish record fields and date/page/archive completeness; tested ranges were empty."
+            "Provider-wide catalog and live acceptance are not claimed."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "fixture_passed",
+          "evidence_level": "attributed_contract_and_synthetic_execution",
           "tenant_scope": [
             "https://cityofmurraycityuttmmapp.tylerhost.net/7452prod/tylermm/calendar/",
             "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Local source and executed scoped fixtures; no account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -26658,25 +26967,26 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "tyler-ector"
+            "tyler-ector",
+            "tyler-liberty-public-contract-execution"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. Baseline source skips cancelled/adjourned records and derives agenda item ids by position; new schema must preserve statuses and explain identity derivation rather than advertise baseline as full fidelity.",
+          "details": "Stored native meetingId/recurringId bound detail; exact observed published agenda/minutes URL membership; explicit attachment fetch validates PDF signature.",
           "dependencies": [
             "shared network safeguards"
           ],
           "remaining_verification": [
-            "Verify raw response MIME, redirects, document/media status and independent attachment failures."
+            "Provider-wide catalog and live acceptance are not claimed."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "fixture_passed",
+          "evidence_level": "attributed_contract_and_synthetic_execution",
           "tenant_scope": [
             "https://cityofmurraycityuttmmapp.tylerhost.net/7452prod/tylermm/calendar/",
             "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Local source and executed scoped fixtures; no account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -26710,25 +27020,26 @@
           ]
         },
         "native_search": {
-          "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "tyler-ector",
-            "tyler-doc"
+            "tyler-doc",
+            "tyler-liberty-public-contract-execution"
           ],
-          "details": "Official robust searching and attachment search documented; public Search control observed, query endpoint/results untested.",
+          "details": "Observed search POST with term/date/meeting type and bounded pages; exact local metadata matching only, no provider stable-order or full-document claim.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify request method/route, exact-term/phrase/date/body semantics, paging and incomplete/error outcomes."
+            "Provider-wide catalog and live acceptance are not claimed."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "fixture_passed",
+          "evidence_level": "attributed_contract_and_synthetic_execution",
           "tenant_scope": [
             "https://cityofmurraycityuttmmapp.tylerhost.net/7452prod/tylermm/calendar/",
             "https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Local source and executed scoped fixtures; no account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -27099,10 +27410,10 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "Calendar month navigation/list/day/week visible; JSON paging, query ranges and archived completeness unverified."
+        "details": "Calendar date window plus source/query/page-bound native search continuation; full catalog and remote stable ordering are not established."
       },
       "auth": {
-        "public_read": "unverified",
+        "public_read": "Observed anonymous Liberty public reads; tenant applicability remains explicit.",
         "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
@@ -27110,9 +27421,9 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "The Ector bundle exposes POST /tylermmcalendar46612prod/meetingInformation/getMeetingInformationByDate with JSON startDate/endDate/meetingTypeIds (MM/DD/YYYY; [-1] all types). The added 2025 historical query returned HTTP 200 and `[]` (2 bytes); all observed ranges are empty, so record schema/paging cannot yet be established.",
-        "A nonempty public result on Ector is the next executable dependency before validating record fields, agenda/minutes/media links, status fidelity and archive completeness. The other bounded Murray context had a fetch-extraction failure; no third tenant.",
-        "Official Tyler product features describe staff scheduling, item/document, minutes and video workflows but no machine write/import schema. No authorized credentials/test tenant supplied."
+        "Historical Ector empty requests remain historical. Liberty establishes nonempty selected-window fields; not full catalog or universal meetingTypeIds semantics.",
+        "Native search pagination is bounded/partial; remote stable ordering and full-document text remain unverified.",
+        "Staff meeting/item writes, document/media upload and provider-specific import format remain unmapped; no API inference from UI features."
       ],
       "authentication": "Ector public calendar anonymous. Staff functions need authorized Tyler account and configured workflow; API tier/access unknown.",
       "write_findings": "Official page explicitly supports meeting scheduling/rescheduling, agenda edits, attachment/video uploads and minutes import/edit/publish. No usable write API or vendor minutes import schema verified.",

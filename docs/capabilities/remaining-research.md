@@ -1,5 +1,18 @@
 # Remaining provider research and access gaps
 
+November 13 lead reconciliation: the [execution receipt](../verification/public-contract-leads-2026-11-13.json)
+and generated inventory supersede the dated open statements below for the
+specific implemented paths. Tyler Liberty nonempty selected-window/detail/search,
+OnBase Akron embedded results/date windows, and CivicClerk Select detail/files
+and section create/update are now source implementations with scoped fixtures.
+BoardDocs opt-in committee listing/print detail has third-party-source-backed
+synthetic proof, with official/live acceptance still unverified after a 403.
+PrimeGov's alternate date route confirms an empty tracking-number field in 817
+rows, not tracking-query semantics; the existing archive route already preserves
+`documentList`. TelVue v2 GET contracts and the Granicus SDK were already mapped;
+the new reports do not establish their outstanding upload/processing/import
+contracts. Missing contracts remain specific work, not an account acquisition gate.
+
 Current owner amendment (2026-11-12): vendor-documented synthetic execution, readback and receipts satisfy provider discovery/read/search/import/export/write acceptance. Live checks are optional supporting evidence; credential/test-account acquisition is not a completion gate. Actual reference-app persistence/isolation/authorization, signed Windows and authorized delivery proof remain required. Unknown contracts remain research/implementation work, not unsupported features. Dated observations below remain historical; older account/mocks-only statements do not override this amendment. No arbitrary public-city mutation, procurement or outreach is authorized.
 
 ## F01 Legistar (`legistar`)

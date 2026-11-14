@@ -1,0 +1,16 @@
+{
+  "url": "https://onlinedocs.akronohio.gov/OnBaseAgendaOnline/Meetings/Search?dropid=11&dropsv=10%2F01%2F2026&dropev=10%2F31%2F2026",
+  "status": 200,
+  "bytes": 40622,
+  "sha256": "ad6eb3ed10f02376bf5898417c2714990d839253cc75cc62ea462a9d18f812be",
+  "label": "Observed public read; embedded JSON and literal client extracts, not official API specification",
+  "raw_response_local": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\onbase-akron\\search.html",
+  "model_derivation": "JSONDecoder on literal showSearchResults(new SearchResults argument; no JS execution; no CSRF/cookies included",
+  "model_sha256": "75111da479d2bc1c3f346dbc3678fa5320ebb42ca53019677ff7f8031c6e2b22",
+  "client_extract_sha256": "180a3c8560d2b05d7f2ed6adf9be62a84e1b9d2b50db000d6cc5c80253be5d63",
+  "limits": [
+    "one Akron v25 model/date window",
+    "NoMoreResults false even for3rows: no paging or archive-completeness claim",
+    "No nonempty Documents/Media contract or staff write association"
+  ]
+}

@@ -1,0 +1,95 @@
+CELL 2
+# We'll use the requests module to fetch info here.
+
+import requests
+
+# set up the BoardDocs endpoints based on params we were passed.
+baseURL = "https://go.boarddocs.com/" + site + "/Board.nsf"
+publicURL = baseURL + "/Public"
+meetingsListURL = baseURL + "/BD-GetMeetingsList?open"
+
+# set up the headers required for the server to answer
+headers = {
+    "accept": "application/json, text/javascript, */*; q=0.01",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "sec-ch-ua": '"Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"macOS"',
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "x-requested-with": "XMLHttpRequest",
+}
+
+# set the committee
+data = "current_committee_id=" + committeeID
+
+# POST the request!
+response = requests.post(meetingsListURL, headers=headers, data=data)
+
+print("Status returned by meetings list request:", response.status_code)
+CELL 4
+# Here's an alternate approach, there's apparently an XML feed..
+
+import xml.etree.ElementTree as ET
+
+xmlMeetingListURL = baseURL + "/XML-ActiveMeetings"
+xmlMeetingListData = requests.get(xmlMeetingListURL)
+xmlMeetingList = ET.fromstring(xmlMeetingListData)
+
+# The returned XML document is in this form:
+
+# <meetings>
+# <meeting bodyid="A4EP6J588C05" bodyname="Board of Trustees" id="C55TDQ76E688" order="1">
+# <name>Board of Trustees Regular Meeting - 7:00pm</name>
+# <start>
+# <date format="yyyy-mm-dd">2021-08-11</date>
+# <english>
+# <weekday>Wednesday</weekday>
+# <date>August 11, 2021</date>
+# </english>
+# </start>
+# <description>Please click the video link above to access the regular board meeting EDUCATING EVERY CHILD FOR SUCCESS REDWOOD CITY SCHOOL DISTRICT BOARD OF EDUCATION REGULAR MEETING WEDNESDAY, AUGUST 11, 2021 AT 7:00pm TELECONFERENCE MEETING https://rcsdk8-net.zoom.us/s/86849531859 (to participate in the Regular Board Meeting) US : +1 669 900 6833 or +1 346 248 7799 or +1 301 715 8592 or +1 312 626 6799 or +1 929 436 2866 or +1 253 215 8782 Webinar ID: 868 4953 1859 Password: rcsdbot Backup Password: 0863523 (to listen to the Regular Board Meeting) TELECONFERENCE NOTIFICATION for the REGULAR BOARD MEETING In light of the current Public Health Emergency and consistent with the Governor&#8217s recent order suspending some of the Brown Act&#8217s teleconferencing requirements, the Board will be holding its August 11th regular meeting by teleconference. The Board invites the public to join the open session portion of the meeting and offer public comment via Zoom. Additionally, the meeting will be recorded and staff will be available to receive real-time comments via the links below. Comments received during the open session of the meeting will be shared publicly during the meeting: ENGLISH https://docs.google.com/forms/d/e/1FAIpQLSexN3rAtNYJrhCjKT0s9AG__Eq0-_iAUFPI6ID3Mo0Jn8yeGA/viewform?usp=sf_link SPANISH https://docs.google.com/forms/d/e/1FAIpQLScMO3Wo8kjGmJF7KNhihQqanOLfzfoyQ7IT904jU9QtFFF28Q/viewform?usp=sf_link If you require Spanish interpretation please call: 978-990-5137 and press 8377041# for the password. Si require interpretaci&#243n al espa&#241ol por favor llame al: 978-990-5137 y presione 8377041# para la contrase&#241a. If you need special assistance or a modification due to a disability (including auxiliary aids or services) to participate in this meeting, please contact Eliana Garc&#237a at egarcia@rcsdk8.net at least 48 hours in advance of the meeting and we will make our best efforts to accommodate.</description>
+# <link>http://go.boarddocs.com/ca/redwood/Board.nsf/goto?open&id=C55TDQ76E688</link>
+# <category id="C55TDR76E689" order="1">
+# <name>1. Call to Order</name>
+# <agendaitems>
+# <item id="C55TDS76E68A" order="1">
+# <name>1.1 Roll Call</name>
+# <link>http://go.boarddocs.com/ca/redwood/Board.nsf/goto?open&id=C55TDS76E68A</link>
+# <actiontype>Procedural</actiontype>
+# </item>
+# </agendaitems>
+# </category>
+CELL 5
+# Ah HA! The detailes "print" agenda has all the info we want - and links to the PDFs!
+
+detailedMeetingAgendaURL = baseURL + "/PRINT-AgendaDetailed"
+
+meetingID = "CPSNV9612DF1"
+
+# set the meetingID & committee
+data = "id=" + meetingID + "&" + "current_committee_id=" + committeeID
+
+# POST the request!
+response = requests.post(detailedMeetingAgendaURL, headers=headers, data=data)
+
+print("Status returned by detailed agenda fetch request:", response.status_code)
+
+import html2text
+from bs4 import BeautifulSoup
+
+# parse the returned HTML
+soup = BeautifulSoup(response.content, "html.parser")
+agendaDate = soup.find("div", {"class": "print-meeting-date"}).string
+agendaTitle = soup.find("div", {"class": "print-meeting-name"}).string
+agendaFiles = [
+    fd.a.get("href") for fd in soup.find_all("div", {"class": "public-file"})
+]
+agendaData = html2text.html2text(response.text)
+print("Agenda Title:", agendaTitle)
+print("Agenda Date:", agendaDate)
+print("Number of Files:", len(agendaFiles))
+
+print(agendaFiles)

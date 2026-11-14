@@ -1,6 +1,6 @@
 # Developer integration guide
 
-Preserved package baseline: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The integrated development source retains that baseline and the approved CivicWeb/Cablecast readers, with 32 registered providers, 31 baseline families, 34 baseline formats, 46 additive parser hooks and 15 native-search handlers. It has not been packaged as a successor or delivered. Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
+Preserved package baseline: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The integrated development source retains that baseline and the approved CivicWeb/Cablecast readers, plus opt-in BoardDocs public listing/detail and CivicClerk Select detail/files and section writes, with 32 registered providers, 31 baseline families, 34 baseline formats, 47 additive parser hooks and 17 native-search handlers. It has not been packaged as a successor or delivered. Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
 
 QuorumRelay is a standalone civic-data engine for your own application, service,
 script or agent. It does not require a Townlight installation, an application
@@ -443,7 +443,10 @@ checkout containing the mapping; the frozen dev8 wheel is not silently updated.
 | Simbli selected item | [Fresh item content and same-meeting attachment mapping](SIMBLI-ITEM-CONTENT.md) |
 | CivicWeb FilePro | [Pinned SOAP reads and saved-response mapping](CIVICWEB-FILEPRO.md) |
 | Wistia replacement | [Exact approved replacement and provider job/readback](WISTIA-SWAP.md) |
-| OnBase linked meeting documents | [Prepared Normal Tagged DIP files](ONBASE-DIP.md); not a remote Agenda import/association |
+| Tyler Meeting Manager | [Public calendar, selected detail/documents and search](TYLER-PUBLIC.md); staff writes and complete archive remain unverified |
+| OnBase public windows and selected details | [Public listing and selected detail mapping](ONBASE-PUBLIC-WINDOWS.md); [prepared Normal Tagged DIP files](ONBASE-DIP.md) are not a remote Agenda import/association |
+| BoardDocs public listing and selected printable agenda | [Opt-in third-party-source-backed mapping](BOARDDOCS-PUBLIC.md); no paging or linked-file fetch |
+| CivicClerk Select detail/files and section writes | [Official contract and scoped mapping](CIVICCLERK-SELECT.md); selected published agenda/files and exact section plan/commit/readback |
 
 For Granicus Platform/MediaVault and other supported field mappings, consult the
 [write contract](WRITE-CONTRACT.md#later-local-source-mappings) and

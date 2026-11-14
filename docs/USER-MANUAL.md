@@ -1,6 +1,6 @@
 # QuorumRelay user manual
 
-Preserved package baseline: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The integrated development source retains that baseline and the approved CivicWeb/Cablecast readers, with 32 registered providers, 31 baseline families, 34 baseline formats, 46 additive parser hooks and 15 native-search handlers. It has not been packaged as a successor or delivered. Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
+Preserved package baseline: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The integrated development source retains that baseline and the approved CivicWeb/Cablecast readers, plus opt-in BoardDocs public listing/detail and CivicClerk Select detail/files and section writes, with 32 registered providers, 31 baseline families, 34 baseline formats, 47 additive parser hooks and 17 native-search handlers. It has not been packaged as a successor or delivered. Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
 
 This manual describes the integrated development source. Immutable dev8 and dev11 packages are separate historical candidates; the retained readers and repairs have not been packaged into a successor.
 
@@ -82,7 +82,7 @@ for provider in manifest["data"]["providers"]:
           provider.get("additional_formats", []))
 ~~~
 
-The fixed compatibility baseline contains 34 provider/input-format pairs. The integrated source registers 46 additional parser hooks beside those baseline pairs. Cablecast contributes two public parser hooks (`cablecast-show-json` and `cablecast-shows-json`) registered through `additional_formats`. A baseline format keeps its exact historical reader behavior; additive formats replay other captured details or API responses. An additive parser is a saved-capture capability and does not imply that QuorumRelay can discover that provider live. Use the exact <code>input_format</code> returned for the provider. Do not choose a parser by guessing from a filename.
+The fixed compatibility baseline contains 34 provider/input-format pairs. The integrated source registers 47 additional parser hooks beside those baseline pairs. Cablecast contributes two public parser hooks (`cablecast-show-json` and `cablecast-shows-json`); BoardDocs contributes its public listing parser. These are advertised through `additional_formats`. A baseline format keeps its exact historical reader behavior; additive formats replay other captured details or API responses. A saved-capture parser does not by itself imply live discovery. Use the exact <code>input_format</code> returned for the provider. Do not choose a parser by guessing from a filename.
 
 Use <code>capabilities</code> for the provider’s operation-level implementation and acceptance information:
 
@@ -127,7 +127,7 @@ context = OperationContext(
 
 A default context is useful for local read-only SDK use. Production callers should set the real application principal/client/tenant and least-privilege operation and namespace policies. Provider credentials, when needed, belong in the private trusted <code>OperationContext.credentials</code> supplied by the application. Provider credential formats vary; follow the exact provider entry in [the SDK guide](SDK.md) and [native mappings](PROVIDER-NATIVE-MAPPINGS.md). Never put credentials in <code>Source.url</code>, operation JSON, a source option, or a citation.
 
-<code>Source.options</code> contains only provider-documented configuration. For example, Tyler calendar requests require an observed tenant-specific API base; the configured API base must match that tenant’s observed client. An option is not an unrestricted request target. Set <code>Source.body</code> only where the provider mapping recognizes that body. Unmapped body assignments remain an explicit unknown instead of being guessed from a city or meeting label.
+<code>Source.options</code> contains only configuration recognized by the selected mapping. Tyler calendar requests require an observed tenant-specific API base; the configured API base must match that tenant’s observed client. BoardDocs public discovery requires an explicit <code>boarddocs_committee_id</code> and the exact public <code>/{site}/Board.nsf/Public</code> path; see the [BoardDocs guide](BOARDDOCS-PUBLIC.md). CivicClerk Select public Search uses the configured portal/API tenant and requires an explicit date window; see the [CivicClerk Select guide](CIVICCLERK-SELECT.md). These options are not unrestricted request targets. Set <code>Source.body</code> only where the provider mapping recognizes that body. Unmapped body assignments remain an explicit unknown instead of being guessed from a city or meeting label.
 
 ## 4. Read, parse and fetch
 

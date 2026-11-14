@@ -77,6 +77,15 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if source.provider == "onbase":
             from .onbase_detail import fetch_detail
             return fetch_detail(source, namespace, request, bounds, context, transport)
+        if source.provider == 'tyler-meeting-manager':
+            from .tyler_public import fetch_detail
+            return fetch_detail(engine, source, namespace, request['external_id'], bounds, context, transport)
+        if source.provider == 'boarddocs':
+            from .boarddocs_public import fetch_detail
+            return fetch_detail(engine, source, namespace, request['external_id'], bounds, context, transport)
+        if source.provider == 'civicplus-select':
+            from .civicclerk_detail import fetch_detail
+            return fetch_detail(engine, source, namespace, request['external_id'], bounds, context, transport)
         if source.provider == "laserfiche-weblink" and urlsplit(source.url).hostname == "api.laserfiche.com":
             from .repository import fetch_entry
             return fetch_entry(source, namespace, request["external_id"], bounds, context, transport,
@@ -216,6 +225,22 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     url = document.get(url_field)
     if not isinstance(url, str):
         raise ValueError("The captured attachment has no retrievable URL.")
+    if source.provider == 'tyler-meeting-manager':
+        from .tyler_public import documents as tyler_documents
+        raw = record.get('original') or {}
+        if (kind != 'documents' or url_field != 'url' or identity.get('record_type') != 'meeting'
+                or identity.get('external_id') != raw.get('id') or record.get('source_url') != source.url
+                or document not in tyler_documents(source, raw)):
+            raise ValueError('The selected Tyler document does not match its captured meeting.')
+    civicclerk_detail = (source.provider == 'civicplus-select' and isinstance(record.get('original'), dict)
+                         and 'meeting' in record['original'] and 'event' in record['original'])
+    if civicclerk_detail:
+        from .civicclerk_detail import declared_documents
+        event, meeting = record['original']['event'], record['original']['meeting']
+        if (kind != 'documents' or url_field != 'url' or identity.get('record_type') != 'meeting'
+                or not isinstance(event, dict) or identity.get('external_id') != str(event.get('id'))
+                or record.get('source_url') != source.url or document not in declared_documents(source, event, meeting)):
+            raise ValueError('The selected CivicClerk file does not match its captured published meeting.')
     deadline = monotonic() + bounds.deadline_seconds
     supplemental = []
 
@@ -298,15 +323,22 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             response = transport.request(
                 transfer_url, byte_limit=remaining_transfer,
                 deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=allowed,
-                **({"allow_redirects": False} if boardable_viewer or source.provider == "onbase" else {}))
+                **({"allow_redirects": False} if boardable_viewer or civicclerk_detail or source.provider in {"onbase", "tyler-meeting-manager"} else {}))
+        if civicclerk_detail and context.check_cancelled():
+            return OperationResult('cancelled', retained_data(), operation_id=context.operation_id)
+        if civicclerk_detail and monotonic() >= deadline:
+            raise ValueError('The selected CivicClerk file exceeded its deadline.')
         if response.status != 200:
             raise ValueError("The captured attachment did not return HTTP 200.")
+        if civicclerk_detail and response.url != transfer_url:
+            raise ValueError('The selected CivicClerk file changed its captured route.')
         if (source.provider == "onbase" and kind == "documents" and not response.content.startswith(b"%PDF-")
                 and response.content_type.split(";", 1)[0].strip().lower() in {"text/html", "application/xhtml+xml"}):
             from .onbase_documents import resolve_document
             response, resolution = resolve_document(source, url, record, response, bounds, context, transport, deadline,
                                                      captures=supplemental)
         pdf_expected = (kind == "documents" and (
+            source.provider == 'tyler-meeting-manager' or
             urlsplit(transfer_url).path.lower().endswith(".pdf") or
             (boardable_viewer and str(document.get("title", "")).lower().endswith(".pdf")) or
             response.content_type.split(";", 1)[0].strip().lower() == "application/pdf"))

@@ -4,6 +4,14 @@ Candidate schema 2.0.0. This is implementation documentation, not provider accep
 
 `providers/native.py` owns additive formats. They do not replace any of the original 34 inputs.
 
+November 13 public-lead additions are documented separately: [Tyler selected
+calendar/detail/search](TYLER-PUBLIC.md), [OnBase embedded results and date
+windows](ONBASE-PUBLIC-WINDOWS.md), [BoardDocs committee listing and printable
+detail](BOARDDOCS-PUBLIC.md), and [CivicClerk Select detail/files and section
+writes](CIVICCLERK-SELECT.md). The [scoped receipt](verification/public-contract-leads-2026-11-13.json)
+distinguishes vendor sources, third-party source, public response observations
+and synthetic engine execution. No baseline input mapping is replaced.
+
 ## Legistar Events
 
 Official references checked November 11, 2026:

@@ -1219,8 +1219,10 @@ class WriteAdapter:
 
 
 def default_adapters(transport=None):
+    from .providers.civicclerk_write import CivicClerkWriteAdapter
     from .providers.essential_write import EssentialWriteAdapter
     from .providers.granicus_write import GranicusWriteAdapter
     return {**{name: WriteAdapter(name, transport)
                for name in ("legistar", "wistia", "laserfiche", "laserfiche-weblink")},
-            "municode-meetings": EssentialWriteAdapter(transport), "granicus": GranicusWriteAdapter(transport)}
+            "municode-meetings": EssentialWriteAdapter(transport), "granicus": GranicusWriteAdapter(transport),
+            "civicplus-select": CivicClerkWriteAdapter(transport)}

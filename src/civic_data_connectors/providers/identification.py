@@ -17,6 +17,7 @@ FORMATS = {provider: tuple(row["input_format"] for row in compat.source_formats(
            for provider in dict.fromkeys(row["connector"] for row in compat.source_formats())}
 ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json", "legistar-votes-json",
                                  "legistar-rollcalls-json"),
+                      "boarddocs": ("boarddocs-public-meetings-json",),
                       "boardbook": ("boardbook-public-agenda-html",),
                       "town-hall-streams": ("town-hall-streams-event-html",),
                       "civicplus-select": ("civicplus-search-json",),
@@ -184,7 +185,9 @@ def validate_source(source: Source, context: OperationContext | None = None,
                                     "repository_alternate_edoc_name", "repository_export_async",
                                     "repository_include_fields"})
     if source.provider == "tyler-meeting-manager":
-        allowed_options.add("calendar_api_base")
+        allowed_options.update({"calendar_api_base", "meeting_type_ids"})
+    if source.provider == "boarddocs":
+        allowed_options.add("boarddocs_committee_id")
     if source.provider == "civicweb" and source.input_format == "civicweb-filepro-soap-xml":
         allowed_options.update({"filepro_resource", "folder_id", "document_id", "meeting_id"})
     if not isinstance(source.options, dict) or set(source.options) - allowed_options:

@@ -50,7 +50,11 @@ def test_changed_explicit_public_routes_have_implemented_labels_without_catalog_
     for provider, operation in pairs:
         metadata = provider_capabilities(provider)["operations"][operation]
         assert metadata["implementation_status"] == "implemented"
-        assert metadata["acceptance_status"] == "not_run"
+        # The observed Akron window now has attributed fixture execution;
+        # this does not promote other public routes to provider acceptance.
+        assert metadata["acceptance_status"] == ("fixture_passed" if provider == "onbase" else "not_run")
+        if provider == "onbase":
+            assert "onbase-akron-model-window-execution" in metadata["evidence_ids"]
         assert metadata["evidence_ids"]
 
 

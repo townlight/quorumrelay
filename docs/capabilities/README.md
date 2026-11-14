@@ -1,5 +1,19 @@
 # Provider capability research inventory
 
+## Verified public leads — November 13, 2026
+
+The [scoped execution receipt](../verification/public-contract-leads-2026-11-13.json)
+supersedes older unresolved statements for the exact mappings it names. Liberty
+County Tyler now has nonempty calendar/detail/search evidence and explicit
+meeting-type configuration. Akron OnBase supplies an embedded result model and
+date-window request. CivicClerk Select publishes official OpenAPI and OData
+metadata supporting selected meeting/file reads and section create/update.
+Those scoped vendor-backed fixtures have attributed acceptance in the inventory.
+BoardDocs committee listing and printable detail are implemented against pinned
+third-party source with synthetic tests; direct portal access returned 403, so
+its vendor acceptance remains `not_run`. The original 31 families and 34 formats
+remain intact. See the provider guides for configuration and limits.
+
 Observed: 2026-11-11. Revision: researched-pass-7. **Release incomplete.** All 31 families received a bounded research pass; unresolved contracts and access blockers remain explicit. Follow-up evidence adds NovusAGENDA’s 12-page partial engine traversal, a bounded Granicus Superior Clip search, the CivicPlus Select historical-import file mapping, CivicPlus Essential and TelVue Connect v2 read contracts, eSCRIBE’s exact public calendar POST, Legistar’s selected Vote/RollCall reads, and guarded WebLink access failures. These bounded sources do not establish provider-wide discovery or write acceptance.
 
 ## Current verification policy and source reconciliation — 2026-11-12
