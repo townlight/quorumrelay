@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import base64
+from concurrent.futures import CancelledError as FutureCancelledError
 from dataclasses import replace
 from threading import Event, Lock
 from uuid import uuid4
@@ -84,6 +85,7 @@ def create_server(engine, principal: Principal | None = None, *, config: Service
                 return CallToolResult(content=[TextContent(type="text", text=json.dumps(payload))],
                                       structured_content=payload, is_error=True)
             context, done = identity.context(), Event()
+            cancelled_error = anyio.get_cancelled_exc_class()
             context.operation_id = uuid4().hex
             if config is not None:
                 try:
@@ -106,9 +108,14 @@ def create_server(engine, principal: Principal | None = None, *, config: Service
                     return
                 completed = value.get("completed", value.get("completed_steps", 0))
                 total = value.get("total", value.get("total_steps"))
-                anyio.from_thread.run(ctx.report_progress, float(completed),
-                                      float(total) if total is not None else None,
-                                      "operation_id=" + context.operation_id)
+                try:
+                    anyio.from_thread.run(ctx.report_progress, float(completed),
+                                          float(total) if total is not None else None,
+                                          "operation_id=" + context.operation_id)
+                except (cancelled_error, FutureCancelledError):
+                    # A cancelled progress send must not exit the worker before it
+                    # can cooperatively stop and persist its actual terminal result.
+                    context.cancellation.set()
             class MCPProgress(ProgressRecorder):
                 def __call__(self, value):
                     if context.cancellation.is_set():

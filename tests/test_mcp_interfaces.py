@@ -209,6 +209,36 @@ def test_protocol_cancellation_stops_engine_work(tmp_path, running_http, transpo
     anyio.run(run)
 
 
+@pytest.mark.parametrize("cancellation_type", ["asyncio", "future"])
+def test_cancelled_progress_preserves_cooperative_terminal_result(tmp_path, cancellation_type):
+    """A cancelled progress send must not strand the worker's durable operation."""
+    import asyncio
+    from concurrent.futures import CancelledError
+    from mcp.server.mcpserver import Context
+    from civic_data_connectors.transports.mcp import create_server
+
+    owner = engine(tmp_path / "progress-cancel.sqlite")
+    identity = principal("progress-cancel")
+    server = create_server(owner, identity)
+    error = asyncio.CancelledError if cancellation_type == "asyncio" else CancelledError
+
+    class CancelledProgress(Context):
+        async def report_progress(self, *args, **kwargs):
+            raise error()
+
+    async def run():
+        result = await server.call_tool("discover", {"request": {"fixture_slow": True}},
+                                        context=CancelledProgress(mcp_server=server))
+        payload = result.structured_content
+        assert payload["status"] == "cancelled"
+        assert payload["data"]["completed"] == 1
+        stored = owner.storage.get("operations", payload["operation_id"], scope=identity.context().scope)
+        assert stored.value["state"] == "cancelled"
+        assert stored.value["result"] == payload
+
+    anyio.run(run)
+
+
 def test_cli_mock_exact_plan_commit_receipt_same_core_contract(tmp_path):
     owner = engine(tmp_path / "cli-writes.sqlite")
     cfg = tmp_path / "principal.json"
