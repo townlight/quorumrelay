@@ -87,3 +87,20 @@ supply no attachment locator. Bodies, file bytes, native search and writes remai
 unmapped by this outline. This is third-party archived-source compatibility with
 [47 affected synthetic checks](verification/boarddocs-selected-agenda-2026-11-14.json),
 not a current vendor read or official API guarantee.
+
+## Saved native public item
+
+`engine.normalize(source, saved_html, input_format="boarddocs-public-item-html")`
+maps one explicitly public item fragment. The hidden native item ID, navigation
+IDs and same-site clipboard citation must agree. It retains the literal labeled
+fields, public body, recommended action and supplied motion text. SQLite, local
+text search and neutral ZIP retain those fields and exact original bytes.
+
+The pinned Fairfax fragment supplies no native meeting or section ID. Their
+display labels remain text; the saved item has no parent relationship and is not
+automatically joined to an outline record. Motion text does not become structured
+votes or decisions. The empty attachment placeholder supplies no file URL. This
+parser adds no network calls or vendor write support. Its evidence is a
+Git-blob-verified third-party archive, with synthetic local execution, rather than
+official vendor or current live acceptance. See
+[source and limits](capabilities/evidence/boarddocs-public/fairfax-item-source.json).

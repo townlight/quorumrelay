@@ -19198,6 +19198,24 @@
           "receipt_path": "docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
           "receipt_sha256": "6fee4af5afe51a093c5d67b536595911f10095be37628f64559d5b3f81bc3466",
           "limits": "Only the identified resources and exact missing fields; no exhaustive search, provider absence or live transaction claim."
+        },
+        {
+          "id": "onbase-eis-generated-entity-schema",
+          "url": "https://docs.hyland.com/api/khub/maps/AugNBYY9Ewm9IM3rYOrWxg/topics/PMFCrAmmXx~UmEFEKjm_qw/content",
+          "title": "Hyland EIS Foundation25.1 destination-generated Agenda entity schemas",
+          "kind": "official_documentation",
+          "observed": "Four actual anonymous topic contents retrieved and inspected; initial SPA shells are not contract text.",
+          "observation_date": "2026-11-14",
+          "access_scope": "public_documentation_no_vendor_mutation",
+          "proof_level": "official_partial_machine_schema_not_execution",
+          "findings": [
+            "Agenda entity adapter example Entity/agendaandminutes/25957/Update; numeric type ID is a destination example, not universal.",
+            "CreateEntityType_<typeID>/EntityCreateData/Fields; created entityItemID returned.",
+            "ReadEntityType_<typeID>/EntityReadData/entityItemID; response includes configured entity fields and primary keys if any.",
+            "UpdateEntityType_<typeID>/EntityUpdateData/entityItemID/Fields.",
+            "Adapter uses configured Application Server, database and service-account context; selected object WSDL/schema is generated after connecting. Canonical mode binds configured Web Services Publishing objects."
+          ],
+          "limits": "For implementing this destination-specific EIS path: generated selected entity WSDL/XSD and matching Agenda fields/types, endpoint/binding, readback/error contract must come from its configuration/export. No live credential acquisition or mutation is required for synthetic acceptance. Fixed HTTP SOAP action, XML namespaces and complete typed Agenda fields. Document-to-Agenda association envelope or upload bytes/readback. Applicability/version/schema equivalence to any selected public Agenda Online tenant. No assertion that every alternative Agenda API or public source is private."
         }
       ],
       "tenants": [
@@ -19422,11 +19440,13 @@
           "capability_status": "documented",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "hyland-onbase-agenda-online-docs"
+            "hyland-onbase-agenda-online-docs",
+            "onbase-eis-generated-entity-schema"
           ],
-          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits. Public EIS partial entity operation outline now verified; destination-generated typed WSDL/field mapping and binding still needed for this route, not all alternative APIs.",
           "dependencies": [
-            "Supported integration route and conflict/idempotency contract unresolved."
+            "Supported integration route and conflict/idempotency contract unresolved.",
+            "For the EIS entity route: destination-generated selected Agenda entity WSDL/XSD, field/type mapping, endpoint/binding and readback/error schema. Public docs establish this configuration dependency; credentials/live writes are not required for synthetic execution."
           ],
           "remaining_verification": [
             "Validate exact entity/field permissions and plan-bound commit/readback; do not invent API payloads."
@@ -19447,11 +19467,13 @@
           "capability_status": "documented",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "hyland-onbase-agenda-online-docs"
+            "hyland-onbase-agenda-online-docs",
+            "onbase-eis-generated-entity-schema"
           ],
-          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits. Public EIS partial entity operation outline now verified; destination-generated typed WSDL/field mapping and binding still needed for this route, not all alternative APIs.",
           "dependencies": [
-            "Supported integration route and conflict/idempotency contract unresolved."
+            "Supported integration route and conflict/idempotency contract unresolved.",
+            "For the EIS entity route: destination-generated selected Agenda entity WSDL/XSD, field/type mapping, endpoint/binding and readback/error schema. Public docs establish this configuration dependency; credentials/live writes are not required for synthetic execution."
           ],
           "remaining_verification": [
             "Validate exact entity/field permissions and plan-bound commit/readback; do not invent API payloads."
@@ -19720,7 +19742,8 @@
           "endpoint_or_format": "Unknown machine endpoint/import schema; source documents UI only.",
           "field_mappings": [],
           "evidence_ids": [
-            "hyland-onbase-agenda-online-docs"
+            "hyland-onbase-agenda-online-docs",
+            "onbase-eis-generated-entity-schema"
           ],
           "account_requirements": "Authorized tenant staff account, applicable module/tier and entity/workflow permissions; exact API entitlement unknown.",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
@@ -19744,7 +19767,8 @@
           "method": null,
           "api_version": "unknown",
           "automatable_contract_verified": false,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "notes": "For implementing this destination-specific EIS path: generated selected entity WSDL/XSD and matching Agenda fields/types, endpoint/binding, readback/error contract must come from its configuration/export. No live credential acquisition or mutation is required for synthetic acceptance. Partial operation names verified; complete typed wire contract remains unavailable in these overview pages. See docs/ONBASE-DIP.md."
         },
         {
           "entity": "agenda_item",
@@ -19752,7 +19776,8 @@
           "endpoint_or_format": "Unknown machine endpoint/import schema; source documents UI only.",
           "field_mappings": [],
           "evidence_ids": [
-            "hyland-onbase-agenda-online-docs"
+            "hyland-onbase-agenda-online-docs",
+            "onbase-eis-generated-entity-schema"
           ],
           "account_requirements": "Authorized tenant staff account, applicable module/tier and entity/workflow permissions; exact API entitlement unknown.",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
@@ -19776,7 +19801,8 @@
           "method": null,
           "api_version": "unknown",
           "automatable_contract_verified": false,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
+          "notes": "For implementing this destination-specific EIS path: generated selected entity WSDL/XSD and matching Agenda fields/types, endpoint/binding, readback/error contract must come from its configuration/export. No live credential acquisition or mutation is required for synthetic acceptance. Partial operation names verified; complete typed wire contract remains unavailable in these overview pages. See docs/ONBASE-DIP.md."
         },
         {
           "entity": "meeting_document",
@@ -26932,6 +26958,20 @@
           "receipt_path": "docs/verification/boarddocs-selected-agenda-2026-11-14.json",
           "receipt_sha256": "ca78bc87be187843a87eb5f4eabab26a8d76d61c9f2965b089050aeb0f877f2e",
           "limits": "47affected/14newcases; native outline IDs/titles with selected request-parent provenance, no guessed section membership/item body/files/writes. No live read or official API guarantee."
+        },
+        {
+          "id": "boarddocs-archived-public-item",
+          "url": "https://github.com/ArkXero/civic-cycle/blob/32b864c1da7b3558b51187b3b1a5c2c44264ab43/boarddocs-agenda-item-7.04.html",
+          "title": "Exact archived Fairfax public item and executed local mapping",
+          "kind": "third_party_archived_response_and_synthetic_execution",
+          "observed": "Pinned Git blob inspected; 12 new /59 affected local cases passed.",
+          "observation_date": "2026-11-14",
+          "access_scope": "public_archived_response_local_synthetic_no_vendor_mutation",
+          "proof_level": "archived_response_and_executed_local_workflow_not_official_vendor_acceptance",
+          "findings": "Saved public item parser: ID/citation/navigation agreement; literal labeled fields, public body, recommended action and motion text; exact capture preservation and SQLite/search/ZIP.",
+          "limits": "No native parent meeting/section ID, inferred name/date/category join, structured vote parsing, attachment URL or network/write support.",
+          "receipt_path": "docs/verification/boarddocs-item-fragment-2026-11-14.json",
+          "receipt_sha256": "c8f207fefa3ea33f2ac1e7591ed5b93bb2e108185484ebd2387629116476b518"
         }
       ],
       "tenants": [
@@ -27035,9 +27075,10 @@
             "diligent-boarddocs-baseline",
             "quorumrelay-shared-core-operations",
             "boarddocs-pinned-reader-synthetic-execution",
-            "boarddocs-grand-archived-meeting-fragments"
+            "boarddocs-grand-archived-meeting-fragments",
+            "boarddocs-archived-public-item"
           ],
-          "details": "Baseline numbered PDF remains unchanged; additive boarddocs-public-meetings-json retains JSON listing rows and identities. Printable detail requires captured selected identity and is not a standalone advertised parser. Additive boarddocs-public-meeting-html maps saved public meeting fragments with exact same-site native citation/base identity, title/date/description; links and separate agenda/minutes remain unmapped.",
+          "details": "Baseline numbered PDF remains unchanged; additive boarddocs-public-meetings-json retains JSON listing rows and identities. Printable detail requires captured selected identity and is not a standalone advertised parser. Additive boarddocs-public-meeting-html maps saved public meeting fragments with exact same-site native citation/base identity, title/date/description; links and separate agenda/minutes remain unmapped. Saved boarddocs-public-item-html additionally maps explicitly public native item/body/field/motion text from exact archived fragment, without parent joins or attachment guesses.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."

@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-14",
+  "url": "https://github.com/ArkXero/civic-cycle/blob/32b864c1da7b3558b51187b3b1a5c2c44264ab43/boarddocs-agenda-item-7.04.html",
+  "fixture": "tests/fixtures/boarddocs-public/fairfax-item-20260716.html",
+  "git_blob": "458852f8e7cacad99ebf5b44778ce90b13b4d97a",
+  "sha256": "211fb43569f8ecc3feddaf59dad94abed3451e784f49638a11ee17191b7d5f35",
+  "bytes": 17055,
+  "provenance": "Exact third-party archived BoardDocs public fragment; Git blob verified. Not an official API spec or current live vendor response.",
+  "native_id": "DVSPWJ669D42",
+  "native_citation": "https://go.boarddocs.com/vsba/fairfax/Board.nsf/goto?open&id=DVSPWJ669D42",
+  "implemented": "Saved public item parser: ID/citation/navigation agreement; literal labeled fields, public body, recommended action and motion text; exact capture preservation and SQLite/search/ZIP.",
+  "limits": "No native parent meeting/section ID, inferred name/date/category join, structured vote parsing, attachment URL or network/write support."
+}

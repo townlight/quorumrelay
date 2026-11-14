@@ -10,3 +10,6 @@ docs/verification/*.json -text whitespace=cr-at-eol
 
 # Exact vendor HTML includes trailing spaces; retain original response bytes.
 docs/capabilities/evidence/contract-followup-2026-11-14/onbase-unity-information-mapping.html -text whitespace=-blank-at-eol
+
+# Exact Hyland adapter topic capture contains vendor trailing spaces.
+docs/capabilities/evidence/onbase-eis-entity/*.content.html whitespace=-blank-at-eol

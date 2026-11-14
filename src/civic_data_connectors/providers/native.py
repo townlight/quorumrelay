@@ -150,6 +150,9 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format == "boarddocs-public-item-html":
+        from .boarddocs_item import parse_bundle
+        return parse_bundle(source, namespace, content)
     if input_format == "gworks-secure-calendar-json":
         from .gworks_calendar import parse_bundle
         return parse_bundle(source, namespace, content)

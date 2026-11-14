@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "ff7ffed",
+  "status": "ARCHIVED_RESPONSE_AND_SYNTHETIC_LOCAL_WORKFLOW_PASS",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_boarddocs_item_fragment.py tests/test_boarddocs_selected_agenda.py tests/test_boarddocs_meeting_fragment.py tests/test_boarddocs_public_helpers.py tests/test_boarddocs_public_workflow.py -q",
+      "passed": 59,
+      "failed": 0,
+      "new_cases": 12,
+      "junit_sha256": "50f101a61a1198508dc506969a5ee4a9c62b4e29e85a89a9768abc981fa11e09"
+    }
+  ],
+  "limits": "No native parent meeting/section ID, inferred name/date/category join, structured vote parsing, attachment URL or network/write support.",
+  "bindings": [
+    {
+      "kind": "archived_response",
+      "path": "tests/fixtures/boarddocs-public/fairfax-item-20260716.html",
+      "sha256": "211fb43569f8ecc3feddaf59dad94abed3451e784f49638a11ee17191b7d5f35"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/boarddocs_item.py",
+      "sha256": "64a71e546bf5913b23ca8873b006c5fd225bbc4c13ffa21e02b43e1f70d0f66f"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_boarddocs_item_fragment.py",
+      "sha256": "0b9d6298f8e44dbee33b86ea24f7c7a1b0758b84e4ae93aa8400fe8e640a6535",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "0b9d6298f8e44dbee33b86ea24f7c7a1b0758b84e4ae93aa8400fe8e640a6535"
+    }
+  ]
+}

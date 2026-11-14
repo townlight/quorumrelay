@@ -18,7 +18,7 @@ FORMATS = {provider: tuple(row["input_format"] for row in compat.source_formats(
 ADDITIONAL_FORMATS = {"gworks": ("gworks-published-meeting-html", "gworks-secure-calendar-json"),
                       "legistar": ("legistar-events-json", "legistar-event-json", "legistar-votes-json",
                                  "legistar-rollcalls-json"),
-                      "boarddocs": ("boarddocs-public-meetings-json", "boarddocs-public-meeting-html"),
+                      "boarddocs": ("boarddocs-public-meetings-json", "boarddocs-public-meeting-html", "boarddocs-public-item-html"),
                       "boardbook": ("boardbook-public-agenda-html",),
                       "town-hall-streams": ("town-hall-streams-event-html",),
                       "civicplus-select": ("civicplus-search-json",),

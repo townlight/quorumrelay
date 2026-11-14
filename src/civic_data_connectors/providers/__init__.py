@@ -44,6 +44,7 @@ def register(engine, *, transport: Transport | None = None,
     for provider, input_format in (
             ("boarddocs", "boarddocs-public-meetings-json"),
             ("boarddocs", "boarddocs-public-meeting-html"),
+            ("boarddocs", "boarddocs-public-item-html"),
             ("boardbook", "boardbook-public-agenda-html"),
             ("gworks", "gworks-published-meeting-html"),
             ("gworks", "gworks-secure-calendar-json"),

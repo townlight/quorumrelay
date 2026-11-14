@@ -88,3 +88,31 @@ remote processing remains an optional observation under the owner amendment.
 Agenda entity writes and native API contracts remain separate implementation work.
 
 Hyland separately documents a [Create or Update Agenda Item from Document workflow](https://docs.hyland.com/r/OnBase/Agenda/Foundation-26.1/Agenda/Configuration/System-Interaction/Workflow/General-Workflow-Actions/Create-or-Update-Agenda-Item-From-Document). Its destination meeting/item types and any target meeting must already exist; a target meeting uses the destination numeric ID. Unity-form field mappings, ownership group and supporting-document relationships are destination configuration. A DIP keyword named `MeetingID:` does not by itself establish that workflow or associate an agenda item. The official workflow also warns that using the same Document Type to initialize the workflow and create its agenda item can create an infinite loop. This exporter neither installs nor invokes that workflow. Exact source captures and version limits are in [the contract assessment](capabilities/evidence/contract-followup-2026-11-14/source.json).
+# Agenda entity integration is separate from DIP
+
+Hyland's Foundation 25.1 Enterprise Integration Server documentation supplies a
+more specific Agenda entity integration lead. The adapter example identifies
+`Entity/agendaandminutes/25957/Update`; **25957 is an example configured entity
+type, not a universal Agenda type ID**.
+
+| Documented operation | Request outline | Documented response |
+| --- | --- | --- |
+| `CreateEntityType_<type ID>` | `EntityCreateData` → `Fields` | Created `entityItemID` |
+| `ReadEntityType_<type ID>` | `EntityReadData` → `entityItemID` | Configured entity fields and primary key fields, if any |
+| `UpdateEntityType_<type ID>` | `EntityUpdateData` → `entityItemID`, `Fields` | Complete response schema not specified on this overview page |
+
+The adapter connects to a configured Application Server/data source using an
+OnBase service account, enumerates configured objects and generates the selected
+object's WSDL/schema. Canonical schemas instead refer to configured Web Services
+Publishing objects. The documentation therefore establishes a **destination
+schema dependency for this EIS path**: a shareable generated WSDL/XSD and matching
+Agenda field/type mapping, endpoint/binding and readback/error contract are needed
+to implement it. No live credentials or mutation is needed for synthetic tests.
+
+The published outlines do not provide XML namespaces, complete typed Agenda
+fields, a fixed HTTP SOAP action/envelope or a document-association request.
+Generating those from display labels would invent a contract. This mapping
+assessment adds no EIS adapter or new export format. It does not establish that
+all alternative Agenda APIs are private. Exact public topic captures and scoped
+findings are pinned in
+[the EIS evidence](capabilities/evidence/onbase-eis-entity/source.json).

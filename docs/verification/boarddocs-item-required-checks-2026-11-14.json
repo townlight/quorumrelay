@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "ff7ffed",
+  "status": "PASSED",
+  "scope": "BoardDocs saved public item parser and partial OnBase EIS mapping documentation; local source only",
+  "checks": [
+    {
+      "command": "pytest tests -q",
+      "passed": 1693,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 78.54,
+      "junit_sha256": "ea3d5e8185878d5adbb7d956d96450acee5c58d7134994b6afc76c9e581be3a6"
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "command": "scripts/validate_capabilities.py",
+      "status": "PASSED",
+      "evidence_records": 394,
+      "distinct_urls": 247,
+      "outbound_mappings": 172,
+      "negative_checks": 5,
+      "errors": 0
+    }
+  ],
+  "reused": "Unchanged TypeScript build/tests. No package/native rebuild, repin, install or release."
+}
