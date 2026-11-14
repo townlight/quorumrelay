@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from time import monotonic
+from urllib.parse import urljoin
 
 from ..engine import source_identity_key
 from ..models import Error, OperationResult
@@ -20,6 +21,26 @@ def _id(value):
 
 def _api_root(source):
     return _api_source(source).removesuffix('/Events')
+
+
+def event_documents(source, event, *, legacy=False):
+    if (not isinstance(event, dict) or not _id(event.get('id'))
+            or event.get('isPublished') != 'Published' or event.get('isDeleted')):
+        raise ValueError('The selected Event is not a captured published event.')
+    files = event.get('publishedFiles')
+    if files is None:
+        return []
+    if not isinstance(files, list) or len(files) > 10000:
+        raise ValueError('Invalid Event published file collection.')
+    result = []
+    for item in files:
+        if not isinstance(item, dict) or not _id(item.get('fileId')):
+            continue
+        path = f"/v1/Meetings/GetMeetingFileStream(fileId={item['fileId']},plainText=false)"
+        result.append({'external_id': str(item['fileId']), 'kind': str(item.get('type') or 'document'),
+                       'title': str(item.get('name') or ''),
+                       'url': urljoin(source.url if legacy else _api_root(source), path)})
+    return result
 
 
 def declared_documents(source, event, meeting):

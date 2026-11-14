@@ -7330,6 +7330,57 @@
               }
             ]
           }
+        },
+        {
+          "id": "select-event-file-api-origin-execution",
+          "url": "https://fishersin.api.civicclerk.com/swagger/v1/swagger.json",
+          "title": "Official Event publishedFiles contract and scoped portal/API file correction",
+          "kind": "official_OpenAPI_and_synthetic_engine_tests",
+          "observed": "2026-11-14",
+          "observation_date": "2026-11-14",
+          "access_scope": "local_mock_execution_and_bounded_public_source_read_no_mutations",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/select-event-files-2026-11-14.json",
+          "receipt_sha256": "ece8481db290d773e0ed0a2dbdb8e75f9a9fc1bb64b47f4d1ddd5f936e889c3e",
+          "limits": "Only Event-supplied published-file mapping/transfer from portal/API sources, exact legacy-locator resolution, storage invariance and denial/bounds against the documented file stream. Does not certify full discovery catalogs, live bytes/rendering or Event writes.",
+          "synthetic_execution": {
+            "provider": "civicplus-select",
+            "status": "fixture_passed",
+            "operations": [
+              "discover",
+              "fetch"
+            ],
+            "scope": "Only Event-supplied published-file mapping/transfer from portal/API sources, exact legacy-locator resolution, storage invariance and denial/bounds against the documented file stream. Does not certify full discovery catalogs, live bytes/rendering or Event writes.",
+            "execution_provenance": "97-case Python3.13 affected run preceded root hash-lookup/storage-invariance changes;15-case final Python3.13 Event/detail run executed those changes. Counts overlap; unchanged provider-discovery/recording cases are reused. No new full suite or build.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_civicclerk_event_files.py tests/test_civicclerk_detail.py -q --junitxml=C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\select-event-files-root-final.xml",
+                "passed": 15,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/civicclerk-openapi/swagger.json",
+                "sha256": "d242638b2a6fd2b4dc2ef295ea000a52b146a1de63b7298ba463acd8d94ce62a"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_civicclerk_event_files.py",
+                "sha256": "4474f67677a9b39d05dfde333ae7b2609ddfed98de6450634602afc45492782c",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "4474f67677a9b39d05dfde333ae7b2609ddfed98de6450634602afc45492782c"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_civicclerk_detail.py",
+                "sha256": "b0613bf53af88113b5c23b18917294f51a0a4a1beba2e18c69e4bb24121eab99",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "b0613bf53af88113b5c23b18917294f51a0a4a1beba2e18c69e4bb24121eab99"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -7379,15 +7430,16 @@
             "select-lacey",
             "select-search",
             "civicplus-media-discovery-1277",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "select-event-file-api-origin-execution"
           ],
-          "details": "The engine has a bounded CivicClerk Events collection route with guarded nextLink handling. Discovery-only enrichment surfaces an exact captured absolute HTTPS mediaStreamPath as a normalized recording, citation and relationship; relative/malformed paths are retained only in original data. A saved page remains partial and is not a full tenant catalog.",
+          "details": "The engine has a bounded CivicClerk Events collection route with guarded nextLink handling. Discovery-only enrichment surfaces an exact captured absolute HTTPS mediaStreamPath as a normalized recording, citation and relationship; relative/malformed paths are retained only in original data. A saved page remains partial and is not a full tenant catalog. Event-declared published-file locators use the same tenant API; exact legacy portal locators resolve only after captured native membership/source checks, with stored data unchanged.",
           "dependencies": [],
           "remaining_verification": [
             "Full tenant catalog completeness, broader search and tenant-specific continuation remain unverified.",
             "The event 1277 media regression uses a saved capture and synthetic transport; it is not a live engine retrieval or media-playability acceptance."
           ],
-          "acceptance_status": "not_run",
+          "acceptance_status": "fixture_passed",
           "evidence_level": "source_and_saved_fixture_contract_test_not_provider_acceptance",
           "tenant_scope": [
             "https://laceywa.portal.civicclerk.com/event/1077/files",
@@ -7407,9 +7459,10 @@
             "select-lacey",
             "civicplus-media-discovery-1277",
             "quorumrelay-shared-core-operations",
-            "select-official-detail-section-execution"
+            "select-official-detail-section-execution",
+            "select-event-file-api-origin-execution"
           ],
-          "details": "Official selected Meetings/{agendaId} read from stored published Event; retains supplied items/raw fields and exact published file IDs. Explicit file stream requires stored membership; no rendered text/playback claim.",
+          "details": "Official selected Meetings/{agendaId} read from stored published Event; retains supplied items/raw fields and exact published file IDs. Explicit file stream requires stored membership; no rendered text/playback claim. Event-declared published-file locators use the same tenant API; exact legacy portal locators resolve only after captured native membership/source checks, with stored data unchanged.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
@@ -8197,7 +8250,8 @@
         "A bounded Lacey CivicClerk native-search engine read and in-process resume is captured in docs/verification/civicplus-select-native-search-2026-11-12.json: partial/no-error pages yielded three then two local hits; the first request made one network call and resume reused the exact in-process snapshot with zero additional calls. Provider candidate semantics, broader search/full catalog, full text and restart-persistent continuation remain unverified.",
         "The exporter prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4. The official-linked filename tester classifies the additional tokens, but backend acceptance and post-import behavior remain unverified. MP4 framing does not establish codec/playability, captions or timestamp fidelity; ambiguous Packet, Notices and Audio/Video aliases remain rejected.",
         "Historical FTP host is contradictory; project-lead credentials, transfer, consultant processing and readback are absent. Authenticated create/update/upload routes remain account-gated.",
-        "Official Fishers spec and metadata now pin Event/Section models and publication enum0/1/2; section writes are implemented with scoped synthetic execution. Event date/time/template readback equivalence remains unresolved, and no item create/update or document upload model is established. No account acquisition gate."
+        "Official Fishers spec and metadata now pin Event/Section models and publication enum0/1/2; section writes are implemented with scoped synthetic execution. Event date/time/template readback equivalence remains unresolved, and no item create/update or document upload model is established. No account acquisition gate.",
+        "Bounded Event-write follow-up: create eventStartTime has HH:MM regex, update time is free-form with12:00:00AM default; UI workflows/public display client do not establish write timestamp or template recurrence readback. No write conversion inferred. Portal Event-file API-origin defect is now implemented/tested separately."
       ],
       "requirement_ids": [
         "C01",

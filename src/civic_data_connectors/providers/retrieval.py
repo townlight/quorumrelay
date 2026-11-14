@@ -27,8 +27,10 @@ def _download_origins(source, url):
     base = _origin(source.url)
     target = _origin(url)
     # Published files on a CivicClerk API origin are part of the same configured tenant.
-    if source.provider == "civicplus-select" and base.endswith(".portal.civicclerk.com"):
-        base = base.replace(".portal.civicclerk.com", ".api.civicclerk.com")
+    if (source.provider == "civicplus-select" and
+            (urlsplit(source.url).hostname or '').endswith(('.portal.civicclerk.com', '.api.civicclerk.com'))):
+        from .discovery import _api_source
+        base = _origin(_api_source(source))
     allowed = tuple(dict.fromkeys([base, *origins]))
     if target not in allowed:
         raise ValueError("The document origin needs explicit configured download_origins authorization.")
@@ -241,6 +243,20 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
                 or not isinstance(event, dict) or identity.get('external_id') != str(event.get('id'))
                 or record.get('source_url') != source.url or document not in declared_documents(source, event, meeting)):
             raise ValueError('The selected CivicClerk file does not match its captured published meeting.')
+    civicclerk_event = source.provider == 'civicplus-select' and kind == 'documents' and not civicclerk_detail
+    if civicclerk_event:
+        from .civicclerk_detail import event_documents
+        event = record.get('original')
+        if (kind != 'documents' or url_field != 'url' or identity.get('record_type') != 'meeting'
+                or not isinstance(event, dict) or identity.get('external_id') != str(event.get('id'))
+                or record.get('source_url') != source.url):
+            raise ValueError('The selected CivicClerk file does not match its captured Event.')
+        supplied = event_documents(source, event)
+        legacy = event_documents(source, event, legacy=True)
+        matches = [api for api, old in zip(supplied, legacy, strict=True) if document in (api, old)]
+        if not matches:
+            raise ValueError('The selected file was not supplied by the captured published Event.')
+        url = matches[0]['url']
     deadline = monotonic() + bounds.deadline_seconds
     supplemental = []
 
@@ -323,14 +339,14 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             response = transport.request(
                 transfer_url, byte_limit=remaining_transfer,
                 deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=allowed,
-                **({"allow_redirects": False} if boardable_viewer or civicclerk_detail or source.provider in {"onbase", "tyler-meeting-manager"} else {}))
-        if civicclerk_detail and context.check_cancelled():
+                **({"allow_redirects": False} if boardable_viewer or civicclerk_detail or civicclerk_event or source.provider in {"onbase", "tyler-meeting-manager"} else {}))
+        if (civicclerk_detail or civicclerk_event) and context.check_cancelled():
             return OperationResult('cancelled', retained_data(), operation_id=context.operation_id)
-        if civicclerk_detail and monotonic() >= deadline:
+        if (civicclerk_detail or civicclerk_event) and monotonic() >= deadline:
             raise ValueError('The selected CivicClerk file exceeded its deadline.')
         if response.status != 200:
             raise ValueError("The captured attachment did not return HTTP 200.")
-        if civicclerk_detail and response.url != transfer_url:
+        if (civicclerk_detail or civicclerk_event) and response.url != transfer_url:
             raise ValueError('The selected CivicClerk file changed its captured route.')
         if (source.provider == "onbase" and kind == "documents" and not response.content.startswith(b"%PDF-")
                 and response.content_type.split(";", 1)[0].strip().lower() in {"text/html", "application/xhtml+xml"}):

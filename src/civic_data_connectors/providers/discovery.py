@@ -365,6 +365,24 @@ def _enrich(bundle, provider):
                 record['relationships'].extend({'relation': 'document', 'value': deepcopy(item)} for item in supplied)
         elif provider == "civicplus-select":
             normalized["body"] = raw.get("categoryName")
+            from .civicclerk_detail import event_documents
+            civic_source = Source.from_dict(bundle['source'])
+            try:
+                legacy_files = event_documents(civic_source, raw, legacy=True)
+                api_files = event_documents(civic_source, raw)
+            except ValueError:
+                legacy_files, api_files = [], []
+            replacements = {canonical_hash(old): new['url']
+                            for old, new in zip(legacy_files, api_files, strict=True)}
+            for document in normalized.get('documents') or []:
+                replacement = replacements.get(canonical_hash(document))
+                if replacement is not None:
+                    document['url'] = replacement
+            for relation in record.get('relationships') or []:
+                if relation.get('relation') == 'document':
+                    replacement = replacements.get(canonical_hash(relation.get('value')))
+                    if replacement is not None:
+                        relation['value']['url'] = replacement
             # CivicClerk may publish a direct HTTPS video in mediaStreamPath
             # while the unchanged compatibility reader only maps
             # externalMediaUrl. Keep this enrichment discovery-only: relative
