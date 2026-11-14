@@ -1,0 +1,68 @@
+{
+  "base_commit": "39a950b1bcba60f7aa75a03f846aabcb49cced22",
+  "recorded_at": "2026-11-14T06:18:23.893700+00:00",
+  "scope": "Original tasks 4/6/9: OnBase minutes-packet kind fidelity and declared meeting-packet download wrapper. No new provider or staff write.",
+  "defects": [
+    "Public table/detail type 6 mislabeled attachment instead of vendor MinutesPacket; both failures reproduced before fix.",
+    "Existing meeting-document wrapper resolver rejected supplied packet isAttachment flag. Exact captured packet wrapper declares attachment branch with zero item/publish IDs."
+  ],
+  "source_observation": {
+    "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Documents/Downloadfile/Commission_on_Aging_Well_3825_Agenda_Packet_11_12_2026_8_30_00_AM.pdf?documentType=5&meetingId=3825&isAttachment=True",
+    "response_url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Documents/Downloadfile/Commission_on_Aging_Well_3825_Agenda_Packet_11_12_2026_8_30_00_AM.pdf?documentType=5&meetingId=3825&isAttachment=True",
+    "status": 200,
+    "bytes": 3725,
+    "sha256": "72bb4e8c541664e087a510dd265e613dd5240a01efaf7ab7e94e872a3aca7c76",
+    "method": "GET",
+    "scope": "One declared public agenda packet wrapper; no preparation POST or file GET executed"
+  },
+  "source_hashes_canonical_lf": {
+    "src/civic_data_connectors/providers/onbase.py": "9cca091902b927f04012901e788f70ba3290d0962418542dc9732fc5f74e8402",
+    "src/civic_data_connectors/providers/onbase_detail.py": "817bb07fec0f5eb846a6e994a00c04134977c778a2e2ccc07fc6098c5938c93b",
+    "src/civic_data_connectors/providers/onbase_documents.py": "29e32ea861ecadb717c6c910e78db7cb7d9f8fb102c78840b516aae7e8611b9c",
+    "tests/test_onbase_document_kinds.py": "479079602ca7104bf51c9d914c2434dd473fab5c5a0d18d34ebb4b89458c67e5",
+    "tests/test_onbase_packets.py": "029fb6f27862a133aed0d0818197de198107fd2055308e773bdb3237f196f0d5"
+  },
+  "vendor_contract_hashes": {
+    "docs/capabilities/evidence/onbase-packet/wrapper.html": "72bb4e8c541664e087a510dd265e613dd5240a01efaf7ab7e94e872a3aca7c76",
+    "docs/capabilities/evidence/onbase-search-model/client-extract.txt": "180a3c8560d2b05d7f2ed6adf9be62a84e1b9d2b50db000d6cc5c80253be5d63"
+  },
+  "runs": [
+    {
+      "junit": "onbase-minutes-kind-before.xml",
+      "passed": 0,
+      "failed": 2,
+      "meaning": "Reproduced actual wrong kind on both surfaces."
+    },
+    {
+      "junit": "onbase-minutes-kind-after.xml",
+      "passed": 90,
+      "failed": 2,
+      "meaning": "Kind corrected; new URL assertion incorrectly duplicated root path. Corrected assertion using URL joining; implementation URL was correct."
+    },
+    {
+      "junit": "onbase-minutes-kind-final.xml",
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "junit": "onbase-packets-focused.xml",
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "junit": "onbase-packet-integration.xml",
+      "passed": 101,
+      "failed": 0,
+      "command": "python -X utf8 -m pytest tests/test_onbase_document_kinds.py tests/test_onbase_packets.py tests/test_onbase_listing.py tests/test_onbase_detail.py tests/test_onbase_search_model.py tests/test_onbase_documents.py tests/test_onbase_item_documents.py -q"
+    }
+  ],
+  "work_evidence_directory": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay",
+  "test_count_note": "Overlapping runs; final affected integration covers 101 distinct test nodes, counts are not additive. One existing Starlette AnyIO deprecation warning.",
+  "lint": "python -m ruff check src tests scripts examples: passed",
+  "limits": [
+    "Live read was one public GET of an already declared type-5 packet wrapper; no preparation POST or live file GET.",
+    "Type-6 packet flow is a labeled synthetic variation grounded in captured vendor enum, not live minutes-packet acceptance.",
+    "Final packet/PDF readback is synthetic; no rendering, complete archive, staff write or Agenda association claim.",
+    "Original baseline compatibility code unchanged. Existing unchanged full-suite receipts reused; no full-suite rerun, release or outward delivery."
+  ]
+}

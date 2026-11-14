@@ -50,6 +50,8 @@ def resolve_document(source, url, record, first, bounds, context, transport, dea
     identity = record.get("identity") or {}
     normalized = record.get("normalized") or {}
     item_scope = identity.get("record_type") == "agenda_item"
+    packet_scope = (identity.get("record_type") == "meeting" and query.get("documentType", [None])[0] in {"5", "6"}
+                    and query.get("isAttachment", [None])[0] in {"true", "True"})
     def positive(v):
         return isinstance(v, str) and re.fullmatch(r"[1-9][0-9]{0,18}", v) is not None
     if (selected.scheme != "https" or _origin(url) != _origin(source.url) or selected.fragment
@@ -74,7 +76,8 @@ def resolve_document(source, url, record, first, bounds, context, transport, dea
                 or documents[0].get("agenda_item_external_id") != item
                 or documents[0].get("publish_id") != query["publishId"][0]):
             raise ValueError("The selected supporting document does not match its item and meeting.")
-    elif (identity.get("record_type") != "meeting" or set(query) != {"meetingId", "documentType"}
+    elif (identity.get("record_type") != "meeting"
+            or set(query) != ({"meetingId", "documentType", "isAttachment"} if packet_scope else {"meetingId", "documentType"})
             or query["meetingId"][0] != identity.get("external_id")
             or not positive(query["meetingId"][0]) or query["documentType"][0] not in {"1", "2", "3", "5", "6"}):
         raise ValueError("Only a captured same-tenant meeting-document download is mapped.")
@@ -100,7 +103,7 @@ def resolve_document(source, url, record, first, bounds, context, transport, dea
             or value("g_documentTypeMaxEnum", r"[0-9]+") != "7"
             or value("g_documentItemId", r"[0-9]+") != str(item_id)
             or value("g_documentPublishId", r"[0-9]+") != str(publish_id)
-            or value("g_documentIsAttachment", r"true|false") != ("true" if item_scope else "false")
+            or value("g_documentIsAttachment", r"true|false") != ("true" if item_scope or packet_scope else "false")
             or value("g_documentIsSection", r"true|false") != "false"):
         raise ValueError("The wrapper did not match the selected meeting-document scope.")
     name = value("g_documentName", r"'[^'\\\r\n]+'")[1:-1]
@@ -113,7 +116,7 @@ def resolve_document(source, url, record, first, bounds, context, transport, dea
 
     prefix = match[1]
     invoke_template = prefix + "/Documents/InvokeDownloadMeetingDocument/DOCUMENTNAME?meetingId=MEETINGIDVALUE&documentType=DOCUMENTTYPEVALUE"
-    if item_scope:
+    if item_scope or packet_scope:
         invoke_template = prefix + "/Documents/InvokeDownloadAttachment/DOCUMENTNAME?meetingId=MEETINGIDVALUE&itemId=ITEMIDVALUE&publishId=PUBLISHIDVALUE&isSection=ISSECTIONVALUE&documentType=AGENDATYPEVALUE"
     view_template = prefix + "/Documents/ViewDocument/DOCUMENTNAME?meetingId=MEETINGIDVALUE&documentType=DOCUMENTTYPEVALUE&itemId=ITEMIDVALUE&publishId=PUBLISHIDVALUE&isSection=ISSECTIONVALUE"
     if (not valid_name(name) or "'" + invoke_template + "'" not in script
@@ -170,9 +173,9 @@ def resolve_document(source, url, record, first, bounds, context, transport, dea
             reject_credential_echo(response.content, {"token": cookie.value})
         return response
 
-    invoke = origin + prefix + ("/Documents/InvokeDownloadAttachment/" if item_scope else "/Documents/InvokeDownloadMeetingDocument/") + quote(name, safe="")
+    invoke = origin + prefix + ("/Documents/InvokeDownloadAttachment/" if item_scope or packet_scope else "/Documents/InvokeDownloadMeetingDocument/") + quote(name, safe="")
     params = ({"meetingId": meeting, "itemId": item_id, "publishId": publish_id, "isSection": "false", "documentType": kind}
-              if item_scope else {"meetingId": meeting, "documentType": kind})
+              if item_scope or packet_scope else {"meetingId": meeting, "documentType": kind})
     prepared = read(invoke + "?" + urlencode(params), method="POST", control=True)
     data = json.loads(prepared.content)
     if (not isinstance(data, dict) or data.get("DocumentName") != name

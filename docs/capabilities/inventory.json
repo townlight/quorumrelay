@@ -18895,6 +18895,62 @@
               }
             ]
           }
+        },
+        {
+          "id": "onbase-meeting-packet-wrapper-2026-11-14",
+          "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Documents/Downloadfile/Commission_on_Aging_Well_3825_Agenda_Packet_11_12_2026_8_30_00_AM.pdf?documentType=5&meetingId=3825&isAttachment=True",
+          "title": "Declared public meeting packet wrapper and minutes-packet kind consistency",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observed": "2026-11-14",
+          "observation_date": "2026-11-14",
+          "access_scope": "public_wrapper_get_and_local_mock_execution_no_remote_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/onbase-packets-2026-11-14.json",
+          "receipt_sha256": "5b388700ea4f362ea8fe4b9eea7ea4a8a7bb374d3b63b202ad3e9051addb338e",
+          "limits": "Live read was one public GET of an already declared type-5 packet wrapper; no preparation POST or live file GET.; Type-6 packet flow is a labeled synthetic variation grounded in captured vendor enum, not live minutes-packet acceptance.; Final packet/PDF readback is synthetic; no rendering, complete archive, staff write or Agenda association claim.",
+          "synthetic_execution": {
+            "provider": "onbase",
+            "status": "fixture_passed",
+            "operations": [
+              "fetch",
+              "parse"
+            ],
+            "entities": [],
+            "scope": "Selected meeting packet wrapper and public HTML document type mapping only; no live PDF or complete catalog acceptance.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_onbase_document_kinds.py tests/test_onbase_packets.py tests/test_onbase_listing.py tests/test_onbase_detail.py tests/test_onbase_search_model.py tests/test_onbase_documents.py tests/test_onbase_item_documents.py -q",
+                "passed": 101,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/onbase-packet/wrapper.html",
+                "sha256": "72bb4e8c541664e087a510dd265e613dd5240a01efaf7ab7e94e872a3aca7c76"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/onbase-search-model/client-extract.txt",
+                "sha256": "180a3c8560d2b05d7f2ed6adf9be62a84e1b9d2b50db000d6cc5c80253be5d63"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_onbase_document_kinds.py",
+                "sha256": "479079602ca7104bf51c9d914c2434dd473fab5c5a0d18d34ebb4b89458c67e5",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "479079602ca7104bf51c9d914c2434dd473fab5c5a0d18d34ebb4b89458c67e5"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_onbase_packets.py",
+                "sha256": "029fb6f27862a133aed0d0818197de198107fd2055308e773bdb3237f196f0d5",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "029fb6f27862a133aed0d0818197de198107fd2055308e773bdb3237f196f0d5"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -18972,9 +19028,10 @@
             "onbase-meeting-document-wrapper-2026-11-13",
             "onbase-supplied-agenda-detail-2026-11-13",
             "onbase-item-document-wrapper-2026-11-13",
-            "onbase-selected-section-detail-2026-11-13"
+            "onbase-selected-section-detail-2026-11-13",
+            "onbase-meeting-packet-wrapper-2026-11-14"
           ],
-          "details": "Captured OnBase meeting-document Downloadfile links either return PDF bytes or a recognized vendor-authored wrapper. Exact meeting/type/name constants and declared InvokeDownloadMeetingDocument POST/ViewDocument GET templates are validated. Preparation JSON must match selected meeting/type and non-item/non-section scope; final MIME/PDF magic, same-origin exact URL, no redirects, cumulative parser/transfer/request/deadline bounds and cancellation apply. Scoped cookies remain in memory. Verified wrapper/preparation captures and unknown response fields survive partial failure and explicit persistence/ZIP; durable citation stays the supplied link. Actual live file availability and broader detail/search/association remain unverified. Selected fetch_record from the configured HTTPS root revalidates current listing membership, follows the exact declared Agenda view and returns native agenda sections/items with parent context. fetch_related lists items/sections or verifies and fetches a selected non-section item. Raw fields, hierarchy, supplied partial rendered text/citations and exact supplemental captures survive local persistence/search/ZIP. Supporting-document native attachment/publish IDs and links remain metadata only. Explicit fetch_attachment from a scoped persisted selected agenda_item now additionally maps the exact published InvokeDownloadAttachment branch for supporting documents: canonical parent meeting, item, selected URL/document metadata, publish ID, type and non-section context bind wrapper constants and typed preparation JSON before final PDF GET. Detail itself still returns locators; download requires this separate explicit operation. Durable citation and capture bytes/hashes retained. Selected agenda_section detail now validates section membership separately from agenda_item and follows the supplied isSection=true route. The observed section supplies rendered title/text only; canonical meeting parent and supplied nested section relationship survive persistence/ZIP, with existing partial semantics and bounds.",
+          "details": "Captured OnBase meeting-document Downloadfile links either return PDF bytes or a recognized vendor-authored wrapper. Exact meeting/type/name constants and declared InvokeDownloadMeetingDocument POST/ViewDocument GET templates are validated. Preparation JSON must match selected meeting/type and non-item/non-section scope; final MIME/PDF magic, same-origin exact URL, no redirects, cumulative parser/transfer/request/deadline bounds and cancellation apply. Scoped cookies remain in memory. Verified wrapper/preparation captures and unknown response fields survive partial failure and explicit persistence/ZIP; durable citation stays the supplied link. Actual live file availability and broader detail/search/association remain unverified. Selected fetch_record from the configured HTTPS root revalidates current listing membership, follows the exact declared Agenda view and returns native agenda sections/items with parent context. fetch_related lists items/sections or verifies and fetches a selected non-section item. Raw fields, hierarchy, supplied partial rendered text/citations and exact supplemental captures survive local persistence/search/ZIP. Supporting-document native attachment/publish IDs and links remain metadata only. Explicit fetch_attachment from a scoped persisted selected agenda_item now additionally maps the exact published InvokeDownloadAttachment branch for supporting documents: canonical parent meeting, item, selected URL/document metadata, publish ID, type and non-section context bind wrapper constants and typed preparation JSON before final PDF GET. Detail itself still returns locators; download requires this separate explicit operation. Durable citation and capture bytes/hashes retained. Selected agenda_section detail now validates section membership separately from agenda_item and follows the supplied isSection=true route. The observed section supplies rendered title/text only; canonical meeting parent and supplied nested section relationship survive persistence/ZIP, with existing partial semantics and bounds. Meeting packet types 5/6 with supplied isAttachment=true additionally use the declared InvokeDownloadAttachment route with exact zero item/publish IDs and typed readback; synthetic execution only, public wrapper GET observed. Type 6 is consistently minutes_packet across public table/detail/model mappings.",
           "dependencies": [],
           "remaining_verification": [
             "Native search, archive meetings absent from the current root, other agenda variants/deployment shapes, and staff API/import association remain unresolved."
@@ -18999,7 +19056,8 @@
             "quorumrelay-shared-core-operations",
             "onbase-supplied-agenda-detail-2026-11-13",
             "onbase-selected-section-detail-2026-11-13",
-            "onbase-akron-model-window-execution"
+            "onbase-akron-model-window-execution",
+            "onbase-meeting-packet-wrapper-2026-11-14"
           ],
           "details": "Legacy baseline remains intact; additive listing parser handles literal embedded JSON without executing JS, preserves raw unknown fields and maps only declared document flags/names.",
           "dependencies": [

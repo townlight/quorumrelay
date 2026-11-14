@@ -12,6 +12,7 @@ from ..models import Error, OperationResult
 from .contracts import _origin
 from .escribe_detail import Page
 from .native import make_bundle
+from .onbase import KINDS
 
 FORMAT = "onbase-public-listing-html"
 
@@ -85,8 +86,7 @@ def wrapper_bundle(source, namespace, content):
                 or query.get("meetingId") != meeting or query.get("documentType") not in {"1", "2", "3", "5", "6"}
                 or set(query) - {"meetingId", "documentType", "isAttachment"}):
             raise ValueError("A supplied meeting document left its selected meeting scope.")
-        documents.append({"url": target, "kind": {"1": "agenda", "2": "minutes", "3": "summary",
-            "5": "packet", "6": "attachment"}[query["documentType"]], "title": node.text(),
+        documents.append({"url": target, "kind": KINDS[query["documentType"]], "title": node.text(),
             "availability": "supplied_locator_not_fetched"})
     agenda = _origin(source.url) + literal.replace("AGENDATYPEVALUE", "agenda")
     normalized = {"external_id": meeting, "title": None, "url": source.url, "documents": documents,

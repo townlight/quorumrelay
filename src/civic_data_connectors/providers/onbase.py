@@ -9,7 +9,7 @@ from ..compat import _table_rows
 from .identification import validate_url
 
 FORMAT = 'onbase-public-listing-html'
-KINDS = {'1':'agenda','2':'minutes','3':'summary','5':'packet','6':'attachment'}
+KINDS = {'1':'agenda','2':'minutes','3':'summary','5':'packet','6':'minutes_packet'}
 
 
 def window_url(source, date_from, date_to):

@@ -21,6 +21,21 @@ emitted only for the corresponding true availability flag and supplied document
 name. Links are locators, not proof that a PDF was retrieved. Nonempty `Documents`
 and `Media` submodels remain raw and unmapped until their contracts are verified.
 
+The public table and selected meeting HTML readers use the same document-type
+mapping: type 6 is `minutes_packet`, matching the embedded-results reader.
+This corrects their earlier generic `attachment` label without changing supplied
+URLs, meeting identities, raw captures or the baseline compatibility reader.
+
+An explicit attachment fetch also recognizes the captured meeting-packet wrapper
+for document types 5 and 6 with `isAttachment=true`. Its native meeting, document
+type, zero item/publish IDs and non-section flag must match before the declared
+`InvokeDownloadAttachment` preparation POST and `ViewDocument` GET. Typed
+preparation readback and PDF bytes remain required; redirects, cross-origin
+requests and changed scope are rejected under existing transfer, parser, deadline
+and cancellation bounds. The [captured packet wrapper](capabilities/evidence/onbase-packet/source.json)
+was obtained by public GET only. Tests execute preparation and PDF retrieval
+synthetically; they do not establish live packet availability or Agenda writes.
+
 The October 2026 window returned three meetings, but its `NoMoreResults` value was
 false. No `GetMoreFullTextResults` traversal or complete-archive claim is made.
 Results remain partial and explicitly describe their window and completeness
