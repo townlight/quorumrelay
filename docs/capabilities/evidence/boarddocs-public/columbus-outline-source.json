@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-14",
+  "provenance": "Third-party archived BoardDocs fragments at pinned commit; both exact Git blob hashes verified. No current live vendor acceptance or official API spec.",
+  "fixtures": [
+    {
+      "url": "https://github.com/City-Bureau/city-scrapers-coloh/blob/8e2c109cf14fa6424eaebcc1460b7190e9a38e5f/tests/files/colum_boe_agenda.html",
+      "path": "tests/fixtures/boarddocs-public/columbus-agenda.html",
+      "git_blob": "2d7d2fa21e295f9555b16972b84d9529ef36a480",
+      "sha256": "0e9c7e15bf32aeacc9a1fc60270d373b8257f1e55fcc468ee1da62764c2de32b",
+      "bytes": 87671
+    },
+    {
+      "url": "https://github.com/City-Bureau/city-scrapers-coloh/blob/8e2c109cf14fa6424eaebcc1460b7190e9a38e5f/tests/files/colum_boe_detail.html",
+      "path": "tests/fixtures/boarddocs-public/columbus-meeting.html",
+      "git_blob": "43098f3265a5b25ab367a272514649cac2767210",
+      "sha256": "4faf95c1d4e8344a6969fbb4b43f753acc5ee3f668c9297af79b898e2e5a2a27",
+      "bytes": 3284
+    }
+  ],
+  "association_source": "https://github.com/City-Bureau/city-scrapers-coloh/blob/8e2c109cf14fa6424eaebcc1460b7190e9a38e5f/tests/test_colum_boe.py",
+  "association": "Test parsed_items pairs detail_response with agenda_response. Meeting clipboard nativeID DQ3VPX80F260. Source callback posts selected native id and current committee to BD-GetAgenda.",
+  "request_leads": [
+    "https://github.com/dweekly/rcsd-meetings/blob/fba5b5c61033d6f98b571b6bda71eb787246907d/scripts/scrape-boarddocs.mjs",
+    "https://github.com/City-Bureau/city-scrapers-coloh/blob/8e2c109cf14fa6424eaebcc1460b7190e9a38e5f/city_scrapers/spiders/colum_boe.py"
+  ],
+  "fields": "28 native dt.category sections and123 li.item.public items with id==unique, optional unid, literal outline/title/order attributes.",
+  "limits": "Meeting parent from selected stored identity/request, not asserted in response. Section membership not inferred from visual adjacency/numbering. Outline titles only; no item body, attachment URLs, search, write, complete catalog or access workaround."
+}

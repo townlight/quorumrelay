@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "3ff5b30749ef0a671bf8e5a174ea7f44ae9a38ca",
+  "status": "ARCHIVED_RESPONSE_AND_SYNTHETIC_SELECTED_READ_PASS",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_boarddocs_selected_agenda.py tests/test_boarddocs_meeting_fragment.py tests/test_boarddocs_public_helpers.py tests/test_boarddocs_public_workflow.py -q",
+      "passed": 47,
+      "failed": 0,
+      "junit_sha256": "1d118f4177885412f6f748cd9caa0910d540e5e8dfaf44c7c0cde53b9fd312a4"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "archived_response",
+      "path": "tests/fixtures/boarddocs-public/columbus-agenda.html",
+      "sha256": "0e9c7e15bf32aeacc9a1fc60270d373b8257f1e55fcc468ee1da62764c2de32b"
+    },
+    {
+      "kind": "archived_response",
+      "path": "tests/fixtures/boarddocs-public/columbus-meeting.html",
+      "sha256": "4faf95c1d4e8344a6969fbb4b43f753acc5ee3f668c9297af79b898e2e5a2a27"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/boarddocs_agenda.py",
+      "sha256": "22aeceab8f151852d78c7d3722f8a4197af8f3d68a7e8fc467e29d118abefcec"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "d8481d67e845ebc4bec02f349517b6e0109718b9d5d8cf5a89164f7e7876a72a"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_boarddocs_selected_agenda.py",
+      "sha256": "051fa6ad787abeebb80c47305d5a39a54f064b937fe4680144a27a4cd10f571f",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "051fa6ad787abeebb80c47305d5a39a54f064b937fe4680144a27a4cd10f571f"
+    }
+  ],
+  "execution": "14 newcases within47affected. Explicit stored parent/namespace scope, native request,123items/28sections, byte-preserving capture/SQLite retry/reopen/local title search/ZIP, recordcap, denied/redirect/changedshape/duplicates/identity/cancel/private ancestor.",
+  "limits": "Third-party archived response compatibility and synthetic selected GET-style POST read only; no live vendor acceptance or official write specification. No hierarchy, item body, placeholder URL or native search inferred."
+}

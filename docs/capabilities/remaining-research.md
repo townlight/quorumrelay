@@ -277,6 +277,8 @@ Evidence and exact scope: `inventory.json` provider `boarddocs`; operation statu
 
 - Two third-party archived BD-GetMeeting fragments now have saved-format mapping and executed native identity/listing compatibility, public description search, SQLite retry/reopen and exact ZIP. This supplies public meeting metadata, not agenda/item trees, placeholder control URLs or staff-write contracts. See `evidence/boarddocs-public/grand-detail-source.json`.
 
+- Selected public agenda outline now maps123native items and28sections from exact pinned Columbus archive, with explicit stored meeting/request context and14new/47affected tests. Section membership is not inferred from neighboring headings or numbering; body text/attachment URLs/native search/writes remain unresolved. See `evidence/boarddocs-public/columbus-outline-source.json`.
+
 ## F31 Tyler Meeting Manager (`tyler-meeting-manager`)
 
 - Historical Ector empty requests remain historical. Liberty establishes nonempty selected-window fields; not full catalog or universal meetingTypeIds semantics.

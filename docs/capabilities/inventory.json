@@ -26920,6 +26920,18 @@
           "receipt_path": "docs/verification/boarddocs-meeting-fragment-2026-11-14.json",
           "receipt_sha256": "010798fcf68b39c3f7e4d495f8a954160f6d733025f91083f96b760b8d7802df",
           "limits": "Exact archived fragments, native identity and public description only;40affected/12newcases. No live read, item tree, guessed control URL or staff contract."
+        },
+        {
+          "id": "boarddocs-archived-selected-outline",
+          "url": "https://github.com/City-Bureau/city-scrapers-coloh/blob/8e2c109cf14fa6424eaebcc1460b7190e9a38e5f/tests/files/colum_boe_agenda.html",
+          "title": "Archived selected agenda native sections/items and guarded synthetic parent-bound read",
+          "kind": "archived_vendor_response_and_synthetic_selected_read",
+          "observed": "2026-11-14",
+          "observation_date": "2026-11-14",
+          "proof_level": "archived_response_compatibility_not_vendor_acceptance",
+          "receipt_path": "docs/verification/boarddocs-selected-agenda-2026-11-14.json",
+          "receipt_sha256": "ca78bc87be187843a87eb5f4eabab26a8d76d61c9f2965b089050aeb0f877f2e",
+          "limits": "47affected/14newcases; native outline IDs/titles with selected request-parent provenance, no guessed section membership/item body/files/writes. No live read or official API guarantee."
         }
       ],
       "tenants": [
@@ -26995,9 +27007,10 @@
           "evidence_ids": [
             "diligent-boarddocs-tenant",
             "boarddocs-pinned-reader-synthetic-execution",
-            "boarddocs-public-anchor-correction"
+            "boarddocs-public-anchor-correction",
+            "boarddocs-archived-selected-outline"
           ],
-          "details": "Selected stored listing meeting enables exact printable agenda POST; retains title/date/rendered text and raw response. No item-tree or file transfer mapping.",
+          "details": "Selected stored listing meeting enables exact printable agenda POST; retains title/date/rendered text and raw response. No item-tree or file transfer mapping. Explicit stored-parent fetch_related agenda_item/agenda_section now uses BD-GetAgenda native request, archived outline IDs/titles/attributes and exact raw capture; no section parent inferred from adjacency.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
@@ -27503,9 +27516,10 @@
       ],
       "remaining_research": [
         "Opt-in public listing/print detail is implemented with pinned third-party source and18synthetic helper/workflow cases; official/live contract acceptance remains unverified (403 observed).",
-        "Public file hrefs remain strings only; item hierarchy, attachment transfer, native search, staff writes and vendor import remain unresolved.",
+        "Public file hrefs remain strings only; full item hierarchy/content, attachment transfer, native search, staff writes and vendor import remain unresolved.",
         "City Bureau Git-blob-pinned saved listing now parses331valid native meetings and explicitly counts one empty placeholder; nonempty identityless rows still reject. Entire original JSON retained. No completeness or official vendor acceptance claim.",
-        "Two archived BD-GetMeeting fragments now mapped with native clipboard/base identity and public description. Matching archived listing identity and SQLite/ZIP executed; no response-shaped agenda tree/item body, current invocation or staff-write contract inferred."
+        "Two archived BD-GetMeeting fragments now mapped with native clipboard/base identity and public description. Matching archived listing identity and SQLite/ZIP executed; no response-shaped agenda tree/item body, current invocation or staff-write contract inferred.",
+        "Selected native public agenda outline now maps archived123items/28sections with stored meeting/request-context binding and14synthetic cases. Item bodies, actual section-parent ID assertions, attachment transfer, official/live applicability and staff writes remain unresolved; no private-only dependency inferred."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "boarddocs",

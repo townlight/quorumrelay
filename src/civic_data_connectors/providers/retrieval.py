@@ -68,6 +68,9 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if source.provider == "onbase":
             from .onbase_detail import fetch_detail
             return fetch_detail(source, namespace, request, bounds, context, transport)
+        if source.provider == "boarddocs":
+            from .boarddocs_agenda import fetch_related
+            return fetch_related(engine, source, namespace, request, bounds, context, transport)
         return OperationResult.unsupported("fetch_related", reason=(
             "No verified related-record retrieval mapping is registered for this provider."))
     if "external_id" in request:

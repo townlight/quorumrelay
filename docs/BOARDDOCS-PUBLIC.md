@@ -68,3 +68,22 @@ map an item hierarchy or establish a vendor write/import contract.
 and [executed scope](verification/boarddocs-meeting-fragment-2026-11-14.json)
 are separate from official vendor or current live acceptance. Preserved dev13
 artifacts predate this source.
+
+## Selected native agenda outline
+
+After importing a selected meeting, `engine.fetch_related(source, meeting_id,
+"agenda_item")` reads its public outline; use `"agenda_section"` for sections.
+The bounded POST uses the selected native meeting ID and explicit committee ID.
+It retains the exact response, native `id`/`unique`, supplied `unid`, literal
+outline/order attributes and titles. `max_records` limits the returned records
+with an explicit coverage marker; no upstream paging is invented.
+
+The [pinned Columbus archive](capabilities/evidence/boarddocs-public/columbus-outline-source.json)
+contains123 items and28 sections. Their meeting association comes from the
+selected stored identity and request context; the fragment does not independently
+assert its meeting parent. Section-parent IDs are not supplied, so heading
+adjacency and outline numbering do not become parent relationships. File icons
+supply no attachment locator. Bodies, file bytes, native search and writes remain
+unmapped by this outline. This is third-party archived-source compatibility with
+[47 affected synthetic checks](verification/boarddocs-selected-agenda-2026-11-14.json),
+not a current vendor read or official API guarantee.
