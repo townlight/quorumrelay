@@ -26248,6 +26248,64 @@
           "fixture_path": "tests/fixtures/gworks-published/5017-agenda.html",
           "fixture_sha256": "fe3f140adf91404239a5b8e789b9fcedd687b457bc8b8425bb82233abbcad24f",
           "limits": "Separate explicitly selected HTML format; no secure calendar equivalence or native item identities, timezone or full catalog claim."
+        },
+        {
+          "id": "gworks-secure-calendar-saved-mapping-2026-11-14",
+          "url": "https://galenaks.frontdeskgworks.com/plugin/cms/js/citizen.plugin.js?v=26-11-12-7b140d5a1a",
+          "title": "Distinct secure-calendar flattened response mapping with explicit configured city",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-14",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/gworks-secure-calendar-2026-11-14.json",
+          "receipt_sha256": "649be431e919b0fdc3200da0855837be6ac52054f876d4f3b98c10c402331578",
+          "limits": "Saved response mapping only; no live account read, native search, writes, inferred paging/time units or publication-flag document URLs.",
+          "synthetic_execution": {
+            "provider": "gworks",
+            "status": "fixture_passed",
+            "operations": [
+              "parse",
+              "discover",
+              "local_search",
+              "neutral_export"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "One supplied secure-calendar response; city configured explicitly, no response-asserted tenant, live network or complete catalog.",
+            "execution_provenance": "25 new saved-format cases within124 affected passes. Native baseline identity, request-free saved discovery, local SQLite/reopen/search and exact original ZIP retention executed.",
+            "checks": [
+              {
+                "command": "pytest tests/test_gworks_secure_calendar.py tests/test_gworks_published_detail.py tests/test_provider_discovery.py tests/test_interfaces.py tests/test_public_package.py -q",
+                "passed": 124,
+                "failed": 0,
+                "junit_sha256": "ad79d24945327b0b60ea4cd6ae8d07dee0857470040ae98222518ee3209ffa13"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/gworks-published-client/secure-calendar.extract.js",
+                "sha256": "02512eac407492044656a25db959ff189d4c6bb1e9b6f9620494f4619fd95add"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/gworks-published-client/secure-calendar-source.json",
+                "sha256": "409702f03d8779216653287f44c10bdab887cefcf7c703b15a107263a6a591d3"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/gworks_calendar.py",
+                "sha256": "f01d9dbd3677d41bc1644885f5a5d3c746271f5b5f6cdc4ba312d31fb22e10f2"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_gworks_secure_calendar.py",
+                "sha256": "1eed56868f89ea3190c7b608f62afd7c6891102b51fd954e5c5c7a09e1052a8e",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "1eed56868f89ea3190c7b608f62afd7c6891102b51fd954e5c5c7a09e1052a8e"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -26293,9 +26351,10 @@
             "gworks-json",
             "gworks-galena-current-listing-live",
             "quorumrelay-shared-core-operations",
-            "gworks-published-html-capture-and-tests"
+            "gworks-published-html-capture-and-tests",
+            "gworks-secure-calendar-saved-mapping-2026-11-14"
           ],
-          "details": "The existing configured static GET and baseline gWorks parser handle https://files.frontdeskgworks.com/city/{city_id}/cms/data.json. Current Galena read produced 153 meetings in one response; results remain partial because a static response does not prove upstream catalog completeness. Agenda/minutes flags derive the documented baseline attachment routes; no separate meeting detail URL or continuation was observed. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only.",
+          "details": "The existing configured static GET and baseline gWorks parser handle https://files.frontdeskgworks.com/city/{city_id}/cms/data.json. Current Galena read produced 153 meetings in one response; results remain partial because a static response does not prove upstream catalog completeness. Agenda/minutes flags derive the documented baseline attachment routes; no separate meeting detail URL or continuation was observed. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
           "dependencies": [
             "Configured public city JSON URL/city ID",
             "Safe bounded public retrieval"
@@ -26354,9 +26413,10 @@
             "media-baseline",
             "media-reader-source",
             "quorumrelay-shared-core-operations",
-            "gworks-published-html-capture-and-tests"
+            "gworks-published-html-capture-and-tests",
+            "gworks-secure-calendar-saved-mapping-2026-11-14"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
           "dependencies": [
             "standalone extraction",
             "source revision pin"
@@ -26403,9 +26463,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "quorumrelay-shared-core-operations",
-            "gworks-published-html-capture-and-tests"
+            "gworks-published-html-capture-and-tests",
+            "gworks-secure-calendar-saved-mapping-2026-11-14"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only.",
+          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
           "dependencies": [
             "shared capture/search engine"
           ],
@@ -26427,9 +26488,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "quorumrelay-shared-core-operations",
-            "gworks-published-html-capture-and-tests"
+            "gworks-published-html-capture-and-tests",
+            "gworks-secure-calendar-saved-mapping-2026-11-14"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
           "dependencies": [
             "shared schemas/export engine"
           ],

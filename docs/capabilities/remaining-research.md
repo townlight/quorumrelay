@@ -75,7 +75,7 @@ Evidence and exact scope: `inventory.json` provider `municode-meetings`; operati
 
 ## F08 BoardBook (`boardbook`)
 
-- Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agendaâ†’PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied.
+- Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied.
 - Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.
 - Pinned material does not establish role/enablement, write/readback or conflict schemas for an external integration. Those contract details remain unresolved; staff-account acquisition is not an acceptance gate.
 
@@ -254,7 +254,7 @@ Evidence and exact scope: `inventory.json` provider `boardable`; operation statu
 
 ## F29 gWorks FrontDesk (`gworks`)
 
-- Bounded public evidence now covers the Galena static listing, one successful city-1311 agenda fetch, and one Galena minutes failure (resolver ready, guarded object GET HTTP 403). See the three F29 receipts. Published HTML detail is now mapped separately from the vendor-declared path, with native meeting identity matching the original city listing namespace. Eleven sections and thirteen children are capture-local rendered positions. Catalog continuation/completeness and every flagged document remain unverified.
+- Bounded public evidence now covers the Galena static listing, one successful city-1311 agenda fetch, and one Galena minutes failure (resolver ready, guarded object GET HTTP 403). See the three F29 receipts. Published HTML detail is now mapped separately from the vendor-declared path, with native meeting identity matching the original city listing namespace. Eleven sections and thirteen children are capture-local rendered positions. Catalog continuation/completeness and every flagged document remain unverified. A separate saved secure-calendar response mapping now preserves flattened native fields with explicit configured city binding; no live account request or inferred flag/epoch equivalence.
 - Retained history, update frequency and maximum response payload remain unknown; one static response cannot establish them. No additional repeated sampling is required for this bounded research outcome.
 - Pinned FrontDesk builder material describes staff UI without an external write schema. Vendor machine field/readback contracts remain unresolved; staff credentials and live-write acceptance are not completion gates.
 

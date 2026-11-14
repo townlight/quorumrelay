@@ -533,6 +533,8 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
     saved = _decode_content(request, content)
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")
+    if input_format == "gworks-secure-calendar-json" and saved is None:
+        raise ValueError("The secure calendar format maps saved responses only; no live authenticated read is implemented.")
     if source.provider == "granicus" and input_format == "granicus-platform-soap-xml" and saved is None:
         from .granicus_platform import read
         return read(source, namespace, request, bounds, context, transport or PublicTransport(), discover=True)
@@ -799,7 +801,11 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
             "configured capture only; upstream catalog completeness is unverified"),
         "available_text": "metadata_and_supplied_text_only",
     }
-    if input_format == "town-hall-streams-event-html":
+    if input_format == "gworks-secure-calendar-json":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one supplied secure calendar response; configured city, not response-verified tenant",
+            "live_read_implemented": False, "time_zone_status": "unknown"})
+    elif input_format == "town-hall-streams-event-html":
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "one configured public event/player declaration; no media segment or archive claim",
             "time_zone_status": "unknown"})
