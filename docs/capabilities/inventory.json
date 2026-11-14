@@ -18998,6 +18998,61 @@
               }
             ]
           }
+        },
+        {
+          "id": "onbase-model-documents-2026-11-14",
+          "url": "https://onlinedocs.akronohio.gov/OnBaseAgendaOnline/",
+          "title": "Published Document/media constructors and exact locator branches",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-14",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/onbase-model-documents-2026-11-14.json",
+          "receipt_sha256": "f8d7155a1a04668f60aa463828c8416509eabc5c900d769386c98c1a06b307cc",
+          "limits": "No native keyword search/archive/staff writes/import or Agenda association implemented.; Media metadata is a player link, not bytes/playback/captions.; Only nested supporting attachment wrapper type1/PublishType4 uses mapped preparation; other unknown wrappers retain partial outcomes.; No package/native build, installs, pins, releases, remote mutation or publication. Immutable dev13 artifacts predate this source.",
+          "synthetic_execution": {
+            "provider": "onbase",
+            "status": "fixture_passed",
+            "operations": [
+              "parse",
+              "fetch"
+            ],
+            "entities": [],
+            "scope": "Nested supplied document locator/explicit PDF and link-only media mapping; no live nonempty response or playback.",
+            "checks": [
+              {
+                "command": "python -m pytest tests/test_onbase_model_documents.py and existing OnBase affected modules",
+                "passed": 119,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/onbase.py",
+                "sha256": "adc81440457006a02038383f0c35223a6807e13fe1c7aaae4aa52120cb7defa6"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/onbase_documents.py",
+                "sha256": "cc3a4869a1e18eb32c47257cb648a624402a3f2b1b49589e45e4c0fe337a0ce0"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_onbase_model_documents.py",
+                "sha256": "494c9ef57843711bf41079eb3a8fad5339adc475029936d635c8b3b42b41ec99"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/onbase-model-documents/client-extract.txt",
+                "sha256": "ce77efe19624dc03a5b204cb1ef0f96a58c36d6535184ec8f4515db3a95938ea"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/onbase-model-documents/source.json",
+                "sha256": "68df7444b7105eca0deef2526b2946d2c6d7ca00ced56a7e66fd041775a5107a"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -19047,9 +19102,10 @@
           "evidence_ids": [
             "hyland-onbase-agenda-online-tenant",
             "onbase-public-search-redirect-blocked-2026-11-12",
-            "onbase-akron-model-window-execution"
+            "onbase-akron-model-window-execution",
+            "onbase-model-documents-2026-11-14"
           ],
-          "details": "Existing rendered listing plus observed modern embedded model; explicit bounds map root/Meetings to exact date-window GET. Continuation slices the captured window, not an undocumented upstream pager.",
+          "details": "Existing rendered listing plus observed modern embedded model; explicit bounds map root/Meetings to exact date-window GET. Continuation slices the captured window, not an undocumented upstream pager. Modern embedded Documents additionally preserve exact meeting/item/publish bindings and client-declared PDF locators; link-only Media flags remain distinct from file/playback acceptance. Nested type1 supporting attachments use the existing scoped wrapper/readback flow.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
@@ -19076,9 +19132,10 @@
             "onbase-supplied-agenda-detail-2026-11-13",
             "onbase-item-document-wrapper-2026-11-13",
             "onbase-selected-section-detail-2026-11-13",
-            "onbase-meeting-packet-wrapper-2026-11-14"
+            "onbase-meeting-packet-wrapper-2026-11-14",
+            "onbase-model-documents-2026-11-14"
           ],
-          "details": "Captured OnBase meeting-document Downloadfile links either return PDF bytes or a recognized vendor-authored wrapper. Exact meeting/type/name constants and declared InvokeDownloadMeetingDocument POST/ViewDocument GET templates are validated. Preparation JSON must match selected meeting/type and non-item/non-section scope; final MIME/PDF magic, same-origin exact URL, no redirects, cumulative parser/transfer/request/deadline bounds and cancellation apply. Scoped cookies remain in memory. Verified wrapper/preparation captures and unknown response fields survive partial failure and explicit persistence/ZIP; durable citation stays the supplied link. Actual live file availability and broader detail/search/association remain unverified. Selected fetch_record from the configured HTTPS root revalidates current listing membership, follows the exact declared Agenda view and returns native agenda sections/items with parent context. fetch_related lists items/sections or verifies and fetches a selected non-section item. Raw fields, hierarchy, supplied partial rendered text/citations and exact supplemental captures survive local persistence/search/ZIP. Supporting-document native attachment/publish IDs and links remain metadata only. Explicit fetch_attachment from a scoped persisted selected agenda_item now additionally maps the exact published InvokeDownloadAttachment branch for supporting documents: canonical parent meeting, item, selected URL/document metadata, publish ID, type and non-section context bind wrapper constants and typed preparation JSON before final PDF GET. Detail itself still returns locators; download requires this separate explicit operation. Durable citation and capture bytes/hashes retained. Selected agenda_section detail now validates section membership separately from agenda_item and follows the supplied isSection=true route. The observed section supplies rendered title/text only; canonical meeting parent and supplied nested section relationship survive persistence/ZIP, with existing partial semantics and bounds. Meeting packet types 5/6 with supplied isAttachment=true additionally use the declared InvokeDownloadAttachment route with exact zero item/publish IDs and typed readback; synthetic execution only, public wrapper GET observed. Type 6 is consistently minutes_packet across public table/detail/model mappings.",
+          "details": "Captured OnBase meeting-document Downloadfile links either return PDF bytes or a recognized vendor-authored wrapper. Exact meeting/type/name constants and declared InvokeDownloadMeetingDocument POST/ViewDocument GET templates are validated. Preparation JSON must match selected meeting/type and non-item/non-section scope; final MIME/PDF magic, same-origin exact URL, no redirects, cumulative parser/transfer/request/deadline bounds and cancellation apply. Scoped cookies remain in memory. Verified wrapper/preparation captures and unknown response fields survive partial failure and explicit persistence/ZIP; durable citation stays the supplied link. Actual live file availability and broader detail/search/association remain unverified. Selected fetch_record from the configured HTTPS root revalidates current listing membership, follows the exact declared Agenda view and returns native agenda sections/items with parent context. fetch_related lists items/sections or verifies and fetches a selected non-section item. Raw fields, hierarchy, supplied partial rendered text/citations and exact supplemental captures survive local persistence/search/ZIP. Supporting-document native attachment/publish IDs and links remain metadata only. Explicit fetch_attachment from a scoped persisted selected agenda_item now additionally maps the exact published InvokeDownloadAttachment branch for supporting documents: canonical parent meeting, item, selected URL/document metadata, publish ID, type and non-section context bind wrapper constants and typed preparation JSON before final PDF GET. Detail itself still returns locators; download requires this separate explicit operation. Durable citation and capture bytes/hashes retained. Selected agenda_section detail now validates section membership separately from agenda_item and follows the supplied isSection=true route. The observed section supplies rendered title/text only; canonical meeting parent and supplied nested section relationship survive persistence/ZIP, with existing partial semantics and bounds. Meeting packet types 5/6 with supplied isAttachment=true additionally use the declared InvokeDownloadAttachment route with exact zero item/publish IDs and typed readback; synthetic execution only, public wrapper GET observed. Type 6 is consistently minutes_packet across public table/detail/model mappings. Modern embedded Documents additionally preserve exact meeting/item/publish bindings and client-declared PDF locators; link-only Media flags remain distinct from file/playback acceptance. Nested type1 supporting attachments use the existing scoped wrapper/readback flow.",
           "dependencies": [],
           "remaining_verification": [
             "Native search, archive meetings absent from the current root, other agenda variants/deployment shapes, and staff API/import association remain unresolved."
@@ -19104,9 +19161,10 @@
             "onbase-supplied-agenda-detail-2026-11-13",
             "onbase-selected-section-detail-2026-11-13",
             "onbase-akron-model-window-execution",
-            "onbase-meeting-packet-wrapper-2026-11-14"
+            "onbase-meeting-packet-wrapper-2026-11-14",
+            "onbase-model-documents-2026-11-14"
           ],
-          "details": "Legacy baseline remains intact; additive listing parser handles literal embedded JSON without executing JS, preserves raw unknown fields and maps only declared document flags/names.",
+          "details": "Legacy baseline remains intact; additive listing parser handles literal embedded JSON without executing JS, preserves raw unknown fields and maps only declared document flags/names. Modern embedded Documents additionally preserve exact meeting/item/publish bindings and client-declared PDF locators; link-only Media flags remain distinct from file/playback acceptance. Nested type1 supporting attachments use the existing scoped wrapper/readback flow.",
           "dependencies": [
             "Extract shared engine preserving legacy behavior."
           ],
@@ -19733,7 +19791,7 @@
         "Deployment-matched create/update/upload and meeting-association field/readback contracts remain missing. An authorized staff/test account is not required for vendor-documented synthetic acceptance.",
         "Normal Tagged DIP linked-document file/index preparation is implemented with exact destination mappings and synthetic emitted-layout proof; no Agenda meeting association or remote processing is inferred. OnBase API SDK remains an actual vendor surface; sdk.onbase.com redirected to Hyland identity, and public REST help describes per-deployment published operations rather than a universal Agenda schema. Continue exact API contract research without credential acquisition.",
         "Current-listing Agenda hierarchy, selected item/section detail, supporting-document wrapper and meeting-packet branches now have scoped source/synthetic execution. Archive traversal, native search, non-agenda detail variants and staff import/meeting association remain unresolved; broader deployment or live file availability is not inferred.",
-        "Akron modern window is now implemented/tested; nonempty Documents/Media, native keyword search, complete archive and remote Agenda association/import remain unverified."
+        "Akron embedded Documents and Media now have vendor-client-backed synthetic mapping: exact native document/item/publish IDs and locator branches, plus link-only live/on-demand meeting player. Actual nonempty response applicability, native keyword search/archive, other wrappers and remote Agenda association/import remain unverified."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "onbase",

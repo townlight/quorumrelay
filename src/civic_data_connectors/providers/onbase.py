@@ -69,6 +69,51 @@ def search_model(content):
     return models[0] if models else None
 
 
+def _model_documents(base, meeting, raw):
+    """Map the captured Document constructor and addMeetings link branches."""
+    documents, seen, complete = [], set(), True
+    if raw.get('HasDocuments') is not True:
+        return documents, not raw.get('Documents')
+    values = raw.get('Documents')
+    if not isinstance(values, list):
+        return documents, False
+    for value in values:
+        if not isinstance(value, dict):
+            raise ValueError('Invalid OnBase nested document.')
+        identity, item, code, publish = (value.get(key) for key in
+                                        ('ID', 'ItemID', 'MeetingDocumentType', 'PublishType'))
+        title, item_title, name = (value.get(key) for key in ('Name', 'ItemTitle', 'UrlFriendlyName'))
+        if (type(identity) is not int or not 0 < identity < 10**19 or identity in seen
+                or type(item) is not int or not 0 <= item < 10**19
+                or type(code) is not int or type(publish) is not int
+                or not isinstance(title, str) or not title.strip()
+                or not isinstance(item_title, str) or not isinstance(name, str) or not name
+                or len(name) > 512 or any(c in name for c in '/\\')
+                or any(ord(c) < 32 or ord(c) == 127 for c in name)
+                or (item_title and item == 0)):
+            raise ValueError('Invalid OnBase nested document identity or filename.')
+        seen.add(identity)
+        kind = {**KINDS, '4': 'supporting_document'}.get(str(code))
+        if kind is None:
+            complete = False
+            continue
+        query = {'documentType': code, 'meetingId': meeting}
+        document = {'external_id': str(identity), 'title': title, 'kind': kind,
+                    'meeting_external_id': str(meeting),
+                    'availability': 'supplied_locator_not_fetched'}
+        if item_title:
+            query.update(itemId=item, publishId=identity, isSection='False',
+                         isAttachment='True' if publish == 4 else 'False')
+            document.update(agenda_item_external_id=str(item), agenda_item_title=item_title,
+                            agenda_item_outline=value.get('ItemOutlineNum'), publish_id=str(identity),
+                            publish_type=publish)
+            if publish == 4:
+                document['kind'] = 'supporting_document'
+        document['url'] = base + '/Documents/DownloadFile/' + quote(name, safe='') + '.pdf?' + urlencode(query)
+        documents.append(document)
+    return documents, complete
+
+
 def _model_rows(source, model):
     parts = urlsplit(source.url)
     root = parts.path.lower().find('/onbaseagendaonline')
@@ -111,13 +156,26 @@ def _model_rows(source, model):
         meeting_url = base + '/Meetings/ViewMeeting?' + urlencode({'id': identity})
         if type(latest) is int and latest in (1, 2, 3, 5, 6):
             meeting_url += '&' + urlencode({'doctype': latest})
-        # Documents/Media submodels are preserved, not guessed from flags.
+        nested, document_complete = _model_documents(base, identity, raw)
+        documents.extend(nested)
+        recordings, media_availability = [], 'not_advertised'
+        if raw.get('HasMedia') is True:
+            media = raw.get('Media')
+            media_availability = 'unmapped_submodel'
+            if (isinstance(media, dict) and type(latest) is int and latest in (1, 2, 3, 5, 6)
+                    and type(media.get('IsLive')) is bool and type(media.get('IsOnDemand')) is bool
+                    and (media['IsLive'] or media['IsOnDemand'])):
+                recordings.append({'url': meeting_url, 'availability': 'link_only_not_fetched',
+                                   'is_live': media['IsLive'], 'is_on_demand': media['IsOnDemand']})
+                media_availability = 'link_only_not_fetched'
         normalized = {'external_id': str(identity), 'title': title,
                       'meeting_type_name': raw.get('MeetingTypeName'),
                       'meeting_date': parsed.date().isoformat(), 'source_start': start,
                       'time_zone_status': 'source_literal_unverified',
                       'location': raw.get('Location'), 'url': meeting_url,
-                      'documents': documents, 'recordings': [],
+                      'documents': documents, 'recordings': recordings,
+                      'document_mapping_complete': document_complete,
+                      'media_availability': media_availability,
                       'agenda_items_availability': 'unverified'}
         result.append((normalized, raw, 'meeting'))
     return result

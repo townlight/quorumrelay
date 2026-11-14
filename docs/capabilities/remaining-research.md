@@ -183,7 +183,7 @@ Evidence and exact scope: `inventory.json` provider `champ`; operation status an
 - Deployment-matched create/update/upload and meeting-association field/readback contracts remain missing. An authorized staff/test account is not required for vendor-documented synthetic acceptance.
 - Normal Tagged DIP linked-document file/index preparation is implemented with exact destination mappings and synthetic emitted-layout proof; no Agenda meeting association or remote processing is inferred. OnBase API SDK remains an actual vendor surface; sdk.onbase.com redirected to Hyland identity, and public REST help describes per-deployment published operations rather than a universal Agenda schema. Continue exact API contract research without credential acquisition.
 - Current-listing Agenda hierarchy, selected item/section detail, supporting-document wrapper and meeting-packet branches now have scoped source/synthetic execution. Archive traversal, native search, non-agenda detail variants and staff import/meeting association remain unresolved; broader deployment or live file availability is not inferred.
-- Akron modern window is now implemented/tested; nonempty Documents/Media, native keyword search, complete archive and remote Agenda association/import remain unverified.
+- Akron embedded Documents and Media now have vendor-client-backed synthetic mapping: exact native document/item/publish IDs and locator branches, plus link-only live/on-demand meeting player. Actual nonempty response applicability, native keyword search/archive, other wrappers and remote Agenda association/import remain unverified.
 
 Evidence and exact scope: `inventory.json` provider `onbase`; operation status and outbound mappings are separate from historical observations.
 

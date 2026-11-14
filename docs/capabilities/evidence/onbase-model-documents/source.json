@@ -1,0 +1,15 @@
+{
+  "url": "https://onlinedocs.akronohio.gov/OnBaseAgendaOnline/",
+  "source_capture": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\onbase-akron\\root.html",
+  "source_capture_sha256": "16fe23ab559379aa8621c22f8963ccb493d96a5e6e2aa8bdc11c99ad290637f1",
+  "source_captured_date": "2026-11-13",
+  "inspected_date": "2026-11-14",
+  "extract_sha256": "ce77efe19624dc03a5b204cb1ef0f96a58c36d6535184ec8f4515db3a95938ea",
+  "derivation": "Literal Meeting/Document constructors and addMeetings/document/media link functions; no JavaScript execution or cookie/form-token inclusion. Derived extract normalizes line endings and trailing whitespace; exact raw response hash remains above.",
+  "limits": [
+    "Published tenant vendor client, not a universal API schema.",
+    "Original captured rows have empty Documents/null Media. Nonempty tests are labeled synthetic contract-shaped variations, not actual nonempty server captures.",
+    "Media links lead to meeting player HTML; no direct bytes, playback or transcript inferred.",
+    "No search/archive/staff write/import or meeting association proof."
+  ]
+}

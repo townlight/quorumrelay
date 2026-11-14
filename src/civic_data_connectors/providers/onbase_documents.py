@@ -49,8 +49,9 @@ def resolve_document(source, url, record, first, bounds, context, transport, dea
     query = parse_qs(selected.query, keep_blank_values=True)
     identity = record.get("identity") or {}
     normalized = record.get("normalized") or {}
-    item_scope = identity.get("record_type") == "agenda_item"
-    packet_scope = (identity.get("record_type") == "meeting" and query.get("documentType", [None])[0] in {"5", "6"}
+    nested_item = identity.get("record_type") == "meeting" and "itemId" in query
+    item_scope = identity.get("record_type") == "agenda_item" or nested_item
+    packet_scope = (not item_scope and identity.get("record_type") == "meeting" and query.get("documentType", [None])[0] in {"5", "6"}
                     and query.get("isAttachment", [None])[0] in {"true", "True"})
     def positive(v):
         return isinstance(v, str) and re.fullmatch(r"[1-9][0-9]{0,18}", v) is not None
@@ -59,22 +60,26 @@ def resolve_document(source, url, record, first, bounds, context, transport, dea
             or any(len(value) != 1 for value in query.values())):
         raise ValueError("Only a captured same-tenant document download is mapped.")
     if item_scope:
-        parent = identity.get("parent") or {}
-        meeting, item = parent.get("external_id"), identity.get("external_id")
+        parent = identity if nested_item else identity.get("parent") or {}
+        meeting = parent.get("external_id")
+        item = query.get("itemId", [None])[0] if nested_item else identity.get("external_id")
         documents = [d for d in normalized.get("documents", []) if isinstance(d, dict) and d.get("url") == url]
         if (set(query) != {"meetingId", "itemId", "publishId", "documentType", "isSection", "isAttachment"}
-                or parent != {"provider": identity.get("provider"), "namespace": identity.get("namespace"),
+                or {k: parent.get(k) for k in ("provider", "namespace", "record_type", "external_id", "parent")} != {
+                              "provider": identity.get("provider"), "namespace": identity.get("namespace"),
                               "record_type": "meeting", "external_id": meeting, "parent": None}
                 or not all(positive(v) for v in (meeting, item, query["publishId"][0]))
                 or query["meetingId"][0] != meeting or query["itemId"][0] != item
                 or query["documentType"][0] != "1" or query["isSection"][0].lower() != "false"
                 or query["isAttachment"][0].lower() != "true" or len(documents) != 1
-                or normalized.get("meeting_external_id") != meeting
+                or (identity.get("external_id") if nested_item else normalized.get("meeting_external_id")) != meeting
                 or documents[0].get("kind") != "supporting_document"
                 or not positive(documents[0].get("external_id"))
                 or documents[0].get("meeting_external_id") != meeting
                 or documents[0].get("agenda_item_external_id") != item
-                or documents[0].get("publish_id") != query["publishId"][0]):
+                or documents[0].get("publish_id") != query["publishId"][0]
+                or (nested_item and (documents[0].get("external_id") != query["publishId"][0]
+                                     or documents[0].get("publish_type") != 4))):
             raise ValueError("The selected supporting document does not match its item and meeting.")
     elif (identity.get("record_type") != "meeting"
             or set(query) != ({"meetingId", "documentType", "isAttachment"} if packet_scope else {"meetingId", "documentType"})
