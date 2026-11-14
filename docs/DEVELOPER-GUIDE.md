@@ -1,6 +1,6 @@
 # Developer integration guide
 
-Preserved package baseline: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The integrated development source retains that baseline and the approved CivicWeb/Cablecast readers, plus opt-in BoardDocs public listing/detail and CivicClerk Select detail/files and section writes, with 32 registered providers, 31 baseline families, 34 baseline formats, 47 additive parser hooks and 17 native-search handlers. The local successor is Python **0.1.0.dev12** / TypeScript **0.1.0-dev.12**; it is built and unpublished. See [local preparation evidence](verification/local-preparation-2026-11-14.json). Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
+The preserved immutable package baseline is Python **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The current integrated source and its locally built, unpublished successor are Python **0.1.0.dev13** / TypeScript **0.1.0-dev.13**. This candidate includes the approved CivicWeb/Cablecast readers, opt-in BoardDocs public listing/detail and CivicClerk Select detail/files and section writes, with 32 registered providers, 31 baseline families, 34 baseline formats, 47 additive parser hooks and 17 native-search handlers. See [local preparation evidence](verification/local-completion-2026-11-14.json). Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
 
 QuorumRelay is a standalone civic-data engine for your own application, service,
 script or agent. It does not require a Townlight installation, an application
@@ -319,7 +319,7 @@ npm ci
 npm run build
 npm pack
 # In your own application:
-npm install /path/to/quorumrelay-client-0.1.0-dev.11.tgz
+npm install /path/to/quorumrelay-client-0.1.0-dev.13.tgz
 ```
 
 ```typescript
@@ -331,7 +331,7 @@ const client = new QuorumRelayClient({
   timeoutMs: 90_000,
 });
 const info = await client.info();
-if (info.data.version !== "0.1.0.dev11") throw new Error("Service pin mismatch");
+if (info.data.version !== "0.1.0.dev13") throw new Error("Service pin mismatch");
 try {
   const result = await client.execute("providers", {});
   console.log(result.status, result.data, result.errors, result.coverage);

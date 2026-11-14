@@ -1,7 +1,8 @@
 # External interfaces
 
 This integrated source is local development software, currently reporting
-0.1.0.dev11 with schema 2.0.0. Its successor packages are not delivered.
+0.1.0.dev13 with schema 2.0.0. The matching Python wheel and TypeScript tarball
+are built locally but unpublished. The preserved dev11 wheel predates these reader repairs.
 Vendor-documented synthetic execution satisfies its attributed provider scope;
 it does not establish actual tenant transactions. No interface publishes stories or starts provider
 writes as part of ingestion.
@@ -123,7 +124,7 @@ worker. Writes reconcile uncertain intents according to their core contract.
 
 ## TypeScript and an unrelated fifth client
 
-The package is `quorumrelay-client@0.1.0-dev.11`. For local development
+The package is `quorumrelay-client@0.1.0-dev.13`. For local development
 use a `file:` dependency to `client/`. To use it without this checkout or any
 reference product, build and `npm pack` the client, then install its `.tgz` in
 your own project. Generated types come from the packaged core schemas.
@@ -145,3 +146,5 @@ Engine partial/failed/unsupported results remain envelopes, not stripped arrays.
 Abort/timeout/network failures remain distinct native errors. Provide `{signal}`
 to public client methods when the consumer owns cancellation.
 Check the service version before use and pin both deployment artifacts.
+
+MCP cancellation also covers progress delivery: a cancelled progress notification signals cooperative engine cancellation, allowing the worker to save its actual terminal result. It must not leave a finished worker recorded as running. Provider write reconciliation and receipt rules still apply.

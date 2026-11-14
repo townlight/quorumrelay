@@ -1,6 +1,6 @@
 # Provider capability inventory
 
-Current reconciliation: **2026-11-14**. Release remains incomplete and publication is held. The integrated local candidate is Python **0.1.0.dev12**, TypeScript **0.1.0-dev.12**, schema **2.0.0**. Historical dev8/dev11 artifacts remain separate.
+Current reconciliation: **2026-11-14**. Release remains incomplete and publication is held. The integrated local candidate is Python **0.1.0.dev13**, TypeScript **0.1.0-dev.13**, schema **2.0.0**. Historical dev8/dev11 artifacts remain separate.
 
 ## Scope and evidence
 

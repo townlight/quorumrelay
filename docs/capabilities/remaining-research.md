@@ -16,6 +16,8 @@ Evidence and exact scope: `inventory.json` provider `legistar`; operation status
 
 ## F02 PrimeGov (`primegov`)
 
+- Latest bounded item-method follow-up: the preserved client does not contain the supplied `getItemInfo` / `ListPublicFromSourceId` names; seven literal vendor assets returned HTTP 403. This establishes neither those methods' contract nor an outside-only dependency. Exact requests and capture hashes are indexed in `docs/verification/local-completion-2026-11-14.json`.
+
 - Observed Reno public /api/v2/PublicPortal/search form is now source-implemented with exact local metadata/excerpt checks, stable native-ID continuation, raw/parent preservation and bounded first/resumed receipt. Full document content, provider matching/caps/rank and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.
 - Official release notes identify Meeting API, speaker and tracking-number search but the checked release/help material supplies no executable schema. Continue from concrete product-matched API leads; no exhaustive public search or outside-only dependency is established, and no account enablement is a synthetic acceptance gate.
 - Authenticated create/update/upload field schemas, permissions, readback and conflict semantics remain unverified in the pinned material. A matching machine contract is needed; credentials or live tenant writes are not an acceptance gate.
@@ -253,6 +255,8 @@ Evidence and exact scope: `inventory.json` provider `boardable`; operation statu
 Evidence and exact scope: `inventory.json` provider `gworks`; operation status and outbound mappings are separate from historical observations.
 
 ## F30 Diligent BoardDocs (`boarddocs`)
+
+- Latest XML-ActiveMeetings lead: pinned third-party notebook has an unexecuted, incomplete illustrative XML fragment with malformed entities, not a saved server response. One exact example request returned HTTP 403; no XML/item mapping was inferred. Exact source pins and request are indexed in `docs/verification/local-completion-2026-11-14.json`. This does not establish an outside-only dependency.
 
 - Opt-in public listing/print detail is implemented with pinned third-party source and18synthetic helper/workflow cases; official/live contract acceptance remains unverified (403 observed).
 - Public file hrefs remain strings only; item hierarchy, attachment transfer, native search, staff writes and vendor import remain unresolved.

@@ -1,8 +1,8 @@
 # QuorumRelay user manual
 
-Preserved package baseline: **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The integrated development source retains that baseline and the approved CivicWeb/Cablecast readers, plus opt-in BoardDocs public listing/detail and CivicClerk Select detail/files and section writes, with 32 registered providers, 31 baseline families, 34 baseline formats, 47 additive parser hooks and 17 native-search handlers. The local successor is Python **0.1.0.dev12** / TypeScript **0.1.0-dev.12**; it is built and unpublished. See [local preparation evidence](verification/local-preparation-2026-11-14.json). Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
+The preserved immutable package baseline is Python **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The current integrated source and its locally built, unpublished successor are Python **0.1.0.dev13** / TypeScript **0.1.0-dev.13**. This candidate includes the approved CivicWeb/Cablecast readers, opt-in BoardDocs public listing/detail and CivicClerk Select detail/files and section writes, with 32 registered providers, 31 baseline families, 34 baseline formats, 47 additive parser hooks and 17 native-search handlers. See [local preparation evidence](verification/local-completion-2026-11-14.json). Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
 
-This manual describes the integrated development source. Immutable dev8 and dev11 packages are separate historical candidates; the retained readers and repairs are included in the local dev12 successor candidate.
+This manual describes the integrated development source. Immutable dev8 and dev11 packages are separate historical candidates; the retained readers and repairs are included in the local dev13 successor candidate.
 
 QuorumRelay is a standalone engine for identifying configured civic-data sources, reading or parsing bounded captures, normalizing meeting records, searching captured material, preparing neutral exports, and executing a small set of explicitly authorized provider writes. It does not require Townlight, TownReporter, TownRecord, Brief, a hosted service, or a particular application database. Those projects are examples of consumers; the engine API is intended for other products as well.
 
@@ -32,14 +32,14 @@ The <code>service</code> extra installs the MCP, Starlette, Uvicorn, multipart a
 
 ### Install the verified wheel
 
-This repository does not offer a public wheel download for the candidate. If your operator has already transferred the exact immutable wheel into an approved artifact store, verify its digest before installing it:
+This repository does not offer a public wheel download for the candidate. The locally prepared dev13 wheel is <code>quorumrelay-0.1.0.dev13-py3-none-any.whl</code>, SHA-256 <code>bcce6d5d2985dfa0f2e0810403b45e64a82a7c6b6e769015a1660a188c75acc5</code>. If your operator has transferred that exact immutable artifact into an approved artifact store, verify its digest before installing it:
 
 ~~~powershell
-Get-FileHash .\quorumrelay-0.1.0.dev11-py3-none-any.whl -Algorithm SHA256
-py -m pip install .\quorumrelay-0.1.0.dev11-py3-none-any.whl
+Get-FileHash .\quorumrelay-0.1.0.dev13-py3-none-any.whl -Algorithm SHA256
+py -m pip install .\quorumrelay-0.1.0.dev13-py3-none-any.whl
 ~~~
 
-Use only the immutable artifact whose hash is recorded above; rebuilding from source produces a different artifact identity. To run the HTTP or MCP service from source, install the matching checkout’s <code>.[service]</code> extra as shown above.
+Use only the dev13 artifact whose hash is recorded above; rebuilding from source produces a different artifact identity. The preserved dev11 wheel documented earlier is historical and predates the reader integration. To run the HTTP or MCP service from source, install the matching checkout’s <code>.[service]</code> extra as shown above.
 
 ### Verify the installed package
 
@@ -48,7 +48,7 @@ py -c "import quorumrelay; print(quorumrelay.__version__)"
 '{}' | quorumrelay providers
 ~~~
 
-The version command should print <code>0.1.0.dev11</code> for the preserved dev11 package and <code>0.1.0.dev12</code> for the integrated local candidate. Verify the source manifest and wheel SHA-256 as well. The <code>providers</code> command returns the installed provider and format manifest as JSON. In an embedded deployment, also request <code>GET /v1/info</code> and compare the installed version and schema version with the application’s approved pin.
+For the current integrated candidate, the version command should print <code>0.1.0.dev13</code>. It prints <code>0.1.0.dev11</code> only when you intentionally install the preserved historical wheel. Verify the source manifest and wheel SHA-256 as well. The <code>providers</code> command returns the installed provider and format manifest as JSON. In an embedded deployment, also request <code>GET /v1/info</code> and compare the installed version and schema version with the application’s approved pin.
 
 ## 2. Choose a provider and input format
 
