@@ -1,0 +1,341 @@
+<div class="content-locale-en-US content-locale-en"><div id="gzz1707128660378"><div class="body taskbody">
+      <div class="section context" id="gzz1707128660378__context_N10011_N1000E_N10001">
+         <p class="p">The following section outlines the procedure of associating Agenda Item Fields from Unity Form
+				with values from an <span class="keyword">OnBase</span> E-form or document via
+				Agenda Item Information Mapping option.</p>
+
+         <div class="note caution" id="gzz1707128660378__note_pgw_2h3_31c"><span class="cautiontitle">CAUTION:</span> When attempting to update Unity Form agenda
+				item, you cannot use the <span class="ph uicontrol">Legacy Form</span> option. When this option
+				is selected, the <span class="ph uicontrol">Agenda Form</span> drop-down list is
+				disabled.</div>
+
+         <p class="p">To perform Agenda Item Information Mapping with Unity Form:</p>
+
+      </div>
+
+      <ol class="ol steps"><li class="li step stepexpand" id="gzz1707128660378__step_N10033_N10030_N1000E_N10001">
+            <span class="ph cmd">In the <span class="ph uicontrol">Properties</span> pane, on the
+						<span class="ph uicontrol">General</span> tab, click <span class="ph uicontrol">Configure</span>. </span>
+            <div class="itemgroup stepresult">The <span class="keyword wintitle">Agenda Item Information Mapping</span> dialog box is
+					displayed.</div>
+         </li>
+<li class="li step stepexpand" id="gzz1707128660378__step_N10048_N10030_N1000E_N10001">
+            <span class="ph cmd">Select one the following required Agenda Item Fields:</span>
+            <div class="itemgroup info">
+               <div class="note note" id="gzz1707128660378__note_kw1_d3p_y1c"><span class="notetitle">Note:</span> All the required Agenda Items Fields are marked with
+						an asterisk (*) and displayed automatically in the <span class="ph uicontrol">Agenda
+							Item</span> column.</div>
+
+               
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="gzz1707128660378__table_h4p_wr3_31c" class="table" frame="border" border="1" rules="all"><colgroup><col style="width:31.15264797507788%"><col style="width:68.84735202492212%"></colgroup><thead class="thead" style="text-align:left;">
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e104" style="vertical-align:top;">Agenda Item Field</th>
+
+                           <th class="entry cellrowborder" style="vertical-align:top;" id="d53052e107">Description</th>
+
+                        </tr>
+
+                     </thead>
+<tbody class="tbody">
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e116" style="vertical-align:top;" headers="d53052e104 ">AgendaItemType</th>
+
+                           <td class="entry cellrowborder" style="vertical-align:top;" headers="d53052e116 d53052e107 ">
+                              <p class="p">Classifies individual agenda items.</p>
+
+                              <p class="p">Set it to <span class="ph uicontrol">Constant Value</span> and
+											select agenda item type from the <span class="ph uicontrol">Agenda Item
+												Type</span> drop-down list.</p>
+
+                           </td>
+
+                        </tr>
+
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e137" style="vertical-align:top;" headers="d53052e104 ">ShortTitle</th>
+
+                           <td class="entry cellrowborder" style="vertical-align:top;" headers="d53052e137 d53052e107 ">
+                              <p class="p">The short title of an agenda item.</p>
+
+                              <p class="p">Set it to one of the following:</p>
+
+                              <ul class="ul" id="gzz1707128660378__ul_hhv_rkj_31c">
+                                 <li class="li">
+                                    <span class="ph uicontrol">Constant Value</span> - to set a
+												static title for all items created via the Workflow
+												action.</li>
+
+                                 <li class="li">
+                                    <span class="ph uicontrol">Keyword Type</span> - to select a
+												keyword from the form as a title of an agenda
+												item.</li>
+
+                              </ul>
+
+                           </td>
+
+                        </tr>
+
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e167" style="vertical-align:top;" headers="d53052e104 ">Meeting Type</th>
+
+                           <td class="entry cellrowborder" style="vertical-align:top;" headers="d53052e167 d53052e107 ">
+                              <p class="p">The name of the type of meeting the item is associated
+											with. Set it to <span class="ph uicontrol">Constant
+											Value</span>.</p>
+
+                              <p class="p">Ensure that any configured <span class="ph uicontrol">Agenda Item
+												Fields</span> are compatible with the selected
+												<span class="ph uicontrol">Meeting Type</span>. </p>
+
+                              <p class="p">
+                                 <span class="ph uicontrol">Agenda Item Fields</span> are configured
+											and assigned to <span class="ph uicontrol">Meeting Types</span> as
+											described in the <cite class="cite">Agenda</cite> documentation. </p>
+
+                           </td>
+
+                        </tr>
+
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e203" style="vertical-align:top;" headers="d53052e104 ">OwnershipGroup</th>
+
+                           <td class="entry cellrowborder" style="vertical-align:top;" headers="d53052e203 d53052e107 ">
+                              <p class="p">The user group assigned to the agenda item. </p>
+
+                              <p class="p">Set it to <span class="ph uicontrol">Constant Value</span>.</p>
+
+                           </td>
+
+                        </tr>
+
+                     </tbody>
+</table>
+</div>
+
+            </div>
+         </li>
+<li class="li step stepexpand" id="gzz1707128660378__step_N100EC_N10030_N1000E_N10001">
+            <span class="ph cmd">To modify <span class="ph uicontrol">Name/Value</span> field of an agenda item, select the
+					agenda item from the <span class="ph uicontrol">Agenda Item</span> column and select one of
+					the following from the <span class="ph uicontrol">Get From</span> drop-down list:</span>
+            <div class="itemgroup info">
+               
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="gzz1707128660378__table_knb_tbm_l1c" class="table" frame="border" border="1" rules="all"><colgroup><col style="width:31.15264797507788%"><col style="width:68.84735202492212%"></colgroup><thead class="thead" style="text-align:left;">
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e252" style="vertical-align:top;">Value</th>
+
+                           <th class="entry cellrowborder" style="vertical-align:top;" id="d53052e255">Description</th>
+
+                        </tr>
+
+                     </thead>
+<tbody class="tbody">
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e264" style="vertical-align:top;" headers="d53052e252 ">Constant Value</th>
+
+                           <td class="entry cellrowborder" style="vertical-align:top;" headers="d53052e264 d53052e255 ">
+                              <p class="p">Populates selected <span class="ph uicontrol">Agenda Item
+												Field</span>.</p>
+
+                              <p class="p">Specify a value in the drop-down list or in the
+												<span class="ph uicontrol">Name or Value</span> field.</p>
+
+                           </td>
+
+                        </tr>
+
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e285" style="vertical-align:top;" headers="d53052e252 ">E-Form Field Name</th>
+
+                           <td class="entry cellrowborder" style="vertical-align:top;" headers="d53052e285 d53052e255 ">
+                              <p class="p">Populates selected <span class="ph uicontrol">Agenda Item
+												Field</span>.</p>
+
+                              <p class="p">Type the E-Form Field Name in the <span class="ph uicontrol">Name or
+												Value</span> field.</p>
+
+                           </td>
+
+                        </tr>
+
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e306" style="vertical-align:top;" headers="d53052e252 ">Keyword Type</th>
+
+                           <td class="entry cellrowborder" style="vertical-align:top;" headers="d53052e306 d53052e255 ">
+                              <p class="p">Populates selected <span class="ph uicontrol">Agenda Item
+												Field</span>.</p>
+
+                              <p class="p">Select a Keyword Type from the <span class="ph uicontrol">Keyword
+												Type</span> drop-down list.</p>
+
+                              <p class="p">Keyword Types are assigned to Document Types in the
+											system. The <span class="ph uicontrol">Keyword Type</span>
+											drop-down list displays all the available keywords in
+											the system. </p>
+
+                              <div class="note note" id="gzz1707128660378__note_h22_hdj_31c"><span class="notetitle">Note:</span> When an agenda item is created
+											via Workflow, the title of the agenda item is based on a
+											keyword entered for the title on the form that is used
+											to initiate the Workflow action. </div>
+
+                           </td>
+
+                        </tr>
+
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e336" style="vertical-align:top;" headers="d53052e252 ">Workflow Property</th>
+
+                           <td class="entry cellrowborder" style="vertical-align:top;" headers="d53052e336 d53052e255 ">
+                              <p class="p">Populates selected <span class="ph uicontrol">Agenda Item
+												Field</span>.</p>
+
+                              <p class="p">Defined in a life cycle as a part of a Workflow action,
+											rule, or task.</p>
+
+                              <p class="p">Type the Workflow Property in the <span class="ph uicontrol">Name or
+												Value</span> field.</p>
+
+                           </td>
+
+                        </tr>
+
+                     </tbody>
+</table>
+</div>
+
+               <div class="note note" id="gzz1707128660378__note_h2p_rdj_31c"><span class="notetitle">Note:</span> The <span class="ph uicontrol">Constant Value</span>,
+							<span class="ph uicontrol">E-Form Field Name</span>, or <span class="ph uicontrol">Workflow
+							Property</span> cannot exceed 255 characters.</div>
+
+            </div>
+         </li>
+<li class="li step stepexpand" id="gzz1707128660378__step_rwc_dfj_31c">
+            <span class="ph cmd">Perform one of the following:.</span>
+            <ul class="ul choices" id="gzz1707128660378__choices_nkb_dx4_y1c">
+               <li class="li choice">Select a value from the drop-down list to match the item you selected
+						from the <span class="ph uicontrol">Get From</span> drop-down list.</li>
+
+               <li class="li choice">Type a value in the <span class="ph uicontrol">Name or Value</span> field if a
+						drop-down list is not applicable.</li>
+
+            </ul>
+
+         </li>
+<li class="li step stepexpand" id="gzz1707128660378__step_ngt_kmj_31c">
+            <span class="ph cmd">Click <span class="ph uicontrol">Update</span>.</span>
+            <div class="itemgroup stepresult">The value of the selected agenda item is displayed in the
+						<span class="ph uicontrol">Name/Value</span> column.<div class="note note" id="gzz1707128660378__note_ug4_42j_31c"><span class="notetitle">Note:</span> A
+						message box may be displayed, prompting you to ensure that any
+							<span class="ph uicontrol">Agenda Item Fields</span> you have configured are
+						compatible with the selected <span class="ph uicontrol">Agenda Item
+					Type</span>.</div>
+
+            </div>
+         </li>
+<li class="li step stepexpand" id="gzz1707128660378__step_N101B8_N10030_N1000E_N10001">
+            <span class="ph cmd">Repeat steps<span class="xref ft-internal-link" data-ft-warning="excluded-from-rendering" data-mapid="~mVtIkbZpe0~RrfUkx1dxw" data-tocid="COEsxFhyw5ofgJjkHOFJNw" data-section="gzz1707128660378__step_rwc_dfj_31c">4</span>  and <span class="xref ft-internal-link" data-ft-warning="excluded-from-rendering" data-mapid="~mVtIkbZpe0~RrfUkx1dxw" data-tocid="COEsxFhyw5ofgJjkHOFJNw" data-section="gzz1707128660378__step_ngt_kmj_31c">5</span> to configure the remaining
+					required Agenda Item Fields.</span>
+         </li>
+<li class="li step stepexpand" id="gzz1707128660378__step_N101CB_N10030_N1000E_N10001">
+            <span class="ph cmd">Select any optional Agenda Item Fields from the <span class="ph uicontrol">Agenda Item
+						Field</span> drop-down list and configure them by performing step <span class="xref ft-internal-link" data-ft-warning="excluded-from-rendering" data-mapid="~mVtIkbZpe0~RrfUkx1dxw" data-tocid="COEsxFhyw5ofgJjkHOFJNw" data-section="gzz1707128660378__step_rwc_dfj_31c">4</span> and clicking
+						<span class="ph uicontrol">Add</span>. If you select one of the following Agenda Item
+					Fields, configure them as shown in the following table:</span>
+            <div class="itemgroup info">
+               
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="gzz1707128660378__table_k32_hcm_l1c" class="table" frame="border" border="1" rules="all"><colgroup><col style="width:31.15264797507788%"><col style="width:68.84735202492212%"></colgroup><thead class="thead" style="text-align:left;">
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e464" style="vertical-align:top;">Agenda Item Field</th>
+
+                           <th class="entry cellrowborder" style="vertical-align:top;" id="d53052e467">Value</th>
+
+                        </tr>
+
+                     </thead>
+<tbody class="tbody">
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e476" style="vertical-align:top;" headers="d53052e464 ">Mark Attachment Confidential</th>
+
+                           <td class="entry cellrowborder" style="vertical-align:top;" headers="d53052e476 d53052e467 ">
+                              <span class="ph uicontrol">Constant Value</span> set to <span class="ph uicontrol">1</span>.</td>
+
+                        </tr>
+
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e491" style="vertical-align:top;" headers="d53052e464 ">Closed Session</th>
+
+                           <td class="entry cellrowborder" style="vertical-align:top;" headers="d53052e491 d53052e467 ">
+                              <span class="ph uicontrol">Constant Value</span> set to <span class="ph uicontrol">1</span>.</td>
+
+                        </tr>
+
+                        <tr class="row">
+                           <th class="entry firstcol cellrowborder" id="d53052e506" style="vertical-align:top;" headers="d53052e464 ">Attachment Exclude from Packet Flag</th>
+
+                           <td class="entry cellrowborder" style="vertical-align:top;" headers="d53052e506 d53052e467 ">
+                              <span class="ph uicontrol">Constant Value</span> set to <span class="ph uicontrol">1</span>.</td>
+
+                        </tr>
+
+                     </tbody>
+</table>
+</div>
+
+               <div class="note note" id="gzz1707128660378__note_xqw_dnj_31c"><span class="notetitle">Note:</span> The Agenda Item Fields available from this drop-down list
+						correspond to the Agenda Item Field names that were created using Agenda
+						administration.</div>
+
+            </div>
+         </li>
+<li class="li step stepexpand" id="gzz1707128660378__step_N1023E_N10030_N1000E_N10001">
+            <span class="ph cmd">Once all the Agenda Item Fields are configured, click
+					<span class="ph uicontrol">OK</span>.</span>
+         </li>
+<li class="li step stepexpand" id="gzz1707128660378__step_N1024B_N10030_N1000E_N10001">
+            <span class="ph cmd">In the <span class="ph uicontrol">Property to Store Agenda Item Primary Key</span> field,
+					type <span class="ph uicontrol">AgendaItemPrimaryKey</span>.</span>
+         </li>
+<li class="li step stepexpand" id="gzz1707128660378__step_N1025C_N10030_N1000E_N10001">
+            <span class="ph cmd">To configure <span class="ph uicontrol">Related Documents</span>, select
+						<span class="ph uicontrol">Attached Related Documents</span>, navigate to the
+						<span class="ph uicontrol">Related</span> tab, and configure one of the
+					following:</span>
+            <ul class="ul choices" id="gzz1707128660378__choices_fjn_thj_31c">
+               <li class="li choice">Portfolio Type</li>
+
+               <li class="li choice">Portfolio Relation</li>
+
+               <li class="li choice">Ad Hoc Portfolio Relation</li>
+
+            </ul>
+
+            <div class="itemgroup stepresult">Related documents become supporting documents for agenda
+					items.</div>
+         </li>
+<li class="li step stepexpand" id="gzz1707128660378__step_N10221_N10022_N1000E_N10001">
+            <span class="ph cmd">Select the Keyword Type from the <span class="ph uicontrol">Keyword Type to Set Related
+						Document Order</span> drop-down list if you want to use the Keyword
+					Type to set the order of supporting documents attached to agenda item.</span>
+            <div class="itemgroup info">
+               <div class="note tip" id="gzz1707128660378__note_gmd_p3j_31c"><span class="tiptitle">Tip:</span> One of the most typically used Keyword
+						Types is Document Handle.</div>
+
+            </div>
+            <div class="itemgroup info">
+               <div class="note tip" id="gzz1707128660378__note_r21_z3j_31c"><span class="tiptitle">Tip:</span>  It is recommended to check the resulting
+						property value immediately after the Create or Update Agenda Item from
+						Document action is executed by configuring the following rules: Check Last
+						Execution Result and Compare Property Value. Configure the Check Last
+						Execution Result to verify that the Create or Update Agenda Item from
+						Document action occurred. Configure the Compare Property Value rule to use
+						the property value that was set by the Property to Store Agenda Item Primary
+						Key in the Create or Update Agenda Item from Document action.</div>
+
+            </div>
+         </li>
+</ol>
+
+   </div>
+
+</div></div>

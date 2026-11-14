@@ -264,7 +264,8 @@ def semantic_errors(data, identities):
             if mapping["interface_type"] == "observed_vendor_client_machine_contract":
                 if ((name, mapping["entity"], mapping["operation"]) not in {
                         ("telvue", "playlist_order", "update"), ("telvue", "playlist_membership", "create"),
-                        ("boardable", "agenda_order", "update"), ("boardable", "item", "update")}
+                        ("boardable", "agenda_order", "update"), ("boardable", "item", "update"),
+                        ("towncloud", "item_draft", "update")}
                         or mapping["implementation_status"] != "implemented"
                         or mapping["acceptance_status"] != "mock_passed"):
                     errors.append(f"{name}: vendor client contract requires attributed exact product/entity synthetic proof")

@@ -1,0 +1,22 @@
+{
+  "observed": "2026-11-14",
+  "url": "https://libertycountytxapp.meetingmanager.tylerapp.com/392259prod/tylermm/calendar/main.f980238b7778fb2e.js.map",
+  "derivation": "Literal sourceMappingURL in anonymous calendar application bundle. Direct bounded GET; no script execution/login or mutation. sourcesContent selected exact excerpts.",
+  "http_status": 200,
+  "bytes": 560075,
+  "sha256": "10924a3536e1dd48b4508efae6b2dc5ef79b050131e2d5adc11d6abd3ade9209",
+  "request": "POST {observed_calendar_api_base}/meetingCalendarSearch/agenda-items/search; JSON pageNo,pageSize,searchKeyword,startDate,endDate,meetingTypeIds,votingOutcomes",
+  "response": "searchResults[].agendaItemId,itemTitle,description,outcomeDescription,meetingName,meetingDate,meetingType,votingOutcome; totalElements",
+  "feature_gate": "GET {observed_calendar_api_base}/v1/harness/feature-flags must explicitly return agenda-item-outcome=true; missing/false is not successful empty search.",
+  "live_feature_observation": {
+    "url": "https://libertycountytxapp.meetingmanager.tylerapp.com/tylermmcalendar392259prod/v1/harness/feature-flags",
+    "result": "HTTP404 once via urllib.HTTPError; no body/hash receipt retained. No live agenda-item search was attempted.",
+    "limits": "Feature/backend applicability not established at this tenant. Client declaration plus synthetic verification does not claim this deployment supports it."
+  },
+  "limits": [
+    "No native parent meeting ID is supplied; meeting names/dates are metadata only, never an identity join.",
+    "Date normalized only when source is ISO-parsable; no timezone inferred.",
+    "Supplied rich text converted to visible local-search text; complete full-document/exact upstream query semantics unverified.",
+    "No source-map schema or DTO is treated as a staff write send/readback."
+  ]
+}

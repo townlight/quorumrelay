@@ -1,0 +1,128 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "49c8ad843b9890c37bf1145643a6b134aef713bf",
+  "status": "LOCAL_REQUIRED_SOURCE_CHECKS_PASS_NOT_DELIVERED",
+  "checks": [
+    {
+      "command": "python -m pytest -q",
+      "passed": 1587,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 84.007,
+      "junit_sha256": "f18ce3aed13706d89139afd1640d7a38efe596b22f64d2ddb4c3a01a93b97c45",
+      "warnings": [
+        "Starlette anyio BlockingPortal dependency deprecation"
+      ]
+    },
+    {
+      "command": "python -m ruff check .",
+      "status": "passed"
+    },
+    {
+      "command": "python scripts/validate_capabilities.py",
+      "status": "passed",
+      "evidence_records": 386,
+      "outbound_entries": 171,
+      "negative_checks": 5,
+      "errors": 0
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    {
+      "command": "python -m pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q",
+      "passed": 25,
+      "failed": 0,
+      "scope": "After final documentation/evidence line-ending normalization and reference/runtime hash sync; Python implementation and original vendor/test fixture bytes unchanged from1587-pass run."
+    },
+    {
+      "command": "git diff HEAD^ --check",
+      "status": "passed",
+      "scope": "Entire candidate relative to49c8ad8 after newly added evidence was staged; original vendor response trailing spaces preserved by an exact-file attribute."
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/gworks_detail.py",
+      "sha256": "e1477f4333141dcb818f7112470632c44f89c968e06ad4e0de7aeb6e813cd957",
+      "scope": "exact working-tree bytes at completed test run"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/towncloud_write.py",
+      "sha256": "bac98d56b4d8cedde6eed5bcc6c31e5235098505372ede0f2f5908331ad5cccd",
+      "scope": "exact working-tree bytes at completed test run"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/tyler_search.py",
+      "sha256": "83dc9051802cdeb8d846644430a77e900608559cfcc3218faa9cc44662ed6470",
+      "scope": "exact working-tree bytes at completed test run"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/__init__.py",
+      "sha256": "fcf2d2812b0e5ddf14d30e547ab869df85cc4ce9ccee6b785280a5d0eff2ebad",
+      "scope": "exact working-tree bytes at completed test run"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/identification.py",
+      "sha256": "b0470953e6d520416402970afe8980703bc75994f17ce0b94ccc9e530de290aa",
+      "scope": "exact working-tree bytes at completed test run"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/native.py",
+      "sha256": "41a45df08bf5df95e4e1093df426520d9427d4e099eb5fbf233cc04e0ac9884f",
+      "scope": "exact working-tree bytes at completed test run"
+    },
+    {
+      "path": "src/civic_data_connectors/write_adapters.py",
+      "sha256": "c0c191fa42ae1896016631210c93b9e1682fab9945d747922a4e2aac0970a111",
+      "scope": "exact working-tree bytes at completed test run"
+    },
+    {
+      "path": "scripts/validate_capabilities.py",
+      "sha256": "a2bc349918d7c87ccf041cb1c7e754c5f54f67b0bbfdc591431e6a5f5947955d",
+      "scope": "exact working-tree bytes at completed test run"
+    },
+    {
+      "path": "src/civic_data_connectors/data/capabilities.json",
+      "sha256": "bc5058d5bc3fd20545748850d7fba2f9814500963b3579262d2650ef26ca759a",
+      "scope": "exact working-tree bytes at completed test run"
+    },
+    {
+      "path": "docs/capabilities/inventory.json",
+      "sha256": "36b3833e9a290395f05a8f1e8c1d4b2a6b2f64d7d0afd79a68cc5749ca802c35",
+      "scope": "exact working-tree bytes at completed test run"
+    }
+  ],
+  "attribution_receipts": [
+    "docs/verification/gworks-published-detail-2026-11-14.json",
+    "docs/verification/towncloud-draft-write-2026-11-14.json",
+    "docs/verification/tyler-agenda-item-search-2026-11-14.json"
+  ],
+  "reused_evidence": [
+    "Unchanged TypeScript build and four tests from local-completion-2026-11-14.json; no client source changed."
+  ],
+  "limits": [
+    "No hosted CI, live TownCloud mutation or live Tyler item-search acceptance claimed.",
+    "Preserved dev13 artifacts and consumer pins do not contain these later source changes.",
+    "Full tasks 6/8/9/10 retain unresolved product-matched contracts; this receipt does not claim full-plan completion."
+  ],
+  "owned_job": "session75877 terminal exit0; no owned suite process remains",
+  "post_run_metadata": {
+    "reason": "New primary OnBase workflow assessment, corrected README client-contract count and stale Boardable native-search wording; no adapter or test-source changes. Authored evidence JSON/extract line endings normalized with receipt hashes refreshed; original vendor HTML bytes preserved with an exact-file whitespace attribute. No executable code or test input changed.",
+    "bindings": [
+      {
+        "path": "docs/capabilities/inventory.json",
+        "sha256": "43bf4fb3695630d44ed4b74c7c1a1ed7db4add8fbf1287d83b1f9560797df975"
+      },
+      {
+        "path": "src/civic_data_connectors/data/capabilities.json",
+        "sha256": "d620904325805a78ee642b86598d8a5559caeed8596d30043da2646a0edd62a4"
+      },
+      {
+        "path": "docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
+        "sha256": "6fee4af5afe51a093c5d67b536595911f10095be37628f64559d5b3f81bc3466"
+      }
+    ]
+  }
+}

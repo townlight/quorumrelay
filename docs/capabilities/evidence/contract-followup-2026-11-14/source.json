@@ -20,7 +20,33 @@
       "Unity REST fileContent encoding and create/query response envelope/native document identity",
       "Configured document type, keyword/index mapping and allowed service origin from matching deployment specification"
     ],
-    "outside_proof_scope": "Access to linked SDK documentation needs Hyland authentication or a shareable exported document. This does not prove another public source cannot establish a subset."
+    "outside_proof_scope": "Access to linked SDK documentation needs Hyland authentication or a shareable exported document. This does not prove another public source cannot establish a subset.",
+    "public_workflow_followup": {
+      "method": "Anonymous public documentation-client search. Literal clustered-search endpoint and request validator in vendor-declared fluidtopics.min.js; no SDK sign-in or access workaround. Broad filters were not assumed authoritative; selected topic content read directly from returned contentUrl.",
+      "sources": [
+        {
+          "url": "https://docs.hyland.com/r/OnBase/Agenda/Foundation-26.1/Agenda/Configuration/System-Interaction/Workflow/General-Workflow-Actions/Create-or-Update-Agenda-Item-From-Document",
+          "path": "docs/capabilities/evidence/contract-followup-2026-11-14/onbase-agenda-workflow.html",
+          "sha256": "f65c6ef9836e6f92624543e31d0e0aad0dc68776bd4a87ed07d03aa3010fb6b5",
+          "bytes": 4741,
+          "status": 200
+        },
+        {
+          "url": "https://docs.hyland.com/r/OnBase/Agenda/Foundation-23.1/Agenda/Configuration/System-Interaction/Workflow/General-Workflow-Actions/Create-or-Update-Agenda-Item-From-Document/Option-Agenda-Item-Information-Mapping/Agenda-Item-Information-Mapping-with-Unity-Form",
+          "path": "docs/capabilities/evidence/contract-followup-2026-11-14/onbase-unity-information-mapping.html",
+          "sha256": "b298038e7fdaccafd8abdf6b7b4b8327663dfcf9b6e78455b05e96ef5b78a20c",
+          "bytes": 19153,
+          "status": 200
+        }
+      ],
+      "findings": [
+        "Official workflow can create/update an agenda item and add supporting documents, but is supported in Core-based Client and Unity Workflow, not an exposed Agenda REST method.",
+        "Destination meeting and item types must exist; pending target meeting must exist; numeric target meeting IDs must be adjusted for the destination. These are explicitly deployment-owned configuration values, not values a generic connector can infer.",
+        "Unity mapping declares AgendaItemType, ShortTitle, Meeting Type and OwnershipGroup; optional field names are configured by local Agenda administration. Legacy Form cannot update a Unity Form item.",
+        "No workflow export bytes/schema, remote invocation, response identity or readback contract is supplied by these two pages. Existing Tagged DIP preparation does not execute this workflow or establish meeting association."
+      ],
+      "outside_proof_scope": "Exact SDK access remains authenticated. Public workflow requirements establish destination configuration needs for that workflow; no blanket claim that remaining Agenda APIs are private."
+    }
   },
   "tyler": {
     "official_article": "https://tylernow.atlassian.net/wiki/spaces/KA/pages/1044250630/API+Toolkit+-+What+is+needed+in+the+file+to+upload+TCM+Attachments",
@@ -94,6 +120,14 @@
     {
       "path": "docs/capabilities/evidence/contract-followup-2026-11-14/tyler-eerp-attachment.extract.txt",
       "sha256": "7aec7822049fe6c37e0b67265a7273e8566787591838222774b8035469127534"
+    },
+    {
+      "path": "docs/capabilities/evidence/contract-followup-2026-11-14/onbase-agenda-workflow.html",
+      "sha256": "f65c6ef9836e6f92624543e31d0e0aad0dc68776bd4a87ed07d03aa3010fb6b5"
+    },
+    {
+      "path": "docs/capabilities/evidence/contract-followup-2026-11-14/onbase-unity-information-mapping.html",
+      "sha256": "b298038e7fdaccafd8abdf6b7b4b8327663dfcf9b6e78455b05e96ef5b78a20c"
     }
   ]
 }

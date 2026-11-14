@@ -5,3 +5,6 @@ docs/capabilities/evidence/** -text
 # This vendor Swagger capture has original CRLF bytes; preserve its pinned hash.
 docs/capabilities/evidence/contract-followup-2026-11-14/onbase-unity-rest-swagger.json -text whitespace=cr-at-eol
 docs/verification/*.json -text whitespace=cr-at-eol
+
+# Exact vendor HTML includes trailing spaces; retain original response bytes.
+docs/capabilities/evidence/contract-followup-2026-11-14/onbase-unity-information-mapping.html -text whitespace=-blank-at-eol

@@ -150,6 +150,9 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format == "gworks-published-meeting-html":
+        from .gworks_detail import parse_bundle
+        return parse_bundle(source, namespace, content)
     if input_format == "boarddocs-public-meetings-json":
         from .boarddocs_public import parse_bundle
         return parse_bundle(source, namespace, content, input_format)

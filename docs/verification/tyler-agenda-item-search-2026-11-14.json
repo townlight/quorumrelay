@@ -1,0 +1,116 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "49c8ad843b9890c37bf1145643a6b134aef713bf",
+  "status": "SCOPED_SYNTHETIC_PASS",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_tyler_agenda_item_search.py tests/test_tyler_liberty.py tests/test_tyler_native_rows.py tests/test_tyler_packets.py tests/test_tyler_recording_metadata.py -q",
+      "passed": 63,
+      "failed": 0,
+      "junit_sha256": "0f68e7898d8a1fed821d9b5db795d3f0fc2a9686161f3053b00d7fb94a6d0f50"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/tyler-public-item-search/item-search-model.extract.ts",
+      "sha256": "94d771e6e815401e118bac48f217efb142cb14334a95d94f8154028c6d763762"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/tyler-public-item-search/item-search-call.extract.ts",
+      "sha256": "34d7af4f1e4d3b3bcb5ec71b09e2efb263b7043a527988e9ff34b79a87d248e7"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/tyler-public-item-search/public-feature-flag.service.ts",
+      "sha256": "c0a4b105524fb844b00f99d1a8dbe56c60e7fb59f7e5a32fdee9edb472b9b1ca"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/tyler-public-item-search/search-routes.extract.ts",
+      "sha256": "29bccf27d785d8bc99015373928eceb2f5eba3334a21788b9f6028513ae35715"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/tyler-public-item-search/source.json",
+      "sha256": "5c9142f02d89744912e2b54a90ffbe42c712e8cb87db8a5e14bace613283acc5"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/tyler_search.py",
+      "sha256": "83dc9051802cdeb8d846644430a77e900608559cfcc3218faa9cc44662ed6470"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_tyler_agenda_item_search.py",
+      "sha256": "0b4616636bf99a0d5376e53e176ca6260817cf1cf8aef18994f00efb25e3fc5c",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "52cccce18a5893b3a90cb5aff60dbebca1e0b32cad8ec55997323ab978aea1f8"
+    }
+  ],
+  "synthetic_execution": {
+    "provider": "tyler-meeting-manager",
+    "status": "mock_passed",
+    "operations": [
+      "native_search"
+    ],
+    "entities": [
+      "agenda_item"
+    ],
+    "scope": "Feature-gated public agenda-item candidates and exact local supplied-text matching; native parent meeting identity not supplied.",
+    "execution_provenance": "22new synthetic item-mode cases within63affected Tyler passes; real source-map declarations, no live item-search acceptance.",
+    "checks": [
+      {
+        "command": "pytest tests/test_tyler_agenda_item_search.py tests/test_tyler_liberty.py tests/test_tyler_native_rows.py tests/test_tyler_packets.py tests/test_tyler_recording_metadata.py -q",
+        "passed": 63,
+        "failed": 0,
+        "junit_sha256": "0f68e7898d8a1fed821d9b5db795d3f0fc2a9686161f3053b00d7fb94a6d0f50"
+      }
+    ],
+    "bindings": [
+      {
+        "kind": "vendor_contract",
+        "path": "docs/capabilities/evidence/tyler-public-item-search/item-search-model.extract.ts",
+        "sha256": "94d771e6e815401e118bac48f217efb142cb14334a95d94f8154028c6d763762"
+      },
+      {
+        "kind": "vendor_contract",
+        "path": "docs/capabilities/evidence/tyler-public-item-search/item-search-call.extract.ts",
+        "sha256": "34d7af4f1e4d3b3bcb5ec71b09e2efb263b7043a527988e9ff34b79a87d248e7"
+      },
+      {
+        "kind": "vendor_contract",
+        "path": "docs/capabilities/evidence/tyler-public-item-search/public-feature-flag.service.ts",
+        "sha256": "c0a4b105524fb844b00f99d1a8dbe56c60e7fb59f7e5a32fdee9edb472b9b1ca"
+      },
+      {
+        "kind": "vendor_contract",
+        "path": "docs/capabilities/evidence/tyler-public-item-search/search-routes.extract.ts",
+        "sha256": "29bccf27d785d8bc99015373928eceb2f5eba3334a21788b9f6028513ae35715"
+      },
+      {
+        "kind": "vendor_contract",
+        "path": "docs/capabilities/evidence/tyler-public-item-search/source.json",
+        "sha256": "5c9142f02d89744912e2b54a90ffbe42c712e8cb87db8a5e14bace613283acc5"
+      },
+      {
+        "kind": "test",
+        "path": "tests/test_tyler_agenda_item_search.py",
+        "sha256": "0b4616636bf99a0d5376e53e176ca6260817cf1cf8aef18994f00efb25e3fc5c",
+        "hash_policy": "test_source_crlf_to_lf",
+        "canonical_lf_sha256": "52cccce18a5893b3a90cb5aff60dbebca1e0b32cad8ec55997323ab978aea1f8"
+      }
+    ]
+  },
+  "limits": [
+    "Feature gate must explicitly return true; exact Liberty GET404, no item search live call attempted.",
+    "Metadata names/dates never create parent meeting identity. Fulltext/provider ranking/complete-catalog semantics unverified.",
+    "Native agendaItemId and unknown response fields retained across SQLite/reopen/ZIP."
+  ]
+}

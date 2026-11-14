@@ -1,0 +1,41 @@
+{
+  "observed": "2026-11-14",
+  "shell_url": "https://towncloud.io/go/woodford-vt/agendas/452",
+  "client_url": "https://towncloud.io/assets/application-0dc58293d54de1ba75143417a29e41af370bc6bcc6d4a90281c00b50f6a6d29b.js",
+  "client_bytes": 1758089,
+  "client_sha256": "180588c9245d1e9b195b2ec81887346af77c88bcfe2492baf28240e0e377b8ae",
+  "extract_sha256": "f2a4b76f247d8732915f00497916bb941ef09f9b6a488392549bae190d1342e4",
+  "client_operations": {
+    "save": "POST /go/{site}/drafts application/x-www-form-urlencoded draft[agenda_id],draft[content_type],draft[content_id],draft[field_name],draft[draft_content],client_timestamp",
+    "readback": "GET /go/{site}/drafts?agenda_id={agenda}; drafts[].content_type/content_id/field_name/draft_content/updated_at/expired consumed by client",
+    "content_types": [
+      "Meetings::Item",
+      "Meetings::SectionHeader"
+    ],
+    "item_fields": [
+      "heading",
+      "subheading",
+      "text",
+      "minutes"
+    ],
+    "section_fields": [
+      "heading",
+      "text"
+    ]
+  },
+  "anonymous_editor_observation": {
+    "url": "https://towncloud.io/go/woodford-vt/agendas/452/edit",
+    "status": 302,
+    "location": "https://towncloud.io/go/woodford-vt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "limits": "GET only; redirect not followed. No login, cookies or mutation. Applies this exact editor route; no all-source contract absence claim."
+  },
+  "limits": [
+    "Client-declared unpublished drafts only; no native item publish/save, upload or file-import contract inferred.",
+    "Application must supply trusted exact site/namespace/tenant and native agenda/content binding; no login or account acquisition implemented.",
+    "Adapter only changes existing explicitly unexpired draft rows and verifies readback; does not create agenda items or drafts.",
+    "Public rendered agenda provides capture-local positions, never usable as native editor IDs.",
+    "Anonymous edit route302 home with no form does not prove all documentation private or API absent."
+  ]
+}

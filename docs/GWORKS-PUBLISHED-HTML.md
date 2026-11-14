@@ -1,0 +1,7 @@
+# GWorks published meeting HTML
+
+Select `gworks-published-meeting-html` for an exact HTTPS `https://files.frontdeskgworks.com/city/{city}/cms/{meeting}_agenda.html` or `_minute.html` source. This additive format preserves the original 34 compatibility formats and native meeting ID in the existing city listing namespace. It maps the rendered title, wall-clock date/time (zone unknown), location, sections/children and same-city supporting-file links. Item IDs are local to the exact SHA256 capture, never staff item identifiers. The supplied PDF resolver must bind the same city, meeting and document kind. Supporting links are locators until separately fetched under existing transfer policy.
+
+The vendor citizen client declares this HTML load path. A real public city1311 meeting5017 response is pinned under `tests/fixtures/gworks-published`; source provenance and client extract are under `docs/capabilities/evidence/gworks-published-client`. Thirteen new tests include a real capture mapping, SQLite import twice/reopen/search, ZIP identity and original-byte preservation, separate synthetic attachment transfer, and mismatched/unsafe metadata rejection. The affected suite passed 156 tests. This is selected-page evidence, not provider-wide acceptance.
+
+The secure calendar client uses a distinct POST/Bearer and flattened-field contract. Static JSON flags are not assumed equivalent to its publication flags. No staff writes, upload association, native item IDs, tenant-wide catalog completeness or timezone inference is added.

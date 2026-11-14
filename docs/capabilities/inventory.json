@@ -3449,7 +3449,7 @@
           "observation_date": "2026-11-14",
           "proof_level": "bounded_source_assessment_not_implementation_acceptance",
           "receipt_path": "docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
-          "receipt_sha256": "93dbd5a8169cd4e4646adf5c2f2aa7a30cd3c1b86a3e26480cfe61e47fc0d108",
+          "receipt_sha256": "6fee4af5afe51a093c5d67b536595911f10095be37628f64559d5b3f81bc3466",
           "limits": "Only the identified resources and exact missing fields; no exhaustive search, provider absence or live transaction claim."
         },
         {
@@ -8497,6 +8497,16 @@
           "limits": "The observed empty/sentinel response was an application error, not an empty-result proof. Search is limited to supplied year/category requests and title/date matching; no full-text, full catalog or provider write acceptance.",
           "receipt_path": "docs/verification/civicplus-agenda-center-native-search-2026-11-12.json",
           "receipt_sha256": "374984e232effbdc72a51cf869828bccbe7fa5bfc3006add0d299a166235fb7a"
+        },
+        {
+          "id": "webcentral-api-schema-product-assessment",
+          "url": "https://www.effinghamcounty.org/swagger/v1/swagger.json",
+          "title": "Official Web Central REST schema inspected separately from Agenda Center",
+          "kind": "observed_official_api_schema_product_applicability_review",
+          "observation_date": "2026-11-14",
+          "observed": "Official /api discovery produced shell and declared Swagger schema; Calendar and DocumentCenter routes present, no AgendaCenter path in this schema.",
+          "proof_level": "official_schema_product_applicability_unverified_for_agenda_center",
+          "limits": "Schema contains Calendar and DocumentCenter modules, no AgendaCenter-named path. This is exact inspected schema coverage, not proof Agenda Center API absent. Do not substitute Calendar or generic document upload for a meeting association. No authenticated API calls or SDK acquisition."
         }
       ],
       "tenants": [
@@ -9081,7 +9091,8 @@
       "remaining_research": [
         "Effingham 2024/category 3 returned 35 rows; a bounded Commission native-search engine request and resume returned partial/no-error pages with three hits each. The supplied ViewFile?html=true response was text/html (2,481 bytes), not PDF/binary. Other years/categories, PreviousVersions traversal, full archive and binary/PDF retrieval remain unresolved; do not repeat the same HTML route. Chino extraction failure remains recorded; add no tenant.",
         "Bounded discovery/native search have scoped source and fixture coverage. Pinned CivicPlus material supplies no external machine write/file-import schema for Agenda Center. The missing input is a product-matched integration contract, not an authorized live test account.",
-        "If authorized test access is supplied, verify role/approval/visibility and duplicate/update/readback separately for meeting, item and file; no remote writes occurred."
+        "If authorized test access is supplied, verify role/approval/visibility and duplicate/update/readback separately for meeting, item and file; no remote writes occurred.",
+        "Official Web Central /api linked schema inspected at known Effingham site: Calendar/DocumentCenter models do not establish AgendaCenter writes or meeting associations. Support explicitly supplies SDK files; exact SDK-file access is an outside contact dependency, not proof another public source cannot establish a subset. See evidence/webcentral-api-assessment/source.json."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "civicplus-agenda-center",
@@ -19236,11 +19247,11 @@
           "url": "https://dev.salesforce.unityapi.onbase.com/swagger/docs/V1",
           "title": "Product-matched concrete contract lead assessment",
           "kind": "public_contract_and_access_observation",
-          "observed": "New public UnityRestAPI V1 request DTOs found: document/create and document/get responses remain unspecified objects, fileContent encoding unspecified, and no Agenda association path. SDK official link redirects to Hyland authentication; exact sample ZIP403. Do not substitute Content Innovation Cloud or Fiserv interfaces for selected Agenda deployment.",
+          "observed": "New public UnityRestAPI V1 request DTOs found: document/create and document/get responses remain unspecified objects, fileContent encoding unspecified, and no Agenda association path. SDK official link redirects to Hyland authentication; exact sample ZIP403. Do not substitute Content Innovation Cloud or Fiserv interfaces for selected Agenda deployment. Public Agenda workflow pages additionally establish destination-owned meeting/item type and target-meeting ID configuration; no remote invocation/readback schema is supplied.",
           "observation_date": "2026-11-14",
           "proof_level": "bounded_source_assessment_not_implementation_acceptance",
           "receipt_path": "docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
-          "receipt_sha256": "93dbd5a8169cd4e4646adf5c2f2aa7a30cd3c1b86a3e26480cfe61e47fc0d108",
+          "receipt_sha256": "6fee4af5afe51a093c5d67b536595911f10095be37628f64559d5b3f81bc3466",
           "limits": "Only the identified resources and exact missing fields; no exhaustive search, provider absence or live transaction claim."
         }
       ],
@@ -21469,6 +21480,58 @@
           "limits": "No native item IDs supplied; capture-local positions stable only within the exact captured version; Supplied S3 links are locators, not retrieved byte/playability proof; transfer response is synthetic; No inferred body/speaker/adopted motion/vote or timezone; No new network, vendor writes, frozen rebuild or publication",
           "receipt_path": "docs/verification/towncloud-agenda-associations-2026-11-12.json",
           "receipt_sha256": "b7d4f22c1acbc6212d39804e6b62ff86ea0c59199a533852fea92e9622ad74e6"
+        },
+        {
+          "id": "towncloud-existing-draft-synthetic",
+          "url": "https://towncloud.io/go/woodford-vt/agendas/452",
+          "title": "Pinned vendor existing agenda item draft save/readback client and synthetic coordinator execution",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-14",
+          "observed": "Anonymous published page and declared application bundle HTTP200; no script execution. Anonymous editor GET302home, no form.",
+          "access_scope": "public_source_and_local_synthetic_execution_only",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/towncloud-draft-write-2026-11-14.json",
+          "receipt_sha256": "c710c37241cd8ca0d0e393089742ed355155febc1d99b7e9e678d31774798f00",
+          "limits": "Existing explicitly unexpired draft fields only; no publication, full item form, new file/import contract or API stability claim.",
+          "synthetic_execution": {
+            "provider": "towncloud",
+            "status": "mock_passed",
+            "operations": [
+              "update"
+            ],
+            "entities": [
+              "item_draft"
+            ],
+            "scope": "One existing explicitly unexpired draft text field bound to a trusted native meeting/item or section. Saved unpublished draft only.",
+            "execution_provenance": "30TownCloud cases including all declared field variants;105affected passes through shared coordinator, restart/reconcile and readback. No live mutation.",
+            "checks": [
+              {
+                "command": "pytest tests/test_towncloud_draft_write.py tests/test_boardable_agenda_write.py tests/test_telvue_playlist_write.py tests/test_writes.py -q",
+                "passed": 105,
+                "failed": 0,
+                "junit_sha256": "d84bf667bc22e77c3b19d186beccddeb7be0cc4e30718475dca412326a92c548"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/towncloud-client-drafts/application.extract.js",
+                "sha256": "f2a4b76f247d8732915f00497916bb941ef09f9b6a488392549bae190d1342e4"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/towncloud-client-drafts/source.json",
+                "sha256": "82cd73203ae70590a6cad9c477d476ed08de23f2ebbe132bfb9aff40b315a3ff"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_towncloud_draft_write.py",
+                "sha256": "cbf2ae5e7962516a3465d9a54fadd71f87d6005ef7ebda57695b442cf5970cdb",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "b3c91c545881a581299ded773cee30d188fd942aaeb830716a9b74438a72b967"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -21710,11 +21773,12 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "towncloud-doc"
+            "towncloud-doc",
+            "towncloud-existing-draft-synthetic"
           ],
-          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_agenda_or_minutes: Authenticated TownCloud manage/publish UI; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_agenda_or_minutes: Authenticated TownCloud manage/publish UI; API unknown Scoped existing item/section draft text update is implemented and synthetic accepted in its outbound row. Full item save/publication remains unmapped; no blanket acceptance.",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -21867,6 +21931,64 @@
           "api_version": "unknown",
           "automatable_contract_verified": false,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "item_draft",
+          "operation": "update",
+          "endpoint_or_format": "POST /go/{site}/drafts; GET /go/{site}/drafts?agenda_id={native_meeting_id}",
+          "field_mappings": [
+            {
+              "normalized": "meeting_id",
+              "provider_field": "draft[agenda_id]",
+              "mapping_level": "observed_vendor_client_form_field"
+            },
+            {
+              "normalized": "resource_id",
+              "provider_field": "draft[content_id]",
+              "mapping_level": "observed_vendor_client_form_field"
+            },
+            {
+              "normalized": "content_type",
+              "provider_field": "draft[content_type]",
+              "mapping_level": "observed_vendor_client_form_field"
+            },
+            {
+              "normalized": "field_name",
+              "provider_field": "draft[field_name]",
+              "mapping_level": "observed_vendor_client_form_field"
+            },
+            {
+              "normalized": "draft_content",
+              "provider_field": "draft[draft_content]",
+              "mapping_level": "observed_vendor_client_form_field"
+            }
+          ],
+          "evidence_ids": [
+            "towncloud-existing-draft-synthetic"
+          ],
+          "account_requirements": "Trusted exact site/namespace/tenant, session cookie/CSRF and agenda/native content policy. No account acquisition or live mutation required for synthetic acceptance.",
+          "authorized_test_access": "synthetic_only_no_live_mutation",
+          "readback_receipt": "Before GET returned snapshot, exact preflight, POST one field and exact GET after; only selected updated_at may vary. Durable intent, restart and reconciliation never replay POST.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_public_vendor_client_not_stable_public_write_API_guarantee",
+          "method": "POST",
+          "api_version": "pinned2026-11-14TownCloudclient",
+          "automatable_contract_verified": true,
+          "domain_scope": "Existing meeting agenda item/section unpublished text draft only; no new items/drafts, publish, file upload or administration."
         }
       ],
       "pagination": {
@@ -21884,7 +22006,8 @@
       "remaining_research": [
         "Woodford /agendas embeds the published agenda response; public body/year controls, next-page behavior and complete history remain unverified.",
         "The observed published JSON is mapped; no native public search or complete archive scope is established.",
-        "Pinned evidence does not establish an external write route or vendor file-import schema. Tenant-supported field/readback documentation remains needed; authorized-account acquisition is not required for synthetic contract acceptance."
+        "Pinned public client now establishes existing unpublished draft fields, implemented with30synthetic coordinator cases. Full item save/publication, new file and vendor file-import schemas remain unresolved. Tenant-supported field/readback documentation remains needed; authorized-account acquisition is not required for synthetic contract acceptance.",
+        "Nested-sort PUT and packet-status GET consume runtime DOM paths missing from the anonymous published page. No endpoint or native editor item IDs are guessed. Exact anonymous editor GET302home returned no form; no private-only or absent-API claim."
       ],
       "authentication": "Published agenda detail public. Editing/publication requires authorized TownCloud account; API access and tier unknown.",
       "write_findings": "Official product page documents meeting/agenda/minutes creation and management/publication UI, not a supported machine write endpoint.",
@@ -26110,6 +26233,21 @@
           "proof_level": "live_engine_bounded_read_receipt_not_provider_acceptance",
           "receipt_path": "docs/verification/gworks-galena-minutes-fetch-2026-11-12.json",
           "receipt_sha256": "bb4e185774455d221099b5a0a6904fe61b4a9a3e99af227c1c84bf1052b0d1ca"
+        },
+        {
+          "id": "gworks-published-html-capture-and-tests",
+          "url": "https://files.frontdeskgworks.com/city/1311/cms/5017_agenda.html",
+          "title": "Published FrontDesk HTML native meeting and capture-local hierarchy mapping",
+          "kind": "observed_vendor_source_and_local_engine_tests",
+          "observed": "HTTP200 text/html 6877 bytes; real published capture mapped with supplied PDF resolver, 11 rendered sections, 13 children and one same-city supporting document.",
+          "proof_level": "real_capture_and_local_engine_execution_not_provider_acceptance",
+          "observation_date": "2026-11-14",
+          "access_scope": "anonymous_read_and_local_execution_only",
+          "receipt_path": "docs/verification/gworks-published-detail-2026-11-14.json",
+          "receipt_sha256": "fd2d23b8e26d83061b5e3051ff51cfcf40a7cfe53298f50360a422fd8343b2ff",
+          "fixture_path": "tests/fixtures/gworks-published/5017-agenda.html",
+          "fixture_sha256": "fe3f140adf91404239a5b8e789b9fcedd687b457bc8b8425bb82233abbcad24f",
+          "limits": "Separate explicitly selected HTML format; no secure calendar equivalence or native item identities, timezone or full catalog claim."
         }
       ],
       "tenants": [
@@ -26154,9 +26292,10 @@
             "gworks-galena",
             "gworks-json",
             "gworks-galena-current-listing-live",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "gworks-published-html-capture-and-tests"
           ],
-          "details": "The existing configured static GET and baseline gWorks parser handle https://files.frontdeskgworks.com/city/{city_id}/cms/data.json. Current Galena read produced 153 meetings in one response; results remain partial because a static response does not prove upstream catalog completeness. Agenda/minutes flags derive the documented baseline attachment routes; no separate meeting detail URL or continuation was observed.",
+          "details": "The existing configured static GET and baseline gWorks parser handle https://files.frontdeskgworks.com/city/{city_id}/cms/data.json. Current Galena read produced 153 meetings in one response; results remain partial because a static response does not prove upstream catalog completeness. Agenda/minutes flags derive the documented baseline attachment routes; no separate meeting detail URL or continuation was observed. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only.",
           "dependencies": [
             "Configured public city JSON URL/city ID",
             "Safe bounded public retrieval"
@@ -26184,9 +26323,10 @@
             "gworks-json",
             "gworks-city-1311-agenda-engine-fetch-live",
             "gworks-galena-minutes-engine-fetch-403-live",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "gworks-published-html-capture-and-tests"
           ],
-          "details": "The existing fetch_attachment path resolves baseline-derived api.gworks.cloud agenda/minutes URLs and downloads only through explicitly configured exact public origins. The city-1311 agenda fetch completed (5,211-byte PDF); a flagged Galena minutes object resolved but its signed object GET returned HTTP 403, so the citation was retained as partial/unavailable. This is a document route, not a separate meeting detail API.",
+          "details": "The existing fetch_attachment path resolves baseline-derived api.gworks.cloud agenda/minutes URLs and downloads only through explicitly configured exact public origins. The city-1311 agenda fetch completed (5,211-byte PDF); a flagged Galena minutes object resolved but its signed object GET returned HTTP 403, so the citation was retained as partial/unavailable. This is a document route, not a separate meeting detail API. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only.",
           "dependencies": [
             "Supplied capture with the agenda_fl/minutes_fl row flag",
             "Explicit bounded download_origins for the API and observed signed-file origin"
@@ -26213,9 +26353,10 @@
           "evidence_ids": [
             "media-baseline",
             "media-reader-source",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "gworks-published-html-capture-and-tests"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only.",
           "dependencies": [
             "standalone extraction",
             "source revision pin"
@@ -26261,9 +26402,10 @@
           "capability_status": "unverified",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "gworks-published-html-capture-and-tests"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only.",
           "dependencies": [
             "shared capture/search engine"
           ],
@@ -26284,9 +26426,10 @@
           "capability_status": "unverified",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "gworks-published-html-capture-and-tests"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only.",
           "dependencies": [
             "shared schemas/export engine"
           ],
@@ -26519,9 +26662,10 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "Bounded public evidence now covers the Galena static listing, one successful city-1311 agenda fetch, and one Galena minutes failure (resolver ready, guarded object GET HTTP 403). See the three F29 receipts. No separate meeting detail route or continuation token was observed; provider-wide catalog completeness and retrieval of every flagged document remain unverified.",
+        "Published HTML detail is now mapped from the vendor-declared /city/{city}/cms/{meeting}_{agenda|minute}.html format with real city1311 meeting5017 capture. Existing Galena PDF failure remains a one-document access failure; not a provider-wide blocker. Catalog continuation/completeness and every flagged document remain unverified.",
         "Retained history, update frequency and maximum response payload remain unknown; one static response cannot establish them. No additional repeated sampling is required for this bounded research outcome.",
-        "Pinned FrontDesk builder material describes staff UI without an external write schema. Vendor machine field/readback contracts remain unresolved; staff credentials and live-write acceptance are not completion gates."
+        "Pinned FrontDesk builder material describes staff UI without an external write schema. Vendor machine field/readback contracts remain unresolved; staff credentials and live-write acceptance are not completion gates.",
+        "Anonymous citizen client declares secure POST /cms/secure/city/meeting/list with Bearer token and flattened cms_meeting.* fields. Separate calendar response/paging contract and meeting-write payload/readback remain unresolved; do not substitute static meetings JSON field names. Generic upload helper consumes a caller-supplied endpoint and signedUrl but does not establish meeting association."
       ],
       "authentication": "City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown.",
       "write_findings": "Historical official indexed article documents agenda creation/logging minutes/publication; live docs 404. Machine create/update/upload contracts remain unknown; no absence claim.",
@@ -27629,8 +27773,75 @@
           "observation_date": "2026-11-14",
           "proof_level": "bounded_source_assessment_not_implementation_acceptance",
           "receipt_path": "docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
-          "receipt_sha256": "93dbd5a8169cd4e4646adf5c2f2aa7a30cd3c1b86a3e26480cfe61e47fc0d108",
+          "receipt_sha256": "6fee4af5afe51a093c5d67b536595911f10095be37628f64559d5b3f81bc3466",
           "limits": "Only the identified resources and exact missing fields; no exhaustive search, provider absence or live transaction claim."
+        },
+        {
+          "id": "tyler-public-item-search-synthetic",
+          "url": "https://libertycountytxapp.meetingmanager.tylerapp.com/392259prod/tylermm/calendar/main.f980238b7778fb2e.js.map",
+          "title": "Vendor source-map public agenda-item search call/model and scoped synthetic execution",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-14",
+          "observed": "Anonymous literal sourceMappingURL GET200560075bytes;22newcases/63affectedPASS. No script execution, account access or mutation.",
+          "access_scope": "public_source_and_local_synthetic_execution_only",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/tyler-agenda-item-search-2026-11-14.json",
+          "receipt_sha256": "d235b18bdb95fafeda6d6c91301137b8779344ba89b8a99140ab7cdc8f7b8687",
+          "limits": "Native agendaItemId only; no meeting ID from names/dates. Feature must returntrue; exact Liberty flagGET404 means live item mode applicability remains unverified.",
+          "synthetic_execution": {
+            "provider": "tyler-meeting-manager",
+            "status": "mock_passed",
+            "operations": [
+              "native_search"
+            ],
+            "entities": [
+              "agenda_item"
+            ],
+            "scope": "Feature-gated public agenda-item candidates and exact local supplied-text matching; native parent meeting identity not supplied.",
+            "execution_provenance": "22new synthetic item-mode cases within63affected Tyler passes; real source-map declarations, no live item-search acceptance.",
+            "checks": [
+              {
+                "command": "pytest tests/test_tyler_agenda_item_search.py tests/test_tyler_liberty.py tests/test_tyler_native_rows.py tests/test_tyler_packets.py tests/test_tyler_recording_metadata.py -q",
+                "passed": 63,
+                "failed": 0,
+                "junit_sha256": "0f68e7898d8a1fed821d9b5db795d3f0fc2a9686161f3053b00d7fb94a6d0f50"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/tyler-public-item-search/item-search-model.extract.ts",
+                "sha256": "94d771e6e815401e118bac48f217efb142cb14334a95d94f8154028c6d763762"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/tyler-public-item-search/item-search-call.extract.ts",
+                "sha256": "34d7af4f1e4d3b3bcb5ec71b09e2efb263b7043a527988e9ff34b79a87d248e7"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/tyler-public-item-search/public-feature-flag.service.ts",
+                "sha256": "c0a4b105524fb844b00f99d1a8dbe56c60e7fb59f7e5a32fdee9edb472b9b1ca"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/tyler-public-item-search/search-routes.extract.ts",
+                "sha256": "29bccf27d785d8bc99015373928eceb2f5eba3334a21788b9f6028513ae35715"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/tyler-public-item-search/source.json",
+                "sha256": "5c9142f02d89744912e2b54a90ffbe42c712e8cb87db8a5e14bace613283acc5"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_tyler_agenda_item_search.py",
+                "sha256": "0b4616636bf99a0d5376e53e176ca6260817cf1cf8aef18994f00efb25e3fc5c",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "52cccce18a5893b3a90cb5aff60dbebca1e0b32cad8ec55997323ab978aea1f8"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -27777,9 +27988,10 @@
           "evidence_ids": [
             "tyler-ector",
             "tyler-doc",
-            "tyler-liberty-public-contract-execution"
+            "tyler-liberty-public-contract-execution",
+            "tyler-public-item-search-synthetic"
           ],
-          "details": "Observed search POST with term/date/meeting type and bounded pages; exact local metadata matching only, no provider stable-order or full-document claim. Configured native mapping retains visible cancelled/adjourned records and literal source status/date/time; legacy baseline parsing remains unchanged.",
+          "details": "Observed search POST with term/date/meeting type and bounded pages; exact local metadata matching only, no provider stable-order or full-document claim. Configured native mapping retains visible cancelled/adjourned records and literal source status/date/time; legacy baseline parsing remains unchanged. Separate agenda_item search mode is now source implemented with22scoped synthetic cases, exact feature flag and item/native ID field model. No parent meeting join, complete text or current Liberty feature acceptance inferred.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
@@ -28176,7 +28388,8 @@
         "Historical Ector empty requests remain historical. Liberty establishes nonempty selected-window fields; not full catalog or universal meetingTypeIds semantics.",
         "Native search pagination is bounded/partial; remote stable ordering and full-document text remain unverified.",
         "Staff meeting/item writes, document/media upload and provider-specific import format remain unmapped; no API inference from UI features.",
-        "Actual publicly rendered TCM attachment article applies to EERP Accounts Payable, not MeetingManager. Calendar bundle names write route constants and a scheduling DTO without matching send/auth/response/recurrence contract. No staff write or upload inferred. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json"
+        "Actual publicly rendered TCM attachment article applies to EERP Accounts Payable, not MeetingManager. Calendar bundle names write route constants and a scheduling DTO without matching send/auth/response/recurrence contract. No staff write or upload inferred. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
+        "Pinned public source-map now establishes agenda-item search and its feature flag, implemented with22synthetic cases and neutral persistence/ZIP. Liberty exact featureflag GET404; live item-mode applicability unverified, not unsupported. Staff DTO definitions still do not establish native write send/readback/auth."
       ],
       "authentication": "Ector public calendar anonymous. Staff functions need authorized Tyler account and configured workflow; API tier/access unknown.",
       "write_findings": "Official page explicitly supports meeting scheduling/rescheduling, agenda edits, attachment/video uploads and minutes import/edit/publish. No usable write API or vendor minutes import schema verified.",

@@ -75,7 +75,7 @@ Evidence and exact scope: `inventory.json` provider `municode-meetings`; operati
 
 ## F08 BoardBook (`boardbook`)
 
-- Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied.
+- Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agendaâ†’PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied.
 - Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.
 - Pinned material does not establish role/enablement, write/readback or conflict schemas for an external integration. Those contract details remain unresolved; staff-account acquisition is not an acceptance gate.
 
@@ -184,6 +184,7 @@ Evidence and exact scope: `inventory.json` provider `champ`; operation status an
 
 - Historical Fitchburg failed search/HTML-at-PDF observations remain retained as such. Later selected hierarchy/item/section detail and explicit meeting/item/packet wrapper resolution are implemented with separate captures and synthetic execution. Akron embedded SearchResults/custom-date GET is also implemented. These paths do not establish all archives, attachment variants or Agenda association.
 - Hyland Agenda Foundation 25.1 guidance is version/installation-scoped. Identify deployment/version and entitlement before applying API/write operations to Agenda Online.
+- Public Agenda workflow documentation now pins its required existing destination meeting/item types and numeric target-meeting ID, plus locally configured Unity fields. It documents Core/Unity Workflow configuration, not a remote invocation/readback or export-file schema. Tagged DIP preparation does not execute that association.
 - Deployment-matched create/update/upload and meeting-association field/readback contracts remain missing. An authorized staff/test account is not required for vendor-documented synthetic acceptance.
 - Normal Tagged DIP linked-document file/index preparation is implemented with exact destination mappings and synthetic emitted-layout proof; no Agenda meeting association or remote processing is inferred. OnBase API SDK remains an actual vendor surface; sdk.onbase.com redirected to Hyland identity, and public REST help describes per-deployment published operations rather than a universal Agenda schema. Continue exact API contract research without credential acquisition.
 - Current-listing Agenda hierarchy, selected item/section detail, supporting-document wrapper and meeting-packet branches now have scoped source/synthetic execution. Archive traversal, native search, non-agenda detail variants and staff import/meeting association remain unresolved; broader deployment or live file availability is not inferred.
@@ -203,7 +204,7 @@ Evidence and exact scope: `inventory.json` provider `laserfiche-weblink`; operat
 
 - Woodford /agendas embeds the published agenda response; public body/year controls, next-page behavior and complete history remain unverified.
 - The observed published JSON is mapped; no native public search or complete archive scope is established.
-- Pinned evidence does not establish an external write route or vendor file-import schema. Tenant-supported field/readback documentation remains needed; authorized-account acquisition is not required for synthetic contract acceptance.
+- Pinned vendor client now establishes existing unpublished item/section draft fields, implemented with30synthetic coordinator cases. Full item save/publication, file upload and vendor file-import remain unmapped. Nested-sort PUT and packet GET require runtime DOM paths not supplied by the anonymous published page; the exact editor GET302home supplies no form. This is not proof all documentation is private or API absent.
 
 Evidence and exact scope: `inventory.json` provider `towncloud`; operation status and outbound mappings are separate from historical observations.
 
@@ -245,7 +246,7 @@ Evidence and exact scope: `inventory.json` provider `wistia`; operation status a
 - The live engine call covered VCCCD upcoming=true through pages 1-2 and resumed one page offset, returning 20 distinct records across first/resumed calls. Past mode is fixture-tested only; reported total 150 and full catalog coverage remain unverified.
 - The separate pinned public search client GET is implemented with24synthetic cases. Exact matching covers supplied title and agenda/minutes/attachment excerpts. Native numeric identities resolve only through original scoped listing captures; unbound candidates remain explicit. Two bounded live queries timed out. Provider matching/ranking, full text, paging and search-ID/date equivalence remain unverified. See [the mapping](../BOARDABLE-SEARCH.md).
 - Public meeting rows expose description, not a verified normalized body field; body filtering is unknown. Preserve timezone literals and the earlier VCCCD detail-versus-landing display discrepancy.
-- The listing has no agenda/document/media locators. Selected known-detail mapping and supplied viewer-to-document resolution are implemented with separate synthetic and bounded live-byte receipts. Other documents and the listing/detail date disagreement remain unverified; no native search or complete catalog is inferred.
+- The listing has no agenda/document/media locators. Selected known-detail mapping and supplied viewer-to-document resolution are implemented with separate synthetic and bounded live-byte receipts. Other documents and the listing/detail date disagreement remain unverified; the separate native-search implementation does not establish complete catalog coverage.
 - The pinned public legacy client now establishes sibling reorder and existing item text/description updates; both are implemented with36 synthetic coordinator cases. Explicit runtime organization/meeting URLs and legacy-editor binding are required. No draft creation, parent moves, new attachments or publication. See [exact usage and limits](../BOARDABLE-WRITES.md).
 - New agenda_app_url editor, recurring day, full meeting forms, new item/file, publication and vendor-specific import contracts remain unresolved. The visible new-file FormData branch does not establish created attachment identity/bytes/readiness or subsequent GET readback; no account acquisition gate is imposed.
 
@@ -253,7 +254,7 @@ Evidence and exact scope: `inventory.json` provider `boardable`; operation statu
 
 ## F29 gWorks FrontDesk (`gworks`)
 
-- Bounded public evidence now covers the Galena static listing, one successful city-1311 agenda fetch, and one Galena minutes failure (resolver ready, guarded object GET HTTP 403). See the three F29 receipts. No separate meeting detail route or continuation token was observed; provider-wide catalog completeness and retrieval of every flagged document remain unverified.
+- Bounded public evidence now covers the Galena static listing, one successful city-1311 agenda fetch, and one Galena minutes failure (resolver ready, guarded object GET HTTP 403). See the three F29 receipts. Published HTML detail is now mapped separately from the vendor-declared path, with native meeting identity matching the original city listing namespace. Eleven sections and thirteen children are capture-local rendered positions. Catalog continuation/completeness and every flagged document remain unverified.
 - Retained history, update frequency and maximum response payload remain unknown; one static response cannot establish them. No additional repeated sampling is required for this bounded research outcome.
 - Pinned FrontDesk builder material describes staff UI without an external write schema. Vendor machine field/readback contracts remain unresolved; staff credentials and live-write acceptance are not completion gates.
 
@@ -271,7 +272,7 @@ Evidence and exact scope: `inventory.json` provider `boarddocs`; operation statu
 ## F31 Tyler Meeting Manager (`tyler-meeting-manager`)
 
 - Historical Ector empty requests remain historical. Liberty establishes nonempty selected-window fields; not full catalog or universal meetingTypeIds semantics.
-- Native search pagination is bounded/partial; remote stable ordering and full-document text remain unverified.
+- Meeting and separate feature-gated agenda-item native search are implemented. The latter has22synthetic cases/63affected passes; the exact Liberty feature flagGET404 means live applicability unverified. Native agendaItemId is retained, parent meeting ID is absent; no name/date identity join. Remote stable ordering, full-document text and complete catalog remain unverified.
 - Staff meeting/item writes, document/media upload and provider-specific import format remain unmapped; no API inference from UI features.
 
 Evidence and exact scope: `inventory.json` provider `tyler-meeting-manager`; operation status and outbound mappings are separate from historical observations.

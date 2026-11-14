@@ -1,0 +1,76 @@
+<div class="content-locale-en-US content-locale-en"><div id="dgh1646163560554"><div class="body conbody">
+      <p class="p" id="dgh1646163560554__1236731">The <span class="ph uicontrol">Create or Update Agenda Item from Document</span> action
+            allows you to use an <span class="keyword">OnBase</span> document or E-Form to add,
+            update, or clear both legacy and Unity Form agenda items in <span class="keyword">Agenda</span>.</p>
+
+      <p class="p">For a specific existing agenda item, you can modify its field values and add additional
+            supporting documents.</p>
+
+      <p class="p">When configuring this action, note the following:</p>
+
+      <ul class="ul" id="dgh1646163560554__ul_m5h_n23_31c">
+         <li class="li">All necessary items in <span class="keyword">Agenda</span> must be completely
+                configured.</li>
+
+         <li class="li">An agenda item should not be created from the same <span class="keyword">OnBase</span> Document Type that is used to initialize the
+                workflow. If the same Document Type is used to create an agenda item and initialize
+                the workflow, and the <span class="ph uicontrol">Create or Update Agenda Item from
+                    Document</span> action is used as a System Task, then an infinite loop is
+                created, resulting in multiple new agenda items.</li>
+
+         <li class="li">This action is only supported in the Core-based Client and Unity Workflow
+                interfaces.</li>
+
+         <li class="li">Agenda license is required to configure and use this action.</li>
+
+         <li class="li">Exporting this action requires a destination database that already contains a
+                meeting type or agenda item type.</li>
+
+      </ul>
+
+      <p class="p">This action allows you to configure import types, which allows for the import and export
+            of agenda items to know what types they are, and also allows for the import to map to
+            the corresponding objects in the new system:</p>
+
+      <ul class="ul" id="dgh1646163560554__ul_bkt_v11_cyb">
+         <li class="li">Agenda Manager Item Types (map only)</li>
+
+         <li class="li">Agenda Manager Meeting Types (map only)</li>
+
+      </ul>
+
+      <p class="p">When configuring these import types, note the following:</p>
+
+      <ul class="ul" id="dgh1646163560554__ul_p3r_kb1_cyb">
+         <li class="li">Prior to importing the workflow, the Meeting Type used by the workflow must
+                exist. The import cannot create a new Meeting Type and Item Type. The import can
+                only map to existing meeting and item types.</li>
+
+         <li class="li">If a workflow action is configured to target an agenda item for a meeting (pending
+                item), then the Target Meeting must exist in Agenda.</li>
+
+         <li class="li">In Workflow, the configuration for a Target Meeting uses an ID number. The Target
+                Meeting number will need to be determined, and any actions or rules using the Target
+                Metting in the imported workflow will need to be updated to the correct ID after the
+                import.</li>
+
+      </ul>
+
+      <p class="p">The configuration of <span class="ph uicontrol">Create or Update Agenda Item from Document</span>
+            action varies depending on whether you select the <span class="ph uicontrol">Unity Form</span> or
+            the <span class="ph uicontrol">Legacy Form</span> agenda item in the
+                <span class="ph uicontrol">Properties</span> pane. For more information on configuring this
+            action with Legacy and Unity agenda items, see <span class="xref ft-internal-link" data-ft-warning="excluded-from-rendering" data-mapid="OaK8rbAFp9fF_uz1yo4x_w" data-tocid="3OIJ9AAwcSlhCEdV5bghog">Option: Agenda Item Information Mapping</span>.</p>
+
+      <div class="note caution" id="dgh1646163560554__note_pgw_2h3_31c"><span class="cautiontitle">CAUTION:</span> When attempting to update Unity Form agenda item, you cannot use
+            the <span class="ph uicontrol">Legacy Form</span> option. When this option is selected, the
+                <span class="ph uicontrol">Agenda Form</span> drop-down list is disabled.</div>
+
+      <div class="note tip" id="dgh1646163560554__note_g21_sf3_31c"><span class="tiptitle">Tip:</span>  As a best practice, with Legacy agenda items, this action
+            should only be used as a System Task when you are creating a new Agenda Item and the
+                <span class="ph uicontrol">Agenda Item Primary Key</span> can be set to <span class="ph uicontrol">Constant
+                Value</span> of <span class="ph uicontrol">0</span>.</div>
+
+   </div>
+
+</div></div>

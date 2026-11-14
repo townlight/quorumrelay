@@ -341,3 +341,7 @@ consumer file validation still apply; the path is not proof of playable bytes.
 ## Boardable legacy agenda client
 
 [BOARDABLE-WRITES.md](BOARDABLE-WRITES.md) documents the pinned runtime org/meeting binding, native list and item GETs, reorder JSON and preserved-field multipart text edits. Vendor client source and36 synthetic coordinator checks are separately attributed; new editor/draft creation/new files/publication remain unmapped. Current source is later than preserved dev13 packages.
+
+## GWorks published HTML and TownCloud drafts
+
+[GWorks published HTML](GWORKS-PUBLISHED-HTML.md) uses the original city listing namespace and meeting ID; rendered item IDs remain capture-local. [TownCloud draft writes](TOWNCLOUD-WRITES.md) map native agenda/content/field form keys with exact GET readback for an existing unpublished draft. Full item save/publication/file upload remain unmapped.

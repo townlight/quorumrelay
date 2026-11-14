@@ -15,7 +15,8 @@ from ..models import OperationContext, OperationResult, Source
 FORMATS = {provider: tuple(row["input_format"] for row in compat.source_formats()
                            if row["connector"] == provider)
            for provider in dict.fromkeys(row["connector"] for row in compat.source_formats())}
-ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json", "legistar-votes-json",
+ADDITIONAL_FORMATS = {"gworks": ("gworks-published-meeting-html",),
+                      "legistar": ("legistar-events-json", "legistar-event-json", "legistar-votes-json",
                                  "legistar-rollcalls-json"),
                       "boarddocs": ("boarddocs-public-meetings-json",),
                       "boardbook": ("boardbook-public-agenda-html",),
@@ -166,6 +167,11 @@ def validate_source(source: Source, context: OperationContext | None = None,
     account_api = is_account_api(source)
     namespace = (account_namespace(source) if account_api else
                  compat.source_namespace(source.provider, urlsplit(source.url)))
+    if source.provider == "gworks" and source.input_format == "gworks-published-meeting-html":
+        published = urlsplit(source.url)
+        city = re.fullmatch(r"/city/([1-9][0-9]*)/cms/[1-9][0-9]*_(?:agenda|minute)\.html", published.path)
+        if published.scheme == "https" and published.hostname == "files.frontdeskgworks.com" and city:
+            namespace = f"//files.frontdeskgworks.com/city/{city[1]}/cms/data.json"
     if not account_api and source.namespace is not None and namespace != source.namespace:
         raise ValueError("The configured namespace does not match the provider-derived source namespace.")
     if (context is not None and context.allowed_namespaces is not None and

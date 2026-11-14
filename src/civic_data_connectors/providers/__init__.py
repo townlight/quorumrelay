@@ -44,6 +44,7 @@ def register(engine, *, transport: Transport | None = None,
     for provider, input_format in (
             ("boarddocs", "boarddocs-public-meetings-json"),
             ("boardbook", "boardbook-public-agenda-html"),
+            ("gworks", "gworks-published-meeting-html"),
             ("town-hall-streams", "town-hall-streams-event-html"),
             ("escribe", "escribe-meeting-detail-html"),
             ("granicus", "granicus-platform-soap-xml"),
