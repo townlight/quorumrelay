@@ -30,6 +30,14 @@ def documents(source, raw):
         if type(value) is int and 0 < value <= 2147483647 and raw.get(status) == 5:
             result.append({'kind': kind, 'external_id': str(value), 'url': f'{base}meetingInformation/{route}/false/{value}',
                            'availability': 'supplied_public_document_locator'})
+    for field, status, enabled, kind, route in (
+            ('meetingAgendaId', 'agendaStatus', 'agendaPacketEnabled', 'packet', 'Agenda'),
+            ('minutesId', 'minutesStatus', 'minutesPacketEnabled', 'minutes_packet', 'Minutes')):
+        value = raw.get(field)
+        if (type(value) is int and 0 < value <= 2147483647 and raw.get(status) == 5
+                and raw.get(enabled) is True):
+            result.append({'kind': kind, 'external_id': str(value), 'url': f'{base}meetingInformation/{route}/true/{value}',
+                           'availability': 'supplied_public_document_locator'})
     return result
 
 

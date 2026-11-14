@@ -24,3 +24,5 @@ mapping. Tokens created under the former row-filtering semantics are rejected
 before network access; start a fresh request to obtain a current token. Other
 providers' checkpoints are unchanged. This prevents a saved local row offset
 from being interpreted against a differently filtered calendar page.
+
+Posted agenda and minutes packets use the captured client’s `Agenda/true/{meetingAgendaId}` and `Minutes/true/{minutesId}` locators only when the corresponding packet-enabled flag is literally true. The opaque packet document ID is not substituted for the native agenda/minutes ID. Calendar flags can be false while selected detail enables packets; the mapper respects the captured response rather than inferring availability. After storing selected detail, explicit `fetch_attachment(..., index=...)` retains the existing exact source/native meeting/document-membership and PDF guards. [Packet evidence](verification/tyler-packets-2026-11-14.json) covers synthetic PDF transfer; live packet availability and rendering remain unverified.

@@ -26998,6 +26998,55 @@
               }
             ]
           }
+        },
+        {
+          "id": "tyler-enabled-packets-2026-11-14",
+          "url": "https://libertycountytxapp.meetingmanager.tylerapp.com/392259prod/tylermm/calendar/main.f980238b7778fb2e.js",
+          "title": "Posted enabled packet selectors and synthetic SDK transfer",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observed": "2026-11-14",
+          "observation_date": "2026-11-14",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "access_scope": "pinned_public_client_and_local_mock_execution_no_remote_mutation",
+          "receipt_path": "docs/verification/tyler-packets-2026-11-14.json",
+          "receipt_sha256": "dc313ddd07fb41f6829553973f3703f20b4d14875065b052f7561ae39d0a4ef2",
+          "limits": "Packet PDF bytes are synthetic; no live packet GET/rendering/playback or staff write.; Packet links require positive native agenda/minutes ID, posted status5 and literal boolean enabled flag; not the opaque packet document ID.; No new parser/provider/search handler or baseline compatibility changes. Existing affected evidence reused; no full-suite rerun or release.",
+          "synthetic_execution": {
+            "provider": "tyler-meeting-manager",
+            "status": "fixture_passed",
+            "operations": [
+              "discover",
+              "fetch"
+            ],
+            "entities": [],
+            "scope": "Posted enabled agenda/minutes packet locators; persisted selected detail and synthetic PDF transfer only.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_tyler_packets.py tests/test_tyler_liberty.py tests/test_tyler_native_rows.py tests/test_provider_discovery.py -q",
+                "passed": 106,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/tyler-packets/client-extract.txt",
+                "sha256": "3f6f19013d30ec41451a155562d70ea8afdefb75f91fdbff626e3acfba83a2aa"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/tyler-liberty/detail.json",
+                "sha256": "ace54029a5934c586c2e9e5600db91414f55dd2dc033c488f6247b0885bfffbc"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_tyler_packets.py",
+                "sha256": "a1623cdaa03782cd08b2542cacdf7fc01fe362aa33b0330c14a048bd6f2f5a2a",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "a1623cdaa03782cd08b2542cacdf7fc01fe362aa33b0330c14a048bd6f2f5a2a"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -27057,7 +27106,8 @@
             "tyler-ector",
             "tyler-ector-public-calendar-query",
             "tyler-ector-historical-empty-read",
-            "tyler-liberty-public-contract-execution"
+            "tyler-liberty-public-contract-execution",
+            "tyler-enabled-packets-2026-11-14"
           ],
           "details": "Observed nonempty Liberty calendar with explicit meeting_type_ids []; legacy default [-1] preserved. Scoped date window and raw fields retained. Configured native mapping retains visible cancelled/adjourned records and literal source status/date/time; legacy baseline parsing remains unchanged.",
           "dependencies": [
@@ -27085,9 +27135,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "tyler-ector",
-            "tyler-liberty-public-contract-execution"
+            "tyler-liberty-public-contract-execution",
+            "tyler-enabled-packets-2026-11-14"
           ],
-          "details": "Stored native meetingId/recurringId bound detail; exact observed published agenda/minutes URL membership; explicit attachment fetch validates PDF signature. Configured native mapping retains visible cancelled/adjourned records and literal source status/date/time; legacy baseline parsing remains unchanged.",
+          "details": "Stored native meetingId/recurringId bound detail; exact observed published agenda/minutes URL membership; explicit attachment fetch validates PDF signature. Configured native mapping retains visible cancelled/adjourned records and literal source status/date/time; legacy baseline parsing remains unchanged. Posted agenda/minutes packets are additionally exposed only with their literal enabled flag; documented client isPacket=true selectors retain native agenda/minutes IDs. Calendar false flags emit no packet; selected detail may supply true. Explicit transfer uses existing source/native-record/document-membership/PDF guards. Packet byte execution is synthetic, not live availability.",
           "dependencies": [
             "shared network safeguards"
           ],
