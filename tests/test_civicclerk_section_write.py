@@ -22,14 +22,20 @@ class Vendor:
         self.calls = []
         self.mismatch = False
         self.omit_text = False
+        self.event = {'id': 7, 'agendaId': 91}
+        self.change_parent_on_post = False
 
     def send(self, url, *, method, body, headers, byte_limit, deadline_seconds):
         assert headers['Authorization'] == 'Bearer private-test-token'
         assert urlsplit(url).hostname == 'fishersin.api.civicclerk.com' and deadline_seconds > 0
         self.calls.append((method, url, json.loads(body) if body else None))
+        if method == 'GET' and urlsplit(url).path == '/v1/Events/7':
+            return WriteResponse(200, json.dumps(self.event).encode())
         if method == 'POST':
             value = {'id': 41, **json.loads(body)}
             self.rows[41] = value
+            if self.change_parent_on_post:
+                self.event['agendaId'] = 92
             return WriteResponse(201, json.dumps(value).encode())
         if method == 'PUT':
             self.rows[41].update(json.loads(body))
@@ -69,10 +75,11 @@ def change(operation, **fields):
 def test_create_update_204_readback_receipt_and_replay(tmp_path):
     engine, context, network = setup(tmp_path)
     approval = plan(engine, context, change('create', sectionName='Budget', sectionText='Initial text'))
-    assert not network.calls
+    assert len(network.calls) == 1 and network.calls[0][0] == 'GET'
     created = engine.execute('commit_write', approval, context=context)
     assert created.status == 'completed', created.public_dict()
-    assert network.calls[0][2] == {'agendaId': 91, 'sectionName': 'Budget', 'sectionText': 'Initial text'}
+    post = next(call for call in network.calls if call[0] == 'POST')
+    assert post[2] == {'agendaId': 91, 'sectionName': 'Budget', 'sectionText': 'Initial text'}
     assert created.data['items'][0]['readback']['agendaId'] == 91
     receipt = engine.execute('receipt', {'plan_id': approval['plan_id']}, context=context)
     assert receipt.status == 'completed' and 'private-test-token' not in json.dumps(receipt.public_dict())
@@ -136,3 +143,39 @@ def test_missing_text_readback_cannot_confirm_null_or_preserve_update(tmp_path):
     result = engine.execute('plan_write', {'source': SOURCE,
         'changes': [change('update', sectionName='Changed')]}, context=context)
     assert result.status == 'failed' and not any(call[0] == 'PUT' for call in network.calls[before:])
+
+
+def test_wrong_event_parent_or_identity_rejected_during_plan(tmp_path):
+    engine, context, network = setup(tmp_path)
+    invalid = change('create', sectionName='x')
+    invalid['meeting_id'] = 'not-a-native-id'
+    assert engine.execute('plan_write', {'source': SOURCE, 'changes': [invalid]}, context=context).status == 'failed'
+    assert not network.calls
+    for event in ({'id': 7, 'agendaId': 92}, {'id': 8, 'agendaId': 91}, {'id': True, 'agendaId': 91}):
+        network.event = event
+        result = engine.execute('plan_write', {'source': SOURCE,
+            'changes': [change('create', sectionName='x')]}, context=context)
+        assert result.status == 'failed'
+    assert all(method == 'GET' for method, _, _ in network.calls)
+
+
+def test_parent_changed_after_plan_prevents_create_and_update(tmp_path):
+    engine, context, network = setup(tmp_path)
+    network.rows[41] = {'id': 41, 'agendaId': 91, 'sectionName': 'Old', 'sectionText': 'Keep'}
+    for operation in ('create', 'update'):
+        network.event['agendaId'] = 91
+        approval = plan(engine, context, change(operation, sectionName='New'))
+        network.event['agendaId'] = 92
+        result = engine.execute('commit_write', approval, context=context)
+        assert result.status == 'failed'
+    assert all(method == 'GET' for method, _, _ in network.calls)
+
+
+def test_parent_changed_after_create_remains_uncertain_without_duplicate(tmp_path):
+    engine, context, network = setup(tmp_path)
+    approval = plan(engine, context, change('create', sectionName='Budget'))
+    network.change_parent_on_post = True
+    result = engine.execute('commit_write', approval, context=context)
+    assert result.status == 'partial' and result.data['items'][0]['state'] == 'uncertain'
+    assert engine.execute('commit_write', approval, context=context).status == 'partial'
+    assert sum(method == 'POST' for method, _, _ in network.calls) == 1

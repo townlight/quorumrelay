@@ -5,7 +5,6 @@ from dataclasses import asdict, replace
 from datetime import date
 from time import monotonic
 
-from ..compat import read_tyler_meeting_manager
 from ..engine import canonical_hash
 from ..models import Bounds, Error, OperationResult
 from ..search import _query, search_records
@@ -15,6 +14,7 @@ from .discovery import _checkpoint, _enrich, _resume
 from .identification import configured_source, validate_source
 from .native import make_bundle
 from .tyler_public import api_base
+from .tyler_rows import calendar_rows
 
 
 def native_search(engine, request, content, context, *, transport=None):
@@ -38,7 +38,7 @@ def native_search(engine, request, content, context, *, transport=None):
         raise ValueError('Invalid meeting type selection.')
     size = min(20, query.limit, bounds.max_records)
     binding = canonical_hash({'source': source.public_dict(), 'query': asdict(query), 'scope': context.scope, 'page_size': size,
-                              'contract': 'tyler-public-search/v1'})
+                              'contract': 'tyler-public-search/v2-preserve-status'})
     queue, seen = _resume(bounds.checkpoint, binding) if bounds.checkpoint else ([{'page': 1}], set())
     if (len(queue) != 1 or set(queue[0]) != {'page'} or seen or type(queue[0]['page']) is not int
             or not 1 <= queue[0]['page'] <= 10000):
@@ -70,11 +70,7 @@ def native_search(engine, request, content, context, *, transport=None):
         raw_rows, total = data['searchResults'], data['totalElements']
         if (not isinstance(raw_rows, list) or len(raw_rows) > size or type(total) is not int or total < 0):
             raise ValueError('Unexpected Tyler search envelope.')
-        rows = []
-        for raw in raw_rows:
-            parsed = read_tyler_meeting_manager(source.url, json.dumps([raw]).encode())
-            if parsed:
-                rows.append((parsed[0], raw, 'meeting'))
+        rows = calendar_rows(source.url, raw_rows)
         bundle = make_bundle(source, namespace, response.content, 'tyler-public-search-json', rows)
         bundle['capture']['retrieval_url'] = url
         _enrich(bundle, source.provider)

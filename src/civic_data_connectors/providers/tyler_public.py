@@ -37,12 +37,12 @@ def fetch_detail(engine, source, namespace, external_id, bounds, context, transp
     import json
     from time import monotonic
 
-    from ..compat import read_tyler_meeting_manager
     from ..engine import source_identity_key
     from ..models import Error, OperationResult
     from ..storage import operation_cancelled
     from .discovery import _enrich
     from .native import make_bundle
+    from .tyler_rows import meeting_row
 
     identity = {'provider': source.provider, 'namespace': namespace, 'record_type': 'meeting',
                 'external_id': external_id}
@@ -77,11 +77,11 @@ def fetch_detail(engine, source, namespace, external_id, bounds, context, transp
         if (not isinstance(detail, dict) or detail.get('id') != external_id
                 or detail.get('meetingId') != meeting or detail.get('recurringId') != recurring):
             raise ValueError('Detail does not match the captured meeting.')
-        parsed = read_tyler_meeting_manager(source.url, json.dumps([detail]).encode())
-        if len(parsed) != 1:
+        mapped = meeting_row(source.url, detail)
+        if mapped is None:
             raise ValueError('Detail was not a visible mapped meeting.')
         bundle = make_bundle(source, namespace, response.content, 'tyler-public-detail-json',
-                             [(parsed[0], detail, 'meeting')])
+                             [(mapped[0], detail, mapped[1])])
         bundle['capture']['retrieval_url'] = url
         _enrich(bundle, source.provider)
         return OperationResult('partial', bundle, coverage=coverage, operation_id=context.operation_id)

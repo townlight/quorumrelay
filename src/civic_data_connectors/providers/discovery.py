@@ -65,11 +65,16 @@ def _api_source(source):
 
 
 def _binding(source, bounds, context, input_format):
-    return canonical_hash({
+    state = {
         "source": source.public_dict(), "dates": [bounds.date_from, bounds.date_to],
         "scope": context.scope, "input_format": input_format,
         "semantics": "inclusive-source-calendar-date/v1",
-    })
+    }
+    if (source.provider == "tyler-meeting-manager" and source.options.get("calendar_api_base")
+            and input_format == "tyler-public-calendar-json"):
+        # Retaining previously filtered rows changes local offsets in a captured page.
+        state["native_row_mapping"] = "tyler-visible-status/v2"
+    return canonical_hash(state)
 
 
 def _checkpoint(binding, queue, seen):
@@ -436,6 +441,15 @@ def _enrich(bundle, provider):
 def parse_page(engine, source, namespace, content, input_format, bounds, context):
     if len(content) > bounds.parser_bytes:
         raise ValueError("The provider listing exceeds the configured parser byte limit.")
+    if (source.provider == "tyler-meeting-manager" and source.options.get("calendar_api_base")
+            and input_format == "tyler-public-calendar-json"):
+        from .native import make_bundle
+        from .tyler_rows import calendar_rows
+
+        bundle = make_bundle(source, namespace, content, input_format,
+                             calendar_rows(source.url, json.loads(content)))
+        _enrich(bundle, source.provider)
+        return bundle, ()
     if input_format in {"boarddocs-public-meetings-json", "legistar-events-json", "legistar-event-json", "wistia-api-media-json",
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
                         "civicweb-detail-html", "civicweb-filepro-soap-xml", "civicweb-meetings-json", "civicweb-meeting-documents-json", "swagit-listing-html", "onbase-public-listing-html",
@@ -616,23 +630,25 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
                 response = transport.request(
                     url, method=method, body=body, headers=headers or None,
                     byte_limit=(min(bounds.parser_bytes, bounds.transfer_bytes)
-                                if task.get("kind") in {"onbase-window", "boarddocs-public"} else bounds.parser_bytes),
+                                if task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
+                                else bounds.parser_bytes),
                     deadline_seconds=max(0.001, deadline - monotonic()),
                     allowed_origins=(origin,),
                     **({"allow_redirects": False} if task.get("kind") in {
                         "suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period", "clerkbase-tree",
-                        "onbase-window", "boarddocs-public"} else {}),
+                        "onbase-window", "boarddocs-public", "tyler-calendar"} else {}),
                 )
                 if _origin(response.url) != origin:
                     raise ValueError("Provider retrieval left its configured origin.")
-                if task.get("kind") in {"onbase-window", "boarddocs-public"} and response.url != url:
+                if task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"} and response.url != url:
                     raise ValueError("The OnBase response left its exact requested window.")
                 if response.status != 200:
                     raise RetrievalError("provider_http_error", status=response.status)
                 page_content = response.content
                 if len(page_content) > bounds.parser_bytes:
                     raise ValueError("The provider listing exceeds its parser byte limit.")
-                if task.get("kind") in {"onbase-window", "boarddocs-public"} and len(page_content) > bounds.transfer_bytes:
+                if (task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
+                        and len(page_content) > bounds.transfer_bytes):
                     raise ValueError("The OnBase window exceeds its transfer byte limit.")
                 try:
                     payload = json.loads(page_content)

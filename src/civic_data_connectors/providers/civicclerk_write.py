@@ -41,9 +41,10 @@ class CivicClerkWriteAdapter(WriteAdapter):
         if change.entity != 'agenda_section' or change.operation not in {'create', 'update'} or change.files:
             raise WriteFailure('mapping_unverified', 'Only documented agenda section create/update is mapped.')
         parent = _id(change.parent_id)
+        meeting = _id(change.meeting_id)
         if (f'agenda_section:{change.operation}' not in config.get('permissions', ())
                 or str(parent) not in config.get('parent_ids', ())
-                or not change.meeting_id or str(change.meeting_id) not in config.get('meeting_ids', ())):
+                or str(meeting) not in config.get('meeting_ids', ())):
             raise WriteFailure('permission_denied', 'Section parent or meeting is outside trusted source policy.')
         if change.operation == 'update':
             resource = _id(change.resource_id)
@@ -54,6 +55,13 @@ class CivicClerkWriteAdapter(WriteAdapter):
 
     def _root(self, source):
         return _api_source(source).removesuffix('/Events') + '/Sections'
+
+    def _verify_meeting_parent(self, source, change, parent, context, bounds, deadline):
+        meeting = _id(change.meeting_id)
+        value = self.read(source, _api_source(source) + '/' + str(meeting), context, bounds, deadline)
+        if (not isinstance(value, dict) or type(value.get('id')) is not int or value['id'] != meeting
+                or type(value.get('agendaId')) is not int or value['agendaId'] != parent):
+            raise WriteFailure('conflict', 'The event does not identify the selected agenda parent.')
 
     def _read(self, source, identity, parent, context, bounds, deadline):
         value = self.read(source, self._root(source) + '/' + str(identity), context, bounds, deadline)
@@ -77,6 +85,7 @@ class CivicClerkWriteAdapter(WriteAdapter):
         if 'sectionText' in fields and fields['sectionText'] is not None and not isinstance(fields['sectionText'], str):
             raise ValueError('sectionText must be a string or null.')
         parent = _id(change.parent_id)
+        self._verify_meeting_parent(source, change, parent, context, bounds, deadline)
         before, resource = None, None
         if change.operation == 'update':
             resource = _id(change.resource_id)
@@ -106,6 +115,7 @@ class CivicClerkWriteAdapter(WriteAdapter):
     def apply(self, source, prepared, context, bounds, deadline, *, persist=None):
         change = WriteChange.from_dict(prepared['change'])
         self.authorize(source, change, context)
+        self._verify_meeting_parent(source, change, prepared['parent'], context, bounds, deadline)
         identity = prepared['resource_id']
         if identity is not None:
             before = self._read(source, identity, prepared['parent'], context, bounds, deadline)
@@ -137,6 +147,7 @@ class CivicClerkWriteAdapter(WriteAdapter):
             return {'state': 'uncertain', 'reason': 'No section ID was returned; do not repeat create.'}
         try:
             identity = _id(identity)
+            self._verify_meeting_parent(source, change, prepared['parent'], context, bounds, deadline)
             value = self._read(source, identity, prepared['parent'], context, bounds, deadline)
         except (WriteFailure, ValueError, TypeError):
             return {'state': 'uncertain', 'resource_id': identity, 'reason': 'Exact section readback was unavailable.'}

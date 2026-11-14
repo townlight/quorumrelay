@@ -31,7 +31,7 @@ Use the exact API Events source without options and its derived namespace, for e
 }
 ```
 
-The example IDs are synthetic, not instructions to modify a public city's data. The independent meeting and agenda allowlists express application policy; this write path does **not** independently verify their upstream relationship. Credentials remain private and are redacted from plans/receipts.
+The example IDs are synthetic, not instructions to modify a public city's data. Both meeting and agenda allowlists remain required. The adapter also reads the exact `/v1/Events/{meeting_id}` and checks its native `id` and `agendaId` during planning, immediately before a write, and during reconciliation. A mismatched relationship prevents the write; a changed relationship after creation leaves the receipt uncertain. Credentials remain private and are redacted from plans/receipts.
 
 Create sends only documented `agendaId`, `sectionName` and optional `sectionText`. Update reads the selected section and checks its agenda parent, preserves omitted fields, then compares the prepared readback immediately before PUT. This is a preflight comparison, not an atomic provider-side lock. A 204 PUT is followed by GET. Success requires exact identity, parent and approved fields. An ambiguous create/readback remains uncertain; replay never resends its POST. No parent move, DELETE, Event write, item write or document upload is mapped here.
 

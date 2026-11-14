@@ -7275,9 +7275,9 @@
           "observation_date": "2026-11-13",
           "access_scope": "public_source_read_and_local_mock_execution_no_remote_mutation",
           "proof_level": "vendor_contract_and_synthetic_engine_execution",
-          "receipt_path": "docs/verification/public-contract-leads-2026-11-13.json",
-          "receipt_sha256": "0a2a1a3c1157b3ff7f18c293fa68b166e675d313efbac3b5981d1a196d8a35bb",
-          "limits": "Official Select/CivicClerk v1 spec. Published stored event agendaId binds selected Meeting detail/files. Section create/update through exact plan approval, scoped readback/replay. Independent meeting/agenda policy lists; no verified upstream association, no atomic CAS, no live writes. Event date/time transformation and item/upload contracts are not implemented.",
+          "receipt_path": "docs/verification/provider-fidelity-2026-11-14.json",
+          "receipt_sha256": "b434f32dacc156e6de80f3e1e2778a03d162ce941e05075a5e4b55f06dfa0db5",
+          "limits": "Official Select v1 selected published Event/Meeting/file reads and scoped agenda_section create/update. Event id/agendaId relationship checked in plan/preflight/reconciliation; mismatch denies mutation or leaves an already created result uncertain without duplicate POST. No atomic CAS, live mutation or Event date/time write equivalence.",
           "synthetic_execution": {
             "provider": "civicplus-select",
             "status": "fixture_passed",
@@ -7289,16 +7289,16 @@
             "entities": [
               "agenda_section"
             ],
-            "scope": "Official Select/CivicClerk v1 spec. Published stored event agendaId binds selected Meeting detail/files. Section create/update through exact plan approval, scoped readback/replay. Independent meeting/agenda policy lists; no verified upstream association, no atomic CAS, no live writes. Event date/time transformation and item/upload contracts are not implemented.",
-            "execution_provenance": "Separate affected runs overlap. Distinct node count deduplicates classname/name. Earlier runs precede additive changes in other handlers; final 109-test integration checks shared dispatch, provider interfaces, package and new BoardDocs/Select write paths. No claim these separate runs are one full-suite execution.",
+            "scope": "Official Select v1 selected published Event/Meeting/file reads and scoped agenda_section create/update. Event id/agendaId relationship checked in plan/preflight/reconciliation; mismatch denies mutation or leaves an already created result uncertain without duplicate POST. No atomic CAS, live mutation or Event date/time write equivalence.",
+            "execution_provenance": "Current affected files executed after relationship/status fixes, exact nodes and terminal logs in docs/verification/provider-fidelity-2026-11-14.json. Prior unchanged selected read/document evidence retained in public-contract-leads-2026-11-13.json; no claim of a new full suite or live provider transaction.",
             "checks": [
               {
-                "command": "python -m pytest (exact nodes in docs/verification/public-contract-leads-2026-11-13.json#runs/civicclerk-section-write-final)",
-                "passed": 103,
+                "command": "python -X utf8 -m pytest tests/test_tyler_native_rows.py tests/test_tyler_liberty.py tests/test_civicclerk_section_write.py tests/test_writes.py tests/test_provider_discovery.py -q (JUnit C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\provider-fidelity-integration.xml)",
+                "passed": 113,
                 "failed": 0
               },
               {
-                "command": "python -m pytest (exact nodes in docs/verification/public-contract-leads-2026-11-13.json#runs/civicclerk-detail-affected)",
+                "command": "Reused civicclerk-detail-affected execution in public-contract-leads-2026-11-13.json",
                 "passed": 163,
                 "failed": 0
               }
@@ -7324,9 +7324,9 @@
               {
                 "kind": "test",
                 "path": "tests/test_civicclerk_section_write.py",
-                "sha256": "ff03a8dfaa27fa90c536e1b927602d9602928874ab326a1ff7b04a879509ff2d",
+                "sha256": "165212a68c0f0ba58ec1ff879f3b7a776ae8fa073b64e402e3bfe91e9475ff96",
                 "hash_policy": "test_source_crlf_to_lf",
-                "canonical_lf_sha256": "ff03a8dfaa27fa90c536e1b927602d9602928874ab326a1ff7b04a879509ff2d"
+                "canonical_lf_sha256": "165212a68c0f0ba58ec1ff879f3b7a776ae8fa073b64e402e3bfe91e9475ff96"
               }
             ]
           }
@@ -7555,7 +7555,7 @@
             "select-update",
             "select-official-detail-section-execution"
           ],
-          "details": "Only agenda_section create is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented.",
+          "details": "Only agenda_section create is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented. Exact native Event id/agendaId is revalidated during plan, before mutation and in reconciliation.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
             "Verified machine interface or authorized UI automation test environment",
@@ -7586,7 +7586,7 @@
             "select-update",
             "select-official-detail-section-execution"
           ],
-          "details": "Only agenda_section update is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented.",
+          "details": "Only agenda_section update is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented. Exact native Event id/agendaId is revalidated during plan, before mutation and in reconciliation.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
             "Verified machine interface or authorized UI automation test environment",
@@ -8107,7 +8107,7 @@
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
           "verification_status": "documented_and_synthetically_executed_not_live",
-          "notes": "Only sectionName/sectionText; create requires agendaId. Update preserves omitted fields; no parent move, no upstream atomic CAS. meeting_ids and parent_ids are independent trusted allowlists, not upstream relationship proof.",
+          "notes": "Exact Event-to-agenda parent checked in plan/preflight/reconciliation, plus section id/parent readback. Preserve omitted fields; no parent move or atomic provider lock.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -8157,7 +8157,7 @@
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
           "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
           "verification_status": "documented_and_synthetically_executed_not_live",
-          "notes": "Only sectionName/sectionText; create requires agendaId. Update preserves omitted fields; no parent move, no upstream atomic CAS. meeting_ids and parent_ids are independent trusted allowlists, not upstream relationship proof.",
+          "notes": "Exact Event-to-agenda parent checked in plan/preflight/reconciliation, plus section id/parent readback. Preserve omitted fields; no parent move or atomic provider lock.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -8241,7 +8241,8 @@
       "aliases": [
         "civicplus_select"
       ],
-      "identity_definition": "docs/capabilities/provider-identities.json"
+      "identity_definition": "docs/capabilities/provider-identities.json",
+      "write_findings": "Official CivicClerk v1 Section create/update implemented and synthetically verified with exact Event/agenda association and readback. Event models/publication enum documented, but date/time/template equivalence remains unmapped; item writes and document upload contracts remain unverified."
     },
     {
       "number": 6,
@@ -26837,9 +26838,9 @@
           "observation_date": "2026-11-13",
           "access_scope": "public_source_read_and_local_mock_execution_no_remote_mutation",
           "proof_level": "vendor_contract_and_synthetic_engine_execution",
-          "receipt_path": "docs/verification/public-contract-leads-2026-11-13.json",
-          "receipt_sha256": "0a2a1a3c1157b3ff7f18c293fa68b166e675d313efbac3b5981d1a196d8a35bb",
-          "limits": "Explicit tenant API base and meeting type selection, stored selected detail and document identity; exact local metadata search of bounded provider candidates. No complete catalog, universal type/status semantics, full content search or playback.",
+          "receipt_path": "docs/verification/provider-fidelity-2026-11-14.json",
+          "receipt_sha256": "b434f32dacc156e6de80f3e1e2778a03d162ce941e05075a5e4b55f06dfa0db5",
+          "limits": "Explicit configured Tyler API calendar, selected detail and bounded metadata search preserve visible cancelled/adjourned records, literal source status/date/time and raw fields. Baseline compatibility parser unchanged. No timezone/enum meaning inference or stable native agenda-item IDs from title positions.",
           "synthetic_execution": {
             "provider": "tyler-meeting-manager",
             "status": "fixture_passed",
@@ -26849,17 +26850,12 @@
               "native_search"
             ],
             "entities": [],
-            "scope": "Explicit tenant API base and meeting type selection, stored selected detail and document identity; exact local metadata search of bounded provider candidates. No complete catalog, universal type/status semantics, full content search or playback.",
-            "execution_provenance": "Separate affected runs overlap. Distinct node count deduplicates classname/name. Earlier runs precede additive changes in other handlers; final 109-test integration checks shared dispatch, provider interfaces, package and new BoardDocs/Select write paths. No claim these separate runs are one full-suite execution. Exact source URL binding was then fixed and the final13Tyler cases executed separately; no earlier run is claimed to contain that fix.",
+            "scope": "Explicit configured Tyler API calendar, selected detail and bounded metadata search preserve visible cancelled/adjourned records, literal source status/date/time and raw fields. Baseline compatibility parser unchanged. No timezone/enum meaning inference or stable native agenda-item IDs from title positions.",
+            "execution_provenance": "Current affected files executed after relationship/status fixes, exact nodes and terminal logs in docs/verification/provider-fidelity-2026-11-14.json. Prior unchanged selected read/document evidence retained in public-contract-leads-2026-11-13.json; no claim of a new full suite or live provider transaction.",
             "checks": [
               {
-                "command": "python -m pytest (exact nodes in docs/verification/public-contract-leads-2026-11-13.json#runs/tyler-liberty-affected)",
-                "passed": 169,
-                "failed": 0
-              },
-              {
-                "command": "python -m pytest -q tests/test_tyler_liberty.py --junitxml=.../tyler-source-binding-final.xml",
-                "passed": 13,
+                "command": "python -X utf8 -m pytest tests/test_tyler_native_rows.py tests/test_tyler_liberty.py -q (JUnit C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\tyler-fidelity-checkpoint-final.xml)",
+                "passed": 21,
                 "failed": 0
               }
             ],
@@ -26880,6 +26876,13 @@
                 "sha256": "20272971319cb4f9829599d9bcca89864926d2b35d797d959e31d95af00889bb",
                 "hash_policy": "test_source_crlf_to_lf",
                 "canonical_lf_sha256": "20272971319cb4f9829599d9bcca89864926d2b35d797d959e31d95af00889bb"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_tyler_native_rows.py",
+                "sha256": "da86c926e8c92cef00b2f37e5552c31c9e7bd73cd6c56531b0d8a7f8e80cff7f",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "da86c926e8c92cef00b2f37e5552c31c9e7bd73cd6c56531b0d8a7f8e80cff7f"
               }
             ]
           }
@@ -26944,7 +26947,7 @@
             "tyler-ector-historical-empty-read",
             "tyler-liberty-public-contract-execution"
           ],
-          "details": "Observed nonempty Liberty calendar with explicit meeting_type_ids []; legacy default [-1] preserved. Scoped date window and raw fields retained.",
+          "details": "Observed nonempty Liberty calendar with explicit meeting_type_ids []; legacy default [-1] preserved. Scoped date window and raw fields retained. Configured native mapping retains visible cancelled/adjourned records and literal source status/date/time; legacy baseline parsing remains unchanged.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
@@ -26972,7 +26975,7 @@
             "tyler-ector",
             "tyler-liberty-public-contract-execution"
           ],
-          "details": "Stored native meetingId/recurringId bound detail; exact observed published agenda/minutes URL membership; explicit attachment fetch validates PDF signature.",
+          "details": "Stored native meetingId/recurringId bound detail; exact observed published agenda/minutes URL membership; explicit attachment fetch validates PDF signature. Configured native mapping retains visible cancelled/adjourned records and literal source status/date/time; legacy baseline parsing remains unchanged.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -27027,7 +27030,7 @@
             "tyler-doc",
             "tyler-liberty-public-contract-execution"
           ],
-          "details": "Observed search POST with term/date/meeting type and bounded pages; exact local metadata matching only, no provider stable-order or full-document claim.",
+          "details": "Observed search POST with term/date/meeting type and bounded pages; exact local metadata matching only, no provider stable-order or full-document claim. Configured native mapping retains visible cancelled/adjourned records and literal source status/date/time; legacy baseline parsing remains unchanged.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
