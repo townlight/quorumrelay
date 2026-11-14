@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "title": "Civic data connectors capability inventory",
   "observation_date": "2026-11-11",
-  "revision": "researched-pass-7",
+  "revision": "researched-pass-7; owned-reconciliation-2026-11-14",
   "release_completion": "incomplete",
   "research_completion": "partial: all 31 families received a bounded pass; follow-up NovusAGENDA list traversal, CivicPlus Select historical-import mapping and Legistar related reads are recorded, while exact contracts, permissions and remaining provider gaps stay explicit",
   "test_policy": "Current owner amendment (2026-11-12): vendor-documented synthetic execution/readback/receipts satisfy provider discovery/read/search/import/export/write acceptance. Live checks are optional supporting evidence, never a credential-acquisition gate. Historical observation/live-acceptance fields do not override this policy; actual reference-app, Windows and delivery proof remains required.",
@@ -3192,9 +3192,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -3641,9 +3641,9 @@
         },
         "create": {
           "capability_status": "unverified",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [],
-          "details": "Provider capability and machine interface unverified. No authorized provider test tenant or credentials supplied; no remote writes or live acceptance.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
           "dependencies": [
             "Documented provider interface and explicit entity/field mapping",
             "No authorized provider test tenant or credentials supplied",
@@ -3667,9 +3667,9 @@
         },
         "update": {
           "capability_status": "unverified",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [],
-          "details": "Provider capability and machine interface unverified. No authorized provider test tenant or credentials supplied; no remote writes or live acceptance.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
           "dependencies": [
             "Documented provider interface and explicit entity/field mapping",
             "No authorized provider test tenant or credentials supplied",
@@ -3693,9 +3693,9 @@
         },
         "upload": {
           "capability_status": "unverified",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [],
-          "details": "Provider capability and machine interface unverified. No authorized provider test tenant or credentials supplied; no remote writes or live acceptance.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
           "dependencies": [
             "Documented provider interface and explicit entity/field mapping",
             "No authorized provider test tenant or credentials supplied",
@@ -3970,7 +3970,7 @@
       ],
       "remaining_research": [
         "Observed Reno public /api/v2/PublicPortal/search form is now source-implemented with exact local metadata/excerpt checks, stable native-ID continuation, raw/parent preservation and bounded first/resumed receipt. Full document content, provider matching/caps/rank and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.",
-        "Official release notes identify Meeting API, speaker endpoint and tracking-number search but no executable schema. Obtain PrimeGov account-specific API specification and enablement before coding those routes.",
+        "Official release notes identify Meeting API, speaker and tracking-number search but the checked release/help material supplies no executable schema. Continue from concrete product-matched API leads; no exhaustive public search or outside-only dependency is established, and no account enablement is a synthetic acceptance gate.",
         "Authenticated create/update/upload field schemas, permissions, readback and conflict semantics remain unverified in the pinned material. A matching machine contract is needed; credentials or live tenant writes are not an acceptance gate.",
         "Selected public client document branches synthetically executed; JSON URL-string shape inferred from callback. Type4 HTML/unknown output, live file availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled."
       ],
@@ -4001,9 +4001,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -6263,7 +6263,9 @@
         "authorized_remote_writes": false,
         "provider_credentials": "not_required_for_accepted_synthetic_verification",
         "live_provider_checks": "optional_supporting_evidence",
-        "rule": "Vendor-documented synthetic verification satisfies provider operation acceptance under the dated owner amendment; actual app/Windows/delivery requirements remain."
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -6688,11 +6690,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "novusagenda-docs"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -6714,11 +6716,11 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "novusagenda-docs"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -6740,11 +6742,11 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "novusagenda-docs"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -6992,9 +6994,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -7662,14 +7664,14 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "select-create",
             "select-items",
             "select-upload",
             "select-update"
           ],
-          "details": "Official authenticated UI supports in-scope operations; exact external API contract is unverified. Historical import is consultant-mediated, not an automatic write API.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Official authenticated UI supports in-scope operations; exact external API contract is unverified. Historical import is consultant-mediated, not an automatic write API.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
             "Verified machine interface or authorized UI automation test environment",
@@ -8278,9 +8280,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -8686,12 +8688,12 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "civicplus-agenda-center-docs",
             "civicplus-agenda-center-items"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -8714,12 +8716,12 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "civicplus-agenda-center-docs",
             "civicplus-agenda-center-items"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -8742,12 +8744,12 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "civicplus-agenda-center-docs",
             "civicplus-agenda-center-items"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -9073,9 +9075,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -9972,9 +9974,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -10338,11 +10340,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "boardbook-docs"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -10364,12 +10366,12 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "boardbook-docs",
             "boardbook-custom"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -10391,12 +10393,12 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "boardbook-docs",
             "boardbook-custom"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -10669,9 +10671,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -11057,9 +11059,9 @@
         },
         "create": {
           "capability_status": "unverified",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [],
-          "details": "Provider capability and machine interface unverified. No authorized provider test tenant or credentials supplied; no remote writes or live acceptance.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
           "dependencies": [
             "Documented provider interface and explicit entity/field mapping",
             "No authorized provider test tenant or credentials supplied",
@@ -11083,9 +11085,9 @@
         },
         "update": {
           "capability_status": "unverified",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [],
-          "details": "Provider capability and machine interface unverified. No authorized provider test tenant or credentials supplied; no remote writes or live acceptance.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
           "dependencies": [
             "Documented provider interface and explicit entity/field mapping",
             "No authorized provider test tenant or credentials supplied",
@@ -11109,9 +11111,9 @@
         },
         "upload": {
           "capability_status": "unverified",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [],
-          "details": "Provider capability and machine interface unverified. No authorized provider test tenant or credentials supplied; no remote writes or live acceptance.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
           "dependencies": [
             "Documented provider interface and explicit entity/field mapping",
             "No authorized provider test tenant or credentials supplied",
@@ -11334,9 +11336,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -11716,11 +11718,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "simbli-docs"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -11742,11 +11744,11 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "simbli-docs"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -11908,7 +11910,7 @@
       "restrictions": [],
       "remaining_research": [
         "Public listing/page2, fresh selected meeting/agenda tree, selected item content and same-meeting supplied attachments are source implemented with scoped captures/synthetic execution. The older HTML-only observation is historical. Aggregate agenda/minutes PDF generation, native search and full-catalog semantics remain unverified.",
-        "Reviewed current Simbli pages describe archive search and staff meeting/item/document workflows but publish no machine field schema. Obtain customer API specification before implementing writes or claiming absence.",
+        "Reviewed current Simbli pages describe archive search and staff meeting/item/document workflows but publish no machine field schema. A product-matched machine contract is not yet established; this is unresolved research, not proof only a customer/private source can resolve it.",
         "Tenant-specific role/permission and write/readback configuration must come from a matching machine contract. No staff/test-tenant credential acquisition is an acceptance gate; no live mutation is authorized."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
@@ -11937,9 +11939,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -12346,12 +12348,12 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "icompass-civicweb-docs",
             "icompass-civicweb-staff-guide"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -12374,12 +12376,12 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "icompass-civicweb-docs",
             "icompass-civicweb-staff-guide"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -12402,11 +12404,11 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "icompass-civicweb-staff-guide"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -12707,9 +12709,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -13084,11 +13086,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "iqm2-docs"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -13131,11 +13133,11 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "iqm2-media"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -13339,9 +13341,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -13855,7 +13857,7 @@
       "remaining_research": [
         "Princeton archive capture maps 482 rows; bounded Search Archives pages 1 and 2 yielded 10 provider-ID rows each. No third page/full catalog result was fetched. Provider query semantics remain unknown; exact local matching uses available title/date only.",
         "Sound Search timestamp URLs are links, not transcripts. No transcript text or video playback is established.",
-        "Official Swagit integration documentation is login-gated and describes PrimeGov/MediaManager IDs, not general writes. Create/update/upload methods need customer docs and authorized access."
+        "Official Swagit integration documentation is login-gated and describes PrimeGov/MediaManager IDs, not general writes. Create/update/upload methods remain unresolved contract research; no outside-information dependency has been established."
       ],
       "authentication": "Archive public without credentials; support article requires customer login. Swagit/MediaManager integration account prerequisites unverified.",
       "write_findings": "Swagit-to-MediaManager integration is documented at product level, but no publicly usable Swagit entity create/update/upload contract was verified.",
@@ -13884,9 +13886,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -14276,11 +14278,11 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "suiteone-upload"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. event.media_and_minutes: SuiteView Admin UI: save media and Minutes/Bookmarks, then SAVE Event; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. event.media_and_minutes: SuiteView Admin UI: save media and Minutes/Bookmarks, then SAVE Event; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -14304,11 +14306,11 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "suiteone-upload"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. recording: SuiteView Admin UI: Event > View/Edit > Event Media > Upload Media (.WMV); API unknown; minutes.bookmarks: SuiteView Admin UI: Agendas & Minutes > Minutes Edit/Upload > HTML/import and Bookmarks; *_content.HTML",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. recording: SuiteView Admin UI: Event > View/Edit > Event Media > Upload Media (.WMV); API unknown; minutes.bookmarks: SuiteView Admin UI: Agendas & Minutes > Minutes Edit/Upload > HTML/import and Bookmarks; *_content.HTML",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -14535,9 +14537,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -14916,11 +14918,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "granicus-peak-guide"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -14943,11 +14945,11 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "granicus-peak-guide"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -14970,11 +14972,11 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "granicus-peak-guide"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -15287,7 +15289,7 @@
       "restrictions": [],
       "remaining_research": [
         "Lower Merion capture returned 116 rows and one separately supplied PDF fetch completed. Detailed receipt serialization failed afterward; the fetch was not repeated. RSS schema, full archive continuation and other document/media outcomes remain unverified.",
-        "The Elko Peak manual gives authenticated UI fields and privacy values but no external route/payload. Machine create/update/upload, roles and readback still need supported API documentation and authorized Peak access.",
+        "The Elko Peak manual gives authenticated UI fields and privacy values but no external route/payload. Machine create/update/upload, roles and readback still remain unresolved product-matched contract research; live access is not an acceptance gate.",
         "Do not use ViewPublisher fields as write parameters or reuse MediaManager/Legistar contracts."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
@@ -15316,9 +15318,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -15689,11 +15691,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "utah-help"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. meeting_notice: Authenticated Admin UI: Notices > Add > Save draft or Publish; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_notice: Authenticated Admin UI: Notices > Add > Save draft or Publish; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -15717,11 +15719,11 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "utah-help"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. meeting_notice: Authenticated Admin UI: edit notice within associated Body; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_notice: Authenticated Admin UI: edit notice within associated Body; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -15745,11 +15747,11 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "utah-help"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. meeting_notice.document_or_recording: Authenticated notice UI: attachment at bottom of notice; accepted formats shown there, not enumerated in Help",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_notice.document_or_recording: Authenticated notice UI: attachment at bottom of notice; accepted formats shown there, not enumerated in Help",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -15925,9 +15927,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -16297,11 +16299,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "destiny-doc"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. agenda_or_minutes: AgendaQuick authenticated product UI; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. agenda_or_minutes: AgendaQuick authenticated product UI; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -16326,11 +16328,11 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "destiny-doc"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. agenda_or_minutes: AgendaQuick authenticated editing/publishing UI; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. agenda_or_minutes: AgendaQuick authenticated editing/publishing UI; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -16499,7 +16501,7 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "On Yuma’s current AgendaQuick page, follow Previous/Next Period for one adjacent month and another meeting type; inspect agenda sequence 1737 and its supplied attachment/video URLs.",
+        "Configured Yuma listing and supplied Previous/Next Period controls already have bounded implementation. Adjacent-month/other-type surveys are optional coverage observations, not required new work. Selected native memo/file association remains distinct from unverified video and binary-transfer acceptance.",
         "Yuma public agenda-item search and bounded fixtures are mapped; live next-page behavior, provider full-text semantics and full result coverage remain unverified.",
         "Pinned feature material describes staff scheduling, minute votes and uploads without a machine schema or vendor file-import contract. Those contracts remain unresolved; credentials are not an acceptance gate."
       ],
@@ -16530,9 +16532,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -16888,11 +16890,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "ths-doc"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. streaming_meeting_event: Town Hall Streams service web UI: select start and end date/time; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. streaming_meeting_event: Town Hall Streams service web UI: select start and end date/time; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -17125,9 +17127,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -17572,11 +17574,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "telvue-upload"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. recording: Connect UI: Media Library or Series upload creates media/episode; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. recording: Connect UI: Media Library or Series upload creates media/episode; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -17601,11 +17603,11 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "telvue-edit"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. recording.metadata: Connect UI: Media > Edit; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. recording.metadata: Connect UI: Media > Edit; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -17630,11 +17632,11 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "telvue-upload"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. recording: Connect UI drag/drop videos; API upload endpoint unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. recording: Connect UI drag/drop videos; API upload endpoint unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -17831,9 +17833,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -18291,12 +18293,12 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "champ-create",
             "champ-attachment"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. meeting_event: Authenticated CHAMP UI: Events > + New Event > Save; API unknown; agenda_item_or_minutes_item: Authenticated CHAMP Event agenda/minutes item editor; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_event: Authenticated CHAMP UI: Events > + New Event > Save; API unknown; agenda_item_or_minutes_item: Authenticated CHAMP Event agenda/minutes item editor; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -18320,11 +18322,11 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "champ-publish"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. event.publication: Authenticated UI: Overview > Publish Settings and Elements; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. event.publication: Authenticated UI: Overview > Publish Settings and Elements; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -18348,12 +18350,12 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "champ-attachment",
             "champ-upload"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. meeting_document: Event agenda/minute item > Attachments: PDF file upload; API unknown; recording: Event > Media > Update Media; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_document: Event agenda/minute item > Attachments: PDF file upload; API unknown; recording: Event > Media > Update Media; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -18638,9 +18640,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -19221,11 +19223,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "hyland-onbase-agenda-online-docs"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -19247,11 +19249,11 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "hyland-onbase-agenda-online-docs"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -19273,11 +19275,11 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "hyland-onbase-agenda-online-docs"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -19759,9 +19761,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -20973,7 +20975,7 @@
             "W09",
             "W10"
           ],
-          "notes": "Pairing contradiction: prose says index-paired arrays, sample says one image+one text yields2pages, then same shape says pair. Do not guess or claim acceptance. All-pages PUT with empty inputs deletes existing pages, so excluded with delete operations.",
+          "notes": "Pinned official SDK defines index-paired image/text arrays; page count is max(imageFiles.Count,textPages.Count). Coordinator verifies independent per-position readback. Empty all-pages replacement and automatic text generation are excluded.",
           "api_version": "Repository v2 Cloud",
           "interface_type": "documented_automated_api",
           "contract_confidence": "official_exact_endpoint_schema_or_guide",
@@ -20984,7 +20986,7 @@
           "automatable_contract_verified": true,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration.",
           "contract_caveats": [
-            "Image/text pairing prose/sample conflict retained; endpoint known, combined pairing semantics unaccepted."
+            "Image conversion can change exported bytes; unmatched readback hashes remain uncertain. No remote conversion guarantee."
           ],
           "synthetic_acceptance_scope": "Small/multipart new-document upload, additive metadata, supplied page text create/update and indexed image/text pairing. Not document create spelling or existing-document UpdateUploadedParts."
         },
@@ -21060,7 +21062,7 @@
       "remaining_research": [
         "Guarded offline-Chrome WebLink session is implemented with PublicTransport routing; synthetic/browser checks are separate from live acceptance. Current Boulder request is blocked at the cross-origin redirect boundary and Louisville returns HTTP 403. No catalog was obtained; both tenant contexts have been used.",
         "Repository v2 child-list, selected-entry metadata and original document-content reads are implemented from pinned official SDK routes with scoped synthetic verification. Optional live reads require repository.Read OAuth for the selected tenant; acquiring it is not an acceptance gate.",
-        "Resolve the official ImportUploadedParts multipart-vs-JSON and CreatePages image/text pairing conflicts from authoritative documentation or an authorized sandbox. Do not infer Repository API identity/access from WebLink repository name."
+        "Resolved against pinned official Repository v2 SDK: Folder/ImportUploadedParts finalizes with application/json and CreatePages uses multipart JSON plus repeated imageFiles paired by index with textPages (page count max of the two lengths). tests/test_laserfiche_page_parts.py and the public-contract-leads receipt cover unequal arrays, exact positions, wrong/incomplete readback and legacy plans. These are implemented synthetic scopes, not open wire-contract blockers. generateText guide ambiguity remains qualified; no OCR/generation or automatic meeting association is inferred."
       ],
       "requirement_ids": [
         "C01",
@@ -21087,9 +21089,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -21432,11 +21434,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "towncloud-doc"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. meeting_agenda_or_minutes: Authenticated TownCloud Agenda product UI; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_agenda_or_minutes: Authenticated TownCloud Agenda product UI; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -21460,11 +21462,11 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "towncloud-doc"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. meeting_agenda_or_minutes: Authenticated TownCloud manage/publish UI; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_agenda_or_minutes: Authenticated TownCloud manage/publish UI; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -21665,9 +21667,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -21994,11 +21996,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "towpath-manual"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. meeting: Dashboard Meetings Module described by indexed official PDF; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting: Dashboard Meetings Module described by indexed official PDF; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -22194,7 +22196,7 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "On the selected Digital Towpath demo, follow Other Years from Meetings and Minutes and capture date/category continuity, one meeting detail and one PDF URL/MIME. The old Brutus category URL is a moved path, not a current executable route.",
+        "Current dated listing and supplied Other Years controls are implemented with bounded continuation. Selected numeric meeting detail preserves supplied category/location/local time, text and document locators; docs/verification/towpath-supplied-detail-2026-11-12.json records four scoped synthetic cases. Other years/full history and PDF byte availability remain coverage qualifications, not mandatory new sampling. The old Brutus URL is historical.",
         "Demo search query semantics and archive bounds remain unknown; HTML success does not establish PDF extraction or attachment availability.",
         "The pinned Meetings Module guide describes staff entry without a machine API/import payload. A vendor contract remains unresolved; test-account acquisition is not a completion gate."
       ],
@@ -22225,9 +22227,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -22874,8 +22876,8 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "On the sole South Kingstown context, bounded public tree discovery and native search are implemented. One partial live tree engine read returned three URL-keyed document records across two pages; one separate partial native-search engine read returned three URL-keyed documents and three local hits from one capped page. Full nested-tree/search catalog coverage and provider phrase/wildcard semantics remain unverified. A linked meeting document has not been fetched and verified by bytes/MIME/hash; raw page-two search probes do not prove an engine page-two search traversal.",
-        "Current vendor pages distinguish ClerkBase Meeting Center/OnBoardGOV from ClerkMate. Obtain a current ClerkBase-specific API/import contract before implementing writes.",
+        "South Kingstown tree/native-search live receipts remain bounded/partial and do not establish full tree, phrase/wildcard or live search-page-two coverage. Separate Richmond saved-document parsing/default synthetic GET preserves static body/paragraph text with four-case receipt docs/verification/clerkbase-document-text-2026-11-12.json and actual consumer supplied-text evidence. This closes supplied HTML text handling, not linked binary downloads or all document fetch paths.",
+        "Current vendor pages distinguish ClerkBase Meeting Center/OnBoardGOV from ClerkMate. A current ClerkBase-specific API/import contract is not established; research remains unresolved without proof of an outside-only dependency.",
         "Machine role, pagination-cap, write-permission and readback contracts remain unverified. Staff/API credentials are not required for accepted synthetic verification; do not substitute another product route."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
@@ -22904,9 +22906,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -23480,7 +23482,7 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "On the existing Logan Township feed, compare /events/month/?ical=1 across one adjacent month and inspect UID, recurrence, timezone and updated-event behavior; current saved response contains five events.",
+        "The saved Logan Township response contains five events. Adjacent-month, recurrence/timezone and update sampling were not executed; these are explicit feed-coverage limits, not a universal contract gap or mandatory new survey.",
         "RFC 5545 defines event serialization, not universal feed paging or a write endpoint. Establish the published feed horizon/update behavior; do not infer mutation from subscription URLs.",
         "Keep neutral iCalendar export separate from writing to a municipality calendar; no provider-specific import/write contract is supplied."
       ],
@@ -23511,9 +23513,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -24732,7 +24734,7 @@
       "remaining_research": [
         "Authenticated media detail, supplied caption list/per-language reads and native search are source implemented with scoped synthetic verification. Optional live account reads require trusted token/account policy; credential acquisition is not a completion gate.",
         "/modern/search is capped at 100 primary and 100 transcript-only candidates with no cursor and provider-defined exact/phrase candidate semantics. Local exact checks cover returned metadata/excerpts, not full transcripts.",
-        "Resolve account-tier limits and media replacement/swap behavior before those paths are claimed. Keep upload/import, media metadata, caption create/update and edits permission scopes separate; no remote writes occurred.",
+        "Upload/import, media metadata, caption create/update/edits and media swap have separately scoped implementation and synthetic evidence. Account-tier/permission and current server applicability remain runtime qualifications, not unresolved swap implementation or a live-account acceptance gate. No independent playback or overwrite-from-swap inference.",
         "Media swap is source implemented and synthetic tested; pending jobs are preserved and exact finished jobs with target identity/type readback confirm provider completion without independent byte/playback claims. Overwrite is not inferred from swap. Account/folder offset discovery is already implemented; packaged status corrected from stale blocked_access."
       ],
       "requirement_ids": [
@@ -24760,9 +24762,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -25215,11 +25217,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "boardable-docs"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -25241,11 +25243,11 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "boardable-edit"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -25267,11 +25269,11 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "boardable-uploads"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -25510,9 +25512,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -25878,11 +25880,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "gworks-builder"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. agenda_or_minutes: FrontDesk Agenda & Minutes builder UI in historical indexed official article; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. agenda_or_minutes: FrontDesk Agenda & Minutes builder UI in historical indexed official article; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -26102,9 +26104,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -26461,12 +26463,12 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "diligent-boarddocs-docs",
             "diligent-boarddocs-staff-guide"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -26489,12 +26491,12 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "diligent-boarddocs-docs",
             "diligent-boarddocs-staff-guide"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -26517,11 +26519,11 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "diligent-boarddocs-staff-guide"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
             "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
@@ -26854,9 +26856,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",
@@ -27379,11 +27381,11 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "tyler-doc"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. meeting: Authenticated Meeting Manager scheduling UI; API unknown; agenda_item: Authenticated topic/item submission UI; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting: Authenticated Meeting Manager scheduling UI; API unknown; agenda_item: Authenticated topic/item submission UI; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -27408,11 +27410,11 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "tyler-doc"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. meeting: Authenticated scheduling/rescheduling UI; API unknown; agenda_item_or_minutes: Authenticated agenda editing and minutes import/edit/publish UI; API/import format unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting: Authenticated scheduling/rescheduling UI; API unknown; agenda_item_or_minutes: Authenticated agenda editing and minutes import/edit/publish UI; API/import format unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -27437,11 +27439,11 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "blocked_access",
+          "implementation_status": "not_implemented",
           "evidence_ids": [
             "tyler-doc"
           ],
-          "details": "Supported UI/product operation only, not a verified machine route. meeting_document: Authenticated central document/agenda-item attachment UI; API unknown; recording: Authenticated upload/share video UI; API unknown",
+          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_document: Authenticated central document/agenda-item attachment UI; API unknown; recording: Authenticated upload/share video UI; API unknown",
           "dependencies": [
             "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
@@ -27714,9 +27716,9 @@
         "mode": "synthetic_fixture_only",
         "authorized_remote_writes": false,
         "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN/BLOCKED_ACCESS",
-        "rule": "Synthetic checks establish adapter behavior only, not provider acceptance.",
-        "permission_status": "Full plan authorizes supported writes only against an explicitly authorized provider test tenant; none was supplied. No arbitrary public-city mutation."
+        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
+        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
         "status": "unverified_unless_named_in_evidence",

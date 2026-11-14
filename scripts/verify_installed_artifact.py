@@ -30,10 +30,11 @@ def main():
     assert PublicSource is Source
     owner = create_engine()
     providers = owner.providers().data
-    assert len(providers["providers"]) == 31 and len(providers["formats"]) == 34
-    assert civic_data_connectors.__version__ == "0.1.0.dev11"
-    assert len(owner.parsers) == 42
-    assert len(owner.native_searches) == 15
+    assert len(providers["providers"]) == 32 and len(providers["formats"]) == 34
+    assert civic_data_connectors.__version__ == "0.1.0.dev12"
+    assert len([row for row in providers["providers"] if row["formats"]]) == 31
+    assert len(owner.parsers) == 47
+    assert len(owner.native_searches) == 17
     assert all(importlib.util.find_spec(name) is None for name in
                ("townlight_runtime", "townlight_core", "civiccast_brief", "townrecord"))
     original = [{"EventId": 1, "EventBodyName": "Synthetic council", "EventDate": "2026-11-11T00:00:00",
@@ -61,7 +62,7 @@ def main():
         "os": platform.system(), "observed_at": datetime.now(timezone.utc).isoformat(),
         "interpreter_environment": "fresh venv, wheel[service], outside checkout cwd",
         "installed_location": str(location), "status": "PASS",
-        "checks": {"providers": 31, "baseline_formats": 34, "standard_handlers": len(owner.handlers),
+        "checks": {"providers": 32, "baseline_families": 31, "baseline_formats": 34, "standard_handlers": len(owner.handlers),
                    "native_parsers": len(owner.parsers), "native_search_handlers": len(owner.native_searches), "native_normalize": "PASS",
                    "raw_unknown_fields": "PASS", "reference_imports": "absent",
                    "HTTP_MCP_module_imports": "PASS", "packaged_resources": "PASS"},

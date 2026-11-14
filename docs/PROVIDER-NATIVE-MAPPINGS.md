@@ -287,13 +287,25 @@ Cablecast (`*.cablecast.tv`) is a built-in typed connector outside the 31 baseli
 Meeting, multimedia and collection routes keep
 their documented `/PublicApi/meeting/` paths on the selected origin. No origin
 fallback, automatic token acquisition or alternate item-route probing occurs.
-The Postman multimedia-update request uses lower-camel-case fields, unlike the
-support article's Pascal-case DTO, and has no response example. Production writes
-therefore remain unmapped and fail before network; development retains its
-existing plan/approval/readback/receipt flow. Synthetic verification establishes
-production read routing and binding;
-no live account request or mutation was made. Meeting/item create/update and file
-upload remain unresolved. See the [production-route receipt](verification/essential-production-2026-11-14.json).
+The current [vendor-linked Postman collection](https://documenter.getpostman.com/view/7558574/TWDcEuDz)
+contains a production multimedia update sample with lower-camel-case `id`,
+`meetingId`, `audioVideoDetails` (`audioVideoProviderType`, `audioVideoUrl`),
+`publishState`, and `multimediaItems` fields (`entityId`, `entityName`,
+`entityTypeName`, `timeStamp`, `multimediaDisplayOptions`, `customDisplay`,
+`includeNumbering`, `useDefaultMultimediaSettings`, `multimediaBaseUrl`). Its
+multimedia GET and update POST both have zero response examples. The [official
+development API article](https://www.civicplus.help/meetings-essential/docs/public-application-programming-interface-api)
+shows a Pascal-case .NET `MeetingStructure` inside `meetingStructure` for its
+development host and describes the update response only as `HttpResponseMessage`;
+it does not document production response casing/wrapper or persistence/readback
+semantics. That development response cannot safely be assumed for production.
+Although the production request fields are recorded, no production response is
+supplied. The write adapter therefore remains unmapped and rejects production
+updates before network; its internal reads also target only the development
+origin. No account is required to record this source-level gap; no live account
+request or mutation was made. Meeting/item create/update and file upload remain
+unresolved. See the [production-route receipt](verification/essential-production-2026-11-14.json)
+and [saved collection evidence](capabilities/evidence/essential-postman/source.json).
 
 The same dispatcher implements TelVue Connect GET media/videos/playlists and only the documented media/playlist detail routes, using the exact CONNECT access-key/passphrase headers. `telvue-connect-media-json`, `telvue-connect-videos-json`, and `telvue-connect-playlists-json` preserve original envelopes/bytes, IDs, transcript, chapters, sources, and unknown fields. No list continuation/end condition or video detail route is invented. Current explicit origin, application account namespace and caller tenant binding is required before credentials are sent. Public tenant legacy identity behavior stays unchanged.
 

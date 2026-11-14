@@ -1,980 +1,268 @@
-# Remaining provider research and access gaps
+# Remaining provider work
 
-The canonical inventory's `remaining_research` arrays now reconcile the later
-read implementations and the owner's synthetic-acceptance amendment. Use those
-active entries with their linked operation evidence for next actions. The dated
-observations below retain historical failures and missing-account statements;
-they do not reopen completed mappings or make account acquisition/live mutation
-an acceptance gate. Missing machine schemas, applicability and readback semantics
-remain unresolved where stated; no operation is promoted to supported by this
-text correction.
+Reconciled 2026-11-14 against current source and saved receipts. Canonical structured source: [inventory.json](inventory.json). This replaces stale imperative follow-ups; original dated observations and source URLs remain in that ledger and version history.
 
-November 13 lead reconciliation: the [execution receipt](../verification/public-contract-leads-2026-11-13.json)
-and generated inventory supersede the dated open statements below for the
-specific implemented paths. Tyler Liberty nonempty selected-window/detail/search,
-OnBase Akron embedded results/date windows, and CivicClerk Select detail/files
-and section create/update are now source implementations with scoped fixtures.
-BoardDocs opt-in committee listing/print detail has third-party-source-backed
-synthetic proof, with official/live acceptance still unverified after a 403.
-PrimeGov's alternate date route confirms an empty tracking-number field in 817
-rows, not tracking-query semantics; the existing archive route already preserves
-`documentList`. TelVue v2 GET contracts and the Granicus SDK were already mapped;
-the new reports do not establish their outstanding upload/processing/import
-contracts. Missing contracts remain specific work, not an account acquisition gate.
+Unknown machine contracts are unresolved research, not verified outside-information dependencies or unsupported features. No exhaustive-public-search claim is made. Vendor-documented synthetic execution is accepted for its attributed scope; credentials and live writes are optional. Actual public HTTP 403 and guarded redirect failures remain access observations for those exact requests only.
 
-Current owner amendment (2026-11-12): vendor-documented synthetic execution, readback and receipts satisfy provider discovery/read/search/import/export/write acceptance. Live checks are optional supporting evidence; credential/test-account acquisition is not a completion gate. Actual reference-app persistence/isolation/authorization, signed Windows and authorized delivery proof remain required. Unknown contracts remain research/implementation work, not unsupported features. Dated observations below remain historical; older account/mocks-only statements do not override this amendment. No arbitrary public-city mutation, procurement or outreach is authorized.
+Archive completeness, wider tenant surveys, live account observations and playback limits are qualifications, not newly imposed gates. No release/publication is authorized. Local source/package preparation is separate from delivery.
 
 ## F01 Legistar (`legistar`)
 
-- Current acceptance reconciliation: 16 existing documented synthetic engine cases verify eight create/update entity routes with their explicit sample fields and readback. These are attributed as `mock_passed`, not whole-model or live proof. The separate `legistar-public-dispatch-synthetic-attribution` evidence also verifies public attachment `upload`, exact binary readback and replay; attachment `create` is not silently relabelled upload. Six additional field-level cases verify event media-reference strings and hyperlink-only attachment create/update, preserved omitted native fields, visibility-flag values and persistent mismatches without duplicate creates. See [the field-level receipt](../verification/legistar-media-link-writes-2026-11-13.json); this does not prove media processing or effective public visibility.
+- Exact Event and MatterAttachment POST/PUT/File Help review completed2026-11-13; existing binary JSON/file-readback evidence and new media-reference string/hyperlink/visibility-field synthetic cases are attributed separately. Help pages do not define recording-byte upload/replacement, media URL interpretation, MIME/byte limits, processing or effective tenant visibility.
+- Olympia Event7011 and selected Vote/RollCall reads remain bounded, not catalog proof. Caller supplies documented ValueIds/permissions; undocumented enum meanings and RowVersion server conflict behavior remain qualified, not a credential-acquisition gate.
+- Historical vendor import package/current media import path still has no accepted file contract or transfer evidence; API field handling does not substitute for import.
 
-- Current implementation: bounded EventBodyName native OData search is registered and labelled implemented; source/fixture coverage and the existing public query probe do not establish general agenda/full-text semantics or live writes.
-
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"Some clients public; others token query required. Tenant policy controls access.","outbound":"Write credential scope and authorized test tenant not supplied."}}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://webapi.legistar.com/v1/olympia: One Events result fetched publicly; flattened extractor output is not raw JSON acceptance.
-
-### Remaining research
-
-- Follow-up exact Help-page review (2026-11-12 UTC) confirms attachment create/update JSON exposes `MatterAttachmentBinary` as base64 bytes, separate hyperlink/file-name fields, and visibility flags; create sort is server-generated and update sort cannot change. Existing `write_adapters.py` implements these fields, excludes sort and compares `/File` readback bytes. [Create contract](https://webapi.legistar.com/Help/Api/POST-v1-Client-Matters-MatterId-Attachments), [update contract](https://webapi.legistar.com/Help/Api/PUT-v1-Client-Matters-MatterId-Attachments-MatterAttachmentId), [file readback](https://webapi.legistar.com/Help/Api/GET-v1-Client-Matters-MatterId-Attachments-MatterAttachmentId-File). Provider byte limits, processing and tenant visibility behavior are not specified there; document exact contract limits and use synthetic fixtures without claiming undocumented runtime behavior.
-- [Event creation contract](https://webapi.legistar.com/Help/Api/POST-v1-Client-Events) exposes `EventMedia` and `EventVideoPath` as strings, without file/upload semantics. Existing string mappings do not establish binary recording upload or replacement; those exact semantics remain unresolved. No additional media endpoint was inferred and no provider mutation was performed.
-- Olympia Event 7011 and the selected Vote/RollCall reads are bounded receipts, not catalog coverage. Historical live write checks were not run. Synthetic fixtures must use documented Vote/RollCall models and supplied configured ValueIds; undocumented RowVersion conflict behavior must remain qualified rather than become a credential-acquisition gate.
-- The historical vendor import package/current media import path has no accepted file contract or authorized transfer evidence.
-
-### Pagination contract
-
-{
-  "status": "documented",
-  "evidence_ids": [
-    "legistar-paging"
-  ],
-  "details": "$top/$skip, max1000; stable EventId order/keyset checkpoint for mutable catalogs; ge lower/lt upper EventDate examples."
-}
-
-### Authorization restrictions
-
-- Research boundary on 2026-11-11: read-only public captures. That former test-tenant dependency is superseded by the owner amendment: documented synthetic verification is accepted, and live checks are optional. Procurement and outreach remain unauthorized.
-- Unverified and access-blocked are incomplete, not unsupported.
+Evidence and exact scope: `inventory.json` provider `legistar`; operation status and outbound mappings are separate from historical observations.
 
 ## F02 PrimeGov (`primegov`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+- Observed Reno public /api/v2/PublicPortal/search form is now source-implemented with exact local metadata/excerpt checks, stable native-ID continuation, raw/parent preservation and bounded first/resumed receipt. Full document content, provider matching/caps/rank and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.
+- Official release notes identify Meeting API, speaker and tracking-number search but the checked release/help material supplies no executable schema. Continue from concrete product-matched API leads; no exhaustive public search or outside-only dependency is established, and no account enablement is a synthetic acceptance gate.
+- Authenticated create/update/upload field schemas, permissions, readback and conflict semantics remain unverified in the pinned material. A matching machine contract is needed; credentials or live tenant writes are not an acceptance gate.
+- Selected public client document branches synthetically executed; JSON URL-string shape inferred from callback. Type4 HTML/unknown output, live file availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled.
 
-### Representative research observations
-
-- https://reno.primegov.com/public/portal: Search/filter UI fetched publicly; no catalog-completeness test.
-
-### Remaining research
-
-- The observed Reno public `/api/v2/PublicPortal/search` form is source-implemented after dev6. Bounded first/resumed calls each returned three distinct records with partial coverage. Stable native-kind/id traversal handles provider tie-order changes and checks canonical row-set values while retaining exact captures; ranking is deliberately not retained. Exact local checks use supplied metadata/highlight excerpts only. Full document content, provider matching/caps and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.
-- The captured public client now supports selected document retrieval for type 1 (PDF URL resolver), type 2 (original file), type 3 (section PDF with meeting ID) and type 4 (file URL resolver for supplied numeric non-HTML output types). Search only declares these links; an explicit scoped attachment fetch performs retrieval. JSON URL-string responses are inferred from the client callback and synthetically checked, not observed live server responses. Type-4 HTML/unknown output branches, live file availability and authenticated Meeting API schemas remain unresolved. Subtype-qualified identities for newly mapped 1/3/4 prevent native numeric-ID collisions; prior generic unqualified records are not automatically migrated. See [the selected-document receipt](../verification/primegov-selected-documents-2026-11-13.json); the earlier type-2 locator receipt remains historical evidence.
-- Official release notes identify Meeting API, speaker retrieval and tracking-number search. The bounded 2026-11-12 follow-up also confirmed named Get Meeting Status / Update Swagit ID APIs in the [December 10, 2021 vendor release](https://primegov.releasenotes.io/release/jK5OV-release-december-10-2021). These are API-existence evidence, not HTTP routes, methods, authentication or payload schemas. The old vendor Ross Integration KB now redirects readers to Granicus Support; no reproducible outbound contract was obtained. Exact Meeting API contracts remain research work; no credentials request or guessed third-party schema is substituted.
-- Exact vendor-documented create/update/upload fields, permissions and conflict/readback contracts remain research and synthetic implementation work; absence of live credentials is not the gap.
-
-### Pagination contract
-
-{
-  "status": "unverified",
-  "details": "Provider-specific bounds/pagination and date coverage pending."
-}
-
-### Authorization restrictions
-
-- Research boundary on 2026-11-11: read-only public captures. That former test-tenant dependency is superseded by the owner amendment: documented synthetic verification is accepted, and live checks are optional. Procurement and outreach remain unauthorized.
-- Unverified and access-blocked are incomplete, not unsupported.
+Evidence and exact scope: `inventory.json` provider `primegov`; operation status and outbound mappings are separate from historical observations.
 
 ## F03 Granicus (`granicus`)
 
-Pinned official Platform SOAP SDK/WSDL ca7baf0768c32e5fd2ef9c5236fdefde3386934a and Java schema evidence548e20a5f25f9ca5472e168996fe116ab8bd1164 are retained under evidence/granicus-platform. This is MediaManager/MediaVault, not Legistar/Peak/Swagit/iQM2. The exact method-to-engine assessment is in provider-api-contracts.json; it is an outcome map, not a requirement to implement every vendor endpoint.
+- Pinned contract/version qualification remains; synthetic fixtures establish the pinned mapping, not all historical/current server variants. Do not infer custom status enums, unknown Payload types or checksum algorithms.
+- SDK method-to-engine outcome assessment is recorded in provider-api-contracts.json. General roster/motion registries, deletes and additional vendor administration are not required; meeting-bound Attendees/MotionTypes and typed Motion/VoteRecord are mapped. Destructive ClearExisting=true is excluded by project scope.
+- PublishClip presentation fields and generated-minutes template selection/file bytes have no independently exposed readback mapping in these methods; receipts keep these limits explicit. No automatic publication.
+- Raw record-shaped SOAP normalizes offline; supporting responses lacking request parent IDs use the neutral CaptureBundle fallback retaining exact XML and parent identity, not bare XML with inferred IDs.
 
-- Engine reads preserve Event/Clip/metadata, related parents/indices, supplied whole captions, video URIs, attachment bytes and minutes metadata; numeric/UID/ForeignID/list variants are bounded and fixture-verified. No archive or custom matching/status semantics are inferred.
-- Exact-plan creation/full-model updates, non-clearing metadata Add/Import, document URL/upload, explicit PublishClip and generated minutes are mapped. Destructive ClearExisting=true is vendor-supported but excluded by the original no-delete scope. Server-owned identity/revision/Event fields are preserved in full models and readback, not accepted as patches.
-- MediaVault UploadFile and StartUpload/SendChunk/FinishUpload/RegisterUploadedFile/AssignUploadedFile workflows are mapped. Remote bucket GUID is private durable caller/source/plan-bound state; current PHP session stays ephemeral. Unknown sends never replay; private state is not a promise of resumability. The vendor checksum algorithm is unspecified. Returned identity/status does not establish playable media or remote original-byte equality.
-- Generated minutes has four synthetic coordinator cases; chunk workflows have ten including loss/cancellation/private-state binding/reflection; meeting-bound Attendees/MotionTypes have two field/readback cases. Above7MB single-agenda full-byte proof removes an arbitrary adapter restriction while retaining encoded-request/caller bounds. Prior passed binding/model/document/publication tests are reused.
-- Raw record SOAP normalizes offline without credentials. Supporting responses with no parent ID use the existing neutral CaptureBundle fallback, retaining exact response XML and supplied parent/records; bare supporting XML fails rather than inventing identity. Two saved-input tests verify both paths.
-- PublishClip presentation fields and generated-minutes template selection/file bytes remain explicitly submitted-only where no independent readback is documented. Default visibility Pending stays uncertain; publication is always explicit. Version applicability, custom enums and unknown Payload shapes remain qualified.
-- System-wide roster/motion registries, deletes, vendor administration and duplicate convenience endpoints are not new project requirements. Existing meeting-bound typed Motion/VoteRecord/Attendees/MotionTypes paths remain in scope. See the exact assessment before inferring a missing endpoint requirement.
+Evidence and exact scope: `inventory.json` provider `granicus`; operation status and outbound mappings are separate from historical observations.
 
 ## F04 NovusAGENDA (`novusagenda`)
 
-Official documentation status: inspected_with_recorded_limits; the current search result is not a documented machine API.
-Account/tier: East Brunswick public page responded without credentials. Staff/test credentials were not supplied; no private access attempted.
-Test environment: bounded public reads only. One supplied agenda PDF was fetched on 2026-11-12; no credentials or remote writes were used.
+- Selected-window listing, bounded native search, supplied Coversheet and MeetingView Agenda parsing are implemented with separate receipts. The older failed search postback is historical. Search candidate/full-text semantics, Minutes rendering and automatic root-to-detail traversal remain unverified; exact saved detail contexts are not a complete catalog.
+- Existing receipts establish their selected listing/search windows only. Default horizon, retained history and broader catalog extent remain qualified; no repeated tenant/history survey is a new completion gate.
+- Pinned UI instructions do not supply a current machine create/update/upload contract or field/readback schema. Vendor-contract synthetic execution is accepted when such a contract is available; staff-account acquisition is not required for acceptance.
 
-### Representative research observations
-
-- https://ebps.novusagenda.com/agendapublic/: GET returned 124337 B HTML. The stateful form posts to `./`. Search fields include `ctl00$ContentPlaceHolder1$SearchAgendasMeetings$ddlDateRange`, `$radCalendarFrom`, `$radCalendarFrom$dateInput`, `$radCalendarTo`, `$radCalendarTo$dateInput`, `$ctl00` (meeting type), `$ctl01` (category), `$ctl02` (containing text) and the Search image control. Page-size control is `...$radGridItems$ctl00$ctl03$ctl01$PageSizeComboBox`. Carry current ASP.NET `__VIEWSTATE`, Telerik client state and returned session cookies; the current response’s Next Page `__doPostBack` target changes across the traversal. Cookie values were not saved.
-- Form values 2026-08-11 through 2027-02-11 returned a 12-page item pager: 180 item rows at 15 rows/page. All page bodies and SHA-256 values are in outputs/provider-route-probes-2026-11-11/novus-eastbrunswick-page-01-of-12.body through page-12-of-12.body and novus-eastbrunswick-page-traversal-2026-11-11.json. The meeting grid displayed 11 rows.
-- Item rows are `table[id*='radGridItems_ctl00'] tr.rgRow, table[id*='radGridItems_ctl00'] tr.rgAltRow`; meeting rows are `table[id*='radGridMeetings_ctl00'] tr.rgRow, table[id*='radGridMeetings_ctl00'] tr.rgAltRow`. Of 180 item rows, 75 had literal `Coversheet.aspx?ItemID=...&MeetingID=...` onclick targets (75 unique ID pairs); 105 rows had no such target, and no IDs were inferred.
-- A separate stateful read-only POST for “Superintendent’s report” returned HTTP 200 HTML with zero item rows. This does not establish exact/phrase semantics or a complete empty result.
-- 2026-11-12 follow-up: the saved postback response for a search candidate contained an ASP.NET date-validation error (“TO date must be after FROM date”) and no rows; no opaque form state was replayed. Visible form controls and MeetingView/Coversheet/DisplayAgendaPDF.ashx link shapes were recorded.
-- The engine fetched one supplied DisplayAgendaPDF.ashx?MeetingID=996 link as application/pdf, 28,849,631 bytes, SHA-256 90644aacdb5f3fc7bf0d82deff93edb5f51d60d5226344d1871fd6246eaf0c03. This is one supplied agenda only; no Minutes or structured detail read.
-
-### Remaining research
-
-- Resumed source now implements fresh default-date containing-text Search image POST plus exact local metadata matching. One integrated engine Board query returned two hits/partial/no errors; query-bound continuations remain process-local. Provider full-text semantics, live search pager and catalog completeness remain unverified.
-- The selected-window listing covers 12 pages/180 items and 11 meeting rows. One supplied agenda PDF has now been fetched. One supplied native-item Coversheet is now mapped with rendered text/date and its item-bound attachment locator (docs/NOVUS-COVERSHEET.md; six scoped synthetic cases). The supplied MeetingView Agenda is also mapped via the existing public HTML format: native meeting996 plus20 same-meeting item links, heading/date/localtime and whole meeting text (seven scoped synthetic cases). Other templates and Minutes rendering remain unverified; the historical failed postback is retained separately from the new successful bounded search.
-- On this same tenant, establish date-window defaults, retained history and meeting-grid continuation. The receipt exhausts only the selected window; catalog/source completeness are false.
-- No current machine create/update/upload route or authorized staff/test account was supplied; historical UI instructions are not API fields.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "The item pager was traversed for the displayed form values 2026-08-11 through 2027-02-11: 12 pages, 180 rows, 15 per page. Meeting grid showed 11 rows. Follow-up did not establish successful native search or meeting-grid continuation; retained-history and full-catalog bounds remain unknown."
-}
-
-### Authorization restrictions
-
-- No credentials or remote writes were used in the 2026-11-11 research capture; no document bytes were downloaded.
-- Preserve provider-issued IDs only when present in link targets; rows without linked IDs remain without IDs.
-- Unknown search, retention and continuation behavior is incomplete, not unsupported.
+Evidence and exact scope: `inventory.json` provider `novusagenda`; operation status and outbound mappings are separate from historical observations.
 
 ## F05 CivicPlus Agenda and Meeting Management Select (`civicplus-select`)
 
-Official documentation status: historical file-import article and authenticated UI guides inspected; no external REST contract verified.
-Account/tier: public Lacey portal evidence only. Historical FTP credentials are project-lead supplied and were not available.
-Test environment: documentation and public read-only observation; no FTP access or transfer.
+- A bounded Lacey CivicClerk native-search engine read and in-process resume is captured in docs/verification/civicplus-select-native-search-2026-11-12.json: partial/no-error pages yielded three then two local hits; the first request made one network call and resume reused the exact in-process snapshot with zero additional calls. Provider candidate semantics, broader search/full catalog, full text and restart-persistent continuation remain unverified.
+- The exporter prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4. The official-linked filename tester classifies the additional tokens, but backend acceptance and post-import behavior remain unverified. MP4 framing does not establish codec/playability, captions or timestamp fidelity; ambiguous Packet, Notices and Audio/Video aliases remain rejected.
+- Historical FTP host and consultant processing/readback remain unverified. Source file preparation is separate from remote import or association. Official Fishers Section create/update is implemented; Event timestamp/template equivalence, item writes and document upload remain contract gaps, not account-acquisition gates.
+- Official Fishers spec and metadata now pin Event/Section models and publication enum0/1/2; section writes are implemented with scoped synthetic execution. Event date/time/template readback equivalence remains unresolved, and no item create/update or document upload model is established. No account acquisition gate.
+- Bounded Event-write follow-up: create eventStartTime has HH:MM regex, update time is free-form with12:00:00AM default; UI workflows/public display client do not establish write timestamp or template recurrence readback. No write conversion inferred. Portal Event-file API-origin defect is now implemented/tested separately.
 
-### Representative research observations
-
-- https://www.civicplus.help/meetings-select/docs/historical-imports (updated October 29, 2026): PDF/MP4 only; up to five PDFs plus one audio/video file per event/meeting. Filename stem `MeetingBody_MeetingType_FileType_MM_DD_YYYY`; explicit examples use `Agenda`, `Agenda Packet`, `Minutes`. Files are placed in the Imports FTP main folder, then a CivicPlus consultant processes, spot-checks and releases the import.
-- Exact names in prose vary: `Packet` versus `Agenda Packet`, `Notice` versus `Notices`, and `Media` versus `Audio/Video`. Only the three filename examples establish exact input tokens in the page. It omits file extensions, component escaping rules and a historical FTP size ceiling.
-- The article contradicts itself on host: `ftp://imports.civicclerk.com` in credential instructions and `ftp://important.civicclerk.com` in FileZilla instructions. Project-lead username/password were not supplied; no host probe or transfer occurred.
-- Agenda packets are imported as indivisible PDFs; MP4 bookmarks/timestamps are not carried over. A separate UI upload-size page does not establish the historical FTP limits.
-
-### Remaining research
-
-- A bounded Lacey CivicClerk native-search engine request and in-process resume are now captured in `docs/verification/civicplus-select-native-search-2026-11-12.json`: partial/no-error pages yielded three then two local hits, with one network call on the first request and none on resume because the exact page snapshot was retained in-process. Provider candidate semantics, full catalog/full text and restart-persistent continuation remain unverified.
-- The exporter now prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4. The official-linked Filename Tester v3.5.9 classifies Notice/Notices as Notice, Packet/Agenda Packet as Agenda Packet, Media `.mp4` as Video and Other as Other; these results establish classifier behavior, not consultant/vendor acceptance. Confirm accepted filenames and post-import behavior with the consultant/vendor. MP4 codec/playability, captions and timestamp preservation remain unverified; ambiguous aliases Packet, Notices and Audio/Video remain rejected.
-- Historical FTP host is contradictory; credentials, transfer, consultant processing and readback are absent. Authenticated create/update/upload routes remain account-gated.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "A bounded native-search engine request and in-process resume are observed for one Lacey query. Candidate relevance, broader pagination and full catalog completeness remain unverified; historical file intake is not a paged catalog."
-}
-
-### Authorization restrictions
-
-- The 2026-11-11 research capture made no remote writes or FTP connections and used no credentials or consultant contact; authorized test-tenant acceptance remains blocked pending supplied access.
-- Do not use unrelated Select UI size limits as historical FTP acceptance limits.
-- Vendor PDF optimization may change bytes; preserve local source hashes and do not promise post-import hash equality.
+Evidence and exact scope: `inventory.json` provider `civicplus-select`; operation status and outbound mappings are separate from historical observations.
 
 ## F06 CivicPlus Agenda Center (`civicplus-agenda-center`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+- Effingham 2024/category 3 returned 35 rows; a bounded Commission native-search engine request and resume returned partial/no-error pages with three hits each. The supplied ViewFile?html=true response was text/html (2,481 bytes), not PDF/binary. Other years/categories, PreviousVersions traversal, full archive and binary/PDF retrieval remain unresolved; do not repeat the same HTML route. Chino extraction failure remains recorded; add no tenant.
+- Bounded discovery/native search have scoped source and fixture coverage. Pinned CivicPlus material supplies no external machine write/file-import schema for Agenda Center. The missing input is a product-matched integration contract, not an authorized live test account.
+- If authorized test access is supplied, verify role/approval/visibility and duplicate/update/readback separately for meeting, item and file; no remote writes occurred.
 
-### Representative research observations
-
-- https://www.effinghamcounty.org/AgendaCenter: selected year=2024/category=3 returned HTTP 200 HTML with 35 rows (2024-01-16 through 2024-12-03).
-- A supplied ViewFile URL ending `?html=true` returned 2,481 bytes of `text/html` (SHA-256 4d84e2d105bf4e452065aa75f6d845cc7700a5722e6eafaa21c1d59c18f88690); it is HTML, not a PDF/binary-document result.
-- Receipts: `docs/verification/civicplus-agenda-center-year-2024-2026-11-12.json` and `docs/verification/agendacenter-viewfile-html-2026-11-12.json`.
-- The bounded Commission native-search engine read and resume returned partial/no-error pages with three hits each. Exact receipt: `docs/verification/civicplus-agenda-center-native-search-2026-11-12.json`; the sentinel response was an application error, not an empty-result proof.
-- https://www.cityofchino.org/AgendaCenter: Chino candidate access failure; no directly fetched content; no unsupported conclusion.
-
-### Remaining research
-
-- Source and saved-fixture tests now cover bounded year/category discovery and native search. One Effingham 2024/category 3 read returned 35 rows; one Commission search and resume are also captured. Other years/categories, broader date/body coverage, PreviousVersions traversal and full archive completeness remain unresolved. The observed `html=true` response is HTML and must not be counted as PDF/binary proof. Chino extraction failure is already recorded; do not add another tenant.
-- Official CivicPlus material describes the staff agenda/item UI but supplies no external machine request/response or file-import schema. Obtain tenant-supported API/integration specification and authorized test account.
-- If access is supplied, verify role/approval/visibility and duplicate/update/readback separately for meeting, item and file; no remote writes occurred.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "The bounded year/category route returned 35 rows for 2024/category 3, and the native-search engine receipt records a Commission first page and resume. Other years/categories, full archive bounds and binary/PDF retrieval remain unknown; ViewFile?html=true returned HTML, not PDF."
-}
-
-### Authorization restrictions
-
-- SVG unsupported; PDF-only agendas do not accept structured items; item removal required before modification; approval/publishing rights.
+Evidence and exact scope: `inventory.json` provider `civicplus-agenda-center`; operation status and outbound mappings are separate from historical observations.
 
 ## F07 Municode Meetings (`municode-meetings`)
 
-- Current acceptance reconciliation: exact Essential multimedia typed-model POST/GET readback has four attributed existing synthetic engine cases, including full documented sample patches, fixed-ID preservation, conflict/uncertain recovery and no replay. This closes that scoped synthetic outcome. Meeting/item UI edits and document uploads are separate unknown API contracts; no live account is a completion gate.
-
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://meetings.municode.com/PublishPage/index?cid=EFFINGHAM&ppid=9639c19d-1d1f-4201-b8ff-163a28a35f08&p=1: Effingham Board of Commissioners; Initial page; do not assume p is numeric pagination.
-
-### Remaining research
-
-- Source now implements explicit-offset POST collection and GET meeting/item/multimedia capture on the documented support-gated dev origin. Only the multimedia `{meetingStructure:...}` response is schema-mapped; meeting/item/collection bodies remain raw partial captures with zero inferred normalized records.
-- Collection offset is caller-supplied; page size, ordering, total/terminal condition and offset progression remain undocumented. Live request validation needs a support-issued token/account; none was supplied.
-- The documented multimedia update is source-implemented and fixture-tested. Official examples demonstrate URL/timestamp/default/baseURL changes, but other enum/mutability constraints and update response/readback/version conflicts remain unverified without an authorized tenant.
-- The inspected API page has no meeting/item create/update or document upload route; obtain applicable current support API documentation before coding those routes or treating omission as unsupported. No token was issued, and the test host is not a production host.
+- Development and officially linked production request routes are source implemented with environment-bound credentials. Only the existing meetingStructure multimedia shape is mapped; meeting/item/collection responses remain raw partial captures with no inferred records. The Postman collection has no response examples.
+- Collection offset is caller-supplied; page size, ordering, total/terminal condition and offset progression remain undocumented. Support-token requirements apply to optional live calls, not synthetic contract acceptance; no pagination behavior is inferred.
+- Development multimedia updates have accepted scoped synthetic execution/readback for the documented URL/timestamp/default/baseURL fields. Other enum meanings, mutability and upstream conflict semantics remain qualified; no authorized-tenant or live-write acceptance gate is imposed.
+- The inspected help article and officially linked Postman collection provide no meeting/item create/update or document-upload route/model. Product-matched machine contracts remain needed before coding those operations or claiming vendor absence. The article development host and collection production host remain explicitly distinct.
 - Essential reaches end-of-life on 2027-06-30. Keep this product row separate from Select and Aha CMS.
+- Production multimedia update request uses lower-camel-case JSON, while the existing development DTO adapter uses Pascal-case fields. Production payload/readback equivalence remains unmapped and write planning fails before network; no development-to-production field-case inference.
 
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "cid/ppid/p observed; p semantics unverified; older years may be outside product."
-}
-
-### Authorization restrictions
-
-- Essential end-of-life June 30, 2027; preserve legacy input and IDs.
-- Do not merge public/private packets or substitute Aha CMS API.
+Evidence and exact scope: `inventory.json` provider `municode-meetings`; operation status and outbound mappings are separate from historical observations.
 
 ## F08 BoardBook (`boardbook`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://meetings.boardbook.org/public/organization/1807: Minneapolis public organization listing; Initial list; full archive pagination not tested.
-
-### Remaining research
-
-- Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, detail relationships and complete catalog remain unverified; no new tenant/history survey implied.
-- Additive `boardbook-public-agenda-html` now maps saved/configured public agenda meeting/native item parents and associated document IDs from captured attributes. Seven new synthetic engine cases and three reused document cases pass; saved Minneapolis HTML maps one meeting/44 items/34 supplied viewer links. Hidden loaders are not invoked; original bytes behind those viewers and catalog completeness remain unverified. See [mapping guide](../BOARDBOOK-DETAIL.md) and `docs/verification/boardbook-rendered-agenda-2026-11-12.json`.
+- Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied.
 - Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.
-- No authorized staff/test account was supplied for roles, API enablement, write/readback or conflict checks.
+- Pinned material does not establish role/enablement, write/readback or conflict schemas for an external integration. Those contract details remain unresolved; staff-account acquisition is not an acceptance gate.
 
-### Pagination contract
-
-{
-  "status": "observed_single_page_with_local_continuation",
-  "details": "629meetings in selected organization HTML; no separate archive pager exposed. Existing local checkpoint/date bounds apply; no catalog completeness guarantee."
-}
-
-### Authorization restrictions
-
+Evidence and exact scope: `inventory.json` provider `boardbook`; operation status and outbound mappings are separate from historical observations.
 
 ## F09 eSCRIBE (`escribe`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council: Public calendar and agenda/PDF/player links; admin host auth-blocked separately.
-
-### Remaining research
-
-- Additive rendered Meeting.aspx detail is now mapped from the existing saved HTML:1native meeting,12capture-local item positions and15associated supplied document links. Five scoped synthetic cases cover offline normalization and actual engine detail→document transfer; IDs/links/date/local-time/location are explicit, item keys are not stable native IDs. Calendar POST already implemented/proven; bounded Meeting.aspx HTML fetch completed and supplied FileStream PDF returned403 (correctly partial). No bypass/retry or complete agenda-item/catalog claim.
+- Calendar and bounded native search remain separately evidenced. Captured Meeting.aspx detail now maps rendered agenda positions, supplied partial text and same-origin FileStream locators. Item keys are capture-local with native item ID null. The earlier FileStream 403 remains a failed live transfer, not proof that the rendered detail path is unimplemented or the catalog complete.
 - Public native search source implementation and bounded first/page2/resume are verified with partial coverage. Provider full-text/exact matching semantics, broader document visibility and catalog completeness remain unknown; no saved metadata search is mislabeled native.
-- The official product overview describes modules, not public API schemas. No customer API/import contract or authorized write tenant was supplied for meeting/item create/update/upload.
+- Pinned product/module material does not supply a customer machine API/import schema for meeting/item create/update/upload. Product-matched field/readback contracts remain needed; live write-tenant acquisition is not required for accepted synthetic verification.
 
-### Pagination contract
-
-{
-  "status": "unverified",
-  "details": "Provider-specific bounds/pagination and date coverage pending."
-}
-
-### Authorization restrictions
-
-- Research boundary on 2026-11-11: read-only public captures. That former test-tenant dependency is superseded by the owner amendment: documented synthetic verification is accepted, and live checks are optional. Procurement and outreach remain unauthorized.
-- Unverified and access-blocked are incomplete, not unsupported.
+Evidence and exact scope: `inventory.json` provider `escribe`; operation status and outbound mappings are separate from historical observations.
 
 ## F10 Simbli (`simbli`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+- Public listing/page2, fresh selected meeting/agenda tree, selected item content and same-meeting supplied attachments are source implemented with scoped captures/synthetic execution. The older HTML-only observation is historical. Aggregate agenda/minutes PDF generation, native search and full-catalog semantics remain unverified.
+- Reviewed current Simbli pages describe archive search and staff meeting/item/document workflows but publish no machine field schema. A product-matched machine contract is not yet established; this is unresolved research, not proof only a customer/private source can resolve it.
+- Tenant-specific role/permission and write/readback configuration must come from a matching machine contract. No staff/test-tenant credential acquisition is an acceptance gate; no live mutation is authorized.
 
-### Representative research observations
-
-- https://simbli.eboardsolutions.com/index.aspx?S=36031063: Oneida public Simbli landing page; Extracted landing page does not expose actual meeting list.
-
-- Resumed implementation: fresh anonymous ViewMeeting controls drive only observed GET meeting/agenda/supporting/minutes routes, verified district/meeting and anonymous user. One engine read returned meeting4942 plus41 agenda items/partial/no errors; exact raw responses and nested numeric IDs preserved. The two additive JSON formats do not replace the baseline reader. Empty supporting arrays and Minutesnull are scoped to this meeting; item bodies and PDF/document URLs remain unresolved.
-
-### Remaining research
-
-- Working public menu/listing and page2 are verified and source implemented. Fresh anonymous ViewMeeting controls and observed GET routes now retrieve meeting metadata and the agenda tree; one integrated read retained42 records. Selected public item content and supplied same-meeting attachment routes are now source implemented with scoped synthetic engine transfer checks; one separate endpoint probe returned an actual PDF. Aggregate agenda/minutes PDF generation and broader document coverage remain unresolved. Body filtering/search/full-catalog semantics remain unverified.
-- Reviewed current Simbli pages describe archive search and staff meeting/item/document workflows but publish no machine field schema. Obtain customer API specification before implementing writes or claiming absence.
-- No authorized provider test tenant, staff credentials or tenant-specific write configuration was supplied.
-
-### Pagination contract
-
-{
-  "status": "observed_and_source_implemented",
-  "details": "First50 embedded rows; published POST /Services/api/GetMeetingListing uses current anonymous controls, RecordCount50 and RecordStart51,101,...; bounded opaque scoped cursor retains midpage position, seen IDs and private cookie state for15minutes in one engine process. No public full-catalog claim."
-}
-
-### Authorization restrictions
-
+Evidence and exact scope: `inventory.json` provider `simbli`; operation status and outbound mappings are separate from historical observations.
 
 ## F11 iCompass CivicWeb (`civicweb`)
 
-- Current implementation: existing meeting detail/print PDF plus additive documented FilePro SOAP one-folder listing, original/PDF/supplied-meeting PDF retrieval, public native candidates/details and raw saved replay. Thirty-four distinct synthetic cases pass. Exact guide2014/WSDL2026 pins and field/action discrepancies are in `evidence/civicweb-filepro/source.json`; see `docs/CIVICWEB-FILEPRO.md`. This is document scope, not calendar create/update/upload or exhaustive catalog.
+- Existing Independence meeting-detail/print-PDF proof stays separate. FilePro API maps documents/folders/search and supplied file bytes, not an exhaustive meeting calendar or inferred agenda/minutes kind.
+- Find vendor-documented meeting/agenda create/update/upload contract and supported fields; the read-only Document.asmx contract does not close outbound entity requirements. No credential acquisition/live tenant gate.
+- No file/folder traversal implies meeting association; explicit supplied meetingId on PDF variant is preserved only. Guide2014 and captured2026 WSDL provenance/version differences remain explicit.
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://csknowledgebase.civicweb.net/document/57754/: Milton staff guide hosted on CivicWeb knowledgebase; Tenant staff UI instructions not vendor API; deployment differences possible.
-- https://ciindependenceor.civicweb.net/Portal/MeetingTypeList.aspx: Independence meeting-type listing; may be stale July 2025 content; not full catalog. One linked MeetingInformation.aspx?Id=11021 record was a City Council Work Session and supplied a completed print PDF (120,193 bytes, application/pdf; SHA-256 781943f47d7af1b250ee3c6f4b69b862feeb369ac829d2a66e851b3426348643). The document kind was not inferred as agenda/minutes. Receipt: `docs/verification/civicweb-supplied-document-2026-11-12.json`.
-
-### Remaining research
-
-- One MeetingInformation.aspx record and supplied print PDF remain separate supporting evidence. FilePro search continuation and one-folder capture offsets are implemented; full meeting-type archive, recursive catalog, adjacent-date coverage and agenda/minutes classification remain unknown.
-- The vendor-hosted FilePro guide supplies exact read-only document SOAP schemas, confirmed against both supplied WSDLs. It does not specify calendar/meeting create/update/upload; continue vendor contract research for those actual fields. Synthetic execution is accepted; no test credentials/live writes are required.
-- Do not derive write fields from labels such as Meeting Type, Description or auto-assigned item/file numbers.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "FilePro returns candidate IDs and details in <=50-ID batches; bounded one-folder/mid-batch continuations bind raw response hashes. No recursive or MeetingTypeList archive completeness claim."
-}
-
-### Authorization restrictions
-
+Evidence and exact scope: `inventory.json` provider `civicweb`; operation status and outbound mappings are separate from historical observations.
 
 ## F12 iQM2 (`iqm2`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+- The bounded Kent public calendar and first native search result are observed; verify broader date/body and archive coverage and live supplied Next before claiming completeness.
+- Pinned Granicus/iQM2 help describes authenticated locations/types/meeting and streaming workflows, not an iQM2 machine API. Deployment-specific field/readback documentation remains needed; account enablement is not a synthetic-acceptance gate.
+- Upload limits, write schemas, permission/readback and product applicability remain unresolved in pinned material. Do not substitute Legistar contracts; credentials and live writes are not required acceptance evidence.
 
-### Representative research observations
-
-- https://kentwa.iqm2.com/citizens/default.aspx: Kent portal; Self/# placeholders were not downloadable documents in the original capture.
-- Kent public search returned 20 mixed result rows for Council and reported 11,387 results. The captured Council and explicit-empty fixtures exercise source mapping; supplied Next is fixture-tested only, and no full text or complete catalog is claimed.
-
-### Remaining research
-
-- The bounded Kent calendar and first native search result are observed; broader date/body and archive coverage remain unverified. A supplied Santa Monica detail1496 now maps heading/control identities,17 same-meeting native legislative files,63 document locators and14 other-meeting references; eight focused synthetic cases pass including configured discovery/fetch/search/export and separate synthetic FileOpen transfer. Actual file bytes, other detail templates and live supplied Next remain unverified. Pre-2007 records are reported elsewhere, not in this portal.
-- Current Granicus/iQM2 help pages describe authenticated locations/types/meeting and streaming-media workflows, not an iQM2 external API. An exact product-matched machine contract remains to establish from vendor documentation.
-- Exact product-matched create/update/upload schemas and documented limits remain unresolved; do not reuse Legistar contracts. Vendor-contract synthetic execution is the required verification basis, not credential acquisition.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "Upcoming list plus Full Calendar/group filter; archive boundaries untested, pre-2007 Kent archive external."
-}
-
-### Authorization restrictions
-
-- Preserve Scheduled/Cancelled; ignore self/# file placeholders; minutes may be embedded in following packet.
+Evidence and exact scope: `inventory.json` provider `iqm2`; operation status and outbound mappings are separate from historical observations.
 
 ## F13 Granicus Swagit (`swagit`)
 
-- Current implementation: configured current-listing discovery and observed public native search are registered and labelled implemented. The first/page-two raw endpoint probe, exact local metadata matching and fixture traversal remain bounded; timestamp links are not transcripts.
+- Princeton archive capture maps 482 rows; bounded Search Archives pages 1 and 2 yielded 10 provider-ID rows each. No third page/full catalog result was fetched. Provider query semantics remain unknown; exact local matching uses available title/date only.
+- Sound Search timestamp URLs are links, not transcripts. No transcript text or video playback is established.
+- Official Swagit integration documentation is login-gated and describes PrimeGov/MediaManager IDs, not general writes. Create/update/upload methods remain unresolved contract research; no outside-information dependency has been established.
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Archive public without credentials; support article requires customer login. Swagit/MediaManager integration account prerequisites unverified."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://princetontx.new.swagit.com/views/261/: the selected archive capture maps 482 rows. GET /videos/search with q=Council returned 10 provider-ID rows on each of the first two pages; the page-2 request followed the supplied same-origin rel=next link and IDs were disjoint. Search query semantics remain unknown. Sound Search timestamp links were retained, not transcript text. Receipt: `docs/verification/swagit-native-search-page2-2026-11-12.json`.
-
-### Remaining research
-
-- The current archive capture maps 482 rows; only search pages 1 and 2 were fetched (10 provider-ID rows each). No third page or full archive boundary was established. The earlier player error remains separate from archive/search evidence.
-- The public Search Archives request is now observed for q=Council on pages 1 and 2. Upstream query semantics remain unverified; exact matching is limited to returned title/date metadata, so this does not prove all source matches are returned.
-- Official Swagit integration documentation is login-gated and describes PrimeGov/MediaManager ID integration, not a general write API. Exact create/update/upload methods require customer documentation and authorized access.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "Selected archive capture maps 482 rows. Search pages 1 and 2 each returned 10 disjoint provider-ID rows; no third page or full catalog boundary was tested."
-}
-
-### Authorization restrictions
-
-- No media playback, upload, API write, search submission or caption retrieval tested.
-- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
+Evidence and exact scope: `inventory.json` provider `swagit`; operation status and outbound mappings are separate from historical observations.
 
 ## F14 SuiteOne Media (`suiteone-media`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public archive GET anonymous. Upload/update requires an authorized SuiteView Admin account; account tier not specified."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+- On Vermilion, root and one supplied Older Meetings group were traversed (328 rows; 17 older groups reported; continuation retained). A separate bounded Council native-search run/resume returned three provider candidates per page and zero exact local hits. Remaining groups, full history, remote search/date semantics and all meeting/document MIME/redirect outcomes remain unestablished.
+- The SuiteOne guide names WMV and Liberty *_content.HTML intake with asynchronous processing, but no exact bookmark HTML schema. An authorized vendor-produced example is still needed for that import.
+- Pinned admin UI steps do not establish a machine write/publication/readback contract. Those schemas remain unresolved; account credentials or live publication are not an acceptance gate.
 
-### Representative research observations
-
-- https://vermilionoh.suiteonemedia.com/: root plus one supplied Older Meetings POST returned 328 meeting rows total; 17 older groups were reported, continuation retained, and coverage remains partial/truncated. The selected dates span 2022-01-25 through 2026-11-17. The one POST returned 52 parsed meetings. Other groups and document downloads are not established. Receipts: `docs/verification/suiteone-older-groups-2026-11-12.json` and `docs/verification/suiteone-older-group-request-2026-11-12.json`.
-- The bounded native-search engine run and resume for Council returned three provider candidates on each partial/no-error page and zero exact local hits. Receipt: `docs/verification/suiteone-native-search-2026-11-12.json`; this does not establish that the archive has no matches.
-
-### Remaining research
-
-- Bounded native search and root/one Older Meetings group discovery are implemented and exercised with fixture/source evidence; the limited public engine receipts are partial. Remaining older groups and full history, provider keyword/date semantics, and separate event/agenda/packet/minutes MIME/redirect outcomes remain unresolved.
-- The official SuiteOne guide names WMV and Liberty *_content.HTML intake with asynchronous processing, but no exact bookmark HTML schema. Obtain an authorized vendor-produced example before completing that file export.
-- Admin UI steps are documented; no machine write contract, account credentials or publication/readback test is available.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "Root plus one Older Meetings group yielded 328 records with continuation retained; 17 older groups were reported. A separate bounded keyword search/resume returned six candidates and zero exact local hits. Remaining groups, provider search/date semantics and full history are unresolved."
-}
-
-### Authorization restrictions
-
-- Uploaded media requires processing before public visibility; do not report upload completion as publication.
-- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
+Evidence and exact scope: `inventory.json` provider `suiteone-media`; operation status and outbound mappings are separate from historical observations.
 
 ## F15 Granicus Peak (`peak`)
 
-- Current implementation: the explicit configured Peak current-listing mapping is labelled implemented, preserving the 116-row capture. This does not promote generic attachments into a provider-wide fetch contract or establish archive/search completeness.
-
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://elkocounty.granicus.com/DocumentViewer.php?file=elkocounty_297e107d2b4284d01a905ef2af7c24f9.pdf&view=1: Elko public copy of vendor-authored Peak manual; Historical 2015-era examples/browser requirements; current 200 MB limit must be reverified; not current API.
-- https://lowermerion.granicus.com/ViewPublisher.php?view_id=1: bounded capture returned 116 records dated 2025-10-08 through 2026-11-18, partial. One separately supplied PDF retrieval completed with SHA-256 19994b412b91e3b6a41f77a7999971d8396c3d5bffaeb74290954e39e62db4cc; detailed receipt serialization failed afterward and the fetch was not repeated. Receipts: `docs/verification/peak-lower-merion-capture-2026-11-12.json` and `docs/verification/peak-champ-supplied-artifacts-2026-11-12.json`.
-
-### Remaining research
-
-- Rich mapping now retains captured unlabeled agenda/minutes viewer links bound to the same row player, configured origin/view and clip ID (ten new synthetic cases; three packet cases reused). Viewer locators do not prove agenda/PDF bytes; compatibility output is unchanged.
-- The selected capture and one supplied PDF are now recorded. RSS schema, full archive continuation and other document/media outcomes remain unverified; the receipt serialization failure is preserved and was not repaired by repeating the fetch.
-- The Elko Peak manual gives authenticated UI fields, attachment privacy values and a 200 MB limit, but no external route/payload. Machine create/update/upload, role permissions and readback need a supported API contract and authorized Peak account.
+- Lower Merion capture returned 116 rows and one separately supplied PDF fetch completed. Detailed receipt serialization failed afterward; the fetch was not repeated. RSS schema, full archive continuation and other document/media outcomes remain unverified.
+- The Elko Peak manual gives authenticated UI fields and privacy values but no external route/payload. Machine create/update/upload, roles and readback still remain unresolved product-matched contract research; live access is not an acceptance gate.
 - Do not use ViewPublisher fields as write parameters or reuse MediaManager/Legistar contracts.
 
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "The selected Lower Merion capture has 116 rows dated 2025-10-08 through 2026-11-18, partial; one supplied PDF completed separately. Full archive continuation is unknown."
-}
-
-### Authorization restrictions
-
+Evidence and exact scope: `inventory.json` provider `peak`; operation status and outbound mappings are separate from historical observations.
 
 ## F16 Utah Public Notice Website (`utah-public-notice`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Reads public. Writes require Utah login and approved poster/owner rights for target Body; publish permission distinct from draft edit."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://www.utah.gov/pmn/sitemap/notice/1120627.html: GET 200; notice detail read. Contains body URL, title, start/end, agenda text, location, posted/edited dates, PDF attachment and /noticeical/1120627.ics link. Limits: One Body observed. Outbound UI field names not inferred from public display labels; attachment bytes not fetched.
-
-### Remaining research
-
-- One public body/date search returned notice 1120627 and its supplied PDF link with no next control. Government/ZIP filters, result caps, live next-page behavior and linked document/iCalendar byte acceptance remain unverified; the private CSRF token and cookie were not retained.
-- Admin Help documents notice draft/publish and attachments as UI steps; no external API or import schema is published. Obtain a supported integration contract and authorized test account.
+- One Utah body/date public search returned notice 1120627; government/ZIP search, result caps, live next-page behavior and linked document/iCalendar byte acceptance remain unverified.
+- Pinned Admin Help describes notice draft/publish and attachments as UI steps without an external API/import schema. A supported machine integration contract remains needed; live test-account acquisition is not required for synthetic acceptance.
 - Notice publication has legal timing/visibility consequences; future writes require explicit authorization and planned readback.
 
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "No public search paging contract verified. Detail is one notice; per-notice iCalendar link is not a complete notice catalog."
-}
-
-### Authorization restrictions
-
-- Notice writes affect legally consequential public postings. Only authorized synthetic/test Body writes permitted; none attempted.
-- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
+Evidence and exact scope: `inventory.json` provider `utah-public-notice`; operation status and outbound mappings are separate from historical observations.
 
 ## F17 Destiny AgendaQuick (`destiny-agendaquick`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Yuma list public; staff publishing/editing requires authorized installation account. Hosted and client-installed deployment supported; no API credentials supplied."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+- Configured Yuma listing and supplied Previous/Next Period controls already have bounded implementation. Adjacent-month/other-type surveys are optional coverage observations, not required new work. Selected native memo/file association remains distinct from unverified video and binary-transfer acceptance.
+- Yuma public agenda-item search and bounded fixtures are mapped; live next-page behavior, provider full-text semantics and full result coverage remain unverified.
+- Pinned feature material describes staff scheduling, minute votes and uploads without a machine schema or vendor file-import contract. Those contracts remain unresolved; credentials are not an acceptance gate.
 
-### Representative research observations
-
-- https://destinyhosted.com/frs/coonrapids.htm: GET redirects to /frs/fas/default.cfm?con=coonr26667. Provider-branded shell/version announcement only in extracted response. Limits: No usable meeting listing in this response; not a discovery success.
-- https://public.destinyhosted.com/agenda_publish.cfm?id=98622: GET 200 after destinyhosted.com redirect. Meeting type/month/year filters; Previous/Next Period links with mt,get_month,get_year; agenda seq=1737; CHAMP video link. Search Agenda Items visible. Limits: Search not submitted; HTML/PDF attachment bytes and API not checked.
-
-### Remaining research
-
-- The supplied agenda sequence1737 is now captured/mapped:25 native linked memos with explicit meeting/line/revision bindings, displayed body/date/time, and one labelled packet locator. Seven new synthetic cases and two existing calendar cases pass. Memo contents, live packet bytes, other template variations and complete history remain unverified.
-- The bounded Yuma public agenda-item form and result are mapped by source/fixture tests. Live next-page behavior, provider phrase/full-text semantics and complete result coverage remain unverified.
-- Official feature copy describes staff scheduling/minute votes/uploads but no machine schema. No authorized credentials or vendor file-import contract were supplied.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "Previous/Next Period explicitly observed; month/year and meeting-type coverage must be bounded. Not all tenants return same public shell."
-}
-
-### Authorization restrictions
-
-- Public HTML/PDF export is not a vendor import contract. Roll call/votes are product features, not guaranteed structured fields in listing HTML.
-- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
+Evidence and exact scope: `inventory.json` provider `destiny-agendaquick`; operation status and outbound mappings are separate from historical observations.
 
 ## F18 Town Hall Streams (`town-hall-streams`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Town archive public. Scheduling requires service account; tier/roles unknown."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://townhallstreams.com/town.php?id=72: GET 200, 87,874 bytes; 132 embedded event rows parsed with partial status. Event 74003 detail returned 31,913 bytes of text/html and no supplied document links; HTML is not playable-stream evidence. Time-zone status stays unknown and history bounds remain unverified. Receipts: `docs/verification/town-hall-streams-capture-2026-11-12.json` and `docs/verification/town-hall-stream-detail-2026-11-12.json`.
-
-### Remaining research
-
-- The selected page already embeds 132 rows, and one supplied event detail is captured as HTML. No additional network group/page, PDF, agenda/minutes link or playable stream bytes were observed.
-- Additive `town-hall-streams-event-html` now maps the exact event/location-bound player and supplied HTTPS CDN HLS declaration from the existing capture. Eight synthetic engine/safety cases pass; saved HTML normalizes offline. The player citation and raw provenance remain; no JavaScript, transcript action or hidden loader is executed. See [mapping guide](../TOWN-HALL-STREAMS-DETAIL.md) and `docs/verification/town-hall-streams-player-mapping-2026-11-12.json`.
-- The earlier player error and later completed HTML response are not media acceptance. Stream bytes and tenant retention remain unverified.
+- The selected Hollis location page yielded 132 embedded rows; event 74003 detail yielded HTML only. No PDF/document links or playable stream bytes were available in this bounded capture; time zone remains unknown.
+- Do not treat an earlier player error or completed HTML fetch as an empty archive or media acceptance. Stream bytes and tenant retention remain unverified.
 - Reviewed sources provide no public create/update/upload API or vendor import schema; provider/admin documentation is needed for write questions.
 
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "132 embedded event rows were parsed from the selected page; no additional network continuation was observed. Long-term catalog/retention bounds remain unknown."
-}
-
-### Authorization restrictions
-
-- No supplied captions/transcripts or direct playable media verified. Service statement 'no uploading' must not be reclassified as unavailable upload capability.
-- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
+Evidence and exact scope: `inventory.json` provider `town-hall-streams`; operation status and outbound mappings are separate from historical observations.
 
 ## F19 TelVue (`telvue`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public playlists anonymous; Connect API requires client application access key + secret passphrase in custom headers, not Basic auth. Upload roles Contributor/Coordinator/Admin and account feature settings matter."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://videoplayer.telvue.com/player/WDZPS7GoaEEQAF8v5_qEOE_Kj--KiACH/categories/574?showtabssearch=false: GET 200; provider-owned demonstration/training player. Categories/media links and 14 training videos visible, including Uploads and Creating Playlists. Limits: Provider training content, not municipal meeting fixture.
-- https://videoplayer.telvue.com/player/dQtoDvlZYDOtqaf7eRn9z2lb1Nb6EZzu/playlists: GET 200. Named City Council playlist (87 videos at observation), committee playlists and stable player/playlist/media paths visible. Limits: Playlist media enumeration, paging, video playback and search were not tested.
-
-### Remaining research
-
 - Documented Connect v2 reads are GET /api/v2/media[/{id}], /videos and /playlists[/{id}]. The source fetch adapter now implements explicitly requested account reads; synthetic documented-route verification is accepted; live calls are optional and unrun.
 - Published pages show example JSON envelopes/fields but omit filters, pagination/cursor, caps and rate limits. Record these from a supplied authorized account response/current guide; do not claim catalog completeness.
-- CloudCast [official MRSS documentation](https://telvue.com/knowledgebase/cloudcast-mrss/) is now readable and mapped by explicit `telvue-cloudcast-mrss-xml`. Its published-player feed and optional `recent` count retain supplied stable media IDs, URLs, duration and language; creation/publication time is not a meeting date, and program/category is not inferred as meeting body. Exact vendor page and bounded existing-player sample are pinned under evidence/telvue-cloudcast; synthetic normalize/discover and account-boundary checks pass. No complete archive, media download/playback, transcript or native search claim follows from the feed.
-- Connect v2 playlist items now map exact documented collection/detail GET routes with explicit playlist_id and optional item external_id. Separate native item/playlist/media IDs, sequence/windows, supplied recordings and raw values are retained; seven synthetic engine/saved-response checks pass. Reference examples are dated December2022; pagination, unknown playable models, current deployment compatibility and mutation contracts are not inferred. The fixture is a documented selected-field transcription, not an exact captured response.
-- Connect upload guidance remains UI-only in reviewed material; no executable mutation payload schema was obtained. Separate HyperCaster Add/Edit/Content Metadata REST guides were inspected as a research lead but are outside the existing Connect/CloudCast target and were not implemented or substituted.
+- Connect/CloudCast MRSS is implemented with explicit feed format and partial published-player coverage. Exact vendor page/sample pins and synthetic engine checks establish mapped fields, not full archives or playback. Connect v2 mutations still lack executable payload contracts in reviewed guides; HyperCaster APIs are a separate product and are not substituted.
+- Connect v2 playlist-item relationships are implemented from December2022 vendor examples; no playlist write contract or meeting association is inferred. Mutation schema research remains required, not credential acquisition.
 
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "API examples do not specify paging, filtering or limits; playlist counts require verification against enumerated media, not assumed exhaustive single page."
-}
-
-### Authorization restrictions
-
-- No authenticated API requests. Keep TLS verification even though old sample curl uses -k. HyperCaster API not assumed applicable. Legacy MRSS doc CAPTCHA-blocked.
-- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
+Evidence and exact scope: `inventory.json` provider `telvue`; operation status and outbound mappings are separate from historical observations.
 
 ## F20 CHAMP (`champ`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public player metadata observed; CHAMP login required for UI writes; role/tier and API credential contract unknown."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+- Two public event details remain engine-read verified. One supplied Lake Zurich PDF completed (1,933,081 bytes); player HTML completed; a separate supplied HLS/media request remained partial. Public-player URL composition does not establish playback/segment acceptance. No public event index or paging contract is established.
+- Do not generalize the one PDF to other documents or event media. Yuma reports no media.
+- Pinned CHAMP Help documents staff event/media/PDF workflows rather than machine writes. Field/codec/role and write/readback contracts remain unverified; staff credentials and live mutations are not required synthetic acceptance.
 
-### Representative research observations
-
-- Public player JS https://play.champds.com/_COMMON/js/cds.event.js?1794445126 derives GET https://playapi.champds.com/{CustomerAccessID}/event/{EventID} and expects JSON.
-- https://playapi.champds.com/lakezurichil/event/164 and https://playapi.champds.com/yumacoaz/event/657: two bounded detail reads remain complete with original fields preserved (14 agenda items each; Lake Zurich 6 documents, Yuma 0; one recording each); catalog_complete=false. Follow-up Lake Zurich supplied PDF completed (1,933,081 bytes, application/pdf) and player HTML completed, while a separate supplied HLS/media fetch was partial. The public client composes VOD2 first, otherwise service 2048 or 8 plus URLFilename; this is URL-selection evidence, not playable-stream proof. Receipts: `docs/verification/champ-detail-2026-11-11.json`, `docs/verification/champ-supplied-links-2026-11-12.json`, `docs/verification/peak-champ-supplied-artifacts-2026-11-12.json`.
-
-### Remaining research
-
-- Rich source mapping now preserves native agenda parents/descriptions/item-document IDs and event/item-bound timeline seconds using the existing event JSON plus exact vendor player bytes. Twelve agenda/pin cases and six body-projection cases pass, with six media cases reused; normalize/search/neutral export preserve associations/provenance. A matching typed native Board ID binds BoardName to rich body for exact search/discovery filters; mismatched or untyped IDs are not promoted. See [CHAMP agenda mapping](../CHAMP-AGENDA.md) and `docs/verification/champ-agenda-relationships-2026-11-12.json`. No new network request or inferred transcript/speaker/motion; search remains partial for unavailable text.
-
-- Two public event detail GETs are engine-receipted, but no public event index/list or paging route is established. Continue only through existing tenant links if an index is visibly exposed.
-- One supplied Lake Zurich PDF is now fetched; a separate supplied HLS/media attempt remains partial and player HTML is not playback. Do not generalize these results to all attachments or events; Yuma reports no media.
-- CHAMP Help documents staff event/media/PDF workflows, not machine writes. API codecs, account roles and write/readback remain unverified without authorized credentials.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "Public event detail is engine-live-read-verified on two existing tenants; no public catalog/list or pagination route found. Admin help says authenticated Events list has 15/page; that is not a public JSON pagination contract."
-}
-
-### Authorization restrictions
-
-- Do not ingest unpublished JSON through baseline public path. Supplied media/captions only; player/download button not proof playable media.
-- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
+Evidence and exact scope: `inventory.json` provider `champ`; operation status and outbound mappings are separate from historical observations.
 
 ## F21 Hyland OnBase Agenda Online (`onbase`)
 
-- Current implementation: the configured current listing and supplied same-meeting Downloadfile wrapper protocol remain mapped. Separately, bounded selected detail revalidates current-listing membership and follows the exact supplied meeting page, accessible Agenda variant and, for a current member only, the declared item/section route with the matching isSection flag. The observed section supplies title-only rendered content, with scoped evidence in `docs/verification/onbase-section-detail-2026-11-13.json`. Its partial native records, locators, captures and SQLite/search/ZIP behavior are recorded in `docs/verification/onbase-detail-2026-11-13.json`; wrapper execution remains in `docs/verification/onbase-meeting-document-2026-11-13.json`. Explicit `fetch_attachment` also maps the supplied non-section Agenda-item attachment wrapper through exact preparation/view routes, with synthetic-only item wrapper/PDF evidence in `docs/verification/onbase-item-document-2026-11-13.json`. Native search, archived detail outside the current listing, section attachments, other Agenda variants, broader APIs and remote import/association remain unresolved. Historical PDF mismatch below is the initial observation, not a final claim that the wrapper has no retrievable document.
+- Historical Fitchburg failed search/HTML-at-PDF observations remain retained as such. Later selected hierarchy/item/section detail and explicit meeting/item/packet wrapper resolution are implemented with separate captures and synthetic execution. Akron embedded SearchResults/custom-date GET is also implemented. These paths do not establish all archives, attachment variants or Agenda association.
+- Hyland Agenda Foundation 25.1 guidance is version/installation-scoped. Identify deployment/version and entitlement before applying API/write operations to Agenda Online.
+- Deployment-matched create/update/upload and meeting-association field/readback contracts remain missing. An authorized staff/test account is not required for vendor-documented synthetic acceptance.
+- Normal Tagged DIP linked-document file/index preparation is implemented with exact destination mappings and synthetic emitted-layout proof; no Agenda meeting association or remote processing is inferred. OnBase API SDK remains an actual vendor surface; sdk.onbase.com redirected to Hyland identity, and public REST help describes per-deployment published operations rather than a universal Agenda schema. Continue exact API contract research without credential acquisition.
+- Current-listing Agenda hierarchy, selected item/section detail, supporting-document wrapper and meeting-packet branches now have scoped source/synthetic execution. Archive traversal, native search, non-agenda detail variants and staff import/meeting association remain unresolved; broader deployment or live file availability is not inferred.
+- Akron modern window is now implemented/tested; nonempty Documents/Media, native keyword search, complete archive and remote Agenda association/import remain unverified.
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/: current root maps 30 rows. A supplied Meetings response returned HTTP 200 but mapped zero; a guarded search POST was rejected before redirect details/results. One supplied `.pdf` link returned HTTP 200 `text/html`, 3,719 bytes, without PDF magic; corrected engine result is partial and retains the meeting. It is not a PDF success or unsupported-route finding. Receipts: `docs/verification/onbase-public-search-2026-11-12.json` and `docs/verification/onbase-pdf-mismatch-2026-11-12.json`.
-
-### Remaining research
-
-- Documented OnBase Normal Tagged DIP file/index preparation is now implemented as `onbase-tagged-dip-files`; see [the mapping guide](../ONBASE-DIP.md). Thirteen synthetic actual-engine checks verify emitted layout, mapped tags/types, exact bytes and authorization/bounds. This prepares linked meeting documents only, with explicit destination configuration; it does not establish an Agenda API, meeting association, remote Verification Report or committed import.
-
-- The current bounded follow-up covered root, Meetings response, guarded search attempt and one supplied Downloadfile route. Search results, redirect target/method and adjacent-date/archive completeness remain unresolved; the supplied `.pdf` response is HTML, not a PDF.
-- 2026-11-13 client-source follow-up: the saved `Meetings` HTML declares a form POST to `/OnBaseAgendaOnline/Meetings` with `Keywords`, `MeetingTypeIDs`, `DateRangeOptionID`, and custom start/end dates. Its date options include `7` (This Year) and `11` (Custom Date Range); the date picker format is `%n/%j/%Y`, and selected meeting-type IDs are serialized as a comma-separated hidden `MeetingTypeIDs` value. One GET of the literal `corescripts` URL from that saved HTML returned the pinned 291,171-byte JavaScript file. This is form/client-source evidence only: the existing guarded redirect receipt does not establish POST field semantics, result schema, or paging. No further query POST, repeated GET, or source mapping was performed. See [the client-source receipt](../verification/onbase-search-client-contract-2026-11-13.json).
-- Hyland Agenda Foundation 25.1 guidance is version/installation-scoped. Identify tenant deployment/version and entitlement before applying API or write operations to Agenda Online.
-- No authorized deployment-matched staff/test account or integration contract was supplied for create/update/upload.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "Current root mapping yielded 30 rows; Meetings response mapped zero. Search redirect was not followed, so archive/year/search continuation and completeness remain unknown."
-}
-
-### Authorization restrictions
-
+Evidence and exact scope: `inventory.json` provider `onbase`; operation status and outbound mappings are separate from historical observations.
 
 ## F22 Laserfiche WebLink (`laserfiche-weblink`)
 
-Current implementation (2026-11-13): configured Repository v2 reads now include GetEntry, bounded sync/async document representations, opt-in supplied page text, and SearchAsync/Tasks/Results/ContextHits. Search is limited to direct-folder first-expression candidates and exact local matches over returned metadata/excerpts; raw bytes, page anchors and partial coverage survive persistence/ZIP. See `docs/verification/laserfiche-native-search-2026-11-13.json` plus the earlier scoped read receipts. These are accepted documented synthetic checks, not inferred WebLink access or whole-provider completion. Historical follow-ups at the end of this document describe the sequence and are superseded where they call these paths unimplemented.
-
-
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"WebLink cookie/browser session may be required; saved capture baseline remains.","outbound":"Cloud OAuth v2 scopes AND principal ACL; self-hosted API deployment/version separate. No access supplied."}}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://miweblink.metro-inet.us/sapublic/Browse.aspx?startid=207&cr=1: cookie_blocked
-- https://weblink.ci.northfield.mn.us/WebLink/Browse.aspx?dbid=0&startid=92&row=1&cr=1: cookie_blocked
-
-### Remaining research
-
 - Guarded offline-Chrome WebLink session is implemented with PublicTransport routing; synthetic/browser checks are separate from live acceptance. Current Boulder request is blocked at the cross-origin redirect boundary and Louisville returns HTTP 403. No catalog was obtained; both tenant contexts have been used.
-- Repository v2 child-list GET is implemented from the official route and supports returned nextLinks, but live reads need a supplied repository.Read OAuth tenant token; no account credentials were supplied.
-- Resolved two wire ambiguities against the pinned [official JavaScript SDK](https://github.com/Laserfiche/lf-api-js/blob/3a40996613f6f1a1b2fa90cd7d31c512a149ee25/packages/lf-repository-api-client-v2/index.ts): ImportUploadedParts sends JSON and returns a 202 task; CreatePages sends multipart request JSON plus repeated imageFiles, paired by index with textPages. Exact vendor bytes/hash are retained under evidence/laserfiche-repository. New page plans independently read pageNumber/hasImage/hasText and verify paired positions, unmatched streams and supplied insertion; incomplete or wrong readback stays uncertain. Prior prepared plans retain their legacy readback contract. Synthetic tests cover unequal arrays, image-only pages, insertion, incomplete metadata, wrong pairing and legacy plans. Existing chunk finalization was already JSON and its affected synthetic proof is reused. Image conversion may change exported bytes, so unmatched hashes do not count as success; no remote conversion guarantee is claimed. Guide generateText descriptions still disagree, and no new generation behavior is inferred. Repository API identity/access is never inferred from WebLink repository name.
+- Repository v2 child-list, selected-entry metadata and original document-content reads are implemented from pinned official SDK routes with scoped synthetic verification. Optional live reads require repository.Read OAuth for the selected tenant; acquiring it is not an acceptance gate.
+- Resolved against pinned official Repository v2 SDK: Folder/ImportUploadedParts finalizes with application/json and CreatePages uses multipart JSON plus repeated imageFiles paired by index with textPages (page count max of the two lengths). tests/test_laserfiche_page_parts.py and the public-contract-leads receipt cover unequal arrays, exact positions, wrong/incomplete readback and legacy plans. These are implemented synthetic scopes, not open wire-contract blockers. generateText guide ambiguity remains qualified; no OCR/generation or automatic meeting association is inferred.
 
-### Pagination contract
-
-{
-  "status": "unverified",
-  "details": "Provider-specific bounds/pagination and date coverage pending."
-}
-
-### Authorization restrictions
-
-- Research boundary on 2026-11-11: read-only public captures. That former test-tenant dependency is superseded by the owner amendment: documented synthetic verification is accepted, and live checks are optional. Procurement and outreach remain unauthorized.
-- Unverified and access-blocked are incomplete, not unsupported.
-- No DELETE or empty all-page replacement; move/copy/rotate and general repository administration not part of connector write scope.
+Evidence and exact scope: `inventory.json` provider `laserfiche-weblink`; operation status and outbound mappings are separate from historical observations.
 
 ## F23 TownCloud (`towncloud`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Published agenda detail public. Editing/publication requires authorized TownCloud account; API access and tier unknown."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+- Woodford /agendas embeds the published agenda response; public body/year controls, next-page behavior and complete history remain unverified.
+- The observed published JSON is mapped; no native public search or complete archive scope is established.
+- Pinned evidence does not establish an external write route or vendor file-import schema. Tenant-supported field/readback documentation remains needed; authorized-account acquisition is not required for synthetic contract acceptance.
 
-### Representative research observations
-
-- https://woodfordvt.org/: GET 200. Recent agendas grouped by body, links to /go/woodford-vt/agendas/{id} and PDF document links. Limits: Recent-only homepage is not full agenda table or exhaustive discovery.
-
-### Remaining research
-
-- Existing captured agenda HTML now enriches the rich meeting with 11 capture-local item positions, three supplied parent links, eight native attachment IDs and item-owned text. Four affected synthetic engine cases pass; compatibility projection remains unchanged. No native item IDs, actual downloaded attachment bytes or archive completeness is claimed; S3 transfer still requires an explicit configured download origin.
-
-- Woodford /agendas embeds a published-agendas response containing 115 captured rows. Its source mapper preserves supplied IDs and links; public body/year controls and complete history remain unverified.
-- The observed published JSON is mapped; a next-page contract, retained-history completeness and native public search remain unverified.
-- No external write route or vendor file-import schema is in reviewed evidence; obtain tenant-supported documentation and an authorized account before write work.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "The Woodford /agendas embedded published JSON is mapped; body/year controls, pagination, native search and full history remain unverified."
-}
-
-### Authorization restrictions
-
-- Downloadable packet output does not establish a TownCloud import file format. Do not infer table JSON write endpoint.
-- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
+Evidence and exact scope: `inventory.json` provider `towncloud`; operation status and outbound mappings are separate from historical observations.
 
 ## F24 Digital Towpath (`digital-towpath`)
 
-- Current implementation: supplied current-listing/year controls and dedicated numeric detail fetch are registered and labelled implemented. Existing 2024 ten-record proof and URL-derived identity limits are retained; no full archive, arbitrary slug identity or search contract is inferred.
-
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Demo reads public; dashboard required for administration. Customer credentials and account roles not supplied."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://townbrutus.digitaltowpath.org:10148/content/MinuteCategories/View/1: GET redirected to digitaltowpathny.gov:10148/content/404, HTTP 200. Provider-branded File Not Found page, search and Minutes navigation links. Limits: Requested category was not obtained; HTTP 200 cannot mean successful meeting fetch. Legacy/new templates may differ.
-
-### Remaining research
-
-- On the selected Digital Towpath demo, follow Other Years from Meetings and Minutes and capture date/category continuity, one meeting detail and one PDF URL/MIME. The old Brutus category URL is a moved path, not a current executable route.
+- Current dated listing and supplied Other Years controls are implemented with bounded continuation. Selected numeric meeting detail preserves supplied category/location/local time, text and document locators; docs/verification/towpath-supplied-detail-2026-11-12.json records four scoped synthetic cases. Other years/full history and PDF byte availability remain coverage qualifications, not mandatory new sampling. The old Brutus URL is historical.
 - Demo search query semantics and archive bounds remain unknown; HTML success does not establish PDF extraction or attachment availability.
-- The indexed Meetings Module guide describes staff entry without a machine payload. No vendor API/import contract or test account was supplied.
+- The pinned Meetings Module guide describes staff entry without a machine API/import payload. A vendor contract remains unresolved; test-account acquisition is not a completion gate.
 
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "Demo Other Years navigation observed. Legacy Brutus category URL moved; no numeric paging or complete archive verified."
-}
-
-### Authorization restrictions
-
-- PDF manual extraction blocked; indexed excerpts insufficient to claim upload/update API. Demo inconsistent minutes dates must not silently override page dates.
-- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
+Evidence and exact scope: `inventory.json` provider `digital-towpath`; operation status and outbound mappings are separate from historical observations.
 
 ## F25 ClerkBase (`clerkbase`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+- South Kingstown tree/native-search live receipts remain bounded/partial and do not establish full tree, phrase/wildcard or live search-page-two coverage. Separate Richmond saved-document parsing/default synthetic GET preserves static body/paragraph text with four-case receipt docs/verification/clerkbase-document-text-2026-11-12.json and actual consumer supplied-text evidence. This closes supplied HTML text handling, not linked binary downloads or all document fetch paths.
+- Current vendor pages distinguish ClerkBase Meeting Center/OnBoardGOV from ClerkMate. A current ClerkBase-specific API/import contract is not established; research remains unresolved without proof of an outside-only dependency.
+- Machine role, pagination-cap, write-permission and readback contracts remain unverified. Staff/API credentials are not required for accepted synthetic verification; do not substitute another product route.
 
-### Representative research observations
-
-- https://clerkshq.com/southkingstown-ri: the supplied public tree and search routes were probed anonymously. The captured tree response contains five supplied document links; Council and empty-result POST responses are in `docs/verification/clerkbase-search-route-probes-2026-11-12.json`, while the published page-two POST and tree GET are in `docs/verification/clerkbase-page2-tree-route-probes-2026-11-12.json`. These are raw public route probes, not a live QuorumRelay engine action.
-- Separate bounded engine receipts record partial/no-error live reads: tree discovery returned three URL-keyed records over two pages, and Council native search returned three URL-keyed records with three local hits from one capped page. Receipts: `docs/verification/clerkbase-tree-engine-discovery-2026-11-12.json` and `docs/verification/clerkbase-native-search-engine-read-2026-11-12.json`; neither proves complete catalog/search coverage or linked-document download.
-
-### Remaining research
-
-- Bounded ClerkBase tree discovery and native search are implemented and have separate partial live engine receipts: tree discovery returned three URL-keyed records over two pages; native search returned three URL-keyed records and three local hits from one capped page. Saved-fixture tests cover guards and mapping. The raw page-two search receipt is a route probe, not proof of an engine page-two search resume. A linked document has not been fetched and verified by bytes/MIME/hash; nested-tree/full catalog coverage and exact provider phrase/wildcard semantics remain unresolved.
-- The existing pinned Richmond published minutes capture now contributes rich static body/paragraph text and capture provenance through clerkbase-document-html; local supplied-text search/export/revision and legacy parity are synthetically checked (docs/CLERKBASE-DOCUMENT.md). No new download is claimed.
-- Current vendor pages distinguish ClerkBase Meeting Center/OnBoardGOV from ClerkMate. Obtain a current ClerkBase-specific API/import contract before implementing writes.
-- No staff/API credentials supplied; roles, page caps, write permissions and readback remain gated. Do not substitute another product route.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "Bounded live engine receipts record partial/no-error tree discovery across two pages and three URL-keyed records, plus one capped native-search page with three URL-keyed documents and three exact local hits. A separate raw probe observed the published search page-two request, but no engine page-two search resume is recorded. Linked-document byte retrieval, nested trees and full catalog coverage remain unverified."
-}
-
-### Authorization restrictions
-
+Evidence and exact scope: `inventory.json` provider `clerkbase`; operation status and outbound mappings are separate from historical observations.
 
 ## F26 Municipality-published calendar (iCalendar) (`first-party`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Observed feed public. Publication/admin credentials and hosting CMS are separate, unknown contracts."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://www.logan-twp.org/events/: GET 200 redirected from /municipal-calendar/. Municipal meeting calendar has iCalendar webcal subscription and HTTP Export .ics links. Limits: Calendar page includes non-meeting events; explicit source/type bounds required.
-
-### Remaining research
-
-- On the existing Logan Township feed, compare /events/month/?ical=1 across one adjacent month and inspect UID, recurrence, timezone and updated-event behavior; current saved response contains five events.
+- The saved Logan Township response contains five events. Adjacent-month, recurrence/timezone and update sampling were not executed; these are explicit feed-coverage limits, not a universal contract gap or mandatory new survey.
 - RFC 5545 defines event serialization, not universal feed paging or a write endpoint. Establish the published feed horizon/update behavior; do not infer mutation from subscription URLs.
 - Keep neutral iCalendar export separate from writing to a municipality calendar; no provider-specific import/write contract is supplied.
 
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "iCalendar defines no universal pagination. Tenant export window is bounded/implementation-specific; observed month endpoint omitted past early-month events."
-}
-
-### Authorization restrictions
-
-- No generic calendar-host write support. METHOD:PUBLISH and RFC property names do not grant upstream create/update/upload. Preserve floating/all-day/timezone/recurrence distinctions.
-- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
+Evidence and exact scope: `inventory.json` provider `first-party`; operation status and outbound mappings are separate from historical observations.
 
 ## F27 Wistia (`wistia`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":{"public_read":"unverified","outbound":"not supplied; authorized provider test tenant/credentials absent"}}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
-
-### Representative research observations
-
-- https://fast.wistia.com/embed/medias/26sk4lmiix.json: Public official demonstration media JSON observed; not municipal live meeting acceptance.
-
-### Remaining research
-
-- Core now implements authenticated media-detail and supplied-caption-list/per-language GETs plus native search. Runtime account access requires a trusted read token; documented synthetic execution is the accepted verification basis, not credential acquisition.
+- Authenticated media detail, supplied caption list/per-language reads and native search are source implemented with scoped synthetic verification. Optional live account reads require trusted token/account policy; credential acquisition is not a completion gate.
 - /modern/search is capped at 100 primary and 100 transcript-only candidates with no cursor and provider-defined exact/phrase candidate semantics. Local exact checks cover returned metadata/excerpts, not full transcripts.
-- Exact Wistia 2026-09 swap is now source-implemented as `media_swap/update`, with distinct original/replacement IDs, matching media-type readback, current resource grants and explicit existing-embed effects bound to the approved plan. Thirteen synthetic cases verify pinned request/response schema, durable queued-job/reopen, policy/conflict/lost-ack/no-replay and exact job matching. An exact finished job plus matching target identity/type readback confirms provider completion; the receipt explicitly excludes independent replacement-byte/playback verification. See [swap guide](../WISTIA-SWAP.md); overwrite is not inferred.
-- Account/folder List Media offset discovery was already implemented in providers/discovery.py and its page2/version/private-token fixture passed in prior required checks; the stale blocked_access metadata has been corrected. No duplicate discovery implementation or mandatory cursor alternative was added. Keep upload/import, media metadata, caption create/update and edits permission scopes separate.
+- Upload/import, media metadata, caption create/update/edits and media swap have separately scoped implementation and synthetic evidence. Account-tier/permission and current server applicability remain runtime qualifications, not unresolved swap implementation or a live-account acceptance gate. No independent playback or overwrite-from-swap inference.
+- Media swap is source implemented and synthetic tested; pending jobs are preserved and exact finished jobs with target identity/type readback confirm provider completion without independent byte/playback claims. Overwrite is not inferred from swap. Account/folder offset discovery is already implemented; packaged status corrected from stale blocked_access.
 
-### Pagination contract
-
-{
-  "status": "documented_with_conflict",
-  "evidence_ids": [
-    "wistia-list"
-  ],
-  "details": "page/per_page offset OR cursor[enabled]/before/after, never combine page/cursor. Cursor sort_by description permits id/created, but enum excludes id; shared unambiguous supported sort value created. Numeric per_page bounds not stated in inspected schema."
-}
-
-### Authorization restrictions
-
-- Research boundary on 2026-11-11: read-only public captures. That former test-tenant dependency is superseded by the owner amendment: documented synthetic verification is accepted, and live checks are optional. Procurement and outreach remain unauthorized.
-- Unverified and access-blocked are incomplete, not unsupported.
-- No caption purchasing or ASR/transcription generation authorized.
-- Official older embed guide cautions audio/Channels,modern schemas include audio types; feature/version mismatch needs validation rather than unsupported claim.
+Evidence and exact scope: `inventory.json` provider `wistia`; operation status and outbound mappings are separate from historical observations.
 
 ## F28 Boardable (`boardable`)
 
-Official documentation status: UI create/edit/upload/public-page instructions inspected; no vendor-published external API or import contract established. The public listing API route below is observed in the rendered client and engine, not documented as a supported integration.
-Account/tier: public VCCCD listing accessed without credentials. No Boardable staff/test account or credentials were supplied; no private account access or writes were attempted.
-Current authorization/access (2026-11-12): the full plan authorizes test-tenant acceptance, but no Boardable test tenant or credentials are available. Provider write acceptance is NOT_RUN/access-blocked; no arbitrary public-city data was mutated.
+- The live engine call covered VCCCD upcoming=true through pages 1-2 and resumed one page offset, returning 20 distinct records across first/resumed calls. Past mode is fixture-tested only; reported total 150 and full catalog coverage remain unverified.
+- The public UI search field/API search parameter was not exercised; native-search semantics remain unknown and this discovery path sends blank search.
+- Public meeting rows expose description, not a verified normalized body field; body filtering is unknown. Preserve timezone literals and the earlier VCCCD detail-versus-landing display discrepancy.
+- The listing has no agenda/document/media locators. Selected known-detail mapping and supplied viewer-to-document resolution are implemented with separate synthetic and bounded live-byte receipts. Other documents and the listing/detail date disagreement remain unverified; no native search or complete catalog is inferred.
+- Pinned Boardable documentation remains UI-focused and does not establish external API/import/create/update/upload or readback schemas. Missing machine contracts remain unresolved; absence of test credentials does not block accepted vendor-contract synthetic execution.
 
-### Bounded public-list observations
-
-- The existing VCCCD organization root and `/meetings` page resolve the numeric public `SiteId` by matching the organization slug in rendered `__NUXT_DATA__`.
-- The rendered public client requests `GET https://app.boardable.com/api/public-sites/meetings` with `SiteId`, `count=10`, blank `search/group/status`, `sort=asc`, `upcoming=true|false`, and `page`. The captured `links.next` advances the same mode to the next page.
-- Saved page 1 and page 2 each contain ten rows with numeric provider IDs; their ID sets are disjoint. The engine receipt exercised `upcoming=true` through two pages, returning 15 first-call records and five distinct resumed records. Both calls returned partial status without errors. The provider-reported total is 150; full catalog completion is not claimed.
-- Captured rows supply title, description, start/end date strings, timezone literals, groups and published-material flags. The implementation retains the exact original row and page capture. `description` is not normalized as governing-body `body`; timezone values are not converted.
-- The listing does not supply agenda/document/media links. Existing saved detail parsing remains the baseline behavior; the new discovery path does not claim live detail or document retrieval.
-- Receipt: `docs/verification/boardable-public-discovery-2026-11-12.json`. Saved response fixtures: `tests/fixtures/boardable-discovery/page-1.json` and `page-2.json`; the sanitized landing fixture omits expiring signed asset URLs.
-
-### Remaining research
-
-- The live engine read covered only VCCCD `upcoming=true` pages 1-2 and one page-offset resume. `upcoming=false` has fixture coverage only; the provider-reported total 150 and full listing/catalog remain unexhausted.
-- The public client/API request is observed, not a published supported Boardable integration contract. Version stability, rate limits, native search semantics and date-query semantics remain unverified; this implementation sends blank search and filters returned source dates locally.
-- Body filters remain unknown because the listing's `description` field is not proven equivalent to a governing body. Preserve timezone literals and the earlier detail-versus-landing time display discrepancy.
-- Resumed source: explicit configured detail URL returns one meeting/five supplied document links; one original supporting PDF completed (227,464 bytes, SHA256606b68337d78113ea981517b11c5eb7cca263285150a9712a6c20298ef85480a). The resolver validates exact organization/meeting/document viewer identity, follows only the declared download route without redirects, preserves viewer capture and rejects HTML as a file. Known-ID listing-to-detail retrieval is now synthetically checked using a scoped imported listing capture and its supplied URL, with exact response identity verification. Other documents, uncaptured root-to-detail lookup, agenda/minutes content and listing/detail date disagreement remain unresolved. Listing flags alone still do not prove download access.
-- Official guides describe UI create/edit and public-page upload, not external API/import fields. Notification, visibility and approval effects need an authorized account/manual. No test tenant/credentials were supplied; create/update/upload and readback acceptance remain access-blocked, not unsupported.
-
-### Pagination contract
-
-{
-  "status": "observed_bounded_public_client_route; live_engine_partial",
-  "details": "The rendered client uses SiteId from matching public organization state and GET /api/public-sites/meetings with count=10, blank search/group/status, sort=asc, upcoming mode and page. Same-mode links.next is validated. Live engine evidence covered upcoming=true pages 1-2 and resumed an offset; past mode is fixture-only. The provider total was not exhausted and full catalog completeness is false."
-}
-
-### Authorization restrictions
-
-- Private document upload is not public publication.
-- Invited-meeting edits send mandatory notifications.
-- No arbitrary public-city writes; use an authorized Boardable test tenant when credentials are supplied.
-- Keep the explicit PST versus unspecified landing-time display discrepancy.
+Evidence and exact scope: `inventory.json` provider `boardable`; operation status and outbound mappings are separate from historical observations.
 
 ## F29 gWorks FrontDesk (`gworks`)
 
-Official documentation status: inspected with recorded limits; some indexed-only/login or extraction-blocked material
-Account/tier: public city JSON read observed; login/admin writes remain separate. Galena UI showed login disabled at the earlier observation; API credentials and roles remain unknown.
+- Bounded public evidence now covers the Galena static listing, one successful city-1311 agenda fetch, and one Galena minutes failure (resolver ready, guarded object GET HTTP 403). See the three F29 receipts. No separate meeting detail route or continuation token was observed; provider-wide catalog completeness and retrieval of every flagged document remain unverified.
+- Retained history, update frequency and maximum response payload remain unknown; one static response cannot establish them. No additional repeated sampling is required for this bounded research outcome.
+- Pinned FrontDesk builder material describes staff UI without an external write schema. Vendor machine field/readback contracts remain unresolved; staff credentials and live-write acceptance are not completion gates.
 
-### Bounded public observations
-
-- Current Galena source: `GET https://files.frontdeskgworks.com/city/1117/cms/data.json` returned HTTP 200 `application/json`, 49,618 bytes. The engine parsed the one response as 153 meetings (153 `agenda_fl=true`, 142 `minutes_fl=true`), date span 2021-01-05 through 2026-06-01. It returned `partial`, with one page, no errors and no truncation because catalog completeness is unknown. Receipt: `docs/verification/gworks-galena-listing-2026-11-12.json`; raw response and row summary are under `outputs/gworks-followup-20261112/`.
-- Existing city-1311 capture row 5017 (`agenda_fl=true`) used the baseline-derived `GET https://api.gworks.cloud/cms/public/city/1311/agenda/pdf/5017/`. The engine resolved it and retrieved one 5,211-byte PDF object (`application/octet-stream`, `%PDF-` signature, SHA256 `6b9d4bc7967dfd2f0d695113f5e6e2fbf9892f9d37b9f6a7dc429751ec483037`), without a redirect. Receipt: `docs/verification/gworks-city-1311-agenda-fetch-2026-11-12.json`.
-- Galena row 4195 has `minutes_fl=true`; `GET https://api.gworks.cloud/cms/public/city/1117/minutes/pdf/4195/` returned a resolver-ready response, but the guarded signed-object GET returned HTTP 403 `application/xml` (543 bytes, SHA256 `6667a8b825cdfaab782d382a398e8000b848bab4d343c860f0d5bf174e8f045d`). The engine returned `partial`/`attachment_unavailable` and retained the citation. This is one document access failure, not evidence the route or provider capability is unsupported. Receipt: `docs/verification/gworks-galena-minutes-fetch-2026-11-12.json`.
-- Signed transfer URL paths and query values were not saved. The successful read used explicit `download_origins` for the resolver API and the signed origin observed from that resolver.
-
-### Remaining research and limits
-
-- The current city JSON is one static public listing response; no continuation token or separate meeting-detail URL was observed. Provider-wide catalog completeness and successful retrieval of every flagged document remain unverified.
-- Retained history, update frequency and maximum response payload remain unknown; a single response cannot establish them. Additional repeated sampling is optional and is not required for this bounded research result.
-- The FrontDesk builder describes staff UI, not an external write schema. No vendor API or authorized test credentials were supplied; writes remain unaccepted/access-blocked.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "One current Galena response returned 153 rows in a 49,618-byte static JSON body. No continuation token was observed in that response; full catalog, retained history, update frequency and maximum payload remain unknown."
-}
-
-### Authorization restrictions
-
-- Keep cancelled titles/status indicators. Public city JSON fields and PDF routes are not writable API fields.
-- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
+Evidence and exact scope: `inventory.json` provider `gworks`; operation status and outbound mappings are separate from historical observations.
 
 ## F30 Diligent BoardDocs (`boarddocs`)
 
-Official documentation status: current BoardDocs product/support materials inspected; historical official-hosted proposal surfaced through public search indexing; no current API/feed specification found.
-Account/tier: the Colorado public shell was previously extracted but its latest unauthenticated GET returned 403. Las Positas evidence is a staff workflow guide, not a public API. No staff/test credentials were supplied.
-Test environment: two bounded tenant contexts only; no remote writes or private access.
+- Opt-in public listing/print detail is implemented with pinned third-party source and18synthetic helper/workflow cases; official/live contract acceptance remains unverified (403 observed).
+- Public file hrefs remain strings only; item hierarchy, attachment transfer, native search, staff writes and vendor import remain unresolved.
 
-### Representative research observations
-
-- Current Diligent BoardDocs page says BoardDocs remains supported for existing customers and describes search, agendas and document/minutes management, but gives no machine endpoint or payload.
-- Official-hosted 2017 BoardDocs LT proposal (https://go.boarddocs.com/pa/lewi/Board.nsf/files/AU2Q6567B2FC/%24file/BoardDocs%2006%2008%2017.pdf) is visible in search-indexed text and says subscribers could access public data through RSS/XML. Direct PDF open returned 403. The proposal supplies no feed URL, request/response fields, pagination, permissions or current product-tier applicability.
-- https://www.laspositascollege.edu/gv/assets/docs/INSTRUCTIONS%20-%20Submitting%20Agenda%20Items%20-%20Final.pdf: tenant staff guide documents Meeting, Category, Subject, Access, Recommended Action, Approval Tree, Public Content and Public Files UI labels, with submit/approval constraints. These are UI labels, not request keys.
-- https://go.boarddocs.com/co/cde/Board.nsf/Public: earlier extraction saw a branded shell and print controls without dynamic meeting rows; latest bounded direct unauthenticated GET returned HTTP 403. Do not bypass or infer unsupported from this result.
-
-### Remaining research
-
-- Two bounded BoardDocs contexts are used: Colorado direct GET currently returns HTTP 403, and the other evidence is a staff-guide document. Do not probe a third tenant. Capture an exact RSS/XML URL only if a current public link appears in either existing context; the 2017 proposal itself has no route/schema.
-- Current Diligent BoardDocs materials give features but no API/search request schema. Current tier applicability, public catalog access and the 403 path remain unresolved pending supported endpoint/access evidence.
-- No authorized BoardDocs non-production account supplied for role/approval, create/update/upload, readback or conflict checks.
-
-### Pagination contract
-
-{
-  "status": "unverified",
-  "details": "Historical 2017 proposal makes a product-level RSS/XML claim but gives no route or page contract. One Colorado shell GET returned 403; the second tenant context is a staff PDF. No current public meeting catalog or pagination contract was verified."
-}
-
-### Authorization restrictions
-
-- Stay within the two inspected tenant contexts; do not test a third tenant.
-- Keep baseline unencrypted printed numbered-PDF input; a JS shell is not equivalent.
-- Do not substitute Diligent Community/Boards APIs.
-- Respect post-approval edit lock and public/private visibility.
+Evidence and exact scope: `inventory.json` provider `boarddocs`; operation status and outbound mappings are separate from historical observations.
 
 ## F31 Tyler Meeting Manager (`tyler-meeting-manager`)
 
-Official documentation status: inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked
-Account/tier: {"status":"unverified_unless_named_in_evidence","details":"Ector public calendar anonymous. Staff functions need authorized Tyler account and configured workflow; API tier/access unknown."}
-Test environment (2026-11-11 bounded research snapshot; not current permissions): {"mode":"synthetic_mock_only","authorized_remote_writes":false,"provider_credentials":"not_supplied","live_provider_write_acceptance":"NOT_RUN/BLOCKED_ACCESS","rule":"Mock checks may prove adapter behavior; never provider acceptance."}
+- Historical Ector empty requests remain historical. Liberty establishes nonempty selected-window fields; not full catalog or universal meetingTypeIds semantics.
+- Native search pagination is bounded/partial; remote stable ordering and full-document text remain unverified.
+- Staff meeting/item writes, document/media upload and provider-specific import format remain unmapped; no API inference from UI features.
 
-### Representative research observations
-
-- https://cityofmurraycityuttmmapp.tylerhost.net/7452prod/tylermm/calendar/: prior FetchUrl extraction service HTTP 500; public URL found but no calendar response verified. This is not proof of tenant unavailability.
-- https://ectorcountyclerktxtmmapp.meetingmanager.tylerapp.com/46612prod/tylermm/calendar/: direct GET returned 1403-byte SPA shell; public bundle provides tcmURL and POST meetingInformation/getMeetingInformationByDate with JSON `{startDate,endDate,meetingTypeIds}`, dates MM/DD/YYYY, no type filter [-1]. Nov 9-15 and Nov 1-30, 2026 returned HTTP 200 `[]`; no nonempty row schema. Captures/hashes in outputs/provider-route-probes-2026-11-11.
-
-### Remaining research
-
-- The Ector bundle exposes POST /tylermmcalendar46612prod/meetingInformation/getMeetingInformationByDate with JSON startDate/endDate/meetingTypeIds (MM/DD/YYYY; [-1] all types). The added 2025 historical query returned HTTP 200 and `[]` (2 bytes); all observed ranges are empty, so record schema/paging cannot yet be established.
-- A nonempty public result on Ector is the next executable dependency before validating record fields, agenda/minutes/media links, status fidelity and archive completeness. The other bounded Murray context had a fetch-extraction failure; no third tenant.
-- Official Tyler product features describe staff scheduling, item/document, minutes and video workflows but no machine write/import schema. No authorized credentials/test tenant supplied.
-
-### Pagination contract
-
-{
-  "status": "partly_observed_or_unverified",
-  "details": "Public Ector client bundle exposes a date-range JSON query; two bounded Nov 2026 requests returned empty arrays. Successful nonempty response, JSON record fields, date bounds, pagination and archive completeness remain unverified."
-}
-
-### Authorization restrictions
-
-- Baseline source skips cancelled/adjourned records and derives agenda item ids by position; new schema must preserve statuses and explain identity derivation rather than advertise baseline as full fidelity.
-- As of the 2026-11-11 research capture, no provider test tenant/credentials were supplied and no live writes were performed. The resumed full plan authorizes supported writes only against an explicitly authorized test tenant; arbitrary public-city mutations, procurement and outreach are not authorized.
-
-Current outbound attribution (2026-11-12): existing required-suite evidence now covers the scoped Granicus19, Wistia6, Laserfiche4, Select1 and OnBase1 outbound rows. Select/OnBase acceptance is prepared-output only, never remote import or meeting association. Four additional actual public dispatches now pass plan/commit/readback: Legistar matter_attachment/upload, Wistia media_import/create, Laserfiche document/create and document_large/update. The latter two modern-import/multipart row operation labels were corrected to match existing dispatch; no aliases or endpoints were added. No whole-provider/all-field acceptance is implied. Frozen dev9 artifacts remain unchanged.
-
-
-Current source follow-up (2026-11-13): the pinned Repository Export contract now supplies bounded original Edoc content through fetch_attachment, after fresh entry/parent validation and explicit download-origin authorization. Synthetic bytes, hashes, scoped persistence/reopen, retry, cancellation and failure evidence: `docs/verification/laserfiche-document-content-2026-11-13.json`. No signed URL is retained. Supplied page Text/image, asynchronous export, native search, WebLink account mapping and whole-provider acceptance remain separate.
-
-
-Current source follow-up (2026-11-13): opt-in Repository GetEntry page-text enrichment now follows documented page-info nextLinks and reads existing page text without generation. Exact supplemental captures, page anchors and partial coverage survive scoped persistence/search/ZIP roundtrip; see `docs/verification/laserfiche-page-text-2026-11-13.json`. This closes supplied page-text retrieval only. Native search still requires verified search-command grammar/folder scoping before implementation; the pinned SDK documents both potentially truncated SimpleSearches and full asynchronous SearchAsync/Tasks/Results/ContextHits. Image/alternate/text-file exports, async export and broad WebLink outcomes remain separate.
-
-
-Current source follow-up (2026-11-13): synchronous Repository export now maps Image/Text/AlternateEdoc in addition to original Edoc, using explicit source options. Redactions/annotations remain included; TIFF AsStored and alternate-name restrictions follow the pinned SDK. Synthetic mapping/opaque byte-relay and image signature checks: `docs/verification/laserfiche-export-variants-2026-11-13.json`. This is not live rendering or full codec validation. Asynchronous export and native search remain incomplete.
-
-
-Current source follow-up (2026-11-13): Repository ExportAsync/Tasks is now implemented as an explicit attachment source option, reusing scoped entry validation and private single-use download. Synthetic task identity, completion, timeout/cancellation and unconfirmed-cleanup evidence: `docs/verification/laserfiche-async-export-2026-11-13.json`. No real provider task was started. Native search remains incomplete. The selected existing official search guide contains an LF:Basic/LOOKIN folder-path example and SearchAsync/Tasks/Results/ContextHits flow; verify exact query grammar, folder restriction and escaping from that authoritative lead before implementation.
-
-Native-search syntax follow-up (2026-11-13): followed the pinned SDK/official guide's search-syntax lead. Pinned the vendor's Advanced Search Syntax 10.3 PDF (79 pages; SHA256 1dcc51b9101bfdbc1dfc121a659bd79691e70e25e2307a059617e47a7cecb441) and selected pages under `evidence/laserfiche-search-syntax/`, with source/date/applicability metadata. Page33 explicitly permits numeric LookIn values as folder IDs and Subfolders=0/N; pages4/6/14 specify quote, wildcard and indexed-string escaping. This supplies a concrete configured-folder query route without guessing paths. The existing Repository v2 search guide supplies SearchAsync/Tasks/Results/ContextHits. Native search is still unimplemented; Basic phrase matching, exact result/context attribution and task lifecycle must be implemented/tested against these contracts. The older guide's applicability is recorded, not treated as live account proof. Do not repeat this search merely to rediscover the sources.
-
-Current Repository search implementation follow-up (2026-11-13): the preceding native-search implementation gap is now closed for the explicitly configured API folder. Twenty-eight new synthetic cases plus ninety-six affected regression/capability cases passed; full Ruff and capability validation passed. Task cleanup after reads is an exact owned search-task DELETE, not deletion of a domain record. Metadata/excerpt scope, unsupported meeting-date/body filters, non-resumable task state and possible unconfirmed cleanup remain explicit. Field-metadata retrieval beyond returned default Entry properties and broader WebLink behavior remain separate; no new vendor searches or live account were needed.
-
-Current assigned-field implementation follow-up (2026-11-13): source option repository_include_fields=true now reads the pinned ListFields contract for selected entry detail, discovery and search. Twenty-one new synthetic cases plus affected regressions passed; exact field objects/multiple values, missing/null/empty values, unknown properties, field-to-capture provenance and partial coverage survive actual SQLite/reopen/search/ZIP. Listing first-value projections are not presented as full assigned metadata. The earlier field-retrieval gap is closed for this explicit API-folder path; no template administration, field write, account mapping or whole-provider acceptance is claimed. Receipt: `docs/verification/laserfiche-fields-2026-11-13.json`.
-
-OnBase document-wrapper follow-up (2026-11-13): inspected the complete existing 3719-byte HTML capture (SHA256 4c1f3f9b93f85603759a5237725ef71c7b5121e8603447de78f7cdeec08ec832), revealing the published preparation/view protocol. Implemented the exact meeting-document branch without executing JavaScript or weakening PDF/redirect guards. Twenty-one new synthetic cases and affected regressions passed, with actual SQLite/reopen/ZIP capture persistence. No real provider POST/download occurred; the old live mismatch remains historical. See `docs/verification/onbase-meeting-document-2026-11-13.json`. Native search, broader Agenda APIs and meeting/import association remain incomplete.
-
-OnBase selected-detail follow-up (2026-11-13): three exact public GET captures pin the supplied meeting view, accessible agenda and selected item HTML in `docs/capabilities/evidence/onbase-detail/`. `fetch_record` revalidates a current listing meeting before following the declared agenda; `fetch_related` lists native sections/items and reads only a selected agenda item currently present in that agenda, through its exact declared non-section route. The existing `onbase-public-listing-html` format preserves native IDs, canonical meeting/section relationships, source fields, raw captures/citations and partial rendered text; timezone stays unknown, and supporting attachment native IDs/publish IDs/links are locators only in this detail result. Seventeen new synthetic cases and 70 affected cases passed, including actual SQLite/reopen/search/ZIP capture roundtrip, per `docs/verification/onbase-detail-2026-11-13.json`. No attachment was fetched by the detail operation. Coverage remains partial: no catalog/snapshot claim, native search, archived meeting outside the current listing, selected section detail, other Agenda variants, broader APIs or remote import/association are established. This receipt is scoped and is not whole-provider acceptance.
-
-OnBase selected item-document follow-up (2026-11-13): explicit `fetch_attachment` now accepts a selected agenda-item record whose supplied attachment locator and exact meeting/item/publish/type/section flags match its canonical parent and normalized metadata. It checks the wrapper-declared safe filename and exact same-tenant `InvokeDownloadAttachment` empty-body POST plus `ViewDocument` GET, verifies preparation identity and PDF media type/magic, disables redirects and retains captures without cookies. The 24 new synthetic cases cover mismatch, cancellation/bounds, reopened-item retrieval and SQLite/capture/ZIP persistence. The existing pinned vendor attachment branch was used to construct the synthetic item wrapper; no real item wrapper or PDF response was captured, so live availability/rendering remain unverified. Section attachments and packet branches remain unmapped. Receipt: `docs/verification/onbase-item-document-2026-11-13.json`.
-
-OnBase selected-section follow-up (2026-11-13): one exact supplied `ViewMeetingAgendaItem` GET for captured section54973 with `isSection=true` returned a native section title and no attachment links. The pinned response and scoped receipt extend selected detail with requested-type membership, canonical meeting/section relations, exact route/identity and partial title-only content under existing bounds. No section attachment or full section-content mapping is inferred. See `docs/verification/onbase-section-detail-2026-11-13.json`. Native search, archive traversal, other Agenda variants, staff APIs/import association and the other full-plan outcomes remain incomplete.
+Evidence and exact scope: `inventory.json` provider `tyler-meeting-manager`; operation status and outbound mappings are separate from historical observations.

@@ -1,132 +1,39 @@
-# Provider capability research inventory
+# Provider capability inventory
 
-## Verified public leads — November 13, 2026
+Current reconciliation: **2026-11-14**. Release remains incomplete and publication is held. The integrated local candidate is Python **0.1.0.dev12**, TypeScript **0.1.0-dev.12**, schema **2.0.0**. Historical dev8/dev11 artifacts remain separate.
 
-The [scoped execution receipt](../verification/public-contract-leads-2026-11-13.json)
-supersedes older unresolved statements for the exact mappings it names. Liberty
-County Tyler now has nonempty calendar/detail/search evidence and explicit
-meeting-type configuration. Akron OnBase supplies an embedded result model and
-date-window request. CivicClerk Select publishes official OpenAPI and OData
-metadata supporting selected meeting/file reads and section create/update.
-Those scoped vendor-backed fixtures have attributed acceptance in the inventory.
-BoardDocs committee listing and printable detail are implemented against pinned
-third-party source with synthetic tests; direct portal access returned 403, so
-its vendor acceptance remains `not_run`. The original 31 families and 34 formats
-remain intact. See the provider guides for configuration and limits.
+## Scope and evidence
 
-Observed: 2026-11-11. Revision: researched-pass-7. **Release incomplete.** All 31 families received a bounded research pass; unresolved contracts and access blockers remain explicit. Follow-up evidence adds NovusAGENDA’s 12-page partial engine traversal, a bounded Granicus Superior Clip search, the CivicPlus Select historical-import file mapping, CivicPlus Essential and TelVue Connect v2 read contracts, eSCRIBE’s exact public calendar POST, Legistar’s selected Vote/RollCall reads, and guarded WebLink access failures. These bounded sources do not establish provider-wide discovery or write acceptance.
+The runtime registers **32 providers**, retaining **31 original families / 34 baseline formats**, with **47 additive parser hooks / 17 native-search handlers**. Cablecast is the additional typed reader, not a new original baseline family. These counts do not imply every operation is supported.
 
-## Current verification policy and source reconciliation — 2026-11-12
+Capability, source implementation and executed acceptance are independent. Vendor-documented synthetic checks satisfy only their explicitly attributed scope. Product/UI documentation alone does not establish an API payload. Live credentials, account acquisition and real vendor mutations are not acceptance gates. Unresolved research is not a verified outside-information dependency.
 
-Scott's owner amendment accepts vendor-documented synthetic execution, readback and receipts for provider discovery/read/search/import/export/write verification. Live checks are optional supporting evidence; no credential acquisition or live-tenant write is a completion gate. Reference-app, signed Windows, coherent candidate and authorized delivery requirements remain separate. The dated research-pass counts and access observations below are historical, not the current governing policy or current totals; use inventory.json and the validator output for current counts.
-
-Current explicit source mappings include Legistar bounded Events discovery, Wistia account/folder offset discovery, and native Legistar/Wistia/Laserfiche in-domain write adapters. Their source implementation labels do not certify every field, operation or tenant. Historical affected executions retain their original provenance and are reused only where unchanged. A synthetic acceptance label is accepted only when referenced evidence names its provider, operation/entity scope, executed checks and repository-contained SHA-pinned vendor-contract/test files. The generator preserves that evidence in packaged capability output. Missing, mismatched or altered evidence and unsupported live claims remain rejected.
-
-Wistia media swap has newly attributed `mock_passed` evidence for the thirteen distinct synthetic cases in tests/test_wistia_swap.py. It proves exact approved intent, policy/conflict/recovery and documented job completion with target identity/type readback; it does not prove independent remote bytes or playback. Other mapping labels are not automatically promoted to executed acceptance. No frozen dev8 artifact was rebuilt; these are local source changes.
-
-## Historical research-pass snapshot
+Reconciliation corrected 56 operation entries that incorrectly used `blocked_access` for missing machine contracts. Those operations are `not_implemented`; support was not promoted. Actual BoardDocs HTTP 403 and WebLink redirect/403 observations remain preserved. Laserfiche JSON finalization/index-paired pages and Wistia swap are implemented in their tested scopes. Towpath and ClerkBase supplied detail/text evidence supersedes earlier read-gap wording. Wider archive/month/tenant sampling remains optional coverage evidence.
 
 ## Artifacts
 
-- `inventory.json`: full31-family,34-format research ledger,341 separate operation entries,146 outbound mapping entries,248 provider-scoped evidence records and172 distinct URLs.
-- `inventory.schema.json`: JSON Schema for both documented and packaged research snapshots.
-- `provider-identities.json`:31 exact baseline provider IDs and six explicit historical aliases (37 exact lookups). The packaged copy is the runtime definition; no inferred product aliases.
-- `baseline-field-contracts.json`: all34 exact reader mappings extracted from pinned original sources, including original function text. These are compatibility contracts, not vendor schemas.
-- `provider-api-contracts.json`: official extracted OpenAPI/model/guide content for12 Wistia routes,16 Legistar routes,7 Laserfiche guides, CivicPlus Essential API routes/models, and TelVue Connect v2 media/video/playlist GET routes. Some routes are read-only or have unresolved details; counts are not accepted writes.
-- `remaining-research.md`: provider-specific gaps, tenant observations, credentials, pagination and contract blockers.
-- Packaged runtime: `src/civic_data_connectors/data/capabilities.json` and `provider-identities.json`. Generated by `scripts/sync_capabilities.py`; source hash detects stale snapshots.
+- [inventory.json](inventory.json): canonical full evidence ledger and per-operation/outbound status.
+- [remaining-research.md](remaining-research.md): reconciled provider-specific work and qualifications.
+- [provider-identities.json](provider-identities.json): exact original identities and aliases.
+- [baseline-field-contracts.json](baseline-field-contracts.json): pinned original compatibility contracts, not vendor API schemas.
+- [provider-api-contracts.json](provider-api-contracts.json): extracted vendor API material; consult per-mapping evidence before treating any route as accepted.
+- Packaged `src/civic_data_connectors/data/capabilities.json` is generated by `scripts/sync_capabilities.py`; its source hash detects drift.
 
-## Proof and status rules
-
-Capability evidence, implementation status and acceptance are independent. Legistar event 7011, selected Vote/RollCall reads, two CHAMP event details, NovusAGENDA’s East Brunswick selected-window listing, and Granicus Superior native Clip search have bounded engine receipts; each remains scoped and partial. Essential, TelVue and Wistia account routes have fixture-tested source paths but no tenant credentials/live account reads. At that dated snapshot, provider write acceptances were recorded as `not_run`, including Essential multimedia update; see the current policy and attributed synthetic evidence above.
-UI labels are not JSON request fields. Indexed product features are not exact machine contracts. Credentials-blocked and unverified operations are not unsupported. Mock fixtures, including a mocked browser, do not establish undisclosed provider requests or live acceptance.
-Historical pre-amendment rule: the full plan authorized supported provider writes only against an explicitly authorized test tenant. No provider test tenant or credentials were supplied, so live write acceptance remains access-blocked and no remote writes were performed. No arbitrary public-city data was mutated. That former live-only gate is superseded: documented synthetic checks are accepted for their evidenced provider-operation scope. Procurement/outreach were not authorized; deletes, unrelated repository/platform administration, automatic OCR/transcription and implicit bidirectional synchronization are outside this scope.
-Existing saved fixture captures are baseline evidence, not new live representative checks; the NovusAGENDA and guarded WebLink receipts are separately dated follow-up evidence. Research FetchUrl observations are recorded separately and do not count as successful engine discovery/fetch tests. Public failures, login redirects and extractor-only output remain explicit.
+Ledger counts: 31 families; 341 operation entries; 166 outbound mapping entries; 370 evidence records; 227 distinct evidence URLs. Counts are ledger entries, not accepted features.
 
 ## Outbound interface classification
 
-These are ledger-entry counts, not feature counts, implementation counts or acceptance counts.
-
 | Interface type | Entries |
 | --- | ---: |
-| documented_automated_api | 29 |
-| unresolved | 28 |
-| gated_sdk_contract_unverified | 4 |
+| documented_automated_api | 52 |
+| documented_file_import | 2 |
 | manual_ui_documented_machine_contract_unverified | 76 |
-| documented_file_import | 1 |
 | manual_ui_export_only_import_unverified | 1 |
 | manual_ui_or_feature_indexed_only | 3 |
-| other_product_applicability_unverified | 3 |
 | neutral_standard_not_provider_write | 1 |
-
-Documented automated routes occur for Legistar, Laserfiche Repository v2, Wistia and the support-token-gated CivicPlus Essential API in this bounded pass. The Essential API contract is test-host documentation with incomplete response/pagination semantics and no supplied token; no live access or acceptance is claimed. Even these require adapter implementation, exact applicable permissions and independent receipts. Laserfiche has explicit unresolved content-type and page-pairing contradictions. Legistar Vote/RollCall POST and PUT under EventItems are documented; required PersonId and ValueId fields are explicit, while tenant value IDs, write credentials and live acceptance remain unresolved.
-Manual-UI-based supported operations remain implementation gaps, not unsupported operations. They require a real supported workflow contract or authorized product/browser investigation; a fabricated POST is never a substitute.
-
-## Important exact-contract findings
-
-- Granicus native Clip search on the selected Superior ViewPublisher uses the observed same-origin `ViewSearchResults.php` form (`view_id`, `types[Clip]=on`, first expression in `allwords`, numeric `pagenumber`). The live receipt has five distinct hits on each of two partial calls; QuorumRelay applies exact AND only to supplied title/date metadata. Provider candidate semantics, other Clip pages beyond those fetched, full publisher catalog, agendas and transcript/document text remain incomplete. See `docs/verification/granicus-native-search-2026-11-12.json`.
-- Legistar saved export fields remain `MeetingId/MeetingName/MeetingDate`. Current Events API fields `EventId/EventBodyName/EventDate` are separate. APIv1 POST/PUT Events, EventItems, in-scope meeting-linked Matters/Texts/Histories and MatterAttachments are documented, along with Vote and RollCall GET collection/detail and POST/PUT under EventItems. VotePersonId/VoteValueId and RollCallPersonId/RollCallValueId are required by their request models. With `Accept:text/plain`, success returns an ID string, not `{id}`. `RowVersion` exists but optimistic-lock enforcement is not established. No authorized write credentials or test tenant are supplied.
-- Legistar event 7011 has one engine `fetch_record` receipt: 10 agenda items, 9 linked documents and 19 relationships, with original fields preserved. A separate `fetch_related` receipt reads seven Votes under EventItemId 102964 and seven RollCalls under EventItemId 102887 across three keyset pages each, plus one detail for each type. The parent EventItems were explicit and the receipts do not prove provider-wide catalog completeness.
-- Legistar read docs cap results at1000, support `$top/$skip` and date filters; stable highest-ID keyset pagination is recommended. Optional query-token read policy is not proof of authorized write permissions. Tokens must never enter citations or logs.
-- Granicus native Clip search on selected Superior ViewPublisher sources uses the observed same-origin `ViewSearchResults.php` form (`view_id`, `types[Clip]=on`, first expression in `allwords`, numeric `pagenumber`). The bounded live receipt has five distinct hits on each of two partial calls; exact AND matching applies only to supplied title/date metadata. Provider candidate semantics, other categories, complete catalog and agenda/document text remain unverified. See `docs/verification/granicus-native-search-2026-11-12.json`.
-- Wistia modern DataAPI server is `https://api.wistia.com/modern`, OpenAPI2026.09.0, required `X-Wistia-API-Version:2026-09`, Bearer permissions. UploadAPI1.0 is separate at `https://upload.wistia.com/`. Do not infer old `/v1` or `/v2` endpoints.
-- Wistia native `/modern/search` returns up to 100 primary media and 100 transcript-only matches with no cursor; exact/phrase semantics are provider-defined. Search implementation applies exact local checks only to returned metadata and excerpts. Media detail is a bare JSON object; separate caption list/per-language GET routes supply SRT and optional segments.
-- Wistia media PUT tags replace; bulk tag creation adds. Caption edits require1..20 atomic corrections plus `expected_version`;409 stale_version means reread, but diverged means wait/retry/escalate. Caption PUT and edit endpoints have different language-code rules. URL import201 queues a background job, not accepted media; omit folder_id only if an unintended new Untitled Folder is explicitly approved.
-- Laserfiche Cloud Repositoryv2 is not automatically public WebLink9 or self-hosted API. Simple import100MB, chunked import64GB; metadata/edoc update and supplied-page endpoints are documented. OAuth requested/configured scopes intersect principal ACLs; no supplied account access.
-- Laserfiche `ImportUploadedParts` guide prose calls the request multipart/form while showing JSON; exact content type remains unresolved. Page-create prose and sample conflict on image/text pairing. Preserve both conflicts; mocks cannot resolve them. Keep generateText false for supplied-text-only scope. All-pages replacement may delete existing pages and is excluded.
-- CivicPlus Select historical import is a consultant-mediated PDF/MP4 workflow using `MeetingBody_MeetingType_FileType_MM_DD_YYYY`, at most five PDFs plus one media file per event. The local exporter prepares canonical `Agenda`, `Agenda Packet`, `Minutes`, `Notice` and `Other` PDFs plus `Media` MP4, with exact-byte/hash checks, PDF parsing and bounded MP4 box framing. The official article gives literal successful filename examples only for the first three; its linked Filename Tester v3.5.9 classifies Notice/Notices as Notice, Packet/Agenda Packet as Agenda Packet, Media `.mp4` as Video, and Other as Other. The tester is not consultant acceptance; ambiguous aliases `Packet`, `Notices` and `Audio/Video` remain rejected. The ZIP is a local wrapper, not a vendor ZIP importer. The page conflicts on `imports` vs `important`; no FTP transfer occurred. Packets remain indivisible, and MP4 bookmarks/timestamps are lost. MP4 framing does not establish playback, codecs or post-import fidelity. The separate Select UI size page is not evidence of FTP historical-import size limits. Dev5 build/installed acceptance remains incomplete.
-- NovusAGENDA East Brunswick returned 11 meeting rows and 180 item rows over 12 engine-traversed pages for the selected 2026-08-11 to 2027-02-11 window. 75 items and 5 meetings supplied provider IDs in links; 105 items and 6 meetings lacked native IDs and receive explicitly unstable capture-position-derived local keys, never provider IDs. Receipt `docs/verification/novus-public-discovery-2026-11-11.json` is partial: the selected listing window is exhausted, but catalog/source completeness are false. Search semantics, full-history bounds, meeting-grid continuation and detail/document retrieval remain unverified.
-- BoardDocs current Diligent materials describe product features; a 2017 BoardDocs LT proposal mentions RSS/XML public-data access but gives no current feed URL/schema. Colorado’s current unauthenticated shell GET returned 403, while the other bounded tenant evidence is a staff guide; no current executable catalog contract is established.
-- BoardBook Reports Word/text/HTML/PDF export is not an established provider-specific import schema. Its vendor-file generation capability stays unverified.
-- CivicPlus Essential (F07, formerly Municode Meetings) has a separate support-token-gated API on a documented dev host: meeting collection POST, meeting/item/multimedia GETs, and multimedia timestamping POST. Exact request fields are recorded; meeting/item response schemas and list continuation semantics are absent. Do not confuse it with Select (F05), the Aha CMS API, or production hosts. The official page states Essential end-of-life 2027-06-30.
-- SuiteOne WMV plus Liberty `*_content.HTML` bookmarks is documented manual intake, but the precise bookmark file schema remains unresolved.
-- TelVue Connectv2 GET APIs and custom headers are not HyperCaster contracts. BoardDocs is not Diligent Community/Boards; Municode Meetings is not the separate Aha CMS API; ClerkBase, ClerkMate and OnBoardGOV Meeting Center remain distinct.
-- Cablecast (`*.cablecast.tv`) is not one of the 31 inventoried families. It is a built-in typed connector whose `capabilities()` the engine lists with empty baseline formats; this inventory, its 34 baseline formats and the identity roster do not include it. See [engine coverage](../ENGINE-COVERAGE.md).
-- Boardable invitation-stage edits can trigger notifications; private upload is not public publication. Calendar RFC5545 output does not imply CalDAV or hosting-CMS writes.
-- Laserfiche WebLink baseline emits document-ID meeting-shaped records, not verified meeting grouping. eSCRIBE public `pub-...` host differs from the same tenant's admin-login host. Wistia's official demo media is not municipal acceptance.
-
-## Capability evidence matrix
-
-Evidence only: D=documented; O=observed; B=baseline original source; U=unverified; X=documented unavailable. A D/O/B is not implementation or acceptance.
-
-| Family | identify | discover | fetch | parse | native_search | local_search | neutral_export | vendor_file_export | create | update | upload |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| F01 legistar | D | D | D | B | D | U | U | U | D | D | D |
-| F02 primegov | O | O | O | B | O | U | U | U | U | U | U |
-| F03 granicus | O | O | O | B | O | U | U | U | U | U | U |
-| F04 novusagenda | O | O | O | B | O | U | U | D | D | D | D |
-| F05 civicplus-select | O | O | O | B | D | U | U | D | D | D | D |
-| F06 civicplus-agenda-center | O | O | O | B | U | U | U | O | D | D | D |
-| F07 municode-meetings | O | O | O | B | U | U | U | O | D | D | D |
-| F08 boardbook | O | O | O | B | U | U | U | U | D | D | D |
-| F09 escribe | O | O | O | B | O | U | U | U | U | U | U |
-| F10 simbli | O | U | O | B | D | U | U | D | D | D | U |
-| F11 civicweb | O | O | O | B | D | U | U | D | D | D | D |
-| F12 iqm2 | O | O | O | B | U | U | U | O | D | U | D |
-| F13 swagit | O | O | O | B | O | U | U | U | U | U | U |
-| F14 suiteone-media | O | O | O | B | O | U | U | D | U | D | D |
-| F15 peak | O | O | O | B | O | U | U | D | D | D | D |
-| F16 utah-public-notice | O | O | O | B | O | U | U | U | D | D | D |
-| F17 destiny-agendaquick | O | O | O | B | D | U | U | U | D | D | U |
-| F18 town-hall-streams | O | O | O | B | U | U | U | U | D | U | U |
-| F19 telvue | O | O | O | B | U | U | U | U | D | D | D |
-| F20 champ | O | O | O | B | O | U | U | U | D | D | D |
-| F21 onbase | O | O | O | B | D | U | U | O | D | D | D |
-| F22 laserfiche-weblink | O | D | D | B | D | U | U | U | D | D | D |
-| F23 towncloud | O | O | O | B | U | U | U | U | D | D | U |
-| F24 digital-towpath | B | U | B | B | U | U | U | U | D | U | U |
-| F25 clerkbase | O | U | O | B | O | U | U | D | U | U | U |
-| F26 first-party | O | O | O | B | U | U | U | U | U | U | U |
-| F27 wistia | O | D | O | B | D | U | U | U | D | D | D |
-| F28 boardable | O | O | O | B | O | U | U | O | D | D | D |
-| F29 gworks | O | O | O | B | U | U | U | U | D | U | U |
-| F30 boarddocs | O | U | O | B | D | U | U | O | D | D | D |
-| F31 tyler-meeting-manager | O | O | O | B | D | U | U | U | D | D | D |
+| other_product_applicability_unverified | 3 |
+| unresolved | 28 |
 
 ## Validation
 
-`scripts/validate_capabilities.py` validates JSON Schema, source/runtime hashes, all evidence references, exact identities/aliases,34 baseline mappings, operation labels against the declared status model, and five negative mutations. With `--baseline-source` it independently reads the original pinned SOURCE_FORMATS using AST, without importing Townlight. Validation does not establish current engine behavior or provider acceptance.
-Run with the repository test environment: `python scripts/sync_capabilities.py` then `python scripts/validate_capabilities.py --baseline-source <absolute-pinned-meeting_imports.py>`. `jsonschema` is a test dependency. Installed-wheel inclusion and actual Engine alias/API behavior belong to engine validation.
-
-
-- The guarded WebLink session now uses an isolated offline Chrome context and sends browser network through guarded PublicTransport. The current two bounded public attempts did not yield records: Boulder was blocked at a cross-origin redirect boundary and Louisville returned HTTP 403. The synthetic checks and live failure receipt in `docs/verification/weblink-guarded-session-2026-11-11.json` do not establish catalog or provider acceptance.
+Run `python scripts/sync_capabilities.py`, then `python scripts/validate_capabilities.py`. The validator checks schema, source/runtime hashes, evidence references, exact identities, original formats and five negative mutations. Its optional `--baseline-source` performs the independent original-source AST comparison. Metadata validation does not itself execute adapters or establish installed, live-provider or complete-catalog acceptance.

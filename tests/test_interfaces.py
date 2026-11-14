@@ -176,7 +176,8 @@ def test_node_independent_tarball_client_real_loopback_sequence(tmp_path):
     }}), encoding="utf-8")
     server = subprocess.Popen([sys.executable, "-m", "quorumrelay", "serve", "--config", str(config_path),
                                "--database", str(tmp_path / "node.sqlite")],
-                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                              stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                              env={**os.environ, "PYTHONPATH": str(ROOT / "src")})
     try:
         url = f"http://127.0.0.1:{port}"
         for _ in range(100):
@@ -192,7 +193,7 @@ def test_node_independent_tarball_client_real_loopback_sequence(tmp_path):
 import assert from 'node:assert/strict';
 import {CivicConnectorClient, ServiceError} from 'quorumrelay-client';
 const client = new CivicConnectorClient({baseUrl:process.env.CIVIC_CONNECTOR_URL,token:process.env.CIVIC_CONNECTOR_TOKEN});
-const info = await client.info(); assert.equal(info.data.version,'0.1.0.dev11');
+const info = await client.info(); assert.equal(info.data.version,'0.1.0.dev12');
 const discovered = await client.execute('discover',JSON.parse(process.env.CIVIC_REQUEST));
 assert.equal(discovered.status,'partial'); assert.equal(discovered.data.records.length,1);
 const preview = await client.execute('import_preview',{result:discovered}); assert.equal(preview.data.persisted,false);

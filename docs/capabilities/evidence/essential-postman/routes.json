@@ -16,7 +16,30 @@
       "audioVideoDetails",
       "publishState",
       "multimediaItems"
-    ]
+    ],
+    "request_body_casing": "lower-camel-case",
+    "request_body_model": {
+      "id": "GUID",
+      "meetingId": "GUID",
+      "audioVideoDetails": {
+        "audioVideoProviderType": "integer",
+        "audioVideoUrl": "string"
+      },
+      "publishState": "integer",
+      "multimediaItems": [
+        {
+          "entityId": "GUID",
+          "entityName": "string",
+          "entityTypeName": "string",
+          "timeStamp": "integer",
+          "multimediaDisplayOptions": "integer",
+          "customDisplay": "string or null",
+          "includeNumbering": "boolean",
+          "useDefaultMultimediaSettings": "boolean",
+          "multimediaBaseUrl": "string"
+        }
+      ]
+    }
   },
   {
     "name": "Read Item Details",
