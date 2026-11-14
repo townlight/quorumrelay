@@ -850,7 +850,10 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "one captured public OnBase listing/date window; server truncation and paging unverified",
             "pagination": "no undocumented GetMoreFullTextResults traversal",
-            "unmapped_submodels": ["nonempty Documents", "Media"]})
+            "unmapped_submodels": [name for name, predicate in (
+                ("Documents", lambda value: value.get("document_mapping_complete") is False),
+                ("Media", lambda value: value.get("media_availability") == "unmapped_submodel"))
+                if any(predicate(record["normalized"]) for record in records)]})
     if source.provider == "boarddocs" and input_format == "boarddocs-public-meetings-json":
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "third-party-source-backed public committee list; no paging or complete-catalog claim",

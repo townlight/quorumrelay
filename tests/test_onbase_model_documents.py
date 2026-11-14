@@ -51,6 +51,18 @@ def test_declared_nested_documents_and_media_are_locators_with_exact_parent_meta
     assert record['original']['Documents'][0]['FutureField'] == {'zero': 0, 'unknown': []}
 
 
+def test_discovery_coverage_only_lists_actual_unmapped_submodels():
+    model = model_with_documents()
+    result = create_engine().execute('discover', {'source': SOURCE.public_dict()}, content=page(model))
+    assert result.status == 'partial', result.public_dict()
+    assert result.coverage['unmapped_submodels'] == []
+    model['Meetings'][0]['Media'] = {'UnknownPlayer': True}
+    model['Meetings'][0]['Documents'][0]['MeetingDocumentType'] = 999
+    result = create_engine().execute('discover', {'source': SOURCE.public_dict()}, content=page(model))
+    assert result.status == 'partial', result.public_dict()
+    assert result.coverage['unmapped_submodels'] == ['Documents', 'Media']
+
+
 def test_nested_documents_survive_real_storage_search_zip_and_idempotent_import(tmp_path):
     bundle = normalize()
     owner = create_engine(storage=SQLiteStorage(tmp_path / 'owner.sqlite'))

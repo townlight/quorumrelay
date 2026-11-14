@@ -75,6 +75,8 @@ Evidence and exact scope: `inventory.json` provider `civicplus-agenda-center`; o
 
 Evidence and exact scope: `inventory.json` provider `municode-meetings`; operation status and outbound mappings are separate from historical observations.
 
+- Exact Essential root-declared `/app` editor GET returned302 to CivicPlus `/connect/authorize` with no body. A shareable editor/client export or authorized access is needed for this exact path; no authentication was attempted. This does not prove another public contract is absent. Receipt: `evidence/essential-postman/app-access-source.json`.
+
 ## F08 BoardBook (`boardbook`)
 
 - Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied.
@@ -159,6 +161,8 @@ Evidence and exact scope: `inventory.json` provider `utah-public-notice`; operat
 
 Evidence and exact scope: `inventory.json` provider `destiny-agendaquick`; operation status and outbound mappings are separate from historical observations.
 
+- Configured agenda/memo HTML and separate selected packet PDF retrieval are source implemented and synthetically verified. The stale no-engine fetch flag is corrected; video, arbitrary files and full archive acceptance remain unverified. See `docs/verification/configured-fetch-reconciliation-2026-11-14.json`.
+
 ## F18 Town Hall Streams (`town-hall-streams`)
 
 - The selected Hollis location page yielded 132 embedded rows; event 74003 detail yielded HTML only. No PDF/document links or playable stream bytes were available in this bounded capture; time zone remains unknown.
@@ -166,6 +170,8 @@ Evidence and exact scope: `inventory.json` provider `destiny-agendaquick`; opera
 - Reviewed sources provide no public create/update/upload API or vendor import schema; provider/admin documentation is needed for write questions.
 
 Evidence and exact scope: `inventory.json` provider `town-hall-streams`; operation status and outbound mappings are separate from historical observations.
+
+- Configured event HTML and explicitly authorized supplied HLS playlist transfer are source implemented with8 focused cases; no HLS segments, MP4, transcription action or playable-media claim. The stale discovery/fetch flags are corrected. See `docs/verification/configured-fetch-reconciliation-2026-11-14.json`.
 
 ## F19 TelVue (`telvue`)
 
@@ -191,10 +197,12 @@ Evidence and exact scope: `inventory.json` provider `champ`; operation status an
 - Public Agenda workflow documentation now pins its required existing destination meeting/item types and numeric target-meeting ID, plus locally configured Unity fields. It documents Core/Unity Workflow configuration, not a remote invocation/readback or export-file schema. Tagged DIP preparation does not execute that association.
 - Deployment-matched create/update/upload and meeting-association field/readback contracts remain missing. An authorized staff/test account is not required for vendor-documented synthetic acceptance.
 - Normal Tagged DIP linked-document file/index preparation is implemented with exact destination mappings and synthetic emitted-layout proof; no Agenda meeting association or remote processing is inferred. OnBase API SDK remains an actual vendor surface; sdk.onbase.com redirected to Hyland identity, and public REST help describes per-deployment published operations rather than a universal Agenda schema. Continue exact API contract research without credential acquisition.
-- Current-listing Agenda hierarchy, selected item/section detail, supporting-document wrapper and meeting-packet branches now have scoped source/synthetic execution. Archive traversal, native search, non-agenda detail variants and staff import/meeting association remain unresolved; broader deployment or live file availability is not inferred.
-- Akron embedded Documents and Media now have vendor-client-backed synthetic mapping: exact native document/item/publish IDs and locator branches, plus link-only live/on-demand meeting player. Actual nonempty response applicability, native keyword search/archive, other wrappers and remote Agenda association/import remain unverified.
+- Current-listing Agenda hierarchy, selected item/section detail, supporting-document wrapper and meeting-packet branches now have scoped source/synthetic execution. Archive traversal, native search completeness, non-agenda detail variants and staff import/meeting association remain unresolved; broader deployment or live file availability is not inferred.
+- Akron embedded Documents and Media now have vendor-client-backed synthetic mapping: exact native document/item/publish IDs and locator branches, plus link-only live/on-demand meeting player. Actual nonempty response applicability, native keyword full-text/history completeness, other wrappers and remote Agenda association/import remain unverified.
 
 Evidence and exact scope: `inventory.json` provider `onbase`; operation status and outbound mappings are separate from historical observations.
+
+- Fitchburg native This Year search now uses the observed public form destination with exact local title/date checks and literal row IDs, including a fileless meeting.20 new cases/152 affected passes verify bounded retrieval, fault/cancel handling, SQLite retry/reopen and ZIP. The observed100-row provider cap remains partial; no paging or complete/full-text semantics are inferred. Historical redirect-only failure is superseded for this scoped route. See `docs/ONBASE-SEARCH.md`.
 
 ## F22 Laserfiche WebLink (`laserfiche-weblink`)
 
@@ -228,6 +236,8 @@ Evidence and exact scope: `inventory.json` provider `digital-towpath`; operation
 
 Evidence and exact scope: `inventory.json` provider `clerkbase`; operation status and outbound mappings are separate from historical observations.
 
+- The configured selected HTML document GET and cited text path are source implemented and tested. The stale fetch flag is corrected; linked binary download completeness remains unverified. See `docs/verification/configured-fetch-reconciliation-2026-11-14.json`.
+
 ## F26 Municipality-published calendar (iCalendar) (`first-party`)
 
 - The saved Logan Township response contains five events. Adjacent-month, recurrence/timezone and update sampling were not executed; these are explicit feed-coverage limits, not a universal contract gap or mandatory new survey.
@@ -235,6 +245,8 @@ Evidence and exact scope: `inventory.json` provider `clerkbase`; operation statu
 - Keep neutral iCalendar export separate from writing to a municipality calendar; no provider-specific import/write contract is supplied.
 
 Evidence and exact scope: `inventory.json` provider `first-party`; operation status and outbound mappings are separate from historical observations.
+
+- Configured explicit public-meeting-ics feed discovery/fetch is implemented: the1307-record Sunnyvale baseline, bounded resume and unchanged saved-normalize-to-fetch import are now checked. This does not implement municipality HTML-to-feed link discovery or establish server feed horizon. The earlier blanket no-implementation flag is corrected. See `docs/verification/configured-fetch-reconciliation-2026-11-14.json`.
 
 ## F27 Wistia (`wistia`)
 

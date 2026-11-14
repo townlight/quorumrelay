@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-14",
+  "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings/Search?dropid=7&searchTerm=Council",
+  "method": "GET",
+  "status": 200,
+  "raw_bytes": 768963,
+  "raw_sha256": "37a7865fb08ebb21b87c81539d74fa6489b3c88b0ece2ff041323dd76b1a8556",
+  "fixture": "tests/fixtures/onbase-search/fitchburg-council-2026.html",
+  "fixture_sha256": "37e29cadf9b6e75b8afcf8f8167ff5d5c3d1cb61ea7514bbf3d669a36c329391",
+  "fixture_bytes": 768888,
+  "sanitization": "Exactly one anonymous public anti-forgery input value replaced; all other source bytes retained. No cookie/token committed.",
+  "route_provenance": {
+    "form_url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings",
+    "method": "POST public search read",
+    "fields": {
+      "Keywords": "Council",
+      "DateRangeOptionID": "7",
+      "DateRangeCustomStartDate": "",
+      "DateRangeCustomEndDate": ""
+    },
+    "status": 302,
+    "location": "/OnBaseAgendaOnline/Meetings/Search?dropid=7&searchTerm=Council",
+    "redirect_followed": false,
+    "response_sha256": "5030ba83ee902e3dd6aabb2bedba57e27a8c32a1532488dd70c4b1e2f87f11dc",
+    "limits": "Fresh anonymous form context only in process; explicit separate GET of declared destination, no automatic redirect or login."
+  },
+  "established": "Echoed Council keyword and selected This Year option7; 100 unique native meeting-row/data-meeting-id records, including fileless3686. Visible provider search-limit warning. Duplicate responsive cells are not separate meetings.",
+  "limits": "Matching includes non-Council titles: provider text matching may include other content but is unverified. Current server year/timezone, full text, total, paging, complete history and other deployments not established."
+}

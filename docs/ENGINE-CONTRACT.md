@@ -57,6 +57,14 @@ SDK may supply `content` bytes instead. `data` is a `CaptureBundle`: `schema_ver
 
 `Record`: `schema_version`, `identity`, `normalized`, `source_url`, `citation_urls`, `capture_sha256`, `captured_at`, `normalized_sha256`, `source_revision`, `original`, `relationships`, `text`, `extensions`. Preserve these dicts and all additional unknown keys losslessly when store/import/export pass dictionaries around. Typed `from_dict` helpers will preserve unknown top-level keys; dictionaries remain the interchange source of truth.
 
+`normalized_sha256` hashes the complete `normalized` object using the canonical
+JSON hash, including shared fields added after baseline parsing. Direct saved
+normalization and fetched discovery therefore use the same digest for equal
+normalized values. Older direct-normalization records could hash the narrower
+reader row; reprocessing one can refresh its local digest once. Source identities,
+original capture hashes and the version-1 compatibility output are unchanged.
+The digest is a local change indicator, never an upstream revision or overwrite grant.
+
 `Source`, `Identity`, `Record`, `CaptureBundle` and `OperationResult` supply `from_dict`/`public_dict` helpers. Unknown fields survive both top-level and nested typed round trips. JSON serialization uses arrays, not Python tuples. Known-offset timestamps, a supplied calendar TZID, and unknown zones are distinct; a supplied named zone never invents a UTC offset.
 
 Identity: `provider`, `namespace`, `record_type`, `external_id`, optional `parent` identity, `derivation`, `stability`. Only the first five form source identity. Capture hash, normalized hash, upstream revision and application destination IDs are different. `source_revision` has `kind` and `value`, provider mappings may add provenance; do not call local hashes upstream versions. Unknown revisions are `{"kind":"not_supplied","value":null}`.

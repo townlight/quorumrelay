@@ -1,0 +1,27 @@
+{
+  "url": "https://meetings.municode.com/app",
+  "method": "GET",
+  "status": 302,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "content_type": null,
+  "redirect_followed": false,
+  "source": "Exact Sign In href /app in previously saved public Essential root; no login, auth exchange, cookie or mutation.",
+  "location": {
+    "origin": "https://cpauthentication.civicplus.com",
+    "path": "/connect/authorize",
+    "query_keys": [
+      "acr_values",
+      "client_id",
+      "code_challenge",
+      "code_challenge_method",
+      "nonce",
+      "redirect_uri",
+      "response_type",
+      "scope",
+      "state",
+      "x-client-SKU",
+      "x-client-ver"
+    ]
+  }
+}

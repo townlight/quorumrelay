@@ -13,3 +13,5 @@ docs/capabilities/evidence/contract-followup-2026-11-14/onbase-unity-information
 
 # Exact Hyland adapter topic capture contains vendor trailing spaces.
 docs/capabilities/evidence/onbase-eis-entity/*.content.html whitespace=-blank-at-eol
+
+tests/fixtures/onbase-search/*.html whitespace=-blank-at-eol,-blank-at-eof

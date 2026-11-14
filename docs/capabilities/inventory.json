@@ -9411,6 +9411,18 @@
               }
             ]
           }
+        },
+        {
+          "id": "essential-declared-editor-auth-2026-11-14",
+          "url": "https://meetings.municode.com/app",
+          "title": "Essential declared editor entry redirects to CivicPlus authentication",
+          "kind": "observed_http_access_boundary",
+          "observation_date": "2026-11-14",
+          "proof_level": "exact_route_authentication_dependency_not_contract_absence",
+          "observed": "Exact /app Sign In href in saved anonymous root; GET302 zero bytes to cpauthentication.civicplus.com/connect/authorize. No redirect followed or login attempted.",
+          "receipt_path": "docs/capabilities/evidence/essential-postman/app-access-source.json",
+          "receipt_sha256": "9178640378d560d2cb772abe945018f3c0c952a216e8d77e2896fcfc73d32087",
+          "limits": "Access to this rendered editor requires authorized login or a shareable editor/source export. No production multimedia response, staff payload/readback, all-APIs-private or unsupported-feature inference. OAuth query values are not retained; only query key names recorded."
         }
       ],
       "tenants": [
@@ -16106,6 +16118,48 @@
           "limits": "One supplied public memo template; no universal deployment or archive completeness claim; PDF locator is not actual downloaded document bytes; transfer proof uses synthetic PDF; Source-labelled recommended motion is not an adopted motion or vote; No staff schema, vendor mutation, frozen rebuild or publication",
           "receipt_path": "docs/verification/agendaquick-public-memo-2026-11-12.json",
           "receipt_sha256": "17ac662a279bf82b1d55cbd204405a542c4f2d07b50e88a5db0f90d40efc8812"
+        },
+        {
+          "id": "destiny-agendaquick-configured-fetch-reconciled-2026-11-14",
+          "url": "https://public.destinyhosted.com/agenda_publish.cfm?id=98622",
+          "title": "Configured retrieval source and current scoped engine execution",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-14",
+          "observed": "Existing pinned vendor capture/client contract exercised through current engine; no new live read.",
+          "access_scope": "local_fixture_and_synthetic_transport_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/configured-fetch-reconciliation-2026-11-14.json",
+          "receipt_sha256": "7dcaccc60b4612b4de9e854389a5da7bcee4cf2b88ae05234a6f7bdea9463757",
+          "limits": "Configured supplied agenda/memo HTML GET with native meeting/memo/line IDs; separate selected packet PDF synthetic transfer. No automatic full archive traversal or vendor import/write claim.",
+          "synthetic_execution": {
+            "provider": "destiny-agendaquick",
+            "status": "mock_passed",
+            "operations": [
+              "fetch"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Configured supplied agenda/memo HTML GET with native meeting/memo/line IDs; separate selected packet PDF synthetic transfer. No automatic full archive traversal or vendor import/write claim.",
+            "execution_provenance": "159affected passes; exact scope/fixtures and tests listed. Not a new live acceptance claim.",
+            "checks": [
+              {
+                "command": "pytest tests/test_first_party_feed_retrieval.py tests/test_baseline.py tests/test_onbase_model_documents.py tests/test_townhall_detail.py tests/test_agendaquick_detail.py tests/test_agendaquick_memo.py tests/test_clerkbase_detail.py tests/test_storage_search_imports.py tests/test_interchange.py -q",
+                "passed": 159,
+                "failed": 0,
+                "junit_sha256": "a26088e33c6a830fbb3c9e41e9f6b5b2a70d76f9a72081989dca43a411f62855"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "test",
+                "path": "tests/test_agendaquick_detail.py",
+                "sha256": "70ee0d360aedc97e4765909b6fa60c4cbaab80a4f8d3f5db8e1d2e4287d97355",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "810621722753bff022c3714c53f563c710fa4d87e9765a8ba1ac36b400b1cfdc"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -16182,27 +16236,26 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "destiny-yuma",
             "agendaquick-public-agenda-2026-11-12",
-            "agendaquick-public-memo-2026-11-12"
+            "agendaquick-public-memo-2026-11-12",
+            "destiny-agendaquick-configured-fetch-reconciled-2026-11-14"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. Public HTML/PDF export is not a vendor import contract. Roll call/votes are product features, not guaranteed structured fields in listing HTML. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download. Current source also maps the supplied public memo template (agendaquick-public-memo-html): native item/meeting/line/revision controls, six labelled sections and supplied same-origin PDF locator; no implicit attachment fetch or inferred adopted motion/vote.",
-          "dependencies": [
-            "shared network safeguards"
-          ],
+          "details": "Configured supplied agenda/memo HTML GET with native meeting/memo/line IDs; separate selected packet PDF synthetic transfer. No automatic full archive traversal or vendor import/write claim.",
+          "dependencies": [],
           "remaining_verification": [
-            "Verify raw response MIME, redirects, document/media status and independent attachment failures."
+            "Configured supplied agenda/memo HTML GET with native meeting/memo/line IDs; separate selected packet PDF synthetic transfer. No automatic full archive traversal or vendor import/write claim."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_fixture_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://destinyhosted.com/frs/coonrapids.htm",
             "https://public.destinyhosted.com/agenda_publish.cfm?id=98622"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Current159affected execution; scoped synthetic transport and pinned fixture. No test-account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -16701,6 +16754,49 @@
           "receipt_path": "docs/verification/town-hall-streams-player-mapping-2026-11-12.json",
           "receipt_sha256": "d97857ef83819609f5971c26b4edb832f9c6564303595d9355c247703a6a3b26",
           "observation_date": "2026-11-12"
+        },
+        {
+          "id": "town-hall-streams-configured-fetch-reconciled-2026-11-14",
+          "url": "https://townhallstreams.com/stream.php?location_id=72&id=74003",
+          "title": "Configured retrieval source and current scoped engine execution",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-14",
+          "observed": "Existing pinned vendor capture/client contract exercised through current engine; no new live read.",
+          "access_scope": "local_fixture_and_synthetic_transport_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/configured-fetch-reconciliation-2026-11-14.json",
+          "receipt_sha256": "7dcaccc60b4612b4de9e854389a5da7bcee4cf2b88ae05234a6f7bdea9463757",
+          "limits": "Configured event HTML GET and literal native event/location mapping; explicitly granted supplied HLS playlist transfer. Existing captured listing is bounded/partial. No segment playback, MP4, transcript action or complete archive claim.",
+          "synthetic_execution": {
+            "provider": "town-hall-streams",
+            "status": "mock_passed",
+            "operations": [
+              "discover",
+              "fetch"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Configured event HTML GET and literal native event/location mapping; explicitly granted supplied HLS playlist transfer. Existing captured listing is bounded/partial. No segment playback, MP4, transcript action or complete archive claim.",
+            "execution_provenance": "159affected passes; exact scope/fixtures and tests listed. Not a new live acceptance claim.",
+            "checks": [
+              {
+                "command": "pytest tests/test_first_party_feed_retrieval.py tests/test_baseline.py tests/test_onbase_model_documents.py tests/test_townhall_detail.py tests/test_agendaquick_detail.py tests/test_agendaquick_memo.py tests/test_clerkbase_detail.py tests/test_storage_search_imports.py tests/test_interchange.py -q",
+                "passed": 159,
+                "failed": 0,
+                "junit_sha256": "a26088e33c6a830fbb3c9e41e9f6b5b2a70d76f9a72081989dca43a411f62855"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "test",
+                "path": "tests/test_townhall_detail.py",
+                "sha256": "5aabb4f1e5a08419a122a38658ee6ce7cccad610bdc8838a7f872f8778372ea8",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "b117fe2d111dd7a345ff660edcac0fcc5f3e57a4a0bce85157b5e8a9c2bc6aba"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -16742,28 +16838,27 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "ths-hollis",
             "ths-player",
             "town-hall-streams-bounded-listing-2026-11-12",
-            "town-hall-streams-player-synthetic"
+            "town-hall-streams-player-synthetic",
+            "town-hall-streams-configured-fetch-reconciled-2026-11-14"
           ],
-          "details": "The selected public location page yielded 132 embedded event rows with status partial; one event detail HTML was fetched. No additional network continuation was observed and catalog/retention bounds remain unknown. Additive town-hall-streams-event-html accepts an exact saved/configured event player, preserves native event/location identity and maps its declared HTTPS CDN HLS locator with raw provenance. Playlist/segment/MP4/transcript completeness is not inferred.",
-          "dependencies": [
-            "bounded date/body query",
-            "safe public retrieval"
-          ],
+          "details": "Configured event HTML GET and literal native event/location mapping; explicitly granted supplied HLS playlist transfer. Existing captured listing is bounded/partial. No segment playback, MP4, transcript action or complete archive claim.",
+          "dependencies": [],
           "remaining_verification": [
-            "Establish only whether the current public page exposes additional explicit continuation/date controls; the selected embedded listing itself is partial and no full archive bounds are known."
+            "Configured event HTML GET and literal native event/location mapping; explicitly granted supplied HLS playlist transfer. Existing captured listing is bounded/partial. No segment playback, MP4, transcript action or complete archive claim."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_fixture_and_synthetic_engine_execution",
           "tenant_scope": [
-            "https://townhallstreams.com/town.php?id=72"
+            "https://townhallstreams.com/town.php?id=72",
+            "https://townhallstreams.com/stream.php?location_id=72&id=74003"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Current159affected execution; scoped synthetic transport and pinned fixture. No test-account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -16771,27 +16866,27 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "ths-hollis",
             "ths-player",
             "town-hall-streams-event-html-2026-11-12",
-            "town-hall-streams-player-synthetic"
+            "town-hall-streams-player-synthetic",
+            "town-hall-streams-configured-fetch-reconciled-2026-11-14"
           ],
-          "details": "One supplied event-detail link completed as text/html, with no supplied documents. HTML retrieval is not playable stream or media-byte acceptance. Additive town-hall-streams-event-html accepts an exact saved/configured event player, preserves native event/location identity and maps its declared HTTPS CDN HLS locator with raw provenance. Playlist/segment/MP4/transcript completeness is not inferred.",
-          "dependencies": [
-            "shared network safeguards"
-          ],
+          "details": "Configured event HTML GET and literal native event/location mapping; explicitly granted supplied HLS playlist transfer. Existing captured listing is bounded/partial. No segment playback, MP4, transcript action or complete archive claim.",
+          "dependencies": [],
           "remaining_verification": [
-            "Verify raw response MIME, redirects, document/media status and independent attachment failures."
+            "Configured event HTML GET and literal native event/location mapping; explicitly granted supplied HLS playlist transfer. Existing captured listing is bounded/partial. No segment playback, MP4, transcript action or complete archive claim."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_fixture_and_synthetic_engine_execution",
           "tenant_scope": [
-            "https://townhallstreams.com/town.php?id=72"
+            "https://townhallstreams.com/town.php?id=72",
+            "https://townhallstreams.com/stream.php?location_id=72&id=74003"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Current159affected execution; scoped synthetic transport and pinned fixture. No test-account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -19216,6 +19311,60 @@
             "Adapter uses configured Application Server, database and service-account context; selected object WSDL/schema is generated after connecting. Canonical mode binds configured Web Services Publishing objects."
           ],
           "limits": "For implementing this destination-specific EIS path: generated selected entity WSDL/XSD and matching Agenda fields/types, endpoint/binding, readback/error contract must come from its configuration/export. No live credential acquisition or mutation is required for synthetic acceptance. Fixed HTTP SOAP action, XML namespaces and complete typed Agenda fields. Document-to-Agenda association envelope or upload bytes/readback. Applicability/version/schema equivalence to any selected public Agenda Online tenant. No assertion that every alternative Agenda API or public source is private."
+        },
+        {
+          "id": "onbase-public-search-native-synthetic",
+          "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings/Search?dropid=7&searchTerm=Council",
+          "title": "Observed Fitchburg search destination and capped native candidate mapping",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-14",
+          "observed": "Actual public form302 and declared destinationGET200; sanitized response fixture.",
+          "access_scope": "anonymous_public_reads_and_local_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/onbase-native-search-2026-11-14.json",
+          "receipt_sha256": "9fa18a2723e43deabc953df34a962c966d9c583aefcdd56a6cf453fe14702e6c",
+          "fixture_path": "tests/fixtures/onbase-search/fitchburg-council-2026.html",
+          "fixture_sha256": "37e29cadf9b6e75b8afcf8f8167ff5d5c3d1cb61ea7514bbf3d669a36c329391",
+          "limits": "Only This Year candidates on known Fitchburg deployment; cap and full-text/paging/history limits explicit.",
+          "synthetic_execution": {
+            "provider": "onbase",
+            "status": "mock_passed",
+            "operations": [
+              "native_search"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Capped native candidate retrieval; exact local title/date match and supplied native row/link identity; import/reopen/ZIP.",
+            "execution_provenance": "20 new cases within152 affected passes; actual public source observation separately labeled.",
+            "checks": [
+              {
+                "command": "pytest tests/test_onbase_native_search.py tests/test_onbase_listing.py tests/test_onbase_search_model.py tests/test_onbase_model_documents.py tests/test_onbase_packets.py tests/test_onbase_detail.py tests/test_onbase_documents.py tests/test_onbase_item_documents.py tests/test_onbase_document_kinds.py tests/test_onbase_export.py -q",
+                "passed": 152,
+                "failed": 0,
+                "junit_sha256": "b7ffb4a58fe804092bd699e60a78ded1fff55f11ba3f64833164a39404f7f5eb"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/onbase-public-search/source.json",
+                "sha256": "b5080deb36164fd5fd55bc4279b7e6e2f8e69f2cc69b207d1ec4e1356694d6df"
+              },
+              {
+                "kind": "fixture",
+                "path": "tests/fixtures/onbase-search/fitchburg-council-2026.html",
+                "sha256": "37e29cadf9b6e75b8afcf8f8167ff5d5c3d1cb61ea7514bbf3d669a36c329391"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_onbase_native_search.py",
+                "sha256": "d2fad6d1c371da9b0c5323f45eef66609cd8088233aeb2ea00d065a6004cc97d",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "d2fad6d1c371da9b0c5323f45eef66609cd8088233aeb2ea00d065a6004cc97d"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -19345,24 +19494,25 @@
           ]
         },
         "native_search": {
-          "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "hyland-onbase-agenda-online-docs",
-            "onbase-public-search-redirect-blocked-2026-11-12"
+            "onbase-public-search-redirect-blocked-2026-11-12",
+            "onbase-public-search-native-synthetic"
           ],
-          "details": "The visible public search POST was attempted with a fresh in-process anti-forgery token, but guarded transport rejected the redirect before exposing the target or results. No native search semantics are established.",
+          "details": "Known Fitchburg GET destination with dropid=7 and first expression searchTerm. Exact locally checked title/date; native row IDs retain fileless meetings without invented links. Provider search cap remains partial; no paging or full-text semantics inferred.",
           "dependencies": [],
           "remaining_verification": [
-            "Resolve the redirect only if the guarded same-origin/host policy permits it; do not weaken redirect guards. No route or search capability is declared unsupported from this result."
+            "Current-year server semantics, full-text matching, history, total/paging and other deployments remain unverified."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_implementation_scoped_native_search_synthetic_acceptance",
           "tenant_scope": [
             "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "20 new local engine/fixture/fault cases within152 affected passes, plus actual anonymous result observation.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -19952,9 +20102,10 @@
         "Hyland Agenda Foundation 25.1 guidance is version/installation-scoped. Identify deployment/version and entitlement before applying API/write operations to Agenda Online.",
         "Deployment-matched create/update/upload and meeting-association field/readback contracts remain missing. An authorized staff/test account is not required for vendor-documented synthetic acceptance.",
         "Normal Tagged DIP linked-document file/index preparation is implemented with exact destination mappings and synthetic emitted-layout proof; no Agenda meeting association or remote processing is inferred. OnBase API SDK remains an actual vendor surface; sdk.onbase.com redirected to Hyland identity, and public REST help describes per-deployment published operations rather than a universal Agenda schema. Continue exact API contract research without credential acquisition.",
-        "Current-listing Agenda hierarchy, selected item/section detail, supporting-document wrapper and meeting-packet branches now have scoped source/synthetic execution. Archive traversal, native search, non-agenda detail variants and staff import/meeting association remain unresolved; broader deployment or live file availability is not inferred.",
-        "Akron embedded Documents and Media now have vendor-client-backed synthetic mapping: exact native document/item/publish IDs and locator branches, plus link-only live/on-demand meeting player. Actual nonempty response applicability, native keyword search/archive, other wrappers and remote Agenda association/import remain unverified.",
-        "New public UnityRestAPI V1 request DTOs found: document/create and document/get responses remain unspecified objects, fileContent encoding unspecified, and no Agenda association path. SDK official link redirects to Hyland authentication; exact sample ZIP403. Do not substitute Content Innovation Cloud or Fiserv interfaces for selected Agenda deployment. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json"
+        "Current-listing Agenda hierarchy, selected item/section detail, supporting-document wrapper and meeting-packet branches now have scoped source/synthetic execution. Archive traversal, non-agenda detail variants and staff import/meeting association remain unresolved; broader deployment or live file availability is not inferred.",
+        "Akron embedded Documents and Media now have vendor-client-backed synthetic mapping: exact native document/item/publish IDs and locator branches, plus link-only live/on-demand meeting player. Actual nonempty response applicability, native keyword full-text/archive completeness, other wrappers and remote Agenda association/import remain unverified.",
+        "New public UnityRestAPI V1 request DTOs found: document/create and document/get responses remain unspecified objects, fileContent encoding unspecified, and no Agenda association path. SDK official link redirects to Hyland authentication; exact sample ZIP403. Do not substitute Content Innovation Cloud or Fiserv interfaces for selected Agenda deployment. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
+        "Fitchburg native This Year search is source implemented and fixture/synthetic executed; historical redirect-only failure is superseded for this scoped path. Actual result cap remains explicit; complete search/history, provider keyword semantics and other deployments are unverified."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "onbase",
@@ -22752,6 +22903,48 @@
           "limits": "Synthetic provider transport through actual current source application paths; no provider mutations; Existing configured-capture partial and unavailable-media outcomes retained; Supplied HTML/rich text is source content, not OCR/ASR or inferred votes/motions/attendance; Townlight/TownReporter current-source candidate acceptance remains separate; frozen original proof reused only where unchanged; No package build/install/signing/Sandbox restart/frozen artifact/publication",
           "receipt_path": "docs/verification/source-text-reference-clients-2026-11-12.json",
           "receipt_sha256": "21d6656e7555e96469b2146ebe4dc5264c3efb249c73c49be2fdefdce564dc93"
+        },
+        {
+          "id": "clerkbase-configured-fetch-reconciled-2026-11-14",
+          "url": "https://clerkshq.com/Content/Richmond-ri/council/2022/apr19_22tc.htm",
+          "title": "Configured retrieval source and current scoped engine execution",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-14",
+          "observed": "Existing pinned vendor capture/client contract exercised through current engine; no new live read.",
+          "access_scope": "local_fixture_and_synthetic_transport_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/configured-fetch-reconciliation-2026-11-14.json",
+          "receipt_sha256": "7dcaccc60b4612b4de9e854389a5da7bcee4cf2b88ae05234a6f7bdea9463757",
+          "limits": "Configured selected HTML document GET retains supplied cited paragraph text and URL-derived identity; search/export/retry verified. Linked binaries, all nested trees and provider writes remain unverified.",
+          "synthetic_execution": {
+            "provider": "clerkbase",
+            "status": "mock_passed",
+            "operations": [
+              "fetch"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Configured selected HTML document GET retains supplied cited paragraph text and URL-derived identity; search/export/retry verified. Linked binaries, all nested trees and provider writes remain unverified.",
+            "execution_provenance": "159affected passes; exact scope/fixtures and tests listed. Not a new live acceptance claim.",
+            "checks": [
+              {
+                "command": "pytest tests/test_first_party_feed_retrieval.py tests/test_baseline.py tests/test_onbase_model_documents.py tests/test_townhall_detail.py tests/test_agendaquick_detail.py tests/test_agendaquick_memo.py tests/test_clerkbase_detail.py tests/test_storage_search_imports.py tests/test_interchange.py -q",
+                "passed": 159,
+                "failed": 0,
+                "junit_sha256": "a26088e33c6a830fbb3c9e41e9f6b5b2a70d76f9a72081989dca43a411f62855"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "test",
+                "path": "tests/test_clerkbase_detail.py",
+                "sha256": "2c26e4d5b7edb3775a0a179e02ede64b8e50dde12ae36a8ff91a0ac610865f7f",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "ef41563f92ba576ec1437f4d57bc90c390d596ee39cd56e8077435ffbc939325"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -22816,22 +23009,24 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "clerkbase-tenant"
+            "clerkbase-tenant",
+            "clerkbase-configured-fetch-reconciled-2026-11-14"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval.",
+          "details": "Configured selected HTML document GET retains supplied cited paragraph text and URL-derived identity; search/export/retry verified. Linked binaries, all nested trees and provider writes remain unverified.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
+            "Configured selected HTML document GET retains supplied cited paragraph text and URL-derived identity; search/export/retry verified. Linked binaries, all nested trees and provider writes remain unverified."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_fixture_and_synthetic_engine_execution",
           "tenant_scope": [
-            "https://clerkshq.com/southkingstown-ri"
+            "https://clerkshq.com/southkingstown-ri",
+            "https://clerkshq.com/Content/Richmond-ri/council/2022/apr19_22tc.htm"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Current159affected execution; scoped synthetic transport and pinned fixture. No test-account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -23311,6 +23506,49 @@
             "Named tests: tests/test_provider_discovery.py (roster identity), tests/test_baseline.py (all 34 exact compatibility and capture preservation), tests/test_baseline_search.py (all 34/all 31 metadata search), tests/test_storage_search_imports.py (all 31 portable searchable), tests/test_interchange.py (neutral round trips and projections)."
           ],
           "limits": "This is source/test-coverage evidence, not a saved test execution receipt or any provider live read/write acceptance. Local search covers captured normalized metadata and supplied text only; parser and exports do not imply source catalog completeness or vendor file-import acceptance."
+        },
+        {
+          "id": "first-party-configured-fetch-reconciled-2026-11-14",
+          "url": "https://calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics",
+          "title": "Configured retrieval source and current scoped engine execution",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-14",
+          "observed": "Existing pinned vendor capture/client contract exercised through current engine; no new live read.",
+          "access_scope": "local_fixture_and_synthetic_transport_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/configured-fetch-reconciliation-2026-11-14.json",
+          "receipt_sha256": "7dcaccc60b4612b4de9e854389a5da7bcee4cf2b88ae05234a6f7bdea9463757",
+          "limits": "Configured explicit public-meeting-ics feed GET preserves1307 baseline records and original UID identities; bounded static-feed continuation and unchanged mixed normalize/fetch import. Municipality HTML-to-feed link discovery, server window/retention and provider write protocols are not implied.",
+          "synthetic_execution": {
+            "provider": "first-party",
+            "status": "mock_passed",
+            "operations": [
+              "discover",
+              "fetch"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Configured explicit public-meeting-ics feed GET preserves1307 baseline records and original UID identities; bounded static-feed continuation and unchanged mixed normalize/fetch import. Municipality HTML-to-feed link discovery, server window/retention and provider write protocols are not implied.",
+            "execution_provenance": "159affected passes; exact scope/fixtures and tests listed. Not a new live acceptance claim.",
+            "checks": [
+              {
+                "command": "pytest tests/test_first_party_feed_retrieval.py tests/test_baseline.py tests/test_onbase_model_documents.py tests/test_townhall_detail.py tests/test_agendaquick_detail.py tests/test_agendaquick_memo.py tests/test_clerkbase_detail.py tests/test_storage_search_imports.py tests/test_interchange.py -q",
+                "passed": 159,
+                "failed": 0,
+                "junit_sha256": "a26088e33c6a830fbb3c9e41e9f6b5b2a70d76f9a72081989dca43a411f62855"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "test",
+                "path": "tests/test_first_party_feed_retrieval.py",
+                "sha256": "e2f0fae0c251a71c9a9091068cc704bdf2f59757b7678c6bbee07e25e97a7c67",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "e2f0fae0c251a71c9a9091068cc704bdf2f59757b7678c6bbee07e25e97a7c67"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -23350,27 +23588,25 @@
         },
         "discover": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "ical-logan",
-            "ical-logan-feed"
+            "ical-logan-feed",
+            "first-party-configured-fetch-reconciled-2026-11-14"
           ],
-          "details": "Discover explicitly published HTTP(S) ICS links on configured municipality calendar; convert webcal reference only through validated HTTP(S) equivalent. Fetch feed and preserve UID/recurrence identity.",
-          "dependencies": [
-            "bounded date/body query",
-            "safe public retrieval"
-          ],
+          "details": "Configured explicit public-meeting-ics feed GET preserves1307 baseline records and original UID identities; bounded static-feed continuation and unchanged mixed normalize/fetch import. Municipality HTML-to-feed link discovery, server window/retention and provider write protocols are not implied.",
+          "dependencies": [],
           "remaining_verification": [
-            "iCalendar defines no universal pagination. Tenant export window is bounded/implementation-specific; observed month endpoint omitted past early-month events.",
-            "Build fixtures and verify complete bounded result traversal."
+            "Configured explicit public-meeting-ics feed GET preserves1307 baseline records and original UID identities; bounded static-feed continuation and unchanged mixed normalize/fetch import. Municipality HTML-to-feed link discovery, server window/retention and provider write protocols are not implied."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_fixture_and_synthetic_engine_execution",
           "tenant_scope": [
-            "https://www.logan-twp.org/events/"
+            "https://www.logan-twp.org/events/",
+            "https://calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Current159affected execution; scoped synthetic transport and pinned fixture. No test-account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -23378,25 +23614,25 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "ical-logan",
-            "ical-logan-feed"
+            "ical-logan-feed",
+            "first-party-configured-fetch-reconciled-2026-11-14"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. No generic calendar-host write support. METHOD:PUBLISH and RFC property names do not grant upstream create/update/upload. Preserve floating/all-day/timezone/recurrence distinctions.",
-          "dependencies": [
-            "shared network safeguards"
-          ],
+          "details": "Configured explicit public-meeting-ics feed GET preserves1307 baseline records and original UID identities; bounded static-feed continuation and unchanged mixed normalize/fetch import. Municipality HTML-to-feed link discovery, server window/retention and provider write protocols are not implied.",
+          "dependencies": [],
           "remaining_verification": [
-            "Verify raw response MIME, redirects, document/media status and independent attachment failures."
+            "Configured explicit public-meeting-ics feed GET preserves1307 baseline records and original UID identities; bounded static-feed continuation and unchanged mixed normalize/fetch import. Municipality HTML-to-feed link discovery, server window/retention and provider write protocols are not implied."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_fixture_and_synthetic_engine_execution",
           "tenant_scope": [
-            "https://www.logan-twp.org/events/"
+            "https://www.logan-twp.org/events/",
+            "https://calendar.google.com/calendar/ical/cityclerksunnyvale%40gmail.com/public/basic.ics"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Current159affected execution; scoped synthetic transport and pinned fixture. No test-account acquisition gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
