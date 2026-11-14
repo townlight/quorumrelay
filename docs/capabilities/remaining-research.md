@@ -1,5 +1,14 @@
 # Remaining provider research and access gaps
 
+The canonical inventory's `remaining_research` arrays now reconcile the later
+read implementations and the owner's synthetic-acceptance amendment. Use those
+active entries with their linked operation evidence for next actions. The dated
+observations below retain historical failures and missing-account statements;
+they do not reopen completed mappings or make account acquisition/live mutation
+an acceptance gate. Missing machine schemas, applicability and readback semantics
+remain unresolved where stated; no operation is promoted to supported by this
+text correction.
+
 November 13 lead reconciliation: the [execution receipt](../verification/public-contract-leads-2026-11-13.json)
 and generated inventory supersede the dated open statements below for the
 specific implemented paths. Tyler Liberty nonempty selected-window/detail/search,

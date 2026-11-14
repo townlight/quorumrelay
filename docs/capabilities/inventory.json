@@ -3971,7 +3971,7 @@
       "remaining_research": [
         "Observed Reno public /api/v2/PublicPortal/search form is now source-implemented with exact local metadata/excerpt checks, stable native-ID continuation, raw/parent preservation and bounded first/resumed receipt. Full document content, provider matching/caps/rank and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.",
         "Official release notes identify Meeting API, speaker endpoint and tracking-number search but no executable schema. Obtain PrimeGov account-specific API specification and enablement before coding those routes.",
-        "No provider write tenant/credentials were supplied; create/update/upload fields, permissions, readback and conflict semantics remain unverified.",
+        "Authenticated create/update/upload field schemas, permissions, readback and conflict semantics remain unverified in the pinned material. A matching machine contract is needed; credentials or live tenant writes are not an acceptance gate.",
         "Selected public client document branches synthetically executed; JSON URL-string shape inferred from callback. Type4 HTML/unknown output, live file availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled."
       ],
       "requirement_ids": [
@@ -6962,9 +6962,9 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "Selected window is traversed and one supplied agenda PDF fetched. Saved public search postback returned a date-validation error with no rows; native search semantics remain unverified. Structured MeetingView/Coversheet and Minutes retrieval remain unverified.",
-        "On the same tenant, establish default date range, retained history and meeting-grid continuation through valid public controls; current receipt exhausts only its selected window.",
-        "No current machine create/update/upload route or authorized staff/test account was supplied; historical UI instructions are not API fields."
+        "Selected-window listing, bounded native search, supplied Coversheet and MeetingView Agenda parsing are implemented with separate receipts. The older failed search postback is historical. Search candidate/full-text semantics, Minutes rendering and automatic root-to-detail traversal remain unverified; exact saved detail contexts are not a complete catalog.",
+        "Existing receipts establish their selected listing/search windows only. Default horizon, retained history and broader catalog extent remain qualified; no repeated tenant/history survey is a new completion gate.",
+        "Pinned UI instructions do not supply a current machine create/update/upload contract or field/readback schema. Vendor-contract synthetic execution is accepted when such a contract is available; staff-account acquisition is not required for acceptance."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "novusagenda",
@@ -8249,7 +8249,7 @@
       "remaining_research": [
         "A bounded Lacey CivicClerk native-search engine read and in-process resume is captured in docs/verification/civicplus-select-native-search-2026-11-12.json: partial/no-error pages yielded three then two local hits; the first request made one network call and resume reused the exact in-process snapshot with zero additional calls. Provider candidate semantics, broader search/full catalog, full text and restart-persistent continuation remain unverified.",
         "The exporter prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4. The official-linked filename tester classifies the additional tokens, but backend acceptance and post-import behavior remain unverified. MP4 framing does not establish codec/playability, captions or timestamp fidelity; ambiguous Packet, Notices and Audio/Video aliases remain rejected.",
-        "Historical FTP host is contradictory; project-lead credentials, transfer, consultant processing and readback are absent. Authenticated create/update/upload routes remain account-gated.",
+        "Historical FTP host and consultant processing/readback remain unverified. Source file preparation is separate from remote import or association. Official Fishers Section create/update is implemented; Event timestamp/template equivalence, item writes and document upload remain contract gaps, not account-acquisition gates.",
         "Official Fishers spec and metadata now pin Event/Section models and publication enum0/1/2; section writes are implemented with scoped synthetic execution. Event date/time/template readback equivalence remains unresolved, and no item create/update or document upload model is established. No account acquisition gate.",
         "Bounded Event-write follow-up: create eventStartTime has HH:MM regex, update time is free-form with12:00:00AM default; UI workflows/public display client do not establish write timestamp or template recurrence readback. No write conversion inferred. Portal Event-file API-origin defect is now implemented/tested separately."
       ],
@@ -9044,7 +9044,7 @@
       ],
       "remaining_research": [
         "Effingham 2024/category 3 returned 35 rows; a bounded Commission native-search engine request and resume returned partial/no-error pages with three hits each. The supplied ViewFile?html=true response was text/html (2,481 bytes), not PDF/binary. Other years/categories, PreviousVersions traversal, full archive and binary/PDF retrieval remain unresolved; do not repeat the same HTML route. Chino extraction failure remains recorded; add no tenant.",
-        "Bounded discovery and native search have source/fixture coverage, but official CivicPlus material supplies no external machine write/file-import schema. A tenant-supported API/integration specification and authorized test account remain needed.",
+        "Bounded discovery/native search have scoped source and fixture coverage. Pinned CivicPlus material supplies no external machine write/file-import schema for Agenda Center. The missing input is a product-matched integration contract, not an authorized live test account.",
         "If authorized test access is supplied, verify role/approval/visibility and duplicate/update/readback separately for meeting, item and file; no remote writes occurred."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
@@ -9896,7 +9896,7 @@
       ],
       "remaining_research": [
         "Source now implements explicit-offset POST collection and GET meeting/item/multimedia capture on the documented support-gated dev origin. Only the multimedia `{meetingStructure:...}` response is schema-mapped; meeting/item/collection bodies remain raw partial captures with zero inferred normalized records.",
-        "Collection offset is caller-supplied; page size, ordering, total/terminal condition and offset progression remain undocumented. Live request validation needs a support-issued token/account; none was supplied.",
+        "Collection offset is caller-supplied; page size, ordering, total/terminal condition and offset progression remain undocumented. Support-token requirements apply to optional live calls, not synthetic contract acceptance; no pagination behavior is inferred.",
         "The documented multimedia update is source-implemented and fixture-tested. Official examples demonstrate URL/timestamp/default/baseURL changes, but other enum/mutability constraints and update response/readback/version conflicts remain unverified without an authorized tenant.",
         "The inspected API page has no meeting/item create/update or document upload route; obtain applicable current support API documentation before coding those routes or treating omission as unsupported. No token was issued, and the test host is not a production host.",
         "Essential reaches end-of-life on 2027-06-30. Keep this product row separate from Select and Aha CMS."
@@ -10596,7 +10596,7 @@
       "remaining_research": [
         "Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied.",
         "Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.",
-        "No authorized staff/test account was supplied for roles, API enablement, write/readback or conflict checks."
+        "Pinned material does not establish role/enablement, write/readback or conflict schemas for an external integration. Those contract details remain unresolved; staff-account acquisition is not an acceptance gate."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "boardbook",
@@ -11260,9 +11260,9 @@
         "Unverified and access-blocked are incomplete, not unsupported."
       ],
       "remaining_research": [
-        "Calendar POST already implemented/proven; bounded Meeting.aspx HTML fetch completed and supplied FileStream PDF returned403 (correctly partial). No bypass/retry or complete agenda-item/catalog claim.",
+        "Calendar and bounded native search remain separately evidenced. Captured Meeting.aspx detail now maps rendered agenda positions, supplied partial text and same-origin FileStream locators. Item keys are capture-local with native item ID null. The earlier FileStream 403 remains a failed live transfer, not proof that the rendered detail path is unimplemented or the catalog complete.",
         "Public native search source implementation and bounded first/page2/resume are verified with partial coverage. Provider full-text/exact matching semantics, broader document visibility and catalog completeness remain unknown; no saved metadata search is mislabeled native.",
-        "The official product overview describes modules, not public API schemas. No customer API/import contract or authorized write tenant was supplied for meeting/item create/update/upload."
+        "Pinned product/module material does not supply a customer machine API/import schema for meeting/item create/update/upload. Product-matched field/readback contracts remain needed; live write-tenant acquisition is not required for accepted synthetic verification."
       ],
       "requirement_ids": [
         "C01",
@@ -11862,9 +11862,9 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "Working public menu/listing and page2 now verified and source implemented. Supplied ViewMeeting.aspx returned HTML; its hydrated agenda/detail/document chain remains a bounded current-source contract follow-up. Body filtering/search/full-catalog semantics remain unverified.",
+        "Public listing/page2, fresh selected meeting/agenda tree, selected item content and same-meeting supplied attachments are source implemented with scoped captures/synthetic execution. The older HTML-only observation is historical. Aggregate agenda/minutes PDF generation, native search and full-catalog semantics remain unverified.",
         "Reviewed current Simbli pages describe archive search and staff meeting/item/document workflows but publish no machine field schema. Obtain customer API specification before implementing writes or claiming absence.",
-        "No authorized provider test tenant, staff credentials or tenant-specific write configuration was supplied."
+        "Tenant-specific role/permission and write/readback configuration must come from a matching machine contract. No staff/test-tenant credential acquisition is an acceptance gate; no live mutation is authorized."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "simbli",
@@ -13265,8 +13265,8 @@
       ],
       "remaining_research": [
         "The bounded Kent public calendar and first native search result are observed; verify broader date/body and archive coverage and live supplied Next before claiming completeness.",
-        "Current Granicus/iQM2 help pages describe authenticated locations/types/meeting and streaming-media workflows, not an iQM2 external API. Get deployment-specific customer documentation/account enablement.",
-        "No tenant API credentials, upload limits, write schema or write acceptance were supplied; do not reuse Legistar contracts."
+        "Pinned Granicus/iQM2 help describes authenticated locations/types/meeting and streaming workflows, not an iQM2 machine API. Deployment-specific field/readback documentation remains needed; account enablement is not a synthetic-acceptance gate.",
+        "Upload limits, write schemas, permission/readback and product applicability remain unresolved in pinned material. Do not substitute Legistar contracts; credentials and live writes are not required acceptance evidence."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "iqm2",
@@ -14461,7 +14461,7 @@
       "remaining_research": [
         "On Vermilion, root and one supplied Older Meetings group were traversed (328 rows; 17 older groups reported; continuation retained). A separate bounded Council native-search run/resume returned three provider candidates per page and zero exact local hits. Remaining groups, full history, remote search/date semantics and all meeting/document MIME/redirect outcomes remain unestablished.",
         "The SuiteOne guide names WMV and Liberty *_content.HTML intake with asynchronous processing, but no exact bookmark HTML schema. An authorized vendor-produced example is still needed for that import.",
-        "Admin UI steps are documented; no machine write contract, account credentials or publication/readback test is available."
+        "Pinned admin UI steps do not establish a machine write/publication/readback contract. Those schemas remain unresolved; account credentials or live publication are not an acceptance gate."
       ],
       "authentication": "Public archive GET anonymous. Upload/update requires an authorized SuiteView Admin account; account tier not specified.",
       "write_findings": "Concrete supported UI intake exists for WMV recording files and Liberty *_content.HTML bookmarks; programmatic route and bookmark schema remain unverified.",
@@ -15850,7 +15850,7 @@
       ],
       "remaining_research": [
         "One Utah body/date public search returned notice 1120627; government/ZIP search, result caps, live next-page behavior and linked document/iCalendar byte acceptance remain unverified.",
-        "Admin Help documents notice draft/publish and attachments as UI steps; no external API or import schema is published. Obtain a supported integration contract and authorized test account.",
+        "Pinned Admin Help describes notice draft/publish and attachments as UI steps without an external API/import schema. A supported machine integration contract remains needed; live test-account acquisition is not required for synthetic acceptance.",
         "Notice publication has legal timing/visibility consequences; future writes require explicit authorization and planned readback."
       ],
       "authentication": "Reads public. Writes require Utah login and approved poster/owner rights for target Body; publish permission distinct from draft edit.",
@@ -16456,7 +16456,7 @@
       "remaining_research": [
         "On Yuma’s current AgendaQuick page, follow Previous/Next Period for one adjacent month and another meeting type; inspect agenda sequence 1737 and its supplied attachment/video URLs.",
         "Yuma public agenda-item search and bounded fixtures are mapped; live next-page behavior, provider full-text semantics and full result coverage remain unverified.",
-        "Official feature copy describes staff scheduling/minute votes/uploads but no machine schema. No authorized credentials or vendor file-import contract were supplied."
+        "Pinned feature material describes staff scheduling, minute votes and uploads without a machine schema or vendor file-import contract. Those contracts remain unresolved; credentials are not an acceptance gate."
       ],
       "authentication": "Yuma list public; staff publishing/editing requires authorized installation account. Hosted and client-installed deployment supported; no API credentials supplied.",
       "write_findings": "Official product text documents agenda/minutes creation and changes in UI. API routes and field names unknown; supporting documents in packet generation do not establish a public upload API.",
@@ -18564,7 +18564,7 @@
       "remaining_research": [
         "Two public event details remain engine-read verified. One supplied Lake Zurich PDF completed (1,933,081 bytes); player HTML completed; a separate supplied HLS/media request remained partial. Public-player URL composition does not establish playback/segment acceptance. No public event index or paging contract is established.",
         "Do not generalize the one PDF to other documents or event media. Yuma reports no media.",
-        "CHAMP Help documents staff event/media/PDF workflows, not machine writes. API codecs, account roles and write/readback remain unverified without authorized credentials."
+        "Pinned CHAMP Help documents staff event/media/PDF workflows rather than machine writes. Field/codec/role and write/readback contracts remain unverified; staff credentials and live mutations are not required synthetic acceptance."
       ],
       "authentication": "Public player metadata observed; CHAMP login required for UI writes; role/tier and API credential contract unknown.",
       "write_findings": "Official instructions establish event and agenda/minute item creation, publication updates, PDF attachments and external recording uploads; no general API write contract verified.",
@@ -19681,11 +19681,11 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "On Fitchburg, current root maps 30 rows; one Meetings response mapped zero, and guarded search POST was rejected before redirect details/results. One supplied .pdf returned HTTP 200 text/html (3,719 bytes) without PDF magic; corrected result is partial and retains the meeting. This is neither PDF success nor proof of unsupported route.",
+        "Historical Fitchburg failed search/HTML-at-PDF observations remain retained as such. Later selected hierarchy/item/section detail and explicit meeting/item/packet wrapper resolution are implemented with separate captures and synthetic execution. Akron embedded SearchResults/custom-date GET is also implemented. These paths do not establish all archives, attachment variants or Agenda association.",
         "Hyland Agenda Foundation 25.1 guidance is version/installation-scoped. Identify deployment/version and entitlement before applying API/write operations to Agenda Online.",
-        "No authorized deployment-matched staff/test account or integration contract was supplied for create/update/upload.",
+        "Deployment-matched create/update/upload and meeting-association field/readback contracts remain missing. An authorized staff/test account is not required for vendor-documented synthetic acceptance.",
         "Normal Tagged DIP linked-document file/index preparation is implemented with exact destination mappings and synthetic emitted-layout proof; no Agenda meeting association or remote processing is inferred. OnBase API SDK remains an actual vendor surface; sdk.onbase.com redirected to Hyland identity, and public REST help describes per-deployment published operations rather than a universal Agenda schema. Continue exact API contract research without credential acquisition.",
-        "Current-listing Agenda hierarchy and selected item detail now mapped with pinned captures and scoped synthetic execution. Archive traversal, native search, non-agenda variants, other attachment branches and staff import/meeting association remain unresolved; no additional public requests in this acceptance run.",
+        "Current-listing Agenda hierarchy, selected item/section detail, supporting-document wrapper and meeting-packet branches now have scoped source/synthetic execution. Archive traversal, native search, non-agenda detail variants and staff import/meeting association remain unresolved; broader deployment or live file availability is not inferred.",
         "Akron modern window is now implemented/tested; nonempty Documents/Media, native keyword search, complete archive and remote Agenda association/import remain unverified."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
@@ -21014,7 +21014,7 @@
       ],
       "remaining_research": [
         "Guarded offline-Chrome WebLink session is implemented with PublicTransport routing; synthetic/browser checks are separate from live acceptance. Current Boulder request is blocked at the cross-origin redirect boundary and Louisville returns HTTP 403. No catalog was obtained; both tenant contexts have been used.",
-        "Repository v2 child-list GET is implemented from the official route and supports returned nextLinks, but live reads need a supplied repository.Read OAuth tenant token; no account credentials were supplied.",
+        "Repository v2 child-list, selected-entry metadata and original document-content reads are implemented from pinned official SDK routes with scoped synthetic verification. Optional live reads require repository.Read OAuth for the selected tenant; acquiring it is not an acceptance gate.",
         "Resolve the official ImportUploadedParts multipart-vs-JSON and CreatePages image/text pairing conflicts from authoritative documentation or an authorized sandbox. Do not infer Repository API identity/access from WebLink repository name."
       ],
       "requirement_ids": [
@@ -21589,7 +21589,7 @@
       "remaining_research": [
         "Woodford /agendas embeds the published agenda response; public body/year controls, next-page behavior and complete history remain unverified.",
         "The observed published JSON is mapped; no native public search or complete archive scope is established.",
-        "No external write route or vendor file-import schema is in reviewed evidence; obtain tenant-supported documentation and an authorized account before write work."
+        "Pinned evidence does not establish an external write route or vendor file-import schema. Tenant-supported field/readback documentation remains needed; authorized-account acquisition is not required for synthetic contract acceptance."
       ],
       "authentication": "Published agenda detail public. Editing/publication requires authorized TownCloud account; API access and tier unknown.",
       "write_findings": "Official product page documents meeting/agenda/minutes creation and management/publication UI, not a supported machine write endpoint.",
@@ -22151,7 +22151,7 @@
       "remaining_research": [
         "On the selected Digital Towpath demo, follow Other Years from Meetings and Minutes and capture date/category continuity, one meeting detail and one PDF URL/MIME. The old Brutus category URL is a moved path, not a current executable route.",
         "Demo search query semantics and archive bounds remain unknown; HTML success does not establish PDF extraction or attachment availability.",
-        "The indexed Meetings Module guide describes staff entry without a machine payload. No vendor API/import contract or test account was supplied."
+        "The pinned Meetings Module guide describes staff entry without a machine API/import payload. A vendor contract remains unresolved; test-account acquisition is not a completion gate."
       ],
       "authentication": "Demo reads public; dashboard required for administration. Customer credentials and account roles not supplied.",
       "write_findings": "Indexed official manual supports meeting entry in Dashboard; exact field schema and actual upload/update instructions remain unverified. No API contract found.",
@@ -22831,7 +22831,7 @@
       "remaining_research": [
         "On the sole South Kingstown context, bounded public tree discovery and native search are implemented. One partial live tree engine read returned three URL-keyed document records across two pages; one separate partial native-search engine read returned three URL-keyed documents and three local hits from one capped page. Full nested-tree/search catalog coverage and provider phrase/wildcard semantics remain unverified. A linked meeting document has not been fetched and verified by bytes/MIME/hash; raw page-two search probes do not prove an engine page-two search traversal.",
         "Current vendor pages distinguish ClerkBase Meeting Center/OnBoardGOV from ClerkMate. Obtain a current ClerkBase-specific API/import contract before implementing writes.",
-        "No staff/API credentials supplied; roles, page caps, write permissions and readback remain gated. Do not substitute another product route."
+        "Machine role, pagination-cap, write-permission and readback contracts remain unverified. Staff/API credentials are not required for accepted synthetic verification; do not substitute another product route."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "clerkbase",
@@ -24685,7 +24685,7 @@
         "Official older embed guide cautions audio/Channels,modern schemas include audio types; feature/version mismatch needs validation rather than unsupported claim."
       ],
       "remaining_research": [
-        "Core now implements authenticated media-detail and supplied-caption-list/per-language GETs plus native search. Complete account-level reads only after a trusted Wistia token and selected account are supplied; none was supplied.",
+        "Authenticated media detail, supplied caption list/per-language reads and native search are source implemented with scoped synthetic verification. Optional live account reads require trusted token/account policy; credential acquisition is not a completion gate.",
         "/modern/search is capped at 100 primary and 100 transcript-only candidates with no cursor and provider-defined exact/phrase candidate semantics. Local exact checks cover returned metadata/excerpts, not full transcripts.",
         "Resolve account-tier limits and media replacement/swap behavior before those paths are claimed. Keep upload/import, media metadata, caption create/update and edits permission scopes separate; no remote writes occurred.",
         "Media swap is source implemented and synthetic tested; pending jobs are preserved and exact finished jobs with target identity/type readback confirm provider completion without independent byte/playback claims. Overwrite is not inferred from swap. Account/folder offset discovery is already implemented; packaged status corrected from stale blocked_access."
@@ -25436,8 +25436,8 @@
         "The live engine call covered VCCCD upcoming=true through pages 1-2 and resumed one page offset, returning 20 distinct records across first/resumed calls. Past mode is fixture-tested only; reported total 150 and full catalog coverage remain unverified.",
         "The public UI search field/API search parameter was not exercised; native-search semantics remain unknown and this discovery path sends blank search.",
         "Public meeting rows expose description, not a verified normalized body field; body filtering is unknown. Preserve timezone literals and the earlier VCCCD detail-versus-landing display discrepancy.",
-        "The listing has no agenda/document/media links. Direct detail retrieval and bounded download of a supplied document with MIME, redirect and exact-byte/hash evidence remain unverified.",
-        "Official Boardable documentation remains UI-focused and does not establish a supported external API, import schema, create/update/upload contract or readback semantics. No provider test account/credentials were supplied; provider write acceptance is not run and remains access-blocked."
+        "The listing has no agenda/document/media locators. Selected known-detail mapping and supplied viewer-to-document resolution are implemented with separate synthetic and bounded live-byte receipts. Other documents and the listing/detail date disagreement remain unverified; no native search or complete catalog is inferred.",
+        "Pinned Boardable documentation remains UI-focused and does not establish external API/import/create/update/upload or readback schemas. Missing machine contracts remain unresolved; absence of test credentials does not block accepted vendor-contract synthetic execution."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "boardable",
@@ -26028,7 +26028,7 @@
       "remaining_research": [
         "Bounded public evidence now covers the Galena static listing, one successful city-1311 agenda fetch, and one Galena minutes failure (resolver ready, guarded object GET HTTP 403). See the three F29 receipts. No separate meeting detail route or continuation token was observed; provider-wide catalog completeness and retrieval of every flagged document remain unverified.",
         "Retained history, update frequency and maximum response payload remain unknown; one static response cannot establish them. No additional repeated sampling is required for this bounded research outcome.",
-        "The FrontDesk builder describes staff UI, not an external write schema. No vendor API or authorized test credentials were supplied; writes remain unaccepted/access-blocked."
+        "Pinned FrontDesk builder material describes staff UI without an external write schema. Vendor machine field/readback contracts remain unresolved; staff credentials and live-write acceptance are not completion gates."
       ],
       "authentication": "City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown.",
       "write_findings": "Historical official indexed article documents agenda creation/logging minutes/publication; live docs 404. Machine create/update/upload contracts remain unknown; no absence claim.",
