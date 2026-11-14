@@ -43,6 +43,7 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_operation("validate_source", validate_handler)
     for provider, input_format in (
             ("boarddocs", "boarddocs-public-meetings-json"),
+            ("boarddocs", "boarddocs-public-meeting-html"),
             ("boardbook", "boardbook-public-agenda-html"),
             ("gworks", "gworks-published-meeting-html"),
             ("gworks", "gworks-secure-calendar-json"),

@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "b2202565b86ed3dd430a8d5ec732c75f68bc52b0",
+  "status": "PASSED",
+  "checks": [
+    {
+      "command": "pytest tests -q",
+      "passed": 1646,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 76.39,
+      "junit_sha256": "6047996a648c8e86db994e9f39d8d7567f54ea61921e53bcab50be1922f99554"
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "command": "scripts/validate_capabilities.py",
+      "status": "PASSED",
+      "evidence_records": 390,
+      "negative_checks": 5,
+      "errors": 0
+    }
+  ],
+  "scope": "BoardDocs saved parser registration plus Utah public-client evidence metadata; no delivery. Unchanged TypeScript checks reused. Preserved artifacts/pins unchanged."
+}

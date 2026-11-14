@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "b2202565b86ed3dd430a8d5ec732c75f68bc52b0",
+  "status": "ARCHIVED_RESPONSE_COMPATIBILITY_PASS",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_boarddocs_meeting_fragment.py tests/test_boarddocs_public_helpers.py tests/test_boarddocs_public_workflow.py tests/test_interfaces.py tests/test_public_package.py -q",
+      "passed": 40,
+      "failed": 0,
+      "junit_sha256": "850912a1efd84076d9b44e6da4bc28a37d36d8b38c884da50a0804ba3c42191c"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "archived_response",
+      "path": "tests/fixtures/boarddocs-public/grand-detail-20240522.html",
+      "sha256": "e14c1020935f7c2c8deffebcae173c35de417ea1cd60377956f84b2cba0e2575"
+    },
+    {
+      "kind": "archived_response",
+      "path": "tests/fixtures/boarddocs-public/grand-detail-20260701.html",
+      "sha256": "cb6cf16f1c6b7d217eba9e72287f2d0df6a2e9636151ee5579e6f3717089e627"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/boarddocs_public.py",
+      "sha256": "2394c4121a27f91832c60fc501d97d69682434a16d3d162c776929b7a42e4ca6"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_boarddocs_meeting_fragment.py",
+      "sha256": "aed02f8dc3b521b08a538639d14000ccfe86f782a0a32ef1f8c1f33a8acb31c2",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "aed02f8dc3b521b08a538639d14000ccfe86f782a0a32ef1f8c1f33a8acb31c2"
+    }
+  ],
+  "execution": "12 newcases. Both exact archive fragments normalized, native identity matched archived listing; SQLite import twice/reopen/local description search/exact ZIP. Changed citation/ID/site/field, unknown date, size and deniedscope tested.",
+  "limits": "Saved fragment parser only. Third-party archived source/compatibility execution does not promote official vendor-wide acceptance or establish remote BD-GetMeeting invocation."
+}

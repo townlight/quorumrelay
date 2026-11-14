@@ -15613,6 +15613,18 @@
           "receipt_sha256": "3ee751e202389c751d48db4e16472561439d8920da6280b5a98d51d752671d78",
           "observation_date": "2026-11-12",
           "proof_level": "synthetic_saved_capture_engine_not_live_acceptance"
+        },
+        {
+          "id": "utah-public-admin-client-followup",
+          "url": "https://secure.utah.gov/pmn-admin/js/app.js",
+          "title": "Official help-linked notice client intent constants and rendered-form access limit",
+          "kind": "observed_public_client_source",
+          "observed": "2026-11-14",
+          "observation_date": "2026-11-14",
+          "proof_level": "public_source_observation_not_execution",
+          "limits": "Exact rendered-admin access dependency verified; broader machine contract research unresolved, not vendor-wide API absence. Missing full form/response/readback; no create/update/upload adapter inferred.",
+          "local_path": "docs/capabilities/evidence/utah-admin-client/source.json",
+          "sha256": "5eeb98106cdb12ee784955d1df407b91692edb4240251db90bf5e317b67bc667"
         }
       ],
       "tenants": [
@@ -16029,7 +16041,8 @@
       "remaining_research": [
         "One Utah body/date public search returned notice 1120627; government/ZIP search, result caps, live next-page behavior and linked document/iCalendar byte acceptance remain unverified.",
         "Pinned Admin Help describes notice draft/publish and attachments as UI steps without an external API/import schema. A supported machine integration contract remains needed; live test-account acquisition is not required for synthetic acceptance.",
-        "Notice publication has legal timing/visibility consequences; future writes require explicit authorization and planned readback."
+        "Notice publication has legal timing/visibility consequences; future writes require explicit authorization and planned readback.",
+        "Official help-linked admin JS supplies fact=draft/publish/upload and runtime form submission only. Exact anonymous admin index401 confirms access dependency for that rendered form; complete action/method/enctype/fields/CSRF and result/native readback remain missing. No vendor-wide API absence or outside-only research claim."
       ],
       "authentication": "Reads public. Writes require Utah login and approved poster/owner rights for target Body; publish permission distinct from draft edit.",
       "write_findings": "Official Help explicitly documents create/edit drafts, publish permissions and attachment upload, but provides no usable public API contract.",
@@ -26995,6 +27008,18 @@
           "limits": "331valid meetings andone empty placeholder; entire raw capture retained. Not current live vendor or catalog acceptance.",
           "receipt_path": "docs/verification/telvue-boarddocs-contracts-2026-11-14.json",
           "receipt_sha256": "af4e03ab1b787cafd3ed4643ea113ef31d8d4fe2537e3ead313e13766c489451"
+        },
+        {
+          "id": "boarddocs-grand-archived-meeting-fragments",
+          "url": "https://github.com/City-Bureau/city-scrapers-grand-rapids/blob/a6c49c0b5c16120abd79f3742052a92053a8b4bd/tests/files/gra_public_school_board_detail_20260701.html",
+          "title": "Two archived native BoardDocs meeting fragments and executed round trips",
+          "kind": "archived_vendor_response_and_compatibility_tests",
+          "observed": "2026-11-14",
+          "observation_date": "2026-11-14",
+          "proof_level": "archived_response_compatibility_not_vendor_acceptance",
+          "receipt_path": "docs/verification/boarddocs-meeting-fragment-2026-11-14.json",
+          "receipt_sha256": "010798fcf68b39c3f7e4d495f8a954160f6d733025f91083f96b760b8d7802df",
+          "limits": "Exact archived fragments, native identity and public description only;40affected/12newcases. No live read, item tree, guessed control URL or staff contract."
         }
       ],
       "tenants": [
@@ -27096,12 +27121,11 @@
           "evidence_ids": [
             "diligent-boarddocs-baseline",
             "quorumrelay-shared-core-operations",
-            "boarddocs-pinned-reader-synthetic-execution"
+            "boarddocs-pinned-reader-synthetic-execution",
+            "boarddocs-grand-archived-meeting-fragments"
           ],
-          "details": "Baseline numbered PDF remains unchanged; additive boarddocs-public-meetings-json retains JSON listing rows and identities. Printable detail requires captured selected identity and is not a standalone advertised parser.",
-          "dependencies": [
-            "Extract shared engine preserving legacy behavior."
-          ],
+          "details": "Baseline numbered PDF remains unchanged; additive boarddocs-public-meetings-json retains JSON listing rows and identities. Printable detail requires captured selected identity and is not a standalone advertised parser. Additive boarddocs-public-meeting-html maps saved public meeting fragments with exact same-site native citation/base identity, title/date/description; links and separate agenda/minutes remain unmapped.",
+          "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
           ],
@@ -27148,7 +27172,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "diligent-boarddocs-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "boarddocs-grand-archived-meeting-fragments"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [
@@ -27173,7 +27198,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "diligent-boarddocs-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "boarddocs-grand-archived-meeting-fragments"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
           "dependencies": [
@@ -27585,7 +27611,8 @@
       "remaining_research": [
         "Opt-in public listing/print detail is implemented with pinned third-party source and18synthetic helper/workflow cases; official/live contract acceptance remains unverified (403 observed).",
         "Public file hrefs remain strings only; item hierarchy, attachment transfer, native search, staff writes and vendor import remain unresolved.",
-        "City Bureau Git-blob-pinned saved listing now parses331valid native meetings and explicitly counts one empty placeholder; nonempty identityless rows still reject. Entire original JSON retained. No completeness or official vendor acceptance claim."
+        "City Bureau Git-blob-pinned saved listing now parses331valid native meetings and explicitly counts one empty placeholder; nonempty identityless rows still reject. Entire original JSON retained. No completeness or official vendor acceptance claim.",
+        "Two archived BD-GetMeeting fragments now mapped with native clipboard/base identity and public description. Matching archived listing identity and SQLite/ZIP executed; no response-shaped agenda tree/item body, current invocation or staff-write contract inferred."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "boarddocs",

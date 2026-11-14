@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-14",
+  "repository_commit": "a6c49c0b5c16120abd79f3742052a92053a8b4bd",
+  "provenance": "Third-party archived BoardDocs BD-GetMeeting fragments, not current vendor reads or official API specification. Git blob SHA verified against exact UTF-8 contents before save.",
+  "fixtures": [
+    {
+      "url": "https://github.com/City-Bureau/city-scrapers-grand-rapids/blob/a6c49c0b5c16120abd79f3742052a92053a8b4bd/tests/files/gra_public_school_board_detail.html",
+      "git_blob": "f3b866edb8ceecda4d7752d50a8932e61a494c3c",
+      "path": "tests/fixtures/boarddocs-public/grand-detail-20240522.html",
+      "sha256": "e14c1020935f7c2c8deffebcae173c35de417ea1cd60377956f84b2cba0e2575",
+      "bytes": 2910
+    },
+    {
+      "url": "https://github.com/City-Bureau/city-scrapers-grand-rapids/blob/a6c49c0b5c16120abd79f3742052a92053a8b4bd/tests/files/gra_public_school_board_detail_20260701.html",
+      "git_blob": "094151db141e350e0e0dd7e9f05aa5697621193a",
+      "path": "tests/fixtures/boarddocs-public/grand-detail-20260701.html",
+      "sha256": "cb6cf16f1c6b7d217eba9e72287f2d0df6a2e9636151ee5579e6f3717089e627",
+      "bytes": 3273
+    }
+  ],
+  "mapping": "meeting-name/date/description; configured-site clipboard goto nativeID must equal previous/next base IDs. Placeholder href=# controls remain unmapped.",
+  "limits": "No agenda/item hierarchy, minutes/PDF URL, bytes, playback, machine writes or complete catalog inferred."
+}

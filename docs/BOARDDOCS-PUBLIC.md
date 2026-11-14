@@ -49,3 +49,22 @@ This third-party archive is not a current vendor read or complete catalog proof.
 The route and parsing extracts are pinned under [BoardDocs evidence](capabilities/evidence/boarddocs-public/llama-index-source.json) to LlamaIndex commit `26c7dc3e9846045864cf93ab92cb13bc80a3394e`. `tests/test_boarddocs_public_helpers.py` and `tests/test_boarddocs_public_workflow.py` exercise third-party-source-shaped synthetic responses, guarded POSTs, denials, changed listings, bounds, persistence/reopen, search and ZIP export. This is synthetic source execution; no live BoardDocs acceptance is claimed.
 
 The third-party reader returns one rendered meeting document. The current mapping does not claim catalog completeness, server paging, native search, agenda-item structure, attachment bytes, MIME/visibility guarantees, archived-meeting access or vendor approval. See [engine coverage](ENGINE-COVERAGE.md#roster-map) for the broader status.
+
+## Saved public meeting fragments
+
+`boarddocs-public-meeting-html` accepts saved `BD-GetMeeting` fragments using the
+same explicit configured source and committee. It maps `meeting-name`,
+`meeting-date` and `meeting-description`. The same-site native clipboard
+`goto?open&id=...` identifier must agree with the navigation buttons' `base` IDs;
+title/date matching never invents an identity. The two pinned Grand Rapids
+fragments retain the exact native identities from the archived listing.
+
+The description is locally searchable and preserved through SQLite/import retry,
+reopen and neutral ZIP alongside exact original HTML. Time in a title is retained
+as text, without a scheduled instant or time zone. Agenda/minutes controls with
+`href="#"` supply no download URL. This saved parser does not add live requests,
+map an item hierarchy or establish a vendor write/import contract.
+[Archived source and exact hashes](capabilities/evidence/boarddocs-public/grand-detail-source.json)
+and [executed scope](verification/boarddocs-meeting-fragment-2026-11-14.json)
+are separate from official vendor or current live acceptance. Preserved dev13
+artifacts predate this source.

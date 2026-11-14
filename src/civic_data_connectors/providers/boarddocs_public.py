@@ -17,6 +17,7 @@ from .native import make_bundle
 
 LISTING_FORMAT = "boarddocs-public-meetings-json"
 DETAIL_FORMAT = "boarddocs-print-agenda-html"
+MEETING_FORMAT = "boarddocs-public-meeting-html"
 _COMMITTEE = re.compile(r"[A-Za-z0-9_-]{1,80}")
 _MEETING_ID = re.compile(r"[A-Za-z0-9_-]{1,128}")
 _RECORD_TYPES = {"meeting", "recording", "document", "agenda_item", "transcript"}
@@ -228,6 +229,8 @@ def parse_bundle(source, namespace, content: bytes, input_format: str) -> dict:
     """Saved-capture parser; detail HTML needs its listing ID and is capture-only here."""
     if input_format == LISTING_FORMAT:
         return listing_bundle(source, namespace, content, parse_listing(source, content))
+    if input_format == MEETING_FORMAT:
+        return meeting_bundle(source, namespace, content)
     if input_format == DETAIL_FORMAT:
         parsed = _parse_detail(content)
         bundle = make_bundle(source, namespace, content, DETAIL_FORMAT, [])
@@ -239,6 +242,58 @@ def parse_bundle(source, namespace, content: bytes, input_format: str) -> dict:
         }
         return bundle
     raise ValueError("The BoardDocs saved input format is not recognized.")
+
+
+def meeting_bundle(source, namespace, content):
+    """Saved BD-GetMeeting fragment; native clipboard ID, no control URL guesses."""
+    from .escribe_detail import Page
+
+    parts, site, _ = _configured_source(source)
+    page = Page()
+    page.feed(content.decode('utf-8-sig'))
+    views = [n for n in page.root.walk() if n.attrs.get('id') == 'view-meeting']
+    if len(views) != 1:
+        raise ValueError('The BoardDocs response requires one public meeting view.')
+    fields = {}
+    for field in ('meeting-name', 'meeting-date', 'meeting-description'):
+        nodes = [n for n in views[0].walk() if field in n.classes()]
+        if len(nodes) != 1 or not nodes[0].text():
+            raise ValueError('The BoardDocs meeting fragment omitted or repeated a declared field.')
+        fields[field] = nodes[0].text()
+    prefix = f'{parts.scheme}://{parts.netloc}/{site}/Board.nsf/goto?open&id='
+    citations = {n.attrs['data-clipboard-text'] for n in page.root.walk()
+                 if 'data-clipboard-text' in n.attrs}
+    if len(citations) != 1:
+        raise ValueError('The BoardDocs fragment requires one native meeting citation.')
+    citation = citations.pop()
+    identifier = citation.removeprefix(prefix)
+    if not citation.startswith(prefix) or not _MEETING_ID.fullmatch(identifier):
+        raise ValueError('The BoardDocs meeting citation does not match its configured site.')
+    navigation_ids = {n.attrs['base'] for n in page.root.walk()
+                      if n.tag == 'button' and {'previous', 'next'} & n.classes() and 'base' in n.attrs}
+    if navigation_ids != {identifier}:
+        raise ValueError('The BoardDocs native meeting citation and navigation IDs disagree.')
+    try:
+        day = datetime.strptime(fields['meeting-date'], '%A, %B %d, %Y').date().isoformat()
+    except ValueError:
+        day = None
+    normalized = {'external_id': identifier, 'title': fields['meeting-name'],
+        'meeting_date': day, 'source_date': fields['meeting-date'], 'url': citation,
+        'description': fields['meeting-description'], 'time_zone_status': 'unknown',
+        'date_availability': 'supplied_header' if day else 'unmapped',
+        'documents': [], 'recordings': [], 'agenda_items': [],
+        'agenda_items_availability': 'separate_response_not_supplied',
+        'documents_availability': 'controls_only_no_supplied_locator'}
+    bundle = make_bundle(source, namespace, content, MEETING_FORMAT,
+                         [(normalized, {'native_citation': citation, **fields}, 'meeting')])
+    record = bundle['records'][0]
+    record['text'] = [{'field': 'public_meeting_description', 'text': fields['meeting-description'],
+        'citation_url': citation, 'completeness': 'rendered_description_only',
+        'provenance': {'method': 'saved_boarddocs_meeting_fragment',
+                       'capture_sha256': bundle['capture']['sha256']}}]
+    record['citation_urls'] = list(dict.fromkeys([*record.get('citation_urls', []), citation]))
+    bundle['capture']['content_type_hint'] = 'text/html'
+    return bundle
 
 
 

@@ -149,6 +149,8 @@ Evidence and exact scope: `inventory.json` provider `peak`; operation status and
 
 Evidence and exact scope: `inventory.json` provider `utah-public-notice`; operation status and outbound mappings are separate from historical observations.
 
+- Official help-linked admin client follow-up: `evidence/utah-admin-client/source.json` pins actual notice draft/publish/upload intent constants. They submit a runtime rendered form; its action/method/enctype, full inputs, CSRF/body/notice association and created-result readback are not supplied by the script. Exact help-linked anonymous admin index GET returned401 JSON Unauthorized. Access to that form needs authorized authentication or a shareable saved form; this does not prove all contracts are private. No remote submission was attempted.
+
 ## F17 Destiny AgendaQuick (`destiny-agendaquick`)
 
 - Configured Yuma listing and supplied Previous/Next Period controls already have bounded implementation. Adjacent-month/other-type surveys are optional coverage observations, not required new work. Selected native memo/file association remains distinct from unverified video and binary-transfer acceptance.
@@ -270,6 +272,8 @@ Evidence and exact scope: `inventory.json` provider `gworks`; operation status a
 - Two additional pinned third-party clients corroborate direct public anchor declarations. The reader now preserves those hrefs and excludes private/admin/executive and suppressed contexts; persistence/ZIP equality is tested. Compact dates already worked. Public file hrefs remain strings only; item hierarchy, attachment transfer, native search, staff writes and vendor import remain unresolved. See `docs/verification/boarddocs-public-selectors-2026-11-14.json`; this is not official vendor acceptance.
 
 Evidence and exact scope: `inventory.json` provider `boarddocs`; operation status and outbound mappings are separate from historical observations.
+
+- Two third-party archived BD-GetMeeting fragments now have saved-format mapping and executed native identity/listing compatibility, public description search, SQLite retry/reopen and exact ZIP. This supplies public meeting metadata, not agenda/item trees, placeholder control URLs or staff-write contracts. See `evidence/boarddocs-public/grand-detail-source.json`.
 
 ## F31 Tyler Meeting Manager (`tyler-meeting-manager`)
 
