@@ -1,6 +1,6 @@
 # QuorumRelay
 
-Integrated development source retains dev11 and the approved CivicWeb/Cablecast readers: 32 registered providers, 31 baseline families, 34 baseline formats and 44 additive parser hooks. CivicWeb document continuation and Cablecast page/filter handling are repaired in source. No successor package or Windows release has been delivered.
+Integrated development source retains dev11 and the approved CivicWeb/Cablecast readers: 32 registered providers, 31 baseline families, 34 baseline formats and 46 additive parser hooks. CivicWeb document continuation and Cablecast page/filter handling are repaired in source. No successor package or Windows release has been delivered.
 
 Preserved package baseline: Python **0.1.0.dev11**, TypeScript **0.1.0-dev.11**, schema **2.0.0**. Those immutable packages precede the integrated reader fixes. The frozen dev8 artifacts remain historical evidence.
 
@@ -27,7 +27,7 @@ Installing the package does not start a service or install a consumer applicatio
 
 ## Current coverage
 
-The integrated source reports version **0.1.0.dev11**, schema **2.0.0**, while successor packaging is pending. It retains 31 baseline provider families and 34 original input-format combinations, adds Cablecast as a typed connector, and registers 44 additive parser hooks. These counts describe the implemented scope, not universal operation or tenant support. Every result retains status, coverage, errors and provenance; partial results must remain visibly partial in consuming applications.
+The integrated source reports version **0.1.0.dev11**, schema **2.0.0**, while successor packaging is pending. It retains 31 baseline provider families and 34 original input-format combinations, adds Cablecast as a typed connector, and registers 46 additive parser hooks. These counts describe the implemented scope, not universal operation or tenant support. Every result retains status, coverage, errors and provenance; partial results must remain visibly partial in consuming applications.
 
 The public dev8 source/documentation publication is separate from later local source additions, which are listed in the [developer mapping guides](docs/DEVELOPER-GUIDE.md#later-local-source-mapping-guides). Those additions do not change the immutable dev8 wheel or its installed-consumer evidence. Vendor-documented synthetic execution is accepted verification for the provider operations and fields it covers; it is not a claim of actual tenant transactions. Live provider writes, some authenticated account reads and broader catalog claims remain unobserved or incomplete as stated. See the [capability inventory](docs/capabilities/README.md), [coverage map](docs/ENGINE-COVERAGE.md) and [execution state](docs/EXECUTION-STATE.md).
 
