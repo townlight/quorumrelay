@@ -258,8 +258,8 @@ Evidence and exact scope: `inventory.json` provider `gworks`; operation status a
 
 - Latest XML-ActiveMeetings lead: pinned third-party notebook has an unexecuted, incomplete illustrative XML fragment with malformed entities, not a saved server response. One exact example request returned HTTP 403; no XML/item mapping was inferred. Exact source pins and request are indexed in `docs/verification/local-completion-2026-11-14.json`. This does not establish an outside-only dependency.
 
-- Opt-in public listing/print detail is implemented with pinned third-party source and18synthetic helper/workflow cases; official/live contract acceptance remains unverified (403 observed).
-- Public file hrefs remain strings only; item hierarchy, attachment transfer, native search, staff writes and vendor import remain unresolved.
+- Opt-in public listing/print detail is implemented with pinned third-party source and 19 current synthetic helper/workflow cases; official/live contract acceptance remains unverified (403 observed).
+- Two additional pinned third-party clients corroborate direct public anchor declarations. The reader now preserves those hrefs and excludes private/admin/executive and suppressed contexts; persistence/ZIP equality is tested. Compact dates already worked. Public file hrefs remain strings only; item hierarchy, attachment transfer, native search, staff writes and vendor import remain unresolved. See `docs/verification/boarddocs-public-selectors-2026-11-14.json`; this is not official vendor acceptance.
 
 Evidence and exact scope: `inventory.json` provider `boarddocs`; operation status and outbound mappings are separate from historical observations.
 

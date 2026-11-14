@@ -83,6 +83,7 @@ def test_failures_do_not_trigger_bypass_or_silently_complete(fault):
 
 def test_selected_detail_is_stored_identity_bound_and_survives_reopen_search_zip(tmp_path):
     transport = Transport()
+    transport.detail += b'<a class="public-file" unique="FILE1" href="/declared.pdf">Public attachment</a>'
     engine = create_engine(storage=SQLiteStorage(tmp_path / 'records.sqlite'), provider_transport=transport)
     assert engine.fetch_record(SOURCE, ROWS[0]['unique']).status == 'failed'
     assert not transport.calls
@@ -92,7 +93,8 @@ def test_selected_detail_is_stored_identity_bound_and_survives_reopen_search_zip
     assert detailed.status == 'partial', detailed.public_dict()
     assert detailed.data['records'][0]['identity'] == discovered.data['records'][0]['identity']
     assert detailed.data['records'][0]['normalized']['documents'] == []
-    assert detailed.data['records'][0]['normalized']['source_public_file_links']
+    assert detailed.data['records'][0]['normalized']['source_public_file_links'] == [
+        '/mi/grand/Board.nsf/file.pdf', '/declared.pdf']
     assert engine.execute('import_bundle', {'result': detailed.public_dict(), 'persist': True}).status == 'partial'
     reopened = create_engine(storage=SQLiteStorage(tmp_path / 'records.sqlite'), provider_transport=transport)
     hits = reopened.execute('search', {'query': {'terms': ['Budget']}})
@@ -103,6 +105,9 @@ def test_selected_detail_is_stored_identity_bound_and_survives_reopen_search_zip
     restored = destination.execute('import_bundle', {'format': 'zip', 'persist': True},
                                    content=base64.b64decode(exported.data['content_base64']))
     assert restored.status == 'completed', restored.public_dict()
+    saved = list(destination.storage.list('records', scope=OperationContext().scope))[0].value
+    assert saved['normalized'] == detailed.data['records'][0]['normalized']
+    assert saved['original'] == detailed.data['records'][0]['original']
     assert destination.execute('search', {'query': {'terms': ['Budget']}}).data['hits']
 
 

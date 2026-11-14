@@ -105,3 +105,19 @@ def test_unsafe_committee_configuration_is_rejected():
     bad = Source("boarddocs", SOURCE.url, options={"boarddocs_committee_id": "../admin"})
     with pytest.raises(ValueError, match="explicit safe"):
         request_specs(bad)
+
+
+def test_compact_date_and_direct_public_anchors_preserve_declared_links_only():
+    rows = parse_listing(SOURCE, b'[{"unique":"MEETING1","numberdate":"20261112"}]')
+    bundle = listing_bundle(SOURCE, "boarddocs:test", b"[]", rows)
+    assert bundle["records"][0]["normalized"]["meeting_date"] == "2026-11-12"
+    html = DETAIL + b'''<a class="public-file" unique="FILE1" href="/public.pdf">Public</a>
+<div class="public-file"><a class="private-file" href="/private.pdf">Private</a></div>
+<div class="admin-files"><a class="public-file" href="/admin.pdf">Admin</a></div>
+<template><div class="public-file"><a href="/template.pdf">Template</a></div></template>
+<a class="file" href="/unclassified.pdf">Unclassified</a>
+<a class="public-file" href="/public.pdf">Duplicate</a>'''
+    detail = detail_bundle(SOURCE, "boarddocs:test", html, "MEETING1", rows[0])
+    assert detail["records"][0]["normalized"]["source_public_file_links"] == [
+        "/mi/grand/Board.nsf/file.pdf", "/public.pdf"]
+    assert detail["records"][0]["normalized"]["documents"] == []

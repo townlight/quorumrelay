@@ -26298,6 +26298,21 @@
           "receipt_path": "docs/verification/public-contract-leads-2026-11-13.json",
           "receipt_sha256": "0a2a1a3c1157b3ff7f18c293fa68b166e675d313efbac3b5981d1a196d8a35bb",
           "limits": "Direct vendor portal returned403. No workaround. No official contract/live provider acceptance; supplied public-file href strings are not downloaded."
+        },
+        {
+          "id": "boarddocs-public-anchor-correction",
+          "url": "https://github.com/dweekly/rcsd-meetings/blob/main/scripts/scrape-boarddocs.mjs",
+          "title": "Corroborated third-party public anchor selectors and local regression",
+          "kind": "third_party_source_and_synthetic_tests",
+          "observation_date": "2026-11-14",
+          "proof_level": "third_party_source_and_synthetic_engine_execution_not_official_vendor_acceptance",
+          "receipt_path": "docs/verification/boarddocs-public-selectors-2026-11-14.json",
+          "receipt_sha256": "2204373b13408c768a5b081c371112545a0c9919a38ac5099ec41a1e060383cd",
+          "findings": [
+            "Direct public anchors are retained as deduplicated href strings; private/admin/executive and suppressed contexts excluded.",
+            "19 affected tests pass, including persistence and ZIP equality; compact dates already worked."
+          ],
+          "limits": "No official/live response acceptance, item tree, attachment transfer, native search or writes."
         }
       ],
       "tenants": [
@@ -26372,7 +26387,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "diligent-boarddocs-tenant",
-            "boarddocs-pinned-reader-synthetic-execution"
+            "boarddocs-pinned-reader-synthetic-execution",
+            "boarddocs-public-anchor-correction"
           ],
           "details": "Selected stored listing meeting enables exact printable agenda POST; retains title/date/rendered text and raw response. No item-tree or file transfer mapping.",
           "dependencies": [],

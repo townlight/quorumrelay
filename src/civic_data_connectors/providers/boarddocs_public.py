@@ -96,17 +96,22 @@ class _PrintAgenda(HTMLParser):
         fields = dict(attrs)
         classes = set((fields.get("class") or "").split())
         roles = set()
+        if any(marker in value.casefold() for value in classes
+               for marker in ("private", "admin", "executive")):
+            roles.add("excluded_file")
         if tag.lower() == "div":
             if "print-meeting-name" in classes:
                 roles.add("title")
             if "print-meeting-date" in classes:
                 roles.add("date")
-            if "public-file" in classes:
-                roles.add("file")
+        if tag.lower() in {"div", "a"} and "public-file" in classes:
+            roles.add("file")
         if tag.lower() in {"script", "style", "template"}:
             self.suppressed += 1
         self.stack.append((tag.lower(), roles))
-        if tag.lower() == "a" and fields.get("href") and any("file" in role for _, role in self.stack):
+        active = set().union(*(role for _, role in self.stack))
+        if (tag.lower() == "a" and fields.get("href") and "file" in active
+                and "excluded_file" not in active and not self.suppressed):
             self.files.append(fields["href"])
 
     def handle_endtag(self, tag):
