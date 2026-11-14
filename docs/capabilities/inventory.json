@@ -7417,6 +7417,77 @@
               }
             ]
           }
+        },
+        {
+          "id": "select-supplied-assets-execution",
+          "url": "https://fishersin.api.civicclerk.com/swagger/v1/swagger.json",
+          "title": "Declared EventModel supplied media and caption locator execution",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observed": "2026-11-14",
+          "observation_date": "2026-11-14",
+          "access_scope": "saved_public_contract_and_local_synthetic_execution_no_remote_mutation",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/civicclerk-supplied-assets-2026-11-14.json",
+          "receipt_sha256": "fedcae6acec221c79fce9cc23caf9c1e223ad2fe06c4745bc798081df3491be4",
+          "limits": "Published captured Event supplied absolute HTTPS MP4/caption locators, selected detail, guarded exact-membership transfers, SQLite reopen and exact neutral ZIP. No extraction/playability/full catalog or writes.",
+          "synthetic_execution": {
+            "provider": "civicplus-select",
+            "status": "fixture_passed",
+            "operations": [
+              "discover",
+              "fetch",
+              "neutral_export"
+            ],
+            "entities": [
+              "meeting",
+              "recording",
+              "transcript"
+            ],
+            "scope": "Published captured Event supplied absolute HTTPS MP4/caption locators, selected detail, guarded exact-membership transfers, SQLite reopen and exact neutral ZIP. No extraction/playability/full catalog or writes.",
+            "execution_provenance": "22 new scoped cases within119 affected passes; synthetic bytes, saved discovery without network, selected-detail GET, SQLite/reopen and ZIP executed. Existing mediaStreamPath negatives isolate that field from independently supplied MP4.",
+            "checks": [
+              {
+                "command": "pytest tests/test_civicclerk_supplied_assets.py tests/test_civicclerk_event_files.py tests/test_civicclerk_detail.py tests/test_recording_retrieval.py tests/test_provider_discovery.py -q",
+                "passed": 119,
+                "failed": 0,
+                "junit_sha256": "3bb37c51988e1a8fd5573a169399a98d5c38d78bce93f88f69578d30b9fdb150"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/civicclerk-openapi/swagger.json",
+                "sha256": "d242638b2a6fd2b4dc2ef295ea000a52b146a1de63b7298ba463acd8d94ce62a"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/civicclerk-openapi/supplied-assets-extract.json",
+                "sha256": "711b5187ae5e7be41a78a261df39b2bb6594ed44c37c4eef2dfb45141b0078e2"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/civicclerk_detail.py",
+                "sha256": "3c8911267c04e6deef817cdacc99ba9c3886af38aeab407422572d996546e64b"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/discovery.py",
+                "sha256": "0c6d6e5fe84c574eb7a267eeac83c083856b729e347dcf140324c590027f4d8d"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/retrieval.py",
+                "sha256": "e24ad13a51fd155fac390faad510452f08aac48cd3cf250a7ddbe96d146634b7"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_civicclerk_supplied_assets.py",
+                "sha256": "9fb4befd90522f116e27ba633248bfba0fdbb27a0198f37c19421741f4dc91e4",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "9fb4befd90522f116e27ba633248bfba0fdbb27a0198f37c19421741f4dc91e4"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -7467,9 +7538,10 @@
             "select-search",
             "civicplus-media-discovery-1277",
             "quorumrelay-shared-core-operations",
-            "select-event-file-api-origin-execution"
+            "select-event-file-api-origin-execution",
+            "select-supplied-assets-execution"
           ],
-          "details": "The engine has a bounded CivicClerk Events collection route with guarded nextLink handling. Discovery-only enrichment surfaces an exact captured absolute HTTPS mediaStreamPath as a normalized recording, citation and relationship; relative/malformed paths are retained only in original data. A saved page remains partial and is not a full tenant catalog. Event-declared published-file locators use the same tenant API; exact legacy portal locators resolve only after captured native membership/source checks, with stored data unchanged.",
+          "details": "The engine has a bounded CivicClerk Events collection route with guarded nextLink handling. Discovery-only enrichment surfaces an exact captured absolute HTTPS mediaStreamPath as a normalized recording, citation and relationship; relative/malformed paths are retained only in original data. A saved page remains partial and is not a full tenant catalog. Event-declared published-file locators use the same tenant API; exact legacy portal locators resolve only after captured native membership/source checks, with stored data unchanged. Supplied EventModel mediaSourcePathMp4 and caption source/blob absolute HTTPS URLs are mapped without CDN inference; captured publication/native ID and origin policy bind downloads. Selected detail, SQLite and neutral ZIP preserve them; transferred text is not extracted.",
           "dependencies": [],
           "remaining_verification": [
             "Full tenant catalog completeness, broader search and tenant-specific continuation remain unverified.",
@@ -7496,9 +7568,10 @@
             "civicplus-media-discovery-1277",
             "quorumrelay-shared-core-operations",
             "select-official-detail-section-execution",
-            "select-event-file-api-origin-execution"
+            "select-event-file-api-origin-execution",
+            "select-supplied-assets-execution"
           ],
-          "details": "Official selected Meetings/{agendaId} read from stored published Event; retains supplied items/raw fields and exact published file IDs. Explicit file stream requires stored membership; no rendered text/playback claim. Event-declared published-file locators use the same tenant API; exact legacy portal locators resolve only after captured native membership/source checks, with stored data unchanged.",
+          "details": "Official selected Meetings/{agendaId} read from stored published Event; retains supplied items/raw fields and exact published file IDs. Explicit file stream requires stored membership; no rendered text/playback claim. Event-declared published-file locators use the same tenant API; exact legacy portal locators resolve only after captured native membership/source checks, with stored data unchanged. Supplied EventModel mediaSourcePathMp4 and caption source/blob absolute HTTPS URLs are mapped without CDN inference; captured publication/native ID and origin policy bind downloads. Selected detail, SQLite and neutral ZIP preserve them; transferred text is not extracted.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
@@ -7589,9 +7662,10 @@
           "capability_status": "unverified",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "select-supplied-assets-execution"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Supplied EventModel mediaSourcePathMp4 and caption source/blob absolute HTTPS URLs are mapped without CDN inference; captured publication/native ID and origin policy bind downloads. Selected detail, SQLite and neutral ZIP preserve them; transferred text is not extracted.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -8287,7 +8361,8 @@
         "The exporter prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4. The official-linked filename tester classifies the additional tokens, but backend acceptance and post-import behavior remain unverified. MP4 framing does not establish codec/playability, captions or timestamp fidelity; ambiguous Packet, Notices and Audio/Video aliases remain rejected.",
         "Historical FTP host and consultant processing/readback remain unverified. Source file preparation is separate from remote import or association. Official Fishers Section create/update is implemented; Event timestamp/template equivalence, item writes and document upload remain contract gaps, not account-acquisition gates.",
         "Official Fishers spec and metadata now pin Event/Section models and publication enum0/1/2; section writes are implemented with scoped synthetic execution. Event date/time/template readback equivalence remains unresolved, and no item create/update or document upload model is established. No account acquisition gate.",
-        "Bounded Event-write follow-up: create eventStartTime has HH:MM regex, update time is free-form with12:00:00AM default; UI workflows/public display client do not establish write timestamp or template recurrence readback. No write conversion inferred. Portal Event-file API-origin defect is now implemented/tested separately."
+        "Bounded Event-write follow-up: create eventStartTime has HH:MM regex, update time is free-form with12:00:00AM default; UI workflows/public display client do not establish write timestamp or template recurrence readback. No write conversion inferred. Portal Event-file API-origin defect is now implemented/tested separately.",
+        "Supplied EventModel MP4/caption locator mapping and guarded transfers synthetically executed; caption extraction/timing, playback/readiness and staff upload contracts remain unverified, not proven outside-only dependencies."
       ],
       "requirement_ids": [
         "C01",

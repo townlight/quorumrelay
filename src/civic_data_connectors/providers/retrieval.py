@@ -242,14 +242,36 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
                 operation_id=context.operation_id)
     civicclerk_detail = (source.provider == 'civicplus-select' and isinstance(record.get('original'), dict)
                          and 'meeting' in record['original'] and 'event' in record['original'])
-    if civicclerk_detail:
+    civicclerk_asset = source.provider == 'civicplus-select' and document.get('source_field') in {
+        'mediaSourcePathMp4', 'closedCaptionSourcePath', 'closedCaptionBlobPath'}
+    if civicclerk_asset:
+        from .civicclerk_detail import event_assets
+        event = record['original'].get('event') if civicclerk_detail else record.get('original')
+        caption_docs, recordings = event_assets(event)
+        if (identity.get('record_type') != 'meeting' or not isinstance(event, dict)
+                or identity.get('external_id') != str(event.get('id')) or record.get('source_url') != source.url
+                or document not in (caption_docs if kind == 'documents' else recordings)
+                or url_field not in ({'url'} if kind == 'documents' else {'url', 'video_url'})):
+            raise ValueError('The selected CivicClerk asset does not match its captured published Event.')
+    elif source.provider == 'civicplus-select' and kind == 'recordings':
+        event = record['original'].get('event') if civicclerk_detail else record.get('original')
+        if (not isinstance(event, dict) or event.get('isPublished') != 'Published' or event.get('isDeleted')
+                or identity.get('record_type') != 'meeting' or identity.get('external_id') != str(event.get('id'))
+                or record.get('source_url') != source.url or document.get('source_field') is not None
+                or document.get('url') not in (event.get('externalMediaUrl'), event.get('mediaStreamPath'))
+                or url_field not in {'url', 'video_url'}
+                or (url_field == 'video_url' and (url != document.get('url')
+                    or not urlsplit(url).path.lower().endswith('.mp4')))):
+            raise ValueError('The selected CivicClerk recording is not supplied by its captured Event.')
+    if civicclerk_detail and not civicclerk_asset and kind == 'documents':
         from .civicclerk_detail import declared_documents
         event, meeting = record['original']['event'], record['original']['meeting']
         if (kind != 'documents' or url_field != 'url' or identity.get('record_type') != 'meeting'
                 or not isinstance(event, dict) or identity.get('external_id') != str(event.get('id'))
                 or record.get('source_url') != source.url or document not in declared_documents(source, event, meeting)):
             raise ValueError('The selected CivicClerk file does not match its captured published meeting.')
-    civicclerk_event = source.provider == 'civicplus-select' and kind == 'documents' and not civicclerk_detail
+    civicclerk_event = (source.provider == 'civicplus-select' and kind == 'documents'
+                        and not civicclerk_detail and not civicclerk_asset)
     if civicclerk_event:
         from .civicclerk_detail import event_documents
         event = record.get('original')
@@ -345,14 +367,14 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             response = transport.request(
                 transfer_url, byte_limit=remaining_transfer,
                 deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=allowed,
-                **({"allow_redirects": False} if boardable_viewer or civicclerk_detail or civicclerk_event or source.provider in {"onbase", "tyler-meeting-manager"} else {}))
-        if (civicclerk_detail or civicclerk_event) and context.check_cancelled():
+                **({"allow_redirects": False} if boardable_viewer or source.provider == "civicplus-select" or source.provider in {"onbase", "tyler-meeting-manager"} else {}))
+        if (source.provider == "civicplus-select") and context.check_cancelled():
             return OperationResult('cancelled', retained_data(), operation_id=context.operation_id)
-        if (civicclerk_detail or civicclerk_event) and monotonic() >= deadline:
+        if (source.provider == "civicplus-select") and monotonic() >= deadline:
             raise ValueError('The selected CivicClerk file exceeded its deadline.')
         if response.status != 200:
             raise ValueError("The captured attachment did not return HTTP 200.")
-        if (civicclerk_detail or civicclerk_event) and response.url != transfer_url:
+        if (source.provider == "civicplus-select") and response.url != transfer_url:
             raise ValueError('The selected CivicClerk file changed its captured route.')
         if (source.provider == "onbase" and kind == "documents" and not response.content.startswith(b"%PDF-")
                 and response.content_type.split(";", 1)[0].strip().lower() in {"text/html", "application/xhtml+xml"}):

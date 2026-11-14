@@ -54,6 +54,8 @@ Evidence and exact scope: `inventory.json` provider `novusagenda`; operation sta
 
 Evidence and exact scope: `inventory.json` provider `civicplus-select`; operation status and outbound mappings are separate from historical observations.
 
+- Select supplied MP4/caption absolute locator mapping and guarded captured-membership transfers are implemented and synthetically executed (119 affected passes,22 new cases). Selected detail, SQLite/reopen and exact ZIP retain them. Caption extraction/timing and playable/processed media are not established by locator strings; no staff-upload contract is inferred. See `docs/verification/civicclerk-supplied-assets-2026-11-14.json`.
+
 ## F06 CivicPlus Agenda Center (`civicplus-agenda-center`)
 
 - Effingham 2024/category 3 returned 35 rows; a bounded Commission native-search engine request and resume returned partial/no-error pages with three hits each. The supplied ViewFile?html=true response was text/html (2,481 bytes), not PDF/binary. Other years/categories, PreviousVersions traversal, full archive and binary/PDF retrieval remain unresolved; do not repeat the same HTML route. Chino extraction failure remains recorded; add no tenant.

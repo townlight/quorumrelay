@@ -338,6 +338,19 @@ the supplied direct-file candidate to consumers such as Station without
 classifying a generic player link as a downloadable MP4. Guarded retrieval and
 consumer file validation still apply; the path is not proof of playable bytes.
 
+The pinned official `EventModel_28658b0b` also declares
+`mediaSourcePathMp4`, `closedCaptionSourcePath` and `closedCaptionBlobPath`.
+Discovery and selected detail expose supplied absolute HTTPS values, requiring
+an MP4 URL path for the direct video field. Repeated caption URLs deduplicate;
+relative storage names remain raw. Caption descriptors use `kind: transcript`;
+retrieved bytes retain `text_availability: not_extracted`. No caption timing,
+playability, visibility or processing readiness is inferred. Guarded transfers
+recheck the captured published Event, native identity, exact descriptor and
+source, require explicit download origins, reject redirects and honor bounds.
+SQLite/reopen and neutral ZIP preserve these values and original captures.
+[Executed scope and contract hashes](verification/civicclerk-supplied-assets-2026-11-14.json)
+cover synthetic transfers; preserved dev13 packages predate this source.
+
 ## Boardable legacy agenda client
 
 [BOARDABLE-WRITES.md](BOARDABLE-WRITES.md) documents the pinned runtime org/meeting binding, native list and item GETs, reorder JSON and preserved-field multipart text edits. Vendor client source and36 synthetic coordinator checks are separately attributed; new editor/draft creation/new files/publication remain unmapped. Current source is later than preserved dev13 packages.

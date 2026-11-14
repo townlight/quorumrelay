@@ -418,6 +418,8 @@ def _enrich(bundle, provider):
                                     value["video_url"] = media_url
                         citations = list(record.get("citation_urls") or ())
                         record["citation_urls"] = list(dict.fromkeys([*citations, media_url]))
+            from .civicclerk_detail import enrich_event_assets
+            enrich_event_assets(record, raw)
             # The provider's public payload writes local wall time with Z for
             # observed tenants. Preserve Z but never assert its UTC interpretation.
             normalized["time_zone_status"] = "source_literal_unverified"

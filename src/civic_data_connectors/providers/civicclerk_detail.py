@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from time import monotonic
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit
 
 from ..engine import source_identity_key
 from ..models import Error, OperationResult
@@ -21,6 +21,51 @@ def _id(value):
 
 def _api_root(source):
     return _api_source(source).removesuffix('/Events')
+
+
+def event_assets(event):
+    """Absolute EventModel locators only; no CDN, MIME or readiness inference."""
+    from .identification import validate_url
+    if (not isinstance(event, dict) or not _id(event.get('id'))
+            or event.get('isPublished') != 'Published' or event.get('isDeleted')):
+        return [], []
+    documents, recordings, seen = [], [], set()
+    for field in ('mediaSourcePathMp4', 'closedCaptionSourcePath', 'closedCaptionBlobPath'):
+        url = event.get(field)
+        if not isinstance(url, str) or not url or len(url) > 8192 or url in seen:
+            continue
+        try:
+            validate_url(url)
+            parsed = urlsplit(url)
+        except ValueError:
+            continue
+        if parsed.scheme != 'https':
+            continue
+        if field == 'mediaSourcePathMp4' and not parsed.path.lower().endswith('.mp4'):
+            continue
+        seen.add(url)
+        value = {'url': url, 'event_id': str(event['id']), 'source_field': field,
+                 'availability': 'supplied_locator_not_fetched'}
+        if field == 'mediaSourcePathMp4':
+            recordings.append({**value, 'video_url': url})
+        else:
+            title = event.get('closedCaptionFileName')
+            documents.append({**value, 'kind': 'transcript',
+                              'title': title if isinstance(title, str) and title else 'Supplied closed captions'})
+    return documents, recordings
+
+
+def enrich_event_assets(record, event):
+    documents, recordings = event_assets(event)
+    for key, relation, assets in (('documents', 'document', documents), ('recordings', 'recording', recordings)):
+        selected = record['normalized'].setdefault(key, [])
+        for asset in assets:
+            if any(existing.get('url') == asset['url'] for existing in selected):
+                continue
+            selected.append(deepcopy(asset))
+            record['relationships'] = [*record.get('relationships', []),
+                                       {'relation': relation, 'value': deepcopy(asset)}]
+            record['citation_urls'] = list(dict.fromkeys([*record.get('citation_urls', []), asset['url']]))
 
 
 def event_documents(source, event, *, legacy=False):
@@ -104,7 +149,11 @@ def fetch_detail(engine, source, namespace, external_id, bounds, context, transp
         meeting = json.loads(response.content)
         docs = declared_documents(source, event, meeting)
         normalized = deepcopy(record['normalized'])
-        normalized['documents'] = docs
+        caption_docs, recordings = event_assets(event)
+        normalized['documents'] = docs + caption_docs
+        for recording in recordings:
+            if not any(r.get('url') == recording['url'] for r in normalized.get('recordings', [])):
+                normalized.setdefault('recordings', []).append(recording)
         normalized['agenda_id'] = str(event['agendaId'])
         items = meeting.get('items')
         if items is not None and not isinstance(items, list):

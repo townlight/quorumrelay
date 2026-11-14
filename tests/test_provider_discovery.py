@@ -234,7 +234,10 @@ def test_civicclerk_player_link_is_not_a_direct_mp4(media_path):
     from civic_data_connectors.legacy import legacy_previews
 
     payload = json.loads((BRIEF / "civicclerk-erie-events-2026-11-11-page1.json").read_text())
-    next(row for row in payload["value"] if row["id"] == 1277)["mediaStreamPath"] = media_path
+    raw_event = next(row for row in payload["value"] if row["id"] == 1277)
+    raw_event["mediaStreamPath"] = media_path
+    # Isolate this field from the independently supplied MP4 candidate.
+    raw_event["mediaSourcePathMp4"] = None
     engine, _ = make_engine()
     result = engine.execute("discover", {
         "source": {"provider": "civicplus-select", "url": "https://erieco.api.civicclerk.com/v1/Events",
@@ -256,6 +259,7 @@ def test_civicclerk_unusable_media_path_is_not_reconstructed_or_lost(media_path)
     payload = json.loads((BRIEF / "civicclerk-erie-events-2026-11-11-page1.json").read_text())
     raw_event = next(row for row in payload["value"] if row["id"] == 1277)
     raw_event["mediaStreamPath"] = media_path
+    raw_event["mediaSourcePathMp4"] = None  # This test isolates unusable mediaStreamPath.
     raw_event["future_provider_field"] = {"nullable": [None, False, 0, ""]}
     content = json.dumps(payload, ensure_ascii=False).encode()
     engine, transport = make_engine()
