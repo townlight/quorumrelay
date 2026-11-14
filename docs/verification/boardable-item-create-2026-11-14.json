@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "dccbf67",
+  "status": "SCOPED_SYNTHETIC_PASS",
+  "requirements": [
+    9,
+    10
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_boardable_item_create.py tests/test_boardable_agenda_write.py tests/test_writes.py -q",
+      "passed": 64,
+      "failed": 0,
+      "junit_sha256": "71ba5f24a6182dd7176d9851a2faab12db56d522dd81a252f7e7a3c66e27772d"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/boardable-client-write/create-item.extract.js",
+      "sha256": "eecdc1faed76639546fcdeabdc4a4dd319d8023670ef18bc70b19fd889e06ff3"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/boardable-client-write/create-item-source.json",
+      "sha256": "9187ca98dac8df305e9f367c10adda85ed35fb59dabdde9f8746c1a018aeac21"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/boardable_write.py",
+      "sha256": "01153116c30677e94f909d809b2dccf4430c89cbce5fc2fffd07b4d83940651a"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_boardable_item_create.py",
+      "sha256": "6ead52b86041da75b790b0d77d00372812a7213b3e98c23042363d0e5681439f",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "6ead52b86041da75b790b0d77d00372812a7213b3e98c23042363d0e5681439f"
+    }
+  ],
+  "synthetic_execution": {
+    "provider": "boardable",
+    "status": "mock_passed",
+    "operations": [
+      "create",
+      "update"
+    ],
+    "entities": [
+      "item",
+      "agenda_order"
+    ],
+    "scope": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication. Update attribution is post-send cancellation/reconciliation of existing reorder only.",
+    "execution_provenance": "21 new synthetic cases plus36 existing Boardable and7 shared write cases. Native create request/root/child/readback, conflict, collateral/invalid/lost response, restart/no replay and post-send cancellation/permission revocation tested.",
+    "checks": [
+      {
+        "command": "pytest tests/test_boardable_item_create.py tests/test_boardable_agenda_write.py tests/test_writes.py -q",
+        "passed": 64,
+        "failed": 0,
+        "junit_sha256": "71ba5f24a6182dd7176d9851a2faab12db56d522dd81a252f7e7a3c66e27772d"
+      }
+    ],
+    "bindings": [
+      {
+        "kind": "vendor_contract",
+        "path": "docs/capabilities/evidence/boardable-client-write/create-item.extract.js",
+        "sha256": "eecdc1faed76639546fcdeabdc4a4dd319d8023670ef18bc70b19fd889e06ff3"
+      },
+      {
+        "kind": "vendor_contract",
+        "path": "docs/capabilities/evidence/boardable-client-write/create-item-source.json",
+        "sha256": "9187ca98dac8df305e9f367c10adda85ed35fb59dabdde9f8746c1a018aeac21"
+      },
+      {
+        "kind": "source",
+        "path": "src/civic_data_connectors/providers/boardable_write.py",
+        "sha256": "01153116c30677e94f909d809b2dccf4430c89cbce5fc2fffd07b4d83940651a"
+      },
+      {
+        "kind": "test",
+        "path": "tests/test_boardable_item_create.py",
+        "sha256": "6ead52b86041da75b790b0d77d00372812a7213b3e98c23042363d0e5681439f",
+        "hash_policy": "test_source_crlf_to_lf",
+        "canonical_lf_sha256": "6ead52b86041da75b790b0d77d00372812a7213b3e98c23042363d0e5681439f"
+      }
+    ]
+  },
+  "limits": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication."
+}

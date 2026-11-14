@@ -265,6 +265,7 @@ def semantic_errors(data, identities):
                 if ((name, mapping["entity"], mapping["operation"]) not in {
                         ("telvue", "playlist_order", "update"), ("telvue", "playlist_membership", "create"),
                         ("boardable", "agenda_order", "update"), ("boardable", "item", "update"),
+                        ("boardable", "item", "create"),
                         ("towncloud", "item_draft", "update")}
                         or mapping["implementation_status"] != "implemented"
                         or mapping["acceptance_status"] != "mock_passed"):

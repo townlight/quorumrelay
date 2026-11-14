@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "dccbf67",
+  "status": "PASSED",
+  "scope": "Boardable legacy item create and post-send readback uncertainty; local source only",
+  "checks": [
+    {
+      "command": "pytest tests -q",
+      "passed": 1667,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 75.87,
+      "junit_sha256": "88d984f01d2d741f7e6ce01fe4444e83ec1fe2f39dd9b1e639fa2e61849c14bf"
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "command": "pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q",
+      "passed": 25,
+      "failed": 0,
+      "scope": "Final metadata after removing superseded test-account and completed local dependencies"
+    },
+    {
+      "command": "scripts/validate_capabilities.py",
+      "status": "PASSED",
+      "evidence_records": 391,
+      "outbound_mappings": 172,
+      "negative_checks": 5,
+      "errors": 0
+    }
+  ],
+  "metadata_reconciliation": {
+    "superseded_test_account_gates_removed": 66,
+    "completed_local_prerequisites_removed": 83,
+    "acceptance_statuses_promoted_by_cleanup": 0,
+    "runtime_permissions_removed": 0
+  },
+  "reused": "Unchanged TypeScript build/tests. No package/native/artifact rebuild, repin, installed acceptance or release. Existing dev13 artifacts do not include later source."
+}

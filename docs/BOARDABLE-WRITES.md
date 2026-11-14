@@ -1,6 +1,6 @@
 # Boardable legacy agenda writes
 
-The current local source maps two existing-meeting operations from the vendor's
+The current local source maps three existing-meeting operations from the vendor's
 anonymously served legacy application client. See the [pinned source](capabilities/evidence/boardable-client-write/source.json)
 and [executed synthetic receipt](verification/boardable-telvue-writes-2026-11-14.json).
 This is observed client compatibility, not a stable public API promise. No live
@@ -59,7 +59,29 @@ applications must supply an already readable edit-list state.
 
 The `has_agenda_builder`/`has_approval_workflows` feature flags select a different
 `agenda_app_url` editor. It is not covered. Recurring `current_date` variants,
-new items, new files, full meeting forms, draft preparation, publication,
+new files, full meeting forms, draft preparation, publication,
 deletes and vendor-specific file imports remain unmapped. The visible new-file
 FormData branch alone does not establish created attachment identity, stored
 bytes, processing or subsequent readback. No such behavior is inferred.
+
+## Create one legacy agenda item
+
+Use entity `item`, operation `create`, an authorized `meeting_id`, explicit integer
+`parent_id=0` for a root or an existing native parent whose `agenda` is an array,
+and `fields={"text": "Budget public discussion"}`. Omit `resource_id` and files.
+Require `item:create`. The client-declared JSON is `{text, parent_id, date: ""}`;
+recurring-day variants and other new-item fields are not mapped.
+
+Planning GETs the existing edit-list and binds its full snapshot. Commit checks
+that snapshot again, persists mutation intent, sends one POST and persists the
+returned native ID. Readback must contain that new ID with exact requested text
+and parent; removing it must restore the complete previous tree. Collateral
+changes, missing/duplicate IDs and unrequested children leave the result
+uncertain. An ambiguous POST without a returned ID is never reconciled by title
+or date and is never resent. A confirmed ID can reconcile after restart through
+GETs. Post-send cancellation also leaves an uncertain result until readback.
+
+[New source extract](capabilities/evidence/boardable-client-write/create-item-source.json)
+and [64-case affected receipt](verification/boardable-item-create-2026-11-14.json)
+attribute this scope separately. Created edit-list membership does not establish
+publication, delivery, remote attachment bytes or a stable public API promise.

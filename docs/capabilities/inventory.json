@@ -3677,9 +3677,7 @@
           "evidence_ids": [],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
           "dependencies": [
-            "Documented provider interface and explicit entity/field mapping",
-            "No authorized provider test tenant or credentials supplied",
-            "Authorized provider test access required for live acceptance; not supplied"
+            "Documented provider interface and explicit entity/field mapping"
           ],
           "remaining_verification": [
             "Provider-specific evidence investigation",
@@ -3703,9 +3701,7 @@
           "evidence_ids": [],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
           "dependencies": [
-            "Documented provider interface and explicit entity/field mapping",
-            "No authorized provider test tenant or credentials supplied",
-            "Authorized provider test access required for live acceptance; not supplied"
+            "Documented provider interface and explicit entity/field mapping"
           ],
           "remaining_verification": [
             "Provider-specific evidence investigation",
@@ -3729,9 +3725,7 @@
           "evidence_ids": [],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
           "dependencies": [
-            "Documented provider interface and explicit entity/field mapping",
-            "No authorized provider test tenant or credentials supplied",
-            "Authorized provider test access required for live acceptance; not supplied"
+            "Documented provider interface and explicit entity/field mapping"
           ],
           "remaining_verification": [
             "Provider-specific evidence investigation",
@@ -6608,9 +6602,7 @@
             "source-text-reference-clients-2026-11-12-novusagenda"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup.",
-          "dependencies": [
-            "Extract shared engine preserving legacy behavior."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -6659,9 +6651,7 @@
             "source-text-reference-clients-2026-11-12-novusagenda"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "Shared schema, capture/text store and search engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -6683,9 +6673,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "Shared schema and export engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -6730,7 +6718,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -6756,7 +6743,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -6782,7 +6768,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -7721,8 +7706,7 @@
           "details": "Only agenda_section create is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented. Exact native Event id/agendaId is revalidated during plan, before mutation and in reconciliation.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
-            "Verified machine interface or authorized UI automation test environment",
-            "No provider test tenant or credentials supplied"
+            "Verified machine interface or authorized UI automation test environment"
           ],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
@@ -7752,8 +7736,7 @@
           "details": "Only agenda_section update is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented. Exact native Event id/agendaId is revalidated during plan, before mutation and in reconciliation.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
-            "Verified machine interface or authorized UI automation test environment",
-            "No provider test tenant or credentials supplied"
+            "Verified machine interface or authorized UI automation test environment"
           ],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
@@ -7782,8 +7765,7 @@
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Official authenticated UI supports in-scope operations; exact external API contract is unverified. Historical import is consultant-mediated, not an automatic write API.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
-            "Verified machine interface or authorized UI automation test environment",
-            "No provider test tenant or credentials supplied"
+            "Verified machine interface or authorized UI automation test environment"
           ],
           "remaining_verification": [
             "Implementation contract validation",
@@ -8687,9 +8669,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
-          "dependencies": [
-            "Extract shared engine preserving legacy behavior."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -8739,9 +8719,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "Shared schema, capture/text store and search engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -8764,9 +8742,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "Shared schema and export engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -8814,7 +8790,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -8842,7 +8817,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -8870,7 +8844,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -9532,9 +9505,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
-          "dependencies": [
-            "Extract shared engine preserving legacy behavior."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -9577,9 +9548,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "Shared schema, capture/text store and search engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -9601,9 +9570,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "Shared schema and export engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -10349,9 +10316,7 @@
             "source-text-reference-clients-2026-11-12-boardbook"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive boardbook-public-agenda-html accepts saved/configured public Agenda HTML with native item parents and item-bound document IDs; exact raw capture retained. Viewer download semantics and full catalog remain unverified.",
-          "dependencies": [
-            "Extract shared engine preserving legacy behavior."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -10395,9 +10360,7 @@
             "source-text-reference-clients-2026-11-12-boardbook"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "Shared schema, capture/text store and search engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -10419,9 +10382,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "Shared schema and export engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -10466,7 +10427,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -10493,7 +10453,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -10520,7 +10479,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -11193,9 +11151,7 @@
           "evidence_ids": [],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
           "dependencies": [
-            "Documented provider interface and explicit entity/field mapping",
-            "No authorized provider test tenant or credentials supplied",
-            "Authorized provider test access required for live acceptance; not supplied"
+            "Documented provider interface and explicit entity/field mapping"
           ],
           "remaining_verification": [
             "Provider-specific evidence investigation",
@@ -11219,9 +11175,7 @@
           "evidence_ids": [],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
           "dependencies": [
-            "Documented provider interface and explicit entity/field mapping",
-            "No authorized provider test tenant or credentials supplied",
-            "Authorized provider test access required for live acceptance; not supplied"
+            "Documented provider interface and explicit entity/field mapping"
           ],
           "remaining_verification": [
             "Provider-specific evidence investigation",
@@ -11245,9 +11199,7 @@
           "evidence_ids": [],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
           "dependencies": [
-            "Documented provider interface and explicit entity/field mapping",
-            "No authorized provider test tenant or credentials supplied",
-            "Authorized provider test access required for live acceptance; not supplied"
+            "Documented provider interface and explicit entity/field mapping"
           ],
           "remaining_verification": [
             "Provider-specific evidence investigation",
@@ -11736,9 +11688,7 @@
             "source-text-reference-clients-2026-11-12-simbli"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
-          "dependencies": [
-            "Extract shared engine preserving legacy behavior."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -11784,9 +11734,7 @@
             "source-text-reference-clients-2026-11-12-simbli"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "Shared schema, capture/text store and search engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -11808,9 +11756,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "Shared schema and export engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -11855,7 +11801,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -11881,7 +11826,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -12359,9 +12303,7 @@
             "civicweb-filepro-wsdl-contract"
           ],
           "details": "The historical civicweb-html compatibility reader is preserved. civicweb-filepro-soap-xml replays supplied child/search/file SOAP offline; original-file results require explicit options.document_id. civicweb-meetings-json and civicweb-meeting-documents-json replay saved MeetingsService responses. Original capture bytes remain available; these parsers establish no live catalog completeness.",
-          "dependencies": [
-            "Extract shared engine preserving legacy behavior."
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Meeting archive/recursive catalog and calendar entity create/update/upload contracts remain distinct unresolved research; public deployment compatibility not universal."
           ],
@@ -12411,9 +12353,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "Shared schema, capture/text store and search engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -12436,9 +12376,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "Shared schema and export engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -12486,7 +12424,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -12514,7 +12451,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -12541,7 +12477,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -13103,9 +13038,7 @@
             "source-text-reference-clients-2026-11-12-iqm2"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim.",
-          "dependencies": [
-            "Extract shared engine preserving legacy behavior."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -13152,9 +13085,7 @@
             "source-text-reference-clients-2026-11-12-iqm2"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "Shared schema, capture/text store and search engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -13176,9 +13107,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "Shared schema and export engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -13223,7 +13152,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -13270,7 +13198,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -13688,10 +13615,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
-          "dependencies": [
-            "standalone extraction",
-            "source revision pin"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -13737,9 +13661,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "shared capture/search engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -13760,9 +13682,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "shared schemas/export engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -14270,10 +14190,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
-          "dependencies": [
-            "standalone extraction",
-            "source revision pin"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -14321,9 +14238,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "shared capture/search engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -14344,9 +14259,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "shared schemas/export engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -14415,7 +14328,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. event.media_and_minutes: SuiteView Admin UI: save media and Minutes/Bookmarks, then SAVE Event; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -14443,7 +14355,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. recording: SuiteView Admin UI: Event > View/Edit > Event Media > Upload Media (.WMV); API unknown; minutes.bookmarks: SuiteView Admin UI: Agendas & Minutes > Minutes Edit/Upload > HTML/import and Bookmarks; *_content.HTML",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -14932,9 +14843,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
-          "dependencies": [
-            "Extract shared engine preserving legacy behavior."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -14981,9 +14890,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "Shared schema, capture/text store and search engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -15006,9 +14913,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "Shared schema and export engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -15055,7 +14960,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -15082,7 +14986,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -15109,7 +15012,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -15723,10 +15625,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
-          "dependencies": [
-            "standalone extraction",
-            "source revision pin"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -15772,9 +15671,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "shared capture/search engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -15795,9 +15692,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "shared schemas/export engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -15840,7 +15735,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_notice: Authenticated Admin UI: Notices > Add > Save draft or Publish; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -15868,7 +15762,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_notice: Authenticated Admin UI: edit notice within associated Body; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -15896,7 +15789,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_notice.document_or_recording: Authenticated notice UI: attachment at bottom of notice; accepted formats shown there, not enumerated in Help",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -16327,10 +16219,7 @@
             "agendaquick-public-memo-2026-11-12"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download. Current source also maps the supplied public memo template (agendaquick-public-memo-html): native item/meeting/line/revision controls, six labelled sections and supplied same-origin PDF locator; no implicit attachment fetch or inferred adopted motion/vote.",
-          "dependencies": [
-            "standalone extraction",
-            "source revision pin"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -16378,9 +16267,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "shared capture/search engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -16402,9 +16289,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "shared schemas/export engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -16449,7 +16334,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. agenda_or_minutes: AgendaQuick authenticated product UI; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -16478,7 +16362,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. agenda_or_minutes: AgendaQuick authenticated editing/publishing UI; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -16924,10 +16807,7 @@
             "town-hall-streams-player-synthetic"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive town-hall-streams-event-html accepts an exact saved/configured event player, preserves native event/location identity and maps its declared HTTPS CDN HLS locator with raw provenance. Playlist/segment/MP4/transcript completeness is not inferred.",
-          "dependencies": [
-            "standalone extraction",
-            "source revision pin"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -16972,9 +16852,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "shared capture/search engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -16995,9 +16873,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "shared schemas/export engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -17040,7 +16916,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. streaming_meeting_event: Town Hall Streams service web UI: select start and end date/time; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -17657,10 +17532,7 @@
             "telvue-connect-playlist-items-contract"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified. Explicit api_resource=playlist_items plus playlist_id supports documented Connect v2 collection/detail; external_id selects the item. Separate playlist_item identity/playlist parent/media playable relation preserve native IDs, sequence/windows, supplied recordings and raw unknown fields. Seven synthetic engine/saved-response checks pass; published December2022 examples do not establish pagination or current deployment compatibility.",
-          "dependencies": [
-            "standalone extraction",
-            "source revision pin"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "vendor_contract_and_synthetic_engine_checks_plus_bounded_public_sample",
@@ -17707,9 +17579,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "shared capture/search engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -17731,9 +17601,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "shared schemas/export engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -17834,7 +17702,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. recording: Connect UI drag/drop videos; API upload endpoint unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -18459,10 +18326,7 @@
             "champ-rich-agenda-synthetic"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference. Native event-bound BoardName/body ID is projected for exact local body search and configured filtering; native ID mismatch is not inferred away.",
-          "dependencies": [
-            "standalone extraction",
-            "source revision pin"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -18507,9 +18371,7 @@
             "champ-rich-agenda-synthetic"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference. Native event-bound BoardName/body ID is projected for exact local body search and configured filtering; native ID mismatch is not inferred away.",
-          "dependencies": [
-            "shared capture/search engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -18530,9 +18392,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "shared schemas/export engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -18576,7 +18436,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_event: Authenticated CHAMP UI: Events > + New Event > Save; API unknown; agenda_item_or_minutes_item: Authenticated CHAMP Event agenda/minutes item editor; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -18604,7 +18463,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. event.publication: Authenticated UI: Overview > Publish Settings and Elements; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -18633,7 +18491,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_document: Event agenda/minute item > Attachments: PDF file upload; API unknown; recording: Event > Media > Update Media; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -19453,9 +19310,7 @@
             "onbase-model-documents-2026-11-14"
           ],
           "details": "Legacy baseline remains intact; additive listing parser handles literal embedded JSON without executing JS, preserves raw unknown fields and maps only declared document flags/names. Modern embedded Documents additionally preserve exact meeting/item/publish bindings and client-declared PDF locators; link-only Media flags remain distinct from file/playback acceptance. Nested type1 supporting attachments use the existing scoped wrapper/readback flow.",
-          "dependencies": [
-            "Extract shared engine preserving legacy behavior."
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
           ],
@@ -19503,9 +19358,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "Shared schema, capture/text store and search engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -19527,9 +19380,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "Shared schema and export engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -19575,7 +19426,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -19601,7 +19451,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -19627,7 +19476,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -20740,8 +20588,7 @@
           "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Repository.Write granted and resource ACL allows action",
-            "repositoryId,parentEntryId/entryId and authorized test access absent",
-            "No authorized provider test tenant or credentials supplied"
+            "repositoryId,parentEntryId/entryId and authorized test access absent"
           ],
           "remaining_verification": [
             "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
@@ -20770,8 +20617,7 @@
           "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Repository.Write granted and resource ACL allows action",
-            "repositoryId,parentEntryId/entryId and authorized test access absent",
-            "No authorized provider test tenant or credentials supplied"
+            "repositoryId,parentEntryId/entryId and authorized test access absent"
           ],
           "remaining_verification": [
             "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
@@ -20800,8 +20646,7 @@
           "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Repository.Write granted and resource ACL allows action",
-            "repositoryId,parentEntryId/entryId and authorized test access absent",
-            "No authorized provider test tenant or credentials supplied"
+            "repositoryId,parentEntryId/entryId and authorized test access absent"
           ],
           "remaining_verification": [
             "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
@@ -21723,10 +21568,7 @@
             "towncloud-agenda-associations-2026-11-12"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Existing agenda HTML now also enriches rich records with explicitly capture-local item hierarchy, item-owned supplied text and tenant-bound native attachment IDs/locators. No native item IDs, implicit attachment fetch or expanded origin authorization.",
-          "dependencies": [
-            "standalone extraction",
-            "source revision pin"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -21771,9 +21613,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "shared capture/search engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -21794,9 +21634,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "shared schemas/export engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -21839,7 +21677,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_agenda_or_minutes: Authenticated TownCloud Agenda product UI; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -21868,7 +21705,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_agenda_or_minutes: Authenticated TownCloud manage/publish UI; API unknown Scoped existing item/section draft text update is implemented and synthetic accepted in its outbound row. Full item save/publication remains unmapped; no blanket acceptance.",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -22348,10 +22184,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
-          "dependencies": [
-            "standalone extraction",
-            "source revision pin"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -22393,9 +22226,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "shared capture/search engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -22416,9 +22247,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "shared schemas/export engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -22461,7 +22290,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting: Dashboard Meetings Module described by indexed official PDF; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -22993,9 +22821,7 @@
             "source-text-reference-clients-2026-11-12-clerkbase"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Existing clerkbase-document-html additionally retains static document body/paragraph text with capture provenance; four scoped synthetic cases cover saved/default configured reads, local text search/export, revision hashing and exclusion guards without changing original output.",
-          "dependencies": [
-            "Extract shared engine preserving legacy behavior."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -23048,9 +22874,7 @@
             "source-text-reference-clients-2026-11-12-clerkbase"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Existing clerkbase-document-html additionally retains static document body/paragraph text with capture provenance; four scoped synthetic cases cover saved/default configured reads, local text search/export, revision hashing and exclusion guards without changing original output.",
-          "dependencies": [
-            "Shared schema, capture/text store and search engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -23072,9 +22896,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "Shared schema and export engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -23563,10 +23385,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
-          "dependencies": [
-            "standalone extraction",
-            "source revision pin"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -23611,9 +23430,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "shared capture/search engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -23634,9 +23451,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "shared schemas/export engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -24601,8 +24416,7 @@
           "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Upload token permission or Read,update&delete anything/eligible delegated resource permission",
-            "Account media limits/features",
-            "No authorized provider test tenant or credentials supplied; live access absent"
+            "Account media limits/features"
           ],
           "remaining_verification": [
             "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
@@ -24632,8 +24446,7 @@
           "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Upload token permission or Read,update&delete anything/eligible delegated resource permission",
-            "Account media limits/features",
-            "No authorized provider test tenant or credentials supplied; live access absent"
+            "Account media limits/features"
           ],
           "remaining_verification": [
             "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
@@ -24662,8 +24475,7 @@
           "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Upload token permission or Read,update&delete anything/eligible delegated resource permission",
-            "Account media limits/features",
-            "No authorized provider test tenant or credentials supplied; live access absent"
+            "Account media limits/features"
           ],
           "remaining_verification": [
             "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
@@ -25582,6 +25394,65 @@
               }
             ]
           }
+        },
+        {
+          "id": "boardable-legacy-item-create-execution",
+          "url": "https://app.boardable.com/v4/js/app.js?id=052287e3f473e7b1de4bacb15a125802",
+          "title": "Literal legacy NewAgendaItem request and native tree readback execution",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observed": "2026-11-14",
+          "observation_date": "2026-11-14",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "access_scope": "saved_anonymous_vendor_client_and_synthetic_coordinator_no_live_mutation",
+          "receipt_path": "docs/verification/boardable-item-create-2026-11-14.json",
+          "receipt_sha256": "e791cb4fc7fe6f552c1f4552e13e155da5cf507390310859df7d51c23b38f769",
+          "limits": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication.",
+          "synthetic_execution": {
+            "provider": "boardable",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "item",
+              "agenda_order"
+            ],
+            "scope": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication. Update attribution is post-send cancellation/reconciliation of existing reorder only.",
+            "execution_provenance": "21 new synthetic cases plus36 existing Boardable and7 shared write cases. Native create request/root/child/readback, conflict, collateral/invalid/lost response, restart/no replay and post-send cancellation/permission revocation tested.",
+            "checks": [
+              {
+                "command": "pytest tests/test_boardable_item_create.py tests/test_boardable_agenda_write.py tests/test_writes.py -q",
+                "passed": 64,
+                "failed": 0,
+                "junit_sha256": "71ba5f24a6182dd7176d9851a2faab12db56d522dd81a252f7e7a3c66e27772d"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-client-write/create-item.extract.js",
+                "sha256": "eecdc1faed76639546fcdeabdc4a4dd319d8023670ef18bc70b19fd889e06ff3"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-client-write/create-item-source.json",
+                "sha256": "9187ca98dac8df305e9f367c10adda85ed35fb59dabdde9f8746c1a018aeac21"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_write.py",
+                "sha256": "01153116c30677e94f909d809b2dccf4430c89cbce5fc2fffd07b4d83940651a"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardable_item_create.py",
+                "sha256": "6ead52b86041da75b790b0d77d00372812a7213b3e98c23042363d0e5681439f",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "6ead52b86041da75b790b0d77d00372812a7213b3e98c23042363d0e5681439f"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -25681,9 +25552,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
-          "dependencies": [
-            "Extract shared engine preserving legacy behavior."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -25729,9 +25598,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "Shared schema, capture/text store and search engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -25753,9 +25620,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "Shared schema and export engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -25794,25 +25659,23 @@
         },
         "create": {
           "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "boardable-docs"
+            "boardable-docs",
+            "boardable-legacy-item-create-execution"
           ],
-          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
-          "dependencies": [
-            "Authorized test tenant/account not supplied.",
-            "Supported integration route and conflict/idempotency contract unresolved."
-          ],
+          "details": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication. Scoped vendor-client item create and native readback implemented. Meeting creation remains unmapped.",
+          "dependencies": [],
           "remaining_verification": [
             "Validate exact entity/field permissions and plan-bound commit/readback; do not invent API payloads."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://site.boardable.com/ventura-county-community-college-district"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Synthetic transport and application-owned runtime policy; no live account gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -25823,7 +25686,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "boardable-edit",
-            "boardable-client-agenda-synthetic"
+            "boardable-client-agenda-synthetic",
+            "boardable-legacy-item-create-execution"
           ],
           "details": "Scoped legacy editor sibling reorder and existing item text/description edits use pinned native client requests with full snapshot/readback. Whole-provider update support is not claimed; outbound entity rows carry synthetic acceptance.",
           "dependencies": [],
@@ -25850,7 +25714,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -26120,6 +25983,50 @@
           "api_version": "observed2026-11-14legacyclient",
           "automatable_contract_verified": true,
           "domain_scope": "Existing meeting-bound legacy agenda only; sibling order and existing item text/description. No draft creation, parent move, file upload, new editor or publication."
+        },
+        {
+          "entity": "item",
+          "operation": "create",
+          "endpoint_or_format": "POST meeting.url+/agenda",
+          "field_mappings": [
+            {
+              "normalized": "text",
+              "provider_field": "text",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "parent_id",
+              "provider_field": "parent_id",
+              "mapping_level": "observed_vendor_client_payload_field",
+              "notes": "Explicit0 root or existing native parent; date empty only."
+            }
+          ],
+          "evidence_ids": [
+            "boardable-legacy-item-create-execution"
+          ],
+          "account_requirements": "Trusted legacy tenant/org/meeting URL, namespace/meeting allowlists, item:create, session_cookie and CSRF. Readable existing edit-list; no credential acquisition gate.",
+          "authorized_test_access": "synthetic_only_no_live_mutation",
+          "readback_receipt": "Returned native id must be new and match requested text/parent in GET edit-list; removal leaves exact prior tree. Durable intent and returned ID persisted; missing ID remains uncertain, never matched by title or resent.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_public_vendor_client_not_stable_public_write_API_guarantee",
+          "method": "POST",
+          "api_version": "observed2026-11-14legacyclient",
+          "automatable_contract_verified": true,
+          "domain_scope": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication."
         }
       ],
       "pagination": {
@@ -26140,8 +26047,9 @@
         "The declared public search route and SiteId/query/year/month/type mapping are implemented;24synthetic cases preserve native listing identity and excerpts/unknown fields. Unbound candidate URLs remain explicit; two exact bounded live queries timed out. No full-text/paging/ranking or raw-search ID/date equivalence inferred.",
         "Public meeting rows expose description, not a verified normalized body field; body filtering is unknown. Preserve timezone literals and the earlier VCCCD detail-versus-landing display discrepancy.",
         "The listing has no agenda/document/media locators. Selected known-detail mapping and supplied viewer-to-document resolution are implemented with separate synthetic and bounded live-byte receipts. Other documents and the listing/detail date disagreement remain unverified; no native search or complete catalog is inferred.",
-        "Pinned public legacy client establishes sibling reorder and existing item text/description updates; source and36 synthetic coordinator cases implement them. New agenda_app_url editor, recurring day, full meeting form, new item/file, publication and vendor import contracts remain unresolved; no account acquisition gate.",
-        "Legacy new-file FormData branch is visible, but a created attachment identity/byte/readiness and full subsequent GET readback schema is not established. Existing attachment IDs are preserved during text edits; no file upload is guessed."
+        "Pinned public legacy client establishes sibling reorder and existing item text/description updates; source and36 synthetic coordinator cases implement them. New agenda_app_url editor, recurring day, full meeting form, new files, publication and vendor import contracts remain unresolved; no account acquisition gate.",
+        "Legacy new-file FormData branch is visible, but a created attachment identity/byte/readiness and full subsequent GET readback schema is not established. Existing attachment IDs are preserved during text edits; no file upload is guessed.",
+        "Legacy text-only item creation now source implemented from NewAgendaItem client with explicit parent/root and empty date;64affected/21new synthetic cases. Full meeting forms/new files/publication/new editor remain unmapped; no blanket acceptance."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "boardable",
@@ -26505,10 +26413,7 @@
             "gworks-secure-calendar-saved-mapping-2026-11-14"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
-          "dependencies": [
-            "standalone extraction",
-            "source revision pin"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -26555,9 +26460,7 @@
             "gworks-secure-calendar-saved-mapping-2026-11-14"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
-          "dependencies": [
-            "shared capture/search engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -26580,9 +26483,7 @@
             "gworks-secure-calendar-saved-mapping-2026-11-14"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
-          "dependencies": [
-            "shared schemas/export engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -26625,7 +26526,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. agenda_or_minutes: FrontDesk Agenda & Minutes builder UI in historical indexed official article; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -27176,9 +27076,7 @@
             "boarddocs-grand-archived-meeting-fragments"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "Shared schema, capture/text store and search engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -27202,9 +27100,7 @@
             "boarddocs-grand-archived-meeting-fragments"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "Shared schema and export engine."
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -27252,7 +27148,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -27280,7 +27175,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -27307,7 +27201,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
           "dependencies": [
-            "Authorized test tenant/account not supplied.",
             "Supported integration route and conflict/idempotency contract unresolved."
           ],
           "remaining_verification": [
@@ -28128,10 +28021,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
-          "dependencies": [
-            "standalone extraction",
-            "source revision pin"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -28180,9 +28070,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
-          "dependencies": [
-            "shared capture/search engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -28204,9 +28092,7 @@
             "quorumrelay-shared-core-operations"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
-          "dependencies": [
-            "shared schemas/export engine"
-          ],
+          "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
           "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
@@ -28251,7 +28137,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting: Authenticated Meeting Manager scheduling UI; API unknown; agenda_item: Authenticated topic/item submission UI; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -28280,7 +28165,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting: Authenticated scheduling/rescheduling UI; API unknown; agenda_item_or_minutes: Authenticated agenda editing and minutes import/edit/publish UI; API/import format unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],
@@ -28309,7 +28193,6 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_document: Authenticated central document/agenda-item attachment UI; API unknown; recording: Authenticated upload/share video UI; API unknown",
           "dependencies": [
-            "authorized test tenant/account",
             "supported programmatic or explicit authorized UI contract",
             "plan-bound commit and readback"
           ],

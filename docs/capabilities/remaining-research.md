@@ -2,7 +2,7 @@
 
 Reconciled 2026-11-14 against current source and saved receipts. Canonical structured source: [inventory.json](inventory.json). This replaces stale imperative follow-ups; original dated observations and source URLs remain in that ledger and version history.
 
-Unknown machine contracts are unresolved research, not verified outside-information dependencies or unsupported features. No exhaustive-public-search claim is made. Vendor-documented synthetic execution is accepted for its attributed scope; credentials and live writes are optional. Actual public HTTP 403 and guarded redirect failures remain access observations for those exact requests only.
+Unknown machine contracts are unresolved research, not verified outside-information dependencies or unsupported features. No exhaustive-public-search claim is made. Vendor-documented synthetic execution is accepted for its attributed scope; credentials and live writes are optional. Actual public HTTP 403 and guarded redirect failures remain access observations for those exact requests only. Current operation dependencies omit superseded test-account acquisition gates and completed extraction/shared-engine prerequisites; current runtime authorization, machine-contract gaps and unverified acceptance remain separate.
 
 Archive completeness, wider tenant surveys, live account observations and playback limits are qualifications, not newly imposed gates. No release/publication is authorized. Local source/package preparation is separate from delivery.
 
@@ -255,6 +255,8 @@ Evidence and exact scope: `inventory.json` provider `wistia`; operation status a
 - New agenda_app_url editor, recurring day, full meeting forms, new item/file, publication and vendor-specific import contracts remain unresolved. The visible new-file FormData branch does not establish created attachment identity/bytes/readiness or subsequent GET readback; no account acquisition gate is imposed.
 
 Evidence and exact scope: `inventory.json` provider `boardable`; operation status and outbound mappings are separate from historical observations.
+
+- Literal legacy NewAgendaItem contract now implements text-only root/child creation with explicit parent and empty date. Native returned ID and exact preserved-tree readback, snapshot preflight, durable intent/restart/noPOSTreplay and post-send cancellation have21new/64affected synthetic cases. Full meeting creation/new files/new editor/publication remain unmapped.
 
 ## F29 gWorks FrontDesk (`gworks`)
 
