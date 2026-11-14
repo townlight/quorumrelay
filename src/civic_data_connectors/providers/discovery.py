@@ -358,11 +358,14 @@ def _enrich(bundle, provider):
             continue
         normalized = record["normalized"]
         if provider == "tyler-meeting-manager" and bundle['source'].get('options', {}).get('calendar_api_base'):
-            from .tyler_public import documents
+            from .tyler_public import documents, recordings
             supplied = documents(Source.from_dict(bundle['source']), raw)
             if supplied:
                 normalized['documents'] = supplied
                 record['relationships'].extend({'relation': 'document', 'value': deepcopy(item)} for item in supplied)
+            supplied_recordings = recordings(raw)
+            normalized['recordings'] = supplied_recordings
+            record['relationships'].extend({'relation': 'recording', 'value': deepcopy(item)} for item in supplied_recordings)
         elif provider == "civicplus-select":
             normalized["body"] = raw.get("categoryName")
             from .civicclerk_detail import event_documents

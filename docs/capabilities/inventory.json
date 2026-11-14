@@ -27047,6 +27047,55 @@
               }
             ]
           }
+        },
+        {
+          "id": "tyler-player-metadata-2026-11-14",
+          "url": "https://libertycountytxapp.meetingmanager.tylerapp.com/392259prod/tylermm/calendar/main.f980238b7778fb2e.js",
+          "title": "Supplied player metadata and explicit byte-operation outcome",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observed": "2026-11-14",
+          "observation_date": "2026-11-14",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "access_scope": "pinned_public_client_and_local_mock_execution_no_remote_mutation",
+          "receipt_path": "docs/verification/tyler-recording-metadata-2026-11-14.json",
+          "receipt_sha256": "a59187335ff5263003a0b1b38e9cf9fc8a82da1bf1cfe2dc78e208ae628aa9c6",
+          "limits": "No live YouTube/player request, media bytes, playback, caption or staff-write acceptance.; availability is supplied_player_link, not verified media readiness. Unknown nonempty video status retains literal source value according to captured client exclusion list.; No new provider/parser/search handler; original baseline compatibility unchanged. Existing full-suite evidence reused; no build/release or outward delivery.",
+          "synthetic_execution": {
+            "provider": "tyler-meeting-manager",
+            "status": "fixture_passed",
+            "operations": [
+              "discover",
+              "fetch"
+            ],
+            "entities": [],
+            "scope": "Supplied player-link metadata, persistence/ZIP and explicit unsupported byte fetch without media GET.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_tyler_recording_metadata.py tests/test_tyler_packets.py tests/test_tyler_liberty.py tests/test_tyler_native_rows.py tests/test_recording_retrieval.py tests/test_provider_discovery.py -q",
+                "passed": 123,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/tyler-recordings/client-extract.txt",
+                "sha256": "433a657dab5ec8db093a36ccc40641ac58b1b8c4c09edec18f8926ae985ea2ac"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/tyler-liberty/calendar.json",
+                "sha256": "e93f8cae527398998b3316aa41d2016e9b23c41b6e9659d394931b54f871d1f2"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_tyler_recording_metadata.py",
+                "sha256": "62abec4acd50522c9d6fba591a4428b1bff01d6c81e01b11f425015d0926b067",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "62abec4acd50522c9d6fba591a4428b1bff01d6c81e01b11f425015d0926b067"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -27107,7 +27156,8 @@
             "tyler-ector-public-calendar-query",
             "tyler-ector-historical-empty-read",
             "tyler-liberty-public-contract-execution",
-            "tyler-enabled-packets-2026-11-14"
+            "tyler-enabled-packets-2026-11-14",
+            "tyler-player-metadata-2026-11-14"
           ],
           "details": "Observed nonempty Liberty calendar with explicit meeting_type_ids []; legacy default [-1] preserved. Scoped date window and raw fields retained. Configured native mapping retains visible cancelled/adjourned records and literal source status/date/time; legacy baseline parsing remains unchanged.",
           "dependencies": [
@@ -27136,9 +27186,10 @@
           "evidence_ids": [
             "tyler-ector",
             "tyler-liberty-public-contract-execution",
-            "tyler-enabled-packets-2026-11-14"
+            "tyler-enabled-packets-2026-11-14",
+            "tyler-player-metadata-2026-11-14"
           ],
-          "details": "Stored native meetingId/recurringId bound detail; exact observed published agenda/minutes URL membership; explicit attachment fetch validates PDF signature. Configured native mapping retains visible cancelled/adjourned records and literal source status/date/time; legacy baseline parsing remains unchanged. Posted agenda/minutes packets are additionally exposed only with their literal enabled flag; documented client isPacket=true selectors retain native agenda/minutes IDs. Calendar false flags emit no packet; selected detail may supply true. Explicit transfer uses existing source/native-record/document-membership/PDF guards. Packet byte execution is synthetic, not live availability.",
+          "details": "Stored native meetingId/recurringId bound detail; exact observed published agenda/minutes URL membership; explicit attachment fetch validates PDF signature. Configured native mapping retains visible cancelled/adjourned records and literal source status/date/time; legacy baseline parsing remains unchanged. Posted agenda/minutes packets are additionally exposed only with their literal enabled flag; documented client isPacket=true selectors retain native agenda/minutes IDs. Calendar false flags emit no packet; selected detail may supply true. Explicit transfer uses existing source/native-record/document-membership/PDF guards. Packet byte execution is synthetic, not live availability. Supplied video ID/status maps to the vendor client YouTube player link when not cancelled/unavailable; link-only recording metadata survives persistence/ZIP. Explicit recording byte retrieval returns unsupported before a player/media GET; playback/captions/media byte contract remain unverified.",
           "dependencies": [
             "shared network safeguards"
           ],

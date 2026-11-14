@@ -1,0 +1,33 @@
+{
+  "base_commit": "dff6f08a2164163bfea4ee8bf936906bfc44d2ca",
+  "recorded_at": "2026-11-14T06:28:21.562378+00:00",
+  "scope": "Original task6 supplied recording metadata: native video ID/status and vendor-derived YouTube player locator through existing rich Tyler enrichment.",
+  "vendor_client_sha256": "2dcf06fa376a06f48571e959f11ba0b4c62386112feb3344475e18a330e039bd",
+  "source_hashes_canonical_lf": {
+    "tests/test_tyler_recording_metadata.py": "62abec4acd50522c9d6fba591a4428b1bff01d6c81e01b11f425015d0926b067",
+    "src/civic_data_connectors/providers/tyler_public.py": "ab68934594a63b1419d0820668bfb8f3bf2ed5b40347ad3272c22f1db28c9438",
+    "src/civic_data_connectors/providers/discovery.py": "cacf99783af1541457091fd5f3293ef63cd0325340f04e8f4be8b8c0402a16e6",
+    "src/civic_data_connectors/providers/retrieval.py": "7fb3d033fdce357d70fdc25bf3099fd3d44da8d457c5837c897c0fdc0c773d1a"
+  },
+  "contract": {
+    "path": "docs/capabilities/evidence/tyler-recordings/client-extract.txt",
+    "sha256": "433a657dab5ec8db093a36ccc40641ac58b1b8c4c09edec18f8926ae985ea2ac"
+  },
+  "execution": {
+    "command": "python -X utf8 -m pytest tests/test_tyler_recording_metadata.py tests/test_tyler_packets.py tests/test_tyler_liberty.py tests/test_tyler_native_rows.py tests/test_recording_retrieval.py tests/test_provider_discovery.py -q",
+    "passed": 123,
+    "failed": 0,
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\tyler-recording-metadata.xml",
+    "note": "One existing Starlette AnyIO deprecation warning. Final subsequent source change only error message document->attachment."
+  },
+  "checks": [
+    "Captured player metadata/relationship persists and reopens in SQLite, retains raw native values and round-trips ZIP.",
+    "Explicit recording-byte request returns unsupported with retained player metadata before any media network request.",
+    "Unavailable/null/nonstring statuses, unsafe IDs and cancelled recordings do not emit a player locator. Existing documents/packets and other recording behavior covered."
+  ],
+  "limits": [
+    "No live YouTube/player request, media bytes, playback, caption or staff-write acceptance.",
+    "availability is supplied_player_link, not verified media readiness. Unknown nonempty video status retains literal source value according to captured client exclusion list.",
+    "No new provider/parser/search handler; original baseline compatibility unchanged. Existing full-suite evidence reused; no build/release or outward delivery."
+  ]
+}

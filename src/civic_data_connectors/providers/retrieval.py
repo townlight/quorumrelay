@@ -228,12 +228,18 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     if not isinstance(url, str):
         raise ValueError("The captured attachment has no retrievable URL.")
     if source.provider == 'tyler-meeting-manager':
-        from .tyler_public import documents as tyler_documents
+        from .tyler_public import documents as tyler_documents, recordings as tyler_recordings
         raw = record.get('original') or {}
-        if (kind != 'documents' or url_field != 'url' or identity.get('record_type') != 'meeting'
+        if (url_field != 'url' or identity.get('record_type') != 'meeting'
                 or identity.get('external_id') != raw.get('id') or record.get('source_url') != source.url
-                or document not in tyler_documents(source, raw)):
-            raise ValueError('The selected Tyler document does not match its captured meeting.')
+                or document not in (tyler_documents(source, raw) if kind == 'documents' else tyler_recordings(raw))):
+            raise ValueError('The selected Tyler attachment does not match its captured meeting.')
+        if kind == 'recordings':
+            return OperationResult('unsupported', {'record': record, 'attachment': None, 'bundle': bundle,
+                'recording': document}, (Error('operation_unavailable',
+                'The captured Tyler recording supplies a player link, not a recording-byte contract.'),),
+                coverage={'recording_metadata': 'supplied_player_link', 'recording_bytes': 'not_implemented'},
+                operation_id=context.operation_id)
     civicclerk_detail = (source.provider == 'civicplus-select' and isinstance(record.get('original'), dict)
                          and 'meeting' in record['original'] and 'event' in record['original'])
     if civicclerk_detail:

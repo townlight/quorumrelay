@@ -41,6 +41,20 @@ def documents(source, raw):
     return result
 
 
+def recordings(raw):
+    """Expose the vendor client's player link, never a recording-byte URL."""
+    import re
+
+    value, status = raw.get('videoId'), raw.get('videoStatus')
+    if (not isinstance(value, str) or re.fullmatch(r'[A-Za-z0-9_-]{1,128}', value) is None
+            or not isinstance(status, str) or status in {'', 'NA', 'private', 'delete', 'rejected'}
+            or raw.get('canceled')):
+        return []
+    return [{'external_id': value, 'kind': 'video', 'media_type': 'video',
+             'url': 'https://www.youtube.com/watch?v=' + value,
+             'availability': 'supplied_player_link', 'source_status': status}]
+
+
 def fetch_detail(engine, source, namespace, external_id, bounds, context, transport):
     import json
     from time import monotonic
