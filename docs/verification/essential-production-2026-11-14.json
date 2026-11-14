@@ -1,0 +1,32 @@
+{
+  "base_commit": "bf7470e23739e7861acc408b23fb48342de45ccd",
+  "recorded_at": "2026-11-14T06:53:43.221790+00:00",
+  "scope": "Original tasks6/9/10: vendor-linked production read origin and distinct item route, strict development/production credential separation, explicit unmapped production multimedia write.",
+  "contract_paths": [
+    "docs/capabilities/evidence/essential-postman/routes.json",
+    "docs/capabilities/evidence/essential-postman/source.json"
+  ],
+  "source_hashes_canonical_lf": {
+    "tests/test_essential_production.py": "7c36879c77f1c905de2e8fffe1f9ef99fda3a8f82b570e773cf6c6d89155fbac",
+    "src/civic_data_connectors/providers/account_api.py": "b426cdacdd1ab0b8ceb0e5d34e70c7e2eb0349c9ea224e51207f24e89aee1fd5",
+    "src/civic_data_connectors/providers/account_reads.py": "92c1be50ed2ff08c6d4061a5d76b9e032f1ebaee14e90415b0f99eb483ea9af3",
+    "src/civic_data_connectors/providers/essential_write.py": "3b2e99db58db05c15a48cc4a21f46732124cbc8f6d205cfb395728e454608434"
+  },
+  "execution": {
+    "command": "python -X utf8 -m pytest tests/test_essential_production.py tests/test_account_apis.py -q",
+    "passed": 26,
+    "failed": 0,
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\essential-production-contract-final.xml",
+    "lint": "ruff check src tests scripts examples passed"
+  },
+  "diagnosis": [
+    "Initial read tests used nonexistent Engine.fetch(api_resource=...) kwargs; corrected to public execute(fetch, request).",
+    "An early synthetic production write passed using development DTO casing. Inspection of actual Postman request found lower-camel-case fields and no responses; that synthetic result is not accepted as production write proof. Final code rejects production write before network; final26 includes denial and unchanged development write/readback/replay checks."
+  ],
+  "limits": [
+    "No live vendor account read, token exchange, staff mutation, playback or file upload.",
+    "Meeting/item/collection responses remain partial raw captures; multimedia mapping accepts only existing documented wrapper, not guessed response variants.",
+    "No cross-origin fallback or credential reuse. No new provider/parser/search handler or baseline compatibility changes.",
+    "No build/release/pin/default/install/push/publication. Full goal remains incomplete."
+  ]
+}

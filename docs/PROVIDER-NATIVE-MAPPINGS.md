@@ -275,9 +275,25 @@ Additive `civicweb-meetings-json` maps the tenant's public `/Services/MeetingsSe
 
 Cablecast (`*.cablecast.tv`) is a built-in typed connector outside the 31 baseline families. `cablecast-shows-json` maps `/cablecastapi/v1/shows` and `cablecast-show-json` maps `/cablecastapi/v1/shows/{id}`. Show identity is the show `id` in the `//{host}` namespace. Shows with no `vods` entry are not recordings and are left out. The day is the day the title names, else `eventDate`'s first ten characters. The site ignores `pageSize`, so the reader sends `page_size=200` (and `pageSize=200`); `offset` is observed to act as a page index on the one site read. Copies of a meeting share title and day; the reader keeps the copy whose `vod.m3u8` has a `SUBTITLES` entry and records the others in `duplicate_show_ids`. Recording and caption entries are links: watch page `/internetchannel/show/{id}`, the vod `url`, the HLS `vod.m3u8` and the `SUBTITLES` playlist. Caption segment text, media files and audio are not read.
 
-## Essential dev API and TelVue Connect (post-dev3 source)
+## Essential account API and TelVue Connect (post-dev3 source)
 
-`providers/account_reads.py` implements explicit `fetch` requests for the documented Essential dev API meeting/item/multimedia GETs and single supplied-offset collection POST. Meeting/item/collection response models are undocumented: the result is a raw partial capture, without inferred normalized rows or automatic pagination. `essential-multimedia-json` maps only the documented meetingStructure wrapper. No exact native search semantics are claimed for Words.
+`providers/account_reads.py` implements explicit `fetch` requests for the documented Essential meeting/item/multimedia GETs and single supplied-offset collection POST. The support article's development origin and the vendor-linked Postman collection's production origin are selected explicitly; credentials bind to the chosen origin and cannot be reused across them. Meeting/item/collection response models are undocumented: the result is a raw partial capture, without inferred normalized rows or automatic pagination. `essential-multimedia-json` maps only the documented meetingStructure wrapper. No exact native search semantics are claimed for Words.
+
+| Explicit source origin | Item detail route |
+|---|---|
+| `https://meetingsgov.devmunicode.com` | `/PublicApi/item/{id}` from the support article |
+| `https://meetings.municode.com` | `/PublicApi/meeting/item/{id}` from the [vendor-linked Postman documentation](https://documenter.getpostman.com/view/7558574/TWDcEuDz) |
+
+Meeting, multimedia and collection routes keep
+their documented `/PublicApi/meeting/` paths on the selected origin. No origin
+fallback, automatic token acquisition or alternate item-route probing occurs.
+The Postman multimedia-update request uses lower-camel-case fields, unlike the
+support article's Pascal-case DTO, and has no response example. Production writes
+therefore remain unmapped and fail before network; development retains its
+existing plan/approval/readback/receipt flow. Synthetic verification establishes
+production read routing and binding;
+no live account request or mutation was made. Meeting/item create/update and file
+upload remain unresolved. See the [production-route receipt](verification/essential-production-2026-11-14.json).
 
 The same dispatcher implements TelVue Connect GET media/videos/playlists and only the documented media/playlist detail routes, using the exact CONNECT access-key/passphrase headers. `telvue-connect-media-json`, `telvue-connect-videos-json`, and `telvue-connect-playlists-json` preserve original envelopes/bytes, IDs, transcript, chapters, sources, and unknown fields. No list continuation/end condition or video detail route is invented. Current explicit origin, application account namespace and caller tenant binding is required before credentials are sent. Public tenant legacy identity behavior stays unchanged.
 

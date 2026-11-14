@@ -8,7 +8,7 @@ from time import monotonic
 from uuid import UUID
 
 from ..models import Error, OperationResult
-from .account_api import ORIGINS, credentials, headers, reject_credential_echo
+from .account_api import ESSENTIAL_PRODUCTION, account_origin, credentials, headers, reject_credential_echo
 from .native import make_bundle
 
 
@@ -54,6 +54,8 @@ def route(source, request):
         elif not isinstance(identity, str) or re.fullmatch(r"[A-Za-z0-9_-]{1,128}", identity) is None:
             raise ValueError("Meeting/item detail requires a bounded path-safe supplied ID.")
         path = "/PublicApi/" + ("meeting/multimedia/" if resource == "multimedia" else resource + "/")
+        if resource == "item" and account_origin(source) == ESSENTIAL_PRODUCTION:
+            path = "/PublicApi/meeting/item/"
         return "GET", path + identity, None, resource
     if resource == "playlist_items":
         playlist = request.get("playlist_id")
@@ -199,7 +201,8 @@ def fetch_account(source, namespace, request, bounds, context, transport):
                 "meeting_dates": "not inferred from media creation timestamps"}
     if context.check_cancelled():
         return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
-    url = ORIGINS[source.provider] + path
+    origin = account_origin(source)
+    url = origin + path
     deadline = monotonic() + bounds.deadline_seconds
     try:
         request_headers = headers(source, context)
@@ -207,7 +210,7 @@ def fetch_account(source, namespace, request, bounds, context, transport):
             request_headers["Content-Type"] = "application/json"
         response = transport.request(url, method=method, body=encoded, headers=request_headers,
             byte_limit=min(bounds.parser_bytes, bounds.transfer_bytes), deadline_seconds=bounds.deadline_seconds,
-            allowed_origins=(ORIGINS[source.provider],), allow_redirects=False)
+            allowed_origins=(origin,), allow_redirects=False)
         if context.check_cancelled():
             return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
         if (response.status != 200 or response.url != url or monotonic() >= deadline

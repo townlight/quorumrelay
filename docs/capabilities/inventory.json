@@ -9273,6 +9273,49 @@
               }
             ]
           }
+        },
+        {
+          "id": "essential-production-published-routes-2026-11-14",
+          "url": "https://documenter.getpostman.com/view/7558574/TWDcEuDz",
+          "title": "Officially linked production request collection and scoped engine execution",
+          "kind": "official_documentation_and_synthetic_engine_tests",
+          "observed": "2026-11-14",
+          "observation_date": "2026-11-14",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "access_scope": "public_docs_gets_and_local_mock_execution_no_account_or_mutation",
+          "receipt_path": "docs/verification/essential-production-2026-11-14.json",
+          "receipt_sha256": "9b4ccb2d484465513f27fe2f46199741c251fad308a0c7b57cdc751f40b71778",
+          "limits": "No live vendor account read, token exchange, staff mutation, playback or file upload.; Meeting/item/collection responses remain partial raw captures; multimedia mapping accepts only existing documented wrapper, not guessed response variants.",
+          "synthetic_execution": {
+            "provider": "municode-meetings",
+            "status": "fixture_passed",
+            "operations": [
+              "fetch"
+            ],
+            "entities": [],
+            "scope": "Exact production meeting/item/multimedia/collection read routing, raw partial outcomes, environment-bound credentials. Production multimedia write denied before network.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_essential_production.py tests/test_account_apis.py -q",
+                "passed": 26,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/essential-postman/routes.json",
+                "sha256": "3e764b069a40fe85b3bbf1661ea6d519e360603452e6992e5437e9c73f5a0a41"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_essential_production.py",
+                "sha256": "7c36879c77f1c905de2e8fffe1f9ef99fda3a8f82b570e773cf6c6d89155fbac",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "7c36879c77f1c905de2e8fffe1f9ef99fda3a8f82b570e773cf6c6d89155fbac"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -9337,9 +9380,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "municode-essential-public-api",
-            "municode-meetings-tenant"
+            "municode-meetings-tenant",
+            "essential-production-published-routes-2026-11-14"
           ],
-          "details": "Source implements explicitly requested GET meeting/item/multimedia and POST meeting collection at a caller-supplied offset using the documented support-token-gated dev origin. Only `{meetingStructure:...}` multimedia responses have a normalized schema in the guide; meeting/item/collection examples do not define response schemas, so those captures remain raw/partial with no inferred records. No account token or live read.",
+          "details": "Explicit meeting/item/multimedia GET and collection POST at caller-supplied offset use the support article development origin or officially linked Postman production origin. Production item route is /PublicApi/meeting/item/{id}; development retains /PublicApi/item/{id}. Credentials bind exact selected origin/tenant/namespace; no fallback. Meeting/item/collection response schemas remain unverified raw partial captures. Only existing documented meetingStructure multimedia shape is normalized. Synthetic routing/privacy checks accepted; no live account read.",
           "dependencies": [],
           "remaining_verification": [
             "Obtain documented or authorized response examples for meeting and item details and multimedia readback",
@@ -9895,11 +9939,12 @@
         "Do not merge public/private packets or substitute Aha CMS API."
       ],
       "remaining_research": [
-        "Source now implements explicit-offset POST collection and GET meeting/item/multimedia capture on the documented support-gated dev origin. Only the multimedia `{meetingStructure:...}` response is schema-mapped; meeting/item/collection bodies remain raw partial captures with zero inferred normalized records.",
+        "Development and officially linked production request routes are source implemented with environment-bound credentials. Only the existing meetingStructure multimedia shape is mapped; meeting/item/collection responses remain raw partial captures with no inferred records. The Postman collection has no response examples.",
         "Collection offset is caller-supplied; page size, ordering, total/terminal condition and offset progression remain undocumented. Support-token requirements apply to optional live calls, not synthetic contract acceptance; no pagination behavior is inferred.",
-        "The documented multimedia update is source-implemented and fixture-tested. Official examples demonstrate URL/timestamp/default/baseURL changes, but other enum/mutability constraints and update response/readback/version conflicts remain unverified without an authorized tenant.",
-        "The inspected API page has no meeting/item create/update or document upload route; obtain applicable current support API documentation before coding those routes or treating omission as unsupported. No token was issued, and the test host is not a production host.",
-        "Essential reaches end-of-life on 2027-06-30. Keep this product row separate from Select and Aha CMS."
+        "Development multimedia updates have accepted scoped synthetic execution/readback for the documented URL/timestamp/default/baseURL fields. Other enum meanings, mutability and upstream conflict semantics remain qualified; no authorized-tenant or live-write acceptance gate is imposed.",
+        "The inspected help article and officially linked Postman collection provide no meeting/item create/update or document-upload route/model. Product-matched machine contracts remain needed before coding those operations or claiming vendor absence. The article development host and collection production host remain explicitly distinct.",
+        "Essential reaches end-of-life on 2027-06-30. Keep this product row separate from Select and Aha CMS.",
+        "Production multimedia update request uses lower-camel-case JSON, while the existing development DTO adapter uses Pascal-case fields. Production payload/readback equivalence remains unmapped and write planning fails before network; no development-to-production field-case inference."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "municode-meetings",

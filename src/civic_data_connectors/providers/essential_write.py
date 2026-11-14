@@ -7,7 +7,7 @@ import json
 
 from ..engine import canonical_hash
 from ..write_adapters import NativeRequest, WriteAdapter, WriteChange, WriteFailure
-from .account_api import ORIGINS, account_namespace, credentials, reject_credential_echo
+from .account_api import ORIGINS, account_namespace, account_origin, credentials, reject_credential_echo
 from .account_reads import guid
 
 
@@ -23,8 +23,10 @@ class EssentialWriteAdapter(WriteAdapter):
 
     def validate_source(self, source, context):
         if source.provider != self.provider or source.options:
-            raise ValueError("Essential writes require the exact configured dev API source without options.")
+            raise ValueError("Essential writes require an exact documented API source without options.")
         account_namespace(source)
+        if account_origin(source) != ORIGINS[self.provider]:
+            raise WriteFailure("mapping_unverified", "Production multimedia payload/readback casing is not mapped.")
         self.credentials(source, context)
 
     def authorize(self, source, change, context):

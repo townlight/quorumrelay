@@ -1,0 +1,14 @@
+{
+  "observed_at": "2026-11-14T06:53:43.188020+00:00",
+  "official_referrer": "https://www.civicplus.help/meetings-essential/docs/public-application-programming-interface-api",
+  "document_url": "https://documenter.getpostman.com/view/7558574/TWDcEuDz",
+  "document_shell_sha256": "cfbe9090b8349f7a636ae39c8d963847176918bcd41ba6ca95438b62cea9b18b",
+  "collection_url": "https://documenter.gw.postman.com/api/collections/7558574/TWDcEuDz?segregateAuth=true&versionTag=latest",
+  "collection_sha256": "68b166434966c0fb7bf0db9b8016b31bb7782e17d08081ecb7d85269bc5d4c7d",
+  "derivation": "Collection URL was a literal anonymous prefetch href in the officially linked document shell. Three bounded public GETs (shell, metadata, collection), all200; no vendor account API, token exchange or mutation. routes.json contains only names/methods/URLs/body key names; headers/authentication examples and token request omitted. Raw public document stays in local work evidence.",
+  "raw_collection_local": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\essential-postman-prefetch-1.json",
+  "limits": [
+    "Published requests, no response examples. No meeting/item/list response schema or pagination inferred.",
+    "Production multimedia POST has lower-camel-case body; development adapter uses Pascal-case DTO. Production write mapping/readback unresolved; denied before network."
+  ]
+}
