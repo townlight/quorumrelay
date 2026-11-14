@@ -262,9 +262,12 @@ def semantic_errors(data, identities):
                 errors.append(f"{name}: outbound mapping cannot claim provider acceptance")
         for mapping in row["outbound_mappings"]:
             if mapping["interface_type"] == "observed_vendor_client_machine_contract":
-                if (name != "telvue" or mapping["implementation_status"] != "implemented"
+                if ((name, mapping["entity"], mapping["operation"]) not in {
+                        ("telvue", "playlist_order", "update"), ("telvue", "playlist_membership", "create"),
+                        ("boardable", "agenda_order", "update"), ("boardable", "item", "update")}
+                        or mapping["implementation_status"] != "implemented"
                         or mapping["acceptance_status"] != "mock_passed"):
-                    errors.append(f"{name}: vendor client contract requires attributed TelVue synthetic proof")
+                    errors.append(f"{name}: vendor client contract requires attributed exact product/entity synthetic proof")
             if mapping["operation"] not in OPERATIONS:
                 errors.append(f"{name}: unknown outbound operation")
             if mapping["interface_type"] == "documented_automated_api":

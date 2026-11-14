@@ -1,0 +1,2 @@
+import{u as s,Q as o}from"./CNuVc7AT.js";const l=async(a,e={})=>{var n,c;const t=s("publicSiteData",()=>null);if(!((n=t.value)!=null&&n.id))throw new Error("Public site data not available. Make sure public-site middleware has run.");const i={...e,headers:{Accept:"application/json",...e.headers,SiteId:t.value.id}};return!((c=e.headers)!=null&&c["Content-Type"])&&!(e.body instanceof FormData)&&(i.headers["Content-Type"]="application/json"),a=o().public.apiUrl+a,$fetch(a,i)};export{l as p};
+//# sourceMappingURL=CX1JaS8D.js.map

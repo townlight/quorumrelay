@@ -337,3 +337,7 @@ sets `video_url` in discovery and the matched legacy projection. This exposes
 the supplied direct-file candidate to consumers such as Station without
 classifying a generic player link as a downloadable MP4. Guarded retrieval and
 consumer file validation still apply; the path is not proof of playable bytes.
+
+## Boardable legacy agenda client
+
+[BOARDABLE-WRITES.md](BOARDABLE-WRITES.md) documents the pinned runtime org/meeting binding, native list and item GETs, reorder JSON and preserved-field multipart text edits. Vendor client source and36 synthetic coordinator checks are separately attributed; new editor/draft creation/new files/publication remain unmapped. Current source is later than preserved dev13 packages.

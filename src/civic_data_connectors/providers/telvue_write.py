@@ -104,6 +104,10 @@ class TelVueWriteAdapter(WriteAdapter):
             raise AmbiguousWrite("TelVue did not return a confirmed success response.")
         if mutation:
             return None  # A successful POST alone does not confirm the order.
+        if context.check_cancelled():
+            raise WriteCancelled()
+        if monotonic() >= deadline:
+            raise WriteFailure("deadline_exceeded", "The TelVue read exceeded its operation deadline.")
         try:
             value = json.loads(response.content)
         except (ValueError, UnicodeError):

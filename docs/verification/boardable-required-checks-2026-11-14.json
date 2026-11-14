@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "8a634e75ffab2db9ca46623b9bf5c2474804ca26",
+  "status": "LOCAL_REQUIRED_SOURCE_CHECKS_PASS_NOT_DELIVERED",
+  "checks": [
+    {
+      "command": "python -X utf8 -m pytest tests -q",
+      "passed": 1497,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 96.43,
+      "warnings": [
+        "Starlette anyio BlockingPortal dependency deprecation"
+      ],
+      "junit_sha256": "84ffb0d23c8ce3191f6163e4090e5bc9dccc2cfceccc44c67c381082f074ad36"
+    },
+    {
+      "command": "python -m pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q",
+      "passed": 25,
+      "failed": 0,
+      "scope": "After restoring original CRLF inventory serialization and regenerating runtime source hash; behavior suite not repeated."
+    },
+    {
+      "command": "python -m ruff check src tests scripts examples",
+      "status": "passed"
+    },
+    {
+      "command": "python scripts/validate_capabilities.py",
+      "status": "passed",
+      "evidence_records": 378,
+      "outbound_entries": 170,
+      "negative_checks": 5,
+      "errors": 0
+    }
+  ],
+  "reused_evidence": [
+    "Unchanged TypeScript build and four tests from local-completion-2026-11-14.json; no client source changed.",
+    "No new package/native build, installed consumer acceptance or hosted CI claim."
+  ],
+  "attribution_receipt": "docs/verification/boardable-telvue-writes-2026-11-14.json",
+  "attribution_sha256": "219e70c55e36695f21ac26a670cc011960893e635598cc88aacf600b1cf9c870",
+  "remaining": "Full tasks6/8/9/10 still have unresolved provider contract/mapping requirements. This receipt is not full-plan completion.",
+  "owned_job": "session78139 terminal exit0; no remaining owned full-suite process."
+}

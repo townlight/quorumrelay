@@ -258,3 +258,18 @@ def test_membership_policy_revocation_prevents_commit(tmp_path):
     config["medium_ids"] = []
     assert engine.execute("commit_write", approval, context=context).status == "failed"
     assert not any(m == "POST" for m, _, _ in network.calls)
+
+
+def test_cancellation_during_final_plan_read_does_not_persist_plan(tmp_path):
+    engine, context, network = setup(tmp_path)
+    original = network.send
+
+    def cancelled(url, **kwargs):
+        response = original(url, **kwargs)
+        if url.endswith("/playlist_items.json"):
+            context.cancellation.set()
+        return response
+    network.send = cancelled
+    result = engine.execute("plan_write", {"source": SOURCE, "changes": [CHANGE]}, context=context)
+    assert result.status == "cancelled", result.public_dict()
+    assert not list(engine.storage.list("write_plans", scope=context.scope))

@@ -242,7 +242,8 @@ Evidence and exact scope: `inventory.json` provider `wistia`; operation status a
 - The public UI search field/API search parameter was not exercised; native-search semantics remain unknown and this discovery path sends blank search.
 - Public meeting rows expose description, not a verified normalized body field; body filtering is unknown. Preserve timezone literals and the earlier VCCCD detail-versus-landing display discrepancy.
 - The listing has no agenda/document/media locators. Selected known-detail mapping and supplied viewer-to-document resolution are implemented with separate synthetic and bounded live-byte receipts. Other documents and the listing/detail date disagreement remain unverified; no native search or complete catalog is inferred.
-- Pinned Boardable documentation remains UI-focused and does not establish external API/import/create/update/upload or readback schemas. Missing machine contracts remain unresolved; absence of test credentials does not block accepted vendor-contract synthetic execution.
+- The pinned public legacy client now establishes sibling reorder and existing item text/description updates; both are implemented with36 synthetic coordinator cases. Explicit runtime organization/meeting URLs and legacy-editor binding are required. No draft creation, parent moves, new attachments or publication. See [exact usage and limits](../BOARDABLE-WRITES.md).
+- New agenda_app_url editor, recurring day, full meeting forms, new item/file, publication and vendor-specific import contracts remain unresolved. The visible new-file FormData branch does not establish created attachment identity/bytes/readiness or subsequent GET readback; no account acquisition gate is imposed.
 
 Evidence and exact scope: `inventory.json` provider `boardable`; operation status and outbound mappings are separate from historical observations.
 

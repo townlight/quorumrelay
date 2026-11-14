@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "8a634e75ffab2db9ca46623b9bf5c2474804ca26",
+  "status": "SCOPED_SYNTHETIC_PASS_NO_LIVE_MUTATIONS",
+  "requirements": [
+    6,
+    8,
+    9,
+    10
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_boardable_agenda_write.py tests/test_telvue_playlist_write.py tests/test_writes.py tests/test_write_providers.py tests/test_write_file_recovery.py -q",
+      "passed": 126,
+      "failed": 0,
+      "junit_sha256": "3bf1d45f1e36347ca49acf8f24de56bf081e0d0224726c598c9618a91ab9601f"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/boardable-client-write/application.extract.js",
+      "sha256": "2cd4e5bce0910f73b62d1265708a926d6cff639dd0204dfc5f1bca44f4f1ed2f"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/boardable-client-write/source.json",
+      "sha256": "3beb195bf0d0e3f325a2a6509834db65aa8c43db6406f51655884454f387fa69"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_boardable_agenda_write.py",
+      "sha256": "71d273f47b85857701d672aac8afe1a30476a93853166079d836d93addf4568e",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "71d273f47b85857701d672aac8afe1a30476a93853166079d836d93addf4568e"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/telvue-client-write/application.extract.js",
+      "sha256": "0d2aedad0904422c9729d9bda7243ef1df625c3aa6da57a87b9d53f6b7089a5a"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/telvue-client-write/source.json",
+      "sha256": "fa6613a0a2501eb8cf2a0585f8e610248b0f6897ba0ab9bc5a77c6704a3578e2"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_telvue_playlist_write.py",
+      "sha256": "d4c76698c649658891458df614db8a10e6e04c5ee5a2851a6d66b9b5c1150a49",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "d4c76698c649658891458df614db8a10e6e04c5ee5a2851a6d66b9b5c1150a49"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/boardable_write.py",
+      "sha256": "e08ff9d011525cff6e49c0118b2a248645abeb7034f8adc91de247a7643cb7e3"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/telvue_write.py",
+      "sha256": "cbe13bcb1c5b3cc22a3a68a6910afb22c4da65527be22da6b346b3c0d0930834"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/writes.py",
+      "sha256": "7ac06fbaaac6feb7afcadb7813c0f5413268614e2ad45d7ae9524d777a6d595a"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/write_adapters.py",
+      "sha256": "5af832211fb125a6825ddeae30094d2f580e600d9fb62d5cb3cb837f196fdbb8"
+    }
+  ],
+  "scope": "Boardable36 cases plus TelVue32 plus shared58. Explicit vendor legacy agenda sibling reorder and existing item text/description edits; TelVue mid-read cancellation regression. Plan cancellation now returns cancelled without durable plan.",
+  "limits": [
+    "No live mutation/account acquisition or stable public write API guarantee.",
+    "No releases, package/native rebuild, repin, signing/install, push/merge/tag/publication.",
+    "Unmapped vendor operations remain unresolved; no blanket outside-only dependency assertion."
+  ]
+}

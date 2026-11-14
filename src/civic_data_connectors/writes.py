@@ -13,7 +13,7 @@ from .extensions import StorageConflict
 from .models import Bounds, Error, OperationResult, SCHEMA_VERSION, Source
 from .storage import operation_cancelled, update_operation
 from .write_adapters import (
-    AmbiguousWrite, WriteChange, WriteFailure, check_write_adapter, default_adapters, sanitize,
+    AmbiguousWrite, WriteCancelled, WriteChange, WriteFailure, check_write_adapter, default_adapters, sanitize,
 )
 from .write_files import open_write_input, resolve_write_files
 
@@ -130,6 +130,8 @@ class WriteCoordinator:
                                    coverage={"mock": adapter.mock, "changes": len(prepared),
                                              "live_acceptance": "NOT_RUN"},
                                    operation_id=context.operation_id)
+        except WriteCancelled:
+            return OperationResult("cancelled", operation_id=context.operation_id)
         except (WriteFailure, ValueError, TypeError, KeyError) as error:
             return self._failure(error, context)
 
