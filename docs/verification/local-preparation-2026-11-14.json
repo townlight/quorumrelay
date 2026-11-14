@@ -1,0 +1,132 @@
+{
+  "observed_at": "2026-11-14T16:30:52.347540+00:00",
+  "status": "LOCAL_PREPARATION_COMPLETE_WITH_EXPLICIT_UNRESOLVED_MAPPINGS",
+  "source_commit": "e19dc3d5031f82f20f7d3f8d689ab57dba4422b3",
+  "versions": {
+    "python": "0.1.0.dev12",
+    "typescript": "0.1.0-dev.12",
+    "schema": "2.0.0"
+  },
+  "artifacts": {
+    "quorumrelay-0.1.0.dev12-py3-none-any.whl": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\quorumrelay-0.1.0.dev12-py3-none-any.whl",
+      "sha256": "d58a05444797e49542407d912ef48502a616c19dbb80c89af367e8b09e5a98a8",
+      "bytes": 598157
+    },
+    "quorumrelay-client-0.1.0-dev.12.tgz": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\quorumrelay-client-0.1.0-dev.12.tgz",
+      "sha256": "fd9a3d13b9fd9b876a95a5be5d05c206c668ccb3c616e392d0e7faf7f86ebdb1",
+      "bytes": 3861
+    }
+  },
+  "consumer_commits": {
+    "brief": "92e566b934515b089cab01d2990e44c1d2ba0c49",
+    "record": "0fb985bdeed00092f3d29e296491ea08c6205120",
+    "reporter": "b3c630e46ab7cd07ba95caa93f5496005c16cc85",
+    "tl": "ad247c14dc905fbc85c0cba930e5641143c30567"
+  },
+  "inventory_reconciliation": {
+    "access_misclassifications_corrected": 56,
+    "status_change": "blocked_access -> not_implemented where the actual gap was an unknown machine contract, not verified access dependency",
+    "corrected_scopes": [
+      "Laserfiche JSON multipart finalization and indexed image/text page pairing",
+      "Wistia swap/job readback",
+      "Towpath selected detail",
+      "ClerkBase supplied HTML text",
+      "Optional AgendaQuick/calendar/Towpath archive surveys",
+      "Historical live-account gates and stale capability counts"
+    ],
+    "outside_information_dependencies_certified": []
+  },
+  "checks": {
+    "python_affected": "33 distinct passed: initial 32 passed/one failed, exact failed source-subprocess case passed after environment fix; no full rerun",
+    "python_junit": [
+      "C:/Users/scott/Documents/Codex/2026-11-12/re/outputs/local-preparation-2026-11-14.xml",
+      "C:/Users/scott/Documents/Codex/2026-11-12/re/outputs/local-preparation-interface-fix-2026-11-14.xml"
+    ],
+    "typescript": "Build + four tests passed",
+    "ruff": "src/tests/scripts/examples passed",
+    "capability_validator": "zero errors / five negative checks; original AST not repeated",
+    "installed_wheel": {
+      "providers": 32,
+      "baseline_families": 31,
+      "baseline_formats": 34,
+      "standard_handlers": 14,
+      "native_parsers": 47,
+      "native_search_handlers": 17,
+      "native_normalize": "PASS",
+      "raw_unknown_fields": "PASS",
+      "reference_imports": "absent",
+      "HTTP_MCP_module_imports": "PASS",
+      "packaged_resources": "PASS"
+    },
+    "pip_check": "No broken requirements",
+    "package_source_equality": "204 exact Windows checkout members; 198 Python/resource members compared with Git:12 exact and186 line-ending-only; no other differences",
+    "consumer_checks": {
+      "artifact_copies_and_lock_hashes": "pass",
+      "brief_uv_lock_check": "pass",
+      "record_uv_lock_check": "pass",
+      "brief_connector_tests": "49 passed; wheel imported from archive on PYTHONPATH using existing env-brief; 1 deprecation warning",
+      "record_connector_migration": "3 passed; wheel imported from archive on PYTHONPATH using existing env-record; 1 deprecation warning",
+      "reporter_boundary": "pass; packaged client and installed env-local12 service; synthetic loopback, 32 providers",
+      "townlight_connector_contract": "33 passed, 35 skipped; wheel on PYTHONPATH using existing env-tl",
+      "townlight_installer": "pass; dev12 installed and verified in isolated consumer-test-venv",
+      "initial_test_environment_attempts": "env-local12 lacks pytest; system-site test venv lacked fastapi; affected tests passed in existing consumer envs with dev12 wheel on PYTHONPATH",
+      "reporter_boundary_initial": "failed because dev11 expected 31 providers; changed expectation to dev12 count 32 and passed",
+      "limitations": "Local source preparation and synthetic tests only; no native rebuild, installed product acceptance, publication or release."
+    }
+  },
+  "mapping_assessment": {
+    "select_event": {
+      "status": "unresolved_research_and_engineering",
+      "checked": "Current Swagger, official workflows, full literal same-origin portal asset graph:21assets/843993bytes",
+      "missing": "Required templateId/date/time input to Event readback equivalence, timezone and recurrence/template side effects; safe mutation/readback mapping not established",
+      "outside_only_dependency_verified": false,
+      "guide": "docs/CIVICCLERK-SELECT.md"
+    },
+    "essential_production_multimedia": {
+      "status": "unresolved_research_and_engineering",
+      "checked": "Current official help and linked Postman collection, hash unchanged; exact existing Effingham public page 200/92131bytes, zero scripts/iframes/API shape references",
+      "known": "Production lower-camel request sample recorded separately from development Pascal-case DTO",
+      "missing": "Production GET wrapper/casing and independent readback equivalence; no response examples in linked collection",
+      "outside_only_dependency_verified": false,
+      "guide": "docs/capabilities/evidence/essential-postman/source.json"
+    }
+  },
+  "release_hold": [
+    "Push/merge/tag/publication/package registry/site delivery not performed",
+    "No signing/native build/installed product upgrade/recovery or post-publication acceptance performed"
+  ],
+  "limits": [
+    "This is local package and consumer preparation, not full19-goal completion.",
+    "Unknown vendor contracts remain unresolved research; no exhaustive public-source or outside-only dependency claim.",
+    "Brief/Record/Townlight focused tests used wheel-archive imports with existing application dependencies; see consumer receipt for exact commands and limits.",
+    "Townlight 35 corpus-dependent skips remain explicit; no duplicate broader tests were added.",
+    "Full source CI suite and hosted CI were not rerun; unaffected existing receipts remain separate.",
+    "Original dev11 and signed/native artifacts preserved."
+  ],
+  "receipts": {
+    "source-equality.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\source-equality.json",
+      "sha256": "55253d49c2fed4388a3c829a99beeab67e997fde713c995a0008619f05eae902"
+    },
+    "installed-wheel.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\installed-wheel.json",
+      "sha256": "bd282e9398144663cd20ffd4334c4e65e3bdfc8ea7a9de968a3bd570db50ade2"
+    },
+    "consumer-preparation.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\consumer-preparation.json",
+      "sha256": "bfc8d62d6479fff917b0a63045bb5029a7ae32a13510679768fb6b38d3236897"
+    },
+    "townlight-connector-install.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\townlight-connector-install.json",
+      "sha256": "bc10841ad5e4d36c1e16c885a7addee75545f9f20a2e08aa56419238f18594b5"
+    }
+  },
+  "execution_corrections": [
+    "The env-sdk probe lacked jsonschema and env-service lacked Ruff; used existing equipped environments.",
+    "Initial Node source-interface child imported installed dev11; explicitly bound that source test to checkout, exact failed case passed.",
+    "Git evidence JSON retained CRLF under -text; final changed derived summaries normalized to LF, without modifying captured raw evidence.",
+    "Git comparison explicitly records checkout/Git line endings; no repeat artifact build."
+  ]
+}

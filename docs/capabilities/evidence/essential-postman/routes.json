@@ -18,7 +18,7 @@
       "multimediaItems"
     ],
     "request_body_casing": "lower-camel-case",
-    "request_body_model": {
+    "request_body_sample_shape": {
       "id": "GUID",
       "meetingId": "GUID",
       "audioVideoDetails": {
@@ -39,7 +39,8 @@
           "multimediaBaseUrl": "string"
         }
       ]
-    }
+    },
+    "sample_limits": "Derived from supplied sample values only; not a required-field, enum, nullability or response schema."
   },
   {
     "name": "Read Item Details",
