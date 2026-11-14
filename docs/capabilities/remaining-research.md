@@ -163,10 +163,10 @@ Evidence and exact scope: `inventory.json` provider `town-hall-streams`; operati
 
 - Documented Connect v2 reads are GET /api/v2/media[/{id}], /videos and /playlists[/{id}]. The source fetch adapter now implements explicitly requested account reads; synthetic documented-route verification is accepted; live calls are optional and unrun.
 - Published pages show example JSON envelopes/fields but omit filters, pagination/cursor, caps and rate limits. Record these from a supplied authorized account response/current guide; do not claim catalog completeness.
-- Connect/CloudCast MRSS is implemented with explicit feed format and partial published-player coverage. Exact vendor page/sample pins and synthetic engine checks establish mapped fields, not full archives or playback. Connect v2 mutations still lack executable payload contracts in reviewed guides; HyperCaster APIs are a separate product and are not substituted.
-- Connect v2 playlist-item relationships are implemented from December2022 vendor examples; no playlist write contract or meeting association is inferred. Mutation schema research remains required, not credential acquisition.
+- Connect/CloudCast MRSS has scoped published-player coverage. Connect native playlist reorder/media membership writes now have exact public-client request contracts and synthetic readback. No upload/processing/visibility or vendor meeting association inferred; HyperCaster remains separate.
+- Connect client upload consumes runtime fileUrl/dvdUrl/uploadParams/userId absent from public bundle initializers. Sanitized deployment-matched initializer, created-media response and processing/association readback specification are required to map upload safely. This is an exact missing runtime contract input, not a live-account acceptance gate.
 
-Evidence and exact scope: `inventory.json` provider `telvue`; operation status and outbound mappings are separate from historical observations.
+Evidence and exact scope: `inventory.json` provider `telvue`; [playlist-write contract](../TELVUE-WRITES.md).
 
 ## F20 CHAMP (`champ`)
 
@@ -258,7 +258,7 @@ Evidence and exact scope: `inventory.json` provider `gworks`; operation status a
 
 - Latest XML-ActiveMeetings lead: pinned third-party notebook has an unexecuted, incomplete illustrative XML fragment with malformed entities, not a saved server response. One exact example request returned HTTP 403; no XML/item mapping was inferred. Exact source pins and request are indexed in `docs/verification/local-completion-2026-11-14.json`. This does not establish an outside-only dependency.
 
-- Opt-in public listing/print detail is implemented with pinned third-party source and 19 current synthetic helper/workflow cases; official/live contract acceptance remains unverified (403 observed).
+- Opt-in public listing/print detail is implemented with 20 current helper/workflow cases. A Git-blob-verified third-party archived listing now retains331valid native meetings and one explicit empty placeholder, with original bytes intact. Nonempty identityless rows still fail. Official/live contract acceptance remains unverified (403 observed).
 - Two additional pinned third-party clients corroborate direct public anchor declarations. The reader now preserves those hrefs and excludes private/admin/executive and suppressed contexts; persistence/ZIP equality is tested. Compact dates already worked. Public file hrefs remain strings only; item hierarchy, attachment transfer, native search, staff writes and vendor import remain unresolved. See `docs/verification/boarddocs-public-selectors-2026-11-14.json`; this is not official vendor acceptance.
 
 Evidence and exact scope: `inventory.json` provider `boarddocs`; operation status and outbound mappings are separate from historical observations.
@@ -270,3 +270,7 @@ Evidence and exact scope: `inventory.json` provider `boarddocs`; operation statu
 - Staff meeting/item writes, document/media upload and provider-specific import format remain unmapped; no API inference from UI features.
 
 Evidence and exact scope: `inventory.json` provider `tyler-meeting-manager`; operation status and outbound mappings are separate from historical observations.
+
+## Concrete contract follow-up, 2026-11-14
+
+See [the pinned source assessment](evidence/contract-followup-2026-11-14/source.json) for the new OnBase Unity REST schema, exact SDK/sample access results, actual Tyler ERP article/product mismatch, unused calendar write declarations, PrimeGov compiled HTML denial and V2 feature applicability. SDK sign-in is a verified access dependency for that specific documentation site. Other missing schemas remain unresolved research; access errors and UI help do not prove that only an outside source can resolve them. No account acquisition or live transaction is required.

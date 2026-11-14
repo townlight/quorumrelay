@@ -2,6 +2,11 @@
 
 The preserved immutable package baseline is Python **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The current integrated source and its locally built, unpublished successor are Python **0.1.0.dev13** / TypeScript **0.1.0-dev.13**. This candidate includes the approved CivicWeb/Cablecast readers, opt-in BoardDocs public listing/detail and CivicClerk Select detail/files and section writes, with 32 registered providers, 31 baseline families, 34 baseline formats, 47 additive parser hooks and 17 native-search handlers. See [local preparation evidence](verification/local-completion-2026-11-14.json). Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
 
+Later local source changes, including the TelVue playlist writes and latest
+BoardDocs/OnBase corrections, are not inside the preserved dev13 package
+artifacts or consumer pins. Use the matching source checkout to exercise those
+changes. No successor package build or release is implied by this guide update.
+
 QuorumRelay is a standalone civic-data engine for your own application, service,
 script or agent. It does not require a Townlight installation, an application
 database, a model provider or a hosted QuorumRelay account. Use the Python API in
@@ -447,6 +452,7 @@ checkout containing the mapping; the frozen dev8 wheel is not silently updated.
 | OnBase public windows and selected details | [Public listing and selected detail mapping](ONBASE-PUBLIC-WINDOWS.md); [prepared Normal Tagged DIP files](ONBASE-DIP.md) are not a remote Agenda import/association |
 | BoardDocs public listing and selected printable agenda | [Opt-in third-party-source-backed mapping](BOARDDOCS-PUBLIC.md); no paging or linked-file fetch |
 | CivicClerk Select detail/files and section writes | [Official contract and scoped mapping](CIVICCLERK-SELECT.md); selected published agenda/files and exact section plan/commit/readback |
+| TelVue Connect existing playlist | [Native client reorder and media membership addition](TELVUE-WRITES.md); exact plan/commit/v2 readback, no upload or vendor meeting association |
 
 For Granicus Platform/MediaVault and other supported field mappings, consult the
 [write contract](WRITE-CONTRACT.md#later-local-source-mappings) and

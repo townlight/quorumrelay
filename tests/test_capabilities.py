@@ -77,8 +77,12 @@ def test_known_explicit_listing_and_native_write_labels_are_not_stale_access_gat
     assert essential["operations"]["update"]["acceptance_status"] == "mock_passed"
     multimedia = [row for row in essential["outbound_mappings"] if row["acceptance_status"] == "mock_passed"]
     assert len(multimedia) == 1 and multimedia[0]["entity"] == "meeting.multimedia"
-    assert all(row["acceptance_status"] == "not_run"
-               for row in provider_capabilities("telvue")["outbound_mappings"])
+    telvue = provider_capabilities("telvue")
+    mapped = [row for row in telvue["outbound_mappings"] if row["acceptance_status"] == "mock_passed"]
+    assert {row["entity"] for row in mapped} == {"playlist_order", "playlist_membership"}
+    assert all(row["interface_type"] == "observed_vendor_client_machine_contract" for row in mapped)
+    assert "telvue" in adapters
+    assert telvue["operations"]["upload"]["acceptance_status"] == "not_run"
 
 
 def test_attributed_outbound_subsets_match_exact_public_dispatches():

@@ -3439,6 +3439,18 @@
             "Type4 HTML3/unknown output unmapped; bytes do not prove PDF rendering or live availability.",
             "No live provider request, staff account, package/native build, install or delivery."
           ]
+        },
+        {
+          "id": "primegov-contract-followup-2026-11-14",
+          "url": "https://support.granicus.com/customersupport/s/article/Configuring-OneMeeting-Public-Portal-V2",
+          "title": "Product-matched concrete contract lead assessment",
+          "kind": "public_contract_and_access_observation",
+          "observed": "New V2 portal help documents optional support-controlled feature enablement, not authenticated payloads. Third-party crawler corroborates compiled HTML route; exact selected Reno23431GET403. Lacity swagger403, not a verified current login redirect. No outside-only schema dependency proven.",
+          "observation_date": "2026-11-14",
+          "proof_level": "bounded_source_assessment_not_implementation_acceptance",
+          "receipt_path": "docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
+          "receipt_sha256": "93dbd5a8169cd4e4646adf5c2f2aa7a30cd3c1b86a3e26480cfe61e47fc0d108",
+          "limits": "Only the identified resources and exact missing fields; no exhaustive search, provider absence or live transaction claim."
         }
       ],
       "tenants": [
@@ -3972,7 +3984,8 @@
         "Observed Reno public /api/v2/PublicPortal/search form is now source-implemented with exact local metadata/excerpt checks, stable native-ID continuation, raw/parent preservation and bounded first/resumed receipt. Full document content, provider matching/caps/rank and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.",
         "Official release notes identify Meeting API, speaker and tracking-number search but the checked release/help material supplies no executable schema. Continue from concrete product-matched API leads; no exhaustive public search or outside-only dependency is established, and no account enablement is a synthetic acceptance gate.",
         "Authenticated create/update/upload field schemas, permissions, readback and conflict semantics remain unverified in the pinned material. A matching machine contract is needed; credentials or live tenant writes are not an acceptance gate.",
-        "Selected public client document branches synthetically executed; JSON URL-string shape inferred from callback. Type4 HTML/unknown output, live file availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled."
+        "Selected public client document branches synthetically executed; JSON URL-string shape inferred from callback. Type4 HTML/unknown output, live file availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled.",
+        "New V2 portal help documents optional support-controlled feature enablement, not authenticated payloads. Third-party crawler corroborates compiled HTML route; exact selected Reno23431GET403. Lacity swagger403, not a verified current login redirect. No outside-only schema dependency proven. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json"
       ],
       "requirement_ids": [
         "C01",
@@ -17340,6 +17353,60 @@
           "proof_level": "official_documentation",
           "findings": "Published December2022 GET routes, playlist_items/playlist_item envelopes, separate item/playlist/playable IDs, sequence/windows and nested media sources. Selected-field vendor example transcription pinned in evidence/telvue-connect-playlist-items/source.json; seven synthetic actual-engine/saved-normalize checks pass in tests/test_telvue_playlist_items.py.",
           "limits": "No inferred meeting association, unknown playable type schema, pagination/total/order or write methods. Local direct documentation retrieval403; browser official reference read, not an exact page capture."
+        },
+        {
+          "id": "telvue-client-playlist-synthetic",
+          "url": "https://connect.telvue.com/",
+          "title": "Public Connect client machine contracts and executed scoped playlist writes",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-14",
+          "observed": "Anonymous vendor shell and declared application asset HTTP200; no script execution or account access.",
+          "access_scope": "public_source_and_local_synthetic_execution_only",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/telvue-boarddocs-contracts-2026-11-14.json",
+          "receipt_sha256": "af4e03ab1b787cafd3ed4643ea113ef31d8d4fe2537e3ead313e13766c489451",
+          "limits": "Only TelVue existing-playlist reorder/media membership native calls with documented v2 readback are synthetic-accepted. No live acceptance or stable public write API claim.",
+          "synthetic_execution": {
+            "provider": "telvue",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "playlist_order",
+              "playlist_membership"
+            ],
+            "scope": "Exact existing-playlist reorder and media-only membership addition; application meeting policy is not vendor association.",
+            "execution_provenance": "Current local 31-case TelVue coordinator execution within recorded51-case run; no live mutation. Shared108-case safety suite reused independently.",
+            "checks": [
+              {
+                "command": "pytest tests/test_telvue_playlist_write.py tests/test_boarddocs_public_helpers.py tests/test_boarddocs_public_workflow.py -q",
+                "passed": 51,
+                "failed": 0,
+                "junit_sha256": "149d80a14a692845126422d63f7440afbb68c60ca1a099a434197c5c9cecdb7d"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/telvue-client-write/application.extract.js",
+                "sha256": "0d2aedad0904422c9729d9bda7243ef1df625c3aa6da57a87b9d53f6b7089a5a"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/telvue-client-write/source.json",
+                "sha256": "fa6613a0a2501eb8cf2a0585f8e610248b0f6897ba0ab9bc5a77c6704a3578e2"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_telvue_playlist_write.py",
+                "sha256": "8680660f973a7bc8c34b8171f1d76396bac6d10009164a2292f0f658f151a9cc",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "8680660f973a7bc8c34b8171f1d76396bac6d10009164a2292f0f658f151a9cc"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -17573,58 +17640,56 @@
           ]
         },
         "create": {
-          "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "telvue-upload"
+            "telvue-upload",
+            "telvue-client-playlist-synthetic"
           ],
-          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. recording: Connect UI: Media Library or Series upload creates media/episode; API unknown",
+          "details": "Only explicit playlist membership create / playlist order update implemented from vendor client; scoped outbound rows have synthetic acceptance. Recording create, upload and metadata writes remain unverified.",
           "dependencies": [
-            "authorized test tenant/account",
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "application-owned tenant/origin/namespace-bound session+CSRF and v2 read credentials at runtime"
           ],
           "remaining_verification": [
             "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "vendor_client_contract_and_scoped_synthetic_execution",
           "tenant_scope": [
             "https://videoplayer.telvue.com/player/WDZPS7GoaEEQAF8v5_qEOE_Kj--KiACH/categories/574?showtabssearch=false",
             "https://videoplayer.telvue.com/player/dQtoDvlZYDOtqaf7eRn9z2lb1Nb6EZzu/playlists"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Local vendor-client-contract synthetic execution; live credentials not an acceptance gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
           ]
         },
         "update": {
-          "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "telvue-edit"
+            "telvue-edit",
+            "telvue-client-playlist-synthetic"
           ],
-          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. recording.metadata: Connect UI: Media > Edit; API unknown",
+          "details": "Only explicit playlist membership create / playlist order update implemented from vendor client; scoped outbound rows have synthetic acceptance. Recording create, upload and metadata writes remain unverified.",
           "dependencies": [
-            "authorized test tenant/account",
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "application-owned tenant/origin/namespace-bound session+CSRF and v2 read credentials at runtime"
           ],
           "remaining_verification": [
             "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "vendor_client_contract_and_scoped_synthetic_execution",
           "tenant_scope": [
             "https://videoplayer.telvue.com/player/WDZPS7GoaEEQAF8v5_qEOE_Kj--KiACH/categories/574?showtabssearch=false",
             "https://videoplayer.telvue.com/player/dQtoDvlZYDOtqaf7eRn9z2lb1Nb6EZzu/playlists"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Local vendor-client-contract synthetic execution; live credentials not an acceptance gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -17786,6 +17851,86 @@
           "api_version": "unknown",
           "automatable_contract_verified": false,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "playlist_order",
+          "operation": "update",
+          "endpoint_or_format": "POST /playlists/:id/reorder",
+          "field_mappings": [
+            {
+              "normalized": "playlist_item_ids",
+              "provider_field": "playlist_item[]",
+              "mapping_level": "observed_vendor_client_form_field"
+            }
+          ],
+          "evidence_ids": [
+            "telvue-client-playlist-synthetic",
+            "telvue-playlists-api",
+            "telvue-connect-playlist-items-contract"
+          ],
+          "account_requirements": "Application-owned exact tenant/origin/namespace policy; session_cookie/CSRF POST; v2 key/passphrase GET. No credential acquisition required for synthetic acceptance.",
+          "authorized_test_access": "synthetic_only_no_live_mutation",
+          "readback_receipt": "Count and exact native parent/IDs, contiguous explicit sequence, full snapshot preflight and exact order or new media membership readback; uncertain outcomes reconcile without replay.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_public_vendor_client_not_stable_public_write_API_guarantee",
+          "method": "POST",
+          "api_version": "observed2026-11-14client+documentedv2readback",
+          "automatable_contract_verified": true,
+          "domain_scope": "Existing meeting-related playlist only, explicit application meeting binding; no vendor meeting association, deletes or administration."
+        },
+        {
+          "entity": "playlist_membership",
+          "operation": "create",
+          "endpoint_or_format": "POST /bulk/playlists/:id/playlist_items/create",
+          "field_mappings": [
+            {
+              "normalized": "medium_ids",
+              "provider_field": "medium_ids[]",
+              "mapping_level": "observed_vendor_client_form_field"
+            }
+          ],
+          "evidence_ids": [
+            "telvue-client-playlist-synthetic",
+            "telvue-playlists-api",
+            "telvue-connect-playlist-items-contract"
+          ],
+          "account_requirements": "Application-owned exact tenant/origin/namespace policy; session_cookie/CSRF POST; v2 key/passphrase GET. No credential acquisition required for synthetic acceptance.",
+          "authorized_test_access": "synthetic_only_no_live_mutation",
+          "readback_receipt": "Count and exact native parent/IDs, contiguous explicit sequence, full snapshot preflight and exact order or new media membership readback; uncertain outcomes reconcile without replay.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_public_vendor_client_not_stable_public_write_API_guarantee",
+          "method": "POST",
+          "api_version": "observed2026-11-14client+documentedv2readback",
+          "automatable_contract_verified": true,
+          "domain_scope": "Existing meeting-related playlist only, explicit application meeting binding; no vendor meeting association, deletes or administration."
         }
       ],
       "pagination": {
@@ -17803,8 +17948,8 @@
       "remaining_research": [
         "Documented Connect v2 reads are GET /api/v2/media[/{id}], /videos and /playlists[/{id}]. The source fetch adapter now implements explicitly requested account reads; synthetic documented-route verification is accepted; live calls are optional and unrun.",
         "Published pages show example JSON envelopes/fields but omit filters, pagination/cursor, caps and rate limits. Record these from a supplied authorized account response/current guide; do not claim catalog completeness.",
-        "Connect/CloudCast MRSS is implemented with explicit feed format and partial published-player coverage. Exact vendor page/sample pins and synthetic engine checks establish mapped fields, not full archives or playback. Connect v2 mutations still lack executable payload contracts in reviewed guides; HyperCaster APIs are a separate product and are not substituted.",
-        "Connect v2 playlist-item relationships are implemented from December2022 vendor examples; no playlist write contract or meeting association is inferred. Mutation schema research remains required, not credential acquisition."
+        "Connect/CloudCast MRSS has scoped published-player coverage. Connect native playlist reorder/media membership writes now have exact public-client request contracts and synthetic readback. No upload/processing/visibility or vendor meeting association inferred; HyperCaster remains separate.",
+        "Connect client upload consumes runtime fileUrl/dvdUrl/uploadParams/userId absent from public bundle initializers. Sanitized deployment-matched initializer, created-media response and processing/association readback specification are required to map upload safely. This is an exact missing runtime contract input, not a live-account acceptance gate."
       ],
       "authentication": "Public playlists anonymous; Connect API requires client application access key + secret passphrase in custom headers, not Basic auth. Upload roles Contributor/Coordinator/Admin and account feature settings matter.",
       "write_findings": "Strong official UI evidence for recording creation/upload and metadata updates. Public v2 pages inspected document GET only, so a write adapter still needs a supported submission contract and authorized access.",
@@ -19053,6 +19198,18 @@
               }
             ]
           }
+        },
+        {
+          "id": "onbase-contract-followup-2026-11-14",
+          "url": "https://dev.salesforce.unityapi.onbase.com/swagger/docs/V1",
+          "title": "Product-matched concrete contract lead assessment",
+          "kind": "public_contract_and_access_observation",
+          "observed": "New public UnityRestAPI V1 request DTOs found: document/create and document/get responses remain unspecified objects, fileContent encoding unspecified, and no Agenda association path. SDK official link redirects to Hyland authentication; exact sample ZIP403. Do not substitute Content Innovation Cloud or Fiserv interfaces for selected Agenda deployment.",
+          "observation_date": "2026-11-14",
+          "proof_level": "bounded_source_assessment_not_implementation_acceptance",
+          "receipt_path": "docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
+          "receipt_sha256": "93dbd5a8169cd4e4646adf5c2f2aa7a30cd3c1b86a3e26480cfe61e47fc0d108",
+          "limits": "Only the identified resources and exact missing fields; no exhaustive search, provider absence or live transaction claim."
         }
       ],
       "tenants": [
@@ -19791,7 +19948,8 @@
         "Deployment-matched create/update/upload and meeting-association field/readback contracts remain missing. An authorized staff/test account is not required for vendor-documented synthetic acceptance.",
         "Normal Tagged DIP linked-document file/index preparation is implemented with exact destination mappings and synthetic emitted-layout proof; no Agenda meeting association or remote processing is inferred. OnBase API SDK remains an actual vendor surface; sdk.onbase.com redirected to Hyland identity, and public REST help describes per-deployment published operations rather than a universal Agenda schema. Continue exact API contract research without credential acquisition.",
         "Current-listing Agenda hierarchy, selected item/section detail, supporting-document wrapper and meeting-packet branches now have scoped source/synthetic execution. Archive traversal, native search, non-agenda detail variants and staff import/meeting association remain unresolved; broader deployment or live file availability is not inferred.",
-        "Akron embedded Documents and Media now have vendor-client-backed synthetic mapping: exact native document/item/publish IDs and locator branches, plus link-only live/on-demand meeting player. Actual nonempty response applicability, native keyword search/archive, other wrappers and remote Agenda association/import remain unverified."
+        "Akron embedded Documents and Media now have vendor-client-backed synthetic mapping: exact native document/item/publish IDs and locator branches, plus link-only live/on-demand meeting player. Actual nonempty response applicability, native keyword search/archive, other wrappers and remote Agenda association/import remain unverified.",
+        "New public UnityRestAPI V1 request DTOs found: document/create and document/get responses remain unspecified objects, fileContent encoding unspecified, and no Agenda association path. SDK official link redirects to Hyland authentication; exact sample ZIP403. Do not substitute Content Innovation Cloud or Fiserv interfaces for selected Agenda deployment. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json"
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "onbase",
@@ -26313,6 +26471,19 @@
             "19 affected tests pass, including persistence and ZIP equality; compact dates already worked."
           ],
           "limits": "No official/live response acceptance, item tree, attachment transfer, native search or writes."
+        },
+        {
+          "id": "boarddocs-grand-archived-listing",
+          "url": "https://github.com/City-Bureau/city-scrapers-grand-rapids/blob/main/tests/files/gra_public_school_board_boarddocs_list.json",
+          "title": "Git-blob-verified third-party archived listing compatibility",
+          "kind": "third_party_archived_response_and_local_tests",
+          "observation_date": "2026-11-14",
+          "proof_level": "archived_response_compatibility_not_vendor_acceptance",
+          "fixture_path": "tests/fixtures/boarddocs-public/grand-list.json",
+          "fixture_sha256": "23724db103d485a1a2481d17efcf9262ad183f2925d820126abdf9bb2d546476",
+          "limits": "331valid meetings andone empty placeholder; entire raw capture retained. Not current live vendor or catalog acceptance.",
+          "receipt_path": "docs/verification/telvue-boarddocs-contracts-2026-11-14.json",
+          "receipt_sha256": "af4e03ab1b787cafd3ed4643ea113ef31d8d4fe2537e3ead313e13766c489451"
         }
       ],
       "tenants": [
@@ -26902,7 +27073,8 @@
       ],
       "remaining_research": [
         "Opt-in public listing/print detail is implemented with pinned third-party source and18synthetic helper/workflow cases; official/live contract acceptance remains unverified (403 observed).",
-        "Public file hrefs remain strings only; item hierarchy, attachment transfer, native search, staff writes and vendor import remain unresolved."
+        "Public file hrefs remain strings only; item hierarchy, attachment transfer, native search, staff writes and vendor import remain unresolved.",
+        "City Bureau Git-blob-pinned saved listing now parses331valid native meetings and explicitly counts one empty placeholder; nonempty identityless rows still reject. Entire original JSON retained. No completeness or official vendor acceptance claim."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "boarddocs",
@@ -27217,6 +27389,18 @@
               }
             ]
           }
+        },
+        {
+          "id": "tyler-meeting-manager-contract-followup-2026-11-14",
+          "url": "https://tylernow.atlassian.net/wiki/spaces/KA/pages/1044250630/API+Toolkit+-+What+is+needed+in+the+file+to+upload+TCM+Attachments",
+          "title": "Product-matched concrete contract lead assessment",
+          "kind": "public_contract_and_access_observation",
+          "observed": "Actual publicly rendered TCM attachment article applies to EERP Accounts Payable, not MeetingManager. Calendar bundle names write route constants and a scheduling DTO without matching send/auth/response/recurrence contract. No staff write or upload inferred.",
+          "observation_date": "2026-11-14",
+          "proof_level": "bounded_source_assessment_not_implementation_acceptance",
+          "receipt_path": "docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
+          "receipt_sha256": "93dbd5a8169cd4e4646adf5c2f2aa7a30cd3c1b86a3e26480cfe61e47fc0d108",
+          "limits": "Only the identified resources and exact missing fields; no exhaustive search, provider absence or live transaction claim."
         }
       ],
       "tenants": [
@@ -27761,7 +27945,8 @@
       "remaining_research": [
         "Historical Ector empty requests remain historical. Liberty establishes nonempty selected-window fields; not full catalog or universal meetingTypeIds semantics.",
         "Native search pagination is bounded/partial; remote stable ordering and full-document text remain unverified.",
-        "Staff meeting/item writes, document/media upload and provider-specific import format remain unmapped; no API inference from UI features."
+        "Staff meeting/item writes, document/media upload and provider-specific import format remain unmapped; no API inference from UI features.",
+        "Actual publicly rendered TCM attachment article applies to EERP Accounts Payable, not MeetingManager. Calendar bundle names write route constants and a scheduling DTO without matching send/auth/response/recurrence contract. No staff write or upload inferred. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json"
       ],
       "authentication": "Ector public calendar anonymous. Staff functions need authorized Tyler account and configured workflow; API tier/access unknown.",
       "write_findings": "Official page explicitly supports meeting scheduling/rescheduling, agenda edits, attachment/video uploads and minutes import/edit/publish. No usable write API or vendor minutes import schema verified.",

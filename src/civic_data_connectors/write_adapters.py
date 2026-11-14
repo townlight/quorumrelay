@@ -301,13 +301,18 @@ def _public_url(url):
 def sanitize(value, credentials=None):
     """Remove credentials even from a hostile provider response before persistence."""
     secrets = []
-    for key in ("token", "access_token", "authorization", "api_key", "username", "password"):
+    for key in ("token", "access_token", "authorization", "api_key", "username", "password",
+                "access_key", "secret_passphrase", "session_cookie", "csrf_token"):
         secret = (credentials or {}).get(key)
         if isinstance(secret, str) and secret:
             secrets.append(secret)
+            if key == "session_cookie":
+                secrets.extend(part.partition("=")[2].strip() for part in secret.split(";")
+                               if part.partition("=")[2].strip())
     if isinstance(value, dict):
         return {k: sanitize(v, credentials) for k, v in value.items()
-                if k.lower() not in {"token", "access_token", "authorization", "api_key", "cookie", "set-cookie", "password"}}
+                if k.lower() not in {"token", "access_token", "authorization", "api_key", "cookie", "set-cookie", "password",
+                                     "access_key", "secret_passphrase", "session_cookie", "csrf_token"}}
     if isinstance(value, (list, tuple)):
         return [sanitize(v, credentials) for v in value]
     if isinstance(value, str):
@@ -1222,7 +1227,8 @@ def default_adapters(transport=None):
     from .providers.civicclerk_write import CivicClerkWriteAdapter
     from .providers.essential_write import EssentialWriteAdapter
     from .providers.granicus_write import GranicusWriteAdapter
+    from .providers.telvue_write import TelVueWriteAdapter
     return {**{name: WriteAdapter(name, transport)
                for name in ("legistar", "wistia", "laserfiche", "laserfiche-weblink")},
             "municode-meetings": EssentialWriteAdapter(transport), "granicus": GranicusWriteAdapter(transport),
-            "civicplus-select": CivicClerkWriteAdapter(transport)}
+            "civicplus-select": CivicClerkWriteAdapter(transport), "telvue": TelVueWriteAdapter(transport)}

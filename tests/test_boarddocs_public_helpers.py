@@ -2,6 +2,7 @@
 
 import base64
 import json
+from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
 import pytest
@@ -121,3 +122,17 @@ def test_compact_date_and_direct_public_anchors_preserve_declared_links_only():
     assert detail["records"][0]["normalized"]["source_public_file_links"] == [
         "/mi/grand/Board.nsf/file.pdf", "/public.pdf"]
     assert detail["records"][0]["normalized"]["documents"] == []
+
+
+def test_saved_listing_retains_valid_meetings_and_explicit_empty_placeholder():
+    content = (Path(__file__).parent / "fixtures/boarddocs-public/grand-list.json").read_bytes()
+    rows = parse_listing(SOURCE, content)
+    assert len(rows) == 331
+    bundle = listing_bundle(SOURCE, "boarddocs:test", content, rows)
+    assert len(bundle["records"]) == 331
+    assert bundle["extensions"]["boarddocs_listing"]["empty_placeholder_rows"] == 1
+    assert base64.b64decode(bundle["capture"]["content_base64"]) == content
+    assert bundle["records"][0]["normalized"]["meeting_date"] == "2026-09-21"
+    assert [r["original"] for r in bundle["records"]] == [r for r in json.loads(content) if r]
+    with pytest.raises(ValueError, match="provider-issued"):
+        parse_listing(SOURCE, b'[{"name":"Nonempty row without identity"}]')

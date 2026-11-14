@@ -1,0 +1,2174 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V1",
+    "title": "Hyland.UnityRestAPI",
+    "x-swagger-net-version": "8.3.32.401"
+  },
+  "host": "dev.salesforce.unityapi.onbase.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/api/document/get": {
+      "post": {
+        "tags": [
+          "Document"
+        ],
+        "operationId": "Document_QueryDocument",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "info",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DocumentQueryInfo"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/document/{ds}/get": {
+      "post": {
+        "tags": [
+          "Document"
+        ],
+        "operationId": "Document_PostApiDocumentByDsGet",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "info",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DocumentQueryInfo"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/document/get/extended": {
+      "post": {
+        "tags": [
+          "Document"
+        ],
+        "operationId": "Document_QueryDocumentExtended",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "info",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DocumentQueryInfo"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/document/{ds}/get/extended": {
+      "post": {
+        "tags": [
+          "Document"
+        ],
+        "operationId": "Document_PostApiDocumentByDsGetExtended",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "info",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DocumentQueryInfo"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/document/get/extended/documenttypegroup": {
+      "post": {
+        "tags": [
+          "Document"
+        ],
+        "operationId": "Document_QueryDocumentByDocumentTypeGroupExtended",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "info",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DocumentQueryInfo"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/document/{ds}/get/extended/documenttypegroup": {
+      "post": {
+        "tags": [
+          "Document"
+        ],
+        "operationId": "Document_PostApiDocumentByDsGetExtendedDocumenttypegroup",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "info",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DocumentQueryInfo"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/document/create": {
+      "post": {
+        "tags": [
+          "Document"
+        ],
+        "operationId": "Document_CreateDocument",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "info",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DocumentInfo"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/document/{ds}/create": {
+      "post": {
+        "tags": [
+          "Document"
+        ],
+        "operationId": "Document_PostApiDocumentByDsCreate",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "info",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DocumentInfo"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/eform/create": {
+      "post": {
+        "tags": [
+          "Eform"
+        ],
+        "operationId": "Eform_Create",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "info",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EformInfo"
+            }
+          },
+          {
+            "name": "ds",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/eform/{ds}/create": {
+      "post": {
+        "tags": [
+          "Eform"
+        ],
+        "operationId": "Eform_PostApiEformByDsCreate",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "info",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EformInfo"
+            }
+          },
+          {
+            "name": "ds",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/workview/{appName}/filter/{filterName}": {
+      "get": {
+        "tags": [
+          "Filters"
+        ],
+        "operationId": "Filters_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Filters"
+        ],
+        "operationId": "Filters_GetWithInput",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "queryParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FilterQueryParameters"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/workview/{ds}/{appName}/filter/{filterName}": {
+      "get": {
+        "tags": [
+          "Filters"
+        ],
+        "operationId": "Filters_GetApiWorkviewByDsByAppNameFilterByFilterName",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Filters"
+        ],
+        "operationId": "Filters_PostApiWorkviewByDsByAppNameFilterByFilterName",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "queryParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FilterQueryParameters"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/workview/{appName}/{className}/dynamicfilter": {
+      "post": {
+        "tags": [
+          "Filters"
+        ],
+        "operationId": "Filters_GetDynamicFilterQueryWithInput",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "className",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "queryParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FilterQueryParameters"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/workview/{ds}/{appName}/{className}/dynamicfilter": {
+      "post": {
+        "tags": [
+          "Filters"
+        ],
+        "operationId": "Filters_PostApiWorkviewByDsByAppNameByClassNameDynamicfilter",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "className",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "queryParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FilterQueryParameters"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/workview/{appName}/{className}/dynamicfilter/returncolumns": {
+      "post": {
+        "tags": [
+          "Filters"
+        ],
+        "operationId": "Filters_GetDynamicFilterQueryWithInputAndReturnColumns",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "className",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "queryParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FilterQueryParameters"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/workview/{ds}/{appName}/{className}/dynamicfilter/returncolumns": {
+      "post": {
+        "tags": [
+          "Filters"
+        ],
+        "operationId": "Filters_PostApiWorkviewByDsByAppNameByClassNameDynamicfilterReturncolumns",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "className",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "queryParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FilterQueryParameters"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
+          },
+          {
+            "name": "ds",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/workview/{appName}/{className}/object/{objectid}": {
+      "get": {
+        "tags": [
+          "Object"
+        ],
+        "operationId": "Object_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "className",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "objectid",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "ds",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/workview/{ds}/{appName}/{className}/object/{objectid}": {
+      "get": {
+        "tags": [
+          "Object"
+        ],
+        "operationId": "Object_GetApiWorkviewByDsByAppNameByClassNameObjectByObjectid",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "className",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "objectid",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "ds",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/unityform/Create": {
+      "post": {
+        "tags": [
+          "UnityForm"
+        ],
+        "operationId": "UnityForm_Create",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "unityFormInfo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnityFormInfo"
+            }
+          },
+          {
+            "name": "ds",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/unityform/{ds}/Create": {
+      "post": {
+        "tags": [
+          "UnityForm"
+        ],
+        "operationId": "UnityForm_PostApiUnityformByDsCreate",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "unityFormInfo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnityFormInfo"
+            }
+          },
+          {
+            "name": "ds",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/workview/create": {
+      "post": {
+        "tags": [
+          "WorkView"
+        ],
+        "operationId": "WorkView_Create",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "className",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wvObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkviewObjectInfo"
+            }
+          },
+          {
+            "name": "ds",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/workview/{ds}/create": {
+      "post": {
+        "tags": [
+          "WorkView"
+        ],
+        "operationId": "WorkView_PostApiWorkviewByDsCreate",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "className",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wvObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkviewObjectInfo"
+            }
+          },
+          {
+            "name": "ds",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/workview/update": {
+      "post": {
+        "tags": [
+          "WorkView"
+        ],
+        "operationId": "WorkView_Update",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "className",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wvObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkviewObjectInfo"
+            }
+          },
+          {
+            "name": "ds",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/workview/{ds}/update": {
+      "post": {
+        "tags": [
+          "WorkView"
+        ],
+        "operationId": "WorkView_PostApiWorkviewByDsUpdate",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "className",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wvObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkviewObjectInfo"
+            }
+          },
+          {
+            "name": "ds",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "DocumentQueryInfo": {
+      "properties": {
+        "docTypeInfo": {
+          "$ref": "#/definitions/DocTypeInfo"
+        },
+        "keywordRecords": {
+          "items": {
+            "$ref": "#/definitions/EKeywordRecord"
+          },
+          "xml": {
+            "name": "EKeywordRecord",
+            "wrapped": true
+          },
+          "type": "array"
+        },
+        "keywordConstraints": {
+          "items": {
+            "$ref": "#/definitions/KeywordConstraint"
+          },
+          "xml": {
+            "name": "KeywordConstraint",
+            "wrapped": true
+          },
+          "type": "array"
+        },
+        "keywordResponseFields": {
+          "items": {
+            "$ref": "#/definitions/KeywordResponseFields"
+          },
+          "xml": {
+            "name": "KeywordResponseFields",
+            "wrapped": true
+          },
+          "type": "array"
+        },
+        "filterDateRange": {
+          "$ref": "#/definitions/FilterDateRange"
+        },
+        "docTypeGroupInfo": {
+          "$ref": "#/definitions/DocTypeInfo"
+        }
+      },
+      "xml": {
+        "name": "DocumentQueryInfo"
+      },
+      "type": "object"
+    },
+    "DocTypeInfo": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "idSpecified": {
+          "type": "boolean"
+        },
+        "nameSpecified": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "DocTypeInfo"
+      },
+      "type": "object"
+    },
+    "EKeywordRecord": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "idSpecified": {
+          "type": "boolean"
+        },
+        "nameSpecified": {
+          "type": "boolean"
+        },
+        "value": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "xml": {
+        "name": "EKeywordRecord"
+      },
+      "type": "object"
+    },
+    "KeywordConstraint": {
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Operator": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "object"
+        },
+        "Relation": {
+          "type": "string"
+        },
+        "KeywordOperator": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Equal",
+            "LessThan",
+            "GreaterThan",
+            "LessThanEqual",
+            "GreaterThanEqual",
+            "NotEqual",
+            "Literal"
+          ]
+        },
+        "KeywordRelation": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "And",
+            "Or",
+            "To"
+          ]
+        }
+      },
+      "xml": {
+        "name": "KeywordConstraint"
+      },
+      "type": "object"
+    },
+    "KeywordResponseFields": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "KeywordResponseFields"
+      },
+      "type": "object"
+    },
+    "FilterDateRange": {
+      "properties": {
+        "fromDate": {
+          "type": "string"
+        },
+        "toDate": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "FilterDateRange"
+      },
+      "type": "object"
+    },
+    "DocumentInfo": {
+      "properties": {
+        "docTypeInfo": {
+          "$ref": "#/definitions/DocTypeInfo"
+        },
+        "fileTypeInfo": {
+          "$ref": "#/definitions/FileTypeInfo"
+        },
+        "keywordRecords": {
+          "items": {
+            "$ref": "#/definitions/EKeywordRecord"
+          },
+          "xml": {
+            "name": "EKeywordRecord",
+            "wrapped": true
+          },
+          "type": "array"
+        },
+        "editKeywordRec": {
+          "items": {
+            "$ref": "#/definitions/EditKeywordRec"
+          },
+          "xml": {
+            "name": "EditKeywordRec",
+            "wrapped": true
+          },
+          "type": "array"
+        },
+        "fileContent": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "DocumentInfo"
+      },
+      "type": "object"
+    },
+    "FileTypeInfo": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "idSpecified": {
+          "type": "boolean"
+        },
+        "nameSpecified": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "FileTypeInfo"
+      },
+      "type": "object"
+    },
+    "EditKeywordRec": {
+      "properties": {
+        "keywordRecType": {
+          "type": "string"
+        },
+        "keywordRecId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "records": {
+          "items": {
+            "$ref": "#/definitions/Record"
+          },
+          "xml": {
+            "name": "Record",
+            "wrapped": true
+          },
+          "type": "array"
+        },
+        "keywordRecIdSpecified": {
+          "type": "boolean"
+        },
+        "keywordRecTypeSpecified": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "EditKeywordRec"
+      },
+      "type": "object"
+    },
+    "Record": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "idSpecified": {
+          "type": "boolean"
+        },
+        "nameSpecified": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "Record"
+      },
+      "type": "object"
+    },
+    "EformInfo": {
+      "properties": {
+        "docTypeInfo": {
+          "$ref": "#/definitions/DocTypeInfo"
+        },
+        "fileTypeInfo": {
+          "$ref": "#/definitions/FileTypeInfo"
+        },
+        "keywordRecords": {
+          "items": {
+            "$ref": "#/definitions/EKeywordRecord"
+          },
+          "xml": {
+            "name": "EKeywordRecord",
+            "wrapped": true
+          },
+          "type": "array"
+        },
+        "editKeywordRec": {
+          "items": {
+            "$ref": "#/definitions/EditKeywordRec"
+          },
+          "xml": {
+            "name": "EditKeywordRec",
+            "wrapped": true
+          },
+          "type": "array"
+        },
+        "fieldRecords": {
+          "items": {
+            "$ref": "#/definitions/FieldRecord"
+          },
+          "xml": {
+            "name": "FieldRecord",
+            "wrapped": true
+          },
+          "type": "array"
+        }
+      },
+      "xml": {
+        "name": "EformInfo"
+      },
+      "type": "object"
+    },
+    "FieldRecord": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "nameSpecified": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "FieldRecord"
+      },
+      "type": "object"
+    },
+    "FilterQueryParameters": {
+      "properties": {
+        "Constraints": {
+          "items": {
+            "$ref": "#/definitions/Constraint"
+          },
+          "xml": {
+            "name": "Constraint",
+            "wrapped": true
+          },
+          "type": "array"
+        },
+        "Truncate": {
+          "type": "boolean"
+        },
+        "FilterColumns": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "SortAttribute": {
+          "type": "string"
+        },
+        "SortType": {
+          "type": "string"
+        },
+        "WorkViewSortType": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "DESCENDING",
+            "ASCENDING"
+          ]
+        }
+      },
+      "xml": {
+        "name": "FilterQueryParameters"
+      },
+      "type": "object"
+    },
+    "Constraint": {
+      "properties": {
+        "DottedAddress": {
+          "type": "string"
+        },
+        "Operator": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "object"
+        },
+        "Connector": {
+          "type": "string"
+        },
+        "Grouping": {
+          "type": "string"
+        },
+        "WorkviewOperator": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Equal",
+            "LessThan",
+            "GreaterThan",
+            "LessThanEqual",
+            "GreaterThanEqual",
+            "NotEqual",
+            "Like",
+            "NotLike",
+            "Null",
+            "NotNull"
+          ]
+        },
+        "WorkviewGrouping": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "NoParenthesis",
+            "OpenParenthesis",
+            "CloseParenthesis"
+          ]
+        },
+        "WorkviewConnector": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "AndConnector",
+            "OrConnector"
+          ]
+        }
+      },
+      "xml": {
+        "name": "Constraint"
+      },
+      "type": "object"
+    },
+    "UnityFormInfo": {
+      "properties": {
+        "keywordRecordType": {
+          "type": "string"
+        },
+        "keywordRecords": {
+          "items": {
+            "$ref": "#/definitions/KeywordRecordUnity"
+          },
+          "xml": {
+            "name": "KeywordRecordUnity",
+            "wrapped": true
+          },
+          "type": "array"
+        },
+        "editKeywordRecords": {
+          "items": {
+            "$ref": "#/definitions/EditKeywordRecordUnity"
+          },
+          "xml": {
+            "name": "EditKeywordRecordUnity",
+            "wrapped": true
+          },
+          "type": "array"
+        },
+        "fieldRecords": {
+          "items": {
+            "$ref": "#/definitions/FieldRecord"
+          },
+          "xml": {
+            "name": "FieldRecord",
+            "wrapped": true
+          },
+          "type": "array"
+        },
+        "formTemplateId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "formTemplateName": {
+          "type": "string"
+        },
+        "idSpecified": {
+          "type": "boolean"
+        },
+        "nameSpecified": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "UnityFormInfo"
+      },
+      "type": "object"
+    },
+    "KeywordRecordUnity": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "value": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "UnityRecordType": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "KeywordRecordUnity"
+      },
+      "type": "object"
+    },
+    "EditKeywordRecordUnity": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "EditKeywordRecordUnity"
+      },
+      "type": "object"
+    },
+    "WorkviewObjectInfo": {
+      "properties": {
+        "objectId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "appName": {
+          "type": "string"
+        },
+        "className": {
+          "type": "string"
+        },
+        "attributeList": {
+          "items": {
+            "$ref": "#/definitions/AttrInfo"
+          },
+          "xml": {
+            "name": "AttrInfo",
+            "wrapped": true
+          },
+          "type": "array"
+        },
+        "appIdSpecified": {
+          "type": "boolean"
+        },
+        "appNameSpecified": {
+          "type": "boolean"
+        },
+        "classIdSpecified": {
+          "type": "boolean"
+        },
+        "classNameSpecified": {
+          "type": "boolean"
+        },
+        "activateObjectOnSave": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "WorkviewObjectInfo"
+      },
+      "type": "object"
+    },
+    "AttrInfo": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "idSpecified": {
+          "type": "boolean"
+        },
+        "nameSpecified": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "AttrInfo"
+      },
+      "type": "object"
+    }
+  },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "description": "JWT Authorization header \"Authorization: Bearer {token}\"",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "tags": [
+    {
+      "name": "Document"
+    },
+    {
+      "name": "Eform"
+    },
+    {
+      "name": "Filters"
+    },
+    {
+      "name": "Object"
+    },
+    {
+      "name": "UnityForm"
+    },
+    {
+      "name": "WorkView"
+    }
+  ]
+}

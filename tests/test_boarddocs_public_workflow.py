@@ -3,6 +3,7 @@
 import base64
 from copy import deepcopy
 import json
+from pathlib import Path
 
 import pytest
 
@@ -10,6 +11,7 @@ from quorumrelay import OperationContext, Source, create_engine
 from quorumrelay.providers.contracts import Response
 from quorumrelay.storage import SQLiteStorage
 from test_boarddocs_public_helpers import DETAIL, SOURCE
+from civic_data_connectors.providers.boarddocs_public import listing_bundle, parse_listing
 
 
 ROWS = [{'unique': 'C55TD0000001', 'numberdate': '20261112', 'unid': 'NATIVE1',
@@ -138,3 +140,28 @@ def test_unrecognized_source_and_parser_hook_cannot_open_other_hosts():
     source['url'] = 'https://example.com/mi/grand/Board.nsf/Public'
     result = create_engine(provider_transport=transport).execute('discover', {'source': source})
     assert result.status == 'failed' and not transport.calls
+
+
+def test_archived_listing_all_native_ids_and_exact_bytes_roundtrip_without_duplicates(tmp_path):
+    content = (Path(__file__).parent / 'fixtures/boarddocs-public/grand-list.json').read_bytes()
+    bundle = listing_bundle(SOURCE, '//go.boarddocs.com', content, parse_listing(SOURCE, content))
+    engine = create_engine(storage=SQLiteStorage(tmp_path / 'archived.sqlite'))
+    for _ in range(2):
+        imported = engine.execute('import_bundle', {'bundle': bundle, 'persist': True})
+        assert imported.status == 'completed', imported.public_dict()
+    reopened = create_engine(storage=SQLiteStorage(tmp_path / 'archived.sqlite'))
+    assert len(list(reopened.storage.list('records', scope=OperationContext().scope))) == 331
+    exported = reopened.execute('export', {'bundle': imported.data['bundle'], 'format': 'zip'})
+    assert exported.status == 'completed', exported.public_dict()
+    destination = create_engine(storage=SQLiteStorage(tmp_path / 'restored.sqlite'))
+    restored = destination.execute('import_bundle', {'format': 'zip', 'persist': True},
+        content=base64.b64decode(exported.data['content_base64']))
+    assert restored.status == 'completed', restored.public_dict()
+    rows = restored.data['bundle']['records']
+    expected = {r['identity']['external_id']: r for r in bundle['records']}
+    assert len(rows) == len(expected) == 331
+    assert all(r['original'] == expected[r['identity']['external_id']]['original']
+               and r['normalized'] == expected[r['identity']['external_id']]['normalized'] for r in rows)
+    capture = restored.data['bundle']['capture']
+    with destination.storage.open_capture(capture['storage_reference'], scope=OperationContext().scope) as stream:
+        assert stream.read() == content

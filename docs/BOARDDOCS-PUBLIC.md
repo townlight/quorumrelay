@@ -40,6 +40,12 @@ BoardDocs public reads need no provider credential. The application still contro
 
 ## Evidence and limits
 
+The [City Bureau archived listing](capabilities/evidence/boarddocs-public/grand-list-source.json)
+adds exact-byte compatibility evidence: 331 native meeting rows and one empty
+object placeholder. The parser reports that placeholder separately and retains
+the entire original capture. A nonempty row without a native ID still fails.
+This third-party archive is not a current vendor read or complete catalog proof.
+
 The route and parsing extracts are pinned under [BoardDocs evidence](capabilities/evidence/boarddocs-public/llama-index-source.json) to LlamaIndex commit `26c7dc3e9846045864cf93ab92cb13bc80a3394e`. `tests/test_boarddocs_public_helpers.py` and `tests/test_boarddocs_public_workflow.py` exercise third-party-source-shaped synthetic responses, guarded POSTs, denials, changed listings, bounds, persistence/reopen, search and ZIP export. This is synthetic source execution; no live BoardDocs acceptance is claimed.
 
 The third-party reader returns one rendered meeting document. The current mapping does not claim catalog completeness, server paging, native search, agenda-item structure, attachment bytes, MIME/visibility guarantees, archived-meeting access or vendor approval. See [engine coverage](ENGINE-COVERAGE.md#roster-map) for the broader status.

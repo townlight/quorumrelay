@@ -145,6 +145,11 @@ Remaining acceptance includes unresolved documented provider entities/fields and
 
 ## Later local source mappings
 
+TelVue Connect existing-playlist reorder and media membership additions are
+mapped from the pinned public vendor client, with documented v2 readback and
+synthetic coordinator execution. See [exact fields, credentials and limits](TELVUE-WRITES.md).
+This does not establish media upload, processing or vendor meeting association.
+
 The table above records the earlier mapped surface and does not enumerate all
 later source additions. Current source additionally includes Granicus Platform
 SOAP and MediaVault event/media/metadata/document workflows, explicit publication,

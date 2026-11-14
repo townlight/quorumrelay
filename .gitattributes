@@ -2,4 +2,6 @@
 tests/fixtures/** -text
 docs/capabilities/inventory.json -text whitespace=cr-at-eol
 docs/capabilities/evidence/** -text
+# This vendor Swagger capture has original CRLF bytes; preserve its pinned hash.
+docs/capabilities/evidence/contract-followup-2026-11-14/onbase-unity-rest-swagger.json -text whitespace=cr-at-eol
 docs/verification/*.json -text whitespace=cr-at-eol

@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-14",
+  "scope": "New product-specific leads only; prior applicable receipts reused. No exhaustive public-search or vendor-absence claim.",
+  "onbase": {
+    "official_referrers": [
+      "https://community.hyland.com/kb/articles/1362-sdk-onbase",
+      "https://community.hyland.com/kb/articles/1899-api-sample-application-onbase-unity-api"
+    ],
+    "sdk_url": "https://sdk.onbase.com/",
+    "sdk_result": "302 to https://id.hyland.com/oauth2/ausbrhm0v8tXnoOMR4x7/v1/authorize; official sample article links this SDK. Authentication access dependency is verified for this exact site, not for every possible public source.",
+    "sample_zip_url": "https://community.hyland.com/api/v2/media/download-by-url?url=https%3A%2F%2Fus.v-cdn.net%2F6038671%2Fuploads%2FICWMT7JGGGMX%2Fapi-sample-application.zip",
+    "sample_zip_result": "HTTP403; no retry/alternate-UA/access workaround",
+    "swagger_url": "https://dev.salesforce.unityapi.onbase.com/swagger/docs/V1",
+    "swagger_status": 200,
+    "swagger_sha256": "e3f5087d7200b68907a3ff9267c0b474595e8cd9372264459250d4ad3581fe18",
+    "swagger_size": 50760,
+    "assessment": "Hyland.UnityRestAPI V1 request schemas DocumentInfo/DocumentQueryInfo verified. fileContent only string; create/query200 responses only typeobject. No Agenda meeting/item association path or metadata model. Salesforce-named service applicability to selected Agenda deployment unestablished. No base64 assumption, invented response ID or guessed association.",
+    "exact_missing": [
+      "Version/deployment-matched Agenda document-to-meeting/item association method, parameters and readback",
+      "Unity REST fileContent encoding and create/query response envelope/native document identity",
+      "Configured document type, keyword/index mapping and allowed service origin from matching deployment specification"
+    ],
+    "outside_proof_scope": "Access to linked SDK documentation needs Hyland authentication or a shareable exported document. This does not prove another public source cannot establish a subset."
+  },
+  "tyler": {
+    "official_article": "https://tylernow.atlassian.net/wiki/spaces/KA/pages/1044250630/API+Toolkit+-+What+is+needed+in+the+file+to+upload+TCM+Attachments",
+    "retrieval": "HTTP200 bounded1500000-byteprefix; relevant article body present and extracted. Peripheral GraphQL anonymous-access errors are not claimed to hide this article.",
+    "article_prefix_sha256": "3d7f1a5b2009cc8b52c2d9f3588de144969ecd2d698c7e7a321c8e40504bad73",
+    "context": "EERP / Accounts Payable / API ToolKit; TCMFileName includes extension, TCMFileContent explicitlybase64. Not a MeetingManager contract.",
+    "calendar_asset_url": "https://libertycountytxapp.meetingmanager.tylerapp.com/392259prod/tylermm/calendar/main.f980238b7778fb2e.js",
+    "calendar_asset_sha256": "2dcf06fa376a06f48571e959f11ba0b4c62386112feb3344475e18a330e039bd",
+    "new_assessment": "Bundle names meeting/saveOrUpdateMeeting and meeting/saveDragAndDropMeeting plus updateMeetingScheduler DTO. The latter occurs only as constructor definition, not caller; route constants occur in constants only. No mapped write send, authentication, create/update response or recurrence readback. Calendar tcmURL does not establish staff service applicability.",
+    "exact_missing": [
+      "MeetingManager staff request method/base/auth and full create/update payload",
+      "Agenda item/document/media upload request and response/readback",
+      "Recurrence and date/time update semantics with response identity"
+    ],
+    "classification": "Unresolved contract research, not proven outside-only dependency; ERP/TCM schema rejected for product mismatch."
+  },
+  "primegov": {
+    "official_portal_help": "https://support.granicus.com/customersupport/s/article/Configuring-OneMeeting-Public-Portal-V2",
+    "assessment": "Vendor describes portal-{organization}.primegov.com and support enablement of optional ItemSearch/VoteHistory/Kiosk. UI configurations/custom-field choices do not define authenticated Meeting/speaker/tracking schemas; optional feature enablement is not a new completion gate.",
+    "new_client_lead": "https://github.com/HeyClos/agenda-crawler/blob/main/crawler.py",
+    "client_assessment": "Third-party corroborates compileOutputType3 and /Portal/Meeting?compiledMeetingDocumentFileId. No saved raw HTML fixture or staff-write contract established. Client source not executed.",
+    "selected_html_url": "https://reno.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=23431",
+    "selected_html_result": "HTTP403 once; ID from preserved Reno council public-search documentList. No new tenant survey or access workaround.",
+    "swagger_url": "https://lacity.primegov.com/swagger",
+    "swagger_result": "HTTP403; current login redirect not established",
+    "classification": "Unresolved contract research; optional support-controlled enablement is documented but not a required synthetic gate."
+  },
+  "boarddocs": {
+    "new_archived_listing_provenance": "docs/capabilities/evidence/boarddocs-public/grand-list-source.json",
+    "result": "Implemented331valid meetings +explicit empty placeholder with exact raw retention.",
+    "remaining": "BD-GetAgenda/publicfiles third-party declarations lack raw matched response/tree attachment schema in checked sources; XML notebook example incomplete and exact vendor request403. No staff-write/import contract established. Diligent One/Entities/HighBond not substituted.",
+    "classification": "Unresolved; no proof that only private/customer information can resolve every missing contract."
+  },
+  "telvue": {
+    "contract": "docs/capabilities/evidence/telvue-client-write/source.json",
+    "unblocked": "Existing-playlist reorder and existingmedia membership create implemented with coordinator/readback synthetic acceptance.",
+    "runtime_input_dependency": "Public client consumes options.fileUrl/options.dvdUrl/options.uploadParams/userId; these are not assigned to a concrete deployment upload initializer in inspected bundle/sign-in shell.",
+    "exact_missing": [
+      "Sanitized version-matched uploader initializer and upload request/response with created-media identity",
+      "Processing/readiness, effective publication and vendor meeting association readback contract"
+    ],
+    "classification": "Specific runtime inputs and confirmation semantics missing; vendor deployment documentation/export can supply them. No live credentials/upload requested and no claim that all public contracts were exhausted."
+  },
+  "essential": {
+    "proof": "docs/capabilities/evidence/essential-postman/source.json",
+    "result": "Official production collection has request-only lowercamel multimedia model and no GET/POST responses. Development DTO uses Pascalcase under meetingStructure. Production equivalence cannot be fabricated.",
+    "remaining": "Exact production response model/readback; meeting/item create/update and upload contract unestablished.",
+    "classification": "Unresolved; not a proven outside-only dependency."
+  },
+  "select": {
+    "proof": "docs/capabilities/evidence/civicclerk-openapi/swagger.json",
+    "remaining": "EventCreate HH:MM vs EventUpdate freeform time/default, request templateId vs read eventTemplateId/eventDate/startDateTime require recurrence/time readback semantics. Section writes and Event files already mapped.",
+    "classification": "Unresolved; no new machine contract in searched primary leads. Thirdparty read clients do not establish write conversions."
+  },
+  "legistar": {
+    "official_help": "https://webapi.legistar.com/Help",
+    "remaining": "Recording byte upload/replacement, processing/readiness and historical package format not established by EventMedia/EventVideoPath strings or MatterAttachment binary DTO. Existing record/attachment/media-reference writes remain accepted scoped evidence.",
+    "classification": "Unresolved for these separate operations; no vendor-absence claim."
+  },
+  "other_roster_families": "Existing inventory and remaining-research entries retained. New Boardable/Novus/CivicWeb/iQM2 primary guides reviewed are UI/import workflows, not request schemas. Thirdparty Boardable no-publicAPI assertion is not accepted as proof. GenericWord/PDF UI import without exact vendor template does not establish a generatable import format.",
+  "no_release": "No build/sign/install/push/merge/tag/registry/site publication or live vendor mutation.",
+  "bindings": [
+    {
+      "path": "docs/capabilities/evidence/contract-followup-2026-11-14/onbase-unity-rest-swagger.json",
+      "sha256": "e3f5087d7200b68907a3ff9267c0b474595e8cd9372264459250d4ad3581fe18"
+    },
+    {
+      "path": "docs/capabilities/evidence/contract-followup-2026-11-14/tyler-calendar-write-leads.extract.txt",
+      "sha256": "fbc105fb108f1c91faaad0269be55da1316e85bde6d223c6ed5bf0bd0f68b919"
+    },
+    {
+      "path": "docs/capabilities/evidence/contract-followup-2026-11-14/tyler-eerp-attachment.extract.txt",
+      "sha256": "7aec7822049fe6c37e0b67265a7273e8566787591838222774b8035469127534"
+    }
+  ]
+}

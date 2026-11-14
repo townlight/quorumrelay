@@ -67,6 +67,10 @@ def parse_listing(source, content: bytes, *, parser_bytes: int | None = None) ->
     for raw in payload:
         if not isinstance(raw, dict):
             raise ValueError("A BoardDocs meeting list row was not an object.")
+        # The pinned saved public listing ends with an empty object. It has no
+        # record identity; retain it in the capture instead of fabricating one.
+        if not raw:
+            continue
         value = raw.get("unique")
         if type(value) is int and value > 0:
             identifier = str(value)
@@ -176,6 +180,10 @@ def listing_bundle(source, namespace, content: bytes, rows: list[dict]) -> dict:
     """Retain one listing response and selected, title-incomplete meeting records."""
     mapped = [(_listing_normalized(source, row), row["original"], "meeting") for row in rows]
     bundle = make_bundle(source, namespace, content, LISTING_FORMAT, mapped)
+    bundle["extensions"]["boarddocs_listing"] = {
+        "empty_placeholder_rows": sum(row == {} for row in json.loads(content.decode("utf-8-sig"))),
+        "catalog_complete": False,
+    }
     return bundle
 
 
