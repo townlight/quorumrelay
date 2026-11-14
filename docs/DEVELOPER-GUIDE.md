@@ -439,6 +439,7 @@ checkout containing the mapping; the frozen dev8 wheel is not silently updated.
 |---|---|
 | BoardBook public rendered agenda | [Native item hierarchy and document associations](BOARDBOOK-DETAIL.md) |
 | Boardable existing legacy agenda | [Sibling reorder and item text/description edits](BOARDABLE-WRITES.md); exact plan/commit/full snapshot readback, no draft creation or file upload |
+| Boardable public search | [Declared search and capture-bound numeric IDs](BOARDABLE-SEARCH.md); title/excerpts only, unbound candidates explicit |
 | Boardable known listing record | [Scoped capture-bound detail retrieval](BOARDABLE-DETAIL.md); no guessed slugs or implicit document download |
 | AgendaQuick supplied public agenda | [Native linked memo IDs and packet locator](AGENDAQUICK-DETAIL.md); supplied memo sections/PDF locator, no inferred adopted motion/vote |
 | TownCloud rendered agenda | [Capture-local hierarchy and native attachment links](TOWNCLOUD-AGENDA.md); existing format and explicit download origins |

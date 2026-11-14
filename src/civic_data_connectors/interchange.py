@@ -505,12 +505,16 @@ def write_bundle(bundle: dict, destination: BinaryIO, *, format="zip", bounds=No
     elif format == "zip":
         metadata = deepcopy({key: value for key, value in bundle.items() if key != "records"})
         locations, captures = [], {}
-        for path, capture in _capture_locations(metadata):
+        # Snapshot every JSON location before removing inline bytes. deepcopy
+        # preserves object aliases; mutating one occurrence must not hide another
+        # occurrence from traversal or change its original inline flag.
+        original_locations = [(path, capture, "content_base64" in capture)
+                              for path, capture in _capture_locations(metadata)]
+        for path, capture, inline in original_locations:
             sha = capture.get("sha256")
             if not isinstance(sha, str) or re.fullmatch("[0-9a-f]{64}", sha) is None:
                 raise ValueError("A capture requires a SHA-256 hash.")
-            locations.append({"path": list(path), "sha256": sha,
-                              "inline": "content_base64" in capture})
+            locations.append({"path": list(path), "sha256": sha, "inline": inline})
             captures.setdefault(sha, deepcopy(capture))
             capture.pop("content_base64", None)
         manifest["capture_locations"] = locations

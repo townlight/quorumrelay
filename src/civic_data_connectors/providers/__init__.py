@@ -103,6 +103,9 @@ def register(engine, *, transport: Transport | None = None,
     from .primegov_search import native_search as primegov_search
     engine.register_native_search("primegov", tracked_handler("search", lambda engine, request, content, context:
                                   primegov_search(engine, request, content, context, transport=transport)))
+    from .boardable_search import native_search as boardable_search
+    engine.register_native_search("boardable", tracked_handler("search", lambda engine, request, content, context:
+                                  boardable_search(engine, request, content, context, transport=transport)))
     from .tyler_search import native_search as tyler_search
     engine.register_native_search("tyler-meeting-manager", tracked_handler("search", lambda engine, request, content, context:
                                   tyler_search(engine, request, content, context, transport=transport)))

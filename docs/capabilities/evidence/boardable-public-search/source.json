@@ -1,6 +1,6 @@
 {
   "date": "2026-11-14",
-  "status": "NEW_CONCRETE_READ_CONTRACT_LEAD_NOT_IMPLEMENTED",
+  "status": "SCOPED_NATIVE_SEARCH_AND_CAPTURE_BOUND_IDENTITY_IMPLEMENTED_SYNTHETICALLY",
   "shell_url": "https://site.boardable.com/ventura-county-community-college-district/meetings",
   "shell_status": 200,
   "shell_bytes": 239105,
@@ -46,8 +46,10 @@
     }
   ],
   "limits": [
-    "Two bounded timeouts, second narrowed by documented year filter; no further identical retry.",
-    "No live response schema or numeric listing-ID/date equivalence established.",
-    "Concrete owned mapping lead, not proven outside-only dependency; no native-search acceptance claimed."
+    "Two live bounded requests timed out, second narrowed by documented year filter. No repeat of those probes.",
+    "No numeric meeting ID/date inferred from the renderer: only original same-source same-scope listing bytes bind an exact supplied result URL to its existing numeric identity.",
+    "Unmatched candidates remain explicit with preserved raw bytes, never invented slug IDs. Query semantics, full text, ranking, paging and catalog completeness are unverified.",
+    "Only declared meetings/title/slug/highlights/attachment context mapped. Policy administration and arbitrary document retrieval excluded.",
+    "Saved raw search alone is not normalized into guessed IDs; use the full neutral bundle with identity-listing capture provenance."
   ]
 }

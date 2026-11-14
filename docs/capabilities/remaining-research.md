@@ -25,6 +25,8 @@ Evidence and exact scope: `inventory.json` provider `legistar`; operation status
 
 Evidence and exact scope: `inventory.json` provider `primegov`; operation status and outbound mappings are separate from historical observations.
 
+- New historical vendor API leads are pinned in `evidence/product-contract-followup-2026-11-14/source.json`: Jan2024 review page30 and OaklandPark RFP#070623 pages21/22/102 confirm OneMeeting Secure/Votes API and client-published REST datasets. No executable schemas or current tier/version are established.
+
 ## F03 Granicus (`granicus`)
 
 - Pinned contract/version qualification remains; synthetic fixtures establish the pinned mapping, not all historical/current server variants. Do not infer custom status enums, unknown Payload types or checksum algorithms.
@@ -86,6 +88,8 @@ Evidence and exact scope: `inventory.json` provider `boardbook`; operation statu
 - Pinned product/module material does not supply a customer machine API/import schema for meeting/item create/update/upload. Product-matched field/readback contracts remain needed; live write-tenant acquisition is not required for accepted synthetic verification.
 
 Evidence and exact scope: `inventory.json` provider `escribe`; operation status and outbound mappings are separate from historical observations.
+
+- New primary PublishingService landing declares WSDL metadata URLs; the exact singleWsdlGET returned403. Indexed primary content gives WCF client instructions, not operations/types. No SOAP invocation or private-only/APIabsence claim. See `evidence/product-contract-followup-2026-11-14/source.json`.
 
 ## F10 Simbli (`simbli`)
 
@@ -239,7 +243,7 @@ Evidence and exact scope: `inventory.json` provider `wistia`; operation status a
 ## F28 Boardable (`boardable`)
 
 - The live engine call covered VCCCD upcoming=true through pages 1-2 and resumed one page offset, returning 20 distinct records across first/resumed calls. Past mode is fixture-tested only; reported total 150 and full catalog coverage remain unverified.
-- The public UI search field/API search parameter was not exercised; native-search semantics remain unknown and this discovery path sends blank search.
+- The separate pinned public search client GET is implemented with24synthetic cases. Exact matching covers supplied title and agenda/minutes/attachment excerpts. Native numeric identities resolve only through original scoped listing captures; unbound candidates remain explicit. Two bounded live queries timed out. Provider matching/ranking, full text, paging and search-ID/date equivalence remain unverified. See [the mapping](../BOARDABLE-SEARCH.md).
 - Public meeting rows expose description, not a verified normalized body field; body filtering is unknown. Preserve timezone literals and the earlier VCCCD detail-versus-landing display discrepancy.
 - The listing has no agenda/document/media locators. Selected known-detail mapping and supplied viewer-to-document resolution are implemented with separate synthetic and bounded live-byte receipts. Other documents and the listing/detail date disagreement remain unverified; no native search or complete catalog is inferred.
 - The pinned public legacy client now establishes sibling reorder and existing item text/description updates; both are implemented with36 synthetic coordinator cases. Explicit runtime organization/meeting URLs and legacy-editor binding are required. No draft creation, parent moves, new attachments or publication. See [exact usage and limits](../BOARDABLE-WRITES.md).

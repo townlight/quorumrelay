@@ -3451,6 +3451,26 @@
           "receipt_path": "docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
           "receipt_sha256": "93dbd5a8169cd4e4646adf5c2f2aa7a30cd3c1b86a3e26480cfe61e47fc0d108",
           "limits": "Only the identified resources and exact missing fields; no exhaustive search, provider absence or live transaction claim."
+        },
+        {
+          "id": "primegov-vendor-2024-api-review",
+          "url": "https://granicus.com/wp-content/uploads/application/pdf/webinar-GovM-Year-in-Review.pdf",
+          "title": "Historical OneMeeting Secure/Votes API release confirmation",
+          "kind": "official_documentation",
+          "proof_level": "official_documentation",
+          "observation_date": "2026-11-14",
+          "findings": "January9,2024 review of2023, page30 confirms initial SecureAPI additionalfee and VotesAPI field additions; no payload/routes/readback. Currentfee/tier/version unverified. Pins and limits in evidence/product-contract-followup-2026-11-14/source.json.",
+          "limits": "No executable payload/readback accepted or private-only/public-absence claim. Live account acquisition is not required."
+        },
+        {
+          "id": "primegov-vendor-oaklandpark-api-proposal",
+          "url": "https://oaklandpark.novusagenda.com/agendapublic/AttachmentViewer.ashx?AttachmentID=35802&ItemID=10613",
+          "title": "Vendor OneMeeting REST datasets and API/SDK provision statement",
+          "kind": "official_documentation",
+          "proof_level": "official_documentation",
+          "observation_date": "2026-11-14",
+          "findings": "Vendor RFP#070623 pages21/22/102 describes OneMeeting REST datasets published/access-controlled byclient and API/SDK provision. Not a method/input/readback schema. Pins and limits in evidence/product-contract-followup-2026-11-14/source.json.",
+          "limits": "No executable payload/readback accepted or private-only/public-absence claim. Live account acquisition is not required."
         }
       ],
       "tenants": [
@@ -3985,7 +4005,8 @@
         "Official release notes identify Meeting API, speaker and tracking-number search but the checked release/help material supplies no executable schema. Continue from concrete product-matched API leads; no exhaustive public search or outside-only dependency is established, and no account enablement is a synthetic acceptance gate.",
         "Authenticated create/update/upload field schemas, permissions, readback and conflict semantics remain unverified in the pinned material. A matching machine contract is needed; credentials or live tenant writes are not an acceptance gate.",
         "Selected public client document branches synthetically executed; JSON URL-string shape inferred from callback. Type4 HTML/unknown output, live file availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled.",
-        "New V2 portal help documents optional support-controlled feature enablement, not authenticated payloads. Third-party crawler corroborates compiled HTML route; exact selected Reno23431GET403. Lacity swagger403, not a verified current login redirect. No outside-only schema dependency proven. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json"
+        "New V2 portal help documents optional support-controlled feature enablement, not authenticated payloads. Third-party crawler corroborates compiled HTML route; exact selected Reno23431GET403. Lacity swagger403, not a verified current login redirect. No outside-only schema dependency proven. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
+        "Historical Jan2024 vendor review and OaklandPark RFP#070623 confirm OneMeeting Secure/Votes API and client-published REST datasets; selected exact pages are pinned. They do not provide method/auth/request/response/readback schemas or establish currenttier/version. No APIabsence or outside-only claim."
       ],
       "requirement_ids": [
         "C01",
@@ -10869,6 +10890,16 @@
           "limits": "No live request or remote provider write executed in this batch.; Item keys are exact-capture-local and change when HTML changes; native item ID remains null. This is honest capture identity, not cross-revision native item matching.; No body/meeting timezone inferred from title; unrecognized source date/time retained raw, partial coverage explicit.; Only supplied same-origin FileStream links are mapped. Other private/public API controls, comments, media bytes, content fields absent in this capture and write contracts remain unresolved.",
           "receipt_path": "docs/verification/escribe-rendered-detail-2026-11-12.json",
           "receipt_sha256": "dc35dcedfe94fcfffd4785455931748573152cdfdefa4fc324031f19cbe02281"
+        },
+        {
+          "id": "escribe-publishing-service-metadata-lead",
+          "url": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc",
+          "title": "Vendor Publishing Service and declared WSDL metadata",
+          "kind": "official_documentation",
+          "proof_level": "official_documentation",
+          "observation_date": "2026-11-14",
+          "findings": "Indexed primary WCF landing declares wsdl/singleWsdl and PublishingServiceClient. Exact direct singleWsdlGET403; indexedcontent is landing instructions rather than XML operations/types. No SOAP methods invoked. Pins and limits in evidence/product-contract-followup-2026-11-14/source.json.",
+          "limits": "No executable payload/readback accepted or private-only/public-absence claim. Live account acquisition is not required."
         }
       ],
       "tenants": [
@@ -11322,7 +11353,8 @@
       "remaining_research": [
         "Calendar and bounded native search remain separately evidenced. Captured Meeting.aspx detail now maps rendered agenda positions, supplied partial text and same-origin FileStream locators. Item keys are capture-local with native item ID null. The earlier FileStream 403 remains a failed live transfer, not proof that the rendered detail path is unimplemented or the catalog complete.",
         "Public native search source implementation and bounded first/page2/resume are verified with partial coverage. Provider full-text/exact matching semantics, broader document visibility and catalog completeness remain unknown; no saved metadata search is mislabeled native.",
-        "Pinned product/module material does not supply a customer machine API/import schema for meeting/item create/update/upload. Product-matched field/readback contracts remain needed; live write-tenant acquisition is not required for accepted synthetic verification."
+        "Pinned product/module material does not supply a customer machine API/import schema for meeting/item create/update/upload. Product-matched field/readback contracts remain needed; live write-tenant acquisition is not required for accepted synthetic verification.",
+        "New primary PublishingService WCF landing declares exact wsdl/singleWsdl URLs. Direct singleWsdlGET403; indexed primary text exposes generic client instructions, not XML operations/types. This exact access failure is verified, not private-only/auth-required proof or writable-operation contract. No SOAP method invoked."
       ],
       "requirement_ids": [
         "C01",
@@ -25275,6 +25307,70 @@
               }
             ]
           }
+        },
+        {
+          "id": "boardable-public-search-synthetic",
+          "url": "https://site.boardable.com/ventura-county-community-college-district/meetings",
+          "title": "Pinned public search client and same-capture numeric identity mapping",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-14",
+          "observed": "Anonymous vendor shell and declared application asset HTTP200; no script execution or account access.",
+          "access_scope": "public_source_and_local_synthetic_execution_only",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/boardable-search-interchange-2026-11-14.json",
+          "receipt_sha256": "837bf9049c0f558d8908c210daeaf817810aa54a79a722c99155dfbb88ff24ad",
+          "limits": "Known numeric identities only from original same-source listing captures; unbound candidates retained separately. Search/date/ranking/paging/full-text completeness unverified; exact live requests timed out.",
+          "synthetic_execution": {
+            "provider": "boardable",
+            "status": "mock_passed",
+            "operations": [
+              "native_search"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Declared public search plus local title and supplied agenda/minutes/attachment excerpt matching; exact numeric identity only from scoped listing capture.",
+            "execution_provenance": "24synthetic Boardable search cases and generic ZIP alias regression within95affected passes; no live search acceptance.",
+            "checks": [
+              {
+                "command": "pytest tests/test_boardable_native_search.py tests/test_boardable_discovery.py tests/test_boardable_detail.py tests/test_interchange.py tests/test_interchange_capture_aliases.py tests/test_storage_search_imports.py -q",
+                "passed": 95,
+                "failed": 0,
+                "junit_sha256": "8ac6dba39a4d4175ba12cead1c85cf026def472a5db3f4292cf9fa336c745927"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-public-search/boardable-public-search-api.js",
+                "sha256": "f27ef60e05858a0928cd91c61efd45e04bd03669a0f05361e1d81e0df625d6da"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-public-search/boardable-public-search-route.js",
+                "sha256": "fa789602a6cbf16fe905d811eddce8dfc76938c91101f927e63583ff010774b3"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-public-search/source.json",
+                "sha256": "9a9affa4a35df16edea7615964d0de599114aaeed17a182cb08e45fbd1caef21"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardable_native_search.py",
+                "sha256": "95a2b0b7f677a4ade8cccfa43d5901dd4f9e700857df132529a2fd7c6b8144e6",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "95a2b0b7f677a4ade8cccfa43d5901dd4f9e700857df132529a2fd7c6b8144e6"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_interchange_capture_aliases.py",
+                "sha256": "085ff5380f072a6c533000181f3f99804ffa5856891dcfd0792f15efe727693f",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "085ff5380f072a6c533000181f3f99804ffa5856891dcfd0792f15efe727693f"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -25392,22 +25488,23 @@
         },
         "native_search": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "boardable-tenant"
+            "boardable-public-search-synthetic"
           ],
-          "details": "Tenant advertises meeting/committee search; request/completeness unverified.",
+          "details": "Public-client GET /api/public-sites/search with query/year/month/type=meetings and SiteId; locally exact-match title and supplied excerpts. Same numeric identities require verified original listing captures in caller scope. Unbound result URLs are explicit candidates with failure reasons; no invented IDs/date equivalence or paging.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify usable request route, permissions, result fields, exact/phrase semantics and pagination."
+            "Provider matching/ranking/full-text and paging/terminal semantics remain unverified; selected live requests timed out.",
+            "Raw search lacks a documented numeric-ID/date relationship; full neutral bundle preserves bound listing provenance."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "source_implementation_scoped_native_search_synthetic_acceptance",
           "tenant_scope": [
             "https://site.boardable.com/ventura-county-community-college-district"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "24synthetic actual-engine/coordinator/storage cases; no live response success or account acquisition required.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -25829,7 +25926,7 @@
       ],
       "remaining_research": [
         "The live engine call covered VCCCD upcoming=true through pages 1-2 and resumed one page offset, returning 20 distinct records across first/resumed calls. Past mode is fixture-tested only; reported total 150 and full catalog coverage remain unverified.",
-        "The public UI search field/API search parameter was not exercised; native-search semantics remain unknown and this discovery path sends blank search.",
+        "The declared public search route and SiteId/query/year/month/type mapping are implemented;24synthetic cases preserve native listing identity and excerpts/unknown fields. Unbound candidate URLs remain explicit; two exact bounded live queries timed out. No full-text/paging/ranking or raw-search ID/date equivalence inferred.",
         "Public meeting rows expose description, not a verified normalized body field; body filtering is unknown. Preserve timezone literals and the earlier VCCCD detail-versus-landing display discrepancy.",
         "The listing has no agenda/document/media locators. Selected known-detail mapping and supplied viewer-to-document resolution are implemented with separate synthetic and bounded live-byte receipts. Other documents and the listing/detail date disagreement remain unverified; no native search or complete catalog is inferred.",
         "Pinned public legacy client establishes sibling reorder and existing item text/description updates; source and36 synthetic coordinator cases implement them. New agenda_app_url editor, recurring day, full meeting form, new item/file, publication and vendor import contracts remain unresolved; no account acquisition gate.",
