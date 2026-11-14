@@ -288,6 +288,21 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if not matches:
             raise ValueError('The selected file was not supplied by the captured published Event.')
         url = matches[0]['url']
+    if source.provider == 'boarddocs':
+        from .boarddocs_public import public_file_url
+        canonical, file_id = public_file_url(source, url)
+        original = record.get('original') or {}
+        hrefs = original.get('public_file_links') or []
+        matches = []
+        for href in hrefs:
+            try:
+                matches.append(public_file_url(source, href)[0])
+            except ValueError:
+                continue
+        if (kind != 'documents' or url_field != 'url' or identity.get('record_type') != 'meeting'
+                or record.get('source_url') != source.url or canonical not in matches
+                or document.get('external_id') != file_id):
+            raise ValueError('The selected public file must match the original configured meeting capture.')
     deadline = monotonic() + bounds.deadline_seconds
     supplemental = []
 
@@ -370,7 +385,12 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             response = transport.request(
                 transfer_url, byte_limit=remaining_transfer,
                 deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=allowed,
-                **({"allow_redirects": False} if boardable_viewer or source.provider == "civicplus-select" or source.provider in {"onbase", "tyler-meeting-manager"} else {}))
+                **({"allow_redirects": False} if boardable_viewer or source.provider == "civicplus-select" or source.provider in {"onbase", "tyler-meeting-manager", "boarddocs"} else {}))
+        if source.provider == 'boarddocs':
+            if context.check_cancelled():
+                return OperationResult('cancelled', retained_data(), operation_id=context.operation_id)
+            if monotonic() >= deadline or response.url != transfer_url:
+                raise ValueError('The selected public file changed its captured route or exceeded its deadline.')
         if (source.provider == "civicplus-select") and context.check_cancelled():
             return OperationResult('cancelled', retained_data(), operation_id=context.operation_id)
         if (source.provider == "civicplus-select") and monotonic() >= deadline:

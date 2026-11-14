@@ -26972,6 +26972,20 @@
           "limits": "No native parent meeting/section ID, inferred name/date/category join, structured vote parsing, attachment URL or network/write support.",
           "receipt_path": "docs/verification/boarddocs-item-fragment-2026-11-14.json",
           "receipt_sha256": "c8f207fefa3ea33f2ac1e7591ed5b93bb2e108185484ebd2387629116476b518"
+        },
+        {
+          "id": "boarddocs-archived-native-public-files",
+          "url": "https://github.com/jessicamyu/school-surveillance/blob/785b3d6043426d2d533591618a4ca750f3c51da3/Meetings/vsba.html",
+          "title": "Archived native public file locators and synthetic guarded transfer",
+          "kind": "third_party_archived_response_and_synthetic_execution",
+          "observed": "Pinned native public file links inspected;13new/72affected synthetic checks passed.",
+          "observation_date": "2026-11-14",
+          "access_scope": "public_archive_local_synthetic_no_live_file_or_mutation",
+          "proof_level": "archived_response_and_executed_local_workflow_not_official_vendor_acceptance",
+          "findings": "Selected print mapping retains validated file descriptors; scoped storage/reopen/download, exact raw capture/ZIP and synthetic PDF transfer. Redirects disabled; selected URL/fileID/original href/source must agree; cancel/deadline/status/size/PDF magic remain enforced.",
+          "limits": "Synthetic selected meeting request context is explicit and not asserted by raw print fragment. No title/date identity join, live original-byte availability, full catalog, item-to-file association, separate BD-GetPublicFiles mapping or staff write inferred.",
+          "receipt_path": "docs/verification/boarddocs-print-files-2026-11-14.json",
+          "receipt_sha256": "147af9906433f5c31ad7468e497bd60d0fe26b02c29ad766237b83f01a3573a5"
         }
       ],
       "tenants": [
@@ -27048,9 +27062,10 @@
             "diligent-boarddocs-tenant",
             "boarddocs-pinned-reader-synthetic-execution",
             "boarddocs-public-anchor-correction",
-            "boarddocs-archived-selected-outline"
+            "boarddocs-archived-selected-outline",
+            "boarddocs-archived-native-public-files"
           ],
-          "details": "Selected stored listing meeting enables exact printable agenda POST; retains title/date/rendered text and raw response. No item-tree or file transfer mapping. Explicit stored-parent fetch_related agenda_item/agenda_section now uses BD-GetAgenda native request, archived outline IDs/titles/attributes and exact raw capture; no section parent inferred from adjacency.",
+          "details": "Selected stored listing meeting enables exact printable agenda POST; retains title/date/rendered text and raw response. No item-tree or file transfer mapping. Explicit stored-parent fetch_related agenda_item/agenda_section now uses BD-GetAgenda native request, archived outline IDs/titles/attributes and exact raw capture; no section parent inferred from adjacency. Selected print agendas additionally map only matching native same-site public file IDs/hrefs; captured membership downloads have13new/72affected synthetic checks, not live original-byte acceptance.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
@@ -27076,9 +27091,10 @@
             "quorumrelay-shared-core-operations",
             "boarddocs-pinned-reader-synthetic-execution",
             "boarddocs-grand-archived-meeting-fragments",
-            "boarddocs-archived-public-item"
+            "boarddocs-archived-public-item",
+            "boarddocs-archived-native-public-files"
           ],
-          "details": "Baseline numbered PDF remains unchanged; additive boarddocs-public-meetings-json retains JSON listing rows and identities. Printable detail requires captured selected identity and is not a standalone advertised parser. Additive boarddocs-public-meeting-html maps saved public meeting fragments with exact same-site native citation/base identity, title/date/description; links and separate agenda/minutes remain unmapped. Saved boarddocs-public-item-html additionally maps explicitly public native item/body/field/motion text from exact archived fragment, without parent joins or attachment guesses.",
+          "details": "Baseline numbered PDF remains unchanged; additive boarddocs-public-meetings-json retains JSON listing rows and identities. Printable detail requires captured selected identity and is not a standalone advertised parser. Additive boarddocs-public-meeting-html maps saved public meeting fragments with exact same-site native citation/base identity, title/date/description; links and separate agenda/minutes remain unmapped. Saved boarddocs-public-item-html additionally maps explicitly public native item/body/field/motion text from exact archived fragment, without parent joins or attachment guesses. Selected print agendas additionally map only matching native same-site public file IDs/hrefs; captured membership downloads have13new/72affected synthetic checks, not live original-byte acceptance.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."

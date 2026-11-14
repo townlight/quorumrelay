@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "7d110c4",
+  "status": "PASSED",
+  "scope": "BoardDocs validated native public file descriptors and guarded captured attachment transfer",
+  "checks": [
+    {
+      "command": "pytest tests -q",
+      "passed": 1706,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 78.08,
+      "junit_sha256": "40f75cf883020abf87c8cbae8f42f57d1a0e70627a1086504128e2f389892c74"
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "command": "scripts/validate_capabilities.py",
+      "status": "PASSED",
+      "evidence_records": 395,
+      "distinct_urls": 248,
+      "outbound_mappings": 172,
+      "negative_checks": 5,
+      "errors": 0
+    }
+  ],
+  "reused": "Unchanged TypeScript build/tests. No package/native rebuild, repin, installation or release."
+}

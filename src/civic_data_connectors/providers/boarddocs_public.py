@@ -10,7 +10,7 @@ import json
 import re
 from datetime import date, datetime
 from html.parser import HTMLParser
-from urllib.parse import urlencode, urlsplit
+from urllib.parse import urlencode, urlsplit, urljoin, unquote
 
 from ..engine import canonical_hash
 from .native import make_bundle
@@ -188,6 +188,48 @@ def listing_bundle(source, namespace, content: bytes, rows: list[dict]) -> dict:
     return bundle
 
 
+def public_file_url(source, href):
+    """Validate a literal native file locator, without constructing a missing one."""
+    parts, site, _ = _configured_source(source)
+    root = f'{parts.scheme}://{parts.netloc}/{site}/Board.nsf/'
+    target = urlsplit(urljoin(root, href)) if isinstance(href, str) else None
+    match = (re.fullmatch('/' + re.escape(site) + r'/Board\.nsf/files/([A-Za-z0-9_-]{1,128})/\$file/([^/]+)',
+                         target.path) if target else None)
+    if (not target or target.scheme != parts.scheme or target.netloc != parts.netloc
+            or target.query or target.fragment or target.username or target.password or not match
+            or any(c in unquote(match[2]) for c in '/\\\r\n\0') or unquote(match[2]) in {'.', '..'}):
+        raise ValueError('The supplied file locator is not a same-site native public file.')
+    return target.geturl(), match[1]
+
+
+def declared_documents(source, content):
+    from .boarddocs_item import _clean
+    from .escribe_detail import Page
+
+    page = Page()
+    page.feed(content.decode('utf-8-sig'))
+    _clean(page.root)
+    documents, seen = [], set()
+    for node in page.root.walk():
+        if node.tag != 'a' or not node.attrs.get('href'):
+            continue
+        marker = node
+        while marker is not None and 'public-file' not in marker.classes():
+            marker = marker.parent
+        if marker is None:
+            continue
+        try:
+            url, identifier = public_file_url(source, node.attrs['href'])
+        except ValueError:
+            continue  # Raw href remains in the captured response; no download is invented.
+        if marker.attrs.get('unique') != identifier or url in seen:
+            continue
+        seen.add(url)
+        documents.append({'url': url, 'external_id': identifier, 'title': node.text(),
+                          'kind': 'attachment', 'availability': 'supplied_public_locator_not_fetched'})
+    return documents
+
+
 def detail_bundle(source, namespace, content: bytes, meeting_id: str, listing_row: dict | None = None,
                   *, parser_bytes: int | None = None) -> dict:
     """Map one selected PRINT-AgendaDetailed response to its listing-issued meeting ID."""
@@ -204,10 +246,10 @@ def detail_bundle(source, namespace, content: bytes, meeting_id: str, listing_ro
         "meeting_date": parsed["normalized_date"] or _meeting_date(listing_date),
         "source_date": parsed["meeting_date"], "listing_date": listing_date,
         "source_unid": raw_listing.get("unid"), "url": source.url,
-        "documents": [], "source_public_file_links": parsed["public_file_links"],
+        "documents": declared_documents(source, content), "source_public_file_links": parsed["public_file_links"],
         "recordings": [], "agenda_items": [],
         "agenda_html_availability": "rendered_text_only",
-        "documents_availability": "supplied_href_strings_only_not_fetched",
+        "documents_availability": "validated_native_public_locators_only_not_fetched",
         "agenda_items_availability": "not_mapped_by_observed_reader",
         "time_zone_status": "unknown",
     }
@@ -351,7 +393,7 @@ def fetch_detail(engine, source, namespace, external_id, bounds, context, transp
     coverage = {'scope': 'one selected third-party-source-backed printable agenda',
                 'catalog_complete': False, 'source_complete': False,
                 'provider_contract': 'undocumented; no live vendor acceptance',
-                'files': 'supplied href strings only, not downloaded'}
+                'files': 'validated native public locators only, not downloaded'}
     if operation_cancelled(engine.storage, context):
         return OperationResult('cancelled', coverage=coverage, operation_id=context.operation_id)
     deadline = monotonic() + bounds.deadline_seconds

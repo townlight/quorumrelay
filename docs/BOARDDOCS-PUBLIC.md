@@ -104,3 +104,21 @@ parser adds no network calls or vendor write support. Its evidence is a
 Git-blob-verified third-party archive, with synthetic local execution, rather than
 official vendor or current live acceptance. See
 [source and limits](capabilities/evidence/boarddocs-public/fairfax-item-source.json).
+
+## Native public file locators in selected print responses
+
+Selected print mapping retains `source_public_file_links` and now creates document
+descriptors only for explicit `public-file` nodes whose native `unique` ID matches
+the same-site `/Board.nsf/files/<ID>/$file/<filename>` href. The archived Fairfax
+print response supplies four such files. Unmarked inline body links and unmatched
+IDs remain outside that attachment list.
+
+After persisting the selected result, `engine.fetch_attachment(source, record,
+index=0)` uses its original declared locator. The configured source, file ID and
+original href must agree; redirects are disabled and status, cancellation,
+deadline, size and PDF-byte checks apply. This has synthetic transfer and
+SQLite/reopen/ZIP evidence, not a claim that the live originals remain available.
+The print fragment itself supplies no native meeting ID: selected request context
+remains explicit and is never recovered from title/date. No item-to-file
+association or separate public-files endpoint is inferred. See
+[exact source and scope](capabilities/evidence/boarddocs-public/fairfax-print-files-source.json).
