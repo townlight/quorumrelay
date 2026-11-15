@@ -1,4 +1,4 @@
-"""Documented CivicClerk section create/update with exact scoped readback."""
+"""Documented Select section and explicit native event writes with exact readback."""
 from copy import deepcopy
 from dataclasses import asdict
 import json
@@ -36,6 +36,9 @@ class CivicClerkWriteAdapter(WriteAdapter):
             raise WriteFailure('credentials_required', 'A server-side CivicClerk token is required.')
 
     def authorize(self, source, change, context):
+        if change.entity == 'event':
+            from .select_event_write import authorize
+            return authorize(self, source, change, context)
         self.validate_source(source, context)
         config = self.credentials(source, context)
         if change.entity != 'agenda_section' or change.operation not in {'create', 'update'} or change.files:
@@ -74,6 +77,9 @@ class CivicClerkWriteAdapter(WriteAdapter):
         return value
 
     def prepare(self, source, change, context, bounds, deadline):
+        if change.entity == 'event':
+            from .select_event_write import prepare
+            return prepare(self, source, change, context, bounds, deadline)
         self.authorize(source, change, context)
         if not isinstance(change.key, str) or not change.key or len(change.key) > 200:
             raise ValueError('Each change requires a bounded key.')
@@ -113,6 +119,9 @@ class CivicClerkWriteAdapter(WriteAdapter):
                 'conflict_semantics': 'preflight_read_compare_not_atomic_upstream_cas'}
 
     def apply(self, source, prepared, context, bounds, deadline, *, persist=None):
+        if prepared['change']['entity'] == 'event':
+            from .select_event_write import apply
+            return apply(self, source, prepared, context, bounds, deadline, persist)
         change = WriteChange.from_dict(prepared['change'])
         self.authorize(source, change, context)
         self._verify_meeting_parent(source, change, prepared['parent'], context, bounds, deadline)
@@ -140,6 +149,9 @@ class CivicClerkWriteAdapter(WriteAdapter):
         return self.reconcile(source, prepared, {'resource_id': identity}, context, bounds, deadline)
 
     def reconcile(self, source, prepared, item, context, bounds, deadline):
+        if prepared['change']['entity'] == 'event':
+            from .select_event_write import reconcile
+            return reconcile(self, source, prepared, item, context, bounds, deadline)
         change = WriteChange.from_dict(prepared['change'])
         self.authorize(source, change, context)
         identity = item.get('resource_id')

@@ -1,0 +1,841 @@
+{
+  "source_sha256": "d242638b2a6fd2b4dc2ef295ea000a52b146a1de63b7298ba463acd8d94ce62a",
+  "path": "/v1/Events/{key}",
+  "request": {
+    "$ref": "#/components/schemas/EventUpdateApiModel_ad914839"
+  },
+  "response": {
+    "$ref": "#/components/schemas/EventModel_28658b0b"
+  },
+  "models": {
+    "EventUpdateApiModel_ad914839": {
+      "required": [
+        "eventCategoryId",
+        "eventName",
+        "eventStartDate",
+        "eventStartTime",
+        "isPublished"
+      ],
+      "type": "object",
+      "properties": {
+        "eventName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "eventDescription": {
+          "type": "string",
+          "nullable": true
+        },
+        "eventStartDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "eventStartTime": {
+          "minLength": 1,
+          "type": "string",
+          "default": "12:00:00 AM"
+        },
+        "address1": {
+          "type": "string",
+          "nullable": true
+        },
+        "address2": {
+          "type": "string",
+          "nullable": true
+        },
+        "city": {
+          "type": "string",
+          "nullable": true
+        },
+        "state": {
+          "type": "string",
+          "nullable": true
+        },
+        "zipCode": {
+          "type": "string",
+          "nullable": true
+        },
+        "startEventAutomatically": {
+          "type": "boolean"
+        },
+        "streamId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eventCategoryId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isPublished": {
+          "$ref": "#/components/schemas/EventPublishedStatuses_1164921d"
+        },
+        "publishStart": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "externalMediaUrl": {
+          "type": "string",
+          "nullable": true
+        },
+        "actualStartTime": {
+          "type": "string",
+          "default": "12:00:00 AM",
+          "nullable": true
+        },
+        "meetingEndTime": {
+          "type": "string",
+          "default": "12:00:00 AM",
+          "nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "EventPublishedStatuses_1164921d": {
+      "enum": [
+        0,
+        1,
+        2
+      ],
+      "type": "integer",
+      "format": "int32"
+    },
+    "EventModel_28658b0b": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eventName": {
+          "type": "string",
+          "nullable": true
+        },
+        "eventDescription": {
+          "type": "string",
+          "nullable": true
+        },
+        "eventTemplateId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eventLocation": {
+          "$ref": "#/components/schemas/EventLocationDetailModel_32554035"
+        },
+        "eventDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "secondaryIanaTimeZone": {
+          "type": "string",
+          "nullable": true
+        },
+        "secondaryAbbreviatedTimeZone": {
+          "type": "string",
+          "nullable": true
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdByUserId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "isPublished": {
+          "$ref": "#/components/schemas/EventPublishedStatuses_1164921d"
+        },
+        "agendaId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agendaName": {
+          "type": "string",
+          "nullable": true
+        },
+        "cutOffDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "categoryName": {
+          "type": "string",
+          "nullable": true
+        },
+        "keywords": {
+          "type": "string",
+          "nullable": true
+        },
+        "visibilityId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "showInUpcomingEvents": {
+          "type": "boolean"
+        },
+        "isOnDemandEvent": {
+          "type": "boolean"
+        },
+        "isLiveEvent": {
+          "type": "boolean"
+        },
+        "automaticallyStart": {
+          "type": "boolean"
+        },
+        "durationHrs": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "durationMin": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "mediaSourcePath": {
+          "type": "string",
+          "nullable": true
+        },
+        "mediaStreamPath": {
+          "type": "string",
+          "nullable": true
+        },
+        "mediaOrigFileName": {
+          "type": "string",
+          "nullable": true
+        },
+        "publishStart": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "mediaTypeId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "liveStartTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "liveEndTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "liveIsCurrentlyStreaming": {
+          "type": "boolean"
+        },
+        "livePublishingPointId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "automaticallyStop": {
+          "type": "boolean"
+        },
+        "pauseMsgId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "streamingStatus": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "youtubeVideoId": {
+          "type": "string",
+          "nullable": true
+        },
+        "youtubeVideoThumbnailPath": {
+          "type": "string",
+          "nullable": true
+        },
+        "youtubeVideoUploaded": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "youtubeVideoProcessing": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "mobileMediaSourcePath": {
+          "type": "string",
+          "nullable": true
+        },
+        "mobileMediaStreamPath": {
+          "type": "string",
+          "nullable": true
+        },
+        "mobileMediaOrigFileName": {
+          "type": "string",
+          "nullable": true
+        },
+        "externalMediaUrl": {
+          "type": "string",
+          "nullable": true
+        },
+        "mediaSourcePathMp4": {
+          "type": "string",
+          "nullable": true
+        },
+        "mediaOrigFileNameMp4": {
+          "type": "string",
+          "nullable": true
+        },
+        "mediaAwsKeyName": {
+          "type": "string",
+          "nullable": true
+        },
+        "bookmarksAdded": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "displayMessage": {
+          "type": "string",
+          "nullable": true
+        },
+        "mediaUploadedBy": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "mediaUploadedOn": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "mediaFileSize": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "mediaTotalPlay": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "closedCaptionFileName": {
+          "type": "string",
+          "nullable": true
+        },
+        "closedCaptionFileType": {
+          "type": "string",
+          "nullable": true
+        },
+        "closedCaptionUploadedBy": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "closedCaptionUploadedOn": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "closedCaptionSourcePath": {
+          "type": "string",
+          "nullable": true
+        },
+        "closedCaptionBlobPath": {
+          "type": "string",
+          "nullable": true
+        },
+        "eventAutoStartEndTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "showPauseMessage": {
+          "type": "boolean"
+        },
+        "pauseMessage": {
+          "type": "string",
+          "nullable": true
+        },
+        "closedCaptionServiceType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "closedCaptionStatus": {
+          "type": "string",
+          "nullable": true
+        },
+        "closedCaptionOrderId": {
+          "type": "string",
+          "nullable": true
+        },
+        "closedCaptionSeconds": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "closedCaptionCost": {
+          "type": "number",
+          "format": "double"
+        },
+        "startEventAutomatically": {
+          "type": "boolean"
+        },
+        "actualStartTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "meetingEndTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "categoryId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eventCategoryId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eventCategoryName": {
+          "type": "string",
+          "nullable": true
+        },
+        "eventTemplates": {
+          "$ref": "#/components/schemas/EventTemplatesModel_ede8d526"
+        },
+        "eventTemplateName": {
+          "type": "string",
+          "nullable": true
+        },
+        "hasAgenda": {
+          "type": "boolean"
+        },
+        "hasMedia": {
+          "type": "boolean"
+        },
+        "isLive": {
+          "type": "boolean"
+        },
+        "meetingIn": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isDeleted": {
+          "type": "boolean"
+        },
+        "finalDeletedDate": {
+          "type": "string",
+          "format": "date-time",
+          "nullable": true
+        },
+        "canAccessEventTemplate": {
+          "type": "boolean"
+        },
+        "agendaFile": {
+          "$ref": "#/components/schemas/EventAgendaFileModel_986d0ca1"
+        },
+        "minutesFile": {
+          "$ref": "#/components/schemas/MinutesFileModel_f4fbbe23"
+        },
+        "mediaUploadedByName": {
+          "type": "string",
+          "nullable": true
+        },
+        "eventSocialMediaModel": {
+          "$ref": "#/components/schemas/EventSocialMediaModel_e3cc9ced"
+        },
+        "jwPlayerCode": {
+          "type": "string",
+          "nullable": true
+        },
+        "closedCaptionUploadedByName": {
+          "type": "string",
+          "nullable": true
+        },
+        "streamId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "zoomMeetingId": {
+          "type": "string",
+          "nullable": true
+        },
+        "publishedFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PublishFileModel_781acdf1"
+          },
+          "nullable": true
+        },
+        "eventNotice": {
+          "type": "string",
+          "nullable": true
+        },
+        "showEventNoticePreview": {
+          "type": "boolean"
+        },
+        "cpMediaOnly": {
+          "type": "boolean"
+        },
+        "defaultPublicPortalPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updateEvent": {
+          "type": "boolean"
+        },
+        "meetingTypeId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "meetingTypeName": {
+          "type": "string",
+          "nullable": true
+        },
+        "organizationId": {
+          "type": "string",
+          "nullable": true
+        },
+        "publishedAgendaTimeStamp": {
+          "type": "string",
+          "nullable": true
+        },
+        "publicCommentsEnabled": {
+          "type": "boolean"
+        },
+        "uploadMediaOnly": {
+          "type": "boolean"
+        },
+        "isArchived": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EventLocationDetailModel_32554035": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eventId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "address1": {
+          "type": "string",
+          "nullable": true
+        },
+        "address2": {
+          "type": "string",
+          "nullable": true
+        },
+        "city": {
+          "type": "string",
+          "nullable": true
+        },
+        "state": {
+          "type": "string",
+          "nullable": true
+        },
+        "zipCode": {
+          "type": "string",
+          "nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "EventTemplatesModel_ede8d526": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eventTemplateName": {
+          "type": "string",
+          "nullable": true
+        },
+        "eventTemplateDescription": {
+          "type": "string",
+          "nullable": true
+        },
+        "keywords": {
+          "type": "string",
+          "nullable": true
+        },
+        "createdByUserId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "visibilityId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "showInUpcomingEvents": {
+          "type": "boolean"
+        },
+        "isOnDemandEvent": {
+          "type": "boolean"
+        },
+        "isLiveEvent": {
+          "type": "boolean"
+        },
+        "automaticallyStart": {
+          "type": "boolean"
+        },
+        "thumbFileName": {
+          "type": "string",
+          "nullable": true
+        },
+        "thumbFileData": {
+          "type": "string",
+          "format": "byte",
+          "nullable": true
+        },
+        "thumbContentType": {
+          "type": "string",
+          "nullable": true
+        },
+        "thumbFileSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "durationHrs": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "durationMin": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "repeatMode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "repeatPeriodic": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "repeatEndDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "repeatEndOccurrences": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "repeatWeekday": {
+          "type": "string",
+          "nullable": true
+        },
+        "repeatWeekNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "repeatDayOfMonth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isSystem": {
+          "type": "boolean"
+        },
+        "ccServiceType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ccDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dates": {
+          "type": "string",
+          "nullable": true
+        },
+        "startTime": {
+          "type": "string",
+          "nullable": true
+        },
+        "eventCategoriesId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createdByName": {
+          "type": "string",
+          "nullable": true
+        },
+        "sortOrder": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "address1": {
+          "type": "string",
+          "nullable": true
+        },
+        "address2": {
+          "type": "string",
+          "nullable": true
+        },
+        "city": {
+          "type": "string",
+          "nullable": true
+        },
+        "state": {
+          "type": "string",
+          "nullable": true
+        },
+        "zipCode": {
+          "type": "string",
+          "nullable": true
+        },
+        "dtoId": {
+          "type": "string",
+          "nullable": true
+        },
+        "isTranscription": {
+          "type": "boolean"
+        },
+        "translationServiceType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "translationServiceOptions": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nullable": true
+        },
+        "mediaPauseMessage": {
+          "type": "string",
+          "nullable": true
+        },
+        "streamId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "zoomMeetingId": {
+          "type": "string",
+          "nullable": true
+        },
+        "autoTimestamp": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EventAgendaFileModel_986d0ca1": {
+      "type": "object",
+      "properties": {
+        "agendaId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fileName": {
+          "type": "string",
+          "nullable": true
+        },
+        "dateUploaded": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string",
+          "nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "MinutesFileModel_f4fbbe23": {
+      "type": "object",
+      "properties": {
+        "minutesId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eventId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fileName": {
+          "type": "string",
+          "nullable": true
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string",
+          "nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "EventSocialMediaModel_e3cc9ced": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eventId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sendToFacebookLive": {
+          "type": "boolean"
+        },
+        "facebookLiveEmbedCode": {
+          "type": "string",
+          "nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PublishFileModel_781acdf1": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fileId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "publishTo": {
+          "type": "string",
+          "nullable": true
+        },
+        "type": {
+          "type": "string",
+          "nullable": true
+        },
+        "publishOn": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "publishBy": {
+          "type": "string",
+          "nullable": true
+        },
+        "name": {
+          "type": "string",
+          "nullable": true
+        },
+        "url": {
+          "type": "string",
+          "nullable": true
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fileType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "streamUrl": {
+          "type": "string",
+          "nullable": true
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -349,3 +349,7 @@ This lead remains unresolved research, with no outside-only or absent-API claim.
 ### eSCRIBE selected history follow-up (2026-11-15)
 
 The already pinned PublishingService XSDs establish AgendaItemItemHistoryView with inherited History and literal Motions/Votes/Steps/Documents. The selected meeting/item read is implemented; no new tenant sampling was required. Native nested facts, exact source capture, cited source text, history identity and partial item reference are retained. Vote-label meanings/tallies, missing AgendaType and full history discovery are not inferred; this read does not close unrelated upload/readiness/file-import research.
+
+### Select native Event update follow-up (2026-11-15)
+
+The pinned update DTO and GET EventModel now support an explicit native request/postcondition path, with all18properties supplied and publication/media/template guards retained.141affected checks pass. This closes native-wire execution, while normalized clock/timezone conversion remains unresolved and is not hidden in caller defaults. Create still has its separate destination/template configuration dependencies; item writes and document upload remain unresolved research. See CIVICPLUS-SELECT-EVENT-UPDATES.md.

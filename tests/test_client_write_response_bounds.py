@@ -13,6 +13,7 @@ from quorumrelay.writes import register
 import test_boardable_agenda_write as boardable
 import test_towncloud_draft_write as towncloud
 import test_civicclerk_section_write as civicclerk
+import test_select_event_write as select_event
 from test_write_providers import make_engine
 
 
@@ -110,20 +111,26 @@ def test_shared_json_oversize_after_update_reconciles_without_second_mutation(tm
     assert sum(method == "PUT" for method, _ in vendor.calls) == 1
 
 
-@pytest.mark.parametrize("provider", ["wistia", "civicclerk"])
+@pytest.mark.parametrize("provider", ["wistia", "civicclerk", "select_event"])
 @pytest.mark.parametrize("interruption", ["cancel", "deadline"])
 @pytest.mark.parametrize("stage", ["readback", "mutation", "parse"])
 def test_final_readback_interruption_stays_uncertain_and_reopens_without_repeat(
         tmp_path, monkeypatch, provider, interruption, stage):
     import civic_data_connectors.write_adapters as adapters
     import civic_data_connectors.writes as writes
+    from civic_data_connectors.providers import select_event_write
 
     now = [100.0]
     monkeypatch.setattr(adapters, "monotonic", lambda: now[0])
     monkeypatch.setattr(writes, "monotonic", lambda: now[0])
+    monkeypatch.setattr(select_event_write, "monotonic", lambda: now[0])
     if provider == "wistia":
         engine, caller, vendor, source, change = wistia_update(tmp_path)
         database = "provider.sqlite"
+    elif provider == "select_event":
+        engine, caller, vendor = select_event.setup(tmp_path)
+        source, change = civicclerk.SOURCE, select_event.CHANGE
+        database = "write.sqlite"
     else:
         engine, caller, vendor = civicclerk.setup(tmp_path)
         vendor.rows[41] = {"id": 41, "agendaId": 91, "sectionName": "Before", "sectionText": "Keep"}
@@ -148,7 +155,7 @@ def test_final_readback_interruption_stays_uncertain_and_reopens_without_repeat(
             if stage == "mutation":
                 interrupt()
         elif (sent[0] and kwargs["method"] == "GET"
-              and (provider == "wistia" or url.endswith("/Sections/41"))):
+              and (provider != "civicclerk" or url.endswith("/Sections/41"))):
             final_read[0] = True
             if stage == "readback":
                 interrupt()
@@ -174,4 +181,4 @@ def test_final_readback_interruption_stays_uncertain_and_reopens_without_repeat(
     register(reopened, default_adapters(vendor))
     result = reopened.execute("commit_write", approval, context=caller)
     assert result.status == "completed", result.public_dict()
-    assert sum(call[0] == "PUT" for call in vendor.calls) == 1
+    assert sum((call if isinstance(call, str) else call[0]) == "PUT" for call in vendor.calls) == 1

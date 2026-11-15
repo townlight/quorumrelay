@@ -10017,5 +10017,16 @@
       "effective visibility and current deployment/authentication applicability",
       "unique lost-create-response lookup; no replay inferred"
     ]
+  },
+  "civicplus_select_event_update": {
+    "product": "CivicPlus Meetings Select / CivicClerk v1",
+    "source": "docs/capabilities/evidence/civicclerk-openapi/swagger.json",
+    "packaged_contract": "src/civic_data_connectors/data/select_event_update.json",
+    "request": "PUT /v1/Events/{key}; exact18native properties, every property explicit",
+    "readback": "GET same native key; exact full approved returned snapshot",
+    "execution": "Native event:update through shared plan/commit/receipt; beforehash and exact readback, durable no replay",
+    "preserved": "Publication status/start, automatic start, stream/media URL, template, location identity and unrelated readback fields",
+    "time_semantics": "Caller-declared native wire literals and expected native GET snapshot; no date/clock/timezone conversion or template/create equivalence inferred",
+    "limits": "Scoped synthetic native update; no live call, create, media upload, publication action or API-current-default inference"
   }
 }

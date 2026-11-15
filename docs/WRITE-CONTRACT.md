@@ -193,3 +193,7 @@ Fixed account reads and every PublicWriteTransport request disable redirects bef
 ## Response completion bounds
 
 Shared JSON write adapters recheck cancellation and the total deadline after transport completion and JSON sanitization. An interrupted mutation response remains uncertain because the request may have reached the provider. An interrupted final GET cannot confirm success; the durable intent remains available for read-only reconciliation after restart, without replaying the mutation. Preflight GET interruption retains its cancelled/deadline status and cannot produce an approved plan. Synthetic public-coordinator coverage includes Wistia and Select, raw mutation responses and parsing completion. See `verification/write-response-completion-2026-11-15.json`.
+
+## Select native event update
+
+Selected `event:update` additionally supports the exact documented18property native PUT plus an explicit complete intended GET snapshot. Publication/media/template and unrelated fields are preserved; native clock/date literals are caller supplied without inferred conversions. Preflight hash, exact readback and durable GET-only reconciliation apply. Event create remains separate. See [native contract and limits](CIVICPLUS-SELECT-EVENT-UPDATES.md).

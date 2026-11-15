@@ -441,7 +441,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "4cf839f9e0328d3fb59719daff842d1c655f9a9e125ab1bb0a5e53b986d5239c"
+                "sha256": "041c8b02331042d7af938237ca0169cede16ee6e396e86e49555a15a9b301503"
               },
               {
                 "kind": "test",
@@ -490,7 +490,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "4cf839f9e0328d3fb59719daff842d1c655f9a9e125ab1bb0a5e53b986d5239c"
+                "sha256": "041c8b02331042d7af938237ca0169cede16ee6e396e86e49555a15a9b301503"
               },
               {
                 "kind": "test",
@@ -7614,6 +7614,51 @@
           "capture_path": "docs/capabilities/evidence/civicclerk-openapi/event-settings-assessment.json",
           "capture_sha256": "2a2e393a76d01a2e605a9d9857cbc3875cbd6d0f6592671618798c270b8473bb",
           "proof_level": "official_documentation_assessment_not_execution"
+        },
+        {
+          "id": "select-native-event-update-2026-11-15",
+          "url": "https://fishersin.api.civicclerk.com/swagger/v1/swagger.json",
+          "title": "Pinned Select native Event update and exact-postcondition synthetic execution",
+          "kind": "official_machine_contract_and_synthetic_execution",
+          "observed": "2026-11-15",
+          "observation_date": "2026-11-15",
+          "access_scope": "pinned_source_and_local_synthetic_execution_only",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "limits": "Exact caller-supplied18property native PUT and explicit full native GET postcondition; preserve publication/media/template/unrelated fields. No clock conversion or create inferred. No live writes, publication actions or full product acceptance.",
+          "synthetic_execution": {
+            "provider": "civicplus-select",
+            "status": "fixture_passed",
+            "operations": [
+              "update"
+            ],
+            "entities": [
+              "meeting",
+              "event"
+            ],
+            "scope": "Exact caller-supplied18property native PUT and explicit full native GET postcondition; preserve publication/media/template/unrelated fields. No clock conversion or create inferred. Inventory meeting maps to public write entity event for this exact native /Events route.",
+            "execution_provenance": "Actual pytest2026-11-15:141affected passed4.81s including28newnative-event cases and6newshared response interruption cases. No remote mutation.",
+            "checks": [
+              {
+                "command": "pytest tests/test_select_event_write.py tests/test_civicclerk_section_write.py tests/test_client_write_response_bounds.py tests/test_write_plan_boundaries.py tests/test_write_providers.py tests/test_civicclerk_detail.py tests/test_civicclerk_event_files.py tests/test_civicclerk_supplied_assets.py -q",
+                "passed": 141,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/civicclerk-openapi/swagger.json",
+                "sha256": "d242638b2a6fd2b4dc2ef295ea000a52b146a1de63b7298ba463acd8d94ce62a"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_select_event_write.py",
+                "sha256": "43d98c84d09f2b910e090496ef8b6fc313c9a7751f2b95a29cec11fdea9f4586",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "43d98c84d09f2b910e090496ef8b6fc313c9a7751f2b95a29cec11fdea9f4586"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -7872,9 +7917,10 @@
             "select-items",
             "select-upload",
             "select-update",
-            "select-official-detail-section-execution"
+            "select-official-detail-section-execution",
+            "select-native-event-update-2026-11-15"
           ],
-          "details": "Only agenda_section update is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented. Exact native Event id/agendaId is revalidated during plan, before mutation and in reconciliation. Event PUT /v1/Events/{key} has a documented request schema in pinned Fishers OpenAPI; still unimplemented because time/template/readback equivalence is unresolved. Earlier UI-only wording did not describe this documented route.",
+          "details": "Agenda_section update remains implemented. Added selected native event update: complete documented18property PUT, explicit full expected GET snapshot, beforehash, tenant/resource permission, durable intent, conflict/denial/uncertainty and GET-only restart reconciliation. Publication/media/template/unrelated fields preserved; caller-declared native clock literals/postconditions do not establish normalized time conversion. Other entity writes remain unimplemented.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
             "Verified machine interface or authorized UI automation test environment"
@@ -8091,117 +8137,118 @@
           "endpoint_or_format": "PUT /v1/Events/{key}",
           "field_mappings": [
             {
-              "normalized": "native.eventName",
+              "normalized": "changes.fields.native_request.eventName",
               "provider_field": "eventName",
-              "notes": "Required documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.eventDescription",
+              "normalized": "changes.fields.native_request.eventDescription",
               "provider_field": "eventDescription",
-              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.eventStartDate",
+              "normalized": "changes.fields.native_request.eventStartDate",
               "provider_field": "eventStartDate",
-              "notes": "Required documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.eventStartTime",
+              "normalized": "changes.fields.native_request.eventStartTime",
               "provider_field": "eventStartTime",
-              "notes": "Required documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.address1",
+              "normalized": "changes.fields.native_request.address1",
               "provider_field": "address1",
-              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.address2",
+              "normalized": "changes.fields.native_request.address2",
               "provider_field": "address2",
-              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.city",
+              "normalized": "changes.fields.native_request.city",
               "provider_field": "city",
-              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.state",
+              "normalized": "changes.fields.native_request.state",
               "provider_field": "state",
-              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.zipCode",
+              "normalized": "changes.fields.native_request.zipCode",
               "provider_field": "zipCode",
-              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.startEventAutomatically",
+              "normalized": "changes.fields.native_request.startEventAutomatically",
               "provider_field": "startEventAutomatically",
-              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.streamId",
+              "normalized": "changes.fields.native_request.streamId",
               "provider_field": "streamId",
-              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.eventCategoryId",
+              "normalized": "changes.fields.native_request.eventCategoryId",
               "provider_field": "eventCategoryId",
-              "notes": "Required documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.isPublished",
+              "normalized": "changes.fields.native_request.isPublished",
               "provider_field": "isPublished",
-              "notes": "Required documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.publishStart",
+              "normalized": "changes.fields.native_request.publishStart",
               "provider_field": "publishStart",
-              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.externalMediaUrl",
+              "normalized": "changes.fields.native_request.externalMediaUrl",
               "provider_field": "externalMediaUrl",
-              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.actualStartTime",
+              "normalized": "changes.fields.native_request.actualStartTime",
               "provider_field": "actualStartTime",
-              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             },
             {
-              "normalized": "native.meetingEndTime",
+              "normalized": "changes.fields.native_request.meetingEndTime",
               "provider_field": "meetingEndTime",
-              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
-              "mapping_level": "documented_request_field_not_implemented"
+              "mapping_level": "exact_API_key",
+              "notes": "Explicit native property; no default or clock conversion. Publication/media controls must equal before; full expected GET snapshot is separate."
             }
           ],
           "evidence_ids": [
             "select-update",
-            "select-official-detail-section-execution"
+            "select-official-detail-section-execution",
+            "select-native-event-update-2026-11-15"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "GET /v1/Events/{key} returns EventModel. Exact eventStartDate/eventStartTime to eventDate/startDateTime timezone equivalence and create template effects remain unresolved; no write executed.",
-          "verification_status": "request_schema_documented_readback_semantics_unresolved",
-          "notes": "",
+          "readback_receipt": "Full native GET snapshot must exactly match explicit caller-approved expected_readback; preflight beforehash, durable intent and selected resource ID; ambiguous PUT reconciles GET only after restart.",
+          "verification_status": "documented_and_synthetically_executed_not_live",
+          "notes": "Use public write entity event, update only; exact18property request and full expected native GET. Preserve publication/media/template/unrelated fields. Native clock/date literals are caller supplied; automatic conversion, create template/default behavior and other operations are not established.",
           "requirement_ids": [
             "C01",
             "X03",
@@ -8212,14 +8259,14 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "official_openapi_request_schema_not_executed_event_write",
-          "implementation_status": "not_implemented",
-          "acceptance_status": "not_run",
+          "evidence_level": "attributed_contract_and_synthetic_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "fixture_passed",
           "interface_type": "documented_automated_api",
-          "contract_confidence": "documented_request_schema_with_unresolved_time_template_readback",
+          "contract_confidence": "pinned_native_wire_models_and_explicit_postcondition_no_time_conversion",
           "method": "PUT",
           "api_version": "v1, pinned Fishers OpenAPI",
-          "automatable_contract_verified": false,
+          "automatable_contract_verified": true,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
         {
@@ -8593,11 +8640,12 @@
       "remaining_research": [
         "A bounded Lacey CivicClerk native-search engine read and in-process resume is captured in docs/verification/civicplus-select-native-search-2026-11-12.json: partial/no-error pages yielded three then two local hits; the first request made one network call and resume reused the exact in-process snapshot with zero additional calls. Provider candidate semantics, broader search/full catalog, full text and restart-persistent continuation remain unverified.",
         "The exporter prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4. The official-linked filename tester classifies the additional tokens, but backend acceptance and post-import behavior remain unverified. MP4 framing does not establish codec/playability, captions or timestamp fidelity; ambiguous Packet, Notices and Audio/Video aliases remain rejected.",
-        "Historical FTP host and consultant processing/readback remain unverified. Source file preparation is separate from remote import or association. Official Fishers Section create/update is implemented; Event timestamp/template equivalence, item writes and document upload remain contract gaps, not account-acquisition gates.",
+        "Historical FTP host and consultant processing/readback remain unverified. Source file preparation is separate from remote import or association. Official Fishers Section create/update is implemented; Normalized Event timestamp conversion/create-template equivalence, item writes and document upload remain contract gaps, not account-acquisition gates.",
         "Official Fishers spec and metadata now pin Event/Section models and publication enum0/1/2; section writes are implemented with scoped synthetic execution. Event date/time/template readback equivalence remains unresolved, and no item create/update or document upload model is established. No account acquisition gate.",
         "Bounded Event-write follow-up: create eventStartTime has HH:MM regex, update time is free-form with12:00:00AM default; UI workflows/public display client do not establish write timestamp or template recurrence readback. No write conversion inferred. Portal Event-file API-origin defect is now implemented/tested separately.",
         "Supplied EventModel MP4/caption locator mapping and guarded transfers synthetically executed; caption extraction/timing, playback/readiness and staff upload contracts remain unverified, not proven outside-only dependencies.",
-        "Official2026guides establish variable publication/template defaults, with no create publication override in pinned request model. Selected current configuration is a destination fact; API applicability, preflight and timestamp/readback remain unresolved research. See event-settings-assessment.json; no blanket outside-only contract claim."
+        "Official2026guides establish variable publication/template defaults, with no create publication override in pinned request model. Selected current configuration is a destination fact; API applicability, preflight and timestamp/readback remain unresolved research. See event-settings-assessment.json; no blanket outside-only contract claim.",
+        "Native Event PUT is now implemented with complete explicit native request plus exact caller-declared GET postcondition and preserved publication/media/template guards. This closes the native-wire execution gap; normalized date/time conversion and Event create/default effects remain distinct unresolved scopes. No live call or account gate."
       ],
       "requirement_ids": [
         "C01",
@@ -9624,7 +9672,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "4cf839f9e0328d3fb59719daff842d1c655f9a9e125ab1bb0a5e53b986d5239c"
+                "sha256": "041c8b02331042d7af938237ca0169cede16ee6e396e86e49555a15a9b301503"
               },
               {
                 "kind": "test",
@@ -22641,7 +22689,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "4cf839f9e0328d3fb59719daff842d1c655f9a9e125ab1bb0a5e53b986d5239c"
+                "sha256": "041c8b02331042d7af938237ca0169cede16ee6e396e86e49555a15a9b301503"
               },
               {
                 "kind": "test",
@@ -26656,7 +26704,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "4cf839f9e0328d3fb59719daff842d1c655f9a9e125ab1bb0a5e53b986d5239c"
+                "sha256": "041c8b02331042d7af938237ca0169cede16ee6e396e86e49555a15a9b301503"
               },
               {
                 "kind": "test",
@@ -26705,7 +26753,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "4cf839f9e0328d3fb59719daff842d1c655f9a9e125ab1bb0a5e53b986d5239c"
+                "sha256": "041c8b02331042d7af938237ca0169cede16ee6e396e86e49555a15a9b301503"
               },
               {
                 "kind": "test",
