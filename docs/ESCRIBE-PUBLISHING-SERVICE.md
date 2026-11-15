@@ -81,6 +81,13 @@ keys remain source keys, without an inferred language. Supplied Minutes text is
 not interpreted as structured motions or votes. Unknown model fields, SOAP faults,
 wrong method/addressing, duplicate fields and invalid typed values fail explicitly.
 
+Agenda, AgendaItem and Attachment records expose explicit meeting relationships
+from their native compound identifiers. Item/attachment `AgendaType` binds to the
+native Agenda identifier's `Type`, as in the existing selected-parent checks.
+Attachments also expose supplied positive native item/document pointers; zero or
+absent pointers do not create those identities. This makes existing item records
+usable in `csv-items` without decoding provider fields or guessing a meeting join.
+
 ## Record writes
 
 The existing plan/commit coordinator now supports native `meeting`, `agenda`,

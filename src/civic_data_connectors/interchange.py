@@ -775,6 +775,26 @@ def _csv_cell(value):
     return "'" + value if value.lstrip(" \t\r\n").startswith(("=", "+", "-", "@")) else value
 
 
+def _item_csv_parent(record):
+    candidates = []
+    parent = record["identity"].get("parent")
+    if isinstance(parent, dict) and parent.get("record_type") in {"meeting", "event"}:
+        candidates.append(parent)
+    candidates.extend(relation.get("identity") for relation in record.get("relationships", [])
+                      if relation.get("relation") == "meeting")
+    keys, invalid = set(), False
+    for identity in candidates:
+        if (not isinstance(identity, dict) or identity.get("record_type") not in {"meeting", "event"}
+                or any(not isinstance(identity.get(k), str) or not identity[k]
+                       for k in ("provider", "namespace", "external_id"))):
+            invalid = True
+        else:
+            keys.add(source_identity_key(identity))
+    if len(keys) == 1 and not invalid:
+        return next(iter(keys)), None
+    return "", "ambiguous_meeting_parent" if len(keys) > 1 else "missing_or_invalid_meeting_parent"
+
+
 def csv_projection(records, *, kind="meetings"):
     """RFC 4180 CSV with a separate, machine-readable omission ledger."""
     output = io.StringIO(newline="")
@@ -792,6 +812,7 @@ def csv_projection(records, *, kind="meetings"):
         identity, normalized = record["identity"], record.get("normalized", {})
         key = source_identity_key(identity)
         included = {"source_url"}
+        limitations = []
         if kind == "meetings":
             if identity["record_type"] not in {"meeting", "event"}:
                 losses.append({"identity_key": key, "reason": "non_meeting_record_omitted",
@@ -804,6 +825,16 @@ def csv_projection(records, *, kind="meetings"):
             included |= {"identity.provider", "identity.namespace", "identity.external_id", "capture_sha256"}
             included |= {p for p in _leaves(record) if p.startswith("source_revision.")}
             included |= {f"normalized.{k}" for k in ("title", "scheduled_start", "meeting_date", "body")}
+        elif identity["record_type"] == "agenda_item":
+            parent_key, missing = _item_csv_parent(record)
+            writer.writerow({k: _csv_cell(v) for k, v in {
+                "meeting_identity_key": parent_key, "item_external_id": identity["external_id"],
+                "title": normalized.get("title"), "department": normalized.get("department"),
+                "source_url": record.get("source_url"),
+            }.items()})
+            included |= {"identity.external_id", "normalized.title", "normalized.department"}
+            if missing:
+                limitations.append(missing + "; parent key left empty, no join inferred")
         else:
             for index, item in enumerate(normalized.get("agenda_items", [])):
                 writer.writerow({k: _csv_cell(v) for k, v in {
@@ -813,12 +844,14 @@ def csv_projection(records, *, kind="meetings"):
                 }.items()})
                 included |= {f"normalized.agenda_items[{index}].{field}"
                              for field in ("external_id", "title", "department")}
-        losses.append({"identity_key": key, "omitted_fields": sorted(_leaves(record) - included)})
+        losses.append({"identity_key": key, "omitted_fields": sorted(_leaves(record) - included),
+                       **({"limitations": limitations} if limitations else {})})
     return output.getvalue().encode("utf-8"), {
         "projection": kind, "lossless": False, "records": losses,
         "representation_changes": ["null/absent become empty cells",
                                    "formula-like cells are prefixed with apostrophe",
-                                   "nested source_revision uses JSON; other nested fields are omitted"],
+                                   "nested source_revision uses JSON; other nested fields are omitted",
+                                   "standalone agenda_item rows use explicit meeting identities only; missing or ambiguous parents have empty keys"],
         "specification": "https://www.rfc-editor.org/rfc/rfc4180",
     }
 
@@ -900,6 +933,7 @@ def icalendar_projection(records):
 
 def register(engine) -> None:
     def export(owner, request, content, context):
+        started = time.monotonic()
         request = dict(request)
         if request.get("provider_specific"):
             return OperationResult.unsupported("export", reason=(
@@ -969,10 +1003,18 @@ def register(engine) -> None:
         if operation_cancelled(owner.storage, context):
             return OperationResult("cancelled", operation_id=context.operation_id)
         if format in {"csv", "csv-meetings", "csv-items", "icalendar", "ics"}:
+            def check_projection():
+                if operation_cancelled(owner.storage, context):
+                    raise InterruptedError("Projection export cancelled.")
+                if time.monotonic() >= started + bounds.deadline_seconds:
+                    raise ValueError("The projection export deadline was exceeded.")
+
+            check_projection()
             if format.startswith("csv"):
                 payload, losses = csv_projection(bundle["records"], kind="items" if format == "csv-items" else "meetings")
             else:
                 payload, losses = icalendar_projection(bundle["records"])
+            check_projection()
             if len(payload) > bounds.transfer_bytes:
                 raise ValueError("Projection exceeds the transfer byte limit.")
             if delivery == "inline" and len(payload) > bounds.parser_bytes:
@@ -984,7 +1026,7 @@ def register(engine) -> None:
                 metadata = _save_artifact(owner, "artifacts", artifact_id, io.BytesIO(payload),
                     {"artifact_id": artifact_id, "format": format, "manifest": manifest,
                      "namespaces": sorted({r["identity"]["namespace"] for r in bundle["records"]})},
-                    context=context, max_bytes=bounds.transfer_bytes)
+                    context=context, max_bytes=bounds.transfer_bytes, check_bounds=check_projection)
                 data = {"format": format, "artifact_id": artifact_id, "manifest": manifest,
                         "storage_reference": metadata.get("storage_reference",
                             {"kind": "civic_export_artifact", "artifact_id": artifact_id})}
@@ -994,6 +1036,7 @@ def register(engine) -> None:
             status = "partial" if (coverage.get("failures") or coverage.get("truncated")
                                     or coverage.get("input_status") in {"partial", "failed", "cancelled"}
                                     or upstream_errors) else "completed"
+            check_projection()
             return OperationResult(status, data=data,
                                    errors=upstream_errors, coverage=coverage, operation_id=context.operation_id)
         attachment_ids = request.get("attachment_ids", [])

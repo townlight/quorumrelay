@@ -369,6 +369,26 @@ def parse_bundle(source, namespace, content):
     for record in bundle["records"]:
         raw = record["original"]
         kind = record["identity"]["record_type"]
+        if kind in {"agenda", "agenda_item", "attachment"}:
+            native = raw["Id"]
+            parent = {"provider": source.provider, "namespace": namespace, "record_type": "meeting",
+                      "external_id": native["MeetingId"]}
+            record["relationships"].append({"relation": "meeting", "identity": parent})
+            if kind != "agenda":
+                agenda = {"MeetingId": native["MeetingId"], "Type": native["AgendaType"]}
+                record["relationships"].append({"relation": "agenda", "identity": {
+                    **parent, "record_type": "agenda",
+                    "external_id": json.dumps(agenda, sort_keys=True, separators=(",", ":"))}})
+            if kind == "attachment":
+                if type(native.get("AgendaItemId")) is int and native["AgendaItemId"] > 0:
+                    item = {"MeetingId": native["MeetingId"], "AgendaType": native["AgendaType"],
+                            "Id": native["AgendaItemId"]}
+                    record["relationships"].append({"relation": "agenda_item", "identity": {
+                        **parent, "record_type": "agenda_item",
+                        "external_id": json.dumps(item, sort_keys=True, separators=(",", ":"))}})
+                if type(raw.get("DocumentId")) is int and raw["DocumentId"] > 0:
+                    record["relationships"].append({"relation": "document", "identity": {
+                        **parent, "record_type": "document", "external_id": str(raw["DocumentId"])}})
         if kind == "agenda_item_text":
             item = {k: raw[k] for k in ("MeetingId", "AgendaType", "Id")}
             record["relationships"].append({"relation": "agenda_item", "identity": {

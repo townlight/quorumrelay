@@ -317,6 +317,16 @@ Only use this when <code>capabilities</code> says that provider has an implement
 
 The neutral <code>export</code> operation emits JSON, JSONL or ZIP bundles. CSV and iCalendar are explicit projections and can lose unsupported meeting fields; the result reports losses. Export does not contact a vendor or mutate records.
 
+Use <code>csv-items</code> for both items nested in meeting records and standalone
+<code>agenda_item</code> records. Standalone rows retain the native item identifier,
+available normalized title/department and source URL. Their meeting key comes
+only from an explicit meeting identity in the record's parent or relationships.
+Missing, invalid or conflicting meeting identities leave that key empty and add
+a warning to the projection-loss ledger; names, dates and item order never supply
+a guessed join. CSV/iCalendar exports honor cancellation and the total deadline
+through serialization and streamed artifact saving. Checks run when synchronous
+work returns; an expired result is not reported as a completed download.
+
 ~~~python
 exported = engine.execute(
     "export",
