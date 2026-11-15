@@ -413,7 +413,7 @@ explicit writable resources and approval of the exact immutable plan.
 1. Call `plan_write` with the source and typed changes/files. Planning checks cancellation and its total deadline after provider preflight and before storing the approval plan; an interrupted or expired preflight returns no plan. Checks are cooperative after synchronous work returns.
 2. Display the actual planned native request, before state, changes and limits.
 3. Obtain product approval and retain `plan_id` plus `plan_hash`.
-4. Call `commit_write` with only those exact values under the same current scope.
+4. Call `commit_write` with only those exact values under the same current scope. The coordinator checks cancellation again after persisting each new intent, before invoking the adapter; a cancellation observed there produces a durable cancelled item without sending it. An existing uncertain send remains uncertain and cannot be replayed.
 5. Read `receipt`; reconcile ambiguous/lost responses before retrying.
 
 Do not pass identity, credentials or `authorization` in operation JSON. CLI/HTTP

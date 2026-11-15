@@ -233,6 +233,10 @@ class WriteCoordinator:
                 version = self._save(storage, receipt, version, context)
                 # Intent is durable before the first possible outbound mutation.
                 try:
+                    # Persistence may have yielded to a cancellation request. No adapter
+                    # has run for this intent yet, so cancellation is still unambiguous.
+                    if cancelled():
+                        raise WriteCancelled()
                     def persist_step(step):
                         nonlocal version
                         item.update(step)

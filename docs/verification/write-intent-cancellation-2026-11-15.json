@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "cd51fb8f74dfb21335f3bf1c83549c1b99adfaa0",
+  "tasks": [
+    10
+  ],
+  "status": "PASSED",
+  "scope": "Coordinator rechecks cancellation after durable intent save and before adapter invocation. No remote mutation or release. Existing uncertain intents retain reconciliation-only behavior.",
+  "reproduced_before_fix": {
+    "failed": 2,
+    "observed": "Both implicit plan operation ID and explicit operation ID cancellations persisted during intent save were ignored and the synthetic vendor POST completed."
+  },
+  "checks": [
+    {
+      "scope": "Affected shared coordinator and documented/native write adapters, recovery, response/plan bounds",
+      "passed": 338,
+      "failed": 0,
+      "seconds": 12.81,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\write-intent-cancellation-2026-11-15.xml",
+      "xml_sha256": "739443157fde2e0045f929d0fac387cf4b7737e6856b78d84988d7f7f5eb4940"
+    },
+    {
+      "scope": "Ruff changed source/test",
+      "status": "PASSED"
+    }
+  ],
+  "source_sha256": {
+    "src/civic_data_connectors/writes.py": "f86cf92412cd4fd6b4aa86916ec176c88edbc4394eab3d57754a0acb7334f697",
+    "tests/test_write_intent_cancellation.py": "8e6dc18a2fe8196372f57e29a4eda7ab5f04094ae650fc47063ab15adefa6f50",
+    "docs/DEVELOPER-GUIDE.md": "368f5e9c163731ed7eca45b561dc17a06439a9bcb842dc8ba838db04d1527e84"
+  },
+  "limits": [
+    "Synthetic transport only; live tenant mutation NOT_RUN.",
+    "Prior 2317-case full suite remains prior evidence at cd51fb8; not claimed rerun.",
+    "Cancellation is cooperative; this closes the intent-persistence boundary, not a claim of atomic cancellation across remote sends."
+  ]
+}
