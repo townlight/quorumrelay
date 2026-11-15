@@ -6,6 +6,8 @@ Unknown machine contracts are unresolved research, not verified outside-informat
 
 Archive completeness, wider tenant surveys, live account observations and playback limits are qualifications, not newly imposed gates. No release/publication is authorized. Local source/package preparation is separate from delivery.
 
+Active prerequisite reconciliation: completed shared retrieval/network/date-filter and plan/commit infrastructure is no longer listed as unfinished provider work. Superseded live-account acquisition statements are retained as historical restrictions; actual runtime credentials, tenant/resource authorization, undocumented request/readback semantics and selected-destination dependencies remain distinct. No provider capability, implementation or acceptance status was promoted by this correction.
+
 ## F01 Legistar (`legistar`)
 
 - Official Text Editor .txt import with `..title`/`..body` now has local explicit-field preparation, required encoding choice, bounded output/hash/scoped artifact and19new synthetic cases. This resolves that narrow file path; historical migration packages and recording imports remain separate. See [usage and limits](../LEGISTAR-TEXT-FILES.md).

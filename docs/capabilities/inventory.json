@@ -7916,8 +7916,7 @@
           "dependencies": [],
           "remaining_verification": [
             "Provider candidate relevance and exact/phrase behavior beyond the observed bounded query remain unverified.",
-            "Full tenant catalog, search completeness, complete source text and restart-persistent continuation remain unverified.",
-            "No authorized provider test tenant/write acceptance was supplied."
+            "Full tenant catalog, search completeness, complete source text and restart-persistent continuation remain unverified."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "source_fixture_and_bounded_engine_read_not_provider_acceptance",
@@ -7928,7 +7927,8 @@
           "test_access": "Source/fixture coverage is identified separately from the bounded public engine receipt; the receipt shows one partial query and one in-process resume, not provider acceptance.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No authorized provider test tenant/write acceptance was supplied."
           ]
         },
         "local_search": {
@@ -8015,7 +8015,7 @@
           "details": "Only agenda_section create is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented. Exact native Event id/agendaId is revalidated during plan, before mutation and in reconciliation. Event POST /v1/Events has a documented request schema in pinned Fishers OpenAPI; still unimplemented because time/template/readback equivalence is unresolved. Earlier UI-only wording did not describe this documented route.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
-            "Verified machine interface or authorized UI automation test environment"
+            "Applicable documented integration contract and attributable request/readback evidence; vendor-documented synthetic execution is accepted."
           ],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
@@ -8046,7 +8046,7 @@
           "details": "Agenda_section update remains implemented. Added selected native event update: complete documented18property PUT, explicit full expected GET snapshot, beforehash, tenant/resource permission, durable intent, conflict/denial/uncertainty and GET-only restart reconciliation. Publication/media/template/unrelated fields preserved; caller-declared native clock literals/postconditions do not establish normalized time conversion. Other entity writes remain unimplemented.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
-            "Verified machine interface or authorized UI automation test environment"
+            "Applicable documented integration contract and attributable request/readback evidence; vendor-documented synthetic execution is accepted."
           ],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
@@ -8075,13 +8075,12 @@
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Official authenticated UI supports in-scope operations; exact external API contract is unverified. Historical import is consultant-mediated, not an automatic write API.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
-            "Verified machine interface or authorized UI automation test environment"
+            "Applicable documented integration contract and attributable request/readback evidence; vendor-documented synthetic execution is accepted."
           ],
           "remaining_verification": [
             "Implementation contract validation",
             "Provider/tenant boundary and failure cases",
-            "Mock adapter checks are not live provider acceptance",
-            "Authorized live test access not supplied"
+            "Mock adapter checks are not live provider acceptance"
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -8092,7 +8091,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: Authorized live test access not supplied"
           ]
         }
       },
@@ -9057,8 +9057,7 @@
           "dependencies": [],
           "remaining_verification": [
             "Other years/categories, full archive completeness and broader date/body bounds remain unverified.",
-            "The observed ViewFile?html=true representation is text/html, not PDF/binary proof; a separate supplied binary route remains unverified.",
-            "No authorized provider test tenant/write acceptance was supplied."
+            "The observed ViewFile?html=true representation is text/html, not PDF/binary proof; a separate supplied binary route remains unverified."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "source_fixture_and_bounded_public_read_not_provider_acceptance",
@@ -9070,7 +9069,8 @@
           "test_access": "tests/test_agendacenter_discovery.py covers saved year/category controls; the separate 2024/category 3 receipt records a bounded public read, not write acceptance.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No authorized provider test tenant/write acceptance was supplied."
           ]
         },
         "fetch": {
@@ -9133,8 +9133,7 @@
           "dependencies": [],
           "remaining_verification": [
             "Other years/categories, provider keyword semantics, full text and full archive completeness remain unverified.",
-            "The sentinel response was an application error, not evidence of an empty search result.",
-            "No authorized provider test tenant/write acceptance was supplied."
+            "The sentinel response was an application error, not evidence of an empty search result."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "source_fixture_and_bounded_engine_read_not_provider_acceptance",
@@ -9146,7 +9145,8 @@
           "test_access": "tests/test_agendacenter_search.py covers saved controls; the separate bounded engine receipt records one public query and resume, not provider acceptance.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No authorized provider test tenant/write acceptance was supplied."
           ]
         },
         "local_search": {
@@ -9933,8 +9933,7 @@
           "details": "Public Essential API documentation specifies POST /PublicApi/meeting/collection/{offset} with MeetingListFilters; exact response and page termination semantics are not published. The separate Effingham public website p=1 value is not proven pagination.",
           "dependencies": [],
           "remaining_verification": [
-            "Implement documented request only after response schema and continuation are resolved or explicitly bounded",
-            "Support token and account entitlement required for live API access; none supplied"
+            "Implement documented request only after response schema and continuation are resolved or explicitly bounded"
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -9945,7 +9944,8 @@
           "test_access": "bounded_public_research_not_engine_acceptance",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: Support token and account entitlement required for live API access; none supplied"
           ]
         },
         "fetch": {
@@ -9960,8 +9960,7 @@
           "details": "Explicit meeting/item/multimedia GET and collection POST at caller-supplied offset use the support article development origin or officially linked Postman production origin. Production item route is /PublicApi/meeting/item/{id}; development retains /PublicApi/item/{id}. Credentials bind exact selected origin/tenant/namespace; no fallback. Meeting/item/collection response schemas remain unverified raw partial captures. Only existing documented meetingStructure multimedia shape is normalized. Synthetic routing/privacy checks accepted; no live account read. Environment qualification: only development-host multimedia has the documented normalized meetingStructure mapping. All production account responses, including multimedia, are raw partial captures because the production collection supplies no response examples; no development DTO is inferred.",
           "dependencies": [],
           "remaining_verification": [
-            "Obtain documented or authorized response examples for meeting and item details and multimedia readback",
-            "Test account/token not supplied; no API request made"
+            "Obtain documented or authorized response examples for meeting and item details and multimedia readback"
           ],
           "acceptance_status": "not_run",
           "evidence_level": "official_contract_and_fixture_tested_source_implementation_no_live_account_read",
@@ -9973,7 +9972,8 @@
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance",
-            "No provider account read acceptance; no automatic pagination beyond documented contract"
+            "No provider account read acceptance; no automatic pagination beyond documented contract",
+            "Historical observation, not an acceptance dependency: Test account/token not supplied; no API request made"
           ]
         },
         "parse": {
@@ -14093,7 +14093,7 @@
           "details": "No public contract verified for this operation. Missing credentials/evidence does not mean vendor feature unavailable.",
           "dependencies": [],
           "remaining_verification": [
-            "Establish applicable official operation/route and authorized test access."
+            "Establish the applicable vendor-documented operation, fields and readback; synthetic verification is accepted."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "unverified",
@@ -15572,7 +15572,7 @@
           "details": "No public contract verified for this operation. Missing credentials/evidence does not mean vendor feature unavailable.",
           "dependencies": [],
           "remaining_verification": [
-            "Establish applicable official operation/route and authorized test access."
+            "Establish the applicable vendor-documented operation, fields and readback; synthetic verification is accepted."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "unverified",
@@ -16022,10 +16022,7 @@
             "swagit-public-player-2026-11-15"
           ],
           "details": "The registered swagit-listing-html current layout is selected for configured public listings; bounded GET captures preserve provider IDs and supplied links. Pagination/catalog completeness is not claimed. Supplied exact public-player URLs now map native-bound rendered transcript text/date/title and HLS/caption locators. Explicit fetch_captions reads one declared WebVTT with configured download-origin authorization, exact response/MIME/header and aggregate byte/deadline/cancellation checks; scoped SQLite/reopen/search/ZIP proven. No generated text, cue interpretation, playback or staff contract inferred.",
-          "dependencies": [
-            "bounded date/body query",
-            "safe public retrieval"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
             "No complete catalog, provider-wide matching semantics or live write acceptance is claimed."
@@ -16052,9 +16049,7 @@
             "configured-fetch-labels-2026-11-15"
           ],
           "details": "Configured archive HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and10native meeting records. Selected native-bound player transcript and explicit supplied VTT retrieval have separate2026-11-15scoped execution. No playback or general file/catalog acceptance.",
-          "dependencies": [
-            "shared network safeguards"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Verify a supplied agenda/document or media route with MIME/redirect and independent failure outcomes; do not infer transcripts from timestamp links."
           ],
@@ -16192,7 +16187,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -16204,7 +16198,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "update": {
@@ -16216,7 +16211,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -16228,7 +16222,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "upload": {
@@ -16240,7 +16235,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -16252,7 +16246,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         }
       },
@@ -16642,14 +16637,10 @@
             "suiteone-search-discovery-source-tests"
           ],
           "details": "The source adapter supports bounded public root/group discovery and continuation. A Vermilion engine traversal covered the root plus one supplied Older Meetings group, yielding 328 rows while 17 older groups were reported; coverage remains partial/truncated.",
-          "dependencies": [
-            "bounded date/body query",
-            "safe public retrieval"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "The remaining reported Older Meetings groups, full history and full archive completeness remain unverified.",
-            "Separate event/agenda/packet/minutes attachment MIME, redirects and bytes remain unverified.",
-            "No authorized provider test tenant/write acceptance was supplied."
+            "Separate event/agenda/packet/minutes attachment MIME, redirects and bytes remain unverified."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "source_fixture_and_bounded_engine_read_not_provider_acceptance",
@@ -16660,7 +16651,8 @@
           "test_access": "tests/test_provider_discovery.py covers saved group continuation; the separate engine receipt covers one public root/group traversal only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No authorized provider test tenant/write acceptance was supplied."
           ]
         },
         "fetch": {
@@ -16672,9 +16664,7 @@
             "suiteone-public-event-2026-11-15"
           ],
           "details": "Configured archive HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and28native event records. Bounded root/older-group traversal and selected native search have separate receipts. No general attachment, timed Liberty HTML import or upload/publication contract is established. Selected nativeevent2165 rendered transcript/source timing strings and explicit supplied WebVTT have separate2026-11-15execution; source/captures/relationships/hash persist through local search/reopen/neutral formats. No script execution/date/vote/cue/playback/Liberty import inference.",
-          "dependencies": [
-            "shared network safeguards"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Verify raw response MIME, redirects, document/media status and independent attachment failures."
           ],
@@ -16726,8 +16716,7 @@
           "dependencies": [],
           "remaining_verification": [
             "Provider relevance and date-filter semantics, Older Meetings results, full archive/search completeness and document text remain unverified.",
-            "The zero local hits describe only these returned bounded pages, not the archive as a whole.",
-            "No authorized provider test tenant/write acceptance was supplied."
+            "The zero local hits describe only these returned bounded pages, not the archive as a whole."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "source_fixture_and_bounded_engine_read_not_provider_acceptance",
@@ -16738,7 +16727,8 @@
           "test_access": "tests/test_suiteone_search.py covers saved public responses and continuation; the separate engine receipt records a partial public query/resume, not provider acceptance.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No authorized provider test tenant/write acceptance was supplied."
           ]
         },
         "local_search": {
@@ -16819,7 +16809,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -16831,7 +16820,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "update": {
@@ -16842,11 +16832,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. event.media_and_minutes: SuiteView Admin UI: save media and Minutes/Bookmarks, then SAVE Event; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -16858,7 +16846,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "upload": {
@@ -16869,11 +16858,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. recording: SuiteView Admin UI: Event > View/Edit > Event Media > Upload Media (.WMV); API unknown; minutes.bookmarks: SuiteView Admin UI: Agendas & Minutes > Minutes Edit/Upload > HTML/import and Bookmarks; *_content.HTML",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -16885,7 +16872,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         }
       },
@@ -18225,10 +18213,7 @@
             "utah-public-notice-discover-engine-final"
           ],
           "details": "Explicit Utah public body and inclusive dates drive the observed anonymous search form; exact local body/date filtering applies to returned notice metadata, with scope-bound continuation. The single-body response supplies one notice; full result paging and catalog completeness remain unverified. Final bounded integrated-engine read is recorded separately; status partial/no errors, not catalog or installed-client acceptance.",
-          "dependencies": [
-            "bounded date/body query",
-            "safe public retrieval"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
           ],
@@ -18252,9 +18237,7 @@
             "utah-supplied-assets-2026-11-15"
           ],
           "details": "Configured native notice HTML retrieval already implemented; source-bound calendar and audio descriptors now retained, with exact no-redirect guarded asset transfer. Actual calendar bytes observed;No complete-catalog claim. Synthetic failures preserve notice. No staff writes. Selected calendar/audio locator and neutral preservation scope: docs/verification/utah-supplied-assets-2026-11-15.json;211affected cases passed.",
-          "dependencies": [
-            "shared network safeguards"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Other calendar variants, actual audio/playback and unobserved document outcomes remain qualified, not newly required sampling."
           ],
@@ -18390,11 +18373,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_notice: Authenticated Admin UI: Notices > Add > Save draft or Publish; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -18406,7 +18387,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "update": {
@@ -18417,11 +18399,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_notice: Authenticated Admin UI: edit notice within associated Body; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -18433,7 +18413,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "upload": {
@@ -18444,11 +18425,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_notice.document_or_recording: Authenticated notice UI: attachment at bottom of notice; accepted formats shown there, not enumerated in Help",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -18460,7 +18439,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         }
       },
@@ -18857,10 +18837,7 @@
             "agendaquick-public-memo-2026-11-12"
           ],
           "details": "The configured Yuma public calendar maps supplied meeting identities and documents and follows bounded supplied period controls; full tenant archive and meeting-type coverage remain unverified. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download. Current source also maps the supplied public memo template (agendaquick-public-memo-html): native item/meeting/line/revision controls, six labelled sections and supplied same-origin PDF locator; no implicit attachment fetch or inferred adopted motion/vote.",
-          "dependencies": [
-            "bounded date/body query",
-            "safe public retrieval"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
           ],
@@ -19030,11 +19007,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. agenda_or_minutes: AgendaQuick authenticated product UI; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -19047,7 +19022,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "update": {
@@ -19058,11 +19034,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. agenda_or_minutes: AgendaQuick authenticated editing/publishing UI; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -19075,7 +19049,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "upload": {
@@ -19087,7 +19062,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -19100,7 +19074,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         }
       },
@@ -19770,11 +19745,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. streaming_meeting_event: Town Hall Streams service web UI: select start and end date/time; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -19786,7 +19759,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "update": {
@@ -19798,7 +19772,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -19810,7 +19783,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "upload": {
@@ -19822,7 +19796,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -19834,7 +19807,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         }
       },
@@ -20527,10 +20501,7 @@
             "telvue-cloudcast-mrss-contract"
           ],
           "details": "Public player/playlist HTML baseline plus documented authenticated Connect v2 media/videos/playlists. Select tenant/app scope explicitly. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified.",
-          "dependencies": [
-            "bounded date/body query",
-            "safe public retrieval"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "API examples do not specify paging, filtering or limits; playlist counts require verification against enumerated media, not assumed exhaustive single page.",
             "Build fixtures and verify complete bounded result traversal."
@@ -20562,9 +20533,7 @@
             "telvue-public-player-2026-11-15"
           ],
           "details": "Source implements explicit Connect v2 GET requests for media, videos and playlists, plus media/playlist detail routes, with exact documented CONNECT-ACCESS-KEY and CONNECT-SECRET-PASSPHRASE headers. The public examples define JSON envelopes and sample fields. Pagination/filter/rate limits remain undocumented; no account key or live read. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified. Explicit api_resource=playlist_items plus playlist_id supports documented Connect v2 collection/detail; external_id selects the item. Separate playlist_item identity/playlist parent/media playable relation preserve native IDs, sequence/windows, supplied recordings and raw unknown fields. Seven synthetic engine/saved-response checks pass; published December2022 examples do not establish pagination or current deployment compatibility. Selected public native-media player and supplied WebVTT have separate2026-11-15scoped execution; exact source labels/bytes/text retained without meeting-date/language-code/playback/write inference.",
-          "dependencies": [
-            "shared network safeguards"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Verify raw response MIME, redirects, document/media status and independent attachment failures."
           ],
@@ -20717,7 +20686,6 @@
             "application-owned tenant/origin/namespace-bound session+CSRF and v2 read credentials at runtime"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -20730,7 +20698,8 @@
           "test_access": "Local vendor-client-contract synthetic execution; live credentials not an acceptance gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "update": {
@@ -20746,7 +20715,6 @@
             "application-owned tenant/origin/namespace-bound session+CSRF and v2 read credentials at runtime"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -20759,7 +20727,8 @@
           "test_access": "Local vendor-client-contract synthetic execution; live credentials not an acceptance gate.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "upload": {
@@ -20770,11 +20739,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. recording: Connect UI drag/drop videos; API upload endpoint unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -20787,7 +20754,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         }
       },
@@ -21338,12 +21306,10 @@
             "champ-rich-agenda-synthetic"
           ],
           "details": "Public client and live response prove GET detail by customer ID/event ID, not event-catalog listing. No public catalog/index or pagination route verified on the two observed tenants. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference. Native event-bound BoardName/body ID is projected for exact local body search and configured filtering; native ID mismatch is not inferred away.",
-          "dependencies": [
-            "bounded date/body query",
-            "safe public retrieval"
-          ],
+          "dependencies": [],
           "remaining_verification": [
-            "Find/verify public event catalog/list route and bounded date/page traversal; admin event-list help describing 15 events is not a public JSON contract."
+            "Find/verify public event catalog/list route and bounded date/page traversal; admin event-list help describing 15 events is not a public JSON contract.",
+            "Verify the public catalog's native date/body selectors and bounds; configured-event retrieval is separate."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -21370,9 +21336,7 @@
             "champ-rich-agenda-synthetic"
           ],
           "details": "Two public event details are engine-read verified. One supplied PDF and player HTML completed; a separate supplied HLS/media request remained partial. No playback, segment or catalog completeness is established. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference. Native event-bound BoardName/body ID is projected for exact local body search and configured filtering; native ID mismatch is not inferred away.",
-          "dependencies": [
-            "shared network safeguards"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Do not generalize the one supplied PDF to other links. The separate HLS/media attempt is partial; playable stream/segment retrieval remains unverified."
           ],
@@ -21508,11 +21472,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_event: Authenticated CHAMP UI: Events > + New Event > Save; API unknown; agenda_item_or_minutes_item: Authenticated CHAMP Event agenda/minutes item editor; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -21524,7 +21486,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "update": {
@@ -21535,11 +21498,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. event.publication: Authenticated UI: Overview > Publish Settings and Elements; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -21551,7 +21512,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "upload": {
@@ -21563,11 +21525,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_document: Event agenda/minute item > Attachments: PDF file upload; API unknown; recording: Event > Media > Update Media; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -21579,7 +21539,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         }
       },
@@ -23757,7 +23718,7 @@
           "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Repository.Write granted and resource ACL allows action",
-            "repositoryId,parentEntryId/entryId and authorized test access absent"
+            "At runtime the application supplies the explicitly authorized repository ID and parent/entry IDs; acquiring a test account is not a synthetic-acceptance gate."
           ],
           "remaining_verification": [
             "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
@@ -23786,7 +23747,7 @@
           "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Repository.Write granted and resource ACL allows action",
-            "repositoryId,parentEntryId/entryId and authorized test access absent"
+            "At runtime the application supplies the explicitly authorized repository ID and parent/entry IDs; acquiring a test account is not a synthetic-acceptance gate."
           ],
           "remaining_verification": [
             "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
@@ -23815,7 +23776,7 @@
           "details": "Native adapter implements the explicitly documented in-domain entities/fields in write_adapters.py; exact plan/current grants, before-state/readback and durable receipts apply. See outbound mapping/evidence for scope; no claim all vendor endpoints or fields.",
           "dependencies": [
             "Repository.Write granted and resource ACL allows action",
-            "repositoryId,parentEntryId/entryId and authorized test access absent"
+            "At runtime the application supplies the explicitly authorized repository ID and parent/entry IDs; acquiring a test account is not a synthetic-acceptance gate."
           ],
           "remaining_verification": [
             "Reconcile executed entity/field-specific evidence with current source; historical95 affected passes are not blanket new-field acceptance."
@@ -24708,10 +24669,7 @@
             "towncloud-agenda-associations-2026-11-12"
           ],
           "details": "Explicit Woodford /agendas page contains a 200 embedded published_agendas.json response with 115 rows. The mapper preserves original fields and supplied agenda/document URLs; optional configured towncloud.io download origin remains explicit. No body/year pagination or full-history completeness is inferred. Existing agenda HTML now also enriches rich records with explicitly capture-local item hierarchy, item-owned supplied text and tenant-bound native attachment IDs/locators. No native item IDs, implicit attachment fetch or expanded origin authorization.",
-          "dependencies": [
-            "bounded date/body query",
-            "safe public retrieval"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
           ],
@@ -24737,9 +24695,7 @@
             "configured-fetch-labels-2026-11-15"
           ],
           "details": "Configured agenda HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and native meeting/item hierarchy. Explicit captured agenda/item attachment associations remain separate from general live transfer acceptance. No automatic table_data root discovery, external import or write endpoint inferred.",
-          "dependencies": [
-            "shared network safeguards"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Verify raw response MIME, redirects, document/media status and independent attachment failures."
           ],
@@ -24874,11 +24830,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_agenda_or_minutes: Authenticated TownCloud Agenda product UI; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -24890,7 +24844,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "update": {
@@ -24902,11 +24857,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_agenda_or_minutes: Authenticated TownCloud manage/publish UI; API unknown Scoped existing item/section draft text update is implemented and synthetic accepted in its outbound row. Full item save/publication remains unmapped; no blanket acceptance.",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -24918,7 +24871,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "upload": {
@@ -24930,7 +24884,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -24942,7 +24895,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         }
       },
@@ -25329,10 +25283,7 @@
             "towpath-demo-list"
           ],
           "details": "Explicit current dated-link listing and supplied Other Years controls are implemented with current-root revalidation, bounded dates and continuation. One existing 2024 page returned ten records; URL-derived keys are labelled and archive completeness remains unknown.",
-          "dependencies": [
-            "bounded date/body query",
-            "safe public retrieval"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
             "No complete catalog, provider-wide matching semantics or live write acceptance is claimed."
@@ -25357,9 +25308,7 @@
             "towpath-demo-detail"
           ],
           "details": "Explicit supplied numeric /meetings/detail/{id} retrieval is implemented, validates requested identity and preserves exact detail bytes and supplied documents. No arbitrary slug-to-native-ID alias or full-document completeness is inferred.",
-          "dependencies": [
-            "shared network safeguards"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
             "No complete catalog, provider-wide matching semantics or live write acceptance is claimed."
@@ -25491,11 +25440,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting: Dashboard Meetings Module described by indexed official PDF; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -25507,7 +25454,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "update": {
@@ -25519,7 +25467,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -25531,7 +25478,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "upload": {
@@ -25543,7 +25491,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -25555,7 +25502,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         }
       },
@@ -26016,8 +25964,7 @@
           "dependencies": [],
           "remaining_verification": [
             "Nested trees and full tree/catalog completeness remain unverified; the live read was capped at two pages and three records.",
-            "Linked document bytes/MIME/redirect behavior and full file retrieval remain unverified.",
-            "No authorized provider test tenant/write acceptance was supplied."
+            "Linked document bytes/MIME/redirect behavior and full file retrieval remain unverified."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "source_fixture_and_bounded_engine_read_not_provider_acceptance",
@@ -26028,7 +25975,8 @@
           "test_access": "tests/test_clerkbase_listing.py covers saved tree captures; the separate bounded live engine receipt records two pages and three records, while raw route probes are separate HTTP observations. No linked document fetch or provider write acceptance.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No authorized provider test tenant/write acceptance was supplied."
           ]
         },
         "fetch": {
@@ -26094,8 +26042,7 @@
           "dependencies": [],
           "remaining_verification": [
             "The bounded live engine receipt covers one page capped at three records; exact/phrase/wildcard provider semantics beyond the observed AllWords request, full result/catalog completeness, document-body search and linked-document bytes remain unverified.",
-            "The observed result identity is derived from a supplied document URL where present; it is not a provider-issued ID.",
-            "No authorized provider test tenant/write acceptance was supplied."
+            "The observed result identity is derived from a supplied document URL where present; it is not a provider-issued ID."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "source_saved_fixture_and_bounded_engine_read_not_provider_acceptance",
@@ -26106,7 +26053,8 @@
           "test_access": "tests/test_clerkbase_search.py covers saved response form, page, snippet and scope behavior; one separate bounded live engine read is recorded and capped at three results. Raw route probes remain separate observations, not proof of page-two engine traversal.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No authorized provider test tenant/write acceptance was supplied."
           ]
         },
         "local_search": {
@@ -26188,7 +26136,7 @@
           "details": "Legacy write contract unresolved. Official Meeting Center and ClerkMate evidence concerns distinct modules/products; cannot infer legacy compatibility.",
           "dependencies": [],
           "remaining_verification": [
-            "Establish applicable official operation/route and authorized test access."
+            "Establish the applicable vendor-documented operation, fields and readback; synthetic verification is accepted."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -26212,7 +26160,7 @@
           "details": "Legacy write contract unresolved. Official Meeting Center and ClerkMate evidence concerns distinct modules/products; cannot infer legacy compatibility.",
           "dependencies": [],
           "remaining_verification": [
-            "Establish applicable official operation/route and authorized test access."
+            "Establish the applicable vendor-documented operation, fields and readback; synthetic verification is accepted."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -26236,7 +26184,7 @@
           "details": "Legacy write contract unresolved. Official Meeting Center and ClerkMate evidence concerns distinct modules/products; cannot infer legacy compatibility.",
           "dependencies": [],
           "remaining_verification": [
-            "Establish applicable official operation/route and authorized test access."
+            "Establish the applicable vendor-documented operation, fields and readback; synthetic verification is accepted."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -26781,7 +26729,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -26793,7 +26740,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "update": {
@@ -26805,7 +26753,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -26817,7 +26764,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "upload": {
@@ -26829,7 +26777,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -26841,7 +26788,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         }
       },
@@ -29799,8 +29747,7 @@
           ],
           "details": "The existing configured static GET and baseline gWorks parser handle https://files.frontdeskgworks.com/city/{city_id}/cms/data.json. Current Galena read produced 153 meetings in one response; results remain partial because a static response does not prove upstream catalog completeness. Agenda/minutes flags derive the documented baseline attachment routes; no separate meeting detail URL or continuation was observed. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
           "dependencies": [
-            "Configured public city JSON URL/city ID",
-            "Safe bounded public retrieval"
+            "Configured public city JSON URL/city ID"
           ],
           "remaining_verification": [
             "Provider-wide listing completeness, retained history and update frequency remain unknown; the single static response does not establish those properties.",
@@ -29974,11 +29921,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. agenda_or_minutes: FrontDesk Agenda & Minutes builder UI in historical indexed official article; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -29990,7 +29935,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "update": {
@@ -30002,7 +29948,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -30014,7 +29959,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "upload": {
@@ -30026,7 +29972,6 @@
             "resolve provider contract and tenant prerequisites"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -30038,7 +29983,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         }
       },
@@ -31463,10 +31409,7 @@
             "tyler-player-metadata-2026-11-14"
           ],
           "details": "Observed nonempty Liberty calendar with explicit meeting_type_ids []; legacy default [-1] preserved. Scoped date window and raw fields retained. Configured native mapping retains visible cancelled/adjourned records and literal source status/date/time; legacy baseline parsing remains unchanged.",
-          "dependencies": [
-            "bounded date/body query",
-            "safe public retrieval"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
           ],
@@ -31493,9 +31436,7 @@
             "tyler-player-metadata-2026-11-14"
           ],
           "details": "Stored native meetingId/recurringId bound detail; exact observed published agenda/minutes URL membership; explicit attachment fetch validates PDF signature. Configured native mapping retains visible cancelled/adjourned records and literal source status/date/time; legacy baseline parsing remains unchanged. Posted agenda/minutes packets are additionally exposed only with their literal enabled flag; documented client isPacket=true selectors retain native agenda/minutes IDs. Calendar false flags emit no packet; selected detail may supply true. Explicit transfer uses existing source/native-record/document-membership/PDF guards. Packet byte execution is synthetic, not live availability. Supplied video ID/status maps to the vendor client YouTube player link when not cancelled/unavailable; link-only recording metadata survives persistence/ZIP. Explicit recording byte retrieval returns unsupported before a player/media GET; playback/captions/media byte contract remain unverified.",
-          "dependencies": [
-            "shared network safeguards"
-          ],
+          "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
           ],
@@ -31637,11 +31578,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting: Authenticated Meeting Manager scheduling UI; API unknown; agenda_item: Authenticated topic/item submission UI; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -31654,7 +31593,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "update": {
@@ -31665,11 +31605,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting: Authenticated scheduling/rescheduling UI; API unknown; agenda_item_or_minutes: Authenticated agenda editing and minutes import/edit/publish UI; API/import format unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -31682,7 +31620,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         },
         "upload": {
@@ -31693,11 +31632,9 @@
           ],
           "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. meeting_document: Authenticated central document/agenda-item attachment UI; API unknown; recording: Authenticated upload/share video UI; API unknown",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract",
-            "plan-bound commit and readback"
+            "supported programmatic or explicit authorized UI contract"
           ],
           "remaining_verification": [
-            "No remote mutation performed; authorized test access not supplied.",
             "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
           ],
           "acceptance_status": "not_run",
@@ -31710,7 +31647,8 @@
           "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance"
+            "Docs/UI and source-baseline evidence are not acceptance",
+            "Historical observation, not an acceptance dependency: No remote mutation performed; authorized test access not supplied."
           ]
         }
       },
