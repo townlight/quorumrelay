@@ -130,7 +130,7 @@ Evidence and exact scope: `inventory.json` provider `swagit`; operation status a
 ## F14 SuiteOne Media (`suiteone-media`)
 
 - On Vermilion, root and one supplied Older Meetings group were traversed (328 rows; 17 older groups reported; continuation retained). A separate bounded Council native-search run/resume returned three provider candidates per page and zero exact local hits. Remaining groups, full history, remote search/date semantics and all meeting/document MIME/redirect outcomes remain unestablished.
-- The SuiteOne guide names WMV and Liberty *_content.HTML intake with asynchronous processing, but no exact bookmark HTML schema. An authorized vendor-produced example is still needed for that import.
+- Ordinary HTML document preparation is implemented from the August2021 guide, with manual timing explicit. The separate Liberty timed *_content.HTML schema is still unresolved; a matching schema or example would establish it. No outside-only dependency is proved.
 - Pinned admin UI steps do not establish a machine write/publication/readback contract. Those schemas remain unresolved; account credentials or live publication are not an acceptance gate.
 
 Evidence and exact scope: `inventory.json` provider `suiteone-media`; operation status and outbound mappings are separate from historical observations.

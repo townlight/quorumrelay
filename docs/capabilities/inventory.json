@@ -14100,6 +14100,19 @@
           "limits": "This does not establish provider relevance or date-filter semantics, Older Meetings coverage, full archive completeness, document retrieval or provider write acceptance.",
           "receipt_path": "docs/verification/suiteone-native-search-2026-11-12.json",
           "receipt_sha256": "5bc3763cc5240c92916705e07f1285a3d622aa5260d3ea4e6585fb53f98e2caa"
+        },
+        {
+          "id": "suiteone-ordinary-html-document-2026-11-14",
+          "url": "https://getsuiteone.com/wp-content/uploads/2021/08/S1_BookmarksUpdate_2021.pdf",
+          "title": "SuiteOne ordinary HTML document intake and local preparation",
+          "kind": "official_documentation_and_local_synthetic_execution",
+          "observed": "Official August2021 update and PDF read;13 new synthetic cases passed within73 affected cases.",
+          "observation_date": "2026-11-14",
+          "access_scope": "public_read_and_local_file_preparation_only",
+          "proof_level": "official_file_intake_and_scoped_local_execution_not_remote_acceptance",
+          "findings": "Ordinary Word/HTML intake is distinct from timed Liberty format. Escaped plain-text HTML, byte/hash manifest, scoped durable artifacts and explicit manual times are implemented.",
+          "limits": "No remote import/write, automatic timestamps, Liberty schema or recording association.",
+          "receipt_path": "docs/verification/suiteone-bookmark-document-2026-11-14.json"
         }
       ],
       "tenants": [
@@ -14287,22 +14300,24 @@
         },
         "vendor_file_export": {
           "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "suiteone-upload"
+            "suiteone-upload",
+            "suiteone-ordinary-html-document-2026-11-14"
           ],
-          "details": "SuiteOne documents .WMV and Liberty *_content.HTML intake, not a complete general import schema. A generator must preserve a verified Liberty bookmark structure before calling this a usable vendor file export.",
+          "details": "suiteone-bookmark-document prepares ordinary escaped UTF8 HTML from explicit text for manual bookmarking, with exact hash/byte manifest and scoped artifact delivery. August2021 official update permits ordinary HTML. No Liberty format/timing, remote transfer, replacement or association is generated.",
           "dependencies": [],
           "remaining_verification": [
-            "Obtain an evidenced supported input contract before generating vendor-specific files; neutral exports stay separate."
+            "Liberty timed *_content.HTML schema remains unresolved; this ordinary HTML document does not implement that format.",
+            "Actual vendor import and display not observed; local preparation is separate."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "evidence_level": "official_document_intake_and_local_synthetic_execution_not_remote_acceptance",
           "tenant_scope": [
             "https://vermilionoh.suiteonemedia.com/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "13 local synthetic cases; public official guide, no account or live mutation required.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -14561,11 +14576,11 @@
       ],
       "remaining_research": [
         "On Vermilion, root and one supplied Older Meetings group were traversed (328 rows; 17 older groups reported; continuation retained). A separate bounded Council native-search run/resume returned three provider candidates per page and zero exact local hits. Remaining groups, full history, remote search/date semantics and all meeting/document MIME/redirect outcomes remain unestablished.",
-        "The SuiteOne guide names WMV and Liberty *_content.HTML intake with asynchronous processing, but no exact bookmark HTML schema. An authorized vendor-produced example is still needed for that import.",
+        "Ordinary HTML document preparation is implemented from the August2021 guide, with manual timing explicit. The separate Liberty timed *_content.HTML schema is still unresolved; a matching schema or example would establish it. No outside-only dependency is proved.",
         "Pinned admin UI steps do not establish a machine write/publication/readback contract. Those schemas remain unresolved; account credentials or live publication are not an acceptance gate."
       ],
       "authentication": "Public archive GET anonymous. Upload/update requires an authorized SuiteView Admin account; account tier not specified.",
-      "write_findings": "Concrete supported UI intake exists for WMV recording files and Liberty *_content.HTML bookmarks; programmatic route and bookmark schema remain unverified.",
+      "write_findings": "Concrete supported UI intake exists for WMV recording files and Liberty *_content.HTML bookmarks; programmatic route and bookmark schema remain unverified. Ordinary HTML document preparation is now source implemented; this does not promote the remote UI writes.",
       "registry_id": "suiteone-media",
       "family_acceptance_id": "F14",
       "baseline_input_meanings": [

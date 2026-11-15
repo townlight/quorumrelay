@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "62aa701be5237ea9dd941ac0d3ad6dba33d2367b",
+  "status": "PASSED",
+  "provider": "suiteone-media",
+  "scope": "Local ordinary HTML document preparation only; manual timing, no Liberty schema or remote mutation.",
+  "new_cases": 13,
+  "checks": [
+    {
+      "command": "pytest tests/test_suiteone_export.py tests/test_onbase_export.py tests/test_civicplus_export.py tests/test_interchange.py -q",
+      "passed": 73,
+      "failed": 0,
+      "junit_sha256": "cf91dadc7f0c6137a96ad78d527fac33ff5b018548457459c5cfce2c5b5d2195"
+    },
+    {
+      "command": "pytest tests -q",
+      "passed": 1762,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 85.18,
+      "junit_sha256": "92cd0e981e3deb0dd2d877723ccdaec259010f47b374657740820d7b622b31f9"
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "command": "pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q",
+      "passed": 25,
+      "failed": 0
+    },
+    {
+      "command": "scripts/validate_capabilities.py",
+      "status": "PASSED",
+      "evidence_records": 403,
+      "distinct_urls": 252,
+      "errors": 0
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/suiteone-bookmark-document/source.json",
+      "sha256": "8f7f9aa9cf242e50631813c40f948af3a22792bf66a4d86ca63ff3ef746ca0db"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/suiteone-bookmark-document/S1_BookmarksUpdate_2021.pdf",
+      "sha256": "855482f94302b8d036864c5bf92c6f4fea07f02e5a9a863a93c1f5b00cb1e07d"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_suiteone_export.py",
+      "sha256": "f32f419cb833aa4d26495a29300cb5d954d73fe74cd616321271bf215d2cb80c",
+      "hash_policy": "test_source_crlf_to_lf"
+    }
+  ]
+}
