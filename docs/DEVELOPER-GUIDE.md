@@ -410,7 +410,7 @@ the actor permission or establish live vendor acceptance. The application must
 supply durable storage, current operation/source policy, provider credentials,
 explicit writable resources and approval of the exact immutable plan.
 
-1. Call `plan_write` with the source and typed changes/files.
+1. Call `plan_write` with the source and typed changes/files. Planning checks cancellation and its total deadline after provider preflight and before storing the approval plan; an interrupted or expired preflight returns no plan. Checks are cooperative after synchronous work returns.
 2. Display the actual planned native request, before state, changes and limits.
 3. Obtain product approval and retain `plan_id` plus `plan_hash`.
 4. Call `commit_write` with only those exact values under the same current scope.

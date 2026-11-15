@@ -93,10 +93,16 @@ class WriteCoordinator:
             if sanitize(request, config) != request:
                 raise ValueError("Public write data contains credentials or signed authorization data.")
             deadline = monotonic() + bounds.deadline_seconds
+
+            def check_preflight_bounds():
+                if operation_cancelled(storage, context):
+                    raise WriteCancelled()
+                if monotonic() >= deadline:
+                    raise WriteFailure("deadline_exceeded", "The write preflight exceeded its total deadline.")
+
             prepared, keys, resources = [], set(), set()
             for raw in changes:
-                if operation_cancelled(storage, context):
-                    return OperationResult("cancelled", operation_id=context.operation_id)
+                check_preflight_bounds()
                 change_input = deepcopy(raw)
                 change_input["files"] = resolve_write_files(engine, raw.get("files", ()), context=context, bounds=bounds)
                 change = WriteChange.from_dict(change_input)
@@ -110,6 +116,7 @@ class WriteCoordinator:
                         raise ValueError("Overlapping changes to one resource require separate reviewed plans.")
                     resources.add(target)
                 value = adapter.prepare(source, change, context, bounds, deadline)
+                check_preflight_bounds()
                 if canonical_hash(sanitize(value, config)) != canonical_hash(value):
                     raise ValueError("The provider plan contains secret authorization data.")
                 prepared.append(value)
@@ -123,6 +130,7 @@ class WriteCoordinator:
                 "live_acceptance": "NOT_RUN", "authorization_policy": "explicit_exact_plan_commit",
             }
             digest = canonical_hash(plan)
+            check_preflight_bounds()
             storage.put("write_plans", plan_id, {"plan": plan, "plan_hash": digest},
                         scope=context.scope, create_only=True)
             return OperationResult("completed", data={"plan": deepcopy(plan), "plan_id": plan_id,

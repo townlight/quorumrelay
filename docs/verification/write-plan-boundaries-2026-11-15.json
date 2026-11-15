@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "61f045f",
+  "status": "PASSED",
+  "requirements": [
+    10
+  ],
+  "scope": "WriteCoordinator checks cancellation and total deadline before each preflight, after prepare, and before storing the immutable approval plan.",
+  "new_cases": 2,
+  "reproduction": {
+    "failed_before_fix": 2,
+    "scope": "After consistent fake clocks were injected in coordinator and adapter, both completed and persisted plans after final GET cancellation/expiry. Initial mismatched fake clocks caused an unrelated before-request expiry; corrected test fixture before product fix."
+  },
+  "checks": [
+    {
+      "command": "pytest tests/test_write_plan_boundaries.py tests/test_client_write_response_bounds.py tests/test_write_providers.py tests/test_writes.py tests/test_write_file_recovery.py -q",
+      "passed": 66,
+      "failed": 0,
+      "seconds": 2.94
+    },
+    {
+      "command": "pytest tests/test_boardable_agenda_write.py tests/test_civicclerk_section_write.py tests/test_towncloud_draft_write.py tests/test_telvue_playlist_write.py tests/test_legistar_media_link_writes.py tests/test_granicus_write.py -q",
+      "passed": 150,
+      "failed": 0,
+      "seconds": 5.45
+    },
+    {
+      "command": "ruff check src/civic_data_connectors/writes.py tests/test_write_plan_boundaries.py",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/writes.py",
+      "sha256": "96f88e5d4a9e3cb18305ad4944ad3fc70d6fd503acaa465702fba0acbdc9135a"
+    },
+    {
+      "path": "tests/test_write_plan_boundaries.py",
+      "sha256": "3e708521ab02e6e47f7e3dd15269fef94ca0a35894979bd001d71d30182e4350"
+    }
+  ],
+  "unaffected_evidence_reused": {
+    "receipt": "docs/verification/write-response-bounds-2026-11-15.json",
+    "full_suite_passed": 1936,
+    "scope": "Earlier full suite; planning change verified216distinct affected write cases, no new full suite claimed."
+  },
+  "limits": [
+    "Cooperative checks after synchronous work returns. Does not preempt a running adapter or storage transaction.",
+    "No mutation in new regressions, no new vendor contract, no release. Existing durable send intent/reconciliation behavior unchanged."
+  ]
+}
