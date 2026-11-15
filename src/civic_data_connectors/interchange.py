@@ -897,7 +897,8 @@ def icalendar_projection(records):
         if record["identity"]["record_type"] not in {"meeting", "event"}:
             loss["reason"] = "non_event_record_omitted"
             continue
-        start = normalized.get("scheduled_start") or normalized.get("meeting_date")
+        start_field = "scheduled_start" if normalized.get("scheduled_start") else "meeting_date"
+        start = normalized.get(start_field)
         if not start:
             loss["reason"] = "missing_start_event_omitted"
             continue
@@ -917,7 +918,7 @@ def icalendar_projection(records):
         lines += ["BEGIN:VEVENT", f"UID:{key}@civic-data-connectors.invalid",
                   "DTSTAMP:" + stamp.astimezone(timezone.utc).strftime("%Y%m%dT%H%M%SZ"),
                   dtstart, "SUMMARY:" + _ical_text(normalized.get("title", ""))]
-        included = {"normalized.title", "normalized.scheduled_start", "normalized.meeting_date", "captured_at"}
+        included = {"normalized.title", f"normalized.{start_field}", "captured_at"}
         location = normalized.get("location")
         if isinstance(location, str):
             lines.append("LOCATION:" + _ical_text(location))

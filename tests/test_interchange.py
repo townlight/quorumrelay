@@ -237,6 +237,22 @@ def test_ical_cancellation_requires_explicit_status_and_reports_unmapped_fields(
     assert record == before
 
 
+@pytest.mark.parametrize("scheduled_start", ["2026-11-12T09:00:00Z", None])
+def test_ical_reports_the_unused_date_field_as_omitted(scheduled_start):
+    record = sample()["records"][0]
+    record["normalized"].update(scheduled_start=scheduled_start, meeting_date="2026-11-11")
+    payload, losses = icalendar_projection([record])
+    omitted = losses["records"][0]["omitted_fields"]
+    if scheduled_start:
+        assert b"DTSTART:20261112T090000Z\r\n" in payload
+        assert "normalized.meeting_date" in omitted
+        assert "normalized.scheduled_start" not in omitted
+    else:
+        assert b"DTSTART;VALUE=DATE:20261111\r\n" in payload
+        assert "normalized.scheduled_start" in omitted
+        assert "normalized.meeting_date" not in omitted
+
+
 @pytest.mark.parametrize("durable", [False, True])
 def test_registered_streaming_attachment_artifact_scope_policy_expiry_cleanup(tmp_path, durable):
     store = SQLiteStorage(tmp_path / "artifacts.sqlite") if durable else None

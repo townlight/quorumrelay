@@ -321,6 +321,8 @@ iCalendar marks an event cancelled only for the explicit source status `CANCELLE
 or a boolean `canceled: true`. Untyped strings and numbers do not establish
 cancellation. Other source status fields, including adjournment, remain listed
 as omitted from the projection and are retained in neutral bundles.
+The start uses `scheduled_start` when supplied, otherwise `meeting_date`; the
+unused date field remains reported as omitted.
 
 Use <code>csv-items</code> for both items nested in meeting records and standalone
 <code>agenda_item</code> records. Standalone rows retain the native item identifier,
