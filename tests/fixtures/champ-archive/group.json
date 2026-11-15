@@ -1,0 +1,38 @@
+[
+    {
+        "CustomerEventID": 211,
+        "CustomerUUID": "",
+        "EventTypeID": 0,
+        "EventDateTimeUTC": "2026-11-17 01:00:00",
+        "EventTitle": "Meeting",
+        "EventDescription": "<p>The 11\/16\/2026 Village Board meeting will be held at Village Hall and also live streamed on Facebook, YouTube and LZTV at LakeZurich.org.<\/p>",
+        "EventLocation": "",
+        "EventPublishStatusID": 2,
+        "AgendaStyleMask": 0,
+        "MinutesStyleMask": 0,
+        "IndexPointsStyleMask": 0,
+        "EventExternalID": "",
+        "LastModifyDateTimeUTC": "2026-11-13 17:09:26",
+        "EventMediaClassID": 0,
+        "EventMediaTargetID": 3483,
+        "EventDateTimeLocal": "2026-11-16 19:00:00"
+    },
+    {
+        "CustomerEventID": 210,
+        "CustomerUUID": "",
+        "EventTypeID": 0,
+        "EventDateTimeUTC": "2026-11-03 01:00:00",
+        "EventTitle": "Meeting",
+        "EventDescription": "<p>The 11\/2\/2026 Village Board meeting will be held at Village Hall and also live streamed on Facebook, YouTube and LZTV at LakeZurich.org.<\/p>",
+        "EventLocation": "",
+        "EventPublishStatusID": 2,
+        "AgendaStyleMask": 0,
+        "MinutesStyleMask": 0,
+        "IndexPointsStyleMask": 0,
+        "EventExternalID": "",
+        "LastModifyDateTimeUTC": "2026-11-03 02:05:46",
+        "EventMediaClassID": 2,
+        "EventMediaTargetID": 3483,
+        "EventDateTimeLocal": "2026-11-02 19:00:00"
+    }
+]

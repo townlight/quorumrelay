@@ -21249,6 +21249,71 @@
           "receipt_path": "docs/verification/champ-agenda-relationships-2026-11-12.json",
           "receipt_sha256": "dd76d9bf908cf888459744dd63ed2307bd941ec6136ae89bcfcd9ce33f8cd695",
           "observation_date": "2026-11-12"
+        },
+        {
+          "id": "champ-public-archive-calendar-2026-11-15",
+          "url": "https://www.lakezurich.org/260/On-Demand-Meeting-Recordings",
+          "title": "Municipality-declared CHAMP calendar archive client and selected native group/month",
+          "kind": "vendor_client_contract_public_observation_and_synthetic_execution",
+          "observed": "2026-11-15",
+          "observation_date": "2026-11-15",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "access_scope": "bounded_anonymous_GET_observations_and_offline_engine_execution_no_vendor_write",
+          "source_path": "docs/capabilities/evidence/champ-public-archive/source.json",
+          "source_sha256": "d578b18c230f69f289d2b5c3580e0abc9515c4e08022e114c3e9ccbee8088103",
+          "receipt_path": "docs/verification/champ-archive-2026-11-15.json",
+          "receipt_sha256": "26f07e9af1e980c0f0710e186b5215463eacab874bce03cd93a81c176c407330",
+          "findings": "Official municipal iframe -> native archive client -> exact metadata and calendar-group month GETs. Four declared calendar groups; selected group1 November2026 returns2 native events.18new/153integration checks passed4.92s; exact metadata/group captures and original metadata capture time survive continuation, SQLite reopening and JSON/JSONL/ZIP.",
+          "limits": "One selected calendar group/month; no complete archive/server paging, external ECI, event-detail or staff-write inference.",
+          "synthetic_execution": {
+            "provider": "champ",
+            "status": "mock_passed",
+            "operations": [
+              "discover",
+              "local_search",
+              "neutral_export"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Explicit CHAMP calendar archive group/month summaries; native identities, exact metadata/group captures and request context, bounded continuation and portable persistence. No full catalog or external ECI retrieval.",
+            "execution_provenance": "Actual local integration execution2026-11-15:153passed4.92s; exact captured vendor JSON, injected transport and actual engine/storage/interchange.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_champ_archive.py tests/test_storage_search_imports.py tests/test_interchange.py tests/test_provider_discovery.py -q",
+                "passed": 153,
+                "failed": 0,
+                "seconds": 4.92
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/champ-public-archive/cds.archive.js",
+                "sha256": "ce82eeb84fa7a1ac5364dbe2116d818ca76869b136320511a9f6cdeb993fcd35"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/champ-public-archive/cds.common.js",
+                "sha256": "001ef0132c2dbab23686884e39778f08622d71806efdd3af724afa338b2571ae"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/champ-public-archive/archive-json-response.json",
+                "sha256": "7859af3a58df45b68b45bc4e429f47bc454552bd0b67945016a9ef43db7e3b96"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/champ-public-archive/archive-group-1-nov2026.json",
+                "sha256": "91b5a5f4d791bd5b270418ca8416d8ead1ed8abe46088a02f593eb05b3d2b5b3"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_champ_archive.py",
+                "sha256": "30157b81aeb20d430614245d9cf91cd627d96848ade34ee2002a303b8e83a094"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -21262,13 +21327,15 @@
         },
         {
           "url": "https://play.champds.com/lakezurichil/event/164",
-          "observation": "Lake Zurich event 164 has one completed supplied PDF and player HTML; separate supplied HLS/media fetch is partial. No playback/catalog proof.",
+          "observation": "Lake Zurich event 164 has one completed supplied PDF and player HTML; separate supplied HLS/media fetch is partial. No playback/catalog proof. Separately, the official municipality-declared archive and selected group1 November2026 calendar request returned2 native events; offline engine execution is attributed in the calendar evidence. External ECI and other groups/months omitted.",
           "evidence_ids": [
             "champ-public-player-js",
             "champ-lakezurich-event-json",
             "champ-supplied-pdf-and-player-html-2026-11-12",
-            "champ-supplied-hls-fetch-partial-2026-11-12"
-          ]
+            "champ-supplied-hls-fetch-partial-2026-11-12",
+            "champ-public-archive-calendar-2026-11-15"
+          ],
+          "archive_url": "https://play.champds.com/lakezurichil/archive/1"
         }
       ],
       "operations": {
@@ -21297,27 +21364,29 @@
           ]
         },
         "discover": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "champ-public-player-js",
             "champ-lakezurich-event-json",
             "champ-yuma-event-json",
-            "champ-rich-agenda-synthetic"
+            "champ-rich-agenda-synthetic",
+            "champ-public-archive-calendar-2026-11-15"
           ],
-          "details": "Public client and live response prove GET detail by customer ID/event ID, not event-catalog listing. No public catalog/index or pagination route verified on the two observed tenants. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference. Native event-bound BoardName/body ID is projected for exact local body search and configured filtering; native ID mismatch is not inferred away.",
+          "details": "Explicit municipality-declared /tenant/archive/ID discovery with selected positive archive_group_id and inclusive date bounds within one month. Exact archive metadata validates native tenant/archive/group and DisplayTypeID1; exact full-month LOCAL request returns native event summaries.18new/153integration passed. Stable existing event IDs, supplied descriptions/revisions, retained metadata/group captures and request context, local hash-bound offset and interruption/byte bounds. Always partial: external ECI and other groups/months omitted. Configured event-detail retrieval and rich agenda/item/attachment/timeline mapping remain separately evidenced.",
           "dependencies": [],
           "remaining_verification": [
-            "Find/verify public event catalog/list route and bounded date/page traversal; admin event-list help describing 15 events is not a public JSON contract.",
-            "Verify the public catalog's native date/body selectors and bounds; configured-event retrieval is separate."
+            "Other group display types and external ECI publisher records are not implemented by this scoped path; no inferred server paging or catalog completeness.",
+            "Wider month/group/tenant observations remain coverage qualifications, not new mandatory sampling gates."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
-            "https://play.champds.com/yumacoaz/event/657"
+            "https://play.champds.com/yumacoaz/event/657",
+            "https://play.champds.com/lakezurichil/archive/1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "offline_vendor_contract_execution; live_engine_not_run",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -21764,7 +21833,7 @@
       ],
       "pagination": {
         "status": "partly_observed_or_unverified",
-        "details": "Single-record event details do not establish a public index/catalog or pagination route. Supplied-document/media outcomes are separate bounded reads and do not imply catalog or playback completeness."
+        "details": "Selected native calendar group/month returns a bare JSON array with no cursor or total. Implemented local record-offset continuation binds response hash and exact source/group/date/caller scope. External ECI, other groups/months and full catalog completeness remain unverified."
       },
       "auth": {
         "public_read": "unverified",
@@ -21775,7 +21844,7 @@
         "No provider test tenant/credentials were supplied; no live writes were performed. Procurement and outreach remain unauthorized."
       ],
       "remaining_research": [
-        "Two public event details remain engine-read verified. One supplied Lake Zurich PDF completed (1,933,081 bytes); player HTML completed; a separate supplied HLS/media request remained partial. Public-player URL composition does not establish playback/segment acceptance. No public event index or paging contract is established.",
+        "Native selected calendar-group discovery is implemented from the official LakeZurich archive declaration and client: metadata plus explicit monthly LOCAL request, two observed native events and153offline integration checks. Configured event detail/PDF/HLS evidence remains separate. Other group display types, external ECI and complete archive scope are not established.",
         "Do not generalize the one PDF to other documents or event media. Yuma reports no media.",
         "Pinned CHAMP Help documents staff event/media/PDF workflows rather than machine writes. Field/codec/role and write/readback contracts remain unverified; staff credentials and live mutations are not required synthetic acceptance."
       ],

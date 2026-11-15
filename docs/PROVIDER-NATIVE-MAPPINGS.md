@@ -4,6 +4,12 @@ Candidate schema 2.0.0. This is implementation documentation, not provider accep
 
 `providers/native.py` owns additive formats. They do not replace any of the original 34 inputs.
 
+CHAMP now also has explicitly selected calendar-group discovery from its
+municipality-declared archive and vendor client. It preserves native meeting
+identities and both source captures without fetching event details. See
+[the bounded archive contract and example](CHAMP-ARCHIVE.md); other groups,
+months and external publisher records remain outside that result's coverage.
+
 November 13 public-lead additions are documented separately: [Tyler selected
 calendar/detail/search](TYLER-PUBLIC.md), [OnBase embedded results and date
 windows](ONBASE-PUBLIC-WINDOWS.md), [BoardDocs committee listing and printable

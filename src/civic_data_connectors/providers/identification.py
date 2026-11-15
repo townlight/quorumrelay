@@ -202,6 +202,8 @@ def validate_source(source: Source, context: OperationContext | None = None,
         allowed_options.update({"calendar_api_base", "meeting_type_ids"})
     if source.provider == "boarddocs":
         allowed_options.add("boarddocs_committee_id")
+    if source.provider == "champ":
+        allowed_options.add("archive_group_id")
     if source.provider == "civicweb" and source.input_format == "civicweb-filepro-soap-xml":
         allowed_options.update({"filepro_resource", "folder_id", "document_id", "meeting_id"})
     if not isinstance(source.options, dict) or set(source.options) - allowed_options:

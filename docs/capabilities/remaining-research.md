@@ -226,7 +226,8 @@ Evidence and exact scope: `inventory.json` provider `telvue`; [playlist-write co
 
 ## F20 CHAMP (`champ`)
 
-- Two public event details remain engine-read verified. One supplied Lake Zurich PDF completed (1,933,081 bytes); player HTML completed; a separate supplied HLS/media request remained partial. Public-player URL composition does not establish playback/segment acceptance. No public event index or paging contract is established.
+- Selected native calendar-group discovery is now implemented from Lake Zurich's official archive declaration and vendor client. An explicit group and dates within one month select the exact full-month LOCAL request; the observed response contains two native events.153 offline integration checks verify identities, original fields, descriptions/revisions, metadata/group captures, local continuation, interruption/byte bounds and SQLite/neutral preservation. External ECI records, other display types/groups/months and full-catalog completeness remain unverified. See [scope and usage](../CHAMP-ARCHIVE.md).
+- Two public event details remain separately engine-read verified. One supplied Lake Zurich PDF completed (1,933,081 bytes); player HTML completed; a separate supplied HLS/media request remained partial. Archive summaries do not imply detail/document/media retrieval or playback acceptance. No provider paging or exhaustion contract is inferred.
 - Do not generalize the one PDF to other documents or event media. Yuma reports no media.
 - Pinned CHAMP Help documents staff event/media/PDF workflows rather than machine writes. Field/codec/role and write/readback contracts remain unverified; staff credentials and live mutations are not required synthetic acceptance.
 

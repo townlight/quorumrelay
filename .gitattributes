@@ -71,3 +71,7 @@ docs/capabilities/evidence/townhall-public-search/results.html whitespace=cr-at-
 # Exact TelVue public HTML/player client retain vendor CR/blank whitespace.
 docs/capabilities/evidence/telvue-public-search/results.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
 docs/capabilities/evidence/telvue-public-search/player-client.js whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Preserve exact CHAMP vendor HTML/client whitespace and capture hashes.
+docs/capabilities/evidence/champ-public-archive/*.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/champ-public-archive/*.js whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab

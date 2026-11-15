@@ -599,6 +599,11 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
             raise ValueError("The public notice form exposes meeting notice records only.")
         from .utah_search import discover_public
         return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport())
+    if (source.provider == "champ" and saved is None and source.input_format is None
+            and re.fullmatch(r"/[A-Za-z0-9_-]+/archive/[1-9][0-9]*/?", urlsplit(source.url).path)):
+        from .champ_archive import discover_public
+        return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport(),
+                               record_types=request.get("record_types"))
     if source.provider == "simbli" and saved is None and urlsplit(source.url).path.lower() in {
             "/index.aspx", "/sb_meetings/sb_meetinglisting.aspx"}:
         from .simbli import discover_public
