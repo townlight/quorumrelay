@@ -81,6 +81,7 @@ def register(engine, *, transport: Transport | None = None,
             ("escribe", "escribe-publishing-soap-xml"),
             ("suiteone-media", "suiteone-public-event-html"),
             ("telvue", "telvue-public-player-html"),
+            ("telvue", "telvue-public-search-html"),
             ("telvue", "telvue-cloudcast-mrss-xml"),
             ("peak", "peak-publication-rss-xml"),
             ("peak", "peak-public-search-html"),
@@ -127,6 +128,9 @@ def register(engine, *, transport: Transport | None = None,
     from .townhall_search import native_search as townhall_search
     engine.register_native_search("town-hall-streams", tracked_handler("search", lambda engine, request, content, context:
                                   townhall_search(engine, request, content, context, transport=transport)))
+    from .telvue_search import native_search as telvue_search
+    engine.register_native_search("telvue", tracked_handler("search", lambda engine, request, content, context:
+                                  telvue_search(engine, request, content, context, transport=transport)))
     from .boardable_search import native_search as boardable_search
     engine.register_native_search("boardable", tracked_handler("search", lambda engine, request, content, context:
                                   boardable_search(engine, request, content, context, transport=transport)))

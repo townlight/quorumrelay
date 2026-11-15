@@ -67,3 +67,7 @@ docs/capabilities/evidence/boardbook-public-search/search.js whitespace=cr-at-eo
 # Exact Town Hall Streams form/results retain vendor CR/blank whitespace.
 docs/capabilities/evidence/townhall-public-search/form.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
 docs/capabilities/evidence/townhall-public-search/results.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Exact TelVue public HTML/player client retain vendor CR/blank whitespace.
+docs/capabilities/evidence/telvue-public-search/results.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/telvue-public-search/player-client.js whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab

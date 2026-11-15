@@ -9877,6 +9877,18 @@
           "receipt_path": "docs/verification/essential-response-qualification-2026-11-15.json",
           "receipt_sha256": "6e1a44e60802fb2001ba21bc5bba8bc777b64c5b38827865861858f3336a107f",
           "limits": "No new production response schema or live account acceptance established."
+        },
+        {
+          "id": "municode-search-form-2026-11-15",
+          "url": "https://southjordan-ut.municodemeetings.com/",
+          "title": "Original Municode Meetings public search form and exact current access observations",
+          "kind": "source_analysis_and_access_observation",
+          "proof_level": "observed_vendor_form_not_engine_search_acceptance",
+          "observation_date": "2026-11-15",
+          "fixture_path": "tests/fixtures/baseline/municode.response",
+          "fixture_sha256": "b72ccb013f3e6b45bb513d9fad0a250471214a362996e59b269c65660ab825d0",
+          "findings": "Saved public page declares search-block-form POST/, query field/op/form_id/public dynamic controls. Current root closed connection; web source fetch independently restricted URL. See evidence/municode-search-form/source.json.",
+          "limits": "No search POST or nonempty response schema obtained. Exact access errors are not outside-only proof, API absence or unsupported-feature findings."
         }
       ],
       "tenants": [
@@ -9990,11 +10002,14 @@
         "native_search": {
           "capability_status": "unverified",
           "implementation_status": "not_implemented",
-          "evidence_ids": [],
+          "evidence_ids": [
+            "municode-search-form-2026-11-15"
+          ],
           "details": "No usable provider-native search contract verified.",
           "dependencies": [],
           "remaining_verification": [
-            "Investigate native search without treating missing evidence as unavailable."
+            "Investigate native search without treating missing evidence as unavailable.",
+            "Exact baseline POST form identified; fresh controls/redirect chain and nonempty native result mapping remain unverified after exact access failures. No guessed stale token or outside-only classification."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "unverified",
@@ -20155,6 +20170,58 @@
           "receipt_path": "docs/verification/telvue-public-player-2026-11-15.json",
           "receipt_sha256": "8589f22fc470f2f795d2eabf2ddb857ca2be6ca2fc1ba3ab8dbb13b8e3295ddb",
           "proof_level": "actual_public_capture_and_saved_engine_execution_not_catalog_or_write_acceptance"
+        },
+        {
+          "id": "telvue-public-search-2026-11-15",
+          "url": "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/videos/search?showtabssearch=true&fullscreen=false&search=council",
+          "title": "TelVue declared public player-wide GET search and43native media candidates",
+          "kind": "public_tenant_and_vendor_client",
+          "observed": "2026-11-15",
+          "observation_date": "2026-11-15",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "access_scope": "bounded_public_read_and_synthetic_engine",
+          "findings": "One current public form GET supplies43media candidates/22exact local metadata hits.22new/185affected cases passed.",
+          "limits": "Explicit player-wide source only; no playlist broadening, fulltext/caption/chapter bytes or inferred server paging/exhaustion. Allpartial.",
+          "fixture_path": "docs/capabilities/evidence/telvue-public-search/results.html",
+          "fixture_sha256": "e26dfd0d98175bba56cf9b5961e0c865a9f8e0b6bd664c098e87e62ab050f23d",
+          "receipt_path": "docs/verification/telvue-native-search-2026-11-15.json",
+          "receipt_sha256": "1d2595805c288d0942d1f65772664c7d27b543cccb73141bc32e63cefa93f4d3",
+          "synthetic_execution": {
+            "provider": "telvue",
+            "status": "mock_passed",
+            "operations": [
+              "native_search"
+            ],
+            "entities": [
+              "recording"
+            ],
+            "scope": "Explicit TelVue player-wide public media candidates and metadata/summary search; native IDs, safe links and portable exact-hit behavior.",
+            "execution_provenance": "22newcases in185affected; actual43row fixture through synthetic guarded transport,22exact hits persist/reopen/roundtrip.",
+            "checks": [
+              {
+                "command": "pytest tests/test_telvue_native_search.py tests/test_telvue_player.py tests/test_telvue_mrss.py tests/test_provider_discovery.py tests/test_interchange.py tests/test_storage_search_imports.py tests/test_interfaces.py tests/test_mcp_interfaces.py -q",
+                "passed": 185,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/telvue-public-search/source.json",
+                "sha256": "19a7d939c91e9727a0c459b20f52bc44dceb2e9184296a8262de9bee669926cc"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/telvue-public-search/player-client.js",
+                "sha256": "bbf822110dbc53e6d1671f5ad1b6df739cca6663a464d5b0817b663a5e78b55f"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_telvue_native_search.py",
+                "sha256": "20df3b6775f4eb451ad11d47c72bc5977a2834a3fceb06a106465d2ef7f30878"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -20292,25 +20359,24 @@
           ]
         },
         "native_search": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "telvue-training",
-            "telvue-rochester"
+            "telvue-public-search-2026-11-15"
           ],
-          "details": "No verified public/native query request in inspected API pages; product browser search not exercised.",
+          "details": "Explicit TelVue player-wide public media candidates and metadata/summary search; native IDs, safe links and portable exact-hit behavior.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify request method/route, exact-term/phrase/date/body semantics, paging and incomplete/error outcomes."
+            "Caption/chapter match text and complete provider semantics remain unverified. Generic load-more sort selectors are absent on captured search page; no server continuation inferred. Declared unretrieved counts explicit/allpartial."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://videoplayer.telvue.com/player/WDZPS7GoaEEQAF8v5_qEOE_Kj--KiACH/categories/574?showtabssearch=false",
             "https://videoplayer.telvue.com/player/dQtoDvlZYDOtqaf7eRn9z2lb1Nb6EZzu/playlists"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "local_synthetic_no_account_required",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"

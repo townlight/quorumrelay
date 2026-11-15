@@ -416,3 +416,7 @@ The local eSCRIBE [PublishingService mapping](ESCRIBE-PUBLISHING-SERVICE.md) now
 ## Town Hall Streams archive keyword search
 
 The public native search handler uses the baseline/current declared POST form and reuses `town-hall-streams-html`. Literal event IDs/local dates/title/stream links stay within the configured location; precise stream citations and exact POST capture/context survive storage/export. One39meeting current response and scoped execution are documented in [the usage guide](TOWNHALL-PUBLIC-SEARCH.md). No provider exhaustion/fulltext/body or time-zone inference.
+
+## TelVue player-wide public video search
+
+`telvue-public-search-html` maps43observed native media candidates to recording IDs, supplied title/summary/duration, explicitly title-derived dates and exact search-locator citations/relationships. Query-bearing locators stay outside searchable metadata so22exact local hits persist after reopening. Playlist sources are rejected rather than broadened. Native search remains partial with declared/unretrieved counts and local hash-bound offset continuation; caption/chapter match text and server paging remain unverified. See [contract](TELVUE-PUBLIC-SEARCH.md).

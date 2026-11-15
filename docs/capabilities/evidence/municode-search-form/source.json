@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-15",
+  "source_url": "https://southjordan-ut.municodemeetings.com/",
+  "baseline_path": "tests/fixtures/baseline/municode.response",
+  "baseline_sha256": "b72ccb013f3e6b45bb513d9fad0a250471214a362996e59b269c65660ab825d0",
+  "declared_form": {
+    "action": "/",
+    "method": "post",
+    "id": "search-block-form",
+    "query_field": "search_block_form",
+    "submit_field": "op",
+    "submit_value": "Submit Search",
+    "form_id": "search_block_form",
+    "public_dynamic_controls": "form_build_id is page-supplied; not guessed or reused from old capture."
+  },
+  "current_requests": [
+    {
+      "mechanism": "anonymous urllib GET root, before any form POST",
+      "result": "RemoteDisconnected: Remote end closed connection without response",
+      "status": "no HTTP response received"
+    },
+    {
+      "mechanism": "web source fetch root",
+      "result": "Failed to fetch restricted URL",
+      "status": "fetch-service restriction; no further attempt/reroute"
+    }
+  ],
+  "interpretation": "Exact baseline form contract identified. No fresh controls, request redirect chain or nonempty result model obtained; native search remains unimplemented/owned research, not a proven outside-only dependency.",
+  "not_executed": "No search POST, session/credentials/browser, restriction bypass or other tenant survey."
+}
