@@ -655,7 +655,20 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
     deadline = monotonic() + bounds.deadline_seconds
     transport = transport or PublicTransport()
     records, bundles, captures, failures, errors, retry = [], [], [], [], [], []
-    pages = filtered = 0
+    pages = filtered = transferred = 0
+
+    def bounded_request(url, **kwargs):
+        nonlocal transferred
+        remaining = bounds.transfer_bytes - transferred
+        if remaining <= 0:
+            raise ValueError("Discovery exhausted its aggregate transfer byte limit.")
+        limit = min(bounds.parser_bytes, remaining)
+        response = transport.request(url, byte_limit=limit, **kwargs)
+        transferred += len(response.content)
+        if len(response.content) > limit:
+            raise ValueError("Provider response exceeded the remaining discovery byte limit.")
+        return response
+
     unknown_dates, unknown_bodies, visited = [], [], set()
     public_controls = None
     while queue and pages < bounds.max_pages and len(records) < bounds.max_records:
@@ -693,7 +706,7 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
                     # Continuations contain public control values, never trust a
                     # caller-modified group absent from the current root page.
                     if public_controls is None:
-                        root = transport.request(source.url, byte_limit=bounds.parser_bytes,
+                        root = bounded_request(source.url,
                             deadline_seconds=max(.001, deadline - monotonic()),
                             allowed_origins=(_origin(source.url),), allow_redirects=False)
                         if (root.status != 200 or root.url != source.url
@@ -706,11 +719,8 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
                         raise RetrievalError("provider_deadline_or_cancellation")
                 url, method, body, headers, size = _request_spec(source, bounds, task, context)
                 origin = _origin(url)
-                response = transport.request(
+                response = bounded_request(
                     url, method=method, body=body, headers=headers or None,
-                    byte_limit=(min(bounds.parser_bytes, bounds.transfer_bytes)
-                                if boardbook_minutes or swagit_player or telvue_player or suiteone_player or novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
-                                else bounds.parser_bytes),
                     deadline_seconds=max(0.001, deadline - monotonic()),
                     allowed_origins=(origin,),
                     **({"allow_redirects": False} if boardbook_minutes or swagit_player or telvue_player or suiteone_player or novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {

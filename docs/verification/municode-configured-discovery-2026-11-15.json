@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-15",
+  "status": "PASSED",
+  "requirements": [
+    6,
+    9
+  ],
+  "scope": "Offline configured single public HTML listing discovery, local date filtering, path identity and capture retention; generic discovery transfer byte enforcement.",
+  "checks": [
+    {
+      "command": "python -X utf8 -m pytest tests/test_municode_configured_discovery.py tests/test_provider_discovery.py tests/test_suiteone_discovery.py tests/test_champ_archive.py tests/test_champ_agenda.py tests/test_champ_media.py tests/test_provider_record.py -q",
+      "passed": 141,
+      "failed": 0,
+      "seconds": 1.62
+    },
+    {
+      "command": "python -X utf8 -m ruff check src/civic_data_connectors/providers/discovery.py tests/test_municode_configured_discovery.py",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "tests/test_municode_configured_discovery.py",
+      "sha256": "d40cedb008855a991c8bcf3cb12c700ac416c3c120835f9cb2485ffb404b543d"
+    },
+    {
+      "path": "tests/fixtures/baseline/municode.response",
+      "sha256": "b72ccb013f3e6b45bb513d9fad0a250471214a362996e59b269c65660ab825d0"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/discovery.py",
+      "sha256": "f1288fe3fcc1e8f9e219c952ecfd87e3478a280e0030854b2ffca22c43e8cd6c"
+    }
+  ],
+  "limits": [
+    "Injected transport only; no live host requests.",
+    "A configured single HTML page is not the authenticated Essential collection or its schema/pagination; complete upstream catalog not established."
+  ]
+}

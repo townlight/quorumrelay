@@ -9889,6 +9889,51 @@
           "fixture_sha256": "b72ccb013f3e6b45bb513d9fad0a250471214a362996e59b269c65660ab825d0",
           "findings": "Saved public page declares search-block-form POST/, query field/op/form_id/public dynamic controls. Current root closed connection; web source fetch independently restricted URL. See evidence/municode-search-form/source.json.",
           "limits": "No search POST or nonempty response schema obtained. Exact access errors are not outside-only proof, API absence or unsupported-feature findings."
+        },
+        {
+          "id": "municode-configured-listing-2026-11-15",
+          "url": "https://southjordan-ut.municodemeetings.com/meetings3",
+          "title": "Configured public HTML listing discovery from saved baseline",
+          "kind": "saved_fixture_and_engine_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "fixture_path": "tests/fixtures/baseline/municode.response",
+          "fixture_sha256": "b72ccb013f3e6b45bb513d9fad0a250471214a362996e59b269c65660ab825d0",
+          "receipt_path": "docs/verification/municode-configured-discovery-2026-11-15.json",
+          "receipt_sha256": "d79ef1499576ff878cf7ca27feb3a90481f53bb3e5cdfbd532906f8990f0426b",
+          "limits": "One saved public listing through injected transport, not a live request, full catalog or authenticated Essential collection response/pagination.",
+          "synthetic_execution": {
+            "provider": "municode-meetings",
+            "status": "fixture_passed",
+            "operations": [
+              "discover"
+            ],
+            "entities": [],
+            "scope": "Offline configured single public HTML listing discovery, local date filtering, path identity and capture retention; generic discovery transfer byte enforcement.",
+            "execution_provenance": "Offline injected transport with pinned original baseline capture; 141 affected checks passed. No live host request.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_municode_configured_discovery.py tests/test_provider_discovery.py tests/test_suiteone_discovery.py tests/test_champ_archive.py tests/test_champ_agenda.py tests/test_champ_media.py tests/test_provider_record.py -q",
+                "passed": 141,
+                "failed": 0,
+                "seconds": 1.62
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "tests/fixtures/baseline/municode.response",
+                "sha256": "b72ccb013f3e6b45bb513d9fad0a250471214a362996e59b269c65660ab825d0"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_municode_configured_discovery.py",
+                "sha256": "d40cedb008855a991c8bcf3cb12c700ac416c3c120835f9cb2485ffb404b543d",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "6ab7fda710f8eb81d57aade1457793b587cb9cbba3c50c337ec07a5d3b29cb71"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -9925,27 +9970,27 @@
         },
         "discover": {
           "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "municode-essential-public-api",
-            "municode-meetings-tenant"
+            "municode-meetings-tenant",
+            "municode-configured-listing-2026-11-15"
           ],
-          "details": "Public Essential API documentation specifies POST /PublicApi/meeting/collection/{offset} with MeetingListFilters; exact response and page termination semantics are not published. The separate Effingham public website p=1 value is not proven pagination.",
+          "details": "Configured public HTML listing discovery uses one static GET, preserving baseline rows and the original capture with local date filtering and path-derived identities. The separate Essential API collection response and continuation remain unresolved.",
           "dependencies": [],
           "remaining_verification": [
-            "Implement documented request only after response schema and continuation are resolved or explicitly bounded"
+            "Essential authenticated collection response schema and continuation remain unresolved; one configured page does not establish complete catalog coverage."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "fixture_passed",
+          "evidence_level": "saved_fixture_and_bounded_engine_execution",
           "tenant_scope": [
-            "https://meetings.municode.com/PublishPage/index?cid=EFFINGHAM&ppid=9639c19d-1d1f-4201-b8ff-163a28a35f08&p=1"
+            "https://southjordan-ut.municodemeetings.com/meetings3"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "Offline saved baseline fixture through injected transport; no live host request.",
           "restrictions": [
-            "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
-            "Docs/UI and source-baseline evidence are not acceptance",
-            "Historical observation, not an acceptance dependency: Support token and account entitlement required for live API access; none supplied"
+            "Configured HTML listing only; no complete catalog or API pagination claim.",
+            "Authenticated Essential collection response and continuation remain unverified."
           ]
         },
         "fetch": {

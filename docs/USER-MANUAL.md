@@ -313,6 +313,10 @@ native = engine.execute(
 
 Only use this when <code>capabilities</code> says that provider has an implemented native search. Provider search typically selects candidate records; QuorumRelay then applies exact local matching to fields that were actually supplied. Check the response’s <code>coverage</code> for searched fields, candidate limits, omitted rows and checkpoint information. A native result is not a promise of full-text or catalog coverage.
 
+### Discover a configured Municode public listing
+
+For `municode-meetings`, supply the URL of a public HTML meeting listing. Discovery reads that configured page, applies inclusive date bounds locally and returns a partial result with path-derived meeting IDs and the original page capture. The result does not claim a complete archive; the separate authenticated Essential collection response and pagination remain unverified.
+
 ### Export portable records
 
 The neutral <code>export</code> operation emits JSON, JSONL or ZIP bundles. CSV and iCalendar are explicit projections and can lose unsupported meeting fields; the result reports losses. Export does not contact a vendor or mutate records.
