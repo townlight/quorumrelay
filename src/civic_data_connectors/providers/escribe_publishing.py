@@ -33,7 +33,7 @@ READS = frozenset({"MeetingGetById", "MeetingGetByPortal", "AgendaGetById", "Age
     "BookmarkGetById", "BookmarkGetByMeeting", "BookmarkGetByAgenda",
     "ResolutionGetById", "ResolutionGetByMeeting", "ResolutionGetByAgendaItem",
     "MeetingGetByMeetingType", "AgendaItemTextGetByMeetingId", "AgendaItemItemHistoryView",
-    "MeetingAgendaItemsWithHistory", "MeetingTypeGetByPortal", "DocumentGetContentChunk"})
+    "MeetingAgendaItemsWithHistory", "MeetingTypeGetByPortal", "DocumentGetContentChunk", "DocumentGetSince"})
 for prefix, namespace in (("s", SOAP), ("a", ADDRESS), ("e", NS), ("i", XSI)):
     ET.register_namespace(prefix, namespace)
 
@@ -275,6 +275,10 @@ def bind_records(method, parameters, bundle):
         identity = raw["Id"]
         if method.endswith("GetById"):
             matches = identity == selected
+        elif method == "DocumentGetSince":
+            # The metadata declares a literal selector, not inclusive/exclusive
+            # ordering, a page stride or a per-row parent identity.
+            matches = type(selected) is int and 0 <= selected < 2**31
         elif method == "MeetingGetByMeetingType":
             matches = (raw.get("MeetingTypeId") == selected.get("Id")
                        and raw.get("PortalId") == selected.get("PortalId"))
@@ -323,6 +327,7 @@ def parse_bundle(source, namespace, content):
             "AgendaItemText": "agenda_item_text", "MeetingType": "meeting_type"}[method.split("Get")[0]]
     rows = []
     meeting_type_ids = set()
+    document_since_ids = set()
     for raw in records(value, model):
         if not isinstance(raw, dict) or "Id" not in raw or raw["Id"] is None:
             raise ValueError("A native identity is required for every returned record.")
@@ -343,6 +348,10 @@ def parse_bundle(source, namespace, content):
             identity_text = json.dumps(identity, sort_keys=True, separators=(",", ":"))
         else:
             identity_text = str(identity)
+        if method == "DocumentGetSince":
+            if type(identity) is not int or not 0 < identity < 2**31 or identity in document_since_ids:
+                raise ValueError("Document selector rows require unique positive native Int32 IDs.")
+            document_since_ids.add(identity)
         if kind == "meeting_type":
             if identity_text in meeting_type_ids:
                 raise ValueError("A meeting-type collection repeats its native compound identity.")
@@ -450,6 +459,9 @@ def read(engine, source, namespace, request, bounds, context, transport, *, disc
             f["name"] for f in contract()["operations"][method]["request"]} or any(
                 v is None for v in parameters.values()):
         raise ValueError("Supply every exact native selection parameter without nulls.")
+    if method == "DocumentGetSince" and (type(parameters["intLastInsertedId"]) is not int
+            or not 0 <= parameters["intLastInsertedId"] < 2**31):
+        raise ValueError("Supply an explicit nonnegative native Int32 last-inserted ID.")
     if method == "AgendaItemItemHistoryView":
         from .escribe_history import bind_history
         bind_history(parameters, {"records": []})
@@ -524,6 +536,10 @@ def read(engine, source, namespace, request, bounds, context, transport, *, disc
         else:
             bundle = parse_bundle(source, namespace, content)
             bind_records(method, parameters, bundle)
+        if method == "DocumentGetSince":
+            bundle["extensions"]["native_request_context"] = {
+                "api_method": method, "api_parameters": deepcopy(parameters),
+                "selection_semantics": "literal_vendor_selector; ordering/inclusion/continuation_not_inferred"}
         if sum(r["normalized"].get("source_component_count", 1) for r in bundle["records"]) > bounds.max_records:
             raise ValueError("The selected unpaged response exceeds max_records; it is not silently truncated.")
         session.check()

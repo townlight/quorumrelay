@@ -11741,6 +11741,83 @@
               }
             ]
           }
+        },
+        {
+          "id": "escribe-document-since-2026-11-15",
+          "url": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc?wsdl",
+          "title": "Explicit native inserted-ID document metadata selector",
+          "kind": "official_machine_contract_and_synthetic_execution",
+          "observed": "2026-11-15",
+          "observation_date": "2026-11-15",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "access_scope": "local_synthetic_SOAP_execution_no_new_vendor_requests",
+          "source_path": "docs/capabilities/evidence/escribe-publishing-wsdl/source.json",
+          "source_sha256": "cb5ddc5926526860b9c63317974361c6158fb66530c000df488c27435b68cd08",
+          "receipt_path": "docs/verification/escribe-document-since-2026-11-15.json",
+          "receipt_sha256": "bc5f14066305c52996b80f34d76a14af80500929ef95808d0c961f5bb31bead5",
+          "findings": "25new/289affected passed8.84s: typed explicit selector and IDs, local metadata search, SQLite retry/reopen, JSON/JSONL/ZIP and request/cancellation/deadline/transfer/record bounds.",
+          "limits": "No cursor advancement/order/completeness, inferred document bytes or native write.",
+          "synthetic_execution": {
+            "provider": "escribe",
+            "status": "mock_passed",
+            "operations": [
+              "discover",
+              "fetch",
+              "parse",
+              "local_search",
+              "neutral_export"
+            ],
+            "entities": [
+              "document"
+            ],
+            "scope": "One explicit native inserted-ID document metadata selector, bounded typed records, portable actual request context and local metadata search.",
+            "execution_provenance": "Actual local pytest2026-11-15:25new/289affected passed8.84s, independent synthetic XML server and actual engine/storage/interchange.",
+            "checks": [
+              {
+                "command": "pytest tests/test_escribe_document_since.py tests/test_escribe_publishing.py tests/test_escribe_history_write.py tests/test_escribe_related_records.py tests/test_escribe_content_chunk.py tests/test_escribe_selected_text.py tests/test_storage_search_imports.py tests/test_interchange.py tests/test_provider_discovery.py -q",
+                "passed": 289,
+                "failed": 0,
+                "seconds": 8.84
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/publishing.wsdl",
+                "sha256": "a166e11909548edc8876556d4cba67f5661d8269a2269e99a412fe726bd1ac46"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd0.xsd",
+                "sha256": "9794f976a48bbc225e2d8162f50182efd02e7551b68da7bd82eb5c1270c7f6d8"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd1.xsd",
+                "sha256": "cff6937e7a1ed4a816ee6cb8525d75c041ff3244d8ca6100f031d20f689a521a"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd2.xsd",
+                "sha256": "690da8769e0e9c0a850e7978c10acd8f37f50625f6550c2839b2e1476bd418d4"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd3.xsd",
+                "sha256": "fac71636d6bf72283efb73bfafcffe586ae798dabb68b6593542e3b925a3e0de"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd4.xsd",
+                "sha256": "fff0cdd3f2fc2a9d9509f5055c2987051485f7b0b022ec48f14200335c702023"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_escribe_document_since.py",
+                "sha256": "72ee77ac6ccd546a7194f66893951a00111096d1e9f8e7011f2ebe93dfec97e6"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -11784,9 +11861,10 @@
             "escribe-oakville-calendar-live-read",
             "escribe-public-detail-live",
             "escribe-history-index-2026-11-15",
-            "escribe-meeting-types-2026-11-15"
+            "escribe-meeting-types-2026-11-15",
+            "escribe-document-since-2026-11-15"
           ],
-          "details": "Existing bounded calendar POST /MeetingsCalendarView.aspx/GetCalendarMeetings retrieves configured explicit dates, preserves calendar raw fields and supplied documents, and supports local continuation/date bounds. Post-dev6 discovery enrichment additionally types supplied Video/Audio player links as recordings; baseline34 normalization remains unchanged. Explicit MeetingAgendaItemsWithHistory returns scalar native item references with disclosed selected-meeting request binding; existing history view can then be fetched separately. No inferred AgendaType or catalog. Native MeetingTypeGetByPortal supplies complete existing meeting-type filter selectors and source multilingual names; scoped partial read, no administration.",
+          "details": "Existing bounded calendar POST /MeetingsCalendarView.aspx/GetCalendarMeetings retrieves configured explicit dates, preserves calendar raw fields and supplied documents, and supports local continuation/date bounds. Post-dev6 discovery enrichment additionally types supplied Video/Audio player links as recordings; baseline34 normalization remains unchanged. Explicit MeetingAgendaItemsWithHistory returns scalar native item references with disclosed selected-meeting request binding; existing history view can then be fetched separately. No inferred AgendaType or catalog. Native MeetingTypeGetByPortal supplies complete existing meeting-type filter selectors and source multilingual names; scoped partial read, no administration. DocumentGetSince uses explicit typed intLastInsertedId and distinct native document metadata records; selector/capture preserved without inferred paging/completeness or file bytes.",
           "dependencies": [],
           "remaining_verification": [
             "Implementation contract validation",
@@ -11813,9 +11891,10 @@
             "escribe-rendered-detail-2026-11-12",
             "escribe-publishing-wsdl-synthetic-2026-11-15",
             "escribe-history-index-2026-11-15",
-            "escribe-meeting-types-2026-11-15"
+            "escribe-meeting-types-2026-11-15",
+            "escribe-document-since-2026-11-15"
           ],
-          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail\u2192attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference. Two further scoped reads: MeetingGetByMeetingType checks portal/type IDs; AgendaItemTextGetByMeetingId checks meeting/language key and preserves language-qualified native item text identity.17new/240affected passes; docs/verification/escribe-selected-text-2026-11-15.json. Selected AgendaItemItemHistoryView now preserves inherited history fields and literal nested source motions/votes/documents, exact meeting/item binding, cited text and component bounds. No native vote-label meanings, tally or missing AgendaType inferred. See verification/escribe-history-2026-11-15.json. Explicit MeetingAgendaItemsWithHistory returns scalar native item references with disclosed selected-meeting request binding; existing history view can then be fetched separately. No inferred AgendaType or catalog. Native MeetingTypeGetByPortal supplies complete existing meeting-type filter selectors and source multilingual names; scoped partial read, no administration. Explicit DocumentGetContentChunk retains native integer parameters, selected metadata and opaque chunk bytes with request-context binding; no units/assembly/whole-file inference.23new/203affected eSCRIBE passes; verification/escribe-content-chunk-2026-11-15.json. Existing agenda/item/attachment compound parent IDs now expose portable relationships for neutral and standalone item-CSV use; verification/neutral-projections-native-parents-2026-11-15.json.",
+          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail\u2192attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference. Two further scoped reads: MeetingGetByMeetingType checks portal/type IDs; AgendaItemTextGetByMeetingId checks meeting/language key and preserves language-qualified native item text identity.17new/240affected passes; docs/verification/escribe-selected-text-2026-11-15.json. Selected AgendaItemItemHistoryView now preserves inherited history fields and literal nested source motions/votes/documents, exact meeting/item binding, cited text and component bounds. No native vote-label meanings, tally or missing AgendaType inferred. See verification/escribe-history-2026-11-15.json. Explicit MeetingAgendaItemsWithHistory returns scalar native item references with disclosed selected-meeting request binding; existing history view can then be fetched separately. No inferred AgendaType or catalog. Native MeetingTypeGetByPortal supplies complete existing meeting-type filter selectors and source multilingual names; scoped partial read, no administration. Explicit DocumentGetContentChunk retains native integer parameters, selected metadata and opaque chunk bytes with request-context binding; no units/assembly/whole-file inference.23new/203affected eSCRIBE passes; verification/escribe-content-chunk-2026-11-15.json. Existing agenda/item/attachment compound parent IDs now expose portable relationships for neutral and standalone item-CSV use; verification/neutral-projections-native-parents-2026-11-15.json. DocumentGetSince uses explicit typed intLastInsertedId and distinct native document metadata records; selector/capture preserved without inferred paging/completeness or file bytes.",
           "dependencies": [],
           "remaining_verification": [
             "Implementation contract validation",

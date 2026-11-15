@@ -411,3 +411,7 @@ The original saved South Jordan page declares `search-block-form` POST to `/`, `
 ### eSCRIBE supplied item-history step (2026-11-15)
 
 The existing pinned WSDL establishes AgendaItemHistoryCreate and its typed returned identifier. One exact step create is now implemented with explicit meeting/item/history/portal authorization, full selected history preflight/readback, duplicate guards and durable no replay.16new/178affected checks passed; no live SOAP call or history publication. MigrationCreateMotion declares opaque usersvotes strings and an integer return, without establishing the string grammar or returned integer-to-view identity relationship; those semantics remain unresolved research, not an outside-only dependency or guessed motion/vote mapping. See the PublishingService guide and scoped receipt.
+
+### eSCRIBE explicit document inserted-ID selector (2026-11-15)
+
+The existing pinned WSDL establishes DocumentGetSince(intLastInsertedId), returning native document records. Explicit caller selection is now mapped and synthetically verified (25new/289affected passed), preserving native IDs, metadata, exact response/request context, SQLite retry/reopen/search and JSON/JSONL/ZIP. Ordering, selector inclusion, cursor advancement, full catalog and document byte availability remain qualified; no automatic continuation or complete-empty inference. This adds a scoped read, not a new provider or outbound operation.

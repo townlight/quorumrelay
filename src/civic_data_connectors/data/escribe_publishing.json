@@ -876,6 +876,29 @@
         }
       ]
     },
+    "DocumentGetSince": {
+      "action": "eSCRIBE.Internet.WebService/IPublishingService/DocumentGetSince",
+      "request": [
+        {
+          "name": "intLastInsertedId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        }
+      ],
+      "response": [
+        {
+          "name": "DocumentGetSinceResult",
+          "type": "{eSCRIBE.Internet.WebService}ArrayOfDocument.Record",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ]
+    },
     "MeetingCreate": {
       "action": "eSCRIBE.Internet.WebService/IPublishingService/MeetingCreate",
       "request": [

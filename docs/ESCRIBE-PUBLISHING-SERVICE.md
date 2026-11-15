@@ -264,3 +264,21 @@ Planning retains the complete before view, typed native request and fingerprint.
 Success requires exactly the new full step in the readback, preserving every prior step and all other view fields. Reordering steps is immaterial; additional or changed steps/fields remain uncertain. This is strict scoped synthetic verification, not a claim about undocumented server side effects or live deployment applicability. The returned identity is durable before readback. Lost readback can reconcile after restart; a lost create-response identity stays uncertain and is never automatically replayed. No duplicate is inferred from a similar title or partial source match.
 
 See `verification/escribe-history-step-create-2026-11-15.json` for the pinned contract and actual synthetic execution scope.
+
+## Select document metadata by an explicit inserted-ID selector
+
+The pinned WSDL declares `DocumentGetSince(intLastInsertedId)` returning `ArrayOfDocument.Record`. Supply it through `fetch` or configured `discover` with the existing SOAP source:
+
+```python
+request = {
+    "api_method": "DocumentGetSince",
+    "api_parameters": {"intLastInsertedId": 20},
+}
+result = engine.fetch(source, request)
+```
+
+The selector is an explicit nonnegative Int32, not a timestamp. The library sends its literal value, preserves request context and exact response capture, and requires distinct positive native document IDs. It does not infer inclusive/exclusive filtering, stable ordering, cursor advancement, deletions, complete catalog or exhausted history. Even an empty response remains partial. An over-budget collection fails without publishing a truncated bundle. Caller-selected native parameters remain separate from date filters and generic checkpoints.
+
+Document records preserve original fields, native metadata, display names and revisions. Search is over obtained metadata; no file bytes, MIME type, PDF text, meeting association or public availability is inferred from a document ID or filename. A caller can select an explicit returned ID through the separately implemented `DocumentGetContent` metadata/content path. Saved-response normalization retains its native records but cannot reconstruct an absent selector; neutral JSON/JSONL/ZIP preserve the actual fetch request context. SQLite retry/reopen retains identities and exact local metadata hits.
+
+The independent synthetic checks and raw vendor schema bindings are recorded in `verification/escribe-document-since-2026-11-15.json`. No live SOAP method was invoked.
