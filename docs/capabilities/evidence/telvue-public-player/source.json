@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-15",
+  "kind": "observed_public_player_and_supplied_caption",
+  "lead": {
+    "path": "tests/fixtures/baseline/telvue.response",
+    "sha256": "08c2ca51ed7655f5fd6734eaab7e193445deac8764079ee0f8da45ddf9b017fd",
+    "scope": "Original playlist1757 has exact selected media1066963 link; no guessed API or new tenant survey."
+  },
+  "player": {
+    "url": "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/playlists/1757/media/1066963?showtabssearch=true&fullscreen=false",
+    "response_url": "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/playlists/1757/media/1066963?showtabssearch=true&fullscreen=false",
+    "method": "GET",
+    "status": 200,
+    "content_type": "text/html",
+    "byte_limit": 2000000,
+    "deadline_seconds": 20,
+    "redirects": false,
+    "bytes": 30149,
+    "sha256": "7a1da6118ed1f7645d1fe87dba67d5da813a906bbfe12386de2da12fe12eddbd",
+    "fixture": "tests/fixtures/telvue-player/player.html"
+  },
+  "caption": {
+    "url": "https://videoplayer.telvue.com/closed_captions/W1siZiIsIjc4NTkyMDYwLTQ2YzctMDEzMC04MjAyLTUyNTQwMDQ3MTQ4ZS84NDdmOTcwZC00ZWZmLTQ5OTItOGNlNS0wZTgxMzc4MTdhMzQvY2xvc2VkX2NhcHRpb25zL3ByaW1hcnktZW4tY2FwdGlvbnMtMTc5Mzc1NDA0Ni52dHQiXV0?sha=fb4bfea3acc1b7f2",
+    "response_url": "https://videoplayer.telvue.com/closed_captions/W1siZiIsIjc4NTkyMDYwLTQ2YzctMDEzMC04MjAyLTUyNTQwMDQ3MTQ4ZS84NDdmOTcwZC00ZWZmLTQ5OTItOGNlNS0wZTgxMzc4MTdhMzQvY2xvc2VkX2NhcHRpb25zL3ByaW1hcnktZW4tY2FwdGlvbnMtMTc5Mzc1NDA0Ni52dHQiXV0?sha=fb4bfea3acc1b7f2",
+    "method": "GET",
+    "status": 200,
+    "content_type": "text/vtt",
+    "byte_limit": 1000000,
+    "deadline_seconds": 20,
+    "redirects": false,
+    "bytes": 60850,
+    "sha256": "99a71131f7422cd27b3062dc95a57cb8eebd8025d97a0420a0145565104cdbde",
+    "fixture": "tests/fixtures/telvue-player/captions.vtt"
+  },
+  "findings": [
+    "One literal JSON Player.setupData playlist row binds medium/1066963, title, HLS locator, source duration4145, English and Spanish caption labels.",
+    "Supplied English track actualUTF8WEBVTT text/bytes captured; no JavaScript, playback, media or generation executed.",
+    "Public caption-read contract is separate from unresolved Connect upload/runtime initialization/readiness/meeting association writes."
+  ],
+  "limits": "Selected player layout only; actual caption language/timing accuracy unverified. Title date, filename and source labels are not inferred meeting dates, bodies or language codes. Record type recording is explicit; no automatic cross-type identity merge with older meeting-shaped playlist records."
+}

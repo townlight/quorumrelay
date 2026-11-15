@@ -392,3 +392,8 @@ Document/recording byte attachments check cancellation and the total deadline af
 
 
 Explicit Digital Towpath detail retrieval now applies the smaller parser/transfer response cap and checks cancellation/deadline after normalization. An interrupted detail returns cancelled/failed without a completed mapped result. See [three regressions and full1968-case source validation](verification/owned-boundaries-full-2026-11-15.json).
+
+
+### TelVue source-declared public captions (2026-11-15)
+
+The original public playlist native-media link now supports literal player JSON metadata and explicit supplied WebVTT reading without account credentials. No script execution, title-date/language-code inference, playback or staff-write contract is implied. See [mapping and identity limits](TELVUE-PUBLIC-CAPTIONS.md) and [253 affected execution cases](verification/telvue-public-player-2026-11-15.json).

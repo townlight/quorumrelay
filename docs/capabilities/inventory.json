@@ -18368,6 +18368,21 @@
           },
           "receipt_path": "docs/verification/peak-telvue-owned-work-2026-11-15.json",
           "receipt_sha256": "ae8104d94af401928d6948811cc02717ad23f07d6b5de55506bc6913e86e0a51"
+        },
+        {
+          "id": "telvue-public-player-2026-11-15",
+          "url": "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/playlists/1757/media/1066963?showtabssearch=true&fullscreen=false",
+          "title": "Original supplied public TelVue player and actual declared WebVTT",
+          "kind": "implementation_evidence",
+          "observation_date": "2026-11-15",
+          "observed": "Actual player30149bytes and source-declared caption60850bytes returned200;14new/253affected execution cases passed.",
+          "findings": "Native mediaID/title/HLS/source-duration and English/Spanish display labels retained. Explicit first/exact-label supplied WebVTT retrieval under exact no-redirect/MIME/header/origin/total-transfer/deadline/cancel bounds; source text/captures/relationships/hash survive SQLite/retry/reopen/search and JSON/JSONL/ZIP.",
+          "limits": "Selected player layout, no date/body/language-code inference, script execution, cue interpretation, playback or staff upload/association contract.",
+          "local_path": "docs/capabilities/evidence/telvue-public-player/source.json",
+          "sha256": "cb634e8218ff42e69e9b5ec81e9c5ba536d5982faa094696cab40a7419656e8d",
+          "receipt_path": "docs/verification/telvue-public-player-2026-11-15.json",
+          "receipt_sha256": "8589f22fc470f2f795d2eabf2ddb857ca2be6ca2fc1ba3ab8dbb13b8e3295ddb",
+          "proof_level": "actual_public_capture_and_saved_engine_execution_not_catalog_or_write_acceptance"
         }
       ],
       "tenants": [
@@ -18453,9 +18468,10 @@
             "telvue-videos",
             "telvue-playlists-api",
             "telvue-cloudcast-mrss-contract",
-            "telvue-connect-playlist-items-contract"
+            "telvue-connect-playlist-items-contract",
+            "telvue-public-player-2026-11-15"
           ],
-          "details": "Source implements explicit Connect v2 GET requests for media, videos and playlists, plus media/playlist detail routes, with exact documented CONNECT-ACCESS-KEY and CONNECT-SECRET-PASSPHRASE headers. The public examples define JSON envelopes and sample fields. Pagination/filter/rate limits remain undocumented; no account key or live read. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified. Explicit api_resource=playlist_items plus playlist_id supports documented Connect v2 collection/detail; external_id selects the item. Separate playlist_item identity/playlist parent/media playable relation preserve native IDs, sequence/windows, supplied recordings and raw unknown fields. Seven synthetic engine/saved-response checks pass; published December2022 examples do not establish pagination or current deployment compatibility.",
+          "details": "Source implements explicit Connect v2 GET requests for media, videos and playlists, plus media/playlist detail routes, with exact documented CONNECT-ACCESS-KEY and CONNECT-SECRET-PASSPHRASE headers. The public examples define JSON envelopes and sample fields. Pagination/filter/rate limits remain undocumented; no account key or live read. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified. Explicit api_resource=playlist_items plus playlist_id supports documented Connect v2 collection/detail; external_id selects the item. Separate playlist_item identity/playlist parent/media playable relation preserve native IDs, sequence/windows, supplied recordings and raw unknown fields. Seven synthetic engine/saved-response checks pass; published December2022 examples do not establish pagination or current deployment compatibility. Selected public native-media player and supplied WebVTT have separate2026-11-15scoped execution; exact source labels/bytes/text retained without meeting-date/language-code/playback/write inference.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -18484,9 +18500,10 @@
             "media-reader-source",
             "quorumrelay-shared-core-operations",
             "telvue-cloudcast-mrss-contract",
-            "telvue-connect-playlist-items-contract"
+            "telvue-connect-playlist-items-contract",
+            "telvue-public-player-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified. Explicit api_resource=playlist_items plus playlist_id supports documented Connect v2 collection/detail; external_id selects the item. Separate playlist_item identity/playlist parent/media playable relation preserve native IDs, sequence/windows, supplied recordings and raw unknown fields. Seven synthetic engine/saved-response checks pass; published December2022 examples do not establish pagination or current deployment compatibility.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified. Explicit api_resource=playlist_items plus playlist_id supports documented Connect v2 collection/detail; external_id selects the item. Separate playlist_item identity/playlist parent/media playable relation preserve native IDs, sequence/windows, supplied recordings and raw unknown fields. Seven synthetic engine/saved-response checks pass; published December2022 examples do not establish pagination or current deployment compatibility. Selected public native-media player and supplied WebVTT have separate2026-11-15scoped execution; exact source labels/bytes/text retained without meeting-date/language-code/playback/write inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -18531,9 +18548,10 @@
           "capability_status": "unverified",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "telvue-public-player-2026-11-15"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Selected public native-media player and supplied WebVTT have separate2026-11-15scoped execution; exact source labels/bytes/text retained without meeting-date/language-code/playback/write inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -18553,9 +18571,10 @@
           "capability_status": "unverified",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "telvue-public-player-2026-11-15"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Selected public native-media player and supplied WebVTT have separate2026-11-15scoped execution; exact source labels/bytes/text retained without meeting-date/language-code/playback/write inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",

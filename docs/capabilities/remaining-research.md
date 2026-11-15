@@ -191,6 +191,8 @@ Evidence and exact scope: `inventory.json` provider `town-hall-streams`; operati
 
 ## F19 TelVue (`telvue`)
 
+- New original-playlist native media1066963 lead establishes public literal player JSON and supplied caption reads: exact player and first declaredWebVTT200text/vtt60850bytes,14new/253affected cases passed. Metadata/raw text/bytes/relationships persist through SQLite/retry/reopen/search and neutral exports. Caption display labels do not establish language codes or meeting dates. See `docs/TELVUE-PUBLIC-CAPTIONS.md`. Connect upload/runtime initialization/readiness/association gaps remain separate.
+
 - CloudCast4.1 and Connect/CloudCast2022 chapter CSV preparation is implemented from official manual/article/image contracts (2022variant accepts seconds and blank end, with headerless-layout derivation explicit): headerless Start/End/Title/Summary/Description, explicit times, local bytes/hash/scoped artifact. Current Connect compatibility, remote import and meeting association remain unverified. See [format limits](../TELVUE-CHAPTER-CSV.md).
 
 - Documented Connect v2 reads are GET /api/v2/media[/{id}], /videos and /playlists[/{id}]. The source fetch adapter now implements explicitly requested account reads; synthetic documented-route verification is accepted; live calls are optional and unrun.

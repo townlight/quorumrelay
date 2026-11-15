@@ -17,3 +17,6 @@ docs/capabilities/evidence/onbase-eis-entity/*.content.html whitespace=-blank-at
 tests/fixtures/onbase-search/*.html whitespace=-blank-at-eol,-blank-at-eof
 
 tests/fixtures/townhall-transcripts/*.html whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Exact TelVue public player capture retains six vendor trailing-space lines.
+tests/fixtures/telvue-player/player.html whitespace=-blank-at-eol

@@ -34,7 +34,7 @@ ADDITIONAL_FORMATS = {"gworks": ("gworks-published-meeting-html", "gworks-secure
                       "destiny-agendaquick": ("agendaquick-public-listing-html", "agendaquick-item-search-html", "agendaquick-public-agenda-html", "agendaquick-public-memo-html"),
                       "boardable": ("boardable-public-meetings-json",),
                       "simbli": ("simbli-meeting-detail-json", "simbli-agenda-items-json", "simbli-item-content-json"),
-                      "telvue": ("telvue-cloudcast-mrss-xml", "telvue-connect-media-json", "telvue-connect-videos-json",
+                      "telvue": ("telvue-public-player-html", "telvue-cloudcast-mrss-xml", "telvue-connect-media-json", "telvue-connect-videos-json",
                                  "telvue-connect-playlists-json", "telvue-connect-playlist_items-json"),
                       "municode-meetings": ("essential-multimedia-json",),
                       "novusagenda": ("novus-public-listing-html", "novus-public-coversheet-html"),

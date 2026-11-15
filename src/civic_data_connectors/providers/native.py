@@ -150,6 +150,9 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format == "telvue-public-player-html":
+        from .telvue_player import parse_bundle
+        return parse_bundle(source, namespace, content)
     if input_format == "swagit-public-player-html":
         from .swagit_player import parse_bundle
         return parse_bundle(source, namespace, content)
