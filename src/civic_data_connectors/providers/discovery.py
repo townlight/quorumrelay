@@ -573,6 +573,8 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
     if input_format == "peak-publication-rss-xml":
         from .peak_rss import source_context
         source_context(source)
+    if source.provider == "escribe" and input_format == "escribe-publishing-soap-xml":
+        raise ValueError("Use an explicit native PublishingService fetch; unbounded catalog discovery is not inferred.")
     saved = _decode_content(request, content)
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")

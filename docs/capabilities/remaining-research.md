@@ -97,11 +97,11 @@ Evidence and exact scope: `inventory.json` provider `boardbook`; operation statu
 
 - Calendar and bounded native search remain separately evidenced. Captured Meeting.aspx detail now maps rendered agenda positions, supplied partial text and same-origin FileStream locators. Item keys are capture-local with native item ID null. The earlier FileStream 403 remains a failed live transfer, not proof that the rendered detail path is unimplemented or the catalog complete.
 - Public native search source implementation and bounded first/page2/resume are verified with partial coverage. Provider full-text/exact matching semantics, broader document visibility and catalog completeness remain unknown; no saved metadata search is mislabeled native.
-- Pinned product/module material does not supply a customer machine API/import schema for meeting/item create/update/upload. Product-matched field/readback contracts remain needed; live write-tenant acquisition is not required for accepted synthetic verification.
+- New deployed PublishingService WSDL and all5XSDs are captured. Native meeting/agenda/item/attachment/document reads and10record create/update paths are implemented and synthetically verified. Metadata-bound DocumentGetContent preserves exact source bytes. An explicit DocumentUpload chunk with caller-declared final whole-document hash is implemented; preflight/recovery/full-byte readback and no replay are verified synthetically. General chunk sequencing/assembly, append/replacement/truncation/readiness semantics and vendor file-import remain unresolved research. See [PublishingService mapping](../ESCRIBE-PUBLISHING-SERVICE.md). No live SOAP calls or credential-acquisition gate.
 
 Evidence and exact scope: `inventory.json` provider `escribe`; operation status and outbound mappings are separate from historical observations.
 
-- New primary PublishingService landing declares WSDL metadata URLs; the exact singleWsdlGET returned403. Indexed primary content gives WCF client instructions, not operations/types. No SOAP invocation or private-only/APIabsence claim. See `evidence/product-contract-followup-2026-11-14/source.json`.
+- Historical singleWsdl403 applies only to that exact request. The other declared ?wsdl returned200 on2026-11-15 and supplied executable schemas. Current proof: `evidence/escribe-publishing-wsdl/source.json`; no SOAP method called on the live service.
 
 ## F10 Simbli (`simbli`)
 

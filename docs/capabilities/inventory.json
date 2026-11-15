@@ -441,7 +441,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+                "sha256": "c14d5e250d39686d8909e945c9055e208348c8689eab972d62ac6d6ca2509986"
               },
               {
                 "kind": "test",
@@ -450,7 +450,8 @@
                 "hash_policy": "test_source_crlf_to_lf",
                 "canonical_lf_sha256": "aaeb3889dee83238ff3fe31d5b135c49648d29f8d1505dacd2eb833ea87ef98b"
               }
-            ]
+            ],
+            "contract_rebinding_2026_11_15": "All prior JSON contract sections checked equal to HEAD; only new escribe_publishing section added. Prior Windows CRLF contract hash accounted for explicitly. Original executed provider scopes/checks unchanged."
           }
         },
         {
@@ -489,7 +490,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+                "sha256": "c14d5e250d39686d8909e945c9055e208348c8689eab972d62ac6d6ca2509986"
               },
               {
                 "kind": "test",
@@ -498,7 +499,8 @@
                 "hash_policy": "test_source_crlf_to_lf",
                 "canonical_lf_sha256": "ba0bbf9c9b5b5a2eaa37cb86e31b22360a613d5ab8d43f209ba45c35ef97bece"
               }
-            ]
+            ],
+            "contract_rebinding_2026_11_15": "All prior JSON contract sections checked equal to HEAD; only new escribe_publishing section added. Prior Windows CRLF contract hash accounted for explicitly. Original executed provider scopes/checks unchanged."
           }
         },
         {
@@ -9622,7 +9624,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+                "sha256": "c14d5e250d39686d8909e945c9055e208348c8689eab972d62ac6d6ca2509986"
               },
               {
                 "kind": "test",
@@ -9631,7 +9633,8 @@
                 "hash_policy": "test_source_crlf_to_lf",
                 "canonical_lf_sha256": "cb90af8707061ce48a92c4e583db0a7a0cfba085eefd9882cc9d3a881071c7b6"
               }
-            ]
+            ],
+            "contract_rebinding_2026_11_15": "All prior JSON contract sections checked equal to HEAD; only new escribe_publishing section added. Prior Windows CRLF contract hash accounted for explicitly. Original executed provider scopes/checks unchanged."
           }
         },
         {
@@ -11292,6 +11295,91 @@
           "observation_date": "2026-11-14",
           "findings": "Indexed primary WCF landing declares wsdl/singleWsdl and PublishingServiceClient. Exact direct singleWsdlGET403; indexedcontent is landing instructions rather than XML operations/types. No SOAP methods invoked. Pins and limits in evidence/product-contract-followup-2026-11-14/source.json.",
           "limits": "No executable payload/readback accepted or private-only/public-absence claim. Live account acquisition is not required."
+        },
+        {
+          "id": "escribe-publishing-wsdl-synthetic-2026-11-15",
+          "url": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc?wsdl",
+          "title": "Deployed vendor PublishingService WSDL/five XSDs and scoped synthetic engine execution",
+          "kind": "official_machine_contract_and_synthetic_execution",
+          "observed": "2026-11-15",
+          "observation_date": "2026-11-15",
+          "access_scope": "anonymous_metadata_GET_only;local_synthetic_SOAP_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "findings": "Other declared ?wsdl200222643bytes and all5XSDs200. Native record reads/create/update and explicit document chunk upload implemented with typed SOAP1.2/WSAddressing/parent checks, full native readback and durable no replay.60new eSCRIBE cases pass; no live SOAP call. Actual metadata/content binary source preservation separate.",
+          "limits": "Prior singleWsdl403 exact only. No live SOAP call, deployment/auth/publication/readiness/unknown chunk semantics inference. No universal vendor catalog/other tenant acceptance.",
+          "source_path": "docs/capabilities/evidence/escribe-publishing-wsdl/source.json",
+          "source_sha256": "cb5ddc5926526860b9c63317974361c6158fb66530c000df488c27435b68cd08",
+          "synthetic_execution": {
+            "provider": "escribe",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update",
+              "upload"
+            ],
+            "entities": [
+              "meeting",
+              "agenda",
+              "agenda_item",
+              "attachment",
+              "document"
+            ],
+            "scope": "Pinned deployed SOAP1.2 native record create/update plus one explicit document upload chunk with caller-declared whole-document hash, full preflight/recovery and durable no-replay readback. No chunk assembly, workflow, live SOAP or readiness inference.",
+            "execution_provenance": "Actual local pytest execution2026-11-15:60eSCRIBE tests passed2.20s (46record/binding+14upload); earlier171affected passed21.15s and2046full passed106.07s precede upload/three strict-ID regressions and remain historical.",
+            "checks": [
+              {
+                "command": "pytest tests/test_escribe_upload.py tests/test_escribe_publishing.py -q",
+                "passed": 60,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd0.xsd",
+                "sha256": "9794f976a48bbc225e2d8162f50182efd02e7551b68da7bd82eb5c1270c7f6d8"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd1.xsd",
+                "sha256": "cff6937e7a1ed4a816ee6cb8525d75c041ff3244d8ca6100f031d20f689a521a"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd2.xsd",
+                "sha256": "690da8769e0e9c0a850e7978c10acd8f37f50625f6550c2839b2e1476bd418d4"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd3.xsd",
+                "sha256": "fac71636d6bf72283efb73bfafcffe586ae798dabb68b6593542e3b925a3e0de"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd4.xsd",
+                "sha256": "fff0cdd3f2fc2a9d9509f5055c2987051485f7b0b022ec48f14200335c702023"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/publishing.wsdl",
+                "sha256": "a166e11909548edc8876556d4cba67f5661d8269a2269e99a412fe726bd1ac46"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_escribe_publishing.py",
+                "sha256": "cec7156f71cbfe8af59adb885aa86da101fe3e8ede7039fdf1c7cceaabc95d43",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "cec7156f71cbfe8af59adb885aa86da101fe3e8ede7039fdf1c7cceaabc95d43"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_escribe_upload.py",
+                "sha256": "29073b4f187ae63b18b261e37ea8ba12e7757d718b920fd78449e3192dc11849",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "29073b4f187ae63b18b261e37ea8ba12e7757d718b920fd78449e3192dc11849"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -11359,9 +11447,10 @@
           "evidence_ids": [
             "escribe-oakville-public",
             "escribe-public-detail-live",
-            "escribe-rendered-detail-2026-11-12"
+            "escribe-rendered-detail-2026-11-12",
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
-          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail\u2192attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged.",
+          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail\u2192attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance.",
           "dependencies": [],
           "remaining_verification": [
             "Implementation contract validation",
@@ -11384,9 +11473,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "escribe-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -11433,9 +11523,10 @@
           "capability_status": "unverified",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -11454,9 +11545,10 @@
           "capability_status": "unverified",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -11494,72 +11586,69 @@
           ]
         },
         "create": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
-          "evidence_ids": [],
-          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
-          "dependencies": [
-            "Documented provider interface and explicit entity/field mapping"
+          "capability_status": "documented",
+          "implementation_status": "implemented",
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
+          "details": "Pinned PublishingService meeting,agenda,agenda_item,attachment,document native record create implemented with exact full-model plans/readback and durable no-replay reconciliation. Document is metadata; attachment binds existing DocumentId. No byte upload/publication method/other entity coverage inferred.",
+          "dependencies": [],
           "remaining_verification": [
-            "Provider-specific evidence investigation",
-            "Implementation and contract tests"
+            "Runtime destination access/applicability and effective visibility remain qualified; no live credentials/mutation gate."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "unverified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Vendor-schema synthetic execution accepted; no live SOAP operations performed.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
           ]
         },
         "update": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
-          "evidence_ids": [],
-          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
-          "dependencies": [
-            "Documented provider interface and explicit entity/field mapping"
+          "capability_status": "documented",
+          "implementation_status": "implemented",
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
+          "details": "Pinned PublishingService meeting,agenda,agenda_item,attachment,document native record update implemented with exact full-model plans/readback and durable no-replay reconciliation. Document is metadata; attachment binds existing DocumentId. No byte upload/publication method/other entity coverage inferred.",
+          "dependencies": [],
           "remaining_verification": [
-            "Provider-specific evidence investigation",
-            "Implementation and contract tests"
+            "Runtime destination access/applicability and effective visibility remain qualified; no live credentials/mutation gate."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "unverified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Vendor-schema synthetic execution accepted; no live SOAP operations performed.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
           ]
         },
         "upload": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
-          "evidence_ids": [],
-          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Provider capability and machine interface unverified. Live account acquisition is optional and is not the missing implementation contract.",
-          "dependencies": [
-            "Documented provider interface and explicit entity/field mapping"
+          "capability_status": "documented",
+          "implementation_status": "implemented",
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
+          "details": "One explicit XSD DocumentUpload chunk with caller-selected offset/length, preserved existing IsPrivate and expected final whole-document SHA256. Complete preflight bytes/metadata, immutable recovery capture, exact native request and whole-byte readback; durable uncertainty/restart never replays. No inferred splice/truncate/finalize/readiness/association.",
+          "dependencies": [],
           "remaining_verification": [
-            "Provider-specific evidence investigation",
-            "Implementation and contract tests"
+            "General chunk/append/replacement/truncation/processing semantics remain research qualifications; no live-account gate."
           ],
           "acceptance_status": "not_run",
-          "evidence_level": "unverified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://pub-oakville.escribemeetings.com/meetingscalendarview.aspx?Expanded=Council"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Accepted vendor-schema synthetic execution only; no live SOAP method call.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -11624,20 +11713,35 @@
           "mapping_source_ref": "baseline-field-contracts.json#/contracts(provider=escribe)",
           "source_commit": "d4470aeae662c759351f63140b035edac10d9a52",
           "notes": "Exact original normalized-field assignments and source inputs are preserved in the linked function excerpt for every baseline format. Not a vendor-official schema or standalone test pass."
+        },
+        {
+          "entity": "publishing_service_native_records",
+          "input_format": "escribe-publishing-soap-xml",
+          "mapping_source_ref": "src/civic_data_connectors/data/escribe_publishing.json",
+          "field_mappings": [
+            {
+              "normalized": "native_fields/original",
+              "provider_field": "Exact typed WSDL result record and compound native Id",
+              "notes": "No case/parent/timezone/status/language interpretation; exact schema field order and scalar types."
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ]
         }
       ],
       "outbound_mappings": [
         {
-          "entity": "meeting/agenda_item/document/media",
+          "entity": "other_recording_byte_or_unmapped_workflow",
           "operation": "create",
-          "endpoint_or_format": "Product UI and modules documented, external API/import field contract unverified",
+          "endpoint_or_format": "Other media-byte/workflow operations remain unmapped; exact native record paths listed separately",
           "field_mappings": [],
           "evidence_ids": [
             "escribe-platform"
           ],
           "account_requirements": "Licensed Meeting Manager and relevant Report/Internet Publishing/Webcasting modules, authorized account and documented integration/test tenant",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Provider resource identity/version and published vs draft state require independent readback",
+          "readback_receipt": "No byte readiness/effective visibility or other workflow contract inferred from record fields.",
           "verification_status": "unverified_external_contract",
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "not_verified_by_inventory",
@@ -11660,16 +11764,16 @@
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
         {
-          "entity": "meeting/agenda_item/document/media",
+          "entity": "other_recording_byte_or_unmapped_workflow",
           "operation": "update",
-          "endpoint_or_format": "Product UI and modules documented, external API/import field contract unverified",
+          "endpoint_or_format": "Other media-byte/workflow operations remain unmapped; exact native record paths listed separately",
           "field_mappings": [],
           "evidence_ids": [
             "escribe-platform"
           ],
           "account_requirements": "Licensed Meeting Manager and relevant Report/Internet Publishing/Webcasting modules, authorized account and documented integration/test tenant",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Provider resource identity/version and published vs draft state require independent readback",
+          "readback_receipt": "No byte readiness/effective visibility or other workflow contract inferred from record fields.",
           "verification_status": "unverified_external_contract",
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "not_verified_by_inventory",
@@ -11692,20 +11796,51 @@
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
         {
-          "entity": "meeting/agenda_item/document/media",
+          "entity": "document",
           "operation": "upload",
-          "endpoint_or_format": "Product UI and modules documented, external API/import field contract unverified",
-          "field_mappings": [],
-          "evidence_ids": [
-            "escribe-platform"
+          "endpoint_or_format": "SOAP1.2 DocumentUpload(Document.UploadParameters)",
+          "field_mappings": [
+            {
+              "normalized": "native.Chunk",
+              "provider_field": "Parameters.Chunk",
+              "mapping_level": "pinned_vendor_XSD_field_and_synthetic_explicit_chunk_execution"
+            },
+            {
+              "normalized": "native.DocumentId",
+              "provider_field": "Parameters.DocumentId",
+              "mapping_level": "pinned_vendor_XSD_field_and_synthetic_explicit_chunk_execution"
+            },
+            {
+              "normalized": "native.IsPrivate",
+              "provider_field": "Parameters.IsPrivate",
+              "mapping_level": "pinned_vendor_XSD_field_and_synthetic_explicit_chunk_execution"
+            },
+            {
+              "normalized": "native.length",
+              "provider_field": "Parameters.length",
+              "mapping_level": "pinned_vendor_XSD_field_and_synthetic_explicit_chunk_execution"
+            },
+            {
+              "normalized": "native.offset",
+              "provider_field": "Parameters.offset",
+              "mapping_level": "pinned_vendor_XSD_field_and_synthetic_explicit_chunk_execution"
+            },
+            {
+              "normalized": "resource_id",
+              "provider_field": "Parameters.DocumentId",
+              "mapping_level": "exact_native_document_ID_binding"
+            }
           ],
-          "account_requirements": "Licensed Meeting Manager and relevant Report/Internet Publishing/Webcasting modules, authorized account and documented integration/test tenant",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Provider resource identity/version and published vs draft state require independent readback",
-          "verification_status": "unverified_external_contract",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
-          "acceptance_status": "not_run",
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "account_requirements": "Exact trusted endpoint/tenant/namespace/existing native document and document:upload permission. No account acquisition or live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Complete metadata and content fingerprint before approval and send; scoped original-byte recovery capture, native offset/length/IsPrivate plus immutable Chunk, caller-declared whole-document SHA256 and metadata/content readback. Uncertain outcome reconciles by reads only.",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -11716,12 +11851,822 @@
             "W09",
             "W10"
           ],
-          "interface_type": "unresolved",
-          "contract_confidence": "unverified_machine_contract",
-          "method": null,
-          "api_version": "unknown",
-          "automatable_contract_verified": false,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "exact_XSD_request;caller_explicit_chunk_fields_and_final_whole_document_hash;scoped_synthetic_execution",
+          "method": "POST",
+          "api_version": "deployed PublishingService WSDL observed2026-11-15",
+          "automatable_contract_verified": true,
+          "domain_scope": "One caller-specified document chunk for an existing exact document, preserving IsPrivate. No byte assembly/truncate/append/finalize/readiness/association or publication inference."
+        },
+        {
+          "entity": "meeting",
+          "operation": "create",
+          "endpoint_or_format": "SOAP1.2 MeetingCreate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.AllowComments",
+              "provider_field": "Data.AllowComments",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.AllowCommentsAttachment",
+              "provider_field": "Data.AllowCommentsAttachment",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Cancelled",
+              "provider_field": "Data.Cancelled",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.CommentDeadline",
+              "provider_field": "Data.CommentDeadline",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Completed",
+              "provider_field": "Data.Completed",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.DatePublished",
+              "provider_field": "Data.DatePublished",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.End",
+              "provider_field": "Data.End",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.HasHtmlAgenda",
+              "provider_field": "Data.HasHtmlAgenda",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "Data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Location",
+              "provider_field": "Data.Location",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.MeetingTypeId",
+              "provider_field": "Data.MeetingTypeId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Name",
+              "provider_field": "Data.Name",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PortalId",
+              "provider_field": "Data.PortalId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PublicCommentApproval",
+              "provider_field": "Data.PublicCommentApproval",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PublicCommentDeadlinePassed",
+              "provider_field": "Data.PublicCommentDeadlinePassed",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PublicCommentEmailRequired",
+              "provider_field": "Data.PublicCommentEmailRequired",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PublicCommentIncludePosition",
+              "provider_field": "Data.PublicCommentIncludePosition",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PublicCommentPositionMandatory",
+              "provider_field": "Data.PublicCommentPositionMandatory",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PublicCommentPositions",
+              "provider_field": "Data.PublicCommentPositions",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.RequestForDelegationDeadline",
+              "provider_field": "Data.RequestForDelegationDeadline",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Start",
+              "provider_field": "Data.Start",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Started",
+              "provider_field": "Data.Started",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.TimeOverride",
+              "provider_field": "Data.TimeOverride",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.TimeOverrideFR",
+              "provider_field": "Data.TimeOverrideFR",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.VideoURL",
+              "provider_field": "Data.VideoURL",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native meeting record only. Document metadata and existing-document attachment association; no byte upload/publication/admin/delete or effective visibility claim."
+        },
+        {
+          "entity": "meeting",
+          "operation": "update",
+          "endpoint_or_format": "SOAP1.2 MeetingUpdate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.AllowComments",
+              "provider_field": "Data.AllowComments",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.AllowCommentsAttachment",
+              "provider_field": "Data.AllowCommentsAttachment",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Cancelled",
+              "provider_field": "Data.Cancelled",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.CommentDeadline",
+              "provider_field": "Data.CommentDeadline",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Completed",
+              "provider_field": "Data.Completed",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.DatePublished",
+              "provider_field": "Data.DatePublished",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.End",
+              "provider_field": "Data.End",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.HasHtmlAgenda",
+              "provider_field": "Data.HasHtmlAgenda",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "Data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Location",
+              "provider_field": "Data.Location",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.MeetingTypeId",
+              "provider_field": "Data.MeetingTypeId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Name",
+              "provider_field": "Data.Name",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PortalId",
+              "provider_field": "Data.PortalId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PublicCommentApproval",
+              "provider_field": "Data.PublicCommentApproval",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PublicCommentDeadlinePassed",
+              "provider_field": "Data.PublicCommentDeadlinePassed",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PublicCommentEmailRequired",
+              "provider_field": "Data.PublicCommentEmailRequired",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PublicCommentIncludePosition",
+              "provider_field": "Data.PublicCommentIncludePosition",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PublicCommentPositionMandatory",
+              "provider_field": "Data.PublicCommentPositionMandatory",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.PublicCommentPositions",
+              "provider_field": "Data.PublicCommentPositions",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.RequestForDelegationDeadline",
+              "provider_field": "Data.RequestForDelegationDeadline",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Start",
+              "provider_field": "Data.Start",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Started",
+              "provider_field": "Data.Started",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.TimeOverride",
+              "provider_field": "Data.TimeOverride",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.TimeOverrideFR",
+              "provider_field": "Data.TimeOverrideFR",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.VideoURL",
+              "provider_field": "Data.VideoURL",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native meeting record only. Document metadata and existing-document attachment association; no byte upload/publication/admin/delete or effective visibility claim."
+        },
+        {
+          "entity": "agenda",
+          "operation": "create",
+          "endpoint_or_format": "SOAP1.2 AgendaCreate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.CssDocumentId",
+              "provider_field": "data.CssDocumentId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.HtmlDocumentId",
+              "provider_field": "data.HtmlDocumentId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.LogoDocumentId",
+              "provider_field": "data.LogoDocumentId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native agenda record only. Document metadata and existing-document attachment association; no byte upload/publication/admin/delete or effective visibility claim."
+        },
+        {
+          "entity": "agenda",
+          "operation": "update",
+          "endpoint_or_format": "SOAP1.2 AgendaUpdate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.CssDocumentId",
+              "provider_field": "Data.CssDocumentId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.HtmlDocumentId",
+              "provider_field": "Data.HtmlDocumentId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "Data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.LogoDocumentId",
+              "provider_field": "Data.LogoDocumentId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native agenda record only. Document metadata and existing-document attachment association; no byte upload/publication/admin/delete or effective visibility claim."
+        },
+        {
+          "entity": "agenda_item",
+          "operation": "create",
+          "endpoint_or_format": "SOAP1.2 AgendaItemCreate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.Description",
+              "provider_field": "data.Description",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Header",
+              "provider_field": "data.Header",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Minutes",
+              "provider_field": "data.Minutes",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.ParentAgendaItemId",
+              "provider_field": "data.ParentAgendaItemId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Sequence",
+              "provider_field": "data.Sequence",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Title",
+              "provider_field": "data.Title",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native agenda_item record only. Document metadata and existing-document attachment association; no byte upload/publication/admin/delete or effective visibility claim."
+        },
+        {
+          "entity": "agenda_item",
+          "operation": "update",
+          "endpoint_or_format": "SOAP1.2 AgendaItemUpdate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.Description",
+              "provider_field": "Data.Description",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Header",
+              "provider_field": "Data.Header",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "Data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Minutes",
+              "provider_field": "Data.Minutes",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.ParentAgendaItemId",
+              "provider_field": "Data.ParentAgendaItemId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Sequence",
+              "provider_field": "Data.Sequence",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Title",
+              "provider_field": "Data.Title",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native agenda_item record only. Document metadata and existing-document attachment association; no byte upload/publication/admin/delete or effective visibility claim."
+        },
+        {
+          "entity": "attachment",
+          "operation": "create",
+          "endpoint_or_format": "SOAP1.2 AttachmentCreate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.DocumentId",
+              "provider_field": "data.DocumentId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native attachment record only. Document metadata and existing-document attachment association; no byte upload/publication/admin/delete or effective visibility claim."
+        },
+        {
+          "entity": "attachment",
+          "operation": "update",
+          "endpoint_or_format": "SOAP1.2 AttachmentUpdate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.DocumentId",
+              "provider_field": "Data.DocumentId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "Data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native attachment record only. Document metadata and existing-document attachment association; no byte upload/publication/admin/delete or effective visibility claim."
+        },
+        {
+          "entity": "document",
+          "operation": "create",
+          "endpoint_or_format": "SOAP1.2 DocumentCreate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.Description",
+              "provider_field": "Data.Description",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.DisplayName",
+              "provider_field": "Data.DisplayName",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.FamilyId",
+              "provider_field": "Data.FamilyId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.FileSize",
+              "provider_field": "Data.FileSize",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "Data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.IsPrivate",
+              "provider_field": "Data.IsPrivate",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Name",
+              "provider_field": "Data.Name",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.ParentId",
+              "provider_field": "Data.ParentId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Sequence",
+              "provider_field": "Data.Sequence",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.URL",
+              "provider_field": "Data.URL",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native document record only. Document metadata and existing-document attachment association; no byte upload/publication/admin/delete or effective visibility claim."
+        },
+        {
+          "entity": "document",
+          "operation": "update",
+          "endpoint_or_format": "SOAP1.2 DocumentUpdate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.Description",
+              "provider_field": "Id.Description",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.DisplayName",
+              "provider_field": "Id.DisplayName",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.FamilyId",
+              "provider_field": "Id.FamilyId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.FileSize",
+              "provider_field": "Id.FileSize",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "Id.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.IsPrivate",
+              "provider_field": "Id.IsPrivate",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Name",
+              "provider_field": "Id.Name",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.ParentId",
+              "provider_field": "Id.ParentId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Sequence",
+              "provider_field": "Id.Sequence",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.URL",
+              "provider_field": "Id.URL",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native document record only. Document metadata and existing-document attachment association; no byte upload/publication/admin/delete or effective visibility claim."
         }
       ],
       "pagination": {
@@ -11739,8 +12684,8 @@
       "remaining_research": [
         "Calendar and bounded native search remain separately evidenced. Captured Meeting.aspx detail now maps rendered agenda positions, supplied partial text and same-origin FileStream locators. Item keys are capture-local with native item ID null. The earlier FileStream 403 remains a failed live transfer, not proof that the rendered detail path is unimplemented or the catalog complete.",
         "Public native search source implementation and bounded first/page2/resume are verified with partial coverage. Provider full-text/exact matching semantics, broader document visibility and catalog completeness remain unknown; no saved metadata search is mislabeled native.",
-        "Pinned product/module material does not supply a customer machine API/import schema for meeting/item create/update/upload. Product-matched field/readback contracts remain needed; live write-tenant acquisition is not required for accepted synthetic verification.",
-        "New primary PublishingService WCF landing declares exact wsdl/singleWsdl URLs. Direct singleWsdlGET403; indexed primary text exposes generic client instructions, not XML operations/types. This exact access failure is verified, not private-only/auth-required proof or writable-operation contract. No SOAP method invoked."
+        "PublishingService WSDL/five XSDs now captured and native record reads/create/update implemented with scoped synthetic proof. Prior singleWsdl403 is historical exact access only. Explicit native DocumentUpload chunk plus caller-declared whole-byte hash is implemented with scoped synthetic proof. General chunk sequencing/assembly, append/replacement/truncation/readiness semantics and vendor file import remain unresolved research. No outside-only assertion or live-account gate.",
+        "Publishing host/public portal cross-host identity equivalence, effective visibility and live deployment applicability are not inferred from native field readback."
       ],
       "requirement_ids": [
         "C01",
@@ -11778,7 +12723,7 @@
           "outbound": "not supplied; authorized provider test tenant/credentials absent"
         }
       },
-      "official_docs_status": "inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked",
+      "official_docs_status": "pinned_deployed_vendor_WSDL_and5XSDs; scoped_native_record_execution; upload_semantics_unresolved",
       "family_id": "escribe",
       "canonical_id": "escribe",
       "aliases": [],
@@ -21320,7 +22265,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+                "sha256": "c14d5e250d39686d8909e945c9055e208348c8689eab972d62ac6d6ca2509986"
               },
               {
                 "kind": "test",
@@ -21329,7 +22274,8 @@
                 "hash_policy": "test_source_crlf_to_lf",
                 "canonical_lf_sha256": "ba0bbf9c9b5b5a2eaa37cb86e31b22360a613d5ab8d43f209ba45c35ef97bece"
               }
-            ]
+            ],
+            "contract_rebinding_2026_11_15": "All prior JSON contract sections checked equal to HEAD; only new escribe_publishing section added. Prior Windows CRLF contract hash accounted for explicitly. Original executed provider scopes/checks unchanged."
           }
         },
         {
@@ -25334,7 +26280,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+                "sha256": "c14d5e250d39686d8909e945c9055e208348c8689eab972d62ac6d6ca2509986"
               },
               {
                 "kind": "test",
@@ -25343,7 +26289,8 @@
                 "hash_policy": "test_source_crlf_to_lf",
                 "canonical_lf_sha256": "aaeb3889dee83238ff3fe31d5b135c49648d29f8d1505dacd2eb833ea87ef98b"
               }
-            ]
+            ],
+            "contract_rebinding_2026_11_15": "All prior JSON contract sections checked equal to HEAD; only new escribe_publishing section added. Prior Windows CRLF contract hash accounted for explicitly. Original executed provider scopes/checks unchanged."
           }
         },
         {
@@ -25382,7 +26329,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "3ad6f33067000576b25fda5e52eac6dd447ae56cbfe6d3961dd9018ca6483850"
+                "sha256": "c14d5e250d39686d8909e945c9055e208348c8689eab972d62ac6d6ca2509986"
               },
               {
                 "kind": "test",
@@ -25391,7 +26338,8 @@
                 "hash_policy": "test_source_crlf_to_lf",
                 "canonical_lf_sha256": "ba0bbf9c9b5b5a2eaa37cb86e31b22360a613d5ab8d43f209ba45c35ef97bece"
               }
-            ]
+            ],
+            "contract_rebinding_2026_11_15": "All prior JSON contract sections checked equal to HEAD; only new escribe_publishing section added. Prior Windows CRLF contract hash accounted for explicitly. Original executed provider scopes/checks unchanged."
           }
         },
         {

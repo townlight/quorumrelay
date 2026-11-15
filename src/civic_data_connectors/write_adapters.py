@@ -1228,6 +1228,7 @@ def default_adapters(transport=None):
     from .providers.boardable_write import BoardableWriteAdapter
     from .providers.civicclerk_write import CivicClerkWriteAdapter
     from .providers.essential_write import EssentialWriteAdapter
+    from .providers.escribe_write import EscribeWriteAdapter
     from .providers.granicus_write import GranicusWriteAdapter
     from .providers.telvue_write import TelVueWriteAdapter
     from .providers.towncloud_write import TownCloudWriteAdapter
@@ -1235,4 +1236,5 @@ def default_adapters(transport=None):
                for name in ("legistar", "wistia", "laserfiche", "laserfiche-weblink")},
             "municode-meetings": EssentialWriteAdapter(transport), "granicus": GranicusWriteAdapter(transport),
             "civicplus-select": CivicClerkWriteAdapter(transport), "telvue": TelVueWriteAdapter(transport),
-            "boardable": BoardableWriteAdapter(transport), "towncloud": TownCloudWriteAdapter(transport)}
+            "boardable": BoardableWriteAdapter(transport), "towncloud": TownCloudWriteAdapter(transport),
+            "escribe": EscribeWriteAdapter(transport)}

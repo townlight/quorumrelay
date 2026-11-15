@@ -402,3 +402,5 @@ The original public playlist native-media link now supports literal player JSON 
 ### SuiteOne supplied event transcripts (2026-11-15)
 
 Native event2165 now maps its selected rendered transcript table/source timing strings and explicit declared WebVTT. Stable event key matches the original archive. No script execution, date/body/cue/vote/playback or Liberty timed-import equivalence is inferred. See [mapping and limits](SUITEONE-SUPPLIED-TRANSCRIPTS.md) and [245 affected checks](verification/suiteone-public-event-2026-11-15.json).
+
+The local eSCRIBE [PublishingService mapping](ESCRIBE-PUBLISHING-SERVICE.md) now pins a deployed WSDL/five XSDs and implements scoped native record reads/create/update plus metadata-bound document bytes. Exact native parameters and synthetic coordinator evidence are separate from public portal HTML, chunk-upload semantics and live deployment/visibility acceptance.

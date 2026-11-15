@@ -44,6 +44,11 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     transport = transport or PublicTransport()
     content = _decode_content(request, content)
     attachment = request.get("attachment")
+    if source.provider == "escribe" and source.input_format == "escribe-publishing-soap-xml" and content is None:
+        if attachment is not None:
+            raise ValueError("PublishingService requires explicit native parameters, not arbitrary attachment URLs.")
+        from .escribe_publishing import read
+        return read(engine, source, namespace, request, bounds, context, transport)
     if source.provider == "civicweb" and source.input_format == "civicweb-filepro-soap-xml" and content is None:
         from .civicweb_filepro import read
         return read(source, namespace, request, bounds, context, transport)

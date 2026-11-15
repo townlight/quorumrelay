@@ -150,6 +150,9 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format == "escribe-publishing-soap-xml":
+        from .escribe_publishing import parse_bundle
+        return parse_bundle(source, namespace, content)
     if input_format == "suiteone-public-event-html":
         from .suiteone_player import parse_bundle
         return parse_bundle(source, namespace, content)
