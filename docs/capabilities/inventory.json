@@ -27751,14 +27751,14 @@
             "wistia-caption-show",
             "wistia-public-iframe-captions-2026-11-15"
           ],
-          "details": "Core implements authenticated GET /modern/medias/{mediaHashedId} and supplied-caption retrieval: GET /captions for tracks, or /captions/{languageCode}?include=segments for one language. Media detail is a bare media object with no caption text; caption list/per-language responses are preserved separately. No Wistia account token or live read was supplied. Separate opt-in wistia-public-embed-html maps one exact public iframe and supplied untimed captions without an account token; native source identities/capture/text and neutral export are scoped to the selected layout. Static continuation has no catalog-completeness claim.",
+          "details": "Core implements authenticated GET /modern/medias/{mediaHashedId} and supplied-caption retrieval: GET /captions for tracks, or /captions/{languageCode}?include=segments for one language. Media detail is a bare media object with no caption text; caption list/per-language responses are preserved separately. tests/test_provider_record.py::test_wistia_supplied_captions_use_read_routes_preserve_parent_and_search_time_anchors exercises both routes, parent identity, search time anchors, empty-list qualification and wrong-media rejection with synthetic responses. No Wistia account token or live read was supplied. Separate opt-in wistia-public-embed-html maps one exact public iframe and supplied untimed captions without an account token; native source identities/capture/text and neutral export are scoped to the selected layout. Static continuation has no catalog-completeness claim.",
           "dependencies": [
             "Trusted server-side read token with access to requested media",
             "Caption GET requires Read all folder and media data or permitted scoped delegation"
           ],
           "remaining_verification": [
-            "No Wistia account token/tenant; live detail not accepted",
-            "Caption list/per-language adapter remains unimplemented; do not default to diarized_segments"
+            "Account-specific permissions, visibility and live server applicability remain runtime qualifications; a live account read is optional.",
+            "An empty caption list may reflect delegated-token visibility; no diarized_segments default or caption generation is claimed."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "official_contract_and_fixture_tested_source_implementation_no_live_account_read",
@@ -27766,7 +27766,7 @@
             "https://fast.wistia.com/embed/medias/26sk4lmiix.json"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Fixture-only source checks; no authorized account read token.",
+          "test_access": "Documented-route synthetic execution; no account token or live read required for acceptance.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
