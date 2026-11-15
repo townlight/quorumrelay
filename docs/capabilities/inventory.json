@@ -9674,6 +9674,21 @@
           "receipt_path": "docs/capabilities/evidence/essential-postman/app-access-source.json",
           "receipt_sha256": "9178640378d560d2cb772abe945018f3c0c952a216e8d77e2896fcfc73d32087",
           "limits": "Access to this rendered editor requires authorized login or a shareable editor/source export. No production multimedia response, staff payload/readback, all-APIs-private or unsupported-feature inference. OAuth query values are not retained; only query key names recorded."
+        },
+        {
+          "id": "essential-response-qualification-2026-11-15",
+          "url": "https://documenter.getpostman.com/view/7558574/TWDcEuDz",
+          "title": "Production request contract does not imply development response DTO",
+          "kind": "source_regression_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "source_qualification_not_new_response_contract",
+          "findings": [
+            "Production multimedia GET now retains exact raw partial capture, just like production meeting/item/collection. Development-only wrapper is not inferred on production.",
+            "Three negative applicability/response preservation cases failed before fix;33affected cases passed."
+          ],
+          "receipt_path": "docs/verification/essential-response-qualification-2026-11-15.json",
+          "receipt_sha256": "6e1a44e60802fb2001ba21bc5bba8bc777b64c5b38827865861858f3336a107f",
+          "limits": "No new production response schema or live account acceptance established."
         }
       ],
       "tenants": [
@@ -9739,9 +9754,10 @@
           "evidence_ids": [
             "municode-essential-public-api",
             "municode-meetings-tenant",
-            "essential-production-published-routes-2026-11-14"
+            "essential-production-published-routes-2026-11-14",
+            "essential-response-qualification-2026-11-15"
           ],
-          "details": "Explicit meeting/item/multimedia GET and collection POST at caller-supplied offset use the support article development origin or officially linked Postman production origin. Production item route is /PublicApi/meeting/item/{id}; development retains /PublicApi/item/{id}. Credentials bind exact selected origin/tenant/namespace; no fallback. Meeting/item/collection response schemas remain unverified raw partial captures. Only existing documented meetingStructure multimedia shape is normalized. Synthetic routing/privacy checks accepted; no live account read.",
+          "details": "Explicit meeting/item/multimedia GET and collection POST at caller-supplied offset use the support article development origin or officially linked Postman production origin. Production item route is /PublicApi/meeting/item/{id}; development retains /PublicApi/item/{id}. Credentials bind exact selected origin/tenant/namespace; no fallback. Meeting/item/collection response schemas remain unverified raw partial captures. Only existing documented meetingStructure multimedia shape is normalized. Synthetic routing/privacy checks accepted; no live account read. Environment qualification: only development-host multimedia has the documented normalized meetingStructure mapping. All production account responses, including multimedia, are raw partial captures because the production collection supplies no response examples; no development DTO is inferred.",
           "dependencies": [],
           "remaining_verification": [
             "Obtain documented or authorized response examples for meeting and item details and multimedia readback",
@@ -9765,9 +9781,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "municode-meetings-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "essential-response-qualification-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Environment qualification: only development-host multimedia has the documented normalized meetingStructure mapping. All production account responses, including multimedia, are raw partial captures because the production collection supplies no response examples; no development DTO is inferred.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -10291,7 +10308,7 @@
         "Do not merge public/private packets or substitute Aha CMS API."
       ],
       "remaining_research": [
-        "Development and officially linked production request routes are source implemented with environment-bound credentials. Only the existing meetingStructure multimedia shape is mapped; meeting/item/collection responses remain raw partial captures with no inferred records. The Postman collection has no response examples.",
+        "Development and officially linked production request routes are source implemented with environment-bound credentials. Only the development-host meetingStructure multimedia shape is mapped. All production responses (including multimedia) and development meeting/item/collection responses remain exact raw partial captures; no development DTO or unknown production records are inferred. The Postman collection has no response examples.",
         "Collection offset is caller-supplied; page size, ordering, total/terminal condition and offset progression remain undocumented. Support-token requirements apply to optional live calls, not synthetic contract acceptance; no pagination behavior is inferred.",
         "Development multimedia updates have accepted scoped synthetic execution/readback for the documented URL/timestamp/default/baseURL fields. Other enum meanings, mutability and upstream conflict semantics remain qualified; no authorized-tenant or live-write acceptance gate is imposed.",
         "The inspected help article and officially linked Postman collection provide no meeting/item create/update or document-upload route/model. Product-matched machine contracts remain needed before coding those operations or claiming vendor absence. The article development host and collection production host remain explicitly distinct.",

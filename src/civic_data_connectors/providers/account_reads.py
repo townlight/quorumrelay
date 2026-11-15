@@ -226,12 +226,14 @@ def fetch_account(source, namespace, request, bounds, context, transport):
             if request.get("external_id") is not None and (len(bundle["records"]) != 1 or
                     bundle["records"][0]["identity"]["external_id"] != request["external_id"]):
                 raise ValueError("The detail response identity does not match the requested resource.")
-        elif resource == "multimedia":
+        elif resource == "multimedia" and origin != ESSENTIAL_PRODUCTION:
             bundle = essential_bundle(captured_source, namespace, response.content)
             if bundle["records"][0]["identity"]["external_id"].lower() != request["external_id"].lower():
                 raise ValueError("The multimedia response belongs to another meeting.")
         else:
-            # Generic HttpResponseMessage is the entire documented response contract.
+            # Production examples supply request routes only; the development
+            # multimedia wrapper must not be projected onto another environment.
+            # Generic HttpResponseMessage is otherwise the full response contract.
             # Capture exact bytes without interpreting an unknown envelope as rows.
             bundle = make_bundle(captured_source, namespace, response.content, "essential-unmapped-response", [])
             coverage["schema_mapping"] = "unverified; raw response only, no normalized records inferred"

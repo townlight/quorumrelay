@@ -74,7 +74,7 @@ Evidence and exact scope: `inventory.json` provider `civicplus-agenda-center`; o
 
 ## F07 Municode Meetings (`municode-meetings`)
 
-- Development and officially linked production request routes are source implemented with environment-bound credentials. Only the existing meetingStructure multimedia shape is mapped; meeting/item/collection responses remain raw partial captures with no inferred records. The Postman collection has no response examples.
+- Development and officially linked production request routes are source implemented with environment-bound credentials. Only the development-host meetingStructure multimedia shape is mapped. All production responses (including multimedia) and development meeting/item/collection responses remain exact raw partial captures; no development DTO or unknown production records are inferred. The Postman collection has no response examples.
 - Collection offset is caller-supplied; page size, ordering, total/terminal condition and offset progression remain undocumented. Support-token requirements apply to optional live calls, not synthetic contract acceptance; no pagination behavior is inferred.
 - Development multimedia updates have accepted scoped synthetic execution/readback for the documented URL/timestamp/default/baseURL fields. Other enum meanings, mutability and upstream conflict semantics remain qualified; no authorized-tenant or live-write acceptance gate is imposed.
 - The inspected help article and officially linked Postman collection provide no meeting/item create/update or document-upload route/model. Product-matched machine contracts remain needed before coding those operations or claiming vendor absence. The article development host and collection production host remain explicitly distinct.

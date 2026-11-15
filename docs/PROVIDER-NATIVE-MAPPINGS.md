@@ -370,3 +370,12 @@ existing sanitized `account_read_failed` error. Mapping is synchronous and is
 checked on return. No additional requests or automatic continuation are made.
 The [executed boundary cases](verification/account-read-boundaries-2026-11-15.json)
 cover both providers without requiring live credentials.
+
+Essential production request routes have no response examples in the pinned
+official-linked collection. Production multimedia therefore preserves an exact
+raw partial capture, as do its meeting/item/collection routes; it does not
+apply the development-only normalized MeetingStructure model. The documented
+development-host mapping remains available. The
+[response qualification regressions](verification/essential-response-qualification-2026-11-15.json)
+cover development-shaped, lower-camel and unknown production fixtures without
+claiming any of them is an observed production response.
