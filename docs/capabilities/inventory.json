@@ -26128,9 +26128,7 @@
           ],
           "details": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication. Scoped vendor-client item create and native readback implemented. Meeting creation remains unmapped.",
           "dependencies": [],
-          "remaining_verification": [
-            "Validate exact entity/field permissions and plan-bound commit/readback; do not invent API payloads."
-          ],
+          "remaining_verification": [],
           "acceptance_status": "mock_passed",
           "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
@@ -26508,8 +26506,8 @@
         "The live engine call covered VCCCD upcoming=true through pages 1-2 and resumed one page offset, returning 20 distinct records across first/resumed calls. Past mode is fixture-tested only; reported total 150 and full catalog coverage remain unverified.",
         "The declared public search route and SiteId/query/year/month/type mapping are implemented;24synthetic cases preserve native listing identity and excerpts/unknown fields. Unbound candidate URLs remain explicit; two exact bounded live queries timed out. No full-text/paging/ranking or raw-search ID/date equivalence inferred.",
         "Public meeting rows expose description, not a verified normalized body field; body filtering is unknown. Preserve timezone literals and the earlier VCCCD detail-versus-landing display discrepancy.",
-        "The listing has no agenda/document/media locators. Selected known-detail mapping and supplied viewer-to-document resolution are implemented with separate synthetic and bounded live-byte receipts. Other documents and the listing/detail date disagreement remain unverified; no native search or complete catalog is inferred.",
-        "Pinned public legacy client establishes sibling reorder and existing item text/description updates; source and36 synthetic coordinator cases implement them. New agenda_app_url editor, recurring day, full meeting form, new files, publication and vendor import contracts remain unresolved; no account acquisition gate.",
+        "The listing has no agenda/document/media locators. Selected known-detail mapping and supplied viewer-to-document resolution are implemented with separate synthetic and bounded live-byte receipts. Other documents and the listing/detail date disagreement remain unverified; this detail mapping does not establish native-search relevance or complete catalog.",
+        "Pinned legacy client establishes sibling reorder, existing item text/description updates and text-only item creation; all are implemented with scoped synthetic coordinator/readback evidence. New agenda_app_url editor, recurring day, full meeting form, new files, publication and vendor import contracts remain unresolved; no account acquisition gate.",
         "Legacy new-file FormData branch is visible, but a created attachment identity/byte/readiness and full subsequent GET readback schema is not established. Existing attachment IDs are preserved during text edits; no file upload is guessed.",
         "Legacy text-only item creation now source implemented from NewAgendaItem client with explicit parent/root and empty date;64affected/21new synthetic cases. Full meeting forms/new files/publication/new editor remain unmapped; no blanket acceptance."
       ],
