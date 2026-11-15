@@ -8815,6 +8815,19 @@
           "observed": "Official /api discovery produced shell and declared Swagger schema; Calendar and DocumentCenter routes present, no AgendaCenter path in this schema.",
           "proof_level": "official_schema_product_applicability_unverified_for_agenda_center",
           "limits": "Schema contains Calendar and DocumentCenter modules, no AgendaCenter-named path. This is exact inspected schema coverage, not proof Agenda Center API absent. Do not substitute Calendar or generic document upload for a meeting association. No authenticated API calls or SDK acquisition."
+        },
+        {
+          "id": "configured-fetch-labels-2026-11-15",
+          "url": "https://www.clevelandtn.gov/AgendaCenter",
+          "title": "Executed configured-source fetch resolves stale implementation label",
+          "kind": "implementation_evidence",
+          "observation_date": "2026-11-15",
+          "observed": "Original source fixture returned partial/no errors, native records and exact original capture; five distinct provider paths tested.",
+          "findings": "Configured AgendaCenter listing HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and85native meeting records. A separately supplied ViewFile?html=true representation is HTML, not PDF proof; binary document outcomes remain separately qualified.",
+          "limits": "Injected saved response execution only; broad acceptance status unchanged. No new live reads or catalog/attachment/write generalization.",
+          "receipt_path": "docs/verification/configured-fetch-labels-2026-11-15.json",
+          "receipt_sha256": "c4030ee9e9129810ceb97d81f250445f5493c57df61428a68e595f70d3478e8d",
+          "proof_level": "saved_capture_configured_engine_execution_not_live_acceptance"
         }
       ],
       "tenants": [
@@ -8889,12 +8902,13 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "civicplus-agenda-center-tenant",
-            "civicplus-viewfile-html-2026-11-12"
+            "civicplus-viewfile-html-2026-11-12",
+            "configured-fetch-labels-2026-11-15"
           ],
-          "details": "A supplied ViewFile?html=true representation returned 2,481 bytes of text/html. It is not PDF/binary-document proof; source-specific binary attachment support remains unverified.",
+          "details": "Configured AgendaCenter listing HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and85native meeting records. A separately supplied ViewFile?html=true representation is HTML, not PDF proof; binary document outcomes remain separately qualified.",
           "dependencies": [],
           "remaining_verification": [
             "Verify a distinct supplied PDF/binary route and its MIME/redirect/bytes if exposed; do not count the completed HTML representation as PDF."
@@ -14053,6 +14067,19 @@
           },
           "receipt_path": "docs/verification/swagit-public-player-2026-11-15.json",
           "receipt_sha256": "38982b7d69dfd258eccb118759affcd4ed80d13c5072d76d2ecf6a83e4003458"
+        },
+        {
+          "id": "configured-fetch-labels-2026-11-15",
+          "url": "https://bellca.new.swagit.com/past-city-council-videos/",
+          "title": "Executed configured-source fetch resolves stale implementation label",
+          "kind": "implementation_evidence",
+          "observation_date": "2026-11-15",
+          "observed": "Original source fixture returned partial/no errors, native records and exact original capture; five distinct provider paths tested.",
+          "findings": "Configured archive HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and10native meeting records. Selected native-bound player transcript and explicit supplied VTT retrieval have separate2026-11-15scoped execution. No playback or general file/catalog acceptance.",
+          "limits": "Injected saved response execution only; broad acceptance status unchanged. No new live reads or catalog/attachment/write generalization.",
+          "receipt_path": "docs/verification/configured-fetch-labels-2026-11-15.json",
+          "receipt_sha256": "c4030ee9e9129810ceb97d81f250445f5493c57df61428a68e595f70d3478e8d",
+          "proof_level": "saved_capture_configured_engine_execution_not_live_acceptance"
         }
       ],
       "tenants": [
@@ -14121,13 +14148,14 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "swagit-princeton",
             "swagit-public-search-page2-2026-11-12",
-            "swagit-public-player-2026-11-15"
+            "swagit-public-player-2026-11-15",
+            "configured-fetch-labels-2026-11-15"
           ],
-          "details": "Public GET captures document/page HTML and search results; no attachment-transfer or media playback acceptance is established. Timestamp links are not transcript text. Supplied exact public-player URLs now map native-bound rendered transcript text/date/title and HLS/caption locators. Explicit fetch_captions reads one declared WebVTT with configured download-origin authorization, exact response/MIME/header and aggregate byte/deadline/cancellation checks; scoped SQLite/reopen/search/ZIP proven. No generated text, cue interpretation, playback or staff contract inferred.",
+          "details": "Configured archive HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and10native meeting records. Selected native-bound player transcript and explicit supplied VTT retrieval have separate2026-11-15scoped execution. No playback or general file/catalog acceptance.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -14643,6 +14671,19 @@
           "findings": "Ordinary Word/HTML intake is distinct from timed Liberty format. Escaped plain-text HTML, byte/hash manifest, scoped durable artifacts and explicit manual times are implemented.",
           "limits": "No remote import/write, automatic timestamps, Liberty schema or recording association.",
           "receipt_path": "docs/verification/suiteone-bookmark-document-2026-11-14.json"
+        },
+        {
+          "id": "configured-fetch-labels-2026-11-15",
+          "url": "https://watkinsvillega.suiteonemedia.com/",
+          "title": "Executed configured-source fetch resolves stale implementation label",
+          "kind": "implementation_evidence",
+          "observation_date": "2026-11-15",
+          "observed": "Original source fixture returned partial/no errors, native records and exact original capture; five distinct provider paths tested.",
+          "findings": "Configured archive HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and28native event records. Bounded root/older-group traversal and selected native search have separate receipts. No general attachment, timed Liberty HTML import or upload/publication contract is established.",
+          "limits": "Injected saved response execution only; broad acceptance status unchanged. No new live reads or catalog/attachment/write generalization.",
+          "receipt_path": "docs/verification/configured-fetch-labels-2026-11-15.json",
+          "receipt_sha256": "c4030ee9e9129810ceb97d81f250445f5493c57df61428a68e595f70d3478e8d",
+          "proof_level": "saved_capture_configured_engine_execution_not_live_acceptance"
         }
       ],
       "tenants": [
@@ -14713,11 +14754,12 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "suiteone-vermilion"
+            "suiteone-vermilion",
+            "configured-fetch-labels-2026-11-15"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. Uploaded media requires processing before public visibility; do not report upload completion as publication.",
+          "details": "Configured archive HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and28native event records. Bounded root/older-group traversal and selected native search have separate receipts. No general attachment, timed Liberty HTML import or upload/publication contract is established.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -15341,6 +15383,19 @@
           },
           "receipt_path": "docs/verification/peak-telvue-owned-work-2026-11-15.json",
           "receipt_sha256": "ae8104d94af401928d6948811cc02717ad23f07d6b5de55506bc6913e86e0a51"
+        },
+        {
+          "id": "configured-fetch-labels-2026-11-15",
+          "url": "https://douglascountynv.granicus.com/ViewPublisher.php?view_id=1",
+          "title": "Executed configured-source fetch resolves stale implementation label",
+          "kind": "implementation_evidence",
+          "observation_date": "2026-11-15",
+          "observed": "Original source fixture returned partial/no errors, native records and exact original capture; five distinct provider paths tested.",
+          "findings": "Configured explicitly formatted ViewPublisher HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and7native meeting records. Selected publication RSS has separate scoped execution; one actual separately supplied PDF remains recorded without repeating its transfer. No catalog/general media acceptance.",
+          "limits": "Injected saved response execution only; broad acceptance status unchanged. No new live reads or catalog/attachment/write generalization.",
+          "receipt_path": "docs/verification/configured-fetch-labels-2026-11-15.json",
+          "receipt_sha256": "c4030ee9e9129810ceb97d81f250445f5493c57df61428a68e595f70d3478e8d",
+          "proof_level": "saved_capture_configured_engine_execution_not_live_acceptance"
         }
       ],
       "tenants": [
@@ -15415,13 +15470,14 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "granicus-peak-tenant",
             "peak-one-supplied-pdf-2026-11-12",
-            "peak-publication-rss-2026-11-15"
+            "peak-publication-rss-2026-11-15",
+            "configured-fetch-labels-2026-11-15"
           ],
-          "details": "One separately supplied PDF completed with recorded SHA-256; receipt serialization failed afterward and the fetch was not repeated. This is one-document evidence, not archive/general media acceptance. Selected peak-publication-rss-xml maps native publication GUIDs and source-bound agenda viewer notices, with no meeting identity/date inference; empty Minutes only, scoped configured retrieval and neutral persistence/ZIP tested.",
+          "details": "Configured explicitly formatted ViewPublisher HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and7native meeting records. Selected publication RSS has separate scoped execution; one actual separately supplied PDF remains recorded without repeating its transfer. No catalog/general media acceptance.",
           "dependencies": [],
           "remaining_verification": [
             "The one supplied PDF has been fetched; any further document/MIME outcome must be a separately supplied bounded item. The observed response does not establish general media support."
@@ -22470,6 +22526,19 @@
           "receipt_path": "docs/verification/write-response-bounds-2026-11-15.json",
           "receipt_sha256": "0f1df5a0e2958c05662cf21d330979f35510650281219950e00918c0d19f1727",
           "limits": "Synthetic regression of already mapped operations, not new vendor schemas or live acceptance."
+        },
+        {
+          "id": "configured-fetch-labels-2026-11-15",
+          "url": "https://towncloud.io/go/bennett-co/agendas/1033",
+          "title": "Executed configured-source fetch resolves stale implementation label",
+          "kind": "implementation_evidence",
+          "observation_date": "2026-11-15",
+          "observed": "Original source fixture returned partial/no errors, native records and exact original capture; five distinct provider paths tested.",
+          "findings": "Configured agenda HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and native meeting/item hierarchy. Explicit captured agenda/item attachment associations remain separate from general live transfer acceptance. No automatic table_data root discovery, external import or write endpoint inferred.",
+          "limits": "Injected saved response execution only; broad acceptance status unchanged. No new live reads or catalog/attachment/write generalization.",
+          "receipt_path": "docs/verification/configured-fetch-labels-2026-11-15.json",
+          "receipt_sha256": "c4030ee9e9129810ceb97d81f250445f5493c57df61428a68e595f70d3478e8d",
+          "proof_level": "saved_capture_configured_engine_execution_not_live_acceptance"
         }
       ],
       "tenants": [
@@ -22538,13 +22607,14 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
             "towncloud-woodford",
             "towncloud-detail",
-            "towncloud-agenda-associations-2026-11-12"
+            "towncloud-agenda-associations-2026-11-12",
+            "configured-fetch-labels-2026-11-15"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. Downloadable packet output does not establish a TownCloud import file format. Do not infer table JSON write endpoint. Existing agenda HTML now also enriches rich records with explicitly capture-local item hierarchy, item-owned supplied text and tenant-bound native attachment IDs/locators. No native item IDs, implicit attachment fetch or expanded origin authorization.",
+          "details": "Configured agenda HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and native meeting/item hierarchy. Explicit captured agenda/item attachment associations remain separate from general live transfer acceptance. No automatic table_data root discovery, external import or write endpoint inferred.",
           "dependencies": [
             "shared network safeguards"
           ],
