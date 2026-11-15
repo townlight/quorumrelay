@@ -820,7 +820,13 @@ def csv_projection(records, *, kind="meetings"):
     for record in records:
         identity, normalized = record["identity"], record.get("normalized", {})
         key = source_identity_key(identity)
-        included = {"source_url"}
+        included = set()
+        def include_fields(container, fields, prefix=""):
+            for field in fields:
+                if field in container:
+                    path = f"{prefix}.{field}" if prefix else field
+                    included.update(_leaves(container[field], path))
+
         limitations = []
         if kind == "meetings":
             if identity["record_type"] not in {"meeting", "event"}:
@@ -831,9 +837,9 @@ def csv_projection(records, *, kind="meetings"):
                    **{k: normalized.get(k) for k in ("title", "scheduled_start", "meeting_date", "body")},
                    **{k: record.get(k) for k in ("source_url", "capture_sha256", "source_revision")}}
             writer.writerow({k: _csv_cell(v) for k, v in row.items()})
-            included |= {"identity.provider", "identity.namespace", "identity.external_id", "capture_sha256"}
-            included |= {p for p in _leaves(record) if p.startswith("source_revision.")}
-            included |= {f"normalized.{k}" for k in ("title", "scheduled_start", "meeting_date", "body")}
+            include_fields(identity, ("provider", "namespace", "external_id"), "identity")
+            include_fields(record, ("source_url", "capture_sha256", "source_revision"))
+            include_fields(normalized, ("title", "scheduled_start", "meeting_date", "body"), "normalized")
         elif identity["record_type"] == "agenda_item":
             parent_key, missing = _item_csv_parent(record)
             writer.writerow({k: _csv_cell(v) for k, v in {
@@ -841,7 +847,9 @@ def csv_projection(records, *, kind="meetings"):
                 "title": normalized.get("title"), "department": normalized.get("department"),
                 "source_url": record.get("source_url"),
             }.items()})
-            included |= {"identity.external_id", "normalized.title", "normalized.department"}
+            include_fields(identity, ("external_id",), "identity")
+            include_fields(normalized, ("title", "department"), "normalized")
+            include_fields(record, ("source_url",))
             if missing:
                 limitations.append(missing + "; parent key left empty, no join inferred")
         else:
@@ -851,15 +859,16 @@ def csv_projection(records, *, kind="meetings"):
                     "title": item.get("title"), "department": item.get("department"),
                     "source_url": record.get("source_url"),
                 }.items()})
-                included |= {f"normalized.agenda_items[{index}].{field}"
-                             for field in ("external_id", "title", "department")}
+                include_fields(item, ("external_id", "title", "department"),
+                               f"normalized.agenda_items[{index}]")
+                include_fields(record, ("source_url",))
         losses.append({"identity_key": key, "omitted_fields": sorted(_leaves(record) - included),
                        **({"limitations": limitations} if limitations else {})})
     return output.getvalue().encode("utf-8"), {
         "projection": kind, "lossless": False, "records": losses,
         "representation_changes": ["null/absent become empty cells",
                                    "formula-like cells are prefixed with apostrophe",
-                                   "nested source_revision uses JSON; other nested fields are omitted",
+                                   "nested projected cell values use JSON; other nested fields are omitted",
                                    "standalone agenda_item rows use explicit meeting identities only; missing or ambiguous parents have empty keys"],
         "specification": "https://www.rfc-editor.org/rfc/rfc4180",
     }

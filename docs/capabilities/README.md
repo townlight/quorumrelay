@@ -4,7 +4,7 @@ Current reconciliation: **2026-11-15**. Release remains incomplete and publicati
 
 ## Scope and evidence
 
-The runtime registers **32 providers**, retaining **31 original families / 34 baseline formats**, with **61 additive parser hooks / 20 native-search handlers**. Cablecast is the additional typed reader, not a new original baseline family. These counts do not imply every operation is supported.
+The runtime registers **32 providers**, retaining **31 original families / 34 baseline formats**, with **63 additive parser hooks / 23 native-search handlers**. Cablecast is the additional typed reader, not a new original baseline family. These counts do not imply every operation is supported.
 
 Capability, source implementation and executed acceptance are independent. Vendor-documented synthetic checks satisfy only their explicitly attributed scope. Product/UI documentation alone does not establish an API payload. Live credentials, account acquisition and real vendor mutations are not acceptance gates. Unresolved research is not a verified outside-information dependency.
 

@@ -190,6 +190,22 @@ def test_csv_rfc4180_quoting_formula_guard_and_explicit_losses():
     assert losses["lossless"] is False
 
 
+@pytest.mark.parametrize("revision", [[], {}, ["v1"], "v1", None])
+def test_csv_losses_follow_serialized_cells_and_empty_items(revision):
+    record = sample()["records"][0]
+    record["source_revision"] = revision
+    record["normalized"]["title"] = {"en": "Council"}
+    record["normalized"]["agenda_items"] = []
+    payload, losses = csv_projection([record])
+    omitted = losses["records"][0]["omitted_fields"]
+    assert b"Council" in payload
+    assert not any(field == "source_revision" or field.startswith(("source_revision.", "source_revision["))
+                   for field in omitted)
+    assert "normalized.title.en" not in omitted
+    _, losses = csv_projection([record], kind="items")
+    assert "source_url" in losses["records"][0]["omitted_fields"]
+
+
 def test_ical_rfc5545_literal_datetime_escaping_folding_and_stable_uid():
     record = sample()["records"][0]
     record["normalized"]["scheduled_start"] = "1998-01-18T07:30:00Z"
