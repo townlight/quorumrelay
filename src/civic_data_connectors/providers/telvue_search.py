@@ -199,6 +199,9 @@ def native_search(engine, request, content, context, *, transport=None):
                 or response.content_type.split(";", 1)[0].strip().lower() != "text/html"):
             raise ValueError("Search response changed route/type or exceeded bounds.")
         bundle = parse_bundle(source, namespace, response.content)
+        if any(dict(parse_qsl(urlsplit(row["original"]["hrefs"][0]).query))["terms"] != expressions[0]
+               for row in bundle["records"]):
+            raise ValueError("Search result locators do not match the requested expression.")
         stopped()
         digest = sha256(response.content).hexdigest()
         rows = bundle["records"]

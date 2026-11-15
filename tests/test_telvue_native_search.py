@@ -164,3 +164,12 @@ def test_hidden_summary_script_does_not_become_searchable_text():
         b'<div class="summary" style="display: block;"><script>hidden-only-expression</script>', 1)
     bundle = parse_bundle(SOURCE, "//telvue.com/player/" + PLAYER, raw)
     assert "hidden-only-expression" not in bundle["records"][0]["normalized"]["description"]
+
+
+@pytest.mark.parametrize("replacement", [b"budget", b"Council", b"council+meeting"])
+def test_native_response_search_terms_must_match_exact_request(replacement):
+    raw = PAGE.replace(b"terms=council", b"terms=" + replacement)
+    assert raw != PAGE
+    result = create_engine(provider_transport=Transport(raw)).execute("search", request())
+    assert result.status == "failed" and not result.data
+    assert not result.coverage["catalog_complete"]

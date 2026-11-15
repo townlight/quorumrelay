@@ -20180,12 +20180,12 @@
           "observation_date": "2026-11-15",
           "proof_level": "vendor_contract_and_synthetic_engine_execution",
           "access_scope": "bounded_public_read_and_synthetic_engine",
-          "findings": "One current public form GET supplies43media candidates/22exact local metadata hits.22new/185affected cases passed.",
+          "findings": "One current public form GET supplies43media candidates/22exact local metadata hits. Original22new/185affected cases passed; subsequent exact-response-query validation adds3reproduced regressions,49TelVue checks passed.",
           "limits": "Explicit player-wide source only; no playlist broadening, fulltext/caption/chapter bytes or inferred server paging/exhaustion. Allpartial.",
           "fixture_path": "docs/capabilities/evidence/telvue-public-search/results.html",
           "fixture_sha256": "e26dfd0d98175bba56cf9b5961e0c865a9f8e0b6bd664c098e87e62ab050f23d",
           "receipt_path": "docs/verification/telvue-native-search-2026-11-15.json",
-          "receipt_sha256": "1d2595805c288d0942d1f65772664c7d27b543cccb73141bc32e63cefa93f4d3",
+          "receipt_sha256": "556ff9fbcab3a6c145cd0bbd9902348c5256ce181eae85c00d94de6fa08e7c96",
           "synthetic_execution": {
             "provider": "telvue",
             "status": "mock_passed",
@@ -20196,11 +20196,16 @@
               "recording"
             ],
             "scope": "Explicit TelVue player-wide public media candidates and metadata/summary search; native IDs, safe links and portable exact-hit behavior.",
-            "execution_provenance": "22newcases in185affected; actual43row fixture through synthetic guarded transport,22exact hits persist/reopen/roundtrip.",
+            "execution_provenance": "22newcases in185affected; actual43row fixture through synthetic guarded transport,22exact hits persist/reopen/roundtrip. Subsequent exact-response-expression binding:3pre-fix failures and49TelVue checks passed; prior185run remains historical.",
             "checks": [
               {
                 "command": "pytest tests/test_telvue_native_search.py tests/test_telvue_player.py tests/test_telvue_mrss.py tests/test_provider_discovery.py tests/test_interchange.py tests/test_storage_search_imports.py tests/test_interfaces.py tests/test_mcp_interfaces.py -q",
                 "passed": 185,
+                "failed": 0
+              },
+              {
+                "command": "pytest tests/test_telvue_native_search.py tests/test_telvue_player.py tests/test_telvue_mrss.py -q",
+                "passed": 49,
                 "failed": 0
               }
             ],
@@ -20218,7 +20223,7 @@
               {
                 "kind": "test",
                 "path": "tests/test_telvue_native_search.py",
-                "sha256": "20df3b6775f4eb451ad11d47c72bc5977a2834a3fceb06a106465d2ef7f30878"
+                "sha256": "2ddb422594db9469e34c78ee4427e4688c1f36c005433eeb0a55f5856f50d731"
               }
             ]
           }
