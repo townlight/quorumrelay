@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "fe4f0d7",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "Pinned AgendaItemItemHistoryView: native selected meeting/item, XSD extension base-first typed fields, literal source motions/votes/documents, cited text, component limits, cancellation, SQLite retry/reopen/search and all neutral interchange formats. No live SOAP call or mutation.",
+  "checks": [
+    {
+      "scope": "history plus eSCRIBE reads/writes, interfaces, package and baseline/search",
+      "passed": 256,
+      "failed": 0,
+      "seconds": 22.15
+    },
+    {
+      "scope": "history after explicit native document relationship checks",
+      "passed": 16,
+      "failed": 0,
+      "seconds": 0.22
+    },
+    {
+      "scope": "capabilities/interfaces/public package after inventory reconciliation",
+      "passed": 13,
+      "failed": 0,
+      "seconds": 3.22
+    },
+    {
+      "scope": "ruff src tests scripts examples; capability validator",
+      "status": "PASSED"
+    }
+  ],
+  "prior_full": "2134passed104.38s at fe4f0d7 before16new history cases. No claim this later scope has a fresh full-suite run.",
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/escribe_history.py",
+      "sha256": "a88b8cf59d2e8ed7da04eaa6cb4d9861322dcfc6c50b805cfc90e9e86fe2423d"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/escribe_publishing.py",
+      "sha256": "c2bbc27205c0b065c1251f2920b085013d08af8b2195d489cc278a3552bfd89f"
+    },
+    {
+      "path": "scripts/pin_escribe_contract.py",
+      "sha256": "8ac5c4e2444bced8d3e56c2cd37e0266379cd882e37c105fc125de73ab302700"
+    },
+    {
+      "path": "src/civic_data_connectors/data/escribe_publishing.json",
+      "sha256": "b459265e31768bde3f7b6420b91f2dd0de315cd0b91e3fa09ba3e16c33992ec7"
+    },
+    {
+      "path": "tests/test_escribe_history.py",
+      "sha256": "1673883d651b10963720d13593696f3d119ffcedf8953522293e15cfdec87949"
+    }
+  ],
+  "source": "docs/capabilities/evidence/escribe-publishing-wsdl/source.json",
+  "limits": [
+    "One selected native view; no catalog completeness/history search.",
+    "Nested source facts may refer to earlier meetings; no reparenting, vote-label meaning, tally, result or timezone inference.",
+    "AgendaType absent: retain partial current-item reference. Native positive document IDs retained without inventing file URLs or binary availability."
+  ],
+  "central_contract_rebinding": "14other central sections semantically unchanged;6existing proof hashes matched previous raw file and were rebound solely to added eSCRIBE read list entry.",
+  "delivery": "Local source only; no release/build/package/push/merge/tag/sign/install/repin/live vendor mutation."
+}

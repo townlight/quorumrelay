@@ -32,7 +32,7 @@ READS = frozenset({"MeetingGetById", "MeetingGetByPortal", "AgendaGetById", "Age
     "AttachmentGetByAgendaItem", "DocumentGetById", "DocumentGetContent", "PackageGetById", "PackageGetByMeeting",
     "BookmarkGetById", "BookmarkGetByMeeting", "BookmarkGetByAgenda",
     "ResolutionGetById", "ResolutionGetByMeeting", "ResolutionGetByAgendaItem",
-    "MeetingGetByMeetingType", "AgendaItemTextGetByMeetingId"})
+    "MeetingGetByMeetingType", "AgendaItemTextGetByMeetingId", "AgendaItemItemHistoryView"})
 for prefix, namespace in (("s", SOAP), ("a", ADDRESS), ("e", NS), ("i", XSI)):
     ET.register_namespace(prefix, namespace)
 
@@ -266,6 +266,9 @@ def bind_records(method, parameters, bundle):
     selected = next(iter(parameters.values()))
     if selected is None:
         raise ValueError("A native parent/identity selection cannot be nil.")
+    if method == "AgendaItemItemHistoryView":
+        from .escribe_history import bind_history
+        return bind_history(parameters, bundle)
     for record in bundle["records"]:
         raw = record["original"]
         identity = raw["Id"]
@@ -304,6 +307,9 @@ def parse_bundle(source, namespace, content):
     method, value = response_value(content)
     if method not in READS or method == "DocumentGetContent":
         raise ValueError("Only mapped record reads form a standalone record bundle.")
+    if method == "AgendaItemItemHistoryView":
+        from .escribe_history import history_bundle
+        return history_bundle(source, namespace, content, value)
     response = contract()["operations"][method]["response"][0]
     model = response["type"]
     kind = {"Meeting": "meeting", "Agenda": "agenda", "AgendaItem": "agenda_item",
@@ -413,6 +419,9 @@ def read(engine, source, namespace, request, bounds, context, transport, *, disc
             f["name"] for f in contract()["operations"][method]["request"]} or any(
                 v is None for v in parameters.values()):
         raise ValueError("Supply every exact native selection parameter without nulls.")
+    if method == "AgendaItemItemHistoryView":
+        from .escribe_history import bind_history
+        bind_history(parameters, {"records": []})
     selected = next(iter(parameters.values()))
     selected_type = contract()["operations"][method]["request"][0]["type"]
     selected_fields = contract()["types"].get(selected_type, {}).get("fields")
@@ -453,7 +462,7 @@ def read(engine, source, namespace, request, bounds, context, transport, *, disc
         value, content = session.call(method, parameters)
         bundle = parse_bundle(source, namespace, content)
         bind_records(method, parameters, bundle)
-        if len(bundle["records"]) > bounds.max_records:
+        if sum(r["normalized"].get("source_component_count", 1) for r in bundle["records"]) > bounds.max_records:
             raise ValueError("The selected unpaged response exceeds max_records; it is not silently truncated.")
         session.check()
         return OperationResult("partial", bundle, coverage={"scope": "one explicit native SOAP method",

@@ -16,7 +16,7 @@ READS = ("MeetingGetByPortal", "AgendaGetByMeeting", "AgendaItemGetByAgenda",
          "AttachmentGetByAgenda", "AttachmentGetByAgendaItem", "DocumentGetContent",
          "PackageGetByMeeting", "BookmarkGetByMeeting", "BookmarkGetByAgenda",
          "ResolutionGetByMeeting", "ResolutionGetByAgendaItem",
-         "MeetingGetByMeetingType", "AgendaItemTextGetByMeetingId")
+         "MeetingGetByMeetingType", "AgendaItemTextGetByMeetingId", "AgendaItemItemHistoryView")
 
 
 def compile_contract():
@@ -61,6 +61,9 @@ def compile_contract():
                 sequence = node.find("{" + XSD + "}sequence")
                 if sequence is not None:
                     types[key] = {"fields": fields(node)}
+                extension = node.find("{" + XSD + "}complexContent/{" + XSD + "}extension")
+                if extension is not None:
+                    types[key] = {"fields": fields(extension), "extends": qualified(extension.attrib["base"])}
             elif node.tag == "{" + XSD + "}simpleType":
                 restriction = node.find("{" + XSD + "}restriction")
                 if restriction is not None:
@@ -69,6 +72,21 @@ def compile_contract():
                 value = node.find("{" + XSD + "}complexType")
                 if value is not None:
                     elements[name] = fields(value)
+    def inherited(key, trail=()):
+        if key in trail or key not in types:
+            raise ValueError("Unresolved or cyclic vendor model inheritance.")
+        value = types[key]
+        if "extends" not in value:
+            return value["fields"]
+        combined = inherited(value["extends"], (*trail, key)) + value["fields"]
+        names = [(f["namespace"], f["name"]) for f in combined]
+        if len(names) != len(set(names)):
+            raise ValueError("Duplicate inherited vendor fields.")
+        return combined
+
+    # XSD extension serializes base fields first, retaining their namespaces.
+    flattened = {key: {"fields": inherited(key)} for key, value in types.items() if "extends" in value}
+    types.update(flattened)
     content = (EVIDENCE / "publishing.wsdl").read_bytes()
     hashes["publishing.wsdl"] = sha256(content).hexdigest()
     root = ET.fromstring(content)

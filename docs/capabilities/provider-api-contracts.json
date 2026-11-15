@@ -9908,7 +9908,8 @@
       "BookmarkGetById/GetByMeeting/GetByAgenda",
       "ResolutionGetById/GetByMeeting/GetByAgendaItem",
       "MeetingGetByMeetingType with exact portal/type parent checks",
-      "AgendaItemTextGetByMeetingId with exact meeting/language key and source Mintues text"
+      "AgendaItemTextGetByMeetingId with exact meeting/language key and source Mintues text",
+      "AgendaItemItemHistoryView selected meeting/item; exact inherited typed history, literal nested motions/votes/documents; no inferred tally, result or full agenda-item join"
     ],
     "implemented_writes": [
       "MeetingCreate",

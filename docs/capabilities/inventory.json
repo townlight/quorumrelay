@@ -441,7 +441,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "a228d5311033ad303872a75c83f94b464ca459c0712a4a57e4b43755374430d2"
+                "sha256": "4cf839f9e0328d3fb59719daff842d1c655f9a9e125ab1bb0a5e53b986d5239c"
               },
               {
                 "kind": "test",
@@ -490,7 +490,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "a228d5311033ad303872a75c83f94b464ca459c0712a4a57e4b43755374430d2"
+                "sha256": "4cf839f9e0328d3fb59719daff842d1c655f9a9e125ab1bb0a5e53b986d5239c"
               },
               {
                 "kind": "test",
@@ -9624,7 +9624,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "a228d5311033ad303872a75c83f94b464ca459c0712a4a57e4b43755374430d2"
+                "sha256": "4cf839f9e0328d3fb59719daff842d1c655f9a9e125ab1bb0a5e53b986d5239c"
               },
               {
                 "kind": "test",
@@ -11460,7 +11460,7 @@
             "escribe-rendered-detail-2026-11-12",
             "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
-          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail\u2192attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference. Two further scoped reads: MeetingGetByMeetingType checks portal/type IDs; AgendaItemTextGetByMeetingId checks meeting/language key and preserves language-qualified native item text identity.17new/240affected passes; docs/verification/escribe-selected-text-2026-11-15.json.",
+          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail\u2192attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference. Two further scoped reads: MeetingGetByMeetingType checks portal/type IDs; AgendaItemTextGetByMeetingId checks meeting/language key and preserves language-qualified native item text identity.17new/240affected passes; docs/verification/escribe-selected-text-2026-11-15.json. Selected AgendaItemItemHistoryView now preserves inherited history fields and literal nested source motions/votes/documents, exact meeting/item binding, cited text and component bounds. No native vote-label meanings, tally or missing AgendaType inferred. See verification/escribe-history-2026-11-15.json.",
           "dependencies": [],
           "remaining_verification": [
             "Implementation contract validation",
@@ -11733,6 +11733,11 @@
               "normalized": "native_fields/original",
               "provider_field": "Exact typed WSDL result record and compound native Id",
               "notes": "No case/parent/timezone/status/language interpretation; exact schema field order and scalar types."
+            },
+            {
+              "normalized": "source_motions/source_votes/native_fields",
+              "provider_field": "AgendaItemHistoryView.Motions/Votes/History/Steps/Documents",
+              "notes": "Literal native nested values; history base fields precede extension fields in their original namespace. History.Id supplies the complete native identity; current selected item reference lacks AgendaType."
             }
           ],
           "evidence_ids": [
@@ -13054,7 +13059,8 @@
         "Public native search source implementation and bounded first/page2/resume are verified with partial coverage. Provider full-text/exact matching semantics, broader document visibility and catalog completeness remain unknown; no saved metadata search is mislabeled native.",
         "PublishingService WSDL/five XSDs now captured and native record reads/create/update implemented with scoped synthetic proof. Prior singleWsdl403 is historical exact access only. Explicit native DocumentUpload chunk plus caller-declared whole-byte hash is implemented with scoped synthetic proof. General chunk sequencing/assembly, append/replacement/truncation/readiness semantics and vendor file import remain unresolved research. No outside-only assertion or live-account gate.",
         "Publishing host/public portal cross-host identity equivalence, effective visibility and live deployment applicability are not inferred from native field readback.",
-        "Package/Bookmark/Resolution native records are now mapped and synthetically verified. Bookmark timing units, Resolution AgendaType and effective package publication are not declared by these schemas; retain native values/references without guessing."
+        "Package/Bookmark/Resolution native records are now mapped and synthetically verified. Bookmark timing units, Resolution AgendaType and effective package publication are not declared by these schemas; retain native values/references without guessing.",
+        "Selected native item-history view is implemented with scoped synthetic proof. Nested earlier-meeting source facts remain native; no tally, result interpretation or full item join is inferred. Public-comment/history-publish writes are not introduced."
       ],
       "requirement_ids": [
         "C01",
@@ -22635,7 +22641,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "a228d5311033ad303872a75c83f94b464ca459c0712a4a57e4b43755374430d2"
+                "sha256": "4cf839f9e0328d3fb59719daff842d1c655f9a9e125ab1bb0a5e53b986d5239c"
               },
               {
                 "kind": "test",
@@ -26650,7 +26656,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "a228d5311033ad303872a75c83f94b464ca459c0712a4a57e4b43755374430d2"
+                "sha256": "4cf839f9e0328d3fb59719daff842d1c655f9a9e125ab1bb0a5e53b986d5239c"
               },
               {
                 "kind": "test",
@@ -26699,7 +26705,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "a228d5311033ad303872a75c83f94b464ca459c0712a4a57e4b43755374430d2"
+                "sha256": "4cf839f9e0328d3fb59719daff842d1c655f9a9e125ab1bb0a5e53b986d5239c"
               },
               {
                 "kind": "test",

@@ -189,3 +189,11 @@ search and JSON/JSONL/ZIP round-trip retain both language records and exact sour
 captures. Unsupported selectors and incomplete/mismatched source records fail;
 cancellation after response does not publish a completed bundle. No public-comment
 write operation or source timestamp conversion is added.
+
+## Selected source history, motions and votes
+
+Use `api_method: AgendaItemItemHistoryView` with exactly `api_parameters: {"MeetingId": "<native-guid>", "AgendaItemId": 12}`. The selected positive native item and meeting must match the returned History row. This is one bounded view, not history catalog traversal or a native search.
+
+The `agenda_item_history_view` record retains its complete native History.Id (Id and PortalId), the complete typed original view, `source_motions` and `source_votes`. Supplied motion text and history comments carry field-path citations and are locally searchable. Raw SOAP, source identities and all nested fields survive SQLite retry/reopen and neutral JSON/JSONL/ZIP. Inherited History fields retain XSD base-first order and their data-contract namespace.
+
+Nested motions, votes, steps and documents can refer to earlier meetings; their literal native values are retained without assigning them to the selected current meeting. No vote-label meaning, weighted tally, result, time-zone conversion or publication is inferred. The selected item relationship is an explicit partial reference because this view does not supply AgendaType. `max_records` also bounds the nested native components, including container/identity objects, rather than counting only the single outer view. A response exceeding that bound fails without a silently truncated bundle. No comment, approval, publish or mutation operation is added.

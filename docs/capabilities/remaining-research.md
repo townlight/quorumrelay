@@ -345,3 +345,7 @@ separate from web-reader article/PDF observations; raw Git-pinned API/module byt
 and missing route/body/association/readback details are indexed in
 [evidence/agendaquick-openmedia/source.json](evidence/agendaquick-openmedia/source.json).
 This lead remains unresolved research, with no outside-only or absent-API claim.
+
+### eSCRIBE selected history follow-up (2026-11-15)
+
+The already pinned PublishingService XSDs establish AgendaItemItemHistoryView with inherited History and literal Motions/Votes/Steps/Documents. The selected meeting/item read is implemented; no new tenant sampling was required. Native nested facts, exact source capture, cited source text, history identity and partial item reference are retained. Vote-label meanings/tallies, missing AgendaType and full history discovery are not inferred; this read does not close unrelated upload/readiness/file-import research.

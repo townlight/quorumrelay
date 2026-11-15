@@ -382,6 +382,37 @@
         }
       ]
     },
+    "AgendaItemItemHistoryView": {
+      "action": "eSCRIBE.Internet.WebService/IPublishingService/AgendaItemItemHistoryView",
+      "request": [
+        {
+          "name": "MeetingId",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/}guid",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "AgendaItemId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        }
+      ],
+      "response": [
+        {
+          "name": "AgendaItemItemHistoryViewResult",
+          "type": "{eSCRIBE.Internet.WebService}AgendaItemHistoryView",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ]
+    },
     "AttachmentCreate": {
       "action": "eSCRIBE.Internet.WebService/IPublishingService/AttachmentCreate",
       "request": [
@@ -1085,6 +1116,202 @@
         }
       ]
     },
+    "{eSCRIBE.Internet.WebService}AgendaItemHistoryStep": {
+      "fields": [
+        {
+          "name": "AgendaItemId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Category",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Comments",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Date",
+          "type": "{http://www.w3.org/2001/XMLSchema}dateTime",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "Id",
+          "type": "{eSCRIBE.Internet.WebService}AgendaItemHistoryStep.Identifier",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "MeetingDate",
+          "type": "{http://www.w3.org/2001/XMLSchema}dateTime",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "MeetingId",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/}guid",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "MeetingTypeId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "MeetingTypeName",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Number",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Sponsor",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Stage",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Status",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ]
+    },
+    "{eSCRIBE.Internet.WebService}AgendaItemHistoryStep.Identifier": {
+      "fields": [
+        {
+          "name": "AgendaItemHistoryId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "Id",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "PortalId",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/}guid",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        }
+      ]
+    },
+    "{eSCRIBE.Internet.WebService}AgendaItemHistoryView": {
+      "fields": [
+        {
+          "name": "AgendaItemAttachments",
+          "type": "{http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService}ArrayOfAgendaItemHistoryAttachment",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Document",
+          "type": "{eSCRIBE.Internet.WebService}Document.Record",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Documents",
+          "type": "{eSCRIBE.Internet.WebService}ArrayOfDocument.Record",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "History",
+          "type": "{http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService}AgendaItemHistoryListViewRow",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Motions",
+          "type": "{eSCRIBE.Internet.WebService}ArrayOfMotion",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Steps",
+          "type": "{eSCRIBE.Internet.WebService}ArrayOfAgendaItemHistoryStep",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Votes",
+          "type": "{eSCRIBE.Internet.WebService}ArrayOfMotionVote",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ]
+    },
     "{eSCRIBE.Internet.WebService}AgendaItemText": {
       "fields": [
         {
@@ -1173,6 +1400,18 @@
         }
       ]
     },
+    "{eSCRIBE.Internet.WebService}ArrayOfAgendaItemHistoryStep": {
+      "fields": [
+        {
+          "name": "AgendaItemHistoryStep",
+          "type": "{eSCRIBE.Internet.WebService}AgendaItemHistoryStep",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": true
+        }
+      ]
+    },
     "{eSCRIBE.Internet.WebService}ArrayOfAgendaItemText": {
       "fields": [
         {
@@ -1209,11 +1448,47 @@
         }
       ]
     },
+    "{eSCRIBE.Internet.WebService}ArrayOfDocument.Record": {
+      "fields": [
+        {
+          "name": "Document.Record",
+          "type": "{eSCRIBE.Internet.WebService}Document.Record",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": true
+        }
+      ]
+    },
     "{eSCRIBE.Internet.WebService}ArrayOfMeeting.Record": {
       "fields": [
         {
           "name": "Meeting.Record",
           "type": "{eSCRIBE.Internet.WebService}Meeting.Record",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": true
+        }
+      ]
+    },
+    "{eSCRIBE.Internet.WebService}ArrayOfMotion": {
+      "fields": [
+        {
+          "name": "Motion",
+          "type": "{eSCRIBE.Internet.WebService}Motion",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": true
+        }
+      ]
+    },
+    "{eSCRIBE.Internet.WebService}ArrayOfMotionVote": {
+      "fields": [
+        {
+          "name": "MotionVote",
+          "type": "{eSCRIBE.Internet.WebService}MotionVote",
           "namespace": "eSCRIBE.Internet.WebService",
           "optional": true,
           "nullable": true,
@@ -1717,6 +1992,134 @@
         }
       ]
     },
+    "{eSCRIBE.Internet.WebService}Motion": {
+      "fields": [
+        {
+          "name": "AgendaItemId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "BannerColor",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "BannerText",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Id",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "MeetingId",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/}guid",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "Result",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Text",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Votes",
+          "type": "{eSCRIBE.Internet.WebService}ArrayOfMotionVote",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ]
+    },
+    "{eSCRIBE.Internet.WebService}MotionVote": {
+      "fields": [
+        {
+          "name": "Id",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "MeetingId",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/}guid",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "MotionId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "UserId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "UserName",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Vote",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Weight",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        }
+      ]
+    },
     "{eSCRIBE.Internet.WebService}Package.Record": {
       "fields": [
         {
@@ -1913,11 +2316,227 @@
         }
       ]
     },
+    "{http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService}AgendaItemHistory.Identifier": {
+      "fields": [
+        {
+          "name": "Id",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "PortalId",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/}guid",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        }
+      ]
+    },
+    "{http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService}AgendaItemHistoryAttachment": {
+      "fields": [
+        {
+          "name": "AgendaItemId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "AgendaType",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Document",
+          "type": "{eSCRIBE.Internet.WebService}Document.Record",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "MeetingId",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/}guid",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        }
+      ]
+    },
+    "{http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService}AgendaItemHistoryListViewRow": {
+      "fields": [
+        {
+          "name": "DocumentId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Id",
+          "type": "{http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService}AgendaItemHistory.Identifier",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Type",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "AgendaItemHistoryStepId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "AgendaItemId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "AgendaItemTitle",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Category",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Comments",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Date",
+          "type": "{http://www.w3.org/2001/XMLSchema}dateTime",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "DocumentName",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "MeetingDate",
+          "type": "{http://www.w3.org/2001/XMLSchema}dateTime",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "MeetingId",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/}guid",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "MeetingTypeId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "MeetingTypeName",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Number",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Sponsor",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Stage",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Status",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ]
+    },
     "{http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService}ArrayOfAgenda.Record": {
       "fields": [
         {
           "name": "Agenda.Record",
           "type": "{http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService}Agenda.Record",
+          "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": true
+        }
+      ]
+    },
+    "{http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService}ArrayOfAgendaItemHistoryAttachment": {
+      "fields": [
+        {
+          "name": "AgendaItemHistoryAttachment",
+          "type": "{http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService}AgendaItemHistoryAttachment",
           "namespace": "http://schemas.datacontract.org/2004/07/eSCRIBE.Internet.WebService",
           "optional": true,
           "nullable": true,

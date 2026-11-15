@@ -49,4 +49,6 @@ TownCloud existing unpublished item/section draft text is separately synthetic a
 
 Tyler also supports a separately requested, feature-gated public agenda-item search mode with scoped synthetic evidence. See [usage and applicability](../TYLER-AGENDA-ITEM-SEARCH.md).
 
-The eSCRIBE [PublishingService mapping](../ESCRIBE-PUBLISHING-SERVICE.md) adds exact deployed WSDL/XSD record reads and ten synthetically accepted create/update mappings. One explicit native upload chunk with caller-declared whole-document hash is also implemented; general chunk assembly/completion/readiness semantics remain unresolved. The exact earlier singleWsdl403 is not a blanket access finding.
+The eSCRIBE [PublishingService mapping](../ESCRIBE-PUBLISHING-SERVICE.md) adds exact deployed WSDL/XSD record reads and sixteen synthetically accepted create/update mappings. One explicit native upload chunk with caller-declared whole-document hash is also implemented; general chunk assembly/completion/readiness semantics remain unresolved. The exact earlier singleWsdl403 is not a blanket access finding.
+
+Selected eSCRIBE item-history reads additionally preserve supplied native motions/votes and inherited history fields with scoped synthetic proof; see the PublishingService guide. These are source facts, with no inferred tally or publication.
