@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-15",
+  "status": "PASSED",
+  "requirements": [
+    6,
+    9
+  ],
+  "scope": "Explicit selected Municode PublishPage HTML: offline captured page, selector identity, page controls, bounds, local resume, persistence and neutral export.",
+  "checks": [
+    {
+      "command": "python -X utf8 -m pytest tests/test_municode_publish.py tests/test_municode_configured_discovery.py tests/test_account_apis.py tests/test_essential_production.py tests/test_provider_discovery.py -q",
+      "passed": 131,
+      "failed": 0,
+      "seconds": 2.43
+    },
+    {
+      "command": "python -X utf8 -m ruff check authored PublishPage source and test files",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/municode_publish.py",
+      "sha256": "2754f4e792b0636b0df4d3d893417691c7fea6ab4786d1211dd3ac803f2c931d"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/identification.py",
+      "sha256": "d0d6499248e2e8c154cb6cdd8a76a092e9f6b8105eae52568b28a39280fec1e6"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/account_api.py",
+      "sha256": "aca0d6f49797b6d5b966cd34afbd6a85d0c9dd474bab5aa9d32d0591d9eeb07b"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/native.py",
+      "sha256": "41d55cd8f6f8a68f7db09ca1770e26c76355c39bfcf15bb1d5125b538694f3f4"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/__init__.py",
+      "sha256": "1afb47279f35e5ac0bfb2170063b5ba5065f62b42e8f3432abcf1fe4e06351d6"
+    },
+    {
+      "path": "tests/test_municode_publish.py",
+      "sha256": "3e64f94d03d62be3ae73d3b97a9e3a974e99709bd29ca33dbac962c578b5724b"
+    },
+    {
+      "path": "tests/fixtures/municode-publish/effingham.html",
+      "sha256": "f996a42d9d8811f6129cde3b9b57693627e1e2224141933428082ffe8865ee7c"
+    },
+    {
+      "path": "docs/capabilities/evidence/municode-publishpage/source.json",
+      "sha256": "e9baa7a578d92464fbebf78f2a65617ec5851914e20e47aec129923495f7eeee"
+    }
+  ],
+  "limits": [
+    "Captured HTML status was not recorded; prior HTTP 200 observation is separate. No live engine acceptance.",
+    "Only selected page captured; no automatic archive traversal, authenticated API response schema, REST identity equivalence or complete catalog.",
+    "No linked document or media retrieval."
+  ]
+}

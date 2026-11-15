@@ -1,5 +1,7 @@
 # Captures and expected outputs are byte-identity evidence, including original line endings.
 tests/fixtures/** -text
+tests/fixtures/municode-publish/effingham.html whitespace=cr-at-eol
+docs/capabilities/evidence/municode-publishpage/source.json whitespace=cr-at-eol
 tests/fixtures/boarddocs-public/grand-detail-20240522.html whitespace=-blank-at-eol,-blank-at-eof
 docs/capabilities/evidence/utah-admin-client/help.html whitespace=-blank-at-eol
 docs/capabilities/inventory.json -text whitespace=cr-at-eol

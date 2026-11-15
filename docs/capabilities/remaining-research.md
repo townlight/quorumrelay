@@ -93,6 +93,8 @@ Evidence and exact scope: `inventory.json` provider `municode-meetings`; operati
 
 - Exact Essential root-declared `/app` editor GET returned302 to CivicPlus `/connect/authorize` with no body. A shareable editor/client export or authorized access is needed for this exact path; no authentication was attempted. This does not prove another public contract is absent. Receipt: `evidence/essential-postman/app-access-source.json`.
 
+- One selected Effingham public PublishPage HTML is now fixture-tested with native public `cc/me` selectors and page controls. Other pages/tenants are not established by that capture; authenticated collection response, offset semantics and API identity equivalence remain unresolved. See [format guide](../MUNICODE-PUBLISHPAGE.md).
+
 ## F08 BoardBook (`boardbook`)
 
 - Explicit public organization search is implemented with native typed search-index IDs, rendered excerpts, exact query-echo validation and hash-bound local continuation. Canonical meeting/item/document identity, parent joins and provider completeness are not inferred. See [public search](../BOARDBOOK-PUBLIC-SEARCH.md).

@@ -9934,6 +9934,52 @@
               }
             ]
           }
+        },
+        {
+          "id": "municode-publishpage-2026-11-15",
+          "url": "https://meetings.municode.com/PublishPage/index?cid=EFFINGHAM&ppid=9639c19d-1d1f-4201-b8ff-163a28a35f08&p=1",
+          "title": "Selected public PublishPage HTML and scoped offline execution",
+          "kind": "saved_fixture_and_engine_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "fixture_path": "tests/fixtures/municode-publish/effingham.html",
+          "fixture_sha256": "f996a42d9d8811f6129cde3b9b57693627e1e2224141933428082ffe8865ee7c",
+          "receipt_path": "docs/verification/municode-publishpage-2026-11-15.json",
+          "receipt_sha256": "cfac59515d198be5eb1005a5bfddd2485384ddf6484bbfbe157c8d648fc1c0e5",
+          "limits": "Current capture HTTP status unrecorded; previous 200 is separate. One selected page only; no live engine acceptance, complete catalog or authenticated API identity/pagination.",
+          "synthetic_execution": {
+            "provider": "municode-meetings",
+            "status": "fixture_passed",
+            "operations": [
+              "discover",
+              "parse"
+            ],
+            "entities": [],
+            "scope": "Explicit selected Municode PublishPage HTML: offline captured page, selector identity, page controls, bounds, local resume, persistence and neutral export.",
+            "execution_provenance": "Pinned public HTML capture and offline injected transport; 131 affected checks. No live engine acceptance.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_municode_publish.py tests/test_municode_configured_discovery.py tests/test_account_apis.py tests/test_essential_production.py tests/test_provider_discovery.py -q",
+                "passed": 131,
+                "failed": 0,
+                "seconds": 2.43
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "tests/fixtures/municode-publish/effingham.html",
+                "sha256": "f996a42d9d8811f6129cde3b9b57693627e1e2224141933428082ffe8865ee7c"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_municode_publish.py",
+                "sha256": "3e64f94d03d62be3ae73d3b97a9e3a974e99709bd29ca33dbac962c578b5724b",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "b7fdb74f93a49e9264e7a8e9ac2da053b333bdd892ab44437e34d816c947f93a"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -9974,12 +10020,14 @@
           "evidence_ids": [
             "municode-essential-public-api",
             "municode-meetings-tenant",
-            "municode-configured-listing-2026-11-15"
+            "municode-configured-listing-2026-11-15",
+            "municode-publishpage-2026-11-15"
           ],
-          "details": "Configured public HTML listing discovery uses one static GET, preserving baseline rows and the original capture with local date filtering and path-derived identities. The separate Essential API collection response and continuation remain unresolved.",
+          "details": "Configured public HTML listing discovery uses one static GET, preserving baseline rows and the original capture with local date filtering and path-derived identities. The separate Essential API collection response and continuation remain unresolved. The explicit municode-publishpage-html format also reads one selected public PublishPage, retaining native cc/me selectors and supplied controls; no API identity equivalence or archive traversal.",
           "dependencies": [],
           "remaining_verification": [
-            "Essential authenticated collection response schema and continuation remain unresolved; one configured page does not establish complete catalog coverage."
+            "Essential authenticated collection response schema and continuation remain unresolved; one configured page does not establish complete catalog coverage.",
+            "Only one Effingham PublishPage capture is verified; other selected pages and tenants require supplied source evidence."
           ],
           "acceptance_status": "fixture_passed",
           "evidence_level": "saved_fixture_and_bounded_engine_execution",

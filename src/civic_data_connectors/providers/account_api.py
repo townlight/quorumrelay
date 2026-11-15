@@ -21,6 +21,10 @@ def account_origin(source):
 
 
 def is_account_api(source):
+    if (source.provider == "municode-meetings" and source.input_format == "municode-publishpage-html"
+            and urlsplit(source.url).scheme == "https" and urlsplit(source.url).netloc == "meetings.municode.com"
+            and urlsplit(source.url).path in {"/PublishPage", "/PublishPage/index"}):
+        return False
     if (source.provider == "telvue" and source.input_format == "telvue-cloudcast-mrss-xml"
             and re.fullmatch(r"/mrss/[A-Za-z0-9_-]+", urlsplit(source.url).path)):
         # The documented public player feed shares Connect's host, not its

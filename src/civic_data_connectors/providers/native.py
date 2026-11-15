@@ -150,6 +150,9 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format == "municode-publishpage-html":
+        from .municode_publish import parse_bundle
+        return parse_bundle(source, namespace, content)
     if input_format == "wistia-public-embed-html":
         from .wistia_embed import parse_bundle
         return parse_bundle(source, namespace, content)
