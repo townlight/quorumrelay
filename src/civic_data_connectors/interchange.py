@@ -93,7 +93,7 @@ class _ArtifactManager:
                     self.size -= metadata["byte_length"]
                     del self.values[key]
 
-    def save(self, collection, key, source, metadata, *, scope, limit, context=None):
+    def save(self, collection, key, source, metadata, *, scope, limit, context=None, check_bounds=None):
         from pathlib import Path
         from .extensions import StorageConflict
 
@@ -108,6 +108,8 @@ class _ArtifactManager:
             try:
                 with path.open("xb") as target:
                     info = _copy(source, target, min(limit, 1024 * 1024 * 1024 - self.size), context)
+                if check_bounds is not None:
+                    check_bounds()
             except BaseException:
                 path.unlink(missing_ok=True)
                 raise
@@ -136,25 +138,36 @@ def _artifact_manager(engine):
         return manager
 
 
-def _save_artifact(engine, collection, key, source, metadata, *, context, max_bytes):
+def _save_artifact(engine, collection, key, source, metadata, *, context, max_bytes, check_bounds=None):
     metadata = {**metadata, "created_at": time.time(), "expires_at": time.time() + 3600}
     store = engine.storage
-    if (store is not None and callable(getattr(store, "save_capture", None))
-            and callable(getattr(store, "open_capture", None))):
-        class CancellableReader:
-            def read(self, size):
-                if operation_cancelled(store, context):
-                    raise InterruptedError("Export cancelled; no artifact was published.")
-                return source.read(size)
-        reference = store.save_capture(CancellableReader(), scope=context.scope, max_bytes=max_bytes)
+
+    def check():
         if operation_cancelled(store, context):
             raise InterruptedError("Export cancelled; no artifact was published.")
+        if check_bounds is not None:
+            check_bounds()
+
+    class BoundedReader:
+        def read(self, size):
+            check()
+            chunk = source.read(size)
+            check()
+            return chunk
+
+    check()
+    reader = BoundedReader()
+    if (store is not None and callable(getattr(store, "save_capture", None))
+            and callable(getattr(store, "open_capture", None))):
+        reference = store.save_capture(reader, scope=context.scope, max_bytes=max_bytes)
+        check()
         value = {**deepcopy(metadata), "storage_reference": reference,
                  "sha256": reference["sha256"], "byte_length": reference["byte_length"]}
         store.put(collection, key, value, scope=context.scope, create_only=True)
         return value
     return _artifact_manager(engine).save(
-        collection, key, source, metadata, scope=context.scope, limit=max_bytes, context=context,
+        collection, key, reader, metadata, scope=context.scope, limit=max_bytes, context=context,
+        check_bounds=check,
     )
 
 

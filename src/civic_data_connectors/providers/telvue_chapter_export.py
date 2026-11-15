@@ -97,7 +97,7 @@ def export_chapters(owner, request, content, context):
             artifact_id = secrets.token_hex(24)
             metadata = _save_artifact(owner, "artifacts", artifact_id, io.BytesIO(payload),
                 {"artifact_id": artifact_id, "format": output_format, "manifest": manifest,
-                 "namespaces": [namespace]}, context=context, max_bytes=limit)
+                 "namespaces": [namespace]}, context=context, max_bytes=limit, check_bounds=stopped)
             data.update(artifact_id=artifact_id, storage_reference=metadata.get("storage_reference",
                 {"kind": "civic_export_artifact", "artifact_id": artifact_id}))
         else:

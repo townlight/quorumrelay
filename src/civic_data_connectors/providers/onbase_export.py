@@ -62,6 +62,13 @@ def export_dip(owner, request, content, context):
     if encoding not in {"ascii", "utf-8", "cp1252"}:
         raise ValueError("Select the destination index encoding: ascii, utf-8 or cp1252.")
     deadline = monotonic() + bounds.deadline_seconds
+
+    def check_output_bounds():
+        if context.check_cancelled():
+            raise InterruptedError
+        if monotonic() >= deadline:
+            raise ValueError("File preparation exceeded its deadline.")
+
     fields = [{"tag": tags[key], "keyword_type": keyword} for key, keyword in (
         ("begin", ">>Begin Document, Exclusive"), ("document_type", ">>Document Type"),
         ("file_type", ">>File Type"), ("file_name", ">>File Name"))]
@@ -176,12 +183,13 @@ def export_dip(owner, request, content, context):
                 _save_artifact(owner, "artifacts", artifact_id, output,
                     {"artifact_id": artifact_id, "format": FORMAT, "manifest": manifest,
                      "requires_attachment_grant": True, "namespaces": [namespace]},
-                    context=context, max_bytes=bounds.transfer_bytes)
+                    context=context, max_bytes=bounds.transfer_bytes, check_bounds=check_output_bounds)
                 data = {"format": FORMAT, "artifact_id": artifact_id, "manifest": manifest}
             else:
                 if size > bounds.parser_bytes:
                     raise ValueError("Use stream=true for an archive above parser response bounds.")
                 data = {"format": FORMAT, "content_base64": base64.b64encode(output.read()).decode(), "manifest": manifest}
+        check_output_bounds()
         return OperationResult("completed", data, coverage={"scope": "explicit linked document file/index preparation",
             "source_complete": False, "vendor_import_accepted": False,
             "projection_losses": manifest["projection_losses"]}, operation_id=context.operation_id)

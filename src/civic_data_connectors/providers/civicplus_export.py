@@ -145,6 +145,13 @@ def export_historical(owner, request, content, context):
             source=source.url),), coverage={"scope": "filename mapping gap; no files exported",
             "vendor_import_accepted": False}, operation_id=context.operation_id)
     deadline, total, pdf_count, media_count = monotonic() + bounds.deadline_seconds, 0, 0, 0
+
+    def check_output_bounds():
+        if context.check_cancelled():
+            raise InterruptedError
+        if monotonic() >= deadline:
+            raise ValueError("File preparation exceeded its deadline.")
+
     manifest = {"format": FORMAT, "provider": source.provider, "namespace": namespace,
                 "delivery_container": "ZIP wrapper; extract named files before consultant intake; vendor ZIP import is not established",
                 "meeting": meeting, "files": [], "documentation": DOCUMENTATION,
@@ -248,7 +255,7 @@ def export_historical(owner, request, content, context):
                 metadata = _save_artifact(owner, "artifacts", artifact_id, output,
                     {"artifact_id": artifact_id, "format": FORMAT, "manifest": manifest,
                      "requires_attachment_grant": True, "namespaces": [namespace]},
-                    context=context, max_bytes=bounds.transfer_bytes)
+                    context=context, max_bytes=bounds.transfer_bytes, check_bounds=check_output_bounds)
                 data = {"format": FORMAT, "artifact_id": artifact_id, "manifest": manifest,
                         "storage_reference": metadata.get("storage_reference",
                             {"kind": "civic_export_artifact", "artifact_id": artifact_id})}
@@ -257,6 +264,7 @@ def export_historical(owner, request, content, context):
                     raise ValueError("Use stream=true for archives above the parser response bound.")
                 data = {"format": FORMAT, "content_base64": base64.b64encode(output.read()).decode(),
                         "manifest": manifest}
+        check_output_bounds()
         return OperationResult("completed", data,
             coverage={"scope": "explicit files for one historical meeting", "vendor_import_accepted": False,
                       "source_complete": False, "projection_losses": manifest["projection_losses"]},
