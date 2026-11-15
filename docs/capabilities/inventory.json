@@ -6749,6 +6749,22 @@
           },
           "receipt_path": "docs/verification/novus-public-minutes-2026-11-15.json",
           "receipt_sha256": "3b9ad9b8563e9d7b973618cb2efa6e98f4ad6ba7e6b2c80396eef8abf5d1e750"
+        },
+        {
+          "id": "novusagenda-lifecycle-20261115",
+          "url": "https://granicus.com/iqm2-and-novusagenda-end-of-life-planning/",
+          "title": "Granicus legacy lifecycle and conflicting schedule statements",
+          "kind": "official_documentation",
+          "observed": "Root inspected official page/PDF and independently checked retained HTML bytes and PDF date table; exact captures pinned.",
+          "findings": [
+            "Vendor HTML migration guidance states extraction December 11, 2026 / final shutdown December 31, 2026; earlier HTML FAQ and PDF retain 2025 dates. Mixed lifecycle statements do not establish an individual tenant is unavailable or resolve native write/import schemas."
+          ],
+          "limits": "Lifecycle/migration guidance only; no API/schema, blanket tenant shutdown, current entitlement or completeness proof. PDF and HTML contain mixed dates.",
+          "observation_date": "2026-11-15",
+          "access_scope": "public_research_only",
+          "proof_level": "official_documentation_or_ui_contract_not_live_acceptance",
+          "fixture_path": "docs/capabilities/evidence/granicus-legacy-lifecycle/source.json",
+          "fixture_sha256": "f42f054900834a55cea242ed34fb2514233614aa226ccc22687b79ad16b5cfb2"
         }
       ],
       "tenants": [
@@ -7236,11 +7252,14 @@
         "public_read": "unverified",
         "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
-      "restrictions": [],
+      "restrictions": [
+        "Vendor HTML migration guidance states extraction December 11, 2026 / final shutdown December 31, 2026; earlier HTML FAQ and PDF retain 2025 dates. Mixed lifecycle statements do not establish an individual tenant is unavailable or resolve native write/import schemas."
+      ],
       "remaining_research": [
         "Selected-window listing, bounded native search, supplied Coversheet and MeetingView Agenda parsing are implemented with separate receipts. The older failed search postback is historical. Selected rendered Minutes now have separate native document/meeting identities, supplied source text and scoped bounds/persistence/reopen/search/ZIP proof. Other Minutes layouts, search candidate/full-text semantics and automatic root-to-detail traversal remain unverified; exact saved detail contexts are not a complete catalog.",
         "Existing receipts establish their selected listing/search windows only. Default horizon, retained history and broader catalog extent remain qualified; no repeated tenant/history survey is a new completion gate.",
-        "Pinned UI instructions do not supply a current machine create/update/upload contract or field/readback schema. Vendor-contract synthetic execution is accepted when such a contract is available; staff-account acquisition is not required for acceptance."
+        "Pinned UI instructions do not supply a current machine create/update/upload contract or field/readback schema. Vendor-contract synthetic execution is accepted when such a contract is available; staff-account acquisition is not required for acceptance.",
+        "Lifecycle applicability reviewed 2026-11-15 from pinned official HTML/PDF; conflicting dates retained in granicus-legacy-lifecycle/source.json. Saved captures/scoped reads remain valid evidence. No operation/status promotion, removal or outside-only inference."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "novusagenda",
@@ -15435,6 +15454,22 @@
           },
           "receipt_path": "docs/verification/iqm2-supplied-captions-2026-11-14.json",
           "receipt_sha256": "94e7e5e53d4e8cd557af84e442a9caab7498bb5d3c1cdd8965e09c2a5f1447c8"
+        },
+        {
+          "id": "iqm2-lifecycle-20261115",
+          "url": "https://granicus.com/iqm2-and-novusagenda-end-of-life-planning/",
+          "title": "Granicus legacy lifecycle and conflicting schedule statements",
+          "kind": "official_documentation",
+          "observed": "Root inspected official page/PDF and independently checked retained HTML bytes and PDF date table; exact captures pinned.",
+          "findings": [
+            "Vendor HTML and FAQ PDF state planned move-off September 30, 2027; their 2025 extended-support dates conflict. Lifecycle plans do not establish an individual tenant entitlement, write/import schema or current availability."
+          ],
+          "limits": "Lifecycle/migration guidance only; no API/schema, blanket tenant shutdown, current entitlement or completeness proof. PDF and HTML contain mixed dates.",
+          "observation_date": "2026-11-15",
+          "access_scope": "public_research_only",
+          "proof_level": "official_documentation_or_ui_contract_not_live_acceptance",
+          "fixture_path": "docs/capabilities/evidence/granicus-legacy-lifecycle/source.json",
+          "fixture_sha256": "f42f054900834a55cea242ed34fb2514233614aa226ccc22687b79ad16b5cfb2"
         }
       ],
       "tenants": [
@@ -15866,14 +15901,16 @@
         "outbound": "not supplied; authorized provider test tenant/credentials absent"
       },
       "restrictions": [
-        "Preserve Scheduled/Cancelled; ignore self/# file placeholders; minutes may be embedded in following packet."
+        "Preserve Scheduled/Cancelled; ignore self/# file placeholders; minutes may be embedded in following packet.",
+        "Vendor HTML and FAQ PDF state planned move-off September 30, 2027; their 2025 extended-support dates conflict. Lifecycle plans do not establish an individual tenant entitlement, write/import schema or current availability."
       ],
       "remaining_research": [
         "The bounded Kent public calendar and first native search result are observed; verify broader date/body and archive coverage and live supplied Next before claiming completeness.",
         "Pinned Granicus/iQM2 help describes authenticated locations/types/meeting and streaming workflows, not an iQM2 machine API. Deployment-specific field/readback documentation remains needed; account enablement is not a synthetic-acceptance gate.",
         "Upload limits, write schemas, permission/readback and product applicability remain unresolved in pinned material. Do not substitute Legistar contracts; credentials and live writes are not required acceptance evidence.",
         "Selected legislative-file text/documents and scoped exact-child retrieval are implemented from native meeting1496/file7478 captures; parent replay, hashes/relationships, reopen and ZIP are tested. No staff form submission, adopted action or complete history inferred.",
-        "Explicit selected-player first-active WebVTT retrieval is synthetically executed with raw source text/search/reopen/ZIP and both captures. Actual6049 has no active track; no broader caption availability, cue timing or content-language inference."
+        "Explicit selected-player first-active WebVTT retrieval is synthetically executed with raw source text/search/reopen/ZIP and both captures. Actual6049 has no active track; no broader caption availability, cue timing or content-language inference.",
+        "Lifecycle applicability reviewed 2026-11-15 from pinned official HTML/PDF; conflicting dates retained in granicus-legacy-lifecycle/source.json. Saved captures/scoped reads remain valid evidence. No operation/status promotion, removal or outside-only inference."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "iqm2",

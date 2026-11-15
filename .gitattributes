@@ -77,3 +77,7 @@ docs/capabilities/evidence/telvue-public-search/player-client.js whitespace=cr-a
 # Preserve exact CHAMP vendor HTML/client whitespace and capture hashes.
 docs/capabilities/evidence/champ-public-archive/*.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
 docs/capabilities/evidence/champ-public-archive/*.js whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Exact official lifecycle captures retain original CRLF and vendor whitespace.
+docs/capabilities/evidence/granicus-legacy-lifecycle/eol.html whitespace=cr-at-eol,-blank-at-eol,-space-before-tab
+docs/capabilities/evidence/granicus-legacy-lifecycle/source.json whitespace=cr-at-eol

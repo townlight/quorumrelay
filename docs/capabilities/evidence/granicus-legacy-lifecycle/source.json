@@ -1,0 +1,53 @@
+{
+  "vendor": "Granicus",
+  "product": "NovusAGENDA and IQM2",
+  "captured_utc": "2026-11-15T17:25:47Z",
+  "capture_method": {
+    "method": "single direct GET per approved URL",
+    "redirects_followed": false,
+    "cookies_used": false,
+    "credentials_used": false,
+    "retries": 0,
+    "max_bytes_per_response": 3145728,
+    "truncated": false
+  },
+  "files": [
+    {
+      "file": "eol.html",
+      "url": "https://granicus.com/iqm2-and-novusagenda-end-of-life-planning/",
+      "status": 200,
+      "truncated": false,
+      "bytes": 185531,
+      "method": "GET",
+      "sha256": "c47f128f1835ebf9bac98f2ea4c1fe2b7502e5e5b2a4ba8ee812a95bbf4d2937",
+      "content_type": "text/html; charset=UTF-8",
+      "response_url": "https://granicus.com/iqm2-and-novusagenda-end-of-life-planning/"
+    },
+    {
+      "file": "faq.pdf",
+      "url": "https://granicus.com/wp-content/uploads/application/pdf/FAQ_EOL_IQM2_NOVUS.pdf",
+      "status": 200,
+      "truncated": false,
+      "bytes": 271753,
+      "method": "GET",
+      "sha256": "70990674677e6319522677c970ba26405d162260f6de0ecaf83ebf7db8131999",
+      "content_type": "application/pdf",
+      "response_url": "https://granicus.com/wp-content/uploads/application/pdf/FAQ_EOL_IQM2_NOVUS.pdf"
+    }
+  ],
+  "scoped_facts": [
+    "Captured official HTML contains an earlier FAQ statement that Granicus planned to move all NovusAGENDA customers off by September 30, 2025.",
+    "The same HTML page has a newer migration section stating NovusAGENDA data extraction from Granicus must be complete by December 11, 2026 and final product/infrastructure shutdown will be December 31, 2026.",
+    "Captured official FAQ PDF table lists NovusAGENDA end-of-support October 31, 2024 / end-of-life September 30, 2025, and IQM2 end-of-support September 20, 2025 / end-of-life September 30, 2027.",
+    "The HTML page and PDF therefore contain conflicting NovusAGENDA lifecycle dates; preserve both source statements and do not infer all tenants are already off or infer any API availability.",
+    "HTML states extended support for IQM2 products after September 30, 2025 and planned move-off by September 30, 2027; PDF table lists IQM2 September 20, 2025 and September 30, 2027, respectively."
+  ],
+  "mixed_date_qualification": "The HTML page combines an older FAQ/table (NovusAGENDA planned move-off September 30, 2025; IQM2 extended support after September 30, 2025 and move-off September 30, 2027) with a newer migration section (NovusAGENDA data extraction December 11, 2026 and final shutdown December 31, 2026). The PDF table instead lists NovusAGENDA October 31, 2024 / September 30, 2025 and IQM2 September 20, 2025 / September 30, 2027. Preserve these conflicting source dates; no sole current calendar or applicability to any specific tenant is established.",
+  "limitations": [
+    "Raw bytes are retained unchanged; no page links followed.",
+    "These pages establish public lifecycle/migration statements only, not a NovusAGENDA request/response schema, write/import route, file format, or customer-specific entitlement.",
+    "No API absence or outside-access-only conclusion is made.",
+    "Search snippets were prior discovery evidence; these files are direct GET captures."
+  ],
+  "executed_vendor_code": false
+}

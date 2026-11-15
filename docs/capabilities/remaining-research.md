@@ -54,6 +54,8 @@ Evidence and exact scope: `inventory.json` provider `granicus`; operation status
 - Existing receipts establish their selected listing/search windows only. Default horizon, retained history and broader catalog extent remain qualified; no repeated tenant/history survey is a new completion gate.
 - Pinned UI instructions do not supply a current machine create/update/upload contract or field/readback schema. Vendor-contract synthetic execution is accepted when such a contract is available; staff-account acquisition is not required for acceptance.
 
+- Granicus’s [lifecycle planning page](https://granicus.com/iqm2-and-novusagenda-end-of-life-planning/) gives Novus data extraction as December 11, 2026 and final shutdown as December 31, 2026 in its migration guidance; its earlier FAQ/table retains a conflicting 2025 date and its [downloadable FAQ](https://granicus.com/wp-content/uploads/application/pdf/FAQ_EOL_IQM2_NOVUS.pdf) lists September 30, 2025. These vendor plans do not establish availability for every tenant. Saved captures and scoped public reads remain applicable; see [lifecycle source evidence](evidence/granicus-legacy-lifecycle/source.json).
+
 Evidence and exact scope: `inventory.json` provider `novusagenda`; operation status and outbound mappings are separate from historical observations.
 
 ## F05 CivicPlus Agenda and Meeting Management Select (`civicplus-select`)
@@ -146,6 +148,8 @@ Evidence and exact scope: `inventory.json` provider `civicweb`; operation status
 - The bounded Kent public calendar and first native search result are observed; verify broader date/body and archive coverage and live supplied Next before claiming completeness.
 - Pinned Granicus/iQM2 help describes authenticated locations/types/meeting and streaming workflows, not an iQM2 machine API. Deployment-specific field/readback documentation remains needed; account enablement is not a synthetic-acceptance gate.
 - Upload limits, write schemas, permission/readback and product applicability remain unresolved in pinned material. Do not substitute Legistar contracts; credentials and live writes are not required acceptance evidence.
+
+- Granicus’s [lifecycle planning page](https://granicus.com/iqm2-and-novusagenda-end-of-life-planning/) states September 30, 2027 for iQM2 with extended support. This vendor plan does not establish current availability for every tenant; saved captures and scoped public reads remain applicable. See [lifecycle source evidence](evidence/granicus-legacy-lifecycle/source.json).
 
 Evidence and exact scope: `inventory.json` provider `iqm2`; operation status and outbound mappings are separate from historical observations.
 
