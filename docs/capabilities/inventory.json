@@ -6560,6 +6560,54 @@
           "limits": "Synthetic provider transport through actual current source application paths; no provider mutations; Existing configured-capture partial and unavailable-media outcomes retained; Supplied HTML/rich text is source content, not OCR/ASR or inferred votes/motions/attendance; Townlight/TownReporter current-source candidate acceptance remains separate; frozen original proof reused only where unchanged; No package build/install/signing/Sandbox restart/frozen artifact/publication",
           "receipt_path": "docs/verification/source-text-reference-clients-2026-11-12.json",
           "receipt_sha256": "21d6656e7555e96469b2146ebe4dc5264c3efb249c73c49be2fdefdce564dc93"
+        },
+        {
+          "id": "novus-public-minutes-2026-11-15",
+          "url": "https://hpwd.novusagenda.com/agendapublic/MeetingView.aspx?MeetingID=210&MinutesMeetingID=168&doctype=Minutes",
+          "title": "Selected rendered Novus Minutes with separate native document/meeting identities",
+          "kind": "observed_public_response_and_scoped_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "observed_contract_and_synthetic_engine_execution",
+          "findings": [
+            "Official district PDF preserves exact vendor Minutes URL; exact anonymous GET200text/html31582bytes pinned separately.",
+            "Native document168 parent meeting210; rendered full text, date/localtime/location, raw bytes and capture provenance; no structured decision/attendance inference."
+          ],
+          "synthetic_execution": {
+            "provider": "novusagenda",
+            "status": "mock_passed",
+            "operations": [
+              "discover",
+              "fetch",
+              "parse",
+              "neutral_export"
+            ],
+            "entities": [
+              "document"
+            ],
+            "execution_provenance": "Actual captured Minutes mapped offline; configured network/persistence/reopen/search/ZIP executed with injected transport, not a live engine or write acceptance.",
+            "checks": [
+              {
+                "command": "pytest tests/test_novus_minutes.py tests/test_novus_detail.py tests/test_novus_discovery.py tests/test_novus_search.py -q",
+                "passed": 40,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/novus-public-minutes/source.json",
+                "sha256": "710db2710fcb3a40b24d3a425e3cd8157e54afd63093dde29127517797b4ad75"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_novus_minutes.py",
+                "sha256": "cf1304e52f2875ec40bcfc91eff229550385ac6bc57c8e7ac2b54a5a2ee2e61b"
+              }
+            ],
+            "scope": "Selected Novus rendered Minutes document with native parent binding, supplied text, bounds, persistence/search/reopen/ZIP. Existing format retained; no new provider or write contract."
+          },
+          "receipt_path": "docs/verification/novus-public-minutes-2026-11-15.json",
+          "receipt_sha256": "3b9ad9b8563e9d7b973618cb2efa6e98f4ad6ba7e6b2c80396eef8abf5d1e750"
         }
       ],
       "tenants": [
@@ -6604,14 +6652,14 @@
             "novusagenda-traversal",
             "novus-public-listing-live-partial",
             "novus-public-controls-and-fetch-2026-11-12",
-            "novus-public-meetingview-2026-11-12"
+            "novus-public-meetingview-2026-11-12",
+            "novus-public-minutes-2026-11-15"
           ],
-          "details": "The source implements bounded public ASP.NET listing traversal. A live engine receipt returned 191 records (11 meetings, 180 items) over 12 pages for East Brunswick\u2019s displayed 2026-08-11 through 2027-02-11 window. Receipt is partial; catalog/source completeness are false. This partial read is not provider acceptance. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup.",
+          "details": "The source implements bounded public ASP.NET listing traversal. A live engine receipt returned 191 records (11 meetings, 180 items) over 12 pages for East Brunswick\u2019s displayed 2026-08-11 through 2027-02-11 window. Receipt is partial; catalog/source completeness are false. This partial read is not provider acceptance. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup. Selected rendered Minutes now preserve the native Minutes document ID separately from its meeting parent, source text/date/localtime/location and exact capture; scoped persistence/reopen/search/ZIP verified. No universal Minutes schema or automatic detail crawl claimed.",
           "dependencies": [],
           "remaining_verification": [
-            "Implement a bounded stateful form reader only if session/hidden-state behavior can be preserved and tested against the saved bodies",
             "Confirm date-window and retained-history bounds; current form values cover only 2026-08-11 through 2027-02-11",
-            "The meeting-grid paging/completeness contract, search matching semantics, detail/Coversheet fields and document retrieval remain unverified"
+            "The meeting-grid paging/completeness contract, search matching semantics, additional detail/document variants and live transfer acceptance remain unverified"
           ],
           "acceptance_status": "not_run",
           "evidence_level": "source_implementation_fixture_tested_and_bounded_partial_engine_read",
@@ -6635,9 +6683,10 @@
             "novusagenda-traversal",
             "novus-public-controls-and-fetch-2026-11-12",
             "novus-public-coversheet-2026-11-12",
-            "novus-public-meetingview-2026-11-12"
+            "novus-public-meetingview-2026-11-12",
+            "novus-public-minutes-2026-11-15"
           ],
-          "details": "Configured supplied Coversheet URL maps native item/meeting IDs, rendered subject/date/text/sections and exact item-bound AttachmentViewer locators. Saved normalization/default discovery/configured fetch, search/export and separate synthetic PDF transfer are checked. Existing supplied agenda PDF success is separate. No root-to-detail crawl or arbitrary-ID fetch_record claim. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup.",
+          "details": "Configured supplied Coversheet URL maps native item/meeting IDs, rendered subject/date/text/sections and exact item-bound AttachmentViewer locators. Saved normalization/default discovery/configured fetch, search/export and separate synthetic PDF transfer are checked. Existing supplied agenda PDF success is separate. No root-to-detail crawl or arbitrary-ID fetch_record claim. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup. Selected rendered Minutes now preserve the native Minutes document ID separately from its meeting parent, source text/date/localtime/location and exact capture; scoped persistence/reopen/search/ZIP verified. No universal Minutes schema or automatic detail crawl claimed.",
           "dependencies": [],
           "remaining_verification": [
             "Minutes rendering and other public meeting/cover-sheet templates remain unresolved.",
@@ -6662,9 +6711,10 @@
             "novusagenda-baseline",
             "quorumrelay-shared-core-operations",
             "novus-public-meetingview-2026-11-12",
-            "source-text-reference-clients-2026-11-12-novusagenda"
+            "source-text-reference-clients-2026-11-12-novusagenda",
+            "novus-public-minutes-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup. Selected rendered Minutes now preserve the native Minutes document ID separately from its meeting parent, source text/date/localtime/location and exact capture; scoped persistence/reopen/search/ZIP verified. No universal Minutes schema or automatic detail crawl claimed.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -6733,9 +6783,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "novusagenda-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "novus-public-minutes-2026-11-15"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Selected rendered Minutes now preserve the native Minutes document ID separately from its meeting parent, source text/date/localtime/location and exact capture; scoped persistence/reopen/search/ZIP verified. No universal Minutes schema or automatic detail crawl claimed.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -7046,7 +7097,7 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "Selected-window listing, bounded native search, supplied Coversheet and MeetingView Agenda parsing are implemented with separate receipts. The older failed search postback is historical. Search candidate/full-text semantics, Minutes rendering and automatic root-to-detail traversal remain unverified; exact saved detail contexts are not a complete catalog.",
+        "Selected-window listing, bounded native search, supplied Coversheet and MeetingView Agenda parsing are implemented with separate receipts. The older failed search postback is historical. Selected rendered Minutes now have separate native document/meeting identities, supplied source text and scoped bounds/persistence/reopen/search/ZIP proof. Other Minutes layouts, search candidate/full-text semantics and automatic root-to-detail traversal remain unverified; exact saved detail contexts are not a complete catalog.",
         "Existing receipts establish their selected listing/search windows only. Default horizon, retained history and broader catalog extent remain qualified; no repeated tenant/history survey is a new completion gate.",
         "Pinned UI instructions do not supply a current machine create/update/upload contract or field/readback schema. Vendor-contract synthetic execution is accepted when such a contract is available; staff-account acquisition is not required for acceptance."
       ],

@@ -504,6 +504,11 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
     namespace = validated_namespace if validated_namespace is not None else validate_source(source, context, content)
     bounds = Bounds(**request.get("bounds", {}))
     input_format = source.input_format or DEFAULT_FORMAT[source.provider]
+    novus_minutes = (source.provider == "novusagenda"
+                     and "Minutes" in parse_qs(urlsplit(source.url).query).get("doctype", []))
+    if novus_minutes:
+        from .novus_detail import minutes_context
+        minutes_context(source)
     if (source.provider == 'boarddocs' and source.input_format is None
             and source.options.get('boarddocs_committee_id')):
         input_format = 'boarddocs-public-meetings-json'
@@ -666,16 +671,20 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
                 response = transport.request(
                     url, method=method, body=body, headers=headers or None,
                     byte_limit=(min(bounds.parser_bytes, bounds.transfer_bytes)
-                                if input_format == "peak-publication-rss-xml" or task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
+                                if novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
                                 else bounds.parser_bytes),
                     deadline_seconds=max(0.001, deadline - monotonic()),
                     allowed_origins=(origin,),
-                    **({"allow_redirects": False} if input_format == "peak-publication-rss-xml" or task.get("kind") in {
+                    **({"allow_redirects": False} if novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {
                         "suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period", "clerkbase-tree",
                         "onbase-window", "boarddocs-public", "tyler-calendar"} else {}),
                 )
                 if _origin(response.url) != origin:
                     raise ValueError("Provider retrieval left its configured origin.")
+                if novus_minutes and (response.url != url
+                        or response.content_type.split(";", 1)[0].strip().lower() not in {"text/html", "application/xhtml+xml"}
+                        or len(response.content) > bounds.transfer_bytes):
+                    raise ValueError("The exact bounded Novus Minutes HTML was not returned.")
                 if input_format == "peak-publication-rss-xml" and (response.url != url
                         or response.content_type.split(";", 1)[0].strip().lower() not in {"text/xml", "application/xml", "application/rss+xml"}
                         or len(response.content) > bounds.transfer_bytes):

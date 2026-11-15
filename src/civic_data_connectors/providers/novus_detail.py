@@ -92,6 +92,8 @@ def parse_bundle(source, namespace, content):
 
 def parse_meeting_bundle(source, namespace, content):
     """Read the supplied MeetingView variant of the existing public HTML format."""
+    if _query(source.url).get("doctype") == "Minutes":
+        return parse_minutes_bundle(source, namespace, content)
     validate_url(source.url)
     origin, values = urlsplit(source.url), _query(source.url)
     meeting, minutes = values.get("MeetingID"), values.get("MinutesMeetingID")
@@ -157,4 +159,61 @@ def parse_meeting_bundle(source, namespace, content):
     for record in bundle["records"][1:]:
         record["identity"]["parent"] = parent
         record["relationships"].append({"relation": "meeting", "identity": parent})
+    return bundle
+
+
+def minutes_context(source):
+    """A supplied Minutes URL identifies its document and parent separately."""
+    validate_url(source.url)
+    origin, values = urlsplit(source.url), _query(source.url)
+    if (source.provider != "novusagenda" or origin.scheme != "https"
+            or not origin.hostname.endswith(".novusagenda.com") or origin.port not in {None, 443}
+            or origin.path != "/agendapublic/MeetingView.aspx" or origin.fragment
+            or set(values) != {"MeetingID", "MinutesMeetingID", "doctype"}
+            or values.get("doctype") != "Minutes"
+            or not _positive(values.get("MeetingID")) or not _positive(values.get("MinutesMeetingID"))):
+        raise ValueError("Select a supplied Novus Minutes URL with native meeting and minutes IDs.")
+    return origin, values
+
+
+def parse_minutes_bundle(source, namespace, content):
+    origin, values = minutes_context(source)
+    page = Page()
+    page.feed(content.decode("utf-8-sig", errors="strict"))
+    forms = [n for n in page.root.walk() if n.tag == "form" and n.attrs.get("id") == "Form1"]
+    if len(forms) != 1:
+        raise ValueError("The Minutes response has no unique public form.")
+    form = forms[0]
+    action = urljoin(source.url, form.attrs.get("action", ""))
+    if (urlsplit(action).netloc != origin.netloc or urlsplit(action).path != origin.path
+            or _query(action) != values):
+        raise ValueError("The Minutes form disagrees with its selected meeting/document context.")
+    tables = [n for n in form.walk() if n.tag == "table" and n.text()]
+    heading = next((n for n in tables if n.attrs.get("cellpadding") == "2"
+                    and n.attrs.get("cellspacing") == "2"), None)
+    lines = [n.text() for n in heading.walk() if n.tag == "p" and n.text()] if heading else []
+    if len(lines) != 4 or not tables:
+        raise ValueError("The supplied Novus Minutes heading structure is unrecognized.")
+    body, date_literal, time_literal, location = lines
+    start = datetime.strptime(date_literal + " " + time_literal, "%A, %B %d, %Y %I:%M %p")
+    if start.strftime("%A") != date_literal.split(",", 1)[0]:
+        raise ValueError("The Minutes weekday disagrees with its calendar date.")
+    text = tables[0].text()
+    if text == heading.text():
+        raise ValueError("The supplied Minutes have no rendered document body.")
+    normalized = {"external_id": values["MinutesMeetingID"], "meeting_external_id": values["MeetingID"],
+                  "title": "Minutes — " + body, "kind": "minutes", "body": body, "location": location,
+                  "meeting_date": start.date().isoformat(), "source_start": start.isoformat(),
+                  "source_date_literal": date_literal, "source_time_literal": time_literal,
+                  "source_document_type": "Minutes", "time_zone_status": "unknown",
+                  "url": source.url, "text": text, "content_availability": "supplied_rendered_minutes",
+                  "documents": []}
+    bundle = make_bundle(source, namespace, content, "novus-public-listing-html",
+                         [(normalized, {"source_heading": lines, "source_context": values}, "document")])
+    record = bundle["records"][0]
+    parent = {"provider": source.provider, "namespace": namespace, "record_type": "meeting",
+              "external_id": values["MeetingID"], "parent": None}
+    record["identity"]["parent"] = parent
+    record["relationships"].append({"relation": "meeting", "identity": parent})
+    _supplied_text(record, text, "novus_minutes_rendered_text")
     return bundle

@@ -40,7 +40,7 @@ Evidence and exact scope: `inventory.json` provider `granicus`; operation status
 
 ## F04 NovusAGENDA (`novusagenda`)
 
-- Selected-window listing, bounded native search, supplied Coversheet and MeetingView Agenda parsing are implemented with separate receipts. The older failed search postback is historical. Search candidate/full-text semantics, Minutes rendering and automatic root-to-detail traversal remain unverified; exact saved detail contexts are not a complete catalog.
+- Selected-window listing, bounded native search, supplied Coversheet and MeetingView Agenda parsing are implemented with separate receipts. The older failed search postback is historical. Selected rendered Minutes now have separate native document/meeting identities, supplied source text and scoped bounds/persistence/reopen/search/ZIP proof. Other Minutes layouts, search candidate/full-text semantics and automatic root-to-detail traversal remain unverified; exact saved detail contexts are not a complete catalog.
 - Existing receipts establish their selected listing/search windows only. Default horizon, retained history and broader catalog extent remain qualified; no repeated tenant/history survey is a new completion gate.
 - Pinned UI instructions do not supply a current machine create/update/upload contract or field/readback schema. Vendor-contract synthetic execution is accepted when such a contract is available; staff-account acquisition is not required for acceptance.
 

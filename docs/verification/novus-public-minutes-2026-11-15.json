@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "572ba8a",
+  "status": "PASSED",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "scope": "Selected Novus rendered Minutes document with native parent binding, supplied text, bounds, persistence/search/reopen/ZIP. Existing format retained; no new provider or write contract.",
+  "new_cases": 16,
+  "checks": [
+    {
+      "command": "pytest tests/test_novus_minutes.py tests/test_novus_detail.py tests/test_novus_discovery.py tests/test_novus_search.py -q",
+      "passed": 40,
+      "failed": 0,
+      "seconds": 4.27
+    },
+    {
+      "command": "pytest tests/test_provider_discovery.py tests/test_interchange.py tests/test_baseline.py -q",
+      "passed": 174,
+      "failed": 0,
+      "seconds": 4.67
+    },
+    {
+      "command": "ruff check src/civic_data_connectors/providers/novus_detail.py src/civic_data_connectors/providers/discovery.py tests/test_novus_minutes.py",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/novus_detail.py",
+      "sha256": "832b61920f2e71166fccf981d7c98decfb80b2d0aeb5075b6ce3db16209aba69"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/discovery.py",
+      "sha256": "cb36236e745103237dd5e365e564cc05b27b19f1093a713c4fe5149ecb8d2199"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_novus_minutes.py",
+      "sha256": "cf1304e52f2875ec40bcfc91eff229550385ac6bc57c8e7ac2b54a5a2ee2e61b"
+    },
+    {
+      "kind": "observed_contract",
+      "path": "docs/capabilities/evidence/novus-public-minutes/source.json",
+      "sha256": "710db2710fcb3a40b24d3a425e3cd8157e54afd63093dde29127517797b4ad75"
+    },
+    {
+      "kind": "capture",
+      "path": "tests/fixtures/novus-minutes-210.html",
+      "sha256": "a5c4a1d251019fefca817de975193a1e77732c1c5e1e6d0ae6ab7c2bae1454d4"
+    }
+  ],
+  "unaffected_evidence_reused": "docs/verification/peak-telvue-owned-work-2026-11-15.json; 1876 full-suite cases passed before these isolated Minutes changes, no claim of a repeated full run.",
+  "limits": [
+    "One selected rendered Minutes layout. Not catalog or automatic root-to-detail traversal.",
+    "No native agenda item IDs, structured votes/attendance/motions, full-text provider matching or staff writes inferred.",
+    "HTML and official archive are observed sources; engine transfer/persistence/export executed with injected transport."
+  ]
+}
