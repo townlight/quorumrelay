@@ -48,3 +48,8 @@ docs/capabilities/evidence/primegov-tracking-search/tracking-client.txt whitespa
 
 # Exact official Legistar help response retains vendor whitespace.
 docs/capabilities/evidence/legistar-text-import/article.html whitespace=-blank-at-eol,-blank-at-eof
+
+# Exact Peak vendor HTML/JavaScript responses retain original whitespace.
+docs/capabilities/evidence/peak-public-search/page1.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/peak-public-search/page2-empty.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/peak-public-search/pagination.js whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab

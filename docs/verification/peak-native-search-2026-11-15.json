@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "84743ff",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "Public Peak archive form/meeting-group native search, exact page-bound continuation and retained rendered group excerpts; no complete catalog or full-document search",
+  "new_cases": 23,
+  "checks": [
+    {
+      "scope": "Peak readers/search, discovery, interchange/storage and HTTP/MCP interfaces before final explicit excerpt citation segments",
+      "passed": 194,
+      "failed": 0,
+      "seconds": 34.91,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\peak-native-search-2026-11-15.xml",
+      "xml_sha256": "d8b41daaeda9f2bae912d13a25449282984b75353ab3d6c6db4b026aa2362da9",
+      "warning": "Existing Starlette/AnyIO alias deprecation"
+    },
+    {
+      "scope": "All23current Peak search cases after explicit retrieval-URL citations and capture-bound text segments",
+      "passed": 23,
+      "failed": 0,
+      "seconds": 0.53
+    },
+    {
+      "scope": "Capability metadata, synthetic evidence and public package after parser/handler registration",
+      "passed": 27,
+      "failed": 0,
+      "seconds": 0.83
+    },
+    {
+      "scope": "Ruff changed source/test",
+      "status": "PASSED"
+    }
+  ],
+  "source_sha256": {
+    "src/civic_data_connectors/providers/peak_search.py": "15da83749b9beab4107811ef40db652f0520538b6710a430fe7e696d4f546670",
+    "src/civic_data_connectors/providers/__init__.py": "3a5e695c8078400ee441245d31337bf1d50aa123edfad8e1549c7cff60d3d922",
+    "src/civic_data_connectors/providers/identification.py": "9c27dd5210f9f51593aab96df8aba5dee7014bb46ecdbca45b639c81fade97cf",
+    "src/civic_data_connectors/providers/native.py": "9e51f0045e006d543233224c34d6a50d24a5d0ebe993b2c401d067ec52f6ab54",
+    "tests/test_peak_native_search.py": "d39755faaa52903e49242c02eafa3f45ff5c6196ef43cb21807ddda13b1e1411",
+    "docs/PEAK-PUBLIC-SEARCH.md": "5c308605e043dcb735b2a9944ccb532923fe310555db6d3ef654d3e187af30b1",
+    "docs/PROVIDER-NATIVE-MAPPINGS.md": "6151e46f2199e5e2def98a365da18f0ec480d26c6a84599a953ebe7e49dc94b6"
+  },
+  "primary_source": "docs/capabilities/evidence/peak-public-search/source.json",
+  "limits": [
+    "Current source first page150native groups and5declared pages; exact second page200empty/no page declaration, not verified exhaustion.",
+    "Synthetic nonempty second page verifies documented continuation mechanics, not live page-two data.",
+    "No item identity or full document content inferred from group excerpts.",
+    "One provider page per call; all results partial. No account/write/import/publication."
+  ]
+}

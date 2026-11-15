@@ -161,6 +161,8 @@ Evidence and exact scope: `inventory.json` provider `suiteone-media`; operation 
 
 ## F15 Granicus Peak (`peak`)
 
+- Public archive native search is implemented from the exact declared GET form:150native clip groups on actual page1, rendered group excerpts, bounded page/offset/hash continuation, local filters and SQLite/neutral export. The exact page2returned200empty without a page declaration and fails verification rather than completing empty.23new/194affected checks passed; provider matching, full documents and consistent later live pages remain unverified. See [usage and limits](../PEAK-PUBLIC-SEARCH.md).
+
 - Lower Merion capture returned116rows and one separately supplied PDF fetch completed; prior serialization failure remains recorded without repeating that transfer. Exact declared RSS now maps four agenda publication notices and empty Minutes; both podcast feeds were also empty. Publication GUID/pubDate stay separate from meeting identity/date. Full archive and other document/media outcomes remain unverified. See `docs/PEAK-PUBLICATION-FEEDS.md`.
 - The Elko Peak manual gives authenticated UI fields and privacy values but no external route/payload. Machine create/update/upload, roles and readback still remain unresolved product-matched contract research; live access is not an acceptance gate.
 - Do not use ViewPublisher fields as write parameters or reuse MediaManager/Legistar contracts.

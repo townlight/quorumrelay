@@ -82,6 +82,7 @@ def register(engine, *, transport: Transport | None = None,
             ("telvue", "telvue-public-player-html"),
             ("telvue", "telvue-cloudcast-mrss-xml"),
             ("peak", "peak-publication-rss-xml"),
+            ("peak", "peak-public-search-html"),
             ("telvue", "telvue-connect-media-json"), ("telvue", "telvue-connect-videos-json"),
             ("telvue", "telvue-connect-playlists-json"),
             ("telvue", "telvue-connect-playlist_items-json"),
@@ -116,6 +117,9 @@ def register(engine, *, transport: Transport | None = None,
     from .primegov_search import native_search as primegov_search
     engine.register_native_search("primegov", tracked_handler("search", lambda engine, request, content, context:
                                   primegov_search(engine, request, content, context, transport=transport)))
+    from .peak_search import native_search as peak_search
+    engine.register_native_search("peak", tracked_handler("search", lambda engine, request, content, context:
+                                  peak_search(engine, request, content, context, transport=transport)))
     from .boardable_search import native_search as boardable_search
     engine.register_native_search("boardable", tracked_handler("search", lambda engine, request, content, context:
                                   boardable_search(engine, request, content, context, transport=transport)))

@@ -363,6 +363,8 @@ Historical TelVue CloudCast 4.1 chapter CSV preparation is available as `telvue-
 
 Legistar legislative Text Editor preparation is available as `legistar-legislative-text`; see [the explicit title/body format and encoding limits](LEGISTAR-TEXT-FILES.md). This prepares a local `.txt` file with documented section markers. It does not establish historical meeting/media migration, remote import or association.
 
+Peak public archive search now maps the vendor-declared GET form and native clip groups with rendered search excerpts. See [request, continuation and source inconsistency limits](PEAK-PUBLIC-SEARCH.md). Empty or inconsistent later pages fail verification; no complete empty search or full-document coverage is inferred.
+
 ## Account response bounds
 
 TelVue Connect and Essential account reads check cancellation and the shared

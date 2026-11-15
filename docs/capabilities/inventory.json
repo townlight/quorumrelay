@@ -16986,6 +16986,63 @@
           "receipt_path": "docs/verification/configured-fetch-labels-2026-11-15.json",
           "receipt_sha256": "c4030ee9e9129810ceb97d81f250445f5493c57df61428a68e595f70d3478e8d",
           "proof_level": "saved_capture_configured_engine_execution_not_live_acceptance"
+        },
+        {
+          "id": "peak-public-search-2026-11-15",
+          "url": "https://douglascountynv.granicus.com/ViewSearchResults.php?view_id=1&types%5BClip%5D=on&types%5BAgendaItem%5D=on&types%5BAttachmentItem%5D=on&types%5BNote%5D=on&types%5BVote%2CMotion%5D=on&keywords=budget&search_scope=past",
+          "title": "Peak public archive GET form and rendered native search groups",
+          "kind": "public_tenant_and_vendor_client",
+          "observed": "2026-11-15",
+          "observation_date": "2026-11-15",
+          "access_scope": "bounded_public_read_and_synthetic_engine",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "findings": "Exact public form GET200621727B,150native clip groups; declared page1/5. Declared pagination JS confirms page-number contract.23new/194affected cases passed.",
+          "limits": "Exact page2 returned200empty/no page position and is rejected; no exhaustive archive, full-document search, item IDs or write claim.",
+          "fixture_path": "docs/capabilities/evidence/peak-public-search/page1.html",
+          "fixture_sha256": "bbfc15a412e69c1f5f2188c133d6a0b1d048438b2e3546334619d49200bc0d18",
+          "receipt_path": "docs/verification/peak-native-search-2026-11-15.json",
+          "receipt_sha256": "da3ff6ff06d283bbdb3488682c7acd0bab6decc1ccf0b8d410750d220f01aefe",
+          "synthetic_execution": {
+            "provider": "peak",
+            "status": "mock_passed",
+            "operations": [
+              "native_search"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Public archive meeting groups and rendered excerpts, one provider page per call, safe partial/failed continuation; no fulltext or catalog completeness.",
+            "execution_provenance": "23newcases executed within194affected cases; original page1mapped150groups, actual empty page2fails, synthetic nonempty page2 tests declared mechanics.",
+            "checks": [
+              {
+                "command": "pytest tests/test_peak_native_search.py tests/test_peak_viewers.py tests/test_peak_packets.py tests/test_peak_rss.py tests/test_provider_discovery.py tests/test_interchange.py tests/test_storage_search_imports.py tests/test_interfaces.py tests/test_mcp_interfaces.py -q (before final explicit excerpt citation segments)",
+                "passed": 194,
+                "failed": 0
+              },
+              {
+                "command": "pytest tests/test_peak_native_search.py -q (current final citation/roundtrip cases)",
+                "passed": 23,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/peak-public-search/source.json",
+                "sha256": "18c8a8caa1c9a17b319484739db09e67968668892bd6d01765cd9247713b184b"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/peak-public-search/pagination.js",
+                "sha256": "c7d8971e62cb855b6d08de7ca90d58e7ed8fcb8e69d82adc360fccdf0e092aa9"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_peak_native_search.py",
+                "sha256": "d39755faaa52903e49242c02eafa3f45ff5c6196ef43cb21807ddda13b1e1411"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -17091,7 +17148,8 @@
           "evidence_ids": [
             "granicus-peak-baseline",
             "quorumrelay-shared-core-operations",
-            "peak-publication-rss-2026-11-15"
+            "peak-publication-rss-2026-11-15",
+            "peak-public-search-2026-11-15"
           ],
           "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Selected peak-publication-rss-xml maps native publication GUIDs and source-bound agenda viewer notices, with no meeting identity/date inference; empty Minutes only, scoped configured retrieval and neutral persistence/ZIP tested.",
           "dependencies": [],
@@ -17111,23 +17169,23 @@
         },
         "native_search": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "granicus-peak-tenant"
+            "peak-public-search-2026-11-15"
           ],
-          "details": "Archive keyword search control/instructions; no query submitted.",
+          "details": "Vendor-declared public archive GET form; native clip-bound meeting groups/rendered excerpts, local filters and bounded page/offset/hash/seen continuation. Actual150groups page1; inconsistent empty page2fails, never complete empty.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify usable request route, permissions, result fields, exact/phrase semantics and pagination."
+            "Provider matching/full-document semantics and consistent later live pages remain unverified; all results partial."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://elkocounty.granicus.com/DocumentViewer.php?file=elkocounty_297e107d2b4284d01a905ef2af7c24f9.pdf&view=1",
             "https://lowermerion.granicus.com/ViewPublisher.php?view_id=1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "local_synthetic_no_account_required",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -17138,7 +17196,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "granicus-peak-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "peak-public-search-2026-11-15"
           ],
           "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
@@ -17162,7 +17221,8 @@
           "evidence_ids": [
             "granicus-peak-baseline",
             "quorumrelay-shared-core-operations",
-            "peak-publication-rss-2026-11-15"
+            "peak-publication-rss-2026-11-15",
+            "peak-public-search-2026-11-15"
           ],
           "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Selected peak-publication-rss-xml maps native publication GUIDs and source-bound agenda viewer notices, with no meeting identity/date inference; empty Minutes only, scoped configured retrieval and neutral persistence/ZIP tested.",
           "dependencies": [],
@@ -17573,6 +17633,7 @@
       },
       "restrictions": [],
       "remaining_research": [
+        "Public archive native search is implemented from the exact saved form and current first-page response; native IDs/rendered group excerpts persist/export. Actual empty second page without pagination fails verification; provider matching/full-document search and wider archive extent remain unverified.",
         "LowerMerion bounded listing/selected document evidence remains qualified. Exact declared RSS now maps four agenda publication notices and empty Minutes; Podcast/VideoPodcast also observed empty, no nonempty schema inferred. Feed GUID/pubDate are not meeting identity/date. Full archive, remote search/date semantics and other binary/media outcomes remain unestablished.",
         "The Elko Peak manual gives authenticated UI fields and privacy values but no external route/payload. Machine create/update/upload, roles and readback still remain unresolved product-matched contract research; live access is not an acceptance gate.",
         "Do not use ViewPublisher fields as write parameters or reuse MediaManager/Legistar contracts."
