@@ -95,6 +95,8 @@ Evidence and exact scope: `inventory.json` provider `municode-meetings`; operati
 
 ## F08 BoardBook (`boardbook`)
 
+- Explicit public organization search is implemented with native typed search-index IDs, rendered excerpts, exact query-echo validation and hash-bound local continuation. Canonical meeting/item/document identity, parent joins and provider completeness are not inferred. See [public search](../BOARDBOOK-PUBLIC-SEARCH.md).
+
 - Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied. Selected original-baseline Minutes755664 now have native hierarchy/action-source-text and scoped configured retrieval/persistence/reopen/retry/search/ZIP proof; other Minutes layouts remain unverified.
 - Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.
 - Pinned material does not establish role/enablement, write/readback or conflict schemas for an external integration. Those contract details remain unresolved; staff-account acquisition is not an acceptance gate.
@@ -103,11 +105,13 @@ Evidence and exact scope: `inventory.json` provider `boardbook`; operation statu
 
 ## F09 eSCRIBE (`escribe`)
 
+- Exact native item-history-step creation and explicit DocumentGetSince metadata selection are now implemented with separate scoped receipts. History publication and motion-migration vote grammar remain unverified; document selector inclusion/order/advance/completeness is not inferred. See [PublishingService mapping](../ESCRIBE-PUBLISHING-SERVICE.md).
+
 - Explicit `DocumentGetContentChunk` is now implemented from the pinned WSDL with selected metadata, exact native parameters, opaque bytes and context-preserving neutral exports.23new/203affected checks pass. The XSD does not explain offset/length units, terminal/assembly or atomic revision semantics; no byte-range arithmetic or whole-file claim is inferred. See `../ESCRIBE-PUBLISHING-SERVICE.md` and `../verification/escribe-content-chunk-2026-11-15.json`.
 
 - Calendar and bounded native search remain separately evidenced. Captured Meeting.aspx detail now maps rendered agenda positions, supplied partial text and same-origin FileStream locators. Item keys are capture-local with native item ID null. The earlier FileStream 403 remains a failed live transfer, not proof that the rendered detail path is unimplemented or the catalog complete.
 - Public native search source implementation and bounded first/page2/resume are verified with partial coverage. Provider full-text/exact matching semantics, broader document visibility and catalog completeness remain unknown; no saved metadata search is mislabeled native.
-- New deployed PublishingService WSDL and all5XSDs are captured. Native meeting/agenda/item/attachment/document/package/bookmark/resolution reads and16record create/update paths are implemented and synthetically verified. Metadata-bound DocumentGetContent preserves exact source bytes. An explicit DocumentUpload chunk with caller-declared final whole-document hash is implemented; preflight/recovery/full-byte readback and no replay are verified synthetically. General chunk sequencing/assembly, append/replacement/truncation/readiness semantics and vendor file-import remain unresolved research. See [PublishingService mapping](../ESCRIBE-PUBLISHING-SERVICE.md). No live SOAP calls or credential-acquisition gate.
+- New deployed PublishingService WSDL and all5XSDs are captured. Native meeting/agenda/item/attachment/document/package/bookmark/resolution reads and16record create/update paths, plus one separate item-history-step create, are implemented and synthetically verified. Metadata-bound DocumentGetContent preserves exact source bytes. An explicit DocumentUpload chunk with caller-declared final whole-document hash is implemented; preflight/recovery/full-byte readback and no replay are verified synthetically. General chunk sequencing/assembly, append/replacement/truncation/readiness semantics and vendor file-import remain unresolved research. See [PublishingService mapping](../ESCRIBE-PUBLISHING-SERVICE.md). No live SOAP calls or credential-acquisition gate.
 
 Evidence and exact scope: `inventory.json` provider `escribe`; operation status and outbound mappings are separate from historical observations.
 
@@ -193,6 +197,8 @@ Evidence and exact scope: `inventory.json` provider `destiny-agendaquick`; opera
 
 ## F18 Town Hall Streams (`town-hall-streams`)
 
+- The declared location keyword POST is implemented with native archive meeting IDs, exact location/query binding, supplied recording links, local filters and hash-bound continuation. Persistence and neutral exports retain request/capture provenance; all native results remain partial. See [public search](../TOWNHALL-PUBLIC-SEARCH.md).
+
 - One-shot supplied transcript display reads are now mapped from the actual player-declared full GET. Two selected existing-source events returned empty bodies; nonempty static HTML text/search/import/reopen/ZIP handling has separately labeled synthetic execution. No language/timing/speaker, ASR, polling or complete-history inference. See `docs/TOWNHALL-TRANSCRIPTS.md`.
 
 - The selected Hollis location page yielded 132 embedded rows; event 74003 detail yielded HTML only. No PDF/document links or playable stream bytes were available in this bounded capture; time zone remains unknown.
@@ -204,6 +210,8 @@ Evidence and exact scope: `inventory.json` provider `town-hall-streams`; operati
 - Configured event HTML and explicitly authorized supplied HLS playlist transfer are source implemented with8 focused cases; no HLS segments, MP4, transcription action or playable-media claim. The stale discovery/fetch flags are corrected. See `docs/verification/configured-fetch-reconciliation-2026-11-14.json`.
 
 ## F19 TelVue (`telvue`)
+
+- Explicit player-wide public video search is implemented:43native media candidates and22exact local metadata hits in the pinned capture, retained after SQLite/reopen/neutral export. Query-bearing links remain citations outside searchable metadata; exact response-query binding is enforced. Playlist membership, caption/chapter text, server paging and completeness are not inferred. See [public search](../TELVUE-PUBLIC-SEARCH.md).
 
 - New original-playlist native media1066963 lead establishes public literal player JSON and supplied caption reads: exact player and first declaredWebVTT200text/vtt60850bytes,14new/253affected cases passed. Metadata/raw text/bytes/relationships persist through SQLite/retry/reopen/search and neutral exports. Caption display labels do not establish language codes or meeting dates. See `docs/TELVUE-PUBLIC-CAPTIONS.md`. Connect upload/runtime initialization/readiness/association gaps remain separate.
 

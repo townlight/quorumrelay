@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-15",
+  "tested_code_commit": "7ab9c4ba47f8a7ad553da061c5febc1e30184938",
+  "tested_git_trees": {
+    "src": "4dda9a6b0f9691e33c17f8a00cf54ce3d2e775f0",
+    "tests": "5021af0020dd2d4c56c056d36756b92e0316a94e",
+    "scripts": "e0b237c27abe3ad2d577400aad4ebb1b02d85620"
+  },
+  "tasks": [
+    6,
+    8,
+    9,
+    10
+  ],
+  "status": "PASSED_PYTHON_ACCEPTANCE",
+  "python": "3.13.5",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "checks": [
+    {
+      "command": "python -X utf8 -m pytest tests -q --junitxml=<local evidence XML>",
+      "counts": {
+        "tests": 2531,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": 143.22,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\tasks-6-8-9-10-current-2026-11-15.xml",
+      "xml_sha256": "4da23cb5b94387333e2b0b20d3754c5510fe072e0191f5740ba2a1cb2b128046",
+      "owned_session": 93047,
+      "terminal_exit_code": 0,
+      "warnings": [
+        "Existing Starlette/AnyIO BlockingPortal alias deprecation"
+      ]
+    },
+    {
+      "command": "python -m ruff check src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "command": "python scripts/validate_capabilities.py",
+      "status": "PASSED",
+      "operation_entries": 341,
+      "outbound_mapping_entries": 190,
+      "evidence_records": 453,
+      "distinct_evidence_urls": 285,
+      "errors": []
+    }
+  ],
+  "coverage_limits": [
+    "Current local Python checks required by .github/workflows/ci.yml, not execution of hosted CI.",
+    "Documentation-only README/provider-summary changes follow this code commit; source/tests/scripts trees remain exact.",
+    "No package/client build, release, remote push/merge/tag, install/signature or live vendor mutation.",
+    "Full Python success does not resolve unknown vendor contracts or the two selected-destination dependencies."
+  ]
+}
