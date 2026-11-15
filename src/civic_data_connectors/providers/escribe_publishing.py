@@ -33,7 +33,7 @@ READS = frozenset({"MeetingGetById", "MeetingGetByPortal", "AgendaGetById", "Age
     "BookmarkGetById", "BookmarkGetByMeeting", "BookmarkGetByAgenda",
     "ResolutionGetById", "ResolutionGetByMeeting", "ResolutionGetByAgendaItem",
     "MeetingGetByMeetingType", "AgendaItemTextGetByMeetingId", "AgendaItemItemHistoryView",
-    "MeetingAgendaItemsWithHistory", "MeetingTypeGetByPortal"})
+    "MeetingAgendaItemsWithHistory", "MeetingTypeGetByPortal", "DocumentGetContentChunk"})
 for prefix, namespace in (("s", SOAP), ("a", ADDRESS), ("e", NS), ("i", XSI)):
     ET.register_namespace(prefix, namespace)
 
@@ -308,7 +308,7 @@ def bind_records(method, parameters, bundle):
 def parse_bundle(source, namespace, content):
     endpoint(source)
     method, value = response_value(content)
-    if method not in READS or method == "DocumentGetContent":
+    if method not in READS or method in {"DocumentGetContent", "DocumentGetContentChunk"}:
         raise ValueError("Only mapped record reads form a standalone record bundle.")
     if method == "MeetingAgendaItemsWithHistory":
         raise ValueError("History item IDs require explicit request meeting context; use fetch.")
@@ -443,18 +443,45 @@ def read(engine, source, namespace, request, bounds, context, transport, *, disc
     session = Session(source, context, bounds, transport, storage=engine.storage)
     bundle = None
     try:
-        if method == "DocumentGetContent":
+        if method in {"DocumentGetContent", "DocumentGetContentChunk"}:
             if bounds.max_pages < 2 or type(parameters.get("Id")) is not int or parameters["Id"] <= 0:
                 raise ValueError("Document metadata and content require two calls and a positive native document ID.")
-            value, content = session.call("DocumentGetById", parameters)
+            if method == "DocumentGetContentChunk" and (
+                    type(parameters["offset"]) is not int or not 0 <= parameters["offset"] < 2 ** 31
+                    or type(parameters["length"]) is not int or not 0 < parameters["length"] < 2 ** 31):
+                raise ValueError("An explicit nonnegative native offset and positive native length are required.")
+            document = {"Id": parameters["Id"]}
+            value, content = session.call("DocumentGetById", document)
             candidate = parse_bundle(source, namespace, content)
-            bind_records("DocumentGetById", parameters, candidate)
+            bind_records("DocumentGetById", document, candidate)
             if len(candidate["records"]) != 1:
                 raise ValueError("The selected native document metadata is unavailable.")
             bundle = candidate
             value, raw_content = session.call(method, parameters)
             decoded = base64.b64decode(value, validate=True)
             record = bundle["records"][0]
+            if method == "DocumentGetContentChunk":
+                raw_capture = make_bundle(source, namespace, raw_content, FORMAT, [])["capture"]
+                chunk_capture = make_bundle(source, namespace, decoded, "escribe-native-document-chunk", [])["capture"]
+                bundle["captures"] = [raw_capture, chunk_capture]
+                bundle["extensions"]["native_request_context"] = {
+                    "api_method": method, "api_parameters": deepcopy(parameters)}
+                record["normalized"].update(supplied_chunk_sha256=sha256(decoded).hexdigest(),
+                    supplied_chunk_byte_length=len(decoded), native_chunk_parameters=deepcopy(parameters),
+                    chunk_units="not_established_by_pinned_schema", chunk_assembly="not_performed",
+                    document_complete=False, content_type="application/octet-stream",
+                    content_type_availability="not_declared_by_pinned_content_method", text_availability="not_extracted")
+                record["relationships"].append({"relation": "document_content_chunk", "value": {
+                    "native_document_id": parameters["Id"], "capture_sha256": chunk_capture["sha256"],
+                    "native_request_parameters": deepcopy(parameters), "binding": "explicit_request_context_not_response_echo"}})
+                record["normalized_sha256"] = canonical_hash(record["normalized"])
+                session.check()
+                return OperationResult("partial", bundle, coverage={
+                    "scope": "one native document metadata and explicitly requested chunk pair",
+                    "api_method": method, "source_complete": False, "catalog_complete": False,
+                    "document_complete": False, "pages": session.pages, "chunk_received": True,
+                    "chunk_byte_length": len(decoded), "chunk_units": "not_established_by_pinned_schema",
+                    "pagination": "not_inferred", "text_extracted": False}, operation_id=context.operation_id)
             if record["original"].get("FileSize") != len(decoded):
                 raise ValueError("The content byte length does not match the exact native metadata.")
             raw_capture = make_bundle(source, namespace, raw_content, FORMAT, [])["capture"]
@@ -487,7 +514,7 @@ def read(engine, source, namespace, request, bounds, context, transport, *, disc
     except WriteCancelled:
         return OperationResult("cancelled", bundle, operation_id=context.operation_id)
     except (ValueError, TypeError, KeyError, OSError, ET.ParseError):
-        return OperationResult("partial" if method == "DocumentGetContent" and bundle else "failed",
-            bundle if method == "DocumentGetContent" else None, errors=(Error("publishing_read_unverified",
+        return OperationResult("partial" if method in {"DocumentGetContent", "DocumentGetContentChunk"} and bundle else "failed",
+            bundle if method in {"DocumentGetContent", "DocumentGetContentChunk"} else None, errors=(Error("publishing_read_unverified",
             "The exact PublishingService response could not be verified.", source=source.url),),
             operation_id=context.operation_id)

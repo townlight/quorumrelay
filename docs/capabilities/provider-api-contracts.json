@@ -9911,7 +9911,8 @@
       "AgendaItemTextGetByMeetingId with exact meeting/language key and source Mintues text",
       "AgendaItemItemHistoryView selected meeting/item; exact inherited typed history, literal nested motions/votes/documents; no inferred tally, result or full agenda-item join",
       "MeetingAgendaItemsWithHistory: native scalar item IDs bound to explicit meeting request context; partial references, no missing AgendaType inference or automatic detail fan-out",
-      "MeetingTypeGetByPortal with complete native portal/type ID, literal multilingual names and explicit parent selection; supplies the existing MeetingGetByMeetingType filter without ID guessing; no administration or write methods"
+      "MeetingTypeGetByPortal with complete native portal/type ID, literal multilingual names and explicit parent selection; supplies the existing MeetingGetByMeetingType filter without ID guessing; no administration or write methods",
+      "DocumentGetContentChunk: explicit native Id/offset/length, selected metadata, opaque chunk bytes and exact request context; no units, range arithmetic, assembly or complete-file inference"
     ],
     "implemented_writes": [
       "MeetingCreate",

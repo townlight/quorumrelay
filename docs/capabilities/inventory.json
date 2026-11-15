@@ -441,7 +441,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "8706decd266290b673488dbd6d33c4c56f23addd33506355f03abe13a81a9266"
+                "sha256": "a537f0c4ba0cc8e168d0e513e16035fee5aced70289fe907349e13bc4e81de5d"
               },
               {
                 "kind": "test",
@@ -490,7 +490,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "8706decd266290b673488dbd6d33c4c56f23addd33506355f03abe13a81a9266"
+                "sha256": "a537f0c4ba0cc8e168d0e513e16035fee5aced70289fe907349e13bc4e81de5d"
               },
               {
                 "kind": "test",
@@ -3546,6 +3546,18 @@
           ],
           "limits": "Authentication or a shareable copy is needed to inspect this exact article. Does not prove a universal outside dependency, contract absence or lack of other public sources. Targeted current-primary search yielded no matching article body; unrelated results rejected.",
           "source_path": "docs/capabilities/evidence/primegov-ross/source.json"
+        },
+        {
+          "id": "primegov-justmeetings-import-lead-2026-11-15",
+          "url": "https://learning.agendalink.app/releases",
+          "title": "Primary JustMeetings PrimeGov import integration follow-up",
+          "kind": "primary_document_access_observation",
+          "proof_level": "primary_product_workflow_not_machine_contract",
+          "observation_date": "2026-11-15",
+          "source_path": "docs/capabilities/evidence/primegov-justmeetings/source.json",
+          "source_sha256": "a1f10fc446027679cff4dcf24a42b063facd090a8c0111c69bc85f7a14d206ca",
+          "findings": "Release7.63 names PrimeGov agenda/topic import; current appGET403. Partner Agenda API belongs to JustMeetings and its indexed write section is unfinished, not a PrimeGov contract.",
+          "limits": "Bounded exact source observations only; no universal absence/outside-only assertion, new provider, live API method or vendor mutation."
         }
       ],
       "tenants": [
@@ -9672,7 +9684,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "8706decd266290b673488dbd6d33c4c56f23addd33506355f03abe13a81a9266"
+                "sha256": "a537f0c4ba0cc8e168d0e513e16035fee5aced70289fe907349e13bc4e81de5d"
               },
               {
                 "kind": "test",
@@ -11462,6 +11474,18 @@
           "receipt_sha256": "e0d20d599d4a49057f031797e9bbd204873019fa4a04bcefef4159177f93fd17",
           "findings": "15new/170eSCRIBE checks pass. Complete native selector feeds existing MeetingGetByMeetingType with source names preserved through search/reopen/neutral exports.",
           "limits": "Explicit selected portal, not full catalog or known-language meanings; no administration, write or live observation."
+        },
+        {
+          "id": "escribe-content-chunk-2026-11-15",
+          "url": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc?wsdl",
+          "title": "Explicit native document chunk capture and portable request context",
+          "kind": "source",
+          "proof_level": "vendor_schema_scoped_synthetic_execution_not_live_acceptance",
+          "observation_date": "2026-11-15",
+          "receipt_path": "docs/verification/escribe-content-chunk-2026-11-15.json",
+          "receipt_sha256": "e94a0f033aa9745d3c3c4d93e0adc67ec8d9a5d4871a00cb8f014a9d8084b09e",
+          "findings": "23new/203affected eSCRIBE checks passed. Explicit native Id/offset/length plus selected metadata, exact chunk SOAP/bytes/context and SQLite/retry/reopen/search/neutral exports.",
+          "limits": "Units, range/terminal semantics, assembly and atomic revision unavailable; always partial, no whole-document content/hash claim or live SOAP."
         }
       ],
       "tenants": [
@@ -11536,7 +11560,7 @@
             "escribe-history-index-2026-11-15",
             "escribe-meeting-types-2026-11-15"
           ],
-          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail\u2192attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference. Two further scoped reads: MeetingGetByMeetingType checks portal/type IDs; AgendaItemTextGetByMeetingId checks meeting/language key and preserves language-qualified native item text identity.17new/240affected passes; docs/verification/escribe-selected-text-2026-11-15.json. Selected AgendaItemItemHistoryView now preserves inherited history fields and literal nested source motions/votes/documents, exact meeting/item binding, cited text and component bounds. No native vote-label meanings, tally or missing AgendaType inferred. See verification/escribe-history-2026-11-15.json. Explicit MeetingAgendaItemsWithHistory returns scalar native item references with disclosed selected-meeting request binding; existing history view can then be fetched separately. No inferred AgendaType or catalog. Native MeetingTypeGetByPortal supplies complete existing meeting-type filter selectors and source multilingual names; scoped partial read, no administration.",
+          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail\u2192attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference. Two further scoped reads: MeetingGetByMeetingType checks portal/type IDs; AgendaItemTextGetByMeetingId checks meeting/language key and preserves language-qualified native item text identity.17new/240affected passes; docs/verification/escribe-selected-text-2026-11-15.json. Selected AgendaItemItemHistoryView now preserves inherited history fields and literal nested source motions/votes/documents, exact meeting/item binding, cited text and component bounds. No native vote-label meanings, tally or missing AgendaType inferred. See verification/escribe-history-2026-11-15.json. Explicit MeetingAgendaItemsWithHistory returns scalar native item references with disclosed selected-meeting request binding; existing history view can then be fetched separately. No inferred AgendaType or catalog. Native MeetingTypeGetByPortal supplies complete existing meeting-type filter selectors and source multilingual names; scoped partial read, no administration. Explicit DocumentGetContentChunk retains native integer parameters, selected metadata and opaque chunk bytes with request-context binding; no units/assembly/whole-file inference.23new/203affected eSCRIBE passes; verification/escribe-content-chunk-2026-11-15.json.",
           "dependencies": [],
           "remaining_verification": [
             "Implementation contract validation",
@@ -22758,7 +22782,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "8706decd266290b673488dbd6d33c4c56f23addd33506355f03abe13a81a9266"
+                "sha256": "a537f0c4ba0cc8e168d0e513e16035fee5aced70289fe907349e13bc4e81de5d"
               },
               {
                 "kind": "test",
@@ -26773,7 +26797,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "8706decd266290b673488dbd6d33c4c56f23addd33506355f03abe13a81a9266"
+                "sha256": "a537f0c4ba0cc8e168d0e513e16035fee5aced70289fe907349e13bc4e81de5d"
               },
               {
                 "kind": "test",
@@ -26822,7 +26846,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "8706decd266290b673488dbd6d33c4c56f23addd33506355f03abe13a81a9266"
+                "sha256": "a537f0c4ba0cc8e168d0e513e16035fee5aced70289fe907349e13bc4e81de5d"
               },
               {
                 "kind": "test",

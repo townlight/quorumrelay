@@ -814,6 +814,45 @@
         }
       ]
     },
+    "DocumentGetContentChunk": {
+      "action": "eSCRIBE.Internet.WebService/IPublishingService/DocumentGetContentChunk",
+      "request": [
+        {
+          "name": "Id",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "offset",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "length",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        }
+      ],
+      "response": [
+        {
+          "name": "DocumentGetContentChunkResult",
+          "type": "{http://www.w3.org/2001/XMLSchema}base64Binary",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ]
+    },
     "MeetingCreate": {
       "action": "eSCRIBE.Internet.WebService/IPublishingService/MeetingCreate",
       "request": [

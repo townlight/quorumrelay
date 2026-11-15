@@ -16,6 +16,8 @@ Evidence and exact scope: `inventory.json` provider `legistar`; operation status
 
 ## F02 PrimeGov (`primegov`)
 
+- New partner chain: JustMeetings Release7.63 explicitly names PrimeGov agenda/topic import. Its agenda-building guide supplies UI workflows; the declared app GET returned403. The indexed Agenda API is JustMeetings' own read API and leaves updates undocumented, so it cannot establish a PrimeGov payload. Exact sources and missing exchange/identity/readback fields are pinned in `evidence/primegov-justmeetings/source.json`. This remains unresolved research, not outside-only proof; no new provider or method was inferred.
+
 - Waco public portal client now establishes corrected rich document HTML/PDF/Word/vote-summary locators and selected native speaker-request outline reads. Actual335meetings/553descriptors/21HTML and6sections/0items;16new synthetic cases cover nonemptyitems and guard branches. This does not resolve authenticated Meeting/speaker/tracking/write APIs. See `docs/verification/primegov-public-outline-2026-11-14.json`.
 
 - Latest bounded item-method follow-up: the preserved client does not contain the supplied `getItemInfo` / `ListPublicFromSourceId` names; seven literal vendor assets returned HTTP 403. This establishes neither those methods' contract nor an outside-only dependency. Exact requests and capture hashes are indexed in `docs/verification/local-completion-2026-11-14.json`.
@@ -94,6 +96,8 @@ Evidence and exact scope: `inventory.json` provider `municode-meetings`; operati
 Evidence and exact scope: `inventory.json` provider `boardbook`; operation status and outbound mappings are separate from historical observations.
 
 ## F09 eSCRIBE (`escribe`)
+
+- Explicit `DocumentGetContentChunk` is now implemented from the pinned WSDL with selected metadata, exact native parameters, opaque bytes and context-preserving neutral exports.23new/203affected checks pass. The XSD does not explain offset/length units, terminal/assembly or atomic revision semantics; no byte-range arithmetic or whole-file claim is inferred. See `../ESCRIBE-PUBLISHING-SERVICE.md` and `../verification/escribe-content-chunk-2026-11-15.json`.
 
 - Calendar and bounded native search remain separately evidenced. Captured Meeting.aspx detail now maps rendered agenda positions, supplied partial text and same-origin FileStream locators. Item keys are capture-local with native item ID null. The earlier FileStream 403 remains a failed live transfer, not proof that the rendered detail path is unimplemented or the catalog complete.
 - Public native search source implementation and bounded first/page2/resume are verified with partial coverage. Provider full-text/exact matching semantics, broader document visibility and catalog completeness remain unknown; no saved metadata search is mislabeled native.

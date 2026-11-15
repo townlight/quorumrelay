@@ -57,6 +57,23 @@ verified metadata. The content method supplies no MIME field, so bytes are opaqu
 `application/octet-stream`; no PDF interpretation, text extraction or playback
 is claimed.
 
+`DocumentGetContentChunk` accepts exactly
+`{"Id": 23, "offset": 2, "length": 3}` with a positive native document ID,
+nonnegative Int32 offset and positive Int32 length. It first verifies
+`DocumentGetById`, then retains the exact chunk SOAP response, decoded opaque
+bytes, hashes and native request context. Allow two request pages. Metadata,
+context and captures round-trip through SQLite and JSON/JSONL/ZIP. Content failure
+retains independently verified metadata and an explicit error.
+
+The pinned XSD supplies integer parameters and base64 output but does not explain
+their units or range/assembly semantics. The adapter makes no offset-to-byte
+conversion, FileSize/range arithmetic, short-chunk terminal inference, chunk loop,
+atomic revision claim or whole-document hash claim. Empty returned bytes remain
+an explicitly zero-byte partial chunk. `document_complete` is always false, and
+the chunk relationship discloses request-context binding rather than a returned
+document-ID echo. Bare chunk SOAP cannot be normalized as a standalone record;
+use the context-preserving fetched bundle.
+
 Record reads return partial scope. Original XML, native fields, compound IDs,
 relationships and available text survive persistence, reopening and neutral
 JSON/JSONL/ZIP export. Meeting times remain native literals. Language-map integer
