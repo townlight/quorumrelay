@@ -19,7 +19,7 @@ ADDITIONAL_FORMATS = {"gworks": ("gworks-published-meeting-html", "gworks-secure
                       "legistar": ("legistar-events-json", "legistar-event-json", "legistar-votes-json",
                                  "legistar-rollcalls-json"),
                       "boarddocs": ("boarddocs-public-meetings-json", "boarddocs-public-meeting-html", "boarddocs-public-item-html"),
-                      "boardbook": ("boardbook-public-agenda-html",),
+                      "boardbook": ("boardbook-public-agenda-html", "boardbook-public-minutes-html"),
                       "town-hall-streams": ("town-hall-streams-event-html",),
                       "civicplus-select": ("civicplus-search-json",),
                       "clerkbase": ("clerkbase-search-html", "clerkbase-public-tree-html"),

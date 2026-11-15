@@ -168,7 +168,7 @@ def parse_native(source, namespace, content, input_format):
     if input_format == "town-hall-streams-event-html":
         from .townhall_detail import parse_bundle
         return parse_bundle(source, namespace, content)
-    if input_format == "boardbook-public-agenda-html":
+    if input_format in {"boardbook-public-agenda-html", "boardbook-public-minutes-html"}:
         from .boardbook_detail import parse_bundle
         return parse_bundle(source, namespace, content)
     if input_format == "escribe-meeting-detail-html":

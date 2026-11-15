@@ -2,17 +2,33 @@
 
 from datetime import datetime
 import re
-from urllib.parse import parse_qs, urljoin, urlsplit
+from urllib.parse import parse_qs, parse_qsl, urljoin, urlsplit
 
 from .escribe_detail import Page
 from .native import make_bundle
+from .identification import validate_url
 
 FORMAT = "boardbook-public-agenda-html"
 
 
+def minutes_context(source):
+    validate_url(source.url)
+    url = urlsplit(source.url)
+    query = parse_qsl(url.query, keep_blank_values=True)
+    organization = re.fullmatch(r"/Public/Minutes/([1-9][0-9]{0,18})", url.path)
+    if (source.provider != "boardbook" or url.scheme != "https" or url.hostname != "meetings.boardbook.org"
+            or url.port not in {None, 443} or not organization or url.fragment or len(query) != 1
+            or query[0][0] != "meeting" or not re.fullmatch(r"[1-9][0-9]{0,18}", query[0][1])):
+        raise ValueError("Select the exact supplied BoardBook Minutes organization/meeting URL.")
+    return organization[1], query[0][1]
+
+
 def parse_bundle(source, namespace, content):
     url = urlsplit(source.url)
-    organization = re.fullmatch(r"/Public/Agenda/([1-9][0-9]*)", url.path)
+    minutes = url.path.startswith("/Public/Minutes/")
+    if minutes:
+        minutes_context(source)
+    organization = re.fullmatch(r"/Public/(?:Agenda|Minutes)/([1-9][0-9]*)", url.path)
     query = parse_qs(url.query)
     ids = query.get("meeting", [])
     if (url.scheme != "https" or url.hostname != "meetings.boardbook.org"
@@ -36,16 +52,20 @@ def parse_bundle(source, namespace, content):
               "scheduled_start": start.isoformat(), "documents": [],
               "agenda_items_availability": "supplied_rendered_items", **common},
              {"html": content.decode("utf-8-sig"), "meeting_id": meeting}, "meeting")]
+    if minutes:
+        rows[0][0]["source_document_type"] = "Minutes"
     for link in page.root.walk():
         if link.tag != "a" or not link.attrs.get("href"):
             continue
         target = urlsplit(urljoin(source.url, link.attrs["href"]))
         if (target.scheme == "https" and target.netloc == url.netloc and not target.fragment
-                and target.path == "/Public/DownloadAgenda/" + organization[1]
+                and target.path == "/Public/Download" + ("Minutes/" if minutes else "Agenda/") + organization[1]
                 and parse_qs(target.query) == query):
-            document = {"kind": "agenda", "title": link.text(), "url": target.geturl()}
+            document = {"kind": "minutes" if minutes else "agenda", "title": link.text(), "url": target.geturl()}
             if document not in rows[0][0]["documents"]:
                 rows[0][0]["documents"].append(document)
+    if minutes and len(rows[0][0]["documents"]) != 1:
+        raise ValueError("The Minutes page has no unique native meeting-bound download link.")
     parents = {}
     for node in page.root.walk():
         if node.tag != "tr" or "agenda-item-information" not in node.classes():
@@ -62,6 +82,9 @@ def parse_bundle(source, namespace, content):
         parents[identity] = parent_ids[0]
         fields = {key: [n.text() for n in node.walk() if key in n.classes()]
                   for key in ("AgendaItemType", "Description", "Presenter", "Discussion")}
+        if minutes:
+            fields["Actions"] = [n.text() for n in node.walk()
+                                 if n.attrs.get("id") == "ActionsTakenRow-" + identity and n.text()]
         documents = []
         for link in node.walk():
             if link.tag != "a" or not link.attrs.get("href"):
@@ -93,7 +116,7 @@ def parse_bundle(source, namespace, content):
                 raise ValueError("The public agenda parent relationship is missing or cyclic.")
             visited.add(current)
             current = parents[current]
-    bundle = make_bundle(source, namespace, content, FORMAT, rows)
+    bundle = make_bundle(source, namespace, content, "boardbook-public-minutes-html" if minutes else FORMAT, rows)
     meeting_identity = bundle["records"][0]["identity"]
     items = {r["identity"]["external_id"]: r for r in bundle["records"][1:]}
     identities = {}
@@ -107,9 +130,9 @@ def parse_bundle(source, namespace, content):
     for identity, record in items.items():
         record["text"] = [{"field": "source_fields." + field, "text": text,
             "citation_url": source.url, "completeness": "supplied_rendered_field_only",
-            "provenance": {"method": "boardbook_public_agenda_field", "source_field": field,
+            "provenance": {"method": "boardbook_public_minutes_field" if minutes else "boardbook_public_agenda_field", "source_field": field,
                            "capture_sha256": bundle["capture"]["sha256"]}}
-            for field in ("Description", "Discussion")
+            for field in (("Description", "Discussion", "Actions") if minutes else ("Description", "Discussion"))
             for text in record["normalized"]["source_fields"][field] if text]
         record["identity"] = item_identity(identity)
         parent = record["identity"]["parent"]

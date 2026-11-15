@@ -2,9 +2,9 @@
   "schema_version": "1.0.0",
   "title": "Civic data connectors capability inventory",
   "observation_date": "2026-11-11",
-  "revision": "researched-pass-7; owned-reconciliation-2026-11-14",
+  "revision": "researched-pass-7; owned-reconciliation-2026-11-15",
   "release_completion": "incomplete",
-  "research_completion": "partial: all 31 families received a bounded pass; follow-up NovusAGENDA list traversal, CivicPlus Select historical-import mapping and Legistar related reads are recorded, while exact contracts, permissions and remaining provider gaps stay explicit",
+  "research_completion": "partial: original31families/34formats preserved; concrete Peak publication RSS, Novus Minutes, Swagit supplied transcripts/WebVTT and BoardBook Minutes follow-ups implemented with separately attributed observations and synthetic execution. OnBase EIS/Select destination facts affect only their operations; other unresolved contract research remains explicit and is not blanket outside-only.",
   "test_policy": "Current owner amendment (2026-11-12): vendor-documented synthetic execution/readback/receipts satisfy provider discovery/read/search/import/export/write acceptance. Live checks are optional supporting evidence, never a credential-acquisition gate. Historical observation/live-acceptance fields do not override this policy; actual reference-app, Windows and delivery proof remains required.",
   "scope": {
     "provider_families": 31,
@@ -10471,6 +10471,56 @@
           "limits": "Synthetic provider transport through actual current source application paths; no provider mutations; Existing configured-capture partial and unavailable-media outcomes retained; Supplied HTML/rich text is source content, not OCR/ASR or inferred votes/motions/attendance; Townlight/TownReporter current-source candidate acceptance remains separate; frozen original proof reused only where unchanged; No package build/install/signing/Sandbox restart/frozen artifact/publication",
           "receipt_path": "docs/verification/source-text-reference-clients-2026-11-12.json",
           "receipt_sha256": "21d6656e7555e96469b2146ebe4dc5264c3efb249c73c49be2fdefdce564dc93"
+        },
+        {
+          "id": "boardbook-public-minutes-2026-11-15",
+          "url": "https://meetings.boardbook.org/Public/Minutes/3307?meeting=755664",
+          "title": "Supplied native BoardBook Minutes and rendered action source fields",
+          "kind": "observed_public_response_and_scoped_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "observed_contract_and_synthetic_engine_execution",
+          "findings": [
+            "MeetingHeader supplies date/localtime/title; DownloadMinutes link binds organization3307 and native meeting755664.",
+            "26native agenda-item rows retain explicit child-of IDs; ActionsTakenRow-nativeID contains source rendered action prose, separate from hidden empty placeholders.",
+            "Preserve native item/parent/source fields, supplied text, matching attachment/document IDs and exact capture. No inferred structured votes or cross-path namespace equivalence."
+          ],
+          "synthetic_execution": {
+            "provider": "boardbook",
+            "status": "mock_passed",
+            "operations": [
+              "discover",
+              "fetch",
+              "parse",
+              "neutral_export"
+            ],
+            "entities": [
+              "meeting",
+              "agenda_item"
+            ],
+            "execution_provenance": "Actual captured Minutes mapped offline and configured path/persistence/reopen/search/retry/ZIP plus separate PDF transfer executed with injected transport.",
+            "checks": [
+              {
+                "command": "pytest tests/test_boardbook_minutes.py tests/test_boardbook_detail.py tests/test_boardbook_documents.py tests/test_provider_discovery.py tests/test_interchange.py tests/test_baseline.py tests/test_interfaces.py tests/test_public_package.py -q",
+                "passed": 202,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardbook-public-minutes/source.json",
+                "sha256": "53eda2a700323b727e42d86194b424776c20c7ef1ff46f082094d33fbc8d7dff"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardbook_minutes.py",
+                "sha256": "1c380bdf73e9e138af1f04c35a8b730fd3b1d5b796890c25e79deb1337a8e94b"
+              }
+            ],
+            "scope": "Supplied native BoardBook Minutes hierarchy/source action text and declared PDF locator; no new provider or write contract."
+          },
+          "receipt_path": "docs/verification/boardbook-public-minutes-2026-11-15.json",
+          "receipt_sha256": "da002f368d15f64d13fc8151b3e00dad6242683b26f2b8039e8e67ef421061aa"
         }
       ],
       "tenants": [
@@ -10511,9 +10561,10 @@
           "evidence_ids": [
             "boardbook-tenant",
             "boardbook-public-document-live",
-            "boardbook-rendered-agenda-synthetic"
+            "boardbook-rendered-agenda-synthetic",
+            "boardbook-public-minutes-2026-11-15"
           ],
-          "details": "Existing configured organization HTML retrieval/parser and bounded local continuation/date filtering map the supplied public table; selected Minneapolis page contained629meetings back to2010. No separate archive/page control observed; full catalog completeness unknown. Additive boardbook-public-agenda-html accepts saved/configured public Agenda HTML with native item parents and item-bound document IDs; exact raw capture retained. Viewer download semantics and full catalog remain unverified.",
+          "details": "Existing configured organization HTML retrieval/parser and bounded local continuation/date filtering map the supplied public table; selected Minneapolis page contained629meetings back to2010. No separate archive/page control observed; full catalog completeness unknown. Additive boardbook-public-agenda-html accepts saved/configured public Agenda HTML with native item parents and item-bound document IDs; exact raw capture retained. Viewer download semantics and full catalog remain unverified. Supplied rendered Minutes now map27native meeting/item records, explicit parent hierarchy, actual ActionsTakenRow source text and matching Minutes PDF locator; exact configured response/transfer and source-context guards, persistence/reopen/retry/search/ZIP tested. Existing path-based namespaces preserved; no structured vote interpretation or automatic cross-path join.",
           "dependencies": [],
           "remaining_verification": [
             "Verify full date/body bounds, continuation and checkpoints."
@@ -10536,9 +10587,10 @@
           "evidence_ids": [
             "boardbook-tenant",
             "boardbook-public-document-live",
-            "boardbook-rendered-agenda-synthetic"
+            "boardbook-rendered-agenda-synthetic",
+            "boardbook-public-minutes-2026-11-15"
           ],
-          "details": "Captured Agenda/Minutes links are source-authorized. Observed Agenda HTML supplied exact same-organization/meeting DownloadAgenda link; source resolver now retrieves guarded PDF with separate parser/transfer ceilings and retains durable agenda citation. Missing/forged download or unavailable bytes retains meeting as partial. Additive boardbook-public-agenda-html accepts saved/configured public Agenda HTML with native item parents and item-bound document IDs; exact raw capture retained. Viewer download semantics and full catalog remain unverified.",
+          "details": "Captured Agenda/Minutes links are source-authorized. Observed Agenda HTML supplied exact same-organization/meeting DownloadAgenda link; source resolver now retrieves guarded PDF with separate parser/transfer ceilings and retains durable agenda citation. Missing/forged download or unavailable bytes retains meeting as partial. Additive boardbook-public-agenda-html accepts saved/configured public Agenda HTML with native item parents and item-bound document IDs; exact raw capture retained. Viewer download semantics and full catalog remain unverified. Supplied rendered Minutes now map27native meeting/item records, explicit parent hierarchy, actual ActionsTakenRow source text and matching Minutes PDF locator; exact configured response/transfer and source-context guards, persistence/reopen/retry/search/ZIP tested. Existing path-based namespaces preserved; no structured vote interpretation or automatic cross-path join.",
           "dependencies": [],
           "remaining_verification": [
             "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
@@ -10562,9 +10614,10 @@
             "boardbook-baseline",
             "quorumrelay-shared-core-operations",
             "boardbook-rendered-agenda-synthetic",
-            "source-text-reference-clients-2026-11-12-boardbook"
+            "source-text-reference-clients-2026-11-12-boardbook",
+            "boardbook-public-minutes-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive boardbook-public-agenda-html accepts saved/configured public Agenda HTML with native item parents and item-bound document IDs; exact raw capture retained. Viewer download semantics and full catalog remain unverified.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive boardbook-public-agenda-html accepts saved/configured public Agenda HTML with native item parents and item-bound document IDs; exact raw capture retained. Viewer download semantics and full catalog remain unverified. Supplied rendered Minutes now map27native meeting/item records, explicit parent hierarchy, actual ActionsTakenRow source text and matching Minutes PDF locator; exact configured response/transfer and source-context guards, persistence/reopen/retry/search/ZIP tested. Existing path-based namespaces preserved; no structured vote interpretation or automatic cross-path join.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -10628,9 +10681,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "boardbook-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "boardbook-public-minutes-2026-11-15"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Supplied rendered Minutes now map27native meeting/item records, explicit parent hierarchy, actual ActionsTakenRow source text and matching Minutes PDF locator; exact configured response/transfer and source-context guards, persistence/reopen/retry/search/ZIP tested. Existing path-based namespaces preserved; no structured vote interpretation or automatic cross-path join.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -10968,7 +11022,7 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda\u2192PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied.",
+        "Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda\u2192PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied. Selected original-baseline Minutes755664 now have native hierarchy/action-source-text and scoped configured retrieval/persistence/reopen/retry/search/ZIP proof; other Minutes layouts remain unverified.",
         "Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.",
         "Pinned material does not establish role/enablement, write/readback or conflict schemas for an external integration. Those contract details remain unresolved; staff-account acquisition is not an acceptance gate."
       ],

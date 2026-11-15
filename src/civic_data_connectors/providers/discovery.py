@@ -115,7 +115,7 @@ def _initial(source, bounds, input_format, saved):
     if input_format in {"meeting-export", "legistar-event-json", "wistia-media-detail-json", "wistia-caption-json",
                         "agendaquick-item-search-html", "civicplus-search-json"}:
         return []
-    if input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html", "town-hall-streams-event-html",
+    if input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html", "boardbook-public-minutes-html", "town-hall-streams-event-html",
                         "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "novus-public-coversheet-html", "swagit-public-player-html"}:
         return [{"kind": "static"}]
     if provider in NATIVE:
@@ -504,6 +504,12 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
     namespace = validated_namespace if validated_namespace is not None else validate_source(source, context, content)
     bounds = Bounds(**request.get("bounds", {}))
     input_format = source.input_format or DEFAULT_FORMAT[source.provider]
+    boardbook_minutes = (source.provider == "boardbook" and (input_format == "boardbook-public-minutes-html"
+                         or (source.input_format is None and urlsplit(source.url).path.startswith("/Public/Minutes/"))))
+    if boardbook_minutes:
+        from .boardbook_detail import minutes_context
+        minutes_context(source)
+        input_format = "boardbook-public-minutes-html"
     swagit_player = (source.provider == "swagit" and (input_format == "swagit-public-player-html"
                      or (source.input_format is None and re.fullmatch(r"/videos/[1-9][0-9]*", urlsplit(source.url).path))))
     if swagit_player:
@@ -677,17 +683,17 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
                 response = transport.request(
                     url, method=method, body=body, headers=headers or None,
                     byte_limit=(min(bounds.parser_bytes, bounds.transfer_bytes)
-                                if swagit_player or novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
+                                if boardbook_minutes or swagit_player or novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
                                 else bounds.parser_bytes),
                     deadline_seconds=max(0.001, deadline - monotonic()),
                     allowed_origins=(origin,),
-                    **({"allow_redirects": False} if swagit_player or novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {
+                    **({"allow_redirects": False} if boardbook_minutes or swagit_player or novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {
                         "suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period", "clerkbase-tree",
                         "onbase-window", "boarddocs-public", "tyler-calendar"} else {}),
                 )
                 if _origin(response.url) != origin:
                     raise ValueError("Provider retrieval left its configured origin.")
-                if (swagit_player or novus_minutes) and (response.url != url
+                if (boardbook_minutes or swagit_player or novus_minutes) and (response.url != url
                         or response.content_type.split(";", 1)[0].strip().lower() not in {"text/html", "application/xhtml+xml"}
                         or len(response.content) > bounds.transfer_bytes):
                     raise ValueError("The exact bounded public detail HTML was not returned.")
@@ -815,7 +821,7 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
     timed_out = monotonic() >= deadline
     partial = bool(queue or failures or unknown_dates or unknown_bodies or saved is not None or
                    source.provider not in NATIVE or
-                   input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html", "town-hall-streams-event-html"})
+                   input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html", "boardbook-public-minutes-html", "town-hall-streams-event-html"})
     status = "cancelled" if cancelled else (
         "failed" if failures and not captures else "partial" if partial else "completed")
     checkpoint = _checkpoint(binding, queue, seen) if queue else None
@@ -858,9 +864,9 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "one configured public event/player declaration; no media segment or archive claim",
             "time_zone_status": "unknown"})
-    elif input_format == "boardbook-public-agenda-html":
+    elif input_format in {"boardbook-public-agenda-html", "boardbook-public-minutes-html"}:
         coverage.update({"catalog_complete": False, "source_complete": False,
-            "scope": "one configured rendered public BoardBook agenda; no hidden loaders or archive claim",
+            "scope": "one configured rendered public BoardBook document; no hidden loaders or archive claim",
             "native_item_ids": True, "time_zone_status": "unknown"})
     elif input_format == "escribe-meeting-detail-html":
         coverage.update({"catalog_complete": False, "source_complete": False,

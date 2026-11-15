@@ -1,0 +1,69 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "5ad4064166e1f712660ebbaf0dc750106d11b1fc",
+  "status": "PASSED",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "scope": "Supplied native BoardBook Minutes hierarchy/source action text and declared PDF locator; no new provider or write contract.",
+  "new_cases": 11,
+  "checks": [
+    {
+      "command": "pytest tests/test_boardbook_minutes.py tests/test_boardbook_detail.py tests/test_boardbook_documents.py -q",
+      "passed": 21,
+      "failed": 0,
+      "seconds": 1.07
+    },
+    {
+      "command": "pytest tests/test_boardbook_minutes.py tests/test_boardbook_detail.py tests/test_boardbook_documents.py tests/test_provider_discovery.py tests/test_interchange.py tests/test_baseline.py tests/test_interfaces.py tests/test_public_package.py -q",
+      "passed": 202,
+      "failed": 0,
+      "seconds": 18.16,
+      "warning": "Existing starlette/anyio deprecation"
+    },
+    {
+      "command": "ruff check affected source and test paths",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/boardbook_detail.py",
+      "sha256": "fd2426236d88ab87e6376d5766eb5aa0ea8b672c8b3071adb921ac5552bff0d8"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/discovery.py",
+      "sha256": "ca3974acaa152f8a9b0131715f989b050b77c945742c82d642244e94bc7cf60b"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_boardbook_minutes.py",
+      "sha256": "1c380bdf73e9e138af1f04c35a8b730fd3b1d5b796890c25e79deb1337a8e94b"
+    },
+    {
+      "kind": "observed_contract",
+      "path": "docs/capabilities/evidence/boardbook-public-minutes/source.json",
+      "sha256": "53eda2a700323b727e42d86194b424776c20c7ef1ff46f082094d33fbc8d7dff"
+    },
+    {
+      "kind": "capture",
+      "path": "tests/fixtures/boardbook-minutes-755664.html",
+      "sha256": "97973d79ec8860d5eed416ba04ebceff191ec312ba94d955a2a22ae7fc8ba3f1"
+    }
+  ],
+  "unaffected_evidence_reused": {
+    "receipt": "docs/verification/swagit-public-player-2026-11-15.json",
+    "full_suite_passed": 1919,
+    "scope": "Earlier full suite before isolated BoardBook extension; affected registration/compatibility/interfaces/retrieval/export checks rerun, no new full run claimed."
+  },
+  "limits": [
+    "Observed exact public research GET; engine route/persistence/search/reopen/retry/ZIP and separate PDF transfer use injected network.",
+    "Actions kept as source-field text; no typed motion/vote result inference.",
+    "Existing BoardBook source namespace is path-based. Agenda/Minutes/listing paths are not automatically joined or rewritten.",
+    "Additional Minutes layouts, remote staff operations and imports remain unverified."
+  ]
+}

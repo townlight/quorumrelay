@@ -1,6 +1,6 @@
 # Remaining provider work
 
-Reconciled 2026-11-14 against current source and saved receipts. Canonical structured source: [inventory.json](inventory.json). This replaces stale imperative follow-ups; original dated observations and source URLs remain in that ledger and version history.
+Reconciled 2026-11-15 against current source and saved receipts. Canonical structured source: [inventory.json](inventory.json). This replaces stale imperative follow-ups; original dated observations and source URLs remain in that ledger and version history.
 
 Unknown machine contracts are unresolved research, not verified outside-information dependencies or unsupported features. No exhaustive-public-search claim is made. Vendor-documented synthetic execution is accepted for its attributed scope; credentials and live writes are optional. Actual public HTTP 403 and guarded redirect failures remain access observations for those exact requests only. Current operation dependencies omit superseded test-account acquisition gates and completed extraction/shared-engine prerequisites; current runtime authorization, machine-contract gaps and unverified acceptance remain separate.
 
@@ -85,7 +85,7 @@ Evidence and exact scope: `inventory.json` provider `municode-meetings`; operati
 
 ## F08 BoardBook (`boardbook`)
 
-- Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied.
+- Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied. Selected original-baseline Minutes755664 now have native hierarchy/action-source-text and scoped configured retrieval/persistence/reopen/retry/search/ZIP proof; other Minutes layouts remain unverified.
 - Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.
 - Pinned material does not establish role/enablement, write/readback or conflict schemas for an external integration. Those contract details remain unresolved; staff-account acquisition is not an acceptance gate.
 
