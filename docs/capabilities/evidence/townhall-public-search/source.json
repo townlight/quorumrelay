@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-15",
+  "origin": "Original baseline tests/fixtures/baseline/townhallstreams.response declares exact location31 POST form; current page declares same action/fields.",
+  "sources": [
+    {
+      "url": "https://www.townhallstreams.com/town.php?id=31",
+      "method": "GET",
+      "status": 200,
+      "final_url": "https://www.townhallstreams.com/town.php?id=31",
+      "bytes": 245312,
+      "sha256": "57af7fe18c5502e951c743849a8b0a2643acbb78319490ff64e9f6f039c22841",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.townhallstreams.com/town.php?id=31",
+      "method": "POST",
+      "status": 200,
+      "final_url": "https://www.townhallstreams.com/town.php?id=31",
+      "bytes": 44219,
+      "sha256": "5cce84be92d82e0cd1189c1064acef57624b8758a361243dfa1767988a320b2c",
+      "content_type": "text/html; charset=UTF-8"
+    }
+  ],
+  "raw_files": [
+    {
+      "path": "docs/capabilities/evidence/townhall-public-search/form.html",
+      "sha256": "57af7fe18c5502e951c743849a8b0a2643acbb78319490ff64e9f6f039c22841"
+    },
+    {
+      "path": "docs/capabilities/evidence/townhall-public-search/results.html",
+      "sha256": "5cce84be92d82e0cd1189c1064acef57624b8758a361243dfa1767988a320b2c"
+    }
+  ],
+  "request_contract": {
+    "method": "POST",
+    "url": "https://www.townhallstreams.com/town.php?id=31",
+    "content_type": "application/x-www-form-urlencoded",
+    "fields": {
+      "search": "budget",
+      "searchbtn": "Search"
+    }
+  },
+  "response_contract": "Previous Events archived stream rows, read using unchanged compatibility mapper;39native event IDs/title/local dates/stream locators.",
+  "limits": [
+    "Only mapped archived meetings, not upcoming/full catalog or document/caption bytes.",
+    "Unknown time zone remains unknown; body and nonmeeting filters unavailable.",
+    "All results partial; no server paging/exhaustion inferred.",
+    "No browser/account/session handler, vendor write/import or release."
+  ],
+  "proof": "Exact public GET/keyword POST and scoped synthetic engine checks; live search discovery is separate from exhaustive provider coverage."
+}

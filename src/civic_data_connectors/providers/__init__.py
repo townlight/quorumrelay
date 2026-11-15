@@ -124,6 +124,9 @@ def register(engine, *, transport: Transport | None = None,
     from .boardbook_search import native_search as boardbook_search
     engine.register_native_search("boardbook", tracked_handler("search", lambda engine, request, content, context:
                                   boardbook_search(engine, request, content, context, transport=transport)))
+    from .townhall_search import native_search as townhall_search
+    engine.register_native_search("town-hall-streams", tracked_handler("search", lambda engine, request, content, context:
+                                  townhall_search(engine, request, content, context, transport=transport)))
     from .boardable_search import native_search as boardable_search
     engine.register_native_search("boardable", tracked_handler("search", lambda engine, request, content, context:
                                   boardable_search(engine, request, content, context, transport=transport)))

@@ -412,3 +412,7 @@ The local eSCRIBE [PublishingService mapping](ESCRIBE-PUBLISHING-SERVICE.md) now
 ## BoardBook public search-index entries
 
 `boardbook-public-search-html` and the native search handler map the declared public GET form with four observed index types to explicit `search_result` records. Index/native ID remain distinct from canonical meeting/item/document IDs; parent identity and dates are not inferred. Native locators, rendered excerpts, exact captures and hashes survive persistence and neutral export. All native results remain partial; local offset checkpoints bind the entire captured response hash. See [usage, fields and limits](BOARDBOOK-PUBLIC-SEARCH.md).
+
+## Town Hall Streams archive keyword search
+
+The public native search handler uses the baseline/current declared POST form and reuses `town-hall-streams-html`. Literal event IDs/local dates/title/stream links stay within the configured location; precise stream citations and exact POST capture/context survive storage/export. One39meeting current response and scoped execution are documented in [the usage guide](TOWNHALL-PUBLIC-SEARCH.md). No provider exhaustion/fulltext/body or time-zone inference.

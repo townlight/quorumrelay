@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "4fa0e49086b943662212b596dca9f82aa5c731f7",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "Anonymous Town Hall Streams archive keyword POST,39native meeting IDs/date/stream locators; precise citations/local filters and portable capture/context.",
+  "new_cases": 17,
+  "checks": [
+    {
+      "scope": "New search/existing Town Hall readers, discovery, interchange/storage and HTTP/MCP interfaces",
+      "passed": 183,
+      "failed": 0,
+      "seconds": 35.74,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\townhall-native-search-2026-11-15.xml",
+      "xml_sha256": "b7343e3cb57271276a2f1f4bbd99466eb77e196a6fec355d811f341b1f2d068d",
+      "warning": "Existing Starlette/AnyIO alias deprecation"
+    },
+    {
+      "scope": "Ruff changed source/test",
+      "status": "PASSED"
+    }
+  ],
+  "source_sha256": {
+    "src/civic_data_connectors/providers/townhall_search.py": "a8e17171854da8cf8045b0cc661ee555aa6a3cb811d16913f630e2e85e736b7f",
+    "src/civic_data_connectors/providers/__init__.py": "d0caf1af7f5c7a1875b0e691af35bf576046da7db75e1477a2b76dadd852744e",
+    "tests/test_townhall_native_search.py": "23a2dfa878a1786120be87e2a1a8b24e8b25c7c6755e6ca0a7281d0e1544e4fc",
+    "docs/TOWNHALL-PUBLIC-SEARCH.md": "80554afaf00e58dd66a3714b2802c8dce57b9ac6a3cf5e18e1c87379d77534d6"
+  },
+  "primary_source": "docs/capabilities/evidence/townhall-public-search/source.json",
+  "limits": [
+    "Only mapped archived meetings, not upcoming/full catalog or document/caption bytes.",
+    "Unknown time zone remains unknown; body and nonmeeting filters unavailable.",
+    "All results partial; no server paging/exhaustion inferred.",
+    "No browser/account/session handler, vendor write/import or release."
+  ],
+  "test_correction": "Initial cross-location fixture changed only the first upcoming link outside the archive parser scope. Corrected mutation to mapped archived links;17cases pass. No source guard weakened."
+}

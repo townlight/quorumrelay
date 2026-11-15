@@ -395,3 +395,7 @@ Current anonymous default-model GET returned200 with `LoggedIn=false`. Two bound
 ### BoardBook public search-index contract (2026-11-15)
 
 The original saved organization3307 supplies the exact search-page link. Current anonymous GET form/client and one nonempty query response establish42native index entries, retained as `search_result` records with typed locator IDs and partial excerpts;37match the exact local query. Native search and explicit saved parsing are implemented with hash-bound local-offset continuation, interruption/bytes guards, persistence and JSON/JSONL/ZIP checks. No search index ID is assumed to be a canonical meeting/item/document ID. Body/date semantics, canonical parent association, full document bytes and complete provider coverage remain unverified. No server paging or write is invented. See [contract](../BOARDBOOK-PUBLIC-SEARCH.md).
+
+### Town Hall Streams declared keyword POST (2026-11-15)
+
+Original/current location31 pages declare the same anonymous archive search POST fields. One exact budget query returns39native meeting IDs/title/local dates/stream locators. The handler reuses the baseline mapper with explicit same-location binding, exact local text/date filtering and hash-bound offset continuation; capture/context/citations persist and round-trip. Full catalog, server paging, full-document and canonical body semantics remain unverified; all results partial and unreadable/empty responses fail. No new vendor write or caption claim. See [contract](../TOWNHALL-PUBLIC-SEARCH.md).

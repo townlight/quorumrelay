@@ -19242,6 +19242,58 @@
               }
             ]
           }
+        },
+        {
+          "id": "townhall-public-search-2026-11-15",
+          "url": "https://www.townhallstreams.com/town.php?id=31",
+          "title": "Town Hall Streams declared archive keyword POST and39native meetings",
+          "kind": "public_tenant_and_vendor_client",
+          "observed": "2026-11-15",
+          "observation_date": "2026-11-15",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "access_scope": "bounded_public_read_and_synthetic_engine",
+          "findings": "Current baseline-matched POST returns39archived native meetings.17new/183affected cases passed.",
+          "limits": "One rendered result capture, not full catalog/server paging/fulltext; body/nonmeeting filters unavailable.",
+          "fixture_path": "docs/capabilities/evidence/townhall-public-search/results.html",
+          "fixture_sha256": "5cce84be92d82e0cd1189c1064acef57624b8758a361243dfa1767988a320b2c",
+          "receipt_path": "docs/verification/townhall-native-search-2026-11-15.json",
+          "receipt_sha256": "747705af35d074b86d982da6a8a8186ce07acaaaddcbddf50a42e54d2c81588c",
+          "synthetic_execution": {
+            "provider": "town-hall-streams",
+            "status": "mock_passed",
+            "operations": [
+              "native_search"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Anonymous Town Hall Streams archive keyword POST,39native meeting IDs/date/stream locators; precise citations/local filters and portable capture/context.",
+            "execution_provenance": "17new cases within183affected; pinned real39row result via synthetic transport, strict location binding/cancel/deadline/bytes/local date/resume/revision, SQLite retry/reopen and neutral export.",
+            "checks": [
+              {
+                "command": "pytest tests/test_townhall_native_search.py tests/test_townhall_detail.py tests/test_townhall_captions.py tests/test_provider_discovery.py tests/test_interchange.py tests/test_storage_search_imports.py tests/test_interfaces.py tests/test_mcp_interfaces.py -q",
+                "passed": 183,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/townhall-public-search/source.json",
+                "sha256": "b0e61fd816099bf6287afd90de1917d6e7609f34a1981b630459120aff34ff2c"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/townhall-public-search/form.html",
+                "sha256": "57af7fe18c5502e951c743849a8b0a2643acbb78319490ff64e9f6f039c22841"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_townhall_native_search.py",
+                "sha256": "23a2dfa878a1786120be87e2a1a8b24e8b25c7c6755e6ca0a7281d0e1544e4fc"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -19364,24 +19416,23 @@
           ]
         },
         "native_search": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "ths-hollis",
-            "ths-player"
+            "townhall-public-search-2026-11-15"
           ],
-          "details": "No native keyword search contract verified; archive grouping is not full-text search.",
+          "details": "Anonymous Town Hall Streams archive keyword POST,39native meeting IDs/date/stream locators; precise citations/local filters and portable capture/context.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify request method/route, exact-term/phrase/date/body semantics, paging and incomplete/error outcomes."
+            "Provider ranking, unreturned text, full archive and server paging/exhaustion remain unverified; native results remain partial."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://townhallstreams.com/town.php?id=72"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "local_synthetic_no_account_required",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"

@@ -2,7 +2,7 @@
 
 Current immutable development snapshot: `0.1.0.dev8`, schema `2.0.0`, frozen source `3862e5f4ad7064aee722e09bb438899c3566477f`. The finite public-route batch marked post-dev6 below is included in this wheel. Fresh outside-checkout dev8 installation passed package/resource and corrected capability-label checks. All 34 independent original-output comparisons from dev7 are reused through exact runtime-module equality; these are separate from consumer and live-provider acceptance. This source-path and acceptance map preserves all 31 families, 34 baseline inputs and supported outbound obligations. It is not a completed-release or independent-review claim. The capability inventory records each operation's research and bounded evidence.
 
-The later integrated development source is a separate, unshipped candidate. Its current source catalog has 32 registered providers (31 baseline families plus Cablecast), 34 baseline input formats, 62 additive parser hooks and 21 native-search handlers. These source counts do not update the frozen dev8/dev11 packages or claim complete provider or tenant coverage.
+The later integrated development source is a separate, unshipped candidate. Its current source catalog has 32 registered providers (31 baseline families plus Cablecast), 34 baseline input formats, 62 additive parser hooks and 22 native-search handlers. These source counts do not update the frozen dev8/dev11 packages or claim complete provider or tenant coverage.
 
 ## Shared implemented behavior
 
