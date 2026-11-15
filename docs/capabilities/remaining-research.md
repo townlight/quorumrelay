@@ -23,7 +23,7 @@ Evidence and exact scope: `inventory.json` provider `legistar`; operation status
 - Observed Reno public /api/v2/PublicPortal/search form is now source-implemented with exact local metadata/excerpt checks, stable native-ID continuation, raw/parent preservation and bounded first/resumed receipt. Full document content, provider matching/caps/rank and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.
 - Official release notes identify Meeting API, speaker and tracking-number search but the checked release/help material supplies no executable schema. Continue from concrete product-matched API leads; no exhaustive public search or outside-only dependency is established, and no account enablement is a synthetic acceptance gate.
 - Authenticated create/update/upload field schemas, permissions, readback and conflict semantics remain unverified in the pinned material. A matching machine contract is needed; credentials or live tenant writes are not an acceptance gate.
-- Selected public client document branches synthetically executed; JSON URL-string shape inferred from callback. Type4 HTML/unknown output, live file availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled.
+- Selected public client document branches synthetically executed; JSON URL-string shape inferred from callback. Type4 HTML3 retrieval is implemented with scoped evidence; unknown output, live file availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled.
 
 Evidence and exact scope: `inventory.json` provider `primegov`; operation status and outbound mappings are separate from historical observations.
 
@@ -181,7 +181,7 @@ Evidence and exact scope: `inventory.json` provider `town-hall-streams`; operati
 
 ## F19 TelVue (`telvue`)
 
-- Historical CloudCast4.1 chapter CSV preparation is implemented from the official manual: headerless Start/End/Title/Summary/Description, explicit times, local bytes/hash/scoped artifact. Current Connect compatibility, remote import and meeting association remain unverified. See [format limits](../TELVUE-CHAPTER-CSV.md).
+- CloudCast4.1 and Connect/CloudCast2022 chapter CSV preparation is implemented from official manual/article/image contracts (2022variant accepts seconds and blank end, with headerless-layout derivation explicit): headerless Start/End/Title/Summary/Description, explicit times, local bytes/hash/scoped artifact. Current Connect compatibility, remote import and meeting association remain unverified. See [format limits](../TELVUE-CHAPTER-CSV.md).
 
 - Documented Connect v2 reads are GET /api/v2/media[/{id}], /videos and /playlists[/{id}]. The source fetch adapter now implements explicitly requested account reads; synthetic documented-route verification is accepted; live calls are optional and unrun.
 - Published pages show example JSON envelopes/fields but omit filters, pagination/cursor, caps and rate limits. Record these from a supplied authorized account response/current guide; do not claim catalog completeness.

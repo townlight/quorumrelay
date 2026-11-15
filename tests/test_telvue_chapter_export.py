@@ -94,3 +94,31 @@ def test_cancelled_request_has_no_output():
     ctx.cancellation.set()
     result = create_engine().execute("export", request(), context=ctx)
     assert result.status == "cancelled" and not result.data
+
+
+@pytest.mark.parametrize("start,end,expected", [
+    (20, 30, ["20", "30"]),
+    ("00:00:20", "", ["00:00:20", ""]),
+    (20, "00:00:30", ["20", "00:00:30"]),
+])
+def test_2022_bulk_format_seconds_optional_end_and_five_positions(start, end, expected):
+    req = request()
+    req.update(format="telvue-connect-chapters-csv", chapters=[{"start": start, "title": "Opening"}])
+    if end != "":
+        req["chapters"][0]["end"] = end
+    result = create_engine().execute("export", req)
+    assert result.status == "completed", result.public_dict()
+    rows = list(csv.reader(io.StringIO(base64.b64decode(result.data["content_base64"]).decode())))
+    assert rows == [[*expected, "Opening", "", ""]]
+    manifest = result.data["manifest"]
+    assert manifest["documented_version"] == "Add Chapters / December 2022"
+    assert "headerless" in manifest["projection_losses"][2]
+    assert not manifest["vendor_import_accepted"]
+
+
+@pytest.mark.parametrize("value", [True, -1, 360000, 1.5, None])
+def test_2022_seconds_requires_a_bounded_integer_not_a_coerced_value(value):
+    req = request()
+    req.update(format="telvue-connect-chapters-csv", chapters=[{"start": value, "title": "Opening"}])
+    result = create_engine().execute("export", req)
+    assert result.status == "failed" and not result.data

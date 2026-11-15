@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-14",
+  "url": "https://telvue.com/knowledgebase/add-chapters/",
+  "status": 200,
+  "article_updated": "2022-12-01",
+  "image_url": "https://telvue.com/wp-content/uploads/2016/04/CC_Chapters_Bulk.png",
+  "image_sha256": "8407486275eb3c53cf038d65166cd42e14b0dfd8058a7efd5ae1deee8873a035",
+  "established": {
+    "columns": [
+      "start_time",
+      "end_time",
+      "title",
+      "short_summary",
+      "description"
+    ],
+    "start_and_title_required": true,
+    "optional_fields_require_blank_position": true,
+    "time_representation": [
+      "seconds",
+      "HH:MM:SS"
+    ]
+  },
+  "interpretation": "Headerless layout follows the matching five-column 2014 official CloudCast contract. The 2022 screenshot itself names columns and does not separately state header handling. Encoding/current deployment/remote acceptance remain unverified.",
+  "source_access": "Firecrawl anonymous scrape returned200 after direct articleGET403. Image exact declared public URL GET20064537bytes; inspected as local image, no desktop control. No login, header override or mutation."
+}

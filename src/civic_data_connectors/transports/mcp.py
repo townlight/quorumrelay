@@ -108,10 +108,28 @@ def create_server(engine, principal: Principal | None = None, *, config: Service
                     return
                 completed = value.get("completed", value.get("completed_steps", 0))
                 total = value.get("total", value.get("total_steps"))
+                async def notify():
+                    # A legacy HTTP progress send may be blocked after its
+                    # request is cancelled. Release that send cooperatively so
+                    # the worker can persist its real terminal engine result.
+                    async with anyio.create_task_group() as group:
+                        async def stop_on_cancel():
+                            while not context.cancellation.is_set():
+                                await anyio.sleep(.01)
+                            group.cancel_scope.cancel()
+
+                        group.start_soon(stop_on_cancel)
+                        try:
+                            await ctx.report_progress(float(completed),
+                                float(total) if total is not None else None,
+                                "operation_id=" + context.operation_id)
+                        except (cancelled_error, FutureCancelledError):
+                            context.cancellation.set()
+                        finally:
+                            group.cancel_scope.cancel()
+
                 try:
-                    anyio.from_thread.run(ctx.report_progress, float(completed),
-                                          float(total) if total is not None else None,
-                                          "operation_id=" + context.operation_id)
+                    anyio.from_thread.run(notify)
                 except (cancelled_error, FutureCancelledError):
                     # A cancelled progress send must not exit the worker before it
                     # can cooperatively stop and persist its actual terminal result.

@@ -2,6 +2,11 @@
 
 import argparse
 import time
+import sys
+from pathlib import Path
+
+# Subprocesses must exercise this checkout, not an unrelated editable install.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from civic_data_connectors import Engine, imports, interchange, providers, search, storage, writes
 from civic_data_connectors.models import OperationResult

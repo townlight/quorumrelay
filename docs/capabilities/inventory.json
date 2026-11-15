@@ -17798,6 +17798,53 @@
           },
           "receipt_path": "docs/verification/telvue-chapter-csv-2026-11-14.json",
           "receipt_sha256": "b3ab6873001efb2d2334611d543c6d62db2638b6788f50cea2ad44fd540359ea"
+        },
+        {
+          "id": "telvue-connect-2022-chapter-csv-2026-11-14",
+          "url": "https://telvue.com/knowledgebase/add-chapters/",
+          "title": "Connect/CloudCast2022 bulk chapter CSV optional fields",
+          "kind": "official_documentation_and_scoped_execution",
+          "observation_date": "2026-11-14",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "findings": "Exact declared vendor image establishes seconds orHH:MM:SS, required start/title and blank optional positions. Headerless layout derived from matching2014manual; no current deployed/import claim.",
+          "synthetic_execution": {
+            "provider": "telvue",
+            "status": "mock_passed",
+            "operations": [
+              "vendor_file_export"
+            ],
+            "entities": [
+              "chapter_csv"
+            ],
+            "checks": [
+              {
+                "command": "pytest tests/test_telvue_chapter_export.py -q",
+                "passed": 25,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/telvue-chapter-csv/connect-2022-source.json",
+                "sha256": "d70f9cdaf94f47a78b1876f262912a5b2a39c358686648d6fc84b5d92edb62c2"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/telvue-chapter-csv/source.json",
+                "sha256": "4f424a0cec2e7a4992d1496629e0d27b1b2734e1a63fd03255130f380434932a"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_telvue_chapter_export.py",
+                "sha256": "cdb050278f11232ff2d0e1822070f3629f8c014ef6c70f87dbb01ec733b7238e"
+              }
+            ],
+            "execution_provenance": "Actual scoped local file generation andCSVreadback;25cases including8new2022shape cases.",
+            "scope": "Local documented chapter file preparation only. No remote write/acceptance/current deployment or automatic association."
+          },
+          "receipt_path": "docs/verification/telvue-connect-chapters-2026-11-14.json",
+          "receipt_sha256": "dec79a9d69084a7a45a26d1b32092d53fd9665ee50b1b90f84f6af6423fb4e1b"
         }
       ],
       "tenants": [
@@ -18005,9 +18052,10 @@
           "capability_status": "observed",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "telvue-cloudcast-4.1-chapter-csv-2026-11-14"
+            "telvue-cloudcast-4.1-chapter-csv-2026-11-14",
+            "telvue-connect-2022-chapter-csv-2026-11-14"
           ],
-          "details": "Local historical CloudCast4.1 headerless chapter CSV preparation only; explicit times and text, bytes/hash/scoped persistent artifacts. No remote import/recording association/current Connect claim.",
+          "details": "Local CloudCast4.1 and Connect/CloudCast2022 chapter CSV preparation; explicit times/text, optional end/seconds in2022variant, bytes/hash/scoped artifacts. Headerless derivation andUTF8choice disclosed; no current deployment or remote import/association acceptance.",
           "dependencies": [],
           "remaining_verification": [
             "Current Connect/CloudCast applicability and remote import/readback remain unverified."
