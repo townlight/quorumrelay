@@ -250,7 +250,7 @@ Evidence and exact scope: `inventory.json` provider `towncloud`; operation statu
 
 - Current dated listing and supplied Other Years controls are implemented with bounded continuation. Selected numeric meeting detail preserves supplied category/location/local time, text and document locators; docs/verification/towpath-supplied-detail-2026-11-12.json records four scoped synthetic cases. Other years/full history and PDF byte availability remain coverage qualifications, not mandatory new sampling. The old Brutus URL is historical.
 - Demo search query semantics and archive bounds remain unknown; HTML success does not establish PDF extraction or attachment availability.
-- The pinned Meetings Module guide describes staff entry without a machine API/import payload. A vendor contract remains unresolved; test-account acquisition is not a completion gate.
+- Full5page Meetings Module PDF read and pinned2026-11-15: staff fields, text/PDF agenda/minutes, pending state, additional documents and enabled visibility are documented. No remote machine request/readback or external import format is supplied. No new API mapping or outside-only dependency is established; test-account acquisition remains optional.
 
 Evidence and exact scope: `inventory.json` provider `digital-towpath`; operation status and outbound mappings are separate from historical observations.
 

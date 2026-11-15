@@ -24603,12 +24603,16 @@
           "url": "https://digitaltowpath.digitaltowpath.net/application/files/4317/4956/6451/Using_the_Meetings_Module.pdf",
           "title": "Using the Meetings Module",
           "kind": "official_documentation",
-          "observed": "FetchUrl refused binary PDF. WebSearch official indexed excerpts reviewed.",
-          "findings": "Excerpts describe Dashboard Meetings Module, category setup for committees/boards, entering meetings and Meeting Date/Time selection.",
-          "limits": "Full manual not read; no field contract, upload/update behavior or machine write route verified.",
-          "observation_date": "2026-11-11",
+          "observed": "Full5page official PDF GET200 read2026-11-15; earlier indexed-only binary-tool limitation superseded.",
+          "findings": "Staff UI fields and category/default-location configuration; optional calendar association, enabled visibility control, text/PDF agendas and minutes with pending placeholders, additional documents. No remote route/body or external import schema.",
+          "limits": "Staff workflow documentation only; no machine auth, identity, request, conflict/readback or external file-import schema. Missing contracts remain unresolved research, not outside-only proof.",
+          "observation_date": "2026-11-15",
           "access_scope": "public_research_only",
-          "proof_level": "indexed_or_limited_documentation"
+          "proof_level": "official_documentation_or_ui_contract_not_live_acceptance",
+          "fixture_path": "docs/capabilities/evidence/towpath-meetings-manual/using-the-meetings-module.pdf",
+          "fixture_sha256": "9f680134d3ec76ce5af1eae2fb904146e4e96a9ae24b5e9811539773855b1332",
+          "receipt_path": "docs/capabilities/evidence/towpath-meetings-manual/source.json",
+          "receipt_sha256": "07692e99416e30a7d292f563afabe10e97c981bde693e21566f07a6e23d15fd6"
         },
         {
           "id": "towpath-demo-list",
@@ -25073,7 +25077,7 @@
       "remaining_research": [
         "Current dated listing and supplied Other Years controls are implemented with bounded continuation. Selected numeric meeting detail preserves supplied category/location/local time, text and document locators; docs/verification/towpath-supplied-detail-2026-11-12.json records four scoped synthetic cases. Other years/full history and PDF byte availability remain coverage qualifications, not mandatory new sampling. The old Brutus URL is historical.",
         "Demo search query semantics and archive bounds remain unknown; HTML success does not establish PDF extraction or attachment availability.",
-        "The pinned Meetings Module guide describes staff entry without a machine API/import payload. A vendor contract remains unresolved; test-account acquisition is not a completion gate."
+        "Full5page Meetings Module PDF read and pinned2026-11-15: staff fields, text/PDF agenda/minutes, pending state, additional documents and enabled visibility are documented. No remote machine request/readback or external import format is supplied. No new API mapping or outside-only dependency is established; test-account acquisition remains optional."
       ],
       "authentication": "Demo reads public; dashboard required for administration. Customer credentials and account roles not supplied.",
       "write_findings": "Indexed official manual supports meeting entry in Dashboard; exact field schema and actual upload/update instructions remain unverified. No API contract found.",
@@ -25110,7 +25114,7 @@
         "status": "unverified_unless_named_in_evidence",
         "details": "Demo reads public; dashboard required for administration. Customer credentials and account roles not supplied."
       },
-      "official_docs_status": "inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked",
+      "official_docs_status": "Full5page Meetings Module official PDF inspected2026-11-15; UI fields/workflow only, no machine API/import schema established.",
       "family_id": "digital-towpath",
       "canonical_id": "digital-towpath",
       "aliases": [],
