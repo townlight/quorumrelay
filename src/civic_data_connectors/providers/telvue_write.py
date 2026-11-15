@@ -243,7 +243,7 @@ class TelVueWriteAdapter(WriteAdapter):
         # fields apart from explicit sequence, and verify every new native item.
         def without_sequence(r):
             return {k: v for k, v in r.items() if k != "sequence_number"}
-        if any(without_sequence(current[i]) != without_sequence(r) for i, r in old.items()):
+        if any(canonical_hash(without_sequence(current[i])) != canonical_hash(without_sequence(r)) for i, r in old.items()):
             return False
         added = [r for i, r in current.items() if i not in old]
         media = [r.get("playable") for r in added]

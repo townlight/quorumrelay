@@ -98,8 +98,11 @@
     },
     {
       "path": "docs/WRITE-CONTRACT.md",
-      "sha256": "d9713892251acf048cb753942ab9ef5f3bfb72bb625635297da2067b18317ccc",
-      "previous_sha256": "8a35b5ac413ae52cdc89e82d14a9941c24e54e8d309b9770fd958eb5d88d78fd"
+      "sha256": "00fbeffc8eb86cf5ddfc6767ba3e9fb94dedc85e63da2f431880308a140385ca",
+      "previous_sha256": "8a35b5ac413ae52cdc89e82d14a9941c24e54e8d309b9770fd958eb5d88d78fd",
+      "historical_sha256": [
+        "d9713892251acf048cb753942ab9ef5f3bfb72bb625635297da2067b18317ccc"
+      ]
     },
     {
       "path": "docs/capabilities/evidence/granicus-platform/APIEntities.cs",
@@ -120,6 +123,22 @@
     {
       "path": "tests/test_granicus_metadata_identity.py",
       "sha256": "1df1603d482627072706afee139a1a94fa8304fea06b500e269b88c5686ffa4a"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/granicus_minutes.py",
+      "sha256": "ac40a4ed7b204490348dbb0e5d5e12609d88bbf2f44af66d4f1415d6530da7ae"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/telvue_write.py",
+      "sha256": "129711f0f6fb3cecc87d254161fbee0699f59647a91361dae661b357d4ca02f3"
+    },
+    {
+      "path": "tests/test_retained_write_types.py",
+      "sha256": "063a49499c716dacf1b59225a194c00795d983e8bb162507300bba78506502cd"
+    },
+    {
+      "path": "docs/capabilities/evidence/telvue-client-write/application.extract.js",
+      "sha256": "0d2aedad0904422c9729d9bda7243ef1df625c3aa6da57a87b9d53f6b7089a5a"
     }
   ],
   "limits": [
@@ -160,5 +179,35 @@
       "An invalid durable key mapping stays uncertain; changing later reads does not rewrite the acknowledged mapping.",
       "Lost-ack typed parent/native-ID failures recover with valid later readback after SQLite reopen, without replay."
     ]
+  },
+  "retained_state_followup": {
+    "base_commit": "5c560ec47e57e22d56dd92d0c65a5a0b0d69d9ec",
+    "scope": "Existing generated-minutes and playlist membership paths preserve retained native field types; sequence exception unchanged.",
+    "before_fix": "Both coordinator regressions falsely completed: retained Published false read as SOAP int0; retained playable.id1 read as JSONtrue.",
+    "checks": [
+      {
+        "command": "python -X utf8 -m pytest tests/test_retained_write_types.py tests/test_granicus_minutes.py tests/test_telvue_playlist_write.py -q",
+        "passed": 40,
+        "failed": 0,
+        "seconds": 1.2,
+        "executed_by": "Terra"
+      },
+      {
+        "command": "python -X utf8 -m pytest tests/test_retained_write_types.py -q",
+        "passed": 2,
+        "failed": 0,
+        "seconds": 0.32,
+        "executed_by": "root",
+        "junit_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\retained-write-types-2026-11-15.xml",
+        "junit_sha256": "566a35f70e9676326efd66171645f15fcfcc5b5a4690f4231f2182f29b5ce5b6"
+      },
+      {
+        "command": "ruff check changed source/new regression; git diff --check",
+        "status": "passed",
+        "executed_by": "Terra"
+      }
+    ],
+    "behavior": "Mismatch remains uncertain after SQLite reopen; valid later readback recovers with exactly one mutation. No new vendor semantics or operations.",
+    "comparison_closure": "Bounded same-cause source check: eSCRIBE scalar values enforced by XSD decoder; CivicClerk sections mapped as present strings/null; Boardable/Essential/TownCloud use canonical typed comparison. No changes justified in those paths from this cause; not a general completion audit."
   }
 }

@@ -72,7 +72,7 @@ def _outcome(session, prepared):
                 and doc.get("Default") is change.fields["isDefault"]]
     # Do not infer undocumented changes to other documents, even default flags.
     by_uid = {doc["UID"]: doc for doc in actual["documents"]}
-    verified = len(matching) == 1 and all(by_uid.get(uid) == doc for uid, doc in prior.items())
+    verified = len(matching) == 1 and all(uid in by_uid and canonical_hash(by_uid[uid]) == canonical_hash(doc) for uid, doc in prior.items())
     return {"state": "succeeded" if verified else "uncertain", "resource_id": change.resource_id,
         "document_uid": matching[0]["UID"] if len(matching) == 1 else None,
         "readback": actual["documents"], "reconciled": True,
