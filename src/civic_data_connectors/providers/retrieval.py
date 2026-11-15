@@ -145,17 +145,22 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
                 return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
             started = monotonic()
             try:
-                response = transport.request(target.url, byte_limit=bounds.parser_bytes,
+                response_limit = min(bounds.parser_bytes, bounds.transfer_bytes)
+                response = transport.request(target.url, byte_limit=response_limit,
                     deadline_seconds=bounds.deadline_seconds, allowed_origins=(_origin(target.url),),
                     allow_redirects=False)
                 if context.check_cancelled():
                     return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
                 if (response.status != 200 or response.url != target.url
-                        or len(response.content) > bounds.parser_bytes
+                        or len(response.content) > response_limit
                         or monotonic() - started >= bounds.deadline_seconds):
                     raise ValueError("The requested detail is unavailable or left its bounds.")
                 bundle, errors = parse_page(engine, target, namespace, response.content,
                                             target.input_format, bounds, context)
+                if context.check_cancelled():
+                    return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
+                if monotonic() - started >= bounds.deadline_seconds:
+                    raise ValueError("The requested detail mapping exceeded its total deadline.")
                 if any(record["identity"]["external_id"] != external_id for record in bundle["records"]):
                     raise ValueError("The public detail does not match the requested meeting ID.")
                 return OperationResult("partial", bundle, errors, coverage, context.operation_id)

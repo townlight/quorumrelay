@@ -389,3 +389,6 @@ Native notice detail enrichment retains the exact Add Notice to Calendar locator
 ### Shared attachment completion bounds (2026-11-15)
 
 Document/recording byte attachments check cancellation and the total deadline after the transfer and final wrapper resolution. Interrupted reads retain the source record and any captured wrapper context, returning cancelled or partial rather than completed. Cancellation is cooperative after synchronous work returns. Exact provider route/origin/MIME checks remain in force. See [120 affected cases](verification/attachment-response-boundaries-2026-11-15.json).
+
+
+Explicit Digital Towpath detail retrieval now applies the smaller parser/transfer response cap and checks cancellation/deadline after normalization. An interrupted detail returns cancelled/failed without a completed mapped result. See [three regressions and full1968-case source validation](verification/owned-boundaries-full-2026-11-15.json).

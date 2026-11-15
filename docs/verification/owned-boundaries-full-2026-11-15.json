@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "da2d286",
+  "status": "PASSED",
+  "requirements": [
+    6,
+    8,
+    9,
+    10
+  ],
+  "scope": "Towpath explicit detail transfer/mapping bounds and one full current source validation after Essential, Utah assets, shared attachment, inventory and write preflight changes.",
+  "new_cases": 3,
+  "reproduction": {
+    "failed_before_fix": 3,
+    "scope": "Mapping returnedpartial after cancellation/expired clock; transport used16MiB instead of approved16byte transfer cap."
+  },
+  "checks": [
+    {
+      "command": "pytest tests/test_towpath_read_boundaries.py tests/test_towpath_detail.py tests/test_attachment_response_boundaries.py tests/test_configured_fetch_labels.py tests/test_provider_discovery.py -q",
+      "passed": 97,
+      "failed": 0,
+      "seconds": 1.58
+    },
+    {
+      "command": "pytest tests -q --junitxml=owned-boundaries-full-2026-11-15.xml",
+      "passed": 1968,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 98.48,
+      "xml_attributes": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "1968",
+        "time": "98.402",
+        "timestamp": "2026-11-15T01:30:40.657384-07:00",
+        "hostname": "Halo"
+      },
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\owned-boundaries-full-2026-11-15.xml",
+      "xml_sha256": "d1662e6bfdefeebaec44f24ffb0cb0474cdee96876515f98d8f7e6b00e5c4b5b",
+      "session": 40345,
+      "terminal_exit": 0,
+      "warnings": "One existing starlette/anyio BlockingPortal deprecation."
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "2f67b6a82eccc6a3a2b54f254cf0a8ad69084f52d54ca608d2d10d34a7f5d939"
+    },
+    {
+      "path": "src/civic_data_connectors/writes.py",
+      "sha256": "96f88e5d4a9e3cb18305ad4944ad3fc70d6fd503acaa465702fba0acbdc9135a"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/account_reads.py",
+      "sha256": "6abeebe4c3d8f3902b82a93d4ff9dc1904740ae6ca9924feccc7c77c3ffdb917"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/utah_detail.py",
+      "sha256": "3507a9c9c2a1609294d734dfde09b2ade38c19bf148d1caa94340fa213884920"
+    },
+    {
+      "path": "tests/test_towpath_read_boundaries.py",
+      "sha256": "1d89c241583854b1ef4df97b5bc08f02c7e567638e62b0f32694dfe7de0fed9f"
+    }
+  ],
+  "prior_batches": [
+    "docs/verification/essential-response-qualification-2026-11-15.json",
+    "docs/verification/utah-supplied-assets-2026-11-15.json",
+    "docs/verification/attachment-response-boundaries-2026-11-15.json",
+    "docs/verification/configured-fetch-labels-2026-11-15.json",
+    "docs/verification/write-plan-boundaries-2026-11-15.json"
+  ],
+  "limits": [
+    "Python source verification only; existing TypeScript/artifact/install/delivery evidence reused for unchanged inputs.",
+    "No new vendor contract, catalog/playback acceptance, release, package build, installation or mutation.",
+    "Cancellation remains cooperative after synchronous transport/mapping returns; no mid-call preemption claim."
+  ]
+}
