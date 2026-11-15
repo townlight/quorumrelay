@@ -119,6 +119,8 @@ Evidence and exact scope: `inventory.json` provider `civicweb`; operation status
 
 ## F12 iQM2 (`iqm2`)
 
+- Explicit selected-player `fetch_captions` now retrieves the first active supplied WebVTT under bounded no-redirect/origin policy, preserving exact source text/bytes and both captures through search/reopen/ZIP. Active-track transfer is synthetic from pinned vendor-client semantics; actual6049 has none. No cue interpretation, content-language claim or generation. See `docs/IQM2-PUBLIC-PLAYER.md`.
+
 - Selected native legislative-file detail is now mapped and scoped related retrieval replays the retained parent capture before following its exact child link. Staff recommendation/body, three document locators, separate other-meeting references, identities/relationships and both captures survive persistence/ZIP; standalone parent context stays unverified. See `docs/IQM2-PUBLIC-FILE.md`. No staff write or live attachment claim.
 
 - Selected Kent6049 public player is now mapped from its exact declared Video/Agenda URL and native meeting-bound outline. First-source MP4/HLS metadata and conditionally active supplied subtitle locator are preserved; no evaluation, media/caption bytes or playback claim. The observed source has HLS and no tracks; subtitle logic has separate synthetic proof. Historical IQM2 proposal describes SOAP/XML datasets without endpoint/WSDL/types, so it establishes a concrete API lead rather than an executable write contract or outside-only dependency. See `docs/IQM2-PUBLIC-PLAYER.md`.

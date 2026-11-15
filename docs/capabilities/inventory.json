@@ -739,7 +739,7 @@
           "capability_status": "unverified",
           "implementation_status": "not_implemented",
           "evidence_ids": [],
-          "details": "Provider-specific documentation and bounded public-tenant investigation pending.",
+          "details": "No provider-specific import-file preparation mapping is implemented or established by the pinned evidence. Neutral export and provider API/file-download mappings are separate; no unsupported-feature or account-acquisition inference.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-specific evidence investigation",
@@ -3715,7 +3715,7 @@
           "capability_status": "unverified",
           "implementation_status": "not_implemented",
           "evidence_ids": [],
-          "details": "Provider-specific documentation and bounded public-tenant investigation pending.",
+          "details": "No provider-specific import-file preparation mapping is implemented or established by the pinned evidence. Neutral export and provider API/file-download mappings are separate; no unsupported-feature or account-acquisition inference.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-specific evidence investigation",
@@ -4525,7 +4525,7 @@
           "capability_status": "unverified",
           "implementation_status": "not_implemented",
           "evidence_ids": [],
-          "details": "Provider-specific documentation and bounded public-tenant investigation pending.",
+          "details": "No provider-specific import-file preparation mapping is implemented or established by the pinned evidence. Neutral export and provider API/file-download mappings are separate; no unsupported-feature or account-acquisition inference.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-specific evidence investigation",
@@ -9812,7 +9812,7 @@
             "municode-meetings-docs",
             "municode-meetings-items"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "UI/feature workflow is documented, but a matching meeting/item create or document-upload machine request/readback contract is not established by the pinned support article/Postman collection. Contract gap remains unresolved research; account acquisition and live writes are not synthetic acceptance gates.",
           "dependencies": [
             "Exact in-domain API/file request/response contract not established by the existing Essential public API page; UI support alone is not a machine contract."
           ],
@@ -9861,7 +9861,7 @@
           "evidence_ids": [
             "municode-meetings-uploads"
           ],
-          "details": "Documented UI/feature capability only. No supported machine-write route, live acceptance or authorized test credentials verified; see entity mappings and evidence limits.",
+          "details": "UI/feature workflow is documented, but a matching meeting/item create or document-upload machine request/readback contract is not established by the pinned support article/Postman collection. Contract gap remains unresolved research; account acquisition and live writes are not synthetic acceptance gates.",
           "dependencies": [
             "Exact in-domain API/file request/response contract not established by the existing Essential public API page; UI support alone is not a machine contract."
           ],
@@ -11325,7 +11325,7 @@
           "capability_status": "unverified",
           "implementation_status": "not_implemented",
           "evidence_ids": [],
-          "details": "Provider-specific documentation and bounded public-tenant investigation pending.",
+          "details": "No provider-specific import-file preparation mapping is implemented or established by the pinned evidence. Neutral export and provider API/file-download mappings are separate; no unsupported-feature or account-acquisition inference.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-specific evidence investigation",
@@ -13236,6 +13236,55 @@
           },
           "receipt_path": "docs/verification/iqm2-legislative-file-2026-11-14.json",
           "receipt_sha256": "f395c8edb685ee8398d77f2c3e5552d2086f622babbeb9408e3487122f7124c9"
+        },
+        {
+          "id": "iqm2-supplied-captions-2026-11-14",
+          "url": "https://kentwa.iqm2.com/Scripts/player.js",
+          "title": "Explicit first active supplied WebVTT retrieval from selected iQM2 player",
+          "kind": "observed_vendor_client_and_scoped_execution",
+          "observation_date": "2026-11-14",
+          "proof_level": "observed_client_contract_and_synthetic_engine_execution",
+          "findings": "First-track branch is vendor-client-defined; active file transfer is synthetic. Actual6049 response has no track. No cue/language interpretation or generation.",
+          "synthetic_execution": {
+            "provider": "iqm2",
+            "status": "mock_passed",
+            "operations": [
+              "fetch",
+              "parse",
+              "export"
+            ],
+            "entities": [
+              "meeting",
+              "supplied_caption_text"
+            ],
+            "checks": [
+              {
+                "command": "pytest tests/test_iqm2_captions.py tests/test_iqm2_player.py tests/test_iqm2_file.py tests/test_townhall_captions.py tests/test_interchange.py -q",
+                "passed": 88,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/iqm2-public-player/source.json",
+                "sha256": "4489143f5550d9e1d5cc53dac310d3577e0388da44badc778d4325f7ac3a28b2"
+              },
+              {
+                "kind": "vendor_client",
+                "path": "docs/capabilities/evidence/iqm2-public-player/player.js",
+                "sha256": "ea82b53b1f948f4764c93d89f2a93c1f653726903e6816528cec1b341d38e7d3"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_iqm2_captions.py",
+                "sha256": "a7020b6b53418c29c7fd6ed2744f0540f4a1eac948cac36265a285a36ce8d847"
+              }
+            ],
+            "scope": "Two bounded exact no-redirect GETs, explicit cross-origin grant, native meeting binding, source WebVTT text/bytes/hash provenance, SQLite/search/ZIP; no live caption file, media, cue interpretation or content-language claim."
+          },
+          "receipt_path": "docs/verification/iqm2-supplied-captions-2026-11-14.json",
+          "receipt_sha256": "94e7e5e53d4e8cd557af84e442a9caab7498bb5d3c1cdd8965e09c2a5f1447c8"
         }
       ],
       "tenants": [
@@ -13304,9 +13353,10 @@
             "iqm2-tenant",
             "iqm2-public-detail-2026-11-12",
             "iqm2-public-player-2026-11-14",
-            "iqm2-legislative-file-2026-11-14"
+            "iqm2-legislative-file-2026-11-14",
+            "iqm2-supplied-captions-2026-11-14"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified.",
+          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified. Explicit fetch_captions reads the first active supplied WebVTT file with caller-origin grants, exact byte/text/hash capture and reopen/ZIP preservation; active transfer is synthetic, no timing/content-language inference.",
           "dependencies": [],
           "remaining_verification": [
             "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
@@ -13332,9 +13382,10 @@
             "iqm2-public-detail-2026-11-12",
             "source-text-reference-clients-2026-11-12-iqm2",
             "iqm2-public-player-2026-11-14",
-            "iqm2-legislative-file-2026-11-14"
+            "iqm2-legislative-file-2026-11-14",
+            "iqm2-supplied-captions-2026-11-14"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified. Explicit fetch_captions reads the first active supplied WebVTT file with caller-origin grants, exact byte/text/hash capture and reopen/ZIP preservation; active transfer is synthetic, no timing/content-language inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -13402,9 +13453,10 @@
           "evidence_ids": [
             "iqm2-baseline",
             "quorumrelay-shared-core-operations",
-            "iqm2-legislative-file-2026-11-14"
+            "iqm2-legislative-file-2026-11-14",
+            "iqm2-supplied-captions-2026-11-14"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified. Explicit fetch_captions reads the first active supplied WebVTT file with caller-origin grants, exact byte/text/hash capture and reopen/ZIP preservation; active transfer is synthetic, no timing/content-language inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -13670,7 +13722,8 @@
         "The bounded Kent public calendar and first native search result are observed; verify broader date/body and archive coverage and live supplied Next before claiming completeness.",
         "Pinned Granicus/iQM2 help describes authenticated locations/types/meeting and streaming workflows, not an iQM2 machine API. Deployment-specific field/readback documentation remains needed; account enablement is not a synthetic-acceptance gate.",
         "Upload limits, write schemas, permission/readback and product applicability remain unresolved in pinned material. Do not substitute Legistar contracts; credentials and live writes are not required acceptance evidence.",
-        "Selected legislative-file text/documents and scoped exact-child retrieval are implemented from native meeting1496/file7478 captures; parent replay, hashes/relationships, reopen and ZIP are tested. No staff form submission, adopted action or complete history inferred."
+        "Selected legislative-file text/documents and scoped exact-child retrieval are implemented from native meeting1496/file7478 captures; parent replay, hashes/relationships, reopen and ZIP are tested. No staff form submission, adopted action or complete history inferred.",
+        "Explicit selected-player first-active WebVTT retrieval is synthetically executed with raw source text/search/reopen/ZIP and both captures. Actual6049 has no active track; no broader caption availability, cue timing or content-language inference."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "iqm2",
@@ -21191,7 +21244,7 @@
           "capability_status": "unverified",
           "implementation_status": "not_implemented",
           "evidence_ids": [],
-          "details": "Provider-specific documentation and bounded public-tenant investigation pending.",
+          "details": "No provider-specific import-file preparation mapping is implemented or established by the pinned evidence. Neutral export and provider API/file-download mappings are separate; no unsupported-feature or account-acquisition inference.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-specific evidence investigation",
@@ -25104,7 +25157,7 @@
           "capability_status": "unverified",
           "implementation_status": "not_implemented",
           "evidence_ids": [],
-          "details": "Provider-specific documentation and bounded public-tenant investigation pending.",
+          "details": "No provider-specific import-file preparation mapping is implemented or established by the pinned evidence. Neutral export and provider API/file-download mappings are separate; no unsupported-feature or account-acquisition inference.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-specific evidence investigation",
@@ -27881,7 +27934,7 @@
           "evidence_ids": [
             "diligent-boarddocs-tenant"
           ],
-          "details": "Simple/Detailed Agenda print UI observed; no PDF export/download exercised.",
+          "details": "Public print/download response mappings do not establish a native BoardDocs import-file contract. No provider-specific import-file preparation mapping is implemented; neutral export is separate.",
           "dependencies": [],
           "remaining_verification": [
             "Verify exact generated file/fields/access. Downloading a PDF is not structured provider import/write-back."

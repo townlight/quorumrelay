@@ -1,12 +1,18 @@
 """One public iQM2 split-view player; decode literal data without evaluating JavaScript."""
 import json
 import re
+from copy import deepcopy
+from time import monotonic
 from html.parser import HTMLParser
 from urllib.parse import urljoin, urlsplit
 
 from .iqm2_detail import _query, _positive
 from .identification import validate_url
 from .native import make_bundle
+from ..engine import canonical_hash
+from ..models import Error, OperationResult
+from ..storage import operation_cancelled
+from .contracts import _origin
 
 FORMAT = "iqm2-public-player-html"
 
@@ -103,3 +109,90 @@ def parse_bundle(source, namespace, content):
     return make_bundle(source, namespace, content, FORMAT,
         [(normalized, {"player_sources": sources, "meeting_id": meeting,
                        "enable_dvr": dvr, "has_transcript": transcript}, "meeting")])
+
+
+def fetch_captions(engine, source, namespace, request, bounds, context, transport):
+    """Preserve the first active supplied WebVTT file, without cue/language inference."""
+    from .retrieval import _download_origins
+    if not context.allows("fetch", namespace):
+        return OperationResult("failed", errors=(Error("permission_denied", "Source fetch is not authorized."),))
+    if request.get("caption_language") != "*":
+        return OperationResult.unsupported("fetch_captions_language", reason=(
+            "The player hardcodes srclang; it does not establish selectable content languages."))
+    if bounds.checkpoint is not None or bounds.max_pages < 2:
+        raise ValueError("The player and supplied caption require two request pages and no checkpoint.")
+    # Validate the exact configured player before any I/O, not only after its response.
+    query = _query(source.url)
+    parsed = urlsplit(source.url)
+    if (parsed.scheme != "https" or not (parsed.hostname or "").endswith(".iqm2.com")
+            or parsed.path != "/Citizens/SplitView.aspx" or parsed.fragment
+            or set(query) != {"Mode", "MeetingID", "Format"} or query.get("Mode") != "Video"
+            or query.get("Format") != "Agenda" or not _positive(query.get("MeetingID"))
+            or request.get("external_id") != query["MeetingID"]):
+        raise ValueError("Use the exact configured native Video/Agenda player meeting ID.")
+    deadline, transferred = monotonic() + bounds.deadline_seconds, 0
+    coverage = {"scope": "one selected player and first active supplied WebVTT file",
+        "source_complete": False, "catalog_complete": False, "pages": 0,
+        "generation_requested": False, "polling": False, "content_language": None,
+        "cue_timing_interpretation": "not_performed"}
+    bundle = None
+
+    def get(url, origins, mime):
+        nonlocal transferred
+        if operation_cancelled(engine.storage, context):
+            raise InterruptedError()
+        remaining = min(bounds.parser_bytes, bounds.transfer_bytes - transferred)
+        seconds = deadline - monotonic()
+        if remaining <= 0 or seconds <= 0:
+            raise ValueError("The supplied-caption transfer exceeded its bounds.")
+        response = transport.request(url, headers={"Accept": mime}, allowed_origins=origins,
+            allow_redirects=False, byte_limit=remaining, deadline_seconds=seconds)
+        if operation_cancelled(engine.storage, context):
+            raise InterruptedError()
+        if (response.status != 200 or response.url != url or not isinstance(response.content, bytes)
+                or len(response.content) > remaining or monotonic() >= deadline
+                or response.content_type.split(";", 1)[0].strip().lower() != mime):
+            raise ValueError("The supplied caption/player left its exact bounded response contract.")
+        transferred += len(response.content)
+        coverage["pages"] += 1
+        return response.content
+
+    try:
+        player = get(source.url, (_origin(source.url),), "text/html")
+        bundle = parse_bundle(source, namespace, player)
+        record = bundle["records"][0]
+        tracks = record["normalized"]["recordings"][0]["caption_tracks"]
+        if tracks:
+            target = tracks[0]["url"]
+            content = get(target, _download_origins(source, target), "text/vtt")
+            text = content.decode("utf-8-sig", errors="strict")
+            if re.match(r"\AWEBVTT(?:[ \t][^\r\n]*)?(?:\r?\n|\Z)", text) is None or "-->" in text.splitlines()[0]:
+                raise ValueError("The supplied file lacks a WebVTT header; no text format is guessed.")
+            capture = make_bundle(source, namespace, content, "iqm2-supplied-webvtt", [])["capture"]
+            capture.update(source_url=target, retrieval_url=target)
+            bundle["captures"] = [capture]
+            record["normalized"].update(supplied_caption_text=text,
+                supplied_caption_format="webvtt_source_text", content_language=None)
+            tracks[0]["availability"] = "supplied_file_received"
+            recording = record["normalized"]["recordings"][0]
+            recording["captions_availability"] = "supplied_file_received"
+            record["relationships"] = [{"relation": "recording", "value": deepcopy(recording)}]
+            record["text"].append({"field": "supplied_caption_text", "text": text, "citation_url": target,
+                "completeness": "supplied_file_only", "provenance": {"method": "player_declared_webvtt",
+                    "capture_sha256": capture["sha256"], "player_capture_sha256": bundle["capture"]["sha256"],
+                    "cue_timing_interpretation": "not_performed", "content_language": "not_verified"}})
+            record["normalized_sha256"] = canonical_hash(record["normalized"])
+            coverage["caption_file_received"] = True
+        else:
+            coverage["caption_file_received"] = False
+        if operation_cancelled(engine.storage, context):
+            raise InterruptedError()
+        if monotonic() >= deadline:
+            raise ValueError("Caption parsing exceeded its deadline.")
+        return OperationResult("partial", bundle, coverage=coverage, operation_id=context.operation_id)
+    except InterruptedError:
+        return OperationResult("cancelled", bundle, coverage=coverage, operation_id=context.operation_id)
+    except Exception:
+        return OperationResult("partial" if bundle else "failed", bundle,
+            errors=(Error("supplied_caption_unavailable", "The exact declared WebVTT file could not be verified.",
+                          source=source.url),), coverage=coverage, operation_id=context.operation_id)
