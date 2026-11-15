@@ -1,0 +1,15 @@
+{
+  "url": "https://support.granicus.com/articles/How_To/Drafting-Legislative-Files-Legistar-Text-Editor",
+  "final_url": "https://support.granicus.com/articles/How_To/Drafting-Legislative-Files-Legistar-Text-Editor",
+  "status": 200,
+  "content_type": "text/html;charset=UTF-8",
+  "bytes": 33435,
+  "sha256": "821784df3ba9a36957090a6f5935d458fb7f48e5d89909980f7400944ac265a3",
+  "date": "2026-11-15",
+  "scope": "Official legislative Text Editor .txt/.rtf import with ..title and ..body; local preparation only",
+  "limits": [
+    "No encoding specified; caller explicitly selects encoding.",
+    "Not a meeting/media migration package or remote transfer/association contract.",
+    "No actual Legistar import acceptance or tenant-version equivalence tested."
+  ]
+}

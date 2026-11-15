@@ -45,3 +45,6 @@ docs/capabilities/evidence/onbase-minutes/minutes-3831.html whitespace=cr-at-eol
 
 # Exact PrimeGov deployed client slices retain original CRLF/blank lines.
 docs/capabilities/evidence/primegov-tracking-search/tracking-client.txt whitespace=cr-at-eol,-blank-at-eof
+
+# Exact official Legistar help response retains vendor whitespace.
+docs/capabilities/evidence/legistar-text-import/article.html whitespace=-blank-at-eol,-blank-at-eof

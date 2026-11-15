@@ -166,6 +166,8 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_native_export("telvue", tracked_handler("export", export_chapters))
     from .suiteone_export import export_document
     engine.register_native_export("suiteone-media", tracked_handler("export", export_document))
+    from .legistar_text_export import export_text
+    engine.register_native_export("legistar", tracked_handler("export", export_text))
 
 
 __all__ = ["FORMATS", "BrowserSession", "PublicTransport", "Response", "Transport", "register"]

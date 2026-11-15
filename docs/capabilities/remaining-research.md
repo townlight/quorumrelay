@@ -8,6 +8,8 @@ Archive completeness, wider tenant surveys, live account observations and playba
 
 ## F01 Legistar (`legistar`)
 
+- Official Text Editor .txt import with `..title`/`..body` now has local explicit-field preparation, required encoding choice, bounded output/hash/scoped artifact and19new synthetic cases. This resolves that narrow file path; historical migration packages and recording imports remain separate. See [usage and limits](../LEGISTAR-TEXT-FILES.md).
+
 - Exact Event and MatterAttachment POST/PUT/File Help review completed2026-11-13; existing binary JSON/file-readback evidence and new media-reference string/hyperlink/visibility-field synthetic cases are attributed separately. Help pages do not define recording-byte upload/replacement, media URL interpretation, MIME/byte limits, processing or effective tenant visibility.
 - Olympia Event7011 and selected Vote/RollCall reads remain bounded, not catalog proof. Caller supplies documented ValueIds/permissions; undocumented enum meanings and RowVersion server conflict behavior remain qualified, not a credential-acquisition gate.
 - Historical vendor import package/current media import path still has no accepted file contract or transfer evidence; API field handling does not substitute for import.

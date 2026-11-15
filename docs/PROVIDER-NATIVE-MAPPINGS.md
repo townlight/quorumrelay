@@ -361,6 +361,8 @@ cover synthetic transfers; preserved dev13 packages predate this source.
 
 Historical TelVue CloudCast 4.1 chapter CSV preparation is available as `telvue-cloudcast-4.1-chapters-csv`; see [the format and limits](TELVUE-CHAPTER-CSV.md). This is local file preparation, with current Connect applicability and remote import unverified.
 
+Legistar legislative Text Editor preparation is available as `legistar-legislative-text`; see [the explicit title/body format and encoding limits](LEGISTAR-TEXT-FILES.md). This prepares a local `.txt` file with documented section markers. It does not establish historical meeting/media migration, remote import or association.
+
 ## Account response bounds
 
 TelVue Connect and Essential account reads check cancellation and the shared
