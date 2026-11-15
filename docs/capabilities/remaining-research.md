@@ -306,6 +306,8 @@ Evidence and exact scope: `inventory.json` provider `gworks`; operation status a
 
 ## F30 Diligent BoardDocs (`boarddocs`)
 
+- A2025Diligent administrator PDF names a BoardDocs migration implementation guide/resource center, but the exact PDF returned403 and indexed text exposes no target URLs or migration schema. This new file-contract lead establishes neither external import/write fields nor a private-only dependency. The2026DocAccess announcement describes accessible HTML alternatives, not a machine import/transfer contract; no additional integration or generation work is required. Source limits are pinned in `evidence/boarddocs-migration-lead/source.json`.
+
 - Latest XML-ActiveMeetings lead: pinned third-party notebook has an unexecuted, incomplete illustrative XML fragment with malformed entities, not a saved server response. One exact example request returned HTTP 403; no XML/item mapping was inferred. Exact source pins and request are indexed in `docs/verification/local-completion-2026-11-14.json`. This does not establish an outside-only dependency.
 
 - Opt-in public listing/print detail is implemented with 20 current helper/workflow cases. A Git-blob-verified third-party archived listing now retains331valid native meetings and one explicit empty placeholder, with original bytes intact. Nonempty identityless rows still fail. Official/live contract acceptance remains unverified (403 observed).
