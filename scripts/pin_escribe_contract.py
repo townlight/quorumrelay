@@ -94,7 +94,7 @@ def compile_contract():
     methods = set(READS) | {model + suffix for model in MODELS
                            for suffix in ("Create", "Update", "GetById", "Exists")}
     # Upload request shape is retained for attribution; chunk semantics are not inferred.
-    methods.add("DocumentUpload")
+    methods.update({"DocumentUpload", "AgendaItemHistoryCreate"})
     operations = {}
     for node in root.findall("./{" + WSDL + "}binding/{" + WSDL + "}operation"):
         name = node.attrib["name"]

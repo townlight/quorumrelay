@@ -382,6 +382,29 @@
         }
       ]
     },
+    "AgendaItemHistoryCreate": {
+      "action": "eSCRIBE.Internet.WebService/IPublishingService/AgendaItemHistoryCreate",
+      "request": [
+        {
+          "name": "history",
+          "type": "{eSCRIBE.Internet.WebService}AgendaItemHistoryStep",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ],
+      "response": [
+        {
+          "name": "AgendaItemHistoryCreateResult",
+          "type": "{eSCRIBE.Internet.WebService}AgendaItemHistoryStep.Identifier",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ]
+    },
     "AgendaItemItemHistoryView": {
       "action": "eSCRIBE.Internet.WebService/IPublishingService/AgendaItemItemHistoryView",
       "request": [

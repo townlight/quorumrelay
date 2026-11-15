@@ -11683,6 +11683,64 @@
           "receipt_sha256": "648c7471aa84e6ce35c46496c81003c50a8b391209eb17eb873f86266b7ec1cb",
           "findings": "Existing agenda/item/attachment models expose native meeting/agenda/item/document relationships from already pinned compound identifiers/pointers; shared csv-items retains standalone items without guessed parents.24new/293affected checks pass. Full local Python source2317passed112.62s; no failures/errors/skips. Not installed/hosted/vendor completeness proof.",
           "limits": "No native field or identity rewritten; absent/nonpositive attachment item/document pointers do not create identities. CSV projection remains lossy, not new live vendor acceptance."
+        },
+        {
+          "id": "escribe-history-step-create-2026-11-15",
+          "url": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc?wsdl",
+          "title": "Typed AgendaItemHistoryCreate and exact selected history view readback",
+          "kind": "official_machine_contract_and_synthetic_execution",
+          "observed": "2026-11-15",
+          "observation_date": "2026-11-15",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "access_scope": "local_synthetic_SOAP_execution_no_new_vendor_requests",
+          "source_path": "docs/capabilities/evidence/escribe-publishing-wsdl/source.json",
+          "source_sha256": "cb5ddc5926526860b9c63317974361c6158fb66530c000df488c27435b68cd08",
+          "receipt_path": "docs/verification/escribe-history-step-create-2026-11-15.json",
+          "receipt_sha256": "a860457d504c90aa935c84437fe12fe1db02fa6ce77212840747a362f5c49b12",
+          "findings": "16new/178affected synthetic cases passed4.78s; exact fields/parent/auth, before-state change, returned ID/readback mismatch, loss/restart no replay and cancellation/call capacity.",
+          "limits": "No live calls, history publication, migration grammar or inferred side effects.",
+          "synthetic_execution": {
+            "provider": "escribe",
+            "status": "mock_passed",
+            "operations": [
+              "create"
+            ],
+            "entities": [
+              "agenda_item_history_step"
+            ],
+            "scope": "One typed item-history-step create with selected meeting/item/history/portal preflight, full readback and durable no-replay uncertainty.",
+            "execution_provenance": "Actual local pytest2026-11-15:16new/178affected passed4.78s. Independent synthetic SOAP server uses pinned namespaces/order, production encoder/decoder and durable coordinator.",
+            "checks": [
+              {
+                "command": "pytest tests/test_escribe_history_write.py tests/test_escribe_publishing.py tests/test_escribe_upload.py tests/test_escribe_related_records.py tests/test_escribe_history.py tests/test_escribe_history_index.py tests/test_escribe_selected_text.py tests/test_writes.py -q",
+                "passed": 178,
+                "failed": 0,
+                "seconds": 4.78
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/publishing.wsdl",
+                "sha256": "a166e11909548edc8876556d4cba67f5661d8269a2269e99a412fe726bd1ac46"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd0.xsd",
+                "sha256": "9794f976a48bbc225e2d8162f50182efd02e7551b68da7bd82eb5c1270c7f6d8"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd1.xsd",
+                "sha256": "cff6937e7a1ed4a816ee6cb8525d75c041ff3244d8ca6100f031d20f689a521a"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_escribe_history_write.py",
+                "sha256": "79cd8a0a5585219c9c7d017c62623eab68adb2a43d96f42775abc97eb8e10823"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -11896,9 +11954,10 @@
           "capability_status": "documented",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "escribe-publishing-wsdl-synthetic-2026-11-15"
+            "escribe-publishing-wsdl-synthetic-2026-11-15",
+            "escribe-history-step-create-2026-11-15"
           ],
-          "details": "Pinned PublishingService meeting,agenda,agenda_item,attachment,document native record create implemented with exact full-model plans/readback and durable no-replay reconciliation. Document is metadata; attachment binds existing DocumentId. No byte upload/publication method/other entity coverage inferred. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference.",
+          "details": "Pinned PublishingService meeting,agenda,agenda_item,attachment,document native record create implemented with exact full-model plans/readback and durable no-replay reconciliation. Document is metadata; attachment binds existing DocumentId. No byte upload/publication method/other entity coverage inferred. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference. One exact native item-history-step create now has separate executed preflight/full-view readback/no-replay proof; no history publication or migration semantics inferred.",
           "dependencies": [],
           "remaining_verification": [
             "Runtime destination access/applicability and effective visibility remain qualified; no live credentials/mutation gate."
@@ -13337,6 +13396,104 @@
             "W10"
           ],
           "domain_scope": "Native meeting/item resolution, supplied mover/seconder/result/type/vote-type strings/IDs. No enum meanings/person registry join; AgendaType absent from returned identifier so complete item join not inferred."
+        },
+        {
+          "entity": "agenda_item_history_step",
+          "operation": "create",
+          "endpoint_or_format": "SOAP1.2 AgendaItemHistoryCreate(history) /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.AgendaItemId",
+              "provider_field": "history.AgendaItemId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Category",
+              "provider_field": "history.Category",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Comments",
+              "provider_field": "history.Comments",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Date",
+              "provider_field": "history.Date",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "history.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.MeetingDate",
+              "provider_field": "history.MeetingDate",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.MeetingId",
+              "provider_field": "history.MeetingId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.MeetingTypeId",
+              "provider_field": "history.MeetingTypeId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.MeetingTypeName",
+              "provider_field": "history.MeetingTypeName",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Number",
+              "provider_field": "history.Number",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Sponsor",
+              "provider_field": "history.Sponsor",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Stage",
+              "provider_field": "history.Stage",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Status",
+              "provider_field": "history.Status",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-history-step-create-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact selected-item full history view: one complete new returned-ID step, old steps/unrelated fields unchanged. Full preflight fingerprint, durable returned ID; no replay after loss.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "One source-supplied agenda-item history step; no history publication, administrative methods or motion/vote migration inference."
         }
       ],
       "pagination": {

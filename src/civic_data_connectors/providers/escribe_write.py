@@ -69,6 +69,9 @@ class EscribeWriteAdapter(WriteAdapter):
         self.credentials(source, context)
 
     def authorize(self, source, change, context):
+        if change.entity == "agenda_item_history_step":
+            from .escribe_history_write import policy
+            return policy(self, source, change, context)
         if change.entity == "document" and change.operation == "upload":
             from .escribe_upload import policy
             policy(self, source, change, context)
@@ -125,6 +128,9 @@ class EscribeWriteAdapter(WriteAdapter):
                 raise WriteFailure("conflict", "The native model does not bind the selected parent meeting.")
 
     def prepare(self, source, change, context, bounds, deadline):
+        if change.entity == "agenda_item_history_step":
+            from .escribe_history_write import prepare
+            return prepare(self, source, change, context, bounds, deadline)
         if change.entity == "document" and change.operation == "upload":
             from .escribe_upload import prepare
             return prepare(self, source, change, context, bounds, deadline)
@@ -182,6 +188,9 @@ class EscribeWriteAdapter(WriteAdapter):
                 **({} if matches else {"reason": "Exact full-model readback differs; no automatic replay."})}
 
     def apply(self, source, prepared, context, bounds, deadline, *, persist=None):
+        if prepared["change"]["entity"] == "agenda_item_history_step":
+            from .escribe_history_write import apply
+            return apply(self, source, prepared, context, bounds, deadline, persist=persist)
         change = WriteChange.from_dict(prepared["change"])
         if change.entity == "document" and change.operation == "upload":
             from .escribe_upload import apply
@@ -218,6 +227,9 @@ class EscribeWriteAdapter(WriteAdapter):
             raise AmbiguousWrite() from None
 
     def reconcile(self, source, prepared, item, context, bounds, deadline):
+        if prepared["change"]["entity"] == "agenda_item_history_step":
+            from .escribe_history_write import reconcile
+            return reconcile(self, source, prepared, item, context, bounds, deadline)
         change = WriteChange.from_dict(prepared["change"])
         if change.entity == "document" and change.operation == "upload":
             from .escribe_upload import reconcile
