@@ -3555,7 +3555,7 @@
           "proof_level": "primary_product_workflow_not_machine_contract",
           "observation_date": "2026-11-15",
           "source_path": "docs/capabilities/evidence/primegov-justmeetings/source.json",
-          "source_sha256": "a1f10fc446027679cff4dcf24a42b063facd090a8c0111c69bc85f7a14d206ca",
+          "source_sha256": "4fce804ea51a610d9b5ae11ee3ae80dcad9fa5672954bd38c0bf59138440c0d4",
           "findings": "Release7.63 names PrimeGov agenda/topic import; current appGET403. Partner Agenda API belongs to JustMeetings and its indexed write section is unfinished, not a PrimeGov contract.",
           "limits": "Bounded exact source observations only; no universal absence/outside-only assertion, new provider, live API method or vendor mutation."
         }
@@ -11483,7 +11483,7 @@
           "proof_level": "vendor_schema_scoped_synthetic_execution_not_live_acceptance",
           "observation_date": "2026-11-15",
           "receipt_path": "docs/verification/escribe-content-chunk-2026-11-15.json",
-          "receipt_sha256": "e94a0f033aa9745d3c3c4d93e0adc67ec8d9a5d4871a00cb8f014a9d8084b09e",
+          "receipt_sha256": "8af44d5f469cc8e4b5196056cdeb397d8333dfe6643b0cb02b35eb899b7a4be1",
           "findings": "23new/203affected eSCRIBE checks passed. Explicit native Id/offset/length plus selected metadata, exact chunk SOAP/bytes/context and SQLite/retry/reopen/search/neutral exports.",
           "limits": "Units, range/terminal semantics, assembly and atomic revision unavailable; always partial, no whole-document content/hash claim or live SOAP."
         }

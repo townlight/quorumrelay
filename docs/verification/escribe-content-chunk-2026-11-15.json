@@ -26,6 +26,13 @@
       "failed": 0,
       "seconds": 3.38,
       "warning": "Existing Starlette AnyIO deprecated alias"
+    },
+    {
+      "scope": "Strengthened assertions reload exact bundle and all3capture entries from reopened SQLite before neutral export",
+      "passed": 23,
+      "failed": 0,
+      "seconds": 0.26,
+      "reason": "Direct evidence for durable capture/context claim; test-only refinement after27ca01b, no engine change"
     }
   ],
   "bindings": [
@@ -43,7 +50,7 @@
     },
     {
       "path": "tests/test_escribe_content_chunk.py",
-      "sha256": "9436a9a6d9ad90fa9b3cac45691ee1de463e2c508ba47d38a3f4abaf3a23d62f"
+      "sha256": "dde9e675d89865f30fea78fc733594a1dfce49c07d4bc4adab77fe848191bc5d"
     }
   ],
   "central_contract_rebinding": "15other root sections preserved;6prior raw byte hashes verified and rebound solely for added native read.",

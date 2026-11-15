@@ -8,6 +8,7 @@ import pytest
 
 from quorumrelay import Bounds, OperationContext, create_engine
 from quorumrelay.storage import SQLiteStorage
+from civic_data_connectors.engine import canonical_hash
 from civic_data_connectors.interchange import read_bundle
 from civic_data_connectors.providers import escribe_publishing as soap
 from civic_data_connectors.providers.contracts import Response
@@ -78,8 +79,12 @@ def test_explicit_native_chunk_preserves_metadata_context_bytes_retry_search_and
         assert engine.execute("import_bundle", {"bundle": result.data, "persist": True}).status == "completed"
     reopened = create_engine(storage=SQLiteStorage(path))
     assert len(reopened.execute("search", {"query": {"phrases": ["Agenda"]}}).data["hits"]) == 1
+    durable = reopened.storage.get("bundles", canonical_hash(result.data), scope=OperationContext().scope).value
+    assert durable == result.data
+    for capture in [durable["capture"], *durable["captures"]]:
+        assert reopened.storage.get("captures", capture["sha256"], scope=OperationContext().scope).value == capture
     for format in ("json", "jsonl", "zip"):
-        exported = reopened.execute("export", {"bundle": result.data, "format": format})
+        exported = reopened.execute("export", {"bundle": durable, "format": format})
         assert read_bundle(base64.b64decode(exported.data["content_base64"]), format=format) == result.data
     with pytest.raises(ValueError, match="standalone"):
         soap.parse_bundle(SOURCE, "synthetic", server.payloads[1])
