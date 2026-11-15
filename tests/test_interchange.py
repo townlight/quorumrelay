@@ -213,6 +213,30 @@ def test_ical_rfc5545_literal_datetime_escaping_folding_and_stable_uid():
     assert "future.a" in losses["records"][0]["omitted_fields"]
 
 
+@pytest.mark.parametrize("source_status,cancelled,mapped", [
+    ("CANCELLED", True, "normalized.source_status"),
+    ({"canceled": True, "adjourned": True}, True, "normalized.source_status.canceled"),
+    ({"canceled": False}, False, None),
+    ({"canceled": "False"}, False, None),
+    ({"canceled": "0"}, False, None),
+    ({"canceled": "unknown"}, False, None),
+    ({"canceled": 1}, False, None),
+    ({"canceled": None}, False, None),
+])
+def test_ical_cancellation_requires_explicit_status_and_reports_unmapped_fields(source_status, cancelled, mapped):
+    record = sample()["records"][0]
+    record["normalized"]["source_status"] = source_status
+    before = deepcopy(record)
+    payload, losses = icalendar_projection([record])
+    assert (b"STATUS:CANCELLED\r\n" in payload) is cancelled
+    omitted = losses["records"][0]["omitted_fields"]
+    status_fields = {"normalized.source_status"} if isinstance(source_status, str) else {
+        f"normalized.source_status.{key}" for key in source_status
+    }
+    assert {field for field in omitted if field.startswith("normalized.source_status")} == status_fields - {mapped}
+    assert record == before
+
+
 @pytest.mark.parametrize("durable", [False, True])
 def test_registered_streaming_attachment_artifact_scope_policy_expiry_cleanup(tmp_path, durable):
     store = SQLiteStorage(tmp_path / "artifacts.sqlite") if durable else None

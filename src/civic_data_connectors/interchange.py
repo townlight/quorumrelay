@@ -928,9 +928,12 @@ def icalendar_projection(records):
             lines.append("URL:" + citation)
             included.add("citation_urls[0]" if record.get("citation_urls") else "source_url")
         source_status = normalized.get("source_status")
-        if source_status == "CANCELLED" or (isinstance(source_status, dict) and source_status.get("canceled")):
+        if source_status == "CANCELLED":
             lines.append("STATUS:CANCELLED")
-            included |= {p for p in _leaves(record) if p.startswith("normalized.source_status")}
+            included.add("normalized.source_status")
+        elif isinstance(source_status, dict) and source_status.get("canceled") is True:
+            lines.append("STATUS:CANCELLED")
+            included.add("normalized.source_status.canceled")
         lines.append("END:VEVENT")
         loss["omitted_fields"] = sorted(_leaves(record) - included)
     lines.append("END:VCALENDAR")

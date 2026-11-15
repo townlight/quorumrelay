@@ -317,6 +317,11 @@ Only use this when <code>capabilities</code> says that provider has an implement
 
 The neutral <code>export</code> operation emits JSON, JSONL or ZIP bundles. CSV and iCalendar are explicit projections and can lose unsupported meeting fields; the result reports losses. Export does not contact a vendor or mutate records.
 
+iCalendar marks an event cancelled only for the explicit source status `CANCELLED`
+or a boolean `canceled: true`. Untyped strings and numbers do not establish
+cancellation. Other source status fields, including adjournment, remain listed
+as omitted from the projection and are retained in neutral bundles.
+
 Use <code>csv-items</code> for both items nested in meeting records and standalone
 <code>agenda_item</code> records. Standalone rows retain the native item identifier,
 available normalized title/department and source URL. Their meeting key comes
