@@ -249,7 +249,7 @@ document = engine.fetch_attachment(
 )
 ~~~
 
-If the bundle is stored, the helper can resolve the stored capture instead of receiving <code>capture</code>. Keep durable citation URLs separately from short-lived signed download URLs. Check the attachment result for availability, hash, byte length, content type and errors.
+If the bundle is stored, the helper can resolve the stored capture instead of receiving <code>capture</code>. Keep durable citation URLs separately from short-lived signed download URLs. Check the attachment result for availability, hash, byte length, content type and errors. The shared download path checks cancellation and its total deadline through hashing and encoding the returned bytes. An interrupted or expired result retains the source record without reporting a completed attachment; checks are cooperative after synchronous work returns.
 
 A captured media player URL may return a player page instead of media. Where a provider captured a direct <code>video_url</code>, <code>audio_url</code> or <code>playback_url</code>, select that existing field with <code>kind="recordings"</code> and <code>url_field="video_url"</code> (or the verified field). QuorumRelay does not let the caller substitute a URL. An HLS fetch returns the manifest, not all segments; it is not proof that a recording is playable.
 

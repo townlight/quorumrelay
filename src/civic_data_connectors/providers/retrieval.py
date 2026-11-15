@@ -464,7 +464,7 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             return OperationResult("cancelled", retained_data(), operation_id=context.operation_id)
         if monotonic() >= deadline:
             raise ValueError("The captured attachment exceeded its total deadline.")
-        return OperationResult("completed", {
+        data = {
             **retained_data(), "attachment": {
                 "citation_url": document.get("citation_url") or (record.get("normalized", {}).get("url") if primegov_selected else None) or document.get("url") or url,
                 "selected_url_field": url_field, "content_type": response.content_type,
@@ -473,7 +473,13 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
                 "text_availability": "not_extracted",
                 **({"resolution": resolution} if resolution else {}),
             },
-        }, coverage={"sources": [source.public_dict()], "failures": [], "unavailable_attachments": [],
+        }
+        if context.check_cancelled():
+            return OperationResult("cancelled", retained_data(), operation_id=context.operation_id)
+        if monotonic() >= deadline:
+            raise ValueError("The captured attachment encoding exceeded its total deadline.")
+        return OperationResult("completed", data,
+                     coverage={"sources": [source.public_dict()], "failures": [], "unavailable_attachments": [],
                      **({"catalog_complete": False, "source_complete": False} if primegov_selected else {})},
                                operation_id=context.operation_id)
     except InterruptedError:

@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "4cdf385",
+  "tasks": [
+    6
+  ],
+  "status": "PASSED",
+  "scope": "Shared attachment completion checks cancellation and total deadline after hashing/base64 encoding, retaining the record without a completed attachment when interrupted. No provider contract change, new integration or remote mutation.",
+  "reproduced_before_fix": {
+    "failed": 4,
+    "observed": "Document and recording encoding returned completed despite cancellation or deadline expiry during base64 encoding."
+  },
+  "checks": [
+    {
+      "scope": "Tests referencing attachment retrieval plus response boundary checks",
+      "passed": 514,
+      "failed": 0,
+      "seconds": 9.65,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\attachment-encoding-completion-2026-11-15.xml",
+      "xml_sha256": "83c62d20af7194140c0d1b21666f44be43414c2bdfb42c7a61018a307b8d0b20",
+      "warning": "Existing Starlette/AnyIO alias deprecation"
+    },
+    {
+      "scope": "Ruff changed source/test",
+      "status": "PASSED"
+    }
+  ],
+  "source_sha256": {
+    "src/civic_data_connectors/providers/retrieval.py": "905caf8c5ee8f0eb2c7315c7a98aa822cb207cf9cfdbcacec10f45308118f5a7",
+    "tests/test_attachment_response_boundaries.py": "42ecfd53880df1b45a280136672061933580972f8d38bcb9a1ca4d7a7ee0f82a",
+    "docs/USER-MANUAL.md": "2f1f49c43e92931f76d7225f36d43f574219336419173dd9665b3a08185fabd2"
+  },
+  "limits": [
+    "Synthetic response tests; no live vendor transfers.",
+    "Previous2317full remains prior evidence; not rerun.",
+    "Cooperative bounds after synchronous work returns."
+  ]
+}
