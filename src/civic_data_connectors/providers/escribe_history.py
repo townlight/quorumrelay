@@ -6,6 +6,42 @@ from ..engine import canonical_hash
 from .native import make_bundle
 
 
+def history_index_bundle(source, namespace, content, value, parameters):
+    """Bind a native scalar ID list only to its explicit request meeting."""
+    from .escribe_publishing import FORMAT
+
+    if value is None:
+        ids = []
+    elif isinstance(value, dict) and set(value) <= {"int"} and isinstance(value.get("int", []), list):
+        ids = value.get("int", [])
+    else:
+        raise ValueError("The history selector requires the pinned integer-array response.")
+    if any(type(i) is not int or i <= 0 for i in ids) or len(set(ids)) != len(ids):
+        raise ValueError("Every history item reference must have a unique positive native ID.")
+    meeting = parameters["MeetingId"]
+    rows = []
+    for item in ids:
+        identity = json.dumps({"MeetingId": meeting, "AgendaItemId": item}, sort_keys=True, separators=(",", ":"))
+        rows.append(({"external_id": identity, "url": source.url,
+            "native_agenda_item_id": item, "native_meeting_id": meeting,
+            "meeting_binding": "explicit_request_context_not_response_echo",
+            "agenda_type_availability": "not_supplied_by_history_index",
+            "history_availability": "native_selector_only_fetch_selected_view_separately",
+            "documents": [], "recordings": []}, item, "agenda_item_history_reference"))
+    bundle = make_bundle(source, namespace, content, FORMAT, rows)
+    bundle["extensions"]["native_request_context"] = {
+        "api_method": "MeetingAgendaItemsWithHistory", "api_parameters": deepcopy(parameters)}
+    bundle["extensions"]["native_result_availability"] = "nil" if value is None else "supplied_array"
+    for record in bundle["records"]:
+        record["relationships"] = [{"relation": "meeting", "identity": {
+            "provider": source.provider, "namespace": namespace, "record_type": "meeting",
+            "external_id": meeting}, "binding": "explicit_request_context_not_response_echo"},
+            {"relation": "agenda_item_reference", "value": {
+                "native_meeting_id": meeting, "native_agenda_item_id": record["original"],
+                "agenda_type_availability": "not_supplied_by_history_index"}}]
+    return bundle
+
+
 def bind_history(parameters, bundle):
     if (type(parameters.get("AgendaItemId")) is not int or parameters["AgendaItemId"] <= 0
             or not isinstance(parameters.get("MeetingId"), str)):

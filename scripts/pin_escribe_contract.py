@@ -16,7 +16,8 @@ READS = ("MeetingGetByPortal", "AgendaGetByMeeting", "AgendaItemGetByAgenda",
          "AttachmentGetByAgenda", "AttachmentGetByAgendaItem", "DocumentGetContent",
          "PackageGetByMeeting", "BookmarkGetByMeeting", "BookmarkGetByAgenda",
          "ResolutionGetByMeeting", "ResolutionGetByAgendaItem",
-         "MeetingGetByMeetingType", "AgendaItemTextGetByMeetingId", "AgendaItemItemHistoryView")
+         "MeetingGetByMeetingType", "AgendaItemTextGetByMeetingId", "AgendaItemItemHistoryView",
+         "MeetingAgendaItemsWithHistory")
 
 
 def compile_contract():

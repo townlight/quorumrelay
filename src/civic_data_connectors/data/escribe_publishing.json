@@ -413,6 +413,29 @@
         }
       ]
     },
+    "MeetingAgendaItemsWithHistory": {
+      "action": "eSCRIBE.Internet.WebService/IPublishingService/MeetingAgendaItemsWithHistory",
+      "request": [
+        {
+          "name": "MeetingId",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/}guid",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        }
+      ],
+      "response": [
+        {
+          "name": "MeetingAgendaItemsWithHistoryResult",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfint",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ]
+    },
     "AttachmentCreate": {
       "action": "eSCRIBE.Internet.WebService/IPublishingService/AttachmentCreate",
       "request": [
@@ -2561,6 +2584,18 @@
         {
           "name": "KeyValueOfintstring",
           "type": "{http://schemas.microsoft.com/2003/10/Serialization/Arrays}inline/fbe2904b66ab35ad47ecb11ab15d44144c0cd36fe64b728cd25c02518655a823",
+          "namespace": "http://schemas.microsoft.com/2003/10/Serialization/Arrays",
+          "optional": true,
+          "nullable": false,
+          "many": true
+        }
+      ]
+    },
+    "{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfint": {
+      "fields": [
+        {
+          "name": "int",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
           "namespace": "http://schemas.microsoft.com/2003/10/Serialization/Arrays",
           "optional": true,
           "nullable": false,

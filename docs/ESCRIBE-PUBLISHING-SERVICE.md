@@ -174,6 +174,26 @@ publication, document availability or server generation/readiness.
 Both selection components must match every returned Meeting.Record. This is one
 explicit unpaged response with record/byte/time limits, not a catalog traversal.
 
+### Find native item IDs with supplied history
+
+`MeetingAgendaItemsWithHistory` takes `{"MeetingId": "<native-guid>"}` and returns
+the vendor's integer array. Fetch it explicitly, then use a returned positive item
+ID in `AgendaItemItemHistoryView` with that same meeting. The engine makes no
+automatic detail requests or polling loop.
+
+The result contains distinct `agenda_item_history_reference` records. Each retains
+its original scalar integer, exact SOAP capture and explicit meeting request
+context. The server does not echo that meeting or supply AgendaType, so these are
+partial references with a disclosed request-context binding, rather than complete
+agenda-item identities. A bare saved array cannot normalize without its request
+context; portable bundles retain that context through JSON, JSONL and ZIP.
+
+Missing/nil results and supplied empty arrays are distinguished and remain partial;
+neither establishes absence of history across a catalog. Duplicate, nonpositive,
+out-of-range or malformed native IDs fail. Unpaged results must fit `max_records`;
+there is no invented paging or silent truncation. Cancellation/deadline and byte
+bounds apply through mapping. [Synthetic execution receipt](verification/escribe-history-index-2026-11-15.json).
+
 `AgendaItemTextGetByMeetingId` takes exactly
 `{"meetingId": "<native-guid>", "languageId": 1033}`. Parameter casing differs
 from other methods. Each returned AgendaItemText must match both selections and

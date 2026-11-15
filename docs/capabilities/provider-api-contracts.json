@@ -9909,7 +9909,8 @@
       "ResolutionGetById/GetByMeeting/GetByAgendaItem",
       "MeetingGetByMeetingType with exact portal/type parent checks",
       "AgendaItemTextGetByMeetingId with exact meeting/language key and source Mintues text",
-      "AgendaItemItemHistoryView selected meeting/item; exact inherited typed history, literal nested motions/votes/documents; no inferred tally, result or full agenda-item join"
+      "AgendaItemItemHistoryView selected meeting/item; exact inherited typed history, literal nested motions/votes/documents; no inferred tally, result or full agenda-item join",
+      "MeetingAgendaItemsWithHistory: native scalar item IDs bound to explicit meeting request context; partial references, no missing AgendaType inference or automatic detail fan-out"
     ],
     "implemented_writes": [
       "MeetingCreate",

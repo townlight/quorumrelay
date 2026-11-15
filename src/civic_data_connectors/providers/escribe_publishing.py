@@ -32,7 +32,8 @@ READS = frozenset({"MeetingGetById", "MeetingGetByPortal", "AgendaGetById", "Age
     "AttachmentGetByAgendaItem", "DocumentGetById", "DocumentGetContent", "PackageGetById", "PackageGetByMeeting",
     "BookmarkGetById", "BookmarkGetByMeeting", "BookmarkGetByAgenda",
     "ResolutionGetById", "ResolutionGetByMeeting", "ResolutionGetByAgendaItem",
-    "MeetingGetByMeetingType", "AgendaItemTextGetByMeetingId", "AgendaItemItemHistoryView"})
+    "MeetingGetByMeetingType", "AgendaItemTextGetByMeetingId", "AgendaItemItemHistoryView",
+    "MeetingAgendaItemsWithHistory"})
 for prefix, namespace in (("s", SOAP), ("a", ADDRESS), ("e", NS), ("i", XSI)):
     ET.register_namespace(prefix, namespace)
 
@@ -307,6 +308,8 @@ def parse_bundle(source, namespace, content):
     method, value = response_value(content)
     if method not in READS or method == "DocumentGetContent":
         raise ValueError("Only mapped record reads form a standalone record bundle.")
+    if method == "MeetingAgendaItemsWithHistory":
+        raise ValueError("History item IDs require explicit request meeting context; use fetch.")
     if method == "AgendaItemItemHistoryView":
         from .escribe_history import history_bundle
         return history_bundle(source, namespace, content, value)
@@ -460,8 +463,12 @@ def read(engine, source, namespace, request, bounds, context, transport, *, disc
                 "source_complete": False, "catalog_complete": False, "pages": session.pages,
                 "document_content_received": True, "text_extracted": False}, operation_id=context.operation_id)
         value, content = session.call(method, parameters)
-        bundle = parse_bundle(source, namespace, content)
-        bind_records(method, parameters, bundle)
+        if method == "MeetingAgendaItemsWithHistory":
+            from .escribe_history import history_index_bundle
+            bundle = history_index_bundle(source, namespace, content, value, parameters)
+        else:
+            bundle = parse_bundle(source, namespace, content)
+            bind_records(method, parameters, bundle)
         if sum(r["normalized"].get("source_component_count", 1) for r in bundle["records"]) > bounds.max_records:
             raise ValueError("The selected unpaged response exceeds max_records; it is not silently truncated.")
         session.check()
