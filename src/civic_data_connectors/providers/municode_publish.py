@@ -157,7 +157,7 @@ def parse_bundle(source, namespace, content):
                         raise ValueError("PublishPage HTML locator has an invalid tenant or meeting identity.")
                     identities.add(q["me"][0])
                 elif parts.hostname == HOST and parts.path == "/d/f":
-                    q = parse_qs(parts.query)
+                    q = parse_qs(parts.query, keep_blank_values=True)
                     target = q.get("u", [])
                     if len(target) != 1:
                         raise ValueError("PublishPage document locator is ambiguous.")

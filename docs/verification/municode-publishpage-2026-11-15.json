@@ -11,17 +11,32 @@
       "command": "python -X utf8 -m pytest tests/test_municode_publish.py tests/test_municode_configured_discovery.py tests/test_account_apis.py tests/test_essential_production.py tests/test_provider_discovery.py -q",
       "passed": 131,
       "failed": 0,
-      "seconds": 2.43
+      "seconds": 2.43,
+      "revision_scope": "preceding candidate"
     },
     {
       "command": "python -X utf8 -m ruff check authored PublishPage source and test files",
-      "status": "passed"
+      "status": "passed",
+      "revision_scope": "preceding candidate"
+    },
+    {
+      "command": "python -X utf8 -m pytest tests/test_municode_publish.py -q",
+      "passed": 23,
+      "failed": 0,
+      "seconds": 0.6,
+      "revision_scope": "corrected duplicate-u candidate"
+    },
+    {
+      "command": "python -X utf8 -m ruff check src/civic_data_connectors/providers/municode_publish.py tests/test_municode_publish.py",
+      "status": "passed",
+      "revision_scope": "corrected duplicate-u candidate"
     }
   ],
   "bindings": [
     {
       "path": "src/civic_data_connectors/providers/municode_publish.py",
-      "sha256": "2754f4e792b0636b0df4d3d893417691c7fea6ab4786d1211dd3ac803f2c931d"
+      "sha256": "d6dfbf7234e11f7072a6bfa86220df39282d4f483022d104ad21349d4e4953ac",
+      "preceding_sha256": "2754f4e792b0636b0df4d3d893417691c7fea6ab4786d1211dd3ac803f2c931d"
     },
     {
       "path": "src/civic_data_connectors/providers/identification.py",
@@ -41,7 +56,8 @@
     },
     {
       "path": "tests/test_municode_publish.py",
-      "sha256": "3e64f94d03d62be3ae73d3b97a9e3a974e99709bd29ca33dbac962c578b5724b"
+      "sha256": "420519deaf0a68d1cf3628beca948aef079701ddf968f37f165c0bcb938969bf",
+      "preceding_sha256": "3e64f94d03d62be3ae73d3b97a9e3a974e99709bd29ca33dbac962c578b5724b"
     },
     {
       "path": "tests/fixtures/municode-publish/effingham.html",

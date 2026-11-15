@@ -9945,7 +9945,7 @@
           "fixture_path": "tests/fixtures/municode-publish/effingham.html",
           "fixture_sha256": "f996a42d9d8811f6129cde3b9b57693627e1e2224141933428082ffe8865ee7c",
           "receipt_path": "docs/verification/municode-publishpage-2026-11-15.json",
-          "receipt_sha256": "cfac59515d198be5eb1005a5bfddd2485384ddf6484bbfbe157c8d648fc1c0e5",
+          "receipt_sha256": "3fc2c860c11db29f7f5e8c884c43e5188e5d89c27d709aa94baaa683bb24529a",
           "limits": "Current capture HTTP status unrecorded; previous 200 is separate. One selected page only; no live engine acceptance, complete catalog or authenticated API identity/pagination.",
           "synthetic_execution": {
             "provider": "municode-meetings",
@@ -9956,13 +9956,21 @@
             ],
             "entities": [],
             "scope": "Explicit selected Municode PublishPage HTML: offline captured page, selector identity, page controls, bounds, local resume, persistence and neutral export.",
-            "execution_provenance": "Pinned public HTML capture and offline injected transport; 131 affected checks. No live engine acceptance.",
+            "execution_provenance": "Pinned HTML fixture; 131 affected checks on preceding candidate, then 23 focused checks on corrected duplicate-u candidate. No live engine acceptance.",
             "checks": [
               {
                 "command": "python -X utf8 -m pytest tests/test_municode_publish.py tests/test_municode_configured_discovery.py tests/test_account_apis.py tests/test_essential_production.py tests/test_provider_discovery.py -q",
                 "passed": 131,
                 "failed": 0,
-                "seconds": 2.43
+                "seconds": 2.43,
+                "revision_scope": "preceding candidate"
+              },
+              {
+                "command": "python -X utf8 -m pytest tests/test_municode_publish.py -q",
+                "passed": 23,
+                "failed": 0,
+                "seconds": 0.6,
+                "revision_scope": "corrected duplicate-u candidate"
               }
             ],
             "bindings": [
@@ -9974,9 +9982,10 @@
               {
                 "kind": "test",
                 "path": "tests/test_municode_publish.py",
-                "sha256": "3e64f94d03d62be3ae73d3b97a9e3a974e99709bd29ca33dbac962c578b5724b",
+                "sha256": "420519deaf0a68d1cf3628beca948aef079701ddf968f37f165c0bcb938969bf",
                 "hash_policy": "test_source_crlf_to_lf",
-                "canonical_lf_sha256": "b7fdb74f93a49e9264e7a8e9ac2da053b333bdd892ab44437e34d816c947f93a"
+                "canonical_lf_sha256": "3be08c8415782b5e3a4f4b31499408b06c3c8261af2f7dcfc58d84da1ca47204",
+                "preceding_sha256": "3e64f94d03d62be3ae73d3b97a9e3a974e99709bd29ca33dbac962c578b5724b"
               }
             ]
           }

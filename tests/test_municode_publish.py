@@ -130,6 +130,17 @@ def test_pdf_filename_identity_disagreement_rejected():
     assert result.status == "failed"
 
 
+@pytest.mark.parametrize("replacement", [b"?u=&u=https://", b"?u=https://"])
+def test_pdf_duplicate_u_including_blank_rejected(replacement):
+    if replacement == b"?u=https://":
+        changed = RAW.replace(b".pdf&n=Agenda-", b".pdf&u=&n=Agenda-", 1)
+    else:
+        changed = RAW.replace(b"?u=https://", replacement, 1)
+    result = create_engine().normalize(Source("municode-meetings", URL, input_format=FORMAT), changed,
+                                       input_format=FORMAT)
+    assert result.status == "failed"
+
+
 def test_changed_capture_rejected_on_local_checkpoint():
     first, _ = discover(max_records=1)
     resumed, _ = discover(Transport(RAW + b" "), max_records=1, checkpoint=first.coverage["checkpoint"])
