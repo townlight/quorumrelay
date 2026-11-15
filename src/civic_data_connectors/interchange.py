@@ -951,6 +951,12 @@ def register(engine) -> None:
             request["coverage"] = {**upstream.get("coverage", {}), "input_status": upstream["status"]}
             upstream_errors = tuple(Error(**error) for error in upstream.get("errors", []))
         bounds = Bounds(**request.get("bounds", {}))
+        def check_export():
+            if operation_cancelled(owner.storage, context):
+                raise InterruptedError("Export cancelled.")
+            if time.monotonic() >= started + bounds.deadline_seconds:
+                raise ValueError("The export deadline was exceeded.")
+
         if "stream" in request and type(request["stream"]) is not bool:
             raise ValueError("stream must be a JSON boolean.")
         delivery = request.get("delivery", "storage" if request.get("stream") else "inline")
@@ -1003,18 +1009,12 @@ def register(engine) -> None:
         if operation_cancelled(owner.storage, context):
             return OperationResult("cancelled", operation_id=context.operation_id)
         if format in {"csv", "csv-meetings", "csv-items", "icalendar", "ics"}:
-            def check_projection():
-                if operation_cancelled(owner.storage, context):
-                    raise InterruptedError("Projection export cancelled.")
-                if time.monotonic() >= started + bounds.deadline_seconds:
-                    raise ValueError("The projection export deadline was exceeded.")
-
-            check_projection()
+            check_export()
             if format.startswith("csv"):
                 payload, losses = csv_projection(bundle["records"], kind="items" if format == "csv-items" else "meetings")
             else:
                 payload, losses = icalendar_projection(bundle["records"])
-            check_projection()
+            check_export()
             if len(payload) > bounds.transfer_bytes:
                 raise ValueError("Projection exceeds the transfer byte limit.")
             if delivery == "inline" and len(payload) > bounds.parser_bytes:
@@ -1026,7 +1026,7 @@ def register(engine) -> None:
                 metadata = _save_artifact(owner, "artifacts", artifact_id, io.BytesIO(payload),
                     {"artifact_id": artifact_id, "format": format, "manifest": manifest,
                      "namespaces": sorted({r["identity"]["namespace"] for r in bundle["records"]})},
-                    context=context, max_bytes=bounds.transfer_bytes, check_bounds=check_projection)
+                    context=context, max_bytes=bounds.transfer_bytes, check_bounds=check_export)
                 data = {"format": format, "artifact_id": artifact_id, "manifest": manifest,
                         "storage_reference": metadata.get("storage_reference",
                             {"kind": "civic_export_artifact", "artifact_id": artifact_id})}
@@ -1036,7 +1036,7 @@ def register(engine) -> None:
             status = "partial" if (coverage.get("failures") or coverage.get("truncated")
                                     or coverage.get("input_status") in {"partial", "failed", "cancelled"}
                                     or upstream_errors) else "completed"
-            check_projection()
+            check_export()
             return OperationResult(status, data=data,
                                    errors=upstream_errors, coverage=coverage, operation_id=context.operation_id)
         attachment_ids = request.get("attachment_ids", [])
@@ -1059,9 +1059,11 @@ def register(engine) -> None:
                                               item["citation_url"], item["sha256"]))
             output = stack.enter_context(tempfile.TemporaryFile())
             try:
+                check_export()
                 manifest = write_bundle(bundle, output, format=format, bounds=bounds, storage=owner.storage,
                                         scope=context.scope, context=context, attachments=attachments,
                                         authorized_attachments=frozenset(attachment_ids))
+                check_export()
             except InterruptedError:
                 return OperationResult("cancelled", coverage={"truncated": True}, operation_id=context.operation_id)
             if delivery == "storage":
@@ -1070,7 +1072,8 @@ def register(engine) -> None:
                 metadata = _save_artifact(owner, "artifacts", artifact_id, output,
                     {"artifact_id": artifact_id, "format": format, "manifest": manifest,
                      "requires_attachment_grant": bool(attachment_ids),
-                     "namespaces": sorted(namespaces)}, context=context, max_bytes=bounds.transfer_bytes)
+                     "namespaces": sorted(namespaces)}, context=context, max_bytes=bounds.transfer_bytes,
+                    check_bounds=check_export)
                 data = {"format": format, "artifact_id": artifact_id, "manifest": manifest,
                         "storage_reference": metadata.get("storage_reference",
                             {"kind": "civic_export_artifact", "artifact_id": artifact_id})}
@@ -1085,6 +1088,7 @@ def register(engine) -> None:
                                 or coverage.get("input_status") in {"partial", "failed", "cancelled"}
                                 or any(item.get("reason") == "original_capture_not_supplied"
                                        for item in manifest["not_included"])) else "completed"
+        check_export()
         return OperationResult(status, data=data,
                                errors=upstream_errors, coverage=coverage, operation_id=context.operation_id)
     def safe_export(owner, request, content, context):

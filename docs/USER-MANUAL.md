@@ -323,8 +323,8 @@ available normalized title/department and source URL. Their meeting key comes
 only from an explicit meeting identity in the record's parent or relationships.
 Missing, invalid or conflicting meeting identities leave that key empty and add
 a warning to the projection-loss ledger; names, dates and item order never supply
-a guessed join. CSV/iCalendar exports honor cancellation and the total deadline
-through serialization and streamed artifact saving. Checks run when synchronous
+a guessed join. JSON/JSONL/ZIP and CSV/iCalendar exports honor cancellation and
+the total deadline through serialization, inline encoding and streamed artifact saving. Checks run when synchronous
 work returns; an expired result is not reported as a completed download.
 
 ~~~python
