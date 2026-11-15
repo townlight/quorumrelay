@@ -8641,10 +8641,10 @@
         "A bounded Lacey CivicClerk native-search engine read and in-process resume is captured in docs/verification/civicplus-select-native-search-2026-11-12.json: partial/no-error pages yielded three then two local hits; the first request made one network call and resume reused the exact in-process snapshot with zero additional calls. Provider candidate semantics, broader search/full catalog, full text and restart-persistent continuation remain unverified.",
         "The exporter prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4. The official-linked filename tester classifies the additional tokens, but backend acceptance and post-import behavior remain unverified. MP4 framing does not establish codec/playability, captions or timestamp fidelity; ambiguous Packet, Notices and Audio/Video aliases remain rejected.",
         "Historical FTP host and consultant processing/readback remain unverified. Source file preparation is separate from remote import or association. Official Fishers Section create/update is implemented; Normalized Event timestamp conversion/create-template equivalence, item writes and document upload remain contract gaps, not account-acquisition gates.",
-        "Official Fishers spec and metadata now pin Event/Section models and publication enum0/1/2; section writes are implemented with scoped synthetic execution. Event date/time/template readback equivalence remains unresolved, and no item create/update or document upload model is established. No account acquisition gate.",
+        "Official Fishers spec and metadata now pin Event/Section models and publication enum0/1/2; section writes are implemented with scoped synthetic execution. Automatic normalized Event date/time conversion and create-template effects remain unresolved; explicit native update/full GET readback is implemented, and no item create/update or document upload model is established. No account acquisition gate.",
         "Bounded Event-write follow-up: create eventStartTime has HH:MM regex, update time is free-form with12:00:00AM default; UI workflows/public display client do not establish write timestamp or template recurrence readback. No write conversion inferred. Portal Event-file API-origin defect is now implemented/tested separately.",
         "Supplied EventModel MP4/caption locator mapping and guarded transfers synthetically executed; caption extraction/timing, playback/readiness and staff upload contracts remain unverified, not proven outside-only dependencies.",
-        "Official2026guides establish variable publication/template defaults, with no create publication override in pinned request model. Selected current configuration is a destination fact; API applicability, preflight and timestamp/readback remain unresolved research. See event-settings-assessment.json; no blanket outside-only contract claim.",
+        "Official2026guides establish variable publication/template defaults, with no create publication override in pinned request model. Selected current configuration is a destination fact; Create API applicability/preflight and automatic normalized timestamp conversion remain unresolved research; explicit native Event update/readback is implemented. See event-settings-assessment.json; no blanket outside-only contract claim.",
         "Native Event PUT is now implemented with complete explicit native request plus exact caller-declared GET postcondition and preserved publication/media/template guards. This closes the native-wire execution gap; normalized date/time conversion and Event create/default effects remain distinct unresolved scopes. No live call or account gate."
       ],
       "requirement_ids": [
@@ -13312,6 +13312,30 @@
           "limits": "Synthetic provider transport through actual current source application paths; no provider mutations; Existing configured-capture partial and unavailable-media outcomes retained; Supplied HTML/rich text is source content, not OCR/ASR or inferred votes/motions/attendance; Townlight/TownReporter current-source candidate acceptance remains separate; frozen original proof reused only where unchanged; No package build/install/signing/Sandbox restart/frozen artifact/publication",
           "receipt_path": "docs/verification/source-text-reference-clients-2026-11-12.json",
           "receipt_sha256": "21d6656e7555e96469b2146ebe4dc5264c3efb249c73c49be2fdefdce564dc93"
+        },
+        {
+          "id": "simbli-completion-bounds-2026-11-15",
+          "url": "https://github.com/townlight/quorumrelay",
+          "title": "Simbli aggregate transfer and response-completion bounds",
+          "kind": "source",
+          "proof_level": "scoped_synthetic_execution_not_live_provider_acceptance",
+          "observation_date": "2026-11-15",
+          "receipt_path": "docs/verification/simbli-completion-bounds-2026-11-15.json",
+          "receipt_sha256": "d0dcea70c9fa812864a2eb8784ad79a77af75a663ce0fa3aaee7f0bfc6bdc5f2",
+          "findings": "Five reproduced failures corrected; eight new cases and217affected checks pass. Exact exhausted/overflow budgets, interrupted mapping and safe resume covered.",
+          "limits": "No new catalog, native search, external import, staff write or current live applicability claim."
+        },
+        {
+          "id": "simbli-current-meetings-brochure-2026-11-15",
+          "url": "https://21607822.fs1.hubspotusercontent-na1.net/hubfs/21607822/Website%20Downloads/Simbli%20Meetings%20Software.pdf",
+          "title": "Current vendor-declared Simbli meetings brochure",
+          "kind": "official_docs",
+          "proof_level": "vendor_product_workflow_not_machine_contract",
+          "observation_date": "2026-11-15",
+          "fixture_path": "docs/capabilities/evidence/simbli-current-meetings/meetings.pdf",
+          "fixture_sha256": "5ad207498de7f21d2846589aa75732c5cefdfaa3ff81ce5ba9a40fe2f0b7c0c9",
+          "findings": "Working current vendor-declared two-page PDF describes agenda recommendations into minutes and staff packet/search/vote workflows.",
+          "limits": "Does not specify external file layout, request endpoint/fields/authentication or readback; no API absence/outside-only claim. Page web-reader success and separate direct403 are distinguished in source.json."
         }
       ],
       "tenants": [
@@ -13351,9 +13375,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "simbli-tenant",
-            "simbli-public-pagination-live"
+            "simbli-public-pagination-live",
+            "simbli-completion-bounds-2026-11-15"
           ],
-          "details": "Observed anonymous index/menu\u2192district listing\u219250-row public POST pager, local date filters and private source/caller-bound TTL cursors implemented. Baseline saved HTML parser unchanged. No body-field mapping or complete catalog/search proof.",
+          "details": "Observed anonymous index/menu\u2192district listing\u219250-row public POST pager, local date filters and private source/caller-bound TTL cursors implemented. Baseline saved HTML parser unchanged. No body-field mapping or complete catalog/search proof. Aggregate transfer and post-transport/post-mapping cancellation/deadline bounds have separately executed regressions; valid earlier captures remain partial on later failure.",
           "dependencies": [],
           "remaining_verification": [
             "Resolve actual catalog; exercise bounded dates/page transitions and report partial failures."
@@ -13376,9 +13401,10 @@
           "evidence_ids": [
             "simbli-tenant",
             "simbli-fresh-detail-2026-11-12",
-            "simbli-item-content-2026-11-12"
+            "simbli-item-content-2026-11-12",
+            "simbli-completion-bounds-2026-11-15"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Resumed local source maps fresh anonymous GetMeeting/GetItemsTreeDTO responses, with explicit simbli-meeting-detail-json and simbli-agenda-items-json saved formats. Integrated meeting4942 read returned1meeting/41items/partial/noerrors. Supporting/minutes responses retained raw; no document links inferred from flags. Optional agenda_item_id now reads only an item supplied by the fresh same-meeting tree, maps supplied content fields and stable same-district/meeting attachment URLs from the vendor public renderer; simbli-item-content-json supports offline explicit-context normalization. Scoped synthetic engine mapping\u2192attachment transfer passed; separate public PDF probe returned175050bytes/application/pdf with PDF magic. No full-provider acceptance inferred.",
+          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Resumed local source maps fresh anonymous GetMeeting/GetItemsTreeDTO responses, with explicit simbli-meeting-detail-json and simbli-agenda-items-json saved formats. Integrated meeting4942 read returned1meeting/41items/partial/noerrors. Supporting/minutes responses retained raw; no document links inferred from flags. Optional agenda_item_id now reads only an item supplied by the fresh same-meeting tree, maps supplied content fields and stable same-district/meeting attachment URLs from the vendor public renderer; simbli-item-content-json supports offline explicit-context normalization. Scoped synthetic engine mapping\u2192attachment transfer passed; separate public PDF probe returned175050bytes/application/pdf with PDF magic. No full-provider acceptance inferred. Aggregate transfer and post-transport/post-mapping cancellation/deadline bounds have separately executed regressions; valid earlier captures remain partial on later failure.",
           "dependencies": [],
           "remaining_verification": [
             "Aggregate agenda/minutes PDF generation, broader item/document coverage and native search contracts remain unresolved; supplied item PDF mapping is covered by the named scoped synthetic engine case."
@@ -13702,7 +13728,8 @@
       "remaining_research": [
         "Public listing/page2, fresh selected meeting/agenda tree, selected item content and same-meeting supplied attachments are source implemented with scoped captures/synthetic execution. The older HTML-only observation is historical. Aggregate agenda/minutes PDF generation, native search and full-catalog semantics remain unverified.",
         "Reviewed current Simbli pages describe archive search and staff meeting/item/document workflows but publish no machine field schema. A product-matched machine contract is not yet established; this is unresolved research, not proof only a customer/private source can resolve it.",
-        "Tenant-specific role/permission and write/readback configuration must come from a matching machine contract. No staff/test-tenant credential acquisition is an acceptance gate; no live mutation is authorized."
+        "Tenant-specific role/permission and write/readback configuration must come from a matching machine contract. No staff/test-tenant credential acquisition is an acceptance gate; no live mutation is authorized.",
+        "Current vendor-declared meetings brochure captured2026-11-15. Import recommendations into minutes is a product workflow claim, with no external file/request/readback schema. Exact old CDN failure and direct page403 do not prove other public contracts absent; no new tenant sampling or guessed staff path."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "simbli",

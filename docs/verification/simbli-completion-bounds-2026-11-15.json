@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "9ef3fc2",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "defect": "Simbli listing reset the transfer budget per page; listing/detail mapping could retain mapped bundles after cancellation/deadline expiry.",
+  "reproduction": "Five new focused cases failed before the fix; one existing-behavior boundary case passed.",
+  "changes": "One aggregate listing transfer counter and remaining-byte transport bound, completion checks after transport/mapping, explicit transfer/deadline coverage. Prior valid pages and resumable cursor survive later failures without page skipping.",
+  "new_cases": 8,
+  "checks": [
+    {
+      "scope": "Simbli completion/discovery/detail, provider discovery, interfaces/public package, original baseline and local search",
+      "passed": 217,
+      "failed": 0,
+      "seconds": 20.23
+    },
+    {
+      "scope": "Ruff on three changed Python paths",
+      "status": "PASSED"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/simbli.py",
+      "sha256": "c6d3a8d02c2ed0d1d9e2a0ef66f745b4d386c9a33e0fdfc3800621e0119b341f"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/simbli_detail.py",
+      "sha256": "fb95f34326e64e72d8ad242f922408f12963d296939de7a1609f070dfb3ebcc2"
+    },
+    {
+      "path": "tests/test_simbli_completion_bounds.py",
+      "sha256": "6490498c58fc8704b59b1440e6041013c72c740c8786db830ace931d5f6ae356"
+    }
+  ],
+  "limits": [
+    "Synchronous transport/parser work is checked after returning; no claim of preempting blocked external code.",
+    "No new Simbli native search, aggregate PDF, file import or staff write contract established.",
+    "Existing source captures/identities and saved-format export behavior retained; no live tenant call."
+  ],
+  "delivery": "Local source only. No release, push, merge, package, install, signing, credential change or vendor mutation."
+}

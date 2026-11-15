@@ -151,6 +151,10 @@ def fetch_detail(source, namespace, bounds, context, transport):
     jar, total, requests = CookieJar(), 0, 0
     bundles, captures, errors = [], [], []
 
+    def check_completion():
+        if context.check_cancelled() or monotonic() >= deadline:
+            raise ValueError("The public detail read was cancelled or exceeded its deadline.")
+
     def read(url):
         nonlocal total, requests
         if context.check_cancelled() or monotonic() >= deadline or total >= bounds.transfer_bytes:
@@ -165,6 +169,7 @@ def fetch_detail(source, namespace, bounds, context, transport):
             deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=(HOST,), allow_redirects=False)
         total += len(response.content)
         requests += 1
+        check_completion()
         if (response.status != 200 or response.url != url or len(response.content) > bounds.parser_bytes
                 or total > bounds.transfer_bytes or monotonic() >= deadline):
             raise ValueError("The public detail response was unavailable or outside its exact bounds.")
@@ -201,11 +206,13 @@ def fetch_detail(source, namespace, bounds, context, transport):
                 tree_payload = json.loads(raw)
             if input_format:
                 bundle = parse_bundle(source, namespace, raw, input_format)
+                check_completion()
                 bundle["extensions"]["observed_read_route"] = path
                 bundles.append(bundle)
                 captures.append(bundle["capture"])
             else:
                 capture = make_bundle(source, namespace, raw, "simbli-public-response-json", [])["capture"]
+                check_completion()
                 captures.append({**capture, "observed_read_route": path, "mapping": "raw_response_only"})
         if selected is not None:
             if tree_payload is None or len(captures) >= bounds.max_pages:
@@ -240,6 +247,7 @@ def fetch_detail(source, namespace, bounds, context, transport):
             bundle = parse_bundle(source, namespace, wrapped, CONTENT)
             # Preserve exact network response separately from the contextual saved envelope.
             capture = make_bundle(source, namespace, raw, "simbli-public-response-json", [])["capture"]
+            check_completion()
             bundle["extensions"]["observed_read_route"] = path
             tree_bundle["records"] = [r for r in tree_bundle["records"]
                 if r["identity"]["external_id"] != str(selected)]
@@ -260,4 +268,5 @@ def fetch_detail(source, namespace, bounds, context, transport):
         tuple(errors), {"scope": "one anonymous meeting and supplied agenda tree; selected item fields and supplied same-meeting attachment routes when requested",
             "source_complete": False, "catalog_complete": False, "requests": requests,
             "transfer_bytes": total, "truncated": truncated, "unknown_time_zone": True,
+            "deadline_exceeded": monotonic() >= deadline,
             "supporting_and_minutes_mapping": "raw supplied responses only", "checkpoint": None}, context.operation_id)

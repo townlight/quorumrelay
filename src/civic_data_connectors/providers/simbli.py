@@ -140,11 +140,18 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, re
     deadline = monotonic() + bounds.deadline_seconds
     records, bundles, failures, errors = [], [], [], []
     pages, requests, filtered, finished = 0, 0, 0, False
+    transferred = 0
 
-    def request(url, *, method="GET", body=None):
-        nonlocal requests
+    def check_completion():
         if context.check_cancelled() or monotonic() >= deadline:
             raise RetrievalError("cancelled_or_deadline")
+
+    def request(url, *, method="GET", body=None):
+        nonlocal requests, transferred
+        check_completion()
+        remaining = bounds.transfer_bytes - transferred
+        if remaining <= 0:
+            raise ValueError("The anonymous request exhausted its aggregate transfer budget.")
         headers = {"Accept": "application/json" if method == "POST" else "text/html, application/json"}
         if body is not None:
             headers.update({"Content-Type": "application/json", "Authorization": "Bearer "})
@@ -158,12 +165,14 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, re
         if any(cookie.name.lower() == "auth_token" for cookie in state["cookies"]):
             raise ValueError("Authenticated Simbli sessions are outside this anonymous listing contract.")
         response = transport.request(url, method=method, body=body, headers=headers,
-            byte_limit=bounds.parser_bytes, deadline_seconds=max(.001, deadline - monotonic()),
+            byte_limit=min(bounds.parser_bytes, remaining), deadline_seconds=max(.001, deadline - monotonic()),
             allowed_origins=(HOST,), allow_redirects=False)
         requests += 1
+        transferred += len(response.content)
+        check_completion()
         if response.status != 200:
             raise RetrievalError("provider_http_error", status=response.status)
-        if response.url != url or len(response.content) > bounds.parser_bytes or monotonic() >= deadline:
+        if response.url != url or len(response.content) > min(bounds.parser_bytes, remaining):
             raise ValueError("The anonymous response left its exact endpoint or bounds.")
         _cookies(state["cookies"], response, url)
         if any(cookie.name.lower() == "auth_token" for cookie in state["cookies"]):
@@ -208,6 +217,7 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, re
             if len(state["content"]) > bounds.parser_bytes:
                 raise ValueError("Continuation exceeds current parser bounds.")
             bundle = _rows_bundle(source, namespace, state["content"], rows, district, state["first"])
+            check_completion()
             signature = canonical_hash(rows)
             if signature not in state["signatures"]:
                 state["signatures"].append(signature)
@@ -253,6 +263,7 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, re
             errors.append(Error("simbli_continuation_capacity", "Continuation capacity reached; no active cursors were evicted.", source=source.url))
     coverage = dict(scope="observed anonymous public listing only; catalog completeness unverified", catalog_complete=False,
         source_complete=False, listing_exhausted=finished, snapshot_consistency="not_guaranteed",
+        transfer_bytes=transferred,
         date_from=bounds.date_from, date_to=bounds.date_to, pages=pages, requests=requests,
         returned_records=len(records), filtered_records=filtered, failed_pages=failures, truncated=not finished,
         checkpoint=checkpoint, checkpoint_lifetime="15 minutes; current engine process only",
