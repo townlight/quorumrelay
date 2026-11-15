@@ -181,6 +181,8 @@ Evidence and exact scope: `inventory.json` provider `town-hall-streams`; operati
 
 ## F19 TelVue (`telvue`)
 
+- Historical CloudCast4.1 chapter CSV preparation is implemented from the official manual: headerless Start/End/Title/Summary/Description, explicit times, local bytes/hash/scoped artifact. Current Connect compatibility, remote import and meeting association remain unverified. See [format limits](../TELVUE-CHAPTER-CSV.md).
+
 - Documented Connect v2 reads are GET /api/v2/media[/{id}], /videos and /playlists[/{id}]. The source fetch adapter now implements explicitly requested account reads; synthetic documented-route verification is accepted; live calls are optional and unrun.
 - Published pages show example JSON envelopes/fields but omit filters, pagination/cursor, caps and rate limits. Record these from a supplied authorized account response/current guide; do not claim catalog completeness.
 - Connect/CloudCast MRSS has scoped published-player coverage. Connect native playlist reorder/media membership writes now have exact public-client request contracts and synthetic readback. No upload/processing/visibility or vendor meeting association inferred; HyperCaster remains separate.

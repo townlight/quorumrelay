@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "e95f82a",
+  "status": "PASSED",
+  "new_cases": 17,
+  "scope": "Local historical CloudCast4.1 chapter CSV preparation. No current Connect compatibility, vendor transfer/import, recording/chapter creation or meeting association claim. Explicit times/text only; encoding is a disclosed local choice.",
+  "checks": [
+    {
+      "command": "pytest tests/test_telvue_chapter_export.py tests/test_suiteone_export.py tests/test_interchange.py tests/test_baseline.py tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q",
+      "passed": 150,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 4.062,
+      "junit_sha256": "27de84a02c9daab0458c1d645e38fe773c71dd637c8643885c7eb0abd239ff8a"
+    },
+    {
+      "command": "pytest tests -q",
+      "passed": 1803,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 100.898,
+      "junit_sha256": "6a53ef30adf806a129f580365c199195319b6b76ebae63c2f4b5375993d7bbb3"
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "command": "scripts/validate_capabilities.py",
+      "status": "PASSED",
+      "evidence_records": 406,
+      "distinct_urls": 255,
+      "errors": 0
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/telvue-chapter-csv/source.json",
+      "sha256": "4f424a0cec2e7a4992d1496629e0d27b1b2734e1a63fd03255130f380434932a"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_telvue_chapter_export.py",
+      "sha256": "3d5ad71b0f4a9a2f2b8c73fda0fc7601c67fb6fa57d147e9a50da03621c79bb6"
+    }
+  ],
+  "initial_test_correction": "First draft omitted required application-owned account namespace; added explicit synthetic namespace, reran all focused cases. No guard weakened."
+}

@@ -1,0 +1,34 @@
+{
+  "url": "https://telvue.com/wp-content/uploads/2014/06/CloudCastUserManual_v4_1.pdf",
+  "status": 200,
+  "bytes": 18005219,
+  "sha256": "2e662375b2f2d2073ecc1f496769942db0926b428f1fb87b882cd0c273b3eafb",
+  "observation_date": "2026-11-14",
+  "product": "TelVue CloudCast",
+  "documented_version": "4.1.0 / June 2014",
+  "pdf_page": 15,
+  "printed_page": 14,
+  "columns": [
+    "Start",
+    "End",
+    "Title",
+    "Summary",
+    "Description"
+  ],
+  "rules": {
+    "header": false,
+    "time_format": "HH:MM:SS",
+    "optional_text_columns": [
+      "Summary",
+      "Description"
+    ],
+    "comma_fields": "CSV quoted",
+    "workflow": "Select chapter CSV in Bulk Add Chapters for an existing video."
+  },
+  "limits": [
+    "Historical CloudCast contract, not current Connect API or deployment qualification.",
+    "PDF does not specify encoding or remote upload route; local exporter chooses UTF-8.",
+    "Explicit start and end required in local bulk CSV; single-chapter UI optional end is not inferred for bulk intake.",
+    "No vendor transfer, generated thumbnails, current CMS readback or meeting association performed."
+  ]
+}

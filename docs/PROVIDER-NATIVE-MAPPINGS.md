@@ -358,3 +358,5 @@ cover synthetic transfers; preserved dev13 packages predate this source.
 ## GWorks published HTML and TownCloud drafts
 
 [GWorks published HTML](GWORKS-PUBLISHED-HTML.md) uses the original city listing namespace and meeting ID; rendered item IDs remain capture-local. [TownCloud draft writes](TOWNCLOUD-WRITES.md) map native agenda/content/field form keys with exact GET readback for an existing unpublished draft. Full item save/publication/file upload remain unmapped.
+
+Historical TelVue CloudCast 4.1 chapter CSV preparation is available as `telvue-cloudcast-4.1-chapters-csv`; see [the format and limits](TELVUE-CHAPTER-CSV.md). This is local file preparation, with current Connect applicability and remote import unverified.

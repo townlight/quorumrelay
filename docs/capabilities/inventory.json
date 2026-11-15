@@ -17756,6 +17756,48 @@
               }
             ]
           }
+        },
+        {
+          "id": "telvue-cloudcast-4.1-chapter-csv-2026-11-14",
+          "url": "https://telvue.com/wp-content/uploads/2014/06/CloudCastUserManual_v4_1.pdf",
+          "title": "Historical CloudCast4.1 chapter CSV file contract",
+          "kind": "official_documentation_and_scoped_execution",
+          "observation_date": "2026-11-14",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "findings": "Exact18,005,219byte official PDF200; printedp14 specifies five-column headerless bulk chapter CSV. Local preparation only; current Connect applicability unverified.",
+          "synthetic_execution": {
+            "provider": "telvue",
+            "status": "mock_passed",
+            "operations": [
+              "vendor_file_export"
+            ],
+            "entities": [
+              "historical_chapter_csv"
+            ],
+            "scope": "Local historical CloudCast4.1 file preparation only; no transfer/import/current Connect claim.",
+            "execution_provenance": "30focused cases passed including17new chapter cases, actual scoped SQLite artifact/reopen and CSV byte readback; no remote request.",
+            "checks": [
+              {
+                "command": "pytest tests/test_telvue_chapter_export.py tests/test_suiteone_export.py -q",
+                "passed": 30,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/telvue-chapter-csv/source.json",
+                "sha256": "4f424a0cec2e7a4992d1496629e0d27b1b2734e1a63fd03255130f380434932a"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_telvue_chapter_export.py",
+                "sha256": "3d5ad71b0f4a9a2f2b8c73fda0fc7601c67fb6fa57d147e9a50da03621c79bb6"
+              }
+            ]
+          },
+          "receipt_path": "docs/verification/telvue-chapter-csv-2026-11-14.json",
+          "receipt_sha256": "b3ab6873001efb2d2334611d543c6d62db2638b6788f50cea2ad44fd540359ea"
         }
       ],
       "tenants": [
@@ -17960,22 +18002,24 @@
           ]
         },
         "vendor_file_export": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
-          "evidence_ids": [],
-          "details": "No usable provider-specific import file schema verified. UI/PDF/video downloads do not establish vendor import acceptance.",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
+          "evidence_ids": [
+            "telvue-cloudcast-4.1-chapter-csv-2026-11-14"
+          ],
+          "details": "Local historical CloudCast4.1 headerless chapter CSV preparation only; explicit times and text, bytes/hash/scoped persistent artifacts. No remote import/recording association/current Connect claim.",
           "dependencies": [],
           "remaining_verification": [
-            "Obtain an evidenced supported input contract before generating vendor-specific files; neutral exports stay separate."
+            "Current Connect/CloudCast applicability and remote import/readback remain unverified."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "unverified",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_scoped_synthetic_execution",
           "tenant_scope": [
             "https://videoplayer.telvue.com/player/WDZPS7GoaEEQAF8v5_qEOE_Kj--KiACH/categories/574?showtabssearch=false",
             "https://videoplayer.telvue.com/player/dQtoDvlZYDOtqaf7eRn9z2lb1Nb6EZzu/playlists"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "local_synthetic_no_account_required",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"

@@ -153,6 +153,8 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_native_export("civicplus-select", tracked_handler("export", export_historical))
     from .onbase_export import export_dip
     engine.register_native_export("onbase", tracked_handler("export", export_dip))
+    from .telvue_chapter_export import export_chapters
+    engine.register_native_export("telvue", tracked_handler("export", export_chapters))
     from .suiteone_export import export_document
     engine.register_native_export("suiteone-media", tracked_handler("export", export_document))
 
