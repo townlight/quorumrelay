@@ -222,7 +222,7 @@ def test_direct_pdf_redirect_and_compiled_nonpdf(tmp_path):
 
 
 
-def test_compiled_html_and_unknown_output_remain_unmapped(tmp_path):
+def test_compiled_html_maps_but_unknown_output_remains_unmapped(tmp_path):
     from quorumrelay.engine import source_identity_key
 
     transport = Transport(4)
@@ -237,7 +237,10 @@ def test_compiled_html_and_unknown_output_remain_unmapped(tmp_path):
     records = result.data['bundle']['records']
     assert len({source_identity_key(row['identity']) for row in records}) == 4
     compiled = [row for row in records if row['original']['type'] == 4]
-    assert all('documents' not in row['normalized'] for row in compiled)
+    html, *unknown = compiled
+    assert html['normalized']['documents'][0]['kind'] == 'compiled_html_page'
+    assert html['normalized']['documents'][0]['url'].endswith('/Portal/Meeting?compiledMeetingDocumentFileId=100')
+    assert all('documents' not in row['normalized'] for row in unknown)
     assert all(row['identity']['external_id'] == f"type:4:{row['original']['id']}" for row in compiled)
 
 
@@ -288,3 +291,84 @@ def test_compiled_html_response_is_partial_and_retains_resolver(tmp_path, mime, 
     result = owner.fetch_attachment(Source.from_dict(SOURCE), record)
     assert result.status == 'partial' and result.data['attachment'] is None
     assert len(result.data['captures']) == 1
+
+
+class HtmlTransport(Transport):
+    """Synthetic HTML branch from the pinned Waco _Search.js callback."""
+
+    def __init__(self, fault=None, context=None):
+        super().__init__(4, context=context)
+        self.row["compileOutputType"] = 3
+        self.fault = fault
+        self.html = b'<!doctype html><html><body><h1>Public meeting page</h1></body></html>'
+
+    def request(self, url, **options):
+        if url.endswith('/api/v2/PublicPortal/search'):
+            return super().request(url, **options)
+        self.calls.append((url, options))
+        assert url == ORIGIN + '/Portal/Meeting?compiledMeetingDocumentFileId=42'
+        assert options.get('method', 'GET') == 'GET' and options['allow_redirects'] is False
+        assert options['allowed_origins'] == (ORIGIN,)
+        if self.context:
+            self.context.cancellation.set()
+        if self.fault == 'timeout':
+            raise TimeoutError('synthetic')
+        return Response(url + '/other' if self.fault == 'redirect_url' else url,
+            b'not html' if self.fault == 'body' else self.html,
+            'application/pdf' if self.fault == 'mime' else 'text/html; charset=utf-8',
+            302 if self.fault == 'redirect_status' else 200)
+
+
+def html_setup(tmp_path, fault=None, context=None):
+    transport = HtmlTransport(fault, context)
+    owner = create_engine(storage=SQLiteStorage(tmp_path / 'html.sqlite'), provider_transport=transport)
+    search = owner.execute('search', request())
+    assert search.status == 'partial', search.public_dict()
+    record, = search.data['bundle']['records']
+    assert record['normalized']['documents'][0]['kind'] == 'compiled_html_page'
+    assert owner.execute('import_bundle', {'bundle': search.data['bundle'], 'persist': True}).status == 'completed'
+    return owner, record, transport
+
+
+def test_compiled_html_page_one_read_bound_to_stored_native_document_and_zip(tmp_path):
+    owner, record, transport = html_setup(tmp_path)
+    r = owner.fetch_attachment(Source.from_dict(SOURCE), record, bounds=Bounds(max_pages=1))
+    assert r.status == 'completed', r.public_dict()
+    attachment = r.data['attachment']
+    assert len(transport.calls) == 2 and not r.data.get('captures')
+    assert base64.b64decode(attachment['content_base64']) == transport.html
+    assert attachment['sha256'] == hashlib.sha256(transport.html).hexdigest()
+    assert attachment['text_availability'] == 'not_extracted'
+    assert attachment['resolution']['representation'] == 'compiled_html_page'
+    assert attachment['resolution']['content_completeness'] == 'unverified'
+    assert not attachment['resolution']['dynamic_content_executed']
+    assert not attachment['resolution']['compile_requested']
+    from quorumrelay.interchange import stage_attachment, read_bundle
+    import io
+    ctx = OperationContext(authorization=frozenset({'export_attachments'}))
+    stage_attachment(owner, 'html-page', io.BytesIO(transport.html),
+        filename='compiled.html', citation_url=record['normalized']['documents'][0]['url'],
+        namespace=record['identity']['namespace'], context=ctx)
+    exported = owner.execute('export', {'records': [record], 'format': 'zip',
+        'attachment_ids': ['html-page']}, context=ctx)
+    assert exported.status == 'completed', exported.public_dict()
+    restored = read_bundle(base64.b64decode(exported.data['content_base64']), format='zip')
+    assert restored['records'][0]['normalized']['documents'] == record['normalized']['documents']
+    # ZIP attachment bytes are independently checked; importing/reopening the
+    # record selection does not turn this HTML page into parsed agenda text.
+    import zipfile
+    with zipfile.ZipFile(io.BytesIO(base64.b64decode(exported.data['content_base64']))) as archive:
+        assert any(archive.read(name) == transport.html for name in archive.namelist())
+    reopened = create_engine(storage=SQLiteStorage(tmp_path / 'html.sqlite'), provider_transport=transport)
+    assert reopened.fetch_attachment(Source.from_dict(SOURCE), record).status == 'completed'
+
+
+@pytest.mark.parametrize('fault', ['redirect_url', 'redirect_status', 'mime', 'body', 'timeout', 'bytes', 'cancel'])
+def test_html_page_failures_retain_document_without_html_bytes(tmp_path, fault):
+    context = OperationContext() if fault == 'cancel' else None
+    owner, record, transport = html_setup(tmp_path, fault, context)
+    bounds = Bounds(parser_bytes=10) if fault == 'bytes' else Bounds()
+    r = owner.fetch_attachment(Source.from_dict(SOURCE), record, context=context, bounds=bounds)
+    assert r.status == ('cancelled' if fault == 'cancel' else 'partial'), r.public_dict()
+    assert r.data['attachment'] is None
+    assert len(transport.calls) == 2

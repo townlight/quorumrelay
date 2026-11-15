@@ -1,0 +1,16 @@
+function downloadCompiledMeetingDoc(id, outputType) {
+    if (isOutputTypeHtml(outputType)) {
+        window.open("/Portal/Meeting?compiledMeetingDocumentFileId=" + id);
+    } else {
+        $.getJSON('/api/Meeting/getcompiledfiledownloadurl?compiledFileId=' + id, null, function (data) {
+            window.location = data;
+        })
+            .fail(function (jqXHR, status, error) {
+                handleError(_Common.Error + ':' + jqXHR.responseJSON.exceptionMessage, jqXHR);
+            });
+    }
+}
+
+function isOutputTypeHtml(outputType) {
+    return outputType == 3;
+}

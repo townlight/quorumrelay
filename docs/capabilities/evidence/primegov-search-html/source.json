@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-14",
+  "sources": [
+    {
+      "url": "https://wacotexas.primegov.com/Scripts/Custom/Public/_Search.js",
+      "status": 200,
+      "bytes": 40780,
+      "sha256": "59d8325d7adcff9451b9140acd3fe4acf1dcbecaa2b5a7ae3c1d80d63b0e6b70"
+    },
+    {
+      "url": "https://wacotexas.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3369",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 1060349,
+      "sha256": "f50da6ec6618f806f6835b5b0f7548018033362bdd29a210c86f157d821d13cf"
+    },
+    {
+      "url": "https://wacotexas.primegov.com/bundles/asyncmeetingitemcompiler?v=8hXFhc-ZbAMYM6tJ8cXM3mTKLZ_G4MoipJbwzHE78dE1",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 4993,
+      "sha256": "2df79b7f81856cf1ed0145440b821a0a40023318bff12f68332622bda9b54dd1"
+    }
+  ],
+  "scope": "Anonymous GET only. Search client maps numeric output3 to the selected compiled HTML page. Native file3369 came from the saved Waco2026 list. Exact GET returned HTML, not parsed agenda text. Dynamic compiler script inspected only; CompileAsync was not called. No authenticated API or whole-catalog acceptance.",
+  "excerpt_sha256": "fd00c027417f1d7226a70c80b549361d4cdd48cd2fdb2a5497fa68af718a82e1"
+}

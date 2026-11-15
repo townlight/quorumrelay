@@ -3436,7 +3436,7 @@
           },
           "limits": [
             "JSON URL-string schema is an explicit inference from window.location callback, verified synthetically, not an observed server contract.",
-            "Type4 HTML3/unknown output unmapped; bytes do not prove PDF rendering or live availability.",
+            "Historical selected-document proof predates the HTML3 branch; new scoped proof is primegov-search-html-2026-11-14. Unknown output remains unmapped; bytes do not establish rendering or live availability for another file.",
             "No live provider request, staff account, package/native build, install or delivery."
           ]
         },
@@ -3484,6 +3484,53 @@
           "limits": "Public speaker-request outline may omit agenda content, documents and private sections; not speaker-list search or authenticated Meeting API. Actual item result empty; nonemptyitems/votesummarybranches verified synthetically against client fields. No automatic full agenda, tier/current authenticated write schemas or API completeness claimed.",
           "receipt_path": "docs/verification/primegov-public-outline-2026-11-14.json",
           "source_path": "docs/capabilities/evidence/primegov-public-outline/source.json"
+        },
+        {
+          "id": "primegov-search-html-2026-11-14",
+          "url": "https://wacotexas.primegov.com/Scripts/Custom/Public/_Search.js",
+          "title": "Public search compiled HTML branch and guarded page retrieval",
+          "kind": "public_vendor_client_and_scoped_execution",
+          "observation_date": "2026-11-14",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/primegov-search-html-2026-11-14.json",
+          "receipt_sha256": "67fe4a02208fa92078d77408bd012791ae6eebc8970270d2b19b941d8264714e",
+          "findings": "Anonymous GET only. Search client maps numeric output3 to the selected compiled HTML page. Native file3369 came from the saved Waco2026 list. Exact GET returned HTML, not parsed agenda text. Dynamic compiler script inspected only; CompileAsync was not called. No authenticated API or whole-catalog acceptance.",
+          "synthetic_execution": {
+            "provider": "primegov",
+            "status": "mock_passed",
+            "operations": [
+              "fetch"
+            ],
+            "entities": [
+              "public_search_selected_document"
+            ],
+            "checks": [
+              {
+                "command": "pytest tests/test_primegov_documents.py -q",
+                "passed": 35,
+                "failed": 0
+              }
+            ],
+            "execution_provenance": "Synthetic transport with SQLite import/reopen, exact HTML byte/hash, explicit authorized ZIP attachment and guarded negative cases. Public GET pinned separately.",
+            "scope": "Anonymous GET only. Search client maps numeric output3 to the selected compiled HTML page. Native file3369 came from the saved Waco2026 list. Exact GET returned HTML, not parsed agenda text. Dynamic compiler script inspected only; CompileAsync was not called. No authenticated API or whole-catalog acceptance.",
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/primegov-search-html/source.json",
+                "sha256": "b0fc0af1a63c1cdfef20e5d1c93ef9d20ea93c30495a6b3e29551d330146adaa"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/primegov-search-html/compiled_html_client.txt",
+                "sha256": "fd00c027417f1d7226a70c80b549361d4cdd48cd2fdb2a5497fa68af718a82e1"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_primegov_documents.py",
+                "sha256": "800781e695fb5fe8bea74fcfffeaa091924075df4810776a72e3206ec23f06b1"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -3548,9 +3595,10 @@
           "evidence_ids": [
             "primegov-reno",
             "primegov-selected-documents-synthetic-2026-11-13",
-            "primegov-public-outline-and-document-client-2026-11-14"
+            "primegov-public-outline-and-document-client-2026-11-14",
+            "primegov-search-html-2026-11-14"
           ],
-          "details": "Existing date-bounded public ListUpcomingMeetings and ListArchivedMeetings?year listing routes are implemented; configured capture/document retrieval is separate. No standalone authenticated detail endpoint or complete catalog/search semantics are claimed. Current source selected public search attachment types1/2/3 and numeric non-HTML type4 are synthetically verified through scoped storage and exact declared direct/JSON resolver routes. URL-string resolver response is inferred from vendor callback; full listing/catalog/live-file acceptance is not implied. Rich portal documents now follow actual getHref HTML/PDF/Word/compiled-file identity branches while legacy compatibility stays frozen. A selected stored allowPublicSpeaker=true meeting can fetch native sections/items from public speaker-request outline; all results partial, not a complete agenda or speaker search.",
+          "details": "Existing date-bounded public ListUpcomingMeetings and ListArchivedMeetings?year listing routes are implemented; configured capture/document retrieval is separate. No standalone authenticated detail endpoint or complete catalog/search semantics are claimed. Current source selected public search attachment types1/2/3 and numeric type4 including the HTML3 page are synthetically verified through scoped storage and exact declared direct/JSON resolver routes. URL-string resolver response is inferred from vendor callback; full listing/catalog/live-file acceptance is not implied. Rich portal documents now follow actual getHref HTML/PDF/Word/compiled-file identity branches while legacy compatibility stays frozen. A selected stored allowPublicSpeaker=true meeting can fetch native sections/items from public speaker-request outline; all results partial, not a complete agenda or speaker search.",
           "dependencies": [],
           "remaining_verification": [
             "Per-tenant completeness/paging and standalone detail contracts remain unresolved; existing bounded public listing receipt is not full catalog acceptance."
@@ -3894,7 +3942,7 @@
             {
               "normalized": "documents[].url",
               "provider_field": "type,id,meetingId,compileOutputType",
-              "notes": "Exact vendor branches1/2/3/nonHTMLnumeric4; links unfetched until explicit attachment operation."
+              "notes": "Exact vendor branches1/2/3/numeric4 including HTML3; links unfetched until explicit attachment operation."
             },
             {
               "normalized": "identity.external_id",
@@ -4012,7 +4060,7 @@
         "Observed Reno public /api/v2/PublicPortal/search form is now source-implemented with exact local metadata/excerpt checks, stable native-ID continuation, raw/parent preservation and bounded first/resumed receipt. Full document content, provider matching/caps/rank and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.",
         "Official release notes identify Meeting API, speaker and tracking-number search but the checked release/help material supplies no executable schema. Continue from concrete product-matched API leads; no exhaustive public search or outside-only dependency is established, and no account enablement is a synthetic acceptance gate.",
         "Authenticated create/update/upload field schemas, permissions, readback and conflict semantics remain unverified in the pinned material. A matching machine contract is needed; credentials or live tenant writes are not an acceptance gate.",
-        "Selected public client document branches synthetically executed; JSON URL-string shape inferred from callback. Type4 HTML/unknown output, live file availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled.",
+        "Selected public client document branches synthetically executed; JSON URL-string shape inferred from callback. Unknown Type4 output, live file availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled.",
         "New V2 portal help documents optional support-controlled feature enablement, not authenticated payloads. Third-party crawler corroborates compiled HTML route; exact selected Reno23431GET403. Lacity swagger403, not a verified current login redirect. No outside-only schema dependency proven. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
         "Historical Jan2024 vendor review and OaklandPark RFP#070623 confirm OneMeeting Secure/Votes API and client-published REST datasets; selected exact pages are pinned. They do not provide method/auth/request/response/readback schemas or establish currenttier/version. No APIabsence or outside-only claim.",
         "Waco public client and actual335-row year/6-section outline resolved scoped read mappings and HTML locator defect. Nonempty items are client-shaped synthetic only; authenticated Meeting/speaker/tracking/write contracts remain unresolved, not proved outside-only."

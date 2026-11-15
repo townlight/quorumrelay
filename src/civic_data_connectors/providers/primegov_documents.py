@@ -29,10 +29,13 @@ def declared_document(source, raw, citation):
         path = "/api/meetingSectionAttachment/DownloadPublicPdf?" + urlencode({"id": identity, "meetingId": meeting})
         label = "section_attachment"
     elif (kind == 4 and type(raw.get("compileOutputType")) in {int, float}
-          and (type(raw["compileOutputType"]) is int or math.isfinite(raw["compileOutputType"]))
-          and raw["compileOutputType"] != 3):
-        path = "/api/Meeting/getcompiledfiledownloadurl?" + urlencode({"compiledFileId": identity})
-        label = "compiled_document"
+          and (type(raw["compileOutputType"]) is int or math.isfinite(raw["compileOutputType"]))):
+        if raw["compileOutputType"] == 3:
+            path = "/Portal/Meeting?" + urlencode({"compiledMeetingDocumentFileId": identity})
+            label = "compiled_html_page"
+        else:
+            path = "/api/Meeting/getcompiledfiledownloadurl?" + urlencode({"compiledFileId": identity})
+            label = "compiled_document"
     else:
         return None
     return {"kind": label, "external_id": str(identity), "title": raw.get("title"),
@@ -57,7 +60,8 @@ def resolve_document(source, url, record, document, bounds, context, transport, 
             or record.get("normalized", {}).get("url") != citation):
         raise ValueError("The selected document does not match its captured native meeting and type.")
     kind = raw["type"]
-    resolver = kind in {1, 4}
+    html_page = kind == 4 and raw.get("compileOutputType") == 3
+    resolver = kind == 1 or (kind == 4 and not html_page)
     if bounds.max_pages < (2 if resolver else 1):
         raise ValueError("The selected document exceeds its request budget.")
     remaining = bounds.transfer_bytes
@@ -93,14 +97,19 @@ def resolve_document(source, url, record, document, bounds, context, transport, 
         target = url
     if context.check_cancelled():
         raise InterruptedError()
-    response = read(target, remaining)
+    response = read(target, min(remaining, bounds.parser_bytes) if html_page else remaining)
     if context.check_cancelled():
         raise InterruptedError()
-    if kind == 4 and (response.content_type.split(";", 1)[0].strip().lower() in
+    if kind == 4 and not html_page and (response.content_type.split(";", 1)[0].strip().lower() in
                       {"text/html", "application/xhtml+xml"} or
                       response.content.lstrip().lower().startswith((b"<!doctype html", b"<html"))):
         raise ValueError("The compiled file route returned an HTML page, not a file.")
+    if html_page and (response.content_type.split(";", 1)[0].strip().lower() != "text/html"
+                      or not response.content.lstrip().lower().startswith((b"<!doctype html", b"<html"))):
+        raise ValueError("The selected compiled HTML page did not return an HTML document.")
     if kind in {1, 3} and not response.content.startswith(b"%PDF-"):
         raise ValueError("The selected PDF route did not return PDF bytes.")
     return response, {"kind": "primegov_public_search_document", "document_type": kind,
-                      "requests": 2 if resolver else 1, "catalog_complete": False}
+                      "requests": 2 if resolver else 1, "catalog_complete": False,
+                      **({"representation": "compiled_html_page", "content_completeness": "unverified",
+                          "dynamic_content_executed": False, "compile_requested": False} if html_page else {})}
