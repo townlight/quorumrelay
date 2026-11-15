@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-15",
+  "source_url": "https://galenaks.frontdeskgworks.com/js-app/gworks.core.js?v=26-11-12-7b140d5a1a",
+  "source_sha256": "6830cd18bbf7325e78bbda7a7cf4239ba2d53179d1bb68afb4c3067854941723",
+  "source_bytes": 171862,
+  "excerpt_regions": [
+    {
+      "start_line": 148,
+      "end_line": 157,
+      "sha256": "fae822ffba5b93509de105f72aa1a7b2b9134f86ffda2fc287524647e937e551"
+    },
+    {
+      "start_line": 239,
+      "end_line": 264,
+      "sha256": "0ab57b4d0def6e9cd83774620eeb984607512e483aa58af49fc49da25a945664"
+    },
+    {
+      "start_line": 276,
+      "end_line": 284,
+      "sha256": "f2a8685ff4117168f3948d296ddbf36211e79b43d03f4ab799938a30366b2627"
+    },
+    {
+      "start_line": 537,
+      "end_line": 556,
+      "sha256": "3a85248200aa22c639f318f52bf39e20a31e9f32c5c7dcf8a7bf638558f2d5b6"
+    }
+  ],
+  "existing_plugin_request": "secure-calendar.extract.js",
+  "request_fields": "Exact plugin range/4columns/order/start0; core literal unpadded dates, JSON.stringify/application/json and Bearer header",
+  "implemented_scope": "One explicit inclusive range fetch with local ISO-date checks and unknown numeric times retained; trusted private tenant/city/origin/namespace credential binding",
+  "limits": "Synthetic response execution; no live secure call, paging/total/full catalog/current server auth/independently returned city/meeting write contract inference"
+}

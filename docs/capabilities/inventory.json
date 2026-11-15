@@ -29015,8 +29015,22 @@
           "proof_level": "source_review_not_machine_write_contract",
           "local_path": "docs/capabilities/evidence/gworks-current-builder/source.json",
           "sha256": "c461feb845e880503de3e27a695861731c8c1e419b6e61b091129419edfe111f",
-          "findings": "Official page200, declared one-page raster minutes screenshot200 and iframe200 with vendor-supplied workflow captions inspected. No gWorks endpoint/request/readback schema in these declared sources.",
+          "findings": "Official page200, declared one-page raster minutes screenshot200 and iframe200 with vendor-supplied workflow captions inspected. No gWorks endpoint/request/readback schema in these declared sources. Follow-up source-declared minutes editor URL for existing native meeting4195 returned404; captured separately under same evidence directory. Exact URL result only.",
           "limits": "Describes staff save/publish/attachment UI; not a machine contract or proof all other documentation absent. No credentials, guessed staff routes or mutations."
+        },
+        {
+          "id": "gworks-secure-range-read-2026-11-15",
+          "url": "https://galenaks.frontdeskgworks.com/js-app/gworks.core.js?v=26-11-12-7b140d5a1a",
+          "title": "Observed GWorks core calendar range/JSON/auth and synthetic selected read execution",
+          "kind": "implementation_evidence",
+          "observation_date": "2026-11-15",
+          "proof_level": "observed_vendor_client_and_synthetic_read_not_live_account_or_catalog_acceptance",
+          "local_path": "docs/capabilities/evidence/gworks-published-client/calendar-read-source.json",
+          "sha256": "7d6f4d9a6d6fb8e89a4065e14ea6706a40b7b31c5126fd09981592747b29684b",
+          "receipt_path": "docs/verification/gworks-calendar-read-2026-11-15.json",
+          "receipt_sha256": "2cde0ab3bec699776483a5b38f398211ce182fbdae164186d03e8198674b7142",
+          "findings": "Pinned existing core source defines date literals/JSON/Bearer. Selected secure calendar POST implemented;21newnative-read cases plus248affected checks. No live secure call or write.",
+          "limits": "One start0 range response; no pagination/total/catalog completeness inferred.; City identity is configured by trusted private credential policy, not independently supplied by response.; Numeric timestamp units are not guessed; unknown dates remain explicit.; Publication flags do not establish document locators, meeting associations or writes."
         }
       ],
       "tenants": [
@@ -29094,9 +29108,10 @@
             "gworks-city-1311-agenda-engine-fetch-live",
             "gworks-galena-minutes-engine-fetch-403-live",
             "quorumrelay-shared-core-operations",
-            "gworks-published-html-capture-and-tests"
+            "gworks-published-html-capture-and-tests",
+            "gworks-secure-range-read-2026-11-15"
           ],
-          "details": "The existing fetch_attachment path resolves baseline-derived api.gworks.cloud agenda/minutes URLs and downloads only through explicitly configured exact public origins. The city-1311 agenda fetch completed (5,211-byte PDF); a flagged Galena minutes object resolved but its signed object GET returned HTTP 403, so the citation was retained as partial/unavailable. This is a document route, not a separate meeting detail API. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only.",
+          "details": "The existing fetch_attachment path resolves baseline-derived api.gworks.cloud agenda/minutes URLs and downloads only through explicitly configured exact public origins. The city-1311 agenda fetch completed (5,211-byte PDF); a flagged Galena minutes object resolved but its signed object GET returned HTTP 403, so the citation was retained as partial/unavailable. This is a document route, not a separate meeting detail API. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Observed vendor-core client now establishes explicit secure-calendar range POST via existing gworks-secure-calendar-json format. Private configured tenant/city/origin/namespace credentials, exact unpadded native date strings/JSON/auth, local ISO date checks, unknown numeric timestamp units, transfer/parser/time/cancel guards and source-capture neutral export are synthetically verified. Unpaged response is always partial; configured city is not independently asserted by response. No live account acceptance or writes.",
           "dependencies": [
             "Supplied capture with the agenda_fl/minutes_fl row flag",
             "Explicit bounded download_origins for the API and observed signed-file origin"
@@ -29435,8 +29450,9 @@
         "Published HTML detail is now mapped from the vendor-declared /city/{city}/cms/{meeting}_{agenda|minute}.html format with real city1311 meeting5017 capture. Existing Galena PDF failure remains a one-document access failure; not a provider-wide blocker. Catalog continuation/completeness and every flagged document remain unverified.",
         "Retained history, update frequency and maximum response payload remain unknown; one static response cannot establish them. No additional repeated sampling is required for this bounded research outcome.",
         "Pinned FrontDesk builder material describes staff UI without an external write schema. Vendor machine field/readback contracts remain unresolved; staff credentials and live-write acceptance are not completion gates.",
-        "Anonymous citizen client declares secure POST /cms/secure/city/meeting/list with Bearer token and flattened cms_meeting.* fields. Separate calendar response/paging contract and meeting-write payload/readback remain unresolved; do not substitute static meetings JSON field names. Generic upload helper consumes a caller-supplied endpoint and signedUrl but does not establish meeting association.",
-        "Current official builder resource and its declared PDF/video reviewed2026-11-15: raster public UI example and supplied workflow captions, no endpoint/request/readback schema. Exact source chain checked; cannot label all gWorks write research outside-only. Source captures retained; no repeated tenant survey."
+        "Anonymous citizen client declares secure POST /cms/secure/city/meeting/list with Bearer token and flattened cms_meeting.* fields. Explicit unpaged calendar range POST is now implemented from captured core/plugin source with synthetic response execution; current server applicability/paging and meeting-write payload/readback remain unresolved; do not substitute static meetings JSON field names. Generic upload helper consumes a caller-supplied endpoint and signedUrl but does not establish meeting association.",
+        "Current official builder resource and its declared PDF/video reviewed2026-11-15: raster public UI example and supplied workflow captions, no endpoint/request/readback schema. Exact source chain checked; cannot label all gWorks write research outside-only. Source captures retained; no repeated tenant survey.",
+        "Previously missing core date/serialization/auth details are now source-inspected and mapped for explicit range fetch. Current live account applicability, response paging/total and independent returned city remain unverified without becoming account-acquisition acceptance gates. Exact declared editor minutes URL on existing Galena context returned404; no alternate staff host/path guessed."
       ],
       "authentication": "City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown.",
       "write_findings": "Historical official indexed article documents agenda creation/logging minutes/publication; live docs 404. Machine create/update/upload contracts remain unknown; no absence claim.",

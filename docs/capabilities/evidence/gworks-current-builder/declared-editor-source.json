@@ -1,0 +1,9 @@
+{
+  "url": "https://galenaks.frontdeskgworks.com/plugin/cms/am-editor-minutes.html?cms_meeting.id=4195",
+  "final_url": "https://galenaks.frontdeskgworks.com/plugin/cms/am-editor-minutes.html?cms_meeting.id=4195",
+  "status": 404,
+  "content_type": "text/html",
+  "bytes": 8584,
+  "sha256": "5bdc9de92a7de359f12aaa944014be955ea45bbb8bcc62fe3a9056b7a5abd439",
+  "source_lead": "Existing captured citizen.plugin.js declares am-editor-${type}.html?cms_meeting.id=... for city portal; existing Galena meeting4195 minutes ID reused. GET only; no form submission or login."
+}

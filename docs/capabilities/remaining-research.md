@@ -357,3 +357,7 @@ The pinned update DTO and GET EventModel now support an explicit native request/
 ### Current gWorks builder / declared Wistia source follow-up (2026-11-15)
 
 The current official builder article and declared PDF/iframe returned200. The PDF is a raster published-UI screenshot, and the iframe supplies staff-workflow caption text rather than gWorks endpoint/payload/readback schemas. No staff login, guessed route or mutation was used; this does not prove every other public source absent. That same declared iframe establishes a concrete Wistia public metadata/supplied-caption path, now implemented with22new/212affected passing checks. No binary video, ASR, timing or meeting association inferred. Source captures, exact scope and neutral persistence/export proof are retained separately.
+
+### GWorks captured-core range contract (2026-11-15)
+
+The existing core client establishes unpadded calendar date literals, JSON serialization and Bearer auth missing from the prior plugin-only assessment. One explicit secure range POST is now source-implemented and synthetically verified, with private configured city/tenant/origin/namespace binding, honest unpaged partial coverage and no numeric time-unit/document-locator inference. See GWORKS-SECURE-CALENDAR.md. Staff writes/processing remain separate; the exact source-declared existing-tenant minutes editor GET returned404 and supplies no new write contract. No global outside-only assertion.

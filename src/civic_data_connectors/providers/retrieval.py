@@ -44,6 +44,10 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     transport = transport or PublicTransport()
     content = _decode_content(request, content)
     attachment = request.get("attachment")
+    if (source.provider == "gworks" and source.input_format == "gworks-secure-calendar-json"
+            and attachment is None and content is None):
+        from .gworks_calendar import fetch as fetch_calendar
+        return fetch_calendar(source, namespace, request, bounds, context, transport)
     if (source.provider == "wistia" and source.input_format == "wistia-public-embed-html"
             and attachment is None and content is None):
         from .wistia_embed import fetch as fetch_embed

@@ -54,3 +54,5 @@ The eSCRIBE [PublishingService mapping](../ESCRIBE-PUBLISHING-SERVICE.md) adds e
 Selected eSCRIBE item-history reads additionally preserve supplied native motions/votes and inherited history fields with scoped synthetic proof; see the PublishingService guide. These are source facts, with no inferred tally or publication.
 
 The existing Wistia family now includes opt-in [public iframe metadata and supplied captions](../WISTIA-PUBLIC-EMBED.md), with no account token, script execution, inferred cue timing or catalog completeness. The source-declared gWorks builder demonstration is kept separate from unresolved gWorks write contracts.
+
+[GWorks secure calendar range fetch](../GWORKS-SECURE-CALENDAR.md) now uses observed core/plugin date/JSON/auth contracts with synthetic verification. It retains partial unpaged coverage and configured credential-city binding, distinct from public static listings and staff writes.

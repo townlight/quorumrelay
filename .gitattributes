@@ -35,3 +35,6 @@ docs/capabilities/evidence/gworks-current-builder/builder.html whitespace=-space
 
 # Exact public iframe retains its final blank line.
 tests/fixtures/wistia-public/iframe-ylfk2zpd7f.html whitespace=-blank-at-eof,-blank-at-eol
+
+# Exact declared editor404 response retains vendor whitespace.
+docs/capabilities/evidence/gworks-current-builder/declared-editor-response.html whitespace=-blank-at-eol,-blank-at-eof

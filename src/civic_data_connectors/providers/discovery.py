@@ -581,7 +581,7 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")
     if input_format == "gworks-secure-calendar-json" and saved is None:
-        raise ValueError("The secure calendar format maps saved responses only; no live authenticated read is implemented.")
+        raise ValueError("Use an explicit bounded calendar fetch; authenticated catalog traversal is not mapped.")
     if source.provider == "granicus" and input_format == "granicus-platform-soap-xml" and saved is None:
         from .granicus_platform import read
         return read(source, namespace, request, bounds, context, transport or PublicTransport(), discover=True)
