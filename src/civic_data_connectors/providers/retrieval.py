@@ -44,6 +44,10 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     transport = transport or PublicTransport()
     content = _decode_content(request, content)
     attachment = request.get("attachment")
+    if (source.provider == "wistia" and source.input_format == "wistia-public-embed-html"
+            and attachment is None and content is None):
+        from .wistia_embed import fetch as fetch_embed
+        return fetch_embed(source, namespace, request, bounds, context, transport)
     if source.provider == "escribe" and source.input_format == "escribe-publishing-soap-xml" and content is None:
         if attachment is not None:
             raise ValueError("PublishingService requires explicit native parameters, not arbitrary attachment URLs.")

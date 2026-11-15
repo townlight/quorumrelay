@@ -106,6 +106,8 @@ def _initial(source, bounds, input_format, saved):
     if saved:
         return [{"kind": "saved", "offset": 0}]
     provider = source.provider
+    if input_format == "wistia-public-embed-html":
+        return [{"kind": "static"}]
     if (provider == "boarddocs" and input_format == "boarddocs-public-meetings-json"
             and source.options.get("boarddocs_committee_id")):
         return [{"kind": "boarddocs-public"}]
@@ -474,7 +476,7 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
         _enrich(bundle, source.provider)
         return bundle, ()
     if input_format in {"boarddocs-public-meetings-json", "legistar-events-json", "legistar-event-json", "wistia-api-media-json",
-                        "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
+                        "wistia-media-detail-json", "wistia-caption-json", "wistia-public-embed-html", "granicus-listing-html",
                         "civicweb-detail-html", "civicweb-filepro-soap-xml", "civicweb-meetings-json", "civicweb-meeting-documents-json", "swagit-listing-html", "swagit-public-player-html", "telvue-public-player-html", "suiteone-public-event-html", "onbase-public-listing-html",
                         "digital-towpath-listing-html", "towncloud-public-listing-json", "telvue-cloudcast-mrss-xml",
                         "agendaquick-public-listing-html", "agendaquick-item-search-html", "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "civicplus-search-json",

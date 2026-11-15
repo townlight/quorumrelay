@@ -91,6 +91,7 @@ def register(engine, *, transport: Transport | None = None,
             ("laserfiche-weblink", "laserfiche-repository-entries-json"),
             ("wistia", "wistia-api-media-json"), ("wistia", "wistia-media-detail-json"),
             ("wistia", "wistia-caption-json"),
+            ("wistia", "wistia-public-embed-html"),
             ("granicus", "granicus-listing-html"), ("peak", "granicus-listing-html")):
         engine.register_parser(provider, input_format, _parse_saved_native)
     engine.register_operation(

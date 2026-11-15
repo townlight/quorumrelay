@@ -29,3 +29,9 @@ tests/fixtures/suiteone-player/captions.vtt whitespace=cr-at-eol
 
 # Exact pinned partner source retains two original trailing-space lines.
 docs/capabilities/evidence/agendaquick-openmedia/om_clickable_agenda.module whitespace=-blank-at-eol
+
+# Exact official builder HTML retains vendor mixed-indentation whitespace.
+docs/capabilities/evidence/gworks-current-builder/builder.html whitespace=-space-before-tab,-blank-at-eol
+
+# Exact public iframe retains its final blank line.
+tests/fixtures/wistia-public/iframe-ylfk2zpd7f.html whitespace=-blank-at-eof,-blank-at-eol

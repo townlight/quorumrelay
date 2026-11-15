@@ -26779,6 +26779,21 @@
           "receipt_path": "docs/verification/write-response-bounds-2026-11-15.json",
           "receipt_sha256": "0f1df5a0e2958c05662cf21d330979f35510650281219950e00918c0d19f1727",
           "limits": "Synthetic regression of already mapped operations, not new vendor schemas or live acceptance."
+        },
+        {
+          "id": "wistia-public-iframe-captions-2026-11-15",
+          "url": "https://fast.wistia.net/embed/iframe/ylfk2zpd7f",
+          "title": "Declared public Wistia iframe metadata and actual supplied captions",
+          "kind": "implementation_evidence",
+          "observation_date": "2026-11-15",
+          "observed": "Source GET20011499bytes; native mediaID and eng1366charactercaption;22new/212affected checks passed19.91s.",
+          "findings": "Literal W.iframeInit JSON parsed without execution; exact media binding, supplied text and original fields/capture, composite caption identity, recording relationship, static continuation, SQLite retry/reopen/search and neutral export.",
+          "limits": "Selected layout and exact iframe hosts/path, no query/options, no catalog/date/body inference.; Native caption language key retained without assigning a BCP47 interpretation. Supplied text has no cue timings.; Shared embed-origin namespace is not equated to authenticated account identity.",
+          "fixture_path": "tests/fixtures/wistia-public/iframe-ylfk2zpd7f.html",
+          "fixture_sha256": "40809e020ba47e669dfbeec71e15176b74e77545fb493d9762ea810788a1d38a",
+          "receipt_path": "docs/verification/wistia-public-embed-2026-11-15.json",
+          "receipt_sha256": "0b3975727dfca8a9e43972bce2f50f4b4e00a09b6520961e08bb5cb23be240c2",
+          "proof_level": "actual_public_capture_and_saved_engine_execution_not_catalog_or_write_acceptance"
         }
       ],
       "tenants": [
@@ -26820,9 +26835,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "wistia-list",
-            "wistia-auth"
+            "wistia-auth",
+            "wistia-public-iframe-captions-2026-11-15"
           ],
-          "details": "Explicit /modern/medias offset listing with version header/private read token, optional folder_id, created ordering and local unknown-date labels; tests/test_provider_discovery.py::test_wistia_modern_version_bearer_page_and_unknown_meeting_date covers page2. Cursor mode is not required or claimed.",
+          "details": "Explicit /modern/medias offset listing with version header/private read token, optional folder_id, created ordering and local unknown-date labels; tests/test_provider_discovery.py::test_wistia_modern_version_bearer_page_and_unknown_meeting_date covers page2. Cursor mode is not required or claimed. Separate opt-in wistia-public-embed-html maps one exact public iframe and supplied untimed captions without an account token; native source identities/capture/text and neutral export are scoped to the selected layout. Static continuation has no catalog-completeness claim.",
           "dependencies": [
             "Read token/account folder scope for DataAPI",
             "Configured source page/known media IDs for public route"
@@ -26850,9 +26866,10 @@
             "wistia-public",
             "wistia-embed",
             "wistia-caption-list",
-            "wistia-caption-show"
+            "wistia-caption-show",
+            "wistia-public-iframe-captions-2026-11-15"
           ],
-          "details": "Core implements authenticated GET /modern/medias/{mediaHashedId} and supplied-caption retrieval: GET /captions for tracks, or /captions/{languageCode}?include=segments for one language. Media detail is a bare media object with no caption text; caption list/per-language responses are preserved separately. No Wistia account token or live read was supplied.",
+          "details": "Core implements authenticated GET /modern/medias/{mediaHashedId} and supplied-caption retrieval: GET /captions for tracks, or /captions/{languageCode}?include=segments for one language. Media detail is a bare media object with no caption text; caption list/per-language responses are preserved separately. No Wistia account token or live read was supplied. Separate opt-in wistia-public-embed-html maps one exact public iframe and supplied untimed captions without an account token; native source identities/capture/text and neutral export are scoped to the selected layout. Static continuation has no catalog-completeness claim.",
           "dependencies": [
             "Trusted server-side read token with access to requested media",
             "Caption GET requires Read all folder and media data or permitted scoped delegation"
@@ -26878,9 +26895,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "wistia-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "wistia-public-iframe-captions-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Separate opt-in wistia-public-embed-html maps one exact public iframe and supplied untimed captions without an account token; native source identities/capture/text and neutral export are scoped to the selected layout. Static continuation has no catalog-completeness claim.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -26928,9 +26946,10 @@
           "capability_status": "unverified",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "wistia-public-iframe-captions-2026-11-15"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Separate opt-in wistia-public-embed-html maps one exact public iframe and supplied untimed captions without an account token; native source identities/capture/text and neutral export are scoped to the selected layout. Static continuation has no catalog-completeness claim.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -26949,9 +26968,10 @@
           "capability_status": "unverified",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "wistia-public-iframe-captions-2026-11-15"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Separate opt-in wistia-public-embed-html maps one exact public iframe and supplied untimed captions without an account token; native source identities/capture/text and neutral export are scoped to the selected layout. Static continuation has no catalog-completeness claim.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -27132,6 +27152,31 @@
           "mapping_source_ref": "baseline-field-contracts.json#/contracts(provider=wistia)",
           "source_commit": "d4470aeae662c759351f63140b035edac10d9a52",
           "notes": "Exact original normalized-field assignments and source inputs are preserved in the linked function excerpt for every baseline format. Not a vendor-official schema or standalone test pass."
+        },
+        {
+          "entity": "public_recording_and_supplied_caption_text",
+          "input_format": "wistia-public-embed-html",
+          "mapping_source_ref": "src/civic_data_connectors/providers/wistia_embed.py",
+          "field_mappings": [
+            {
+              "normalized": "identity.external_id",
+              "provider_field": "hashedId",
+              "notes": "Native media identity bound to exact iframe URL."
+            },
+            {
+              "normalized": "native_fields/original",
+              "provider_field": "Literal W.iframeInit first JSON argument",
+              "notes": "No execution; complete source HTML capture retained."
+            },
+            {
+              "normalized": "transcript.text/native_language_key",
+              "provider_field": "captions[].text/language",
+              "notes": "Composite media/language identity; source text without invented timing or code interpretation."
+            }
+          ],
+          "evidence_ids": [
+            "wistia-public-iframe-captions-2026-11-15"
+          ]
         }
       ],
       "outbound_mappings": [
@@ -27590,7 +27635,8 @@
         "Authenticated media detail, supplied caption list/per-language reads and native search are source implemented with scoped synthetic verification. Optional live account reads require trusted token/account policy; credential acquisition is not a completion gate.",
         "/modern/search is capped at 100 primary and 100 transcript-only candidates with no cursor and provider-defined exact/phrase candidate semantics. Local exact checks cover returned metadata/excerpts, not full transcripts.",
         "Upload/import, media metadata, caption create/update/edits and media swap have separately scoped implementation and synthetic evidence. Account-tier/permission and current server applicability remain runtime qualifications, not unresolved swap implementation or a live-account acceptance gate. No independent playback or overwrite-from-swap inference.",
-        "Media swap is source implemented and synthetic tested; pending jobs are preserved and exact finished jobs with target identity/type readback confirm provider completion without independent byte/playback claims. Overwrite is not inferred from swap. Account/folder offset discovery is already implemented; packaged status corrected from stale blocked_access."
+        "Media swap is source implemented and synthetic tested; pending jobs are preserved and exact finished jobs with target identity/type readback confirm provider completion without independent byte/playback claims. Overwrite is not inferred from swap. Account/folder offset discovery is already implemented; packaged status corrected from stale blocked_access.",
+        "Opt-in public iframe metadata and supplied untimed captions now implemented from declared gWorks media ylfk2zpd7f. Account API authentication remains separate; no shared-origin/account-identity equivalence or catalog completeness. Other player layouts and unavailable tracks are not inferred. Two existing representative public contexts retained; no further tenant survey."
       ],
       "requirement_ids": [
         "C01",
@@ -28959,6 +29005,18 @@
               }
             ]
           }
+        },
+        {
+          "id": "gworks-current-builder-source-followup-2026-11-15",
+          "url": "https://www.gworks.com/resource/frontdesk-agendas-and-minutes-builder",
+          "title": "Current official FrontDesk builder and declared PDF/video source inspection",
+          "kind": "official_ui_workflow_and_declared_example",
+          "observation_date": "2026-11-15",
+          "proof_level": "source_review_not_machine_write_contract",
+          "local_path": "docs/capabilities/evidence/gworks-current-builder/source.json",
+          "sha256": "c461feb845e880503de3e27a695861731c8c1e419b6e61b091129419edfe111f",
+          "findings": "Official page200, declared one-page raster minutes screenshot200 and iframe200 with vendor-supplied workflow captions inspected. No gWorks endpoint/request/readback schema in these declared sources.",
+          "limits": "Describes staff save/publish/attachment UI; not a machine contract or proof all other documentation absent. No credentials, guessed staff routes or mutations."
         }
       ],
       "tenants": [
@@ -29269,7 +29327,8 @@
           "endpoint_or_format": "FrontDesk Agenda & Minutes builder UI in historical indexed official article; API unknown",
           "field_mappings": [],
           "evidence_ids": [
-            "gworks-builder"
+            "gworks-builder",
+            "gworks-current-builder-source-followup-2026-11-15"
           ],
           "account_requirements": "City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown.",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
@@ -29300,7 +29359,9 @@
           "operation": "update",
           "endpoint_or_format": "unknown",
           "field_mappings": [],
-          "evidence_ids": [],
+          "evidence_ids": [
+            "gworks-current-builder-source-followup-2026-11-15"
+          ],
           "account_requirements": "City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown.",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
           "readback_receipt": "Unknown provider receipt contract; require assigned identity, before/after state and authorized resource readback before acceptance.",
@@ -29330,7 +29391,9 @@
           "operation": "upload",
           "endpoint_or_format": "unknown",
           "field_mappings": [],
-          "evidence_ids": [],
+          "evidence_ids": [
+            "gworks-current-builder-source-followup-2026-11-15"
+          ],
           "account_requirements": "City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown.",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
           "readback_receipt": "Unknown provider receipt contract; require assigned identity, before/after state and authorized resource readback before acceptance.",
@@ -29372,7 +29435,8 @@
         "Published HTML detail is now mapped from the vendor-declared /city/{city}/cms/{meeting}_{agenda|minute}.html format with real city1311 meeting5017 capture. Existing Galena PDF failure remains a one-document access failure; not a provider-wide blocker. Catalog continuation/completeness and every flagged document remain unverified.",
         "Retained history, update frequency and maximum response payload remain unknown; one static response cannot establish them. No additional repeated sampling is required for this bounded research outcome.",
         "Pinned FrontDesk builder material describes staff UI without an external write schema. Vendor machine field/readback contracts remain unresolved; staff credentials and live-write acceptance are not completion gates.",
-        "Anonymous citizen client declares secure POST /cms/secure/city/meeting/list with Bearer token and flattened cms_meeting.* fields. Separate calendar response/paging contract and meeting-write payload/readback remain unresolved; do not substitute static meetings JSON field names. Generic upload helper consumes a caller-supplied endpoint and signedUrl but does not establish meeting association."
+        "Anonymous citizen client declares secure POST /cms/secure/city/meeting/list with Bearer token and flattened cms_meeting.* fields. Separate calendar response/paging contract and meeting-write payload/readback remain unresolved; do not substitute static meetings JSON field names. Generic upload helper consumes a caller-supplied endpoint and signedUrl but does not establish meeting association.",
+        "Current official builder resource and its declared PDF/video reviewed2026-11-15: raster public UI example and supplied workflow captions, no endpoint/request/readback schema. Exact source chain checked; cannot label all gWorks write research outside-only. Source captures retained; no repeated tenant survey."
       ],
       "authentication": "City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown.",
       "write_findings": "Historical official indexed article documents agenda creation/logging minutes/publication; live docs 404. Machine create/update/upload contracts remain unknown; no absence claim.",

@@ -4,7 +4,7 @@ Current reconciliation: **2026-11-15**. Release remains incomplete and publicati
 
 ## Scope and evidence
 
-The runtime registers **32 providers**, retaining **31 original families / 34 baseline formats**, with **59 additive parser hooks / 19 native-search handlers**. Cablecast is the additional typed reader, not a new original baseline family. These counts do not imply every operation is supported.
+The runtime registers **32 providers**, retaining **31 original families / 34 baseline formats**, with **60 additive parser hooks / 19 native-search handlers**. Cablecast is the additional typed reader, not a new original baseline family. These counts do not imply every operation is supported.
 
 Capability, source implementation and executed acceptance are independent. Vendor-documented synthetic checks satisfy only their explicitly attributed scope. Product/UI documentation alone does not establish an API payload. Live credentials, account acquisition and real vendor mutations are not acceptance gates. Unresolved research is not a verified outside-information dependency.
 
@@ -52,3 +52,5 @@ Tyler also supports a separately requested, feature-gated public agenda-item sea
 The eSCRIBE [PublishingService mapping](../ESCRIBE-PUBLISHING-SERVICE.md) adds exact deployed WSDL/XSD record reads and sixteen synthetically accepted create/update mappings. One explicit native upload chunk with caller-declared whole-document hash is also implemented; general chunk assembly/completion/readiness semantics remain unresolved. The exact earlier singleWsdl403 is not a blanket access finding.
 
 Selected eSCRIBE item-history reads additionally preserve supplied native motions/votes and inherited history fields with scoped synthetic proof; see the PublishingService guide. These are source facts, with no inferred tally or publication.
+
+The existing Wistia family now includes opt-in [public iframe metadata and supplied captions](../WISTIA-PUBLIC-EMBED.md), with no account token, script execution, inferred cue timing or catalog completeness. The source-declared gWorks builder demonstration is kept separate from unresolved gWorks write contracts.

@@ -41,7 +41,7 @@ ADDITIONAL_FORMATS = {"suiteone-media": ("suiteone-public-event-html",),
                       "novusagenda": ("novus-public-listing-html", "novus-public-coversheet-html"),
                       "granicus": ("granicus-listing-html", "granicus-platform-soap-xml"),
                       "peak": ("granicus-listing-html", "peak-publication-rss-xml"),
-                      "wistia": ("wistia-api-media-json", "wistia-media-detail-json", "wistia-caption-json"),
+                      "wistia": ("wistia-api-media-json", "wistia-media-detail-json", "wistia-caption-json", "wistia-public-embed-html"),
                       "laserfiche-weblink": ("laserfiche-listing-json", "laserfiche-repository-entries-json")}
 
 

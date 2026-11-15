@@ -353,3 +353,7 @@ The already pinned PublishingService XSDs establish AgendaItemItemHistoryView wi
 ### Select native Event update follow-up (2026-11-15)
 
 The pinned update DTO and GET EventModel now support an explicit native request/postcondition path, with all18properties supplied and publication/media/template guards retained.141affected checks pass. This closes native-wire execution, while normalized clock/timezone conversion remains unresolved and is not hidden in caller defaults. Create still has its separate destination/template configuration dependencies; item writes and document upload remain unresolved research. See CIVICPLUS-SELECT-EVENT-UPDATES.md.
+
+### Current gWorks builder / declared Wistia source follow-up (2026-11-15)
+
+The current official builder article and declared PDF/iframe returned200. The PDF is a raster published-UI screenshot, and the iframe supplies staff-workflow caption text rather than gWorks endpoint/payload/readback schemas. No staff login, guessed route or mutation was used; this does not prove every other public source absent. That same declared iframe establishes a concrete Wistia public metadata/supplied-caption path, now implemented with22new/212affected passing checks. No binary video, ASR, timing or meeting association inferred. Source captures, exact scope and neutral persistence/export proof are retained separately.
