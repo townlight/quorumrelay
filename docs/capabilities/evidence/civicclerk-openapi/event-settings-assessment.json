@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-14",
+  "scope": "Select Event-create configuration applicability; no new execution, mutation or full-contract outside-only claim.",
+  "sources": [
+    {
+      "url": "https://www.civicplus.help/meetings-select/docs/set-the-default-publication-status-for-created-events",
+      "updated": "2026-09-16",
+      "established": "The tenant Default Event Publish Setting selects no automatic publication or immediate publication. Changes affect the next created event. Configuration changes require Events Site Settings permission."
+    },
+    {
+      "url": "https://www.civicplus.help/meetings-select/docs/create-manage-event-templates",
+      "updated": "2026-08-14",
+      "established": "Templates retain category, location, schedule, stream/Zoom and optional caption/transcription/translation settings. Some configured media services incur charges when used. Template name defaults the meeting name."
+    },
+    {
+      "url": "https://www.civicplus.help/meetings-select/docs/sign-in-to-your-site",
+      "updated": "2026-09-28",
+      "established": "Permanent staff URL template SITEID.v8.civicclerk.com, separate from public portal. Exact anonymousFishers staff root returned403; no authentication or writes attempted."
+    }
+  ],
+  "pinned_schema": "docs/capabilities/evidence/civicclerk-openapi/swagger.json",
+  "pinned_schema_sha256": "d242638b2a6fd2b4dc2ef295ea000a52b146a1de63b7298ba463acd8d94ce62a",
+  "schema_assessment": {
+    "create": "CreateEventFromTemplateApiModel_0067e88d requires templateId, eventName, eventStartDate, eventStartTime. Its properties have no publication-status override.",
+    "template_read": "EventTemplatesModel exposes streamId, ccServiceType, isTranscription, translationServiceType and related fields; schema alone does not supply all service enum meanings or the destination current values.",
+    "settings_read": "Pinned Settings paths cover custom public portal settings, public portal customizations, identity server configuration and public browser keys; no explicitly named default-event-publication property/endpoint is exposed. No endpoint is inferred or called."
+  },
+  "proven_destination_information_dependency": "The selected destination current Default Event Publish Setting and chosen template settings are variable tenant facts, not values derivable from the universal request schema or this repository. For a create whose approval excludes publication/extra effects, an authoritative applicable preflight contract/configuration snapshot must establish those facts and their relationship to API creation. A shareable sanitized configuration/contract is enough to investigate and synthetically test; credentials/live mutation are not required acceptance gates.",
+  "unresolved_research": "UI create behavior does not by itself prove the API applies the same defaults. Exact API date/time/template-to-readback equivalence and configuration preflight mapping remain unresolved. No assertion all alternative public sources are exhausted or only a customer can supply the API semantics.",
+  "implementation": "No Event create/update implemented; existing section adapter still rejects them before mutation. This assessment does not add template administration, paid services or publication to scope."
+}

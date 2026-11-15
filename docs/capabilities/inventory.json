@@ -7536,6 +7536,17 @@
               }
             ]
           }
+        },
+        {
+          "id": "select-event-settings-assessment-2026-11-14",
+          "url": "https://www.civicplus.help/meetings-select/docs/set-the-default-publication-status-for-created-events",
+          "title": "Select destination publication/template settings and Event-create limits",
+          "kind": "official_documentation_assessment_not_execution",
+          "observation_date": "2026-11-14",
+          "findings": "Destination publication default and inherited template effects are configured values. Pinned create schema has no publication override. Exact API preflight/readback mapping remains unresolved; no Event writer or live mutation.",
+          "capture_path": "docs/capabilities/evidence/civicclerk-openapi/event-settings-assessment.json",
+          "capture_sha256": "2a2e393a76d01a2e605a9d9857cbc3875cbd6d0f6592671618798c270b8473bb",
+          "proof_level": "official_documentation_assessment_not_execution"
         }
       ],
       "tenants": [
@@ -7979,13 +7990,14 @@
           ],
           "evidence_ids": [
             "select-create",
-            "select-official-detail-section-execution"
+            "select-official-detail-section-execution",
+            "select-event-settings-assessment-2026-11-14"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
           "readback_receipt": "GET /v1/Events/{key} returns EventModel. Exact eventStartDate/eventStartTime to eventDate/startDateTime timezone equivalence and create template effects remain unresolved; no write executed.",
           "verification_status": "request_schema_documented_readback_semantics_unresolved",
-          "notes": "State two-letter abbreviation needed for Web Central calendar integration.",
+          "notes": "State two-letter abbreviation needed for Web Central calendar integration. Official2026tenant publication default and inherited template effects must be distinguished from request fields; the request has no publication override. Configuration applicability and timestamp/readback remain unresolved; no Event write enabled.",
           "requirement_ids": [
             "C01",
             "X03",
