@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-15",
+  "origin": "Exact baseline tests/fixtures/baseline/boardbook.response organization3307 search href -> anonymous declared GET form and Search.6.js -> one bounded budget query.",
+  "sources": [
+    {
+      "url": "https://meetings.boardbook.org/Search/Index/3307?returnurl=/Public/Organization/3307",
+      "status": 200,
+      "final_url": "https://meetings.boardbook.org/Search/Index/3307?returnurl=/Public/Organization/3307",
+      "bytes": 35098,
+      "sha256": "078c10ae3128c454b7cc1baa485c7fd4a6f5c51a219e92d8270ccf737d0bb668",
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://meetings.boardbook.org/Search/Index/3307?q=budget",
+      "status": 200,
+      "final_url": "https://meetings.boardbook.org/Search/Index/3307?q=budget",
+      "bytes": 83364,
+      "sha256": "5ad0c802dbbf6921c33a1a258102a29a29d0f34078e0de77fad72141f2a141d3",
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://cdn2.sparqdata.com/Scripts/Search.6.js",
+      "bytes": 5920,
+      "status": 200,
+      "sha256": "b25a3112e308eb35f366849e878981bf5f287ea29f2a4f7c02f53f3397eec27c"
+    }
+  ],
+  "raw_files": [
+    {
+      "path": "docs/capabilities/evidence/boardbook-public-search/search.html",
+      "sha256": "078c10ae3128c454b7cc1baa485c7fd4a6f5c51a219e92d8270ccf737d0bb668"
+    },
+    {
+      "path": "docs/capabilities/evidence/boardbook-public-search/results.html",
+      "sha256": "5ad0c802dbbf6921c33a1a258102a29a29d0f34078e0de77fad72141f2a141d3"
+    },
+    {
+      "path": "docs/capabilities/evidence/boardbook-public-search/search.js",
+      "sha256": "b25a3112e308eb35f366849e878981bf5f287ea29f2a4f7c02f53f3397eec27c"
+    }
+  ],
+  "request_contract": "GET /Search/Index/{organization}?q={first_expression}, exact declared form. Client also supports AjaxSearch with serialized form; this implementation uses full GET only.",
+  "response_contract": "SearchResults container li entries; supplied GoToResult path ID and Index/PublicOrgID query; rendered title and excerpt text. Four observed search indexes remain separately typed.",
+  "observation": "42native index locators,37exact local budget hits; five document candidates lack the term in supplied rendered metadata.",
+  "identity_limit": "Index plus native ID identifies a search entry, not a canonical meeting/item/document or inferred parent.",
+  "coverage_limits": [
+    "No inferred server pagination/exhaustion, document-byte search, date/body semantics or remote mutation.",
+    "No Index refresh/CheckLoadSearchItems call, result redirects or returnUrl navigation is executed.",
+    "No complete empty coverage inferred; all native results partial, empty/unrecognized result containers fail."
+  ],
+  "authorization": "Anonymous public GETs only; no account, browser, write, import, release or other tenant survey."
+}

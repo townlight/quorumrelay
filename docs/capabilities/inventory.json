@@ -10740,6 +10740,58 @@
           },
           "receipt_path": "docs/verification/boardbook-public-minutes-2026-11-15.json",
           "receipt_sha256": "da002f368d15f64d13fc8151b3e00dad6242683b26f2b8039e8e67ef421061aa"
+        },
+        {
+          "id": "boardbook-public-search-2026-11-15",
+          "url": "https://meetings.boardbook.org/Search/Index/3307?q=budget",
+          "title": "BoardBook declared anonymous GET search and native index entries",
+          "kind": "public_tenant_and_vendor_client",
+          "observed": "2026-11-15",
+          "observation_date": "2026-11-15",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "access_scope": "bounded_public_read_and_synthetic_engine",
+          "findings": "One current public GET maps42typed native index entries/37exact local hits.20new/180affected tests passed.",
+          "limits": "Search entry IDs are not canonical meeting/item/document IDs; no inferred parent/date/body, fulltext/catalog completeness, server paging or write.",
+          "fixture_path": "docs/capabilities/evidence/boardbook-public-search/results.html",
+          "fixture_sha256": "5ad0c802dbbf6921c33a1a258102a29a29d0f34078e0de77fad72141f2a141d3",
+          "receipt_path": "docs/verification/boardbook-native-search-2026-11-15.json",
+          "receipt_sha256": "b8c4a6a25787e7ebfe614fb4eaf90e8a61ba20d441bde6655bdfdc98f41d2c4d",
+          "synthetic_execution": {
+            "provider": "boardbook",
+            "status": "mock_passed",
+            "operations": [
+              "native_search"
+            ],
+            "entities": [
+              "search_result"
+            ],
+            "scope": "Anonymous BoardBook rendered search-index entries and partial excerpts; no canonical parent inference/fulltext/exhaustive catalog/write.",
+            "execution_provenance": "20newcases in180affected cases; pinned real42entry response through synthetic transport, SQLite/reopen and neutral exports.",
+            "checks": [
+              {
+                "command": "pytest tests/test_boardbook_native_search.py tests/test_boardbook_detail.py tests/test_boardbook_documents.py tests/test_boardbook_minutes.py tests/test_provider_discovery.py tests/test_interchange.py tests/test_storage_search_imports.py tests/test_interfaces.py tests/test_mcp_interfaces.py -q",
+                "passed": 180,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardbook-public-search/source.json",
+                "sha256": "4d76b9148e7bd9abfe687b81722098bd63ebed346d8e998d6168fcf27f1d1d4f"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardbook-public-search/search.js",
+                "sha256": "b25a3112e308eb35f366849e878981bf5f287ea29f2a4f7c02f53f3397eec27c"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardbook_native_search.py",
+                "sha256": "b9493f48b3d263ec3c7ba30c7e253c497239859fb22a68b5ce931ccc9bdb6400"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -10852,21 +10904,23 @@
           ]
         },
         "native_search": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
-          "evidence_ids": [],
-          "details": "No usable provider-native search contract verified.",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
+          "evidence_ids": [
+            "boardbook-public-search-2026-11-15"
+          ],
+          "details": "Anonymous BoardBook rendered search-index entries and partial excerpts; no canonical parent inference/fulltext/exhaustive catalog/write.",
           "dependencies": [],
           "remaining_verification": [
-            "Investigate native search without treating missing evidence as unavailable."
+            "Canonical parent identity, date/body semantics and full-document/provider-complete search remain unverified; native results stay partial."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "unverified",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://meetings.boardbook.org/public/organization/1807"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "bounded_public_research_not_engine_acceptance",
+          "test_access": "local_synthetic_no_account_required",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"

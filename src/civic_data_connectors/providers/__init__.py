@@ -47,6 +47,7 @@ def register(engine, *, transport: Transport | None = None,
             ("boarddocs", "boarddocs-public-item-html"),
             ("boardbook", "boardbook-public-agenda-html"),
             ("boardbook", "boardbook-public-minutes-html"),
+            ("boardbook", "boardbook-public-search-html"),
             ("gworks", "gworks-published-meeting-html"),
             ("gworks", "gworks-secure-calendar-json"),
             ("town-hall-streams", "town-hall-streams-event-html"),
@@ -120,6 +121,9 @@ def register(engine, *, transport: Transport | None = None,
     from .peak_search import native_search as peak_search
     engine.register_native_search("peak", tracked_handler("search", lambda engine, request, content, context:
                                   peak_search(engine, request, content, context, transport=transport)))
+    from .boardbook_search import native_search as boardbook_search
+    engine.register_native_search("boardbook", tracked_handler("search", lambda engine, request, content, context:
+                                  boardbook_search(engine, request, content, context, transport=transport)))
     from .boardable_search import native_search as boardable_search
     engine.register_native_search("boardable", tracked_handler("search", lambda engine, request, content, context:
                                   boardable_search(engine, request, content, context, transport=transport)))

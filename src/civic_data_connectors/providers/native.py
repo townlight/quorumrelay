@@ -252,6 +252,9 @@ def parse_native(source, namespace, content, input_format):
     if input_format == "peak-public-search-html":
         from .peak_search import parse_bundle
         return parse_bundle(source, namespace, content)
+    if input_format == "boardbook-public-search-html":
+        from .boardbook_search import parse_bundle
+        return parse_bundle(source, namespace, content)
     if input_format == "towncloud-public-listing-json":
         from .towncloud_public import listing_rows
         return make_bundle(source, namespace, content, input_format, listing_rows(source, content))

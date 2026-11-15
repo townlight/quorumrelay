@@ -58,3 +58,8 @@ docs/capabilities/evidence/peak-public-search/pagination.js whitespace=cr-at-eol
 docs/capabilities/evidence/simbli-search-client/default-request.json whitespace=cr-at-eol
 docs/capabilities/evidence/simbli-search-client/search-response.json whitespace=cr-at-eol
 docs/capabilities/evidence/simbli-search-client/board-response.json whitespace=cr-at-eol
+
+# Exact BoardBook rendered pages/client retain vendor CR/blank whitespace.
+docs/capabilities/evidence/boardbook-public-search/search.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/boardbook-public-search/results.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/boardbook-public-search/search.js whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
