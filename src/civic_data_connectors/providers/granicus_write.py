@@ -10,7 +10,7 @@ from time import monotonic
 from urllib.parse import urlsplit
 
 from ..engine import canonical_hash
-from ..write_adapters import AmbiguousWrite, WriteAdapter, WriteChange, WriteFailure
+from ..write_adapters import AmbiguousWrite, WriteAdapter, WriteCancelled, WriteChange, WriteFailure
 from .contracts import Response
 from .granicus_platform import numeric_id
 from .granicus_soap import Session, contract, request_xml
@@ -188,8 +188,8 @@ class GranicusWriteAdapter(WriteAdapter):
                     raise WriteFailure("conflict", "The source ForeignID changed after creation was planned.")
             elif canonical_hash(self._read(session, change)) != prepared["before_fingerprint"]:
                 raise WriteFailure("conflict", "SOAP resource changed after plan preparation.")
-            if persist:
-                persist({"resource_id": change.resource_id, "read_url": session.url})
+            if persist and persist({"resource_id": change.resource_id, "read_url": session.url}):
+                raise WriteCancelled()
             try:
                 returned, _ = session.call(prepared["native"]["soap_method"], prepared["native"]["body"])
             except ValueError:
@@ -315,8 +315,8 @@ class GranicusWriteAdapter(WriteAdapter):
         try:
             if canonical_hash(self._publication_read(session, prepared)) != prepared["before_fingerprint"]:
                 raise WriteFailure("conflict", "The clip changed after publication was planned.")
-            if persist:
-                persist({"resource_id": prepared["change"]["resource_id"]})
+            if persist and persist({"resource_id": prepared["change"]["resource_id"]}):
+                raise WriteCancelled()
             try:
                 result, _ = session.call("PublishClip", prepared["native"]["body"])
             except ValueError:
@@ -463,8 +463,8 @@ class GranicusWriteAdapter(WriteAdapter):
             if canonical_hash(self._document_read(session, change)) != prepared["before_fingerprint"]:
                 raise WriteFailure("conflict", "The document parent changed after planning.")
             parameters = self._document_parameters(prepared, bounds)
-            if persist:
-                persist({"resource_id": change.resource_id, "read_url": session.url})
+            if persist and persist({"resource_id": change.resource_id, "read_url": session.url}):
+                raise WriteCancelled()
             try:
                 chunked = prepared["native"].get("chunked_upload")
                 if chunked:
@@ -478,8 +478,8 @@ class GranicusWriteAdapter(WriteAdapter):
                                                    "id": chunked["id"]}, separators=(",", ":"))
                             parameters = self._document_parameters(prepared, bounds, data=data, location=location)
                             session.call(prepared["native"]["soap_method"], parameters)
-                            if persist:
-                                persist({"completed_chunks": index+1, "upload_id": chunked["id"]})
+                            if persist and persist({"completed_chunks": index+1, "upload_id": chunked["id"]}):
+                                raise AmbiguousWrite("Upload interrupted after a chunk; reconcile without replay.")
                 else:
                     session.call(prepared["native"]["soap_method"], parameters)
             except ValueError:
@@ -590,8 +590,8 @@ class GranicusWriteAdapter(WriteAdapter):
             if vault._url != prepared["native"]["url"]:
                 raise WriteFailure("conflict", "The folder's authorized MediaVault endpoint changed.")
             data = self._file_bytes(prepared["native"]["files"][0])
-            if persist:
-                persist({"target_folder_id": change.fields["FolderID"]})
+            if persist and persist({"target_folder_id": change.fields["FolderID"]}):
+                raise WriteCancelled()
             try:
                 result = vault.call("UploadFile", {**change.fields, "bytes": data})
             except ValueError:

@@ -1059,6 +1059,8 @@ class WriteAdapter:
             if canonical_hash(now) != prepared["before_fingerprint"]:
                 raise WriteFailure("conflict", "Provider state changed after this exact plan was prepared.")
         native = NativeRequest(**prepared["native"])
+        if persist and persist({"resource_id": change.resource_id}):
+            raise WriteCancelled()
         if change.entity == "document_large":
             return self.large_document(source, prepared, context, bounds, deadline, persist=persist)
         response = self._call(source, context, native, bounds, deadline)
