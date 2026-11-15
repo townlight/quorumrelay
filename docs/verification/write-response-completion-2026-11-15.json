@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "ae539e2",
+  "tasks": [
+    6,
+    10
+  ],
+  "status": "PASSED",
+  "reproduced": "Four public-coordinator cases incorrectly completed interrupted final GET readback (Wistia/Select; cancellation/deadline).",
+  "fix": "Check completion after send and JSON sanitization. Preserve ambiguous mutation outcomes, preflight cancellation/deadline classification, uncertain final readback, and GET-only restart reconciliation.",
+  "checks": [
+    {
+      "scope": "12 new boundary cases plus affected response, Select, native writers and plan boundary tests",
+      "passed": 70,
+      "seconds": 3.03
+    },
+    {
+      "scope": "full pytest",
+      "passed": 2134,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 104.38,
+      "warning": "Existing Starlette anyio alias deprecation",
+      "xml": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\write-response-completion-full-2026-11-15.xml"
+    },
+    {
+      "scope": "ruff check src tests scripts",
+      "status": "PASSED"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/write_adapters.py",
+      "sha256": "290276891eaf26cb11811444153d6ebc0b4c1314a7442c2d174ffe8d3f03ed20"
+    },
+    {
+      "path": "tests/test_client_write_response_bounds.py",
+      "sha256": "a03fa51e36d3772a152d475a02157f89a320bd4bbf31ef68ba77a2a6c904e97d"
+    }
+  ],
+  "delivery": "Local only; no releases, live mutations or publication actions."
+}

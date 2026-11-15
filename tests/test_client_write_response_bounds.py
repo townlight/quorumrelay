@@ -12,6 +12,7 @@ from quorumrelay.writes import register
 
 import test_boardable_agenda_write as boardable
 import test_towncloud_draft_write as towncloud
+import test_civicclerk_section_write as civicclerk
 from test_write_providers import make_engine
 
 
@@ -107,3 +108,70 @@ def test_shared_json_oversize_after_update_reconciles_without_second_mutation(tm
     result = reopened.execute("commit_write", approval, context=caller)
     assert result.status == "completed", result.public_dict()
     assert sum(method == "PUT" for method, _ in vendor.calls) == 1
+
+
+@pytest.mark.parametrize("provider", ["wistia", "civicclerk"])
+@pytest.mark.parametrize("interruption", ["cancel", "deadline"])
+@pytest.mark.parametrize("stage", ["readback", "mutation", "parse"])
+def test_final_readback_interruption_stays_uncertain_and_reopens_without_repeat(
+        tmp_path, monkeypatch, provider, interruption, stage):
+    import civic_data_connectors.write_adapters as adapters
+    import civic_data_connectors.writes as writes
+
+    now = [100.0]
+    monkeypatch.setattr(adapters, "monotonic", lambda: now[0])
+    monkeypatch.setattr(writes, "monotonic", lambda: now[0])
+    if provider == "wistia":
+        engine, caller, vendor, source, change = wistia_update(tmp_path)
+        database = "provider.sqlite"
+    else:
+        engine, caller, vendor = civicclerk.setup(tmp_path)
+        vendor.rows[41] = {"id": 41, "agendaId": 91, "sectionName": "Before", "sectionText": "Keep"}
+        source, change = civicclerk.SOURCE, civicclerk.change("update", sectionName="After")
+        database = "write.sqlite"
+    planned = engine.execute("plan_write", {"source": source, "changes": [change],
+        "bounds": {"deadline_seconds": 5}}, context=caller)
+    assert planned.status == "completed", planned.public_dict()
+    approval = {key: planned.data[key] for key in ("plan_id", "plan_hash")}
+    original, sent, final_read = vendor.send, [False], [False]
+
+    def interrupt():
+        if interruption == "cancel":
+            caller.cancellation.set()
+        else:
+            now[0] += 6
+
+    def interrupted_readback(url, **kwargs):
+        response = original(url, **kwargs)
+        if kwargs["method"] == "PUT":
+            sent[0] = True
+            if stage == "mutation":
+                interrupt()
+        elif (sent[0] and kwargs["method"] == "GET"
+              and (provider == "wistia" or url.endswith("/Sections/41"))):
+            final_read[0] = True
+            if stage == "readback":
+                interrupt()
+        return response
+
+    sanitize = adapters.sanitize
+
+    def interrupted_parse(*args, **kwargs):
+        value = sanitize(*args, **kwargs)
+        if stage == "parse" and final_read[0]:
+            interrupt()
+        return value
+
+    monkeypatch.setattr(adapters, "sanitize", interrupted_parse)
+    vendor.send = interrupted_readback
+    result = engine.execute("commit_write", approval, context=caller)
+    assert result.status == "partial", result.public_dict()
+    assert result.data["items"][0]["state"] == "uncertain"
+    caller.cancellation.clear()
+    vendor.send = original
+    monkeypatch.setattr(adapters, "sanitize", sanitize)
+    reopened = Engine(storage=SQLiteStorage(tmp_path / database))
+    register(reopened, default_adapters(vendor))
+    result = reopened.execute("commit_write", approval, context=caller)
+    assert result.status == "completed", result.public_dict()
+    assert sum(call[0] == "PUT" for call in vendor.calls) == 1

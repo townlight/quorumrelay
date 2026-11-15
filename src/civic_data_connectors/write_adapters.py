@@ -467,6 +467,20 @@ class WriteAdapter:
         except (OSError, TimeoutError, RuntimeError, ValueError):
             # Never echo transport errors: they may contain credentialed URLs.
             raise AmbiguousWrite() from None
+        # A transport timeout argument does not prove timely completion. Once
+        # send has started, interruption must preserve uncertainty, not mark a
+        # possible mutation cancelled or accept a late final read as success.
+        def check_completion():
+            cancelled, expired = context.check_cancelled(), monotonic() >= deadline
+            if native.method == "GET":
+                if cancelled:
+                    raise WriteCancelled()
+                if expired:
+                    raise WriteFailure("deadline_exceeded", "The read response exceeded the write deadline.")
+            elif cancelled or expired:
+                raise AmbiguousWrite("The provider response completed outside the active write bounds.")
+
+        check_completion()
         if not isinstance(response, WriteResponse):
             raise AmbiguousWrite("The configured transport returned an invalid response.")
         if len(response.content) > response_limit:
@@ -485,9 +499,11 @@ class WriteAdapter:
             return None
         try:
             value = json.loads(response.content)
-            return value if private_response else sanitize(value, config)
+            value = value if private_response else sanitize(value, config)
         except (UnicodeError, ValueError):
             raise AmbiguousWrite("The provider returned an invalid JSON response.") from None
+        check_completion()
+        return value
 
     def read(self, source, url, context, bounds, deadline):
         return self._call(source, context, NativeRequest("GET", url, "", {}, self.headers()), bounds, deadline)
