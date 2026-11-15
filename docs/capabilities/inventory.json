@@ -425,7 +425,7 @@
               "vote"
             ],
             "scope": "Eight native entity types, create/update wire routes and coordinator plan/commit/readback; fixture sample fields only (event date/location, item title/parent, attachment name/binary, matter type/status/body/title, matter text, history action, vote/rollcall person/value/result). Does not execute public upload spelling or prove every declared field.",
-            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged. Whole-file JSON hash rebound solely for two eSCRIBE read-list additions;14other vendor sections checked equal to HEADa3dfc79; prior synthetic scopes unchanged.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
@@ -441,7 +441,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "66bde111a85aee700918a86de134821d054ef9af2c123799d579e62b2b70d8c4"
+                "sha256": "a228d5311033ad303872a75c83f94b464ca459c0712a4a57e4b43755374430d2"
               },
               {
                 "kind": "test",
@@ -474,7 +474,7 @@
               "linked_meeting_document"
             ],
             "scope": "Public matter_attachment/upload: approved parent/native binary fields, exact file readback and duplicate receipt replay without another network request.",
-            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged. Whole-file JSON hash rebound solely for two eSCRIBE read-list additions;14other vendor sections checked equal to HEADa3dfc79; prior synthetic scopes unchanged.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
@@ -490,7 +490,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "66bde111a85aee700918a86de134821d054ef9af2c123799d579e62b2b70d8c4"
+                "sha256": "a228d5311033ad303872a75c83f94b464ca459c0712a4a57e4b43755374430d2"
               },
               {
                 "kind": "test",
@@ -9605,7 +9605,7 @@
               "meeting.multimedia"
             ],
             "scope": "Exact documented multimedia POST and GET readback; submitted URL/timestamp/default/base URL plus PublishState/provider and item display/name/type/numbering sample patches, fixed ID denial, unknown preservation, conflict/revocation/duplicate/uncertain response recovery. Does not cover meeting/item create, document upload, inferred enum semantics or unknown production hosts.",
-            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged. Whole-file JSON hash rebound solely for two eSCRIBE read-list additions;14other vendor sections checked equal to HEADa3dfc79; prior synthetic scopes unchanged.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
@@ -9624,7 +9624,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "66bde111a85aee700918a86de134821d054ef9af2c123799d579e62b2b70d8c4"
+                "sha256": "a228d5311033ad303872a75c83f94b464ca459c0712a4a57e4b43755374430d2"
               },
               {
                 "kind": "test",
@@ -11305,7 +11305,7 @@
           "observation_date": "2026-11-15",
           "access_scope": "anonymous_metadata_GET_only;local_synthetic_SOAP_execution",
           "proof_level": "vendor_contract_and_synthetic_engine_execution",
-          "findings": "Other declared ?wsdl200222643bytes and all5XSDs200. Native record reads/create/update and explicit document chunk upload implemented with typed SOAP1.2/WSAddressing/parent checks, full native readback and durable no replay.102eSCRIBE cases pass including Package/Bookmark/Resolution; no live SOAP call. Actual metadata/content binary source preservation separate.",
+          "findings": "Other declared ?wsdl200222643bytes and all5XSDs200. Native record reads/create/update and explicit document chunk upload implemented with typed SOAP1.2/WSAddressing/parent checks, full native readback and durable no replay.102eSCRIBE cases pass including Package/Bookmark/Resolution; no live SOAP call. Actual metadata/content binary source preservation separate. Separately17new/240affected checks pass for two additional native selected listing/text methods; aggregate acceptance unchanged.",
           "limits": "Prior singleWsdl403 exact only. No live SOAP call, deployment/auth/publication/readiness/unknown chunk semantics inference. No universal vendor catalog/other tenant acceptance.",
           "source_path": "docs/capabilities/evidence/escribe-publishing-wsdl/source.json",
           "source_sha256": "cb5ddc5926526860b9c63317974361c6158fb66530c000df488c27435b68cd08",
@@ -11460,7 +11460,7 @@
             "escribe-rendered-detail-2026-11-12",
             "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
-          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail\u2192attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference.",
+          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail\u2192attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference. Two further scoped reads: MeetingGetByMeetingType checks portal/type IDs; AgendaItemTextGetByMeetingId checks meeting/language key and preserves language-qualified native item text identity.17new/240affected passes; docs/verification/escribe-selected-text-2026-11-15.json.",
           "dependencies": [],
           "remaining_verification": [
             "Implementation contract validation",
@@ -22618,7 +22618,7 @@
               "linked_meeting_document"
             ],
             "scope": "Public document/create through Folder/Import and document_large/update through existing target Document/UpdateUploadedParts, exact approved file bytes/readback, multipart signed transfer, asynchronous task reconciliation; no inferred meeting association.",
-            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged. Whole-file JSON hash rebound solely for two eSCRIBE read-list additions;14other vendor sections checked equal to HEADa3dfc79; prior synthetic scopes unchanged.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
@@ -22635,7 +22635,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "66bde111a85aee700918a86de134821d054ef9af2c123799d579e62b2b70d8c4"
+                "sha256": "a228d5311033ad303872a75c83f94b464ca459c0712a4a57e4b43755374430d2"
               },
               {
                 "kind": "test",
@@ -26630,7 +26630,7 @@
               "supplied_caption"
             ],
             "scope": "Upload-server URL/file submission with processing readback; name/tags, captions, versioned edits and additive tags job/readback. Not modern import_url, playable output or every field.",
-            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged. Whole-file JSON hash rebound solely for two eSCRIBE read-list additions;14other vendor sections checked equal to HEADa3dfc79; prior synthetic scopes unchanged.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
@@ -26650,7 +26650,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "66bde111a85aee700918a86de134821d054ef9af2c123799d579e62b2b70d8c4"
+                "sha256": "a228d5311033ad303872a75c83f94b464ca459c0712a4a57e4b43755374430d2"
               },
               {
                 "kind": "test",
@@ -26683,7 +26683,7 @@
               "recording"
             ],
             "scope": "Public media_import/create: exact supplied URL bound in plan, documented modern import_url POST, queued job retained, finished job supplies created media ID, exact target GET; processing readback is not playable-media confirmation.",
-            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged. Whole-file JSON hash rebound solely for two eSCRIBE read-list additions;14other vendor sections checked equal to HEADa3dfc79; prior synthetic scopes unchanged.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
@@ -26699,7 +26699,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "66bde111a85aee700918a86de134821d054ef9af2c123799d579e62b2b70d8c4"
+                "sha256": "a228d5311033ad303872a75c83f94b464ca459c0712a4a57e4b43755374430d2"
               },
               {
                 "kind": "test",

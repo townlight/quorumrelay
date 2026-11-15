@@ -9906,7 +9906,9 @@
       "DocumentGetById/GetContent metadata-bound bytes",
       "PackageGetById/GetByMeeting",
       "BookmarkGetById/GetByMeeting/GetByAgenda",
-      "ResolutionGetById/GetByMeeting/GetByAgendaItem"
+      "ResolutionGetById/GetByMeeting/GetByAgendaItem",
+      "MeetingGetByMeetingType with exact portal/type parent checks",
+      "AgendaItemTextGetByMeetingId with exact meeting/language key and source Mintues text"
     ],
     "implemented_writes": [
       "MeetingCreate",

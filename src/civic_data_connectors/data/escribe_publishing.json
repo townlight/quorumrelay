@@ -351,6 +351,37 @@
         }
       ]
     },
+    "AgendaItemTextGetByMeetingId": {
+      "action": "eSCRIBE.Internet.WebService/IPublishingService/AgendaItemTextGetByMeetingId",
+      "request": [
+        {
+          "name": "meetingId",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/}guid",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "languageId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        }
+      ],
+      "response": [
+        {
+          "name": "AgendaItemTextGetByMeetingIdResult",
+          "type": "{eSCRIBE.Internet.WebService}ArrayOfAgendaItemText",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ]
+    },
     "AttachmentCreate": {
       "action": "eSCRIBE.Internet.WebService/IPublishingService/AttachmentCreate",
       "request": [
@@ -812,6 +843,29 @@
         }
       ]
     },
+    "MeetingGetByMeetingType": {
+      "action": "eSCRIBE.Internet.WebService/IPublishingService/MeetingGetByMeetingType",
+      "request": [
+        {
+          "name": "Id",
+          "type": "{eSCRIBE.Internet.WebService}MeetingType.Identifier",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ],
+      "response": [
+        {
+          "name": "MeetingGetByMeetingTypeResult",
+          "type": "{eSCRIBE.Internet.WebService}ArrayOfMeeting.Record",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ]
+    },
     "MeetingGetByPortal": {
       "action": "eSCRIBE.Internet.WebService/IPublishingService/MeetingGetByPortal",
       "request": [
@@ -1031,11 +1085,99 @@
         }
       ]
     },
+    "{eSCRIBE.Internet.WebService}AgendaItemText": {
+      "fields": [
+        {
+          "name": "AgendaType",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "AllowPublicComments",
+          "type": "{http://www.w3.org/2001/XMLSchema}boolean",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "Description",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Header",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Id",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "LanguageId",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "MeetingId",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/}guid",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "Mintues",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Title",
+          "type": "{http://www.w3.org/2001/XMLSchema}string",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ]
+    },
     "{eSCRIBE.Internet.WebService}ArrayOfAgendaItem.Record": {
       "fields": [
         {
           "name": "AgendaItem.Record",
           "type": "{eSCRIBE.Internet.WebService}AgendaItem.Record",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": true
+        }
+      ]
+    },
+    "{eSCRIBE.Internet.WebService}ArrayOfAgendaItemText": {
+      "fields": [
+        {
+          "name": "AgendaItemText",
+          "type": "{eSCRIBE.Internet.WebService}AgendaItemText",
           "namespace": "eSCRIBE.Internet.WebService",
           "optional": true,
           "nullable": true,
@@ -1551,6 +1693,26 @@
           "namespace": "eSCRIBE.Internet.WebService",
           "optional": true,
           "nullable": true,
+          "many": false
+        }
+      ]
+    },
+    "{eSCRIBE.Internet.WebService}MeetingType.Identifier": {
+      "fields": [
+        {
+          "name": "Id",
+          "type": "{http://www.w3.org/2001/XMLSchema}int",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        },
+        {
+          "name": "PortalId",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/}guid",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
           "many": false
         }
       ]

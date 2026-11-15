@@ -15,7 +15,8 @@ MODELS = ("Meeting", "Agenda", "AgendaItem", "Attachment", "Document", "Package"
 READS = ("MeetingGetByPortal", "AgendaGetByMeeting", "AgendaItemGetByAgenda",
          "AttachmentGetByAgenda", "AttachmentGetByAgendaItem", "DocumentGetContent",
          "PackageGetByMeeting", "BookmarkGetByMeeting", "BookmarkGetByAgenda",
-         "ResolutionGetByMeeting", "ResolutionGetByAgendaItem")
+         "ResolutionGetByMeeting", "ResolutionGetByAgendaItem",
+         "MeetingGetByMeetingType", "AgendaItemTextGetByMeetingId")
 
 
 def compile_contract():

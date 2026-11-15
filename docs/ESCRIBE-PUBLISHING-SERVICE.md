@@ -42,7 +42,8 @@ Implemented record methods are MeetingGetById/GetByPortal,
 AgendaGetById/GetByMeeting, AgendaItemGetById/GetByAgenda,
 AttachmentGetById/GetByAgenda/GetByAgendaItem, DocumentGetById,
 PackageGetById/GetByMeeting, BookmarkGetById/GetByMeeting/GetByAgenda and
-ResolutionGetById/GetByMeeting/GetByAgendaItem. Parameters use
+ResolutionGetById/GetByMeeting/GetByAgendaItem, MeetingGetByMeetingType and
+AgendaItemTextGetByMeetingId. Parameters use
 their exact XSD names and native identifier objects; missing or nil selection
 parameters fail before network. Collection rows must match the supplied native
 portal, meeting, agenda or item parent. Responses exceeding `max_records` fail;
@@ -166,3 +167,25 @@ intent/receipt storage and read-only reconciliation apply to all three. A server
 returned bookmark ID can assign its `Id` component but cannot change its native
 meeting/agenda/item parent. Native package associations do not establish effective
 publication, document availability or server generation/readiness.
+
+## Meeting-type listing and supplied item text
+
+`MeetingGetByMeetingType` takes `{"Id": {"Id": 7, "PortalId": "<native-guid>"}}`.
+Both selection components must match every returned Meeting.Record. This is one
+explicit unpaged response with record/byte/time limits, not a catalog traversal.
+
+`AgendaItemTextGetByMeetingId` takes exactly
+`{"meetingId": "<native-guid>", "languageId": 1033}`. Parameter casing differs
+from other methods. Each returned AgendaItemText must match both selections and
+supply its native AgendaType and Id. Its stable `agenda_item_text` identity includes
+MeetingId, AgendaType, Id and LanguageId, retaining separate native-language
+records without treating the integer key as a known language code. The complete
+agenda-item identity is retained as a parent relationship.
+
+Title, Header, Description and the vendor's literal `Mintues` field are preserved
+as source text with citations and the native language key. The spelling is part
+of this pinned schema, not a local typo correction. Repeat imports, SQLite reopen,
+search and JSON/JSONL/ZIP round-trip retain both language records and exact source
+captures. Unsupported selectors and incomplete/mismatched source records fail;
+cancellation after response does not publish a completed bundle. No public-comment
+write operation or source timestamp conversion is added.

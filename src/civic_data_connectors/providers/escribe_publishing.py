@@ -31,7 +31,8 @@ READS = frozenset({"MeetingGetById", "MeetingGetByPortal", "AgendaGetById", "Age
     "AgendaItemGetById", "AgendaItemGetByAgenda", "AttachmentGetById", "AttachmentGetByAgenda",
     "AttachmentGetByAgendaItem", "DocumentGetById", "DocumentGetContent", "PackageGetById", "PackageGetByMeeting",
     "BookmarkGetById", "BookmarkGetByMeeting", "BookmarkGetByAgenda",
-    "ResolutionGetById", "ResolutionGetByMeeting", "ResolutionGetByAgendaItem"})
+    "ResolutionGetById", "ResolutionGetByMeeting", "ResolutionGetByAgendaItem",
+    "MeetingGetByMeetingType", "AgendaItemTextGetByMeetingId"})
 for prefix, namespace in (("s", SOAP), ("a", ADDRESS), ("e", NS), ("i", XSI)):
     ET.register_namespace(prefix, namespace)
 
@@ -270,6 +271,12 @@ def bind_records(method, parameters, bundle):
         identity = raw["Id"]
         if method.endswith("GetById"):
             matches = identity == selected
+        elif method == "MeetingGetByMeetingType":
+            matches = (raw.get("MeetingTypeId") == selected.get("Id")
+                       and raw.get("PortalId") == selected.get("PortalId"))
+        elif method == "AgendaItemTextGetByMeetingId":
+            matches = (raw.get("MeetingId") == parameters["meetingId"]
+                       and raw.get("LanguageId") == parameters["languageId"])
         elif method == "MeetingGetByPortal":
             matches = raw.get("PortalId") == selected
         elif method == "PackageGetByMeeting":
@@ -301,17 +308,23 @@ def parse_bundle(source, namespace, content):
     model = response["type"]
     kind = {"Meeting": "meeting", "Agenda": "agenda", "AgendaItem": "agenda_item",
             "Attachment": "attachment", "Document": "document",
-            "Package": "package", "Bookmark": "bookmark", "Resolution": "resolution"}[method.split("Get")[0]]
+            "Package": "package", "Bookmark": "bookmark", "Resolution": "resolution",
+            "AgendaItemText": "agenda_item_text"}[method.split("Get")[0]]
     rows = []
     for raw in records(value, model):
         if not isinstance(raw, dict) or "Id" not in raw or raw["Id"] is None:
             raise ValueError("A native identity is required for every returned record.")
         identity = raw["Id"]
+        if kind == "agenda_item_text":
+            if any(raw.get(k) is None or raw.get(k) == "" for k in ("MeetingId", "AgendaType", "LanguageId")):
+                raise ValueError("The item text requires its native meeting, agenda type and language key.")
+            identity = {k: raw[k] for k in ("MeetingId", "AgendaType", "Id", "LanguageId")}
         if isinstance(identity, dict):
             needed = {"agenda": ("MeetingId", "Type"), "agenda_item": ("MeetingId", "AgendaType", "Id"),
                       "attachment": ("MeetingId", "AgendaType", "AgendaItemId", "Sequence"),
                       "bookmark": ("MeetingId", "AgendaType", "AgendaItemId", "Id"),
-                      "resolution": ("MeetingId", "AgendaItemId", "Sequence")}[kind]
+                      "resolution": ("MeetingId", "AgendaItemId", "Sequence"),
+                      "agenda_item_text": ("MeetingId", "AgendaType", "Id", "LanguageId")}[kind]
             if set(identity) != set(needed) or any(identity[k] is None or identity[k] == "" for k in needed):
                 raise ValueError("Every component of the native compound identity is required.")
             identity_text = json.dumps(identity, sort_keys=True, separators=(",", ":"))
@@ -326,6 +339,8 @@ def parse_bundle(source, namespace, content):
                 normalized["recordings"] = [{"url": raw["VideoURL"], "availability": "supplied_reference_only"}]
         elif kind == "document":
             normalized["title"] = raw.get("DisplayName", raw.get("Name"))
+        elif kind == "agenda_item_text":
+            normalized["source_parent_identity"] = {k: raw[k] for k in ("MeetingId", "AgendaType", "Id")}
         elif kind == "package":
             if not isinstance(raw.get("MeetingId"), str) or not raw["MeetingId"]:
                 raise ValueError("The package must supply its native meeting identity.")
@@ -337,6 +352,11 @@ def parse_bundle(source, namespace, content):
     for record in bundle["records"]:
         raw = record["original"]
         kind = record["identity"]["record_type"]
+        if kind == "agenda_item_text":
+            item = {k: raw[k] for k in ("MeetingId", "AgendaType", "Id")}
+            record["relationships"].append({"relation": "agenda_item", "identity": {
+                "provider": source.provider, "namespace": namespace, "record_type": "agenda_item",
+                "external_id": json.dumps(item, sort_keys=True, separators=(",", ":"))}})
         if kind in {"package", "bookmark", "resolution"}:
             meeting_id = raw["MeetingId"] if kind == "package" else raw["Id"]["MeetingId"]
             record["relationships"].append({"relation": "meeting", "identity": {
@@ -362,11 +382,12 @@ def parse_bundle(source, namespace, content):
                     "external_id": json.dumps(item, sort_keys=True, separators=(",", ":"))}})
                 record["normalized"]["timing_units"] = "not_declared_by_pinned_schema"
         text = []
-        for field in ("Name", "Description", "Title", "Header", "Minutes", "Comments"):
+        for field in ("Name", "Description", "Title", "Header", "Minutes", "Comments", "Mintues"):
             value = raw.get(field)
             entries = value.get("KeyValueOfintstring", []) if isinstance(value, dict) else [value]
             for entry in entries:
-                language_key = entry.get("Key") if isinstance(entry, dict) else None
+                language_key = entry.get("Key") if isinstance(entry, dict) else (
+                    raw["LanguageId"] if kind == "agenda_item_text" else None)
                 literal = entry.get("Value") if isinstance(entry, dict) else entry
                 if isinstance(literal, str) and literal:
                     text.append({"field": field, "text": literal, "citation_url": source.url,
