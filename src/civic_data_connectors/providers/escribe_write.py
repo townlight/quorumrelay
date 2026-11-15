@@ -10,25 +10,26 @@ from .escribe_publishing import Session, contract, endpoint, request_xml
 from .identification import validate_source
 
 MODELS = {"meeting": "Meeting", "agenda": "Agenda", "agenda_item": "AgendaItem",
-          "attachment": "Attachment", "document": "Document"}
+          "attachment": "Attachment", "document": "Document",
+          "package": "Package", "bookmark": "Bookmark", "resolution": "Resolution"}
 
 
 def native_identity(entity, value):
-    if entity in {"agenda", "agenda_item", "attachment"}:
+    if entity in {"agenda", "agenda_item", "attachment", "bookmark", "resolution"}:
         if not isinstance(value, str):
             raise ValueError("Compound resource_id requires the canonical JSON native identifier object.")
         result = json.loads(value)
         if not isinstance(result, dict) or identity_key(result) != value:
             raise ValueError("Compound identity must use canonical sorted JSON without spaces.")
         return result
-    if entity == "document":
+    if entity in {"document", "package"}:
         if type(value) is int and 0 < value < 2**31:
             return value
         if isinstance(value, str) and value.isascii() and value.isdecimal():
             number = int(value)
             if str(number) == value and 0 < number < 2**31:
                 return number
-        raise ValueError("Document resource_id requires a positive canonical Int32 without coercion.")
+        raise ValueError("Document/package resource_id requires a positive canonical Int32 without coercion.")
     return value
 
 
@@ -87,7 +88,7 @@ class EscribeWriteAdapter(WriteAdapter):
                 raise WriteFailure("permission_denied", "The exact resource identity is not authorized.")
         elif change.resource_id is not None or change.expected_version is not None:
             raise ValueError("Create requires no existing resource/version; supply the complete explicit native model.")
-        if change.entity in {"agenda", "agenda_item", "attachment"}:
+        if change.entity in {"agenda", "agenda_item", "attachment", "bookmark", "package", "resolution"}:
             if not change.meeting_id or change.meeting_id not in config.get("meeting_ids", ()):
                 raise WriteFailure("permission_denied", "The exact related meeting must be authorized.")
 
@@ -114,7 +115,12 @@ class EscribeWriteAdapter(WriteAdapter):
         if change.entity == "meeting":
             if value.get("PortalId") not in config.get("portal_ids", ()):
                 raise WriteFailure("permission_denied", "The meeting's exact native portal is not authorized.")
-        elif change.entity in {"agenda", "agenda_item", "attachment"}:
+        elif change.entity == "package":
+            if value.get("MeetingId") != change.meeting_id:
+                raise WriteFailure("conflict", "The package does not bind the selected parent meeting.")
+            if type(value.get("DocumentId")) is not int or value["DocumentId"] <= 0:
+                raise ValueError("An explicit positive existing native DocumentId is required.")
+        elif change.entity in {"agenda", "agenda_item", "attachment", "bookmark", "resolution"}:
             if not isinstance(value.get("Id"), dict) or value["Id"].get("MeetingId") != change.meeting_id:
                 raise WriteFailure("conflict", "The native model does not bind the selected parent meeting.")
 
@@ -148,6 +154,7 @@ class EscribeWriteAdapter(WriteAdapter):
                 raise ValueError("Full current model is required before replacement; omitted fields cannot be preserved.")
             if change.expected_version is not None and change.expected_version != canonical_hash(before):
                 raise WriteFailure("conflict", "The expected model fingerprint does not match current state.")
+            self._parent(source, change, before, context)
             after = {**deepcopy(before), **deepcopy(change.fields)}
         self._parent(source, change, after, context)
         method = model + ("Create" if change.operation == "create" else "Update")
@@ -201,7 +208,7 @@ class EscribeWriteAdapter(WriteAdapter):
                 identity = returned
                 verify_identifier(change.entity, identity)
                 if isinstance(identity, dict):
-                    assigned = {"Id"} if change.entity == "agenda_item" else set()
+                    assigned = {"Id"} if change.entity in {"agenda_item", "bookmark"} else set()
                     if any(identity[k] != prepared["resource_id"][k] for k in identity if k not in assigned):
                         raise ValueError("Created identifier differs from the planned native parent/key.")
                 if persist:

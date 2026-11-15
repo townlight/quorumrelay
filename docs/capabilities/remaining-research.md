@@ -97,7 +97,7 @@ Evidence and exact scope: `inventory.json` provider `boardbook`; operation statu
 
 - Calendar and bounded native search remain separately evidenced. Captured Meeting.aspx detail now maps rendered agenda positions, supplied partial text and same-origin FileStream locators. Item keys are capture-local with native item ID null. The earlier FileStream 403 remains a failed live transfer, not proof that the rendered detail path is unimplemented or the catalog complete.
 - Public native search source implementation and bounded first/page2/resume are verified with partial coverage. Provider full-text/exact matching semantics, broader document visibility and catalog completeness remain unknown; no saved metadata search is mislabeled native.
-- New deployed PublishingService WSDL and all5XSDs are captured. Native meeting/agenda/item/attachment/document reads and10record create/update paths are implemented and synthetically verified. Metadata-bound DocumentGetContent preserves exact source bytes. An explicit DocumentUpload chunk with caller-declared final whole-document hash is implemented; preflight/recovery/full-byte readback and no replay are verified synthetically. General chunk sequencing/assembly, append/replacement/truncation/readiness semantics and vendor file-import remain unresolved research. See [PublishingService mapping](../ESCRIBE-PUBLISHING-SERVICE.md). No live SOAP calls or credential-acquisition gate.
+- New deployed PublishingService WSDL and all5XSDs are captured. Native meeting/agenda/item/attachment/document/package/bookmark/resolution reads and16record create/update paths are implemented and synthetically verified. Metadata-bound DocumentGetContent preserves exact source bytes. An explicit DocumentUpload chunk with caller-declared final whole-document hash is implemented; preflight/recovery/full-byte readback and no replay are verified synthetically. General chunk sequencing/assembly, append/replacement/truncation/readiness semantics and vendor file-import remain unresolved research. See [PublishingService mapping](../ESCRIBE-PUBLISHING-SERVICE.md). No live SOAP calls or credential-acquisition gate.
 
 Evidence and exact scope: `inventory.json` provider `escribe`; operation status and outbound mappings are separate from historical observations.
 
@@ -334,3 +334,14 @@ See [the pinned source assessment](evidence/contract-followup-2026-11-14/source.
 
 
 Configured-source inventory correction2026-11-15: AgendaCenter, Swagit, SuiteOne, Peak and TownCloud fetch paths execute against original saved responses and retain exact capture bytes/native records. Their stale not_implemented flags are corrected; configured fetching does not establish root discovery, full history, binary document/media acceptance, staff writes or wider provider applicability. See `docs/verification/configured-fetch-labels-2026-11-15.json` (five path regressions,30affected metadata/execution cases).
+
+
+Concrete integration-partner follow-up2026-11-15: AgendaQuick names Open.Media;
+the partner's June2025 announcement describes returning video links/timestamps to
+AgendaQuick and importing OnBase sessions. Its published2019 Open.Media API is
+GET-only and the older public Drupal agenda module does not implement that exchange.
+No AgendaQuick/OnBase write mapping is inferred. Exact direct406 responses are
+separate from web-reader article/PDF observations; raw Git-pinned API/module bytes
+and missing route/body/association/readback details are indexed in
+[evidence/agendaquick-openmedia/source.json](evidence/agendaquick-openmedia/source.json).
+This lead remains unresolved research, with no outside-only or absent-API claim.

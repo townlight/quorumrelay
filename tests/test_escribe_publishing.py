@@ -46,6 +46,15 @@ def sample(model):
     elif model == "Attachment":
         value.update(Id={"AgendaItemId": 12, "AgendaType": "Agenda", "MeetingId": MEETING, "Sequence": 1},
                      DocumentId=23)
+    elif model == "Resolution":
+        value.update(Id={"AgendaItemId": 12, "MeetingId": MEETING, "Sequence": 1},
+                     Comments="Literal source resolution", MovedBy=7, SecondedBy=8, Number="R-12",
+                     Result="Source result", Type="Source type", VoteType="Source vote type")
+    elif model == "Package":
+        value.update(Id=31, DocumentId=23, LanguageId=1033, MeetingId=MEETING, Type="Agenda")
+    elif model == "Bookmark":
+        value.update(Id={"AgendaItemId": 12, "AgendaType": "Agenda", "Id": 5, "MeetingId": MEETING},
+                     TimeStart=120, TimeEnd=240)
     elif model == "Document":
         value.update(Id=23, Name="agenda.pdf", DisplayName="Agenda", FileSize=6, IsPrivate=True)
     return value
@@ -117,7 +126,7 @@ class Server:
                 value["Name"] = "Server changed it"
         elif method.endswith(("Create", "Update")):
             assert len(node) == 1
-            expected_parameter = ("data" if method in {"AgendaCreate", "AgendaItemCreate", "AttachmentCreate"}
+            expected_parameter = ("data" if method in {"AgendaCreate", "AgendaItemCreate", "AttachmentCreate", "PackageCreate", "ResolutionCreate"}
                                   else "Id" if method == "DocumentUpdate" else "Data")
             assert node[0].tag == "{" + soap.NS + "}" + expected_parameter
             # Decode primitive/identifier test data independently from the production decoder.
@@ -163,17 +172,19 @@ def setup(tmp_path, model="Meeting", create=False):
     server.exists = not create
     source = replace(SOURCE, namespace=validate_source(SOURCE))
     entity = {"Meeting": "meeting", "Agenda": "agenda", "AgendaItem": "agenda_item",
-              "Attachment": "attachment", "Document": "document"}[model]
+              "Attachment": "attachment", "Document": "document",
+              "Package": "package", "Bookmark": "bookmark", "Resolution": "resolution"}[model]
     context = OperationContext(tenant="test", authorization=frozenset({"write:plan", "write:commit"}),
         credentials={"escribe": {"endpoint": URL, "tenant": "test", "allowed_namespaces": [source.namespace],
             "permissions": [entity + (":create" if create else ":update")],
             "resource_ids": [identity_key(server.value["Id"])], "meeting_ids": [MEETING], "portal_ids": [PORTAL]}})
     field = {"Meeting": "Name", "Agenda": "LogoDocumentId", "AgendaItem": "Sequence",
-             "Attachment": "DocumentId", "Document": "DisplayName"}[model]
+             "Attachment": "DocumentId", "Document": "DisplayName",
+             "Package": "DocumentId", "Bookmark": "TimeStart", "Resolution": "MovedBy"}[model]
     patch = {field: "After" if model in {"Meeting", "Document"} else 99}
     change = {"key": "test", "entity": entity, "operation": "create" if create else "update",
               "resource_id": None if create else identity_key(server.value["Id"]),
-              "meeting_id": MEETING if entity in {"agenda", "agenda_item", "attachment"} else None,
+              "meeting_id": MEETING if entity in {"agenda", "agenda_item", "attachment", "package", "bookmark", "resolution"} else None,
               "fields": {**deepcopy(server.value), **patch} if create else patch}
     engine = create_engine(storage=SQLiteStorage(tmp_path / "store.sqlite"),
                            write_adapters={"escribe": EscribeWriteAdapter(SendOnly(server))})
@@ -196,7 +207,7 @@ def test_compiled_contract_exactly_matches_all_pinned_vendor_types_and_actions()
     assert soap.contract()["operations"]["MeetingCreate"]["request"][0]["name"] == "Data"
 
 
-@pytest.mark.parametrize("model", ["Meeting", "Agenda", "AgendaItem", "Attachment", "Document"])
+@pytest.mark.parametrize("model", ["Meeting", "Agenda", "AgendaItem", "Attachment", "Document", "Package", "Bookmark", "Resolution"])
 @pytest.mark.parametrize("create", [False, True])
 def test_native_record_plan_commit_readback_idempotency_and_reopen(tmp_path, model, create):
     owner, server, source, context, change = setup(tmp_path, model, create)
@@ -235,7 +246,7 @@ def test_concurrent_change_and_revoked_target_fail_before_mutation(tmp_path):
     assert server.mutations == 0
 
 
-@pytest.mark.parametrize("model", ["Meeting", "Agenda", "AgendaItem", "Attachment", "Document"])
+@pytest.mark.parametrize("model", ["Meeting", "Agenda", "AgendaItem", "Attachment", "Document", "Package", "Bookmark", "Resolution"])
 def test_explicit_native_read_capture_identity_persistence_search_and_export(tmp_path, model):
     server = Server(model)
     identity = server.value["Id"]
@@ -291,6 +302,13 @@ def test_read_bounds_cancel_and_unmapped_upload_do_not_create_empty_success():
 
 
 @pytest.mark.parametrize("method,model,parent,wrapper,namespace", [
+    ("ResolutionGetByMeeting", "Resolution", {"MeetingId": MEETING}, "Resolution.Record", soap.NS),
+    ("ResolutionGetByAgendaItem", "Resolution", {"Id": {"AgendaType": "Agenda", "Id": 12,
+     "MeetingId": MEETING}}, "Resolution.Record", soap.NS),
+    ("PackageGetByMeeting", "Package", {"MeetingId": MEETING}, "Package.Record", soap.NS),
+    ("BookmarkGetByMeeting", "Bookmark", {"MeetingId": MEETING}, "Bookmark.Record", soap.NS),
+    ("BookmarkGetByAgenda", "Bookmark", {"AgendaId": {"MeetingId": MEETING, "Type": "Agenda"}},
+     "Bookmark.Record", soap.NS),
     ("MeetingGetByPortal", "Meeting", {"PortalId": PORTAL}, "Meeting.Record", soap.NS),
     ("AgendaGetByMeeting", "Agenda", {"MeetingId": MEETING}, "Agenda.Record", DATA),
     ("AgendaItemGetByAgenda", "AgendaItem", {"AgendaId": {"MeetingId": MEETING, "Type": "Agenda"}},

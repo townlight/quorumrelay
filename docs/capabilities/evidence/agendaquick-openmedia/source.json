@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-15",
+  "scope": "New product-matched integration partner follow-up; no live API/mutation calls. No new QuorumRelay provider.",
+  "sources": [
+    {
+      "url": "https://www.destinysoftwareinc.com/agendaquick/video-integration/",
+      "path": "integration-response.html",
+      "status": 406,
+      "bytes": 0,
+      "content_type": null,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "url": "https://openmediafoundation.org/wp-content/uploads/2025/06/Open-Media-Government-SaaS-News-and-Updates.pdf",
+      "path": "integration-news-response.html",
+      "status": 406,
+      "bytes": 226,
+      "content_type": "text/html; charset=iso-8859-1",
+      "sha256": "80a265bed528211aa708dcd58f7a95db36eeb7f873c6fe4ddab0b3a1dc0973a4"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/omfound/ompgov-api/ab979389cb521a1180d388fa2421e4bd2151f608/ompgov-api-0.2.2-swagger.yaml",
+      "path": "ompgov-api-0.2.2-swagger.yaml",
+      "status": 200,
+      "bytes": 18738,
+      "sha256": "edadc13048375defac125d4bef7ab08b6b1bdc06cbce1aeb8c815e95a39616fe"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/omfound/om-clickable-agendas/fddcadd9c98aab9fa94f218772caa68a48d2ab3a/om_clickable_agenda.module",
+      "path": "om_clickable_agenda.module",
+      "status": 200,
+      "bytes": 14244,
+      "sha256": "5f86fbf405c812a9eb480c3f564bcd0958db5d113751ce433f9268fb8ed0acf4"
+    }
+  ],
+  "findings": [
+    "AgendaQuick vendor integration page names Open.Media in search-index content; exact direct urllib GET406 saved separately, not mislabeled as article content.",
+    "Web tool opened/read the official June2025 PDF describing AgendaQuick video/timestamp return and OnBase session import; direct urllib GET406 HTML saved separately, not PDF bytes.",
+    "Published ompgov-api0.2.2 (2019 Git revision pinned) declares GET-only Open.Media session/site/agenda/caption/cuepoint methods, not AgendaQuick or OnBase outbound requests.",
+    "Pinned older clickable-agenda module defines Drupal agenda field/UI callbacks; it is not the2025 cross-product integration implementation."
+  ],
+  "not_established": [
+    "AgendaQuick native write route/auth/body/item identity/time units/readback.",
+    "OnBase Agenda write/association route/body/readback.",
+    "Current integration source availability or absence of other public documentation."
+  ],
+  "next_concrete_need": "Version-matched AgendaQuick integration specification or actual partner send/readback implementation. Partner announcement does not make this outside-only; contract research stays open."
+}

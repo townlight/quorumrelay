@@ -29,7 +29,9 @@ XSD = "http://www.w3.org/2001/XMLSchema"
 SER = "http://schemas.microsoft.com/2003/10/Serialization/"
 READS = frozenset({"MeetingGetById", "MeetingGetByPortal", "AgendaGetById", "AgendaGetByMeeting",
     "AgendaItemGetById", "AgendaItemGetByAgenda", "AttachmentGetById", "AttachmentGetByAgenda",
-    "AttachmentGetByAgendaItem", "DocumentGetById", "DocumentGetContent"})
+    "AttachmentGetByAgendaItem", "DocumentGetById", "DocumentGetContent", "PackageGetById", "PackageGetByMeeting",
+    "BookmarkGetById", "BookmarkGetByMeeting", "BookmarkGetByAgenda",
+    "ResolutionGetById", "ResolutionGetByMeeting", "ResolutionGetByAgendaItem"})
 for prefix, namespace in (("s", SOAP), ("a", ADDRESS), ("e", NS), ("i", XSI)):
     ET.register_namespace(prefix, namespace)
 
@@ -270,11 +272,16 @@ def bind_records(method, parameters, bundle):
             matches = identity == selected
         elif method == "MeetingGetByPortal":
             matches = raw.get("PortalId") == selected
-        elif method == "AgendaGetByMeeting":
+        elif method == "PackageGetByMeeting":
+            matches = raw.get("MeetingId") == selected
+        elif method in {"AgendaGetByMeeting", "BookmarkGetByMeeting", "ResolutionGetByMeeting"}:
             matches = identity.get("MeetingId") == selected
-        elif method in {"AgendaItemGetByAgenda", "AttachmentGetByAgenda"}:
+        elif method in {"AgendaItemGetByAgenda", "AttachmentGetByAgenda", "BookmarkGetByAgenda"}:
             matches = (identity.get("MeetingId") == selected.get("MeetingId")
                        and identity.get("AgendaType") == selected.get("Type"))
+        elif method == "ResolutionGetByAgendaItem":
+            matches = (identity.get("MeetingId") == selected.get("MeetingId")
+                       and identity.get("AgendaItemId") == selected.get("Id"))
         elif method == "AttachmentGetByAgendaItem":
             matches = (identity.get("MeetingId") == selected.get("MeetingId")
                        and identity.get("AgendaType") == selected.get("AgendaType")
@@ -293,7 +300,8 @@ def parse_bundle(source, namespace, content):
     response = contract()["operations"][method]["response"][0]
     model = response["type"]
     kind = {"Meeting": "meeting", "Agenda": "agenda", "AgendaItem": "agenda_item",
-            "Attachment": "attachment", "Document": "document"}[method.split("Get")[0]]
+            "Attachment": "attachment", "Document": "document",
+            "Package": "package", "Bookmark": "bookmark", "Resolution": "resolution"}[method.split("Get")[0]]
     rows = []
     for raw in records(value, model):
         if not isinstance(raw, dict) or "Id" not in raw or raw["Id"] is None:
@@ -301,7 +309,9 @@ def parse_bundle(source, namespace, content):
         identity = raw["Id"]
         if isinstance(identity, dict):
             needed = {"agenda": ("MeetingId", "Type"), "agenda_item": ("MeetingId", "AgendaType", "Id"),
-                      "attachment": ("MeetingId", "AgendaType", "AgendaItemId", "Sequence")}[kind]
+                      "attachment": ("MeetingId", "AgendaType", "AgendaItemId", "Sequence"),
+                      "bookmark": ("MeetingId", "AgendaType", "AgendaItemId", "Id"),
+                      "resolution": ("MeetingId", "AgendaItemId", "Sequence")}[kind]
             if set(identity) != set(needed) or any(identity[k] is None or identity[k] == "" for k in needed):
                 raise ValueError("Every component of the native compound identity is required.")
             identity_text = json.dumps(identity, sort_keys=True, separators=(",", ":"))
@@ -316,14 +326,43 @@ def parse_bundle(source, namespace, content):
                 normalized["recordings"] = [{"url": raw["VideoURL"], "availability": "supplied_reference_only"}]
         elif kind == "document":
             normalized["title"] = raw.get("DisplayName", raw.get("Name"))
+        elif kind == "package":
+            if not isinstance(raw.get("MeetingId"), str) or not raw["MeetingId"]:
+                raise ValueError("The package must supply its native meeting identity.")
+            normalized["source_parent_identity"] = {"MeetingId": raw["MeetingId"]}
         else:
             normalized["source_parent_identity"] = deepcopy(raw["Id"])
         rows.append((normalized, raw, kind))
     bundle = make_bundle(source, namespace, content, FORMAT, rows)
     for record in bundle["records"]:
         raw = record["original"]
+        kind = record["identity"]["record_type"]
+        if kind in {"package", "bookmark", "resolution"}:
+            meeting_id = raw["MeetingId"] if kind == "package" else raw["Id"]["MeetingId"]
+            record["relationships"].append({"relation": "meeting", "identity": {
+                "provider": source.provider, "namespace": namespace, "record_type": "meeting",
+                "external_id": meeting_id}})
+            if kind == "package":
+                if type(raw.get("DocumentId")) is not int or raw["DocumentId"] <= 0:
+                    raise ValueError("The package must supply a positive native document ID.")
+                record["relationships"].append({"relation": "document", "identity": {
+                    "provider": source.provider, "namespace": namespace, "record_type": "document",
+                    "external_id": str(raw["DocumentId"])}})
+            elif kind == "resolution":
+                # Resolution.Identifier omits AgendaType; do not invent a complete item identity.
+                record["relationships"].append({"relation": "agenda_item_reference", "value": {
+                    "native_agenda_item_id": raw["Id"]["AgendaItemId"], "native_meeting_id": meeting_id,
+                    "agenda_type_availability": "not_supplied_by_resolution_identifier"}})
+                record["normalized"]["source_resolution"] = deepcopy(raw)
+            else:
+                item = {k: raw["Id"][k] for k in ("MeetingId", "AgendaType")}
+                item["Id"] = raw["Id"]["AgendaItemId"]
+                record["relationships"].append({"relation": "agenda_item", "identity": {
+                    "provider": source.provider, "namespace": namespace, "record_type": "agenda_item",
+                    "external_id": json.dumps(item, sort_keys=True, separators=(",", ":"))}})
+                record["normalized"]["timing_units"] = "not_declared_by_pinned_schema"
         text = []
-        for field in ("Name", "Description", "Title", "Header", "Minutes"):
+        for field in ("Name", "Description", "Title", "Header", "Minutes", "Comments"):
             value = raw.get(field)
             entries = value.get("KeyValueOfintstring", []) if isinstance(value, dict) else [value]
             for entry in entries:

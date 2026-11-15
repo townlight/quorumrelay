@@ -9903,7 +9903,10 @@
       "AgendaGetById/GetByMeeting",
       "AgendaItemGetById/GetByAgenda",
       "AttachmentGetById/GetByAgenda/GetByAgendaItem",
-      "DocumentGetById/GetContent metadata-bound bytes"
+      "DocumentGetById/GetContent metadata-bound bytes",
+      "PackageGetById/GetByMeeting",
+      "BookmarkGetById/GetByMeeting/GetByAgenda",
+      "ResolutionGetById/GetByMeeting/GetByAgendaItem"
     ],
     "implemented_writes": [
       "MeetingCreate",
@@ -9916,7 +9919,13 @@
       "AttachmentUpdate",
       "DocumentCreate",
       "DocumentUpdate",
-      "DocumentUpload explicit chunk/caller-declared final hash with metadata/content readback"
+      "DocumentUpload explicit chunk/caller-declared final hash with metadata/content readback",
+      "PackageCreate",
+      "PackageUpdate",
+      "BookmarkCreate",
+      "BookmarkUpdate",
+      "ResolutionCreate",
+      "ResolutionUpdate"
     ],
     "synthetic_execution": {
       "provider": "escribe",
@@ -9931,14 +9940,17 @@
         "agenda",
         "agenda_item",
         "attachment",
-        "document"
+        "document",
+        "package",
+        "bookmark",
+        "resolution"
       ],
-      "scope": "Pinned deployed SOAP1.2 native record create/update plus one explicit document upload chunk with caller-declared whole-document hash, full preflight/recovery and durable no-replay readback. No chunk assembly, workflow, live SOAP or readiness inference.",
-      "execution_provenance": "Actual local pytest execution2026-11-15:60eSCRIBE tests passed2.20s (46record/binding+14upload); earlier171affected passed21.15s and2046full passed106.07s precede upload/three strict-ID regressions and remain historical.",
+      "scope": "Pinned deployed SOAP1.2 native record create/update plus one explicit document upload chunk with caller-declared whole-document hash, full preflight/recovery and durable no-replay readback. No chunk assembly, workflow, live SOAP or readiness inference. Includes native meeting-document Package association, Bookmark source timing integers (units unknown), and Resolution fields (no interpreted enum or complete agenda-item join).",
+      "execution_provenance": "Actual local pytest2026-11-15:102eSCRIBE cases passed3.00s;42additional cases cover package/bookmark/resolution reads/writes/relationships/bounds/conflict/loss/restart. Prior60case/full2063 evidence remains historical at431294a.",
       "checks": [
         {
-          "command": "pytest tests/test_escribe_upload.py tests/test_escribe_publishing.py -q",
-          "passed": 60,
+          "command": "pytest tests/test_escribe_related_records.py tests/test_escribe_publishing.py tests/test_escribe_upload.py -q",
+          "passed": 102,
           "failed": 0
         }
       ],
@@ -9976,9 +9988,9 @@
         {
           "kind": "test",
           "path": "tests/test_escribe_publishing.py",
-          "sha256": "cec7156f71cbfe8af59adb885aa86da101fe3e8ede7039fdf1c7cceaabc95d43",
+          "sha256": "9585c3e31fbbae83ae85c97cd5c7afd0a9ce2f8502d8a7e922c8bd0ce1f486b5",
           "hash_policy": "test_source_crlf_to_lf",
-          "canonical_lf_sha256": "cec7156f71cbfe8af59adb885aa86da101fe3e8ede7039fdf1c7cceaabc95d43"
+          "canonical_lf_sha256": "9585c3e31fbbae83ae85c97cd5c7afd0a9ce2f8502d8a7e922c8bd0ce1f486b5"
         },
         {
           "kind": "test",
@@ -9986,6 +9998,13 @@
           "sha256": "29073b4f187ae63b18b261e37ea8ba12e7757d718b920fd78449e3192dc11849",
           "hash_policy": "test_source_crlf_to_lf",
           "canonical_lf_sha256": "29073b4f187ae63b18b261e37ea8ba12e7757d718b920fd78449e3192dc11849"
+        },
+        {
+          "kind": "test",
+          "path": "tests/test_escribe_related_records.py",
+          "sha256": "9f34abb74734de8af3ffbdbdd1989cddc87dd8c7dc9f3de81884d3dab086309a",
+          "hash_policy": "test_source_crlf_to_lf",
+          "canonical_lf_sha256": "9f34abb74734de8af3ffbdbdd1989cddc87dd8c7dc9f3de81884d3dab086309a"
         }
       ]
     },

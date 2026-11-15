@@ -26,3 +26,6 @@ tests/fixtures/suiteone-player/event-2165.html whitespace=-blank-at-eol,-blank-a
 
 # Exact supplied WebVTT retains vendor CRLF bytes.
 tests/fixtures/suiteone-player/captions.vtt whitespace=cr-at-eol
+
+# Exact pinned partner source retains two original trailing-space lines.
+docs/capabilities/evidence/agendaquick-openmedia/om_clickable_agenda.module whitespace=-blank-at-eol

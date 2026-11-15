@@ -11,9 +11,11 @@ XSD = "http://www.w3.org/2001/XMLSchema"
 WSDL = "http://schemas.xmlsoap.org/wsdl/"
 SOAP12 = "http://schemas.xmlsoap.org/wsdl/soap12/"
 NAMESPACE = "eSCRIBE.Internet.WebService"
-MODELS = ("Meeting", "Agenda", "AgendaItem", "Attachment", "Document")
+MODELS = ("Meeting", "Agenda", "AgendaItem", "Attachment", "Document", "Package", "Bookmark", "Resolution")
 READS = ("MeetingGetByPortal", "AgendaGetByMeeting", "AgendaItemGetByAgenda",
-         "AttachmentGetByAgenda", "AttachmentGetByAgendaItem", "DocumentGetContent")
+         "AttachmentGetByAgenda", "AttachmentGetByAgendaItem", "DocumentGetContent",
+         "PackageGetByMeeting", "BookmarkGetByMeeting", "BookmarkGetByAgenda",
+         "ResolutionGetByMeeting", "ResolutionGetByAgendaItem")
 
 
 def compile_contract():

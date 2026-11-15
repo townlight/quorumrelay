@@ -1,0 +1,457 @@
+<?php  
+
+/**
+ * Implementation of hook_permission().
+ */
+function om_clickable_agenda_permission() {
+ return array(
+    'access clickable agenda' => array(
+      'title' => t('Access Clickable Agenda'),
+      'description' => t('Access and use the clickable agenda tab on show nodes.'),
+    ),
+    'access live broadcast page' => array(
+      'title' => t('Access Live Broadcast Page'),
+      'description' => t('Access and administer live broadcast page.'),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function om_clickable_agenda_menu() {
+  $items['node/%node/agenda_manager'] = array(
+    'title' => 'Agenda Manager',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('agenda_manager_form', 1),
+    'access callback' => 'om_clickable_agenda_check_for_session_node',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK
+  );
+  $items['create-cue-point'] = array(
+    'title' => 'Create a Cue Point',
+    'page callback' => 'om_clickable_agenda_save_cue_point',
+    'access arguments' => array('access clickable agenda'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['delete-cue-point'] = array(
+    'title' => 'Delete a Cue Point',
+    'page callback' => 'om_clickable_agenda_delete_cue_point',
+    'access arguments' => array('access clickable agenda'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['list-cue-points'] = array(
+    'title' => 'Create a Cue Point',
+    'page callback' => 'om_clickable_agenda_list_cue_points',
+    'page arguments' => array(1),
+    'access arguments' => array('access clickable agenda'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['get-session-bills'] = array(
+    'title' => 'Get Session Bills',
+    'page callback' => 'get_session_bills',
+    'page arguments' => array(1),
+    'access arguments' => array('access clickable agenda'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['change-session-status'] = array(
+    'title' => 'Change Session Status',
+    'page callback' => 'om_clickable_agenda_change_session_status',
+    'access arguments' => array('access clickable agenda'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  // AJAX endpoints for our custom table
+  $items['write-agenda-session'] = array(
+    'page callback' => '_om_clickable_agenda_create_custom_session',
+    'access arguments' => array('access clickable agenda'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['get-agenda-session'] = array(
+    'page callback' => '_om_clickable_agenda_get_custom_session',
+    'access arguments' => array('access clickable agenda'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['delete-agenda-session'] = array(
+    'page callback' => '_om_clickable_agenda_delete_custom_session',
+    'access arguments' => array('access clickable agenda'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_library
+ */
+function om_clickable_agenda_library() {
+  $libraries['underscore'] = array(
+    'title' => 'Underscore JS',
+    'website' => 'http://underscorejs.org',
+    'version' => '1.4.3',
+    'js' => array(
+      array(
+        'type' => 'file',
+        'data' => libraries_get_path('underscore') . '/underscore-min.js',
+        'group' => JS_LIBRARY,
+        'preprocess' => FALSE
+      ),
+    )
+  );
+  $libraries['json2'] = array(
+    'title' => 'JSON2',
+    'website' => 'https://github.com/douglascrockford/JSON-js',
+    'version' => '2',
+    'js' => array(
+      array(
+        'type' => 'file',
+        'data' => libraries_get_path('json2') . '/json2.js',
+        'group' => JS_LIBRARY,
+        'preprocess' => FALSE
+      ),
+    )
+  );
+  $libraries['backbone'] = array(
+    'title' => 'Backbone JS',
+    'website' => 'http://backbonejs.org',
+    'version' => '0.9.10',
+    'js' => array(
+      array(
+        'type' => 'file',
+        'data' => libraries_get_path('backbone') . '/backbone-min.js',
+        'group' => JS_LIBRARY,
+        'preprocess' => FALSE
+      ),
+    ),
+    'dependencies' => array(
+     array('om_clickable_agenda', 'json2'),
+      array('om_clickable_agenda', 'underscore'),
+    ),
+  );
+  return $libraries;
+}
+
+/**
+ * Check to make sure we are on a "session" node
+ */
+function om_clickable_agenda_check_for_session_node($node){
+  if ($node->type == 'om_show' && user_access('access clickable agenda')) {
+    return TRUE;
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
+ * Endpoint to list a session nodes.
+ *   @TODO this endpoing is not being called. '/node/' . $nid . '/agenda-items' endpoint's contents
+ *   should be moved here instead.
+ */
+function get_session_bills($nid) {
+  global $base_path;
+  $bill_json = file_get_contents($base_path . '/node/' . $nid . '/agenda-items');
+  print $bill_json;
+  /**
+  $bills = drupal_json_decode($bill_json);
+  $formatted_bills = array();
+  foreach ($bills as $key => $text) {
+    if (function_exists('views_trim_text')) {
+      $alter = array('max_length' => 175, 'ellipsis' => TRUE, 'word_boundary' => FALSE);
+      $text = views_trim_text($alter, $text);
+    }
+    $formatted_bills[] = array('title' => $text);
+  }
+  print drupal_json_encode($formatted_bills);
+  **/
+}
+
+/**
+ * Small form builder for the main interface.
+ */
+function agenda_manager_form($form, &$form_state, $node) {
+  $nid = $node->nid;
+  $form['session_controls'] = array(
+    '#type' => 'fieldset'
+  );
+  $form['session_controls']['time_toggle'] = array(
+    '#markup' => '<div id="agenda-time-toggle">Start Timer</div>',
+  );
+  $query_obj = new stdClass();
+  $query_obj->nid = $nid;
+  $previous_session = om_clickable_agenda_get_custom_session($query_obj);
+  //$active_session = om_clickable_agenda_get_session_status();
+  $live_status = om_agenda_manager_livestream_info();
+
+  $session_seconds = 0;
+  if (!empty($previous_session)) {
+    foreach ($live_status as $theme => $info) {
+      if ($info['status']) {
+        if ($info['live_nid'] == $previous_session['nid']) {
+          $session_seconds = time() - $previous_session['initialized'];
+        }
+      }
+    }
+  }
+
+  $form['session_controls']['time_container'] = array(
+    '#type' => 'textfield',
+    '#default_value' => formatTimeHuman($session_seconds),
+    '#attributes' => array('id' => array('timer-wrapper'))
+  );
+  $form['session_controls']['session_toggle'] = array(
+    '#type' => 'checkboxes',
+    '#options' => array('live' => 'Apply to live broadcast')
+  );
+  /**
+  $form['session_controls']['session_type'] = array(
+    '#type' => 'select',
+    '#options' => om_agenda_manager_livestream_types(),
+    '#suffix' => '<div id="session-status"></div>'
+  );**/
+  $form['session_controls']['active_sessions'] = array(
+    '#markup' => '<div id="active-sessions"></div>',
+  );
+  $form['add_bill'] = array(
+    '#type' => 'fieldset',
+  );
+  $form['add_bill']['add_bill_box'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Add an Agenda Item'),
+    '#default_value' => '',
+    '#size' => 50,
+    '#maxlength' => 128,
+  );
+  $form['add_bill']['submit'] = array(
+    '#type' => 'submit', 
+    '#value' => t('Add to Recorded')
+  );
+  $video_field = field_view_field('node', $node, 'field_om_show_video');
+  $video = render($video_field);
+  $form['video_player'] = array(
+    '#markup' => $video
+  );
+  return $form;
+}
+
+/**
+ * Implements hook_init()
+ */
+function om_clickable_agenda_init() {
+  if (arg(2) == 'agenda_manager') {
+    drupal_add_library('om_clickable_agenda', 'backbone');
+    $js_options = array('type' => 'file', 'group' => JS_DEFAULT);
+    drupal_add_js(drupal_get_path('module', 'om_clickable_agenda') . '/js/agenda_manager.js', $js_options);
+    drupal_add_css(drupal_get_path('module', 'om_clickable_agenda') . '/theme/agenda.css');
+    $node = menu_get_object();
+    om_show_jwplayer_include(true, 525, 300);
+    $nid = $node->nid;
+    $theme = $node->field_om_theme[$node->language][0]['tid'];
+    //$session_status = om_clickable_agenda_get_session_status();
+    $live_status = om_agenda_manager_livestream_info();
+    drupal_add_js(array('clickableAgenda' => array('currentNodeId' => $nid, 'sessionStatus' => $live_status, 'themeNid' => $theme)), 'setting');
+  }
+}
+
+/**
+ * Listen for POST data from script to save or update nodes.
+ */
+function om_clickable_agenda_save_cue_point() {
+  if (!empty($_POST['node'])) {
+    $node_data = drupal_json_decode($_POST['node']);
+    if (empty($node_data['nid'])) {
+      $node = new StdClass();
+      $node->type = 'agenda_cue_point';
+      $node->status = 1;
+    }
+    else {
+      $node = node_load($node_data['nid']);
+    }
+    $node->language = LANGUAGE_NONE;
+    $node->title = truncate_utf8(strip_tags($node_data['title']), 128);
+    if (!empty($node_data['node_revisions_body'])) {
+      $node->body = array(
+        'und' => array(
+          0 => array(
+            'value' => strip_tags($node_data['node_revisions_body']),
+          )
+        ),
+      );
+    }
+    $node->field_acp_show_reference = array(
+      'und' => array(
+        0 => array(
+          'target_id' => $node_data['node_data_field_session_reference_field_session_reference_nid']
+        )
+      )
+    );
+    $node->field_acp_seconds = array(
+      'und' => array(
+        0 => array(
+          'value' => $node_data['node_data_field_cue_seconds_field_cue_seconds_value']
+        )
+      )
+    );
+    node_save($node);
+    print drupal_json_encode($node);
+  }
+}
+/**
+ * Endpoint to set session status on the live broadcast node.
+ */
+function om_clickable_agenda_change_session_status() {
+  if (empty($_POST['sessionUpdate'])) {
+    $json = drupal_json_decode($_POST['sessionStatus']);
+    print_r($json);
+    om_agenda_manager_livestream_update($json);
+  }
+}
+
+/**
+ * @TODO Legacy function. Are we going to display session status?
+ *   Need to remove otherwise.
+ */
+function om_clickable_agenda_get_session_status() {
+  $node = node_load(1620);
+  return array(
+    'house' => $node->field_house_video_status[0]['value'],
+    'houseSession' => $node->field_active_session_house[0]['value'],
+    'senate' => $node->field_senate_video_status[0]['value'],
+    'senateSession' => $node->field_active_session_senate[0]['value'],
+  );
+}
+
+/**
+ * Endpoint to delete a cue point node.
+ */
+function om_clickable_agenda_delete_cue_point() {
+  if (!empty($_POST['node'])) {
+    $node_data = drupal_json_decode($_POST['node']);
+    if (!empty($node_data['nid'])) {
+      node_delete($node_data['nid']);
+    }
+  }
+}
+
+/**
+ * Endpoint to list a cue point nodes.
+ */
+function om_clickable_agenda_list_cue_points($nid) {
+  $args = array();
+  $args[] = $nid;
+  $view = views_get_view('session_agenda');
+  $view->preview('default', $args);
+  $results = $view->result;
+  $output = array();
+  if (!empty($results)) {
+    foreach ($results AS $result) {
+      $cleaned_result = om_clickable_agenda_simplify_cue_point_result($result);
+      $output[] = $cleaned_result;
+    }
+  }
+  print drupal_json_encode($output);
+}
+
+/**
+ * Isolate transformation of above view results to objects the agenda app is looking for.
+ *  @TODO make these keys less rediculous one day.
+ */
+function om_clickable_agenda_simplify_cue_point_result($result) {
+  $result = (array) $result;
+  $cleaned_result = array();
+  $cleaned_result['nid'] = $result['nid'];
+  $cleaned_result['node_revisions_body'] = $result['node_title'];
+  $seconds = 0;
+  if (!empty($result['field_field_acp_seconds'][0])) {
+    $seconds = $result['field_field_acp_seconds'][0]['raw']['value'];
+  }
+  $cleaned_result['node_data_field_cue_seconds_field_cue_seconds_value'] = $seconds;
+  $cleaned_result['node_data_field_session_reference_field_session_reference_nid'] = $result['field_field_acp_show_reference'][0]['raw']['target_id'];
+  return $cleaned_result;
+}
+
+/**
+ * Create a custom session entry in the om_clickable_agenda_sessions table.
+ *  Simple wrapper for drupal_write_record.
+ */
+function om_clickable_agenda_create_custom_session($session_obj) {
+  if (is_object($session_obj)) {
+    drupal_write_record('om_clickable_agenda_sessions', $session_obj);
+  }
+}
+
+/**
+ * Helper to call om_clickable_agenda_create_custom_session with a POST request.
+ */
+function _om_clickable_agenda_create_custom_session() {
+  if (isset($_POST['customSession'])) {
+    $session_obj = (object)drupal_json_decode($_POST['customSession']);
+    $session_obj->initialized = time();
+    om_clickable_agenda_create_custom_session($session_obj);
+  }
+}
+
+/**
+ * Read from om_clickable_agenda_sessions by nid or asid.
+ */
+function om_clickable_agenda_get_custom_session($session_query) {
+  if ($session_query->nid) {
+    $query = db_query("SElECT * FROM {om_clickable_agenda_sessions} WHERE nid=:nid", array(':nid' => $session_query->nid));
+  }
+  else if ($session_query->asid) {
+    $query = db_query("SElECT * FROM {om_clickable_agenda_sessions} WHERE asid=:asid", array(':asid' => $session_query->asid));
+  }
+  foreach ($query as $result) {
+    return (array)$result;
+  }
+  return FALSE;
+}
+
+/**
+ * Helper to call om_clickable_agenda_get_custom_session with a POST request.
+ */
+function _om_clickable_agenda_get_custom_session() {
+  if (isset($_POST['sessionQuery'])) {
+    $session_query = (object)drupal_json_decode($_POST['sessionQuery']);
+    $result = om_clickable_agenda_get_custom_session($session_query);
+    print drupal_json_encode($result);
+  }
+}
+
+/**
+ * Deletee from om_clickable_agenda_sessions by nid or asid.
+ */
+function om_clickable_agenda_delete_custom_session($session_query) {
+  if ($session_query->nid) {
+    $query = db_query("DELETE FROM {om_clickable_agenda_sessions} WHERE nid=:nid", array(':nid' => $session_query->nid));
+    return TRUE;
+  }
+  else if ($session_query->asid) {
+    $query = db_query("DELETE FROM {om_clickable_agenda_sessions} WHERE asid=:asid", array(':asid' => $session_query->asid));
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Helper to call om_clickable_agenda_delete_custom_session with a POST request.
+ */
+function _om_clickable_agenda_delete_custom_session() {
+  if (isset($_POST['sessionQuery'])) {
+    $session_query = (object)drupal_json_decode($_POST['sessionQuery']);
+    om_clickable_agenda_delete_custom_session($session_query);
+  }
+}
+
+function ensure2Digit($number) {
+  if($number < 10) {
+    $number = '0' . $number;
+  }
+  return $number;
+}
+
+
+function formatTimeHuman($time) {
+  $s = ensure2Digit($time%60);
+  $m = ensure2Digit(floor(($time%3600)/60));
+  $h = ensure2Digit(floor(($time%86400)/3600));
+  return "$h:$m:$s";
+}

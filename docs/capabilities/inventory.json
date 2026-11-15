@@ -425,7 +425,7 @@
               "vote"
             ],
             "scope": "Eight native entity types, create/update wire routes and coordinator plan/commit/readback; fixture sample fields only (event date/location, item title/parent, attachment name/binary, matter type/status/body/title, matter text, history action, vote/rollcall person/value/result). Does not execute public upload spelling or prove every declared field.",
-            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
@@ -441,7 +441,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "c14d5e250d39686d8909e945c9055e208348c8689eab972d62ac6d6ca2509986"
+                "sha256": "66bde111a85aee700918a86de134821d054ef9af2c123799d579e62b2b70d8c4"
               },
               {
                 "kind": "test",
@@ -474,7 +474,7 @@
               "linked_meeting_document"
             ],
             "scope": "Public matter_attachment/upload: approved parent/native binary fields, exact file readback and duplicate receipt replay without another network request.",
-            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
@@ -490,7 +490,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "c14d5e250d39686d8909e945c9055e208348c8689eab972d62ac6d6ca2509986"
+                "sha256": "66bde111a85aee700918a86de134821d054ef9af2c123799d579e62b2b70d8c4"
               },
               {
                 "kind": "test",
@@ -9605,7 +9605,7 @@
               "meeting.multimedia"
             ],
             "scope": "Exact documented multimedia POST and GET readback; submitted URL/timestamp/default/base URL plus PublishState/provider and item display/name/type/numbering sample patches, fixed ID denial, unknown preservation, conflict/revocation/duplicate/uncertain response recovery. Does not cover meeting/item create, document upload, inferred enum semantics or unknown production hosts.",
-            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
@@ -9624,7 +9624,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "c14d5e250d39686d8909e945c9055e208348c8689eab972d62ac6d6ca2509986"
+                "sha256": "66bde111a85aee700918a86de134821d054ef9af2c123799d579e62b2b70d8c4"
               },
               {
                 "kind": "test",
@@ -11305,7 +11305,7 @@
           "observation_date": "2026-11-15",
           "access_scope": "anonymous_metadata_GET_only;local_synthetic_SOAP_execution",
           "proof_level": "vendor_contract_and_synthetic_engine_execution",
-          "findings": "Other declared ?wsdl200222643bytes and all5XSDs200. Native record reads/create/update and explicit document chunk upload implemented with typed SOAP1.2/WSAddressing/parent checks, full native readback and durable no replay.60new eSCRIBE cases pass; no live SOAP call. Actual metadata/content binary source preservation separate.",
+          "findings": "Other declared ?wsdl200222643bytes and all5XSDs200. Native record reads/create/update and explicit document chunk upload implemented with typed SOAP1.2/WSAddressing/parent checks, full native readback and durable no replay.102eSCRIBE cases pass including Package/Bookmark/Resolution; no live SOAP call. Actual metadata/content binary source preservation separate.",
           "limits": "Prior singleWsdl403 exact only. No live SOAP call, deployment/auth/publication/readiness/unknown chunk semantics inference. No universal vendor catalog/other tenant acceptance.",
           "source_path": "docs/capabilities/evidence/escribe-publishing-wsdl/source.json",
           "source_sha256": "cb5ddc5926526860b9c63317974361c6158fb66530c000df488c27435b68cd08",
@@ -11322,14 +11322,17 @@
               "agenda",
               "agenda_item",
               "attachment",
-              "document"
+              "document",
+              "package",
+              "bookmark",
+              "resolution"
             ],
-            "scope": "Pinned deployed SOAP1.2 native record create/update plus one explicit document upload chunk with caller-declared whole-document hash, full preflight/recovery and durable no-replay readback. No chunk assembly, workflow, live SOAP or readiness inference.",
-            "execution_provenance": "Actual local pytest execution2026-11-15:60eSCRIBE tests passed2.20s (46record/binding+14upload); earlier171affected passed21.15s and2046full passed106.07s precede upload/three strict-ID regressions and remain historical.",
+            "scope": "Pinned deployed SOAP1.2 native record create/update plus one explicit document upload chunk with caller-declared whole-document hash, full preflight/recovery and durable no-replay readback. No chunk assembly, workflow, live SOAP or readiness inference. Includes native meeting-document Package association, Bookmark source timing integers (units unknown), and Resolution fields (no interpreted enum or complete agenda-item join).",
+            "execution_provenance": "Actual local pytest2026-11-15:102eSCRIBE cases passed3.00s;42additional cases cover package/bookmark/resolution reads/writes/relationships/bounds/conflict/loss/restart. Prior60case/full2063 evidence remains historical at431294a.",
             "checks": [
               {
-                "command": "pytest tests/test_escribe_upload.py tests/test_escribe_publishing.py -q",
-                "passed": 60,
+                "command": "pytest tests/test_escribe_related_records.py tests/test_escribe_publishing.py tests/test_escribe_upload.py -q",
+                "passed": 102,
                 "failed": 0
               }
             ],
@@ -11367,9 +11370,9 @@
               {
                 "kind": "test",
                 "path": "tests/test_escribe_publishing.py",
-                "sha256": "cec7156f71cbfe8af59adb885aa86da101fe3e8ede7039fdf1c7cceaabc95d43",
+                "sha256": "9585c3e31fbbae83ae85c97cd5c7afd0a9ce2f8502d8a7e922c8bd0ce1f486b5",
                 "hash_policy": "test_source_crlf_to_lf",
-                "canonical_lf_sha256": "cec7156f71cbfe8af59adb885aa86da101fe3e8ede7039fdf1c7cceaabc95d43"
+                "canonical_lf_sha256": "9585c3e31fbbae83ae85c97cd5c7afd0a9ce2f8502d8a7e922c8bd0ce1f486b5"
               },
               {
                 "kind": "test",
@@ -11377,6 +11380,13 @@
                 "sha256": "29073b4f187ae63b18b261e37ea8ba12e7757d718b920fd78449e3192dc11849",
                 "hash_policy": "test_source_crlf_to_lf",
                 "canonical_lf_sha256": "29073b4f187ae63b18b261e37ea8ba12e7757d718b920fd78449e3192dc11849"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_escribe_related_records.py",
+                "sha256": "9f34abb74734de8af3ffbdbdd1989cddc87dd8c7dc9f3de81884d3dab086309a",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "9f34abb74734de8af3ffbdbdd1989cddc87dd8c7dc9f3de81884d3dab086309a"
               }
             ]
           }
@@ -11450,7 +11460,7 @@
             "escribe-rendered-detail-2026-11-12",
             "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
-          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail\u2192attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance.",
+          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail\u2192attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference.",
           "dependencies": [],
           "remaining_verification": [
             "Implementation contract validation",
@@ -11591,7 +11601,7 @@
           "evidence_ids": [
             "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
-          "details": "Pinned PublishingService meeting,agenda,agenda_item,attachment,document native record create implemented with exact full-model plans/readback and durable no-replay reconciliation. Document is metadata; attachment binds existing DocumentId. No byte upload/publication method/other entity coverage inferred.",
+          "details": "Pinned PublishingService meeting,agenda,agenda_item,attachment,document native record create implemented with exact full-model plans/readback and durable no-replay reconciliation. Document is metadata; attachment binds existing DocumentId. No byte upload/publication method/other entity coverage inferred. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference.",
           "dependencies": [],
           "remaining_verification": [
             "Runtime destination access/applicability and effective visibility remain qualified; no live credentials/mutation gate."
@@ -11614,7 +11624,7 @@
           "evidence_ids": [
             "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
-          "details": "Pinned PublishingService meeting,agenda,agenda_item,attachment,document native record update implemented with exact full-model plans/readback and durable no-replay reconciliation. Document is metadata; attachment binds existing DocumentId. No byte upload/publication method/other entity coverage inferred.",
+          "details": "Pinned PublishingService meeting,agenda,agenda_item,attachment,document native record update implemented with exact full-model plans/readback and durable no-replay reconciliation. Document is metadata; attachment binds existing DocumentId. No byte upload/publication method/other entity coverage inferred. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference.",
           "dependencies": [],
           "remaining_verification": [
             "Runtime destination access/applicability and effective visibility remain qualified; no live credentials/mutation gate."
@@ -12667,6 +12677,364 @@
             "W10"
           ],
           "domain_scope": "Native document record only. Document metadata and existing-document attachment association; no byte upload/publication/admin/delete or effective visibility claim."
+        },
+        {
+          "entity": "package",
+          "operation": "create",
+          "endpoint_or_format": "SOAP1.2 PackageCreate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.DocumentId",
+              "provider_field": "data.DocumentId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.LanguageId",
+              "provider_field": "data.LanguageId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.MeetingId",
+              "provider_field": "data.MeetingId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Type",
+              "provider_field": "data.Type",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native existing-document association to exact meeting, language key and literal package Type. No generated packet/import/byte availability or publication assertion."
+        },
+        {
+          "entity": "package",
+          "operation": "update",
+          "endpoint_or_format": "SOAP1.2 PackageUpdate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.DocumentId",
+              "provider_field": "Data.DocumentId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "Data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.LanguageId",
+              "provider_field": "Data.LanguageId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.MeetingId",
+              "provider_field": "Data.MeetingId",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Type",
+              "provider_field": "Data.Type",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native existing-document association to exact meeting, language key and literal package Type. No generated packet/import/byte availability or publication assertion."
+        },
+        {
+          "entity": "bookmark",
+          "operation": "create",
+          "endpoint_or_format": "SOAP1.2 BookmarkCreate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.Id",
+              "provider_field": "Data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.TimeEnd",
+              "provider_field": "Data.TimeEnd",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.TimeStart",
+              "provider_field": "Data.TimeStart",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native meeting/agenda/item bookmark and source TimeStart/TimeEnd Int32. Timing units unestablished; no interpreted seconds, playable seek or media generation."
+        },
+        {
+          "entity": "bookmark",
+          "operation": "update",
+          "endpoint_or_format": "SOAP1.2 BookmarkUpdate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.Id",
+              "provider_field": "Data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.TimeEnd",
+              "provider_field": "Data.TimeEnd",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.TimeStart",
+              "provider_field": "Data.TimeStart",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native meeting/agenda/item bookmark and source TimeStart/TimeEnd Int32. Timing units unestablished; no interpreted seconds, playable seek or media generation."
+        },
+        {
+          "entity": "resolution",
+          "operation": "create",
+          "endpoint_or_format": "SOAP1.2 ResolutionCreate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.Comments",
+              "provider_field": "data.Comments",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.MovedBy",
+              "provider_field": "data.MovedBy",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Number",
+              "provider_field": "data.Number",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Result",
+              "provider_field": "data.Result",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.SecondedBy",
+              "provider_field": "data.SecondedBy",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Type",
+              "provider_field": "data.Type",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.VoteType",
+              "provider_field": "data.VoteType",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native meeting/item resolution, supplied mover/seconder/result/type/vote-type strings/IDs. No enum meanings/person registry join; AgendaType absent from returned identifier so complete item join not inferred."
+        },
+        {
+          "entity": "resolution",
+          "operation": "update",
+          "endpoint_or_format": "SOAP1.2 ResolutionUpdate /WebService/eSCRIBE.Internet.WebService.svc",
+          "field_mappings": [
+            {
+              "normalized": "native.Comments",
+              "provider_field": "Data.Comments",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Id",
+              "provider_field": "Data.Id",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.MovedBy",
+              "provider_field": "Data.MovedBy",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Number",
+              "provider_field": "Data.Number",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Result",
+              "provider_field": "Data.Result",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.SecondedBy",
+              "provider_field": "Data.SecondedBy",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.Type",
+              "provider_field": "Data.Type",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            },
+            {
+              "normalized": "native.VoteType",
+              "provider_field": "Data.VoteType",
+              "mapping_level": "pinned_vendor_xsd_typed_field_and_synthetic_execution"
+            }
+          ],
+          "evidence_ids": [
+            "escribe-publishing-wsdl-synthetic-2026-11-15"
+          ],
+          "interface_type": "documented_automated_api",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "method": "POST",
+          "api_version": "deployed PublishingService metadata observed2026-11-15",
+          "automatable_contract_verified": true,
+          "contract_confidence": "exact_deployed_vendor_WSDL_XSD_with_scoped_synthetic_execution",
+          "verification_status": "vendor_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "account_requirements": "Exact trusted endpoint/namespace/tenant/native resources/parents and permissions; authentication belongs to destination transport if needed. No credential acquisition/live mutation gate.",
+          "authorized_test_access": "synthetic_only_no_live_SOAP_calls",
+          "readback_receipt": "Exact GetById typed full-model readback; preflight hash comparison, durable intent/returned identity, duplicate/restart no replay. Lost create response identity stays uncertain.",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "domain_scope": "Native meeting/item resolution, supplied mover/seconder/result/type/vote-type strings/IDs. No enum meanings/person registry join; AgendaType absent from returned identifier so complete item join not inferred."
         }
       ],
       "pagination": {
@@ -12685,7 +13053,8 @@
         "Calendar and bounded native search remain separately evidenced. Captured Meeting.aspx detail now maps rendered agenda positions, supplied partial text and same-origin FileStream locators. Item keys are capture-local with native item ID null. The earlier FileStream 403 remains a failed live transfer, not proof that the rendered detail path is unimplemented or the catalog complete.",
         "Public native search source implementation and bounded first/page2/resume are verified with partial coverage. Provider full-text/exact matching semantics, broader document visibility and catalog completeness remain unknown; no saved metadata search is mislabeled native.",
         "PublishingService WSDL/five XSDs now captured and native record reads/create/update implemented with scoped synthetic proof. Prior singleWsdl403 is historical exact access only. Explicit native DocumentUpload chunk plus caller-declared whole-byte hash is implemented with scoped synthetic proof. General chunk sequencing/assembly, append/replacement/truncation/readiness semantics and vendor file import remain unresolved research. No outside-only assertion or live-account gate.",
-        "Publishing host/public portal cross-host identity equivalence, effective visibility and live deployment applicability are not inferred from native field readback."
+        "Publishing host/public portal cross-host identity equivalence, effective visibility and live deployment applicability are not inferred from native field readback.",
+        "Package/Bookmark/Resolution native records are now mapped and synthetically verified. Bookmark timing units, Resolution AgendaType and effective package publication are not declared by these schemas; retain native values/references without guessing."
       ],
       "requirement_ids": [
         "C01",
@@ -18214,7 +18583,8 @@
       "remaining_research": [
         "Configured Yuma listing and supplied Previous/Next Period controls already have bounded implementation. Adjacent-month/other-type surveys are optional coverage observations, not required new work. Selected native memo/file association remains distinct from unverified video and binary-transfer acceptance.",
         "Yuma public agenda-item search and bounded fixtures are mapped; live next-page behavior, provider full-text semantics and full result coverage remain unverified.",
-        "Pinned feature material describes staff scheduling, minute votes and uploads without a machine schema or vendor file-import contract. Those contracts remain unresolved; credentials are not an acceptance gate."
+        "Pinned feature material describes staff scheduling, minute votes and uploads without a machine schema or vendor file-import contract. Those contracts remain unresolved; credentials are not an acceptance gate.",
+        "New Open.Media integration-partner lead checked: published2019API is Open.Media GET-only; older Drupal module is not2025AgendaQuick/OnBase exchange. Exact direct vendor/article406 captures kept separate from web reader content. No matching write contract or outside-only proof. See evidence/agendaquick-openmedia/source.json."
       ],
       "authentication": "Yuma list public; staff publishing/editing requires authorized installation account. Hosted and client-installed deployment supported; no API credentials supplied.",
       "write_findings": "Official product text documents agenda/minutes creation and changes in UI. API routes and field names unknown; supporting documents in packet generation do not establish a public upload API.",
@@ -22248,7 +22618,7 @@
               "linked_meeting_document"
             ],
             "scope": "Public document/create through Folder/Import and document_large/update through existing target Document/UpdateUploadedParts, exact approved file bytes/readback, multipart signed transfer, asynchronous task reconciliation; no inferred meeting association.",
-            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
@@ -22265,7 +22635,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "c14d5e250d39686d8909e945c9055e208348c8689eab972d62ac6d6ca2509986"
+                "sha256": "66bde111a85aee700918a86de134821d054ef9af2c123799d579e62b2b70d8c4"
               },
               {
                 "kind": "test",
@@ -26260,7 +26630,7 @@
               "supplied_caption"
             ],
             "scope": "Upload-server URL/file submission with processing readback; name/tags, captions, versioned edits and additive tags job/readback. Not modern import_url, playable output or every field.",
-            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then.",
+            "execution_provenance": "Reused required suite at ae098d22c940c689a7587ba0edb8fe3e5cbab0f4: 977 passed/8 skipped/one unrelated structured-response fixture failure. The named subset passed, zero failures in this attributed subset. That unrelated fixture was corrected in cf1fe35; no claim of a new targeted execution or of the whole suite passing on first run. Named test ASTs unchanged from executed source; current whole-file hashes below are reference bindings, not claims that current whole files ran then. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests -q",
@@ -26280,7 +26650,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "c14d5e250d39686d8909e945c9055e208348c8689eab972d62ac6d6ca2509986"
+                "sha256": "66bde111a85aee700918a86de134821d054ef9af2c123799d579e62b2b70d8c4"
               },
               {
                 "kind": "test",
@@ -26313,7 +26683,7 @@
               "recording"
             ],
             "scope": "Public media_import/create: exact supplied URL bound in plan, documented modern import_url POST, queued job retained, finished job supplies created media ID, exact target GET; processing readback is not playable-media confirmation.",
-            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
@@ -26329,7 +26699,7 @@
               {
                 "kind": "vendor_contract",
                 "path": "docs/capabilities/provider-api-contracts.json",
-                "sha256": "c14d5e250d39686d8909e945c9055e208348c8689eab972d62ac6d6ca2509986"
+                "sha256": "66bde111a85aee700918a86de134821d054ef9af2c123799d579e62b2b70d8c4"
               },
               {
                 "kind": "test",
