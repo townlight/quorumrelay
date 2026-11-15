@@ -384,3 +384,8 @@ claiming any of them is an observed production response.
 ### Utah supplied notice assets (2026-11-15)
 
 Native notice detail enrichment retains the exact Add Notice to Calendar locator and explicitly labeled Audio Recording MP3 locator. Exact calendar file bytes are independently captured; no calendar-to-notice field merge, timezone or recording-date inference. Legacy output unchanged. See [mapping and limits](UTAH-SUPPLIED-ASSETS.md) and [211-case affected verification](verification/utah-supplied-assets-2026-11-15.json).
+
+
+### Shared attachment completion bounds (2026-11-15)
+
+Document/recording byte attachments check cancellation and the total deadline after the transfer and final wrapper resolution. Interrupted reads retain the source record and any captured wrapper context, returning cancelled or partial rather than completed. Cancellation is cooperative after synchronous work returns. Exact provider route/origin/MIME checks remain in force. See [120 affected cases](verification/attachment-response-boundaries-2026-11-15.json).

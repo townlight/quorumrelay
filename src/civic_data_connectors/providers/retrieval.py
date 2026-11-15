@@ -401,25 +401,17 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
                 transfer_url, byte_limit=remaining_transfer,
                 deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=allowed,
                 **({"allow_redirects": False} if boardable_viewer or source.provider == "civicplus-select" or source.provider in {"onbase", "tyler-meeting-manager", "boarddocs", "utah-public-notice"} else {}))
-        if source.provider == 'boarddocs':
-            if context.check_cancelled():
-                return OperationResult('cancelled', retained_data(), operation_id=context.operation_id)
-            if monotonic() >= deadline or response.url != transfer_url:
-                raise ValueError('The selected public file changed its captured route or exceeded its deadline.')
-        if (source.provider == "civicplus-select") and context.check_cancelled():
-            return OperationResult('cancelled', retained_data(), operation_id=context.operation_id)
-        if (source.provider == "civicplus-select") and monotonic() >= deadline:
-            raise ValueError('The selected CivicClerk file exceeded its deadline.')
-        if source.provider == "utah-public-notice":
-            if context.check_cancelled():
-                return OperationResult("cancelled", retained_data(), operation_id=context.operation_id)
-            if response.url != transfer_url or monotonic() >= deadline:
-                raise ValueError("The supplied Utah asset changed route or exceeded its deadline.")
-            if document.get("kind") == "calendar":
-                media_type = response.content_type.split(";", 1)[0].strip().lower()
-                if (media_type != "text/calendar" or not response.content.startswith(b"BEGIN:VCALENDAR\r\n")
-                        or not response.content.rstrip().endswith(b"END:VCALENDAR")):
-                    raise ValueError("The supplied Utah calendar did not return calendar bytes.")
+        if context.check_cancelled():
+            return OperationResult("cancelled", retained_data(), operation_id=context.operation_id)
+        if monotonic() >= deadline:
+            raise ValueError("The captured attachment exceeded its total deadline.")
+        if source.provider in {"boarddocs", "utah-public-notice"} and response.url != transfer_url:
+            raise ValueError("The supplied asset changed its captured route.")
+        if source.provider == "utah-public-notice" and document.get("kind") == "calendar":
+            media_type = response.content_type.split(";", 1)[0].strip().lower()
+            if (media_type != "text/calendar" or not response.content.startswith(b"BEGIN:VCALENDAR\r\n")
+                    or not response.content.rstrip().endswith(b"END:VCALENDAR")):
+                raise ValueError("The supplied Utah calendar did not return calendar bytes.")
         if response.status != 200:
             raise ValueError("The captured attachment did not return HTTP 200.")
         if (source.provider == "civicplus-select") and response.url != transfer_url:
@@ -444,6 +436,10 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             raise ValueError("The document exceeds the configured transfer byte limit.")
         if not primegov_selected and _origin(response.url) not in allowed:
             raise ValueError("The document left its configured download origins.")
+        if context.check_cancelled():
+            return OperationResult("cancelled", retained_data(), operation_id=context.operation_id)
+        if monotonic() >= deadline:
+            raise ValueError("The captured attachment exceeded its total deadline.")
         return OperationResult("completed", {
             **retained_data(), "attachment": {
                 "citation_url": document.get("citation_url") or (record.get("normalized", {}).get("url") if primegov_selected else None) or document.get("url") or url,
