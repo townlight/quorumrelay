@@ -1,0 +1,11 @@
+# Peak public document-publication feeds
+
+The existing Lower Merion Peak publisher declares Agenda, Minutes, Podcast and Video Podcast RSS URLs. The exact Agenda URL returned four notices; each has a publication GUID, title, agenda viewer URL, publication time, Granicus date-part attributes and HTML notice text. The exact Minutes and both podcast feeds were empty. Source hashes and request scope are pinned in [source evidence](capabilities/evidence/peak-publication-rss/source.json).
+
+The new `peak-publication-rss-xml` format normalizes the observed Agenda notices as `document_publication` records. Their GUIDs are preserved as native publication identifiers. The viewer's event ID is retained as locator context, without an inferred parent meeting. `pubDate` remains `source_published`; it is not a meeting date, even when the title contains a calendar date. The unusual native `pubDateParts` attributes remain raw rather than becoming an invented time zone.
+
+An explicitly configured `https://lowermerion.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas` source defaults to this mapping in discover/fetch. Saved captures can be normalized explicitly. The mode/view, channel source URL, publisher view and each agenda locator must agree. Requests remain on the exact HTTPS URL with no redirect, enforce XML MIME and byte bounds, and respect the shared deadline/cancellation/caller policy. DTD/entity declarations, duplicate native GUIDs, malformed XML and changed source bindings reject. XML stylesheet instructions and HTML notice descriptions are never executed.
+
+Minutes supports its observed empty channel only; nonempty Minutes items, podcast modes and their item schemas are not inferred. All results remain partial feed snapshots, not a meeting catalog. Shared local continuation binds the exact capture hash; changing a feed before resuming requires a fresh operation. Meeting date filters report unknown dates instead of using publication time or title parsing. The supplied agenda URLs are viewer locators, not verified binary downloads.
+
+SQLite import/reopen, cited title search and exact ZIP round trips retain the records, original fields and raw feed bytes. The frozen original Peak compatibility reader remains unchanged. No staff write or native import-file format is established.

@@ -89,12 +89,13 @@ class TelVueWriteAdapter(WriteAdapter):
         remaining = deadline - monotonic()
         if remaining <= 0:
             raise WriteFailure("deadline_exceeded", "The TelVue request deadline expired.")
+        response_limit = min(bounds.parser_bytes, bounds.transfer_bytes)
         try:
             response = self.transport.send(ORIGIN + path, method="POST" if mutation else "GET",
-                body=body, headers=headers, byte_limit=bounds.parser_bytes, deadline_seconds=remaining)
+                body=body, headers=headers, byte_limit=response_limit, deadline_seconds=remaining)
         except (OSError, TimeoutError, RuntimeError, ValueError):
             raise AmbiguousWrite() from None
-        if not isinstance(response, WriteResponse) or len(response.content) > bounds.parser_bytes:
+        if not isinstance(response, WriteResponse) or len(response.content) > response_limit:
             raise AmbiguousWrite("TelVue returned an invalid or oversized response.")
         if response.status in {401, 403}:
             raise WriteFailure("permission_denied", "TelVue denied the operation.")

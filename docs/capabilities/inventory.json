@@ -15106,6 +15106,51 @@
           "limits": "No new network request or vendor mutation; Viewer locator only; no agenda/PDF bytes or HTML-to-PDF claim; Only otherwise-unlabeled supplied viewer links changed; compatibility output unchanged; No catalog/search/write promotion",
           "receipt_path": "docs/verification/peak-unlabeled-viewers-2026-11-12.json",
           "receipt_sha256": "119342ed0996e7308950aec4cf09a226869be313dcfa10a28512ff04a70dea09"
+        },
+        {
+          "id": "peak-publication-rss-2026-11-15",
+          "url": "https://lowermerion.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
+          "title": "Selected Peak publication feed mapping and scoped persistence/ZIP execution",
+          "kind": "observed_public_response_and_scoped_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "observed_contract_and_synthetic_engine_execution",
+          "findings": "Four actual agenda notices, empty Minutes and podcast channels; native publication GUIDs/view/event locators/pubDate kept distinct from meeting identities/dates.",
+          "synthetic_execution": {
+            "provider": "peak",
+            "status": "mock_passed",
+            "operations": [
+              "discover",
+              "fetch",
+              "parse",
+              "neutral_export"
+            ],
+            "entities": [
+              "document_publication"
+            ],
+            "execution_provenance": "Actual captured RSS mapped offline and configured network path executed with injected transport; no live binary or staff write.",
+            "checks": [
+              {
+                "command": "pytest tests/test_peak_rss.py tests/test_peak_packets.py tests/test_peak_viewers.py tests/test_provider_discovery.py tests/test_interchange.py tests/test_baseline.py -q",
+                "passed": 206,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/peak-publication-rss/source.json",
+                "sha256": "79af57b6f55739982fd29bd2e59e8d0691329982ef1f45b088a0e053aad2a2a3"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_peak_rss.py",
+                "sha256": "32139c0190febd7e2a9397242e319c40c7943752577464387401662dc706dc94"
+              }
+            ],
+            "scope": "Selected Agenda publication fields, empty Minutes, identity/context/XXE and exact response guards, local capture-hash continuation, date qualification, SQLite/search/reopen/ZIP."
+          },
+          "receipt_path": "docs/verification/peak-telvue-owned-work-2026-11-15.json",
+          "receipt_sha256": "ae8104d94af401928d6948811cc02717ad23f07d6b5de55506bc6913e86e0a51"
         }
       ],
       "tenants": [
@@ -15156,9 +15201,10 @@
           "evidence_ids": [
             "granicus-peak-tenant",
             "peak-lower-merion-capture-2026-11-12",
-            "peak-unlabeled-viewers-2026-11-12"
+            "peak-unlabeled-viewers-2026-11-12",
+            "peak-publication-rss-2026-11-15"
           ],
-          "details": "The registered Peak current listing uses the explicit granicus-listing-html mapping for its configured public page; 116 captured rows are preserved with supplied packet/media references. No full archive or search coverage is claimed. Same-row unlabeled agenda/minutes viewer links are retained only when exact configured origin/view and row clip agree; these are locators, not retrieved PDF proof.",
+          "details": "The registered Peak current listing uses the explicit granicus-listing-html mapping for its configured public page; 116 captured rows are preserved with supplied packet/media references. No full archive or search coverage is claimed. Same-row unlabeled agenda/minutes viewer links are retained only when exact configured origin/view and row clip agree; these are locators, not retrieved PDF proof. Selected peak-publication-rss-xml maps native publication GUIDs and source-bound agenda viewer notices, with no meeting identity/date inference; empty Minutes only, scoped configured retrieval and neutral persistence/ZIP tested.",
           "dependencies": [],
           "remaining_verification": [
             "Live authorization/account and broader tenant behavior remain unverified where not covered by existing bounded receipts.",
@@ -15182,9 +15228,10 @@
           "implementation_status": "not_implemented",
           "evidence_ids": [
             "granicus-peak-tenant",
-            "peak-one-supplied-pdf-2026-11-12"
+            "peak-one-supplied-pdf-2026-11-12",
+            "peak-publication-rss-2026-11-15"
           ],
-          "details": "One separately supplied PDF completed with recorded SHA-256; receipt serialization failed afterward and the fetch was not repeated. This is one-document evidence, not archive/general media acceptance.",
+          "details": "One separately supplied PDF completed with recorded SHA-256; receipt serialization failed afterward and the fetch was not repeated. This is one-document evidence, not archive/general media acceptance. Selected peak-publication-rss-xml maps native publication GUIDs and source-bound agenda viewer notices, with no meeting identity/date inference; empty Minutes only, scoped configured retrieval and neutral persistence/ZIP tested.",
           "dependencies": [],
           "remaining_verification": [
             "The one supplied PDF has been fetched; any further document/MIME outcome must be a separately supplied bounded item. The observed response does not establish general media support."
@@ -15207,9 +15254,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "granicus-peak-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "peak-publication-rss-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Selected peak-publication-rss-xml maps native publication GUIDs and source-bound agenda viewer notices, with no meeting identity/date inference; empty Minutes only, scoped configured retrieval and neutral persistence/ZIP tested.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -15277,9 +15325,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "granicus-peak-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "peak-publication-rss-2026-11-15"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Selected peak-publication-rss-xml maps native publication GUIDs and source-bound agenda viewer notices, with no meeting identity/date inference; empty Minutes only, scoped configured retrieval and neutral persistence/ZIP tested.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -15688,7 +15737,7 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "Lower Merion capture returned 116 rows and one separately supplied PDF fetch completed. Detailed receipt serialization failed afterward; the fetch was not repeated. RSS schema, full archive continuation and other document/media outcomes remain unverified.",
+        "LowerMerion bounded listing/selected document evidence remains qualified. Exact declared RSS now maps four agenda publication notices and empty Minutes; Podcast/VideoPodcast also observed empty, no nonempty schema inferred. Feed GUID/pubDate are not meeting identity/date. Full archive, remote search/date semantics and other binary/media outcomes remain unestablished.",
         "The Elko Peak manual gives authenticated UI fields and privacy values but no external route/payload. Machine create/update/upload, roles and readback still remain unresolved product-matched contract research; live access is not an acceptance gate.",
         "Do not use ViewPublisher fields as write parameters or reuse MediaManager/Legistar contracts."
       ],
@@ -18012,6 +18061,50 @@
           },
           "receipt_path": "docs/verification/telvue-connect-chapters-2026-11-14.json",
           "receipt_sha256": "dec79a9d69084a7a45a26d1b32092d53fd9665ee50b1b90f84f6af6423fb4e1b"
+        },
+        {
+          "id": "telvue-write-response-bounds-2026-11-15",
+          "url": "https://connect.telvue.com/",
+          "title": "TelVue playlist write response-bound regression and durable reconciliation",
+          "kind": "scoped_synthetic_regression_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "findings": "Pre-fix engine test approved a plan despite transfer_bytes16. Fixed minimum parser/transfer response guard; oversized post-response remains uncertain then reconciles across reopen without a secondPOST.",
+          "synthetic_execution": {
+            "provider": "telvue",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "playlist_order",
+              "playlist_membership"
+            ],
+            "execution_provenance": "Existing vendor-client-backed reorder/membership tests plus two new response-bound regressions executed locally; no live mutation.",
+            "checks": [
+              {
+                "command": "pytest tests/test_telvue_playlist_write.py tests/test_telvue_playlist_items.py tests/test_account_apis.py tests/test_peak_rss.py -q",
+                "passed": 76,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/telvue-client-write/source.json",
+                "sha256": "fa6613a0a2501eb8cf2a0585f8e610248b0f6897ba0ab9bc5a77c6704a3578e2"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_telvue_playlist_write.py",
+                "sha256": "454f8d42c7704fd49998a8862ec09a70ad54fc8b606b6c1ae6bdb76e85c7c282"
+              }
+            ],
+            "scope": "Exact existing playlist order/membership policy, before-state/readback, no-replay/restart and minimum response byte bounds; no recording upload or association expansion."
+          },
+          "receipt_path": "docs/verification/peak-telvue-owned-work-2026-11-15.json",
+          "receipt_sha256": "ae8104d94af401928d6948811cc02717ad23f07d6b5de55506bc6913e86e0a51"
         }
       ],
       "tenants": [
@@ -18245,7 +18338,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "telvue-upload",
-            "telvue-client-playlist-synthetic"
+            "telvue-client-playlist-synthetic",
+            "telvue-write-response-bounds-2026-11-15"
           ],
           "details": "Only explicit playlist membership create / playlist order update implemented from vendor client; scoped outbound rows have synthetic acceptance. Recording create, upload and metadata writes remain unverified.",
           "dependencies": [
@@ -18273,7 +18367,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "telvue-edit",
-            "telvue-client-playlist-synthetic"
+            "telvue-client-playlist-synthetic",
+            "telvue-write-response-bounds-2026-11-15"
           ],
           "details": "Only explicit playlist membership create / playlist order update implemented from vendor client; scoped outbound rows have synthetic acceptance. Recording create, upload and metadata writes remain unverified.",
           "dependencies": [
@@ -18466,7 +18561,8 @@
           "evidence_ids": [
             "telvue-client-playlist-synthetic",
             "telvue-playlists-api",
-            "telvue-connect-playlist-items-contract"
+            "telvue-connect-playlist-items-contract",
+            "telvue-write-response-bounds-2026-11-15"
           ],
           "account_requirements": "Application-owned exact tenant/origin/namespace policy; session_cookie/CSRF POST; v2 key/passphrase GET. No credential acquisition required for synthetic acceptance.",
           "authorized_test_access": "synthetic_only_no_live_mutation",
@@ -18506,7 +18602,8 @@
           "evidence_ids": [
             "telvue-client-playlist-synthetic",
             "telvue-playlists-api",
-            "telvue-connect-playlist-items-contract"
+            "telvue-connect-playlist-items-contract",
+            "telvue-write-response-bounds-2026-11-15"
           ],
           "account_requirements": "Application-owned exact tenant/origin/namespace policy; session_cookie/CSRF POST; v2 key/passphrase GET. No credential acquisition required for synthetic acceptance.",
           "authorized_test_access": "synthetic_only_no_live_mutation",
@@ -18550,7 +18647,8 @@
         "Published pages show example JSON envelopes/fields but omit filters, pagination/cursor, caps and rate limits. Record these from a supplied authorized account response/current guide; do not claim catalog completeness.",
         "Connect/CloudCast MRSS has scoped published-player coverage. Connect native playlist reorder/media membership writes now have exact public-client request contracts and synthetic readback. No upload/processing/visibility or vendor meeting association inferred; HyperCaster remains separate.",
         "Connect client upload consumes runtime fileUrl/dvdUrl/uploadParams/userId absent from public bundle initializers. Sanitized deployment-matched initializer, created-media response and processing/association readback specification are required to map upload safely. This is an exact missing runtime contract input, not a live-account acceptance gate.",
-        "Local historical CloudCast4.1 and documented2022Connect five-position chapter CSV preparation is implemented and synthetically verified. Current deployment import, processing, association and byte/playback acceptance are not inferred; headerless derivation and optional-end variant are separately attributed."
+        "Local historical CloudCast4.1 and documented2022Connect five-position chapter CSV preparation is implemented and synthetically verified. Current deployment import, processing, association and byte/playback acceptance are not inferred; headerless derivation and optional-end variant are separately attributed.",
+        "Existing playlist order/membership response transfers now enforce min(parser_bytes, transfer_bytes) at transport and response validation. Oversized preflight rejects; after-send oversized response reconciles without replay. No new upload contract inferred."
       ],
       "authentication": "Public playlists anonymous; Connect API requires client application access key + secret passphrase in custom headers, not Basic auth. Upload roles Contributor/Coordinator/Admin and account feature settings matter.",
       "write_findings": "Strong official UI evidence for recording creation/upload and metadata updates. Public v2 pages inspected document GET only, so a write adapter still needs a supported submission contract and authorized access.",

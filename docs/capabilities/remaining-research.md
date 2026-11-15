@@ -149,7 +149,7 @@ Evidence and exact scope: `inventory.json` provider `suiteone-media`; operation 
 
 ## F15 Granicus Peak (`peak`)
 
-- Lower Merion capture returned 116 rows and one separately supplied PDF fetch completed. Detailed receipt serialization failed afterward; the fetch was not repeated. RSS schema, full archive continuation and other document/media outcomes remain unverified.
+- Lower Merion capture returned116rows and one separately supplied PDF fetch completed; prior serialization failure remains recorded without repeating that transfer. Exact declared RSS now maps four agenda publication notices and empty Minutes; both podcast feeds were also empty. Publication GUID/pubDate stay separate from meeting identity/date. Full archive and other document/media outcomes remain unverified. See `docs/PEAK-PUBLICATION-FEEDS.md`.
 - The Elko Peak manual gives authenticated UI fields and privacy values but no external route/payload. Machine create/update/upload, roles and readback still remain unresolved product-matched contract research; live access is not an acceptance gate.
 - Do not use ViewPublisher fields as write parameters or reuse MediaManager/Legistar contracts.
 
@@ -323,3 +323,5 @@ See [the pinned source assessment](evidence/contract-followup-2026-11-14/source.
 - BoardDocs saved item follow-up: exact Fairfax public fragment now maps native item/body/labeled fields and supplied motion text with12new/59affected local cases. Meeting/section labels do not become native parents; placeholder attachments remain absent. See `evidence/boarddocs-public/fairfax-item-source.json`.
 
 - BoardDocs print-file follow-up: four literal native public-file IDs/hrefs from a Git-verified archived Fairfax print response now map to guarded attachment transfers (13new/72affected synthetic cases). Raw hrefs stay retained; arbitrary inline links and mismatched site/file IDs do not become attachments. No live byte availability or native meeting ID inferred from the archive. See `evidence/boarddocs-public/fairfax-print-files-source.json`.
+
+- TelVue write response-bound regression resolved2026-11-15: transport and injected-response checks enforce the smaller parser/transfer limit. Oversized preflight fails before a plan; oversized after-send response stays uncertain and reconciles without replay. Existing playlist scope only, no upload/association claim.

@@ -65,3 +65,5 @@ processing/readiness or meeting-association readback. The exact missing contract
 is a sanitized deployment-matched upload initializer and request/response plus
 the processing/association readback specification, not a live account or live
 upload. HyperCaster and CloudCast contracts are not substituted for Connect.
+
+Response transfers use the smaller of `parser_bytes` and `transfer_bytes`, both at the transport boundary and when checking an injected response. An oversized preflight cannot produce a mutation plan. If a mutation was sent before its oversized response is rejected, its durable outcome stays uncertain; a later reconciliation reads actual state without resending the mutation. Regression execution is recorded in `docs/verification/peak-telvue-owned-work-2026-11-15.json`.

@@ -478,7 +478,7 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
                         "civicweb-detail-html", "civicweb-filepro-soap-xml", "civicweb-meetings-json", "civicweb-meeting-documents-json", "swagit-listing-html", "onbase-public-listing-html",
                         "digital-towpath-listing-html", "towncloud-public-listing-json", "telvue-cloudcast-mrss-xml",
                         "agendaquick-public-listing-html", "agendaquick-item-search-html", "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "civicplus-search-json",
-                        "utah-public-search-html", "iqm2-public-search-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "novus-public-coversheet-html", "novus-public-listing-html",
+                        "utah-public-search-html", "iqm2-public-search-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "novus-public-coversheet-html", "novus-public-listing-html", "peak-publication-rss-xml",
                         "clerkbase-public-tree-html", "clerkbase-search-html"}:
         return parse_native(source, namespace, content, input_format), ()
     result = engine.normalize(replace(source, body=None), content, input_format=input_format,
@@ -538,6 +538,11 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
     if (source.provider == "iqm2" and source.input_format is None
             and urlsplit(source.url).path == "/Citizens/Detail_LegiFile.aspx"):
         input_format = "iqm2-legislative-file-html"
+    if source.provider == "peak" and source.input_format is None and urlsplit(source.url).path == "/ViewPublisherRSS.php":
+        input_format = "peak-publication-rss-xml"
+    if input_format == "peak-publication-rss-xml":
+        from .peak_rss import source_context
+        source_context(source)
     saved = _decode_content(request, content)
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")
@@ -661,16 +666,20 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
                 response = transport.request(
                     url, method=method, body=body, headers=headers or None,
                     byte_limit=(min(bounds.parser_bytes, bounds.transfer_bytes)
-                                if task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
+                                if input_format == "peak-publication-rss-xml" or task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
                                 else bounds.parser_bytes),
                     deadline_seconds=max(0.001, deadline - monotonic()),
                     allowed_origins=(origin,),
-                    **({"allow_redirects": False} if task.get("kind") in {
+                    **({"allow_redirects": False} if input_format == "peak-publication-rss-xml" or task.get("kind") in {
                         "suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period", "clerkbase-tree",
                         "onbase-window", "boarddocs-public", "tyler-calendar"} else {}),
                 )
                 if _origin(response.url) != origin:
                     raise ValueError("Provider retrieval left its configured origin.")
+                if input_format == "peak-publication-rss-xml" and (response.url != url
+                        or response.content_type.split(";", 1)[0].strip().lower() not in {"text/xml", "application/xml", "application/rss+xml"}
+                        or len(response.content) > bounds.transfer_bytes):
+                    raise ValueError("The exact bounded XML feed was not returned.")
                 if task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"} and response.url != url:
                     raise ValueError("The OnBase response left its exact requested window.")
                 if response.status != 200:
@@ -809,7 +818,12 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
             "configured capture only; upstream catalog completeness is unverified"),
         "available_text": "metadata_and_supplied_text_only",
     }
-    if input_format == "iqm2-legislative-file-html":
+    if input_format == "peak-publication-rss-xml":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one configured publication feed snapshot; not a meeting catalog",
+            "publication_time_is_meeting_time": False, "meeting_identity": "not_established",
+            "provider_pagination": "no supplied continuation mapped"})
+    elif input_format == "iqm2-legislative-file-html":
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "one supplied legislative-file page; parent membership requires retained meeting capture",
             "meeting_membership": "not_verified_by_file_page_alone"})

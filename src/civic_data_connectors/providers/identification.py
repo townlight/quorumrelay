@@ -39,7 +39,7 @@ ADDITIONAL_FORMATS = {"gworks": ("gworks-published-meeting-html", "gworks-secure
                       "municode-meetings": ("essential-multimedia-json",),
                       "novusagenda": ("novus-public-listing-html", "novus-public-coversheet-html"),
                       "granicus": ("granicus-listing-html", "granicus-platform-soap-xml"),
-                      "peak": ("granicus-listing-html",),
+                      "peak": ("granicus-listing-html", "peak-publication-rss-xml"),
                       "wistia": ("wistia-api-media-json", "wistia-media-detail-json", "wistia-caption-json"),
                       "laserfiche-weblink": ("laserfiche-listing-json", "laserfiche-repository-entries-json")}
 

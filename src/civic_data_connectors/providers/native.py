@@ -231,6 +231,9 @@ def parse_native(source, namespace, content, input_format):
     if input_format == "telvue-cloudcast-mrss-xml":
         from .telvue_mrss import listing_rows
         return make_bundle(source, namespace, content, input_format, listing_rows(source, content))
+    if input_format == "peak-publication-rss-xml":
+        from .peak_rss import parse_bundle
+        return parse_bundle(source, namespace, content)
     if input_format == "towncloud-public-listing-json":
         from .towncloud_public import listing_rows
         return make_bundle(source, namespace, content, input_format, listing_rows(source, content))

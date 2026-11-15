@@ -164,6 +164,49 @@ def test_timeout_after_send_reconciles_without_resending(tmp_path):
     assert sum(m == "POST" for m, _, _ in network.calls) == 1
 
 
+def test_current_transfer_bound_limits_preflight_response_and_prevents_mutation(tmp_path):
+    engine, context, network = setup(tmp_path)
+    limits = []
+    send = network.send
+    def bounded_response(url, **options):
+        limits.append(options["byte_limit"])
+        # Deliberately ignore the declared limit: the adapter must also reject
+        # oversized injected responses before approving a mutation plan.
+        return send(url, **options)
+    network.send = bounded_response
+    result = engine.execute("plan_write", {"source": SOURCE, "changes": [CHANGE],
+        "bounds": {"transfer_bytes": 16}}, context=context)
+    assert result.status == "failed", result.public_dict()
+    assert limits == [16]
+    assert not any(method == "POST" for method, _, _ in network.calls)
+
+
+def test_oversized_post_response_is_uncertain_then_reconciles_without_resend(tmp_path):
+    engine, context, network = setup(tmp_path)
+    planned = engine.execute("plan_write", {"source": SOURCE, "changes": [CHANGE],
+        "bounds": {"transfer_bytes": 512}}, context=context)
+    assert planned.status == "completed", planned.public_dict()
+    approval = {key: planned.data[key] for key in ("plan_id", "plan_hash")}
+    send = network.send
+    limits = []
+    def oversized_post(url, **options):
+        response = send(url, **options)
+        limits.append(options["byte_limit"])
+        if options["method"] == "POST":
+            return WriteResponse(200, b"x" * 513)
+        return response
+    network.send = oversized_post
+    result = engine.execute("commit_write", approval, context=context)
+    assert result.status == "partial", result.public_dict()
+    assert result.data["items"][0]["state"] == "uncertain"
+    assert limits and set(limits) == {512}
+    reopened = Engine(storage=SQLiteStorage(tmp_path / "write.sqlite"))
+    register(reopened, default_adapters(network))
+    reconciled = reopened.execute("commit_write", approval, context=context)
+    assert reconciled.status == "completed", reconciled.public_dict()
+    assert sum(method == "POST" for method, _, _ in network.calls) == 1
+
+
 @pytest.mark.parametrize("secret", ["private-key", "private-passphrase", "private-csrf", "private-cookie"])
 def test_credential_echo_never_enters_plan_or_receipt(tmp_path, secret):
     engine, context, network = setup(tmp_path)
