@@ -516,12 +516,19 @@ def _record(source, namespace, row, original, digest, captured_at):
         if source.provider == "tyler-meeting-manager":
             normalized["source_status"] = {key: original_row[key] for key in
                                            ("canceled", "adjourned") if key in original_row}
+    if (source.provider == "primegov" and isinstance(original_row, dict)
+            and isinstance(original_row.get("documentList"), list)):
+        from .providers.primegov_public import documents
+        mapped, unmapped = documents(source, original_row)
+        normalized["documents"] = mapped
+        normalized["documents_unmapped_count"] = unmapped
+        normalized["documents_mapping"] = "public_client_getHref; legacy compatibility projection unchanged"
     citations = tuple(dict.fromkeys([source.url] + ([row["url"]] if row.get("url") else [])))
     relationships = tuple(
         {"relation": kind, "value": deepcopy(value)}
         for field, kind in (("documents", "document"), ("recordings", "recording"),
                             ("agenda_items", "agenda_item"))
-        for value in row.get(field, [])
+        for value in normalized.get(field, [])
     )
     derivation = "provider_or_legacy_reader"
     stability = "Stable according to the pinned input-format mapping; not an application identifier."

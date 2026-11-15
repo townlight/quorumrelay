@@ -16,6 +16,8 @@ Evidence and exact scope: `inventory.json` provider `legistar`; operation status
 
 ## F02 PrimeGov (`primegov`)
 
+- Waco public portal client now establishes corrected rich document HTML/PDF/Word/vote-summary locators and selected native speaker-request outline reads. Actual335meetings/553descriptors/21HTML and6sections/0items;16new synthetic cases cover nonemptyitems and guard branches. This does not resolve authenticated Meeting/speaker/tracking/write APIs. See `docs/verification/primegov-public-outline-2026-11-14.json`.
+
 - Latest bounded item-method follow-up: the preserved client does not contain the supplied `getItemInfo` / `ListPublicFromSourceId` names; seven literal vendor assets returned HTTP 403. This establishes neither those methods' contract nor an outside-only dependency. Exact requests and capture hashes are indexed in `docs/verification/local-completion-2026-11-14.json`.
 
 - Observed Reno public /api/v2/PublicPortal/search form is now source-implemented with exact local metadata/excerpt checks, stable native-ID continuation, raw/parent preservation and bounded first/resumed receipt. Full document content, provider matching/caps/rank and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.
@@ -50,6 +52,8 @@ Evidence and exact scope: `inventory.json` provider `novusagenda`; operation sta
 - The exporter prepares canonical Agenda, Agenda Packet, Minutes, Notice and Other PDFs plus Media MP4. The official-linked filename tester classifies the additional tokens, but backend acceptance and post-import behavior remain unverified. MP4 framing does not establish codec/playability, captions or timestamp fidelity; ambiguous Packet, Notices and Audio/Video aliases remain rejected.
 - Historical FTP host and consultant processing/readback remain unverified. Source file preparation is separate from remote import or association. Official Fishers Section create/update is implemented; Event timestamp/template equivalence, item writes and document upload remain contract gaps, not account-acquisition gates.
 - Official Fishers spec and metadata now pin Event/Section models and publication enum0/1/2; section writes are implemented with scoped synthetic execution. Event date/time/template readback equivalence remains unresolved, and no item create/update or document upload model is established. No account acquisition gate.
+- Inventory correction: Event POST `/v1/Events` and PUT `/v1/Events/{key}` are documented APIs, not merely UI-only operations. Their exact request fields are now listed as unimplemented; time/template/readback gaps remain explicit. This adds two documented but unimplemented mappings and does not promote support.
+
 - Bounded Event-write follow-up: create eventStartTime has HH:MM regex, update time is free-form with12:00:00AM default; UI workflows/public display client do not establish write timestamp or template recurrence readback. No write conversion inferred. Portal Event-file API-origin defect is now implemented/tested separately.
 
 Evidence and exact scope: `inventory.json` provider `civicplus-select`; operation status and outbound mappings are separate from historical observations.

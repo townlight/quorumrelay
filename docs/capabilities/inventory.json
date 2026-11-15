@@ -3471,6 +3471,19 @@
           "observation_date": "2026-11-14",
           "findings": "Vendor RFP#070623 pages21/22/102 describes OneMeeting REST datasets published/access-controlled byclient and API/SDK provision. Not a method/input/readback schema. Pins and limits in evidence/product-contract-followup-2026-11-14/source.json.",
           "limits": "No executable payload/readback accepted or private-only/public-absence claim. Live account acquisition is not required."
+        },
+        {
+          "id": "primegov-public-outline-and-document-client-2026-11-14",
+          "url": "https://wacotexas.primegov.com/Scripts/Custom/Public/_Upcoming.js?v3",
+          "title": "Waco public client document branches and speaker-request outline",
+          "kind": "public_vendor_client_and_scoped_execution",
+          "observation_date": "2026-11-14",
+          "access_scope": "anonymous_public_read_only",
+          "proof_level": "actual_public_read_and_named_synthetic_execution_not_authenticated_api_acceptance",
+          "findings": "335 native2026meetings,553documentdescriptors including21HTML. Selected allowPublicSpeaker=true4922 returned6sections/0items. ExactHTML locator1187 returned200text/html; no installed/rendered/playback acceptance inferred. Richdocument HTML output3 uses Portal/Meeting. PDF1/Word2 use Public/CompiledDocument. Vote summary uses compiledMeetingDocumentFileId when templateId absent/nonpositive. Explicit link precedes format. Frozenlegacyprojection unchanged.",
+          "limits": "Public speaker-request outline may omit agenda content, documents and private sections; not speaker-list search or authenticated Meeting API. Actual item result empty; nonemptyitems/votesummarybranches verified synthetically against client fields. No automatic full agenda, tier/current authenticated write schemas or API completeness claimed.",
+          "receipt_path": "docs/verification/primegov-public-outline-2026-11-14.json",
+          "source_path": "docs/capabilities/evidence/primegov-public-outline/source.json"
         }
       ],
       "tenants": [
@@ -3534,9 +3547,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "primegov-reno",
-            "primegov-selected-documents-synthetic-2026-11-13"
+            "primegov-selected-documents-synthetic-2026-11-13",
+            "primegov-public-outline-and-document-client-2026-11-14"
           ],
-          "details": "Existing date-bounded public ListUpcomingMeetings and ListArchivedMeetings?year listing routes are implemented; configured capture/document retrieval is separate. No standalone authenticated detail endpoint or complete catalog/search semantics are claimed. Current source selected public search attachment types1/2/3 and numeric non-HTML type4 are synthetically verified through scoped storage and exact declared direct/JSON resolver routes. URL-string resolver response is inferred from vendor callback; full listing/catalog/live-file acceptance is not implied.",
+          "details": "Existing date-bounded public ListUpcomingMeetings and ListArchivedMeetings?year listing routes are implemented; configured capture/document retrieval is separate. No standalone authenticated detail endpoint or complete catalog/search semantics are claimed. Current source selected public search attachment types1/2/3 and numeric non-HTML type4 are synthetically verified through scoped storage and exact declared direct/JSON resolver routes. URL-string resolver response is inferred from vendor callback; full listing/catalog/live-file acceptance is not implied. Rich portal documents now follow actual getHref HTML/PDF/Word/compiled-file identity branches while legacy compatibility stays frozen. A selected stored allowPublicSpeaker=true meeting can fetch native sections/items from public speaker-request outline; all results partial, not a complete agenda or speaker search.",
           "dependencies": [],
           "remaining_verification": [
             "Per-tenant completeness/paging and standalone detail contracts remain unresolved; existing bounded public listing receipt is not full catalog acceptance."
@@ -4000,7 +4014,8 @@
         "Authenticated create/update/upload field schemas, permissions, readback and conflict semantics remain unverified in the pinned material. A matching machine contract is needed; credentials or live tenant writes are not an acceptance gate.",
         "Selected public client document branches synthetically executed; JSON URL-string shape inferred from callback. Type4 HTML/unknown output, live file availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled.",
         "New V2 portal help documents optional support-controlled feature enablement, not authenticated payloads. Third-party crawler corroborates compiled HTML route; exact selected Reno23431GET403. Lacity swagger403, not a verified current login redirect. No outside-only schema dependency proven. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
-        "Historical Jan2024 vendor review and OaklandPark RFP#070623 confirm OneMeeting Secure/Votes API and client-published REST datasets; selected exact pages are pinned. They do not provide method/auth/request/response/readback schemas or establish currenttier/version. No APIabsence or outside-only claim."
+        "Historical Jan2024 vendor review and OaklandPark RFP#070623 confirm OneMeeting Secure/Votes API and client-published REST datasets; selected exact pages are pinned. They do not provide method/auth/request/response/readback schemas or establish currenttier/version. No APIabsence or outside-only claim.",
+        "Waco public client and actual335-row year/6-section outline resolved scoped read mappings and HTML locator defect. Nonempty items are client-shaped synthetic only; authenticated Meeting/speaker/tracking/write contracts remain unresolved, not proved outside-only."
       ],
       "requirement_ids": [
         "C01",
@@ -7703,7 +7718,7 @@
             "select-update",
             "select-official-detail-section-execution"
           ],
-          "details": "Only agenda_section create is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented. Exact native Event id/agendaId is revalidated during plan, before mutation and in reconciliation.",
+          "details": "Only agenda_section create is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented. Exact native Event id/agendaId is revalidated during plan, before mutation and in reconciliation. Event POST /v1/Events has a documented request schema in pinned Fishers OpenAPI; still unimplemented because time/template/readback equivalence is unresolved. Earlier UI-only wording did not describe this documented route.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
             "Verified machine interface or authorized UI automation test environment"
@@ -7733,7 +7748,7 @@
             "select-update",
             "select-official-detail-section-execution"
           ],
-          "details": "Only agenda_section update is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented. Exact native Event id/agendaId is revalidated during plan, before mutation and in reconciliation.",
+          "details": "Only agenda_section update is implemented: documented sectionName/sectionText, selected agenda parent, exact source/tenant/resource policy, plan/commit/readback/receipt/replay. Other entities remain unimplemented. Exact native Event id/agendaId is revalidated during plan, before mutation and in reconciliation. Event PUT /v1/Events/{key} has a documented request schema in pinned Fishers OpenAPI; still unimplemented because time/template/readback equivalence is unresolved. Earlier UI-only wording did not describe this documented route.",
           "dependencies": [
             "Provider authorized account with Meetings/Events permissions",
             "Verified machine interface or authorized UI automation test environment"
@@ -7851,46 +7866,77 @@
         {
           "entity": "meeting",
           "operation": "create",
-          "endpoint_or_format": "Authenticated UI Create Event; external API unverified",
+          "endpoint_or_format": "POST /v1/Events",
           "field_mappings": [
             {
-              "normalized": "title",
-              "provider_field": "UI: Event Name",
-              "notes": "",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
+              "normalized": "native.templateId",
+              "provider_field": "templateId",
+              "notes": "Required documented CreateEventFromTemplateApiModel_0067e88d request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
             },
             {
-              "normalized": "date",
-              "provider_field": "UI: Event Date",
-              "notes": "",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
+              "normalized": "native.eventName",
+              "provider_field": "eventName",
+              "notes": "Required documented CreateEventFromTemplateApiModel_0067e88d request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
             },
             {
-              "normalized": "time",
-              "provider_field": "UI: Event Time",
-              "notes": "",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
+              "normalized": "native.eventDescription",
+              "provider_field": "eventDescription",
+              "notes": "Optional documented CreateEventFromTemplateApiModel_0067e88d request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
             },
             {
-              "normalized": "location",
-              "provider_field": "UI: Address/City/State/Zip Code",
-              "notes": "",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
+              "normalized": "native.address1",
+              "provider_field": "address1",
+              "notes": "Optional documented CreateEventFromTemplateApiModel_0067e88d request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
             },
             {
-              "normalized": "notice",
-              "provider_field": "UI: Notice",
-              "notes": "",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
+              "normalized": "native.address2",
+              "provider_field": "address2",
+              "notes": "Optional documented CreateEventFromTemplateApiModel_0067e88d request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.city",
+              "provider_field": "city",
+              "notes": "Optional documented CreateEventFromTemplateApiModel_0067e88d request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.state",
+              "provider_field": "state",
+              "notes": "Optional documented CreateEventFromTemplateApiModel_0067e88d request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.zipCode",
+              "provider_field": "zipCode",
+              "notes": "Optional documented CreateEventFromTemplateApiModel_0067e88d request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.eventStartDate",
+              "provider_field": "eventStartDate",
+              "notes": "Required documented CreateEventFromTemplateApiModel_0067e88d request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.eventStartTime",
+              "provider_field": "eventStartTime",
+              "notes": "Required documented CreateEventFromTemplateApiModel_0067e88d request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
             }
           ],
           "evidence_ids": [
-            "select-create"
+            "select-create",
+            "select-official-detail-section-execution"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "readback_receipt": "GET /v1/Events/{key} returns EventModel. Exact eventStartDate/eventStartTime to eventDate/startDateTime timezone equivalence and create template effects remain unresolved; no write executed.",
+          "verification_status": "request_schema_documented_readback_semantics_unresolved",
           "notes": "State two-letter abbreviation needed for Web Central calendar integration.",
           "requirement_ids": [
             "C01",
@@ -7902,53 +7948,132 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "evidence_level": "official_openapi_request_schema_not_executed_event_write",
+          "implementation_status": "not_implemented",
           "acceptance_status": "not_run",
-          "interface_type": "manual_ui_documented_machine_contract_unverified",
-          "contract_confidence": "ui_labels_or_product_feature_not_payload_keys",
-          "method": null,
-          "api_version": "unknown",
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "documented_request_schema_with_unresolved_time_template_readback",
+          "method": "POST",
+          "api_version": "v1, pinned Fishers OpenAPI",
           "automatable_contract_verified": false,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
         {
           "entity": "meeting",
           "operation": "update",
-          "endpoint_or_format": "Authenticated UI Event Details; external API unverified",
+          "endpoint_or_format": "PUT /v1/Events/{key}",
           "field_mappings": [
             {
-              "normalized": "notice",
-              "provider_field": "UI: Notice",
-              "notes": "",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
+              "normalized": "native.eventName",
+              "provider_field": "eventName",
+              "notes": "Required documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
             },
             {
-              "normalized": "category",
-              "provider_field": "UI: Category",
-              "notes": "",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
+              "normalized": "native.eventDescription",
+              "provider_field": "eventDescription",
+              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
             },
             {
-              "normalized": "recordings.url",
-              "provider_field": "UI: External Media URL",
-              "notes": "Feature must be enabled.",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
+              "normalized": "native.eventStartDate",
+              "provider_field": "eventStartDate",
+              "notes": "Required documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
             },
             {
-              "normalized": "published",
-              "provider_field": "UI: Published",
-              "notes": "Publication must be explicitly planned, not automatic ingestion.",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
+              "normalized": "native.eventStartTime",
+              "provider_field": "eventStartTime",
+              "notes": "Required documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.address1",
+              "provider_field": "address1",
+              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.address2",
+              "provider_field": "address2",
+              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.city",
+              "provider_field": "city",
+              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.state",
+              "provider_field": "state",
+              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.zipCode",
+              "provider_field": "zipCode",
+              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.startEventAutomatically",
+              "provider_field": "startEventAutomatically",
+              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.streamId",
+              "provider_field": "streamId",
+              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.eventCategoryId",
+              "provider_field": "eventCategoryId",
+              "notes": "Required documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.isPublished",
+              "provider_field": "isPublished",
+              "notes": "Required documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.publishStart",
+              "provider_field": "publishStart",
+              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.externalMediaUrl",
+              "provider_field": "externalMediaUrl",
+              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.actualStartTime",
+              "provider_field": "actualStartTime",
+              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
+            },
+            {
+              "normalized": "native.meetingEndTime",
+              "provider_field": "meetingEndTime",
+              "notes": "Optional documented EventUpdateApiModel_ad914839 request field; not an executed mapping.",
+              "mapping_level": "documented_request_field_not_implemented"
             }
           ],
           "evidence_ids": [
-            "select-update"
+            "select-update",
+            "select-official-detail-section-execution"
           ],
           "account_requirements": "Provider-authorized account/tenant and correct resource permissions; no credentials supplied.",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Capture exact request/plan, response content type and remote identity; independently GET/read resource including supplied revision. No automatic retry of ambiguous create.",
-          "verification_status": "documented_not_implemented_not_live_accepted",
+          "readback_receipt": "GET /v1/Events/{key} returns EventModel. Exact eventStartDate/eventStartTime to eventDate/startDateTime timezone equivalence and create template effects remain unresolved; no write executed.",
+          "verification_status": "request_schema_documented_readback_semantics_unresolved",
           "notes": "",
           "requirement_ids": [
             "C01",
@@ -7960,13 +8085,13 @@
             "W09",
             "W10"
           ],
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "evidence_level": "official_openapi_request_schema_not_executed_event_write",
+          "implementation_status": "not_implemented",
           "acceptance_status": "not_run",
-          "interface_type": "manual_ui_documented_machine_contract_unverified",
-          "contract_confidence": "ui_labels_or_product_feature_not_payload_keys",
-          "method": null,
-          "api_version": "unknown",
+          "interface_type": "documented_automated_api",
+          "contract_confidence": "documented_request_schema_with_unresolved_time_template_readback",
+          "method": "PUT",
+          "api_version": "v1, pinned Fishers OpenAPI",
           "automatable_contract_verified": false,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
