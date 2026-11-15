@@ -29,3 +29,5 @@ One GET runs per call. `max_records` and query limit bound the candidate slice. 
 Only `search_result` record-type filtering is accepted for this path. Body and date filters are rejected because canonical body/date semantics have not been established for all four indexes. Transfer/parser byte limits, cancellation and deadline checks apply before retrieval, after transport, after mapping and after local search. Cross-organization, duplicate-parameter and unknown-index locators fail. Saved responses use explicit input format `boardbook-public-search-html` with the same configured organization source.
 
 This adds no vendor write, upload, remote import, account requirement or release claim. Existing BoardBook organization/agenda/minutes readers remain separate.
+
+Native responses must echo the exact first submitted expression in one visible text input. Missing, changed, duplicate or template-only query controls fail before publishing records; saved-file normalization remains independent of any current search request.

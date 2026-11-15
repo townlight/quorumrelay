@@ -139,3 +139,27 @@ def test_capture_identity_locator_and_context_survive_reopen_export(tmp_path, fo
     restored = read_bundle(base64.b64decode(exported.data["content_base64"]), format=format)
     assert restored["records"] == bundle["records"] and restored["extensions"] == bundle["extensions"]
     assert base64.b64decode(restored["capture"]["content_base64"]) == PAGE
+
+
+@pytest.mark.parametrize("replacement", [b"other", b"Budget", b""])
+def test_response_echo_must_match_native_search_expression(replacement):
+    old = b'name="search" value="budget"'
+    raw = PAGE.replace(old, old.replace(b"budget", replacement))
+    assert raw != PAGE
+    result = create_engine(provider_transport=Transport(raw)).execute("search", request())
+    assert result.status == "failed" and not result.data
+    assert not result.coverage["catalog_complete"]
+
+
+@pytest.mark.parametrize("hidden", [False, True])
+def test_duplicate_or_hidden_only_query_controls_cannot_bind_response(hidden):
+    field = 'search'
+    import re
+    pattern = rb"<input\b[^>]*name=[\"']" + field.encode() + rb"[\"'][^>]*>"
+    match = re.search(pattern, PAGE)
+    assert match
+    control = match[0]
+    replacement = b"<template>" + control + b"</template>" if hidden else control + control
+    raw = PAGE[:match.start()] + replacement + PAGE[match.end():]
+    result = create_engine(provider_transport=Transport(raw)).execute("search", request())
+    assert result.status == "failed" and not result.data

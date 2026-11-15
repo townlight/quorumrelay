@@ -10765,12 +10765,12 @@
           "observation_date": "2026-11-15",
           "proof_level": "vendor_contract_and_synthetic_engine_execution",
           "access_scope": "bounded_public_read_and_synthetic_engine",
-          "findings": "One current public GET maps42typed native index entries/37exact local hits.20new/180affected tests passed.",
+          "findings": "One current public GET maps42typed native index entries/37exact local hits.20new/180affected tests passed. Follow-up exact-response-expression validation:3pre-fix failures and5new cases per provider;47combined native-search checks passed.",
           "limits": "Search entry IDs are not canonical meeting/item/document IDs; no inferred parent/date/body, fulltext/catalog completeness, server paging or write.",
           "fixture_path": "docs/capabilities/evidence/boardbook-public-search/results.html",
           "fixture_sha256": "5ad0c802dbbf6921c33a1a258102a29a29d0f34078e0de77fad72141f2a141d3",
           "receipt_path": "docs/verification/boardbook-native-search-2026-11-15.json",
-          "receipt_sha256": "b8c4a6a25787e7ebfe614fb4eaf90e8a61ba20d441bde6655bdfdc98f41d2c4d",
+          "receipt_sha256": "15f968736d8335a8fb6fda2f8ace6b67642249c5ade755de7a1a61c2ccaf62fb",
           "synthetic_execution": {
             "provider": "boardbook",
             "status": "mock_passed",
@@ -10781,11 +10781,16 @@
               "search_result"
             ],
             "scope": "Anonymous BoardBook rendered search-index entries and partial excerpts; no canonical parent inference/fulltext/exhaustive catalog/write.",
-            "execution_provenance": "20newcases in180affected cases; pinned real42entry response through synthetic transport, SQLite/reopen and neutral exports.",
+            "execution_provenance": "20newcases in180affected cases; pinned real42entry response through synthetic transport, SQLite/reopen and neutral exports. Exact echoed-expression follow-up:6pre-fix failures,10new cases,47combined passed; prior broad runs historical.",
             "checks": [
               {
                 "command": "pytest tests/test_boardbook_native_search.py tests/test_boardbook_detail.py tests/test_boardbook_documents.py tests/test_boardbook_minutes.py tests/test_provider_discovery.py tests/test_interchange.py tests/test_storage_search_imports.py tests/test_interfaces.py tests/test_mcp_interfaces.py -q",
                 "passed": 180,
+                "failed": 0
+              },
+              {
+                "command": "pytest tests/test_boardbook_native_search.py tests/test_townhall_native_search.py -q",
+                "passed": 47,
                 "failed": 0
               }
             ],
@@ -10803,7 +10808,7 @@
               {
                 "kind": "test",
                 "path": "tests/test_boardbook_native_search.py",
-                "sha256": "b9493f48b3d263ec3c7ba30c7e253c497239859fb22a68b5ce931ccc9bdb6400"
+                "sha256": "eede4f2970d43828ce7a0478e2205a62b37c72ca426695a3913fabe9803ec98c"
               }
             ]
           }
@@ -19267,12 +19272,12 @@
           "observation_date": "2026-11-15",
           "proof_level": "vendor_contract_and_synthetic_engine_execution",
           "access_scope": "bounded_public_read_and_synthetic_engine",
-          "findings": "Current baseline-matched POST returns39archived native meetings.17new/183affected cases passed.",
+          "findings": "Current baseline-matched POST returns39archived native meetings.17new/183affected cases passed. Follow-up exact-response-expression validation:3pre-fix failures and5new cases per provider;47combined native-search checks passed.",
           "limits": "One rendered result capture, not full catalog/server paging/fulltext; body/nonmeeting filters unavailable.",
           "fixture_path": "docs/capabilities/evidence/townhall-public-search/results.html",
           "fixture_sha256": "5cce84be92d82e0cd1189c1064acef57624b8758a361243dfa1767988a320b2c",
           "receipt_path": "docs/verification/townhall-native-search-2026-11-15.json",
-          "receipt_sha256": "747705af35d074b86d982da6a8a8186ce07acaaaddcbddf50a42e54d2c81588c",
+          "receipt_sha256": "01c6ac06c7268b6dd9d1c0d343295ebfb4a7056066de294d356cc9cb603f40c0",
           "synthetic_execution": {
             "provider": "town-hall-streams",
             "status": "mock_passed",
@@ -19283,11 +19288,16 @@
               "meeting"
             ],
             "scope": "Anonymous Town Hall Streams archive keyword POST,39native meeting IDs/date/stream locators; precise citations/local filters and portable capture/context.",
-            "execution_provenance": "17new cases within183affected; pinned real39row result via synthetic transport, strict location binding/cancel/deadline/bytes/local date/resume/revision, SQLite retry/reopen and neutral export.",
+            "execution_provenance": "17new cases within183affected; pinned real39row result via synthetic transport, strict location binding/cancel/deadline/bytes/local date/resume/revision, SQLite retry/reopen and neutral export. Exact echoed-expression follow-up:6pre-fix failures,10new cases,47combined passed; prior broad runs historical.",
             "checks": [
               {
                 "command": "pytest tests/test_townhall_native_search.py tests/test_townhall_detail.py tests/test_townhall_captions.py tests/test_provider_discovery.py tests/test_interchange.py tests/test_storage_search_imports.py tests/test_interfaces.py tests/test_mcp_interfaces.py -q",
                 "passed": 183,
+                "failed": 0
+              },
+              {
+                "command": "pytest tests/test_boardbook_native_search.py tests/test_townhall_native_search.py -q",
+                "passed": 47,
                 "failed": 0
               }
             ],
@@ -19305,7 +19315,7 @@
               {
                 "kind": "test",
                 "path": "tests/test_townhall_native_search.py",
-                "sha256": "23a2dfa878a1786120be87e2a1a8b24e8b25c7c6755e6ca0a7281d0e1544e4fc"
+                "sha256": "ffd8923a85c0f407c92d002ed03aa1b03e5c6ad9db5e62fe3cd410e5f6402452"
               }
             ]
           }

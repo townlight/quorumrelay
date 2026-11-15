@@ -25,3 +25,5 @@ One POST executes per call, with no cookies, account or session mutation. Transf
 Exact response bytes, capture hash, native IDs, recording relationships, citations and POST request fields survive SQLite persistence/reopening and JSON/JSONL/ZIP exchange. The existing `town-hall-streams-html` saved format and all original compatibility inputs remain supported; this adds a native search handler, not a replacement baseline reader.
 
 Source URLs and immutable hashes are in [the source assessment](capabilities/evidence/townhall-public-search/source.json). Execution scope is recorded in [the receipt](verification/townhall-native-search-2026-11-15.json). No vendor write/import, browser execution or release is involved.
+
+Native responses must echo the exact first submitted expression in one visible text input. Missing, changed, duplicate or template-only query controls fail before publishing records; saved-file normalization remains independent of any current search request.

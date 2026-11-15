@@ -14,6 +14,7 @@ from .contracts import PublicTransport, _origin
 from .discovery import _checkpoint, _resume
 from .identification import configured_source, validate_source
 from .native import make_bundle
+from .search_echo import require_search_echo
 
 FORMAT = "boardbook-public-search-html"
 HOST = "https://meetings.boardbook.org"
@@ -167,6 +168,7 @@ def native_search(engine, request, content, context, *, transport=None):
         if (response.status != 200 or response.url != url or len(response.content) > min(bounds.parser_bytes, bounds.transfer_bytes)
                 or response.content_type.split(";", 1)[0].strip().lower() != "text/html"):
             raise ValueError("Search response changed route/type or exceeded bounds.")
+        require_search_echo(response.content, "q", expressions[0])
         bundle = parse_bundle(source, namespace, response.content)
         stopped()
         digest = sha256(response.content).hexdigest()
