@@ -82,6 +82,10 @@ not a safe-to-repeat create. Retry reconciles the original intended identity and
 state before it does anything else. If readback cannot identify exactly one
 matching effect, the receipt stays uncertain and requires review.
 
+For the shared Legistar and Wistia JSON field comparison, fields selected for confirmation must be present in readback with matching values and types; upload confirmation selects the mapped name and description fields, Wistia tag objects are normalized to tag names. Legistar's documented `number` fields accept equal finite integer and floating-point values, while integer fields do not accept booleans or floats. Provider-managed row versions and last-modified fields are excluded from that comparison. Synchronous resource readbacks must also identify the acknowledged native resource or the approved update target. Laserfiche task completion requires an entry readback matching the task's entry ID and any already-known target. Captions and Wistia background jobs use their own identity and confirmation rules.
+
+A mismatch remains uncertain. Reconciliation after reopening storage checks the original intent and any durable acknowledged ID; it does not replay a possibly accepted mutation or replace an acknowledged ID with a different lookup candidate. See the [scoped readback verification](verification/write-readback-2026-11-15.json).
+
 Allowed item states are `planned`, `sending`, `succeeded`, `failed`, `conflict`,
 `uncertain`, `pending` for asynchronous tasks, and `cancelled`. Receipt state may also be `partial`. These are data
 states, not additions to `OperationResult.status`. Standard envelope statuses
@@ -170,6 +174,10 @@ and the [engine adapter](../src/civic_data_connectors/providers/granicus_platfor
 Publication is explicit approved input; destructive clearing, deletes and unrelated
 platform administration remain excluded. Returned provider IDs/jobs do not imply
 independently verified playable bytes.
+
+Granicus event creation accepts the full documented `EventData` with system-assigned `ID` left at zero. The caller may supply a GUID string as `UID`; the exact supplied value must appear in readback and cannot be changed by an update. An empty `UID` retains the existing server-assignment path. Full-model readback requires each planned, non-server field to be present with its exact value and type. The pinned WSDL does not establish how a provider treats omitted fields versus explicit nil on write.
+
+For lost event-create acknowledgments, `GetEventsByForeignID` returns all matches for the supplied association. Reconciliation requires one matching candidate with a valid native ID and honors any ID already acknowledged; observing one candidate is not a provider uniqueness or idempotency guarantee.
 
 Other later source additions include [Wistia replacement](WISTIA-SWAP.md),
 Laserfiche paired image/text pages (see the pinned contract and tests referenced

@@ -1056,6 +1056,19 @@ class WriteAdapter:
         return {"state": "pending", "task_id": task_id, "upload_id": upload_id, "part_etags": etags,
                 "resource_id": change.get("resource_id")}
 
+    def _matches_identity(self, prepared, readback, expected=None):
+        if not isinstance(readback, dict):
+            return False
+        actual = readback.get(prepared["identity_field"])
+        if self.family == "wistia":
+            valid = isinstance(actual, str) and bool(actual) and re.fullmatch(r"[A-Za-z0-9_.:-]+", actual)
+            return bool(valid and (expected is None or actual == expected))
+        valid = type(actual) is int and actual > 0
+        if expected is None:
+            return valid
+        return bool(valid and not isinstance(expected, bool) and isinstance(expected, (int, str))
+                    and re.fullmatch(r"[1-9][0-9]*", str(expected)) and str(actual) == str(expected))
+
     def apply(self, source, prepared, context, bounds, deadline, *, persist=None):
         change = WriteChange.from_dict(prepared["change"])
         self.authorize(source, change, context)
@@ -1077,9 +1090,18 @@ class WriteAdapter:
             return {"state": "pending", "provider_response": response, "resource_id": None,
                     "job": response["background_job_status"]}
         identity = (response or {}).get(prepared["identity_field"]) if isinstance(response, dict) else None
-        if identity is None:
+        caption = self.family == "wistia" and change.entity in {"caption", "caption_edits"}
+        if not caption and change.operation == "update" and change.resource_id is not None:
+            if identity is not None and not self._matches_identity(prepared, response, change.resource_id):
+                return {"state": "uncertain", "resource_id": change.resource_id,
+                        "reason": "The mutation response did not identify the approved target."}
             identity = change.resource_id
-        if self.family == "wistia" and change.entity in {"caption", "caption_edits"}:
+        elif identity is None:
+            identity = change.resource_id
+        if not caption and change.operation != "update" and not self._matches_identity(
+                prepared, {prepared["identity_field"]: identity}):
+            raise AmbiguousWrite("The provider response did not establish a valid remote resource identity.")
+        if caption:
             identity = f"{change.parent_id}:{change.language or change.fields.get('language') or 'detected'}"
             read_url = prepared["read_url"]
         elif identity is not None:
@@ -1099,6 +1121,9 @@ class WriteAdapter:
             persist({"resource_id": identity, "read_url": read_url})
         try:
             readback = self.read(source, read_url, context, bounds, deadline)
+            if not caption and not self._matches_identity(prepared, readback, identity):
+                return {"state": "uncertain", "resource_id": identity, "readback": readback,
+                        "reason": "Readback did not identify the acknowledged resource."}
             if self.family == "laserfiche":
                 readback = self.document_readback(source, readback, change, context, bounds, deadline,
                                                   page_parts=prepared.get("page_parts_contract") == 1)
@@ -1140,10 +1165,16 @@ class WriteAdapter:
         for key, value in fields.items():
             if key.endswith(("RowVersion", "LastModifiedUtc")):
                 continue
-            actual = readback.get(key)
+            if key not in readback:
+                return False
+            actual = readback[key]
             if key == "tags" and isinstance(actual, list):
                 actual = [v.get("name") if isinstance(v, dict) else v for v in actual]
-            if actual != value:
+            kind = LEGISTAR.get(change["entity"], ({},))[0].get(key) if self.family == "legistar" else None
+            if kind == "number":
+                if type(actual) not in {int, float} or not math.isfinite(actual) or actual != value:
+                    return False
+            elif canonical_hash(actual) != canonical_hash(value):
                 return False
         return True
 
@@ -1164,8 +1195,11 @@ class WriteAdapter:
             if task.get("status") != "Completed":
                 return {"state": "pending", "task": task}
             identity = task.get("result", {}).get("entryId")
-            if identity is not None:
+            if identity is not None and self._matches_identity(
+                    prepared, {prepared["identity_field"]: identity}, item.get("resource_id")):
                 result = self.read(source, root + "/Entries/" + safe_id(identity), context, bounds, deadline)
+                if not self._matches_identity(prepared, result, identity):
+                    return {"state": "uncertain", "task": task, "reason": "Task entry identity did not match readback."}
                 change = WriteChange.from_dict(prepared["change"])
                 result = self.document_readback(source, result, change, context, bounds, deadline,
                                                 page_parts=prepared.get("page_parts_contract") == 1)
@@ -1234,12 +1268,18 @@ class WriteAdapter:
                 "$filter": f"{lookup['field']} eq '{term}'", "$top": 2,
             })
             result = self.read(source, url, context, bounds, deadline)
-            if isinstance(result, list) and len(result) == 1 and self.matches(prepared, result[0]):
+            if (isinstance(result, list) and len(result) == 1
+                    and self._matches_identity(prepared, result[0], identity)
+                    and self.matches(prepared, result[0])):
                 return {"state": "succeeded", "resource_id": result[0][lookup["id_field"]],
                         "readback": result[0], "reconciled": True,
                         "provider_revision": result[0].get(prepared["revision_field"])}
         if identity is not None and item.get("read_url"):
             result = self.read(source, item["read_url"], context, bounds, deadline)
+            caption = self.family == "wistia" and prepared["change"]["entity"] in {"caption", "caption_edits"}
+            if not caption and not self._matches_identity(prepared, result, identity):
+                return {"state": "uncertain", "resource_id": identity,
+                        "reason": "Readback did not identify the acknowledged resource."}
             if self.family == "laserfiche":
                 result = self.document_readback(source, result, WriteChange.from_dict(prepared["change"]),
                                                 context, bounds, deadline,
@@ -1250,8 +1290,10 @@ class WriteAdapter:
             result = self.read_before(source, WriteChange.from_dict(prepared["change"]), prepared["read_url"],
                                       context, bounds, deadline,
                                                 page_parts=prepared.get("page_parts_contract") == 1)
-            if self.matches(prepared, result):
-                return {"state": "succeeded", "resource_id": identity or prepared["change"].get("resource_id"),
+            caption = self.family == "wistia" and prepared["change"]["entity"] in {"caption", "caption_edits"}
+            expected = identity or prepared["change"].get("resource_id")
+            if (caption or self._matches_identity(prepared, result, expected)) and self.matches(prepared, result):
+                return {"state": "succeeded", "resource_id": expected,
                         "readback": result, "reconciled": True}
         return {"state": "uncertain", "resource_id": identity,
                 "reason": "Readback cannot uniquely reconcile the original intent; do not repeat create."}

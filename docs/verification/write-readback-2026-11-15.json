@@ -1,0 +1,123 @@
+{
+  "date": "2026-11-15",
+  "status": "PASSED",
+  "requirements": [
+    9,
+    10
+  ],
+  "candidate_base": "d6f9c35733709827f14529eda30294fbea9c57e1",
+  "scope": "Local actual-coordinator synthetic readback corrections for Granicus full models/create IDs/caller UID and shared Legistar/Wistia/Laserfiche typed values and native identities. Not whole-provider acceptance.",
+  "changes": [
+    "Planned mapped values must be present and typed exactly; Legistar documented number permits equal finite int/float, excluding bool.",
+    "Readbacks bind acknowledged/approved native identities; missing/invalid/different IDs remain uncertain. Known acknowledgments cannot be replaced by a different lookup result.",
+    "Granicus EventData caller GUID accepted at creation and confirmed literally; empty UID retains server assignment; UID updates remain denied.",
+    "SQLite reopen reconciles without replay; later exact matching readback recovers."
+  ],
+  "checks": [
+    {
+      "command": "python -X utf8 -m pytest tests/test_granicus_write_identity.py tests/test_granicus_create_uid.py tests/test_write_readback_types.py tests/test_write_readback_identity.py -q",
+      "passed": 31,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 2.23,
+      "junit_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\write-readback-2026-11-15.xml",
+      "junit_sha256": "074a0da08fa23496e0143a1c7a3d7c4a554db2afcf5f76227b48ef729347674a",
+      "executed_by": "root"
+    },
+    {
+      "command": "python -X utf8 scripts/validate_capabilities.py",
+      "status": "passed",
+      "errors": 0,
+      "evidence_records": 456,
+      "distinct_evidence_urls": 287
+    },
+    {
+      "command": "python -X utf8 -m pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py tests/test_public_package.py -q",
+      "passed": 27,
+      "failed": 0,
+      "seconds": 0.98
+    },
+    {
+      "command": "ruff check changed Python source and four new tests; git diff --check",
+      "status": "passed"
+    }
+  ],
+  "prior_affected_checks": [
+    {
+      "scope": "Granicus write, identity, UID and JSON typed readback suites",
+      "passed": 61,
+      "seconds": 5.4,
+      "executed_by": "Terra",
+      "revision_limit": "Before final shared identity patch."
+    },
+    {
+      "scope": "Ten affected shared provider/write safety suites",
+      "passed": 123,
+      "seconds": 10.01,
+      "executed_by": "Terra",
+      "revision_limit": "Before final task-target identity refinement."
+    },
+    {
+      "scope": "Shared native identity and provider suites",
+      "passed": 48,
+      "seconds": 3.47,
+      "executed_by": "Terra",
+      "revision_limit": "Includes final task-target refinement."
+    }
+  ],
+  "before_fix_evidence": [
+    "Granicus full-model identity/type suite: five reproduced failures.",
+    "Caller-assigned UID: five creation cases rejected before support; remaining original cases passed.",
+    "Root restored old shared comparator in memory: two typed cases failed at initial commit; documented number positive control passed.",
+    "Shared identity: four reproduced false-success/invalid-lookup failures."
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/granicus_write.py",
+      "sha256": "0ed4ad2eb215ef0d55e3b7c316c94805b1ffefa47ac14d6c5eb37163d87fba73"
+    },
+    {
+      "path": "src/civic_data_connectors/write_adapters.py",
+      "sha256": "51d3e7d7ce1e89487aa8fc27cb1ae461076976e1a21d4e6fc0f249cd956f8dcf"
+    },
+    {
+      "path": "tests/test_granicus_write_identity.py",
+      "sha256": "bbaf7d617509cf4057ea024770fe1eaabc43bde4135ec962ba1d3831d6297239"
+    },
+    {
+      "path": "tests/test_granicus_create_uid.py",
+      "sha256": "dd2b8ca01e4e1c3af07fbdc33a5102edd89e41f29e76528d2fe478e2e227fe6d"
+    },
+    {
+      "path": "tests/test_write_readback_types.py",
+      "sha256": "9154b2c1df33e53118bd3dfe201481b0ea962b6aed2af461b6da9d27ec188199"
+    },
+    {
+      "path": "tests/test_write_readback_identity.py",
+      "sha256": "961b8ab2febb73ba430db89004a25d17f7f120bd372ae1a8dbe3f98b6af0dddd"
+    },
+    {
+      "path": "docs/WRITE-CONTRACT.md",
+      "sha256": "8a35b5ac413ae52cdc89e82d14a9941c24e54e8d309b9770fd958eb5d88d78fd"
+    },
+    {
+      "path": "docs/capabilities/evidence/granicus-platform/APIEntities.cs",
+      "sha256": "a521a377c55c3cd8c6e089d6a9630fd96a2e0708c9167648b7a08b105b930a47"
+    },
+    {
+      "path": "docs/capabilities/evidence/granicus-platform/index.php.wsdl",
+      "sha256": "ac21ee789510bc062ef0c87ecd1481e49f893e3276661b503272d6947b82c0e0"
+    },
+    {
+      "path": "docs/capabilities/provider-api-contracts.json",
+      "sha256": "a537f0c4ba0cc8e168d0e513e16035fee5aced70289fe907349e13bc4e81de5d"
+    }
+  ],
+  "limits": [
+    "Injected vendor-shaped transports only; no live vendor mutation, credentials, releases or account access.",
+    "GetEventsByForeignID returns all matches; one observed candidate is not vendor uniqueness, atomic compare-and-set or idempotency.",
+    "Pinned WSDL does not establish omitted/nil write semantics. Missing-null rejection is defensive confirmation, not a new nullable-field support claim.",
+    "Specialized Wistia caption/background job and Laserfiche document confirmation paths retain their own contracts.",
+    "Unchanged historical full-suite receipt is not a full-suite run of this revision."
+  ]
+}

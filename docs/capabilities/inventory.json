@@ -4364,7 +4364,7 @@
           "findings": [
             "48 in-domain methods have typed bounded SOAP bindings; this does not mean all 48 have engine mappings.",
             "Engine reads: date-range Events, folder Clips, supplied Event/Clip/MetaData, Event/Clip metadata and Clip indices; raw XML, provider identities, unknown fields, revision and related parents retained.",
-            "Writes: CreateEvent full EventData plus unique authorized ForeignID; UpdateEvent/EventData, UpdateClip/ClipData and UpdateMetaData/MetaDataData full-model read/patch/readback. Actual coordinator duplicate/conflict/revocation/uncertain-response cases execute synthetically.",
+            "Writes: CreateEvent full EventData plus authorized ForeignID (empty preflight required, not a vendor uniqueness guarantee); UpdateEvent/EventData, UpdateClip/ClipData and UpdateMetaData/MetaDataData full-model read/patch/readback. Actual coordinator duplicate/conflict/revocation/uncertain-response cases execute synthetically.",
             "Private login/cookies remain transport state, excluded from stored plans/receipts; exact-origin requests prohibit redirects.",
             "Tests: test_granicus_soap.py, test_granicus_platform.py, test_granicus_write.py; independently pinned WSDL field/method assertions.",
             "Document URL/update and single-call agenda/minutes upload mappings execute through actual coordinator with immutable file references; expired input handles do not expire plans, lost mutation responses reconcile without resend, and altered file readback remains uncertain. Six exact vendor methods mapped; tests/test_granicus_write.py.",
@@ -4372,7 +4372,8 @@
             "Six supporting read methods run through the actual engine in vendor-shaped fixtures: GetClipCaptions, GetEventVideoLocation, GetClipVideoLocation, GetMetaDataVideoLocation, FetchAttachment and GetClipMinutesDocuments. Exact raw XML/Document base64 and byte hash retained; no inferred document URL or caption format. Generic SDK fetch_captions is exercised separately.",
             "APIEntities.cs MetaDataData.Payload explicitly lists AgendaItem/Note/Document/Rollcall/Motion/VoteRecord. An explicit $type/value wrapper validates full pinned fields, preserves SOAP xsi:type on readback and supports actual meeting-bound Motion update. Generic untyped object schemas remain rejected.",
             "MediaVault literal binding has 13 focused checks against exact pinned SDK.asmx.wsdl, including bytes/header typing and no token transfer on origin mismatch. Three actual coordinator UploadFile cases prove identity readback, persisted-ID reconciliation and unknown-ID uncertainty/no replay; no implicit publication.",
-            "Official Java WSDL revision548e20a5f25f9ca5472e168996fe116ab8bd1164 supplies structured PublishClipData/PublishClipResult matching .NET SDK DTOs. Explicit per-type source overrides retain and qualify the original conflicting array definitions; two independent provenance checks pass."
+            "Official Java WSDL revision548e20a5f25f9ca5472e168996fe116ab8bd1164 supplies structured PublishClipData/PublishClipResult matching .NET SDK DTOs. Explicit per-type source overrides retain and qualify the original conflicting array definitions; two independent provenance checks pass.",
+            "2026-11-15 followup: caller-assigned Event UID, exact typed mapped values and acknowledged native ID recovery; source/test/contract hashes and executed scoped checks in docs/verification/write-readback-2026-11-15.json. ForeignID lookup returns all matches; no uniqueness/idempotency guarantee."
           ],
           "limits": "Pinned SDK1.x contract, not a live/current compatibility claim. Document uploads/URLs, media upload registration/publication, metadata add/import and structured motion/attendee engine mappings remain implementation work; no delete/admin scope."
         },
@@ -4866,7 +4867,8 @@
               "normalized": "fields.UID",
               "provider_field": "EventData.UID",
               "mapping_level": "exact_native_dto",
-              "native_type": "xsd:string"
+              "native_type": "xsd:string",
+              "notes": "Caller-supplied GUID accepted at creation and confirmed literally; empty string permits server assignment. UID is immutable on update. Pinned APIEntities.cs Event.UID; scoped followup docs/verification/write-readback-2026-11-15.json."
             },
             {
               "normalized": "fields.ForeignID",
@@ -5061,7 +5063,7 @@
           ],
           "account_requirements": "Explicit origin/namespace/application tenant plus private username/password; exact operation/resource or ForeignID server policy.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
-          "readback_receipt": "Actual coordinator persists exact model plan and intent; provider-shaped readback/unique ForeignID reconciliation, no uncertain mutation replay.",
+          "readback_receipt": "Actual coordinator persists exact model plan and intent; typed provider-shaped readback, one observed ForeignID candidate with valid native ID and any durable acknowledged ID preserved; no provider uniqueness guarantee or uncertain mutation replay.",
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
@@ -5294,7 +5296,7 @@
           ],
           "account_requirements": "Explicit origin/namespace/application tenant plus private username/password; exact operation/resource or ForeignID server policy.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
-          "readback_receipt": "Actual coordinator persists exact model plan and intent; provider-shaped readback/unique ForeignID reconciliation, no uncertain mutation replay.",
+          "readback_receipt": "Actual coordinator persists exact model plan and intent; typed provider-shaped readback, one observed ForeignID candidate with valid native ID and any durable acknowledged ID preserved; no provider uniqueness guarantee or uncertain mutation replay.",
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
@@ -5503,7 +5505,7 @@
           ],
           "account_requirements": "Explicit origin/namespace/application tenant plus private username/password; exact operation/resource or ForeignID server policy.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
-          "readback_receipt": "Actual coordinator persists exact model plan and intent; provider-shaped readback/unique ForeignID reconciliation, no uncertain mutation replay.",
+          "readback_receipt": "Actual coordinator persists exact model plan and intent; typed provider-shaped readback, one observed ForeignID candidate with valid native ID and any durable acknowledged ID preserved; no provider uniqueness guarantee or uncertain mutation replay.",
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",
@@ -5628,7 +5630,7 @@
           ],
           "account_requirements": "Explicit origin/namespace/application tenant plus private username/password; exact operation/resource or ForeignID server policy.",
           "authorized_test_access": "vendor_documented_synthetic_execution_accepted",
-          "readback_receipt": "Actual coordinator persists exact model plan and intent; provider-shaped readback/unique ForeignID reconciliation, no uncertain mutation replay.",
+          "readback_receipt": "Actual coordinator persists exact model plan and intent; typed provider-shaped readback, one observed ForeignID candidate with valid native ID and any durable acknowledged ID preserved; no provider uniqueness guarantee or uncertain mutation replay.",
           "verification_status": "synthetic_contract_verified",
           "evidence_level": "vendor_documented_synthetic_contract_verification",
           "implementation_status": "implemented",

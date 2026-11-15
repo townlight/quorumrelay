@@ -134,8 +134,16 @@ class GranicusWriteAdapter(WriteAdapter):
         session = self._session(source, context, bounds, deadline)
         try:
             if create:
-                if set(change.fields) != set(fields) or change.fields["ID"] != 0 or change.fields["UID"] != "":
-                    raise ValueError("Creation requires the full documented EventData model with unassigned ID0/empty UID.")
+                if set(change.fields) != set(fields) or type(change.fields["ID"]) is not int or change.fields["ID"] != 0:
+                    raise ValueError("Creation requires the full documented EventData model with unassigned ID0.")
+                uid = change.fields["UID"]
+                if not isinstance(uid, str):
+                    raise ValueError("Event UID must be an empty string or a supplied GUID string.")
+                if uid:
+                    try:
+                        uuid.UUID(uid)
+                    except ValueError:
+                        raise ValueError("Event UID must be an empty string or a supplied GUID string.") from None
                 found, _ = session.call("GetEventsByForeignID", {"ForeignID": change.fields["ForeignID"]})
                 if found.get("events") != []:
                     raise WriteFailure("conflict", "The source ForeignID already exists or cannot be verified absent.")
@@ -202,7 +210,8 @@ class GranicusWriteAdapter(WriteAdapter):
                 read_change = replace(change, resource_id=identity)
             else:
                 read_change = change
-            return self._outcome(prepared, self._read(session, read_change))
+            return self._outcome(prepared, self._read(session, read_change),
+                                 expected_id=identity if change.operation == "create" else None)
         finally:
             try:
                 session.close()
@@ -210,14 +219,24 @@ class GranicusWriteAdapter(WriteAdapter):
                 pass  # Logout does not change a verified mutation/readback outcome.
 
     @staticmethod
-    def _outcome(prepared, actual):
+    def _outcome(prepared, actual, *, expected_id=None):
         # Providers may update LastModified; require every planned patch value,
         # retain full readback and never pretend a server CAS was performed.
-        ignored = {"LastModified", "ID", "UID"} if prepared["change"]["operation"] == "create" else {"LastModified"}
+        ignored = {"LastModified", "ID"} if prepared["change"]["operation"] == "create" else {"LastModified"}
+        if prepared["change"]["operation"] == "create" and not prepared["after"]["UID"]:
+            ignored.add("UID")
         if prepared["change"]["entity"] == "event":
             ignored |= EVENT_SERVER_FIELDS
-        matches = all(actual.get(key) == value for key, value in prepared["after"].items() if key not in ignored)
-        return {"state": "succeeded" if matches else "uncertain", "resource_id": actual.get("ID"),
+        expected = {key: value for key, value in prepared["after"].items() if key not in ignored}
+        matches = (isinstance(actual, dict) and expected.keys() <= actual.keys()
+                   and canonical_hash({key: actual[key] for key in expected}) == canonical_hash(expected))
+        actual_id = actual.get("ID") if isinstance(actual, dict) else None
+        if prepared["change"]["operation"] == "create":
+            matches = (matches and type(actual_id) is int and 0 < actual_id < 2**31
+                       and (expected_id is None or actual_id == expected_id))
+        resource_id = (expected_id if expected_id is not None else actual_id if matches else None
+                       ) if prepared["change"]["operation"] == "create" else actual_id
+        return {"state": "succeeded" if matches else "uncertain", "resource_id": resource_id,
                 "readback": actual, "reconciled": True,
                 "provider_revision": actual.get("LastModified"),
                 **({} if matches else {"reason": "SOAP readback differs from the intended patch; no mutation replay."})}
@@ -262,7 +281,7 @@ class GranicusWriteAdapter(WriteAdapter):
                 candidates = found.get("events")
                 if not isinstance(candidates, list) or len(candidates) != 1 or not isinstance(candidates[0], dict):
                     return {"state": "uncertain", "reason": "Creation has no unique ForeignID readback; no mutation replay."}
-                return self._outcome(prepared, candidates[0])
+                return self._outcome(prepared, candidates[0], expected_id=item.get("resource_id"))
             return self._outcome(prepared, self._read(session, change))
         finally:
             session.close()
