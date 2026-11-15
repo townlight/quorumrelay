@@ -943,6 +943,29 @@
         }
       ]
     },
+    "MeetingTypeGetByPortal": {
+      "action": "eSCRIBE.Internet.WebService/IPublishingService/MeetingTypeGetByPortal",
+      "request": [
+        {
+          "name": "PortalId",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/}guid",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": false,
+          "many": false
+        }
+      ],
+      "response": [
+        {
+          "name": "MeetingTypeGetByPortalResult",
+          "type": "{eSCRIBE.Internet.WebService}ArrayOfMeetingType.Record",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        }
+      ]
+    },
     "PackageCreate": {
       "action": "eSCRIBE.Internet.WebService/IPublishingService/PackageCreate",
       "request": [
@@ -1495,6 +1518,18 @@
         }
       ]
     },
+    "{eSCRIBE.Internet.WebService}ArrayOfMeetingType.Record": {
+      "fields": [
+        {
+          "name": "MeetingType.Record",
+          "type": "{eSCRIBE.Internet.WebService}MeetingType.Record",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": true
+        }
+      ]
+    },
     "{eSCRIBE.Internet.WebService}ArrayOfMotion": {
       "fields": [
         {
@@ -2011,6 +2046,26 @@
           "namespace": "eSCRIBE.Internet.WebService",
           "optional": true,
           "nullable": false,
+          "many": false
+        }
+      ]
+    },
+    "{eSCRIBE.Internet.WebService}MeetingType.Record": {
+      "fields": [
+        {
+          "name": "Id",
+          "type": "{eSCRIBE.Internet.WebService}MeetingType.Identifier",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
+          "many": false
+        },
+        {
+          "name": "Name",
+          "type": "{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfKeyValueOfintstring",
+          "namespace": "eSCRIBE.Internet.WebService",
+          "optional": true,
+          "nullable": true,
           "many": false
         }
       ]

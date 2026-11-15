@@ -170,6 +170,15 @@ publication, document availability or server generation/readiness.
 
 ## Meeting-type listing and supplied item text
 
+`MeetingTypeGetByPortal` takes `{"PortalId": "<native-guid>"}` and supplies the
+complete native `{Id, PortalId}` selectors required by the meeting-type filter
+below. The result preserves `meeting_type` records, source multilingual Name
+entries and their integer language keys. It does not assign language meanings or
+select a default name. Each returned identifier must match the requested portal;
+missing components, duplicates and unknown fields fail explicitly. Empty results
+remain partial and do not establish a complete catalog. This is a read selector,
+with no meeting-type administration or writes.
+
 `MeetingGetByMeetingType` takes `{"Id": {"Id": 7, "PortalId": "<native-guid>"}}`.
 Both selection components must match every returned Meeting.Record. This is one
 explicit unpaged response with record/byte/time limits, not a catalog traversal.

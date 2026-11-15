@@ -33,7 +33,7 @@ READS = frozenset({"MeetingGetById", "MeetingGetByPortal", "AgendaGetById", "Age
     "BookmarkGetById", "BookmarkGetByMeeting", "BookmarkGetByAgenda",
     "ResolutionGetById", "ResolutionGetByMeeting", "ResolutionGetByAgendaItem",
     "MeetingGetByMeetingType", "AgendaItemTextGetByMeetingId", "AgendaItemItemHistoryView",
-    "MeetingAgendaItemsWithHistory"})
+    "MeetingAgendaItemsWithHistory", "MeetingTypeGetByPortal"})
 for prefix, namespace in (("s", SOAP), ("a", ADDRESS), ("e", NS), ("i", XSI)):
     ET.register_namespace(prefix, namespace)
 
@@ -283,6 +283,8 @@ def bind_records(method, parameters, bundle):
                        and raw.get("LanguageId") == parameters["languageId"])
         elif method == "MeetingGetByPortal":
             matches = raw.get("PortalId") == selected
+        elif method == "MeetingTypeGetByPortal":
+            matches = isinstance(identity, dict) and identity.get("PortalId") == selected
         elif method == "PackageGetByMeeting":
             matches = raw.get("MeetingId") == selected
         elif method in {"AgendaGetByMeeting", "BookmarkGetByMeeting", "ResolutionGetByMeeting"}:
@@ -318,8 +320,9 @@ def parse_bundle(source, namespace, content):
     kind = {"Meeting": "meeting", "Agenda": "agenda", "AgendaItem": "agenda_item",
             "Attachment": "attachment", "Document": "document",
             "Package": "package", "Bookmark": "bookmark", "Resolution": "resolution",
-            "AgendaItemText": "agenda_item_text"}[method.split("Get")[0]]
+            "AgendaItemText": "agenda_item_text", "MeetingType": "meeting_type"}[method.split("Get")[0]]
     rows = []
+    meeting_type_ids = set()
     for raw in records(value, model):
         if not isinstance(raw, dict) or "Id" not in raw or raw["Id"] is None:
             raise ValueError("A native identity is required for every returned record.")
@@ -333,12 +336,17 @@ def parse_bundle(source, namespace, content):
                       "attachment": ("MeetingId", "AgendaType", "AgendaItemId", "Sequence"),
                       "bookmark": ("MeetingId", "AgendaType", "AgendaItemId", "Id"),
                       "resolution": ("MeetingId", "AgendaItemId", "Sequence"),
-                      "agenda_item_text": ("MeetingId", "AgendaType", "Id", "LanguageId")}[kind]
+                      "agenda_item_text": ("MeetingId", "AgendaType", "Id", "LanguageId"),
+                      "meeting_type": ("Id", "PortalId")}[kind]
             if set(identity) != set(needed) or any(identity[k] is None or identity[k] == "" for k in needed):
                 raise ValueError("Every component of the native compound identity is required.")
             identity_text = json.dumps(identity, sort_keys=True, separators=(",", ":"))
         else:
             identity_text = str(identity)
+        if kind == "meeting_type":
+            if identity_text in meeting_type_ids:
+                raise ValueError("A meeting-type collection repeats its native compound identity.")
+            meeting_type_ids.add(identity_text)
         normalized = {"external_id": identity_text, "url": source.url, "native_fields": deepcopy(raw),
                       "time_zone_status": "not_interpreted", "documents": [], "recordings": []}
         if kind == "meeting":
