@@ -29,8 +29,10 @@ def test_wistia_modern_import_url_pending_then_exact_job_resource_readback(tmp_p
     assert result.status == "partial" and result.data["items"][0]["state"] == "pending"
     assert sum(method == "POST" and path == "/modern/medias/import_url" for method, path in network.calls) == 1
     network.rows["imported1"] = {"hashed_id": "imported1", "name": "Imported", "status": "processing"}
-    network.job.update(status="finished", object={"results": [{"status": "succeeded", "operation": "create",
-                                                              "resource_type": "media", "id": "imported1"}]})
+    network.job.update(status="finished", object={"type": "bulk_operation",
+        "summary": {"total": 1, "succeeded": 1, "failed": 0},
+        "results": [{"position": 0, "status": "succeeded", "operation": "create",
+                     "resource_type": "media", "id": "imported1"}]})
     result = engine.execute("commit_write", approval, context=context)
     assert result.status == "completed", result.public_dict()
     assert result.data["items"][0]["readback"]["hashed_id"] == "imported1"

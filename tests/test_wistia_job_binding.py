@@ -61,11 +61,18 @@ def test_import_valid_job_and_media_binding(tmp_path):
     assert sum(method == "POST" for method, _ in network.calls) == 1
 
 
-@pytest.mark.parametrize("obj", [None, [], {"type": "other", "results": []}, {"type": "bulk_operation", "results": [None]}])
+@pytest.mark.parametrize("obj", [None, [], {"type": "other", "results": []}, {"type": "bulk_operation", "results": [None]},
+    {"summary": {"total": 1, "succeeded": 1, "failed": 0},
+     "results": [{"position": 0, "status": "succeeded", "operation": "create", "resource_type": "media", "id": "media2"}]}])
 def test_import_malformed_job_object_is_uncertain(tmp_path, obj):
     engine, context, network, approval = start(tmp_path, "media_import")
-    network.job.update(status="finished", object=obj)
+    network.rows["media2"] = {"id": 2, "hashed_id": "media2"}
+    network.job.update(status="finished", object=deepcopy(obj))
     assert poll(engine, context, approval)["state"] == "uncertain"
+    if isinstance(obj, dict) and "summary" in obj and "type" not in obj:
+        network.job["object"]["type"] = "bulk_operation"
+        assert poll(engine, context, approval)["state"] == "succeeded"
+        assert sum(method == "POST" for method, _ in network.calls) == 1
 
 
 

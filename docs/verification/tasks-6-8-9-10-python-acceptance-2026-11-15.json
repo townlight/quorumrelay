@@ -52,5 +52,64 @@
     "Documentation-only README/provider-summary changes follow this code commit; source/tests/scripts trees remain exact.",
     "No package/client build, release, remote push/merge/tag, install/signature or live vendor mutation.",
     "Full Python success does not resolve unknown vendor contracts or the two selected-destination dependencies."
-  ]
+  ],
+  "current_integration_followup": {
+    "date": "2026-11-15",
+    "source_commit": "0822bcd232002e7cdaa47b5dc0fbfb82c02e301d",
+    "tested_git_trees": {
+      "src": "8caba0fd4a154783cb04a868fabd240b344d800f",
+      "tests": "b9a6a6112a454c6d81506db7205c96c16c4cdad1",
+      "scripts": "e0b237c27abe3ad2d577400aad4ebb1b02d85620"
+    },
+    "full_run": {
+      "command": "python -X utf8 -m pytest tests -q --junitxml=<local current integration XML>",
+      "owned_session": 45477,
+      "terminal_exit_code": 1,
+      "passed": 2655,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 239.31,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\tasks-6-8-9-10-current-integration-2026-11-15.xml",
+      "xml_sha256": "0633586fc39a2d43d8b21336f317b8c0cfed00a6bf2dbfc4db9a78f438a26ac1",
+      "failed_test": "tests/test_outbound_attribution.py::test_wistia_modern_import_url_pending_then_exact_job_resource_readback"
+    },
+    "diagnosis": "A stale synthetic import poll fixture omitted the required bulk_operation discriminator, summary and result position. Production correctly retained uncertainty. Corrected fixture to pinned schema; production source unchanged.",
+    "affected_correction": {
+      "command": "python -X utf8 -m pytest -q tests/test_outbound_attribution.py tests/test_wistia_job_binding.py tests/test_wistia_swap.py tests/test_write_providers.py",
+      "executor": "Terra worker",
+      "passed": 87,
+      "seconds": 16.62,
+      "revision_note": "Before final strengthening of the missing-discriminator negative case."
+    },
+    "final_regression_refinement": {
+      "command": "python -X utf8 -m pytest -q tests/test_wistia_job_binding.py::test_import_malformed_job_object_is_uncertain",
+      "executor": "Terra worker",
+      "passed": 5,
+      "seconds": 1.19,
+      "proof": "Matching media readback and otherwise valid summary/results remain uncertain without type; adding only bulk_operation type succeeds, without replay (one POST)."
+    },
+    "other_checks": {
+      "full_ruff": "PASSED at tested source commit; affected Ruff PASSED after test-only correction",
+      "capability_validation": "PASSED at source commit; metadata unchanged by this correction",
+      "root_review": "Root inspected adapter, pinned schema, full-run XML and final tests; tested-worktree and committed-blob hashes verified separately. Test files differ only by Git CRLF normalization."
+    },
+    "result": "COMBINED_FULL_RUN_AND_FOCUSED_FIXTURE_CORRECTION_EVIDENCE",
+    "limits": [
+      "The full run itself failed one stale fixture; it is not represented as a green full run.",
+      "Production src and scripts unchanged by the fixture correction; reuse 2655 unaffected full-run passes and affected correction results.",
+      "No full suite repeated for test-only refinement. No hosted CI, client build, install, release or live vendor mutation.",
+      "Unknown vendor contracts and two selected-destination dependencies remain incomplete."
+    ],
+    "tested_worktree_file_sha256": {
+      "tests/test_outbound_attribution.py": "120b2071fef801f687103ab071a7327702d2c1b0f14c668c61fc175b409dba0b",
+      "tests/test_wistia_job_binding.py": "dc8cf401c04274bc3cf919739e12dcb2ae6400d268de23f6cb4b9531317b20b8",
+      "docs/capabilities/evidence/wistia-swap/get_background-job-status-backgroundjobstatusid.md": "0d4471b3046472564fb50a0bbdf61bd7c5cc2aaa289673076e64cb034a91604e"
+    },
+    "committed_blob_sha256": {
+      "tests/test_outbound_attribution.py": "2352b20e900e6b2ebedff8fbdb1311e85dbd2501d8df949073c3543b15731f13",
+      "tests/test_wistia_job_binding.py": "097bb7e2046ea6a7cdee720b6810793cafd87bcb255238978e5501ba89b72ab4",
+      "docs/capabilities/evidence/wistia-swap/get_background-job-status-backgroundjobstatusid.md": "0d4471b3046472564fb50a0bbdf61bd7c5cc2aaa289673076e64cb034a91604e"
+    }
+  }
 }
