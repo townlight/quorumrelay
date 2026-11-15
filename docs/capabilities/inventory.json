@@ -13130,6 +13130,52 @@
           "limits": "Synthetic provider transport through actual current source application paths; no provider mutations; Existing configured-capture partial and unavailable-media outcomes retained; Supplied HTML/rich text is source content, not OCR/ASR or inferred votes/motions/attendance; Townlight/TownReporter current-source candidate acceptance remains separate; frozen original proof reused only where unchanged; No package build/install/signing/Sandbox restart/frozen artifact/publication",
           "receipt_path": "docs/verification/source-text-reference-clients-2026-11-12.json",
           "receipt_sha256": "21d6656e7555e96469b2146ebe4dc5264c3efb249c73c49be2fdefdce564dc93"
+        },
+        {
+          "id": "iqm2-public-player-2026-11-14",
+          "url": "https://kentwa.iqm2.com/Citizens/SplitView.aspx?Mode=Video&MeetingID=6049&Format=Agenda",
+          "title": "Selected iQM2 public player literal media and subtitle metadata",
+          "kind": "observed_vendor_client_and_scoped_execution",
+          "observation_date": "2026-11-14",
+          "proof_level": "observed_client_contract_and_synthetic_engine_execution",
+          "findings": "Native6049 page binds outline ID, declares HLS source and no tracks. Declared player client defines first-source and conditional first-track semantics; no evaluation or playback.",
+          "synthetic_execution": {
+            "provider": "iqm2",
+            "status": "mock_passed",
+            "operations": [
+              "discover",
+              "fetch",
+              "parse",
+              "export"
+            ],
+            "entities": [
+              "meeting",
+              "recording_metadata",
+              "caption_locator"
+            ],
+            "checks": [
+              {
+                "command": "pytest tests/test_iqm2_player.py tests/test_iqm2_detail.py tests/test_provider_discovery.py tests/test_baseline.py tests/test_interchange.py tests/test_public_package.py -q",
+                "passed": 195,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/iqm2-public-player/source.json",
+                "sha256": "4489143f5550d9e1d5cc53dac310d3577e0388da44badc778d4325f7ac3a28b2"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_iqm2_player.py",
+                "sha256": "e336284c9a4f63e1e2b0453c2976e20c533c1f25de064ec0674eaf8d3e38b0c2"
+              }
+            ],
+            "scope": "Literal supplied player data and ZIP preservation only; no recording/caption transfer, playback, complete catalog or staff API."
+          },
+          "receipt_path": "docs/verification/iqm2-public-player-2026-11-14.json",
+          "receipt_sha256": "63bd4ab09537f70497b137da49945ef85bf67963c152fb3dc7392d176c8e7b1a"
         }
       ],
       "tenants": [
@@ -13170,9 +13216,10 @@
           "evidence_ids": [
             "iqm2-tenant",
             "iqm2-search-observed",
-            "iqm2-public-detail-2026-11-12"
+            "iqm2-public-detail-2026-11-12",
+            "iqm2-public-player-2026-11-14"
           ],
-          "details": "Configured Kent calendar response can be parsed into 185 observed rows; it is a bounded listing, not proven archive completeness or date/body traversal. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim.",
+          "details": "Configured Kent calendar response can be parsed into 185 observed rows; it is a bounded listing, not proven archive completeness or date/body traversal. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
@@ -13194,9 +13241,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "iqm2-tenant",
-            "iqm2-public-detail-2026-11-12"
+            "iqm2-public-detail-2026-11-12",
+            "iqm2-public-player-2026-11-14"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim.",
+          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference.",
           "dependencies": [],
           "remaining_verification": [
             "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
@@ -13220,9 +13268,10 @@
             "iqm2-baseline",
             "quorumrelay-shared-core-operations",
             "iqm2-public-detail-2026-11-12",
-            "source-text-reference-clients-2026-11-12-iqm2"
+            "source-text-reference-clients-2026-11-12-iqm2",
+            "iqm2-public-player-2026-11-14"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",

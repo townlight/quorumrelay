@@ -23,7 +23,7 @@ ADDITIONAL_FORMATS = {"gworks": ("gworks-published-meeting-html", "gworks-secure
                       "town-hall-streams": ("town-hall-streams-event-html",),
                       "civicplus-select": ("civicplus-search-json",),
                       "clerkbase": ("clerkbase-search-html", "clerkbase-public-tree-html"),
-                      "iqm2": ("iqm2-public-search-html", "iqm2-meeting-detail-html"),
+                      "iqm2": ("iqm2-public-search-html", "iqm2-meeting-detail-html", "iqm2-public-player-html"),
                       "utah-public-notice": ("utah-public-search-html",),
                       "escribe": ("escribe-meeting-detail-html",),
                       "civicweb": ("civicweb-detail-html", "civicweb-filepro-soap-xml", "civicweb-meetings-json", "civicweb-meeting-documents-json"),

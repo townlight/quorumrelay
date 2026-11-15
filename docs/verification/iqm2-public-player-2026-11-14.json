@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "dda5214162340194c8e37ae5c8b8cd05ae73f7de",
+  "status": "PASSED",
+  "scope": "Exact public Video/Agenda SplitView source; native meeting-bound outline, literal first-source MP4/HLS and conditionally active first supplied subtitle locator. No eval, media/caption transfer/playback, archive or staff-write claim.",
+  "new_cases": 11,
+  "checks": [
+    {
+      "command": "pytest tests/test_iqm2_player.py tests/test_iqm2_detail.py tests/test_provider_discovery.py tests/test_baseline.py tests/test_interchange.py tests/test_public_package.py -q",
+      "passed": 195,
+      "failed": 0,
+      "seconds": 4.68
+    },
+    {
+      "command": "pytest tests -q",
+      "passed": 1823,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 95.059,
+      "junit_sha256": "2c69fc0e8900435e834eb5e14afa10690b5d72a6c9793dca28ce7927a518fe45"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/iqm2_player.py",
+      "sha256": "ff171095559fd64729090ca1a5d4837357b9bfc18738917286a1d00b301576ff"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/iqm2-public-player/source.json",
+      "sha256": "4489143f5550d9e1d5cc53dac310d3577e0388da44badc778d4325f7ac3a28b2"
+    },
+    {
+      "kind": "vendor_client",
+      "path": "docs/capabilities/evidence/iqm2-public-player/player.js",
+      "sha256": "ea82b53b1f948f4764c93d89f2a93c1f653726903e6816528cec1b341d38e7d3"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_iqm2_player.py",
+      "sha256": "e336284c9a4f63e1e2b0453c2976e20c533c1f25de064ec0674eaf8d3e38b0c2"
+    },
+    {
+      "kind": "capture",
+      "path": "tests/fixtures/iqm2-player-6049.capture.json",
+      "sha256": "a63999fbb381610d1473b5f2842edb5c04616c27d1dc357c032fcfd61d731442"
+    }
+  ],
+  "source_observation": "Anonymous exact declared calendar -> player6049 -> player.js reads returned200; source hashes in source.json. Actual6049 HLS/emptytracks and syntheticMP4/track branch attributed separately. Configured engine network behavior executed with injected transport, not claimed as live integrated acceptance.",
+  "initial_test_correction": "The first new configured test incorrectly treated unknown_date_records as a scalar/count without date filtering. Corrected the test to assert explicit source_complete=false and unmapped-date coverage; no runtime date filter weakened.",
+  "other_contract_followup": {
+    "source": "https://www.civicplus.help/meetings-select/docs/sign-in-to-your-site",
+    "established": "Official staff URL template is SITEID.v8.civicclerk.com, distinct from publicportal.",
+    "exact_request": "GET https://fishersin.v8.civicclerk.com/",
+    "result": "HTTP403; no login, header override, alternate path or write attempted. This exact source access failure does not prove all Event semantics require outside help."
+  }
+}

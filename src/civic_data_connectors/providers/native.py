@@ -203,6 +203,9 @@ def parse_native(source, namespace, content, input_format):
     if input_format == "novus-public-coversheet-html":
         from .novus_detail import parse_bundle
         return parse_bundle(source, namespace, content)
+    if input_format == "iqm2-public-player-html":
+        from .iqm2_player import parse_bundle
+        return parse_bundle(source, namespace, content)
     if input_format == "iqm2-meeting-detail-html":
         from .iqm2_detail import parse_bundle
         return parse_bundle(source, namespace, content)

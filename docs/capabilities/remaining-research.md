@@ -117,6 +117,8 @@ Evidence and exact scope: `inventory.json` provider `civicweb`; operation status
 
 ## F12 iQM2 (`iqm2`)
 
+- Selected Kent6049 public player is now mapped from its exact declared Video/Agenda URL and native meeting-bound outline. First-source MP4/HLS metadata and conditionally active supplied subtitle locator are preserved; no evaluation, media/caption bytes or playback claim. The observed source has HLS and no tracks; subtitle logic has separate synthetic proof. Historical IQM2 proposal describes SOAP/XML datasets without endpoint/WSDL/types, so it establishes a concrete API lead rather than an executable write contract or outside-only dependency. See `docs/IQM2-PUBLIC-PLAYER.md`.
+
 - The bounded Kent public calendar and first native search result are observed; verify broader date/body and archive coverage and live supplied Next before claiming completeness.
 - Pinned Granicus/iQM2 help describes authenticated locations/types/meeting and streaming workflows, not an iQM2 machine API. Deployment-specific field/readback documentation remains needed; account enablement is not a synthetic-acceptance gate.
 - Upload limits, write schemas, permission/readback and product applicability remain unresolved in pinned material. Do not substitute Legistar contracts; credentials and live writes are not required acceptance evidence.
