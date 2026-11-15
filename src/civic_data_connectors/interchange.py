@@ -298,14 +298,20 @@ def open_artifact(engine, artifact_id: str, *, context):
 
 
 class _LimitWriter:
-    def __init__(self, stream, limit, deadline_seconds):
+    def __init__(self, stream, limit, deadline_seconds, context=None):
         self.stream, self.limit, self.size = stream, limit, 0
         self.deadline = time.monotonic() + deadline_seconds
         self.digest = hashlib.sha256()
+        self.context = context
+
+    def check(self):
+        if self.context is not None and self.context.check_cancelled():
+            raise InterruptedError("Export cancelled; discard the output stream.")
+        if time.monotonic() >= self.deadline:
+            raise ValueError("The export deadline was exceeded.")
 
     def write(self, data):
-        if time.monotonic() > self.deadline:
-            raise ValueError("The export deadline was exceeded.")
+        self.check()
         if self.size + len(data) > self.limit:
             raise ValueError("The export exceeds the configured transfer byte limit.")
         written = self.stream.write(data)
@@ -313,6 +319,7 @@ class _LimitWriter:
             raise ValueError("The output stream did not accept all bytes.")
         self.digest.update(data)
         self.size += len(data)
+        self.check()
         return written
 
     def tell(self):
@@ -459,6 +466,8 @@ def write_bundle(bundle: dict, destination: BinaryIO, *, format="zip", bounds=No
     Output size and expanded payload sizes are bounded independently of parser input.
     """
     bounds = bounds or Bounds()
+    sink = _LimitWriter(destination, bounds.transfer_bytes, bounds.deadline_seconds, context)
+    sink.check()
     if not isinstance(bundle, dict) or not isinstance(bundle.get("records"), (list, tuple)):
         raise ValueError("Export requires a bundle with records.")
     if format in {"json", "jsonl"}:
@@ -479,7 +488,6 @@ def write_bundle(bundle: dict, destination: BinaryIO, *, format="zip", bounds=No
             if materialized > bounds.parser_bytes:
                 raise ValueError("Original captures exceed the text-format parser limit; use ZIP export.")
             capture["content_base64"] = base64.b64encode(raw).decode("ascii")
-    sink = _LimitWriter(destination, bounds.transfer_bytes, bounds.deadline_seconds)
     manifest = {"interchange_version": INTERCHANGE_VERSION, "schema_version": SCHEMA_VERSION,
                 "format": format, "entries": [], "attachments": [], "not_included": [],
                 "projection_losses": [], "bundle": _hash_json(bundle)}
@@ -604,6 +612,7 @@ def write_bundle(bundle: dict, destination: BinaryIO, *, format="zip", bounds=No
             archive.writestr("manifest.json", raw_manifest)
     else:
         raise ValueError("Neutral format must be json, jsonl or zip.")
+    sink.check()
     return {**manifest, "output": {"sha256": sink.digest.hexdigest(), "byte_length": sink.size}}
 
 

@@ -55,6 +55,8 @@ For a recording that supplies a direct `video_url`, `audio_url` or `playback_url
 
 Export/import/search and write requests also use `engine.execute(operation, request, context=...)`. The transports and SDK share the same result/error contract. Writes require durable atomic storage, explicit `write:plan`/commit policy grants, server-side credentials, supported mappings and exact authorized plan approval. Importing a capture never writes upstream.
 
+For direct stream exports, `quorumrelay.interchange.write_bundle` accepts a caller-owned binary destination and returns its manifest only after completion checks. The deadline includes capture materialization and caller writes; cancellation and expiry are checked after synchronous writes return, including the final write. On any exception, discard the output stream even if it contains all expected bytes. The SDK cannot undo bytes already written to a destination you own.
+
 For backward-compatible application imports:
 
 ```python

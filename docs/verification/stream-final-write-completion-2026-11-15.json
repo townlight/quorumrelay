@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "a161b5c",
+  "tasks": [
+    8
+  ],
+  "status": "PASSED",
+  "scope": "Public write_bundle stream SDK checks cancellation and total deadline before/after caller writes and before manifest return. Deadline starts before capture materialization. Caller discards its stream on any error.",
+  "reproduced_before_fix": {
+    "failed": 5,
+    "already_passed": 1,
+    "observed": "Final caller write cancellation returned a manifest in all3formats; JSON/JSONL also returned a manifest after expiry. ZIP deadline case was already guarded by a subsequent write."
+  },
+  "new_cases": 6,
+  "checks": [
+    {
+      "scope": "Focused stream/engine neutral completion and interchange",
+      "passed": 56,
+      "failed": 0,
+      "seconds": 2.48
+    },
+    {
+      "scope": "All tests referencing write_bundle/neutral exports/projections",
+      "passed": 818,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 58.29,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\stream-final-write-completion-2026-11-15.xml",
+      "xml_sha256": "5facef222fa47bdc046d722a48f8411c7bbfcd313b9681935349a35ae4d2ee90",
+      "warning": "Existing Starlette/AnyIO alias deprecation"
+    },
+    {
+      "scope": "Ruff changed source/test",
+      "status": "PASSED"
+    }
+  ],
+  "source_sha256": {
+    "src/civic_data_connectors/interchange.py": "904c54d2d69709dad5bfe8dc1fd24dffe80049b49cf17797401e464977e90403",
+    "tests/test_stream_bundle_completion.py": "984aeca248157cf5b85f2b80503760e6039086570440818e2f00033c2051569b",
+    "docs/SDK.md": "5492d259a4ba358ec8e55d2d54e30cd86639ec0d957bf4fa99e3229085d3a6fb"
+  },
+  "limits": [
+    "Full2335 suite passed at a161b5c before this final SDK correction; not represented as rerun at current source. Current changed export behavior covered by818affected cases.",
+    "Caller-owned streams may contain bytes after failure; no rollback/atomic remote stream guarantee.",
+    "No release/installed/hosted CI or live provider acceptance claim."
+  ]
+}
