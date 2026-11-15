@@ -13918,6 +13918,56 @@
           "limits": "No third search page, full catalog, transcript text, playback or provider write acceptance.",
           "receipt_path": "docs/verification/swagit-native-search-page2-2026-11-12.json",
           "receipt_sha256": "e2eff82e22cd127122b765cab17c1ec2243881e37267bdb492bc16ca6f427ce2"
+        },
+        {
+          "id": "swagit-public-player-2026-11-15",
+          "url": "https://princetontx.new.swagit.com/videos/405841",
+          "title": "Native-bound Swagit rendered transcript and declared supplied WebVTT",
+          "kind": "observed_public_response_and_scoped_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "observed_contract_and_synthetic_engine_execution",
+          "findings": [
+            "Player transcript-fragments contains62736characters of supplied rendered text; native identity is bound by exact same-video Download Transcript link.",
+            "Explicit track kindcaptions URL ends.vtt with srclang en/labelEnglish. Exact GET200application/octet-stream88614bytes startsWEBVTT; MIME difference from text/vtt is observed, not guessed.",
+            "Literal HLS player declaration retained as metadata only; no JS execution, media/segments, generation, language verification, cue interpretation or structured decisions."
+          ],
+          "synthetic_execution": {
+            "provider": "swagit",
+            "status": "mock_passed",
+            "operations": [
+              "discover",
+              "fetch",
+              "parse",
+              "neutral_export"
+            ],
+            "entities": [
+              "meeting",
+              "transcript"
+            ],
+            "execution_provenance": "Actual player/caption captures mapped offline and configured engine transfer/persistence/reopen/search/ZIP executed with injected transport. Exact public research GETs separately pinned.",
+            "checks": [
+              {
+                "command": "pytest tests/test_swagit_player.py tests/test_swagit_listing.py tests/test_swagit_native_search.py -q",
+                "passed": 31,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/swagit-public-player/source.json",
+                "sha256": "7046a97eeccda01cb781e2ca2ff41b216b197de04105f9c52f4cd205b505b609"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_swagit_player.py",
+                "sha256": "2a17be7530332d72fb2ae2b0d8ee5935cfc32f3e60e845d508c835bb224a3f2b"
+              }
+            ],
+            "scope": "Swagit supplied rendered transcript and exact declared WebVTT; original31families/34formats retained."
+          },
+          "receipt_path": "docs/verification/swagit-public-player-2026-11-15.json",
+          "receipt_sha256": "38982b7d69dfd258eccb118759affcd4ed80d13c5072d76d2ecf6a83e4003458"
         }
       ],
       "tenants": [
@@ -13960,9 +14010,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "swagit-princeton",
-            "swagit-public-search-page2-2026-11-12"
+            "swagit-public-search-page2-2026-11-12",
+            "swagit-public-player-2026-11-15"
           ],
-          "details": "The registered swagit-listing-html current layout is selected for configured public listings; bounded GET captures preserve provider IDs and supplied links. Pagination/catalog completeness is not claimed.",
+          "details": "The registered swagit-listing-html current layout is selected for configured public listings; bounded GET captures preserve provider IDs and supplied links. Pagination/catalog completeness is not claimed. Supplied exact public-player URLs now map native-bound rendered transcript text/date/title and HLS/caption locators. Explicit fetch_captions reads one declared WebVTT with configured download-origin authorization, exact response/MIME/header and aggregate byte/deadline/cancellation checks; scoped SQLite/reopen/search/ZIP proven. No generated text, cue interpretation, playback or staff contract inferred.",
           "dependencies": [
             "bounded date/body query",
             "safe public retrieval"
@@ -13988,9 +14039,10 @@
           "implementation_status": "not_implemented",
           "evidence_ids": [
             "swagit-princeton",
-            "swagit-public-search-page2-2026-11-12"
+            "swagit-public-search-page2-2026-11-12",
+            "swagit-public-player-2026-11-15"
           ],
-          "details": "Public GET captures document/page HTML and search results; no attachment-transfer or media playback acceptance is established. Timestamp links are not transcript text.",
+          "details": "Public GET captures document/page HTML and search results; no attachment-transfer or media playback acceptance is established. Timestamp links are not transcript text. Supplied exact public-player URLs now map native-bound rendered transcript text/date/title and HLS/caption locators. Explicit fetch_captions reads one declared WebVTT with configured download-origin authorization, exact response/MIME/header and aggregate byte/deadline/cancellation checks; scoped SQLite/reopen/search/ZIP proven. No generated text, cue interpretation, playback or staff contract inferred.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -14015,9 +14067,10 @@
           "evidence_ids": [
             "media-baseline",
             "media-reader-source",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "swagit-public-player-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Supplied exact public-player URLs now map native-bound rendered transcript text/date/title and HLS/caption locators. Explicit fetch_captions reads one declared WebVTT with configured download-origin authorization, exact response/MIME/header and aggregate byte/deadline/cancellation checks; scoped SQLite/reopen/search/ZIP proven. No generated text, cue interpretation, playback or staff contract inferred.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -14082,9 +14135,10 @@
           "capability_status": "unverified",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "swagit-public-player-2026-11-15"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Supplied exact public-player URLs now map native-bound rendered transcript text/date/title and HLS/caption locators. Explicit fetch_captions reads one declared WebVTT with configured download-origin authorization, exact response/MIME/header and aggregate byte/deadline/cancellation checks; scoped SQLite/reopen/search/ZIP proven. No generated text, cue interpretation, playback or staff contract inferred.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -14310,7 +14364,7 @@
       ],
       "remaining_research": [
         "Princeton archive capture maps 482 rows; bounded Search Archives pages 1 and 2 yielded 10 provider-ID rows each. No third page/full catalog result was fetched. Provider query semantics remain unknown; exact local matching uses available title/date only.",
-        "Sound Search timestamp URLs are links, not transcripts. No transcript text or video playback is established.",
+        "Sound Search timestamp URLs remain links. Separately, selected native-bound player405841 now preserves its supplied rendered transcript and exact declared WebVTT with scoped engine transfer/persistence/reopen/search/ZIP proof. Other player layouts, content language and playback remain unverified; no generation or cue interpretation.",
         "Official Swagit integration documentation is login-gated and describes PrimeGov/MediaManager IDs, not general writes. Create/update/upload methods remain unresolved contract research; no outside-information dependency has been established."
       ],
       "authentication": "Archive public without credentials; support article requires customer login. Swagit/MediaManager integration account prerequisites unverified.",

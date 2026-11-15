@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-15",
+  "kind": "observed_public_responses",
+  "lead": {
+    "path": "tests/fixtures/swagit-native-search/page-1.html",
+    "sha256": "0b98a678a066895e73407a6032beff8f1df86d489e2ec55c975ed56073cb7f89",
+    "scope": "Existing Princeton search capture supplies exact video405841 URL."
+  },
+  "requests": [
+    {
+      "url": "https://princetontx.new.swagit.com/videos/405841",
+      "method": "GET",
+      "byte_limit": 2000000,
+      "deadline_seconds": 20,
+      "redirects": false,
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 319257,
+      "sha256": "a29e96d76b464ddf4b104811195bd76ddd399e497a9e9324bcf0fe40934192f7",
+      "response_url": "https://princetontx.new.swagit.com/videos/405841",
+      "capture_path": "tests/fixtures/swagit-player/player.html"
+    },
+    {
+      "url": "https://swagit-video.granicus.com/princetontx/32ea54ff-1e43-4027-a587-1b5c771d8755-en.vtt",
+      "method": "GET",
+      "byte_limit": 1000000,
+      "deadline_seconds": 20,
+      "redirects": false,
+      "status": 200,
+      "content_type": "application/octet-stream",
+      "bytes": 88614,
+      "sha256": "917de417c68b1db2f3aa5dc5596da2a74a21f0b07b26240be61c1c7d335ae6be",
+      "response_url": "https://swagit-video.granicus.com/princetontx/32ea54ff-1e43-4027-a587-1b5c771d8755-en.vtt",
+      "capture_path": "tests/fixtures/swagit-player/captions.vtt"
+    }
+  ],
+  "scope": "One supplied native player and declared caption track; observed HTML and actual WebVTT, not playback, catalog or staff API.",
+  "findings": [
+    "Player transcript-fragments contains62736characters of supplied rendered text; native identity is bound by exact same-video Download Transcript link.",
+    "Explicit track kindcaptions URL ends.vtt with srclang en/labelEnglish. Exact GET200application/octet-stream88614bytes startsWEBVTT; MIME difference from text/vtt is observed, not guessed.",
+    "Literal HLS player declaration retained as metadata only; no JS execution, media/segments, generation, language verification, cue interpretation or structured decisions."
+  ]
+}

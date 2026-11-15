@@ -116,7 +116,7 @@ def _initial(source, bounds, input_format, saved):
                         "agendaquick-item-search-html", "civicplus-search-json"}:
         return []
     if input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html", "town-hall-streams-event-html",
-                        "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "novus-public-coversheet-html"}:
+                        "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "novus-public-coversheet-html", "swagit-public-player-html"}:
         return [{"kind": "static"}]
     if provider in NATIVE:
         if not bounds.date_from or not bounds.date_to:
@@ -475,7 +475,7 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
         return bundle, ()
     if input_format in {"boarddocs-public-meetings-json", "legistar-events-json", "legistar-event-json", "wistia-api-media-json",
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
-                        "civicweb-detail-html", "civicweb-filepro-soap-xml", "civicweb-meetings-json", "civicweb-meeting-documents-json", "swagit-listing-html", "onbase-public-listing-html",
+                        "civicweb-detail-html", "civicweb-filepro-soap-xml", "civicweb-meetings-json", "civicweb-meeting-documents-json", "swagit-listing-html", "swagit-public-player-html", "onbase-public-listing-html",
                         "digital-towpath-listing-html", "towncloud-public-listing-json", "telvue-cloudcast-mrss-xml",
                         "agendaquick-public-listing-html", "agendaquick-item-search-html", "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "civicplus-search-json",
                         "utah-public-search-html", "iqm2-public-search-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "novus-public-coversheet-html", "novus-public-listing-html", "peak-publication-rss-xml",
@@ -504,6 +504,12 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
     namespace = validated_namespace if validated_namespace is not None else validate_source(source, context, content)
     bounds = Bounds(**request.get("bounds", {}))
     input_format = source.input_format or DEFAULT_FORMAT[source.provider]
+    swagit_player = (source.provider == "swagit" and (input_format == "swagit-public-player-html"
+                     or (source.input_format is None and re.fullmatch(r"/videos/[1-9][0-9]*", urlsplit(source.url).path))))
+    if swagit_player:
+        from .swagit_player import player_context
+        player_context(source)
+        input_format = "swagit-public-player-html"
     novus_minutes = (source.provider == "novusagenda"
                      and "Minutes" in parse_qs(urlsplit(source.url).query).get("doctype", []))
     if novus_minutes:
@@ -671,20 +677,20 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
                 response = transport.request(
                     url, method=method, body=body, headers=headers or None,
                     byte_limit=(min(bounds.parser_bytes, bounds.transfer_bytes)
-                                if novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
+                                if swagit_player or novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
                                 else bounds.parser_bytes),
                     deadline_seconds=max(0.001, deadline - monotonic()),
                     allowed_origins=(origin,),
-                    **({"allow_redirects": False} if novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {
+                    **({"allow_redirects": False} if swagit_player or novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {
                         "suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period", "clerkbase-tree",
                         "onbase-window", "boarddocs-public", "tyler-calendar"} else {}),
                 )
                 if _origin(response.url) != origin:
                     raise ValueError("Provider retrieval left its configured origin.")
-                if novus_minutes and (response.url != url
+                if (swagit_player or novus_minutes) and (response.url != url
                         or response.content_type.split(";", 1)[0].strip().lower() not in {"text/html", "application/xhtml+xml"}
                         or len(response.content) > bounds.transfer_bytes):
-                    raise ValueError("The exact bounded Novus Minutes HTML was not returned.")
+                    raise ValueError("The exact bounded public detail HTML was not returned.")
                 if input_format == "peak-publication-rss-xml" and (response.url != url
                         or response.content_type.split(";", 1)[0].strip().lower() not in {"text/xml", "application/xml", "application/rss+xml"}
                         or len(response.content) > bounds.transfer_bytes):
@@ -827,7 +833,11 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
             "configured capture only; upstream catalog completeness is unverified"),
         "available_text": "metadata_and_supplied_text_only",
     }
-    if input_format == "peak-publication-rss-xml":
+    if swagit_player:
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one native-bound Swagit player and supplied rendered transcript; media/caption locators not fetched",
+            "generation_requested": False, "cue_timing_interpretation": "not_performed", "playback_verified": False})
+    elif input_format == "peak-publication-rss-xml":
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "one configured publication feed snapshot; not a meeting catalog",
             "publication_time_is_meeting_time": False, "meeting_identity": "not_established",

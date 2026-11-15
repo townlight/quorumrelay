@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "ecc9fed",
+  "status": "PASSED",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "scope": "Swagit supplied rendered transcript and exact declared WebVTT; original31families/34formats retained.",
+  "new_cases": 23,
+  "checks": [
+    {
+      "command": "pytest tests/test_swagit_player.py tests/test_swagit_listing.py tests/test_swagit_native_search.py -q",
+      "passed": 31,
+      "failed": 0,
+      "seconds": 1.3
+    },
+    {
+      "command": "pytest tests/test_swagit_player.py tests/test_swagit_listing.py tests/test_swagit_native_search.py tests/test_novus_minutes.py tests/test_novus_detail.py tests/test_provider_discovery.py tests/test_interchange.py tests/test_baseline.py tests/test_account_read_boundaries.py -q",
+      "passed": 238,
+      "failed": 0,
+      "seconds": 6.4
+    },
+    {
+      "command": "ruff check src tests",
+      "status": "passed"
+    },
+    {
+      "command": "pytest tests -q --junitxml=work/quorumrelay/swagit-novus-owned-work-full-2026-11-15.xml",
+      "passed": 1919,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 102.24,
+      "junit_sha256": "57b5ae73977c235c681d6200d33087daa877ba2ae656d5e7f6d905e64e4efedf",
+      "warning": "Existing starlette anyio BlockingPortal deprecation"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/swagit_player.py",
+      "sha256": "104a55bcd7e506aa4302c109369c3eca8a53da92f0d9122507810c8fde495a28"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/discovery.py",
+      "sha256": "5a79527b23577772c63ae333c263acd23c928ae832f84d418e31cc4ee4d65941"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "b985a509fde5a746b5068e9b48e3098a808026415cd84702fd563bbaf4d6cac1"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_swagit_player.py",
+      "sha256": "2a17be7530332d72fb2ae2b0d8ee5935cfc32f3e60e845d508c835bb224a3f2b"
+    },
+    {
+      "kind": "observed_contract",
+      "path": "docs/capabilities/evidence/swagit-public-player/source.json",
+      "sha256": "7046a97eeccda01cb781e2ca2ff41b216b197de04105f9c52f4cd205b505b609"
+    },
+    {
+      "kind": "capture",
+      "path": "tests/fixtures/swagit-player/player.html",
+      "sha256": "a29e96d76b464ddf4b104811195bd76ddd399e497a9e9324bcf0fe40934192f7"
+    },
+    {
+      "kind": "capture",
+      "path": "tests/fixtures/swagit-player/captions.vtt",
+      "sha256": "917de417c68b1db2f3aa5dc5596da2a74a21f0b07b26240be61c1c7d335ae6be"
+    }
+  ],
+  "initial_test_draft": "First test run used an invalid caller-chosen namespace and12positive cases were rejected by existing source-namespace policy. Removed invalid namespace; no policy or implementation check weakened.",
+  "limits": [
+    "Observed selected player structure, not universal historical/current variants or full catalog.",
+    "Source language label selects a supplied track; content language, timing/speakers and playback are not independently verified.",
+    "HTML/track direct public research GETs observed; engine configured transfer/persistence/reopen/search/ZIP uses injected transport.",
+    "No staff API, release, native build or live mutation."
+  ]
+}

@@ -85,6 +85,9 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if "caption_language" in request and source.provider == "iqm2":
             from .iqm2_player import fetch_captions
             return fetch_captions(engine, source, namespace, request, bounds, context, transport)
+        if "caption_language" in request and source.provider == "swagit":
+            from .swagit_player import fetch_captions
+            return fetch_captions(engine, source, namespace, request, bounds, context, transport)
         if "caption_language" in request and source.provider == "town-hall-streams":
             from .townhall_captions import fetch_captions
             return fetch_captions(engine, source, namespace, request, bounds, context, transport)

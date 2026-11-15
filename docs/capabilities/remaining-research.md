@@ -134,7 +134,7 @@ Evidence and exact scope: `inventory.json` provider `iqm2`; operation status and
 ## F13 Granicus Swagit (`swagit`)
 
 - Princeton archive capture maps 482 rows; bounded Search Archives pages 1 and 2 yielded 10 provider-ID rows each. No third page/full catalog result was fetched. Provider query semantics remain unknown; exact local matching uses available title/date only.
-- Sound Search timestamp URLs are links, not transcripts. No transcript text or video playback is established.
+- Sound Search timestamp URLs remain links. Separately, selected native-bound player405841 now preserves its supplied rendered transcript and exact declared WebVTT with scoped engine transfer/persistence/reopen/search/ZIP proof. Other player layouts, content language and playback remain unverified; no generation or cue interpretation.
 - Official Swagit integration documentation is login-gated and describes PrimeGov/MediaManager IDs, not general writes. Create/update/upload methods remain unresolved contract research; no outside-information dependency has been established.
 
 Evidence and exact scope: `inventory.json` provider `swagit`; operation status and outbound mappings are separate from historical observations.
