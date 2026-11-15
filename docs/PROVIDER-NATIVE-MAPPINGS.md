@@ -360,3 +360,13 @@ cover synthetic transfers; preserved dev13 packages predate this source.
 [GWorks published HTML](GWORKS-PUBLISHED-HTML.md) uses the original city listing namespace and meeting ID; rendered item IDs remain capture-local. [TownCloud draft writes](TOWNCLOUD-WRITES.md) map native agenda/content/field form keys with exact GET readback for an existing unpublished draft. Full item save/publication/file upload remain unmapped.
 
 Historical TelVue CloudCast 4.1 chapter CSV preparation is available as `telvue-cloudcast-4.1-chapters-csv`; see [the format and limits](TELVUE-CHAPTER-CSV.md). This is local file preparation, with current Connect applicability and remote import unverified.
+
+## Account response bounds
+
+TelVue Connect and Essential account reads check cancellation and the shared
+operation deadline after response mapping and identity checks, before returning
+a bundle. Cancellation returns `cancelled`; an expired deadline returns the
+existing sanitized `account_read_failed` error. Mapping is synchronous and is
+checked on return. No additional requests or automatic continuation are made.
+The [executed boundary cases](verification/account-read-boundaries-2026-11-15.json)
+cover both providers without requiring live credentials.

@@ -235,6 +235,10 @@ def fetch_account(source, namespace, request, bounds, context, transport):
             # Capture exact bytes without interpreting an unknown envelope as rows.
             bundle = make_bundle(captured_source, namespace, response.content, "essential-unmapped-response", [])
             coverage["schema_mapping"] = "unverified; raw response only, no normalized records inferred"
+        if context.check_cancelled():
+            return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
+        if monotonic() >= deadline:
+            raise ValueError("The response mapping exceeded the operation deadline.")
         returned = len(bundle["records"])
         bundle["records"] = bundle["records"][:bounds.max_records]
         coverage.update({"returned_records": returned, "selected_records": len(bundle["records"]),
