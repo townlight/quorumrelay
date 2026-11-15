@@ -1,0 +1,9 @@
+# Utah notice calendar and audio attachments
+
+The existing native notice detail reader now retains the exact notice-bound “Add Notice to Calendar” link as a calendar document and MP3 links explicitly categorized “Audio Recording” as recording metadata. Foreign origins, other notice IDs, query/fragment calendar links and hidden or differently labeled audio rows do not become these assets. Original compatibility output stays unchanged.
+
+Select the appended calendar with the existing `fetch_attachment` document index; select audio using `kind="recordings"`. Asset indexes refer to the normalized record, not the page position. Requests stay on the exact captured route without redirects, with transfer/deadline/cancellation guards. Calendar responses require HTTP200, text/calendar and the captured VCALENDAR framing; exact bytes/hash are returned. A failed asset read retains the notice and permits retry. JSON/JSONL/ZIP and SQLite reopen preserve the normalized locators and original notice capture. Downloaded bytes are returned separately by the attachment operation; they are not silently added to the notice bundle.
+
+The actual source calendar1101977 was fetched once: HTTP200,270bytes. UID and floating local DTSTART are visible in the raw source. This reader does not parse or merge that event, infer timezone, convert to UTC or replace notice fields. The original notice also declares MP3 file1477057; its bytes were not fetched live. Synthetic transfer verification does not establish playback, duration, transcript, or recording date from its filename.
+
+Evidence: [source](capabilities/evidence/utah-supplied-assets/source.json), [execution receipt](verification/utah-supplied-assets-2026-11-15.json), `tests/test_utah_supplied_assets.py`. Wider calendar variants, catalog completeness and staff/publication contracts remain unresolved.

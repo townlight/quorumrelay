@@ -400,7 +400,7 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             response = transport.request(
                 transfer_url, byte_limit=remaining_transfer,
                 deadline_seconds=max(0.001, deadline - monotonic()), allowed_origins=allowed,
-                **({"allow_redirects": False} if boardable_viewer or source.provider == "civicplus-select" or source.provider in {"onbase", "tyler-meeting-manager", "boarddocs"} else {}))
+                **({"allow_redirects": False} if boardable_viewer or source.provider == "civicplus-select" or source.provider in {"onbase", "tyler-meeting-manager", "boarddocs", "utah-public-notice"} else {}))
         if source.provider == 'boarddocs':
             if context.check_cancelled():
                 return OperationResult('cancelled', retained_data(), operation_id=context.operation_id)
@@ -410,6 +410,16 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
             return OperationResult('cancelled', retained_data(), operation_id=context.operation_id)
         if (source.provider == "civicplus-select") and monotonic() >= deadline:
             raise ValueError('The selected CivicClerk file exceeded its deadline.')
+        if source.provider == "utah-public-notice":
+            if context.check_cancelled():
+                return OperationResult("cancelled", retained_data(), operation_id=context.operation_id)
+            if response.url != transfer_url or monotonic() >= deadline:
+                raise ValueError("The supplied Utah asset changed route or exceeded its deadline.")
+            if document.get("kind") == "calendar":
+                media_type = response.content_type.split(";", 1)[0].strip().lower()
+                if (media_type != "text/calendar" or not response.content.startswith(b"BEGIN:VCALENDAR\r\n")
+                        or not response.content.rstrip().endswith(b"END:VCALENDAR")):
+                    raise ValueError("The supplied Utah calendar did not return calendar bytes.")
         if response.status != 200:
             raise ValueError("The captured attachment did not return HTTP 200.")
         if (source.provider == "civicplus-select") and response.url != transfer_url:

@@ -17,6 +17,58 @@ def _text(node):
                              for c in node.children).split())
 
 
+
+def supplied_assets(page, url, notice_id):
+    """Keep literal public notice asset locators; never infer a recording date."""
+    origin = urlsplit(url)
+    calendar, recordings = [], []
+
+    def target(href, path):
+        address = urljoin(url, href)
+        parsed = urlsplit(address)
+        return address if (parsed.scheme == origin.scheme == "https"
+            and parsed.netloc == origin.netloc and not parsed.username
+            and not parsed.query and not parsed.fragment
+            and re.fullmatch(path, parsed.path)) else None
+
+    def visible(node):
+        while node is not None:
+            if "hidden" in node.attrs or node.attrs.get("aria-hidden") == "true":
+                return False
+            node = node.parent
+        return True
+
+    for node in page.root.walk():
+        if (node.tag == "a" and visible(node) and _text(node) == "Add Notice to Calendar"
+                and node.parent is not None and "message" in node.parent.classes()):
+            address = target(node.attrs.get("href", ""),
+                rf"/pmn/sitemap/noticeical/{re.escape(notice_id)}\.ics")
+            if address:
+                value = {"kind": "calendar", "url": address, "title": _text(node)}
+                if value not in calendar:
+                    calendar.append(value)
+        if node.tag != "table" or not visible(node):
+            continue
+        if not any(n.tag == "caption" and _text(n) == "Download Attachments" for n in node.children if isinstance(n, Node)):
+            continue
+        for row in node.walk():
+            if row.tag != "tr" or not visible(row):
+                continue
+            cells = [n for n in row.children if isinstance(n, Node) and n.tag == "td"]
+            if len(cells) != 3 or _text(cells[1]) != "Audio Recording":
+                continue
+            for link in cells[0].walk():
+                if link.tag != "a" or not visible(link):
+                    continue
+                address = target(link.attrs.get("href", ""), r"/pmn/files/[0-9]+\.mp3")
+                if address:
+                    value = {"kind": "audio", "url": address, "title": _text(link),
+                             "source_category": _text(cells[1])}
+                    if value not in recordings:
+                        recordings.append(value)
+    return calendar, recordings
+
+
 def enrich_bundle(bundle):
     result = deepcopy(bundle)
     capture = result["capture"]
@@ -33,6 +85,7 @@ def enrich_bundle(bundle):
         raise ValueError("Utah notice capture hash mismatch.")
     page = Page()
     page.feed(content.decode("utf-8", errors="replace"))
+    calendars, recordings = supplied_assets(page, url, notice[1])
     fields, nodes = {}, {}
     for node in page.root.walk():
         if node.tag != "dt" or not node.parent:
@@ -65,6 +118,10 @@ def enrich_bundle(bundle):
             raise ValueError("Utah notice disagrees with its capture identity.")
         normalized = record["normalized"]
         normalized["supplied_notice_fields"] = deepcopy(fields)
+        for calendar in calendars:
+            if calendar not in normalized["documents"]:
+                normalized["documents"].append(deepcopy(calendar))
+        normalized["recordings"] = deepcopy(recordings)
         normalized["time_zone_status"] = "unknown"
         for label, key in (("Public Body", "body"), ("Entity", "entity"),
                            ("Government Type", "government_type"),

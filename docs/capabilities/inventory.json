@@ -16133,6 +16133,21 @@
           "limits": "Exact rendered-admin access dependency verified; broader machine contract research unresolved, not vendor-wide API absence. Missing full form/response/readback; no create/update/upload adapter inferred.",
           "local_path": "docs/capabilities/evidence/utah-admin-client/source.json",
           "sha256": "5eeb98106cdb12ee784955d1df407b91692edb4240251db90bf5e317b67bc667"
+        },
+        {
+          "id": "utah-supplied-assets-2026-11-15",
+          "url": "https://www.utah.gov/pmn/sitemap/noticeical/1101977.ics",
+          "title": "Native notice calendar and audio source locators with bounded retrieval",
+          "kind": "implementation_evidence",
+          "observation_date": "2026-11-15",
+          "observed": "Actual calendar GET200text/calendar270bytes;13new/211affected cases passed. Audio source locator actual; audio transfer synthetic only.",
+          "findings": "Exact source-bound calendar and labeled MP3 recording retained in rich record; legacy projection unchanged; no timezone/date/playback inference. Calendar transfer checks exact no-redirect route, MIME/framing and bounds; notices retained on failures. SQLite/reopen and JSON/JSONL/ZIP preserve locators/raw HTML.",
+          "limits": "One source calendar; no calendar semantic merge, actual audio/playback, catalog or staff writes.",
+          "receipt_path": "docs/verification/utah-supplied-assets-2026-11-15.json",
+          "receipt_sha256": "14d9aa0f7044a5b0d89310c734d503b2eeebe429af89f2c4915d4293867d3f32",
+          "local_path": "docs/capabilities/evidence/utah-supplied-assets/source.json",
+          "sha256": "d4e970917708dfcf57c9a274597f1e1a16f62851f091e00b6b5c5d811b455fe1",
+          "proof_level": "public_source_and_saved_capture_synthetic_engine_execution"
         }
       ],
       "tenants": [
@@ -16199,16 +16214,17 @@
         },
         "fetch": {
           "capability_status": "observed",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "utah-notice"
+            "utah-notice",
+            "utah-supplied-assets-2026-11-15"
           ],
-          "details": "Research GETs observed only as described in evidence; no engine implementation or attachment-transfer acceptance. Notice writes affect legally consequential public postings. Only authorized synthetic/test Body writes permitted; none attempted.",
+          "details": "Configured native notice HTML retrieval already implemented; source-bound calendar and audio descriptors now retained, with exact no-redirect guarded asset transfer. Actual calendar bytes observed;No complete-catalog claim. Synthetic failures preserve notice. No staff writes. Selected calendar/audio locator and neutral preservation scope: docs/verification/utah-supplied-assets-2026-11-15.json;211affected cases passed.",
           "dependencies": [
             "shared network safeguards"
           ],
           "remaining_verification": [
-            "Verify raw response MIME, redirects, document/media status and independent attachment failures."
+            "Other calendar variants, actual audio/playback and unobserved document outcomes remain qualified, not newly required sampling."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -16228,9 +16244,10 @@
           "evidence_ids": [
             "media-baseline",
             "media-reader-source",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "utah-supplied-assets-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Selected calendar/audio locator and neutral preservation scope: docs/verification/utah-supplied-assets-2026-11-15.json;211affected cases passed.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",

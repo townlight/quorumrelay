@@ -159,7 +159,7 @@ Evidence and exact scope: `inventory.json` provider `peak`; operation status and
 
 ## F16 Utah Public Notice Website (`utah-public-notice`)
 
-- One Utah body/date public search returned notice 1120627; government/ZIP search, result caps, live next-page behavior and linked document/iCalendar byte acceptance remain unverified.
+- One Utah body/date public search returned notice 1120627; government/ZIP search, result caps, live next-page behavior and other linked-document outcomes remain unverified. Separately, existing notice1101977 now retains source-declared calendar/audio locators; actual exact calendar270bytes observed and bounded transfer/neutral preservation verified. Audio byte transfer is synthetic only; no playback or event/timezone merge. See `docs/UTAH-SUPPLIED-ASSETS.md`.
 - Pinned Admin Help describes notice draft/publish and attachments as UI steps without an external API/import schema. A supported machine integration contract remains needed; live test-account acquisition is not required for synthetic acceptance.
 - Notice publication has legal timing/visibility consequences; future writes require explicit authorization and planned readback.
 

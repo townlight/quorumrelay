@@ -379,3 +379,8 @@ development-host mapping remains available. The
 [response qualification regressions](verification/essential-response-qualification-2026-11-15.json)
 cover development-shaped, lower-camel and unknown production fixtures without
 claiming any of them is an observed production response.
+
+
+### Utah supplied notice assets (2026-11-15)
+
+Native notice detail enrichment retains the exact Add Notice to Calendar locator and explicitly labeled Audio Recording MP3 locator. Exact calendar file bytes are independently captured; no calendar-to-notice field merge, timezone or recording-date inference. Legacy output unchanged. See [mapping and limits](UTAH-SUPPLIED-ASSETS.md) and [211-case affected verification](verification/utah-supplied-assets-2026-11-15.json).
