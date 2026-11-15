@@ -117,7 +117,7 @@ def _outcome(session, prepared, key_table):
     for row in flat:
         by_foreign.setdefault(str(row.get("ForeignID")), []).append(row)
     intended = [change.fields["MetaDataData"]] if change.operation == "create" else change.fields["MetaData"]
-    matched = True
+    matched = all(type(row.get("ID")) is int and row["ID"] > 0 for row in flat)
     resolved = {}
     for row, parent in _nodes(intended):
         found = by_foreign.get(str(row["ForeignID"]), [])
@@ -127,24 +127,32 @@ def _outcome(session, prepared, key_table):
         target = found[0]
         resolved[str(row["ForeignID"])] = target["ID"]
         # Creation IDs/UIDs and child parent references are server-assigned.
-        matched &= all(target.get(k) == v for k, v in row.items()
-                       if k not in {"ID", "UID", "Children", "ParentID", "ParentUID"})
+        fields = {k: v for k, v in row.items()
+                  if k not in {"ID", "UID", "Children", "ParentID", "ParentUID"}}
+        matched &= all(k in target and canonical_hash(target[k]) == canonical_hash(v)
+                       for k, v in fields.items())
         if parent is None:
-            matched &= target.get("ParentID") == row["ParentID"]
+            matched &= ("ParentID" in target and
+                        canonical_hash(target["ParentID"]) == canonical_hash(row["ParentID"]))
             if row["ParentUID"]:
                 matched &= target.get("ParentUID") == row["ParentUID"]
         else:
             parents = by_foreign.get(str(parent["ForeignID"]), [])
-            matched &= len(parents) == 1 and target.get("ParentID") == parents[0]["ID"] and target.get("ParentUID") == parents[0].get("UID")
+            matched &= (len(parents) == 1 and "ParentID" in target and "ParentUID" in target
+                        and "UID" in parents[0]
+                        and canonical_hash(target["ParentID"]) == canonical_hash(parents[0]["ID"])
+                        and canonical_hash(target["ParentUID"]) == canonical_hash(parents[0]["UID"]))
     if change.fields.get("ClearExisting"):
         matched &= len(flat) == len(_nodes(intended))
     else:
         by_id = {row["ID"]: row for row in flat}
-        matched &= all(row["ID"] in by_id and all(by_id[row["ID"]].get(k) == v for k, v in row.items()
+        matched &= all(row["ID"] in by_id and all(k in by_id[row["ID"]] and canonical_hash(by_id[row["ID"]][k]) == canonical_hash(v) for k, v in row.items()
                          if k != "Children") for row, _ in _nodes(prepared["before"]))
     if key_table is not None:
         matched &= (isinstance(key_table, list) and len(key_table) == len(resolved)
-                    and all(isinstance(pair, dict) and resolved.get(str(pair.get("ForeignID"))) == pair.get("GranicusID") for pair in key_table)
+                    and all(isinstance(pair, dict) and type(pair.get("ForeignID")) is int
+                            and type(pair.get("GranicusID")) is int and pair["GranicusID"] > 0
+                            and resolved.get(str(pair["ForeignID"])) == pair["GranicusID"] for pair in key_table)
                     and len({str(pair.get("ForeignID")) for pair in key_table if isinstance(pair, dict)}) == len(resolved))
     return {"state": "succeeded" if matched else "uncertain", "resource_id": change.resource_id,
         "readback": actual, "key_table": key_table, "resolved_foreign_ids": resolved,

@@ -175,7 +175,7 @@ Publication is explicit approved input; destructive clearing, deletes and unrela
 platform administration remain excluded. Returned provider IDs/jobs do not imply
 independently verified playable bytes.
 
-Granicus event creation accepts the full documented `EventData` with system-assigned `ID` left at zero. The caller may supply a GUID string as `UID`; the exact supplied value must appear in readback and cannot be changed by an update. An empty `UID` retains the existing server-assignment path. Full-model readback requires each planned, non-server field to be present with its exact value and type. The pinned WSDL does not establish how a provider treats omitted fields versus explicit nil on write.
+Granicus event creation accepts the full documented `EventData` with system-assigned `ID` left at zero. The caller may supply a GUID string as `UID`; the exact supplied value must appear in readback and cannot be changed by an update. An empty `UID` retains the existing server-assignment path. Full-model readback requires each planned, non-server field to be present with its exact value and type. The pinned WSDL does not establish how a provider treats omitted fields versus explicit nil on write. Agenda Add/Import confirmation also checks typed, present mapped fields, native node IDs, parent references, key-table IDs and preservation of retained nodes; an invalid persisted key mapping remains uncertain without replay.
 
 For lost event-create acknowledgments, `GetEventsByForeignID` returns all matches for the supplied association. Reconciliation requires one matching candidate with a valid native ID and honors any ID already acknowledged; observing one candidate is not a provider uniqueness or idempotency guarantee.
 

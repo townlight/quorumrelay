@@ -98,7 +98,8 @@
     },
     {
       "path": "docs/WRITE-CONTRACT.md",
-      "sha256": "8a35b5ac413ae52cdc89e82d14a9941c24e54e8d309b9770fd958eb5d88d78fd"
+      "sha256": "d9713892251acf048cb753942ab9ef5f3bfb72bb625635297da2067b18317ccc",
+      "previous_sha256": "8a35b5ac413ae52cdc89e82d14a9941c24e54e8d309b9770fd958eb5d88d78fd"
     },
     {
       "path": "docs/capabilities/evidence/granicus-platform/APIEntities.cs",
@@ -111,6 +112,14 @@
     {
       "path": "docs/capabilities/provider-api-contracts.json",
       "sha256": "a537f0c4ba0cc8e168d0e513e16035fee5aced70289fe907349e13bc4e81de5d"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/granicus_metadata.py",
+      "sha256": "3b3be733ccb0cba52c25814440e64a7334ae51224ba394b9901b2b066faeb884"
+    },
+    {
+      "path": "tests/test_granicus_metadata_identity.py",
+      "sha256": "1df1603d482627072706afee139a1a94fa8304fea06b500e269b88c5686ffa4a"
     }
   ],
   "limits": [
@@ -119,5 +128,37 @@
     "Pinned WSDL does not establish omitted/nil write semantics. Missing-null rejection is defensive confirmation, not a new nullable-field support claim.",
     "Specialized Wistia caption/background job and Laserfiche document confirmation paths retain their own contracts.",
     "Unchanged historical full-suite receipt is not a full-suite run of this revision."
-  ]
+  ],
+  "agenda_tree_followup": {
+    "base_commit": "009871058740afb0fa9053175948bb536cf7149c",
+    "scope": "Existing Add/Import coordinator confirmation, typed planned and retained fields, positive integer native node IDs and typed parent/key mapping. No new operations/UID/nullable semantics.",
+    "before_fix": "Two actual coordinator false-success failures: OrderID0 vs SOAP false; native ID1 vs SOAP true in key mapping.",
+    "checks": [
+      {
+        "command": "python -X utf8 -m pytest tests/test_granicus_metadata_identity.py tests/test_granicus_metadata.py -q",
+        "passed": 11,
+        "failed": 0,
+        "seconds": 0.93,
+        "executed_by": "root",
+        "junit_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\granicus-metadata-readback-2026-11-15.xml",
+        "junit_sha256": "99142eec80ada148018a20372d54414de60db336d5b8fb9e3bb1dac6750333b9"
+      },
+      {
+        "command": "ruff check src/civic_data_connectors/providers/granicus_metadata.py tests/test_granicus_metadata_identity.py; git diff --check",
+        "status": "passed"
+      }
+    ],
+    "prior_affected_check": {
+      "scope": "metadata + full-model write + identity + caller UID suites",
+      "passed": 67,
+      "seconds": 5.58,
+      "executed_by": "Terra",
+      "revision_limit": "Final production source, before two additional regression cases; final new four-case suite passed0.43s."
+    },
+    "limits": [
+      "Injected WSDL-shaped responses only; no live requests.",
+      "An invalid durable key mapping stays uncertain; changing later reads does not rewrite the acknowledged mapping.",
+      "Lost-ack typed parent/native-ID failures recover with valid later readback after SQLite reopen, without replay."
+    ]
+  }
 }
