@@ -35,3 +35,11 @@ The cookie must use normal `name=value` syntax. The context tenant and namespace
 Planning reads the returned draft snapshot and validates a unique content-type/content-ID/field tuple. Commit rereads it and rejects changes since planning. This preflight comparison is not atomic upstream compare-and-swap. The adapter persists intent before the single POST, then checks exact returned readback; only the selected draft's `updated_at` may vary. Unknown fields and other returned drafts must remain unchanged. A timeout or uncertain response is reconciled through GET after restart, without replaying the POST. No paging or complete account-wide snapshot is inferred from the client.
 
 The source extract/provenance is under `docs/capabilities/evidence/towncloud-client-drafts`. Thirty synthetic coordinator cases cover every declared field, request encoding, identity/tenant permissions, conflict, unknown fields, ignored/collateral changes, cancellation and durable restart recovery. The related write suite passed 105 tests. No live vendor write was performed. The anonymous editor GET redirected to the site home without a form; that observation does not establish that all remaining contracts require private access.
+
+Response retrieval uses the smaller of the approved parser and transfer byte
+limits, including injected transports that fail to enforce the requested cap.
+An oversized preflight fails before approval. An oversized response after a
+sent mutation leaves an uncertain receipt; a subsequent commit reconciles by
+readback after reopening without sending a second mutation. The
+[executed boundary regressions](verification/write-response-bounds-2026-11-15.json)
+preserve existing target binding and request payload contracts.

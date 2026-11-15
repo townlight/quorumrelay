@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-15",
+  "request": {
+    "url": "https://support.granicus.com/s/article/Ross-Integration",
+    "method": "GET",
+    "byte_limit": 2000000,
+    "deadline_seconds": 20,
+    "redirects": false,
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 1410,
+    "sha256": "f13431dcb9118fabff6f1db36c47676208493468324c3738247117d64f4d2119",
+    "response_url": "https://support.granicus.com/s/article/Ross-Integration"
+  },
+  "capture_path": "docs/capabilities/evidence/primegov-ross/article-response.html",
+  "capture_sha256": "f13431dcb9118fabff6f1db36c47676208493468324c3738247117d64f4d2119",
+  "old_supplied_url": "https://support.rocksolid.com/hc/en-us/articles/8476821710107-Ross-Integration",
+  "old_url_result": "web direct fetch404",
+  "finding": "Exact current article URL returns200HTML whose literal script redirects to /s/login?ec=302&startURL=%2Fs%2Farticle%2FRoss-Integration. No article text or response example image present. No browser, login, credentials or route/header bypass used.",
+  "limits": "Authentication or a shareable copy is needed to inspect this exact article. Does not prove a universal outside dependency, contract absence or lack of other public sources. Targeted current-primary search yielded no matching article body; unrelated results rejected."
+}

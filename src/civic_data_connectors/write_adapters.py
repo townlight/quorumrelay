@@ -458,17 +458,18 @@ class WriteAdapter:
         remaining = deadline - monotonic()
         if remaining <= 0:
             raise WriteFailure("deadline_exceeded", "The bounded write deadline expired before the request.")
+        response_limit = bounds.transfer_bytes if raw else min(bounds.parser_bytes, bounds.transfer_bytes)
         try:
             response = self.transport.send(
                 url, method=native.method, body=body, headers=headers,
-                byte_limit=bounds.transfer_bytes if raw else bounds.parser_bytes, deadline_seconds=remaining,
+                byte_limit=response_limit, deadline_seconds=remaining,
             )
         except (OSError, TimeoutError, RuntimeError, ValueError):
             # Never echo transport errors: they may contain credentialed URLs.
             raise AmbiguousWrite() from None
         if not isinstance(response, WriteResponse):
             raise AmbiguousWrite("The configured transport returned an invalid response.")
-        if len(response.content) > (bounds.transfer_bytes if raw else bounds.parser_bytes):
+        if len(response.content) > response_limit:
             raise AmbiguousWrite("The provider response exceeded the bounded parser size.")
         if response.status in {401, 403}:
             raise WriteFailure("permission_denied", "The provider denied this operation.")

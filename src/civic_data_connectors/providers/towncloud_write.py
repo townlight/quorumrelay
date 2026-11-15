@@ -83,12 +83,13 @@ class TownCloudWriteAdapter(WriteAdapter):
         seconds = deadline - monotonic()
         if seconds <= 0:
             raise WriteFailure("deadline_exceeded", "The TownCloud operation deadline expired.")
+        response_limit = min(bounds.parser_bytes, bounds.transfer_bytes)
         try:
             response = self.transport.send(url, method="GET" if body is None else "POST", body=body,
-                headers=headers, byte_limit=bounds.parser_bytes, deadline_seconds=seconds)
+                headers=headers, byte_limit=response_limit, deadline_seconds=seconds)
         except (OSError, TimeoutError, RuntimeError, ValueError):
             raise AmbiguousWrite() from None
-        if not isinstance(response, WriteResponse) or len(response.content) > bounds.parser_bytes:
+        if not isinstance(response, WriteResponse) or len(response.content) > response_limit:
             raise AmbiguousWrite("Invalid or oversized TownCloud response.")
         if response.status in {401, 403}:
             raise WriteFailure("permission_denied", "TownCloud denied the operation.")

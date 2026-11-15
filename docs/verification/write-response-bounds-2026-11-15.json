@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "bbe1c11fe6b7e303b47c94d8ad999b76d278e565",
+  "status": "PASSED",
+  "requirements": [
+    10
+  ],
+  "scope": "Existing Boardable/TownCloud client writers and shared JSON write adapter response limits; no new vendor routes or policy fields.",
+  "new_cases": 6,
+  "reproductions": [
+    {
+      "command": "pytest tests/test_client_write_response_bounds.py -q --tb=short",
+      "before_client_fix": "4failed: Boardable approved a16byte plan and both writers accepted oversized post-mutation response; TownCloud failed planning for another constraint but sent incorrect16MiB response limit."
+    },
+    {
+      "command": "pytest tests/test_client_write_response_bounds.py -q --tb=short",
+      "before_shared_fix": "2failed/4passed: Wistia shared JSON approved16byte preflight and completed despite oversized validJSON post-response."
+    }
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_client_write_response_bounds.py tests/test_boardable_agenda_write.py tests/test_towncloud_draft_write.py tests/test_boardable_item_create.py tests/test_write_file_recovery.py tests/test_write_providers.py tests/test_writes.py tests/test_account_apis.py tests/test_essential_production.py -q",
+      "passed": 177,
+      "failed": 0,
+      "seconds": 5.11
+    },
+    {
+      "command": "ruff check src tests",
+      "status": "passed"
+    },
+    {
+      "command": "pytest tests -q --junitxml=work/quorumrelay/write-response-bounds-full-2026-11-15.xml",
+      "passed": 1936,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 102.93,
+      "junit_sha256": "89c89fde3ab589fc22f0b84ed3125869b74ac3912ae08ac8bfb73d59b88d0e60",
+      "warning": "Existing starlette/anyio BlockingPortal deprecation"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/boardable_write.py",
+      "sha256": "99adfeb0147d3733b972d3b847f280197efa7fcfbff934e101f6f27bf2d2ef63"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/towncloud_write.py",
+      "sha256": "4244d43bb61e8b228d7f094f2cdbf81cb97e300ac969ece532e4816f18c7352e"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/write_adapters.py",
+      "sha256": "6721d7bdb404358b658c08a696a7d294c9c499d90d098343a42beddbdc3f9b35"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_client_write_response_bounds.py",
+      "sha256": "beeffdab9e5e077daeaf9ca6612a6bd91a6eec9ab7cd1b156ec3ad923ac37399"
+    }
+  ],
+  "limitations": [
+    "Synthetic executed bounds/reconciliation, no live provider mutation or acceptance.",
+    "Response cap is per request; this change does not introduce aggregate byte accounting across an existing multi-request write plan.",
+    "Raw binary response semantics retained: transfer_bytes, not parser_bytes.",
+    "No release, build, install or publication."
+  ],
+  "inventory_reexecution": "Validator initially identified historical Boardable create proof bound to the changed source hash. Added a separately dated current-source create/update reexecution proof using the unchanged pinned vendor contract and existing create tests that passed in177affected/full1936. Historical proof preserved; validator not weakened."
+}

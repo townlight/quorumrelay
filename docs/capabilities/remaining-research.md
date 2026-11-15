@@ -29,6 +29,8 @@ Evidence and exact scope: `inventory.json` provider `primegov`; operation status
 
 - New historical vendor API leads are pinned in `evidence/product-contract-followup-2026-11-14/source.json`: Jan2024 review page30 and OaklandPark RFP#070623 pages21/22/102 confirm OneMeeting Secure/Votes API and client-published REST datasets. No executable schemas or current tier/version are established.
 
+- Exact Ross Integration article follow-up: old supplied URL404; current primary article body explicitly redirects to sign-in, with no response-example image. This establishes access for that article only. Other PrimeGov machine-contract research remains unresolved, not proved outside-only. See `evidence/primegov-ross/source.json`.
+
 ## F03 Granicus (`granicus`)
 
 - Pinned contract/version qualification remains; synthetic fixtures establish the pinned mapping, not all historical/current server variants. Do not infer custom status enums, unknown Payload types or checksum algorithms.

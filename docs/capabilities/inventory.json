@@ -3531,6 +3531,19 @@
               }
             ]
           }
+        },
+        {
+          "id": "primegov-ross-article-2026-11-15",
+          "url": "https://support.granicus.com/s/article/Ross-Integration",
+          "title": "Exact Ross Integration article redirects to sign-in",
+          "kind": "primary_document_access_observation",
+          "observation_date": "2026-11-15",
+          "proof_level": "access_observation_not_machine_contract",
+          "findings": [
+            "Exact current article URL returns200HTML whose literal script redirects to /s/login?ec=302&startURL=%2Fs%2Farticle%2FRoss-Integration. No article text or response example image present. No browser, login, credentials or route/header bypass used."
+          ],
+          "limits": "Authentication or a shareable copy is needed to inspect this exact article. Does not prove a universal outside dependency, contract absence or lack of other public sources. Targeted current-primary search yielded no matching article body; unrelated results rejected.",
+          "source_path": "docs/capabilities/evidence/primegov-ross/source.json"
         }
       ],
       "tenants": [
@@ -4063,7 +4076,8 @@
         "Selected public document branches and Type4 compiled HTML output3 are implemented with captured parent membership, retained raw HTML and bounded no-redirect retrieval. Other unknown output, live availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled.",
         "New V2 portal help documents optional support-controlled feature enablement, not authenticated payloads. Third-party crawler corroborates compiled HTML route; exact selected Reno23431GET403. Lacity swagger403, not a verified current login redirect. No outside-only schema dependency proven. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
         "Historical Jan2024 vendor review and OaklandPark RFP#070623 confirm OneMeeting Secure/Votes API and client-published REST datasets; selected exact pages are pinned. They do not provide method/auth/request/response/readback schemas or establish currenttier/version. No APIabsence or outside-only claim.",
-        "Waco public client and actual335-row year/6-section outline resolved scoped read mappings and HTML locator defect. Nonempty items are client-shaped synthetic only; authenticated Meeting/speaker/tracking/write contracts remain unresolved, not proved outside-only."
+        "Waco public client and actual335-row year/6-section outline resolved scoped read mappings and HTML locator defect. Nonempty items are client-shaped synthetic only; authenticated Meeting/speaker/tracking/write contracts remain unresolved, not proved outside-only.",
+        "Exact current Ross Integration article returns a literal login redirect; its response-example image is not exposed in that body. This is a dependency for that exact article, not proof that ActiveItem/staff contracts are universally private. See evidence/primegov-ross/source.json. No arbitrary ActiveItem schema inferred."
       ],
       "requirement_ids": [
         "C01",
@@ -22408,6 +22422,20 @@
               }
             ]
           }
+        },
+        {
+          "id": "write-response-bounds-2026-11-15-towncloud",
+          "url": "https://github.com/townlight/quorumrelay",
+          "title": "Approved response byte bounds and restart reconciliation regression",
+          "kind": "source_regression_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "source_regression_not_new_vendor_contract",
+          "findings": [
+            "Response limits honor the smaller parser/transfer bound; oversized preflight cannot approve, oversized post-response stays uncertain and reconciles after restart without second mutation."
+          ],
+          "receipt_path": "docs/verification/write-response-bounds-2026-11-15.json",
+          "receipt_sha256": "0f1df5a0e2958c05662cf21d330979f35510650281219950e00918c0d19f1727",
+          "limits": "Synthetic regression of already mapped operations, not new vendor schemas or live acceptance."
         }
       ],
       "tenants": [
@@ -25223,6 +25251,20 @@
               }
             ]
           }
+        },
+        {
+          "id": "write-response-bounds-2026-11-15-wistia",
+          "url": "https://github.com/townlight/quorumrelay",
+          "title": "Approved response byte bounds and restart reconciliation regression",
+          "kind": "source_regression_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "source_regression_not_new_vendor_contract",
+          "findings": [
+            "Response limits honor the smaller parser/transfer bound; oversized preflight cannot approve, oversized post-response stays uncertain and reconciles after restart without second mutation."
+          ],
+          "receipt_path": "docs/verification/write-response-bounds-2026-11-15.json",
+          "receipt_sha256": "0f1df5a0e2958c05662cf21d330979f35510650281219950e00918c0d19f1727",
+          "limits": "Synthetic regression of already mapped operations, not new vendor schemas or live acceptance."
         }
       ],
       "tenants": [
@@ -26481,6 +26523,78 @@
               }
             ]
           }
+        },
+        {
+          "id": "write-response-bounds-2026-11-15-boardable",
+          "url": "https://github.com/townlight/quorumrelay",
+          "title": "Approved response byte bounds and restart reconciliation regression",
+          "kind": "source_regression_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "source_regression_not_new_vendor_contract",
+          "findings": [
+            "Response limits honor the smaller parser/transfer bound; oversized preflight cannot approve, oversized post-response stays uncertain and reconciles after restart without second mutation."
+          ],
+          "receipt_path": "docs/verification/write-response-bounds-2026-11-15.json",
+          "receipt_sha256": "0f1df5a0e2958c05662cf21d330979f35510650281219950e00918c0d19f1727",
+          "limits": "Synthetic regression of already mapped operations, not new vendor schemas or live acceptance."
+        },
+        {
+          "id": "boardable-legacy-write-bounds-reexecution-2026-11-15",
+          "url": "https://app.boardable.com/v4/js/app.js?id=052287e3f473e7b1de4bacb15a125802",
+          "title": "Legacy Boardable native writes reexecuted after response bound correction",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observed": "2026-11-15",
+          "observation_date": "2026-11-15",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "access_scope": "saved_anonymous_vendor_client_and_synthetic_coordinator_no_live_mutation",
+          "receipt_path": "docs/verification/write-response-bounds-2026-11-15.json",
+          "receipt_sha256": "0f1df5a0e2958c05662cf21d330979f35510650281219950e00918c0d19f1727",
+          "limits": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication.",
+          "synthetic_execution": {
+            "provider": "boardable",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "item",
+              "agenda_order"
+            ],
+            "scope": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication. Update attribution is post-send cancellation/reconciliation of existing reorder only.",
+            "execution_provenance": "Existing Boardable native text-only create/reorder/item-update suites reexecuted in177 affected synthetic checks after min(parser_bytes,transfer_bytes) response cap change; new regression file adds post-send/reopen bounds checks. No new wire schema or live mutation.",
+            "checks": [
+              {
+                "command": "pytest tests/test_client_write_response_bounds.py tests/test_boardable_agenda_write.py tests/test_towncloud_draft_write.py tests/test_boardable_item_create.py tests/test_write_file_recovery.py tests/test_write_providers.py tests/test_writes.py tests/test_account_apis.py tests/test_essential_production.py -q",
+                "passed": 177,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-client-write/create-item.extract.js",
+                "sha256": "eecdc1faed76639546fcdeabdc4a4dd319d8023670ef18bc70b19fd889e06ff3"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-client-write/create-item-source.json",
+                "sha256": "9187ca98dac8df305e9f367c10adda85ed35fb59dabdde9f8746c1a018aeac21"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_write.py",
+                "sha256": "99adfeb0147d3733b972d3b847f280197efa7fcfbff934e101f6f27bf2d2ef63"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardable_item_create.py",
+                "sha256": "6ead52b86041da75b790b0d77d00372812a7213b3e98c23042363d0e5681439f",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "6ead52b86041da75b790b0d77d00372812a7213b3e98c23042363d0e5681439f"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -26690,7 +26804,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "boardable-docs",
-            "boardable-legacy-item-create-execution"
+            "boardable-legacy-item-create-execution",
+            "boardable-legacy-write-bounds-reexecution-2026-11-15"
           ],
           "details": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication. Scoped vendor-client item create and native readback implemented. Meeting creation remains unmapped.",
           "dependencies": [],
@@ -26713,7 +26828,8 @@
           "evidence_ids": [
             "boardable-edit",
             "boardable-client-agenda-synthetic",
-            "boardable-legacy-item-create-execution"
+            "boardable-legacy-item-create-execution",
+            "boardable-legacy-write-bounds-reexecution-2026-11-15"
           ],
           "details": "Scoped legacy editor sibling reorder and existing item text/description edits use pinned native client requests with full snapshot/readback. Whole-provider update support is not claimed; outbound entity rows carry synthetic acceptance.",
           "dependencies": [],
@@ -27028,7 +27144,8 @@
             }
           ],
           "evidence_ids": [
-            "boardable-legacy-item-create-execution"
+            "boardable-legacy-item-create-execution",
+            "boardable-legacy-write-bounds-reexecution-2026-11-15"
           ],
           "account_requirements": "Trusted legacy tenant/org/meeting URL, namespace/meeting allowlists, item:create, session_cookie and CSRF. Readable existing edit-list; no credential acquisition gate.",
           "authorized_test_access": "synthetic_only_no_live_mutation",

@@ -85,3 +85,11 @@ GETs. Post-send cancellation also leaves an uncertain result until readback.
 and [64-case affected receipt](verification/boardable-item-create-2026-11-14.json)
 attribute this scope separately. Created edit-list membership does not establish
 publication, delivery, remote attachment bytes or a stable public API promise.
+
+Response retrieval uses the smaller of the approved parser and transfer byte
+limits, including injected transports that fail to enforce the requested cap.
+An oversized preflight fails before approval. An oversized response after a
+sent mutation leaves an uncertain receipt; a subsequent commit reconciles by
+readback after reopening without sending a second mutation. The
+[executed boundary regressions](verification/write-response-bounds-2026-11-15.json)
+preserve existing target binding and request payload contracts.
