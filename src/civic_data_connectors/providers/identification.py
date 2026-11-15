@@ -182,6 +182,8 @@ def validate_source(source: Source, context: OperationContext | None = None,
             namespace not in context.allowed_namespaces):
         raise ValueError("The source namespace is outside the caller's authorized source scope.")
     allowed_options = {"download_origins"}
+    if source.provider == "primegov":
+        allowed_options.add("tracking_number")
     if source.provider == "gworks" and source.input_format == "gworks-secure-calendar-json":
         allowed_options.add("gworks_city_id")
     if source.provider == "simbli":

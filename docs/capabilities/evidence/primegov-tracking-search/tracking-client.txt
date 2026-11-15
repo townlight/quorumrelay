@@ -1,0 +1,44 @@
+        e.preventDefault();
+
+        $(this).find(':input').each(function () {
+            var sanitizedValue = sanitize($(this).val());
+            $(this).val(sanitizedValue);
+        });
+
+        showLoading(true, 'getResults', 'Loading Search Results');
+        var searchMeetingModel = {
+            CommitteeId: $("#CommitteeAdvancedSearch").val(),
+            MeetingDateFrom: $("#StartDate").val(),
+            MeetingDateTo: $("#EndDate").val(),
+            MeetingType: $("#MeetingType").val(),
+            ItemTypeId: $("#ItemType").val(),
+            ItemTitle: $("#ItemTitle").val(),
+            Sponsor: $("#Sponsor").val(),
+            TrackingNo: $("#TrackingNumber").val(),
+            Text: $("#Text").val()
+        };
+
+        if ($("#CommitteeAdvancedSearch").val() != null) {
+        }
+
+        if ($("#TrackingNumber").val() != '') {
+            var showTrackingNo = " <b> " + _Common.TrackingNumber + ":</b> '" + searchMeetingModel.TrackingNo + "'";
+        } else {
+            var showTrackingNo = '';
+        }
+        searchMeetingModel.IsFromAdvanceSearch = true;
+
+       changeForSearchResult();
+
+        _searchResultCall = $.ajax({
+            type: 'POST',
+            url: '/api/v2/PublicPortal/search',
+            data: searchMeetingModel,
+            success: function (data) {
+                createSearchResult(data);
+                enableDocumentDropdownAccessibility();
+            },
+            error: function (jqXHR, status, error) {
+                handleError(_Common.Error + ": " + jqXHR.responseJSON != null ? jqXHR.responseJSON.exceptionMessage : error, jqXHR);
+                showLoading(false, 'getResults');
+            }

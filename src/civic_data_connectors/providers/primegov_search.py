@@ -84,12 +84,19 @@ def native_search(engine, request, content, context, *, transport=None):
         raise ValueError("Native search retrieves public candidates; use native=false for saved captures.")
     query, bounds = _query(request.get("query", {})), Bounds(**request.get("bounds", {}))
     query = replace(query, date_from=query.date_from or bounds.date_from, date_to=query.date_to or bounds.date_to)
+    tracking = source.options.get("tracking_number", "")
+    if "tracking_number" in source.options and (
+            not isinstance(tracking, str) or not tracking.strip()
+            or any(ord(char) < 32 or ord(char) == 127 for char in tracking)
+            or len(tracking.encode("utf-8")) > min(1024, bounds.parser_bytes)):
+        raise ValueError("Public tracking_number must be nonempty bounded text without control characters.")
     expressions = [*query.terms, *query.phrases]
-    if not expressions or any(not value.strip() for value in expressions) or not query.date_from or not query.date_to:
-        raise ValueError("Public search requires a nonempty term/phrase and explicit date bounds.")
+    if (not expressions and not tracking or any(not value.strip() for value in expressions)
+            or not query.date_from or not query.date_to):
+        raise ValueError("Public search requires a nonempty term/phrase or tracking_number and explicit date bounds.")
     if source.body or query.body:
         raise ValueError("The observed public search result does not establish a body filter.")
-    candidate = expressions[0]
+    candidate = expressions[0] if expressions else ""
     if len(candidate.encode("utf-8")) > min(1024, bounds.parser_bytes):
         raise ValueError("The provider search expression exceeds its local bound.")
     binding = canonical_hash({"source": source.public_dict(), "query": asdict(query), "scope": context.scope,
@@ -103,7 +110,7 @@ def native_search(engine, request, content, context, *, transport=None):
     url = origin + "/api/v2/PublicPortal/search"
     fields = {"CommitteeId": "", "MeetingDateFrom": date.fromisoformat(query.date_from).strftime("%m/%d/%Y"),
               "MeetingDateTo": date.fromisoformat(query.date_to).strftime("%m/%d/%Y"),
-              "MeetingType": "", "ItemTypeId": "", "ItemTitle": "", "Sponsor": "", "TrackingNo": "",
+              "MeetingType": "", "ItemTypeId": "", "ItemTitle": "", "Sponsor": "", "TrackingNo": tracking,
               "Text": candidate, "IsFromAdvanceSearch": "true"}
     coverage = {"sources": [{**source.public_dict(), "namespace": namespace}], "native_search": True,
                 "scope": "public provider candidates; exact local metadata and supplied excerpt matching",
@@ -111,6 +118,9 @@ def native_search(engine, request, content, context, *, transport=None):
                 "full_document_text_searched": False, "catalog_complete": False, "source_complete": False,
                 "candidate_order": "stable native kind/id; provider ranking is not retained",
                 "provider_pagination": "no continuation in observed public request/array; completeness unknown"}
+    if tracking:
+        coverage["tracking_number_filter"] = {"value": tracking, "field": "TrackingNo",
+                                              "matching": "provider_defined_not_locally_verified"}
     if operation_cancelled(engine.storage, context):
         return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
     deadline = monotonic() + bounds.deadline_seconds
@@ -136,6 +146,8 @@ def native_search(engine, request, content, context, *, transport=None):
         end = min(len(rows), offset + min(query.limit, bounds.max_records))
         bundle = make_bundle(source, namespace, response.content, "primegov-search-json", rows[offset:end])
         bundle["capture"]["retrieval_url"] = url
+        if tracking:
+            bundle["extensions"]["public_search_request"] = {"method": "POST", "url": url, "fields": fields}
         for record in bundle["records"]:
             raw = record["original"]
             if (record["identity"]["record_type"] == "document" and

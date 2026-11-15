@@ -42,3 +42,6 @@ docs/capabilities/evidence/gworks-current-builder/declared-editor-response.html 
 # Exact supplied OnBase Minutes captures retain vendor CRLF/blank whitespace.
 docs/capabilities/evidence/onbase-minutes/wrapper-3831.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
 docs/capabilities/evidence/onbase-minutes/minutes-3831.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Exact PrimeGov deployed client slices retain original CRLF/blank lines.
+docs/capabilities/evidence/primegov-tracking-search/tracking-client.txt whitespace=cr-at-eol,-blank-at-eof

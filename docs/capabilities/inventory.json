@@ -3558,6 +3558,21 @@
           "source_sha256": "4fce804ea51a610d9b5ae11ee3ae80dcad9fa5672954bd38c0bf59138440c0d4",
           "findings": "Release7.63 names PrimeGov agenda/topic import; current appGET403. Partner Agenda API belongs to JustMeetings and its indexed write section is unfinished, not a PrimeGov contract.",
           "limits": "Bounded exact source observations only; no universal absence/outside-only assertion, new provider, live API method or vendor mutation."
+        },
+        {
+          "id": "primegov-public-tracking-search-2026-11-15",
+          "url": "https://reno.primegov.com/Scripts/Custom/Public/_Search.js",
+          "title": "Observed public TrackingNo advanced-search request mapping",
+          "kind": "implementation_evidence",
+          "observation_date": "2026-11-15",
+          "proof_level": "observed_vendor_client_and_synthetic_engine_not_server_match_or_authenticated_api_acceptance",
+          "observed": "Current public client GET20040780B matches pinned SHA59d8325d7adcff9451b9140acd3fe4acf1dcbecaa2b5a7ae3c1d80d63b0e6b70.20new focused cases;216affected passed46.83s, final20strengthened cases passed0.61s.",
+          "findings": "TrackingNo receives literal source.options.tracking_number; tracking-only or optional local text with bounded dates, exact native request context, source-bound checkpoints and SQLite/reopen/JSON/JSONL/ZIP preservation.",
+          "limits": "Provider-defined filter; no local tracking equality, catalog/full-text completeness, authenticated API/write/import or live query claim.",
+          "fixture_path": "docs/capabilities/evidence/primegov-tracking-search/tracking-client.txt",
+          "fixture_sha256": "5d30f542dbe2780fcf3906a1db62d0b520f1ea733020f60b77a5077f0d383fd0",
+          "receipt_path": "docs/verification/primegov-tracking-search-2026-11-15.json",
+          "receipt_sha256": "8e31abd770eec6f9b2d967b5ce8f8fc9d6a18975644aae6ba0aae02af37177a4"
         }
       ],
       "tenants": [
@@ -3676,9 +3691,10 @@
             "primegov-search-empty-fixture",
             "primegov-native-search-live-final",
             "primegov-system-document-client-locator-2026-11-13",
-            "primegov-selected-documents-synthetic-2026-11-13"
+            "primegov-selected-documents-synthetic-2026-11-13",
+            "primegov-public-tracking-search-2026-11-15"
           ],
-          "details": "For explicitly configured HTTPS public/portal sources, the observed public form POST returns Meeting/Item/Attachment candidates. The first expression is submitted; exact AND terms/phrases/date/type matching is local over supplied metadata and stripped highlight excerpts only. Explicit dates are required; body filtering is not established. Source/query/caller-bound traversal sorts native kind/id because observed provider rank changes, while canonical row-set fingerprints detect value changes. Raw captures/unknowns/meeting parents retained. First/resumed bounded mutable-source reads each returned3distinct records; catalog/source coverage remains partial. Type-2 system-document rows with positive bounded integer IDs expose the published same-origin document locator; search does not fetch it or verify file availability. Additional declared types1/3/4 now support explicit selected-document fetch; search itself never fetches files. New subtype-qualified identity avoids numeric collisions; type2 and baseline IDs unchanged. Previous v1 checkpoints must restart under v2 identity binding.",
+          "details": "For explicitly configured HTTPS public/portal sources, the observed public form POST returns Meeting/Item/Attachment candidates. The first expression is submitted; exact AND terms/phrases/date/type matching is local over supplied metadata and stripped highlight excerpts only. Explicit dates are required; body filtering is not established. Source/query/caller-bound traversal sorts native kind/id because observed provider rank changes, while canonical row-set fingerprints detect value changes. Raw captures/unknowns/meeting parents retained. First/resumed bounded mutable-source reads each returned3distinct records; catalog/source coverage remains partial. Type-2 system-document rows with positive bounded integer IDs expose the published same-origin document locator; search does not fetch it or verify file availability. Additional declared types1/3/4 now support explicit selected-document fetch; search itself never fetches files. New subtype-qualified identity avoids numeric collisions; type2 and baseline IDs unchanged. Previous v1 checkpoints must restart under v2 identity binding. Public TrackingNo advanced-search filter now maps source.options.tracking_number literally, with tracking-only or optional local text and explicit dates. Provider tracking matching remains unverified; exact request context is preserved.",
           "dependencies": [],
           "remaining_verification": [
             "Provider matching/ranking/cap semantics, full document search and cross-tenant behavior remain unverified.",
@@ -4084,6 +4100,7 @@
         "Unverified and access-blocked are incomplete, not unsupported."
       ],
       "remaining_research": [
+        "Public TrackingNo form filter implemented2026-11-15 from the current pinned client;20synthetic cases and216affected checks. This resolves that observed public request field, not authenticated Meeting/speaker/private tracking schemas or provider matching semantics. See docs/verification/primegov-tracking-search-2026-11-15.json.",
         "Observed Reno public /api/v2/PublicPortal/search form is now source-implemented with exact local metadata/excerpt checks, stable native-ID continuation, raw/parent preservation and bounded first/resumed receipt. Full document content, provider matching/caps/rank and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.",
         "Official release notes identify Meeting API, speaker and tracking-number search but the checked release/help material supplies no executable schema. Continue from concrete product-matched API leads; no exhaustive public search or outside-only dependency is established, and no account enablement is a synthetic acceptance gate.",
         "Authenticated create/update/upload field schemas, permissions, readback and conflict semantics remain unverified in the pinned material. A matching machine contract is needed; credentials or live tenant writes are not an acceptance gate.",

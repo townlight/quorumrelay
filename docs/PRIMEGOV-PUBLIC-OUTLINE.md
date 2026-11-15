@@ -1,4 +1,41 @@
-# PrimeGov public document links and selected outlines
+# PrimeGov public document links, outlines and tracking search
+
+## Public tracking-number search
+
+The public advanced-search client sends its Tracking Number input as
+`TrackingNo` to `POST /api/v2/PublicPortal/search`. Set the existing PrimeGov
+source's `options.tracking_number` to the literal number:
+
+```python
+from quorumrelay import Source, create_engine
+
+source = Source("primegov", "https://selected-tenant.primegov.com/public/portal",
+                options={"tracking_number": "PG-2026/011"})
+result = create_engine().execute("search", {
+    "native": True, "source": source.public_dict(),
+    "query": {"date_from": "2026-11-01", "date_to": "2026-11-30"},
+    "bounds": {"max_records": 100, "deadline_seconds": 15},
+})
+```
+
+This option applies only to native public search. Explicit date bounds remain
+required. Optional query terms/phrases retain local AND matching over returned
+metadata/excerpts; tracking-only searches send empty `Text`. The number must be
+nonempty text without control characters, bounded by1024UTF-8 bytes and the
+parser limit. Form encoding preserves the literal value. The filter binds the
+checkpoint, so a continuation cannot change or remove it.
+
+Results remain partial. Tracking matching is provider-defined, without locally
+verified equality against an invented response field. Full-document content,
+server matching rules and catalog completeness remain unverified. The exact
+form request is retained in `bundle.extensions.public_search_request` alongside
+the original response and native identities through SQLite and JSON/JSONL/ZIP.
+The current Reno client returned200 with the previously pinned hash; source
+excerpts are in `capabilities/evidence/primegov-tracking-search/source.json`.
+This public form does not establish authenticated Meeting/speaker/private
+tracking API behavior, writes or vendor-file import.
+
+## Public document links and selected outlines
 
 The Waco public portal's declared `_Upcoming.js` has a `getHref(doc)` contract. Rich records now use the HTML portal route for `compileOutputType=3`; PDF and Word use the compiled-document route. Missing/nonpositive `templateId` selects the native `compiledMeetingDocumentFileId`, rather than inventing a meeting-template ID. An explicit valid source link takes priority. Each descriptor must match its parent meeting ID; malformed/unknown branches are counted in `documents_unmapped_count`. Original document fields remain in source metadata and captures.
 

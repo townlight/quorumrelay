@@ -16,6 +16,8 @@ Evidence and exact scope: `inventory.json` provider `legistar`; operation status
 
 ## F02 PrimeGov (`primegov`)
 
+- Public tracking-number filtering is implemented from the current deployed vendor client: literal `TrackingNo` via `Source.options.tracking_number`, explicit date bounds, optional local text matching, checkpoint binding and retained request context. Matching remains provider-defined and all results partial. This does not establish the authenticated tracking/Meeting/speaker APIs. See `evidence/primegov-tracking-search/source.json` and `../verification/primegov-tracking-search-2026-11-15.json`.
+
 - New partner chain: JustMeetings Release7.63 explicitly names PrimeGov agenda/topic import. Its agenda-building guide supplies UI workflows; the declared app GET returned403. The indexed Agenda API is JustMeetings' own read API and leaves updates undocumented, so it cannot establish a PrimeGov payload. Exact sources and missing exchange/identity/readback fields are pinned in `evidence/primegov-justmeetings/source.json`. This remains unresolved research, not outside-only proof; no new provider or method was inferred.
 
 - Waco public portal client now establishes corrected rich document HTML/PDF/Word/vote-summary locators and selected native speaker-request outline reads. Actual335meetings/553descriptors/21HTML and6sections/0items;16new synthetic cases cover nonemptyitems and guard branches. This does not resolve authenticated Meeting/speaker/tracking/write APIs. See `docs/verification/primegov-public-outline-2026-11-14.json`.
