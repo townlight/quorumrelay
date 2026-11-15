@@ -474,7 +474,7 @@
               "linked_meeting_document"
             ],
             "scope": "Public matter_attachment/upload: approved parent/native binary fields, exact file readback and duplicate receipt replay without another network request.",
-            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged. Whole-file JSON hash rebound solely for two eSCRIBE read-list additions;14other vendor sections checked equal to HEADa3dfc79; prior synthetic scopes unchanged.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged. Whole-file JSON hash rebound solely for two eSCRIBE read-list additions;14other vendor sections checked equal to HEADa3dfc79; prior synthetic scopes unchanged. Current test-source binding refreshed after local276ee5d: 87 affected tests passed, including all named outbound attribution nodes. The full run had 2655 passes and one stale Wistia fixture failure; it is not a green full-run claim. See docs/verification/tasks-6-8-9-10-python-acceptance-2026-11-15.json. Production adapter unchanged by fixture correction; prior raw/canonical test hashes retained in prior_test_bindings.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
@@ -495,12 +495,33 @@
               {
                 "kind": "test",
                 "path": "tests/test_outbound_attribution.py",
-                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d",
+                "sha256": "120b2071fef801f687103ab071a7327702d2c1b0f14c668c61fc175b409dba0b",
                 "hash_policy": "test_source_crlf_to_lf",
-                "canonical_lf_sha256": "ba0bbf9c9b5b5a2eaa37cb86e31b22360a613d5ab8d43f209ba45c35ef97bece"
+                "canonical_lf_sha256": "2352b20e900e6b2ebedff8fbdb1311e85dbd2501d8df949073c3543b15731f13"
               }
             ],
-            "contract_rebinding_2026_11_15": "All prior JSON contract sections checked equal to HEAD; only new escribe_publishing section added. Prior Windows CRLF contract hash accounted for explicitly. Original executed provider scopes/checks unchanged."
+            "contract_rebinding_2026_11_15": "All prior JSON contract sections checked equal to HEAD; only new escribe_publishing section added. Prior Windows CRLF contract hash accounted for explicitly. Original executed provider scopes/checks unchanged.",
+            "prior_test_bindings": [
+              {
+                "date": "2026-11-15",
+                "binding": {
+                  "kind": "test",
+                  "path": "tests/test_outbound_attribution.py",
+                  "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d",
+                  "hash_policy": "test_source_crlf_to_lf",
+                  "canonical_lf_sha256": "ba0bbf9c9b5b5a2eaa37cb86e31b22360a613d5ab8d43f209ba45c35ef97bece"
+                },
+                "reason": "Wistia import fixture corrected to documented bulk_operation shape; other attributed dispatch tests unchanged."
+              }
+            ],
+            "binding_refresh_evidence": {
+              "receipt_path": "docs/verification/tasks-6-8-9-10-python-acceptance-2026-11-15.json",
+              "receipt_sha256": "a29b812458c8c656f250d1dea67f3b37d758bce18d5c311e5ffb15ba462e2d53",
+              "affected_command": "python -X utf8 -m pytest -q tests/test_outbound_attribution.py tests/test_wistia_job_binding.py tests/test_wistia_swap.py tests/test_write_providers.py",
+              "affected_passed": 87,
+              "seconds": 16.62,
+              "attribution": "Only existing named nodes attributed to this provider; 87 is combined affected-suite count."
+            }
           }
         },
         {
@@ -4100,9 +4121,9 @@
           "field_mappings": [],
           "evidence_ids": [],
           "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Historical: no authorized provider test tenant or credentials supplied; documented-contract synthetic execution is accepted when a contract is established, and live account access is not required.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
+          "verification_status": "unverified_machine_contract",
           "implementation_status": "not_verified_by_inventory",
           "acceptance_status": "not_run",
           "requirement_ids": [
@@ -4129,9 +4150,9 @@
           "field_mappings": [],
           "evidence_ids": [],
           "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Historical: no authorized provider test tenant or credentials supplied; documented-contract synthetic execution is accepted when a contract is established, and live account access is not required.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
+          "verification_status": "unverified_machine_contract",
           "implementation_status": "not_verified_by_inventory",
           "acceptance_status": "not_run",
           "requirement_ids": [
@@ -4158,9 +4179,9 @@
           "field_mappings": [],
           "evidence_ids": [],
           "account_requirements": "not supplied; authorized provider test tenant/credentials absent",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
+          "authorized_test_access": "Historical: no authorized provider test tenant or credentials supplied; documented-contract synthetic execution is accepted when a contract is established, and live account access is not required.",
           "readback_receipt": "Bind exact approved plan to request; preserve provider resource/task identity and supplied revision; independently GET/read before declaring accepted. Uncertain create cannot be blindly repeated.",
-          "verification_status": "official_contract_documented_not_live_accepted",
+          "verification_status": "unverified_machine_contract",
           "implementation_status": "not_verified_by_inventory",
           "acceptance_status": "not_run",
           "requirement_ids": [
@@ -23563,7 +23584,7 @@
               "linked_meeting_document"
             ],
             "scope": "Public document/create through Folder/Import and document_large/update through existing target Document/UpdateUploadedParts, exact approved file bytes/readback, multipart signed transfer, asynchronous task reconciliation; no inferred meeting association.",
-            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged. Whole-file JSON hash rebound solely for two eSCRIBE read-list additions;14other vendor sections checked equal to HEADa3dfc79; prior synthetic scopes unchanged.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged. Whole-file JSON hash rebound solely for two eSCRIBE read-list additions;14other vendor sections checked equal to HEADa3dfc79; prior synthetic scopes unchanged. Current test-source binding refreshed after local276ee5d: 87 affected tests passed, including all named outbound attribution nodes. The full run had 2655 passes and one stale Wistia fixture failure; it is not a green full-run claim. See docs/verification/tasks-6-8-9-10-python-acceptance-2026-11-15.json. Production adapter unchanged by fixture correction; prior raw/canonical test hashes retained in prior_test_bindings.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
@@ -23585,12 +23606,33 @@
               {
                 "kind": "test",
                 "path": "tests/test_outbound_attribution.py",
-                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d",
+                "sha256": "120b2071fef801f687103ab071a7327702d2c1b0f14c668c61fc175b409dba0b",
                 "hash_policy": "test_source_crlf_to_lf",
-                "canonical_lf_sha256": "ba0bbf9c9b5b5a2eaa37cb86e31b22360a613d5ab8d43f209ba45c35ef97bece"
+                "canonical_lf_sha256": "2352b20e900e6b2ebedff8fbdb1311e85dbd2501d8df949073c3543b15731f13"
               }
             ],
-            "contract_rebinding_2026_11_15": "All prior JSON contract sections checked equal to HEAD; only new escribe_publishing section added. Prior Windows CRLF contract hash accounted for explicitly. Original executed provider scopes/checks unchanged."
+            "contract_rebinding_2026_11_15": "All prior JSON contract sections checked equal to HEAD; only new escribe_publishing section added. Prior Windows CRLF contract hash accounted for explicitly. Original executed provider scopes/checks unchanged.",
+            "prior_test_bindings": [
+              {
+                "date": "2026-11-15",
+                "binding": {
+                  "kind": "test",
+                  "path": "tests/test_outbound_attribution.py",
+                  "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d",
+                  "hash_policy": "test_source_crlf_to_lf",
+                  "canonical_lf_sha256": "ba0bbf9c9b5b5a2eaa37cb86e31b22360a613d5ab8d43f209ba45c35ef97bece"
+                },
+                "reason": "Wistia import fixture corrected to documented bulk_operation shape; other attributed dispatch tests unchanged."
+              }
+            ],
+            "binding_refresh_evidence": {
+              "receipt_path": "docs/verification/tasks-6-8-9-10-python-acceptance-2026-11-15.json",
+              "receipt_sha256": "a29b812458c8c656f250d1dea67f3b37d758bce18d5c311e5ffb15ba462e2d53",
+              "affected_command": "python -X utf8 -m pytest -q tests/test_outbound_attribution.py tests/test_wistia_job_binding.py tests/test_wistia_swap.py tests/test_write_providers.py",
+              "affected_passed": 87,
+              "seconds": 16.62,
+              "attribution": "Only existing named nodes attributed to this provider; 87 is combined affected-suite count."
+            }
           }
         },
         {
@@ -27619,7 +27661,7 @@
               "recording"
             ],
             "scope": "Public media_import/create: exact supplied URL bound in plan, documented modern import_url POST, queued job retained, finished job supplies created media ID, exact target GET; processing readback is not playable-media confirmation.",
-            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged. Whole-file JSON hash rebound solely for two eSCRIBE read-list additions;14other vendor sections checked equal to HEADa3dfc79; prior synthetic scopes unchanged.",
+            "execution_provenance": "Executed locally on base76cf32c with the new test file bound below; four distinct public dispatch cases passed in 15.38s. This entry attributes only its named subset; no vendor mutation, package build or full-suite rerun. Central JSON hash rebound2026-11-15 solely for eSCRIBE Package/Bookmark/Resolution additions; all14other vendor JSON sections compared equal to HEAD, their executed scopes unchanged. Whole-file JSON hash rebound solely for two eSCRIBE read-list additions;14other vendor sections checked equal to HEADa3dfc79; prior synthetic scopes unchanged. Current test-source binding refreshed after local276ee5d: 87 affected tests passed, including all named outbound attribution nodes. The full run had 2655 passes and one stale Wistia fixture failure; it is not a green full-run claim. See docs/verification/tasks-6-8-9-10-python-acceptance-2026-11-15.json. Production adapter unchanged by fixture correction; prior raw/canonical test hashes retained in prior_test_bindings.",
             "checks": [
               {
                 "command": ".venv/Scripts/python.exe -m pytest tests/test_outbound_attribution.py -q",
@@ -27640,12 +27682,33 @@
               {
                 "kind": "test",
                 "path": "tests/test_outbound_attribution.py",
-                "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d",
+                "sha256": "120b2071fef801f687103ab071a7327702d2c1b0f14c668c61fc175b409dba0b",
                 "hash_policy": "test_source_crlf_to_lf",
-                "canonical_lf_sha256": "ba0bbf9c9b5b5a2eaa37cb86e31b22360a613d5ab8d43f209ba45c35ef97bece"
+                "canonical_lf_sha256": "2352b20e900e6b2ebedff8fbdb1311e85dbd2501d8df949073c3543b15731f13"
               }
             ],
-            "contract_rebinding_2026_11_15": "All prior JSON contract sections checked equal to HEAD; only new escribe_publishing section added. Prior Windows CRLF contract hash accounted for explicitly. Original executed provider scopes/checks unchanged."
+            "contract_rebinding_2026_11_15": "All prior JSON contract sections checked equal to HEAD; only new escribe_publishing section added. Prior Windows CRLF contract hash accounted for explicitly. Original executed provider scopes/checks unchanged.",
+            "prior_test_bindings": [
+              {
+                "date": "2026-11-15",
+                "binding": {
+                  "kind": "test",
+                  "path": "tests/test_outbound_attribution.py",
+                  "sha256": "5987bde90ae690a1b54d53e917e9b940a0dc751dbdb7d92ffb3d79261c8a780d",
+                  "hash_policy": "test_source_crlf_to_lf",
+                  "canonical_lf_sha256": "ba0bbf9c9b5b5a2eaa37cb86e31b22360a613d5ab8d43f209ba45c35ef97bece"
+                },
+                "reason": "Wistia import fixture corrected to documented bulk_operation shape; other attributed dispatch tests unchanged."
+              }
+            ],
+            "binding_refresh_evidence": {
+              "receipt_path": "docs/verification/tasks-6-8-9-10-python-acceptance-2026-11-15.json",
+              "receipt_sha256": "a29b812458c8c656f250d1dea67f3b37d758bce18d5c311e5ffb15ba462e2d53",
+              "affected_command": "python -X utf8 -m pytest -q tests/test_outbound_attribution.py tests/test_wistia_job_binding.py tests/test_wistia_swap.py tests/test_write_providers.py",
+              "affected_passed": 87,
+              "seconds": 16.62,
+              "attribution": "Only existing named nodes attributed to this provider; 87 is combined affected-suite count."
+            }
           }
         },
         {
