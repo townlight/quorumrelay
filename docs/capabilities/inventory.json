@@ -14684,6 +14684,21 @@
           "receipt_path": "docs/verification/configured-fetch-labels-2026-11-15.json",
           "receipt_sha256": "c4030ee9e9129810ceb97d81f250445f5493c57df61428a68e595f70d3478e8d",
           "proof_level": "saved_capture_configured_engine_execution_not_live_acceptance"
+        },
+        {
+          "id": "suiteone-public-event-2026-11-15",
+          "url": "https://watkinsvillega.suiteonemedia.com/event/?id=2165",
+          "title": "Original archive native event2165 rendered transcript and actual WebVTT",
+          "kind": "implementation_evidence",
+          "observation_date": "2026-11-15",
+          "observed": "Actual eventHTML1562086bytes and declared caption104409bytes returned200;13new/245affected execution cases passed.",
+          "findings": "959selected table rows/46059textcharacters; native event/share context, literal source timing strings, supplied MP4/caption metadata. Explicit supplied WebVTT transfer retains exact text/captures/relationships/hash through SQLite/retry/reopen/search and neutral formats.",
+          "limits": "Selected native player only. No duplicate display merge, script execution, date/body/language/timezone/cue/vote/playback inference; not Liberty import or staff write schema.",
+          "local_path": "docs/capabilities/evidence/suiteone-public-event/source.json",
+          "sha256": "1816dfd8d0e8358bf7b57544f8782ce70421190cf7ac114a7a56147e71d1ee15",
+          "receipt_path": "docs/verification/suiteone-public-event-2026-11-15.json",
+          "receipt_sha256": "33f5f9d8f18221a9ec7041b33bc3b560f817606569c95009755ac16bc5e78056",
+          "proof_level": "actual_public_capture_and_saved_engine_execution_not_catalog_or_write_acceptance"
         }
       ],
       "tenants": [
@@ -14757,9 +14772,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "suiteone-vermilion",
-            "configured-fetch-labels-2026-11-15"
+            "configured-fetch-labels-2026-11-15",
+            "suiteone-public-event-2026-11-15"
           ],
-          "details": "Configured archive HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and28native event records. Bounded root/older-group traversal and selected native search have separate receipts. No general attachment, timed Liberty HTML import or upload/publication contract is established.",
+          "details": "Configured archive HTML fetch is implemented and executed against the original saved source; retained original bytes/hash and28native event records. Bounded root/older-group traversal and selected native search have separate receipts. No general attachment, timed Liberty HTML import or upload/publication contract is established. Selected nativeevent2165 rendered transcript/source timing strings and explicit supplied WebVTT have separate2026-11-15execution; source/captures/relationships/hash persist through local search/reopen/neutral formats. No script execution/date/vote/cue/playback/Liberty import inference.",
           "dependencies": [
             "shared network safeguards"
           ],
@@ -14784,9 +14800,10 @@
           "evidence_ids": [
             "media-baseline",
             "media-reader-source",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "suiteone-public-event-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Selected nativeevent2165 rendered transcript/source timing strings and explicit supplied WebVTT have separate2026-11-15execution; source/captures/relationships/hash persist through local search/reopen/neutral formats. No script execution/date/vote/cue/playback/Liberty import inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -14832,9 +14849,10 @@
           "capability_status": "unverified",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "suiteone-public-event-2026-11-15"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Selected nativeevent2165 rendered transcript/source timing strings and explicit supplied WebVTT have separate2026-11-15execution; source/captures/relationships/hash persist through local search/reopen/neutral formats. No script execution/date/vote/cue/playback/Liberty import inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -14853,9 +14871,10 @@
           "capability_status": "unverified",
           "implementation_status": "implemented",
           "evidence_ids": [
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "suiteone-public-event-2026-11-15"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Selected nativeevent2165 rendered transcript/source timing strings and explicit supplied WebVTT have separate2026-11-15execution; source/captures/relationships/hash persist through local search/reopen/neutral formats. No script execution/date/vote/cue/playback/Liberty import inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",

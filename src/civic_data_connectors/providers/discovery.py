@@ -116,7 +116,7 @@ def _initial(source, bounds, input_format, saved):
                         "agendaquick-item-search-html", "civicplus-search-json"}:
         return []
     if input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html", "boardbook-public-minutes-html", "town-hall-streams-event-html",
-                        "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "novus-public-coversheet-html", "swagit-public-player-html", "telvue-public-player-html"}:
+                        "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "novus-public-coversheet-html", "swagit-public-player-html", "telvue-public-player-html", "suiteone-public-event-html"}:
         return [{"kind": "static"}]
     if provider in NATIVE:
         if not bounds.date_from or not bounds.date_to:
@@ -475,7 +475,7 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
         return bundle, ()
     if input_format in {"boarddocs-public-meetings-json", "legistar-events-json", "legistar-event-json", "wistia-api-media-json",
                         "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
-                        "civicweb-detail-html", "civicweb-filepro-soap-xml", "civicweb-meetings-json", "civicweb-meeting-documents-json", "swagit-listing-html", "swagit-public-player-html", "telvue-public-player-html", "onbase-public-listing-html",
+                        "civicweb-detail-html", "civicweb-filepro-soap-xml", "civicweb-meetings-json", "civicweb-meeting-documents-json", "swagit-listing-html", "swagit-public-player-html", "telvue-public-player-html", "suiteone-public-event-html", "onbase-public-listing-html",
                         "digital-towpath-listing-html", "towncloud-public-listing-json", "telvue-cloudcast-mrss-xml",
                         "agendaquick-public-listing-html", "agendaquick-item-search-html", "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "civicplus-search-json",
                         "utah-public-search-html", "iqm2-public-search-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "novus-public-coversheet-html", "novus-public-listing-html", "peak-publication-rss-xml",
@@ -510,6 +510,12 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
         from .boardbook_detail import minutes_context
         minutes_context(source)
         input_format = "boardbook-public-minutes-html"
+    suiteone_player = (source.provider == "suiteone-media" and (input_format == "suiteone-public-event-html"
+        or (source.input_format is None and urlsplit(source.url).path == "/event/")))
+    if suiteone_player:
+        from .suiteone_player import player_context
+        player_context(source)
+        input_format = "suiteone-public-event-html"
     telvue_player = (source.provider == "telvue" and (input_format == "telvue-public-player-html"
         or (source.input_format is None and urlsplit(source.url).hostname == "videoplayer.telvue.com"
             and re.search(r"/media/[1-9][0-9]*$", urlsplit(source.url).path))))
@@ -690,17 +696,17 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
                 response = transport.request(
                     url, method=method, body=body, headers=headers or None,
                     byte_limit=(min(bounds.parser_bytes, bounds.transfer_bytes)
-                                if boardbook_minutes or swagit_player or telvue_player or novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
+                                if boardbook_minutes or swagit_player or telvue_player or suiteone_player or novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
                                 else bounds.parser_bytes),
                     deadline_seconds=max(0.001, deadline - monotonic()),
                     allowed_origins=(origin,),
-                    **({"allow_redirects": False} if boardbook_minutes or swagit_player or telvue_player or novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {
+                    **({"allow_redirects": False} if boardbook_minutes or swagit_player or telvue_player or suiteone_player or novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {
                         "suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period", "clerkbase-tree",
                         "onbase-window", "boarddocs-public", "tyler-calendar"} else {}),
                 )
                 if _origin(response.url) != origin:
                     raise ValueError("Provider retrieval left its configured origin.")
-                if (boardbook_minutes or swagit_player or telvue_player or novus_minutes) and (response.url != url
+                if (boardbook_minutes or swagit_player or telvue_player or suiteone_player or novus_minutes) and (response.url != url
                         or response.content_type.split(";", 1)[0].strip().lower() not in {"text/html", "application/xhtml+xml"}
                         or len(response.content) > bounds.transfer_bytes):
                     raise ValueError("The exact bounded public detail HTML was not returned.")
@@ -846,6 +852,11 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
             "configured capture only; upstream catalog completeness is unverified"),
         "available_text": "metadata_and_supplied_text_only",
     }
+    if suiteone_player:
+        coverage.update(scope="one native SuiteOne event and supplied transcript table",
+                        playback_verified=False, generation_requested=False,
+                        cue_timing_interpretation="not_performed", content_language=None,
+                        catalog_complete=False, source_complete=False)
     if telvue_player:
         coverage.update(scope="one native public TelVue player; supplied metadata/locators only",
                         playback_verified=False, caption_bytes_received=False,

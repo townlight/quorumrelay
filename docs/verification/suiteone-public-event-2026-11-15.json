@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "5652f0f",
+  "status": "PASSED",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "new_cases": 13,
+  "scope": "Actual native SuiteOne event rendered transcript/source timing literals and explicitly requested declared WebVTT; source preservation without generation/account access.",
+  "checks": [
+    {
+      "command": "pytest tests/test_suiteone_player.py tests/test_telvue_player.py tests/test_suiteone_search.py tests/test_swagit_player.py tests/test_provider_discovery.py tests/test_baseline.py tests/test_baseline_search.py tests/test_interfaces.py tests/test_public_package.py -q",
+      "passed": 245,
+      "failed": 0,
+      "seconds": 24.6,
+      "warnings": "One existing starlette/anyio BlockingPortal deprecation."
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/suiteone_player.py",
+      "sha256": "5e601b85c3e46abc5446323e9d0abb9c300c54443b04c15dca1a77ccfe7b3c13"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/discovery.py",
+      "sha256": "f4afd2a51175b0e763bad3ab266581da1cc6ab788cdb3afcf7da24d685ccd2c3"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "967dd8d1c73a0d59399a1c8b4a866bc425ebbe143116b24d1157806ce25725dc"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/native.py",
+      "sha256": "1b8572ef7f6aca83276951d5ab51b6aba15898fb9f2668533b36bad7ed3d3986"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/identification.py",
+      "sha256": "9c4a2ebcd9e34079c1b21888a858b40983ab4315566ad8d6b2c1bdce13efdee1"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/__init__.py",
+      "sha256": "dc15f8a59e802b79947e8b5b9ff0aefd8ff3637ba5843e1d8009774b19960fa9"
+    },
+    {
+      "path": "tests/test_suiteone_player.py",
+      "sha256": "b0a0a2b964208da16afd5e7b45a89dba83dead16a507c3f3a8f592ea0db7974c"
+    },
+    {
+      "path": "docs/capabilities/evidence/suiteone-public-event/source.json",
+      "sha256": "1816dfd8d0e8358bf7b57544f8782ce70421190cf7ac114a7a56147e71d1ee15"
+    }
+  ],
+  "unaffected_evidence_reused": {
+    "receipt": "docs/verification/owned-boundaries-full-2026-11-15.json",
+    "full_suite_passed": 1968,
+    "scope": "Prior full suite; additive public player changes reexecuted245affected cases. No later full suite claimed."
+  },
+  "limits": [
+    "Only literal supplied player/track declarations and rendered table rows; no scripts executed or media fetched.",
+    "Two exact no-redirect HTML/VTT requests under aggregate transfer/per-response parser/deadline/cancel bounds; independent rendered source survives caption failure.",
+    "Timing values remain source strings; no cue interpretation or content-language/accuracy/date/body/timezone/playback claim.",
+    "Stable source_identity_key matches original meeting2165; derivation/stability explanatory metadata differs by format and is not part of that key. No missing date merged from a guessed title or transcript.",
+    "Neutral JSON/JSONL/ZIP exact captures/text/relationships/hash, SQLite retry/reopen/search checked. No Liberty import/write contract or release."
+  ]
+}

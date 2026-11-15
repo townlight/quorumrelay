@@ -397,3 +397,8 @@ Explicit Digital Towpath detail retrieval now applies the smaller parser/transfe
 ### TelVue source-declared public captions (2026-11-15)
 
 The original public playlist native-media link now supports literal player JSON metadata and explicit supplied WebVTT reading without account credentials. No script execution, title-date/language-code inference, playback or staff-write contract is implied. See [mapping and identity limits](TELVUE-PUBLIC-CAPTIONS.md) and [253 affected execution cases](verification/telvue-public-player-2026-11-15.json).
+
+
+### SuiteOne supplied event transcripts (2026-11-15)
+
+Native event2165 now maps its selected rendered transcript table/source timing strings and explicit declared WebVTT. Stable event key matches the original archive. No script execution, date/body/cue/vote/playback or Liberty timed-import equivalence is inferred. See [mapping and limits](SUITEONE-SUPPLIED-TRANSCRIPTS.md) and [245 affected checks](verification/suiteone-public-event-2026-11-15.json).

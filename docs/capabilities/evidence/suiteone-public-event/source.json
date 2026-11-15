@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-15",
+  "kind": "observed_public_event_and_supplied_caption",
+  "lead": {
+    "path": "tests/fixtures/baseline/suiteone.response",
+    "sha256": "c4a0732de74628cf5590129d0020d474937161638719c3215c09533235241112",
+    "scope": "Original saved Watkinsville archive supplies exact native event2165 recording link; no guessed API or new tenant survey."
+  },
+  "player": {
+    "url": "https://watkinsvillega.suiteonemedia.com/event/?id=2165",
+    "response_url": "https://watkinsvillega.suiteonemedia.com/event/?id=2165",
+    "method": "GET",
+    "status": 200,
+    "content_type": "text/html",
+    "byte_limit": 2000000,
+    "deadline_seconds": 20,
+    "redirects": false,
+    "bytes": 1562086,
+    "sha256": "652eed6ff364a02791ea07a464f818e171d2b6671634664da9ca9af3bd6a2302",
+    "fixture": "tests/fixtures/suiteone-player/event-2165.html"
+  },
+  "caption": {
+    "url": "https://watkinsvillega.suiteonemedia.com/Event/GetCaptions/?eventId=2165",
+    "response_url": "https://watkinsvillega.suiteonemedia.com/Event/GetCaptions/?eventId=2165",
+    "method": "GET",
+    "status": 200,
+    "content_type": "text/vtt",
+    "byte_limit": 1000000,
+    "deadline_seconds": 20,
+    "redirects": false,
+    "bytes": 104409,
+    "sha256": "ee014e220eb3bccd4389db206523fa205826b557774b3a9cbd76810c0b5d4dc7",
+    "fixture": "tests/fixtures/suiteone-player/captions.vtt"
+  },
+  "findings": [
+    "Selected player tab transcript table supplies959rows and46059characters; other display duplicate not combined.",
+    "Each row source text/data-time/data-time_end/display timestamp retained literally, without cue interpretation or structured motions/votes/speakers.",
+    "shareEventUrl data-eventid/value and exact caption declaration bind native event2165. Uniqueev-header title and literal HTTPSMP4 source retained without fetching media or scripts."
+  ],
+  "limits": "Selected layout only; no date/body/timezone inferred, content language/accuracy/playback unverified. This rendered source is not the Liberty timed *_content.HTML import contract or staff write API."
+}

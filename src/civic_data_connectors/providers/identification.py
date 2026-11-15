@@ -15,7 +15,8 @@ from ..models import OperationContext, OperationResult, Source
 FORMATS = {provider: tuple(row["input_format"] for row in compat.source_formats()
                            if row["connector"] == provider)
            for provider in dict.fromkeys(row["connector"] for row in compat.source_formats())}
-ADDITIONAL_FORMATS = {"gworks": ("gworks-published-meeting-html", "gworks-secure-calendar-json"),
+ADDITIONAL_FORMATS = {"suiteone-media": ("suiteone-public-event-html",),
+                      "gworks": ("gworks-published-meeting-html", "gworks-secure-calendar-json"),
                       "legistar": ("legistar-events-json", "legistar-event-json", "legistar-votes-json",
                                  "legistar-rollcalls-json"),
                       "boarddocs": ("boarddocs-public-meetings-json", "boarddocs-public-meeting-html", "boarddocs-public-item-html"),

@@ -143,6 +143,8 @@ Evidence and exact scope: `inventory.json` provider `swagit`; operation status a
 
 ## F14 SuiteOne Media (`suiteone-media`)
 
+- New original-archive native event2165 now maps959supplied transcript rows/46059textcharacters and source timing strings; exact declared WebVTT200text/vtt104409bytes,13new/245affected cases passed. Both source captures/text/relationships/hash survive SQLite/retry/reopen/search and neutral formats. No script execution/date/body/cue/vote/playback inference. See `docs/SUITEONE-SUPPLIED-TRANSCRIPTS.md`. This does not establish Liberty timed *_content.HTML import or staff writes.
+
 - On Vermilion, root and one supplied Older Meetings group were traversed (328 rows; 17 older groups reported; continuation retained). A separate bounded Council native-search run/resume returned three provider candidates per page and zero exact local hits. Remaining groups, full history, remote search/date semantics and all meeting/document MIME/redirect outcomes remain unestablished.
 - Ordinary HTML document preparation is implemented from the August2021 guide, with manual timing explicit. The separate Liberty timed *_content.HTML schema is still unresolved; a matching schema or example would establish it. No outside-only dependency is proved.
 - Pinned admin UI steps do not establish a machine write/publication/readback contract. Those schemas remain unresolved; account credentials or live publication are not an acceptance gate.
