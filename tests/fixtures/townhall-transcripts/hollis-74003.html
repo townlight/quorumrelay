@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Stream Video - Town Hall Streams</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <link rel="bookmark" href="assets/"/>
+<!-- matt -->
+    <!-- css -->
+    <link rel="stylesheet" href="assets/css/site.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/anim.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="assets/css/player.css"> 
+<style>
+/* CEA-608 captions: JW positions every caption row at the column the encoder
+   sent, so lines jump left/right and are sized at ~5% of video height.
+   Ignore that layout: stack the rows bottom-center at a readable size. */
+#myElement .jw-captions { font-size: clamp(14px, 2.2vw, 26px) !important; }
+#myElement.jw-flag-fullscreen .jw-captions { font-size: clamp(20px, 2.8vw, 44px) !important; }
+#myElement .jw-text-track-container {
+    top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+    width: auto !important; height: auto !important;
+    display: flex !important; flex-direction: column !important;
+    justify-content: flex-end !important; align-items: center !important;
+    padding: 0 5% 2% !important; box-sizing: border-box !important;
+}
+#myElement .jw-text-track-display {
+    position: static !important; top: auto !important; left: auto !important;
+    width: auto !important; height: auto !important; max-width: 100% !important;
+    text-align: center !important; line-height: 1.3 !important; margin: 0 !important;
+}
+#myElement .jw-text-track-cue { line-height: 1.3 !important; }
+</style>
+<style>
+#adminbar {
+      left: 0px;
+      top: 0px;
+      position:fixed;
+      background-color: #eee;
+      color: #000;
+      font-family: 'Bitter';
+      font-size: 13px;
+      letter-spacing: 1px;
+      line-height: 40px;
+      /*margin-left: -180px;*/
+      opacity: 0.9;
+      padding-right: 20px;
+      text-align: right;
+      text-transform: uppercase;
+      width: 100%;
+      /* word-spacing: 20px;*/
+      z-index: 5000;
+      }
+</style>
+<style>
+.fallback-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1000;
+    padding: 40px;
+    box-sizing: border-box;
+}
+</style>
+
+    <!-- JS -->
+    <script type="text/javascript" src="assets/js/site.min.js"></script> 
+
+    <script src="https://cdn.jwplayer.com/libraries/Jl8FKtA4.js"></script>
+    <script type="text/javascript" src="assets/js/hls-start-keyframe.js"></script>
+    <script type="text/javascript" src="assets/js/jw-skip-forward.js"></script>
+
+	<script type='text/javascript'> 
+function retryStream() {
+        document.getElementById('fallbackMessage').style.display = 'none';
+        console.log("Attempting to retry stream...");
+		
+        const maxRetries = 3;
+        const baseDelay = 1000; // Start with 1 second delay
+        let retryCount = 0;
+
+        function attemptReload() {
+            if (retryCount < maxRetries) {
+                const delay = baseDelay * Math.pow(2, retryCount);
+                console.log(`Retry attempt ${retryCount + 1} after ${delay}ms delay`);
+                
+                setTimeout(() => {
+                    console.log("Reloading player...");
+                    playerInstance.load({
+                        file: playerInstance.getPlaylistItem().file
+                    });
+                    retryCount++;
+                }, delay);
+            } else {
+                console.log("Max retries reached, showing fallback message");
+                document.getElementById('fallbackMessage').style.display = 'block';
+            }
+        }
+
+        attemptReload();
+    }
+function changeCCOptions()
+{
+	var speakerOpt = $("#speakeropt").val();
+	console.log("Choosing "+speakerOpt);
+	$("#autocc").html("");
+	if(speakerOpt=="transcript")
+	{
+		changeView(false);
+	}
+	else if(speakerOpt=="speaker")
+	{
+		changeView(true);
+	}
+}
+function changeView(useSpeaker)
+{
+	var speaker = "";
+	if(useSpeaker)
+	{
+		speaker = "speaker=1&";
+	}
+	var url = "stream.php?"+speaker+"full=1&location_id=72&id=74003&action=get_transcriptions";
+	 
+	$.ajax({
+	    type: 'GET', 
+	    url: url,
+	    data: {   },
+	    success: function(response){ 
+	    	 $("#autocc").html(response); 
+		 $('#autocc').scrollTop($('#autocc')[0].scrollHeight);	
+	    },
+	    error: function() {
+		    console.log("Failed in making the transcription request!"); 
+	      }
+	});
+}
+	function switchTranscriptions()
+	{
+		var speaker = "";
+		if($("#speaker").is(":checked"))
+		{
+			speaker = "speaker=1&";
+		}
+		var url = "stream.php?"+speaker+"full=1&location_id=72&id=74003&action=get_transcriptions";
+		 
+		$.ajax({
+		    type: 'GET', 
+		    url: url,
+		    data: {   },
+		    success: function(response){ 
+		    	 $("#autocc").html(response); 
+		    },
+		    error: function() {
+			    console.log("Failed in making the transcription request!"); 
+		      }
+		});
+	}
+
+function checkTranscriptions()
+{
+
+	var speaker = "";
+	if($("#speaker").is(":checked"))
+	{
+		speaker = "speaker=1&";
+	}
+	var url = "stream.php?"+speaker+"location_id=72&id=74003&action=get_transcriptions";
+	$.ajax({
+	    type: 'GET', 
+	    url: url,
+	    data: {   },
+	    success: function(response){ 
+	    	if(response=="1" || response.length<=0)
+	    	{
+				//console.log("No new captions..");
+	    	}
+	    	else{
+	    		$("#autocc").html(response);
+$('#autocc').scrollTop($('#autocc')[0].scrollHeight);	
+	    	}
+
+
+    },
+	    error: function() {
+		    console.log("Failed in making the transcription request!"); 
+	      }
+	});
+}
+
+	var numClicks= 0;
+	function switchPlayer(elementId){
+			numClicks++;
+		
+			console.log("Number of clicks : "+numClicks);
+			if(numClicks==1){
+				setTimeout(function(){ numClicks=0; }, 500);
+			}
+			else if(numClicks>=2){
+				var newUrl = jwplayer(elementId).getPlaylistItem()["file"];
+			   var oldUrl = jwplayer("myElement").getPlaylistItem()["file"];	
+			   console.log("New URL: "+newUrl);
+			   console.log("Old URL: "+oldUrl);
+		 
+
+			   if(newUrl.indexOf(".mp4")<=0){ 
+			 	   jwplayer('myElement').load([{
+			 		    "file": newUrl, 
+			 		}]);
+			 	   jwplayer(elementId).load([{
+			 		    "file": oldUrl, 
+			 		}]);
+			   }
+			   else{
+	 		      var player = jwplayer("myElement");
+	 		      var player2 = jwplayer(elementId);
+	 		      p1pos = player.getPosition();
+	 		      p2pos = player2.getPosition();
+	 		      
+			 	   jwplayer('myElement').load([{
+			 		    "file": newUrl, 
+			 		}]);
+			 	   jwplayer(elementId).load([{
+			 		    "file": oldUrl, 
+			 		}]);
+			 		setTimeout(function(){
+console.log("Setting player 1 to "+p2pos);			 
+console.log("Setting player 2 to "+p1pos);			 
+			player.seek(p2pos);
+			 			player2.seek(p1pos);
+			 		}, 500);
+			   }
+
+/*	   jwplayer('myElement').load([{
+		 		    "file": newUrl, 
+		 		}]);
+		 	   jwplayer(elementId).load([{
+		 		    "file": oldUrl, 
+		 		}]);*/
+		 	  numClicks=0;
+			}   
+		   
+	}
+	var lastChk = "";
+	function copyAllText(){
+		if(lastChk!=""){
+			$("#"+lastChk).select();
+		}
+	}
+	function getEmbed(){
+		var embedVal = $("#embed_options").val();
+		if(embedVal=="iframe"){
+			lastChk="embed_iframe";
+			$("#embed_iframe").show();
+                        $("#embed_iframesecure").hide();
+			$("#embed_html").hide(); 
+			$("#selector").show();
+		}
+		else if(embedVal=="iframesecure"){
+			lastChk="embed_iframesecure";
+                        $("#embed_iframesecure").show();
+			$("#embed_iframe").hide();
+                        $("#embed_html").hide();
+                        $("#selector").show();
+		}
+		else if(embedVal!=""){
+			lastChk="embed_html";
+			$("#embed_iframe").hide();
+                        $("#embed_iframesecure").hide();
+			$("#embed_html").show();
+			$("#selector").show();
+		}
+		else{
+			lastChk="";
+                        $("#embed_iframesecure").hide();
+			$("#embed_html").hide(); 
+			$("#embed_iframe").hide();
+			$("#selector").hide();
+		}
+	}
+	function reload()
+	{
+		document.location.href="/stream.php?location_id=72&id=74003";
+	}
+	function showErrorPage()
+	{
+		var mystyle = $("#myElement").attr("style");
+		mystyle= mystyle+";background-color: #fff";
+		$("#myElement").attr("style",mystyle);
+		// document.getElementById('myElement').innerHTML = '<img src="https://townhallstreams.com/errorstream.png" />';
+		
+					var msg = 'We were unable to find this video. Please <a style="cursor:pointer" onclick="reload();">click here</a> to try again in a few moments.';
+				document.getElementById('myElement').innerHTML = '<div style="font-family: \'regular\';margin-top: 100px;font-weight:bold;text-align:center; width:100%">'+msg+'</div>';
+	}
+	function checkFirewall(){
+		showErrorPage();
+
+		var url = "https://5bbb19a5c6aad.streamlock.net/firewall";
+		console.log("Checking Townhallstreams.com CDN ... ");
+		$.ajax({
+		    type: 'GET', 
+		    url: url,
+		    data: {   },
+		    success: function(response){ 
+		    	console.log("Received response to firewall request ...");
+		    	console.log(response);
+				 if(response!="Success"){ 
+				 
+					$("#firewall_div").attr("style","color:red");
+					$("#firewall_div").html("Not able to ping the cdn network from your server. Firewall may be restricting access!  Please continue to the remainder of the test by logging in but this may be the issue.");
+					
+				 }
+		    },
+		    error: function() {
+			    console.log("Failed in making the request! Firewall has prevented access?");
+		         $('#firewall_div').text('An error occurred');
+		         $("#firewall").val("0");
+		      }
+		});
+	} 
+	</script>
+  </head>
+  <body style="background-color: #f5f5f5;">
+  
+    <div class="navpan" style="">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5">
+            <center class="visible-xs">
+
+              <img src="assets/img/logo1.png" style="width: 100px !important;" alt="">
+              <br><br>
+            </center>
+            <p>
+              <a href="town.php?id=72"><i class="fa fa-angle-left"></i> Back</a>
+              &nbsp; | &nbsp;
+              Budget Committee<br /> <span style="margin-left: 120px; font-size: 10px;">Nov, 10 2026 07:00 pm - 11:30 pm</span>
+            </p>
+
+          </div>
+
+          <div class="col-md-2">
+            <img src="assets/img/logo1.png" class="hidden-xs"alt="">
+
+          </div>
+
+          <div class="col-md-5 text-right hidden-xs">
+            <form class="" action="index.php" method="post">
+                        </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <section style="padding: 0px 0px; background: #000;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-11 col-md-offset-1" style="text-align: center" id="myown">
+           
+            <div id="myElement"></div>
+			<div id="fallbackMessage" class="fallback-message" style="display: none;">
+				The stream has not started, please stand by...<br />
+			<button onclick="retryStream()" class="btn btn-primary" style="margin-top: 20px;">
+				<i class="fa fa-refresh"></i> Retry Stream
+			</button>
+			</div>
+			
+            <script>
+        document.addEventListener("DOMContentLoaded", function() {
+	if(typeof jwplayer === "function") {
+                var originalFile = "https://cdn.townhallstreams.com/vod/_definst_/mp4:hollis_nh/2026-11-10_9275388_Budget_Committee.mp4/playlist.m3u8";
+                var resolveFile = (typeof thsPlayableHlsUrl === "function")
+                    ? thsPlayableHlsUrl(originalFile)
+                    : Promise.resolve(originalFile);
+
+                resolveFile.then(function(file) {
+                jwplayer("myElement").setup({
+                    file: file,
+                    type: (/playlist\.m3u8/i.test(originalFile) || /^blob:/i.test(file)) ? "hls" : undefined,
+			displaycaptions: true,
+			// Let JW draw the in-stream CEA-608 captions (consistent across
+			// browsers); the native <video> tracks are hidden on ready below.
+			renderCaptionsNatively: false,
+			captions: {
+				color: "#ffffff",
+				fontSize: 15,
+				fontFamily: "Arial, sans-serif",
+				fontOpacity: 100,
+				backgroundColor: "#000000",
+				backgroundOpacity: 75,
+				edgeStyle: "none",
+				windowColor: "#000000",
+				windowOpacity: 0
+			},
+		preload: "auto",
+                    qualityLabels: {
+                        2160: "4K",
+                        1080: "HD",
+                        720: "SD",
+                        480: "SD"
+            },	
+		bufferlength: 5,
+                    hlsLowLatency: false,
+                    buffer: 5,
+                    adaptive: {
+                        enableStartOptimization: true
+                    },
+                    autostart: false,
+
+  "pipIcon": "enabled",
+  "playbackRateControls": true,		
+    
+                        height: 600,
+                                        
+                });
+                if (typeof thsAddSkipForward === "function") {
+                    thsAddSkipForward(jwplayer("myElement"), 10);
+                }
+                thsWireCaptions(jwplayer("myElement"));
+	                if (typeof syncAllPlayers === "function") {
+                    jwplayer("myElement").on('play', function() {
+                        syncAllPlayers();
+                    });
+                    jwplayer("myElement").on('seek', function() {
+                        syncAllPlayers();
+                    });
+                    setInterval(syncAllPlayers, 1000);
+                }
+                });
+            } else {
+                console.error("JW Player library not loaded correctly");
+            }
+        });
+    </script>            
+<script type="text/javascript"> 
+
+   
+
+//////// captions
+// Called right after jwplayer().setup() — the setup is async (it waits on the
+// HLS URL), so anything attached before it would hit an un-setup player.
+function thsWireCaptions(player) {
+    // Hide the browser's own rendering of the 608 track so captions aren't
+    // drawn twice (JW renders them itself; renderCaptionsNatively: false).
+    function hideNativeTracks() {
+        var videoEl = document.querySelector('#myElement video');
+        if (!videoEl || !videoEl.textTracks) { return; }
+        for (var i = 0; i < videoEl.textTracks.length; i++) {
+            if (videoEl.textTracks[i].mode === 'showing') {
+                videoEl.textTracks[i].mode = 'hidden';
+            }
+        }
+    }
+    player.on('ready', function() {
+        hideNativeTracks();
+        var videoEl = document.querySelector('#myElement video');
+        if (videoEl && videoEl.textTracks) {
+            videoEl.textTracks.addEventListener('addtrack', hideNativeTracks);
+            videoEl.textTracks.addEventListener('change', hideNativeTracks);
+        }
+    });
+    player.on('play', hideNativeTracks);
+
+    // ID3 TXXX metadata -> transcript box under the player
+    player.on('meta', function(event) {
+        var obj = event && event.metadata;
+        if (!obj || !obj.TXXX || !obj.TXXX.onMetaData) { return; }
+        var box = $('#autocc');
+        if (!box.length) { return; }
+        box.append($('<div>').text(obj.TXXX.onMetaData));
+        box.scrollTop(box[0].scrollHeight);
+    });
+}
+
+
+
+
+var playerInstance = jwplayer("myElement");
+console.log("playerInstance: init" );
+// Wait for player to be ready before adding event handlers
+
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("Player ready, setting up event handlers...");
+
+    // Function to retry stream with exponential backoff
+    
+    // Handle errors using the newer event syntax
+    playerInstance.on('error', function(e) {
+        console.log("error event ... ");
+        document.getElementById('fallbackMessage').style.display = 'block'; 
+    });
+
+    playerInstance.on('setupError', function(e) {
+        console.log("setupError event ... ");
+        document.getElementById('fallbackMessage').style.display = 'block';
+    });
+
+    playerInstance.on('play', function() {
+        console.log("play event ... ");
+        document.getElementById('fallbackMessage').style.display = 'none';
+        reconnectAttempts = 0;
+    });
+
+    playerInstance.on('bufferEmpty', function() {
+        console.log("bufferEmpty event ... ");
+        let bufferEmptyTime = Date.now();
+        
+        setTimeout(function() {
+            if (playerInstance.getState() === 'buffering') {
+                document.getElementById('fallbackMessage').style.display = 'block';
+            }
+        }, 5000);
+    });
+
+    // Handle reconnection attempts
+    var reconnectAttempts = 0;
+    var maxReconnectAttempts = 3;
+
+    function attemptReconnect() {
+        if (reconnectAttempts < maxReconnectAttempts) {
+            reconnectAttempts++;
+            playerInstance.load({
+                file: playerInstance.getPlaylistItem().file
+            });
+        }
+    }
+
+    playerInstance.on('error', function(e) {
+        console.log("onError event ... ");
+        var errorCode = e.code;
+        var errorMessage = e.message;
+        
+        switch(errorCode) {
+            case 232404:
+            case 232001:
+                document.getElementById('fallbackMessage').style.display = 'block';
+                setTimeout(attemptReconnect, 5000);
+                break;
+            case 230000:
+                document.getElementById('fallbackMessage').style.display = 'block';
+                break;
+            default:
+                document.getElementById('fallbackMessage').style.display = 'block';
+        }
+    });
+
+    console.log("Event handlers setup complete");
+});
+
+
+
+
+
+
+	jwplayer("myElement").onSetupError(function(event){ 
+		console.log("onSetupError event ... ");  
+            //   jwplayer("myElement").setup({ width: 960,height: 600, "autostart": false, file:"https://5bbb19a5c6aad.streamlock.net/vod/sample.mp4/playlist.m3u8",image:"https://townhallstreams.com/errorstream.png"});
+        	//   jwplayer('myElement').setControls(false);
+
+        	  checkFirewall();
+	});   
+    jwplayer("myElement").onError(function (event) { 
+	  console.log("onError event ... ");  
+    //   jwplayer("myElement").setup({ width: 960,height: 600, "autostart": false, file:"https://5bbb19a5c6aad.streamlock.net/vod/sample.mp4/playlist.m3u8",image:"https://townhallstreams.com/errorstream.png"});
+	//   jwplayer('myElement').setControls(false); 
+	  checkFirewall();
+    });
+    var seekCompleted=false;
+    jwplayer("myElement").onPlay(function(e){ 
+console.log("Starting to play THS video ...");      
+var player = jwplayer("myElement");
+      if(jwplayer("myElement").getDuration() != -1 && player.getPosition() == 0) {  
+          if(!seekCompleted){ 
+//player.seek(0);
+          } 
+      
+	}
+      seekCompleted=true;
+	  if (!interval) {
+			console.log("creating  new interval..");
+        // interval = setInterval(refreshFAQs, 5000);            
+    	}
+		else{
+		  console.log("refreshing dead interval..");
+			// clearInterval(interval);
+			// interval = setInterval(refreshFAQs, 5000); 
+		}
+    //});
+    jwplayer("myElement").setVolume(50);
+  });
+</script>
+ 
+          </div>
+        </div>
+      </div>
+    </section>
+
+  
+     
+
+ 
+<section class="th">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="box">
+              <div id='contact'>
+ <div id='firewall_div'></div>
+
+<h4>Trouble Viewing this Stream?</h4>
+- Ensure your browser meets our <a href='requirements.php'>requirements</a>.<br />
+ 
+<br>
+- Otherwise, please fill out the form below to get further help:<br /><br />
+<input type='hidden' value='72'
+	id="location_id" />
+<input type='hidden' value='74003' id="id" />
+<input type='text' value='' name="fullname" id="fullname"
+	placeholder='Enter your name' />
+<input type='text' value='' name="email" id="email"
+	placeholder='name@email.com' width='300px' />
+<br />
+<br />
+<i>Enter a description of the problem:</i>
+<br />
+<textarea name="description" id="description" rows='3' cols='30'></textarea>
+<br />
+<input type='hidden' name='browser' id='browser' value='' />
+<input type='button' value='Send Notification'
+	onclick="sendNotification()" />
+
+<script type='text/javascript'> 
+
+	function detectBrowser() {
+		_browser = {};
+	  var uagent = navigator.userAgent.toLowerCase(),
+	      match = ''; 
+	    
+	  _browser.chrome  = /webkit/.test(uagent)  && /chrome/.test(uagent) && !/edge/.test(uagent);
+	  _browser.firefox = /mozilla/.test(uagent) && /firefox/.test(uagent);
+	  _browser.msie    = /msie/.test(uagent) || /trident/.test(uagent) || /edge/.test(uagent);
+	  _browser.safari  = /safari/.test(uagent)  && /applewebkit/.test(uagent) && !/chrome/.test(uagent);
+	  _browser.opr     = /mozilla/.test(uagent) && /applewebkit/.test(uagent) &&  /chrome/.test(uagent) && /safari/.test(uagent) && /opr/.test(uagent);
+	  _browser.version = '';
+	  _browser.name = "";
+	  for (x in _browser) {
+	    if (_browser[x]) {
+	        
+	      // microsoft is "special"
+	      match = uagent.match(new RegExp("(" + (x === "msie" ? "msie|edge" : x) + ")( |\/)([0-9]+)"));
+	      
+	      if (match) {
+	        _browser.version = match[3];
+	      } else {
+	        match = uagent.match(new RegExp("rv:([0-9]+)"));
+	        _browser.version = match ? match[1] : "";
+	      }
+
+		  _browser.name = x;
+	      console.log("Browser");
+	      console.log(_browser);
+	      
+	      return _browser;
+	    }
+	  }
+	  _browser.opera = _browser.opr;
+	  delete _browser.opr;
+	}
+
+	  function sendNotification(){
+		  var eventId = $("#id").val();
+		  var lid = $("#location_id").val(); 
+		  var name = $("#fullname").val();
+		  var email = $("#email").val();
+		  var description = $("#description").val();
+		  var browser = $("#browser").val();
+		  if(name.length>0 && email.length>0 && description.length>0){
+			$.ajax({
+			    type: 'POST', 
+			    url: 'stream.php',
+			    data: { 
+			        'action': 'send_notification', 
+			        'location_id': lid,
+			        'id': eventId,
+			        'name': name,
+			        'description': description,
+			        'email': email,
+			        'browser': browser
+			    },
+			    success: function(response){ 
+					var responseObj = jQuery.parseJSON(response);
+					console.log(responseObj);
+					 $("#fullname").val("");
+					 $("#email").val("");
+					 $("#description").val("");
+					 $("#notifyres").html("<span style='color:green;'>Notification has been sent.</span>");
+			    }
+			});
+		  }
+		  else{
+			  $("#notifyres").html("<span style='color:red;'>You must complete all three fields to continue.</span>");
+		  } 
+	  }
+
+	   $(document).ready(function(){
+
+		   _browser = detectBrowser(); 
+			$("#browser").val(OSName+" : "+_browser.name+" : "+_browser.version);
+	   });
+	</script>
+              </div>
+              <div id='notifyres'></div>		
+            </div>
+          </div> 
+
+          <div class="col-md-6">
+                
+
+	</div>
+
+
+ 
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+    </section>
+
+    <footer id="page-footer" style="background: #a61111; padding: 0px 0px !important;">
+			<div class="container">
+				<div class="row">
+
+          <div class="col-md-4 hidden-xs">
+						<p class="made-by-me ">© 2017  THS. All Rights Reserved.</p>
+
+          </div>
+
+					<div class="col-md-4 text-center visible-xs">
+						<p class="made-by-me ">© 2017  THS. All Rights Reserved.</p>
+
+					</div>
+
+					<div class="col-md-4 text-center hidden-xs" style="padding-bottom: 28px; padding-top: 15px;"><br>
+
+
+						<div class="social-links">
+
+            <a href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://www.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a>
+			<a href="https://youtube.com/"><i class="fa fa-youtube"></i></a>
+          </div>
+					</div>
+
+          <div class="col-md-4 text-center visible-xs" style="padding-bottom: 0px; padding-top: 0px;"><br>
+
+
+						<div class="social-links">
+
+            <a href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://www.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a>
+			<a href="https://youtube.com/"><i class="fa fa-youtube"></i></a>
+          </div>
+					</div>
+
+          <div class="col-md-4 text-right hidden-xs">
+            <p class="made-by-me">  </p>
+          </div>
+          <div class="col-md-4 text-center visible-xs">
+            <p class="made-by-me"></p>
+          </div>
+				</div>
+			</div>
+		</footer>
+
+
+
+
+
+
+
+        <script type="text/javascript" src="assets/js/jquery-1.10.1.min.js"></script>
+        <script type="text/javascript" src="assets/js/script.js"></script>
+
+
+      <script type="text/javascript">
+  
+</script>
+
+
+			<script type="text/javascript">
+			  function downloadDocument(){
+	  var url = $("#documents").val();
+			  document.location.href = "download.php?url="+escape(url);
+			  }
+  function downloadDocument2(){
+	  var url = $("#documents").val(); 
+	  var anchor = document.createElement('a');
+	  
+	  console.log(url);
+	  console.log(anchor);
+	  /**anchor.href = url;
+	  anchor.target = '_blank';
+	  anchor.download = url;
+	  anchor.click();
+	   */
+  }
+  function reloadPlayer(){
+	  var url = "https%3A%2F%2Fcdn.townhallstreams.com%2Fvod%2F_definst_%2Fmp4%3Ahollis_nh%2F2026-11-10_9275388_Budget_Committee.mp4%2Fplaylist.m3u8";
+	  var newURL = "player.php?url="+url;
+	  var offset = $("#chapters").val();
+	  if(offset>0){
+	  	jwplayer('myElement').seek(offset);
+	  }
+		 
+// 	  $("#player_iframe").attr("src",newURL);
+  }
+  var TxtType = function(el, toRotate, period) {
+      this.toRotate = toRotate;
+      this.el = el;
+      this.loopNum = 0;
+      this.period = parseInt(period, 10) || 2000;
+      this.txt = '';
+      this.tick();
+      this.isDeleting = false;
+  };
+
+  TxtType.prototype.tick = function() {
+      var i = this.loopNum % this.toRotate.length;
+      var fullTxt = this.toRotate[i];
+
+      if (this.isDeleting) {
+      this.txt = fullTxt.substring(0, this.txt.length - 1);
+      } else {
+      this.txt = fullTxt.substring(0, this.txt.length + 1);
+      }
+
+      this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+      var that = this;
+      var delta = 200 - Math.random() * 100;
+
+      if (this.isDeleting) { delta /= 2; }
+
+      if (!this.isDeleting && this.txt === fullTxt) {
+      delta = this.period;
+      this.isDeleting = true;
+      } else if (this.isDeleting && this.txt === '') {
+      this.isDeleting = false;
+      this.loopNum++;
+      delta = 500;
+      }
+
+      setTimeout(function() {
+      that.tick();
+      }, delta);
+  };
+
+  window.onload = function() {
+      var elements = document.getElementsByClassName('typewrite');
+      for (var i=0; i<elements.length; i++) {
+          var toRotate = elements[i].getAttribute('data-type');
+          var period = elements[i].getAttribute('data-period');
+          if (toRotate) {
+            new TxtType(elements[i], JSON.parse(toRotate), period);
+          }
+      }
+      // INJECT CSS
+      var css = document.createElement("style");
+      css.type = "text/css";
+      css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+      document.body.appendChild(css);
+  };
+  </script>
+  <script>
+              //new WOW().init();
+              </script>
+			  	<script>
+	jQuery(document).ready(function($) {
+
+	$(".scroll").click(function(event){
+		event.preventDefault();
+		$('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+	});
+});
+</script>
+<script>
+$(document).ready(function(){
+  $('a[href^="#"]').on('click',function (e) {
+      e.preventDefault();
+
+      var target = this.hash;
+      var $target = $(target);
+
+
+      $('html, body').stop().animate({
+   'scrollTop': $target.offset().top
+}, 900, 'swing');
+  });
+
+});
+
+
+
+
+</script>
+<script type="text/javascript" src="assets/js/browser.js"></script>
+
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+<script type='text/javascript'> 
+$(document).ready(function(){
+  
+});
+
+
+function refreshFAQs(){  
+	$.ajax({
+	    type: 'GET', 
+	    url: 'stream.php?ajax=faqs&location_id=72&id=74003',
+	    data: { 
+	        'ajax': 'faqs'
+	    },
+	    success: function(response){    
+			// console.log(response);
+		try{	
+			var obj = jQuery.parseJSON( response ); 
+			if(obj.is_cache!=undefined && obj.is_cache!=null)
+			{
+				console.log("Found cache variable set to "+obj.is_cache);
+			}
+			else{
+				console.log("Did not find cache variable :(");
+			} 
+	    	$("#faqsection").html(obj.faqs)	
+	    	if($("#answersection").length){ 
+				for(var answerId in obj.data){
+					if($("#div_"+answerId).length){
+						/// exists, do nothing?
+					}
+					else{
+						$("#answersection").append(obj.data[answerId]); 
+					}
+				} 
+	    	}
+		}catch(ex){ console.log("No faqs to find..."); }	 
+	    }
+	});
+}
+var interval;
+$( document ).ready(function() { 
+	    console.log( "faq-ready!" );  
+	  
+	  
+	    // interval = setInterval(refreshFAQs,5000); 
+  	    console.log( "faq-set-interval" ); 
+});
+//add code to hover effect
+//  $('.hoverclass').hover(function(){
+// 	 $( ".hoverclass" ).find( "#myElement1" ).css( "height", "300px");
+// 	 $( ".hoverclass" ).find( "#myElement1" ).css( "width", "540px");
+	 
+//  }, function() {
+// 	 $( ".hoverclass" ).find( "#myElement1" ).css( "height", "100px");
+//   $( ".hoverclass" ).find( "#myElement1" ).css( "width", "150px");
+//  }
+// );
+</script>
+<script>
+
+  </script>
+
+<script>
+function checkStreamStatus() {
+    var player = jwplayer("myElement");
+    var streamStartTime = new Date("2026-11-10 19:00:00");
+    var currentTime = new Date();
+    
+    if (currentTime < streamStartTime) {
+        // Stream hasn't started yet
+        document.getElementById('fallbackMessage').style.display = 'block';
+                    document.getElementById('fallbackMessage').innerHTML = 'The stream has not started yet. Please check back at 07:00 pm.';
+                return false;
+    }
+    
+    // Stream should be live
+    document.getElementById('fallbackMessage').style.display = 'none';
+    return true;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    if(typeof jwplayer === "function") {
+        // Check stream status before setting up player
+        if (!checkStreamStatus()) {
+            // If stream hasn't started, set up a timer to check again
+            setInterval(checkStreamStatus, 60000); // Check every minute
+        }
+    } else {
+        console.error("JW Player library not loaded correctly");
+    }
+});
+</script>
+
+<script>
+function syncAllPlayers() {
+    // Get all JWPlayer instances
+    const mainPlayer = jwplayer("myElement");
+    const pipPlayers = [];
+    
+    // Find all PIP players (they have IDs starting with myElement followed by a number)
+    document.querySelectorAll('[id^="myElement"]').forEach(element => {
+        if (element.id !== "myElement") {
+            pipPlayers.push(jwplayer(element.id));
+        }
+    });
+    
+    // Get the current position of the main player
+    const currentPosition = mainPlayer.getPosition();
+    
+    // Sync all PIP players to the main player's position
+    pipPlayers.forEach(player => {
+        if (player.getState() !== 'idle') {
+            player.seek(currentPosition);
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Main player setup lives in a single handler above so a rewritten HLS
+    // playlist is not replaced. PIP sync attaches after that setup completes.
+});
+</script>
+
+</body>
+</html>
+

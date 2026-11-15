@@ -76,6 +76,9 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     if "external_id" in request:
         if attachment is not None or content is not None:
             raise ValueError("Record detail retrieval cannot be combined with attachment or saved input.")
+        if "caption_language" in request and source.provider == "town-hall-streams":
+            from .townhall_captions import fetch_captions
+            return fetch_captions(engine, source, namespace, request, bounds, context, transport)
         if "caption_language" in request and source.provider != "wistia":
             return OperationResult.unsupported("fetch_captions", reason=(
                 "No verified supplied-caption retrieval mapping is registered for this provider."))

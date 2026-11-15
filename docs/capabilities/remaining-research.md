@@ -165,6 +165,8 @@ Evidence and exact scope: `inventory.json` provider `destiny-agendaquick`; opera
 
 ## F18 Town Hall Streams (`town-hall-streams`)
 
+- One-shot supplied transcript display reads are now mapped from the actual player-declared full GET. Two selected existing-source events returned empty bodies; nonempty static HTML text/search/import/reopen/ZIP handling has separately labeled synthetic execution. No language/timing/speaker, ASR, polling or complete-history inference. See `docs/TOWNHALL-TRANSCRIPTS.md`.
+
 - The selected Hollis location page yielded 132 embedded rows; event 74003 detail yielded HTML only. No PDF/document links or playable stream bytes were available in this bounded capture; time zone remains unknown.
 - Do not treat an earlier player error or completed HTML fetch as an empty archive or media acceptance. Stream bytes and tenant retention remain unverified.
 - Reviewed sources provide no public create/update/upload API or vendor import schema; provider/admin documentation is needed for write questions.

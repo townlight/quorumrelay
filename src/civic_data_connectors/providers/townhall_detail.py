@@ -14,7 +14,7 @@ FORMAT = "town-hall-streams-event-html"
 def parse_bundle(source, namespace, content):
     url = urlsplit(source.url)
     query = parse_qs(url.query)
-    if (url.scheme != "https" or url.hostname != "townhallstreams.com"
+    if (url.scheme != "https" or url.hostname not in {"townhallstreams.com", "www.townhallstreams.com"}
             or url.port not in {None, 443} or url.path != "/stream.php"
             or set(query) != {"location_id", "id"}
             or any(len(query[key]) != 1 or not re.fullmatch(r"[1-9][0-9]*", query[key][0])

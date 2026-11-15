@@ -16797,6 +16797,63 @@
               }
             ]
           }
+        },
+        {
+          "id": "townhall-declared-transcript-display-2026-11-14",
+          "url": "https://townhallstreams.com/stream.php?location_id=72&id=74003",
+          "title": "Declared full transcript HTML read and bounded engine mapping",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-14",
+          "observed": "Two initial sessionless full-display GET200 empty bodies; fresh PHP-session Hollis GET200 also empty. Separate synthetic nonempty display and session-isolation execution.",
+          "access_scope": "anonymous_public_reads_and_local_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/townhall-supplied-transcripts-2026-11-14.json",
+          "receipt_sha256": "15b1aa2e8c9e2ec282c38b2f2204335c09577b725abba3d32c33f287d6e423fc",
+          "limits": "Actual empty observations only. Synthetic nonempty static text; no timing, speaker, language, full history, generation, polling or playback.",
+          "synthetic_execution": {
+            "provider": "town-hall-streams",
+            "status": "mock_passed",
+            "operations": [
+              "fetch"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Exact player/native ID, full display GET; raw empty/nonempty captures and text provenance retained through storage/search/ZIP.",
+            "execution_provenance": "19 new cases within81affected passes; actual public observations separately attributed.",
+            "checks": [
+              {
+                "command": "pytest tests/test_townhall_captions.py tests/test_townhall_detail.py tests/test_provider_record.py tests/test_interchange.py tests/test_storage_search_imports.py -q",
+                "passed": 81,
+                "failed": 0,
+                "junit_sha256": "758adeaeeffbd9091bff47ce6998ebdaf788e83079d55461a20fdac2eb1983fd"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/townhall-transcripts/source.json",
+                "sha256": "41c5fca3e929de7aa5158da3eecca4079047975ee97575a097057bebd871c03f"
+              },
+              {
+                "kind": "fixture",
+                "path": "tests/fixtures/townhall-transcripts/hollis-74003.html",
+                "sha256": "06bd5275933a68e2b41d629b820623da7fc09633773467d9e2016b494bf67bcb"
+              },
+              {
+                "kind": "fixture",
+                "path": "tests/fixtures/townhall-transcripts/location31-77576.html",
+                "sha256": "b741f017d062d43d866dd64892bc4266d192f5baf9b1450a967882ed379ece9e"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_townhall_captions.py",
+                "sha256": "25bd7125c13d8e3a94ccbdc867a60d4848525d4f367ebc10a89254ae05840dbb",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "25bd7125c13d8e3a94ccbdc867a60d4848525d4f367ebc10a89254ae05840dbb"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -16872,12 +16929,14 @@
             "ths-player",
             "town-hall-streams-event-html-2026-11-12",
             "town-hall-streams-player-synthetic",
-            "town-hall-streams-configured-fetch-reconciled-2026-11-14"
+            "town-hall-streams-configured-fetch-reconciled-2026-11-14",
+            "townhall-declared-transcript-display-2026-11-14"
           ],
-          "details": "Configured event HTML GET and literal native event/location mapping; explicitly granted supplied HLS playlist transfer. Existing captured listing is bounded/partial. No segment playback, MP4, transcript action or complete archive claim.",
+          "details": "Configured event HTML GET and literal native event/location mapping; explicitly granted supplied HLS playlist transfer. Existing captured listing is bounded/partial. No segment playback, MP4, transcript action or complete archive claim. One-shot SDK fetch_captions reads only exact player-declared full transcript display; actual selected responses empty, synthetic nonempty static text searchable. Parent meeting retained on transcript failure; no timing/language/speaker inference.",
           "dependencies": [],
           "remaining_verification": [
-            "Configured event HTML GET and literal native event/location mapping; explicitly granted supplied HLS playlist transfer. Existing captured listing is bounded/partial. No segment playback, MP4, transcript action or complete archive claim."
+            "Full transcript display is a selected snapshot, not a complete history claim; nonempty actual transcript shape/timing/speaker semantics remain unverified.",
+            "Playlist transfer does not establish playable media segments or MP4 bytes."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "source_fixture_and_synthetic_engine_execution",
@@ -17212,7 +17271,8 @@
       "remaining_research": [
         "The selected Hollis location page yielded 132 embedded rows; event 74003 detail yielded HTML only. No PDF/document links or playable stream bytes were available in this bounded capture; time zone remains unknown.",
         "Do not treat an earlier player error or completed HTML fetch as an empty archive or media acceptance. Stream bytes and tenant retention remain unverified.",
-        "Reviewed sources provide no public create/update/upload API or vendor import schema; provider/admin documentation is needed for write questions."
+        "Reviewed sources provide no public create/update/upload API or vendor import schema; provider/admin documentation is needed for write questions.",
+        "Declared full transcript display GET is implemented with two actual empty observations and19new synthetic/fault cases; static nonempty text/search/storage/ZIP verified. No ASR/polling, timing/speaker/language or wider history claim. See docs/TOWNHALL-TRANSCRIPTS.md."
       ],
       "authentication": "Town archive public. Scheduling requires service account; tier/roles unknown.",
       "write_findings": "Official service UI documentation establishes scheduling by start/end date/time only. General event API, updates and file uploads remain unverified.",
