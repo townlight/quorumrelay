@@ -116,7 +116,7 @@ def _initial(source, bounds, input_format, saved):
                         "agendaquick-item-search-html", "civicplus-search-json"}:
         return []
     if input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html", "town-hall-streams-event-html",
-                        "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "novus-public-coversheet-html"}:
+                        "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "novus-public-coversheet-html"}:
         return [{"kind": "static"}]
     if provider in NATIVE:
         if not bounds.date_from or not bounds.date_to:
@@ -478,7 +478,7 @@ def parse_page(engine, source, namespace, content, input_format, bounds, context
                         "civicweb-detail-html", "civicweb-filepro-soap-xml", "civicweb-meetings-json", "civicweb-meeting-documents-json", "swagit-listing-html", "onbase-public-listing-html",
                         "digital-towpath-listing-html", "towncloud-public-listing-json", "telvue-cloudcast-mrss-xml",
                         "agendaquick-public-listing-html", "agendaquick-item-search-html", "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "civicplus-search-json",
-                        "utah-public-search-html", "iqm2-public-search-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "novus-public-coversheet-html", "novus-public-listing-html",
+                        "utah-public-search-html", "iqm2-public-search-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "novus-public-coversheet-html", "novus-public-listing-html",
                         "clerkbase-public-tree-html", "clerkbase-search-html"}:
         return parse_native(source, namespace, content, input_format), ()
     result = engine.normalize(replace(source, body=None), content, input_format=input_format,
@@ -535,6 +535,9 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
     if (source.provider == "iqm2" and source.input_format is None
             and urlsplit(source.url).path == "/Citizens/SplitView.aspx"):
         input_format = "iqm2-public-player-html"
+    if (source.provider == "iqm2" and source.input_format is None
+            and urlsplit(source.url).path == "/Citizens/Detail_LegiFile.aspx"):
+        input_format = "iqm2-legislative-file-html"
     saved = _decode_content(request, content)
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")
@@ -806,7 +809,11 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
             "configured capture only; upstream catalog completeness is unverified"),
         "available_text": "metadata_and_supplied_text_only",
     }
-    if input_format == "iqm2-public-player-html":
+    if input_format == "iqm2-legislative-file-html":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one supplied legislative-file page; parent membership requires retained meeting capture",
+            "meeting_membership": "not_verified_by_file_page_alone"})
+    elif input_format == "iqm2-public-player-html":
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "one meeting-bound player declaration; media and subtitle locators only, not fetched",
             "date_availability": "not_supplied_in_player_mapping", "playback_verified": False})

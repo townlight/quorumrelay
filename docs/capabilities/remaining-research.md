@@ -119,6 +119,8 @@ Evidence and exact scope: `inventory.json` provider `civicweb`; operation status
 
 ## F12 iQM2 (`iqm2`)
 
+- Selected native legislative-file detail is now mapped and scoped related retrieval replays the retained parent capture before following its exact child link. Staff recommendation/body, three document locators, separate other-meeting references, identities/relationships and both captures survive persistence/ZIP; standalone parent context stays unverified. See `docs/IQM2-PUBLIC-FILE.md`. No staff write or live attachment claim.
+
 - Selected Kent6049 public player is now mapped from its exact declared Video/Agenda URL and native meeting-bound outline. First-source MP4/HLS metadata and conditionally active supplied subtitle locator are preserved; no evaluation, media/caption bytes or playback claim. The observed source has HLS and no tracks; subtitle logic has separate synthetic proof. Historical IQM2 proposal describes SOAP/XML datasets without endpoint/WSDL/types, so it establishes a concrete API lead rather than an executable write contract or outside-only dependency. See `docs/IQM2-PUBLIC-PLAYER.md`.
 
 - The bounded Kent public calendar and first native search result are observed; verify broader date/body and archive coverage and live supplied Next before claiming completeness.
@@ -295,13 +297,13 @@ Evidence and exact scope: `inventory.json` provider `gworks`; operation status a
 - Latest XML-ActiveMeetings lead: pinned third-party notebook has an unexecuted, incomplete illustrative XML fragment with malformed entities, not a saved server response. One exact example request returned HTTP 403; no XML/item mapping was inferred. Exact source pins and request are indexed in `docs/verification/local-completion-2026-11-14.json`. This does not establish an outside-only dependency.
 
 - Opt-in public listing/print detail is implemented with 20 current helper/workflow cases. A Git-blob-verified third-party archived listing now retains331valid native meetings and one explicit empty placeholder, with original bytes intact. Nonempty identityless rows still fail. Official/live contract acceptance remains unverified (403 observed).
-- Two additional pinned third-party clients corroborate direct public anchor declarations. The reader now preserves those hrefs and excludes private/admin/executive and suppressed contexts; persistence/ZIP equality is tested. Compact dates already worked. Native same-site public-file IDs/hrefs from selected print responses now have scoped descriptors and synthetic guarded transfer; separate item/file responses, hierarchy, native search, staff writes and vendor import remain unresolved. See `docs/verification/boarddocs-public-selectors-2026-11-14.json`; this is not official vendor acceptance.
+- Two additional pinned third-party clients corroborate direct public anchor declarations. The reader now preserves those hrefs and excludes private/admin/executive and suppressed contexts; persistence/ZIP equality is tested. Compact dates already worked. Native same-site public-file IDs/hrefs from selected print responses now have scoped descriptors and synthetic guarded transfer; native section-parent membership, separate BDGetPublicFiles responses, native search, staff writes and vendor import remain unresolved. Selected saved item bodies and print-public-file transfers are implemented as described below. See `docs/verification/boarddocs-public-selectors-2026-11-14.json`; this is not official vendor acceptance.
 
 Evidence and exact scope: `inventory.json` provider `boarddocs`; operation status and outbound mappings are separate from historical observations.
 
 - Two third-party archived BD-GetMeeting fragments now have saved-format mapping and executed native identity/listing compatibility, public description search, SQLite retry/reopen and exact ZIP. This supplies public meeting metadata, not agenda/item trees, placeholder control URLs or staff-write contracts. See `evidence/boarddocs-public/grand-detail-source.json`.
 
-- Selected public agenda outline now maps123native items and28sections from exact pinned Columbus archive, with explicit stored meeting/request context and14new/47affected tests. Section membership is not inferred from neighboring headings or numbering; body text/attachment URLs/native search/writes remain unresolved. See `evidence/boarddocs-public/columbus-outline-source.json`.
+- Selected public agenda outline now maps123native items and28sections from exact pinned Columbus archive, with explicit stored meeting/request context and14new/47affected tests. Section membership is not inferred from neighboring headings or numbering; native section-parent IDs, current response invocation, native search and writes remain unresolved. Separate Fairfax item-body and print-file paths are implemented as described below. See `evidence/boarddocs-public/columbus-outline-source.json`.
 
 ## F31 Tyler Meeting Manager (`tyler-meeting-manager`)
 

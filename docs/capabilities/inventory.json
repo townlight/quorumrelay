@@ -4060,7 +4060,7 @@
         "Observed Reno public /api/v2/PublicPortal/search form is now source-implemented with exact local metadata/excerpt checks, stable native-ID continuation, raw/parent preservation and bounded first/resumed receipt. Full document content, provider matching/caps/rank and cross-tenant completeness remain unverified; authenticated Meeting API routes are separate.",
         "Official release notes identify Meeting API, speaker and tracking-number search but the checked release/help material supplies no executable schema. Continue from concrete product-matched API leads; no exhaustive public search or outside-only dependency is established, and no account enablement is a synthetic acceptance gate.",
         "Authenticated create/update/upload field schemas, permissions, readback and conflict semantics remain unverified in the pinned material. A matching machine contract is needed; credentials or live tenant writes are not an acceptance gate.",
-        "Selected public client document branches synthetically executed; JSON URL-string shape inferred from callback. Unknown Type4 output, live file availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled.",
+        "Selected public document branches and Type4 compiled HTML output3 are implemented with captured parent membership, retained raw HTML and bounded no-redirect retrieval. Other unknown output, live availability and authenticated Meeting API remain unresolved; prior unqualified1/3/4 stored identities are not automatically reconciled.",
         "New V2 portal help documents optional support-controlled feature enablement, not authenticated payloads. Third-party crawler corroborates compiled HTML route; exact selected Reno23431GET403. Lacity swagger403, not a verified current login redirect. No outside-only schema dependency proven. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
         "Historical Jan2024 vendor review and OaklandPark RFP#070623 confirm OneMeeting Secure/Votes API and client-published REST datasets; selected exact pages are pinned. They do not provide method/auth/request/response/readback schemas or establish currenttier/version. No APIabsence or outside-only claim.",
         "Waco public client and actual335-row year/6-section outline resolved scoped read mappings and HTML locator defect. Nonempty items are client-shaped synthetic only; authenticated Meeting/speaker/tracking/write contracts remain unresolved, not proved outside-only."
@@ -8529,7 +8529,8 @@
         "Historical FTP host and consultant processing/readback remain unverified. Source file preparation is separate from remote import or association. Official Fishers Section create/update is implemented; Event timestamp/template equivalence, item writes and document upload remain contract gaps, not account-acquisition gates.",
         "Official Fishers spec and metadata now pin Event/Section models and publication enum0/1/2; section writes are implemented with scoped synthetic execution. Event date/time/template readback equivalence remains unresolved, and no item create/update or document upload model is established. No account acquisition gate.",
         "Bounded Event-write follow-up: create eventStartTime has HH:MM regex, update time is free-form with12:00:00AM default; UI workflows/public display client do not establish write timestamp or template recurrence readback. No write conversion inferred. Portal Event-file API-origin defect is now implemented/tested separately.",
-        "Supplied EventModel MP4/caption locator mapping and guarded transfers synthetically executed; caption extraction/timing, playback/readiness and staff upload contracts remain unverified, not proven outside-only dependencies."
+        "Supplied EventModel MP4/caption locator mapping and guarded transfers synthetically executed; caption extraction/timing, playback/readiness and staff upload contracts remain unverified, not proven outside-only dependencies.",
+        "Official2026guides establish variable publication/template defaults, with no create publication override in pinned request model. Selected current configuration is a destination fact; API applicability, preflight and timestamp/readback remain unresolved research. See event-settings-assessment.json; no blanket outside-only contract claim."
       ],
       "requirement_ids": [
         "C01",
@@ -13188,6 +13189,53 @@
           },
           "receipt_path": "docs/verification/iqm2-public-player-2026-11-14.json",
           "receipt_sha256": "63bd4ab09537f70497b137da49945ef85bf67963c152fb3dc7392d176c8e7b1a"
+        },
+        {
+          "id": "iqm2-legislative-file-2026-11-14",
+          "url": "https://santamonicacityca.iqm2.com/Citizens/Detail_LegiFile.aspx?Frame=&MeetingID=1496&MediaPosition=&ID=7478&CssClass=",
+          "title": "Selected native iQM2 legislative-file text and scoped parent-bound retrieval",
+          "kind": "observed_native_html_and_scoped_execution",
+          "observation_date": "2026-11-14",
+          "proof_level": "observed_contract_and_synthetic_engine_execution",
+          "findings": "Native file7478 staff report and recommendation, three mapped document locators, five separate references; parent membership verified only by replayed meeting capture.",
+          "fixture_path": "tests/fixtures/iqm2-legifile-7478.capture.json",
+          "fixture_sha256": "ac13e47cd8ce51b500a704bd02591ccfa0b1b2c99e7388f26c13425f2c494a66",
+          "synthetic_execution": {
+            "provider": "iqm2",
+            "status": "mock_passed",
+            "operations": [
+              "discover",
+              "fetch",
+              "parse",
+              "export"
+            ],
+            "entities": [
+              "legislative_file",
+              "document_locator"
+            ],
+            "checks": [
+              {
+                "command": "pytest tests/test_iqm2_file.py -q",
+                "passed": 14,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/iqm2-legislative-file/source.json",
+                "sha256": "bc17bbbcd926ca2849eebbaca8fb6ffca90d77b5f2ebb6d5c932c594db68385e"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_iqm2_file.py",
+                "sha256": "3af3f151db3a780896f0ab5c48c49da4a9a780b6c0a6e4be367e79a37a62bb57"
+              }
+            ],
+            "scope": "One exact supplied file detail, immutable scoped meeting membership, text/files/relationships/hashes, reopen/ZIP and synthetic separate attachment transfer; no catalog, staff write or live file byte claim."
+          },
+          "receipt_path": "docs/verification/iqm2-legislative-file-2026-11-14.json",
+          "receipt_sha256": "f395c8edb685ee8398d77f2c3e5552d2086f622babbeb9408e3487122f7124c9"
         }
       ],
       "tenants": [
@@ -13229,9 +13277,10 @@
             "iqm2-tenant",
             "iqm2-search-observed",
             "iqm2-public-detail-2026-11-12",
-            "iqm2-public-player-2026-11-14"
+            "iqm2-public-player-2026-11-14",
+            "iqm2-legislative-file-2026-11-14"
           ],
-          "details": "Configured Kent calendar response can be parsed into 185 observed rows; it is a bounded listing, not proven archive completeness or date/body traversal. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference.",
+          "details": "Configured Kent calendar response can be parsed into 185 observed rows; it is a bounded listing, not proven archive completeness or date/body traversal. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog, live continuation and access-dependent operations remain unverified."
@@ -13254,9 +13303,10 @@
           "evidence_ids": [
             "iqm2-tenant",
             "iqm2-public-detail-2026-11-12",
-            "iqm2-public-player-2026-11-14"
+            "iqm2-public-player-2026-11-14",
+            "iqm2-legislative-file-2026-11-14"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference.",
+          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified.",
           "dependencies": [],
           "remaining_verification": [
             "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
@@ -13281,9 +13331,10 @@
             "quorumrelay-shared-core-operations",
             "iqm2-public-detail-2026-11-12",
             "source-text-reference-clients-2026-11-12-iqm2",
-            "iqm2-public-player-2026-11-14"
+            "iqm2-public-player-2026-11-14",
+            "iqm2-legislative-file-2026-11-14"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference.",
+          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -13350,9 +13401,10 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "iqm2-baseline",
-            "quorumrelay-shared-core-operations"
+            "quorumrelay-shared-core-operations",
+            "iqm2-legislative-file-2026-11-14"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -13617,7 +13669,8 @@
       "remaining_research": [
         "The bounded Kent public calendar and first native search result are observed; verify broader date/body and archive coverage and live supplied Next before claiming completeness.",
         "Pinned Granicus/iQM2 help describes authenticated locations/types/meeting and streaming workflows, not an iQM2 machine API. Deployment-specific field/readback documentation remains needed; account enablement is not a synthetic-acceptance gate.",
-        "Upload limits, write schemas, permission/readback and product applicability remain unresolved in pinned material. Do not substitute Legistar contracts; credentials and live writes are not required acceptance evidence."
+        "Upload limits, write schemas, permission/readback and product applicability remain unresolved in pinned material. Do not substitute Legistar contracts; credentials and live writes are not required acceptance evidence.",
+        "Selected legislative-file text/documents and scoped exact-child retrieval are implemented from native meeting1496/file7478 captures; parent replay, hashes/relationships, reopen and ZIP are tested. No staff form submission, adopted action or complete history inferred."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "iqm2",
@@ -18443,7 +18496,8 @@
         "Documented Connect v2 reads are GET /api/v2/media[/{id}], /videos and /playlists[/{id}]. The source fetch adapter now implements explicitly requested account reads; synthetic documented-route verification is accepted; live calls are optional and unrun.",
         "Published pages show example JSON envelopes/fields but omit filters, pagination/cursor, caps and rate limits. Record these from a supplied authorized account response/current guide; do not claim catalog completeness.",
         "Connect/CloudCast MRSS has scoped published-player coverage. Connect native playlist reorder/media membership writes now have exact public-client request contracts and synthetic readback. No upload/processing/visibility or vendor meeting association inferred; HyperCaster remains separate.",
-        "Connect client upload consumes runtime fileUrl/dvdUrl/uploadParams/userId absent from public bundle initializers. Sanitized deployment-matched initializer, created-media response and processing/association readback specification are required to map upload safely. This is an exact missing runtime contract input, not a live-account acceptance gate."
+        "Connect client upload consumes runtime fileUrl/dvdUrl/uploadParams/userId absent from public bundle initializers. Sanitized deployment-matched initializer, created-media response and processing/association readback specification are required to map upload safely. This is an exact missing runtime contract input, not a live-account acceptance gate.",
+        "Local historical CloudCast4.1 and documented2022Connect five-position chapter CSV preparation is implemented and synthetically verified. Current deployment import, processing, association and byte/playback acceptance are not inferred; headerless derivation and optional-end variant are separately attributed."
       ],
       "authentication": "Public playlists anonymous; Connect API requires client application access key + secret passphrase in custom headers, not Basic auth. Upload roles Contributor/Coordinator/Admin and account feature settings matter.",
       "write_findings": "Strong official UI evidence for recording creation/upload and metadata updates. Public v2 pages inspected document GET only, so a write adapter still needs a supported submission contract and authorized access.",
@@ -20506,7 +20560,8 @@
         "Current-listing Agenda hierarchy, selected item/section detail, supporting-document wrapper and meeting-packet branches now have scoped source/synthetic execution. Archive traversal, non-agenda detail variants and staff import/meeting association remain unresolved; broader deployment or live file availability is not inferred.",
         "Akron embedded Documents and Media now have vendor-client-backed synthetic mapping: exact native document/item/publish IDs and locator branches, plus link-only live/on-demand meeting player. Actual nonempty response applicability, native keyword full-text/archive completeness, other wrappers and remote Agenda association/import remain unverified.",
         "New public UnityRestAPI V1 request DTOs found: document/create and document/get responses remain unspecified objects, fileContent encoding unspecified, and no Agenda association path. SDK official link redirects to Hyland authentication; exact sample ZIP403. Do not substitute Content Innovation Cloud or Fiserv interfaces for selected Agenda deployment. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
-        "Fitchburg native This Year search is source implemented and fixture/synthetic executed; historical redirect-only failure is superseded for this scoped path. Actual result cap remains explicit; complete search/history, provider keyword semantics and other deployments are unverified."
+        "Fitchburg native This Year search is source implemented and fixture/synthetic executed; historical redirect-only failure is superseded for this scoped path. Actual result cap remains explicit; complete search/history, provider keyword semantics and other deployments are unverified.",
+        "For the specifically documented EIS entity route, selected WSDL/XSD operations/type/field IDs are generated from destination configuration. This is a proven destination-schema dependency, not a universal Agenda API or account/live-write requirement. Exact evidence: docs/capabilities/evidence/onbase-eis-entity/source.json."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "onbase",
@@ -28207,11 +28262,11 @@
         "Respect post-approval edit lock and public/private visibility."
       ],
       "remaining_research": [
-        "Opt-in public listing/print detail is implemented with pinned third-party source and18synthetic helper/workflow cases; official/live contract acceptance remains unverified (403 observed).",
-        "Public file hrefs remain strings only; full item hierarchy/content, attachment transfer, native search, staff writes and vendor import remain unresolved.",
+        "Opt-in public listing/print detail is implemented with attributed current helper/workflow evidence; official/live contract acceptance remains unverified (403 observed).",
+        "Selected saved Fairfax native item body/labeled fields and supplied motion text are mapped; selected print-public-file IDs/hrefs support separately guarded synthetic transfers. Arbitrary inline links and placeholder attachments are excluded. Native search, staff writes and vendor import remain unresolved.",
         "City Bureau Git-blob-pinned saved listing now parses331valid native meetings and explicitly counts one empty placeholder; nonempty identityless rows still reject. Entire original JSON retained. No completeness or official vendor acceptance claim.",
-        "Two archived BD-GetMeeting fragments now mapped with native clipboard/base identity and public description. Matching archived listing identity and SQLite/ZIP executed; no response-shaped agenda tree/item body, current invocation or staff-write contract inferred.",
-        "Selected native public agenda outline now maps archived123items/28sections with stored meeting/request-context binding and14synthetic cases. Item bodies, actual section-parent ID assertions, attachment transfer, official/live applicability and staff writes remain unresolved; no private-only dependency inferred."
+        "Two archived BD-GetMeeting fragments map native clipboard/base identity and public description, with listing identity/SQLite/ZIP execution. Selected separate outline and item formats now supply attributed agenda/item content; no current invocation or staff-write contract inferred.",
+        "Selected native outline maps archived123items/28sections with stored meeting/request-context binding. Separate Fairfax item and print-file paths are implemented with source-pinned tests. Actual native section-parent IDs, separate BDGetPublicFiles payload, current official/live applicability, native search and staff writes remain unresolved; no private-only dependency inferred."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "boarddocs",

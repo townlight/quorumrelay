@@ -65,6 +65,9 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if source.provider == "civicweb":
             from .civicweb_listing import fetch_related
             return fetch_related(source, namespace, request, bounds, context, transport)
+        if source.provider == "iqm2":
+            from .iqm2_file import fetch_related
+            return fetch_related(engine, source, namespace, request, bounds, context, transport)
         if source.provider == "onbase":
             from .onbase_detail import fetch_detail
             return fetch_detail(source, namespace, request, bounds, context, transport)
