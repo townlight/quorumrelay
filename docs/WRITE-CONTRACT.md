@@ -110,6 +110,16 @@ not yet a complete outbound backlog and unresolved entries remain incomplete.
 | Wistia | Supplied caption targeted update | POST modern `/medias/{mediaHashedId}/captions/{languageCode}/edits`; JSON expected_version plus edits[1..20] target_text/replacement_text and optional paired inclusive start_ms/end_ms. Atomic vendor version check; 409 stale_version/diverged, 422 unresolved edit writes nothing. |
 | Wistia | Recording/media additive tags | POST modern `/taggings/bulk_create`; JSON hashed_ids/tag_names. Adds tags, does not replace. Returns background_job_status; authorizations-based expiring tokens are explicitly disallowed. |
 
+Wistia asynchronous reconciliation must return the same acknowledged job identity
+for imports, additive tags and swaps. A missing or different job stays uncertain,
+including when it reports failure or completion. URL-import completion requires
+the documented `bulk_operation` result identifying one successfully created media
+record and a GET whose `hashed_id` matches that result. Tagging reads must identify
+each requested media record before its supplied tags can confirm completion.
+Queued or started jobs remain pending; reconciliation does not repeat the mutation.
+These checks establish documented job and record identity, without asserting
+recording-byte equality, playback readiness or other processing effects.
+
 Legistar JSON field schemas come from the official per-operation resource tables,
 not the older MeetingId/MeetingName/MeetingDate reader. Read token examples do not
 prove write permission. Actual deployment authentication/conflict behavior has

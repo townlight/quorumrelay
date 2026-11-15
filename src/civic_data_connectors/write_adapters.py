@@ -831,8 +831,14 @@ class WriteAdapter:
                 raise ValueError("Swap readback must identify both existing media with the same provider type.")
             return {"original": original, "replacement": replacement, "updated": original.get("updated")}
         if change.entity == "media_tags":
-            return {"media": [self.read(source, "https://api.wistia.com/modern/medias/" + safe_id(i),
-                                        context, bounds, deadline) for i in change.fields["hashed_ids"]]}
+            media = []
+            for identity in change.fields["hashed_ids"]:
+                value = self.read(source, "https://api.wistia.com/modern/medias/" + safe_id(identity),
+                                  context, bounds, deadline)
+                if not isinstance(value, dict) or value.get("hashed_id") != identity:
+                    raise AmbiguousWrite("Media tag readback did not identify the requested media.")
+                media.append(value)
+            return {"media": media}
         value = self.read(source, url, context, bounds, deadline)
         if self.family == "laserfiche":
             value = self.document_readback(source, value, change, context, bounds, deadline, page_parts=page_parts)
@@ -1169,14 +1175,18 @@ class WriteAdapter:
             return {"state": "uncertain", "task": task, "reason": "Task completion needs exact document readback."}
         if item.get("job"):
             job = item["job"]
-            job_id = job.get("hashed_id") or job.get("id")
+            if not isinstance(job, dict):
+                return {"state": "uncertain", "reason": "The acknowledged job reference is invalid."}
+            identity_field = "hashed_id" if job.get("hashed_id") else "id"
+            job_id = job.get(identity_field)
+            if not job_id:
+                return {"state": "uncertain", "reason": "The acknowledged job identity is missing."}
             result = self.read(source, "https://api.wistia.com/modern/background_job_status/"
                                + safe_id(job_id), context, bounds, deadline)
-            status = result.get("background_job_status", {})
+            status = result.get("background_job_status") if isinstance(result, dict) else None
+            if not isinstance(status, dict) or status.get(identity_field) != job_id:
+                return {"state": "uncertain", "reason": "The exact acknowledged job was not returned."}
             if prepared["change"]["entity"] == "media_swap":
-                if (not isinstance(status, dict)
-                        or str(status.get("hashed_id") or status.get("id")) != str(job_id)):
-                    return {"state": "uncertain", "reason": "The exact swap job was not returned."}
                 if status.get("status") == "failed":
                     return {"state": "failed", "job": status, "reason": "The provider swap job failed."}
                 if status.get("status") in {"queued", "started"}:
@@ -1204,13 +1214,18 @@ class WriteAdapter:
                     return {"state": "succeeded", "job": status, "readback": readback,
                             "resource_ids": prepared["change"]["fields"]["hashed_ids"]}
             if status.get("status") == "finished" and prepared["change"]["entity"] == "media_import":
-                results = status.get("object", {}).get("results", [])
-                created = [r for r in results if r.get("status") == "succeeded"
-                           and r.get("operation") == "create" and r.get("resource_type") == "media" and r.get("id")]
-                if len(created) == 1:
-                    value = self.read(source, "https://api.wistia.com/modern/medias/" + safe_id(created[0]["id"]),
-                                      context, bounds, deadline)
-                    return {"state": "succeeded", "job": status, "resource_id": created[0]["id"], "readback": value}
+                obj = status.get("object")
+                results = obj.get("results") if isinstance(obj, dict) and obj.get("type") == "bulk_operation" else None
+                if isinstance(results, list) and all(isinstance(r, dict) for r in results):
+                    created = [r for r in results if r.get("status") == "succeeded"
+                               and r.get("operation") == "create" and r.get("resource_type") == "media"
+                               and isinstance(r.get("id"), str) and r["id"]]
+                    if len(created) == 1:
+                        media_id = created[0]["id"]
+                        value = self.read(source, "https://api.wistia.com/modern/medias/" + safe_id(media_id),
+                                          context, bounds, deadline)
+                        if isinstance(value, dict) and value.get("hashed_id") == media_id:
+                            return {"state": "succeeded", "job": status, "resource_id": media_id, "readback": value}
             return {"state": "pending" if status.get("status") in {"queued", "started"} else "uncertain",
                     "job": status, "reason": "Job status retained; exact resource readback still required."}
         if self.family == "legistar" and lookup and lookup.get("value"):
