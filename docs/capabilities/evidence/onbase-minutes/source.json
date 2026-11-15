@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-15",
+  "official_workflow_url": "https://docs.hyland.com/r/OnBase/Agenda/Foundation-24.1/Agenda/Usage/Using-Agenda-Online/Viewing-Public-Meetings/Viewing-Meeting-Documents",
+  "official_observation": "Vendor workflow describes published Minutes with motions/votes/actions when recorded; this is not an external write schema.",
+  "listing_context": {
+    "path": "tests/fixtures/onbase-search/fitchburg-council-2026.html",
+    "sha256": "37e29cadf9b6e75b8afcf8f8167ff5d5c3d1cb61ea7514bbf3d669a36c329391",
+    "supplied_href": "/OnBaseAgendaOnline/Meetings/ViewMeeting?id=3831&doctype=2"
+  },
+  "captures": [
+    {
+      "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings/ViewMeeting?id=3831&doctype=2",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 12619,
+      "sha256": "24a223c3abdcd78b90ca5e3ea65934a449ddf22de50d386a73212e432f453113",
+      "final_url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings/ViewMeeting?id=3831&doctype=2",
+      "lead": "Exact Minutes href in tests/fixtures/onbase-search/fitchburg-council-2026.html, same Fitchburg origin and native meeting3831.",
+      "file": "wrapper-3831.html"
+    },
+    {
+      "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings/ViewMeetingAgenda?meetingId=3831&type=minutes",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 2251,
+      "sha256": "15415b4b424b2feaed5ee7c3f1fab2f26033b80cf667117316fc7a73a269d16f",
+      "final_url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings/ViewMeetingAgenda?meetingId=3831&type=minutes",
+      "lead": "Exact captured same-meeting wrapper template and doctype2 minutes/availableTrue branch.",
+      "file": "minutes-3831.html"
+    }
+  ],
+  "assessment": "Exact same-origin Minutes wrapper declares doctype2 minutes/availableTrue and accessible URL. The accessible response contains the meeting heading/date and an empty accessible-section-level-0, with no loadAgendaItem or section controls. It does not establish a nonempty Minutes item/motion/vote DOM schema. Do not infer zero motions/votes in the actual meeting or empty PDF content. Existing document transfer remains separately implemented; no new parser support promoted.",
+  "discarded_probe": "Earlier meeting2595 was mistakenly rebased from Santa Cruz baseline onto Fitchburg. The local scratch receipt is corrected and excluded from membership/acceptance evidence. No code or mapping uses it.",
+  "limits": [
+    "Two exact current public GETs, same already used Fitchburg context; no additional tenant survey or visible browser.",
+    "No mutation, credential acquisition, endpoint absence or outside-only dependency claim.",
+    "No extra sampling or PDF transfer made into a completion gate."
+  ]
+}

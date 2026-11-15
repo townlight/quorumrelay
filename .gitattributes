@@ -38,3 +38,7 @@ tests/fixtures/wistia-public/iframe-ylfk2zpd7f.html whitespace=-blank-at-eof,-bl
 
 # Exact declared editor404 response retains vendor whitespace.
 docs/capabilities/evidence/gworks-current-builder/declared-editor-response.html whitespace=-blank-at-eol,-blank-at-eof
+
+# Exact supplied OnBase Minutes captures retain vendor CRLF/blank whitespace.
+docs/capabilities/evidence/onbase-minutes/wrapper-3831.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/onbase-minutes/minutes-3831.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab

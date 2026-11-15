@@ -21697,6 +21697,18 @@
               }
             ]
           }
+        },
+        {
+          "id": "onbase-selected-minutes-2026-11-15",
+          "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Meetings/ViewMeeting?id=3831&doctype=2",
+          "title": "Exact listed Fitchburg Minutes wrapper and accessible empty outline",
+          "kind": "public_tenant",
+          "proof_level": "bounded_public_http_capture_not_engine_acceptance",
+          "observation_date": "2026-11-15",
+          "fixture_path": "docs/capabilities/evidence/onbase-minutes/wrapper-3831.html",
+          "fixture_sha256": "24a223c3abdcd78b90ca5e3ea65934a449ddf22de50d386a73212e432f453113",
+          "findings": "Same-origin supplied Minutes wrapper20012619bytes; declared accessible Minutes2002251bytes with meeting heading and empty outline. Exact accessible bytes/hash and parent-listing membership in source.json.",
+          "limits": "Does not establish nonempty Minutes/motion/vote DOM, actual absence of meeting actions, PDF content or an outside-only dependency; erroneous2595cross-context probe excluded."
         }
       ],
       "tenants": [
@@ -22438,7 +22450,8 @@
         "Akron embedded Documents and Media now have vendor-client-backed synthetic mapping: exact native document/item/publish IDs and locator branches, plus link-only live/on-demand meeting player. Actual nonempty response applicability, native keyword full-text/archive completeness, other wrappers and remote Agenda association/import remain unverified.",
         "New public UnityRestAPI V1 request DTOs found: document/create and document/get responses remain unspecified objects, fileContent encoding unspecified, and no Agenda association path. SDK official link redirects to Hyland authentication; exact sample ZIP403. Do not substitute Content Innovation Cloud or Fiserv interfaces for selected Agenda deployment. Exact source/hash/access limits: docs/capabilities/evidence/contract-followup-2026-11-14/source.json",
         "Fitchburg native This Year search is source implemented and fixture/synthetic executed; historical redirect-only failure is superseded for this scoped path. Actual result cap remains explicit; complete search/history, provider keyword semantics and other deployments are unverified.",
-        "For the specifically documented EIS entity route, selected WSDL/XSD operations/type/field IDs are generated from destination configuration. This is a proven destination-schema dependency, not a universal Agenda API or account/live-write requirement. Exact evidence: docs/capabilities/evidence/onbase-eis-entity/source.json."
+        "For the specifically documented EIS entity route, selected WSDL/XSD operations/type/field IDs are generated from destination configuration. This is a proven destination-schema dependency, not a universal Agenda API or account/live-write requirement. Exact evidence: docs/capabilities/evidence/onbase-eis-entity/source.json.",
+        "New official Minutes workflow lead checked against exact Fitchburg3831 listing link and declared accessible route. Both200, but accessible response has empty outline and no native child controls. No nonempty Minutes/motion/vote schema or actual zero actions inferred; existing binary transfer remains separate. See evidence/onbase-minutes/source.json. No outside-only claim or extra sampling gate."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "onbase",
