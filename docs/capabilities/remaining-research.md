@@ -102,8 +102,8 @@ Evidence and exact scope: `inventory.json` provider `municode-meetings`; operati
 - Explicit public organization search is implemented with native typed search-index IDs, rendered excerpts, exact query-echo validation and hash-bound local continuation. Canonical meeting/item/document identity, parent joins and provider completeness are not inferred. See [public search](../BOARDBOOK-PUBLIC-SEARCH.md).
 
 - Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied. Selected original-baseline Minutes755664 now have native hierarchy/action-source-text and scoped configured retrieval/persistence/reopen/retry/search/ZIP proof; other Minutes layouts remain unverified.
-- Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.
-- Pinned material does not establish role/enablement, write/readback or conflict schemas for an external integration. Those contract details remain unresolved; staff-account acquisition is not an acceptance gate.
+- The fully inspected Quick Reference and Custom Documents guides describe Premier UI. “Import Agenda Items” selects items from another meeting; it does not establish external-file import. The guides identify the Agenda Manager as the role that creates meetings. Uploading a custom document does not itself change MeetingStatus; public visibility has separate conditions. See [vendor guide evidence](evidence/boardbook-vendor-guides/source.json).
+- The guides establish no machine API or file-payload contract. External integration role and enablement, create/update/upload routes, readback and conflict semantics remain unverified; staff-account acquisition is not an acceptance gate.
 
 Evidence and exact scope: `inventory.json` provider `boardbook`; operation status and outbound mappings are separate from historical observations.
 

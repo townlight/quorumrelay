@@ -1,0 +1,75 @@
+{
+  "vendor": "BoardBook",
+  "product": "Premier",
+  "capture_method": {
+    "method": "single direct GET per URL",
+    "redirects_followed": false,
+    "cookies_used": false,
+    "credentials_used": false,
+    "retries": 0
+  },
+  "files": [
+    {
+      "source_url": "https://assets-us-01.kc-usercontent.com/37044744-256f-009a-8039-e00bdaabaf39/cd22379e-64fa-42cb-894b-101a7ef176c4/BoardBook_Quick-Reference-Guide-2023-02.pdf",
+      "method": "GET",
+      "capture_utc": "2026-11-15T17:47:44Z",
+      "status": 200,
+      "content_type": "application/pdf",
+      "content_length": 127997,
+      "response_url": "https://assets-us-01.kc-usercontent.com/37044744-256f-009a-8039-e00bdaabaf39/cd22379e-64fa-42cb-894b-101a7ef176c4/BoardBook_Quick-Reference-Guide-2023-02.pdf",
+      "bytes": 127997,
+      "sha256": "d2df5f4a9f183d8a3d8ce8f04d41af68937ab555c9c2311454ca98940f8cc8e0",
+      "truncated": false,
+      "max_bytes": 3145728,
+      "connect_timeout_seconds": 30,
+      "read_idle_timeout_seconds": 30,
+      "total_timeout_seconds": 90,
+      "redirects_followed": false,
+      "cookies_used": false,
+      "credentials_used": false,
+      "retries": 0,
+      "file": "quick-reference.pdf",
+      "pages": 2,
+      "pdftotext_exit": 0,
+      "text_bytes": 9465
+    },
+    {
+      "source_url": "https://assets-us-01.kc-usercontent.com/37044744-256f-009a-8039-e00bdaabaf39/61c25538-ffce-4f01-b1ed-c8ab486ce0f6/Working-with-Custom-Documents-Agenda-Public-Notice-Minutes.pdf",
+      "method": "GET",
+      "capture_utc": "2026-11-15T17:48:10Z",
+      "status": 200,
+      "content_type": "application/pdf",
+      "content_length": 278453,
+      "response_url": "https://assets-us-01.kc-usercontent.com/37044744-256f-009a-8039-e00bdaabaf39/61c25538-ffce-4f01-b1ed-c8ab486ce0f6/Working-with-Custom-Documents-Agenda-Public-Notice-Minutes.pdf",
+      "bytes": 278453,
+      "sha256": "feb03fb016fb2d51caa1b9893761dea33477534a41fce327222996bb4d325211",
+      "truncated": false,
+      "max_bytes": 3145728,
+      "connect_timeout_seconds": 30,
+      "read_idle_timeout_seconds": 30,
+      "total_timeout_seconds": 90,
+      "redirects_followed": false,
+      "cookies_used": false,
+      "credentials_used": false,
+      "retries": 0,
+      "file": "custom-documents.pdf",
+      "pages": 4,
+      "pdftotext_exit": 0,
+      "text_bytes": 6798
+    }
+  ],
+  "inspection": "Full extracted text read for both guides; all four Custom Documents pages additionally rendered and visually inspected headlessly.",
+  "scoped_facts": [
+    "Quick Reference filename says 2023-02 but its printed header says last updated July 26, 2022; current deployment/version applicability is not established.",
+    "Quick Reference identifies Agenda Managers as the UI role that creates meetings. Import Agenda Items selects and copies items from another meeting; it is not an external file-import contract.",
+    "Custom Agenda, Public Notice and Minutes documents are static and require replacement after meeting changes.",
+    "Custom document upload does not itself change MeetingStatus; public visibility has separate status, permission and download conditions.",
+    "Two Word variants, text, HTML and PDF are report output options. Screenshots show an RTF custom document example; neither establishes an exhaustive input schema or machine integration contract."
+  ],
+  "limitations": [
+    "Historical UI documentation; no machine API route, request/response payload, external file import schema, acknowledgement, readback or conflict semantics established.",
+    "UI Agenda Manager role does not establish machine integration permission or enablement.",
+    "No API-absence or outside-only dependency conclusion."
+  ],
+  "executed_vendor_code": false
+}

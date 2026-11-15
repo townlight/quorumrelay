@@ -10718,31 +10718,37 @@
           "url": "https://assets-us-01.kc-usercontent.com/37044744-256f-009a-8039-e00bdaabaf39/cd22379e-64fa-42cb-894b-101a7ef176c4/BoardBook_Quick-Reference-Guide-2023-02.pdf",
           "title": "BoardBook Premier Quick Reference Guide",
           "kind": "official_documentation",
-          "observed": "Full search-indexed PDF text inspected; direct FetchUrl rejected binary processing.",
+          "observed": "Full official PDF directly captured and inspected 2026-11-15; supersedes the earlier index-only observation.",
           "findings": [
             "Only Agenda Managers create meetings; create/edit agenda items; attachments through file browser/drag drop.",
             "In Development/In Review/Published/Completed visibility; upload approved Custom Minutes before Completed.",
-            "Completed meetings archive after configurable default 13 months."
+            "Completed meetings archive after configurable default 13 months.",
+            "Import Agenda Items copies selected items from another existing meeting; no external-file import contract is specified."
           ],
-          "limits": "Historical indexed guide, not independently downloaded; API unknown.",
-          "observation_date": "2026-11-11",
+          "limits": "Historical UI guide, printed last updated July 26, 2022 despite 2023-02 filename. No machine API, file-payload, acknowledgement, readback or conflict schema; current deployment applicability unverified.",
+          "observation_date": "2026-11-15",
           "access_scope": "public_research_only",
-          "proof_level": "indexed_or_limited_documentation"
+          "proof_level": "official_documentation",
+          "fixture_path": "docs/capabilities/evidence/boardbook-vendor-guides/quick-reference.pdf",
+          "fixture_sha256": "d2df5f4a9f183d8a3d8ce8f04d41af68937ab555c9c2311454ca98940f8cc8e0"
         },
         {
           "id": "boardbook-custom",
           "url": "https://assets-us-01.kc-usercontent.com/37044744-256f-009a-8039-e00bdaabaf39/61c25538-ffce-4f01-b1ed-c8ab486ce0f6/Working-with-Custom-Documents-Agenda-Public-Notice-Minutes.pdf",
           "title": "Working with Custom Documents",
           "kind": "official_documentation",
-          "observed": "Full search-indexed vendor PDF text inspected; direct FetchUrl binary extraction rejected.",
+          "observed": "Full official PDF directly captured and inspected 2026-11-15; supersedes the earlier index-only observation.",
           "findings": [
             "Custom Agenda/Public Notice/Minutes upload; reports download two Word variants, text, HTML, PDF.",
-            "Custom documents static and require replacement after edits; public attachments may only be all-in-one PDF packet."
+            "Custom documents static and require replacement after edits; public attachments may only be all-in-one PDF packet.",
+            "Uploading a custom document does not itself change MeetingStatus; visibility has separate conditions."
           ],
-          "limits": "UI file workflow not structured import API.",
-          "observation_date": "2026-11-11",
+          "limits": "UI workflow, report output formats and screenshot examples do not establish a machine upload or structured import contract, exhaustive input MIME rules, acknowledgement or readback.",
+          "observation_date": "2026-11-15",
           "access_scope": "public_research_only",
-          "proof_level": "indexed_or_limited_documentation"
+          "proof_level": "official_documentation",
+          "fixture_path": "docs/capabilities/evidence/boardbook-vendor-guides/custom-documents.pdf",
+          "fixture_sha256": "feb03fb016fb2d51caa1b9893761dea33477534a41fce327222996bb4d325211"
         },
         {
           "id": "boardbook-tenant",
@@ -11439,8 +11445,8 @@
       "restrictions": [],
       "remaining_research": [
         "Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda\u2192PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied. Selected original-baseline Minutes755664 now have native hierarchy/action-source-text and scoped configured retrieval/persistence/reopen/retry/search/ZIP proof; other Minutes layouts remain unverified.",
-        "Quick Reference/custom-document guides describe Premier UI and report exports, not machine field payloads or import schema. Vendor-file import and external create/update/upload routes remain unverified.",
-        "Pinned material does not establish role/enablement, write/readback or conflict schemas for an external integration. Those contract details remain unresolved; staff-account acquisition is not an acceptance gate."
+        "Fully inspected Quick Reference and Custom Documents guides describe Premier UI. Import Agenda Items copies items from another meeting, not external-file import. Agenda Managers create meetings in the UI. Custom-document upload does not itself change MeetingStatus; public visibility has separate conditions.",
+        "The guides establish no machine API or file-payload contract. External integration role and enablement, create/update/upload routes, readback and conflict semantics remain unverified; staff-account acquisition is not an acceptance gate."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "boardbook",

@@ -81,3 +81,4 @@ docs/capabilities/evidence/champ-public-archive/*.js whitespace=cr-at-eol,-blank
 # Exact official lifecycle captures retain original CRLF and vendor whitespace.
 docs/capabilities/evidence/granicus-legacy-lifecycle/eol.html whitespace=cr-at-eol,-blank-at-eol,-space-before-tab
 docs/capabilities/evidence/granicus-legacy-lifecycle/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardbook-vendor-guides/source.json whitespace=cr-at-eol
