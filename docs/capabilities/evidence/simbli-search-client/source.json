@@ -1,0 +1,133 @@
+{
+  "observation_date": "2026-11-15",
+  "scope": "Exact baseline site36030321 and its declared anonymous search client; no other tenant survey or writes.",
+  "sources": {
+    "angular-source.json": {
+      "url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/main.js?n=1&av=639294416178531294",
+      "final_url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/main.js?n=1&av=639294416178531294",
+      "status": 200,
+      "bytes": 146142,
+      "sha256": "957c8e5cd3b97b53e913a75d729a3d18c727f9c7179740a526c7000cd625929e"
+    },
+    "advanced-source.json": {
+      "url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-JYHDY2S2.js",
+      "final_url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-JYHDY2S2.js",
+      "status": 200,
+      "bytes": 1174382,
+      "sha256": "3b6a5dd5069926a83c9392f288f821471e37fbe173c950db4e51148e52568534"
+    },
+    "service-source.json": {
+      "url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-5VLYLDT3.js",
+      "final_url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-5VLYLDT3.js",
+      "status": 200,
+      "bytes": 3120,
+      "sha256": "7f4e59d89e4eabd59c5cf35dd52727bea0579377c06852eed776a4dba7222ef0"
+    },
+    "ui-source.json": {
+      "url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-WOZ3MDSY.js",
+      "status": 200,
+      "bytes": 128564,
+      "sha256": "2cc192a41ce3c570e0d3c28915b4c0f5804ca77d659a8a4b33a4f778b794fcfc"
+    },
+    "default-request.json.source.json": {
+      "url": "https://simbli.eboardsolutions.com/CoreServices/api/Search/GetSearchRequestDTO/?sid=36030321&uid=",
+      "status": 200,
+      "final_url": "https://simbli.eboardsolutions.com/CoreServices/api/Search/GetSearchRequestDTO/?sid=36030321&uid=",
+      "bytes": 12036,
+      "sha256": "c0186c239711d5f43468ad6e8183941f99ca10d78e7f0f6e45bb69165a8bc0fb",
+      "content_type": "application/json; charset=utf-8"
+    },
+    "search-source.json": {
+      "url": "https://simbli.eboardsolutions.com/CoreServices/api/Search/SearchMeetingModule",
+      "status": 200,
+      "final_url": "https://simbli.eboardsolutions.com/CoreServices/api/Search/SearchMeetingModule",
+      "bytes": 548,
+      "sha256": "f1d9893cb51085abedb9f40150d1ff8742b53c1bf2b653cf393b8b94722f2fe2",
+      "content_type": "application/json; charset=utf-8"
+    },
+    "board-source.json": {
+      "url": "https://simbli.eboardsolutions.com/CoreServices/api/Search/SearchMeetingModule",
+      "status": 200,
+      "final_url": "https://simbli.eboardsolutions.com/CoreServices/api/Search/SearchMeetingModule",
+      "bytes": 548,
+      "sha256": "f1d9893cb51085abedb9f40150d1ff8742b53c1bf2b653cf393b8b94722f2fe2",
+      "content_type": "application/json; charset=utf-8"
+    },
+    "current-listing-source.json": {
+      "url": "https://simbli.eboardsolutions.com/SB_Meetings/SB_MeetingListing.aspx?S=36030321",
+      "status": 200,
+      "final_url": "https://simbli.eboardsolutions.com/SB_Meetings/SB_MeetingListing.aspx?S=36030321",
+      "bytes": 920,
+      "sha256": "5d1541fd1c69c6f4bc8c3063c32544f6fd14f51fd70f2fe540e498cbcdd52c9d",
+      "content_type": "text/html"
+    }
+  },
+  "files": [
+    {
+      "path": "docs/capabilities/evidence/simbli-search-client/angular-main.js",
+      "bytes": 146142,
+      "sha256": "957c8e5cd3b97b53e913a75d729a3d18c727f9c7179740a526c7000cd625929e"
+    },
+    {
+      "path": "docs/capabilities/evidence/simbli-search-client/advanced-search.js",
+      "bytes": 1174382,
+      "sha256": "3b6a5dd5069926a83c9392f288f821471e37fbe173c950db4e51148e52568534"
+    },
+    {
+      "path": "docs/capabilities/evidence/simbli-search-client/search-service.js",
+      "bytes": 3120,
+      "sha256": "7f4e59d89e4eabd59c5cf35dd52727bea0579377c06852eed776a4dba7222ef0"
+    },
+    {
+      "path": "docs/capabilities/evidence/simbli-search-client/configure-ui.js",
+      "bytes": 128564,
+      "sha256": "2cc192a41ce3c570e0d3c28915b4c0f5804ca77d659a8a4b33a4f778b794fcfc"
+    },
+    {
+      "path": "docs/capabilities/evidence/simbli-search-client/default-request.json",
+      "bytes": 12036,
+      "sha256": "c0186c239711d5f43468ad6e8183941f99ca10d78e7f0f6e45bb69165a8bc0fb"
+    },
+    {
+      "path": "docs/capabilities/evidence/simbli-search-client/search-request.json",
+      "bytes": 7978,
+      "sha256": "cff3eadd6f36515e2d0f53a1d0bc21e4af340d2964804a6c0ee620d91b408895"
+    },
+    {
+      "path": "docs/capabilities/evidence/simbli-search-client/search-response.json",
+      "bytes": 548,
+      "sha256": "f1d9893cb51085abedb9f40150d1ff8742b53c1bf2b653cf393b8b94722f2fe2"
+    },
+    {
+      "path": "docs/capabilities/evidence/simbli-search-client/board-request.json",
+      "bytes": 7977,
+      "sha256": "9d8d655822f8cda7d37cfc21a620f5fe16a55bf5f8d996116d9d2de893825cb0"
+    },
+    {
+      "path": "docs/capabilities/evidence/simbli-search-client/board-response.json",
+      "bytes": 548,
+      "sha256": "f1d9893cb51085abedb9f40150d1ff8742b53c1bf2b653cf393b8b94722f2fe2"
+    }
+  ],
+  "findings": [
+    "The saved baseline declares Angular main; main declares AdvancedSearchModule; its import resolves search service chunk5VLYLDT3. MasterPageModule imports configure UI chunkWOZ3MDSY.",
+    "Anonymous default DTO GET declares sid=siteID and uid=currUserId, which is empty in the saved baseline. Current GET returned SiteId36030321 and LoggedIn=false.",
+    "SearchMeetingModule is a read-shaped POST with an explicit DTO, not a supported staff write. Client selects SearchOneSite, SearchMeetingModule, SearchText, IsExactPhase/IsAllWords/IsAnyWord, SortColumnEnum/SortDirectionEnum, StartIndex and ReloadData.",
+    "Client initializes CacheKey from window.sessionId and saves the DTO through a separate session handler before navigation. No session-save request was executed. No authenticated operation, credentials or browser execution occurred.",
+    "Result model is meetingSearchResponseDTOs plus TotalCount and grouping/filter metadata. UI has State/Region/Organization grouping rows, Index continuation and MeetingTitle/MeetingDate/MeetingTypeName/AgendaTitle.",
+    "Client goToMeeting uses SiteId and MeetingId in an enMID locator; this does not establish equivalence to the existing numeric MID identity. AgendaId is separately used for the agenda popup and is not assumed to be a meeting ID.",
+    "Two direct bounded read POSTs (budget, then Board) without a page CacheKey each returned HTTP200 and TotalCount0/empty rows, identical548bytes. These do not verify a usable nonempty mapping or catalog exhaustion.",
+    "A fresh anonymous page request could not supply the required controls: HTTP200920bytes Incapsula Request unsuccessful iframe, SHA recorded. An earlier in-memory attempt stopped at missing controls before making another POST. No challenge bypass attempted."
+  ],
+  "remaining": [
+    "Verify the complete anonymous request/session/header chain against actual supplied page controls; never invent a cache/session token or treat null CacheKey probes as complete acceptance.",
+    "Establish nonempty grouped response and opaque/encrypted identity stability/relationship to existing MID records before enabling normalized native-search support.",
+    "Verify Index continuation, group expansion, response revision behavior and exact local search/filter coverage against that model."
+  ],
+  "classification": "Concrete partial client contract and exact public access failure; owned research remains incomplete, not a proven outside-only dependency.",
+  "engine_regression": {
+    "test": "tests/test_simbli_search_access.py",
+    "result": "1 passed in0.13s",
+    "scope": "Synthetic HTTP200 challenge rejected as failed, no records, catalog_complete=false, no checkpoint, one request. Existing behavior passed; no reader code change."
+  }
+}

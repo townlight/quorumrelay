@@ -13512,6 +13512,18 @@
           "fixture_sha256": "5ad207498de7f21d2846589aa75732c5cefdfaa3ff81ce5ba9a40fe2f0b7c0c9",
           "findings": "Working current vendor-declared two-page PDF describes agenda recommendations into minutes and staff packet/search/vote workflows.",
           "limits": "Does not specify external file layout, request endpoint/fields/authentication or readback; no API absence/outside-only claim. Page web-reader success and separate direct403 are distinguished in source.json."
+        },
+        {
+          "id": "simbli-search-client-2026-11-15",
+          "url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-5VLYLDT3.js",
+          "title": "Deployed anonymous Simbli search service and declared result client",
+          "kind": "public_page",
+          "proof_level": "observed_vendor_client_partial_search_contract_not_engine_acceptance",
+          "observation_date": "2026-11-15",
+          "fixture_path": "docs/capabilities/evidence/simbli-search-client/search-service.js",
+          "fixture_sha256": "7f4e59d89e4eabd59c5cf35dd52727bea0579377c06852eed776a4dba7222ef0",
+          "findings": "Exact default DTO GET and SearchMeetingModule read POST with typed client fields; result grouping and enMID locator declared. Pinned chain and bounded probes in source.json.",
+          "limits": "Nonempty result/native identity and complete anonymous session/header chain remain unverified. Two empty responses and a fresh HTTP200 challenge are not empty completeness, usable search acceptance or outside-only proof."
         }
       ],
       "tenants": [
@@ -13624,12 +13636,15 @@
           "capability_status": "documented",
           "implementation_status": "not_implemented",
           "evidence_ids": [
-            "simbli-docs"
+            "simbli-docs",
+            "simbli-search-client-2026-11-15"
           ],
-          "details": "Archived agendas/minutes/document search documented, no verified request.",
+          "details": "Public client declares default DTO GET and SearchMeetingModule read POST, grouped result fields and Index continuation. Nonempty mapping and anonymous session/header chain remain unverified; native handler is not enabled.",
           "dependencies": [],
           "remaining_verification": [
-            "Verify usable request route, permissions, result fields, exact/phrase semantics and pagination."
+            "Verify complete anonymous page/cache/session/header controls without inventing them.",
+            "Verify nonempty grouped results, enMID identity stability and relationship to existing numeric MID records, Index continuation and exact local filter coverage.",
+            "HTTP200 challenge and empty probes do not establish complete empty results or outside-only dependency."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "referenced_documentation_or_source_observation",
@@ -13903,7 +13918,7 @@
       "restrictions": [],
       "remaining_research": [
         "Public listing/page2, fresh selected meeting/agenda tree, selected item content and same-meeting supplied attachments are source implemented with scoped captures/synthetic execution. The older HTML-only observation is historical. Aggregate agenda/minutes PDF generation, native search and full-catalog semantics remain unverified.",
-        "Reviewed current Simbli pages describe archive search and staff meeting/item/document workflows but publish no machine field schema. A product-matched machine contract is not yet established; this is unresolved research, not proof only a customer/private source can resolve it.",
+        "The deployed anonymous client now establishes a partial search request/result contract. Nonempty result identity, complete session/header chain and continuation remain unresolved; staff/import schemas remain separate research gaps. No outside-only dependency is inferred.",
         "Tenant-specific role/permission and write/readback configuration must come from a matching machine contract. No staff/test-tenant credential acquisition is an acceptance gate; no live mutation is authorized.",
         "Current vendor-declared meetings brochure captured2026-11-15. Import recommendations into minutes is a product workflow claim, with no external file/request/readback schema. Exact old CDN failure and direct page403 do not prove other public contracts absent; no new tenant sampling or guessed staff path."
       ],

@@ -114,7 +114,7 @@ Evidence and exact scope: `inventory.json` provider `escribe`; operation status 
 ## F10 Simbli (`simbli`)
 
 - Public listing/page2, fresh selected meeting/agenda tree, selected item content and same-meeting supplied attachments are source implemented with scoped captures/synthetic execution. The older HTML-only observation is historical. Aggregate agenda/minutes PDF generation, native search and full-catalog semantics remain unverified.
-- Reviewed current Simbli pages describe archive search and staff meeting/item/document workflows but publish no machine field schema. A product-matched machine contract is not yet established; this is unresolved research, not proof only a customer/private source can resolve it.
+- The deployed anonymous client establishes a partial search request/result contract. Nonempty result identity, the complete session/header chain and continuation remain unresolved; staff/import schemas remain separate research gaps. No outside-only dependency is inferred. See the [exact client/probe assessment](evidence/simbli-search-client/source.json).
 - Tenant-specific role/permission and write/readback configuration must come from a matching machine contract. No staff/test-tenant credential acquisition is an acceptance gate; no live mutation is authorized.
 
 Evidence and exact scope: `inventory.json` provider `simbli`; operation status and outbound mappings are separate from historical observations.
@@ -385,3 +385,9 @@ Selected eSCRIBE history discovery follow-up2026-11-15: MeetingAgendaItemsWithHi
 Selected eSCRIBE meeting-type filter follow-up2026-11-15: MeetingTypeGetByPortal now supplies complete native selectors to existing MeetingGetByMeetingType.15new/170eSCRIBE checks preserve multilingual source keys/text, IDs, exact capture and all neutral exports. Selected portal is verified on each row; unpaged/empty remains partial, no administration or write added. See [receipt](../verification/escribe-meeting-types-2026-11-15.json).
 
 OnBase supplied Minutes follow-up2026-11-15: the official published-document guide describes Minutes motions/votes/actions. Exact same-origin Fitchburg3831 listing wrapper and its declared accessible Minutes each returned200; accessible content has a meeting header and empty outline, without native item controls. This does not establish a nonempty Minutes DOM, zero actual actions or PDF text. No parser promotion, extra tenant survey or outside-only assertion. See [source/captures](evidence/onbase-minutes/source.json); the rejected2595cross-origin-context probe is explicitly excluded.
+
+### Simbli exact anonymous search client (2026-11-15)
+
+The original saved site36030321 declares the Angular module chain now pinned in [simbli-search-client/source.json](evidence/simbli-search-client/source.json). It establishes `GetSearchRequestDTO` and read-shaped `SearchMeetingModule`, native filter/sort fields, grouped result fields, `Index` continuation and an `enMID` locator. `AgendaId`, encrypted/opaque `MeetingId` and existing numeric `MID` identities are not assumed equivalent.
+
+Current anonymous default-model GET returned200 with `LoggedIn=false`. Two bounded direct read POSTs returned the identical empty548byte result without a page cache key; neither is usable nonempty acceptance or exhaustion proof. The fresh baseline listing returned an HTTP200920byte Incapsula challenge instead of page controls, and no further search POST/session-save/bypass was attempted. Complete anonymous controls and a nonempty stable result model remain owned research gaps. Staff/import APIs remain separate. The focused synthetic HTTP200 challenge regression passed: failed, no records, catalog incomplete, no continuation. Existing rejection behavior needed no code change.

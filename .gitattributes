@@ -53,3 +53,8 @@ docs/capabilities/evidence/legistar-text-import/article.html whitespace=-blank-a
 docs/capabilities/evidence/peak-public-search/page1.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
 docs/capabilities/evidence/peak-public-search/page2-empty.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
 docs/capabilities/evidence/peak-public-search/pagination.js whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Exact Simbli JSON responses retain vendor CRLF bytes for capture hashes.
+docs/capabilities/evidence/simbli-search-client/default-request.json whitespace=cr-at-eol
+docs/capabilities/evidence/simbli-search-client/search-response.json whitespace=cr-at-eol
+docs/capabilities/evidence/simbli-search-client/board-response.json whitespace=cr-at-eol
