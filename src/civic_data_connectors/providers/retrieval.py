@@ -116,6 +116,9 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if source.provider == "onbase":
             from .onbase_detail import fetch_detail
             return fetch_detail(source, namespace, request, bounds, context, transport)
+        if source.provider == "municode-meetings" and source.input_format == "municode-publishpage-html":
+            from .municode_publish import fetch_detail
+            return fetch_detail(source, namespace, request["external_id"], bounds, context, transport)
         if source.provider == 'tyler-meeting-manager':
             from .tyler_public import fetch_detail
             return fetch_detail(engine, source, namespace, request['external_id'], bounds, context, transport)

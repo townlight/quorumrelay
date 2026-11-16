@@ -150,6 +150,9 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format == "municode-publishpage-detail-html":
+        from .municode_publish import detail_bundle
+        return detail_bundle(source, namespace, content, source.options.get("meeting_id"), source.options.get("detail_kind", "agenda"))
     if input_format == "municode-publishpage-html":
         from .municode_publish import parse_bundle
         return parse_bundle(source, namespace, content)

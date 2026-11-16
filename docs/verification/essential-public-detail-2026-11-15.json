@@ -1,0 +1,109 @@
+{
+  "date": "2026-11-15",
+  "status": "PASSED",
+  "requirements": [
+    6
+  ],
+  "scope": "Selected public Essential ADA agenda/packet from parent-revalidated PublishPage membership; positional text/link mapping, bounded retrieval, capture replay and attachment index stability; no whole account API acceptance",
+  "base_candidate": "a8088900f93aca648f3735b35056190004957cd9",
+  "checks": [
+    {
+      "command": "python -X utf8 -m pytest -q tests/test_municode_publish_detail.py tests/test_municode_publish.py tests/test_municode_configured_discovery.py tests/test_essential_production.py tests/test_essential_response_qualification.py",
+      "passed": 51,
+      "failed": 0,
+      "seconds": 1.17,
+      "executor": "projection_terra; final source after two reproduced replay defects fixed"
+    },
+    {
+      "command": "python -X utf8 -m pytest tests/test_account_apis.py tests/test_account_read_boundaries.py tests/test_interfaces.py tests/test_public_package.py tests/test_provider_discovery.py -q",
+      "passed": 106,
+      "failed": 0,
+      "seconds": 9.44,
+      "executor": "root",
+      "xml_local": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\essential-followup-20261115\\integration.xml",
+      "warning": "One existing Starlette/AnyIO deprecation"
+    }
+  ],
+  "reproduced_defects": [
+    "Fetched detail source omitted meeting_id and could not replay its primary capture; regression failed then passed.",
+    "Fetched packet prepended listing documents, shifting attachment indexes against primary capture replay and selecting wrong file; regression failed then passed."
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "tests/fixtures/municode-publish/effingham-agenda.html",
+      "sha256": "0da96906f79aa7dc2344491eccc496b8654d65f54f8d4c76871c9e9bf0093175"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "tests/fixtures/municode-publish/effingham-packet.html",
+      "sha256": "df11743eb9ab9dd1f36bf1ec44e5b39488e4b95f84a517754238c981ee1388c3"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_municode_publish_detail.py",
+      "sha256": "db3a7878fcc47e9a35052483816e603d494ff6df813732f52e93927ae38ce35b",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "8d4521d97c944244f6bfec5a4911231392152878fa30cf91b2437a778adb8ba2"
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/municode_publish.py",
+      "canonical_lf_sha256": "2ff4551fdbccd68d7bce548b3b003dce430303ae64806ea4869e4e305a0fbd92"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "canonical_lf_sha256": "a8a0e3d680df3255002d541a0669b3c44154c2e943be134a9d0d062f46a0a235"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/account_api.py",
+      "canonical_lf_sha256": "cedd6509108dbc2820593825d8388e9859b81b00e8e9dc5c67ce292502c24f79"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/identification.py",
+      "canonical_lf_sha256": "f33c98bff7b0babd05376f1d7b521354ee0b029a36bc8d99f981398f3fdbf4e9"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/native.py",
+      "canonical_lf_sha256": "df060d49db2726c4cf44f7253bed337e181b3af863bc738f6b26dc1c8a64a738"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/__init__.py",
+      "canonical_lf_sha256": "10915c6a5d09aaaecaf7eaf383945d4521f002c1c9615086993afb22fd22af5b"
+    }
+  ],
+  "source_receipt": "docs/capabilities/evidence/essential-public-detail/source.json",
+  "source_receipt_sha256": "888b9de1660d300856bae05de9f939b38ab1f6d4b6e03a0a47c21e342b5a16cb",
+  "limits": [
+    "One selected public meeting layout, not a complete archive or API identity equivalence.",
+    "19 sections,28 positional items,293 packet attachment links; no native section/item IDs inferred.",
+    "No live attachment transfer; bounded file transfer verified with synthetic PDF bytes and explicit origin.",
+    "No full suite repeated; prior full acceptance remains historical and affected checks are attributed here.",
+    "Authenticated meeting/item/collection response shapes and collection advancement remain unresolved. Exact documented production detail route returned401 anonymously; no universal public-schema absence claim.",
+    "No release/push/merge/tag/build/install/authentication/vendor mutation."
+  ],
+  "final_metadata_checks": {
+    "capability_and_synthetic_evidence_tests": {
+      "passed": 25,
+      "failed": 0,
+      "seconds": 0.74
+    },
+    "full_ruff": "passed",
+    "capability_validator": {
+      "status": "PASSED",
+      "providers": 31,
+      "baseline_formats": 34,
+      "operations": 341,
+      "outbound_mappings": 190,
+      "evidence": 463,
+      "urls": 292
+    },
+    "runtime": {
+      "providers": 32,
+      "additive_parser_hooks": 68,
+      "native_search_handlers": 23
+    },
+    "source_review": "Root read complete changed provider dispatch/mapping/bounds and relevant engine attachment-replay path; two named replay defects reproduced/fixed by Terra; no independent reviewer claimed."
+  }
+}

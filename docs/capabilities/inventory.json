@@ -10031,6 +10031,67 @@
               }
             ]
           }
+        },
+        {
+          "id": "essential-public-detail-2026-11-15",
+          "url": "https://meetings.municode.com/adaHtmlDocument/index?cc=EFFINGHAM&me=4a737d59a401417fbd7fd597e964fdba&ip=false",
+          "title": "Selected public Essential ADA agenda/packet captures and bounded synthetic execution",
+          "kind": "saved_fixture_and_engine_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "fixture_path": "tests/fixtures/municode-publish/effingham-agenda.html",
+          "fixture_sha256": "0da96906f79aa7dc2344491eccc496b8654d65f54f8d4c76871c9e9bf0093175",
+          "receipt_path": "docs/verification/essential-public-detail-2026-11-15.json",
+          "receipt_sha256": "ce8189487262cb40e99bb7dfff65412935e511f5ddc14a138e9785c70af52b43",
+          "limits": "One selected public agenda/packet; no native API identity, authenticated response schema or full catalog. Anonymous documented detail GET401 establishes authorization only for exact route.",
+          "synthetic_execution": {
+            "provider": "municode-meetings",
+            "status": "fixture_passed",
+            "operations": [
+              "fetch",
+              "parse"
+            ],
+            "entities": [],
+            "scope": "Selected public Essential ADA agenda/packet from parent-revalidated PublishPage membership; positional text/link mapping, bounded retrieval, capture replay and attachment index stability; no whole account API acceptance",
+            "execution_provenance": "Pinned two HTTP200 public HTML source bodies;51 final affected checks by Terra;106 shared integration checks executed by root. No live engine or account acceptance.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest -q tests/test_municode_publish_detail.py tests/test_municode_publish.py tests/test_municode_configured_discovery.py tests/test_essential_production.py tests/test_essential_response_qualification.py",
+                "passed": 51,
+                "failed": 0,
+                "seconds": 1.17,
+                "executor": "projection_terra; final source after two reproduced replay defects fixed"
+              },
+              {
+                "command": "python -X utf8 -m pytest tests/test_account_apis.py tests/test_account_read_boundaries.py tests/test_interfaces.py tests/test_public_package.py tests/test_provider_discovery.py -q",
+                "passed": 106,
+                "failed": 0,
+                "seconds": 9.44,
+                "executor": "root",
+                "xml_local": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\essential-followup-20261115\\integration.xml",
+                "warning": "One existing Starlette/AnyIO deprecation"
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "tests/fixtures/municode-publish/effingham-agenda.html",
+                "sha256": "0da96906f79aa7dc2344491eccc496b8654d65f54f8d4c76871c9e9bf0093175"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "tests/fixtures/municode-publish/effingham-packet.html",
+                "sha256": "df11743eb9ab9dd1f36bf1ec44e5b39488e4b95f84a517754238c981ee1388c3"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_municode_publish_detail.py",
+                "sha256": "db3a7878fcc47e9a35052483816e603d494ff6df813732f52e93927ae38ce35b",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "8d4521d97c944244f6bfec5a4911231392152878fa30cf91b2437a778adb8ba2"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -10099,20 +10160,21 @@
             "municode-essential-public-api",
             "municode-meetings-tenant",
             "essential-production-published-routes-2026-11-14",
-            "essential-response-qualification-2026-11-15"
+            "essential-response-qualification-2026-11-15",
+            "essential-public-detail-2026-11-15"
           ],
-          "details": "Explicit meeting/item/multimedia GET and collection POST at caller-supplied offset use the support article development origin or officially linked Postman production origin. Production item route is /PublicApi/meeting/item/{id}; development retains /PublicApi/item/{id}. Credentials bind exact selected origin/tenant/namespace; no fallback. Meeting/item/collection response schemas remain unverified raw partial captures. Only existing documented meetingStructure multimedia shape is normalized. Synthetic routing/privacy checks accepted; no live account read. Environment qualification: only development-host multimedia has the documented normalized meetingStructure mapping. All production account responses, including multimedia, are raw partial captures because the production collection supplies no response examples; no development DTO is inferred.",
+          "details": "Explicit meeting/item/multimedia GET and collection POST at caller-supplied offset use the support article development origin or officially linked Postman production origin. Production item route is /PublicApi/meeting/item/{id}; development retains /PublicApi/item/{id}. Credentials bind exact selected origin/tenant/namespace; no fallback. Meeting/item/collection response schemas remain unverified raw partial captures. Only existing documented meetingStructure multimedia shape is normalized. Synthetic routing/privacy checks accepted; no live account read. Environment qualification: only development-host multimedia has the documented normalized meetingStructure mapping. All production account responses, including multimedia, are raw partial captures because the production collection supplies no response examples; no development DTO is inferred. Selected public PublishPage fetch now revalidates membership and follows its exact supplied ADA agenda/packet URL with matching title/date/time/location, shared byte/deadline bounds and retained partial listing after related failure. Positional sections/items, source text and supporting locators are preserved with replay-stable attachment indexes; no native item IDs inferred. Scoped fixture execution covers this public layout only.",
           "dependencies": [],
           "remaining_verification": [
             "Obtain documented or authorized response examples for meeting and item details and multimedia readback"
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "official_contract_and_fixture_tested_source_implementation_no_live_account_read",
+          "acceptance_status": "fixture_passed",
+          "evidence_level": "scoped_public_detail_saved_fixture_and_bounded_engine_execution",
           "tenant_scope": [
             "https://meetings.municode.com/PublishPage/index?cid=EFFINGHAM&ppid=9639c19d-1d1f-4201-b8ff-163a28a35f08&p=1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Fixture-only source checks; no support-issued token or tenant account.",
+          "test_access": "Offline saved public source fixtures and injected transport; no account credentials or vendor mutations.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance",
@@ -10126,18 +10188,19 @@
           "evidence_ids": [
             "municode-meetings-baseline",
             "quorumrelay-shared-core-operations",
-            "essential-response-qualification-2026-11-15"
+            "essential-response-qualification-2026-11-15",
+            "essential-public-detail-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Environment qualification: only development-host multimedia has the documented normalized meetingStructure mapping. All production account responses, including multimedia, are raw partial captures because the production collection supplies no response examples; no development DTO is inferred.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Environment qualification: only development-host multimedia has the documented normalized meetingStructure mapping. All production account responses, including multimedia, are raw partial captures because the production collection supplies no response examples; no development DTO is inferred. Selected public PublishPage fetch now revalidates membership and follows its exact supplied ADA agenda/packet URL with matching title/date/time/location, shared byte/deadline bounds and retained partial listing after related failure. Positional sections/items, source text and supporting locators are preserved with replay-stable attachment indexes; no native item IDs inferred. Scoped fixture execution covers this public layout only.",
           "dependencies": [],
           "remaining_verification": [],
-          "acceptance_status": "not_run",
-          "evidence_level": "shared_source_and_named_test_coverage_not_provider_acceptance",
+          "acceptance_status": "fixture_passed",
+          "evidence_level": "scoped_public_detail_saved_fixture_and_bounded_engine_execution",
           "tenant_scope": [
             "https://meetings.municode.com/PublishPage/index?cid=EFFINGHAM&ppid=9639c19d-1d1f-4201-b8ff-163a28a35f08&p=1"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Local source and saved-fixture contract coverage; no provider account access required.",
+          "test_access": "Offline saved public source fixtures and injected transport; no account credentials or vendor mutations.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -10660,7 +10723,8 @@
         "Development multimedia updates have accepted scoped synthetic execution/readback for the documented URL/timestamp/default/baseURL fields. Other enum meanings, mutability and upstream conflict semantics remain qualified; no authorized-tenant or live-write acceptance gate is imposed.",
         "The inspected help article and officially linked Postman collection provide no meeting/item create/update or document-upload route/model. Product-matched machine contracts remain needed before coding those operations or claiming vendor absence. The article development host and collection production host remain explicitly distinct.",
         "Essential reaches end-of-life on 2027-06-30. Keep this product row separate from Select and Aha CMS.",
-        "Production multimedia update request uses lower-camel-case JSON, while the existing development DTO adapter uses Pascal-case fields. Production payload/readback equivalence remains unmapped and write planning fails before network; no development-to-production field-case inference."
+        "Production multimedia update request uses lower-camel-case JSON, while the existing development DTO adapter uses Pascal-case fields. Production payload/readback equivalence remains unmapped and write planning fails before network; no development-to-production field-case inference.",
+        "Authenticated response schema/collection offset progression remain unresolved after multi-service search; exact official example detail GET401 anonymously proves authorization for that route only. Version-matched response documentation or sanitized successful examples can resolve schema without a live credential acceptance gate."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "municode-meetings",

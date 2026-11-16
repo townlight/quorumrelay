@@ -193,3 +193,130 @@ def parse_bundle(source, namespace, content):
     bundle["extensions"]["publishpage_controls"] = {"selected": selected, "options": page.options,
         "declared_links": links, "cid": cid, "ppid": ppid}
     return bundle
+
+DETAIL = "municode-publishpage-detail-html"
+
+
+def detail_bundle(source, namespace, content, meeting_id, kind, *, selected=None, retrieval_url=None):
+    """Rendered supplied ADA agenda/packet with positional content, never native item IDs."""
+    from .escribe_detail import Page as TreePage
+    if not isinstance(meeting_id, str) or not ID.fullmatch(meeting_id) or kind not in {"agenda", "packet"}:
+        raise ValueError("A supplied public meeting selector and agenda or packet kind are required.")
+    context(source)
+    page = TreePage()
+    page.feed(content.decode("utf-8-sig", errors="strict"))
+    nodes = list(page.root.walk())
+    headers = [[n for n in nodes if f"h1-line-{suffix}" in n.classes()] for suffix in ("one", "two", "three")]
+    agendas = [n for n in nodes if "ap-agenda" in n.classes()]
+    if len(agendas) != 1 or any(len(group) != 1 or not group[0].text() for group in headers):
+        raise ValueError("The selected response lacks a rendered agenda and meeting header.")
+    header = [group[0].text() for group in headers]
+    if selected is not None:
+        expected = selected["normalized"]
+        try:
+            header_date = datetime.strptime(header[1], "%A, %B %d, %Y %I:%M %p").date().isoformat()
+        except ValueError:
+            raise ValueError("The selected agenda date is invalid.") from None
+        try:
+            header_time = datetime.strptime(header[1], "%A, %B %d, %Y %I:%M %p").time()
+            listing_time = datetime.strptime(expected["source_time"], "%I:%M %p").time()
+        except ValueError:
+            raise ValueError("The selected agenda time is invalid.") from None
+        if (header[0] != expected["title"] or header_date != expected["meeting_date"]
+                or header_time != listing_time or header[2] != expected["location"]):
+            raise ValueError("The selected agenda header disagrees with the listing.")
+    sections = []
+    for section in (n for n in agendas[0].walk() if n.tag == "section" and "agenda-section" in n.classes()):
+        headings = [n for n in section.walk() if n.tag == "h2" and "section-header" in n.classes()]
+        if len(headings) != 1:
+            raise ValueError("The supplied agenda section is malformed.")
+        items = []
+        for ol in (n for n in section.walk() if n.tag == "ol" and "agenda-items" in n.classes()):
+            for node in ol.children:
+                if getattr(node, "tag", None) == "li":
+                    links = [{"url": _safe_link(source, a.attrs["href"]), "title": a.text()}
+                             for a in node.walk() if a.tag == "a" and a.attrs.get("href")]
+                    items.append({"text": node.text(), "links": links})
+                elif getattr(node, "tag", None) == "ul" and "agenda_item_attachments" in node.classes():
+                    if not items:
+                        raise ValueError("An attachment list lacks its preceding item.")
+                    items[-1]["links"].extend({"url": _safe_link(source, a.attrs["href"]), "title": a.text()}
+                        for a in node.walk() if a.tag == "a" and a.attrs.get("href"))
+        heading_links = [{"url": _safe_link(source, a.attrs["href"]), "title": a.text()}
+                         for a in headings[0].walk() if a.tag == "a" and a.attrs.get("href")]
+        sections.append({"title": headings[0].text(), "links": heading_links, "items": items})
+    if not sections:
+        raise ValueError("The supplied agenda has no sections.")
+    normalized = {"external_id": meeting_id, "title": header[0], "source_header_date": header[1],
+                  "location": header[2], "detail_kind": kind, "agenda_sections": sections}
+    documents = [{"kind": "supporting_material", "url": link["url"], "title": link["title"],
+                  "section_position": i, "item_position": j}
+                 for i, section in enumerate(sections) for j, item in enumerate(section["items"])
+                 for link in item["links"]]
+    if selected is not None:
+        normalized = {**selected["normalized"], **normalized}
+        normalized["listing_documents"] = selected["normalized"].get("documents", [])
+    normalized["documents"] = documents
+    from dataclasses import replace
+    detail_source = replace(source, input_format=DETAIL,
+        options={**source.options, "meeting_id": meeting_id, "detail_kind": kind})
+    bundle = make_bundle(detail_source, namespace, content, DETAIL, [(normalized, {"header": header, "listing_row": selected.get("original") if selected else None}, "meeting")])
+    record = bundle["records"][0]
+    record["identity"].update(derivation="public_document_selector", stability="Public portal me selector within cid; API equivalence unverified.")
+    for i, section in enumerate(sections):
+        for field, value in [(f"agenda_sections[{i}].title", section["title"]), *[(f"agenda_sections[{i}].items[{j}].text", item["text"]) for j, item in enumerate(section["items"])]]:
+            if value:
+                record["text"].append({"field": field, "text": value, "citation_url": retrieval_url or source.url,
+                    "completeness": "supplied_rendered_text", "provenance": {"method": "municode_public_ada_html", "capture_sha256": bundle["capture"]["sha256"]}})
+    if retrieval_url:
+        bundle["capture"]["retrieval_url"] = retrieval_url
+    return bundle
+
+
+def fetch_detail(source, namespace, external_id, bounds, operation_context, transport):
+    from time import monotonic
+    from ..models import Error, OperationResult
+    kind = source.options.get("detail_kind", "agenda")
+    if not isinstance(external_id, str) or not ID.fullmatch(external_id) or kind not in {"agenda", "packet"} or bounds.checkpoint:
+        raise ValueError("Selected detail requires a supplied meeting selector and agenda or packet kind.")
+    deadline, total = monotonic() + bounds.deadline_seconds, 0
+    listing = None
+    coverage = {"scope": "selected listing-issued ADA agenda or packet", "source_complete": False, "catalog_complete": False}
+    try:
+        def read(url):
+            nonlocal total
+            if operation_context.check_cancelled() or monotonic() >= deadline or total >= bounds.transfer_bytes:
+                raise ValueError("Request cancelled or bounded.")
+            response = transport.request(url, byte_limit=min(bounds.parser_bytes, bounds.transfer_bytes - total),
+                deadline_seconds=max(.001, deadline - monotonic()), allowed_origins=("https://meetings.municode.com",), allow_redirects=False)
+            total += len(response.content)
+            if (operation_context.check_cancelled() or monotonic() >= deadline or response.status != 200
+                    or response.url != url or len(response.content) > bounds.parser_bytes or total > bounds.transfer_bytes):
+                raise ValueError("Response unavailable or outside bounds.")
+            return response.content
+        if bounds.max_pages < 1:
+            raise ValueError("Listing budget unavailable.")
+        listing = parse_bundle(source, namespace, read(source.url))
+        rows = [r for r in listing["records"] if r["identity"]["external_id"] == external_id]
+        listing["records"] = rows
+        if len(rows) != 1:
+            raise ValueError("Selected meeting is absent from the configured listing.")
+        if bounds.max_pages < 2:
+            raise ValueError("Detail page budget unavailable.")
+        docs = [d["url"] for d in rows[0]["normalized"]["documents"] if d.get("source_column") == ("adahtmlagenda" if kind == "agenda" else "adahtmlpacket")]
+        if len(docs) != 1:
+            raise ValueError("The listing does not supply one exact selected detail URL.")
+        raw = read(docs[0])
+        detail_capture = make_bundle(source, namespace, raw, DETAIL, [])["capture"]
+        detail_capture["retrieval_url"] = docs[0]
+        listing["captures"] = [detail_capture]
+        bundle = detail_bundle(source, namespace, raw, external_id, kind, selected=rows[0], retrieval_url=docs[0])
+        if operation_context.check_cancelled() or monotonic() >= deadline:
+            raise ValueError("The selected agenda mapping exceeded its bounds.")
+        bundle["captures"] = [listing["capture"]]
+        coverage["transfer_bytes"] = total
+        return OperationResult("partial", bundle, coverage=coverage, operation_id=operation_context.operation_id)
+    except Exception:
+        coverage["transfer_bytes"] = total
+        return OperationResult("cancelled" if operation_context.check_cancelled() else "partial" if listing else "failed", listing,
+            errors=(Error("municode_public_detail_unavailable", "The selected listing or ADA document could not be retrieved or verified.", retryable=True, source=source.url),), coverage=coverage, operation_id=operation_context.operation_id)

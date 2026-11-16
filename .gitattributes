@@ -8,7 +8,11 @@ docs/capabilities/evidence/task6-archived-windows/source.json whitespace=cr-at-e
 docs/capabilities/evidence/simbli-minutes-client/source.json whitespace=cr-at-eol
 docs/capabilities/evidence/simbli-minutes-client/client-excerpts.txt whitespace=cr-at-eol
 tests/fixtures/municode-publish/effingham.html whitespace=cr-at-eol
+# Exact public ADA document bodies retain vendor CRLF, tabs and trailing whitespace.
+tests/fixtures/municode-publish/effingham-agenda.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+tests/fixtures/municode-publish/effingham-packet.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
 docs/capabilities/evidence/municode-publishpage/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/essential-public-detail/source.json whitespace=cr-at-eol
 tests/fixtures/boarddocs-public/grand-detail-20240522.html whitespace=-blank-at-eol,-blank-at-eof
 docs/capabilities/evidence/utah-admin-client/help.html whitespace=-blank-at-eol
 docs/capabilities/inventory.json -text whitespace=cr-at-eol

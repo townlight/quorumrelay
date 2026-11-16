@@ -96,6 +96,8 @@ Evidence and exact scope: `inventory.json` provider `municode-meetings`; operati
 - Exact Essential root-declared `/app` editor GET returned302 to CivicPlus `/connect/authorize` with no body. A shareable editor/client export or authorized access is needed for this exact path; no authentication was attempted. This does not prove another public contract is absent. Receipt: `evidence/essential-postman/app-access-source.json`.
 
 - One selected Effingham public PublishPage HTML is now fixture-tested with native public `cc/me` selectors and page controls. Other pages/tenants are not established by that capture; authenticated collection response, offset semantics and API identity equivalence remain unresolved. See [format guide](../MUNICODE-PUBLISHPAGE.md).
+- The listing-issued public ADA agenda/packet layout now has bounded selected-meeting retrieval, positional section/item text and supporting attachment locators. Source observations: both exact supplied URLs HTTP200, 19 sections/28 items, packet293 attachment links. This does not establish native API item IDs.
+- The exact production meeting-detail example from the official Postman collection returned401 Bearer when requested anonymously. Authorization is proved for that route; public response-specification absence is not proved. Missing response fields and collection progression can be resolved by a version-matched specification or sanitized successful examples, without making live credentials an acceptance gate. See `evidence/essential-public-detail/source.json`.
 
 ## F08 BoardBook (`boardbook`)
 

@@ -317,7 +317,7 @@ Only use this when <code>capabilities</code> says that provider has an implement
 
 For `municode-meetings`, supply the URL of a public HTML meeting listing. Discovery reads that configured page, applies inclusive date bounds locally and returns a partial result with path-derived meeting IDs and the original page capture. The result does not claim a complete archive; the separate authenticated Essential collection response and pagination remain unverified.
 
-For the distinct `meetings.municode.com/PublishPage` layout, choose the explicit `municode-publishpage-html` format and a complete selected-page URL. It preserves public `cc/me` selectors and declared page controls, reads one page and reports partial coverage. See [PublishPage instructions](MUNICODE-PUBLISHPAGE.md); this does not establish authenticated API identity or pagination.
+For the distinct `meetings.municode.com/PublishPage` layout, choose the explicit `municode-publishpage-html` format and a complete selected-page URL. It preserves public `cc/me` selectors and declared page controls, reads one page and reports partial coverage. `fetch_record` can revalidate membership in that selected listing and retrieve its supplied public HTML agenda or packet with section/item text and attachment locators. See [PublishPage instructions](MUNICODE-PUBLISHPAGE.md); this does not establish authenticated API identity or pagination.
 
 ### Export portable records
 

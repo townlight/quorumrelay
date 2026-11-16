@@ -21,7 +21,7 @@ def account_origin(source):
 
 
 def is_account_api(source):
-    if (source.provider == "municode-meetings" and source.input_format == "municode-publishpage-html"
+    if (source.provider == "municode-meetings" and source.input_format in {"municode-publishpage-html", "municode-publishpage-detail-html"}
             and urlsplit(source.url).scheme == "https" and urlsplit(source.url).netloc == "meetings.municode.com"
             and urlsplit(source.url).path in {"/PublishPage", "/PublishPage/index"}):
         return False

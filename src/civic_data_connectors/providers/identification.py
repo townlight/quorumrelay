@@ -37,7 +37,7 @@ ADDITIONAL_FORMATS = {"suiteone-media": ("suiteone-public-event-html",),
                       "simbli": ("simbli-meeting-detail-json", "simbli-agenda-items-json", "simbli-item-content-json", "simbli-supporting-documents-json", "simbli-meeting-minutes-json", "simbli-simple-minutes-json"),
                       "telvue": ("telvue-public-player-html", "telvue-public-search-html", "telvue-cloudcast-mrss-xml", "telvue-connect-media-json", "telvue-connect-videos-json",
                                  "telvue-connect-playlists-json", "telvue-connect-playlist_items-json"),
-                      "municode-meetings": ("essential-multimedia-json", "municode-publishpage-html"),
+                      "municode-meetings": ("essential-multimedia-json", "municode-publishpage-html", "municode-publishpage-detail-html"),
                       "novusagenda": ("novus-public-listing-html", "novus-public-coversheet-html"),
                       "granicus": ("granicus-listing-html", "granicus-platform-soap-xml"),
                       "peak": ("granicus-listing-html", "peak-publication-rss-xml", "peak-public-search-html"),
@@ -168,7 +168,7 @@ def validate_source(source: Source, context: OperationContext | None = None,
     account_api = is_account_api(source)
     namespace = (account_namespace(source) if account_api else
                  compat.source_namespace(source.provider, urlsplit(source.url)))
-    if source.provider == "municode-meetings" and source.input_format == "municode-publishpage-html":
+    if source.provider == "municode-meetings" and source.input_format in {"municode-publishpage-html", "municode-publishpage-detail-html"}:
         from .municode_publish import namespace as publish_namespace
         namespace = publish_namespace(source)
     if source.provider == "gworks" and source.input_format == "gworks-secure-calendar-json":
@@ -191,6 +191,8 @@ def validate_source(source: Source, context: OperationContext | None = None,
         allowed_options.add("gworks_city_id")
     if source.provider == "simbli":
         allowed_options.add("agenda_item_id")
+    if source.provider == "municode-meetings" and source.input_format in {"municode-publishpage-html", "municode-publishpage-detail-html"}:
+        allowed_options.update({"meeting_id", "detail_kind"})
     if source.provider in {"legistar", "wistia", "laserfiche-weblink"}:
         allowed_options.add("page_size")
     if source.provider == "wistia":
