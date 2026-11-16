@@ -238,13 +238,18 @@ def fetch_detail(source, namespace, request, bounds, context, transport):
         raise ValueError("OnBase detail requires supplied native meeting/item ID strings.")
     if related and kind not in {"agenda_item", "agenda_section"}:
         return OperationResult.unsupported("onbase_related_detail", reason="Only supplied agenda item/section detail is mapped.")
-    if source.body or bounds.date_from or bounds.date_to or bounds.checkpoint:
-        raise ValueError("Selected OnBase detail accepts no body/date/checkpoint filter.")
+    if source.body or bounds.checkpoint:
+        raise ValueError("Selected OnBase detail accepts no body/checkpoint filter.")
+    if bool(bounds.date_from) != bool(bounds.date_to):
+        raise ValueError("Selected OnBase date-window detail requires both date boundaries.")
     parsed = urlsplit(source.url)
-    if parsed.scheme != "https" or parsed.query or not re.fullmatch(r"/OnBaseAgendaOnline/?", parsed.path, re.I):
+    if parsed.scheme != "https" or parsed.query or not re.fullmatch(r"/OnBaseAgendaOnline(?:/Meetings)?/?", parsed.path, re.I):
         raise ValueError("Configure the exact public OnBase root; detail membership is revalidated from its listing.")
+    from .onbase import window_url
+    membership_url = window_url(source, bounds.date_from, bounds.date_to) if bounds.date_from else source.url
     deadline, remaining = monotonic() + bounds.deadline_seconds, min(bounds.parser_bytes, bounds.transfer_bytes)
-    coverage = {"sources": [{**source.public_dict(), "namespace": namespace}], "scope": "one current-listing meeting and supplied Agenda hierarchy/selected detail",
+    coverage = {"sources": [{**source.public_dict(), "namespace": namespace}], "scope": "one currently revalidated listing meeting and supplied Agenda hierarchy/selected detail",
+        "membership_url": membership_url, "date_from": bounds.date_from, "date_to": bounds.date_to,
         "catalog_complete": False, "source_complete": False, "snapshot_consistency": "not_guaranteed",
         "pages": 0, "truncated": False, "failures": []}
     bundle, captures = None, []
@@ -274,12 +279,17 @@ def fetch_detail(source, namespace, request, bounds, context, transport):
 
     try:
         from .onbase import listing_rows
-        content = read(source.url)
-        listing = make_bundle(source, namespace, content, FORMAT, listing_rows(source, content))
+        content = read(membership_url)
+        listing_source = replace(source, url=membership_url)
+        listing = make_bundle(listing_source, namespace, content, FORMAT, listing_rows(listing_source, content))
         retain(listing)
         selected = next((record for record in listing["records"] if record["identity"]["external_id"] == meeting), None)
         if selected is None:
             raise ValueError("The selected meeting has no current supplied listing membership.")
+        if bounds.date_from:
+            selected_date = selected["normalized"].get("meeting_date")
+            if not selected_date or not bounds.date_from <= selected_date <= bounds.date_to:
+                raise ValueError("The selected meeting is outside the explicit membership window.")
         listing["records"] = [selected]
         bundle = listing
         target = selected["normalized"]["url"]

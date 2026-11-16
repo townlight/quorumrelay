@@ -1,5 +1,12 @@
 # Captures and expected outputs are byte-identity evidence, including original line endings.
 tests/fixtures/** -text
+# Exact task6 vendor HTML preserves source line endings and whitespace.
+tests/fixtures/clerkbase/docket-agenda-child.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+tests/fixtures/task6-archives/onbase-akron-2025-q1.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/clerkbase-nested-tree/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/task6-archived-windows/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/simbli-minutes-client/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/simbli-minutes-client/client-excerpts.txt whitespace=cr-at-eol
 tests/fixtures/municode-publish/effingham.html whitespace=cr-at-eol
 docs/capabilities/evidence/municode-publishpage/source.json whitespace=cr-at-eol
 tests/fixtures/boarddocs-public/grand-detail-20240522.html whitespace=-blank-at-eol,-blank-at-eof

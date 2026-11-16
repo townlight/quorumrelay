@@ -1,0 +1,962 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8" />
+	<title>Meeting Search Results - OnBase Agenda Online</title>
+	<link href="/OnBaseAgendaOnline/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	<meta name="viewport" content="width=device-width" />
+	
+	<meta name="format-detection" content="telephone=no" />
+
+	<script src="/OnBaseAgendaOnline/bundles/jquery?v=0XJqbYX4tFhH25_G_qbbiJSeeoDaZY7hjfcdPnQjLwc1"></script>
+
+
+	<link href="/OnBaseAgendaOnline/bundles/css?v=70WAfh5_Fryuvc09STu6rVeZuOqzlpEN2LfMECCmFrw1" rel="stylesheet"/>
+
+
+
+	<script src="/OnBaseAgendaOnline/Scripts/bootstrap.bundle-5.1.3.min.js" type="text/javascript"></script>
+
+	<!-- Dynamic Stylesheet -->
+	<link href="/OnBaseAgendaOnline/Style" rel="stylesheet" />
+</head>
+<body>
+	<div id="accessible-nav" class="visually-hidden-focusable accessible-nav navbar">
+		<ul class="nav navbar-nav">
+			<li class="nav-link">
+				<a id="skip-to-main-content" href="#main-content">Skip to main content</a>
+			</li>
+			<li class="nav-link">
+				<a id="skip-to-intro-content" class="hidden" href="#intro-content">Skip to introduction content</a>
+			</li>
+			<li class="nav-link">
+				<a id="skip-to-search-content" class="hidden" href="#search-content">Skip to search</a>
+			</li>
+		</ul>
+	</div>
+	<div id="logo-container">
+		
+<div class="logo"><img src="/OnBaseAgendaOnline/Images/OnBase_Logo.png" alt="OnBase Logo" /></div>
+	</div>
+	<div id="navbar" class="navbar navbar-expand-sm navbar-dark" role="navigation">
+		<div class="navbar-header">
+			<button class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNavAltMarkup"
+					aria-controls="navbarNavAltMarkup"
+					aria-expanded="false">
+				<span class="navbar-toggler-icon header"></span>
+			</button>
+			<div class="media-collapse">
+				<span id="media-collapse-text">Hide Media</span>
+			</div>
+		</div>
+		<div id="navbarNavAltMarkup" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li class="nav-link"><a href="/OnBaseAgendaOnline/" id="lnkNavHome" title="Navigate to home page">Home</a></li>
+				<li class="nav-link"><a href="/OnBaseAgendaOnline/Meetings" id="lnkNavMeetings" title="Navigate to meeting search page">Meetings</a></li>
+				<li class="nav-link"><a href="/OnBaseAgendaOnline/Home/Contact" id="lnkNavContact" title="Navigate to contact info page">Contact</a></li>
+			</ul>
+		</div>
+
+	</div>
+	<div>
+		
+		<section class="content-wrapper clear-fix">
+			
+
+
+<div id="search-content">
+    
+	<div id="search-controls" class="card-group">
+		<div class="card card-primary">
+			<div class="card-body" id="searchOptions">
+				<div class="search-header">
+					Search Meeting Content
+				</div>
+
+<form action="/OnBaseAgendaOnline/Meetings" id="searchForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="SANITIZED_ANONYMOUS_TOKEN" />			<fieldset>
+				<legend class="visually-hidden" aria-label="Parameters include fields to Search by specific Text, Search by Meeting Types, and Search by Meeting Date Range. Use Tab key to navigate list of Meeting Type checkboxes. Use Spacebar or Enter key to check a checkbox to select a Meeting Type">
+					Meeting search parameters
+				</legend>
+
+																	<div class="row form-group">
+						<label class="col-md-2 control-label" for="MeetingTypeIDs">Meeting Type</label>
+						<div class="col-md-10">
+							<div class="multi-select form-control"
+								 id="MeetingTypeIDs"
+								 name="MeetingTypeIDs"
+								 noselectiontext="No Meeting Types selected. Select one or more Meeting Types"
+								 selectiontext="{0} Meeting Types selected"
+								 checkalltext="Check All"
+								 uncheckalltext="Uncheck All"
+								 nextfocusid="DateRangeOptionID">
+									<button id="btnListItem" value="101" style="display: none;">City Council Meeting</button>
+									<button id="btnListItem" value="102" style="display: none;">Not In Use</button>
+							</div>
+						</div>
+					</div>
+									<div class="row form-group">
+						<label class="col-md-2 control-label" for="DateRangeOptionID">Date Range</label>
+						<div class="col-md-10">
+							<div class="drop-down btn btn-default form-control">
+								<select id="DateRangeOptionID" name="DateRangeOptionID"><option value="1">Last Year</option>
+<option value="2">Last Month</option>
+<option value="3">Last Week</option>
+<option value="4">Recent/Upcoming</option>
+<option value="5">This Week</option>
+<option value="6">This Month</option>
+<option value="7">This Year</option>
+<option value="8">Next Week</option>
+<option value="9">Next Month</option>
+<option value="10">Next Year</option>
+<option selected="selected" value="11">Custom Date Range</option>
+</select>
+							</div>
+						</div>
+					</div>
+					<div id="divDatePicker" class="row form-group" style="display: none;">
+						<label class="col-md-2 control-label d-xs-none d-sm-none d-md-block"></label>
+						<div class="col-md-10">
+							<div class="d-xs-none d-sm-inline d-md-inline meetingPadding"></div>
+							<label for="DateRangeCustomStartDate" class="hidden">Start Date</label>
+							<input class="input-normal" id="DateRangeCustomStartDate" name="DateRangeCustomStartDate" type="text" value="1/1/2025 12:00:00 AM" />
+							<span class="control-label meetingPadding"></span>
+							<label for="DateRangeCustomEndDate" class="hidden">End Date</label>
+							<input class="input-normal" id="DateRangeCustomEndDate" name="DateRangeCustomEndDate" type="text" value="3/31/2025 11:59:59 PM" />
+						</div>
+					</div>
+
+				<div class="row form-group">
+					<div class="col-md-10 col-md-offset-2">
+						<input type="submit" id="btnSearch" value="Search" class="btn btn-primary" />
+					</div>
+				</div>
+			</fieldset>
+</form>
+			</div>
+		</div>
+	</div>
+
+<!-- Can't bundle this due to the language .js files-->
+<script type="text/javascript" src="/OnBaseAgendaOnline/Scripts/datepicker-6.3.6.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function ()
+    {
+		$("#DateRangeOptionID").change(function (e)
+		{
+			showCustomDateRangePicker();
+		});
+
+		datePickerController.createDatePicker(
+		{
+			// Associate the text input to a Local date format
+			formElements: { "DateRangeCustomStartDate": "%n/%j/%Y" }
+		});
+		datePickerController.createDatePicker(
+		{
+			// Associate the text input to a Local date format
+			formElements: { "DateRangeCustomEndDate": "%n/%j/%Y" }
+		});
+
+        showCustomDateRangePicker();
+		showMeetingTypeButtonText();
+
+		$("#btnSearch").click(function (e) {
+			btnSearchClick();
+			return false;
+		});
+	})
+
+	function btnSearchClick() {
+		$("#btnSearch").prop("disabled", true);
+		$("#btnSearch").val("Searching...");
+
+		// Navigate to run search
+		window.location = getUrlForSearch();
+	}
+
+	function getUrlForSearch() {
+		let dateRangeOption = $("#DateRangeOptionID").val();
+		let meetingTypeIds = $("#MeetingTypeIDs").val();
+		let searchText = $("#Keywords").val();
+
+		let url = "/OnBaseAgendaOnline/Meetings/Search?dropid=" + encodeURIComponent(dateRangeOption);
+		if (meetingTypeIds.length > 0) {
+			url += "&mtids=" + encodeURIComponent(meetingTypeIds);
+		}
+		//if (searchText.length > 0) {
+			//url += "&searchTerm=" + encodeURIComponent(searchText);
+		//}
+		if (dateRangeOption == 11) {
+			if ($("#DateRangeCustomStartDate").val().length > 0)
+			{
+				url += "&dropsv=" + encodeURIComponent($("#DateRangeCustomStartDate").val());
+			}
+			if ($("#DateRangeCustomEndDate").val().length > 0) {
+				url += "&dropev=" + encodeURIComponent($("#DateRangeCustomEndDate").val());
+			}
+		}
+
+		return url;
+	}
+
+	function showCustomDateRangePicker()
+	{
+		if ($("#DateRangeOptionID").val() == 11)
+		{
+			$("#divDatePicker").show();
+			showDatePickerHoverText();
+		}
+		else
+		{
+			$("#divDatePicker").hide();
+		}
+	}
+
+	function showDatePickerHoverText()
+	{
+		$("#fd-but-DateRangeCustomStartDate").attr("title", "Show Calendar for Starting Date");
+		$("#fd-but-DateRangeCustomStartDate span + span").remove();
+		$("#fd-but-DateRangeCustomEndDate").attr("title", "Show Calendar for Ending Date");
+		$("#fd-but-DateRangeCustomEndDate span + span").remove();
+	}
+
+	function showMeetingTypeButtonText() {
+		var meetingTypeInput = $('#lblMeetingTypeIDs');
+		$("#divMainMeetingTypeIDs").find('input').change(function (e) {
+			var selectedValues = $("#MeetingTypeIDs").val();
+			var selectedValuesCount = selectedValues.split(',').length;
+
+			if ((selectedValues.length > 0) && (selectedValuesCount > 0) && (selectedValuesCount < 3)) {
+				meetingTypeInput.text(format("Selected Meeting Types: {0}", meetingTypeInput.text()));
+			}
+		});
+	}
+</script>
+
+</div>
+
+    <div class="header">Meeting Search Results</div>
+    <div id="main-content">
+        
+<script src="/OnBaseAgendaOnline/bundles/meetinglisttabs?v=z0SndkfEbolZMMAbsKhpq72KG-zrLzdhS35kmJ3JlBE1"></script>
+
+<script src="/OnBaseAgendaOnline/bundles/meetinglistsort?v=VqWgu2oX8K78ZAE1nyhu9Wx8WXZ9geVZXUQ5bIOItaQ1"></script>
+
+
+<div id="meetings-list">
+</div>
+
+<div id="getMoreResultsError" class="alert alert-dismissible alert-danger hidden">
+</div>
+<div id="getMoreResultsWarning" class="alert alert-dismissible alert-warning hidden">
+</div>
+
+<form action="/OnBaseAgendaOnline/Meetings/GetMoreFullTextResults" id="getMoreResultsForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="SANITIZED_ANONYMOUS_TOKEN" />	<fieldset>
+		<input type="hidden" id="dropid" name="dropid" value="11" />
+		<input type="hidden" id="mtids" name="mtids" />
+		<input type="hidden" id="searchTerm" name="searchTerm" />
+		<input type="hidden" id="dropsv" name="dropsv" value="1/1/2025 12:00:00 AM" />
+		<input type="hidden" id="dropev" name="dropev" value="3/31/2025 11:59:59 PM" />
+		<input type="hidden" id="lastMeetingIdSearched" name="lastMeetingIdSearched" />
+		<div class="">
+			<input type="button" id="btnGetMoreResults" value="Get More Results" class="btn btn-primary hidden" />
+		</div>
+	</fieldset>
+</form>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#btnGetMoreResults").click(function (e) {
+			var yScrollPositionBeforeSearch = window.scrollY;
+			var xScrollPositionBeforeSearch = window.scrollX;
+
+			$("#btnGetMoreResults").val(Translations.GETTING_MORE_RESULTS_TEXT).prop("disabled", true);
+			$.post(
+				$("#getMoreResultsForm")[0].getAttribute("action"),
+				$("#getMoreResultsForm").serialize()
+			)
+				.done(function (data) {
+					let searchResults = new SearchResults(data);
+					showSearchResults(searchResults);
+
+					window.scroll(xScrollPositionBeforeSearch, yScrollPositionBeforeSearch);
+				})
+				.fail(function (ex) {
+					console.error("Error occurred while getting the search results: " + ex.toString());
+					$("#getMoreResultsError").removeClass("hidden").text("Error occurred running search, please try again or try again later.");
+				});
+			return false;
+		});
+
+		showSearchResults(new SearchResults({"MeetingTypes":[{"ID":"101","Name":"City Council Meeting","DisplayName":"City Council Meeting"},{"ID":"102","Name":"Not In Use","DisplayName":"Not In Use"}],"MeetingTypeIDs":null,"DateRangeOptionID":11,"DateRangeCustomStartDate":"2025-01-01T00:00:00","DateRangeCustomEndDate":"2025-03-31T23:59:59","Meetings":[{"ID":627,"Name":"March 31, 2025","MeetingTypeName":"City Council Meeting","PublishedMeetingTypeName":null,"IsAgendaAvailable":true,"IsAgendaPacketAvailable":false,"IsSummaryAvailable":false,"IsMinutesAvailable":false,"IsMinutesPacketAvailable":false,"Time":"2025-03-31T18:30:00-04:00","TimeString":"3/31/2025 6:30:00 PM","TimeStamp":1743460200,"Location":null,"Documents":[],"HasDocuments":false,"Media":null,"HasMedia":false,"AgendaUniqueName":"March_31,_2025_627_Agenda_3_31_2025_6_30_00_PM","AgendaPacketUniqueName":"March_31,_2025_627_Agenda_Packet_3_31_2025_6_30_00_PM","MinutesPacketUniqueName":"March_31,_2025_627_Minutes_Packet_3_31_2025_6_30_00_PM","MinutesUniqueName":"March_31,_2025_627_Minutes_3_31_2025_6_30_00_PM","SummaryUniqueName":"March_31,_2025_627_Summary_3_31_2025_6_30_00_PM","LatestDocumentType":1},{"ID":626,"Name":"March 24, 2025","MeetingTypeName":"City Council Meeting","PublishedMeetingTypeName":null,"IsAgendaAvailable":true,"IsAgendaPacketAvailable":false,"IsSummaryAvailable":false,"IsMinutesAvailable":false,"IsMinutesPacketAvailable":false,"Time":"2025-03-24T18:30:00-04:00","TimeString":"3/24/2025 6:30:00 PM","TimeStamp":1742855400,"Location":null,"Documents":[],"HasDocuments":false,"Media":null,"HasMedia":false,"AgendaUniqueName":"March_24,_2025_626_Agenda_3_24_2025_6_30_00_PM","AgendaPacketUniqueName":"March_24,_2025_626_Agenda_Packet_3_24_2025_6_30_00_PM","MinutesPacketUniqueName":"March_24,_2025_626_Minutes_Packet_3_24_2025_6_30_00_PM","MinutesUniqueName":"March_24,_2025_626_Minutes_3_24_2025_6_30_00_PM","SummaryUniqueName":"March_24,_2025_626_Summary_3_24_2025_6_30_00_PM","LatestDocumentType":1},{"ID":625,"Name":"March 17, 2025","MeetingTypeName":"City Council Meeting","PublishedMeetingTypeName":null,"IsAgendaAvailable":true,"IsAgendaPacketAvailable":false,"IsSummaryAvailable":false,"IsMinutesAvailable":false,"IsMinutesPacketAvailable":false,"Time":"2025-03-17T18:30:00-04:00","TimeString":"3/17/2025 6:30:00 PM","TimeStamp":1742250600,"Location":null,"Documents":[],"HasDocuments":false,"Media":null,"HasMedia":false,"AgendaUniqueName":"March_17,_2025_625_Agenda_3_17_2025_6_30_00_PM","AgendaPacketUniqueName":"March_17,_2025_625_Agenda_Packet_3_17_2025_6_30_00_PM","MinutesPacketUniqueName":"March_17,_2025_625_Minutes_Packet_3_17_2025_6_30_00_PM","MinutesUniqueName":"March_17,_2025_625_Minutes_3_17_2025_6_30_00_PM","SummaryUniqueName":"March_17,_2025_625_Summary_3_17_2025_6_30_00_PM","LatestDocumentType":1},{"ID":624,"Name":"March 10, 2025","MeetingTypeName":"City Council Meeting","PublishedMeetingTypeName":null,"IsAgendaAvailable":true,"IsAgendaPacketAvailable":false,"IsSummaryAvailable":false,"IsMinutesAvailable":false,"IsMinutesPacketAvailable":false,"Time":"2025-03-10T18:30:00-04:00","TimeString":"3/10/2025 6:30:00 PM","TimeStamp":1741645800,"Location":null,"Documents":[],"HasDocuments":false,"Media":null,"HasMedia":false,"AgendaUniqueName":"March_10,_2025_624_Agenda_3_10_2025_6_30_00_PM","AgendaPacketUniqueName":"March_10,_2025_624_Agenda_Packet_3_10_2025_6_30_00_PM","MinutesPacketUniqueName":"March_10,_2025_624_Minutes_Packet_3_10_2025_6_30_00_PM","MinutesUniqueName":"March_10,_2025_624_Minutes_3_10_2025_6_30_00_PM","SummaryUniqueName":"March_10,_2025_624_Summary_3_10_2025_6_30_00_PM","LatestDocumentType":1},{"ID":623,"Name":"2025 Operating Budget Hearings (March 4, 5, 6)","MeetingTypeName":"City Council Meeting","PublishedMeetingTypeName":null,"IsAgendaAvailable":true,"IsAgendaPacketAvailable":false,"IsSummaryAvailable":false,"IsMinutesAvailable":false,"IsMinutesPacketAvailable":false,"Time":"2025-03-04T15:00:00-05:00","TimeString":"3/4/2025 3:00:00 PM","TimeStamp":1741118400,"Location":null,"Documents":[],"HasDocuments":false,"Media":null,"HasMedia":false,"AgendaUniqueName":"2025_Operating_Budget_Hearings_(March_4,_5,_6)_623_Agenda_3_4_2025_3_00_00_PM","AgendaPacketUniqueName":"2025_Operating_Budget_Hearings_(March_4,_5,_6)_623_Agenda_Packet_3_4_2025_3_00_00_PM","MinutesPacketUniqueName":"2025_Operating_Budget_Hearings_(March_4,_5,_6)_623_Minutes_Packet_3_4_2025_3_00_00_PM","MinutesUniqueName":"2025_Operating_Budget_Hearings_(March_4,_5,_6)_623_Minutes_3_4_2025_3_00_00_PM","SummaryUniqueName":"2025_Operating_Budget_Hearings_(March_4,_5,_6)_623_Summary_3_4_2025_3_00_00_PM","LatestDocumentType":1},{"ID":622,"Name":"March 3, 2025","MeetingTypeName":"City Council Meeting","PublishedMeetingTypeName":null,"IsAgendaAvailable":true,"IsAgendaPacketAvailable":false,"IsSummaryAvailable":false,"IsMinutesAvailable":false,"IsMinutesPacketAvailable":false,"Time":"2025-03-03T18:30:00-05:00","TimeString":"3/3/2025 6:30:00 PM","TimeStamp":1741044600,"Location":null,"Documents":[],"HasDocuments":false,"Media":null,"HasMedia":false,"AgendaUniqueName":"March_3,_2025_622_Agenda_3_3_2025_6_30_00_PM","AgendaPacketUniqueName":"March_3,_2025_622_Agenda_Packet_3_3_2025_6_30_00_PM","MinutesPacketUniqueName":"March_3,_2025_622_Minutes_Packet_3_3_2025_6_30_00_PM","MinutesUniqueName":"March_3,_2025_622_Minutes_3_3_2025_6_30_00_PM","SummaryUniqueName":"March_3,_2025_622_Summary_3_3_2025_6_30_00_PM","LatestDocumentType":1},{"ID":621,"Name":"February 24, 2025","MeetingTypeName":"City Council Meeting","PublishedMeetingTypeName":null,"IsAgendaAvailable":true,"IsAgendaPacketAvailable":false,"IsSummaryAvailable":false,"IsMinutesAvailable":false,"IsMinutesPacketAvailable":false,"Time":"2025-02-24T18:30:00-05:00","TimeString":"2/24/2025 6:30:00 PM","TimeStamp":1740439800,"Location":null,"Documents":[],"HasDocuments":false,"Media":null,"HasMedia":false,"AgendaUniqueName":"February_24,_2025_621_Agenda_2_24_2025_6_30_00_PM","AgendaPacketUniqueName":"February_24,_2025_621_Agenda_Packet_2_24_2025_6_30_00_PM","MinutesPacketUniqueName":"February_24,_2025_621_Minutes_Packet_2_24_2025_6_30_00_PM","MinutesUniqueName":"February_24,_2025_621_Minutes_2_24_2025_6_30_00_PM","SummaryUniqueName":"February_24,_2025_621_Summary_2_24_2025_6_30_00_PM","LatestDocumentType":1},{"ID":620,"Name":"February 10, 2025","MeetingTypeName":"City Council Meeting","PublishedMeetingTypeName":null,"IsAgendaAvailable":true,"IsAgendaPacketAvailable":false,"IsSummaryAvailable":false,"IsMinutesAvailable":false,"IsMinutesPacketAvailable":false,"Time":"2025-02-10T18:30:00-05:00","TimeString":"2/10/2025 6:30:00 PM","TimeStamp":1739230200,"Location":null,"Documents":[],"HasDocuments":false,"Media":null,"HasMedia":false,"AgendaUniqueName":"February_10,_2025_620_Agenda_2_10_2025_6_30_00_PM","AgendaPacketUniqueName":"February_10,_2025_620_Agenda_Packet_2_10_2025_6_30_00_PM","MinutesPacketUniqueName":"February_10,_2025_620_Minutes_Packet_2_10_2025_6_30_00_PM","MinutesUniqueName":"February_10,_2025_620_Minutes_2_10_2025_6_30_00_PM","SummaryUniqueName":"February_10,_2025_620_Summary_2_10_2025_6_30_00_PM","LatestDocumentType":1},{"ID":618,"Name":"February 3, 2025","MeetingTypeName":"City Council Meeting","PublishedMeetingTypeName":null,"IsAgendaAvailable":true,"IsAgendaPacketAvailable":false,"IsSummaryAvailable":false,"IsMinutesAvailable":false,"IsMinutesPacketAvailable":false,"Time":"2025-02-03T18:30:00-05:00","TimeString":"2/3/2025 6:30:00 PM","TimeStamp":1738625400,"Location":null,"Documents":[],"HasDocuments":false,"Media":null,"HasMedia":false,"AgendaUniqueName":"February_3,_2025_618_Agenda_2_3_2025_6_30_00_PM","AgendaPacketUniqueName":"February_3,_2025_618_Agenda_Packet_2_3_2025_6_30_00_PM","MinutesPacketUniqueName":"February_3,_2025_618_Minutes_Packet_2_3_2025_6_30_00_PM","MinutesUniqueName":"February_3,_2025_618_Minutes_2_3_2025_6_30_00_PM","SummaryUniqueName":"February_3,_2025_618_Summary_2_3_2025_6_30_00_PM","LatestDocumentType":1},{"ID":617,"Name":"January 27, 2025","MeetingTypeName":"City Council Meeting","PublishedMeetingTypeName":null,"IsAgendaAvailable":true,"IsAgendaPacketAvailable":false,"IsSummaryAvailable":false,"IsMinutesAvailable":false,"IsMinutesPacketAvailable":false,"Time":"2025-01-27T18:30:00-05:00","TimeString":"1/27/2025 6:30:00 PM","TimeStamp":1738020600,"Location":null,"Documents":[],"HasDocuments":false,"Media":null,"HasMedia":false,"AgendaUniqueName":"January_27,_2025_617_Agenda_1_27_2025_6_30_00_PM","AgendaPacketUniqueName":"January_27,_2025_617_Agenda_Packet_1_27_2025_6_30_00_PM","MinutesPacketUniqueName":"January_27,_2025_617_Minutes_Packet_1_27_2025_6_30_00_PM","MinutesUniqueName":"January_27,_2025_617_Minutes_1_27_2025_6_30_00_PM","SummaryUniqueName":"January_27,_2025_617_Summary_1_27_2025_6_30_00_PM","LatestDocumentType":1},{"ID":616,"Name":"January 13, 2025","MeetingTypeName":"City Council Meeting","PublishedMeetingTypeName":null,"IsAgendaAvailable":true,"IsAgendaPacketAvailable":false,"IsSummaryAvailable":false,"IsMinutesAvailable":false,"IsMinutesPacketAvailable":false,"Time":"2025-01-13T18:30:00-05:00","TimeString":"1/13/2025 6:30:00 PM","TimeStamp":1736811000,"Location":null,"Documents":[],"HasDocuments":false,"Media":null,"HasMedia":false,"AgendaUniqueName":"January_13,_2025_616_Agenda_1_13_2025_6_30_00_PM","AgendaPacketUniqueName":"January_13,_2025_616_Agenda_Packet_1_13_2025_6_30_00_PM","MinutesPacketUniqueName":"January_13,_2025_616_Minutes_Packet_1_13_2025_6_30_00_PM","MinutesUniqueName":"January_13,_2025_616_Minutes_1_13_2025_6_30_00_PM","SummaryUniqueName":"January_13,_2025_616_Summary_1_13_2025_6_30_00_PM","LatestDocumentType":1},{"ID":615,"Name":"January 6, 2025","MeetingTypeName":"City Council Meeting","PublishedMeetingTypeName":null,"IsAgendaAvailable":true,"IsAgendaPacketAvailable":false,"IsSummaryAvailable":false,"IsMinutesAvailable":false,"IsMinutesPacketAvailable":false,"Time":"2025-01-06T18:30:00-05:00","TimeString":"1/6/2025 6:30:00 PM","TimeStamp":1736206200,"Location":null,"Documents":[],"HasDocuments":false,"Media":null,"HasMedia":false,"AgendaUniqueName":"January_6,_2025_615_Agenda_1_6_2025_6_30_00_PM","AgendaPacketUniqueName":"January_6,_2025_615_Agenda_Packet_1_6_2025_6_30_00_PM","MinutesPacketUniqueName":"January_6,_2025_615_Minutes_Packet_1_6_2025_6_30_00_PM","MinutesUniqueName":"January_6,_2025_615_Minutes_1_6_2025_6_30_00_PM","SummaryUniqueName":"January_6,_2025_615_Summary_1_6_2025_6_30_00_PM","LatestDocumentType":1}],"NoMoreResults":false,"Keywords":null,"SearchType":0,"FromDisplayDate":"11/15/2026","FromDate":"2026-11-15T21:36:22.9958153-05:00","ToDisplayDate":"11/15/2026","ToDate":"2026-11-15T21:36:22.9958153-05:00","ErrorOccurred":false,"ErrorCode":"","WarningOccurred":false,"WarningCode":"","ModelStateError":null,"Error":null,"HasError":false,"ShowErrorOnly":false}));
+	});
+
+	var _searchResults = null; // In Memory storage of search results
+	var _runningFullTextSearch = "".length > 0;
+
+	const PublishDocType = Object.freeze({
+		Agenda: 1,
+		Minutes: 2,
+		Summary: 3,
+		Supporting: 4,
+		AgendaPacket: 5,
+		MinutesPacket: 6
+	});
+
+	var localeSortableStrings =
+	{
+        FILTER_MENU_ALL: 'All',
+        FILTER_BY_SELECTION: 'Filter by {0} - {1}',
+		COUNT_LABEL: 'Showing {0} Meeting(s).',
+		MEETING_AND_DOCUMENT_COUNT_LABEL: 'Showing {0} Meeting(s) and {1} Document(s).',
+        COLUMN_SORT_TITLE: 'Click to Sort by {0} Descending',
+        COLUMN_SORT_TITLE_ASC: 'Sorted by {0} Ascending. Click to sort Descending',
+        COLUMN_SORT_TITLE_DESC: 'Sorted by {0} Descending. Click to sort Ascending',
+	};
+
+	class Options {
+		static isUpcomingSeparate = false;
+		static isTabbed = false;
+	}
+
+	class Translations {
+		static UPCOMING_LABEL = "Upcoming";
+		static RECENT_LABEL = "Recent";
+		static MEETING_COUNT_LABEL = "Showing {0} Meeting(s).";
+		static TABLE_SUMMARY = "Table includes Meeting Name, Meeting Type, Meeting Date and Time, and any available document links. Showing {0} Meeting(s).";
+		static TABLE_SUMMARY_FT = "Table includes Meeting Name, Meeting Type, Meeting Date and Time, and any available document links. Showing {0} Meeting(s) and {1} Document(s).";
+		static MEETING_NAME_LABEL = "Meeting Name";
+		static MEETING_TYPE_LABEL = "Meeting Type";
+		static MEETING_DATE_LABEL = "Meeting Date";
+		static MEETING_INFO_LABEL = "Meeting Info";
+		static LINKS_LABEL = "Links";
+
+		static AGENDA_LABEL = "Agenda";
+		static AGENDA_TITLE = "View Agenda for {0} {1} on {2}";
+		static AGENDA_PACKET_LABEL = "Agenda Packet";
+		static AGENDA_PACKET_TITLE = "View PDF of Agenda Packet for {0} {1} on {2} in a new tab";
+
+		static SUMMARY_LABEL = "Summary";
+		static SUMMARY_TITLE = "View Summary for {0} {1} on {2}";
+
+		static MINUTES_LABEL = "Minutes";
+		static MINUTES_TITLE = "View Minutes for {0} {1} on {2}";
+		static MINUTES_PACKET_LABEL = "Minutes Packet";
+		static MINUTES_PACKET_TITLE = "View PDF of Minutes Packet for {0} {1} on {2} in a new tab";
+
+		static VIEW_MEETING_PDF_NEW_TAB_TITLE = "View PDF of {0} for {1} {2} on {3} in a new tab";
+
+		static ITEM_TITLE = "Agenda Item";
+		static VIEW_PDF_IN_NEW_TAB_TITLE = "View PDF of {0} in a new tab";
+		static PDF_ICON_TITLE = "PDF Icon";
+		static GET_MORE_RESULTS_TEXT = "Get More Results";
+		static GETTING_MORE_RESULTS_TEXT = "Getting More...";
+		static NO_MORE_RESULTS_TEXT = "No More Results";
+
+		static LIVE_MEDIA = "Live Media";
+		static VOD_MEDIA = "View Media";
+		static MEDIA_TITLE = "View Media for {0} {1} on {2}";
+	}
+
+	function showSearchResults(searchResults) {
+		try {
+			loadSearchResults(searchResults);
+
+			// Clear out results
+			let meetingListDiv = $("#meetings-list");
+			meetingListDiv.empty();
+
+			if (_searchResults.Meetings.length == 0) {
+				// No meetings returned
+				meetingListDiv.append(createMeetingTable(meetingListDiv, []));
+			}
+			else if (_runningFullTextSearch) {
+				// For full-text searches don't show tabs
+				showErrorMessages(searchResults);
+				setupGetMoreResults(searchResults);
+
+				meetingListDiv.append(createMeetingTable(meetingListDiv, _searchResults.Meetings));
+			}
+			else if (!Options.isTabbed && !Options.isUpcomingSeparate) {
+				meetingListDiv.append(createMeetingTable(meetingListDiv, _searchResults.Meetings));
+			}
+			else {
+				createMeetingTabs(meetingListDiv);
+			}
+
+			initializeMeetingSorting();
+		}
+		catch (ex) {
+			console.error("Error occurred while loading the search results: " + ex.toString());
+			$("#getMoreResultsError").removeClass("hidden").text("Error occurred running search, please try again or try again later.");
+		}
+	}
+
+	function setupGetMoreResults(searchResults) {
+		if (searchResults.Meetings.length == 0 || searchResults.NoMoreResults) {
+			$("#btnGetMoreResults").val(Translations.NO_MORE_RESULTS_TEXT);
+			$("#btnGetMoreResults").prop("disabled", true);
+		}
+		else {
+			$("#lastMeetingIdSearched").val(searchResults.Meetings[searchResults.Meetings.length - 1].ID);
+			$("#btnGetMoreResults").removeClass("hidden").val(Translations.GET_MORE_RESULTS_TEXT).prop("disabled", false);
+		}
+	}
+
+	function showErrorMessages(searchResults) {
+		if (searchResults.ErrorOccurred) {
+			$("#getMoreResultsError").removeClass("hidden").text(searchResults.getErrorMessage());
+		} else {
+			$("#getMoreResultsError").addClass("hidden")
+		}
+		if (searchResults.WarningOccurred) {
+			$("#getMoreResultsWarning").removeClass("hidden").text(searchResults.getWarningMEssage());
+		} else {
+			$("#getMoreResultsWarning").addClass("hidden")
+		}
+	}
+
+	function loadSearchResults(searchResults) {
+		if (_searchResults == null) {
+			_searchResults = searchResults;
+		}
+		else {
+			searchResults.Meetings.forEach(meeting => {
+				let currentMeeting = _searchResults.Meetings.find((m) => m.ID == meeting.ID);
+				if (currentMeeting) {
+					// Merge new found documents
+					meeting.Documents.forEach(document => {
+						currentMeeting.Documents.push(document);
+					});
+				}
+				else {
+					// New meeting was returned
+					_searchResults.Meetings.push(meeting);
+				}
+			});
+		}
+	}
+
+	class SearchResults {
+		constructor(data) {
+			this.Meetings = [];
+			this.DocIdsRemaining = data.DocIdsRemaining;
+			this.ErrorOccurred = data.ErrorOccurred;
+			this.ErrorCode = data.ErrorCode;
+			this.WarningOccurred = data.WarningOccurred;
+			this.WarningCode = data.WarningCode;
+			this.NoMoreResults = data.NoMoreResults;
+
+			if (Array.isArray(data.Meetings)) {
+				data.Meetings.forEach(meeting => {
+					this.Meetings.push(new Meeting(meeting));
+				});
+			}
+		}
+
+		getUpcomingMeetings() {
+			// Any meeting on a future date
+			let today = new Date(Date.parse(new Date(Date.now()).toLocaleDateString()));
+			return this.Meetings.filter((m) => m.TimeStamp.getTime() > today.getTime())
+				.sort((a, b) => a.TimeStamp.getTime() - b.TimeStamp.getTime()); // Sort ascending
+		}
+
+		getPastMeetings() {
+			// Any meeting, even for today, which start time has passed
+			let now = new Date(Date.now());
+			return this.Meetings.filter((m) => m.TimeStamp.getTime() <= now.getTime())
+				.sort((a, b) => b.TimeStamp.getTime() - a.TimeStamp.getTime()); // Sort descending
+		}
+
+		getPastMeetingsByYear(year) {
+			return this.getPastMeetings().filter((m) => m.TimeStamp.getFullYear() == year);
+		}
+
+		hasUpcomingMeetings() {
+			return this.getUpcomingMeetings().length > 0;
+		}
+
+		hasPastMeetings() {
+			return this.getPastMeetings().length > 0;
+		}
+
+		getYearsOfPastMeetings() {
+			let years = [];
+			this.getPastMeetings().forEach((m) => {
+				let year = m.TimeStamp.getFullYear();
+				if (years.includes(year) == false) {
+					years.push(year);
+				}
+			});
+			return years.sort((a, b) => b - a); // Sort descending
+		}
+
+		getYearsOfUpcomingMeetings() {
+			let years = [];
+			this.getUpcomingMeetings().forEach((m) => {
+				let year = m.TimeStamp.getFullYear();
+				if (years.includes(year) == false) {
+					years.push(year);
+				}
+			});
+			return years;
+		}
+
+		getTotalDocumentCount() {
+			let count = 0;
+			this.Meetings.forEach(meeting => {
+				count += meeting.Documents.length;
+			});
+			return count;
+		}
+
+		getErrorMessage() {
+			// User entered a query containing an invalid syntax such as one consisting only of noise words or words that are too short
+			if (this.ErrorCode == "PARAMINVALID") {
+				return "The search text was incorrectly formatted, please edit your search text and try again.";
+			}
+			// User entered a query that took to long to process so the server timed out or the server could not establish, or maintain, a connection to IDOL
+			else if (this.ErrorCode == "NETWORK") {
+				return "The search took too long to run, please narrow your query or try again later.";
+			}
+			// None of the above errors apply but we still don't have the criteria for
+			// a successful search (ErrorCode is empty) so display a generic server error message instead
+			else if (this.ErrorCode && this.ErrorCode.length > 0) {
+				return "Error occurred running search, please try again or try again later.";
+			}
+			return "";
+		}
+
+		getWarningMEssage() {
+			if (this.WarningCode == "SEARCHLIMITHIT") {
+				return "The Search Limit has been reached, please refine your search if desired results are not found.";
+			}
+			else if (this.WarningCode && this.WarningCode.length > 0) {
+				return "Error occurred running search, please try again or try again later.";
+			}
+			return "";
+		}
+	}
+
+	class Meeting {
+		constructor(data) {
+			this.ID = data.ID;
+			this.Name = data.Name;
+			this.MeetingTypeName = data.MeetingTypeName;
+			this.IsAgendaAvailable = data.IsAgendaAvailable;
+			this.IsAgendaPacketAvailable = data.IsAgendaPacketAvailable;
+			this.IsSummaryAvailable = data.IsSummaryAvailable;
+			this.IsMinutesAvailable = data.IsMinutesAvailable;
+			this.IsMinutesPacketAvailable = data.IsMinutesPacketAvailable;
+			this.Time = data.TimeString;
+			this.Date = data.TimeString.split(' ')[0];
+			this.TimeStamp = new Date(parseInt(data.TimeStamp) * 1000);
+			this.Documents = [];
+			this.HasDocuments = data.HasDocuments;
+			this.Media = data.Media;
+			this.HasMedia = data.HasMedia;
+			this.AgendaUniqueName = data.AgendaUniqueName;
+			this.AgendaPacketUniqueName = data.AgendaPacketUniqueName;
+			this.MinutesPacketUniqueName = data.MinutesPacketUniqueName;
+			this.MinutesUniqueName = data.MinutesUniqueName;
+			this.SummaryUniqueName = data.SummaryUniqueName;
+			this.LatestDocumentType = data.LatestDocumentType;
+
+			if (Array.isArray(data.Documents)) {
+				data.Documents.forEach(document => {
+					this.Documents.push(new Document(document));
+				});
+			}
+		}
+	}
+
+	class Document {
+		constructor(data) {
+			this.ID = data.ID;
+			this.Name = data.Name;
+			this.ItemID = data.ItemID;
+			this.ItemTitle = data.ItemTitle;
+			this.ItemOutlineNum = data.ItemOutlineNum;
+			this.PublishType = data.PublishType;
+			this.MeetingDocumentType = data.MeetingDocumentType;
+			this.UrlFriendlyName = data.UrlFriendlyName;
+		}
+	}
+
+	function createMeetingTabs(meetingListDiv) {
+		if (Options.isUpcomingSeparate) {
+			meetingListDiv.append(createSeparateUpcomingMeetingsTab());
+		}
+		meetingListDiv.append(createAllMeetingsTabs());
+
+		initializeMeetingTabs();
+	}
+
+	function createSeparateUpcomingMeetingsTab() {
+		if (_searchResults.hasUpcomingMeetings()) {
+			let div = $("<div>").append(
+				$("<ul>").attr("id", "meetings-upcoming-list-tabs").addClass("nav nav-tabs").append(
+					createTab("lnkUpcoming", "#meetings-list-upcoming", Translations.UPCOMING_LABEL)
+				)
+			);
+
+			let tabContent = $("<div>").attr("id", "meetings-upcoming-list-content").addClass("tab-content");
+			let tabPane = $("<div>").attr("id", "meetings-list-upcoming").addClass("tab-pane");
+
+			createMeetingTable(tabPane, _searchResults.getUpcomingMeetings(), true);
+
+			tabContent.append(tabPane);
+			div.append(tabContent);
+
+			return div;
+		} else {
+			return null;
+		}
+	}
+
+	function createAllMeetingsTabs() {
+		let includeRecent = !Options.isUpcomingSeparate && _searchResults.hasUpcomingMeetings();
+		let includePast = _searchResults.hasPastMeetings();
+		let div = $("<div>");
+		div.append(createTabs(includeRecent, includePast));
+		div.append(createTabContent(includeRecent, includePast));
+		return div;
+	}
+
+	function createTabs(includeUpcoming, includePast) {
+		let ul = $("<ul>").attr("id", "meetings-list-tabs").addClass("nav nav-tabs");
+
+		if (includeUpcoming) {
+			ul.append(createTab("lnkUpcoming", "#meetings-list-upcoming", Translations.UPCOMING_LABEL));
+		}
+		if (includePast) {
+			if (Options.isTabbed) {
+				for (let year of _searchResults.getYearsOfPastMeetings()) {
+					ul.append(createTab("lnkMeetingYear-" + year, "#meetings-list-" + year, year));
+				}
+			}
+			else {
+				ul.append(createTab("lnkRecent", "#meetings-list-recent", Translations.RECENT_LABEL));
+			}
+		}
+		return ul;
+	}
+
+	function createTab(id, href, text) {
+		return $("<li>").addClass("nav-item").append(
+			$("<a>").addClass("nav-link").attr("href", href).attr("data-toggle", "tabs").attr("id", id).text(text)
+		);
+	}
+
+	function createTabContent(includeUpcoming, includePast) {
+		let div = $("<div>").attr("id", "meetings-list-content").addClass("tab-content");
+
+		if (includeUpcoming) {
+			let tab = $("<div>").addClass("tab-pane").attr("id", "meetings-list-upcoming");
+			createMeetingTable(tab, _searchResults.getUpcomingMeetings(), true)
+			div.append(tab);
+		}
+		if (includePast) {
+			if (Options.isTabbed) {
+				for (let year of _searchResults.getYearsOfPastMeetings()) {
+					let tab = $("<div>").addClass("tab-pane").attr("id", "meetings-list-" + year);
+					createMeetingTable(tab, _searchResults.getPastMeetingsByYear(year))
+					div.append(tab);
+				}
+			}
+			else {
+				let tab = $("<div>").addClass("tab-pane").attr("id", "meetings-list-recent");
+				createMeetingTable(tab, _searchResults.getPastMeetings());
+				div.append(tab);
+			}
+		}
+		return div;
+	}
+
+	function createMeetingTable(parent, meetings, sortAscending = false) {
+		parent.append(createCount(meetings));
+
+		let table = $("<table>").addClass("table table-hover");
+
+		if (_runningFullTextSearch)
+		{
+			table.attr("summary", Translations.TABLE_SUMMARY_FT.format(meetings.length, _searchResults.getTotalDocumentCount()));
+		}
+		else {
+			table.attr("summary", Translations.TABLE_SUMMARY.format(meetings.length));
+		}
+		table.append($("<colgroup>").append($("<col>").attr("span", "3")).append($("<col>")));
+
+		let header = $("<tr>");
+
+		// The following columns are only visible on medium and large displays
+		let meetingNameHeader = $("<th>").attr("scope", "col").addClass("d-none d-md-table-cell").attr("data-sortable-type", "mtgName");
+		let meetingNameLink = $("<a>").attr("href", "#").attr("id", "lnkMeetingNameLabel").attr("data-sortable-label", "1")
+		meetingNameLink.text(Translations.MEETING_NAME_LABEL);
+		meetingNameHeader.append($("<div>").append(meetingNameLink).append(createChevron()));
+		header.append(meetingNameHeader);
+
+		let meetingTypeHeader = $("<th>").attr("scope", "col").addClass("d-none d-md-table-cell").attr("data-sortable-type", "mtgType");
+		let meetingTypeLink = $("<a>").attr("href", "#").attr("id", "lnkMeetingTypeLabel").attr("data-sortable-label", "1")
+		meetingTypeLink.text(Translations.MEETING_TYPE_LABEL);
+		meetingTypeHeader.append($("<div>").append(meetingTypeLink).append(createChevron()));
+		header.append(meetingTypeHeader);
+
+		let meetingTimeHeader = $("<th>").attr("scope", "col").addClass("d-none d-md-table-cell").attr("data-sortable-type", "mtgTime").attr("data-sortable-numeric", "true").attr("data-sortable-order", sortAscending ? "asc" : "dec");
+		let meetingTimeLink = $("<a>").attr("href", "#").attr("id", "lnkMeetingDate").attr("data-sortable-label", "1")
+		meetingTimeLink.text(Translations.MEETING_DATE_LABEL);
+		meetingTimeHeader.append($("<div>").append(meetingTimeLink).append(createChevron()));
+		header.append(meetingTimeHeader);
+
+		// The following column is only visible on small displays
+		header.append($("<th>").addClass("d-none d-sm-table-cell d-md-none").text(Translations.MEETING_INFO_LABEL).append(createPadding()));
+
+		// The following column is only visible on extra small displays
+		header.append($("<th>").addClass("d-sm-none").text(Translations.MEETING_INFO_LABEL).append(createPadding()));
+
+		// The following column is only visible on small, medium and large displays
+		header.append($("<th>").addClass("d-none d-sm-table-cell").text(Translations.LINKS_LABEL).append(createPadding()));
+
+		table.append($("<thead>").append(header));
+
+		let tableBody = $("<tbody>").attr("id", "meetingTableBody");
+		addMeetings(tableBody, meetings);
+
+		table.append(tableBody);
+		parent.append(table);
+
+		if (_runningFullTextSearch) {
+			parent.append(createCount(meetings));
+		}
+	}
+
+	function createCount(meetings) {
+		return $("<span>").addClass("results-count").append(
+			$("<span>").addClass("meeting-results-count")
+		);
+	}
+
+	function createChevron() {
+		return $("<span>").addClass("chevron").attr("role", "presentation");
+	}
+
+	function addMeetings(parent, meetings) {
+		meetings.forEach(meeting => {
+			let meetingRow = $("<tr>").attr("id", "meeting-" + meeting.ID + "-row").addClass("meeting-row").attr("data-meeting-id", meeting.ID);
+
+			meetingRow.append($("<td>").addClass("d-none d-md-table-cell").attr("data-sortable-type", "mtgName").text(meeting.Name));
+			meetingRow.append($("<td>").addClass("d-none d-md-table-cell").attr("data-sortable-type", "mtgType").text(meeting.MeetingTypeName));
+			meetingRow.append($("<td>").addClass("d-none d-md-table-cell").attr("data-sortable-type", "mtgTime").attr("data-sortable-label", meeting.Date)
+				.attr("data-sortable-data", meeting.TimeStamp.getTime()).text(meeting.Time));
+
+			// The following cell is only visible on small displays
+			meetingRow.append($("<td>").addClass("d-none d-sm-table-cell d-md-none")
+				.append(meeting.Name).append($("<br>"))
+				.append(meeting.MeetingTypeName).append($("<br>")).append(meeting.Time));
+
+			// The following cell is only visible on extra small displays
+			let tdExSmallName = $("<td>").addClass("d-sm-none")
+				.append(meeting.Name).append($("<br>"))
+				.append(meeting.MeetingTypeName).append($("<br>"))
+				.append(meeting.Time).append($("<br>"));
+			createMeetingDocumentLinks(tdExSmallName, meeting, "_small");
+			tdExSmallName.append(createPadding())
+			meetingRow.append(tdExSmallName);
+
+			// The following cell is only visible on small, medium and large displays
+			let tdLinks = $("<td>").addClass("d-none d-sm-table-cell");
+			createMeetingDocumentLinks(tdLinks, meeting);
+			tdLinks.append(createPadding());
+			meetingRow.append(tdLinks);
+
+			parent.append(meetingRow);
+
+			if (meeting.HasDocuments) {
+				let meetingDocumentRow = $("<tr>").attr("id", "meeting-" + meeting.ID + "-document-row").addClass("meeting-document-row").attr("data-meeting-id", meeting.ID);
+				let tdDocuments = $("<td>").attr("colspan", 4);
+
+				meetingDocumentRow.append(tdDocuments);
+				parent.append(meetingDocumentRow);
+
+				let lastItemTitle = "";
+				let i = 0;
+				for (let doc of meeting.Documents) {
+					tdDocuments.append($("<div>").addClass("col-lg-1"));
+					let documentDiv = $("<div>").addClass("col-lg-11");
+
+					if (doc.ItemTitle != "") {
+						// Item Attachment
+						if (lastItemTitle != doc.ItemTitle) {
+							if (i != 0) {
+								documentDiv.append($("<br>"));
+							}
+							let itemDiv = $("<div>");
+							let itemIcon = $("<img>").attr("src", "/OnBaseAgendaOnline/Images/AgendaItem.png").attr("alt", Translations.ITEM_TITLE).addClass("agenda-item");
+							itemDiv.append(itemIcon).append(doc.ItemOutlineNum).append(createPadding()).append(doc.ItemTitle);
+							documentDiv.append(itemDiv);
+						}
+						lastItemTitle = doc.ItemTitle;
+
+						let docDiv = $("<div>").append($("<div>").addClass("col-lg-1"));
+						let docLinkDiv = $("<div>").addClass("col-lg-11");
+						let link = $("<a>")
+							.attr("href", "/OnBaseAgendaOnline/Documents/DownloadFile/" + encodeURIComponent(doc.UrlFriendlyName) + ".pdf?documentType=" + doc.MeetingDocumentType + "&meetingId=" + meeting.ID + "&itemId=" + doc.ItemID + "&publishId=" + doc.ID + "&isSection=False" + "&isAttachment=" + (doc.PublishType == 4 ? "True" : "False"))
+							.attr("id", "lnkAttachment_" + doc.ItemID + "_" + i)
+							.attr("target", "_blank")
+							.attr("title", Translations.VIEW_PDF_IN_NEW_TAB_TITLE.format(doc.Name));
+
+						link.append(createPdfIcon());
+						link.append(doc.Name);
+						docLinkDiv.append(link);
+
+						docDiv.append(docLinkDiv);
+						documentDiv.append(docDiv);
+					}
+					else {
+						// Meeting Document
+						let docLinkDiv = $("<div>");
+						let link = $("<a>")
+							.attr("href", "/OnBaseAgendaOnline/Documents/DownloadFile/" + encodeURIComponent(doc.UrlFriendlyName) + ".pdf?documentType=" + doc.MeetingDocumentType + "&meetingId=" + meeting.ID)
+							.attr("id", "lnkMeetingDocument_" + meeting.ID + "_" + i).attr("target", "_blank")
+							.attr("title", Translations.VIEW_PDF_IN_NEW_TAB_TITLE.format(doc.Name));
+
+						link.append(createPdfIcon());
+						link.append(doc.Name);
+						docLinkDiv.append(link);
+
+						documentDiv.append(docLinkDiv);
+					}
+
+					tdDocuments.append(documentDiv);
+					i++;
+				};
+			}
+		});
+	}
+
+	function createMeetingDocumentLinks(parent, meeting, linkSize = "") {
+		if (meeting.IsAgendaAvailable) {
+			parent.append(createMeetingLink(meeting, "Agenda", PublishDocType.Agenda, Translations.AGENDA_TITLE, Translations.AGENDA_LABEL, linkSize));
+			parent.append(createMeetingPdfLink(meeting, "Agenda", 1, Translations.AGENDA_LABEL, Translations.VIEW_MEETING_PDF_NEW_TAB_TITLE, linkSize));
+		}
+		if (meeting.IsAgendaPacketAvailable) {
+			parent.append(createPacketLink(meeting, "Agenda", PublishDocType.AgendaPacket, Translations.AGENDA_PACKET_TITLE, Translations.AGENDA_PACKET_LABEL, linkSize));
+		}
+		if (meeting.IsSummaryAvailable) {
+			parent.append(createMeetingLink(meeting, "Summary", PublishDocType.Summary, Translations.SUMMARY_TITLE, Translations.SUMMARY_LABEL, linkSize));
+			parent.append(createMeetingPdfLink(meeting, "Summary", 3, Translations.SUMMARY_LABEL, Translations.VIEW_MEETING_PDF_NEW_TAB_TITLE, linkSize));
+		}
+		if (meeting.IsMinutesAvailable) {
+			parent.append(createMeetingLink(meeting, "Minutes", PublishDocType.Minutes, Translations.MINUTES_TITLE, Translations.MINUTES_LABEL, linkSize));
+			parent.append(createMeetingPdfLink(meeting, "Minutes", 2, Translations.MINUTES_LABEL, Translations.VIEW_MEETING_PDF_NEW_TAB_TITLE, linkSize));
+		}
+		if (meeting.IsMinutesPacketAvailable) {
+			parent.append(createPacketLink(meeting, "Minutes", PublishDocType.MinutesPacket, Translations.MINUTES_PACKET_TITLE, Translations.MINUTES_PACKET_LABEL, linkSize));
+		}
+		if (meeting.HasMedia) {
+			if (meeting.Media.IsLive) {
+				parent.append(
+					$("<a>")
+						.attr("href", "/OnBaseAgendaOnline/Meetings/ViewMeeting?id=" + meeting.ID + "&doctype=" + meeting.LatestDocumentType)
+						.addClass("meetingPadding")
+						.attr("Id", "lnkViewMedia_" + meeting.ID + linkSize)
+						.attr("title", Translations.MEDIA_TITLE.format(meeting.Name, meeting.MeetingTypeName, meeting.Time))
+						.text(Translations.LIVE_MEDIA)
+					);
+			} else if (meeting.Media.IsOnDemand) {
+				parent.append(
+					$("<a>")
+						.attr("href", "/OnBaseAgendaOnline/Meetings/ViewMeeting?id=" + meeting.ID + "&doctype=" + meeting.LatestDocumentType)
+						.addClass("meetingPadding")
+						.attr("Id", "lnkViewMedia_" + meeting.ID + linkSize)
+						.attr("title", Translations.MEDIA_TITLE.format(meeting.Name, meeting.MeetingTypeName, meeting.Time))
+						.text(Translations.VOD_MEDIA)
+					);
+			}
+		}
+	}
+
+	function createMeetingLink(meeting, type, docType, titleFormat, text, linkSize) {
+		return $("<a>")
+			.attr("href", "/OnBaseAgendaOnline/Meetings/ViewMeeting?id=" + meeting.ID + "&doctype=" + docType)
+			.attr("id", "lnkMeeting" + type + "_" + meeting.ID + linkSize)
+			.attr("title", titleFormat.format(meeting.Name, meeting.MeetingTypeName, meeting.Time))
+			.addClass("meeting-link")
+			.text(text);
+	}
+
+	function createMeetingPdfLink(meeting, type, docType, docName, titleFormat, linkSize) {
+		let name = meeting.AgendaUniqueName;
+		if (docType == PublishDocType.Summary) {
+			name = meeting.SummaryUniqueName
+		}
+		else if (docType == PublishDocType.Minutes)
+		{
+			name = meeting.MinutesUniqueName
+		}
+
+		return $("<a>")
+			.attr("href", "/OnBaseAgendaOnline/Documents/DownloadFile/" + name + ".pdf?documentType=" + docType + "&meetingId=" + meeting.ID)
+			.addClass("meetingPadding").attr("id", "lnkMeeting" + type + "Doc_" + meeting.ID + linkSize).attr("target", "_blank")
+			.attr("title", titleFormat.format(docName, meeting.Name, meeting.MeetingTypeName, meeting.Time))
+			.append(createPdfIcon());
+	}
+
+	function createPacketLink(meeting, type, docType, titleFormat, text, linkSize) {
+		let name = meeting.AgendaPacketUniqueName;
+		if (docType == PublishDocType.MinutesPacket) {
+			name = meeting.MinutesPacketUniqueName
+		}
+		return $("<a>")
+			.attr("href", "/OnBaseAgendaOnline/Documents/DownloadFile/" + name + ".pdf?documentType=" + docType + "&meetingId=" + meeting.ID + "&isAttachment=true")
+			.addClass("meetingPadding").attr("id", "lnk" + type + "Packet_" + meeting.ID + linkSize).attr("target", "_blank")
+			.attr("title", titleFormat.format(meeting.Name, meeting.MeetingTypeName, meeting.Time))
+			.append($("<span>").addClass("packet").text(text))
+			.append(createPdfIcon());
+	}
+
+	function createPdfIcon() {
+		return $("<img>")
+			.addClass("meetingPadding")
+			.attr("src", "/OnBaseAgendaOnline/Images/PDF_16x16.png")
+			.attr("alt", Translations.PDF_ICON_TITLE);
+	}
+
+	function createPadding() {
+		return $("<span>").addClass("meetingPadding");
+	}
+</script>
+    </div>
+    <div class="post-meeting-grid-spacer">
+    </div>
+<script type="text/javascript">
+    $(window).on('load',
+        function () {
+            // Show accessible "Skip to search content" link
+            $('#skip-to-search-content').attr('class', '');
+        }
+    );
+</script>
+		</section>
+	</div>
+	<div class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="no-padding-left copyright">
+					<img src="/OnBaseAgendaOnline/Images/OnBase_Logo.png" class="onbase-logo" alt="OnBase Logo" />
+					Copyright &#169; 2015-2026 Hyland Software, Inc.
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/OnBaseAgendaOnline/bundles/corescripts?v=LxMT2rkVb7Kcf18O6c81PWDDd4soZlhj0Zx-1ZqWDFU1"></script>
+
+
+	<!--Version: 25.1.9.1000-->
+</body>
+</html>

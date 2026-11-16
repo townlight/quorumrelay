@@ -20,6 +20,8 @@ agenda 1, minutes 2, summary 3, agenda packet 5 and minutes packet 6. Links are
 emitted only for the corresponding true availability flag and supplied document
 name. Links are locators, not proof that a PDF was retrieved. The additional [captured vendor client functions](capabilities/evidence/onbase-model-documents/source.json) define nested `Documents` and `Media`. Native document IDs, item/publish IDs, supplied titles and exact URL branches now map to explicit locators; unknown fields remain raw. The captured response itself has empty document arrays/null media; nonempty execution is synthetic. `document_mapping_complete` describes only mapping of supplied submodels, never catalog or file availability.
 
+For `fetch_record` and `fetch_related`, supply both `Bounds.date_from` and `Bounds.date_to` to revalidate the selected meeting against the observed search window before fetching detail. The supplied meeting date must fall within that window; the exact search response is retained, and the search path does not fall back to the current root listing. This selected archived-detail path is synthetically tested; the live archived observation establishes discovery only. Without date bounds, selected detail continues to use current-listing membership.
+
 Media flags map only a live/on-demand meeting-player link. They do not establish direct media bytes, playback or transcript text. A nested supporting attachment of document type 1 / publish type 4 can use the existing explicit attachment operation and exact wrapper/preparation/PDF readback checks. Other undocumented wrapper variants remain partial.
 
 The public table and selected meeting HTML readers use the same document-type

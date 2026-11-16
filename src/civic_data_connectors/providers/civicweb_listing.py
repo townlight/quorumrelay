@@ -195,11 +195,20 @@ def documents_bundle(source, namespace, content):
     return bundle
 
 
-def _get(transport, url, origin, bounds, deadline):
-    response = transport.request(url, byte_limit=bounds.parser_bytes,
+def _get(transport, url, origin, bounds, deadline, transfer=None):
+    transfer = {"bytes": 0, "requests": 0} if transfer is None else transfer
+    remaining = bounds.transfer_bytes - transfer["bytes"]
+    if remaining <= 0:
+        raise RetrievalError("provider_transfer_limit")
+    limit = min(bounds.parser_bytes, remaining)
+    transfer["requests"] += 1
+    response = transport.request(url, byte_limit=limit,
                                  deadline_seconds=max(.001, deadline - monotonic()),
                                  allowed_origins=(origin,), allow_redirects=False,
                                  headers={"Accept": "application/json, text/html"})
+    transfer["bytes"] += len(response.content)
+    if len(response.content) > remaining:
+        raise RetrievalError("provider_transfer_limit", status=response.status)
     if monotonic() >= deadline:
         raise RetrievalError("provider_deadline_exceeded")
     if response.status != 200:
@@ -275,6 +284,7 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, re
     deadline = monotonic() + bounds.deadline_seconds
     records, bundles, captures, errors, failures = [], [], [], [], []
     pages = filtered = 0
+    transfer = {"bytes": 0, "requests": 0}
     stats = {"unpublished_omitted": 0, "malformed_rows_omitted": 0, "likely_non_meeting_omitted": 0}
     flagged_types, type_status, type_names = {}, "not_requested_by_checkpoint", None
     query = urlencode({"from": bounds.date_from, "to": bounds.date_to})
@@ -289,7 +299,7 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, re
             if task["kind"] == "documents":
                 pages += 1
                 url = f"{origin}{SERVICE}/{task['meeting']}/meetingDocuments"
-                response = _get(transport, url, origin, bounds, deadline)
+                response = _get(transport, url, origin, bounds, deadline, transfer)
                 digest = hashlib.sha256(response.content).hexdigest()
                 if task.get("sha256") and task["sha256"] != digest:
                     raise ValueError("The resumed CivicWeb document list changed; restart without its checkpoint.")
@@ -326,7 +336,7 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, re
                 if pages + 1 < bounds.max_pages:
                     pages += 1
                     try:
-                        listed = _get(transport, origin + TYPE_LIST, origin, bounds, deadline)
+                        listed = _get(transport, origin + TYPE_LIST, origin, bounds, deadline, transfer)
                         type_names = meeting_types(listed.content)
                         type_status = "applied"
                     except Exception as error:
@@ -337,7 +347,7 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, re
                         break
             pages += 1
             url = f"{origin}{SERVICE}?{query}"
-            response = _get(transport, url, origin, bounds, deadline)
+            response = _get(transport, url, origin, bounds, deadline, transfer)
             digest = hashlib.sha256(response.content).hexdigest()
             if task["sha256"] and task["sha256"] != digest:
                 raise ValueError("The resumed CivicWeb listing changed; restart discovery without its checkpoint.")
@@ -412,6 +422,7 @@ def discover_public(engine, source, namespace, bounds, context, transport, *, re
                                 if r["normalized"].get("meeting_date")}),
         "unknown_date_records": [], "unknown_body_records": [],
         "pages": pages, "failed_pages": failures, "failures": failures,
+        "transfer_bytes": transfer["bytes"], "requests": transfer["requests"],
         "meeting_types": type_status,
         "non_meeting_flagging": ("applied" if type_status == "applied" else "not_applied_meeting_types_unavailable"),
         "exclude_likely_non_meetings": exclude_likely_non_meetings,
@@ -445,11 +456,16 @@ def fetch_related(source, namespace, request, bounds, context, transport):
     coverage = {"sources": [{**source.public_dict(), "namespace": namespace}], "parent_id": parent,
                 "scope": "the document list the public service returns for one meeting; links only",
                 "catalog_complete": False, "collection_complete": False, "failures": [], "pages": 0}
+    transfer = {"bytes": 0, "requests": 0}
     if context.check_cancelled():
         return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
     try:
-        response = _get(transport, url, origin, bounds, monotonic() + bounds.deadline_seconds)
+        response = _get(transport, url, origin, bounds, monotonic() + bounds.deadline_seconds, transfer)
         coverage["pages"] = 1
+        if context.check_cancelled():
+            return OperationResult("cancelled", coverage={**coverage,
+                "transfer_bytes": transfer["bytes"], "requests": transfer["requests"]},
+                operation_id=context.operation_id)
         bundle = documents_bundle(source, namespace, response.content)
         bundle["capture"]["retrieval_url"] = url
         if any(r["normalized"]["meeting_external_id"] != parent for r in bundle["records"]):
@@ -459,9 +475,11 @@ def fetch_related(source, namespace, request, bounds, context, transport):
         return OperationResult("failed", errors=(Error(
             "civicweb_documents_unavailable",
             "The meeting's documents could not be retrieved or validated.", source=url,
-            details={"reason": code}),), coverage={**coverage, "failures": [code]},
+            details={"reason": code}),), coverage={**coverage, "failures": [code],
+                "transfer_bytes": transfer["bytes"], "requests": transfer["requests"]},
             operation_id=context.operation_id)
     return OperationResult("partial", {"source": source.public_dict(), "records": bundle["records"],
                                        "captures": [bundle["capture"]], "bundles": [bundle]},
-                           coverage={**coverage, "returned_records": len(bundle["records"])},
+                           coverage={**coverage, "returned_records": len(bundle["records"]),
+                               "transfer_bytes": transfer["bytes"], "requests": transfer["requests"]},
                            operation_id=context.operation_id)

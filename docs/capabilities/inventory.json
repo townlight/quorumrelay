@@ -729,7 +729,7 @@
             "legistar-baseline",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -774,7 +774,7 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -3779,7 +3779,7 @@
             "primegov-baseline",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -3833,7 +3833,7 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -4598,7 +4598,7 @@
             "granicus-baseline",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -4646,7 +4646,7 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -6581,7 +6581,7 @@
           "observed": "FetchUrl public GET inspected; content/controls only, no writes.",
           "findings": [
             "GET East Brunswick page returned HTTP 200 text/html, 124337 B, SHA256 6423712a99fed083a971b148d5f13b0c3545cf7c62489ca998bb2656b4a7bb9a; raw capture outputs/provider-route-probes-2026-11-11/novus-eastbrunswick-public-index.body.",
-            "Server-rendered ASP.NET form posts to ./ with date range, Meeting Type, Category, Containing Text and Search controls; current __VIEWSTATE and Telerik control state are required. One read-only search POST for \u201cSuperintendent\u2019s report\u201d returned HTTP 200 HTML with zero item rows, which does not establish query semantics.",
+            "Server-rendered ASP.NET form posts to ./ with date range, Meeting Type, Category, Containing Text and Search controls; current __VIEWSTATE and Telerik control state are required. One read-only search POST for “Superintendent’s report” returned HTTP 200 HTML with zero item rows, which does not establish query semantics.",
             "The first view displays separate meeting and agenda-item grids. A complete traversal of the selected item pager is separately captured as novusagenda-traversal; this index/search capture alone is not a catalog or engine acceptance."
           ],
           "limits": "One public tenant only. Search match behavior and date-window semantics are unresolved. This is stateful server-rendered HTML, not an official JSON API. No credentials, writes, detail requests or attachment downloads were used.",
@@ -6604,7 +6604,7 @@
             "Item rows use `table[id*='radGridItems_ctl00'] tr.rgRow, table[id*='radGridItems_ctl00'] tr.rgAltRow`; meeting rows use `table[id*='radGridMeetings_ctl00'] tr.rgRow, table[id*='radGridMeetings_ctl00'] tr.rgAltRow`. Pager continuation is the current response's Next Page `__doPostBack` target; submit refreshed hidden state, Telerik state and cookies on each POST. The first target and later targets differ, so do not hardcode them.",
             "Re-parsing the captured rows found 75 rows with literal Coversheet.aspx?ItemID=...&MeetingID=... onclick links (75 unique pairs) and 105 rows without such links. Only linked values are provider IDs; no IDs were inferred for unlinked rows."
           ],
-          "limits": "The capture is one displayed date window, not a retained-history or full-catalog guarantee. It does not validate the meeting-grid\u2019s historical/future bounds, query semantics, detail/Coversheet contents, document bytes, MIME types, redirects or engine behavior."
+          "limits": "The capture is one displayed date window, not a retained-history or full-catalog guarantee. It does not validate the meeting-grid’s historical/future bounds, query semantics, detail/Coversheet contents, document bytes, MIME types, redirects or engine behavior."
         },
         {
           "id": "novus-public-listing-live-partial",
@@ -6833,7 +6833,7 @@
             "novus-public-meetingview-2026-11-12",
             "novus-public-minutes-2026-11-15"
           ],
-          "details": "The source implements bounded public ASP.NET listing traversal. A live engine receipt returned 191 records (11 meetings, 180 items) over 12 pages for East Brunswick\u2019s displayed 2026-08-11 through 2027-02-11 window. Receipt is partial; catalog/source completeness are false. This partial read is not provider acceptance. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup. Selected rendered Minutes now preserve the native Minutes document ID separately from its meeting parent, source text/date/localtime/location and exact capture; scoped persistence/reopen/search/ZIP verified. No universal Minutes schema or automatic detail crawl claimed.",
+          "details": "The source implements bounded public ASP.NET listing traversal. A live engine receipt returned 191 records (11 meetings, 180 items) over 12 pages for East Brunswick’s displayed 2026-08-11 through 2027-02-11 window. Receipt is partial; catalog/source completeness are false. This partial read is not provider acceptance. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup. Selected rendered Minutes now preserve the native Minutes document ID separately from its meeting parent, source text/date/localtime/location and exact capture; scoped persistence/reopen/search/ZIP verified. No universal Minutes schema or automatic detail crawl claimed.",
           "dependencies": [],
           "remaining_verification": [
             "Confirm date-window and retained-history bounds; current form values cover only 2026-08-11 through 2027-02-11",
@@ -6892,7 +6892,7 @@
             "source-text-reference-clients-2026-11-12-novusagenda",
             "novus-public-minutes-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup. Selected rendered Minutes now preserve the native Minutes document ID separately from its meeting parent, source text/date/localtime/location and exact capture; scoped persistence/reopen/search/ZIP verified. No universal Minutes schema or automatic detail crawl claimed.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Exact supplied MeetingView Agenda URLs now use the existing novus-public-listing-html format to retain heading/date/localtime, full meeting text and20 source-native linked agenda items with explicit meeting parents. Saved/default configured read/search/export and guards have seven scoped synthetic cases; no automatic detail crawl or arbitrary-ID lookup. Selected rendered Minutes now preserve the native Minutes document ID separately from its meeting parent, source text/date/localtime/location and exact capture; scoped persistence/reopen/search/ZIP verified. No universal Minutes schema or automatic detail crawl claimed.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -6941,7 +6941,7 @@
             "quorumrelay-shared-core-operations",
             "source-text-reference-clients-2026-11-12-novusagenda"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -7931,7 +7931,7 @@
             "civicplus_select-baseline",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -7979,7 +7979,7 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -9148,7 +9148,7 @@
             "civicplus-agenda-center-baseline",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -9198,7 +9198,7 @@
             "civicplus-agenda-center-baseline",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -10128,7 +10128,7 @@
             "quorumrelay-shared-core-operations",
             "essential-response-qualification-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Environment qualification: only development-host multimedia has the documented normalized meetingStructure mapping. All production account responses, including multimedia, are raw partial captures because the production collection supplies no response examples; no development DTO is inferred.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Environment qualification: only development-host multimedia has the documented normalized meetingStructure mapping. All production account responses, including multimedia, are raw partial captures because the production collection supplies no response examples; no development DTO is inferred.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -10174,7 +10174,7 @@
             "municode-meetings-baseline",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -10819,7 +10819,7 @@
           "url": "https://meetings.boardbook.org/public/organization/1807",
           "title": "Minneapolis existing listing and supplied PDF engine fetch",
           "kind": "live_engine_bounded_read_receipt",
-          "findings": "Existing parser mapped629meetings dating2010-02-09..2026-11-10 from one public organization page; no separate archive pager exposed. Supplied Agenda HTML\u2192DownloadAgenda PDF resolver preserved citation; exact12,716,801byte PDF SHA b57324a8948c384b91d0ad594a32353d43c97d71511ce6864d7b578c46f9f61e completed.3focused+78affected retrieval tests passed.",
+          "findings": "Existing parser mapped629meetings dating2010-02-09..2026-11-10 from one public organization page; no separate archive pager exposed. Supplied Agenda HTML→DownloadAgenda PDF resolver preserved citation; exact12,716,801byte PDF SHA b57324a8948c384b91d0ad594a32353d43c97d71511ce6864d7b578c46f9f61e completed.3focused+78affected retrieval tests passed.",
           "limits": "One selected public agenda/PDF; source addition after dev6, not frozen wheel acceptance. No provider-wide catalog, API/write or retention guarantee.",
           "proof_level": "live_engine_bounded_read_receipt_not_write_acceptance",
           "receipt_path": "docs/verification/boardbook-public-document-2026-11-12.json",
@@ -11058,7 +11058,7 @@
             "source-text-reference-clients-2026-11-12-boardbook",
             "boardbook-public-minutes-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive boardbook-public-agenda-html accepts saved/configured public Agenda HTML with native item parents and item-bound document IDs; exact raw capture retained. Viewer download semantics and full catalog remain unverified. Supplied rendered Minutes now map27native meeting/item records, explicit parent hierarchy, actual ActionsTakenRow source text and matching Minutes PDF locator; exact configured response/transfer and source-context guards, persistence/reopen/retry/search/ZIP tested. Existing path-based namespaces preserved; no structured vote interpretation or automatic cross-path join.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive boardbook-public-agenda-html accepts saved/configured public Agenda HTML with native item parents and item-bound document IDs; exact raw capture retained. Viewer download semantics and full catalog remain unverified. Supplied rendered Minutes now map27native meeting/item records, explicit parent hierarchy, actual ActionsTakenRow source text and matching Minutes PDF locator; exact configured response/transfer and source-context guards, persistence/reopen/retry/search/ZIP tested. Existing path-based namespaces preserved; no structured vote interpretation or automatic cross-path join.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -11104,7 +11104,7 @@
             "quorumrelay-shared-core-operations",
             "source-text-reference-clients-2026-11-12-boardbook"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -11465,7 +11465,7 @@
       },
       "restrictions": [],
       "remaining_research": [
-        "Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda\u2192PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied. Selected original-baseline Minutes755664 now have native hierarchy/action-source-text and scoped configured retrieval/persistence/reopen/retry/search/ZIP proof; other Minutes layouts remain unverified.",
+        "Selected Minneapolis organization page supplied629meetings back to2010 without separate archive pager; bounded Agenda→PDF read now completed. Broader provider retention, broader detail layouts and complete catalog remain unverified; no new tenant/history survey implied. Selected original-baseline Minutes755664 now have native hierarchy/action-source-text and scoped configured retrieval/persistence/reopen/retry/search/ZIP proof; other Minutes layouts remain unverified.",
         "Fully inspected Quick Reference and Custom Documents guides describe Premier UI. Import Agenda Items copies items from another meeting, not external-file import. Agenda Managers create meetings in the UI. Custom-document upload does not itself change MeetingStatus; public visibility has separate conditions.",
         "The guides establish no machine API or file-payload contract. External integration role and enablement, create/update/upload routes, readback and conflict semantics remain unverified; staff-account acquisition is not an acceptance gate."
       ],
@@ -12044,7 +12044,7 @@
             "escribe-meeting-types-2026-11-15",
             "escribe-document-since-2026-11-15"
           ],
-          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail\u2192attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference. Two further scoped reads: MeetingGetByMeetingType checks portal/type IDs; AgendaItemTextGetByMeetingId checks meeting/language key and preserves language-qualified native item text identity.17new/240affected passes; docs/verification/escribe-selected-text-2026-11-15.json. Selected AgendaItemItemHistoryView now preserves inherited history fields and literal nested source motions/votes/documents, exact meeting/item binding, cited text and component bounds. No native vote-label meanings, tally or missing AgendaType inferred. See verification/escribe-history-2026-11-15.json. Explicit MeetingAgendaItemsWithHistory returns scalar native item references with disclosed selected-meeting request binding; existing history view can then be fetched separately. No inferred AgendaType or catalog. Native MeetingTypeGetByPortal supplies complete existing meeting-type filter selectors and source multilingual names; scoped partial read, no administration. Explicit DocumentGetContentChunk retains native integer parameters, selected metadata and opaque chunk bytes with request-context binding; no units/assembly/whole-file inference.23new/203affected eSCRIBE passes; verification/escribe-content-chunk-2026-11-15.json. Existing agenda/item/attachment compound parent IDs now expose portable relationships for neutral and standalone item-CSV use; verification/neutral-projections-native-parents-2026-11-15.json. DocumentGetSince uses explicit typed intLastInsertedId and distinct native document metadata records; selector/capture preserved without inferred paging/completeness or file bytes.",
+          "details": "Existing captured-document retrieval fetched supplied Meeting.aspx agenda HTML; one FileStream PDF returned403 and was correctly partial/attachment_unavailable with meeting/citation retained. Existing source visibility and download-origin/byte guards remain enforced. Local additive escribe-meeting-detail-html now maps supplied public agenda titles/counters, header date/local time/location and same-origin item-associated FileStream links, retaining whole HTML and explicit exact-capture-local item keys. Scoped synthetic detail→attachment engine transfer passes; native item IDs are not invented and calendar outputs remain unchanged. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance. Pinned Package/Bookmark/Resolution native paths are separately synthetically executed with parent checks/full readback; see PublishingService guide. No timing-unit or incomplete-item-identity inference. Two further scoped reads: MeetingGetByMeetingType checks portal/type IDs; AgendaItemTextGetByMeetingId checks meeting/language key and preserves language-qualified native item text identity.17new/240affected passes; docs/verification/escribe-selected-text-2026-11-15.json. Selected AgendaItemItemHistoryView now preserves inherited history fields and literal nested source motions/votes/documents, exact meeting/item binding, cited text and component bounds. No native vote-label meanings, tally or missing AgendaType inferred. See verification/escribe-history-2026-11-15.json. Explicit MeetingAgendaItemsWithHistory returns scalar native item references with disclosed selected-meeting request binding; existing history view can then be fetched separately. No inferred AgendaType or catalog. Native MeetingTypeGetByPortal supplies complete existing meeting-type filter selectors and source multilingual names; scoped partial read, no administration. Explicit DocumentGetContentChunk retains native integer parameters, selected metadata and opaque chunk bytes with request-context binding; no units/assembly/whole-file inference.23new/203affected eSCRIBE passes; verification/escribe-content-chunk-2026-11-15.json. Existing agenda/item/attachment compound parent IDs now expose portable relationships for neutral and standalone item-CSV use; verification/neutral-projections-native-parents-2026-11-15.json. DocumentGetSince uses explicit typed intLastInsertedId and distinct native document metadata records; selector/capture preserved without inferred paging/completeness or file bytes.",
           "dependencies": [],
           "remaining_verification": [
             "Implementation contract validation",
@@ -12070,7 +12070,7 @@
             "quorumrelay-shared-core-operations",
             "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -12120,7 +12120,7 @@
             "quorumrelay-shared-core-operations",
             "escribe-publishing-wsdl-synthetic-2026-11-15"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Additive PublishingService format now retains native meeting/agenda/item/attachment/document models and explicit native parent binding; supplied text/XML/document bytes preserve identities and neutral captures. Scoped vendor-schema synthetic execution, not live method/catalog acceptance.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -13984,6 +13984,18 @@
           "fixture_sha256": "7f4e59d89e4eabd59c5cf35dd52727bea0579377c06852eed776a4dba7222ef0",
           "findings": "Exact default DTO GET and SearchMeetingModule read POST with typed client fields; result grouping and enMID locator declared. Pinned chain and bounded probes in source.json.",
           "limits": "Nonempty result/native identity and complete anonymous session/header chain remain unverified. Two empty responses and a fresh HTTP200 challenge are not empty completeness, usable search acceptance or outside-only proof."
+        },
+        {
+          "id": "simbli-task6-supporting-2026-11-15",
+          "url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-5FTFBQVD.js",
+          "title": "Simbli supporting attachments",
+          "kind": "bounded_public_capture_and_synthetic_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "scoped_capture_and_synthetic_tests_not_full_provider_acceptance",
+          "receipt_path": "docs/verification/task6-bounded-retrieval-2026-11-15.json",
+          "receipt_sha256": "4042084c28989ee57dbe5f07e2d6649f992a3af066a1e4e5f1f181a6d461667d",
+          "findings": "The observed supporting arrays were empty; client-backed nonempty attachment mapping and minutes DTO execution are synthetic. Client-declared print-agenda locator is unverified.",
+          "limits": "No live nonempty supporting or meeting-minutes response, aggregate PDF, inferred agenda-item join or full catalog."
         }
       ],
       "tenants": [
@@ -14026,7 +14038,7 @@
             "simbli-public-pagination-live",
             "simbli-completion-bounds-2026-11-15"
           ],
-          "details": "Observed anonymous index/menu\u2192district listing\u219250-row public POST pager, local date filters and private source/caller-bound TTL cursors implemented. Baseline saved HTML parser unchanged. No body-field mapping or complete catalog/search proof. Aggregate transfer and post-transport/post-mapping cancellation/deadline bounds have separately executed regressions; valid earlier captures remain partial on later failure.",
+          "details": "Observed anonymous index/menu→district listing→50-row public POST pager, local date filters and private source/caller-bound TTL cursors implemented. Baseline saved HTML parser unchanged. No body-field mapping or complete catalog/search proof. Aggregate transfer and post-transport/post-mapping cancellation/deadline bounds have separately executed regressions; valid earlier captures remain partial on later failure.",
           "dependencies": [],
           "remaining_verification": [
             "Resolve actual catalog; exercise bounded dates/page transitions and report partial failures."
@@ -14050,9 +14062,10 @@
             "simbli-tenant",
             "simbli-fresh-detail-2026-11-12",
             "simbli-item-content-2026-11-12",
-            "simbli-completion-bounds-2026-11-15"
+            "simbli-completion-bounds-2026-11-15",
+            "simbli-task6-supporting-2026-11-15"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Resumed local source maps fresh anonymous GetMeeting/GetItemsTreeDTO responses, with explicit simbli-meeting-detail-json and simbli-agenda-items-json saved formats. Integrated meeting4942 read returned1meeting/41items/partial/noerrors. Supporting/minutes responses retained raw; no document links inferred from flags. Optional agenda_item_id now reads only an item supplied by the fresh same-meeting tree, maps supplied content fields and stable same-district/meeting attachment URLs from the vendor public renderer; simbli-item-content-json supports offline explicit-context normalization. Scoped synthetic engine mapping\u2192attachment transfer passed; separate public PDF probe returned175050bytes/application/pdf with PDF magic. No full-provider acceptance inferred. Aggregate transfer and post-transport/post-mapping cancellation/deadline bounds have separately executed regressions; valid earlier captures remain partial on later failure.",
+          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Resumed local source maps fresh anonymous GetMeeting/GetItemsTreeDTO responses, with explicit simbli-meeting-detail-json and simbli-agenda-items-json saved formats. Integrated meeting4942 read returned1meeting/41items/partial/noerrors. The observed supporting arrays were empty; client-backed nonempty attachment mapping and transfer are synthetic. Public meeting-wide and explicit-context simple minutes map supplied HTML and hierarchy with raw capture provenance; nonempty DTO execution is synthetic; the client-declared print-agenda locator is unverified. No document links inferred from flags. Optional agenda_item_id now reads only an item supplied by the fresh same-meeting tree, maps supplied content fields and stable same-district/meeting attachment URLs from the vendor public renderer; simbli-item-content-json supports offline explicit-context normalization. Scoped synthetic engine mapping→attachment transfer passed; separate public PDF probe returned175050bytes/application/pdf with PDF magic. No full-provider acceptance inferred. Aggregate transfer and post-transport/post-mapping cancellation/deadline bounds have separately executed regressions; valid earlier captures remain partial on later failure. Meeting-wide minutes use the public page-declared controls and preserve nested item minutes, supplied links and unknown values without inventing item identities or joining agenda items. Explicit saved minutes formats bind supplied meeting/item context; opaque controls remain call-bound.",
           "dependencies": [],
           "remaining_verification": [
             "Aggregate agenda/minutes PDF generation, broader item/document coverage and native search contracts remain unresolved; supplied item PDF mapping is covered by the named scoped synthetic engine case."
@@ -14077,7 +14090,7 @@
             "quorumrelay-shared-core-operations",
             "source-text-reference-clients-2026-11-12-simbli"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -14126,7 +14139,7 @@
             "quorumrelay-shared-core-operations",
             "source-text-reference-clients-2026-11-12-simbli"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -14578,6 +14591,18 @@
             "A document opens at /document/{id}/{name}.html or .pdf; DocumentType 1 and 9 are HTML, 4, 10 and 53 are PDF in the portal's own use."
           ],
           "limits": "One tenant. Link shapes for document types other than 1, 4, 9, 10 and 53 are not mapped (the bare /document/{id}/ route is used). Document content, minutes availability and full archives are unverified."
+        },
+        {
+          "id": "civicweb-task6-archive-budget-2026-11-15",
+          "url": "https://cilovelandco.civicweb.net/",
+          "title": "CivicWeb archived window and transfer bounds",
+          "kind": "bounded_public_capture_and_synthetic_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "scoped_capture_and_synthetic_tests_not_full_provider_acceptance",
+          "receipt_path": "docs/verification/task6-bounded-retrieval-2026-11-15.json",
+          "receipt_sha256": "4042084c28989ee57dbe5f07e2d6649f992a3af066a1e4e5f1f181a6d461667d",
+          "findings": "One Loveland Q1 2025 read yielded 89 records; aggregate budget covers type, meeting and related-document requests.",
+          "limits": "One tenant/window; type-control response not separately captured; no complete catalog or document content."
         }
       ],
       "tenants": [
@@ -14636,13 +14661,14 @@
             "icompass-civicweb-tenant",
             "civicweb-filepro-wsdl-contract",
             "civicweb-meetings-service-loveland-2026-11-12",
-            "civicweb-meeting-documents-loveland-2026-11-12"
+            "civicweb-meeting-documents-loveland-2026-11-12",
+            "civicweb-task6-archive-budget-2026-11-15"
           ],
-          "details": "Two scoped read paths are implemented. Vendor-documented FilePro one-folder GetChildList retains typed folder/document IDs, supplied parents and raw SOAP with response-bound continuation. The observed Loveland MeetingsService lists an explicit date range, obtains meeting-type/body names, preserves published calendar/notice-style rows with flags by default, and optionally reads document links. Root URLs or civicweb-meetings-json select MeetingsService; explicit civicweb-filepro-soap-xml selects FilePro. Both preserve bounded partial coverage; neither establishes a complete meeting archive.",
+          "details": "Two scoped read paths are implemented. Vendor-documented FilePro one-folder GetChildList retains typed folder/document IDs, supplied parents and raw SOAP with response-bound continuation. The observed Loveland MeetingsService lists an explicit date range, obtains meeting-type/body names, preserves published calendar/notice-style rows with flags by default, and optionally reads document links. Root URLs or civicweb-meetings-json select MeetingsService; explicit civicweb-filepro-soap-xml selects FilePro. Both preserve bounded partial coverage; neither establishes a complete meeting archive. One Loveland Q1 2025 read yielded 89 records; aggregate budget covers type, meeting and related-document requests.",
           "dependencies": [],
           "remaining_verification": [
-            "Meeting archive/recursive catalog and calendar entity create/update/upload contracts remain distinct unresolved research; public deployment compatibility not universal.",
-            "Only Loveland, CO was read (one short date range); other tenants and the service's paging, rate limits and stability are unverified.",
+            "Complete archive/recursive catalog and calendar entity create/update/upload contracts remain unresolved; public deployment compatibility is not universal.",
+            "Loveland reads include one bounded Q1 2025 window; other tenants and the service's paging, rate limits and stability are unverified.",
             "Meeting-type names are taken as body names; a real body whose type name contains a word such as notice, report or budget is flagged likely_not_a_meeting, not dropped (types are listed in coverage.flagged_meeting_types).",
             "No complete catalog or archive is claimed; unpublished meetings are not returned and document content is not read."
           ],
@@ -14673,7 +14699,7 @@
           "details": "Supplied meeting detail and print-PDF retrieval retain exact identity/capture checks. Vendor-documented FilePro GetOriginalFile/GetPdfFile/GetMeetingAttachmentPdfFile returns checked file bytes and raw SOAP; identity is explicitly supplied because those responses do not echo IDs. The observed MeetingsService related-document read returns one selected meeting's document links without downloading content or inferring meeting associations for FilePro documents.",
           "dependencies": [],
           "remaining_verification": [
-            "Meeting archive/recursive catalog and calendar entity create/update/upload contracts remain distinct unresolved research; public deployment compatibility not universal."
+            "Complete archive/recursive catalog and calendar entity create/update/upload contracts remain unresolved; public deployment compatibility is not universal."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "vendor_documented_contract_and_synthetic_engine_execution",
@@ -14699,7 +14725,7 @@
           "details": "The historical civicweb-html compatibility reader is preserved. civicweb-filepro-soap-xml replays supplied child/search/file SOAP offline; original-file results require explicit options.document_id. civicweb-meetings-json and civicweb-meeting-documents-json replay saved MeetingsService responses. Original capture bytes remain available; these parsers establish no live catalog completeness.",
           "dependencies": [],
           "remaining_verification": [
-            "Meeting archive/recursive catalog and calendar entity create/update/upload contracts remain distinct unresolved research; public deployment compatibility not universal."
+            "Complete archive/recursive catalog and calendar entity create/update/upload contracts remain unresolved; public deployment compatibility is not universal."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "vendor_documented_contract_and_synthetic_engine_execution",
@@ -14724,7 +14750,7 @@
           "details": "Source implements documented public GetSearchResults (exactPhrase/allWords) and singular GetSearchResultDetails batches <=50 IDs. Exact local AND matches title/snippet/path only; candidate response and mid-batch hashes bind bounded query/caller/grant continuation. Full document body not asserted from snippets; no meeting association inferred.",
           "dependencies": [],
           "remaining_verification": [
-            "Meeting archive/recursive catalog and calendar entity create/update/upload contracts remain distinct unresolved research; public deployment compatibility not universal."
+            "Complete archive/recursive catalog and calendar entity create/update/upload contracts remain unresolved; public deployment compatibility is not universal."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "vendor_documented_contract_and_synthetic_engine_execution",
@@ -14746,7 +14772,7 @@
             "icompass-civicweb-baseline",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -15597,7 +15623,7 @@
             "iqm2-legislative-file-2026-11-14",
             "iqm2-supplied-captions-2026-11-14"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified. Explicit fetch_captions reads the first active supplied WebVTT file with caller-origin grants, exact byte/text/hash capture and reopen/ZIP preservation; active transfer is synthetic, no timing/content-language inference.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified. Explicit fetch_captions reads the first active supplied WebVTT file with caller-origin grants, exact byte/text/hash capture and reopen/ZIP preservation; active transfer is synthetic, no timing/content-language inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -15644,7 +15670,7 @@
             "quorumrelay-shared-core-operations",
             "source-text-reference-clients-2026-11-12-iqm2"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -16242,7 +16268,7 @@
             "quorumrelay-shared-core-operations",
             "swagit-public-player-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Supplied exact public-player URLs now map native-bound rendered transcript text/date/title and HLS/caption locators. Explicit fetch_captions reads one declared WebVTT with configured download-origin authorization, exact response/MIME/header and aggregate byte/deadline/cancellation checks; scoped SQLite/reopen/search/ZIP proven. No generated text, cue interpretation, playback or staff contract inferred.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Supplied exact public-player URLs now map native-bound rendered transcript text/date/title and HLS/caption locators. Explicit fetch_captions reads one declared WebVTT with configured download-origin authorization, exact response/MIME/header and aggregate byte/deadline/cancellation checks; scoped SQLite/reopen/search/ZIP proven. No generated text, cue interpretation, playback or staff contract inferred.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -16288,7 +16314,7 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -16857,7 +16883,7 @@
             "quorumrelay-shared-core-operations",
             "suiteone-public-event-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Selected nativeevent2165 rendered transcript/source timing strings and explicit supplied WebVTT have separate2026-11-15execution; source/captures/relationships/hash persist through local search/reopen/neutral formats. No script execution/date/vote/cue/playback/Liberty import inference.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Selected nativeevent2165 rendered transcript/source timing strings and explicit supplied WebVTT have separate2026-11-15execution; source/captures/relationships/hash persist through local search/reopen/neutral formats. No script execution/date/vote/cue/playback/Liberty import inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -16906,7 +16932,7 @@
             "quorumrelay-shared-core-operations",
             "suiteone-public-event-2026-11-15"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Selected nativeevent2165 rendered transcript/source timing strings and explicit supplied WebVTT have separate2026-11-15execution; source/captures/relationships/hash persist through local search/reopen/neutral formats. No script execution/date/vote/cue/playback/Liberty import inference.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Selected nativeevent2165 rendered transcript/source timing strings and explicit supplied WebVTT have separate2026-11-15execution; source/captures/relationships/hash persist through local search/reopen/neutral formats. No script execution/date/vote/cue/playback/Liberty import inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -17632,7 +17658,7 @@
             "peak-publication-rss-2026-11-15",
             "peak-public-search-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Selected peak-publication-rss-xml maps native publication GUIDs and source-bound agenda viewer notices, with no meeting identity/date inference; empty Minutes only, scoped configured retrieval and neutral persistence/ZIP tested.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Selected peak-publication-rss-xml maps native publication GUIDs and source-bound agenda viewer notices, with no meeting identity/date inference; empty Minutes only, scoped configured retrieval and neutral persistence/ZIP tested.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -17680,7 +17706,7 @@
             "quorumrelay-shared-core-operations",
             "peak-public-search-2026-11-15"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -18430,7 +18456,7 @@
             "quorumrelay-shared-core-operations",
             "utah-supplied-assets-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Selected calendar/audio locator and neutral preservation scope: docs/verification/utah-supplied-assets-2026-11-15.json;211affected cases passed.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Selected calendar/audio locator and neutral preservation scope: docs/verification/utah-supplied-assets-2026-11-15.json;211affected cases passed.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -18476,7 +18502,7 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -19059,7 +19085,7 @@
             "agendaquick-public-agenda-2026-11-12",
             "agendaquick-public-memo-2026-11-12"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download. Current source also maps the supplied public memo template (agendaquick-public-memo-html): native item/meeting/line/revision controls, six labelled sections and supplied same-origin PDF locator; no implicit attachment fetch or inferred adopted motion/vote.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds supplied dsp=ag meeting-notice HTML mapping: native meeting/memo bindings and labelled packet locator, synthetically checked; no implicit memo or packet download. Current source also maps the supplied public memo template (agendaquick-public-memo-html): native item/meeting/line/revision controls, six labelled sections and supplied same-origin PDF locator; no implicit attachment fetch or inferred adopted motion/vote.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -19107,7 +19133,7 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -19804,7 +19830,7 @@
             "quorumrelay-shared-core-operations",
             "town-hall-streams-player-synthetic"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive town-hall-streams-event-html accepts an exact saved/configured event player, preserves native event/location identity and maps its declared HTTPS CDN HLS locator with raw provenance. Playlist/segment/MP4/transcript completeness is not inferred.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Additive town-hall-streams-event-html accepts an exact saved/configured event player, preserves native event/location identity and maps its declared HTTPS CDN HLS locator with raw provenance. Playlist/segment/MP4/transcript completeness is not inferred.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -19848,7 +19874,7 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -20730,7 +20756,7 @@
             "telvue-connect-playlist-items-contract",
             "telvue-public-player-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified. Explicit api_resource=playlist_items plus playlist_id supports documented Connect v2 collection/detail; external_id selects the item. Separate playlist_item identity/playlist parent/media playable relation preserve native IDs, sequence/windows, supplied recordings and raw unknown fields. Seven synthetic engine/saved-response checks pass; published December2022 examples do not establish pagination or current deployment compatibility. Selected public native-media player and supplied WebVTT have separate2026-11-15scoped execution; exact source labels/bytes/text retained without meeting-date/language-code/playback/write inference.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Explicit telvue-cloudcast-mrss-xml now maps the documented published player feed with supplied numeric media IDs, media URLs/duration/language and exact capture preservation. Publication date is not meeting date; feed extent, archive completeness and playback remain unverified. Explicit api_resource=playlist_items plus playlist_id supports documented Connect v2 collection/detail; external_id selects the item. Separate playlist_item identity/playlist parent/media playable relation preserve native IDs, sequence/windows, supplied recordings and raw unknown fields. Seven synthetic engine/saved-response checks pass; published December2022 examples do not establish pagination or current deployment compatibility. Selected public native-media player and supplied WebVTT have separate2026-11-15scoped execution; exact source labels/bytes/text retained without meeting-date/language-code/playback/write inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -20777,7 +20803,7 @@
             "quorumrelay-shared-core-operations",
             "telvue-public-player-2026-11-15"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Selected public native-media player and supplied WebVTT have separate2026-11-15scoped execution; exact source labels/bytes/text retained without meeting-date/language-code/playback/write inference.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Selected public native-media player and supplied WebVTT have separate2026-11-15scoped execution; exact source labels/bytes/text retained without meeting-date/language-code/playback/write inference.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -21598,7 +21624,7 @@
             "quorumrelay-shared-core-operations",
             "champ-rich-agenda-synthetic"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference. Native event-bound BoardName/body ID is projected for exact local body search and configured filtering; native ID mismatch is not inferred away.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference. Native event-bound BoardName/body ID is projected for exact local body search and configured filtering; native ID mismatch is not inferred away.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -21643,7 +21669,7 @@
             "quorumrelay-shared-core-operations",
             "champ-rich-agenda-synthetic"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference. Native event-bound BoardName/body ID is projected for exact local body search and configured filtering; native ID mismatch is not inferred away.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Rich CHAMP source normalization retains native item parents, supplied descriptions, item document IDs/associations and validated event/item timeline seconds from the captured vendor client; no transcript or media-byte inference. Native event-bound BoardName/body ID is projected for exact local body search and configured filtering; native ID mismatch is not inferred away.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -22552,6 +22578,18 @@
           "fixture_sha256": "24a223c3abdcd78b90ca5e3ea65934a449ddf22de50d386a73212e432f453113",
           "findings": "Same-origin supplied Minutes wrapper20012619bytes; declared accessible Minutes2002251bytes with meeting heading and empty outline. Exact accessible bytes/hash and parent-listing membership in source.json.",
           "limits": "Does not establish nonempty Minutes/motion/vote DOM, actual absence of meeting actions, PDF content or an outside-only dependency; erroneous2595cross-context probe excluded."
+        },
+        {
+          "id": "onbase-task6-archive-window-2026-11-15",
+          "url": "https://onlinedocs.akronohio.gov/OnBaseAgendaOnline/",
+          "title": "OnBase archived window",
+          "kind": "bounded_public_capture_and_synthetic_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "scoped_capture_and_synthetic_tests_not_full_provider_acceptance",
+          "receipt_path": "docs/verification/task6-bounded-retrieval-2026-11-15.json",
+          "receipt_sha256": "4042084c28989ee57dbe5f07e2d6649f992a3af066a1e4e5f1f181a6d461667d",
+          "findings": "One Akron Q1 2025 read yielded 12 records; replay fixture sanitizes two anonymous anti-forgery values.",
+          "limits": "One tenant/window; selected archived detail and complete catalog remain unverified."
         }
       ],
       "tenants": [
@@ -22602,9 +22640,10 @@
             "hyland-onbase-agenda-online-tenant",
             "onbase-public-search-redirect-blocked-2026-11-12",
             "onbase-akron-model-window-execution",
-            "onbase-model-documents-2026-11-14"
+            "onbase-model-documents-2026-11-14",
+            "onbase-task6-archive-window-2026-11-15"
           ],
-          "details": "Existing rendered listing plus observed modern embedded model; explicit bounds map root/Meetings to exact date-window GET. Continuation slices the captured window, not an undocumented upstream pager. Modern embedded Documents additionally preserve exact meeting/item/publish bindings and client-declared PDF locators; link-only Media flags remain distinct from file/playback acceptance. Nested type1 supporting attachments use the existing scoped wrapper/readback flow.",
+          "details": "Existing rendered listing plus observed modern embedded model; explicit bounds map root/Meetings to exact date-window GET. Continuation slices the captured window, not an undocumented upstream pager. Modern embedded Documents additionally preserve exact meeting/item/publish bindings and client-declared PDF locators; link-only Media flags remain distinct from file/playback acceptance. Nested type1 supporting attachments use the existing scoped wrapper/readback flow. One Akron Q1 2025 read yielded 12 records; replay fixture sanitizes two anonymous anti-forgery values.",
           "dependencies": [],
           "remaining_verification": [
             "Provider-wide catalog and live acceptance are not claimed."
@@ -22632,12 +22671,13 @@
             "onbase-item-document-wrapper-2026-11-13",
             "onbase-selected-section-detail-2026-11-13",
             "onbase-meeting-packet-wrapper-2026-11-14",
-            "onbase-model-documents-2026-11-14"
+            "onbase-model-documents-2026-11-14",
+            "onbase-task6-archive-window-2026-11-15"
           ],
-          "details": "Captured OnBase meeting-document Downloadfile links either return PDF bytes or a recognized vendor-authored wrapper. Exact meeting/type/name constants and declared InvokeDownloadMeetingDocument POST/ViewDocument GET templates are validated. Preparation JSON must match selected meeting/type and non-item/non-section scope; final MIME/PDF magic, same-origin exact URL, no redirects, cumulative parser/transfer/request/deadline bounds and cancellation apply. Scoped cookies remain in memory. Verified wrapper/preparation captures and unknown response fields survive partial failure and explicit persistence/ZIP; durable citation stays the supplied link. Actual live file availability and broader detail/search/association remain unverified. Selected fetch_record from the configured HTTPS root revalidates current listing membership, follows the exact declared Agenda view and returns native agenda sections/items with parent context. fetch_related lists items/sections or verifies and fetches a selected non-section item. Raw fields, hierarchy, supplied partial rendered text/citations and exact supplemental captures survive local persistence/search/ZIP. Supporting-document native attachment/publish IDs and links remain metadata only. Explicit fetch_attachment from a scoped persisted selected agenda_item now additionally maps the exact published InvokeDownloadAttachment branch for supporting documents: canonical parent meeting, item, selected URL/document metadata, publish ID, type and non-section context bind wrapper constants and typed preparation JSON before final PDF GET. Detail itself still returns locators; download requires this separate explicit operation. Durable citation and capture bytes/hashes retained. Selected agenda_section detail now validates section membership separately from agenda_item and follows the supplied isSection=true route. The observed section supplies rendered title/text only; canonical meeting parent and supplied nested section relationship survive persistence/ZIP, with existing partial semantics and bounds. Meeting packet types 5/6 with supplied isAttachment=true additionally use the declared InvokeDownloadAttachment route with exact zero item/publish IDs and typed readback; synthetic execution only, public wrapper GET observed. Type 6 is consistently minutes_packet across public table/detail/model mappings. Modern embedded Documents additionally preserve exact meeting/item/publish bindings and client-declared PDF locators; link-only Media flags remain distinct from file/playback acceptance. Nested type1 supporting attachments use the existing scoped wrapper/readback flow.",
+          "details": "Captured OnBase meeting-document Downloadfile links either return PDF bytes or a recognized vendor-authored wrapper. Exact meeting/type/name constants and declared InvokeDownloadMeetingDocument POST/ViewDocument GET templates are validated. Preparation JSON must match selected meeting/type and non-item/non-section scope; final MIME/PDF magic, same-origin exact URL, no redirects, cumulative parser/transfer/request/deadline bounds and cancellation apply. Scoped cookies remain in memory. Verified wrapper/preparation captures and unknown response fields survive partial failure and explicit persistence/ZIP; durable citation stays the supplied link. Actual live file availability and broader detail/search/association remain unverified. Selected fetch_record from the configured HTTPS root revalidates current listing membership, follows the exact declared Agenda view and returns native agenda sections/items with parent context. fetch_related lists items/sections or verifies and fetches a selected non-section item. Raw fields, hierarchy, supplied partial rendered text/citations and exact supplemental captures survive local persistence/search/ZIP. Supporting-document native attachment/publish IDs and links remain metadata only. Explicit fetch_attachment from a scoped persisted selected agenda_item now additionally maps the exact published InvokeDownloadAttachment branch for supporting documents: canonical parent meeting, item, selected URL/document metadata, publish ID, type and non-section context bind wrapper constants and typed preparation JSON before final PDF GET. Detail itself still returns locators; download requires this separate explicit operation. Durable citation and capture bytes/hashes retained. Selected agenda_section detail now validates section membership separately from agenda_item and follows the supplied isSection=true route. The observed section supplies rendered title/text only; canonical meeting parent and supplied nested section relationship survive persistence/ZIP, with existing partial semantics and bounds. Meeting packet types 5/6 with supplied isAttachment=true additionally use the declared InvokeDownloadAttachment route with exact zero item/publish IDs and typed readback; synthetic execution only, public wrapper GET observed. Type 6 is consistently minutes_packet across public table/detail/model mappings. Modern embedded Documents additionally preserve exact meeting/item/publish bindings and client-declared PDF locators; link-only Media flags remain distinct from file/playback acceptance. Nested type1 supporting attachments use the existing scoped wrapper/readback flow. Paired explicit date bounds select the observed Search route for exact meeting membership before detail requests; the supplied meeting date must fall in the window and the search capture is retained. This archived detail path is tested synthetically; the live observation covers discovery only.",
           "dependencies": [],
           "remaining_verification": [
-            "Native search, archive meetings absent from the current root, other agenda variants/deployment shapes, and staff API/import association remain unresolved."
+            "Live archived selected-detail behavior, native search completeness, other agenda variants/deployment shapes, and staff API/import association remain unresolved."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "published_provider_client_contract_and_scoped_synthetic_engine_execution",
@@ -22712,7 +22752,7 @@
             "hyland-onbase-agenda-online-baseline",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -23854,7 +23894,7 @@
             "laserfiche-baseline",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -23904,7 +23944,7 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -24978,7 +25018,7 @@
             "quorumrelay-shared-core-operations",
             "towncloud-agenda-associations-2026-11-12"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Existing agenda HTML now also enriches rich records with explicitly capture-local item hierarchy, item-owned supplied text and tenant-bound native attachment IDs/locators. No native item IDs, implicit attachment fetch or expanded origin authorization.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Existing agenda HTML now also enriches rich records with explicitly capture-local item hierarchy, item-owned supplied text and tenant-bound native attachment IDs/locators. No native item IDs, implicit attachment fetch or expanded origin authorization.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -25023,7 +25063,7 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -25591,7 +25631,7 @@
             "media-reader-source",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -25633,7 +25673,7 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -26175,6 +26215,18 @@
               }
             ]
           }
+        },
+        {
+          "id": "clerkbase-nested-tree-2026-11-15",
+          "url": "https://clerkshq.com/toc/SouthKingstown-ri?path=SouthKingstown_Docket,AGENDA,",
+          "title": "ClerkBase nested agenda tree",
+          "kind": "bounded_public_capture_and_synthetic_execution",
+          "observation_date": "2026-11-15",
+          "proof_level": "scoped_capture_and_synthetic_tests_not_full_provider_acceptance",
+          "receipt_path": "docs/verification/task6-bounded-retrieval-2026-11-15.json",
+          "receipt_sha256": "4042084c28989ee57dbe5f07e2d6649f992a3af066a1e4e5f1f181a6d461667d",
+          "findings": "One exact public child GET supplied 17 agenda-anchor URLs. Synthetic engine traversal revalidates root and parent controls and preserves exact captures.",
+          "limits": "One supplied branch; no independent native item ID, inferred meeting parent, document bytes or complete catalog."
         }
       ],
       "tenants": [
@@ -26216,12 +26268,13 @@
             "clerkbase-tenant",
             "clerkbase-search-tree-source-tests",
             "clerkbase-search-page2-tree-route-probes-2026-11-12",
-            "clerkbase-discover-engine-read-2026-11-12"
+            "clerkbase-discover-engine-read-2026-11-12",
+            "clerkbase-nested-tree-2026-11-15"
           ],
-          "details": "The registered bounded tree adapter follows the captured public data-toc-url and maps supplied South Kingstown document links. One integrated-engine read followed the public root and supplied top-level tree route for two pages, returning three URL-keyed document records with partial/no-error status and a checkpoint; the exact supplied URL is the identity derivation, not a provider ID.",
+          "details": "The registered bounded tree adapter follows the captured public data-toc-url and maps supplied South Kingstown document links. One integrated-engine read followed the public root and supplied top-level tree route for two pages, returning three URL-keyed document records with partial/no-error status and a checkpoint; the exact supplied URL is the identity derivation, not a provider ID. One exact public child GET supplied 17 agenda-anchor URLs. Synthetic engine traversal revalidates root and parent controls and preserves exact captures.",
           "dependencies": [],
           "remaining_verification": [
-            "Nested trees and full tree/catalog completeness remain unverified; the live read was capped at two pages and three records.",
+            "Other nested trees and full catalog completeness remain unverified; one captured child branch and synthetic traversal are scoped separately.",
             "Linked document bytes/MIME/redirect behavior and full file retrieval remain unverified."
           ],
           "acceptance_status": "not_run",
@@ -26244,10 +26297,10 @@
             "clerkbase-tenant",
             "clerkbase-configured-fetch-reconciled-2026-11-14"
           ],
-          "details": "Configured selected HTML document GET retains supplied cited paragraph text and URL-derived identity; search/export/retry verified. Linked binaries, all nested trees and provider writes remain unverified.",
+          "details": "Configured selected HTML document GET retains supplied cited paragraph text and URL-derived identity; search/export/retry verified. Linked binaries, broader nested trees and provider writes remain unverified.",
           "dependencies": [],
           "remaining_verification": [
-            "Configured selected HTML document GET retains supplied cited paragraph text and URL-derived identity; search/export/retry verified. Linked binaries, all nested trees and provider writes remain unverified."
+            "Configured selected HTML document GET retains supplied cited paragraph text and URL-derived identity; search/export/retry verified. Linked binaries, broader nested trees and provider writes remain unverified."
           ],
           "acceptance_status": "not_run",
           "evidence_level": "source_fixture_and_synthetic_engine_execution",
@@ -26271,7 +26324,7 @@
             "clerkbase-document-text-2026-11-12",
             "source-text-reference-clients-2026-11-12-clerkbase"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Existing clerkbase-document-html additionally retains static document body/paragraph text with capture provenance; four scoped synthetic cases cover saved/default configured reads, local text search/export, revision hashing and exclusion guards without changing original output.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Existing clerkbase-document-html additionally retains static document body/paragraph text with capture provenance; four scoped synthetic cases cover saved/default configured reads, local text search/export, revision hashing and exclusion guards without changing original output.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -26324,7 +26377,7 @@
             "clerkbase-document-text-2026-11-12",
             "source-text-reference-clients-2026-11-12-clerkbase"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Existing clerkbase-document-html additionally retains static document body/paragraph text with capture provenance; four scoped synthetic cases cover saved/default configured reads, local text search/export, revision hashing and exclusion guards without changing original output.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Existing clerkbase-document-html additionally retains static document body/paragraph text with capture provenance; four scoped synthetic cases cover saved/default configured reads, local text search/export, revision hashing and exclusion guards without changing original output.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -26876,7 +26929,7 @@
             "media-reader-source",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -26921,7 +26974,7 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -27419,7 +27472,7 @@
           "observed": "Official full documentation fetched and read",
           "observation_date": "2026-11-11",
           "access_scope": "public_research_only",
-          "findings": "This endpoint imports a media file from a given URL. The import is processed\nasynchronously and will return a background_job_status object rather than the\ntypical Media response object. You can poll the background job status endpoint\nto check on the progress of the import.\n\nIf no folder_id is provided, a new folder called \"Untitled Folder\" will be\ncreated and the imported media will be placed there.\n\nThe URL must be publicly accessible \u2014 Wistia's servers need to be able to fetch the file directly.\n\nNote: imports from certain domains (e.g. vimeo.com, wistia.com) are not permitted.\n\n\n## Requires api token with one of the following permissions\n```\nRead, update & delete anything\n```\n\nTokens with the \"Act with a team member's permissions\" permission\n(`all:delegate_to_contact_permissions` scope) can also be used. Requests\nmade with such a token are authorized using the permissions of the\ncontact assigned to the token.\n\n",
+          "findings": "This endpoint imports a media file from a given URL. The import is processed\nasynchronously and will return a background_job_status object rather than the\ntypical Media response object. You can poll the background job status endpoint\nto check on the progress of the import.\n\nIf no folder_id is provided, a new folder called \"Untitled Folder\" will be\ncreated and the imported media will be placed there.\n\nThe URL must be publicly accessible — Wistia's servers need to be able to fetch the file directly.\n\nNote: imports from certain domains (e.g. vimeo.com, wistia.com) are not permitted.\n\n\n## Requires api token with one of the following permissions\n```\nRead, update & delete anything\n```\n\nTokens with the \"Act with a team member's permissions\" permission\n(`all:delegate_to_contact_permissions` scope) can also be used. Requests\nmade with such a token are authorized using the permissions of the\ncontact assigned to the token.\n\n",
           "limits": "Documentation/source contract only; no authorized upstream test environment or live write acceptance.",
           "proof_level": "official_machine_contract_documentation_not_live_acceptance"
         },
@@ -27843,7 +27896,7 @@
             "quorumrelay-shared-core-operations",
             "wistia-public-iframe-captions-2026-11-15"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Separate opt-in wistia-public-embed-html maps one exact public iframe and supplied untimed captions without an account token; native source identities/capture/text and neutral export are scoped to the selected layout. Static continuation has no catalog-completeness claim.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Separate opt-in wistia-public-embed-html maps one exact public iframe and supplied untimed captions without an account token; native source identities/capture/text and neutral export are scoped to the selected layout. Static continuation has no catalog-completeness claim.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -27894,7 +27947,7 @@
             "quorumrelay-shared-core-operations",
             "wistia-public-iframe-captions-2026-11-15"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Separate opt-in wistia-public-embed-html maps one exact public iframe and supplied untimed captions without an account token; native source identities/capture/text and neutral export are scoped to the selected layout. Static continuation has no catalog-completeness claim.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Separate opt-in wistia-public-embed-html maps one exact public iframe and supplied untimed captions without an account token; native source identities/capture/text and neutral export are scoped to the selected layout. Static continuation has no catalog-completeness claim.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -29198,7 +29251,7 @@
             "boardable-baseline",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -29244,7 +29297,7 @@
             "boardable-baseline",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -30086,7 +30139,7 @@
             "gworks-published-html-capture-and-tests",
             "gworks-secure-calendar-saved-mapping-2026-11-14"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -30133,7 +30186,7 @@
             "gworks-published-html-capture-and-tests",
             "gworks-secure-calendar-saved-mapping-2026-11-14"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -30799,7 +30852,7 @@
             "quorumrelay-shared-core-operations",
             "boarddocs-grand-archived-meeting-fragments"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -31740,7 +31793,7 @@
             "media-reader-source",
             "quorumrelay-shared-core-operations"
           ],
-          "details": "The standalone compatibility parser is registered for this provider\u2019s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -31789,7 +31842,7 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations"
           ],
-          "details": "Shared local search indexes the stored record\u2019s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",

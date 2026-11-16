@@ -1,6 +1,6 @@
 # QuorumRelay
 
-The integrated development source is Python **0.1.0.dev13** / TypeScript **0.1.0-dev.13**. It adds approved CivicWeb/Cablecast readers, an opt-in BoardDocs public listing/detail path and CivicClerk Select detail/files and section writes: 32 registered providers, 31 baseline families, 34 baseline formats, 47 additive parser hooks and 17 native-search handlers. The matching local wheel and TypeScript tarball are built but unpublished; no Windows release is claimed. See [local preparation evidence](docs/verification/local-completion-2026-11-14.json).
+The integrated development source reports Python **0.1.0.dev13** / TypeScript **0.1.0-dev.13** and currently has 32 registered providers, 31 baseline families, 34 baseline formats, 67 additive parser hooks and 23 native-search handlers. It includes the approved CivicWeb/Cablecast readers and later provider work. Earlier dev13 Python and TypeScript packages were built locally and remain unpublished; they precede the latest source changes. See [local preparation evidence](docs/verification/local-completion-2026-11-14.json).
 
 Preserved package baseline: Python **0.1.0.dev11**, TypeScript **0.1.0-dev.11**, schema **2.0.0**. Those immutable packages precede the integrated reader fixes. The frozen dev8 artifacts remain historical evidence.
 
@@ -27,7 +27,7 @@ Installing the package does not start a service or install a consumer applicatio
 
 ## Current coverage
 
-The integrated source reports version **0.1.0.dev13**, schema **2.0.0**. Its locally built Python wheel and TypeScript tarball remain unpublished. It retains 31 baseline provider families and 34 original input-format combinations, adds Cablecast as a typed connector, and registers 47 additive parser hooks and 17 native-search handlers. These counts describe the implemented source scope, not universal operation or tenant support. Every result retains status, coverage, errors and provenance; partial results must remain visibly partial in consuming applications.
+The integrated source reports version **0.1.0.dev13**, schema **2.0.0**. Its locally built Python wheel and TypeScript tarball remain unpublished. It retains 31 baseline provider families and 34 original input-format combinations, adds Cablecast as a typed connector, and currently registers 67 additive parser hooks and 23 native-search handlers. These counts describe the implemented source scope, not universal operation or tenant support. Every result retains status, coverage, errors and provenance; partial results must remain visibly partial in consuming applications.
 
 The public dev8 source/documentation publication is separate from later local source additions, which are listed in the [developer mapping guides](docs/DEVELOPER-GUIDE.md#later-local-source-mapping-guides). Those additions do not change the immutable dev8 wheel or its installed-consumer evidence. Vendor-documented synthetic execution is accepted verification for the provider operations and fields it covers; it is not a claim of actual tenant transactions. Live provider writes, some authenticated account reads and broader catalog claims remain unobserved or incomplete as stated. See the [capability inventory](docs/capabilities/README.md), [coverage map](docs/ENGINE-COVERAGE.md) and [execution state](docs/EXECUTION-STATE.md).
 

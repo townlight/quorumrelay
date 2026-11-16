@@ -655,14 +655,17 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
     deadline = monotonic() + bounds.deadline_seconds
     transport = transport or PublicTransport()
     records, bundles, captures, failures, errors, retry = [], [], [], [], [], []
-    pages = filtered = transferred = 0
+    pages = filtered = transferred = request_count = 0
+    clerkbase_controls, clerkbase_content = {}, {}
+    clerkbase_root_content = None
 
     def bounded_request(url, **kwargs):
-        nonlocal transferred
+        nonlocal transferred, request_count
         remaining = bounds.transfer_bytes - transferred
         if remaining <= 0:
             raise ValueError("Discovery exhausted its aggregate transfer byte limit.")
         limit = min(bounds.parser_bytes, remaining)
+        request_count += 1
         response = transport.request(url, byte_limit=limit, **kwargs)
         transferred += len(response.content)
         if len(response.content) > limit:
@@ -713,7 +716,35 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
                                 or len(root.content) > bounds.parser_bytes):
                             raise ValueError("The public control page is unavailable.")
                         public_controls = controls(root.content)
-                    if task.get("fields") not in public_controls:
+                        if task.get("kind") == "clerkbase-tree":
+                            clerkbase_root_content = root.content
+                    if task.get("kind") == "clerkbase-tree":
+                        ancestry = task.get("ancestors", [])
+                        if (not isinstance(ancestry, list) or len(ancestry) > 32
+                                or any(not isinstance(item, dict) or set(item) != {"url"} for item in ancestry)):
+                            raise ValueError("Invalid ClerkBase tree ancestry.")
+                        available = public_controls
+                        previous = None
+                        for entry in [*ancestry, task.get("fields")]:
+                            if entry not in available or not isinstance(entry, dict):
+                                raise ValueError("The ClerkBase tree is not declared by its current parent.")
+                            current = parse_qs(urlsplit(entry["url"]).query, keep_blank_values=True)["path"][0]
+                            if previous is not None and (current == previous or not current.startswith(previous)):
+                                raise ValueError("The ClerkBase child does not descend from its parent.")
+                            previous = current
+                            if entry is not task.get("fields"):
+                                if entry["url"] not in clerkbase_controls:
+                                    parent = bounded_request(entry["url"],
+                                        deadline_seconds=max(.001, deadline - monotonic()),
+                                        allowed_origins=(_origin(source.url),), allow_redirects=False)
+                                    if parent.status != 200 or parent.url != entry["url"]:
+                                        raise ValueError("The ClerkBase parent control is unavailable.")
+                                    if context.check_cancelled() or monotonic() >= deadline:
+                                        raise RetrievalError("provider_deadline_or_cancellation")
+                                    clerkbase_controls[entry["url"]] = controls(parent.content)
+                                    clerkbase_content[entry["url"]] = parent.content
+                                available = clerkbase_controls[entry["url"]]
+                    elif task.get("fields") not in public_controls:
                         raise ValueError("The requested value is not a current public root control.")
                     if context.check_cancelled() or monotonic() >= deadline:
                         raise RetrievalError("provider_deadline_or_cancellation")
@@ -737,11 +768,13 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
                         or response.content_type.split(";", 1)[0].strip().lower() not in {"text/xml", "application/xml", "application/rss+xml"}
                         or len(response.content) > bounds.transfer_bytes):
                     raise ValueError("The exact bounded XML feed was not returned.")
-                if task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"} and response.url != url:
+                if task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar", "clerkbase-tree"} and response.url != url:
                     raise ValueError("The OnBase response left its exact requested window.")
                 if response.status != 200:
                     raise RetrievalError("provider_http_error", status=response.status)
                 page_content = response.content
+                if task.get("kind") == "clerkbase-tree" and (context.check_cancelled() or monotonic() >= deadline):
+                    raise RetrievalError("provider_deadline_or_cancellation")
                 if len(page_content) > bounds.parser_bytes:
                     raise ValueError("The provider listing exceeds its parser byte limit.")
                 if (task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
@@ -755,8 +788,32 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
             digest = hashlib.sha256(page_content).hexdigest()
             if task.get("sha256") is not None and task["sha256"] != digest:
                 raise ValueError("The resumed page changed; restart discovery to review its new revision.")
-            bundle, parse_errors = parse_page(
-                engine, source, namespace, page_content, input_format, bounds, context)
+            if source.provider == "clerkbase" and task.get("kind") == "clerkbase-tree":
+                from .clerkbase_listing import listing_bundle, parent_document
+                tree_url = task["fields"]["url"]
+                tree_path = parse_qs(urlsplit(tree_url).query).get("path", [])
+                expected_document = None
+                if tree_path == ["SouthKingstown_Docket,AGENDA,"]:
+                    ancestors = task.get("ancestors", [])
+                    if not ancestors or ancestors[-1]["url"] not in clerkbase_content:
+                        raise ValueError("The agenda node tree requires its current parent capture.")
+                    expected_document = parent_document(source, clerkbase_content[ancestors[-1]["url"]], tree_url)
+                bundle = listing_bundle(source, namespace, page_content, tree_url=tree_url,
+                                        expected_document_url=expected_document)
+                ancestry = task.get("ancestors", [])
+                chain = [(source.url, clerkbase_root_content)] + [
+                    (entry["url"], clerkbase_content[entry["url"]]) for entry in ancestry]
+                if any(raw is None for _, raw in chain):
+                    raise ValueError("The current ClerkBase control evidence is unavailable.")
+                bundle["extensions"]["tree_validation"] = {
+                    "requested_url": tree_url,
+                    "parent_responses": [{"url": url, "sha256": hashlib.sha256(raw).hexdigest(),
+                        "content_base64": base64.b64encode(raw).decode("ascii")} for url, raw in chain],
+                }
+                parse_errors = ()
+            else:
+                bundle, parse_errors = parse_page(
+                    engine, source, namespace, page_content, input_format, bounds, context)
             errors.extend(parse_errors)
             rows = bundle["records"]
             offset = task.get("offset", 0)
@@ -825,12 +882,27 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
                                  for values in public_controls
                                  if (not bounds.date_from or values["year"] >= bounds.date_from[:4])
                                  and (not bounds.date_to or values["year"] <= bounds.date_to[:4]))
-                elif (source.provider == "clerkbase" and task.get("kind") == "static"
+                elif (source.provider == "clerkbase" and task.get("kind") in {"static", "clerkbase-tree"}
                         and input_format == "clerkbase-public-tree-html"):
                     from .clerkbase_listing import controls
-                    public_controls = controls(source, page_content)
-                    queue.extend({"kind": "clerkbase-tree", "fields": values}
-                                 for values in public_controls)
+                    child_controls = controls(source, page_content)
+                    if task.get("kind") == "static":
+                        public_controls = child_controls
+                        clerkbase_root_content = page_content
+                        ancestors = []
+                    else:
+                        clerkbase_controls[task["fields"]["url"]] = child_controls
+                        clerkbase_content[task["fields"]["url"]] = page_content
+                        ancestors = [*task.get("ancestors", []), task["fields"]]
+                        parent_path = parse_qs(urlsplit(task["fields"]["url"]).query)["path"][0]
+                        child_controls = [child for child in child_controls
+                            if (child_path := parse_qs(urlsplit(child["url"]).query)["path"][0]) != parent_path
+                            and child_path.startswith(parent_path)]
+                    if len(ancestors) > 32:
+                        raise ValueError("The ClerkBase tree exceeds the bounded depth.")
+                    known = {entry.get("fields", {}).get("url") for entry in queue if entry.get("kind") == "clerkbase-tree"}
+                    queue.extend({"kind": "clerkbase-tree", "fields": values, "ancestors": ancestors}
+                                 for values in child_controls if values["url"] not in known)
                 elif (source.provider == "destiny-agendaquick" and task.get("kind") == "static"
                         and input_format == "agendaquick-public-listing-html"
                         and bounds.date_from and bounds.date_to):
@@ -938,8 +1010,9 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
             "control_validation": "current configured listing revalidated before resumed year GET"})
     elif source.provider == "clerkbase" and input_format == "clerkbase-public-tree-html":
         coverage.update({"catalog_complete": False, "source_complete": False,
-            "scope": "configured public root and supplied top-level trees; nested trees and catalog extent unverified",
-            "control_validation": "current public root revalidated before resumed tree GET"})
+            "scope": "configured public root and supplied nested trees; catalog extent unverified",
+            "control_validation": "current public root and parent chain revalidated before tree GET",
+            "network_requests": request_count, "transfer_bytes": transferred})
     elif source.provider == "destiny-agendaquick" and input_format == "agendaquick-public-listing-html":
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "configured public month and advertised month/year selections within requested bounds",

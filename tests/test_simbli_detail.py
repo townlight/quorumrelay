@@ -15,7 +15,7 @@ ROOT = Path(__file__).parent / "fixtures" / "simbli-detail"
 SOURCE = {"provider": "simbli", "url": "https://simbli.eboardsolutions.com/SB_Meetings/ViewMeeting.aspx?S=36031063&MID=4942"}
 FORM = b"""var isUserLoggedIn='False';var did='36031063';var meetingID='4942';var enCuUID='';
 var enDID='synthetic-district';var enMeetingID='synthetic-meeting';
-var encrTZ='synthetic-timezone';var sToken='synthetic-private-control';"""
+var encrTZ='synthetic-timezone';var sToken='synthetic-private-control';var enAjSFlag='';"""
 
 
 class Transport:
@@ -48,6 +48,10 @@ def test_registered_detail_and_agenda_raw_parent_identity_and_private_controls()
     assert records[0]["identity"]["external_id"] == "4942"
     assert records[0]["normalized"]["meeting_date"] == "2026-11-10"
     assert records[0]["normalized"]["time_zone_status"] == "unknown"
+    agenda = records[0]["normalized"]["documents"][0]
+    assert agenda["url"] == "https://simbli.eboardsolutions.com/SB_Meetings/PrintAgenda.aspx?S=36031063&MID=4942"
+    assert agenda["availability"] == "client_declared_print_locator_unverified"
+    assert "format" not in agenda and "external_id" not in agenda
     items = [r for r in records if r["identity"]["record_type"] == "agenda_item"]
     assert all(r["identity"]["parent"]["external_id"] == "4942" for r in items)
     assert any(any(rel["relation"] == "parent_agenda_item" for rel in r["relationships"]) for r in items)
@@ -120,7 +124,7 @@ def test_selected_content_uses_fresh_tree_identity_and_retains_raw_fields():
     identities = [(r["identity"]["record_type"], r["identity"]["external_id"])
                   for r in result.data["records"]]
     assert len(identities) == len(set(identities))
-    content = result.data["bundles"][-1]
+    content = next(b for b in result.data["bundles"] if b["capture"]["input_format"] == "simbli-item-content-json")
     record = content["records"][0]
     assert record["identity"]["parent"]["external_id"] == "4942"
     assert record["normalized"]["level"] == json.loads((ROOT / "items.json").read_bytes())["Items"][0]["Level"]
@@ -142,7 +146,9 @@ def test_selected_content_uses_fresh_tree_identity_and_retains_raw_fields():
 def test_selected_content_rejects_wrong_identity_or_unavailable_response(kwargs):
     result = create_engine(provider_transport=ContentTransport(**kwargs)).execute("fetch", {"source": _selected_source()})
     assert result.status == "partial" and result.errors
-    assert len(result.data["bundles"]) == 2
+    assert {b["capture"]["input_format"] for b in result.data["bundles"]} == {
+        "simbli-meeting-detail-json", "simbli-agenda-items-json",
+        "simbli-supporting-documents-json", "simbli-simple-minutes-json"}
 
 
 def test_unlisted_item_does_not_make_content_request():
@@ -204,10 +210,124 @@ def test_selected_content_attachment_flows_through_capture_verified_engine_trans
     transport = FileTransport()
     engine = create_engine(provider_transport=transport)
     result = engine.execute("fetch", {"source": _selected_source()})
-    bundle = result.data["bundles"][-1]
+    bundle = next(b for b in result.data["bundles"] if b["capture"]["input_format"] == "simbli-item-content-json")
     capture = base64.b64decode(bundle["capture"]["content_base64"])
     fetched = engine.fetch_attachment(Source(**SOURCE, input_format="simbli-item-content-json"),
         bundle["records"][0], capture=capture)
     assert fetched.status == "completed", fetched.public_dict()
     assert base64.b64decode(fetched.data["attachment"]["content_base64"]) == pdf
     assert fetched.data["attachment"]["citation_url"].endswith("S=36031063&AID=131003&MID=4942")
+
+
+class SupportingTransport(Transport):
+    def __init__(self, payload):
+        super().__init__()
+        self.payload = payload
+
+    def request(self, url, **kwargs):
+        path = urlsplit(url).path
+        if path == "/Services/api/GetSupportingDocuments/":
+            self.calls.append(url)
+            return Response(url, json.dumps(self.payload).encode(), "application/json")
+        if path == "/Meetings/Attachment.aspx":
+            self.calls.append(url)
+            assert parse_qs(urlsplit(url).query) == {"S": ["36031063"], "AID": ["131003"], "MID": ["4942"]}
+            return Response(url, b"%PDF-1.7 supporting document", "application/pdf")
+        return super().request(url, **kwargs)
+
+
+def test_supporting_attachment_capture_parent_and_verified_transfer():
+    attachment = {"AttachmentID": 131003, "SchoolID": "36031063", "EnitityID": 4942,
+                  "Title": "Meeting packet", "FileName": "packet.pdf", "unknown": "preserved"}
+    payload = {"Attachment": [attachment], "HyperLink": [{"HUrl": "https://example.org/"}]}
+    transport = SupportingTransport(payload)
+    engine = create_engine(provider_transport=transport)
+    result = engine.execute("fetch", {"source": SOURCE})
+    assert result.status == "partial" and not result.errors, result.public_dict()
+    bundle = next(b for b in result.data["bundles"] if b["capture"]["input_format"] == "simbli-supporting-documents-json")
+    record = bundle["records"][0]
+    assert record["identity"]["record_type"] == "document"
+    assert record["identity"]["external_id"] == "131003"
+    assert record["identity"]["parent"]["external_id"] == "4942"
+    assert record["original"] == attachment
+    captured = base64.b64decode(bundle["capture"]["content_base64"])
+    assert json.loads(captured) == payload
+    downloaded = engine.fetch_attachment(Source(**SOURCE, input_format="simbli-supporting-documents-json"), record, capture=captured)
+    assert downloaded.status == "completed", downloaded.public_dict()
+    assert base64.b64decode(downloaded.data["attachment"]["content_base64"]) == b"%PDF-1.7 supporting document"
+
+
+@pytest.mark.parametrize("change", [{"SchoolID": "other"}, {"EnitityID": 4943}])
+def test_supporting_foreign_parent_is_not_attributed(change):
+    attachment = {"AttachmentID": 131003, "SchoolID": "36031063", "EnitityID": 4942, **change}
+    payload = {"Attachment": [attachment], "HyperLink": []}
+    source = {**SOURCE, "input_format": "simbli-supporting-documents-json"}
+    result = create_engine().execute("normalize", {"source": source}, content=json.dumps(payload).encode())
+    assert result.status == "completed"
+    assert result.data["records"] == []
+    assert result.data["capture"]["original_values"] == payload
+
+
+def test_malformed_supporting_response_retains_earlier_independent_records():
+    transport = SupportingTransport({"Attachment": [None], "HyperLink": []})
+    result = create_engine(provider_transport=transport).execute("fetch", {"source": SOURCE})
+    assert result.status == "partial" and result.errors
+    assert any(r["identity"]["record_type"] == "meeting" for r in result.data["records"])
+    assert any(r["identity"]["record_type"] == "agenda_item" for r in result.data["records"])
+    assert any(c.get("observed_read_route") == "/Services/api/GetSupportingDocuments/" for c in result.data["captures"])
+    assert any(urlsplit(call).path == "/Services/api/GetMinutes/" for call in transport.calls)
+
+
+def test_supporting_bundle_reopen_search_and_neutral_export(tmp_path):
+    from civic_data_connectors.interchange import read_bundle
+    from civic_data_connectors.storage import SQLiteStorage
+
+    payload = {"Attachment": [{"AttachmentID": 131003, "SchoolID": "36031063", "EnitityID": 4942,
+               "Title": "District budget packet", "FileName": "packet.pdf"}], "HyperLink": []}
+    database = tmp_path / "simbli.sqlite"
+    engine = create_engine(storage=SQLiteStorage(database), provider_transport=SupportingTransport(payload))
+    result = engine.execute("fetch", {"source": SOURCE})
+    bundle = next(b for b in result.data["bundles"] if b["capture"]["input_format"] == "simbli-supporting-documents-json")
+    imported = engine.execute("import_bundle", {"bundle": bundle, "persist": True})
+    assert imported.status == "completed", imported.public_dict()
+    key = imported.data["bundle_key"]
+    reopened = create_engine(storage=SQLiteStorage(database))
+    found = reopened.execute("search", {"query": {"phrases": ["district budget packet"]}})
+    assert any(r["identity"]["external_id"] == "131003" for r in found.data["records"])
+    exported = reopened.execute("export", {"bundle_key": key, "format": "zip"})
+    assert exported.status == "completed", exported.public_dict()
+    assert read_bundle(base64.b64decode(exported.data["content_base64"]), format="zip") == bundle
+
+
+def test_supporting_http_failure_keeps_independent_minutes_read():
+    transport = Transport(fail="/Services/api/GetSupportingDocuments/")
+    result = create_engine(provider_transport=transport).execute("fetch", {"source": SOURCE})
+    assert result.status == "partial" and result.errors
+    assert any(r["identity"]["record_type"] == "meeting" for r in result.data["records"])
+    assert any(c.get("observed_read_route") == "/Services/api/GetMinutes/" for c in result.data["captures"])
+
+
+def test_failed_supporting_request_consumes_page_budget_for_selected_item():
+    transport = ContentTransport()
+    transport.fail = "/Services/api/GetSupportingDocuments/"
+    result = create_engine(provider_transport=transport).execute("fetch", {
+        "source": _selected_source(), "bounds": {"max_pages": 4}})
+    assert result.status == "partial" and result.errors
+    assert len(transport.calls) == 5
+    assert not any("GetMeetingItemDetailsModel" in call for call in transport.calls)
+
+
+def test_supporting_transport_exception_consumes_page_budget():
+    class FailedTransport(ContentTransport):
+        def request(self, url, **kwargs):
+            if urlsplit(url).path == "/Services/api/GetSupportingDocuments/":
+                self.calls.append(url)
+                raise OSError("synthetic transport failure")
+            return super().request(url, **kwargs)
+
+    transport = FailedTransport()
+    result = create_engine(provider_transport=transport).execute("fetch", {
+        "source": _selected_source(), "bounds": {"max_pages": 4}})
+    assert result.status == "partial" and result.errors
+    assert len(transport.calls) == 5
+    assert not any("GetMeetingItemDetailsModel" in call for call in transport.calls)
