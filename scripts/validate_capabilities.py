@@ -273,6 +273,7 @@ def semantic_errors(data, identities):
                         ("gworks", "media", "upload"),
                         ("towncloud", "item_draft", "update"),
                         ("simbli", "agenda_item", "update"),
+                        ("simbli", "agenda_item_attachment", "upload"),
                         ("iqm2", "meeting", "create"), ("iqm2", "meeting", "update"),
                         ("iqm2", "agenda", "update"),
                         ("iqm2", "recording", "upload")}

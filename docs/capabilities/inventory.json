@@ -14108,6 +14108,118 @@
               }
             ]
           }
+        },
+        {
+          "id": "simbli-selected-item-title-2026-11-16-upload-dispatch-reexecution",
+          "url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-XH3WJOAC.js",
+          "title": "Recovered native selected-item save and lock contract with synthetic engine execution; re-executed after upload dispatch",
+          "kind": "source_and_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "limits": "Existing editable nondeleted no-workflow agenda-item title update, complete DTO preservation, exact lock/release, current grants, bounded transport, token-safe plans and read-only uncertain recovery; no create/upload/minutes/publication.",
+          "observation_date": "2026-11-16",
+          "receipt_path": "docs/verification/simbli-supporting-upload-2026-11-16.json",
+          "receipt_sha256": "a9c546485f70b4fadf4de6e6c79c3ae6f702b3592baa8c6873246b707692ef07",
+          "synthetic_execution": {
+            "provider": "simbli",
+            "status": "mock_passed",
+            "operations": [
+              "update"
+            ],
+            "entities": [
+              "agenda_item"
+            ],
+            "scope": "Existing editable nondeleted no-workflow agenda-item title update, complete DTO preservation, exact lock/release, current grants, bounded transport, token-safe plans and read-only uncertain recovery; no create/upload/minutes/publication.",
+            "execution_provenance": "All68 unchanged Engine/SQLite title cases re-executed after dispatcher/request changes; main title source and tests unchanged through final upload gates.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_simbli_item_write.py tests/test_simbli_upload.py -q",
+                "passed": 109,
+                "failed": 0,
+                "seconds": 259.476,
+                "reused_scope": "68 unchanged title cases; the earlier41 upload cases preceded the final transfer/cleanup/extension gates and are superseded below."
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/investigations/2026-11-16-paused/simbli-selected-item-contract.json",
+                "sha256": "d3ec3192f8f48e35f1f40a1557340bd376693b82990af418288810728ce871ee"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_simbli_item_write.py",
+                "sha256": "b342836eb08e6b20b200b05f388086771e711144bca5f8cf7a7ffbe830c7de30"
+              },
+              {
+                "kind": "implementation",
+                "path": "src/civic_data_connectors/providers/simbli_write.py",
+                "sha256": "3aac95288e8f817183896520b1a35f84502344575ba5a1ea8ac0edbc808e4110"
+              }
+            ]
+          }
+        },
+        {
+          "id": "simbli-supporting-upload-2026-11-16",
+          "url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-5FTFBQVD.js",
+          "title": "Native supporting attachment upload/save contract with Engine/SQLite execution",
+          "kind": "source_and_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "observation_date": "2026-11-16",
+          "limits": "One new supporting attachment on an existing editable nondeleted no-workflow agenda item; native multipart/descriptor/locked full save, inherited visibility/order, unchanged unrelated state, final native identity and independently matching original MIME/SHA256/length, current grants, bounds, cleanup and durable read-only no-replay recovery. No live mutation.",
+          "receipt_path": "docs/verification/simbli-supporting-upload-2026-11-16.json",
+          "receipt_sha256": "a9c546485f70b4fadf4de6e6c79c3ae6f702b3592baa8c6873246b707692ef07",
+          "synthetic_execution": {
+            "provider": "simbli",
+            "status": "mock_passed",
+            "operations": [
+              "upload"
+            ],
+            "entities": [
+              "agenda_item_attachment"
+            ],
+            "scope": "One new supporting attachment on an existing editable nondeleted no-workflow agenda item; native multipart/descriptor/locked full save, inherited visibility/order, unchanged unrelated state, final native identity and independently matching original MIME/SHA256/length, current grants, bounds, cleanup and durable read-only no-replay recovery. No live mutation.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_simbli_upload.py -q",
+                "passed": 46,
+                "failed": 0,
+                "seconds": 125.583
+              }
+            ],
+            "execution_provenance": "46 final synthetic native wire/Engine/SQLite cases; FileDetail fixtures derive from exact client property accesses. Historical route PDF capture is separate supporting evidence, not a live staff upload.",
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/simbli-supporting-upload-followup/source.json",
+                "sha256": "ddefc19d6f8180269725f3b33b6085719dd32759c6b13cc2fa86cba7536df96f"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/investigations/2026-11-16-paused/simbli-selected-item-contract.json",
+                "sha256": "d3ec3192f8f48e35f1f40a1557340bd376693b82990af418288810728ce871ee"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_simbli_upload.py",
+                "sha256": "9c24de6a28d957693fa5224823a789e05062b10649f491e4bad89c05e2f88655"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_simbli_item_write.py",
+                "sha256": "b342836eb08e6b20b200b05f388086771e711144bca5f8cf7a7ffbe830c7de30"
+              },
+              {
+                "kind": "implementation",
+                "path": "src/civic_data_connectors/providers/simbli_write.py",
+                "sha256": "3aac95288e8f817183896520b1a35f84502344575ba5a1ea8ac0edbc808e4110"
+              },
+              {
+                "kind": "implementation",
+                "path": "src/civic_data_connectors/providers/simbli_upload.py",
+                "sha256": "f07fbc032b0403e9ef1d022c34d05a0d9c1d70bac42b647d85bce0fe1c60f4ea"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -14341,7 +14453,8 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "simbli-docs",
-            "simbli-selected-item-title-2026-11-16"
+            "simbli-selected-item-title-2026-11-16",
+            "simbli-selected-item-title-2026-11-16-upload-dispatch-reexecution"
           ],
           "details": "Existing editable nondeleted no-workflow agenda-item title update, complete DTO preservation, exact lock/release, current grants, bounded transport, token-safe plans and read-only uncertain recovery; no create/upload/minutes/publication.",
           "dependencies": [],
@@ -14361,16 +14474,16 @@
           ]
         },
         "upload": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
-          "evidence_ids": [],
-          "details": "No public contract verified for this operation. Missing credentials/evidence does not mean vendor feature unavailable.",
-          "dependencies": [],
-          "remaining_verification": [
-            "Establish the applicable vendor-documented operation, fields and readback; synthetic verification is accepted."
+          "capability_status": "observed",
+          "implementation_status": "implemented",
+          "evidence_ids": [
+            "simbli-supporting-upload-2026-11-16"
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "unverified",
+          "details": "One new supporting attachment on an existing editable nondeleted no-workflow agenda item; native multipart/descriptor/locked full save, inherited visibility/order, unchanged unrelated state, final native identity and independently matching original MIME/SHA256/length, current grants, bounds, cleanup and durable read-only no-replay recovery. No live mutation.",
+          "dependencies": [],
+          "remaining_verification": [],
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://simbli.eboardsolutions.com/index.aspx?S=36031063"
           ],
@@ -14438,7 +14551,8 @@
             }
           ],
           "evidence_ids": [
-            "simbli-selected-item-title-2026-11-16"
+            "simbli-selected-item-title-2026-11-16",
+            "simbli-selected-item-title-2026-11-16-upload-dispatch-reexecution"
           ],
           "account_requirements": "Authorized tenant staff account, applicable module/tier and entity/workflow permissions; exact API entitlement unknown.",
           "authorized_test_access": "synthetic_only_no_live_mutation",
@@ -14495,6 +14609,44 @@
           "api_version": "unknown",
           "automatable_contract_verified": false,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+        },
+        {
+          "entity": "agenda_item_attachment",
+          "operation": "upload",
+          "endpoint_or_format": "POST /services/api/FileUpload/UploadFile then locked full SaveAgendaItem; native Attachment.aspx binary verification",
+          "field_mappings": [
+            {
+              "normalized": "file",
+              "provider_field": "multipart file -> Data.FileDetail -> selected ControlType9.Attachments",
+              "mapping_level": "observed_vendor_client_payload_field"
+            }
+          ],
+          "evidence_ids": [
+            "simbli-supporting-upload-2026-11-16"
+          ],
+          "account_requirements": "Exact trusted tenant/meeting/item/supporting-field grant; agenda_item:update plus agenda_item_attachment:upload, fresh staff/module/session context.",
+          "authorized_test_access": "synthetic_only_no_live_mutation",
+          "readback_receipt": "One new final native attachment ID in exact selected field, preserved item/tree/business state and independently matching original MIME/SHA256/length; uncertain recovery never resends either POST.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_native_client_with_synthetic_engine_sqlite_execution",
+          "method": "POST",
+          "api_version": "Captured Angular MeetingView client 2026-11-16",
+          "automatable_contract_verified": true,
+          "domain_scope": "One new supporting attachment on an existing editable nondeleted no-workflow agenda item; native multipart/descriptor/locked full save, inherited visibility/order, unchanged unrelated state, final native identity and independently matching original MIME/SHA256/length, current grants, bounds, cleanup and durable read-only no-replay recovery. No live mutation."
         }
       ],
       "pagination": {
@@ -14511,7 +14663,8 @@
         "The deployed anonymous client now establishes a partial search request/result contract. Nonempty result identity, complete session/header chain and continuation remain unresolved; staff/import schemas remain separate research gaps. No outside-only dependency is inferred.",
         "Tenant-specific role/permission and write/readback configuration must come from a matching machine contract. No staff/test-tenant credential acquisition is an acceptance gate; no live mutation is authorized.",
         "Current vendor-declared meetings brochure captured2026-11-15. Import recommendations into minutes is a product workflow claim, with no external file/request/readback schema. Exact old CDN failure and direct page403 do not prove other public contracts absent; no new tenant sampling or guessed staff path.",
-        "Existing agenda-item title update now implemented and synthetically verified against recovered native save/tree/details/lock contracts. Meeting/item creation, supporting upload, minutes and publication remain incomplete. See docs/SIMBLI-WRITES.md."
+        "Existing agenda-item title update now implemented and synthetically verified against recovered native save/tree/details/lock contracts. Meeting/item creation, supporting upload, minutes and publication remain incomplete. See docs/SIMBLI-WRITES.md.",
+        "Existing-item supporting-file upload now implemented and synthetically verified; original bytes require exact native binary response. General meeting-document writes, meeting/item creation, minutes and publication remain separate. See docs/SIMBLI-SUPPORTING-UPLOADS.md."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "simbli",

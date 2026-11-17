@@ -9,6 +9,11 @@
     {
       "url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-XH3WJOAC.js",
       "sha256": "83f27320892cdabc91346a2d105bb36c6ac3afd4967531171077358c09248c09"
+    },
+    {
+      "url": "https://simbli.eboardsolutions.com/SB_Assets/JS/Module/dmuploader.js?n=151&av=639300389128777535",
+      "bytes": 9413,
+      "sha256": "d8a75d6e2fb93b591b5e0b4fefff95e2d9d54d664692a8062c19e0b8b23da2f8"
     }
   ],
   "excerpts": {
@@ -27,7 +32,9 @@
     "item_content_assignment": {
       "offset": 44921,
       "source": "this.contentArr[n].Attachments=this.itemSupportingDocs.attachmentDTO,this.contentArr[n].HyperLinks=this.itemSupportingDocs.hyperLinkDTO):this.contentArr[n].ControlType==12&&(this.contentArr[n].Policie"
-    }
+    },
+    "multipart_plugin_defaults": "var restrictedFileTypes = 'folder;dir;ade;adp;asp;aspx;asx;bas;bat;chm;cmd;com;cpl;crt;exe;hlp;hta;inf;ins;isp;js;jse;lnk;mda;mdb;mde;mdt;mdw;mdz;msc;msi;msp;mst;ops;pcd;pif;prf;reg;scf;scr;sct;shb;shs;url;vb;vbe;vbs;wsc;wsf;wsh;htm;html;php';\nvar extListValidation = restrictedFileTypes.toLowerCase().split(';');\nvar specialcharList = [\"|\", \"/\", \"\\\\\",\"*\",\"?\",\"<\",\">\"];\n(function($) {\n  var pluginName = 'dmUploader';\n\n  // These are the plugin defaults values\n  var defaults = {\n    url: document.URL,\n    method: 'POST',\n    extraData: {},\n    maxFileSize: 0,\n    maxFiles: 0,\n    allowedTypes: '*',\n    extFilter: null,\n    dataType: null,\n    fileName: 'file',\n",
+    "multipart_plugin_send": "    var fd = new FormData();\n    fd.append(widget.settings.fileName, file);\n\n    // Return from client function (default === undefined)\n    var can_continue = widget.settings.onBeforeUpload.call(widget.element, widget.queuePos);\n    // If the client function doesn't return FALSE then continue\n    if( false === can_continue ) {\n      return;\n    }\n\n    // Append extra Form Data\n    $.each(widget.settings.extraData, function(exKey, exVal){\n      fd.append(exKey, exVal);\n    });\n\n    widget.queueRunning = true;\n\n    // Ajax Submit\n    $.ajax({\n        url: widget.settings.url + iDataAppendInUrl,\n      type: widget.settings.method,\n      dataType: widget.settings.dataType,\n      data: fd,\n      cache: false,\n      contentType: false,\n      processData: false,\n      forceSync: false,\n      xhr: function(){\n        var xhrobj = $.ajaxSettings.xhr();\n        if(xhrobj.upload){\n          xhrobj.upload.addEventListener('progress', function(event) {\n            var percent = 0;\n            var position = event.loaded || even"
   },
   "findings": [
     "Upload uses multipart file and fresh page context sct/enportaluid/endid/enentitytypeid/enentityid/enitemid; new upload adds attachmentId=0&id=0.",
@@ -44,9 +51,31 @@
     "outcome": "Incapsula security challenge, no original file or usable viewer controls; no retries or bypass."
   },
   "remaining": [
-    "Original-file retrieval and identity binding from successful attachment view",
+    "Implement exact Module1 Attachment.aspx binary readback with matching native SchoolID/AttachmentID/EnitityID, MIME and original SHA256; reject challenge/HTML and transformed bytes.",
     "Upload FileDetail validation against original filename/type/size and temporary-to-final identity",
     "Durable handling of upload succeeded/item save failed and recovery without replay",
     "Implementation and affected acceptance checks"
-  ]
+  ],
+  "archived_delivery_followup": {
+    "discovery": "Bounded Wayback CDX query for exact vendor Attachment.aspx route with MID selector, after current route challenge.",
+    "binary_response": {
+      "archive_url": "https://web.archive.org/web/20210511195942id_/https://simbli.eboardsolutions.com/Meetings/Attachment.aspx?S=150030&AID=155962&MID=6367&_ga=2.214424663.1554370615.1597664613-1183366412.1596137230",
+      "content_type": "application/pdf",
+      "bytes": 75865,
+      "sha256": "dd4b10c1399091de7bc6a0347f40c5c5dd498c1bd996ac95bb0400506dcfa3e2",
+      "signature": "%PDF-1.5",
+      "scope": "Historical route can return binary PDF directly. Current deployed client still declares the same Module1 route. Upload acceptance must compare returned bytes against the approved original SHA256; HTML, transformed bytes and unmatched files cannot confirm it."
+    },
+    "newer_archive": {
+      "archive_url": "https://web.archive.org/web/20251107080705id_/https://simbli.eboardsolutions.com/Meetings/Attachment.aspx?S=4013&AID=1001568&MID=74495",
+      "bytes": 929,
+      "outcome": "Security challenge, not attachment bytes."
+    },
+    "headless_current_probe": {
+      "browser": "Installed Chrome, ephemeral headless context, no profile/account",
+      "status": 200,
+      "bytes": 1017,
+      "outcome": "Same security challenge; browser closed, no retries or bypass."
+    }
+  }
 }

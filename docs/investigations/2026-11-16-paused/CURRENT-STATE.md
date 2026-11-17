@@ -1,27 +1,28 @@
 # QuorumRelay current state — November 16, 2026
 
-## Current follow-up: inventory reconciliation and contract research
+## Current candidate: Simbli supporting-file upload
 
-The full31-vendor goal remains incomplete:26 entries retain open work. Boardable
-Document Center and selected Simbli title writes are delivered to the candidate
-branch and both passed full CI. No merge or release.
+Supporting upload on an existing editable agenda item is implemented through the
+registered dispatcher: native multipart descriptor, item lock/full save, preserved
+unrelated fields, fresh final identity and independently matching original bytes.
+Durable recovery reads only and never replays upload/save. No live staff mutation.
 
-The stale iCalendar pending label is reconciled against existing source and11
-re-executed projection tests. DTEND/DESCRIPTION are disclosed omissions and no
-longer listed as emitted mappings. Capability validation and25metadata cases
-passed after runtime synchronization. No product code changed in this follow-up.
+Acceptance: 46 final upload cases passed in125.70s;68 unchanged existing-title
+cases re-executed in the earlier109-case run. Receipt records both runs and the
+superseded earlier upload cases explicitly.25 metadata cases, capability validator
+and required full Ruff passed. See docs/verification/simbli-supporting-upload-2026-11-16.json.
+Commit/push and required new-candidate GitHub CI are the next delivery steps.
+Previous pushed62a58ff passed all required CI steps in run44009550804.
 
-PrimeGov's declared Reno login and public attachment helper both returned200;
-they expose sign-in/escaping code, not administrative write models. Sanitized
-capture: `docs/capabilities/evidence/primegov-login-followup/source.json`.
-Simbli supporting-upload descriptor construction, order/visibility and full-item
-save assignment are pinned in `docs/capabilities/evidence/simbli-supporting-upload-followup/source.json`.
-Its exact public attachment viewer returned a security challenge. Original-byte
-readback, temporary-to-final identity and upload/save recovery remain unfinished.
-No upload adapter has been added. Next action: follow declared attachment-view
-client/package contracts or another product-matched source for original retrieval;
-continue other vendor gaps if this source remains unavailable. TownCloud parked;
-no vendor contacts, payments, merges or releases. No owned local background job.
+Meeting/item creation, minutes and publication remain unfinished. Separate native
+minutes access/release DTO types and client functions are captured as research in
+capabilities/evidence/simbli-minutes-lock-followup/source.json; no minutes adapter.
+The full31-vendor goal remains incomplete with26 open entries. TownCloud parked;
+no contacts/payments/merge/release. No owned local background job.
+
+The iCalendar inventory correction is delivered;11 projection cases passed.
+DTEND/DESCRIPTION remain disclosed export omissions. PrimeGov login/helper
+follow-up yielded sign-in/escaping only; sanitized source capture is retained.
 
 ## Current verified implementation: general Boardable Document Center writes
 

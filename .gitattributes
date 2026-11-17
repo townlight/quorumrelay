@@ -180,3 +180,9 @@ tests/fixtures/iqm2/meeting-wire-fixture.ps1 whitespace=cr-at-eol
 docs/capabilities/evidence/primegov-login-followup/login-sanitized.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
 docs/capabilities/evidence/primegov-login-followup/attachmentHelpers.js whitespace=cr-at-eol
 docs/verification/icalendar-projection-reconciliation-2026-11-16.xml -text
+
+# Pin Simbli upload implementation and executed acceptance bytes.
+src/civic_data_connectors/providers/simbli_upload.py -text
+tests/test_simbli_upload.py -text
+docs/verification/simbli-title-upload-affected-2026-11-16.xml -text
+docs/verification/simbli-supporting-upload-2026-11-16.xml -text

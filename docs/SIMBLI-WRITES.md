@@ -3,8 +3,9 @@
 The native adapter updates the title of one existing, editable, nondeleted,
 no-workflow agenda item. It uses the recovered Simbli Angular client contract
 and the shared exact-plan/commit coordinator. Public listing and reading remain
-separate operations. Meeting creation, item creation, supporting-file uploads,
-minutes and publication are still unfinished.
+separate operations. Supporting-file uploads are described in
+[SIMBLI-SUPPORTING-UPLOADS.md](SIMBLI-SUPPORTING-UPLOADS.md). Meeting creation,
+item creation, minutes and publication are still unfinished.
 
 The native source contract is preserved in
 [the selected-item capture](investigations/2026-11-16-paused/simbli-selected-item-contract.json).

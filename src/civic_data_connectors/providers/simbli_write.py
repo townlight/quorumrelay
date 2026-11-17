@@ -494,7 +494,7 @@ class _Requests:
                 "bounds_exceeded", "The Simbli request budget is insufficient for the full safe operation."
             )
 
-    def send(self, method, url, *, host, body=None, headers=None, cleanup=False):
+    def send(self, method, url, *, host, body=None, headers=None, cleanup=False, binary=False, file_body=False):
         if not cleanup and self.context.check_cancelled():
             raise WriteCancelled()
         parsed = urlsplit(url)
@@ -507,7 +507,7 @@ class _Requests:
         reserve = 1 if self.reserve_cleanup and not cleanup else 0
         if self.count >= self.bounds.max_pages - reserve:
             raise WriteFailure("bounds_exceeded", "The Simbli page budget is exhausted.")
-        if body is not None and len(body) > min(self.bounds.parser_bytes, self.bounds.transfer_bytes):
+        if body is not None and len(body) > (self.bounds.transfer_bytes if file_body else min(self.bounds.parser_bytes, self.bounds.transfer_bytes)):
             raise ValueError("The Simbli request body exceeds configured bounds.")
         remaining_bytes = self.bounds.transfer_bytes - self.transfer
         if self.reserve_cleanup and not cleanup:
@@ -542,7 +542,7 @@ class _Requests:
                 method=method,
                 body=body,
                 headers=actual,
-                byte_limit=min(self.bounds.parser_bytes, remaining_bytes),
+                byte_limit=remaining_bytes if binary else min(self.bounds.parser_bytes, remaining_bytes),
                 deadline_seconds=seconds,
             )
         except (OSError, TimeoutError, RuntimeError, ValueError):
@@ -550,7 +550,7 @@ class _Requests:
         if not isinstance(response, WriteResponse):
             raise AmbiguousWrite("The Simbli transport returned an invalid response.")
         if (
-            len(response.content) > min(self.bounds.parser_bytes, remaining_bytes)
+            len(response.content) > (remaining_bytes if binary else min(self.bounds.parser_bytes, remaining_bytes))
             or self.transfer + len(response.content) > self.bounds.transfer_bytes
         ):
             raise AmbiguousWrite("The Simbli response exceeded configured bounds.")
@@ -631,6 +631,8 @@ class SimbliWriteAdapter(WriteAdapter):
         self.credentials(source, context)
 
     def authorize(self, source, change, context):
+        if change.entity == "agenda_item_attachment":
+            return self._supporting().authorize(source, change, context)
         self.validate_source(source, context)
         config = self.credentials(source, context)
         if (
@@ -670,7 +672,17 @@ class SimbliWriteAdapter(WriteAdapter):
             text = response.content.decode("utf-8-sig", errors="strict")
         except UnicodeError:
             raise ValueError("The Simbli page is not valid UTF-8.") from None
-        return _page_context(text, config)
+        page = _page_context(text, config)
+        try:
+            module = _literal(text, "encrModuleID")
+        except Exception:
+            module = None
+        if module is not None:
+            if not _header_safe(module) or len(module) > 4096:
+                raise ValueError("The native module control is malformed.")
+            page["encrModuleID"] = module
+            page["secrets"].append(module)
+        return page
 
     def _read_tree(self, session, page, bounds):
         query = urlencode(
@@ -831,7 +843,13 @@ class SimbliWriteAdapter(WriteAdapter):
         _expect(response, ambiguous=True)
         return response
 
+    def _supporting(self):
+        from .simbli_upload import SupportingUpload
+        return SupportingUpload(self)
+
     def prepare(self, source, change, context, bounds, deadline):
+        if change.entity == "agenda_item_attachment":
+            return self._supporting().prepare(source, change, context, bounds, deadline)
         self.authorize(source, change, context)
         config = self.credentials(source, context)
         if context.check_cancelled():
@@ -860,6 +878,8 @@ class SimbliWriteAdapter(WriteAdapter):
         return prepared
 
     def apply(self, source, prepared, context, bounds, deadline, *, persist=None):
+        if prepared.get("change", {}).get("entity") == "agenda_item_attachment":
+            return self._supporting().apply(source, prepared, context, bounds, deadline, persist=persist)
         change, before, after = self._validate_prepared(source, prepared, context, bounds)
         config = self.credentials(source, context)
         if context.check_cancelled():
@@ -965,6 +985,8 @@ class SimbliWriteAdapter(WriteAdapter):
         return result
 
     def reconcile(self, source, prepared, item, context, bounds, deadline):
+        if prepared.get("change", {}).get("entity") == "agenda_item_attachment":
+            return self._supporting().reconcile(source, prepared, item, context, bounds, deadline)
         change, before, after = self._validate_prepared(source, prepared, context, bounds)
         config = self.credentials(source, context)
         if context.check_cancelled():

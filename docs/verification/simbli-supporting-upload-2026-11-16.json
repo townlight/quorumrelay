@@ -1,0 +1,62 @@
+{
+  "date": "2026-11-16",
+  "scope": "One new supporting attachment on an existing editable nondeleted no-workflow agenda item; native multipart/descriptor/locked full save, inherited visibility/order, unchanged unrelated state, final native identity and independently matching original MIME/SHA256/length, current grants, bounds, cleanup and durable read-only no-replay recovery. No live mutation.",
+  "checks": [
+    {
+      "command": "python -X utf8 -m pytest tests/test_simbli_item_write.py tests/test_simbli_upload.py -q",
+      "passed": 109,
+      "failed": 0,
+      "seconds": 259.476,
+      "reused_scope": "68 unchanged title cases; the earlier41 upload cases preceded the final transfer/cleanup/extension gates and are superseded below."
+    },
+    {
+      "command": "python -X utf8 -m pytest tests/test_simbli_upload.py -q",
+      "passed": 46,
+      "failed": 0,
+      "seconds": 125.583
+    }
+  ],
+  "distinct_accepted_cases": {
+    "existing_title": 68,
+    "supporting_upload": 46
+  },
+  "reuse": "The main title adapter and its test file were unchanged between the109-case run and final46-case run. Only the upload helper/tests gained the transfer minimum, pre-acquisition cleanup and native extension checks.",
+  "junit": [
+    {
+      "path": "docs/verification/simbli-title-upload-affected-2026-11-16.xml",
+      "sha256": "a821f12b997754188ce76620d46db6b5b4af1fc107cc959ac243a2c4bc20178b"
+    },
+    {
+      "path": "docs/verification/simbli-supporting-upload-2026-11-16.xml",
+      "sha256": "8fe49856a975aa0e5796e8bec5fdeb68cf5f538b2559ea66bb7274fd12f7d4eb"
+    }
+  ],
+  "files": [
+    {
+      "path": "src/civic_data_connectors/providers/simbli_write.py",
+      "sha256": "3aac95288e8f817183896520b1a35f84502344575ba5a1ea8ac0edbc808e4110"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/simbli_upload.py",
+      "sha256": "f07fbc032b0403e9ef1d022c34d05a0d9c1d70bac42b647d85bce0fe1c60f4ea"
+    },
+    {
+      "path": "tests/test_simbli_item_write.py",
+      "sha256": "b342836eb08e6b20b200b05f388086771e711144bca5f8cf7a7ffbe830c7de30"
+    },
+    {
+      "path": "tests/test_simbli_upload.py",
+      "sha256": "9c24de6a28d957693fa5224823a789e05062b10649f491e4bad89c05e2f88655"
+    },
+    {
+      "path": "docs/capabilities/evidence/simbli-supporting-upload-followup/source.json",
+      "sha256": "ddefc19d6f8180269725f3b33b6085719dd32759c6b13cc2fa86cba7536df96f"
+    }
+  ],
+  "live_vendor_mutations": "NOT_PERFORMED",
+  "remaining": [
+    "Required current-candidate GitHub CI",
+    "Meeting/item creation",
+    "Minutes and publication"
+  ]
+}
