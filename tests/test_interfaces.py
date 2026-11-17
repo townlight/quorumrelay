@@ -57,7 +57,8 @@ def test_cli_saved_file_stdin_jsonl_and_exit_codes(tmp_path):
     assert main(["providers", "--request", str(saved), "--file-root", str(tmp_path)],
                 stdout=stdout, stderr=stderr, engine=owner) == 0
     listed = json.loads(stdout.getvalue())["data"]["providers"]
-    assert len([row for row in listed if row["formats"]]) == 31 and len(listed) == 32
+    assert len([row for row in listed if row["formats"]]) == 31 and len(listed) == 33
+    assert {row["provider"] for row in listed if not row["formats"]} == {"cablecast", "diligent-community"}
     stdout, stderr = io.StringIO(), io.StringIO()
     assert main(["providers", "--jsonl"], stdin=io.StringIO("{}\ninvalid\n{}\n"),
                 stdout=stdout, stderr=stderr, engine=owner) == 64
@@ -67,6 +68,36 @@ def test_cli_saved_file_stdin_jsonl_and_exit_codes(tmp_path):
     assert main(["providers", "--request", str(saved), "--file-root", str(tmp_path / "absent")],
                 stdout=stdout, stderr=stderr, engine=owner) == 64
     assert json.loads(stdout.getvalue())["status"] == "failed"
+
+
+def test_community_saved_discovery_cli_http_parity(tmp_path):
+    owner = build_engine(database=tmp_path / "community.sqlite")
+    capture = (ROOT / "tests/fixtures/diligent_community/meetings.json").read_bytes()
+    request = {
+        "source": {"provider": "diligent-community",
+                   "url": "https://boonecountyil.community.diligentoneplatform.com",
+                   "input_format": "diligent-community-meetings-json"},
+        "bounds": {"date_from": "2026-11-01", "date_to": "2026-11-16"},
+        "content_base64": base64.b64encode(capture).decode(),
+    }
+    stdout, stderr = io.StringIO(), io.StringIO()
+    assert main(["discover"], stdin=io.StringIO(json.dumps(request)), stdout=stdout,
+                stderr=stderr, engine=owner) == 2
+    cli_result = json.loads(stdout.getvalue())
+    assert not stderr.getvalue()
+    with TestClient(create_app(owner, config()), base_url="http://127.0.0.1") as client:
+        response = client.post("/v1/operations/discover",
+                               headers={"Authorization": "Bearer " + TOKEN_A}, json=request)
+    assert response.status_code == 200
+    result = response.json()
+    assert result["status"] == cli_result["status"] == "partial"
+    # Separate requests have distinct capture times; all captured record content must agree.
+    def stable(rows):
+        return [{k: v for k, v in row.items() if k != "captured_at"} for row in rows]
+    assert stable(result["data"]["records"]) == stable(cli_result["data"]["records"])
+    assert {row["identity"]["external_id"] for row in result["data"]["records"]} == {"1655", "1654", "1659"}
+    assert base64.b64decode(result["data"]["captures"][0]["content_base64"]) == capture
+    Draft202012Validator(document()["components"]["schemas"]["result"]).validate(result)
 
 
 def test_http_real_schemas_parity_auth_scopes_and_multipart(tmp_path):
@@ -176,7 +207,8 @@ def test_node_independent_tarball_client_real_loopback_sequence(tmp_path):
     }}), encoding="utf-8")
     server = subprocess.Popen([sys.executable, "-m", "quorumrelay", "serve", "--config", str(config_path),
                                "--database", str(tmp_path / "node.sqlite")],
-                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                              stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                              env={**os.environ, "PYTHONPATH": str(ROOT / "src")})
     try:
         url = f"http://127.0.0.1:{port}"
         for _ in range(100):
@@ -192,7 +224,7 @@ def test_node_independent_tarball_client_real_loopback_sequence(tmp_path):
 import assert from 'node:assert/strict';
 import {CivicConnectorClient, ServiceError} from 'quorumrelay-client';
 const client = new CivicConnectorClient({baseUrl:process.env.CIVIC_CONNECTOR_URL,token:process.env.CIVIC_CONNECTOR_TOKEN});
-const info = await client.info(); assert.equal(info.data.version,'0.1.0.dev8');
+const info = await client.info(); assert.equal(info.data.version,'0.1.0.dev14');
 const discovered = await client.execute('discover',JSON.parse(process.env.CIVIC_REQUEST));
 assert.equal(discovered.status,'partial'); assert.equal(discovered.data.records.length,1);
 const preview = await client.execute('import_preview',{result:discovered}); assert.equal(preview.data.persisted,false);

@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-16",
+  "scope": "Exact deployed-client excerpts only; upload not implemented or executed.",
+  "sources": [
+    {
+      "url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-5FTFBQVD.js",
+      "sha256": "d4a26496d8b3f91696c19bf5991220f115e201df1341578bb8870a4ac2fe0cd6"
+    },
+    {
+      "url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-XH3WJOAC.js",
+      "sha256": "83f27320892cdabc91346a2d105bb36c6ac3afd4967531171077358c09248c09"
+    },
+    {
+      "url": "https://simbli.eboardsolutions.com/SB_Assets/JS/Module/dmuploader.js?n=151&av=639300389128777535",
+      "bytes": 9413,
+      "sha256": "d8a75d6e2fb93b591b5e0b4fefff95e2d9d54d664692a8062c19e0b8b23da2f8"
+    }
+  ],
+  "excerpts": {
+    "upload_url": {
+      "offset": 883609,
+      "source": "this.tempFileUrl=\"/services/api/FileUpload/UploadFile?sct=\"+this.sToken+\"&enportaluid=\"+this.enCuUID+\"&endid=\"+this.enDID+\"&enentitytypeid=\"+this.encrModuleID+\"&enentityid=\"+this.enMeetingID+\"&enitemid=\"+this.Content.ItemID,this.ShowAttachmentGrid(),this.ShowHyperLinkGrid(),this.chkAllAttachment=!1}ngAfterViewChecked(){this.IsEditMode&&this.isLoadedJs<1&&this.ShowDocumentSection&&(this.FileUploadJQuery(!1),this.isLoa"
+    },
+    "attachment_insert_and_replace": {
+      "offset": 885487,
+      "source": "AddEditAttachment(n,o){var r=[],s=1;if(o<1||n.FileDetail.Id<1){if(!this.isValidUploadFilesLimit())return;var a=n.FileDetail.Title;if(a.length&&(a=a.substr(0,250)),this.attachmentDTO!=null){var l={Order:1,Id:this.attachmentDTO.length+1,TempFileName:n.FileDetail.TempFileName,FileName:n.FileDetail.FileName,AttachmentID:n.FileDetail.AttachmentID,SaveFileName:n.FileDetail.SaveFileName,OrigFileName:n.FileDetail.OrigFileName,IsDeleted:n.FileDetail.IsDeleted,Operation:n.FileDetail.Operation,ContentType:n.FileDetail.ContentType,FileExtension:n.FileDetail.FileExtension,Title:a,OrigTitle:n.FileDetail.OrigTitle,FileSize:n.FileDetail.FileSize,VisibilityMode:this.FieldVisibility};r.push(l);for(let c=0;c<this.attachmentDTO.length;c++)s++,this.attachmentDTO[c].Order=s,r.push(this.attachmentDTO[c]);this.attachmentDTO=r,this.chkAllAttachment=!1}else this.attachmentDTO=[{Order:1,Id:1,TempFileName:n.FileDetail.TempFileName,FileName:n.FileDetail.FileName,AttachmentID:n.FileDetail.AttachmentID,SaveFileName:n.FileDetail.SaveFileName,OrigFileName:n.FileDetail.OrigFileName,IsDeleted:n.FileDetail.IsDeleted,Operation:n.FileDetail.Operation,ContentType:n.FileDetail.ContentType,FileExtension:n.FileDetail.FileExtension,Title:a,OrigTitle:n.FileDetail.OrigTitle,FileSize:n.FileDetail.FileSize,VisibilityMode:this.FieldVisibility}];this.ShowAttachmentGrid()}else for(let c=0;c<this.attachmentDTO.length;c++)if(this.attachmentDTO[c].Id==n.FileDetail.Id){this.attachmentDTO[c].ContentType=n.FileDetail.ContentType,this.attachmentDTO[c].FileExtension=n.FileDetail.FileExtension,this.attachmentDTO[c].TempFileName=n.FileDetail.TempFileName,this.attachmentDTO[c].FileName=n.FileDetail.FileName,this.attachmentDTO[c].FileSize=n.FileDetail.FileSize,this.attachmentDTO[c].AttachmentID=n.FileDetail.AttachmentID,this.attachmentDTO[c].IsDeleted=n.FileDetail.IsDeleted,this.attachmentDTO[c].Operation=n.FileDetail.Operation;break}return this.ChangeContent(),!0}UpdateAttachment(n,o){o.stopPropagation();var r=this.objUniqueId,s=\"&attachmentId=\"+n.AttachmentID+\"&id=\"+n.Id;window.iDataAppendInUrl=s,window.$(\"#ExistingfileUpload\"+r).trigger(\"click\")}EditAttachment(n,o){if(o.stopPropagation(),this.isEditAttachment)for(let r=0;r<this.attachmentDTO.length;r++)this.attachmentDTO[r].IsEdit=!1;n.IsEdit=!0,this.isEditAttachment=!0,this.ChangeContent()}SelectAllAttachment(n){for(var o=0;o<this.attachmentDTO.length;o++)this.attachmentDTO[o].IsDeleted||(this.attachmentDTO[o].Sel"
+    },
+    "attachment_view": {
+      "offset": 884260,
+      "source": "ViewDocument(n){let o;if(this.ModuleID==1)o=\"/Meetings/Attachment.aspx?S=\"+n.SchoolID+\"&AID=\"+n.AttachmentID+\"&MID=\"+n.EnitityID;else if(this.ModuleID==6)o=\"/Evaluation/Attachment.aspx?S=\"+n.SchoolID+\"&AID=\"+n.AttachmentID+\"&EID=\"+n.EnitityID;else if(this.ModuleID==18)o=\"/Policy/ViewMemberCommAttachment.aspx?sid=\"+n.SchoolID+\"&aid=\"+n.EncrId;else if(this.ModuleID==2)o=\"/Policy/ViewAttachment.aspx?S=\"+n.SchoolID+\"&AID=\"+n.EncrId;else if(this.ModuleID==19)o=\"/SB_Meetings/ViewWipAttachment.aspx?S=\"+n.SchoolID+\"&aid=\"+n.EncrId;else if(this.ModuleID==8)o=\"/News/ViewNewsAttachment.aspx?S=\"+n.SchoolID+\"&ENCRAID=\"+n.EncrId;else if(this.ModuleID==21)o=\"/SB_Meetings/ViewMeetingMinuteDocument.aspx?S=\"+n.SchoolID+\"&aid=\"+n.EncrId;else if(this.ModuleID==22)o=\"/SB_Meetings/ViewAgendaMinuteDocument.aspx?S=\"+n.SchoolID+\"&aid=\"+n.EncrId;else if(this.supportingDocsSection==eV.PlanSummary)o=\"/Planning/PlanSummaryAttachment.aspx?S=\"+n.SchoolID+\"&aid=\"+n.EncrId;else if(this.supportingDocsSection==eV.PlanItem)o=\"/Planning/PlanItemAttachment.aspx?S=\"+n.SchoolID+\"&aid=\"+n.EncrId;else if(this.supportingDocsSection==eV.PlanVision)o=\"/Planning/PlanItemAttachment.aspx?S=\"+n.SchoolID+\"&aid=\"+n.EncrId+\"&vision=1\";else return\"#\";return o}AddEditAttachment(n,o){var r=[],s=1;if(o<1||n.FileDetail.Id<1){if(!this.isValidUploadFilesLimit())retur"
+    },
+    "item_content_assignment": {
+      "offset": 44921,
+      "source": "this.contentArr[n].Attachments=this.itemSupportingDocs.attachmentDTO,this.contentArr[n].HyperLinks=this.itemSupportingDocs.hyperLinkDTO):this.contentArr[n].ControlType==12&&(this.contentArr[n].Policie"
+    },
+    "multipart_plugin_defaults": "var restrictedFileTypes = 'folder;dir;ade;adp;asp;aspx;asx;bas;bat;chm;cmd;com;cpl;crt;exe;hlp;hta;inf;ins;isp;js;jse;lnk;mda;mdb;mde;mdt;mdw;mdz;msc;msi;msp;mst;ops;pcd;pif;prf;reg;scf;scr;sct;shb;shs;url;vb;vbe;vbs;wsc;wsf;wsh;htm;html;php';\nvar extListValidation = restrictedFileTypes.toLowerCase().split(';');\nvar specialcharList = [\"|\", \"/\", \"\\\\\",\"*\",\"?\",\"<\",\">\"];\n(function($) {\n  var pluginName = 'dmUploader';\n\n  // These are the plugin defaults values\n  var defaults = {\n    url: document.URL,\n    method: 'POST',\n    extraData: {},\n    maxFileSize: 0,\n    maxFiles: 0,\n    allowedTypes: '*',\n    extFilter: null,\n    dataType: null,\n    fileName: 'file',\n",
+    "multipart_plugin_send": "    var fd = new FormData();\n    fd.append(widget.settings.fileName, file);\n\n    // Return from client function (default === undefined)\n    var can_continue = widget.settings.onBeforeUpload.call(widget.element, widget.queuePos);\n    // If the client function doesn't return FALSE then continue\n    if( false === can_continue ) {\n      return;\n    }\n\n    // Append extra Form Data\n    $.each(widget.settings.extraData, function(exKey, exVal){\n      fd.append(exKey, exVal);\n    });\n\n    widget.queueRunning = true;\n\n    // Ajax Submit\n    $.ajax({\n        url: widget.settings.url + iDataAppendInUrl,\n      type: widget.settings.method,\n      dataType: widget.settings.dataType,\n      data: fd,\n      cache: false,\n      contentType: false,\n      processData: false,\n      forceSync: false,\n      xhr: function(){\n        var xhrobj = $.ajaxSettings.xhr();\n        if(xhrobj.upload){\n          xhrobj.upload.addEventListener('progress', function(event) {\n            var percent = 0;\n            var position = event.loaded || even"
+  },
+  "findings": [
+    "Upload uses multipart file and fresh page context sct/enportaluid/endid/enentitytypeid/enentityid/enitemid; new upload adds attachmentId=0&id=0.",
+    "Data.isSuccess and Data.FileDetail supply the attachment fields. The UI constructs a selected subset, assigns local Id=count+1, inserts at Order=1 and increments previous attachment Order.",
+    "VisibilityMode comes from the existing supporting field visibility. ControlType9 Attachments and HyperLinks are copied into the full item content before save.",
+    "Module1 read link uses /Meetings/Attachment.aspx with returned SchoolID/AttachmentID/EnitityID; it is an attachment viewer, not an established original-download contract."
+  ],
+  "readback_probe": {
+    "url": "https://simbli.eboardsolutions.com/Meetings/Attachment.aspx?S=36031063&AID=131003&MID=4942",
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 1033,
+    "sha256": "b6390567d019f757da2e2236e85b61a5ec9516ee24fa9405d4eb5a01415b852f",
+    "outcome": "Incapsula security challenge, no original file or usable viewer controls; no retries or bypass."
+  },
+  "remaining": [
+    "Implement exact Module1 Attachment.aspx binary readback with matching native SchoolID/AttachmentID/EnitityID, MIME and original SHA256; reject challenge/HTML and transformed bytes.",
+    "Upload FileDetail validation against original filename/type/size and temporary-to-final identity",
+    "Durable handling of upload succeeded/item save failed and recovery without replay",
+    "Implementation and affected acceptance checks"
+  ],
+  "archived_delivery_followup": {
+    "discovery": "Bounded Wayback CDX query for exact vendor Attachment.aspx route with MID selector, after current route challenge.",
+    "binary_response": {
+      "archive_url": "https://web.archive.org/web/20210511195942id_/https://simbli.eboardsolutions.com/Meetings/Attachment.aspx?S=150030&AID=155962&MID=6367&_ga=2.214424663.1554370615.1597664613-1183366412.1596137230",
+      "content_type": "application/pdf",
+      "bytes": 75865,
+      "sha256": "dd4b10c1399091de7bc6a0347f40c5c5dd498c1bd996ac95bb0400506dcfa3e2",
+      "signature": "%PDF-1.5",
+      "scope": "Historical route can return binary PDF directly. Current deployed client still declares the same Module1 route. Upload acceptance must compare returned bytes against the approved original SHA256; HTML, transformed bytes and unmatched files cannot confirm it."
+    },
+    "newer_archive": {
+      "archive_url": "https://web.archive.org/web/20251107080705id_/https://simbli.eboardsolutions.com/Meetings/Attachment.aspx?S=4013&AID=1001568&MID=74495",
+      "bytes": 929,
+      "outcome": "Security challenge, not attachment bytes."
+    },
+    "headless_current_probe": {
+      "browser": "Installed Chrome, ephemeral headless context, no profile/account",
+      "status": 200,
+      "bytes": 1017,
+      "outcome": "Same security challenge; browser closed, no retries or bypass."
+    }
+  }
+}

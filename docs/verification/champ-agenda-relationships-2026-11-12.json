@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-12",
+  "operation": "rich_champ_agenda_relationships",
+  "fixture": {
+    "path": "tests/fixtures/brief-discovery/champ-lakezurich-event-json.json",
+    "byte_length": 32224,
+    "sha256": "6754ddfb70e942b4595fa26cdb54e4c688fe52b3754a7320ed2011e4bb4e7764"
+  },
+  "vendor_player": {
+    "path": "docs/capabilities/evidence/champ-public-player/source.json",
+    "sha256": "3b9b992f1807c15f772175539bc640995a0fbbbb5e87ad5754c3709380125b45"
+  },
+  "offline_saved_result": {
+    "status": "completed",
+    "native_items": 14,
+    "item_document_associations": 6,
+    "native_timeline_associations": 11
+  },
+  "synthetic_execution": {
+    "test_file": "tests/test_champ_agenda.py",
+    "new_distinct_passed": 18,
+    "reused_media_cases_passed": 6,
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_champ_agenda.py -q (8 passed before independent vendor pin case was added)",
+      ".venv/Scripts/python.exe -m pytest tests/test_champ_agenda.py::test_timeline_mapping_is_anchored_to_exact_captured_vendor_player -q (1 passed)",
+      ".venv/Scripts/python.exe -m pytest tests/test_champ_media.py -q (6 passed)",
+      ".venv/Scripts/python.exe -m pytest tests/test_champ_agenda.py -k \"unassociated_or_invalid_timeline or actual_normalize_search\" -q (8 passed, 4 deselected; includes three added typed-ID cases)",
+      ".venv/Scripts/python.exe -m pytest tests/test_champ_agenda.py -k \"body_search or normalized_body\" -q (5 passed, 12 deselected)",
+      ".venv/Scripts/python.exe -m pytest tests/test_champ_agenda.py::test_configured_event_body_filter_uses_bound_source_board -q (1 passed)"
+    ],
+    "agenda_relationship_cases_passed": 12,
+    "body_projection_cases_passed": 6
+  },
+  "limits": [
+    "No new network request or vendor write",
+    "Captured public-client contract version only",
+    "No inferred transcript/speaker/motion or media-byte guarantee",
+    "Search remains partial for unavailable attachment/transcript text",
+    "Compatibility projection and frozen artifacts unchanged"
+  ],
+  "body_projection": {
+    "source": "Board.BoardName",
+    "identity_binding": "positive integer Board.CustomerBoardID equals typed Event.CustomerBoardID",
+    "outcomes": [
+      "Exact-body local search with/without agenda",
+      "Configured matching/mismatching body filters",
+      "Unbound/untyped source IDs not promoted"
+    ],
+    "live_execution": false
+  }
+}

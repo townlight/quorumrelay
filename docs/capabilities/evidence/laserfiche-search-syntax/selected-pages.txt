@@ -1,0 +1,164 @@
+ZERO-BASED PAGE 4
+Laserfiche will look for results with the phrase in quotation marks
+and will return any symbol or no symbol in place of the – (dash).
+If you do not include the phrase in quotation marks, the dash will
+be interpreted as the “not” operator and will exclude results with
+the word “John” in them.
+To include a " in your search, you must precede the character with
+another double quotation mark (") and surround the entire phrase
+with double quotation marks. For example, to search for a
+document named a”report, use this syntax: {LF:NAME=
+“a””report”}.
+Operator Compatibility
+Whether a certain operator can be used in a search depends on the type of value
+being searched for. The following are some situations where certain operators
+cannot be used.
+ Many of our search examples search for entities with empty values (“”) or
+with any non-empty value (“*”). The ~= operator does not work for such
+searches; only = or <> should be used.
+ To search across text or list fields, the search parameter must be a string
+and the operator must be ~=, = or <>, unless a field name is specified. If a
+field name is specified, you can use ordering operators (<, >, >=, <=). When
+such operators are applied to text fields or list fields, the order used is
+alphanumeric order, i.e. a < b, numbers < letters, and punctuation <
+numbers.
+<> Operator
+The <> operator is not a set operator. For example, {LF:tags<>"tag1"} looks for
+documents with a tag that is not tag1. It doesn't look for documents that don't
+contain tag1. If a document has both tag1 and tag2, the search will return this
+document because tag2 is not tag1.
+Operator Precedence
+Advanced search syntax is evaluated from left to right. However, when the
+search syntax has more than one operator, certain operators are always evaluated
+before other operators. The order of precedence, from highest precedence to
+lowest, is as follows:
+ Parentheses ()
+ Within ^
+4
+
+ZERO-BASED PAGE 6
+Note: Searches that use strings starting with a wildcard (e.g. *term)
+are significantly slower than searches that use strings ending with a
+wildcard (e.g. term*).
+Escaping Wildcards
+To include the characters [, ], ?, \, * in your search, instead of using them as
+wildcards, you must precede them with a backslash (\) and include the phrase in
+double quotation marks. For example, to search for a document named *, use this
+syntax: {LF:NAME=“\*”}. To search for these characters in a text search without
+using the symbol as a wildcard, the character must be escaped by putting a \
+(back-slash) before the special character, in addition to being enclosed in double
+quotation marks (e.g., "Is it me\?").
+Date, Time, and Date/Time Formats
+The YMD (year, month, day) date format with a four-digit year is always
+recognized no matter what the defined date format is. For example,
+{LF:Created="2006/07/09"} will always work regardless of the client’s
+regional settings. To specify years before the year 1000, prepend 0s to the year.
+For example, a day in the year 16 should be specified in the format 0016/mm/dd.
+When you specify a date in your search string that is not in the YMD format with
+a four-digit year, Laserfiche will assume that it is in the MDY (month, day, year)
+format unless you insert a header specifying otherwise. For example, if I enter
+the search string {LF:Created<="20/04/2018"}, the client will return an error
+indicating that the date is out of range, because there is no 20th month in a year.
+To specify a different date format, such as DMY, insert a header in your search
+string indicating the order of month/day/year that you want to use. The header
+should have the format %??? In which ??? can be M, D, or Y, in any order.
+Example: To look for entries created before April 20, 2018, I can
+prepend a header to the previously mentioned search string, as
+follows: %DMY {LF:Created<="20/04/2018"}. This tells the
+Laserfiche search engine to interpret the date provided as being in
+the day/month/year format.
+You can separate the month, day and year with different delimiters. Both slashes
+(/) and dashes (-) are allowed, as are both two-digit years and four-digit years.
+For example, if you are using the default MDY order, you can use the formats
+mm/dd/yy, mm/dd/yyyy, and mm-dd-yy.
+If the year is a two-digit number less than 60, the Laserfiche will assume that the
+year is in the 21st century. For example, 59 will be treated as 2059. If the two-digit
+6
+
+ZERO-BASED PAGE 14
+ {[General]:[Category] ~= "(classified | unclassified) ^2 record"} is a full-
+text search matching any entry that has the words "classified" or
+"unclassified" within 2 words of the word "record" in the General
+template's Category field. It uses logical operators between search terms,
+which is not possible in a property search with other operators. The
+Category field must be indexed for this search to work.
+Note: Unlike the <> and = operators, the ~= operator does not
+support searching for empty (“”) or non-empty (“*”) values. For
+such searches, you should use the <> or = operator, even for
+indexed properties.
+Escape Characters
+As with regular searches, when using the ~= operator, the following characters:
+[ ] ? \
+are interpreted as part of search syntax unless they are preceded by a \. The ~=
+operator introduces two more characters that need escaping. A single quote (‘)
+will be interpreted as part of search syntax unless it is preceded by another single
+quote. For example, to search for the value “O’Leary” in a field, the query should
+be written as follows:
+{[]:[] ~= “O’’Leary”}
+where two single quotes, not a double quote, follow the O.
+The tilde (~) also needs to be escaped when using the ~= operator. You can escape
+a ~ by adding a \ before it. For example, to search for the value “~42” in a field,
+the query should be written as follows:
+{[]:[] ~= “\~42”}
+14
+
+ZERO-BASED PAGE 33
+Search within Folder
+To Search For… Syntax Example
+entries in a specific folder {LF:LookIn=“path”, To search the folder General
+Subfolders=0} Documents for an entry
+ Can be performed
+named Romeo and Juliet:
+using the clients’ path is where the item you are
+search interface. looking for is located. {LF:LookIn=“General
+ Not case-sensitive. Demo\General Documents”,
+Note: The path must be a
+Subfolders=0} &
+valid folder path that starts
+{LF:Name=“Romeo and
+with a backslash or contains a
+Juliet”, Type=”D”}
+letter. If you enter a number
+in place of path, it will be This will return the following
+interpreted as a folder ID. document path in the
+repository:
+0 means that no subfolders
+will be searched. General Demo\General
+Documents\Romeo and Juliet
+Note: N, no, or false can also
+be used to mean that no Entries in subfolders will not
+subfolders will be searched. appear in the above results.
+entries in a folder and all its {LF:LookIn=“path”, To search the General
+subfolders Subfolders=y} Documents folder and its
+subfolders for an entry named
+ Can only be path is where the item you are
+Romeo and Juliet:
+performed using looking for is located.
+advanced search {LF:LookIn=“General
+y indicates that the results
+syntax. Demo\General Documents”,
+should include subfolders.
+ Not case-sensitive. Subfolders=y} &
+You can also use yes, 1, or
+ Wildcards {LF:Name=“Romeo and
+true instead of y.
+permitted.Can be Juliet”, Type=”D”}
+performed using the Note: If you do omit the
+This will return the following
+clients’ search Subfolders term, subfolders
+document path in the
+interface. will be searched.
+repository:
+ Not case-sensitive. {LF:LookIn=“path”,
+Subfolders=y} returns the General Demo\General
+same results as Documents\William
+{LF:LookIn=“path”}. Shakespeare\ Romeo and
+Juliet
+To search for any document
+whose name contains
+“Romeo” and is a descendant
+of the folder New Folder
+under the root folder:
+{LF:LookIn="New Folder"} &
+{LF:Name~="Romeo"}
+33

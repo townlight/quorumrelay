@@ -121,9 +121,12 @@ class Engine:
         }, content=capture, context=context)
 
     def fetch_record(self, source: Source, external_id: str, *, bounds: Bounds | None = None,
-                     context: OperationContext | None = None) -> OperationResult:
+                     context: OperationContext | None = None, include_text: bool = False) -> OperationResult:
         """Retrieve one known provider identity through its evidenced detail route."""
-        return self.fetch(source, {"external_id": external_id}, bounds=bounds, context=context)
+        request = {"external_id": external_id}
+        if include_text is not False:
+            request["include_text"] = include_text
+        return self.fetch(source, request, bounds=bounds, context=context)
 
     def fetch_captions(self, source: Source, external_id: str, *, language: str | None = None,
                        bounds: Bounds | None = None, context: OperationContext | None = None) -> OperationResult:
@@ -197,8 +200,17 @@ class Engine:
             return OperationResult(identified.status, {"source": source.public_dict()},
                                    identified.errors, identified.coverage, context.operation_id)
         if operation == "discover":
+            content_hook = getattr(connector, "discover_content", None)
+            if callable(content_hook) and (content is not None or "content_base64" in request):
+                return content_hook(self, source, request, content, bounds, context)
+            request_hook = getattr(connector, "discover_request", None)
+            if callable(request_hook):
+                return request_hook(source, request, bounds, context)
             return connector.discover(source, bounds, context)
         if operation == "fetch":
+            content_hook = getattr(connector, "fetch_content", None)
+            if callable(content_hook) and (content is not None or "content_base64" in request):
+                return content_hook(self, source, request, content, bounds, context)
             return connector.fetch(source, request, bounds, context)
         if operation == "search" and request.get("native") is True:
             return connector.native_search(source, Query(**request.get("query", {})), bounds, context)
@@ -244,6 +256,19 @@ class Engine:
         try:
             if not isinstance(request, dict):
                 raise ValueError("The operation request must be a JSON object.")
+            if operation == "fetch" and "include_text" in request:
+                if type(request["include_text"]) is not bool:
+                    raise ValueError("include_text must be a JSON boolean.")
+                if request["include_text"]:
+                    from urllib.parse import urlsplit
+                    source = Source.from_dict(request["source"])
+                    if not (source.provider == "laserfiche-weblink"
+                            and urlsplit(source.url).hostname == "api.laserfiche.com"
+                            and "external_id" in request and "parent_id" not in request
+                            and "record_type" not in request and "attachment" not in request
+                            and content is None and "content_base64" not in request):
+                        return OperationResult.unsupported("fetch_record_text", reason=(
+                            "Explicit page-text enrichment is currently mapped only for Repository entry detail."))
             if operation == "providers":
                 return self.providers()
             if operation == "capabilities":
@@ -370,7 +395,23 @@ class Engine:
                 "failures": [], "checkpoint": None,
                 "scope": "one saved capture, not a complete upstream catalog",
             }
-            return OperationResult(status, bundle.public_dict(), coverage=coverage,
+            data = bundle.public_dict()
+            if source.provider == "champ":
+                from .providers.champ_agenda import enrich_bundle
+                data = enrich_bundle(data)
+            elif source.provider == "towncloud":
+                from .providers.towncloud_detail import enrich_bundle
+                data = enrich_bundle(data)
+            elif source.provider == "clerkbase":
+                from .providers.clerkbase_detail import enrich_bundle
+                data = enrich_bundle(data)
+            elif source.provider == "digital-towpath":
+                from .providers.towpath_detail import enrich_bundle
+                data = enrich_bundle(data)
+            elif source.provider == "utah-public-notice":
+                from .providers.utah_detail import enrich_bundle
+                data = enrich_bundle(data)
+            return OperationResult(status, data, coverage=coverage,
                                    operation_id=context.operation_id)
         except (compat.ImportInputError, ValueError, TypeError) as error:
             return OperationResult("failed", errors=(Error("invalid_capture", str(error), source=source.url),),
@@ -478,12 +519,19 @@ def _record(source, namespace, row, original, digest, captured_at):
         if source.provider == "tyler-meeting-manager":
             normalized["source_status"] = {key: original_row[key] for key in
                                            ("canceled", "adjourned") if key in original_row}
+    if (source.provider == "primegov" and isinstance(original_row, dict)
+            and isinstance(original_row.get("documentList"), list)):
+        from .providers.primegov_public import documents
+        mapped, unmapped = documents(source, original_row)
+        normalized["documents"] = mapped
+        normalized["documents_unmapped_count"] = unmapped
+        normalized["documents_mapping"] = "public_client_getHref; legacy compatibility projection unchanged"
     citations = tuple(dict.fromkeys([source.url] + ([row["url"]] if row.get("url") else [])))
     relationships = tuple(
         {"relation": kind, "value": deepcopy(value)}
         for field, kind in (("documents", "document"), ("recordings", "recording"),
                             ("agenda_items", "agenda_item"))
-        for value in row.get(field, [])
+        for value in normalized.get(field, [])
     )
     derivation = "provider_or_legacy_reader"
     stability = "Stable according to the pinned input-format mapping; not an application identifier."
@@ -501,7 +549,8 @@ def _record(source, namespace, row, original, digest, captured_at):
     return Record(
         Identity(source.provider, namespace, "meeting", row["external_id"],
                  derivation=derivation, stability=stability),
-        normalized, source.url, citations, digest, captured_at, canonical_hash(row), revision,
+        normalized, source.url, citations, digest, captured_at,
+        canonical_hash(normalized), revision,
         original_row, relationships, tuple(text),
     )
 

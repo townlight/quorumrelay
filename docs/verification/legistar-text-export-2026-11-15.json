@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "d034c12",
+  "tasks": [
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "Local documented legislative Text Editor title/body .txt preparation only; no vendor import or association",
+  "new_cases": 19,
+  "checks": [
+    {
+      "scope": "Legistar text and existing provider-file exporters plus HTTP/MCP interfaces",
+      "passed": 110,
+      "failed": 0,
+      "seconds": 30.85,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\legistar-text-export-2026-11-15.xml",
+      "xml_sha256": "2746cc3475751f5682fa3fef4317832c46d1d9cf4d16d2fd949b3a7889d26584",
+      "warning": "Existing Starlette/AnyIO alias deprecation"
+    },
+    {
+      "scope": "Ruff changed source and test",
+      "status": "PASSED"
+    },
+    {
+      "scope": "Capability ledger, synthetic evidence bindings and public package after runtime synchronization",
+      "passed": 27,
+      "failed": 0,
+      "seconds": 0.8
+    },
+    {
+      "scope": "Capability validator",
+      "status": "PASSED",
+      "errors": 0,
+      "evidence_records": 445,
+      "distinct_evidence_urls": 279
+    }
+  ],
+  "source_sha256": {
+    "src/civic_data_connectors/providers/legistar_text_export.py": "324e504a9f51811900d5e4f6f667c75f175fb50d82750e7ebdcc64d1651e4698",
+    "src/civic_data_connectors/providers/__init__.py": "175d90d69d1abe32f48244cff236928b4e784ffad2e657b40c93a9950c132e2e",
+    "tests/test_legistar_text_export.py": "9c96ac50738984d73f141f599a1acfea514c8a8c19d9c107e1c00a6a390d98cf",
+    "docs/LEGISTAR-TEXT-FILES.md": "abc9839da31408d0dee00d68f8da1280b307ebda58c037fa6a8a8da5afd4de24"
+  },
+  "limits": [
+    "Vendor encoding unspecified; explicitly selected by caller.",
+    "Section placement and CRLF are local conservative serialization choices for documented markers, not vendor sample bytes.",
+    "No live import, tenant version, meeting/media migration or remote write claim."
+  ]
+}

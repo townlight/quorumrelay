@@ -1,0 +1,9 @@
+{
+  "edits": [
+    {
+      "path": "test_simbli_item_write.py",
+      "old": "from quorumrelay.providers.simbli_write import SimbliWriteAdapter",
+      "new": "from civic_data_connectors.providers.simbli_write import SimbliWriteAdapter"
+    }
+  ]
+}

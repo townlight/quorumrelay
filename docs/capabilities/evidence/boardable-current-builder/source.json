@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-16",
+  "origin": "https://agendas.boardable.com/",
+  "scope": "Current Agenda Builder item create/update and item attachment upload; authorized QuorumRelay Evaluation trial. Sanitized synthetic-content request/response captures and observed public client chunks.",
+  "live_actions": "Browser JSON POST201, multipart update/upload200, exact GET and 134-byte original download hash matched. Adapter exercised separately through synthetic public Engine tests.",
+  "excluded": "Full meeting forms, recurring days, draft preparation, publication, invitations, imports, general document-center uploads.",
+  "files": [
+    {
+      "path": "boardable-current-create.json",
+      "sha256": "90bd39856a167df245f720a97dcc1aef8752687562870e6d6343c263767379c1"
+    },
+    {
+      "path": "boardable-current-update-upload.json",
+      "sha256": "1f8ce09963528733b04cee9bf18bf7a3b360ef7e5c086d4ee1e781b53c4f6c90"
+    },
+    {
+      "path": "boardable-current-meeting-after-upload.json",
+      "sha256": "d10c3b74dab5484f337cb3c7edf73ab5969157ee435ec80eb4e722bf0dae8c03"
+    },
+    {
+      "path": "boardable-live-verification.json",
+      "sha256": "738c4925df7c051cc168ad9d77ae082adc85df366ec3adf6fd751a36bb17a4d1"
+    },
+    {
+      "path": "boardable-current-source-excerpts.json",
+      "sha256": "84955bf56fe68cbf15e2e69ea052dd60e8490a4bdb624f84e4bf26aa936a6048"
+    },
+    {
+      "path": "CreateAgendaItemFlow-B3t6FrbH.js",
+      "sha256": "a57dd6528da329b67d70d9b38e59a3721aaf18738433dcfb0563f6e6fa7815fe"
+    },
+    {
+      "path": "Show-CmEVu3NJ.js",
+      "sha256": "fd47e8db4cba465f47fdbf9ae3b966455d680eebc05e99067f7fd968617816cf"
+    },
+    {
+      "path": "Show-FKW58gdV.js",
+      "sha256": "81f50771380e45cd7723094772bde2117dbd3483465263097107eb6a6482a45e"
+    },
+    {
+      "path": "uploadViewerUrl-DpcPMte5.js",
+      "sha256": "fd5f9f83274328bbc4f5b051062c3a585fa9f6f8b903e2817d3bd34e8dd1d350"
+    }
+  ]
+}

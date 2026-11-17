@@ -1,0 +1,70 @@
+[
+  {
+    "name": "Read Meeting Details",
+    "method": "GET",
+    "url": "https://meetings.municode.com/PublicApi/meeting/4c0379d9-c8e5-4b61-8f35-689cc49ddf7e",
+    "response_examples": 0
+  },
+  {
+    "name": "Update Meeting Multimedia Timestamping",
+    "method": "POST",
+    "url": "https://meetings.municode.com/PublicApi/meeting/multimedia/update/54651719-5c5e-4729-9e8c-28a92b0d041c",
+    "response_examples": 0,
+    "request_body_keys": [
+      "id",
+      "meetingId",
+      "audioVideoDetails",
+      "publishState",
+      "multimediaItems"
+    ],
+    "request_body_casing": "lower-camel-case",
+    "request_body_sample_shape": {
+      "id": "GUID",
+      "meetingId": "GUID",
+      "audioVideoDetails": {
+        "audioVideoProviderType": "integer",
+        "audioVideoUrl": "string"
+      },
+      "publishState": "integer",
+      "multimediaItems": [
+        {
+          "entityId": "GUID",
+          "entityName": "string",
+          "entityTypeName": "string",
+          "timeStamp": "integer",
+          "multimediaDisplayOptions": "integer",
+          "customDisplay": "string or null",
+          "includeNumbering": "boolean",
+          "useDefaultMultimediaSettings": "boolean",
+          "multimediaBaseUrl": "string"
+        }
+      ]
+    },
+    "sample_limits": "Derived from supplied sample values only; not a required-field, enum, nullability or response schema."
+  },
+  {
+    "name": "Read Item Details",
+    "method": "GET",
+    "url": "https://meetings.municode.com/PublicApi/meeting/item/c7017db5-acc6-4e37-a087-633f4f7d71d2",
+    "response_examples": 0
+  },
+  {
+    "name": "Read Meeting Multimedia",
+    "method": "GET",
+    "url": "https://meetings.municode.com/PublicApi/meeting/multimedia/54651719-5C5E-4729-9E8C-28A92B0D041C",
+    "response_examples": 0
+  },
+  {
+    "name": "Read Meetings List",
+    "method": "POST",
+    "url": "https://meetings.municode.com/PublicApi/meeting/collection/0",
+    "response_examples": 0,
+    "request_body_keys": [
+      "Words",
+      "CreatedMeetingFromDate",
+      "CreatedMeetingToDate",
+      "ArchivedState",
+      "MeetingTypeIds"
+    ]
+  }
+]

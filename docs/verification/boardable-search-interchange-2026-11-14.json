@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "90fa4e4928678247001c24691344002eabb7c068",
+  "status": "SCOPED_SYNTHETIC_PASS",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_boardable_native_search.py tests/test_boardable_discovery.py tests/test_boardable_detail.py tests/test_interchange.py tests/test_interchange_capture_aliases.py tests/test_storage_search_imports.py -q",
+      "passed": 95,
+      "failed": 0,
+      "junit_sha256": "8ac6dba39a4d4175ba12cead1c85cf026def472a5db3f4292cf9fa336c745927"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/boardable-public-search/boardable-public-search-api.js",
+      "sha256": "f27ef60e05858a0928cd91c61efd45e04bd03669a0f05361e1d81e0df625d6da"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/boardable-public-search/boardable-public-search-route.js",
+      "sha256": "fa789602a6cbf16fe905d811eddce8dfc76938c91101f927e63583ff010774b3"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/boardable-public-search/source.json",
+      "sha256": "9a9affa4a35df16edea7615964d0de599114aaeed17a182cb08e45fbd1caef21"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_boardable_native_search.py",
+      "sha256": "95a2b0b7f677a4ade8cccfa43d5901dd4f9e700857df132529a2fd7c6b8144e6",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "95a2b0b7f677a4ade8cccfa43d5901dd4f9e700857df132529a2fd7c6b8144e6"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_interchange_capture_aliases.py",
+      "sha256": "085ff5380f072a6c533000181f3f99804ffa5856891dcfd0792f15efe727693f",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "085ff5380f072a6c533000181f3f99804ffa5856891dcfd0792f15efe727693f"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/boardable_search.py",
+      "sha256": "e060aebedc4b772000546c5463a3083d500ecb454c52100a8990fe89dbefeabe"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/interchange.py",
+      "sha256": "0d7a8f3ab490cd134d900bdf597bd14b1d69385f1a22778ccfede275d1cfdb14"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/__init__.py",
+      "sha256": "e93720bda6de307b3db7bae07e6d80241d74ec6edb36a7cdab8ae82064e52d62"
+    }
+  ],
+  "defect": "Boardable search ZIP persistence reproduced original bundle manifest mismatch because shared capture objects lost later restoration locations during export. Snapshot all original capture locations and inline flags before removing bytes; retain logical integrity checking and deduplicate blob bytes.",
+  "scope": "24new Boardable search synthetic cases and1generic alias regression within95affected cases. Same numeric identity as captured listing; unmatched URLs never become guessed native IDs. SQLite/reopen/local excerpt search/ZIP destination passes.",
+  "limits": [
+    "Two selected live search requests timed out; no live search success claim.",
+    "No new parser from raw search to guessed IDs; full neutral CaptureBundle retains response and listing provenance.",
+    "No publication, package/native rebuild, repin, remote mutation or desktop action."
+  ],
+  "qualifications": "Excerpts use the shared partial-text marker, so local imported search retains incomplete-text coverage; affected95cases rerun after this final marker correction. Earlier1522fullsuite remains supporting evidence for unaffected behavior, not a second full run after marker change."
+}

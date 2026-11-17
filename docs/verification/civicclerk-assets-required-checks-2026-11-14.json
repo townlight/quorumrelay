@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "410ca2706ec5660828afffcd42bde8b71a4ebb33",
+  "status": "PASSED",
+  "scope": "Current CivicClerk source and metadata; local checks only, no delivery",
+  "checks": [
+    {
+      "command": "pytest tests -q",
+      "passed": 1634,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 81.1,
+      "junit_sha256": "05703830da1f2d4192d2be7bdb820b6c39b04ea653c2f50da1843c066c548f0a"
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "command": "scripts/validate_capabilities.py",
+      "status": "PASSED",
+      "evidence_records": 388,
+      "negative_checks": 5,
+      "errors": 0
+    }
+  ],
+  "reused": "TypeScript source/build/tests unchanged. Existing package artifacts and pins unchanged; do not contain later source.",
+  "limits": "No live vendor mutation, playback/caption extraction, release or installed-consumer delivery claimed."
+}

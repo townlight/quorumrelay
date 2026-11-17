@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "e504e8d",
+  "status": "PASSED",
+  "requirements": [
+    9
+  ],
+  "scope": "Correct five stale fetch implementation labels after executing configured original-source fixture paths; no broad acceptance promotion.",
+  "new_cases": 5,
+  "reproduction": {
+    "failed_before_fix": 5,
+    "scope": "All five paths returned native records/exact captures with partial/noerrors before failing only on stale not_implemented labels."
+  },
+  "checks": [
+    {
+      "command": "pytest tests/test_configured_fetch_labels.py tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q",
+      "passed": 30,
+      "failed": 0,
+      "seconds": 0.86
+    },
+    {
+      "command": "ruff check tests/test_configured_fetch_labels.py",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "tests/test_configured_fetch_labels.py",
+      "sha256": "cc72328a236b360a0b90392d8e1637ae9e98b4dac52d26f497bc4c96b6393d69"
+    },
+    {
+      "path": "tests/fixtures/baseline/cases.json",
+      "sha256": "85667dab73fb1180fddb99c7dd2435a88e46d6f863b3122626e5109372942ed6"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/discovery.py",
+      "sha256": "ca3974acaa152f8a9b0131715f989b050b77c945742c82d642244e94bc7cf60b"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "ba4edb6fe835bd84fe897ea2220c211743a53d95faa4405d9319d4dbf424d30a"
+    }
+  ],
+  "providers": [
+    "civicplus-agenda-center",
+    "swagit",
+    "suiteone-media",
+    "peak",
+    "towncloud"
+  ],
+  "limits": [
+    "No new network request or provider implementation. Source fixtures are original saved baselines.",
+    "Configured exact source fetch is distinct from root discovery/full history/binary attachment/media playback/staff writes.",
+    "Existing broad acceptance_status not_run remains unchanged; scoped execution evidence is separately attributed."
+  ]
+}

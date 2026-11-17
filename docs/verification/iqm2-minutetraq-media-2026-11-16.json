@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-16",
+  "base": "897442bf99dff40c4bd03126009083ad9fd485a3",
+  "scope": "Native M2 BigFiles recording upload/new or existing Media row for an explicitly selected meeting; metadata and original-byte readback, durable chunk intent and read-only uncertain reconciliation. Requires trusted bigfiles_enabled true; no FTP/delete/transcoding administration.",
+  "worker": "deepseek-v4.1-flash:1017-cloud",
+  "think": "low",
+  "primary_product_coding": false,
+  "live_vendor_calls": false,
+  "files": [
+    {
+      "path": "src/civic_data_connectors/providers/iqm2_media_write.py",
+      "sha256": "949162b2d8c9a2cf12092550872fdb3a79cc7687d3f61a10989a4da2ce65fc90"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/iqm2_write.py",
+      "sha256": "1475c5a2e2edcd4a9f54a156bb4b0d80802c504ddd973ef5a3b89c296473b353"
+    },
+    {
+      "path": "tests/test_iqm2_media_write.py",
+      "sha256": "d9edbc6896b1dec2e2882327e2af67ac046b06930f3662be8e596db7549bac34"
+    },
+    {
+      "path": "tests/fixtures/iqm2/media-wire-fixture.ps1",
+      "sha256": "657cbcd89d5564fcd52a312bdf5d93f02f7eb3a66da0c48a0d652063bba73671"
+    }
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_iqm2_media_write.py tests/test_iqm2_meeting_write.py tests/test_iqm2_write.py tests/test_writes.py -q",
+      "passed": 80,
+      "failed": 0,
+      "seconds": 185.325
+    }
+  ],
+  "lint": "full Ruff passed",
+  "independent_dotnet": "System.Data deserialized actual BigFileAppend and new MediaUpdate requests; native types, row state, ID, fields and unset audit values validated.",
+  "remaining": [
+    "capability validation and settled-candidate full regression",
+    "MinuteTraq document import/publication contracts beyond selected title updates"
+  ]
+}

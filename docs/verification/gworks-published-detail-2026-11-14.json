@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "49c8ad843b9890c37bf1145643a6b134aef713bf",
+  "status": "REAL_CAPTURE_MAPPING_AND_LOCAL_WORKFLOW_PASS",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_gworks_published_detail.py tests/test_provider_discovery.py tests/test_storage_search_imports.py tests/test_fetch.py tests/test_repository_fetch.py tests/test_recording_retrieval.py -q",
+      "passed": 156,
+      "failed": 0,
+      "junit_sha256": "bd5b894377248286b36315c83d6d17248b391d3339c00951eb1f16cade23eb44"
+    },
+    {
+      "command": "pytest tests -q (GWorks parser and namespace integration, before later TownCloud adapter)",
+      "passed": 1535,
+      "failed": 0,
+      "junit_sha256": "94d043b6be931e059886d6531369e201e5c70e6174009d9b196c920e3916c05a"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/gworks-published-client/render-meeting.extract.js",
+      "sha256": "f75e1eec9e7096ddc6b1138072f117dfff2fc8e800f0a6fe4fcafcb2e1161bf5"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/gworks-published-client/source.json",
+      "sha256": "c0f70aadcb78464679ac8336129379505d57d8887d7fc498616db57b4b974265"
+    },
+    {
+      "kind": "fixture",
+      "path": "tests/fixtures/gworks-published/5017-agenda.html",
+      "sha256": "fe3f140adf91404239a5b8e789b9fcedd687b457bc8b8425bb82233abbcad24f"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/gworks_detail.py",
+      "sha256": "e1477f4333141dcb818f7112470632c44f89c968e06ad4e0de7aeb6e813cd957"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_gworks_published_detail.py",
+      "sha256": "8976a9105fb8d9c5e3cfc93b242cc04b928c5519ea15835d78bd367f8037673e",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "c8856295d3d1c41b4389b3aba29ff45b79187de59e1c1eb310934b9404357e27"
+    }
+  ],
+  "limits": [
+    "Real one-page vendor capture, 11 sections and 13 child items. Rendered positions are not native item IDs.",
+    "No secure calendar response equivalence, writes, catalog completeness, timezone, media upload or publication inferred.",
+    "SQLite import/reopen/search and ZIP original bytes/normalized identity tested. Attachment transfer is synthetic, not live-byte acceptance.",
+    "Detail and original static listing share the existing city namespace/native meeting key; provenance derivation labels remain distinct."
+  ]
+}

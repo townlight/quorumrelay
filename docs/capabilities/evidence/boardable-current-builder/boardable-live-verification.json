@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-16",
+  "tenant": "QuorumRelay Evaluation",
+  "organization_id": 46098,
+  "meeting_id": 526552,
+  "item_id": 4819464,
+  "upload_id": 1458225,
+  "trial_days_observed": 13,
+  "actions": [
+    "JSON item create201",
+    "Multipart item update and new upload200",
+    "Exact item GET200",
+    "Original file browser download"
+  ],
+  "byte_readback": {
+    "filename": "quorumrelay-contract-evaluation.txt",
+    "size": 134,
+    "sha256": "ecbaade25c53d0d336960fab9b3c451f28bc43e4260ef0f6da5c7358a9818c15",
+    "matches_download": true
+  },
+  "limits": [
+    "Captured through trial web application; not separately entitled public developer API",
+    "No publication, invitations, payments, contacts or release",
+    "Product integration scratch draft pending"
+  ]
+}

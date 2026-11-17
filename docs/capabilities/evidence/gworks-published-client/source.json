@@ -1,0 +1,10 @@
+{
+  "observed": "2026-11-14",
+  "client_url": "https://galenaks.frontdeskgworks.com/plugin/cms/js/citizen.plugin.js?v=26-11-12-7b140d5a1a",
+  "client_sha256": "434091b1dccf150ccf44bfea966386b3cadb6c73753292d200fecf1f8880d0db",
+  "fixture_url": "https://files.frontdeskgworks.com/city/1311/cms/5017_agenda.html",
+  "fixture_sha256": "fe3f140adf91404239a5b8e789b9fcedd687b457bc8b8425bb82233abbcad24f",
+  "fixture_bytes": 6877,
+  "status": 200,
+  "limits": "Published HTML only. Account calendar flattened fields are a separate contract. Rendered item positions are capture-local; time zone not supplied. No native item IDs, writes, full catalog, or document bytes inferred."
+}

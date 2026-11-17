@@ -1,0 +1,116 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "b21c88c",
+  "requirements": [
+    6,
+    8,
+    9,
+    10
+  ],
+  "status": "PASSED",
+  "new_cases": 60,
+  "checks": [
+    {
+      "command": "pytest tests/test_escribe_upload.py tests/test_escribe_publishing.py -q",
+      "passed": 60,
+      "failed": 0,
+      "seconds": 2.2
+    },
+    {
+      "command": "pytest tests/test_escribe_publishing.py -q",
+      "passed": 43,
+      "failed": 0,
+      "seconds": 1.2
+    },
+    {
+      "command": "pytest tests/test_escribe_publishing.py tests/test_escribe_detail.py tests/test_escribe_native_search.py tests/test_escribe_media_projection.py tests/test_writes.py tests/test_interfaces.py tests/test_public_package.py tests/test_baseline.py tests/test_baseline_search.py -q",
+      "passed": 171,
+      "failed": 0,
+      "seconds": 21.15
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "passed"
+    },
+    {
+      "command": "python scripts/validate_capabilities.py",
+      "status": "passed",
+      "evidence_records": 431,
+      "distinct_urls": 272,
+      "outbound_mappings": 182,
+      "errors": 0
+    }
+  ],
+  "metadata_observation": "docs/capabilities/evidence/escribe-publishing-wsdl/source.json",
+  "scope": "Pinned deployed SOAP1.2 native record create/update plus one explicit document upload chunk with caller-declared whole-document hash, full preflight/recovery and durable no-replay readback. No chunk assembly, workflow, live SOAP or readiness inference.",
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/escribe_publishing.py",
+      "sha256": "d469fee16b1ff3de3141f16b4d9468504d88d771660ea917f89e40263281b136"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/escribe_write.py",
+      "sha256": "b599226c3e4c98bf682de8fad8f88e1d0da2d363bbd355b9b04c19b0b7c972ca"
+    },
+    {
+      "path": "src/civic_data_connectors/data/escribe_publishing.json",
+      "sha256": "d77eeb2a925718adc46021ab2b6f42a013802ecc27688ed3fbe1e2bd8715a7d4"
+    },
+    {
+      "path": "scripts/pin_escribe_contract.py",
+      "sha256": "40f10792c11bfaf74e1d5256a1769bc16ad6f2fff90fa9eb2d88dac8d133bc97"
+    },
+    {
+      "path": "tests/test_escribe_publishing.py",
+      "sha256": "cec7156f71cbfe8af59adb885aa86da101fe3e8ede7039fdf1c7cceaabc95d43"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/escribe_upload.py",
+      "sha256": "64c2aac036bdca905cf4c02049bcc77dba1ca7eeaf2b5360cd55a10bd765ae5b"
+    },
+    {
+      "path": "tests/test_escribe_upload.py",
+      "sha256": "29073b4f187ae63b18b261e37ea8ba12e7757d718b920fd78449e3192dc11849"
+    }
+  ],
+  "limits": [
+    "No live SOAP method call or vendor mutation; actual metadata GETs are separate.",
+    "Readback is typed field preservation, not effective visibility/publication/playback proof.",
+    "Lost create response without saved returned identity stays uncertain; no mutation replay.",
+    "General chunk sequencing/assembly/truncation/readiness semantics remain research; one exact caller-selected chunk and expected whole-document hash are separately verified synthetically."
+  ],
+  "prior_full_suite": {
+    "passed": 2046,
+    "failed": 0,
+    "seconds": 106.07,
+    "scope": "Before14upload cases and3strict native document-ID regressions; not final candidate full validation.",
+    "xml_path": "C:/Users/scott/Documents/Codex/2026-11-12/re/work/quorumrelay/escribe-publishing-full-2026-11-15.xml",
+    "xml_sha256": "57062d8f2f2d181057d79267f25fd89abf07152864b442f01f07d7ee890f4b0b"
+  },
+  "reproduced_defect": "Three regression cases reproduced document resource_id23.5/023/+23 coercion to authorized native23; strict canonical positive Int32 validation now rejects before network.",
+  "full_suite": {
+    "command": "python -X utf8 -m pytest tests -q --junitxml=work/quorumrelay/escribe-publishing-owned-work-full-2026-11-15.xml",
+    "passed": 2063,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 104.77,
+    "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\escribe-publishing-owned-work-full-2026-11-15.xml",
+    "xml_sha256": "348a9e0c08b7e6ddde4993d67b61407c58d5b1a59283463432457546660a8b1c",
+    "suite_attributes": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "2063",
+      "time": "104.709",
+      "timestamp": "2026-11-15T02:35:08.656050-07:00",
+      "hostname": "Halo"
+    },
+    "warning": "One existing starlette/anyio BlockingPortal deprecation.",
+    "owned_session": 9603,
+    "terminal_exit_code": 0,
+    "prelaunch_free_kib": 27249176,
+    "total_memory_kib": 66922820
+  }
+}

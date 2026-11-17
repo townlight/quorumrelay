@@ -50,5 +50,47 @@ def test_changed_explicit_public_routes_have_implemented_labels_without_catalog_
     for provider, operation in pairs:
         metadata = provider_capabilities(provider)["operations"][operation]
         assert metadata["implementation_status"] == "implemented"
-        assert metadata["acceptance_status"] == "not_run"
+        # The observed Akron window now has attributed fixture execution;
+        # this does not promote other public routes to provider acceptance.
+        assert metadata["acceptance_status"] == ("fixture_passed" if provider == "onbase" else "not_run")
+        if provider == "onbase":
+            assert "onbase-akron-model-window-execution" in metadata["evidence_ids"]
         assert metadata["evidence_ids"]
+
+
+def test_known_explicit_listing_and_native_write_labels_are_not_stale_access_gates():
+    from civic_data_connectors.write_adapters import default_adapters
+    for provider in ("legistar", "wistia"):
+        assert provider_capabilities(provider)["operations"]["discover"]["implementation_status"] == "implemented"
+    adapters = default_adapters()
+    for provider in ("legistar", "wistia", "laserfiche-weblink"):
+        assert provider in adapters
+        operations = provider_capabilities(provider)["operations"]
+        assert all(operations[operation]["implementation_status"] == "implemented"
+                   for operation in ("create", "update", "upload"))
+        # Registration is not acceptance. Only attributed Legistar sample routes
+        # have synthetic proof; every other entry keeps its existing status.
+        for operation in ("create", "update", "upload"):
+            expected = "mock_passed" if provider == "legistar" and operation != "upload" else "not_run"
+            assert operations[operation]["acceptance_status"] == expected
+    essential = provider_capabilities("municode-meetings")
+    assert essential["operations"]["update"]["acceptance_status"] == "mock_passed"
+    multimedia = [row for row in essential["outbound_mappings"] if row["acceptance_status"] == "mock_passed"]
+    assert len(multimedia) == 1 and multimedia[0]["entity"] == "meeting.multimedia"
+    telvue = provider_capabilities("telvue")
+    mapped = [row for row in telvue["outbound_mappings"] if row["acceptance_status"] == "mock_passed"]
+    assert {row["entity"] for row in mapped} == {"playlist_order", "playlist_membership"}
+    assert all(row["interface_type"] == "observed_vendor_client_machine_contract" for row in mapped)
+    assert "telvue" in adapters
+    assert telvue["operations"]["upload"]["acceptance_status"] == "not_run"
+
+
+def test_attributed_outbound_subsets_match_exact_public_dispatches():
+    accepted = {"granicus": 19, "wistia": 8, "laserfiche-weblink": 6,
+                "civicplus-select": 1, "onbase": 1}
+    for provider, count in accepted.items():
+        rows = provider_capabilities(provider)["outbound_mappings"]
+        assert sum(row["acceptance_status"] == "mock_passed" for row in rows) == count
+    assert provider_capabilities("legistar")["outbound_mappings"][4]["acceptance_status"] == "mock_passed"
+    assert provider_capabilities("wistia")["outbound_mappings"][4]["operation"] == "create"
+    assert provider_capabilities("laserfiche-weblink")["outbound_mappings"][3]["operation"] == "update"

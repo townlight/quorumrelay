@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-11-15T15:40:58.295566+00:00",
+  "scope": "One official municipal archive declaration, declared vendor client, exact archive metadata and selected CHAMP calendar-group month. No external ECI retrieval, exhaustive archive or staff-write inference.",
+  "captures": [
+    {
+      "id": "lake_zurich_official_recordings_page",
+      "url": "https://www.lakezurich.org/260/On-Demand-Meeting-Recordings",
+      "method": "GET",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 137024,
+      "sha256": "927e28952a0336236787d9e4f4d85ba66e1448ec4fced81a32b869663d25de47",
+      "raw_path": "docs/capabilities/evidence/champ-public-archive/municipal-on-demand-page.html",
+      "declares_iframe": "https://play.champds.com/lakezurichil/archive/1",
+      "request_url": "https://www.lakezurich.org/260/On-Demand-Meeting-Recordings",
+      "final_url": "https://www.lakezurich.org/260/On-Demand-Meeting-Recordings",
+      "final_url_observed": true
+    },
+    {
+      "id": "champ_archive_page",
+      "url": "https://play.champds.com/lakezurichil/archive/1",
+      "method": "GET",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 2564,
+      "sha256": "5724c94b865409c732934560e3c4180225f7b50dd6138b40e20d5cec55e481a6",
+      "raw_path": "docs/capabilities/evidence/champ-public-archive/champ-declared-archive.html",
+      "declares_script": "/_COMMON/js/cds.archive.js",
+      "inline_config": {
+        "ARCHIVE_ID": 1,
+        "PRESELECTED_YEAR": "computed as current year when page month >= November",
+        "PRESELECTED_MONTH": null,
+        "START_YEAR": 2013
+      },
+      "request_url": "https://play.champds.com/lakezurichil/archive/1",
+      "final_url": "https://play.champds.com/lakezurichil/archive/1",
+      "final_url_observed": true
+    },
+    {
+      "id": "champ_archive_client",
+      "url": "https://play.champds.com/_COMMON/js/cds.archive.js",
+      "method": "GET",
+      "status": 200,
+      "content_type": "application/javascript",
+      "bytes": 28768,
+      "sha256": "ce82eeb84fa7a1ac5364dbe2116d818ca76869b136320511a9f6cdeb993fcd35",
+      "raw_path": "docs/capabilities/evidence/champ-public-archive/cds.archive.js",
+      "request_url": "https://play.champds.com/_COMMON/js/cds.archive.js",
+      "final_url": "https://play.champds.com/_COMMON/js/cds.archive.js",
+      "final_url_observed": true
+    },
+    {
+      "id": "archive_metadata_and_groups",
+      "url": "https://playapi.champds.com/lakezurichil/archive/1",
+      "method": "GET",
+      "status": 200,
+      "accept": "application/json, text/javascript, */*; q=0.01",
+      "auth_or_cookie_supplied": false,
+      "request_body": null,
+      "query": null,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 1931,
+      "sha256": "7859af3a58df45b68b45bc4e429f47bc454552bd0b67945016a9ef43db7e3b96",
+      "raw_path": "docs/capabilities/evidence/champ-public-archive/archive-json-response.json",
+      "body_parse": "JSON",
+      "top_level_keys": [
+        "Customer",
+        "Archive",
+        "ArchiveGroups",
+        "CDSECI"
+      ],
+      "Archive_schema": {
+        "CustomerArchiveID": "integer",
+        "ArchiveTitle": "string",
+        "ArchiveDescription": "string",
+        "DisplayTypeID": "integer",
+        "LastModifyDateTimeUTC": "string"
+      },
+      "ArchiveGroups_count": 4,
+      "ArchiveGroup_schema": {
+        "CustomerArchiveGroupID": "integer",
+        "CustomerArchiveID": "integer",
+        "GroupName": "string",
+        "OrderOrdinal": "integer",
+        "DisplayTypeID": "integer",
+        "SortTypeID": "integer",
+        "LastModifyDateTimeUTC": "string"
+      },
+      "groups": [
+        {
+          "CustomerArchiveGroupID": 1,
+          "GroupName": "Village Board of Trustees",
+          "DisplayTypeID": 1
+        },
+        {
+          "CustomerArchiveGroupID": 2,
+          "GroupName": "Planning and Zoning Commission",
+          "DisplayTypeID": 1
+        },
+        {
+          "CustomerArchiveGroupID": 4,
+          "GroupName": "Special Meetings",
+          "DisplayTypeID": 1
+        },
+        {
+          "CustomerArchiveGroupID": 5,
+          "GroupName": "Community Events",
+          "DisplayTypeID": 1
+        }
+      ],
+      "request_url": "https://playapi.champds.com/lakezurichil/archive/1",
+      "final_url": null,
+      "final_url_observed": false,
+      "final_url_note": "Final RequestMessage URI was not emitted by the bounded HTTP request log; no retry made under the no-more-network instruction."
+    },
+    {
+      "id": "selected_archive_group_current_month",
+      "url": "https://playapi.champds.com/lakezurichil/archiveGroupDate/1/LOCAL/2026-11-01T00:00:00/2026-11-30T23:59:59",
+      "method": "GET",
+      "status": 200,
+      "accept": "application/json, text/javascript, */*; q=0.01",
+      "auth_or_cookie_supplied": false,
+      "request_body": null,
+      "query": null,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 1459,
+      "sha256": "91b5a5f4d791bd5b270418ca8416d8ead1ed8abe46088a02f593eb05b3d2b5b3",
+      "raw_path": "docs/capabilities/evidence/champ-public-archive/archive-group-1-nov2026.json",
+      "body_parse": "JSON array",
+      "record_count": 2,
+      "record_schema": {
+        "CustomerEventID": "integer",
+        "CustomerUUID": "string",
+        "EventTypeID": "integer",
+        "EventDateTimeUTC": "string",
+        "EventTitle": "string",
+        "EventDescription": "string",
+        "EventLocation": "string",
+        "EventPublishStatusID": "integer",
+        "AgendaStyleMask": "integer",
+        "MinutesStyleMask": "integer",
+        "IndexPointsStyleMask": "integer",
+        "EventExternalID": "string",
+        "LastModifyDateTimeUTC": "string",
+        "EventMediaClassID": "integer",
+        "EventMediaTargetID": "integer",
+        "EventDateTimeLocal": "string"
+      },
+      "sample_native_records": [
+        {
+          "CustomerEventID": 211,
+          "EventTitle": "Meeting",
+          "EventDateTimeLocal": "2026-11-16 19:00:00",
+          "EventDateTimeUTC": "2026-11-17 01:00:00"
+        },
+        {
+          "CustomerEventID": 210,
+          "EventTitle": "Meeting",
+          "EventDateTimeLocal": "2026-11-02 19:00:00",
+          "EventDateTimeUTC": "2026-11-03 01:00:00"
+        }
+      ],
+      "request_url": "https://playapi.champds.com/lakezurichil/archiveGroupDate/1/LOCAL/2026-11-01T00:00:00/2026-11-30T23:59:59",
+      "final_url": null,
+      "final_url_observed": false,
+      "final_url_note": "Final RequestMessage URI was not emitted by the bounded HTTP request log; no retry made under the no-more-network instruction."
+    }
+  ],
+  "client_contract": {
+    "prior_local_common_source": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\champ-catalog-followup\\cds.common.js",
+      "sha256": "001ef0132c2dbab23686884e39778f08622d71806efdd3af724afa338b2571ae"
+    },
+    "prior_local_transport_source": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\champ-catalog-followup\\cds.tools.js",
+      "sha256": "849660f955e8117dd984ba0d076b32c5afecf37a605e76573bf6174996fb595a"
+    },
+    "route_evidence": {
+      "archive": "PROTOCOL + '//' + HOST + '/' + CUSTOMER_ACCESS_ID + '/archive/' + ARCHIVE_ID; uses CDSTools.getJSON.",
+      "groups": "DisplayTypeID 1 or 4 selects archiveGroupDate or archiveGroupDateWithMedia; type 3 selects archiveGroupListWithMedia; other groups select archiveGroupList.",
+      "base_and_tenant": "Local common code reads page protocol/host, inserts api. after the first host label, and extracts the first path component as customer access ID. Resolved values: https://playapi.champds.com and lakezurichil."
+    },
+    "calendar_window_evidence": {
+      "client_default_month": "new Date().getMonth()+1; overridden only when PRESELECTED_MONTH is non-null.",
+      "current_month": "November 2026 at observation time.",
+      "route_date_type": "LOCAL",
+      "start_literal": "2026-11-01T00:00:00",
+      "end_literal": "2026-11-30T23:59:59"
+    },
+    "source_excerpts": [
+      {
+        "source": "cds.archive.js",
+        "excerpt": ".../archive/ + ARCHIVE_ID; CDSTools.getJSON(url, ...)",
+        "supports": "Exact archive metadata GET pattern."
+      },
+      {
+        "source": "cds.archive.js",
+        "excerpt": "archiveGroupDate[/WithMedia]/{agID}/LOCAL/{start}/{end}",
+        "supports": "Actual group branch for DisplayTypeID 1."
+      },
+      {
+        "source": "cds.common.js",
+        "excerpt": "HOST = hosts[0] + 'api.' + hosts[1] + '.' + hosts[2]",
+        "supports": "Resolved API host transformation."
+      },
+      {
+        "source": "archive page config",
+        "excerpt": "ARCHIVE_ID=1; PRESELECTED_MONTH=null; PRESELECTED_YEAR=current year for November/December",
+        "supports": "Archive ID and default month/year selection."
+      }
+    ]
+  },
+  "result_and_limits": {
+    "selected_archive": {
+      "CustomerArchiveID": 1,
+      "ArchiveTitle": "Main"
+    },
+    "selected_group": {
+      "CustomerArchiveGroupID": 1,
+      "GroupName": "Village Board of Trustees",
+      "DisplayTypeID": 1
+    },
+    "nonempty_response": true,
+    "bounded_result": "Two native event rows for one declared archive group and the November 2026 page-selected window; IDs 211 and 210.",
+    "paging": "The captured request is date-bounded and response is a bare array with no cursor/total/paging fields; no full-catalog or exhaustion claim.",
+    "coverage_limit": "Four groups are declared, but only group 1 and one month were read. No other group, month, tenant, or optional EarthChannel integration was requested.",
+    "content_type_qualification": "Both JSON response bodies parse as JSON despite text/html content type.",
+    "implementation_value": "A concrete vendor-declared CHAMP archive and selected-window event-list request/schema is now available for a bounded native listing path.",
+    "provenance_note": "Exact request URLs are recorded for all five captures. Final URLs are directly recorded for the three page/client GETs; the two API GET log objects omitted final RequestMessage URI, so final_url is explicitly null rather than inferred."
+  },
+  "reused_shared_client_captures": [
+    {
+      "url": "https://play.champds.com/_COMMON/js/cds.common.js",
+      "status": 200,
+      "bytes": 3337,
+      "sha256": "001ef0132c2dbab23686884e39778f08622d71806efdd3af724afa338b2571ae",
+      "path": "docs/capabilities/evidence/champ-public-archive/cds.common.js",
+      "observation": "Earlier same-day capture reused; no repeated request."
+    },
+    {
+      "url": "https://play.champds.com/_COMMON/js/cds.tools.js?20250312-2",
+      "status": 200,
+      "bytes": 20471,
+      "sha256": "849660f955e8117dd984ba0d076b32c5afecf37a605e76573bf6174996fb595a",
+      "path": "docs/capabilities/evidence/champ-public-archive/cds.tools.js",
+      "observation": "Earlier same-day capture reused; no repeated request."
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "65afc64acce151903c12df081fdb32dbad2ed9cd",
+  "status": "PASSED_WITH_EXPLICIT_FAILED_FULL_RUN_AND_TARGETED_RECOVERY",
+  "checks": [
+    {
+      "command": "pytest tests/test_primegov_documents.py -q",
+      "passed": 35,
+      "failed": 0,
+      "seconds": 0.99
+    },
+    {
+      "command": "pytest tests/test_primegov_documents.py tests/test_primegov_native_search.py tests/test_primegov_public_outline.py tests/test_interchange.py tests/test_baseline.py -q",
+      "passed": 152,
+      "failed": 0,
+      "seconds": 17.928,
+      "junit_sha256": "dad06afc37c0c0777faeff00bf4535fd53c8f8b43d37c6abf7afb1d3dd7b0373"
+    },
+    {
+      "command": "pytest tests -q",
+      "passed": 1784,
+      "failed": 2,
+      "seconds": 107.647,
+      "junit_sha256": "5444b591e3225e9e9212d36322bc71b4a0f4c5ee4069bb4969ef49a709f0ed7a"
+    },
+    {
+      "command": "pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py tests/test_mcp_interfaces.py::test_protocol_cancellation_stops_engine_work[http-legacy] -q",
+      "passed": 26,
+      "failed": 0,
+      "seconds": 2.629,
+      "junit_sha256": "1b1ef9539dcc2cd1e1083f39f1b67f070f4ccfbf1cdc452f6bcd6aec8e9d5a9f"
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "command": "scripts/validate_capabilities.py",
+      "status": "PASSED",
+      "evidence_records": 405,
+      "distinct_urls": 254,
+      "errors": 0
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/primegov-search-html/source.json",
+      "sha256": "b0fc0af1a63c1cdfef20e5d1c93ef9d20ea93c30495a6b3e29551d330146adaa"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/primegov-search-html/compiled_html_client.txt",
+      "sha256": "fd00c027417f1d7226a70c80b549361d4cdd48cd2fdb2a5497fa68af718a82e1"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_primegov_documents.py",
+      "sha256": "800781e695fb5fe8bea74fcfffeaa091924075df4810776a72e3206ec23f06b1"
+    }
+  ],
+  "limits": "Anonymous GET only. Search client maps numeric output3 to the selected compiled HTML page. Native file3369 came from the saved Waco2026 list. Exact GET returned HTML, not parsed agenda text. Dynamic compiler script inspected only; CompileAsync was not called. No authenticated API or whole-catalog acceptance.",
+  "new_cases": 8,
+  "recovery": "Full run:1784pass/2fail. Metadata failed because the fetch entry omitted the new attributed evidence ID; corrected and25metadata pass. Unchanged HTTP legacy cancellation reached its5second status deadline; inspected test then targeted node passed without source/test changes. All1786 distinct cases have passing evidence across runs; no claim of a single all-green full run."
+}

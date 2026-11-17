@@ -1,0 +1,113 @@
+{
+  "status": "PASS_LOCAL_CURRENT_SOURCE_PYTHON_REQUIRED_CHECKS",
+  "tested_clean_source_head": "593a24fcaa28cf15d87e13c37604b8a6460be662",
+  "workflow": {
+    "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\integrated\\.github\\workflows\\ci.yml",
+    "sha256": "ccc7651afb96a0560b2d86943e1fc11e4496af02a957c229e5f01e4b2140c325"
+  },
+  "source_environment": "Existing Python3.13 service/test environment; PYTHONPATH points to integrated/src; no dependency installation or package build",
+  "suite": {
+    "command": [
+      "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\civic-data-connectors\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "tests",
+      "-q",
+      "--junitxml=C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\required-python-593a24f.xml"
+    ],
+    "passed": 1279,
+    "skipped": 8,
+    "failed": 0,
+    "errors": 0,
+    "warnings": 1,
+    "pytest_elapsed_seconds": 77.31,
+    "started_utc": "2026-11-14T00:04:51.624925+00:00",
+    "ended_utc": "2026-11-14T00:06:10.167608+00:00",
+    "exit_code": 0,
+    "log": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\required-python-593a24f.log",
+      "sha256": "746f700b3ed36ab06059365a7bea889456440b998121b8c30c22d8d38b94bf06"
+    },
+    "junit": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\required-python-593a24f.xml",
+      "sha256": "12790c3e86732394b99c0425828e1bbfe8c04bf7880618c662924b9b0f1a2375"
+    },
+    "terminal_job_record": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\required-python-593a24f-job.json",
+      "sha256": "8edf30e54bc9a2a8f78c0e86b2911aa234519a3d3210777648f493d176ea00a2"
+    },
+    "skip_details": [
+      {
+        "class": "tests.test_weblink_session",
+        "name": "test_real_offline_browser_routes_navigation_and_posts_with_private_cookie",
+        "reason": "could not import 'playwright.sync_api': No module named 'playwright'"
+      },
+      {
+        "class": "tests.test_weblink_session",
+        "name": "test_subresources_never_leave_origin_or_reach_transport[http://127.0.0.1/private]",
+        "reason": "could not import 'playwright.sync_api': No module named 'playwright'"
+      },
+      {
+        "class": "tests.test_weblink_session",
+        "name": "test_subresources_never_leave_origin_or_reach_transport[https://other.example/private]",
+        "reason": "could not import 'playwright.sync_api': No module named 'playwright'"
+      },
+      {
+        "class": "tests.test_weblink_session",
+        "name": "test_browser_only_network_paths_are_disabled",
+        "reason": "could not import 'playwright.sync_api': No module named 'playwright'"
+      },
+      {
+        "class": "tests.test_weblink_session",
+        "name": "test_challenge_is_access_failure_and_no_ajax_followup",
+        "reason": "could not import 'playwright.sync_api': No module named 'playwright'"
+      },
+      {
+        "class": "tests.test_weblink_session",
+        "name": "test_unrecognized_actions_and_other_repositories_are_not_forwarded[fetch('/WebLink/Delete.aspx?id=1').catch(()=>{});-weblink_unrecognized_get]",
+        "reason": "could not import 'playwright.sync_api': No module named 'playwright'"
+      },
+      {
+        "class": "tests.test_weblink_session",
+        "name": "test_unrecognized_actions_and_other_repositories_are_not_forwarded[script1-weblink_repository_denied]",
+        "reason": "could not import 'playwright.sync_api': No module named 'playwright'"
+      },
+      {
+        "class": "tests.test_weblink_session",
+        "name": "test_response_cap_enforced_before_browser_fulfillment",
+        "reason": "could not import 'playwright.sync_api': No module named 'playwright'"
+      }
+    ],
+    "warning": "Starlette TestClient anyio.abc.BlockingPortal deprecation; no failure"
+  },
+  "ruff": {
+    "command": "python -m ruff check src tests scripts examples",
+    "result": "All checks passed",
+    "observation": "Executed by primary immediately after terminal suite; tool stdout observed, no standalone log saved"
+  },
+  "reused_evidence": {
+    "unchanged_from_source": "b71e9450b1742c1f87d5c7cdcb5cf212381cebed",
+    "verified_byte_identical_git_paths": [
+      "client",
+      "src/civic_data_connectors/providers/weblink_session.py",
+      "tests/test_weblink_session.py"
+    ],
+    "typescript": {
+      "receipt": {
+        "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-11\\candidate-receipt.json",
+        "sha256": "1ecd74bdf96d34aaa9fefa4cf10995eb67afeb461b7fa4ae6ffb46238367230c"
+      },
+      "scope": "Unchanged entire client tree; reuse build +4 tests and installed client/service boundary for that exact dev11 identity. Current Python service behavior separately covered by current full suite."
+    },
+    "browser": "8 current tests explicitly skipped for absent optional playwright.sync_api. Guard and tests byte-identical to preserved dev11; no fresh browser execution claimed.",
+    "capabilities": "Reuse current-head Legistar receipt and its validator/6 capability cases; do not rerun unchanged inventory."
+  },
+  "limits": [
+    "Local source validation, not fresh hosted Windows CI or fresh dependency install.",
+    "No package/version/consumer pin/native/sign/install/publication change.",
+    "No live provider writes or invented vendor contracts.",
+    "Full19-task goal remains incomplete; required vendor contracts, coherent successor packages/pins and final installed/delivery outcomes remain outstanding."
+  ]
+}

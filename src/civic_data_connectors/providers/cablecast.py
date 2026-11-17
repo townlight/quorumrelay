@@ -249,6 +249,14 @@ def discover_public(source, namespace, bounds, context, transport, *, record_typ
     record_types = [] if record_types is None else record_types
     if not isinstance(record_types, list) or any(not isinstance(v, str) for v in record_types):
         raise ValueError("record_types must be a list of supported civic record types.")
+    if set(record_types) - {"meeting", "recording", "document", "agenda_item", "transcript"}:
+        raise ValueError("record_types must be a list of supported civic record types.")
+    if record_types and "meeting" not in record_types:
+        return OperationResult("unsupported", errors=(Error(
+            "operation_unavailable", "Cablecast discovery supplies meeting records only."),),
+            coverage={"record_types": record_types, "unobserved_record_types": sorted(set(record_types)),
+                      "returned_records": 0, "catalog_complete": False, "source_complete": False},
+            operation_id=context.operation_id)
     binding = canonical_hash({"source": source.public_dict(), "namespace": namespace, "body": source.body,
                               "dates": [bounds.date_from, bounds.date_to], "record_types": record_types,
                               "scope": context.scope, "semantics": "cablecast-shows/v1"})
@@ -352,7 +360,8 @@ def discover_public(source, namespace, bounds, context, transport, *, record_typ
             bundles.append(bundle)
             captures.append(bundle["capture"])
             if shows and (page + 1) * meta["pageSize"] < total_shows:
-                queue.insert(1 if interrupted else 0, {"page": page + 1})
+                if not any(pending.get("page") == page + 1 for pending in queue):
+                    queue.insert(1 if interrupted else 0, {"page": page + 1})
             context.report(operation="discover", pages=reader.pages, returned_records=len(records))
         except Exception as error:
             code, details = _show_status(error)
@@ -367,6 +376,7 @@ def discover_public(source, namespace, bounds, context, transport, *, record_typ
         "sources": [{**source.public_dict(), "namespace": namespace, "input_format": SHOWS_FORMAT}],
         "date_from": bounds.date_from, "date_to": bounds.date_to, "date_inclusivity": "both",
         "record_types": record_types, "body": source.body, "returned_records": len(records),
+        "unobserved_record_types": sorted(set(record_types) - {"meeting"}),
         "filtered_records": filtered, "pages": reader.pages, "failed_pages": failures, "failures": failures,
         "actual_dates": sorted({r["normalized"]["meeting_date"] for r in records}),
         "unknown_date_records": [],
@@ -450,10 +460,13 @@ class CablecastConnector:
             "aliases": [], "baseline_formats": [], "roster": "additive_typed_connector_outside_the_31_baseline_families",
             "operations": {
                 "identify": {**reads, "details": "*.cablecast.tv host shape; no network request."},
-                "discover": {**reads, "details": "Bounded public shows listing with date filter; recordings are "
-                             "watch-page links; copies of one meeting collapse to the copy with a caption playlist."},
+                "discover": {**reads, "details": "Bounded live shows listing with date filter; recordings are "
+                             "watch-page links; live copies of one meeting collapse to the copy with a caption playlist. "
+                             "Saved show/list captures use bounded filtering and checkpoints without provider network "
+                             "requests; capture coverage does not establish a complete upstream catalog."},
                 "fetch": {**reads, "details": "One show by ID: video file, HLS and caption playlist links."},
-                "parse": {**reads, "details": "Saved shows list JSON (cablecast-shows-json)."},
+                "parse": {**reads, "details": "Saved shows list JSON (cablecast-shows-json) and one show "
+                          "JSON (cablecast-show-json); metadata and links, not caption text."},
                 "native_search": none, "local_search": {**reads, "details": "Shared local search over captured records."},
                 "neutral_export": {**reads, "details": "Shared neutral export of captured records."},
                 "vendor_file_export": none, "create": none, "update": none},
@@ -478,9 +491,22 @@ class CablecastConnector:
         return namespace
 
     def discover(self, source, bounds, context):
+        return self.discover_request(source, {}, bounds, context)
+
+    def discover_content(self, engine, source, request, content, bounds, context):
+        # Reuse the shared saved-capture selection, filtering and checkpoint semantics.
+        namespace = self._namespace(source)
+        from .discovery import discover
+        if source.input_format is None:
+            request = {**request, "source": {**request["source"], "input_format": SHOWS_FORMAT}}
+        result = discover(engine, request, content, context, validated_namespace=namespace)
+        result.coverage.update({"catalog_complete": False, "source_complete": False})
+        return result
+
+    def discover_request(self, source, request, bounds, context):
         namespace = self._namespace(source)
         return discover_public(source, namespace, bounds, context, self._transport(),
-                               record_types=None)
+                               record_types=request.get("record_types"))
 
     def fetch(self, source, request, bounds, context):
         namespace = self._namespace(source)

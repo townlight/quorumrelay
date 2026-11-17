@@ -1,0 +1,7 @@
+videoStatusAvailable(videoStatus) {
+    const unavailableStatuses = ['', 'NA', 'private', 'delete', 'rejected'];
+    return !unavailableStatuses.includes(videoStatus);
+  }
+
+ViewMeetingDetail.uploadMinutesVideo = responseData.videoId && !responseData.canceled ? true : false;
+    ViewMeetingDetail.uploadMinutesVideoURL = 'https://www.youtube.com/watch?v=' + responseData.videoId;

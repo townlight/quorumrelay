@@ -8,10 +8,70 @@ from datetime import date
 from math import isfinite
 from threading import Event
 from typing import Any, Callable, Literal
-from urllib.parse import urlsplit
+from urllib.parse import parse_qsl, unquote_plus, urlsplit, urlunsplit
 
 SCHEMA_VERSION = "2.0.0"
 Status = Literal["completed", "partial", "cancelled", "failed", "unsupported"]
+
+_CREDENTIAL_KEYS = frozenset({
+    "token", "apikey", "accesstoken", "idtoken", "refreshtoken", "password",
+    "authorization", "cookie", "clientsecret", "credentials", "credential", "secret",
+})
+
+
+def _credential_key(key):
+    return isinstance(key, str) and key.casefold().replace("_", "").replace("-", "") in _CREDENTIAL_KEYS
+
+
+def _credential_error(path):
+    return ValueError(
+        f"Credential-bearing key at {path}; put credentials in private "
+        "OperationContext.credentials using the provider's documented shape "
+        "(for example, legistar_token for Legistar reads), never Source URLs or options."
+    )
+
+
+def _check_source_credentials(url, options):
+    for key, _value in parse_qsl(urlsplit(url).query, keep_blank_values=True):
+        if _credential_key(key):
+            raise _credential_error(f"Source.url.query[{key!r}]")
+    if not isinstance(options, dict):
+        raise ValueError("Source.options must be an object.")
+    pending, seen = [(options, "Source.options")], set()
+    while pending:
+        value, path = pending.pop()
+        if not isinstance(value, (dict, list, tuple)) or id(value) in seen:
+            continue
+        seen.add(id(value))
+        if isinstance(value, dict):
+            for key, item in value.items():
+                child = f"{path}[{key!r}]"
+                if _credential_key(key):
+                    raise _credential_error(child)
+                pending.append((item, child))
+        else:
+            pending.extend((item, f"{path}[{index}]") for index, item in enumerate(value))
+
+
+def citation_url(url: str) -> str:
+    """Remove authentication from durable citations, not lossless raw captures."""
+    try:
+        parsed = urlsplit(url)
+    except ValueError:
+        return ""
+    retained = []
+    for part in parsed.query.split("&"):
+        key = unquote_plus(part.partition("=")[0])
+        normalized = key.casefold().replace("_", "").replace("-", "")
+        if (_credential_key(key) or normalized in {"signature", "sig"}
+                or key.casefold().startswith(("x-amz-", "x-goog-"))):
+            continue
+        retained.append(part)
+    query = "&".join(retained)
+    netloc = parsed.netloc.rsplit("@", 1)[-1]
+    if query == parsed.query and netloc == parsed.netloc:
+        return url
+    return urlunsplit((parsed.scheme, netloc, parsed.path, query, parsed.fragment))
 
 
 def _public(value):
@@ -46,6 +106,7 @@ class Source:
         if (parsed.scheme not in {"http", "https"} or not parsed.hostname
                 or parsed.username is not None or parsed.password is not None):
             raise ValueError("A source requires an HTTP(S) citation URL without embedded credentials.")
+        _check_source_credentials(self.url, self.options)
         if not isinstance(self.provider, str) or not self.provider.strip():
             raise ValueError("A source requires a provider.")
         from .capabilities import canonical_provider_id
@@ -54,6 +115,7 @@ class Source:
             raise ValueError("An explicitly configured namespace cannot be empty.")
 
     def public_dict(self) -> dict:
+        _check_source_credentials(self.url, self.options)
         return _public(self)
 
     @classmethod
@@ -139,6 +201,15 @@ class Record:
     text: tuple[dict[str, Any], ...] = ()
     extensions: dict[str, Any] = field(default_factory=dict)
     schema_version: str = SCHEMA_VERSION
+
+    def __post_init__(self):
+        object.__setattr__(self, "citation_urls",
+                           tuple(dict.fromkeys(citation_url(url) for url in self.citation_urls)))
+        object.__setattr__(self, "text", tuple(
+            {**segment, "citation_url": citation_url(segment["citation_url"])}
+            if isinstance(segment, dict) and isinstance(segment.get("citation_url"), str) else segment
+            for segment in self.text
+        ))
 
     def public_dict(self) -> dict:
         return _public(self)

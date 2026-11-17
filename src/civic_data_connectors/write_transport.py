@@ -11,6 +11,7 @@ class WriteResponse:
     status: int
     content: bytes = b""
     headers: dict[str, str] = field(default_factory=dict)
+    set_cookie_headers: tuple[str, ...] = field(default=(), repr=False)
 
 
 class WriteTransport(Protocol):
@@ -40,4 +41,4 @@ class PublicWriteTransport:
             allowed_origins={f"{parsed.scheme}://{parsed.hostname}"},
             allow_redirects=False,
         )
-        return WriteResponse(response.status, response.content, response.headers)
+        return WriteResponse(response.status, response.content, response.headers, response.set_cookie_headers)

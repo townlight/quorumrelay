@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-14",
+  "scope": "Native legislative-file link supplied by retained meeting1496; anonymous read only.",
+  "observed_chain": [
+    {
+      "url": "https://santamonicacityca.iqm2.com/Citizens/Detail_Meeting.aspx?ID=1496",
+      "capture_path": "tests/fixtures/iqm2-detail-1496.capture.json",
+      "declared": "Exact same-meeting legislative-file7478 URL in native meeting capture."
+    },
+    {
+      "url": "https://santamonicacityca.iqm2.com/Citizens/Detail_LegiFile.aspx?Frame=&MeetingID=1496&MediaPosition=&ID=7478&CssClass=",
+      "status": 200,
+      "bytes": 91857,
+      "sha256": "6a25dfb747ba7d339fd57e5a16a806c7881b8049928042ffb86b5444e6274d30",
+      "capture_path": "tests/fixtures/iqm2-legifile-7478.capture.json",
+      "declared": "Native hidden7478 ID, rendered staff report/recommendation, three FileOpen attachments and five other-meeting references. Form action echoes1496; echo alone is not membership proof."
+    }
+  ],
+  "limits": [
+    "No form submitted or staff write contract inferred from anonymous page controls.",
+    "No adopted action, motion or vote inferred from staff recommendation/body.",
+    "Exact public HTML observed; integrated network/attachment execution uses injected transport and synthetic PDF bytes, not live attachment acceptance.",
+    "Standalone file retains unverified meeting context; related fetch verifies immutable scoped parent capture before one exact no-redirect HTML GET."
+  ]
+}

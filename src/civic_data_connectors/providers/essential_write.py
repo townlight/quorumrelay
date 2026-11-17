@@ -6,8 +6,8 @@ from time import monotonic
 import json
 
 from ..engine import canonical_hash
-from ..write_adapters import NativeRequest, WriteAdapter, WriteChange, WriteFailure
-from .account_api import ORIGINS, account_namespace, credentials, reject_credential_echo
+from ..write_adapters import NativeRequest, WriteAdapter, WriteCancelled, WriteChange, WriteFailure
+from .account_api import ORIGINS, account_namespace, account_origin, credentials, reject_credential_echo
 from .account_reads import guid
 
 
@@ -23,8 +23,10 @@ class EssentialWriteAdapter(WriteAdapter):
 
     def validate_source(self, source, context):
         if source.provider != self.provider or source.options:
-            raise ValueError("Essential writes require the exact configured dev API source without options.")
+            raise ValueError("Essential writes require an exact documented API source without options.")
         account_namespace(source)
+        if account_origin(source) != ORIGINS[self.provider]:
+            raise WriteFailure("mapping_unverified", "Production multimedia payload/readback casing is not mapped.")
         self.credentials(source, context)
 
     def authorize(self, source, change, context):
@@ -108,8 +110,8 @@ class EssentialWriteAdapter(WriteAdapter):
             raise WriteFailure("conflict", "Provider state changed after the exact plan was prepared.")
         if monotonic() >= deadline:
             raise WriteFailure("deadline_exceeded", "Deadline expired before mutation.")
-        if persist:
-            persist({"resource_id": change.resource_id, "read_url": prepared["read_url"]})
+        if persist and persist({"resource_id": change.resource_id, "read_url": prepared["read_url"]}):
+            raise WriteCancelled()
         # Update response schema is unspecified. Do not assume JSON or an ID receipt.
         self._call(source, context, NativeRequest(**prepared["native"]), bounds, deadline, raw=True)
         return self.reconcile(source, prepared, {}, context, bounds, deadline)

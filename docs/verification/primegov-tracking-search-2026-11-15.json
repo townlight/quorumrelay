@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "b34488e",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "Literal existing PrimeGov public TrackingNo search form filter via Source.options.tracking_number, including tracking-only requests with date bounds; local term/excerpt matching remains separate. Exact native request context retained through neutral persistence/export. No authenticated API equivalence or new provider/method.",
+  "primary_source": "docs/capabilities/evidence/primegov-tracking-search/source.json",
+  "new_cases": 20,
+  "checks": [
+    {
+      "scope": "All PrimeGov plus provider discovery, HTTP/MCP interfaces, interchange/storage search",
+      "passed": 216,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 46.83,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\primegov-tracking-search-2026-11-15.xml",
+      "xml_sha256": "d258a83173c3bacecb9635e13b3b98981551dfc6a64d6e2045dd8075205cd896",
+      "warning": "Existing Starlette/AnyIO alias deprecation"
+    },
+    {
+      "scope": "All20current tracking tests after strengthening checkpoint-removal assertion; source behavior unchanged",
+      "passed": 20,
+      "failed": 0,
+      "seconds": 0.61
+    },
+    {
+      "scope": "Ruff changed source/test",
+      "status": "PASSED"
+    },
+    {
+      "scope": "Capability ledger, synthetic evidence and public package after inventory/runtime synchronization",
+      "passed": 27,
+      "failed": 0,
+      "seconds": 0.76
+    }
+  ],
+  "source_sha256": {
+    "src/civic_data_connectors/providers/identification.py": "955735a24052ec62da0e7b8542ad4e9c45507c75f3d8321fce64e95f0bd7ca4d",
+    "src/civic_data_connectors/providers/primegov_search.py": "5303cddb2f7a10efc11dbf5e67d5b10bc6eb743770995e65edafe14f1daebca9",
+    "tests/test_primegov_tracking_search.py": "dba53fd1c723644633727bf12263a9fdc20d4cc3bef7670b8d445fda87725449",
+    "docs/PRIMEGOV-PUBLIC-OUTLINE.md": "145ea491a3eb59756103b3878a137fa586f450dbee07a95d9ad47b6e7657f1fa"
+  },
+  "limits": [
+    "Observed public client request contract, not verified server tracking equality/operator semantics.",
+    "Current script GET200matches original pinned hash; no additional live search POST or account API call.",
+    "Native source config filter only; all results partial and catalog/full-text completeness unverified.",
+    "Authenticated Meeting/speaker/private tracking APIs and writes/imports remain separate unresolved research."
+  ]
+}

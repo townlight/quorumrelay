@@ -180,3 +180,55 @@ def test_type_filter_and_cancellation_checkpoint():
     context.progress = lambda p: context.cancellation.set()
     result = owner.execute("discover", request(), context=context)
     assert result.status == "cancelled" and result.coverage["checkpoint"]
+
+
+def test_emitted_weblink_child_capture_replays_same_rows_without_session():
+    import base64
+
+    session = Session(BOULDER)
+    owner = engine(session)
+    src = source(BOULDER, 47549, "LF8PROD2")
+    discovered = owner.execute("discover", request(src, date_from="2026-10-01", date_to="2026-10-20"))
+    bundle = next(bundle for bundle in discovered.data["bundles"] if bundle["records"])
+    raw = base64.b64decode(bundle["capture"]["content_base64"])
+    # Traversal captures retain the configured root URL, not a manufactured child source.
+    assert json.loads(raw)["data"]["folderId"] != 47549
+    replay = engine(None).normalize(Source(**src), raw, input_format="laserfiche-listing-json")
+    assert replay.status == "completed", replay.public_dict()
+    assert [r["normalized"] for r in replay.data["records"]] == [r["normalized"] for r in bundle["records"]]
+    assert [r["identity"] for r in replay.data["records"]] == [r["identity"] for r in bundle["records"]]
+    assert [r["original"] for r in replay.data["records"]] == [r["original"] for r in bundle["records"]]
+    assert replay.data["capture"]["content_base64"] == bundle["capture"]["content_base64"]
+    assert replay.coverage["catalog_complete"] is False
+    assert replay.coverage["source_complete"] is False
+
+
+def test_saved_listing_replay_discloses_untraversed_entries_and_applies_date_bounds():
+    raw = json.dumps({"data": {"folderId": 77, "totalEntries": 10, "results": [
+        {"entryId": 1, "type": 0, "name": "2026"},
+        {"entryId": 2, "type": -2, "name": "Undated agenda"},
+        {"entryId": 3, "type": -2, "name": "Minutes 2026 10 03", "isEdoc": False},
+        {"entryId": 4, "type": -2, "name": "Packet 2026 10 04", "isEdoc": True},
+    ]}}).encode()
+    result = engine(None).normalize(Source(**source()), raw, input_format="laserfiche-listing-json",
+                                    bounds=Bounds(date_to="2026-10-03"))
+    assert result.status == "completed", result.public_dict()
+    assert result.coverage["untraversed_folders"] == [1]
+    assert result.coverage["unclassified_entries"] == [2]
+    assert result.coverage["filtered_records"] == 1
+    assert result.coverage["source_complete"] is False
+    assert result.data["records"][0]["normalized"]["documents"][0]["url"].endswith(
+        "DocView.aspx?id=3&dbid=0&repo=Louisville")
+
+
+def test_saved_listing_replay_rejects_missing_folder_and_duplicate_identity():
+    owner = engine(None)
+    for block in (
+        {"totalEntries": 0, "results": []},
+        {"folderId": 1, "totalEntries": 2, "results": [
+            {"entryId": 3, "type": -2, "name": "Agenda 2026 10 03"},
+            {"entryId": 3, "type": -2, "name": "Agenda 2026 10 04"}]},
+    ):
+        result = owner.normalize(Source(**source()), json.dumps({"data": block}).encode(),
+                                 input_format="laserfiche-listing-json")
+        assert result.status == "failed"

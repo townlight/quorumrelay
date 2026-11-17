@@ -1,0 +1,30 @@
+{
+  "observation_date": "2026-11-14",
+  "shell_url": "https://app.boardable.com/",
+  "shell_final_url": "https://app.boardable.com/login",
+  "shell_status": 200,
+  "shell_bytes": 30258,
+  "shell_sha256": "a1bb93d07931640cae1fe447d455b706ff07c56d7b2c9f308aba55e13027a3f9",
+  "vendor_asset_url": "https://app.boardable.com/v4/js/app.js?id=052287e3f473e7b1de4bacb15a125802",
+  "asset_status": 200,
+  "asset_bytes": 1433809,
+  "asset_sha256": "af516834c6bf34e420a1f06aff1a54233037590ca6e18bef290ff03bc85e1945",
+  "extract_sha256": "2cd4e5bce0910f73b62d1265708a926d6cff639dd0204dfc5f1bca44f4f1ed2f",
+  "extract_policy": "Selected literal functions, LF/trailing whitespace normalized. Exact original retained in work folder. No JS execution, login or live mutation.",
+  "contracts": [
+    "GET Boardable.org_url+meetings/{meeting.id}/agenda/list?list_type=nested&version=edit; response.data nested tree",
+    "POST meeting.url+/agenda/reorder JSON {agenda:[{id,parent_agenda_id}]}; root parent0, preorder recursion through agenda; refetch list",
+    "GET Boardable.org_url+agenda/{id}; response.data.agenda_item",
+    "POST meeting.url+/agenda/update multipart: id,text,description,is_private,original_token,people_responsible[],duration,attachments[index][type]=attachment and attachment_id for existing uploads",
+    "Boardable.onedrive.access_token is a runtime value. Adapter only supports explicit null runtime token, serialized by FormData as null string; no cloud import.",
+    "Explicit X-CSRF-TOKEN=window.csrfToken() and XMLHttpRequest header declared by vendor client."
+  ],
+  "limits": [
+    "Legacy editor only. has_agenda_builder or has_approval_workflows selects a separate agenda_app_url; no equivalence inferred.",
+    "Application supplies exact Boardable.org_url and meeting.url, session/CSRF and policy. No inferred slugs or credentials.",
+    "prepare-draft is a mutation and is never executed by plan/readback.",
+    "Only existing sibling reorder and text/description edits; preserve people, duration, privacy, existing attachments and unknown fields.",
+    "New upload exporter branches show multipart file but created attachment identity/processing/readback is not yet established. No upload implementation.",
+    "No recurring current_date/day variant, new editor, new item, meeting form, publication, deletes, vendor file import or stable public API guarantee."
+  ]
+}

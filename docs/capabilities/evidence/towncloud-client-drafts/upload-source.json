@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-16",
+  "client_url": "https://towncloud.io/assets/application-0dc58293d54de1ba75143417a29e41af370bc6bcc6d4a90281c00b50f6a6d29b.js",
+  "client_bytes": 1758089,
+  "client_sha256": "180588c9245d1e9b195b2ec81887346af77c88bcfe2492baf28240e0e377b8ae",
+  "extract_sha256": "7c92bbccaffdd55e8ec2a995b640337f124797fd0043cba265c4f436e6e42b86",
+  "contracts": {
+    "configuration": "JSON DOM element #s3-upload-config contains presigned_post.url / fields and optional validation_url; public agenda does not supply it.",
+    "upload": "Multipart POST every presigned_post.fields member; substitute ${filename} in key; append file bytes; require201.",
+    "validation": "POST /go/{site}/pdf_validations, s3_key,file_name,content_type=application/pdf; JSON success/error. Single-file mode uses configuration.validation_url.",
+    "association_fields": [
+      "item[item_attachments_attributes][index][name]",
+      "item[item_attachments_attributes][index][s3_key]",
+      "item[item_attachments_attributes][index][original_filename] (multi-file branch)",
+      "item[item_attachments_attributes][index][private_doc] 1/0",
+      "item[item_attachments_attributes][index][rank] 0"
+    ],
+    "save": "Existing form action/method controls parent item save; complete current form and returned identity/GET schema missing.",
+    "limits": "50MiB single-file client branch;150MiB traditional multi-file batch branch; enforce actual caller/provider limits separately."
+  },
+  "remaining": [
+    "Authorized editor config and exact form action/method/full fields",
+    "Saved parent response with created attachment ID and native association",
+    "Original-file locator and downloaded-byte verification",
+    "Recovery lookup for uncertain upload/save without replay"
+  ],
+  "signup": "Trial request submitted successfully; confirmation says someone will be in touch. No application dashboard available. Scott ended further TownCloud pursuit; do not repeat signup or contact the vendor.",
+  "checks": {
+    "passed": 39,
+    "failed": 0,
+    "seconds": 3.5,
+    "command": "pytest tests/test_towncloud_draft_write.py tests/test_towncloud_public.py tests/test_towncloud_detail.py -q",
+    "junit_sha256": "2a86405b2cdbd9393233be949154012dd77272e976190e0f5c0922fe6dac7fe4"
+  }
+}

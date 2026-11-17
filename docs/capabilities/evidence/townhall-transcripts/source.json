@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-14",
+  "provenance": "Actual guarded anonymous reads of two player URLs already in preserved captures. Initial full-transcript GETs were sessionless; after observing PHPSESSID, one fresh Hollis player/session/full-transcript read matched browser cookie flow. No login, generation, speaker mode, playback or polling.",
+  "observations": [
+    {
+      "url": "https://townhallstreams.com/stream.php?full=1&location_id=72&id=74003&action=get_transcriptions",
+      "method": "GET",
+      "status": 200,
+      "final_url": "https://townhallstreams.com/stream.php?full=1&location_id=72&id=74003&action=get_transcriptions",
+      "bytes": 0,
+      "content_type": "text/html",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "Exact changeView(false) full=1 GET declared in event74003 public player; supplied content read only, no generation or live poll.",
+      "player_url": "https://townhallstreams.com/stream.php?location_id=72&id=74003",
+      "player_fixture": "tests/fixtures/townhall-transcripts/hollis-74003.html",
+      "player_sha256": "06bd5275933a68e2b41d629b820623da7fc09633773467d9e2016b494bf67bcb"
+    },
+    {
+      "url": "https://www.townhallstreams.com/stream.php?full=1&location_id=31&id=77576&action=get_transcriptions",
+      "method": "GET",
+      "status": 200,
+      "bytes": 0,
+      "content_type": "text/html",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "Exact full=1 GET declared in preserved-source event77576 public player; supplied content only, no generation, no polling.",
+      "player_url": "https://www.townhallstreams.com/stream.php?location_id=31&id=77576",
+      "player_fixture": "tests/fixtures/townhall-transcripts/location31-77576.html",
+      "player_sha256": "b741f017d062d43d866dd64892bc4266d192f5baf9b1450a967882ed379ece9e"
+    }
+  ],
+  "declared_contract": "The player builds stream.php?full=1&location_id=<native>&id=<native>&action=get_transcriptions, GETs it, and inserts its HTML response into #autocc. Speaker mode is separate and not invoked.",
+  "established": "Both selected full-response bodies empty; exact empty captures are retained. The declared display accepts HTML. Nonempty static HTML text handling is synthetic, not nonempty live transcript acceptance.",
+  "limits": "No language selection, timing/speaker schema, transcript completeness or broader event catalog asserted. No ASR or automatic recurring polling. Location31 empty observation is sessionless; Hollis empty response is verified with a fresh anonymous public session. Cookie values are never persisted.",
+  "session_followup": {
+    "url": "https://townhallstreams.com/stream.php?full=1&location_id=72&id=74003&action=get_transcriptions",
+    "method": "GET",
+    "status": 200,
+    "bytes": 0,
+    "content_type": "text/html",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "public_session_cookie_sent": true,
+    "cookie_names": [
+      "PHPSESSID"
+    ],
+    "limits": "Public fresh player session only in process. No login or generation. Earlier sessionless read was not a browser-equivalent observation."
+  }
+}

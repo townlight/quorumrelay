@@ -1,0 +1,27 @@
+{
+  "source_manifest": "docs/capabilities/evidence/gworks-development-editor/source.json",
+  "origin": "https://api.dev.gworks.cloud",
+  "detail": {
+    "method": "GET",
+    "path": "/cms/secure/city/meeting/{id}",
+    "envelope": "direct flattened cms_meeting fields",
+    "arrays": [
+      "cms_meeting.data",
+      "cms_meeting.files"
+    ]
+  },
+  "save": {
+    "create": "POST /cms/secure/city/meeting/",
+    "update": "PUT /cms/secure/city/meeting/{id}",
+    "encoding": "application/json; data and files fields contain JSON strings",
+    "returned_fields_used": [
+      "cms_meeting.id",
+      "cms_meeting.mod_ts"
+    ],
+    "execution": "implemented with synthetic coordinator/readback acceptance"
+  },
+  "publication": "explicit agenda/minutes flags and dates in client actions",
+  "implemented": "development detail GET, saved normalization, meeting create/update and explicit publication",
+  "tests": "tests/test_gworks_editor.py",
+  "write_tests": "tests/test_gworks_write.py"
+}

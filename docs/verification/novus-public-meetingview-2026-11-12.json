@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-12",
+  "operation": "novus_supplied_meeting_view",
+  "source_url": "https://ebps.novusagenda.com/agendapublic/MeetingView.aspx?MeetingID=996&MinutesMeetingID=-1&doctype=Agenda",
+  "public_observation": {
+    "status": 200,
+    "media_type": "text/html",
+    "byte_length": 784159,
+    "sha256": "c85c9a27bbc97ae472acd507acf8f12a7fbc68ca452083916a02475218c8e64e",
+    "byte_limit": 2097152,
+    "deadline_seconds": 30,
+    "allow_redirects": false,
+    "origin": "one exact supplied link captured before implementation; no repeat request"
+  },
+  "fixture": {
+    "path": "tests/fixtures/novus-meetingview-996.capture.json",
+    "sha256": "42afe9cc3b832627a97e72d889172bd6bb382a6070a89f49778930589a906ca7",
+    "encoding": "exact source response bytes in content_base64"
+  },
+  "synthetic_execution": {
+    "new_distinct_passed": 7,
+    "reused_cover_sheet_cases_passed": 6,
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_novus_detail.py -q (10 passed; three negative test mutations used literal & instead of captured &amp;)",
+      ".venv/Scripts/python.exe -m pytest tests/test_novus_detail.py -k changed_meeting_context -q (4 passed after exact-byte test mutation correction; one prior passing origin case reused)"
+    ],
+    "covered": [
+      "Existing public HTML format URL dispatch; no additional format",
+      "Meeting/minutes/doctype form binding, declared body/title/date/localtime with unknown timezone",
+      "20 native linked-item identities and meeting parents with title/locator-only content",
+      "Saved normalization and default configured discovery/fetch, meeting text search and neutral export",
+      "Changed minutes context/item parent/duplicate native ID/foreign origin rejected",
+      "Observed CoverSheet/Coversheet case variants preserve native identity"
+    ]
+  },
+  "limits": [
+    "One captured Agenda template; no Minutes rendering or universal deployment/catalog claim",
+    "Only supplied native links become items; unlinked agenda headings/content retained in whole meeting text without inferred native identities/hierarchy",
+    "No neighboring prose assigned as item description and no motion/vote/attendance actions inferred",
+    "Cover-sheet locators are not fetched documents; automatic detail crawling/arbitrary-ID fetch_record not introduced",
+    "Local source only; frozen dev8/1.8.5 unchanged"
+  ]
+}

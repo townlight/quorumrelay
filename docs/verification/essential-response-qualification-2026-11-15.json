@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "d4c16114f1de4bf3305fcb87ae4cad7e66037962",
+  "status": "PASSED",
+  "requirements": [
+    6,
+    9
+  ],
+  "scope": "Prevent development multimedia DTO inference on officially linked Essential production request routes; exact response capture retained.",
+  "new_cases": 3,
+  "reproduction": {
+    "command": "pytest tests/test_essential_response_qualification.py -q --tb=short",
+    "failed_before_fix": 3,
+    "behavior": "Pascal-case production fixture incorrectly projected one record; lower-camel/unknown fixtures failed and discarded raw response."
+  },
+  "checks": [
+    {
+      "command": "pytest tests/test_essential_response_qualification.py tests/test_essential_production.py tests/test_account_apis.py tests/test_account_read_boundaries.py -q",
+      "passed": 33,
+      "failed": 0,
+      "seconds": 0.46
+    },
+    {
+      "command": "ruff check src/civic_data_connectors/providers/account_reads.py tests/test_essential_response_qualification.py",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/account_reads.py",
+      "sha256": "6abeebe4c3d8f3902b82a93d4ff9dc1904740ae6ca9924feccc7c77c3ffdb917"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_essential_response_qualification.py",
+      "sha256": "c9e6cab993b2755ec360157a2e6d4b0427ffd956709b09658e1e29c5570e2008"
+    },
+    {
+      "kind": "contract_provenance",
+      "path": "docs/capabilities/evidence/essential-postman/source.json",
+      "sha256": "21580f6d5dad50e1a6c0b95db5fb8f91e4f94fac9d133c55fa684bf3cf45a4a2"
+    },
+    {
+      "kind": "request_contract",
+      "path": "docs/capabilities/evidence/essential-postman/routes.json",
+      "sha256": "0bf7e2af4ac37d36f803510222ae80fa8ba639e8ceb929322fd6afe91a883d2b"
+    }
+  ],
+  "unaffected_evidence_reused": {
+    "receipt": "docs/verification/write-response-bounds-2026-11-15.json",
+    "full_suite_passed": 1936,
+    "scope": "Earlier full run; isolated response-qualification branch rerun through33affected cases. No repeated full suite claimed."
+  },
+  "limits": [
+    "Production GET response schema remains unverified. Exact raw bytes/source URL/requested ID preserved, no inferred normalized records, automatic pagination or response identity assertion.",
+    "Documented development response mapping remains unchanged.",
+    "No live account calls or writes; production writes remain unmapped."
+  ]
+}

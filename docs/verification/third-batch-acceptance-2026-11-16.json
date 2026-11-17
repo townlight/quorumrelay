@@ -1,0 +1,131 @@
+{
+  "recorded_utc": "2026-11-17T06:42:03.051103+00:00",
+  "status": "LOCAL_DOCUMENTED_SCOPE_ACCEPTED",
+  "candidate": "Local uncommitted tree atop 667f40ebde02e86ef756cbd6c821f6432f6bdee8; prior changes preserved",
+  "order": [
+    "Laserfiche / WebLink",
+    "OnBase",
+    "TelVue",
+    "Town Hall Streams",
+    "SuiteOne"
+  ],
+  "changes": {
+    "defect": "Advertised/emitted laserfiche-listing-json could not be normalized; reproduced invalid_capture before fix.",
+    "fix": "Register one-page saved WebLink replay using shared existing document mapping; retain raw bytes, native IDs, explicit incomplete coverage and child folder context without inferred parent.",
+    "files": [
+      "src/civic_data_connectors/providers/laserfiche.py",
+      "src/civic_data_connectors/providers/__init__.py",
+      "tests/test_provider_laserfiche.py",
+      "docs/PROVIDER-NATIVE-MAPPINGS.md",
+      "README.md",
+      "docs/DELIVERY-SCOPE.md"
+    ],
+    "other_providers": "No source/test changes needed."
+  },
+  "checks": {
+    "laserfiche_before_fix": {
+      "passed": 235,
+      "failed": 0,
+      "seconds": 24.647,
+      "xml": "work/batch3-laserfiche.xml",
+      "xml_sha256": "75629398306ffcb6d4cfac033602da0b9d07070c5a94042b56d2071b0c30a2e2",
+      "log_sha256": "a9f9f03eaca1c5604d84e8fc246bdeca2ea88cdb0001a2c1f448431f1ad26ce8",
+      "exit_code": 0
+    },
+    "laserfiche_after_fix": {
+      "passed": 11,
+      "failed": 0,
+      "seconds": 0.283,
+      "xml": "work/batch3-laserfiche-replay.xml",
+      "xml_sha256": "0042344894125d8e0a89040b146c8f1aaeec1219a037a51ed3629f85be7ade1d",
+      "log_sha256": "bed8aa0d23496dc2354186c38f16d24e395ee8d7061b23bd3f262c73596accf8",
+      "exit_code": 0
+    },
+    "onbase": {
+      "passed": 173,
+      "failed": 0,
+      "seconds": 6.365,
+      "xml": "work/batch3-onbase.xml",
+      "xml_sha256": "45029dbc65f05da80971e4844730d89849fc8e7e38f8a9846d1e01a592254010",
+      "log_sha256": "dc2ba333696b786aa620ff6e583d7b95fd1c3938ee27297384f9f250a4cd22c8",
+      "exit_code": 0
+    },
+    "telvue": {
+      "passed": 134,
+      "failed": 0,
+      "seconds": 5.962,
+      "xml": "work/batch3-telvue.xml",
+      "xml_sha256": "60577e778c8b2c1273cdf00421e1b6444fe3beea5298aedc5f9e96fac14dd537",
+      "log_sha256": "b89e9e1dc424d28ed54874ddde4d31138db3f483a8ec4d8d8f0a923e038f1361",
+      "exit_code": 0
+    },
+    "town_hall_streams": {
+      "passed": 49,
+      "failed": 0,
+      "seconds": 1.861,
+      "xml": "work/batch3-townhall.xml",
+      "xml_sha256": "d897199a369e90dd0c6af1c86c093da745e0d06ec97a3fdcfd965cbdbe1ff4a4",
+      "log_sha256": "26dbb0ce9241d0b7d76e6c46efcaec041fefa0905a2cf8fd4a3bf1b446b5ad16",
+      "exit_code": 0
+    },
+    "suiteone": {
+      "passed": 229,
+      "failed": 0,
+      "seconds": 27.494,
+      "xml": "work/batch3-suiteone.xml",
+      "xml_sha256": "66e60e8aaf13346ae6645c39e85ac34cb93b86599942928228158c2b3f744dbe",
+      "log_sha256": "a3fb63dea78284663f499f8ae102022b59f16920e8aeb712fc4b52667ee654bb",
+      "exit_code": 0
+    },
+    "final_full_suite": {
+      "passed": 3283,
+      "failed": 0,
+      "seconds": 1369.374,
+      "xml": "work/batch3-final.xml",
+      "xml_sha256": "d6e82f27fb547be78c18ccd1a8361174c5a60b23bc17d1f32037fae2d1fda9fa",
+      "log_sha256": "3111a44b3204bfc4a0b94142bf26117651f20c4a4d910d2526f39f6b9b002ca1",
+      "exit_code": 0
+    }
+  },
+  "shared_checks": {
+    "ruff": "passed",
+    "capability_validation": "passed; work/batch3-capabilities.log",
+    "git_diff_check": "passed",
+    "unchanged_client": "Prior build and four client tests reused"
+  },
+  "tree_fingerprint": {
+    "method": "SHA256 of sorted relative-posix-path:SHA256 lines for all src/tests .py files, joined with LF and final LF",
+    "files": 452,
+    "sha256": "22e4a3a68e5376de05ea6830ce88c67aa1b498717617c613b2ac0caf31fd77d2"
+  },
+  "changed_source_bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/laserfiche.py",
+      "sha256": "df82d3630beba295cda76991c5ec5dae9d56a888822ac82c8992a9d4da401046"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/__init__.py",
+      "sha256": "20afb8b06b41f33562bea0969cf997cfdcc78a7dd401092b8df53854d139f617"
+    },
+    {
+      "path": "tests/test_provider_laserfiche.py",
+      "sha256": "e84947314e69c3df9fca114ffdc8d2aad9e86a7a554dd40d7849409912e16bfc"
+    }
+  ],
+  "runtime": {
+    "providers": 33,
+    "baseline_formats": 34,
+    "additive_parsers": 74,
+    "native_searches": 23
+  },
+  "writes": "Existing Laserfiche Repository and TelVue playlist writes unchanged. OnBase/TownHall/SuiteOne have no built-in native adapter. Unavailable contracts deferred per market demand. Local exports preserved.",
+  "limits": [
+    "Focused checks overlap the full suite and sometimes include shared tests.",
+    "235-test Laserfiche run preceded fix; 11 affected tests and full3283 run verified corrected candidate.",
+    "No new live tenant transaction, provider mutation, playback or complete catalog certification.",
+    "Local full suite took1369.56seconds; no hosted-CI result inferred.",
+    "No commit, push, merge, release or installation."
+  ],
+  "owned_jobs": "none; root pytest session34851 terminal exit0 and agent jobs terminal",
+  "next_action": "Stop; no next batch authorized."
+}

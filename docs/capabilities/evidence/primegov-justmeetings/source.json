@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-15",
+  "scope": "Original PrimeGov family integration-partner contract lead only; no JustMeetings provider added.",
+  "captures": [
+    {
+      "url": "https://learning.agendalink.app/releases",
+      "method": "GET",
+      "status": 200,
+      "content_type": "text/html",
+      "file": "releases.html",
+      "bytes": 298943,
+      "sha256": "4b279495e505347b13055ca55a0ebbce1a2984ce6c9aa6b6830f14d48b1aab2b",
+      "timeout_seconds": 25,
+      "response_read_limit": 2500000,
+      "redirect_policy": "urllib default; observed final URL unchanged"
+    },
+    {
+      "url": "https://learning.agendalink.app/agenda-building",
+      "method": "GET",
+      "status": 200,
+      "content_type": "text/html",
+      "file": "building.html",
+      "bytes": 46063,
+      "sha256": "54a1159763574189efb4006fab3e474375ef341b3196fdf5eaf050851dff6767",
+      "timeout_seconds": 20,
+      "response_read_limit": 2000000,
+      "redirect_policy": "urllib default; observed final URL unchanged"
+    }
+  ],
+  "findings": [
+    "Primary Release7.63 August9,2026 announces PrimeGov agenda/topic import for live voting and archive conversion, but supplies no source exchange routes, fields or format.",
+    "Release7.64 August23 renames AgendaLink to JustMeetings;7.65 August30 declares app.justmeetings.com alternative to horizon.agendalink.app.",
+    "Agenda-building guide describes UI editing/assignment, not the PrimeGov exchange schema."
+  ],
+  "access_observations": [
+    {
+      "url": "https://app.justmeetings.com",
+      "method": "GET",
+      "result": "HTTP403 via urllib; no body captured; no auth or bypass attempted"
+    },
+    {
+      "url": "https://docs.agendalink.app/docs/agenda-api",
+      "result": "web direct timeout and one urllib connection timeout; not an API absence claim"
+    },
+    {
+      "url": "https://support.agendalink.app/hc/en-us",
+      "result": "web-reader public categories FAQ/HowTo/Releases; targeted primary-domain PrimeGov searches exposed only release notes, not a matching schema"
+    }
+  ],
+  "indexed_document_qualification": {
+    "url": "https://docs.agendalink.app/docs/agenda-api",
+    "source": "Search-reader indexed primary page, not direct response capture",
+    "observation": "API root api.agendalink.app; GET session all/pending/completed/agenda/minutes are JustMeetings own read API. Updating Data is marked Documentation Coming. These are not PrimeGov contracts.",
+    "limits": "Not a complete current-page direct-fetch or current server contract proof."
+  },
+  "missing": [
+    "PrimeGov source endpoint and authentication/version applicability",
+    "Exact source request/response or transfer-file fields/native meeting/item/document parent binding",
+    "Import configuration/transform semantics and readback for any claimed outbound operation"
+  ],
+  "disposition": "No new executable PrimeGov contract established by this bounded primary chain. Preserve existing PrimeGov reader/writer status; unresolved research, not verified outside-only dependency or absent API. Do not repeat these exact sources without a new authoritative lead.",
+  "declared_support_followup": {
+    "source": "web-reader primary support category pages, no raw capture",
+    "pages": [
+      {
+        "url": "https://support.agendalink.app/hc/en-us/sections/21524845530893-How-To",
+        "observation": "9listed articles cover own minutes upload, topic attachment repair, reports, approvals, vote-only boards, extend/move items, cover sheet and recording minutes. No PrimeGov import article or pagination link exposed."
+      },
+      {
+        "url": "https://support.agendalink.app/hc/en-us/sections/21986562374413-FAQ",
+        "observation": "4listed articles cover roles, running meetings, sandbox access and template changes; no PrimeGov import article or pagination link exposed."
+      }
+    ],
+    "limits": "Listed public categories only; not exhaustive document/private-source absence proof. No request submitted, sandbox acquisition or new provider work."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "99ba690",
+  "status": "PASSED",
+  "requirements": [
+    6
+  ],
+  "scope": "Account read cancellation and deadline through response mapping; TelVue and Essential synthetic routes, no live account or vendor schema expansion.",
+  "reproduction": {
+    "command": "pytest tests/test_account_read_boundaries.py -q",
+    "failed_before_fix": 4,
+    "actual_before_fix": "partial returned after mapper set cancellation or advanced deadline"
+  },
+  "checks": [
+    {
+      "command": "pytest tests/test_account_read_boundaries.py tests/test_account_apis.py tests/test_telvue_playlist_items.py tests/test_telvue_playlist_write.py -q",
+      "passed": 61,
+      "failed": 0,
+      "seconds": 1.09
+    },
+    {
+      "command": "pytest tests/test_essential_production.py -q",
+      "passed": 10,
+      "failed": 0,
+      "seconds": 0.47
+    },
+    {
+      "command": "ruff check src/civic_data_connectors/providers/account_reads.py tests/test_account_read_boundaries.py",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/account_reads.py",
+      "sha256": "81527c4a9c5c30dc4acb1f54a43799c5d47f60b2415a07ed906a318f59392c23"
+    },
+    {
+      "path": "tests/test_account_read_boundaries.py",
+      "sha256": "934a2269dac97ea1ccabef8907b96722bb973edbabbf3dfd9373534bbc801023"
+    }
+  ],
+  "unaffected_evidence_reused": {
+    "receipt": "docs/verification/peak-telvue-owned-work-2026-11-15.json",
+    "full_suite_passed": 1876
+  },
+  "limitations": [
+    "Mapping remains synchronous; the boundary is checked when mapping returns, not preempted mid-function.",
+    "No live account acceptance, release or remote mutation."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-12",
+  "operation": "boardable_scoped_known_record_detail",
+  "contract_basis": [
+    "Existing captured public listing numeric ID and slug mapping",
+    "Existing captured Boardable __NUXT_DATA__ detail reference-table parser; no new format or inferred slug"
+  ],
+  "listing_fixture": {
+    "path": "tests/fixtures/boardable-discovery/page-1.json",
+    "sha256": "e429416b040df3b8e0818b1a509afdbe783c0e724abbaf1bd6d89a636c086aaa"
+  },
+  "synthetic_execution": {
+    "new_distinct_cases_passed": 12,
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_boardable_detail.py -q (12 passed)",
+      ".venv/Scripts/python.exe -m pytest tests/test_boardable_detail.py::test_known_listing_detail_survives_restart_and_preserves_both_captures_without_new_grants -q (1 passed after removing redundant local parser delegation in favor of existing fetch dependency)",
+      ".venv/Scripts/python.exe -m pytest \"tests/test_boardable_detail.py::test_known_detail_requires_current_scope_grants_and_exact_capture_binding[digest]\" tests/test_boardable_detail.py::test_known_detail_honors_cancellation_and_response_byte_bound -q (2 passed; equal-length hash tamper and final cancellation check)"
+    ],
+    "covered": [
+      "Actual captured listing row, imported record/capture and persistent-store reopen",
+      "Existing generic SDK fetch_record to supplied public detail and exact native identity",
+      "Same current caller/namespace/operation authorization; no externally granted normalize permission",
+      "Missing or source-mismatched capture, equal-length digest tamper",
+      "Unexpected response identity/URL/type/status, cancellation and response byte ceiling",
+      "Both listing and detail raw captures retained"
+    ]
+  },
+  "limits": [
+    "Synthetic new route execution; no new live provider request or mutation",
+    "One detail only, partial coverage; no catalog, native search or private write claim",
+    "No document bytes fetched implicitly; existing separate attachment path retained",
+    "Dates remain source observations; listing/detail discrepancy unresolved",
+    "Latest source only; frozen dev8 artifact and consumer pins unchanged"
+  ]
+}

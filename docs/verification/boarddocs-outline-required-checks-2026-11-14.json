@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "3ff5b30749ef0a671bf8e5a174ea7f44ae9a38ca",
+  "status": "PASSED",
+  "scope": "BoardDocs selected public agenda outline; local source only",
+  "checks": [
+    {
+      "command": "pytest tests -q",
+      "passed": 1681,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 78.37,
+      "junit_sha256": "9afe6b2eb5ba469fd5a7ad642f4606c2975e613a2d0a76bbe7945cbe6b6176dc"
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "command": "scripts/validate_capabilities.py",
+      "status": "PASSED",
+      "evidence_records": 392,
+      "outbound_mappings": 172,
+      "negative_checks": 5,
+      "errors": 0
+    }
+  ],
+  "reused": "Unchanged TypeScript build/tests. No package/native rebuild, repin, installation or release. Existing dev13 artifacts do not contain later source."
+}

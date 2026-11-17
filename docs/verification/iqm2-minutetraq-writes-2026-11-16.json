@@ -1,0 +1,58 @@
+{
+  "lint": "full Ruff passed",
+  "files": [
+    {
+      "sha256": "7E2B73A2EEAA49D3046DF30C960C9133F24E5403ADC593B5B8546C4D47F9119D",
+      "path": "src/civic_data_connectors/providers/iqm2_write.py"
+    },
+    {
+      "sha256": "90FA0B74C24F69947A8EC74EF132C5B4226874215895EE6288660C12D9D7732B",
+      "path": "src/civic_data_connectors/providers/iqm2_meeting_write.py"
+    },
+    {
+      "sha256": "D1EE2B32FE7EA59836B267C0748E6CB56762C62FD835084DB7A8B7B86B73B693",
+      "path": "tests/test_iqm2_write.py"
+    },
+    {
+      "sha256": "8DD61EFC4B991CB6DCA5ED4CB1DF5DA657CC52D923D5DEB0448558E18B72823A",
+      "path": "tests/test_iqm2_meeting_write.py"
+    },
+    {
+      "sha256": "710812BE4E9D293CD8E4B54F8C571F65AA79405855D01B5FF5E65BB23172717B",
+      "path": "tests/fixtures/iqm2/dataset-wire-fixture.ps1"
+    },
+    {
+      "sha256": "43E1F39AFED33B6534CD40A1CFE6DFB73445447E942C0D8BCFF0BE53B01EC731",
+      "path": "tests/fixtures/iqm2/meeting-wire-fixture.ps1"
+    }
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_iqm2_meeting_write.py tests/test_iqm2_write.py tests/test_writes.py -q",
+      "failed": 0,
+      "seconds": 115.31,
+      "passed": 70
+    }
+  ],
+  "scope": "Selected agenda/minutes item titles and native meeting create/update",
+  "primary_product_coding": false,
+  "worker": "deepseek-v4.1-flash:1017-cloud",
+  "live_vendor_calls": false,
+  "independent_dotnet": "System.Data generated baseline and deserialized actual prepared requests; original/current values, native row states, identities and preserved fields checked",
+  "think": "low",
+  "remaining": [
+    "recording/chunk transfer",
+    "document import/publication beyond mapped title updates",
+    "gWorks media integration",
+    "final required checks"
+  ],
+  "full_suite_prior_to_meeting": {
+    "failed": 1,
+    "failure": "MCP blocked-progress cancellation completion timing; test-only correction under follow-up",
+    "seconds": 2656.61,
+    "title_cases_passed": 41,
+    "passed": 2915
+  },
+  "date": "2026-11-16",
+  "base": "897442bf99dff40c4bd03126009083ad9fd485a3"
+}

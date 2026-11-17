@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "61fdd73",
+  "status": "PASSED",
+  "checks": [
+    {
+      "command": "pytest tests -q",
+      "passed": 1812,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 98.877,
+      "junit_sha256": "53111f7d71ceb428fcd2968b3cba77cef3f1c7b485dad881c9b6a220d2608869"
+    }
+  ],
+  "scope": "Local Connect/CloudCast chapter CSV preparation attributed to the 2022 vendor help screenshot and explicit historical headerless derivation. No remote import, current deployment, processing, visibility or meeting association claim.",
+  "new_cases": 8,
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/telvue-chapter-csv/connect-2022-source.json",
+      "sha256": "d70f9cdaf94f47a78b1876f262912a5b2a39c358686648d6fc84b5d92edb62c2"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/telvue-chapter-csv/source.json",
+      "sha256": "4f424a0cec2e7a4992d1496629e0d27b1b2734e1a63fd03255130f380434932a"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/telvue_chapter_export.py",
+      "sha256": "31d23e723b8729ab86ae4e0640a46ae9db4ae6945cb5f4fbfd302ebd0d2e4edc"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_telvue_chapter_export.py",
+      "sha256": "cdb050278f11232ff2d0e1822070f3629f8c014ef6c70f87dbb01ec733b7238e"
+    }
+  ]
+}

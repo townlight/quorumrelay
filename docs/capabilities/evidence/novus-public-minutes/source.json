@@ -1,0 +1,23 @@
+{
+  "url": "https://hpwd.novusagenda.com/agendapublic/MeetingView.aspx?MeetingID=210&MinutesMeetingID=168&doctype=Minutes",
+  "method": "GET",
+  "byte_limit": 2000000,
+  "deadline_seconds": 20,
+  "redirects": false,
+  "status": 200,
+  "content_type": "text/html",
+  "bytes": 31582,
+  "sha256": "a5c4a1d251019fefca817de975193a1e77732c1c5e1e6d0ae6ab7c2bae1454d4",
+  "response_url": "https://hpwd.novusagenda.com/agendapublic/MeetingView.aspx?MeetingID=210&MinutesMeetingID=168&doctype=Minutes",
+  "date": "2026-11-15",
+  "kind": "observed_public_response",
+  "lead": {
+    "url": "https://gma2.hpwd.org/files/archives/2021/GMA2MinutesAug2021.pdf",
+    "scope": "Official district archive PDF preserves the exact vendor-rendered Minutes URL; selected HTML GET is separate observed evidence."
+  },
+  "capture": {
+    "path": "tests/fixtures/novus-minutes-210.html",
+    "sha256": "a5c4a1d251019fefca817de975193a1e77732c1c5e1e6d0ae6ab7c2bae1454d4"
+  },
+  "scope": "Selected Minutes document168 with parent meeting210; no catalog, item IDs, structured votes, staff writes or universal layout claim."
+}

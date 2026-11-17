@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-16",
+  "scope": "Existing editable no-workflow agenda-item title update only; synthetic Engine/SQLite execution, no live vendor mutation.",
+  "checks": [
+    {
+      "command": "python -X utf8 -m pytest tests/test_simbli_item_write.py tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q",
+      "passed": 93,
+      "failed": 0,
+      "seconds": 132.736
+    }
+  ],
+  "simbli_test_cases": 68,
+  "metadata_test_cases": 25,
+  "lint": "Full required Ruff passed",
+  "junit": {
+    "path": "docs/verification/simbli-item-write-2026-11-16.xml",
+    "sha256": "82504178036e5f8cf11d0b23b7b1377cb285eeb234a330dabc8e77554c263037"
+  },
+  "files": [
+    {
+      "path": "src/civic_data_connectors/providers/simbli_write.py",
+      "sha256": "280feedb5579af2a9de9f7aea45a2b8dbbad2f043e4fbc5d0a444d8269ec06ad"
+    },
+    {
+      "path": "src/civic_data_connectors/write_adapters.py",
+      "sha256": "a5d98885f5d91555c872b552678f5e57e679480938ca0b776c9e2dcb82472696"
+    },
+    {
+      "path": "tests/test_simbli_item_write.py",
+      "sha256": "b342836eb08e6b20b200b05f388086771e711144bca5f8cf7a7ffbe830c7de30"
+    },
+    {
+      "path": "docs/investigations/2026-11-16-paused/simbli-selected-item-contract.json",
+      "sha256": "d3ec3192f8f48e35f1f40a1557340bd376693b82990af418288810728ce871ee"
+    },
+    {
+      "path": "docs/investigations/2026-11-16-paused/simbli-public-item-model-sanitized.json",
+      "sha256": "e53be90bff1b8511790cb2b25e66d79ea88f33f48cf524eed19f09752f606855"
+    }
+  ],
+  "remaining": [
+    "Meeting/item creation",
+    "Supporting uploads",
+    "Minutes and publication",
+    "Required integrated CI for this candidate"
+  ]
+}

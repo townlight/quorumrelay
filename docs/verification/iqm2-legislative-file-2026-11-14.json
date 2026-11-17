@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "83c47f77ba89925828b99dc506a4be7f60306e19",
+  "status": "PASSED",
+  "scope": "Selected native legislative-file text/docs and immutable parent-bound related fetch, hash/relationships/persistence/ZIP; no staff write, catalog or live attachment claim.",
+  "new_cases": 14,
+  "checks": [
+    {
+      "command": "pytest tests/test_iqm2_file.py -q",
+      "passed": 14,
+      "failed": 0,
+      "seconds": 1.74
+    },
+    {
+      "command": "pytest tests -q",
+      "passed": 1837,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 102.462,
+      "junit_sha256": "00838866d9d7d71b84fe635336987b3a1f141ef21737035cc02b2c4f5d2ac774"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/iqm2_file.py",
+      "sha256": "02396859a3a6a81c40521570b9de00500b9b2a3b89735c7dfff760d81cb68768"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_iqm2_file.py",
+      "sha256": "3af3f151db3a780896f0ab5c48c49da4a9a780b6c0a6e4be367e79a37a62bb57"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/iqm2-legislative-file/source.json",
+      "sha256": "bc17bbbcd926ca2849eebbaca8fb6ffca90d77b5f2ebb6d5c932c594db68385e"
+    },
+    {
+      "kind": "capture",
+      "path": "tests/fixtures/iqm2-legifile-7478.capture.json",
+      "sha256": "ac13e47cd8ce51b500a704bd02591ccfa0b1b2c99e7388f26c13425f2c494a66"
+    }
+  ],
+  "corrections": "Initial drafts exposed full identity metadata mismatch and inline word splitting; fixed exact core matching and rendered inline text. Final focused checks also verify recomputed enriched normalized hash and preservation of new document relationships together with native meeting relation. Test transport applies no-redirect assertion to detail HTML; generic FileOpen transfer retains its existing guarded redirect policy."
+}

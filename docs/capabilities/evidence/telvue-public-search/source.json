@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-15",
+  "origin": "Original baseline telvue.response declares anonymous player-wide GET search form; exact form query returned43native media candidates. Connect CMS client was inspected and excluded as unrelated product surface; newly fetched public player asset is distinct.",
+  "sources": [
+    {
+      "url": "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/videos/search?showtabssearch=true&fullscreen=false&search=council",
+      "status": 200,
+      "final_url": "https://videoplayer.telvue.com/player/4jeRlBTetCoFJdyT5ssIvBrB9VUvRN0M/videos/search?showtabssearch=true&fullscreen=false&search=council",
+      "bytes": 103202,
+      "sha256": "e26dfd0d98175bba56cf9b5961e0c865a9f8e0b6bd664c098e87e62ab050f23d",
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://videoplayer.telvue.com/static-assets/player/application-3f30332b9ad179a9ec4332c0f8cb34a86984e46d7d4f77a334362a13814d4dbb.js",
+      "status": 200,
+      "bytes": 602288,
+      "sha256": "bbf822110dbc53e6d1671f5ad1b6df739cca6663a464d5b0817b663a5e78b55f"
+    }
+  ],
+  "raw_files": [
+    {
+      "path": "docs/capabilities/evidence/telvue-public-search/results.html",
+      "sha256": "e26dfd0d98175bba56cf9b5961e0c865a9f8e0b6bd664c098e87e62ab050f23d"
+    },
+    {
+      "path": "docs/capabilities/evidence/telvue-public-search/player-client.js",
+      "sha256": "bbf822110dbc53e6d1671f5ad1b6df739cca6663a464d5b0817b663a5e78b55f"
+    }
+  ],
+  "request_contract": {
+    "method": "GET",
+    "path": "/player/{key}/videos/search",
+    "fields": {
+      "showtabssearch": "true",
+      "fullscreen": "false",
+      "search": "first supplied term/phrase"
+    }
+  },
+  "response_contract": "One video-rows-container with declared total;43data-video-type=media entries and literal data-video-id, supplied title/summary/duration and native search-result locators.",
+  "identity_scope": "Recording media ID in explicit configured player namespace. No inferred meeting or playlist membership. Playlist source is rejected, not broadened.",
+  "matching": "43provider candidates but22exact local council metadata/summary hits. Query-bearing URLs are preserved only in citations/relationships/originals, not normalized searchable strings; stored/reopened exact hits remain22.",
+  "pagination": "Public client generic load-more adds sort/order/offset from selectors absent on this captured search page. Search applicability remains unverified; no guessed server continuation. Local hash-bound offset only; declared and unretrieved counts remain explicit.",
+  "unrequested": "No per-media CSRF metadata requests, caption/chapter match counts/text, redirects/stream/thumbnail/media bytes or script execution.",
+  "limits": [
+    "All results partial; unreadable/empty fails, no complete catalog/fulltext/provider exhaustion.",
+    "Dates are explicitly title-derived calendar dates; unknown time zone remains unknown.",
+    "No account, upload, write/import, browser or release."
+  ]
+}

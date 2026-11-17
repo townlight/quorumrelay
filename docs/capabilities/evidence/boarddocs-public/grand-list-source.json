@@ -1,0 +1,12 @@
+{
+  "source_url": "https://github.com/City-Bureau/city-scrapers-grand-rapids/blob/main/tests/files/gra_public_school_board_boarddocs_list.json",
+  "git_blob": "00ae017435702341280d5d2b05c83e9ea7d8f8b4",
+  "fixture": "tests/fixtures/boarddocs-public/grand-list.json",
+  "bytes": 61041,
+  "sha256": "23724db103d485a1a2481d17efcf9262ad183f2925d820126abdf9bb2d546476",
+  "observation_date": "2026-11-14",
+  "provenance": "Third-party archived BoardDocs response, Git blob verified before saving; not a current live vendor observation.",
+  "records": 331,
+  "empty_placeholders": 1,
+  "limits": "Listing only; no completeness, official vendor acceptance, item hierarchy or write contract."
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<link rel="icon" href="/favicon.ico">
+
+	<title id="cdsPageTitle"></title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/_COMMON/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<link href="/_COMMON/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+	
+	<!-- <link href="/_COMMON/css/cds.archive.css" rel="stylesheet"> -->
+	<link href="../css/archive.css" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="/_COMMON/js/html5shiv.min.js"></script>
+	<script src="/_COMMON/js/respond.min.js"></script>
+	<![endif]-->
+
+  <script type="text/javascript" src="/_COMMON/js/jquery-1.11.0.min.js"></script>
+  <script src="/_COMMON/js/bootstrap.min.js"></script>
+  <script src="/_COMMON/js/bootbox.js"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <!-- source: https://gist.github.com/Luavis/c01a00f3c1bd80893530 -->
+	<script src="/_COMMON/js/ie10-viewport-bug-workaround.js"></script>
+  <script type="text/javascript" src="/_COMMON/js/cds.tools.js"></script>
+  <script type="text/javascript" src="/_COMMON/js/cds.tools.date.js"></script>
+  <script type="text/javascript" src="/_COMMON/js/cds.tools.time.js"></script>
+  <script type="text/javascript" src="/_COMMON/js/cds.tools.stringtools.js"></script>
+  <script type="text/javascript" src="/_COMMON/js/cds.archive.js"></script>
+  <script type="text/javascript" src="/_COMMON/js/jquery.highlightext.js"></script>
+  <script type="text/javascript" src="/_COMMON/js/cds.common.js"></script>
+  <script type="text/javascript">
+  	var ARCHIVE_ID = 1;
+		var IS_TANDEM_CHOOSERS = true;
+		var POP_WINDOW_DIMS = [1100,800];
+		var PRESELECTED_YEAR = null;
+		var PRESELECTED_MONTH = null;
+		var START_YEAR = 2013;
+		var END_YEAR = new Date().getFullYear();
+		if(new Date().getMonth() >= 10)
+		{
+			PRESELECTED_YEAR = END_YEAR;
+			END_YEAR += 1;
+		}
+	</script>
+</head>
+
+<body>
+	<div id="cdsWrapper">
+		<div id="cdsContent" role="main">
+
+			<ul id="ulTabControl" class="nav nav-tabs">
+			</ul>
+			<div id="divTabContent" class="tab-content">
+
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>

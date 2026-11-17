@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "f8a7bea",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "MeetingTypeGetByPortal from existing WSDL: native complete portal/type selector for already implemented MeetingGetByMeetingType, literal multilingual names/source keys, exact capture/IDs, SQLite retry/reopen/search and all neutral formats. No administration, write or network observation.",
+  "new_cases": 15,
+  "checks": [
+    {
+      "scope": "new meeting types plus all prior eSCRIBE reads/writes/history/upload",
+      "passed": 170,
+      "failed": 0,
+      "seconds": 3.28
+    },
+    {
+      "scope": "Ruff changed Python paths",
+      "status": "PASSED"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/escribe_publishing.py",
+      "sha256": "9437f2ca316325bfcaa58b28fe7f969f9c97cb74e43f552c8fc30fe27c2b3e9d"
+    },
+    {
+      "path": "scripts/pin_escribe_contract.py",
+      "sha256": "47be07f35d5f40d9663dd7edd1c59878784237044ed56381b56432051ec5c5d1"
+    },
+    {
+      "path": "src/civic_data_connectors/data/escribe_publishing.json",
+      "sha256": "77fd672a2c663c21124142e1e4b87daf894c4106833310d504c009a7b9555ef4"
+    },
+    {
+      "path": "tests/test_escribe_meeting_types.py",
+      "sha256": "ae9dd74ac8f6eb2cc4bc51bedbdfa0378c545b26c870af4fe9ce607a110474af"
+    }
+  ],
+  "central_contract_rebinding": "15other sections preserved;6prior raw byte hashes verified and rebound solely for added read.",
+  "limits": [
+    "Native language keys are not interpreted as known languages/default names.",
+    "Explicit selected portal only, unpaged/max_records bounded, empty stays partial.",
+    "No current server/catalog, administration, write or additional provider scope."
+  ],
+  "delivery": "Local source only; no release/build/package/push/merge/tag/sign/install/repin/auth change/vendor call."
+}

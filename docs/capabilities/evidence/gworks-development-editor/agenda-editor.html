@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>
+		Agenda - FrontDesk
+	</title>
+
+	<link rel="stylesheet" href="/ext/datatables/1.10.21/css/datatables.min.css">
+	<link rel="stylesheet" href="/ext/datatables/buttons.bootstrap.min.css">
+	<link rel="stylesheet" href="/ext/datatables/select.dataTables.min.css">
+
+
+	<link rel="stylesheet" href="/ext/datetimepicker/3.1/css/daterangepicker.css">
+
+
+
+
+	<link rel="stylesheet" href="/ext/mentions/jquery.mentionsInput.css">
+
+
+
+	<link rel="stylesheet" href="/ext/jquery-ui/1.12.1/css/jquery-ui.min.css?v=21-MM-DD-000DEV000"><link rel="stylesheet" href="/ext/fontawesome/6.4.0/css/all.css?v=21-MM-DD-000DEV000"><link rel="stylesheet" href="/ext/toastr/2.1.3/toastr.css?v=21-MM-DD-000DEV000"><link rel="stylesheet" href="/css/city-base.css?v=21-MM-DD-000DEV000"><link rel="stylesheet" href="/css/common.css?v=21-MM-DD-000DEV000"><link rel="stylesheet" href="/css/city-styles.css?v=21-MM-DD-000DEV000">
+
+	<meta charset="utf-8"/>
+	<meta name="description" content="Messaging Area">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head><body>
+	<div class="fluid-container h-100">
+				<div id="addMenuHere"></div>
+				<div style="display: none;" id="city-sidebar-hub">
+  					<aside class="left-sidebar sidebar bg-white px-0">
+
+
+  					  					         					        <nav class="nav flex-column align-items-stretch flex-grow-1 flex-shrink-1 flex-nowrap" id="side-menu">
+  					            <div class="nav-item accordion-item">
+  					                <div class="nav-link first-level-menu" license-hub="finance">
+  					                    <a class="menu-sub-financehub nav-link" hub="finance" id="menuFinance-tab"
+  					                        aria-selected="false">
+  					                        <span class="icon"><i class="fa fa-money-check-dollar" aria-hidden="true"></i></span>
+  					                        <span class="nav-label">Finance</span>
+  					                    </a>
+  					                </div>
+  					            </div>
+
+  					            <div class="nav-item accordion-item">
+  					                <div class="nav-link has-arrow first-level-menu" license-hub="hr">
+  					                    <a class="menu-sub-employee nav-link" hub="hr" id="menuHrHub" 
+  					                        data-toggle="tab" role="tab" aria-controls="menu-hr" aria-selected="false">
+  					                        <span class="icon" style="margin-right: 0.2em;"><i class="fa fa-users" aria-hidden="true"></i></span>
+  					                        <span class="nav-label">HR</span>
+  					                    </a>
+  					                </div>
+  					                <nav class="nav flex-column nav-second-level">
+  					                    <a href="/s/hr/list.html" class="nav-link menu-sub-employee nav-label">Employees</a>
+  					                    <a href="/s/upgrade.html" license-disable="plugin-payroll"
+  					                        class="nav-link menu-sub-payroll nav-label">Payroll</a>
+  					                    <a href="/s/upgrade.html" license-disable="plugin-timetracker"
+  					                        class="nav-link menu-sub-timetracker nav-label">TimeTracker</a>
+  					                    <a href="/s/upgrade.html" license-disable="plugin-hr-reports"
+  					                        class="nav-link menu-sub-hr-reports nav-label">Reports</a>
+  					                    <a href="/s/upgrade.html" license-disable="plugin-hr-settings"
+  					                        class="nav-link menu-sub-hr-settings nav-label">Settings</a>
+  					                </nav>
+  					            </div>
+
+
+
+  					  					            <div class="nav-item accordion-item">
+  					                <div class="nav-link has-arrow first-level-menu" license-hub="frontdesk">
+  					                    <a class="nav-link " hub="frontdesk" id="menuFrontdesk-tab"
+  					                        data-toggle="tab" role="tab" aria-controls="menu-fi" aria-selected="false" license-enable="frontdesk">
+  					                        <span class="icon" style="margin-right: 0.2em;"><i class="fa fa-message-dollar" aria-hidden="true"></i></span>
+  					                        <span class="nav-label">FrontDesk</span>
+  					                    </a>
+  					                </div>
+  					                <nav class="nav flex-column nav-second-level">
+  					                    <a href="/s/fd/dashboard.html" class="nav-link menu-sub-dashboard nav-label">Dashboard</a>
+  					                    <div id="div_plugin_payments">
+  					                        <a href="/plugin/payments/payments.html" license="plugin-payments" license-disable="plugin-payments"
+  					                            hub="frontdesk" class="nav-link menu-sub-payments nav-label" id="plugin_payments">Payments</a>
+  					                    </div>
+  					                    <a href="/s/fd/crm/list.html" class="nav-link menu-sub-crm nav-label">Public Users</a>
+  					                    <div id="div_plugin_311">
+  					                        <a href="/plugin/311/index.html" license-disable="plugin-311" hub="frontdesk"
+  					                            class="nav-link menu-sub-311 nav-label" id="plugin_311">Citizen Requests (311)</a>
+  					                    </div>
+  					                    <div id="div_plugin_forms">
+  					                        <a href="/plugin/forms/index.html" license-disable="plugin-forms" hub="frontdesk"
+  					                            class="nav-link menu-sub-forms nav-label" id="plugin_forms">Licensing &amp; Permitting</a>
+  					                    </div>
+  					                    <div id="div_plugin_utilities">
+  					                        <a href="/plugin/utilities/index.html" license-disable="plugin-utilities" hub="frontdesk"
+  					                            class="nav-link menu-sub-utilities nav-label" id="plugin_utilities">Utilities</a>
+  					                    </div>
+  					                    <div id="div_plugin_messaging">
+  					                        <a href="/plugin/messaging/index.html" license-disable="plugin-messaging" hub="frontdesk"
+  					                            class="nav-link menu-sub-messaging nav-label" id="plugin_messaging">Communications</a>
+  					                    </div>
+  					                    <div id="div_public_information">
+  					                        <a href="/plugin/cms/publicnotices.html" license-disable="public-information" hub="frontdesk" 
+  					                            class="nav-link menu-sub-publicinfo nav-label" id="public_information">Public Information</a>
+  					                    </div>
+  					                    <div id="div_plugin_cms">
+  					                        <a href="/plugin/cms/pages.html" license-disable="plugin-cms" hub="frontdesk"
+  					                            class="nav-link menu-sub-cms nav-label" id="plugin_cms">Website</a>
+  					                    </div>
+  					                    <div id="div_plugin_reports">
+  					                        <a href="/plugin/reports/index.html" license-disable="plugin-reports"
+  					                            class="nav-link menu-sub-reports nav-label" id="plugin_reports">Reports</a>
+  					                    </div>
+  					                    <div id="div_guest_payments">
+  					                        <a href="/plugin/payments/guest-payments.html" license-disable="guest-payments"
+  					                            class="nav-link menu-sub-guest-payments nav-label" id="guest_payments">Guest Payments</a>
+  					                    </div>
+  					                </nav>
+  					            </div>
+
+
+  					  					              					            <div class="nav-item accordion-item">
+  					                <div class="nav-link first-level-menu" license-hub="ubcloud">
+  					                    <a class="menu-sub-ubaccounts nav-link" hub="utility billing"
+  					                        license-enable="ubcloud" id="menuUtilityBilling-tab" role="tab" aria-controls="menu-ub" aria-selected="false">
+  					                        <span class="icon" style="margin-right: 0.2em;"><i class="fa fa fa-file-invoice-dollar" aria-hidden="true"></i></span>
+  					                        <span class="nav-label">Utility Billing</span>
+  					                    </a>
+  					                </div>
+  					            </div>
+
+  					            <div class="nav-item accordion-item">
+  					                <div class="nav-link first-level-menu" license-hub="operations">
+  					                    <a class="menu-sub-opshub nav-link" hub="operations" id="menuOperations-tab" aria-selected="false">
+  					                        <span class="icon" style="margin-right: 0.2em;"><i class="fa fa-tasks" aria-hidden="true"></i></span>
+  					                        <span class="nav-label">Operations</span>
+  					                    </a>   
+  					                </div>
+  					            </div>
+
+  					            <div class="nav-item accordion-item">
+  					                <div class="nav-link first-level-menu" license-hub="cemetery">
+  					                    <a class="menu-sub-cemeteryhub nav-link" hub="cemetery" id="menuCemetery-tab" aria-selected="false">
+  					                        <span class="icon" style="margin-right: 0.2em;"><i class="fa fa-tombstone" aria-hidden="true"></i></span>
+  					                        <span class="nav-label">Cemetery</span>
+  					                    </a>
+  					                </div>
+  					            </div>
+
+  					            <div class="nav-item accordion-item">
+  					                <div class="nav-link first-level-menu" license-hub="court">
+  					                    <a class="menu-sub-courthub nav-link" hub="court" id="menuCourt-tab" aria-selected="false">
+  					                        <span class="icon" style="margin-right: 0.2em;"><i class="fa fa-gavel" aria-hidden="true"></i></span>
+  					                        <span class="nav-label">Court</span>
+  					                    </a>
+  					                </div>
+  					            </div>
+
+
+
+
+  					            <div class="nav-item accordion-item">
+  					                <div class="nav-link first-level-menu" license-hub="maps">
+  					                    <a class="menu-sub-mapshub nav-link" hub="maps" id="menuMaps-tab" aria-selected="false">
+  					                        <span class="icon" style="margin-right: 0.5em;"><i class="fa fa-map-marker-alt" aria-hidden="true"></i></span>
+  					                        <span class="nav-label">Maps</span>
+  					                    </a>
+  					                </div>                
+  					            </div>
+
+  					            <div class="nav-item accordion-item">
+
+  					  					                <div class="nav-link has-arrow first-level-menu" license-hub="storage">
+  					                    <a class="nav-link" hub="storage" id="menuStorage-tab" data-toggle="tab" role="tab" aria-controls="menu-fi" aria-selected="false">
+  					                        <span class="icon" style="margin-right: 0.2em;"><i class="fa fa-box-archive" aria-hidden="true"></i></span>
+  					                        <span class="nav-label">Storage</span>
+  					                    </a>
+  					                </div>
+  					                <nav class="nav flex-column nav-second-level">
+  					                    <a href="/plugin/cms/medialibrary.html" hub="frontdesk"
+  					                        class="nav-link menu-sub-medialibrary nav-label">Media Library</a>
+  					                </nav>
+  					            </div>
+
+  					            <div class="nav-item accordion-item">
+  					                <div class="nav-link has-arrow first-level-menu" license-hub="settings">
+  					                    <a class="nav-link" hub="settings" id="menuAdminSettings-tab"
+  					                        data-toggle="tab" role="tab" aria-controls="menu-fi" aria-selected="false">
+  					                        <span class="icon" style="margin-right: 0.2em;"><i class="fa fa-cog" aria-hidden="true"></i></span>
+  					                        <span class="nav-label">Settings</span>
+  					                    </a>
+  					                </div>
+
+  					                <nav class="nav flex-column nav-second-level">
+  					                    <a href="/s/ad/settings.html" class="nav-link menu-sub-settings nav-label">Admin
+  					                        Settings</a>
+  					                    <a href="/s/ad/payment-settings.html" license-remove="plugin-payments" 
+  					                        class="nav-link menu-sub-paymentsettings nav-label">Payment Settings</a>
+  					                    <a href="/s/ad/pdf-settings.html" license-show="support" 
+  					                        class="nav-link menu-sub-pdfsettings nav-label">PDF Settings</a>
+  					                    <a href="/s/ad/reference-types.html" license-remove="frontdesk" 
+  					                        class="nav-link menu-sub-reftypes nav-label">Reference Types</a>
+  					                    <a href="/s/ad/security-groups.html" 
+  					                        class="nav-link menu-sub-securitygroups nav-label">Security Groups</a>
+  					                    <a href="/s/ad/city-activity.html" 
+  					                        class="nav-link menu-sub-activity nav-label">Activity</a>
+  					                    <a href="/s/my-account.html" license-show="support" style="display: none" 
+  					                        class="nav-link menu-sub-account nav-label">My Account</a>
+  					                </nav>
+  					            </div>
+
+  					            <div class="nav-item accordion-item side-nav-my-account-menu">
+  					                <div class="nav-link first-level-menu" license-hub="myaccount">
+  					                    <a class="menu-my-account nav-link" hub="myaccount" id="menuMyAccountHub" aria-selected="false">
+  					                        <span class="icon" style="margin-right: 0.2em;"><i class="fa fa-user" aria-hidden="true"></i></span>
+
+  					                          					                        <span class="nav-label">My Account</span>
+  					                    </a>
+  					                </div>
+  					            </div>
+
+
+
+  					  					  					        </nav>
+
+  					               					        <div class="new-admin-quota" license-hub="plugin-messaging" license-show="plugin-messaging">
+  					          <div class="heading"></div>
+
+  					            					          <div class="quotaBox gworks-evt-regular-employees d-none">
+  					            <div class="quotaHeading">
+  					              <div class="name">Regular Employees</div>
+  					              <div class="count"><span class="value">-</span>/<span class="max">-</span></div>
+  					            </div>
+  					            <div class="progress">
+  					              <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  					            </div>
+  					          </div>
+  					          <div class="quotaBox gworks-evt-seasonal-runs d-none">
+  					            <div class="quotaHeading">
+  					              <div class="name">Seasonal Runs</div>
+  					              <div class="count"><span class="value">-</span>/<span class="max">-</span></div>
+  					            </div>
+  					            <div class="progress">
+  					              <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  					            </div>
+  					          </div>
+
+  					            					          <div class="quotaBox text-align-center" style="font-size: 0.75em; margin-top: 10px">Version 21-MM-DD-000DEV000</div>
+  					        </div>
+  					          </aside>
+  					    				</div>
+				<div style="display: none;" id="city-sidebar">
+  					<aside class="left-sidebar sidebar">
+  						<div class="bg-white px-0">
+  							<div class="side-navbar-links">
+  								<div class="icon-links">
+  									<ul id="primary-sidenav" class="nav flex-column gworks-evt-menuMain">
+
+  					  										<li class="nav-item" license-hub="finance">
+  											<a class="nav-link gworks-evt-disableItem disableItem" hub="finance" title="Finance" id="menuFinance-tab" data-toggle="tab" href="#menu-fi" role="tab" aria-controls="menu-fi" aria-selected="false">
+  												<span class="icon"><i class="fa fa-money-check-alt" aria-hidden="true"></i></span><span class="text">Finance</span>
+  											</a>
+  										</li>
+
+  					  										<li class="nav-item" license-hub="hr">
+  											<a class="nav-link" title="HR" id="menuHr-tab" data-toggle="tab" href="#menu-hr" role="tab" aria-controls="menu-hr" aria-selected="false">
+  												<span class="icon"><i class="fa fa-users" aria-hidden="true"></i></span><span class="text">HR</span>
+  											</a>
+  										</li>
+
+  					  										<li class="nav-item" license-hub="frontdesk">
+  											<a class="nav-link gworks-evt-disableItem disableItem" hub="frontdesk" license-enable="frontdesk" title="FrontDesk" id="menuFrontDesk-tab" data-toggle="tab" href="#menu-fd" role="tab" aria-controls="menu-fd" aria-selected="true">
+  												<span class="icon"><i class="fas fa-comments-alt-dollar" aria-hidden="true"></i></span><span class="text">FrontDesk</span>
+  											</a>
+  										</li>
+
+  					  										<li class="nav-item" license-hub="ubcloud">
+  											<a class="nav-link gworks-evt-disableItem disableItem" hub="ubcloud" license-enable="ubcloud" title="Utility Billing" id="menuUtilityBilling-tab" data-toggle="tab" href="#menu-ub" role="tab" aria-controls="menu-ub" aria-selected="true">
+  												<span class="icon"><i class="fa fa-tachometer-alt-fast" aria-hidden="true"></i></span><span class="text">Utility Billing</span>
+  											</a>
+  										</li>
+
+  					  										<li class="nav-item" license-hub="ops">
+  											<a class="nav-link gworks-evt-disableItem disableItem" hub="operations" title="Operations">
+  												<span class="icon"><i class="fas fa-tasks" aria-hidden="true"></i></span><span class="text">Operations</span>
+  											</a>
+  										</li>
+
+  					  										<li class="nav-item" license-hub="maps">
+  											<a class="nav-link gworks-evt-disableItem disableItem" hub="maps" title="Maps">
+  												<span class="icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></span><span class="text">Maps</span>
+  											</a>
+  										</li>
+
+  					  										<li class="nav-item" license-hub="storage">
+  											<a class="nav-link gworks-evt-disableItem disableItem" license-enable="frontdesk" hub="storage" title="Storage" data-toggle="tab" href="#menu-storage" role="tab" aria-controls="menu-storage" aria-selected="true">
+  												<span class="icon"><i class="fas fa-folders" aria-hidden="true"></i></span><span class="text">Storage</span>
+  											</a>
+  										</li>
+
+  					  										<li class="nav-item" license-hub="settings">
+  											<a class="nav-link" license-hide="settings" title="Settings" id="menuAdminSettings-tab" data-toggle="tab" href="#menu-ad" role="tab" aria-controls="menu-ad" aria-selected="false">
+  												<span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span><span class="text">Settings</span>
+  											</a>
+  										</li>
+
+  					  					          <li class="nav-item">
+  											<a class="nav-link" title="My Account" href="#menu-myaccount" data-toggle="tab" aria-selected="false" aria-controls="menu-myaccount">
+  												<span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span><span class="text">My Account</span>
+  											</a>
+  										</li>
+
+  					  										<li class="nav-item border-0">
+  											<a role="button" class="nav-link gworks-evt-textLinksCollapse textLinksCollapse-btn">
+  												<i class="fa fa-expand-alt" aria-hidden="true"></i>
+  												<i class="fa fa-compress-alt" aria-hidden="true"></i>
+  											</a>
+  										</li>
+  									</ul>
+  								</div>
+  								<div class="text-links">
+
+  					  									<div class="tab-content p-0 m-0 sidebar-scroll" id="nav-tabContent">
+
+  					  										<div class="list-group tab-pane fade" id="menu-myaccount" role="tabpanel" aria-labelledby="menuMyAccount-tab">
+  											<a href="/s/my-account/index.html" class="list-group-item menu-sub-myaccount">My Account</a>
+  					            <a href="/plugin/payroll/my-account-timesheet.html" license-area="timesheet" class="list-group-item menu-sub-timesheet">Time Sheets</a>
+  					            <a href="/plugin/payroll/my-account-leave-requests.html" license-area="leaverequest" class="list-group-item menu-sub-leaverequest">Leave Requests</a>
+  										</div>
+
+  					  										<div class="list-group tab-pane fade" id="menu-fi" role="tabpanel" aria-labelledby="menuFinance-tab">
+  											<a href="/s/upgrade.html" class="list-group-item">Coming Soon</a>
+  										</div>
+
+  					  										<div class="list-group tab-pane fade" id="menu-ub" role="tabpanel" aria-labelledby="menuUtilityBilling-tab">
+  											<a href="" class="list-group-item menu-sub-ubaccounts">UB Accounts</a>
+  										</div>
+
+  					  										<div class="list-group tab-pane fade" id="menu-fd" role="tabpanel" aria-labelledby="menuFrontDesk-tab">
+  											<a href="/s/fd/dashboard.html" class="list-group-item menu-sub-dashboard">Dashboard</a>
+  											<div id="div_plugin_payments">
+  												<a href="/plugin/payments/payments.html" license="plugin-payments" license-disable="plugin-payments" hub="frontdesk" class="list-group-item menu-sub-payments" id="plugin_payments">Payments</a>
+  											</div>
+  											<a href="/s/fd/crm/list.html" class="list-group-item menu-sub-crm">Public Users</a>
+  											<div id="div_plugin_311">
+  												<a href="/plugin/311/index.html" license-disable="plugin-311" hub="frontdesk" class="list-group-item menu-sub-311" id="plugin_311">Citizen Requests (311)</a>
+  											</div>
+  											<div id="div_plugin_forms">
+  												<a href="/plugin/forms/index.html" license-disable="plugin-forms" hub="frontdesk" class="list-group-item menu-sub-forms" id="plugin_forms">Licensing &amp; Permitting</a>
+  											</div>
+  											<div id="div_plugin_utilities">
+  												<a href="/plugin/utilities/index.html" license-disable="plugin-utilities" hub="frontdesk" class="list-group-item menu-sub-utilities" id="plugin_utilities">Utilities</a>
+  											</div>
+  											<div id="div_plugin_messaging">
+  												<a href="/plugin/messaging/index.html" license-disable="plugin-messaging" hub="frontdesk" class="list-group-item menu-sub-messaging" id="plugin_messaging">Communications</a>
+  											</div>
+  											<div id="div_public_information">
+  												<a href="/plugin/cms/publicnotices.html" license-disable="public-information" hub="frontdesk" class="list-group-item menu-sub-publicinfo" id="public_information">Public Information</a>
+  											</div>						
+  											<div id="div_plugin_cms">
+  												<a href="/plugin/cms/pages.html" license-disable="plugin-cms" hub="frontdesk" class="list-group-item menu-sub-cms" id="plugin_cms">Website</a>
+  											</div>
+  											<div id="div_plugin_reports">
+  												<a href="/plugin/reports/index.html" license-disable="plugin-reports" class="list-group-item menu-sub-reports" id="plugin_reports">Reports</a>
+  											</div>
+
+  					  											<div id="div_guest_payments">
+  												<a href="/plugin/payments/guest-payments.html" license-disable="guest-payments" class="list-group-item menu-sub-guest-payments" id="guest_payments">Guest Payments</a>
+  											</div>
+
+  					  										</div>
+
+  					  										<div class="list-group tab-pane fade" id="menu-hr" role="tabpanel" aria-labelledby="menuHr-tab">
+  											<a href="/s/hr/list.html" class="list-group-item menu-old-sub-employee">Employees</a>
+  					            			<a href="/plugin/payroll/index.html" license-disable="plugin-payroll" class="list-group-item menu-sub-payroll">Payroll</a>
+  											<a href="/plugin/payroll/timetracker.html" license-disable="plugin-timetracker" class="list-group-item menu-sub-timetracker">TimeTracker</a>
+  										</div>
+
+  										  										<div class="list-group tab-pane fade" id="menu-storage" role="tabpanel" aria-labelledby="menuStorage-tab">
+  											<a href="/plugin/cms/medialibrary.html" hub="frontdesk" class="list-group-item menu-sub-medialibrary">Media Library</a>
+  										</div>
+
+  					  										<div class="list-group tab-pane fade" id="menu-ops" role="tabpanel" aria-labelledby="menuOps-tab">
+  											<a href="/s/underdevelopment.html" class="list-group-item">Coming Soon</a>
+  										</div>
+
+  					  										<div class="list-group tab-pane fade" id="menu-maps" role="tabpanel" aria-labelledby="menuMap-tab">
+  											<a href="/s/underdevelopment.html" class="list-group-item">Coming Soon</a>
+  										</div>
+
+  					  										<div class="list-group tab-pane fade" id="menu-ad" role="tabpanel" aria-labelledby="menuAdmin-tab">
+  											<a href="/s/ad/settings.html" title="Admin Settings" class="list-group-item menu-sub-settings">Admin Settings</a>
+  											<a href="/s/ad/payment-settings.html" license-remove="plugin-payments" title="Payment Settings" class="list-group-item menu-sub-paymentsettings">Payment Settings</a>
+  											<a href="/s/ad/pdf-settings.html" license-show="support" title="PDF Settings" class="list-group-item menu-sub-pdfsettings">PDF Settings</a>
+  											<a href="/s/ad/reference-types.html" license-remove="frontdesk" title="Reference Types" class="list-group-item menu-sub-reftypes">Reference Types</a>
+  											<a href="/s/ad/security-groups.html" title="Security Groups" class="list-group-item menu-sub-securitygroups">Security Groups</a>
+  											<a href="/s/ad/city-activity.html" title="City Activity" class="list-group-item menu-sub-activity">Activity</a>
+  											<a href="/s/my-account.html" license-show="support" style="display: none" title="My Account" class="list-group-item menu-sub-account">My Account</a>
+  										</div>
+
+  					  										<div class="list-group tab-pane fade" id="menu-upgrade" role="tabpanel" aria-labelledby="menuHr-tab">
+  											<a href="/s/upgrade.html" class="list-group-item menu-sub-upgrade">Upgrade</a>
+  										</div>
+
+  					  										<div class="list-group tab-pane fade" id="menu-access" role="tabpanel" aria-labelledby="menuHr-tab">
+  											<a href="/s/warning-access.html" class="list-group-item menu-sub-access">Access</a>
+  										</div>
+
+  					  										<div class="list-group tab-pane fade" id="menu-hub" role="tabpanel" aria-labelledby="menuHr-tab">
+  											<a href="/s/underdevelopment.html" class="list-group-item menu-sub-soon">Coming Soon</a>
+  										</div>
+
+  					  									</div>
+
+  					  												<div class="admin-quota" license-hub="plugin-messaging" license-show="plugin-messaging" style="display: none;">
+  												  <div class="heading"></div>
+
+  												    												  <div class="quotaBox gworks-evt-regular-employees d-none">
+  												    <div class="quotaHeading">
+  												      <div class="name">Regular Employees</div>
+  												      <div class="count"><span class="value">-</span>/<span class="max">-</span></div>
+  												    </div>
+  												    <div class="progress">
+  												      <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  												    </div>
+  												  </div>
+  												  <div class="quotaBox gworks-evt-seasonal-runs d-none">
+  												    <div class="quotaHeading">
+  												      <div class="name">Seasonal Runs</div>
+  												      <div class="count"><span class="value">-</span>/<span class="max">-</span></div>
+  												    </div>
+  												    <div class="progress">
+  												      <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  												    </div>
+  												  </div>
+
+  												  												  <div class="quotaBox text-align-center" style="font-size: 0.75em; margin-top: 10px">Version 21-MM-DD-000DEV000</div>
+  												</div>
+
+  												    								</div>
+  							</div>
+  						</div>
+  					</aside>
+				</div>
+		<div class="sidebar-mboverlay gworks-evt-sidebaroverlay"></div>
+		<div class="page-container ">
+			<nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm top-navbar pl-0">
+			  <a role="button" class="mr-3 text-primary gworks-evt-sidebarCollapse nav-btn-collapse">
+			    <i class="far fa-bars fa-lg" aria-hidden="true"></i>
+			  </a>
+
+						  <div class="logo-header p-2 text-center">
+			    <div class="defaultLogo">
+			      <a href="/s/index.html"><img src="/img/gWorks_logo.svg" alt="gWorks logo" width="140" height="50" class="img-fluid" /></a>
+			    </div>
+			  </div>
+
+						  <div class="gworks-evt-citylogo clientLogo logo-md rectangleLogo ml-3" style='display:none;'>
+			    <img alt="City Logo" src="/img/gWorks_logo.svg" onError="this.src='/img/gWorks_logo.svg'" />
+			  </div>
+
+						  <div class="fw-500 text-dark ml-3">
+			    <span class="gworks-evt-data-city-displayname"></span>
+			  </div>
+
+						  <div class="right-button-group ml-auto user-actions">
+			    <ul class="navbar-nav list-inline">
+			      <li class="nav-item list-inline-item" license-remove="frontdesk" license-area="frontdesk">
+			        <a role="button" class="gworks-evt-searchFormBtn nav-link">
+			          <i class="fa fa-search fa-sm" aria-hidden="true"></i>
+			        </a>
+			        <form class="searchForm gworks-evt-searchForm d-none">
+			          <input name="query" type="search" class="form-control gworks-evt-searchBar gworks-searchBar" placeholder="Search ..." value />
+
+			        			          <div class="gworks-evt-searchResults search-results-dropdown d-none">
+			            <div class="div-holder">
+			              <div class="search-category">
+			                <div class="search-category-title">
+			                  <span class="search-category-icon">
+			                    <i class="far fa-user" aria-hidden="true"></i>
+			                  </span>
+			                  <span class="fw-600 fs-lg">Public Users</span>
+			                </div>
+			                <a href="#" class="search-results-counts"><span id="search_person_result_count">0</span> <small>results</small></a>
+			              </div>
+			              <div class="search-results">
+			                <div class="person-no-result no-result d-none">
+			                  <p class="emptyCardTitle">No results found</p>
+			                </div>
+			                <ul class="person-result-block d-none"></ul>
+			              </div>
+			            </div>
+			            <div class="div-holder">
+			              <div class="search-category">
+			                <div class="search-category-title">
+			                  <span class="search-category-icon">
+			                    <i class="fas fa-cube" aria-hidden="true"></i>
+			                  </span>
+			                  <span class="fw-600 fs-lg">Utilities</span>
+			                </div>
+			                <a href="#" class="search-results-counts"><span id="search_utils_result_count">0</span> <small>results</small></a>
+			              </div>
+			              <div class="search-results">
+			                <div class="utils-no-result no-result d-none">
+			                  <p class="emptyCardTitle">No results found</p>
+			                </div>
+			                <ul class="utils-result-block d-none"></ul>
+			              </div>
+			            </div>
+			          </div>
+			        </form>      </li>
+			      <li class="nav-item list-inline-item gworks-evt-cms-website" license-remove="frontdesk" style="display: none">
+			        <a href="" class="nav-link" title="Public User Web Site" target="_blank">
+			          <i class="fa fa-globe fa-sm" aria-hidden="false"></i>
+			        </a>
+			      </li>
+			       <li class="nav-item list-inline-item gworks-evt-support-portal" license-remove="frontdesk">
+			        <a href="https://service.gworks.com/_hcms/mem/login" class="nav-link" title="Support Portal"
+			            target="_blank" rel="noopener noreferrer">
+			          <i class="fa fa-solid fa-headset fa-sm" aria-hidden="false"></i>
+			          <span class="badge badge-grey gworks-evt-count navbarCounter"></span>
+			        </a>
+			      </li>
+			       <li class="nav-item list-inline-item gworks-evt-learnupon" license-remove="frontdesk">
+			        <a class="nav-link" title="gWorks University">
+			          <i class="fa fa-solid fa-graduation-cap fa-sm" aria-hidden="false"></i>
+			          <span class="badge badge-grey gworks-evt-count navbarCounter"></span>
+			        </a>
+			      </li>
+			      <li class="nav-item list-inline-item gworks-evt-inbox-count" license-remove="frontdesk" license-area="messaging">
+			        <a href="/plugin/messaging/index.html" class="nav-link" title="Inbox">
+			          <i class="fa fa-envelope fa-sm gworks-evt-notice-total" aria-hidden="false"></i>
+			          <span class="badge badge-grey gworks-evt-count navbarCounter"></span>
+			        </a>
+			      </li>
+			      <li class="nav-item list-inline-item dropdown">
+			        <a class="nav-link" data-toggle="dropdown" title="User Profile">
+			          <i class="fa fa-user fa-sm" aria-hidden="true"></i>
+			        </a>
+			        <div class="dropdown-menu profile-dropdown gworks-evt-dropdown-noclick dropdown-menu-animated dropdown p-0">
+			          <div class="dropdown-big-header bg-dark d-flex">
+			          	<div class="d-flex align-items-start w-100">
+			          		<div class="profile-media d-none">
+			          			<div class="profile-image">
+			          				<div class="gworks-evt-data-profilePicLetter d-none"></div>
+			          			</div>
+			          		</div>
+			          		<div class="profile-text w-100">
+			          			<ul>
+			          				<li class='gworks-evt-data-displayname'>City Admin</li>
+			          				<li class="mb-3 dropdown-divider"></li>
+			          				<li class="link-item" license-remove="support"><a href="/s/my-account/index.html">My Account <i class="far fa-user ml-2" aria-hidden="true"></i></a></li>
+			          				<li class="link-item"><a class="gworks-evt-logout">Log Out <i class="far fa-sign-out ml-2" aria-hidden="true"></i></a></li>
+			          			</ul>
+			          		</div>
+			          	</div>
+			          </div>
+			        </div>
+			      </li>
+			    </ul>
+			  </div>
+			</nav>
+
+			<div class="page-content-wrapper">
+				<div class="content">
+
+					<div class="row gworks-evt-pageHeader pageHeader">
+						<div class="col-6">
+							<div id="gworks-evt-breadcrumbs">
+									<a href="/s/fd/dashboard.html" class="text-secondary ">FrontDesk</a>&nbsp; / &nbsp;<a href="/plugin/cms/am.html" class="text-secondary ">Agenda/Minutes</a>
+							</div>
+							<div class="page-header mt-2">
+								<div class="featuredBackBtn"></div>
+								<h3 class="mb-4 pb-4 gworks-evt-pagetitle">Agenda</h3>
+							</div>
+						</div>
+						<div id="gworks-evt-sectionmenu" class="col-6 text-right sectionmenu">
+								<span id="tab_public_notices" class="btn btn-grey btn-sm disableItem" ><a id="link_public_notices" href="/plugin/cms/publicnotices.html" class="">Public Notices</a></span> <span id="tab_agendas_minutes" class="btn btn-grey btn-sm disableItem" ><a id="link_agendas_minutes" href="/plugin/cms/am.html" class="active">Agenda/Minutes</a></span> <span class="btn btn-grey btn-sm " ><a href="/plugin/cms/faq.html" class="">FAQ</a></span>
+						</div>
+					</div>
+					<div class="row gworks-evt-pageWrapper pageWrapper">
+
+
+												<div class='col-12' id="gworks-evt-am-form" type="agenda">
+							<div class="row">
+								<div class="col-lg-8">
+
+															<div class="text-right btns-block mb-3">
+										<button type="button" class="ml-1 btn btn-outline-secondary input-btn text-nowrap gworks-section-add">Add Section</button>
+										<button type="button" class="btn btn-outline-secondary input-btn text-nowrap gworks-page-preview-agenda">Preview</button>
+									</div>
+
+															<ul id="gworks-evt-am" class="gworks-form"></ul>
+
+														</div>
+
+														<div class="col-lg-4 gworks-evt-right-panel pageRightSideBar rightPanel">
+
+
+																					<div class="d-md-flex justify-content-between align-items-start mb-3">
+										<div class="btns-block">
+											<button type="button" class="btn btn-outline-secondary input-btn text-nowrap gworks-page-minutes" style="display: none">Switch to Minutes</button>
+										</div>
+										<div class="text-right btns-block gworks-evt-buttons">
+											<button type="button" class="btn btn-outline-secondary input-btn text-nowrap gworks-page-clone">Clone</button>
+											<button type="button" class="btn btn-secondary input-btn text-nowrap gworks-page-publish">Publish</button>
+										</div>
+									</div>
+
+															<div class="card">
+										<div class="card-header">
+											Agenda
+										</div>
+										<div class="card-body form-block">
+
+																	<div class="form-block">
+												<div class="row">
+													<div class="col-xl-12 col-sm-12">
+														<div class="form-group">
+															<label>Meeting Title</label>
+															<input type="text" class="form-control gworks-evt-blank-on-clone" name="cms_meeting.title" form-required="true" form-min-length="4" form-error-message="Please enter meeting name" placeholder="Meeting name" form-max-length="256"/>
+															<span class="fieldError gworks-evt-error"></span>
+														</div>
+													</div>
+												</div>
+
+																		<div class="row">
+													<div class="col-xl-6 col-sm-4">
+														<div class="form-group">
+															<label>Meeting Type</label>
+															<select class="form-control gworks-data-lookup-refdata" name="cms_meeting.category_ref_type_id" gworks-ref-scope="agenda_category"></select>
+															<span class="fieldError gworks-evt-error"></span>
+														</div>
+													</div>
+												</div>
+
+																		<div class="row">
+													<div class="col-xl-12">
+														<div class="form-group">
+															<label for="dname">Date/Time</label>
+
+																					<div class="d-sm-flex">
+																<div class="mr-sm-2">
+																	<input type="date" name="cms_meeting.date" class="form-control gworks-evt-body w-auto" form-required="true" max="2050-12-31" min="2000-01-01">
+																</div>
+																<div>
+																	<input type="time" name="cms_meeting.time" class="form-control gworks-evt-body w-auto" form-required="true">
+																</div>
+															</div>
+															<span class="fieldError gworks-evt-error"></span>
+
+																				</div>
+													</div>
+												</div>
+
+																		<div class="row">
+													<div class="col-xl-12 col-sm-12">
+														<div class="form-group">
+															<label>Location</label>
+															<textarea class="form-control" name="cms_meeting.location" form-required="true" form-show-char-count="true" form-min-length="4" form-max-length="256" maxlength="256" form-error-message="Please enter location" placeholder="Meeting Location"></textarea>
+															<span class="fieldError gworks-evt-error"></span>
+														</div>
+													</div>
+												</div>
+
+																		<div class="row gworks-evt-saveastemplate">
+													<div class="col-xl-12 col-sm-12">
+														<div class="objectCheckbox">
+															<label for="postNotification"><input type="checkbox" value="true" name="cms_meeting.template_fl" tabindex="0" id="postNotification" /><i></i> Save as Meeting Template for future use</label>
+														</div>
+													</div>
+												</div>
+
+																		<div class="row">
+													<div class="uploadedFiles">
+														<div class="gworks-evt-media-files datacard filesDataCard datacard-columns mt-2"></div>
+													</div>
+												</div>
+
+																		<div class="gworks-evt-publish mt-2 mb-3" style="display: none;">
+													<div class="d-flex align-items-center justify-content-start" style="margin-top: 20px">
+														<label class="w-auto m-0"><span class="text-success"><i class="fad fa-check-circle pr-1" aria-hidden="true"></i></span><span> Agenda Published</span></label>
+														<a href="#" class="d-block text-link ml-2 gworks-page-preview-agenda"><span class="gworks-evt-agenda_published_dt"></span></a>
+													</div>
+												</div>
+
+																		<div class="gworks-evt-archive mt-2 mb-3" style="display: none;">
+													<div class="d-flex align-items-center justify-content-start" style="margin-top: 20px">
+														<label class="w-auto m-0"><span class="text-delete"><i class="fad fa-check-circle pr-1" aria-hidden="true"></i></span><span> Meeting Archived</span></label>
+													</div>
+												</div>
+
+																		<div class="gworks-evt-updated mt-2 mb-3" style="display: none">
+													<div class="d-flex align-items-center justify-content-start" style="margin-top: 20px">
+														<span>Last Updated &nbsp;</span>
+														<span class="gworks-evt-updatedts"></span>
+														<a href="#" class="d-block text-link ml-2 gworks-evt-pdf-download"><i class="fa fa-file-pdf text-danger" aria-hidden="true"></i> PDF</a>
+														<a href="#" class="d-block ml-2 gworks-evt-txt-download"><i class="fa fa-file-alt" aria-hidden="true"></i> TXT</a>
+													</div>
+												</div>
+
+																	</div>
+										</div>
+									</div>
+
+															<div class="d-md-flex justify-content-between align-items-start mt-3">
+										<div class="btns-block">
+										</div>
+										<div class="text-right btns-block  gworks-evt-buttons">
+											<button type="button" gworks-evt-images-only="true" class="btn btn-secondary input-btn text-nowrap gworks-page-add-files">Add Files</button>
+											<button type="button" class="btn btn-danger input-btn text-nowrap gworks-page-delete">Delete</button>
+											<button type="button" class="btn btn-danger input-btn text-nowrap gworks-page-archive">Archive</button>
+											<button type="button" class="btn btn-save input-btn text-nowrap gworks-page-save">Save</button>
+										</div>
+									</div>
+
+														</div>
+							</div>
+						</div>
+
+
+
+
+												<script type="text/x-mustache-template" id="section-template" class=""><li class="ui-state-default gworks-section card">
+						  <div class="section-header card-header d-block">
+						    <div class="item-header d-flex align-items-center justify-content-between ht-30">
+						      <label class="fw-400" style="text-transform: none">Section title</label>
+						      <div class="d-inline-block float-right gworks-object-sortable text-right wt-100">
+						        <button class="btn gworks-section-delete" title="delete section"><i class="far fa-minus-circle text-danger" aria-hidden="true"></i></button>
+						        <button class="btn gworks-item-add" title="add new item"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+						        <span class="pf-grab ui-sortable-handle gworks-evt-sortable-grabber"></span>
+						      </div>
+						    </div>
+						    <div class="gworks-data form-group w-100 m-0">
+						      <input type="text" class="form-control w-100" placeholder="Section Title" form-required="true" form-error-message="please enter a name for this section">
+						      <span class="fieldError gworks-evt-error"></span>
+						    </div>
+						  </div>
+
+												  <ul class="sortable-items gworks-evt-itemlist card-body p-2 datacard"></ul>
+						</li></script>
+						<script type="text/x-mustache-template" id="item-template" class=""><li class="data-box bg-grey gworks-item gworks-evt-item-block">
+						  <div class="item-header d-flex align-items-center justify-content-between ht-30">
+						    <label class="fw-400">Agenda Item</label>
+						    <div class="d-inline-block float-right gworks-object-sortable text-right wt-100">
+						      <button class="btn px-1 gworks-evt-agenda-file-upload" title="upload file"><i class="far fa-upload"></i></button>
+						      <button class="btn px-1 gworks-item-delete" title="delete this item"><i class="far fa-minus-circle text-danger" aria-hidden="true"></i></button>
+						      <span class="pf-grab gworks-evt-sortable-grabber"></span>
+						    </div>
+						  </div>
+						  <div>
+						    <div class="gworks-data form-group gworks-evt-agenda w-100 m-0">
+						      <textarea class="form-control w-100" placeholder="agenda item to discuss/review" form-required="true" form-error-message="please enter an agenda item or remove it" rows="4"></textarea>
+						      <span class="fieldError gworks-evt-error"></span>
+						    </div>
+						    <input type="hidden" class="form-control gworks-evt-minute gworks-evt-mentions">
+						  </div>
+						  <div class="agenda_files clearfix mt-2 gworks-evt-agenda-files-block">
+
+						   						  </div>
+						</li></script>
+						<script type="text/x-mustache-template" id="render-agenda-template" class=""><div class="contentBox">
+								<div class="d-flex justify-content-between">
+									<div class="d-flex">
+										<div class="contentCategory">Agenda</div>
+										{{#category}}<div><span class="px-2 dot"></span><span class="contentCategory">{{category}}</span></div>{{/category}}
+									</div>
+									<div class="downloadPDF pdf-d-none">
+										<a class="pointer gworks-evt-pdf-download" gworks-uri="/cms/public/city/{{cityId}}/agenda/pdf/{{meetingId}}/"><i class="fa fa-file-pdf pr-1" aria-hidden="true"></i> Download PDF</a>
+									</div>
+								</div>
+								<div class="contentTitle">{{title}}</div>
+								<div class="contentInformation">
+									<span class="heading">Event Date/Time </span>
+									<span class="date" title="Event Date">{{meetingDate}} {{meetingTime}}</span>
+									{{#location}}
+										<span class="px-2 dot"></span>
+										<span class="heading">Location </span>
+										<span class="location">{{location}}</span>
+									{{/location}}
+								</div>
+
+														<div class="contentDivider"></div>
+
+														<ul class="mainSection contentDescription">
+									{{#data}}
+										<li>
+											<h1>{{title}}</h1>
+											<ul class="subSection">
+												{{#items}}
+													<li>
+														<span class="heading">Agenda Item</span>
+														<p class="paragraph mt-0">{{{value}}}</p>
+														{{& agendafiles}}
+													</li>
+												{{/items}}
+											</ul>
+										</li>
+									{{/data}}
+								</ul>
+
+														<div class="contentDivider"></div>
+
+														<div class="uploadedFiles smallFilesDataCard">
+									<div class="datacard filesDataCard datacard-columns mt-2">
+										{{#files}}
+										<div class="col-lg-3">
+											<div class="data-box">
+												<div class="file-data">
+													<div class="d-flex text-nowrap mt-1">
+														<i class="fa fa-file-image text-primary pr-2" aria-hidden="true"></i>
+														<h5 class="noLine"><a class="noLine text-secondary" target="_blank" href="{{{fileUrl}}}">{{name}}</a></h5>
+													</div>
+													<div class="file-info float-right">
+														<small>{{size}} KB</small>
+													</div>
+												</div>
+											</div>
+										</div>
+										{{/files}}
+									</div>
+								</div>
+							</div></script>
+
+												<script type="text/x-mustache-template" id="render-minute-template" class=""><div class="contentBox">
+								<div class="d-flex justify-content-between">
+									<div class="d-flex">
+										<div class="contentCategory">Minutes</div>
+										{{#category}}<div><span class="px-2 dot"></span><span class="contentCategory">{{category}}</span></div>{{/category}}
+									</div>
+									<div class="downloadPDF pdf-d-none">
+										<a class="pointer gworks-evt-pdf-download" gworks-uri="/cms/public/city/{{cityId}}/minutes/pdf/{{meetingId}}/"><i class="fa fa-file-pdf pr-1" aria-hidden="true"></i> Download PDF</a>
+									</div>
+								</div>
+								<div class="contentTitle">{{title}}</div>
+								<div class="contentInformation">
+									<span class="heading">Event Date/Time </span>
+									<span class="date" title="Event Date">{{meetingDate}}  {{meetingTime}}</span>
+									{{#location}}
+										<span class="px-2 dot"></span>
+										<span class="heading">Location </span>
+										<span class="location">{{location}}</span>
+									{{/location}}
+								</div>
+
+														<div class="contentDivider"></div>
+
+														<ul class="mainSection contentDescription">
+									{{#data}}
+							      <li>
+							        <h1>{{title}}</h1>
+											<ul class="subSection">
+											 {{#items}}
+													<li>
+														<span class="heading">Agenda Item</span>
+														<p class="paragraph mt-0">{{{value}}}</p>
+														{{& agendafiles}}
+														{{#minute}}
+															<span class="heading">Minutes</span>
+															<p class="text-muted">{{& minute}}</p>
+														{{/minute}}
+													</li>
+												{{/items}}
+											</ul>
+										</li>
+									{{/data}}
+								</ul>
+
+														<div class="contentDivider"></div>
+
+														<div class="uploadedFiles smallFilesDataCard">
+									<div class="datacard filesDataCard datacard-columns mt-2">
+										{{#files}}
+										<div class="col-lg-3">
+											<div class="data-box">
+												<div class="file-data">
+													<div class="d-flex text-nowrap mt-1">
+														<i class="fa fa-file-image text-primary pr-2" aria-hidden="true"></i>
+														<h5 class="noLine"><a class="noLine text-secondary" target="_blank" href="{{{fileUrl}}}">{{name}}</a></h5>
+													</div>
+													<div class="file-info float-right">
+														<small>{{size}} KB</small>
+													</div>
+												</div>
+											</div>
+										</div>
+										{{/files}}
+									</div>
+								</div>
+							</div></script>
+
+												<script type="text/x-mustache-template" id="render-minute-txt-template" class="">{{cityName}}
+						{{title}}
+						{{meetingDate}}  {{meetingTime}}
+						{{#location}}
+						{{location}}
+						{{/location}}
+
+												{{#data}}
+						{{title}}
+						{{#items}}
+
+												{{value}}
+						{{#minute}}
+
+												{{& minute}}
+						{{/minute}}
+						{{/items}}
+						{{/data}}</script>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+		<div class="modal right fade" id="gworks-evt-modalSettings" tabindex="-1" role="dialog" aria-labelledby="modalSettingsLabel">
+			<div class="modal-dialog modal-dialog-scrollable" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalSettingsLabel">Settings</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>Modal body text goes here.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-save">Save</button>
+					</div>
+				</div>
+			</div>
+		</div>		<div class="modal fade modalHelp" id="gworks-evt-help" tabindex="-1" role="dialog" aria-labelledby="modalSettingsLabel">
+			<div class="modal-dialog modal-dialog-scrollable" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalSettingsLabel">Help</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+					</div>
+				</div>
+			</div>
+		</div>	
+	<div class="modal fade" id="gworks-evt-standardModal" tabindex="-1" role="dialog" aria-labelledby="gworks-evt-standardModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+	        <h5 class="modal-title gworks-evt-standardModalLabel"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true"><i class="fal fa-times" aria-hidden="true"></i></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="detail_card gworks-evt-standardModalBody" style="min-height: 50px">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-primary btn-sm gworks-evt-standardModalCancel" id="gworks-evt-standardModalCancel" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-save btn-sm gworks-evt-standardModalSubmit" id="gworks-evt-standardModalSubmit">Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		<div class="modal fade" id="gworks-evt-custom-standardModal" tabindex="-1" role="dialog" aria-labelledby="gworks-evt-standardModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+	        <h5 class="modal-title gworks-evt-standardModalLabel"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true"><i class="fal fa-times" aria-hidden="true"></i></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="detail_card gworks-evt-standardModalBody" style="min-height: 50px">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-primary btn-sm gworks-evt-standardModalCancel" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-save btn-sm gworks-evt-standardModalSubmit">Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>	<script>
+		document.querySelector('body').style.display = 'none';
+	</script>
+
+		<div class="fp-loader gworks-evt-fp-loader d-none"><i class="loading-icon fa fa-spinner-third fa-spin" aria-hidden="true"></i></div>
+	<div class="gworks-evt-popoverContent2" style="display:none;">
+		<div class="nameNstatus">
+			<div class="pr-2">
+				<div class="name gworks-evt-popup-title"></div>
+			</div>
+			<div class="gworks-evt-popup-status">
+			</div>
+		</div>
+
+			<div class="gworks-evt-popup-email-block">
+		</div>
+
+
+				<div class="gworks-evt-popup-tel-block">
+		</div>
+
+			<div class="gworks-evt-popup-address-block">
+
+			</div>
+
+			<div class="popovrActions gworks-evt-popup-action-block">
+		</div>
+	</div>
+	<script>
+	window.configData={secure:true,
+	                    apiEndPoint:'https://api.dev.gworks.cloud',
+	                    externalApiEndpoint:'https://hubs.dev.gworks.cloud',
+	                    cdnDomain:'.dev.gworks.cloud',
+	                    filesUrl:'https://files.dev.gworks.cloud',
+	                    siteMode:'city',
+	                    pageId:'',
+	                    master:false, 
+	                    env: 'dev', 
+	                    ubURL: 'https://portal.dev.gworks.cloud/u/utility-billing', 
+	                    ubURLInQA: 'https://portal.dev.gworks.cloud/u/utility-billing',
+	                    hrEmployeeURL: 'https://portal.dev.gworks.cloud/h/hr/employee/employees',
+	                    hrPayrollURL: 'https://portal.dev.gworks.cloud/h/hr/payroll/payroll-overview/payroll-overview-list',
+	                    hrTimetrackerURL: 'https://portal.dev.gworks.cloud/h/hr/timetracker/timesheets',
+	                    hrReportsURL: 'https://portal.dev.gworks.cloud/h/hr/reports/report',
+	                    hrSettingsURL: 'https://portal.dev.gworks.cloud/h/hr/settings/deduction', 
+						hrEmployeeURLInQA: 'https://portal.dev.gworks.cloud/h/hr/employee/employees',
+	                    hrPayrollURLInQA: 'https://portal.dev.gworks.cloud/h/hr/payroll/payroll-overview/payroll-overview-list',
+	                    hrTimetrackerURLInQA: 'https://portal.dev.gworks.cloud/h/hr/timetracker/timesheets',
+	                    hrReportsURLInQA: 'https://portal.dev.gworks.cloud/h/hr/reports/report',
+	                    hrSettingsURLInQA: 'https://portal.dev.gworks.cloud/h/hr/settings/deduction', 
+	                    myAccountProfileURL: 'https://portal.dev.gworks.cloud/h/my-account/profile',
+	                    myAccountLeaveBalanceURL: 'https://portal.dev.gworks.cloud/h/my-account/leave-balance/leave-balance-list',
+	                    myAccountLeaveRequestURL: 'https://portal.dev.gworks.cloud/h/my-account/leave-request/leave-request-list',
+	                    myAccountTimesheetURL: 'https://portal.dev.gworks.cloud/h/my-account/my-timesheet/my-timesheet-detail',
+	                    myAccountPaystubURL: 'https://portal.dev.gworks.cloud/h/my-account/paystubs',
+	                    opsHubURL: 'https://portal.dev.gworks.cloud/o/ops',
+	                    opsHubURLInQA: 'https://portal.dev.gworks.cloud/o/ops',
+	                    financeHubURL:'https://portal.dev.gworks.cloud/f/finance',
+	                    mapsHubURL:'https://portal.dev.gworks.cloud/m/maps',
+	                    financeHubURLInQA: 'https://portal.dev.gworks.cloud/f/finance',
+	                    mapsHubURLInQA: 'https://portal.dev.gworks.cloud/m/maps',
+						mapsHubBasePublicURL: 'https://*.maps.dev.gworks.cloud/',
+	                    upgradeUrl: '/s/upgrade.html',
+	                    permitFeatureEnabled: 'true',
+						dataMigrationAutomationEnabled: 'false',
+						phoneSearchEnabled: false,
+						ubmaxLambdaApiEndpoint: '',
+						simpleCityLambdaApiEndpoint: '',
+	                    };  
+
+		</script>
+
+		<script>
+		const mapsHubBasePublicURL = window.configData.mapsHubBasePublicURL;
+		const mapsPattern = new RegExp(`^${mapsHubBasePublicURL.replace(/\*/g, '.*')}$`);
+		const isMapsURL = mapsPattern.test(window.location.href);
+		window.configData['isMapsURL'] = isMapsURL;
+		if(isMapsURL) {
+			document.querySelector('body').style.display = 'none';
+			document.title = 'Loading maps...';
+		} else {
+			document.querySelector('body').style.display = '';
+		}
+	</script>
+
+		<script src="/ext/jquery/3.4.1/jquery.min.js?v=21-MM-DD-000DEV000"></script><script src="/ext/jquery-ui/1.12.1/js/jquery-ui.min.js?v=21-MM-DD-000DEV000"></script><script src="/ext/popper/1.16.0/popper.min.js?v=21-MM-DD-000DEV000"></script><script src="/ext/bootstrap/4.5.0/js/bootstrap.min.js?v=21-MM-DD-000DEV000"></script><script src="/ext/toastr/2.1.3/toastr.js?v=21-MM-DD-000DEV000"></script><script src="/ext/mustache/4.0.1/mustache.min.js?v=21-MM-DD-000DEV000"></script><script src="/ext/moment/moment.min.js?v=21-MM-DD-000DEV000"></script><script src="/js-app/gworks.core.js?v=21-MM-DD-000DEV000"></script><script src="/js-app/gworks.city.js?v=21-MM-DD-000DEV000"></script><script src="/plugin/311/js/city.plugin.js?v=21-MM-DD-000DEV000"></script><script src="/plugin/payments/js/city.plugin.js?v=21-MM-DD-000DEV000"></script><script src="/plugin/cms/js/city.plugin.js?v=21-MM-DD-000DEV000"></script><script src="/plugin/forms/js/city.plugin.js?v=21-MM-DD-000DEV000"></script><script src="/plugin/messaging/js/city.plugin.js?v=21-MM-DD-000DEV000"></script><script src="/plugin/utilities/js/city.plugin.js?v=21-MM-DD-000DEV000"></script><script src="/plugin/payroll/js/city.plugin.js?v=21-MM-DD-000DEV000"></script>
+
+		<script src="/ext/datatables/1.10.21/js/datatables.min.js"></script><script src="/ext/datatables/dataTables.buttons.min.js"></script><script src="/ext/datatables/dataTables.select.min.js"></script>
+
+
+
+				<script src="/ext/datetimepicker/3.1/js/daterangepicker.min.js"></script>
+	<script src="/ext/mentions/jquery.mentionsInput.js"></script>
+
+
+
+				<script src="/ext/tinymce/5.4.1/tinymce.min.js"></script>
+	<script src="/ext/tinymce/5.4.1/jquery.tinymce.min.js"></script>
+
+
+			<script src="/ext/sticky-sidebar/sticky-sidebar.js"></script>
+
+
+
+				<script src="/plugin/cms/js-app/meeting-editor.js?v=21-MM-DD-000DEV000" type="text/javascript"></script>
+
+
+			<script>
+	$(function (){
+		if ( window.configData.secure && !window.$gworks.api.initSecure() ){
+			window.location = (window.configData.master) ? '/master/index.html' : '/login.html';
+		} else {
+
+
+						try {
+					if(window.configData.isMapsURL) {		
+						window.$gworks.core.loadingOn()
+						let currentDomain = window.location.hostname;
+						let domainParts = currentDomain.split('.');
+						let containsMaps = domainParts.some(part => part.includes('maps'));					
+						window.$gworks.api.get({
+						url: `${window.configData.apiEndPoint}/core/public/utils/lookup/maps/domain/${domainParts[0]}`,
+						fnSuccess: function (data) {
+							if(data && data['isCustomMapsDomain'] && data['isCustomMapsDomain'] == true && data['access']) {
+								const iframeURI = `${window.configData.mapsHubURL}?token=${data['access']}`;
+								let newBody = $("<body>").append($("<iframe>").attr("src", iframeURI).css("width", "100%").css("height", "100vh").css("border", "0"));
+								$("body").replaceWith(newBody);
+								document.title = data['cityName'];
+								$('body').show();
+								return;
+							}
+							else {
+								console.error({ data, message: 'not a maps city' })
+							}						
+						},
+						fnError: function (error) {
+							console.error(error) 
+							location.reload()
+						}
+					});
+					}
+				} catch (error) {
+					console.log(error)
+				}
+				finally {
+					try {
+						window.$gworks.core.loadingOff()
+					}
+					catch(error) {
+						console.log(error)
+					}
+				}
+
+					if(window.configData.isMapsURL) return;
+
+					if (window.configData.master){
+					onPageReady();
+					window.$gworks.master.onPageLoad();
+				} else {
+					if (window.configData.secure) {
+						window.$gworks.lookup.loadViaCityCode(function (){
+							window.$gworks.city.menuActive('fd-publicinfo','');
+							onPageReady();
+						});
+				 	} else {
+						onPageReady();
+					}
+				}
+		}
+	});
+
+		function onPageReady(){
+
+				window.$gworks.core.onPageLoad();window.$gworks.city.onPageLoad();
+	}
+	</script>
+
+		<div style="display:none">Build Version 21-MM-DD-000DEV000</div></body>
+</html>

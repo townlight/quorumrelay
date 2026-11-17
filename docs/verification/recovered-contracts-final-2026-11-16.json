@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-16",
+  "base": "897442bf99dff40c4bd03126009083ad9fd485a3",
+  "delivery": "local_uncommitted_candidate_only",
+  "scope": "Available recovered contracts: gWorks development meeting/editor/media workflows; MinuteTraq native reads, meeting/title writes and M2 recording transfer; Laserfiche import recovery regression application.",
+  "final_python": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "2963",
+    "time": "352.366",
+    "timestamp": "2026-11-16T13:15:22.418147-07:00",
+    "hostname": "Halo"
+  },
+  "command": "python -X utf8 -m pytest tests -q --tb=short --junitxml=final-python.xml",
+  "junit_sha256": "35014860b0ee576e548633d12528f0c1f1206a37bce66fd3752e09bf733bb2a6",
+  "candidate_snapshot_sha256": "960a94f7c59bf41a69a9b1b65bf255922d12917d52e72ac2c5ecc59dd0df9b44",
+  "candidate_files_verified_unchanged": 725,
+  "capability_validation": {
+    "status": "passed",
+    "evidence_records": 469,
+    "outbound_mappings": 190,
+    "errors": 0
+  },
+  "metadata_tests": {
+    "passed": 25,
+    "failed": 0,
+    "seconds": 1.31
+  },
+  "ruff": "passed src tests scripts examples",
+  "client": "unchanged against HEAD; existing build/test evidence reused",
+  "live_vendor_calls": false,
+  "accounts_payments_contacts_releases": false,
+  "product_worker": "deepseek-v4.1-flash:1017-cloud",
+  "think": "low",
+  "primary_product_coding": false,
+  "remaining_contract_gaps": [
+    "Essential authenticated response envelopes/pagination",
+    "TelVue Connect upload initialization/readiness/association",
+    "MinuteTraq broader document import with deletion/publication effects outside mapped operations",
+    "gWorks production applicability"
+  ],
+  "owned_jobs": "all terminal"
+}

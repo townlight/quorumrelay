@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-14",
+  "client_url": "https://galenaks.frontdeskgworks.com/plugin/cms/js/citizen.plugin.js?v=26-11-12-7b140d5a1a",
+  "client_sha256": "434091b1dccf150ccf44bfea966386b3cadb6c73753292d200fecf1f8880d0db",
+  "declared_request": {
+    "method": "POST",
+    "path": "/cms/secure/city/meeting/list",
+    "range_field": "cms_meeting.meeting_ts",
+    "response_rows": "data.data"
+  },
+  "saved_format": "gworks-secure-calendar-json",
+  "city_binding": "Explicit configured gworks_city_id; response does not independently assert its tenant. Namespace compatibility is configuration, not live authentication proof.",
+  "limits": "Saved response mapping only; no live account read, native search, writes, inferred paging/time units or publication-flag document URLs."
+}

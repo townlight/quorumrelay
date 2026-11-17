@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-14",
+  "scope": "New specific primary product API leads; not an exhaustive-public-search claim or executable payload contract.",
+  "primegov": {
+    "year_in_review_url": "https://granicus.com/wp-content/uploads/application/pdf/webinar-GovM-Year-in-Review.pdf",
+    "document_date": "2024-01-09; reviews2023",
+    "status": 200,
+    "bytes": 4038229,
+    "sha256": "64c713d064d9cd8387dd9711f02b9d972d4ec3a4478bd601e56c52db83be9231",
+    "relevant_page": 30,
+    "finding": "OneMeeting Secure API initial release, additional fees at that historical date; Votes API adds Item ID, Section ID and Position. No operation paths or request/response schemas. Current fee/tier/version not established.",
+    "vendor_proposal_url": "https://oaklandpark.novusagenda.com/agendapublic/AttachmentViewer.ashx?AttachmentID=35802&ItemID=10613",
+    "proposal_status": 200,
+    "proposal_bytes": 16343680,
+    "proposal_sha256": "1b79fb7a5133b58f752f150a2d270b2065e14f14adc4b918b1c0accc0e314b3e",
+    "proposal_product": "Granicus vendor response RFP#070623, OneMeeting Legislative Management Suite",
+    "selected_pages": [
+      21,
+      22,
+      102
+    ],
+    "extract_sha256": "da8e405fe789f6d52cf535b57d8e7212f18ee05a0c61f896650a4f617faaf1ed",
+    "finding_proposal": "API/SDK can be provided; OneMeeting RESTful datasets are published and access controlled by client. The Open Platform description is distinct from OneMeeting. No method/auth/input/readback schema supplied.",
+    "limits": "Historical feature and deployment-access evidence, not executable contract or proof schema is unavailable publicly elsewhere. No fee/account/outreach or live mutation required for synthetic acceptance."
+  },
+  "escribe": {
+    "primary_service_url": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc",
+    "declared_wsdl": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc?wsdl",
+    "declared_single_wsdl": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc?singleWsdl",
+    "exact_direct_single_wsdl_result": "HTTP403; no retries, alternative-UA, login or SOAP method calls.",
+    "indexed_primary_snapshot": "Exa fetch/search returns WCF Publishing Service landing instructions with PublishingServiceClient and declared metadata links, not XML types or operations.",
+    "limits": "Exact metadata request currently inaccessible; not proof of authentication requirement, private-only schemas, lack of APIs, or writable publishing operations."
+  },
+  "boardbook_simbli_followup": "Targeted product-specific API/import searches returned official FAQs/guides and UI feature pages, including conversion support for XML attachments. XML as an uploadable attachment is not an agenda import schema. No new executable machine contract established; no outside-only assertion."
+}

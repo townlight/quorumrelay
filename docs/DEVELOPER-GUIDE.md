@@ -1,15 +1,8 @@
 # Developer integration guide
 
-QuorumRelay is a standalone civic-data engine for your own application, service,
-script or agent. It does not require a Townlight installation, an application
-database, a model provider or a hosted QuorumRelay account. Use the Python API in
-process, or run the optional service for HTTP, TypeScript and MCP consumers.
+Python **0.1.0.dev14**, TypeScript **0.1.0-dev.14**, schema **2.0.0**.
 
-This guide describes **0.1.0.dev8**, schema **2.0.0**. It is a development preview.
-Provider coverage varies by operation. Live account and vendor-write acceptance
-remain deferred; publication of the code and documentation is not a claim that
-those checks passed. Start with the [user manual](USER-MANUAL.md),
-[architecture](ARCHITECTURE.md) and [capability evidence](capabilities/README.md).
+The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 18 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. Use [delivery scope](DELIVERY-SCOPE.md) to select a provider and verify supported operations.
 
 ## 1. Choose an integration path
 
@@ -39,6 +32,10 @@ python -m venv .venv
 python -m pip install -e ".[service]"
 quorumrelay providers
 ```
+
+The clone commands above obtain the public preview. For this integrated source,
+start in the operator-provided approved checkout and run the venv/install steps
+there; do not expect its local commit to be available from the public remote.
 
 For an application deployment, pin a reviewed commit or explicit wheel rather
 than following a moving branch. Install the core without extras for an in-process
@@ -310,7 +307,7 @@ npm ci
 npm run build
 npm pack
 # In your own application:
-npm install /path/to/quorumrelay-client-0.1.0-dev.8.tgz
+npm install /path/to/quorumrelay-client-0.1.0-dev.14.tgz
 ```
 
 ```typescript
@@ -322,7 +319,7 @@ const client = new QuorumRelayClient({
   timeoutMs: 90_000,
 });
 const info = await client.info();
-if (info.data.version !== "0.1.0.dev8") throw new Error("Service pin mismatch");
+if (info.data.version !== "0.1.0.dev14") throw new Error("Service pin mismatch");
 try {
   const result = await client.execute("providers", {});
   console.log(result.status, result.data, result.errors, result.coverage);
@@ -396,10 +393,10 @@ the actor permission or establish live vendor acceptance. The application must
 supply durable storage, current operation/source policy, provider credentials,
 explicit writable resources and approval of the exact immutable plan.
 
-1. Call `plan_write` with the source and typed changes/files.
+1. Call `plan_write` with the source and typed changes/files. Planning checks cancellation and its total deadline after provider preflight and before storing the approval plan; an interrupted or expired preflight returns no plan. Checks are cooperative after synchronous work returns.
 2. Display the actual planned native request, before state, changes and limits.
 3. Obtain product approval and retain `plan_id` plus `plan_hash`.
-4. Call `commit_write` with only those exact values under the same current scope.
+4. Call `commit_write` with only those exact values under the same current scope. The coordinator checks cancellation again after persisting each new intent, before invoking the adapter; a cancellation observed there produces a durable cancelled item without sending it. An existing uncertain send remains uncertain and cannot be replayed.
 5. Read `receipt`; reconcile ambiguous/lost responses before retrying.
 
 Do not pass identity, credentials or `authorization` in operation JSON. CLI/HTTP
@@ -408,12 +405,44 @@ grants; a hash itself is not a grant. Native provider policy additionally binds
 namespaces, operations and resource/meeting IDs. Current policy revocation is
 checked again at commit and readback. Create operations are not blindly replayed
 after a lost response. The exact [write contract](WRITE-CONTRACT.md) documents
-Legistar, Wistia, Repository and Essential mappings and unresolved live behavior.
+Legistar, Wistia, Repository, Essential and later Granicus mappings, their field
+limits, and the distinction between source and frozen-artifact evidence.
 
-Publication is allowed while this vendor acceptance remains deferred. Never turn
-a synthetic receipt into a claim that a real tenant was changed. The executable
+Never turn a synthetic receipt into a claim that a real tenant was changed. The executable
 examples refuse non-mock commits; they cannot be repurposed as live acceptance
 without a separately configured designated test environment.
+
+### Later local source mapping guides
+
+These guides describe additive source formats or workflows. They share the same
+engine/interfaces and preserve the original 34 compatibility readers. Use a source
+checkout containing the mapping; the frozen dev8 wheel is not silently updated.
+
+| Supplied source or workflow | Mapping and limits |
+|---|---|
+| BoardBook public rendered agenda | [Native item hierarchy and document associations](BOARDBOOK-DETAIL.md) |
+| Boardable existing legacy agenda | [Sibling reorder and item text/description edits](BOARDABLE-WRITES.md); exact plan/commit/full snapshot readback, no draft creation or file upload |
+| Boardable public search | [Declared search and capture-bound numeric IDs](BOARDABLE-SEARCH.md); title/excerpts only, unbound candidates explicit |
+| Boardable known listing record | [Scoped capture-bound detail retrieval](BOARDABLE-DETAIL.md); no guessed slugs or implicit document download |
+| AgendaQuick supplied public agenda | [Native linked memo IDs and packet locator](AGENDAQUICK-DETAIL.md); supplied memo sections/PDF locator, no inferred adopted motion/vote |
+| TownCloud rendered agenda | [Capture-local hierarchy and native attachment links](TOWNCLOUD-AGENDA.md); existing format and explicit download origins |
+| iQM2 supplied meeting detail | [Native meeting/files and contextual FileOpen controls](IQM2-DETAIL.md); historical references kept separate |
+| Town Hall Streams event | [Player citation and declared HLS locator](TOWN-HALL-STREAMS-DETAIL.md); a playlist is not verified media segments |
+| CHAMP event JSON | [Native agenda parents, documents and timeline anchors](CHAMP-AGENDA.md); no inferred transcript or speaker |
+| eSCRIBE rendered agenda | [Capture-local agenda positions and supplied documents](ESCRIBE-DETAIL.md) |
+| Simbli selected item | [Fresh item content and same-meeting attachment mapping](SIMBLI-ITEM-CONTENT.md) |
+| CivicWeb FilePro | [Pinned SOAP reads and saved-response mapping](CIVICWEB-FILEPRO.md) |
+| Wistia replacement | [Exact approved replacement and provider job/readback](WISTIA-SWAP.md) |
+| Tyler Meeting Manager | [Public calendar, selected detail/documents and search](TYLER-PUBLIC.md); staff writes and complete archive remain unverified |
+| OnBase public windows and selected details | [Public listing and selected detail mapping](ONBASE-PUBLIC-WINDOWS.md); [prepared Normal Tagged DIP files](ONBASE-DIP.md) are not a remote Agenda import/association |
+| BoardDocs public listing and selected printable agenda | [Opt-in third-party-source-backed mapping](BOARDDOCS-PUBLIC.md); no paging or linked-file fetch |
+| CivicClerk Select detail/files and section writes | [Official contract and scoped mapping](CIVICCLERK-SELECT.md); selected published agenda/files and exact section plan/commit/readback |
+| TelVue Connect existing playlist | [Native client reorder and media membership addition](TELVUE-WRITES.md); exact plan/commit/v2 readback, no upload or vendor meeting association |
+
+For Granicus Platform/MediaVault and other supported field mappings, consult the
+[write contract](WRITE-CONTRACT.md#later-local-source-mappings) and
+[per-operation capability evidence](capabilities/README.md). A configured detail
+page or supplied file is not a complete source catalog; preserve partial coverage.
 
 ## 10. Schemas and connector/storage extensions
 
@@ -432,6 +461,23 @@ Implement `Connector` from `quorumrelay.extensions`, run
 The conformance helper checks hook shape/capability return type without opening
 provider sockets or performing writes. It does not certify a provider contract.
 New connectors use the same record/result/security boundary across all transports.
+Existing connectors keep `discover(source, bounds, context)`. A connector needing
+discovery request fields such as `record_types` may additionally implement
+`discover_request(source, request, bounds, context)`. The engine prefers this
+optional hook, and `check_connector` checks its four-argument shape when present.
+Cablecast uses it to return only requested meeting records; requests containing
+only other record types return `unsupported` without fetching the listing.
+For supplied saved bytes, an extension may also implement
+`discover_content(engine, source, request, content, bounds, context)`. The engine
+prefers this hook when direct `content` bytes or a `content_base64` request field
+are supplied; the hook receives direct bytes in `content` and the original request
+(including encoded content, if provided). It must validate encoded content before
+use. With neither supplied, normal request-aware or legacy discovery is unchanged.
+`check_connector` validates its six-argument shape when present. Cablecast uses
+this hook to parse saved show/list captures without a provider network request,
+with shared selection, filters, bounds and checkpoints; coverage is partial and
+does not claim a complete upstream catalog. This is current source behavior, not
+a claim about an older installed package.
 An additive parser can be registered with `engine.register_parser`; baseline
 formats cannot be replaced through this path. The runnable
 [example connector](../examples/example_connector.py) demonstrates registration.
@@ -456,3 +502,28 @@ automatically prove your deployment's credentials, provider access, reverse prox
 OAuth authority, installed application or live write/readback behavior. Record
 those separately. See [release notes](RELEASE-NOTES.md) for development artifacts
 and the [user manual](USER-MANUAL.md) for operational troubleshooting.
+
+The local source also supports a supplied Novus cover sheet through `novus-public-coversheet-html`; see [native item/meeting and attachment bindings](NOVUS-COVERSHEET.md). This additive route is not in frozen dev8.
+
+Existing `clerkbase-document-html` now retains supplied [document body/paragraph text](CLERKBASE-DOCUMENT.md) in local source for search and neutral export, preserving original compatibility output. Frozen dev8 is unchanged.
+
+Supplied source prose is also retained as capture-bound `record.text` segments in Novus cover sheets/meeting views, iQM2 meeting detail, BoardBook description/discussion fields and Simbli available rich-text controls. These are source text, not OCR/ASR or inferred actions. [Affected source and all four reference-client source-only checks](verification/source-text-reference-clients-2026-11-12.json) distinguish persistence/retry/search/export/reopen proof from frozen installed-candidate acceptance.
+
+Digital Towpath’s existing detail format also retains named supplied category, venue/address, local wall time (timezone unknown), description and rendered agenda/minutes availability text. Category is not inferred to be the governing body. Description reaches `record.text` with capture provenance; minutes pending never creates a minutes file. [Saved/default engine, search/export and revision evidence](verification/towpath-supplied-detail-2026-11-12.json) preserves the pinned compatibility output.
+
+Utah’s existing notice-detail format retains the explicitly labeled public body and same-origin native public-body link, entity/government type, literal notice/post/edit labels, meeting location and other supplied labeled fields. Posted/edited times do not assert a timezone or normalized workflow status. The existing single `notice.text` segment stays unchanged. [Saved/default, relationship, search/export and revision checks](verification/utah-supplied-detail-2026-11-12.json) preserve the original compatibility output.
+
+For this release, see the separate [GWorks published HTML](GWORKS-PUBLISHED-HTML.md) and [TownCloud existing draft update](TOWNCLOUD-WRITES.md) usage. These changes postdate the preserved dev13 artifacts.
+
+Local provider file preparation keeps the total deadline active while saving streamed output. CivicPlus historical files, OnBase DIP, SuiteOne HTML and TelVue chapter CSV check bounds before exposing a downloadable artifact. An expired save returns no artifact; temporary partial files are removed. Checks are cooperative after synchronous storage returns. [Regression evidence](verification/provider-file-completion-bounds-2026-11-15.json).
+
+The local eSCRIBE [PublishingService mapping](ESCRIBE-PUBLISHING-SERVICE.md) now pins a deployed WSDL/five XSDs and implements scoped native record reads/create/update plus metadata-bound document bytes. Exact native parameters and synthetic coordinator evidence are separate from public portal HTML, chunk-upload semantics and live deployment/visibility acceptance.
+
+
+Boardable current-builder update (2026-11-16): explicit current_agenda_builder mode
+now implements item create/update and associated uploads, with exact tree/item
+readback and original-byte hash checks. 105 affected synthetic cases passed.
+Separate authorized browser trial observed create201/update-upload200 and exact
+134-byte download. See `BOARDABLE-WRITES.md` and
+`verification/boardable-current-builder-2026-11-16.json` under docs.
+Full meeting forms, recurring days, publication and imports remain open.

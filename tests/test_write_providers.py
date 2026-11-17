@@ -223,6 +223,9 @@ class DocumentedNetwork:
                 return response({"value": self.fields.get(identity, [])})
             if tail.endswith("/Tags"):
                 return response({"value": [{"name": t} for t in self.tags.get(identity, [])]})
+            if tail.endswith("/Document/Pages"):
+                return response({"value": [{"pageNumber": n, "hasText": True, "hasImage": False}
+                                            for n, _ in enumerate(self.pages.get(identity, []), 1)]})
             if "/Pages/" in tail:
                 number = int(tail.split("/Pages/")[1].split("/")[0])
                 return response({"text": self.pages[identity][number - 1]})
@@ -259,7 +262,9 @@ class DocumentedNetwork:
 
 def make_engine(tmp_path, provider, permissions, network=None):
     network = network or DocumentedNetwork(provider)
-    namespace = {"legistar": "fixture-city", "wistia": "fixture-account", "laserfiche": "repo1"}[provider]
+    namespace = {"legistar": "//webapi.legistar.com/v1/fixture-city",
+                 "wistia": "//fixture-account.wistia.com",
+                 "laserfiche": "//api.laserfiche.com/repository/v2/Repositories/repo1"}[provider]
     source_url = {
         "legistar": "https://webapi.legistar.com/v1/fixture-city/events",
         "wistia": "https://fixture-account.wistia.com/",
@@ -571,10 +576,11 @@ def test_generic_mcp_input_handle_is_resolved_with_current_policy_and_ttl(tmp_pa
     result = engine.execute("plan_write", {"source": source, "changes": [change]}, context=context)
     assert result.status == ("failed" if expired else "completed"), result.public_dict()
     if not expired:
+        assert "content_base64" not in json.dumps(result.data["plan"]["changes"])
         assert "file_handle" not in json.dumps(result.data["plan"]["changes"])
         assert result.data["plan"]["changes"][0]["native"]["files"][0]["reference"]["byte_length"] == 15
 
-def test_canonical_read_namespace_and_legacy_write_slug_route_same_client_without_identity_rewrite(tmp_path):
+def test_canonical_read_namespace_routes_same_client_without_identity_rewrite(tmp_path):
     from dataclasses import replace
     from civic_data_connectors import Source, create_engine
     from civic_data_connectors.providers.contracts import Response
@@ -599,8 +605,9 @@ def test_canonical_read_namespace_and_legacy_write_slug_route_same_client_withou
     assert ("POST", "/v1/fixture-city/Events") in network.calls
     # Credential policy remains exact; a token authorized only for the historical
     # slug does not silently gain access to the richer source identity.
+    slug_only = replace(context, credentials={"legistar": {**config, "allowed_namespaces": ["fixture-city"]}})
     denied = engine.execute("plan_write", {"source": shared_source, "changes": [{"key": "blocked",
-        "entity": "event", "operation": "create", "fields": {"EventDate": "2026-11-11"}}]}, context=context)
+        "entity": "event", "operation": "create", "fields": {"EventDate": "2026-11-11"}}]}, context=slug_only)
     assert denied.status == "failed"
     assert denied.errors[0].code == "permission_denied"
     mismatch = {**shared_source, "url": "https://webapi.legistar.com/v1/other-city/events"}
@@ -631,7 +638,8 @@ def test_repository_canonical_read_write_identity_preserves_exact_credential_sco
     result, _ = run(engine, canonical, source, change)
     assert result.status == "completed", result.public_dict()
     assert network.files["1"] == b"synthetic scoped file"
-    denied = engine.execute("plan_write", {"source": source, "changes": [change]}, context=context)
+    slug_only = replace(context, credentials={"laserfiche": {**config, "allowed_namespaces": ["repo1"]}})
+    denied = engine.execute("plan_write", {"source": source, "changes": [change]}, context=slug_only)
     assert denied.status == "failed"
     assert denied.errors[0].code == "permission_denied"
     mismatch = {**source, "url": legacy["url"].replace("repo1", "repo2")}

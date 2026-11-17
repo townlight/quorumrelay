@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "c2ddf3c",
+  "status": "PASSED",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "scope": "Existing Utah notice source-declared calendar and audio locators; exact raw calendar transfer and neutral preservation. Legacy output unchanged.",
+  "new_cases": 13,
+  "reproduction": {
+    "command": "pytest tests/test_utah_supplied_assets.py -q",
+    "failed_before_fix": 7,
+    "passed_before_fix": 3,
+    "scope": "Initial10cases reproduce missing locators/transfer. Three additional audio/hidden/post-response cancellation cases added after fix."
+  },
+  "checks": [
+    {
+      "command": "pytest tests/test_utah_supplied_assets.py tests/test_utah_detail.py tests/test_utah_public.py tests/test_utah_search.py tests/test_recording_retrieval.py tests/test_fetch.py tests/test_baseline.py tests/test_baseline_search.py tests/test_storage_search_imports.py tests/test_interchange.py -q",
+      "passed": 211,
+      "failed": 0,
+      "seconds": 19.53,
+      "warnings": "One existing starlette/anyio BlockingPortal deprecation."
+    },
+    {
+      "command": "ruff check src/civic_data_connectors/providers/utah_detail.py src/civic_data_connectors/providers/retrieval.py tests/test_utah_supplied_assets.py",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/utah_detail.py",
+      "sha256": "3507a9c9c2a1609294d734dfde09b2ade38c19bf148d1caa94340fa213884920"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "fd52efa014fbb71b73bcb15bea4b6f0da87e4544d7a6886246f858135b50ddd8"
+    },
+    {
+      "path": "tests/test_utah_supplied_assets.py",
+      "sha256": "4e2e3e88290b561acdcc9294ef90d0cb569ea5c2c4dd2141f80b833236854a32"
+    },
+    {
+      "path": "tests/fixtures/utah-notice-1101977.ics",
+      "sha256": "d95c10ef73ebd5d91615a461e7b149659f734e9bfc2980d092953464bd1bac93"
+    },
+    {
+      "path": "docs/capabilities/evidence/utah-supplied-assets/source.json",
+      "sha256": "d4e970917708dfcf57c9a274597f1e1a16f62851f091e00b6b5c5d811b455fe1"
+    }
+  ],
+  "unaffected_evidence_reused": {
+    "receipt": "docs/verification/write-response-bounds-2026-11-15.json",
+    "full_suite_passed": 1936,
+    "scope": "Prior full suite; changed Utah and shared retrieval/interchange/baseline behavior checked by211affected cases. No new full suite claimed."
+  },
+  "limits": [
+    "No semantic calendar merge; downloaded calendar remains opaque exact source bytes with MIME/header/footer checks.",
+    "MP3 locator is actual source data; audio-byte transfer synthetic, no playback/duration/transcription/date claim.",
+    "No create/update/publish or vendor mutation; no release."
+  ]
+}

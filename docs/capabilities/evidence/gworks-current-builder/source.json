@@ -1,0 +1,40 @@
+{
+  "observed_at": "2026-11-15T10:42:00.442230+00:00",
+  "captures": [
+    {
+      "url": "https://www.gworks.com/resource/frontdesk-agendas-and-minutes-builder",
+      "file": "builder.html",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 82708,
+      "sha256": "64911a15160a706b3f98ef61483f188a34833e2b5361f653592ad0319b805766",
+      "final_url": "https://www.gworks.com/resource/frontdesk-agendas-and-minutes-builder"
+    },
+    {
+      "url": "https://f.hubspotusercontent20.net/hubfs/7808826/Published%20Minutes%20Using%20Agenda%20%26%20Minutes%20Builder-1.pdf",
+      "file": "published-minutes.pdf",
+      "status": 200,
+      "content_type": "application/pdf",
+      "bytes": 910511,
+      "sha256": "e0b45a4d73aac612bf5c56e03b7ea2f4d1e33f646f47066edda408c160121a6e",
+      "final_url": "https://f.hubspotusercontent20.net/hubfs/7808826/Published%20Minutes%20Using%20Agenda%20%26%20Minutes%20Builder-1.pdf"
+    },
+    {
+      "url": "https://fast.wistia.net/embed/iframe/ylfk2zpd7f",
+      "file": "tests/fixtures/wistia-public/iframe-ylfk2zpd7f.html",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 11499,
+      "sha256": "40809e020ba47e669dfbeec71e15176b74e77545fb493d9762ea810788a1d38a",
+      "final_url": "https://fast.wistia.net/embed/iframe/ylfk2zpd7f"
+    }
+  ],
+  "scope": "Declared vendor source GETs only; no login, API invocation or mutation",
+  "findings": [
+    "Current official builder page declares PDF and Wistia iframe.",
+    "PDF is one raster screenshot of published public-user minutes UI with agenda item/minutes text, not a remote import/API schema.",
+    "Declared Wistia iframe includes literal W.iframeInit JSON, media hashedId and one eng caption text (1366characters). Supplied caption is staff workflow narrative, not endpoint/request/readback contract.",
+    "Original Galena citizen core/plugin source already inspected; shell declares citizen mode and no admin host. No guessed staff route, login, test-auto endpoint or mutation invoked."
+  ],
+  "limits": "This exact source chain does not establish gWorks write request/readback or prove all other public documentation absent. Public Wistia metadata/captions are a separate existing-provider read lead."
+}

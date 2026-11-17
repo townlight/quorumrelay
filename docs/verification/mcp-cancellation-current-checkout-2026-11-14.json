@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "61fdd73",
+  "status": "PASSED",
+  "checks": [
+    {
+      "command": "pytest tests -q",
+      "passed": 1812,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 98.877,
+      "junit_sha256": "53111f7d71ceb428fcd2968b3cba77cef3f1c7b485dad881c9b6a220d2608869"
+    }
+  ],
+  "scope": "Cooperative cancellation releases an in-flight progress notification and persists the actual engine result. Synthetic stdio/HTTP fixture subprocesses explicitly import this checkout rather than the shared environment editable installation.",
+  "new_cases": 1,
+  "bindings": [
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/transports/mcp.py",
+      "sha256": "12551ebcdc2fdc8119f8e2643007b0969ac3becbead7825fcf2f1fe8c9f71318"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_mcp_interfaces.py",
+      "sha256": "9bee2127b1d454c25f5c6983baf2e35ac361d6944edd9489a1eeb6d13962d655"
+    },
+    {
+      "kind": "fixture",
+      "path": "tests/interface_mock_server.py",
+      "sha256": "63dc2b479ad34bd3f3f6305804187290faaaa1dc714527bca57afc494faa6fd4"
+    }
+  ],
+  "diagnosis": "Deterministic blocked-notification regression failed before the source fix. Subsequent full-suite legacy HTTP failures exercised the older editable checkout in the server subprocess, confirmed by interpreter import path; fixture bootstrap corrected source provenance. Temporary wire/progress diagnostics and artificial delay removed. No timeouts increased.",
+  "prior_failed_runs": [
+    {
+      "passed": 1810,
+      "failed": 1,
+      "seconds": 100.3
+    },
+    {
+      "passed": 1811,
+      "failed": 1,
+      "seconds": 109.05
+    },
+    {
+      "passed": 1811,
+      "failed": 1,
+      "seconds": 108.63
+    }
+  ],
+  "affected_check": {
+    "passed": 39,
+    "failed": 0,
+    "seconds": 17.98
+  }
+}

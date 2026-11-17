@@ -1,0 +1,59 @@
+{
+  "observed_utc": "2026-11-14T17:56:13.606158+00:00",
+  "base_source": "060bcbf8d94203e0a17e0303254995b7bf393c89",
+  "status": "SCOPED_SOURCE_AND_SYNTHETIC_EXECUTION_PASS",
+  "requirements": [
+    "6 discovery/retrieval",
+    "8 neutral persistence/export fidelity",
+    "9 vendor client contract assessment"
+  ],
+  "implementation": "OnBase embedded Documents map native document/publish/item identities and exact meeting/item URL branches; strict live/on-demand flags map meeting-player locator only. Nested supporting documents explicitly fetched via existing exact wrapper/preparation/PDF protocol.",
+  "evidence_type": "Pinned published tenant vendor client; original rows empty/null, new nonempty test rows explicitly synthetic. No nonempty live response or direct media acceptance claimed.",
+  "checks": {
+    "new_cases": 18,
+    "affected_integration_passed": 119,
+    "failures": 0,
+    "junit_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\onbase-model-documents-integration.xml",
+    "junit_sha256": "34d76924b0306ce887c265617a205f4f09d2281597c9b76e575932ab2e59199e",
+    "ruff": "src/tests/scripts/examples PASS",
+    "metadata_cases_passed": 25,
+    "capability_validator": "zero errors / five negative checks"
+  },
+  "bindings": [
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/onbase.py",
+      "sha256": "adc81440457006a02038383f0c35223a6807e13fe1c7aaae4aa52120cb7defa6"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/onbase_documents.py",
+      "sha256": "cc3a4869a1e18eb32c47257cb648a624402a3f2b1b49589e45e4c0fe337a0ce0"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_onbase_model_documents.py",
+      "sha256": "494c9ef57843711bf41079eb3a8fad5339adc475029936d635c8b3b42b41ec99"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/onbase-model-documents/client-extract.txt",
+      "sha256": "ce77efe19624dc03a5b204cb1ef0f96a58c36d6535184ec8f4515db3a95938ea"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/onbase-model-documents/source.json",
+      "sha256": "68df7444b7105eca0deef2526b2946d2c6d7ca00ced56a7e66fd041775a5107a"
+    }
+  ],
+  "limits": [
+    "No native keyword search/archive/staff writes/import or Agenda association implemented.",
+    "Media metadata is a player link, not bytes/playback/captions.",
+    "Only nested supporting attachment wrapper type1/PublishType4 uses mapped preparation; other unknown wrappers retain partial outcomes.",
+    "No package/native build, installs, pins, releases, remote mutation or publication. Immutable dev13 artifacts predate this source."
+  ],
+  "test_setup_corrections": [
+    "Initial reproduction showed missing nested document mapping and absent search hit.",
+    "Attachment tests initially used a storage-less engine, which correctly refuses persistent import; corrected tests to real SQLiteStorage without relaxing membership checks."
+  ]
+}

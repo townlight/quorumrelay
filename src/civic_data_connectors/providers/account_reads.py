@@ -8,7 +8,7 @@ from time import monotonic
 from uuid import UUID
 
 from ..models import Error, OperationResult
-from .account_api import ORIGINS, credentials, headers, reject_credential_echo
+from .account_api import ESSENTIAL_PRODUCTION, account_origin, credentials, headers, reject_credential_echo
 from .native import make_bundle
 
 
@@ -54,7 +54,19 @@ def route(source, request):
         elif not isinstance(identity, str) or re.fullmatch(r"[A-Za-z0-9_-]{1,128}", identity) is None:
             raise ValueError("Meeting/item detail requires a bounded path-safe supplied ID.")
         path = "/PublicApi/" + ("meeting/multimedia/" if resource == "multimedia" else resource + "/")
+        if resource == "item" and account_origin(source) == ESSENTIAL_PRODUCTION:
+            path = "/PublicApi/meeting/item/"
         return "GET", path + identity, None, resource
+    if resource == "playlist_items":
+        playlist = request.get("playlist_id")
+        if not isinstance(playlist, str) or re.fullmatch(r"[1-9][0-9]{0,18}", playlist) is None:
+            raise ValueError("Playlist items require an explicit positive decimal playlist_id.")
+        suffix = ""
+        if identity is not None:
+            if not isinstance(identity, str) or re.fullmatch(r"[1-9][0-9]{0,18}", identity) is None:
+                raise ValueError("Playlist item detail requires a positive decimal external_id.")
+            suffix = "/" + identity
+        return "GET", f"/api/v2/playlists/{playlist}/playlist_items{suffix}.json", None, resource
     if resource not in {"media", "videos", "playlists"}:
         raise ValueError("Use the documented TelVue media, videos or playlists resource.")
     suffix = ""
@@ -66,6 +78,8 @@ def route(source, request):
 
 
 def telvue_bundle(source, namespace, content, input_format):
+    if input_format == "telvue-connect-playlist_items-json":
+        return telvue_playlist_items_bundle(source, namespace, content)
     raw = json.loads(content)
     plural = {"telvue-connect-media-json": "media", "telvue-connect-videos-json": "videos",
               "telvue-connect-playlists-json": "playlists"}[input_format]
@@ -108,6 +122,51 @@ def telvue_bundle(source, namespace, content, input_format):
     return bundle
 
 
+def telvue_playlist_items_bundle(source, namespace, content):
+    """Connect's published playlist-item example, not an inferred meeting join."""
+    raw = json.loads(content)
+    values = raw.get("playlist_items") if isinstance(raw, dict) else None
+    if values is None and isinstance(raw, dict) and "playlist_item" in raw:
+        values = [raw["playlist_item"]]
+    if not isinstance(values, list):
+        raise ValueError("Supply a documented playlist_items or playlist_item envelope.")
+    rows, links, seen = [], [], set()
+    for value in values:
+        if (not isinstance(value, dict) or any(type(value.get(key)) is not int or value[key] <= 0
+                for key in ("id", "playlist_id")) or value["id"] in seen):
+            raise ValueError("Playlist items require distinct native IDs and supplied parent playlist IDs.")
+        seen.add(value["id"])
+        playable = value.get("playable")
+        if not isinstance(playable, dict):
+            raise ValueError("The supplied playable object is required.")
+        # Only the vendor's documented media playable model is projected. Other
+        # playable types stay raw rather than receiving an invented media identity.
+        media = None
+        normalized = {"external_id": str(value["id"]), "url": source.url,
+                      "playlist_id": str(value["playlist_id"]),
+                      "sequence_number": deepcopy(value.get("sequence_number")),
+                      "window_start": deepcopy(value.get("window_start")),
+                      "window_end": deepcopy(value.get("window_end"))}
+        if playable.get("type") == "media":
+            media = telvue_bundle(source, namespace, json.dumps({"medium": playable}).encode(),
+                                  "telvue-connect-media-json")["records"][0]
+            normalized["playable"] = deepcopy(media["normalized"])
+            for key in ("title", "description", "recordings", "chapters"):
+                normalized[key] = deepcopy(media["normalized"].get(key))
+        rows.append((normalized, value, "playlist_item"))
+        links.append(media)
+    bundle = make_bundle(source, namespace, content, "telvue-connect-playlist_items-json", rows)
+    for record, media in zip(bundle["records"], links):
+        parent = {"provider": source.provider, "namespace": namespace, "record_type": "playlist",
+                  "external_id": record["normalized"]["playlist_id"], "parent": None}
+        record["identity"]["parent"] = deepcopy(parent)
+        record["relationships"].append({"relation": "playlist", "identity": parent})
+        if media is not None:
+            record["relationships"].append({"relation": "playable", "identity": deepcopy(media["identity"])})
+            record["text"] = deepcopy(media.get("text", []))
+    return bundle
+
+
 def essential_bundle(source, namespace, content):
     raw = json.loads(content)
     structure = raw.get("meetingStructure") if isinstance(raw, dict) else None
@@ -142,7 +201,8 @@ def fetch_account(source, namespace, request, bounds, context, transport):
                 "meeting_dates": "not inferred from media creation timestamps"}
     if context.check_cancelled():
         return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
-    url = ORIGINS[source.provider] + path
+    origin = account_origin(source)
+    url = origin + path
     deadline = monotonic() + bounds.deadline_seconds
     try:
         request_headers = headers(source, context)
@@ -150,7 +210,7 @@ def fetch_account(source, namespace, request, bounds, context, transport):
             request_headers["Content-Type"] = "application/json"
         response = transport.request(url, method=method, body=encoded, headers=request_headers,
             byte_limit=min(bounds.parser_bytes, bounds.transfer_bytes), deadline_seconds=bounds.deadline_seconds,
-            allowed_origins=(ORIGINS[source.provider],), allow_redirects=False)
+            allowed_origins=(origin,), allow_redirects=False)
         if context.check_cancelled():
             return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
         if (response.status != 200 or response.url != url or monotonic() >= deadline
@@ -160,18 +220,27 @@ def fetch_account(source, namespace, request, bounds, context, transport):
         captured_source = replace(source, url=url)
         if source.provider == "telvue":
             bundle = telvue_bundle(captured_source, namespace, response.content, f"telvue-connect-{resource}-json")
+            if resource == "playlist_items" and any(
+                    record["normalized"]["playlist_id"] != request["playlist_id"] for record in bundle["records"]):
+                raise ValueError("The response belongs to another playlist.")
             if request.get("external_id") is not None and (len(bundle["records"]) != 1 or
                     bundle["records"][0]["identity"]["external_id"] != request["external_id"]):
                 raise ValueError("The detail response identity does not match the requested resource.")
-        elif resource == "multimedia":
+        elif resource == "multimedia" and origin != ESSENTIAL_PRODUCTION:
             bundle = essential_bundle(captured_source, namespace, response.content)
             if bundle["records"][0]["identity"]["external_id"].lower() != request["external_id"].lower():
                 raise ValueError("The multimedia response belongs to another meeting.")
         else:
-            # Generic HttpResponseMessage is the entire documented response contract.
+            # Production examples supply request routes only; the development
+            # multimedia wrapper must not be projected onto another environment.
+            # Generic HttpResponseMessage is otherwise the full response contract.
             # Capture exact bytes without interpreting an unknown envelope as rows.
             bundle = make_bundle(captured_source, namespace, response.content, "essential-unmapped-response", [])
             coverage["schema_mapping"] = "unverified; raw response only, no normalized records inferred"
+        if context.check_cancelled():
+            return OperationResult("cancelled", coverage=coverage, operation_id=context.operation_id)
+        if monotonic() >= deadline:
+            raise ValueError("The response mapping exceeded the operation deadline.")
         returned = len(bundle["records"])
         bundle["records"] = bundle["records"][:bounds.max_records]
         coverage.update({"returned_records": returned, "selected_records": len(bundle["records"]),

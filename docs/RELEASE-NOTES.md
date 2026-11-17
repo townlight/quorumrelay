@@ -1,11 +1,14 @@
 # QuorumRelay release notes
 
-## Unreleased
+## 0.1.0.dev14 · November 17, 2026
+
+The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 18 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. Included fixes cover saved Laserfiche WebLink listings and ClerkBase search pagination. Working writes retain their approval and readback requirements. See [delivery scope](DELIVERY-SCOPE.md) and [release assets](https://github.com/townlight/quorumrelay/releases/tag/v0.1.0.dev14).
+
+## Earlier development history
 
 QuorumRelay is being built under the Townlight organization as an independent
 package. The full first-release scope and acceptance requirements remain in
-[the approved plan](IMPLEMENTATION-PLAN.md). No completed first release has
-been published. Development packages and source checks are separate from
+[the approved plan](IMPLEMENTATION-PLAN.md). These early milestones preceded the dev14 preview. Development packages and source checks are separate from
 authorized vendor acceptance and installed reference-product acceptance.
 
 The implementation preserves all 31 provider families and 34 original format
@@ -22,7 +25,7 @@ receipts. Neutral JSON/JSONL/ZIP exports retain original captures and verify
 hashes; CSV and iCalendar disclose projection losses. Large file inputs use
 separate parser and transfer bounds.
 
-Post-dev8 source adds two public meeting readers. CivicWeb can now list a
+The integrated development source retains dev11 and adds two public meeting readers. CivicWeb can now list a
 tenant's meetings for an explicit date range with their meeting types and, on
 request, each meeting's document links (`civicweb-meetings-json` and
 `civicweb-meeting-documents-json`, additive to the 34 baseline formats).
@@ -33,6 +36,13 @@ Both are bounded, return `partial` with checkpoints, and are fixture-verified on
 saved public Loveland, CO captures. Neither downloads media or documents; no audio
 is handled and nothing is transcribed. A bounded live read of Loveland is noted in
 [engine coverage](ENGINE-COVERAGE.md); no complete catalog is claimed.
+
+CivicWeb document discovery now honors the remaining record budget and resumes
+inside a document list, rejecting changed response bytes on continuation.
+Cablecast continuation avoids duplicate pending pages, and discovery preserves
+requested record types through an optional request-aware connector hook. Existing
+three-argument extension discovery remains compatible. These are source changes,
+not a new package or installed Windows release.
 
 Current source includes Legistar supplied
 vote/attendance reads, Laserfiche Repository folder listings, and preparation

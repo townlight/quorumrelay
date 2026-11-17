@@ -1,0 +1,33 @@
+{
+  "observed": "2026-11-16",
+  "discovery_url": "https://portal.dev.gworks.cloud/plugin/cms/am.html",
+  "method": "Unauthenticated static GET; followed declared editor and script links; no scripts executed or API requests made",
+  "environment": "development",
+  "api_origin": "https://api.dev.gworks.cloud",
+  "files": [
+    {
+      "path": "meeting-editor.js",
+      "url": "https://portal.dev.gworks.cloud/plugin/cms/js-app/meeting-editor.js?v=21-MM-DD-000DEV000",
+      "status": 200,
+      "bytes": 36768,
+      "sha256": "0c277bee76c897e0b34313ecf64b1384b5f05496954064f07b8dcc635bee9f1f"
+    },
+    {
+      "path": "agenda-editor.html",
+      "url": "https://portal.dev.gworks.cloud/plugin/cms/am-editor-agenda.html",
+      "status": 200,
+      "bytes": 62231,
+      "sha256": "ab27ecf59d9a6b14713bc3f8491e9c7fc0b7291dbfcfaddca7a3ee5c3ed6c7bd"
+    },
+    {
+      "path": "gworks.core.js",
+      "url": "https://portal.dev.gworks.cloud/js-app/gworks.core.js?v=21-MM-DD-000DEV000",
+      "status": 200,
+      "bytes": 170208,
+      "sha256": "0826615bc22075396540a3251c724655100223d26afd973db96dc069ea28e920"
+    }
+  ],
+  "implemented": "Selected meeting GET and saved-response normalization",
+  "other_contracts": "Create/update methods and publication fields captured; not executed or implemented by this read change",
+  "acceptance": "Synthetic responses derived from the client; no live account access"
+}

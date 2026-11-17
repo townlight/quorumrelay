@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "310807a4f3626069145f97264f87a7b579a99a7b",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "Explicit CHAMP calendar archive group/month summaries; native identities, exact metadata/group captures and request context, bounded continuation and portable persistence. No full catalog or external ECI retrieval.",
+  "new_cases": 18,
+  "checks": [
+    {
+      "command": "python -X utf8 -m pytest tests/test_champ_archive.py tests/test_storage_search_imports.py tests/test_interchange.py tests/test_provider_discovery.py -q",
+      "passed": 153,
+      "failed": 0,
+      "seconds": 4.92,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\champ-archive-integration-2026-11-15.xml",
+      "xml_sha256": "c4e7a3418e7c5dddc28e7e9233cfd0b97b922f1c5136f98b161085d1c86b166f"
+    },
+    {
+      "command": "ruff check src/civic_data_connectors/providers/champ_archive.py src/civic_data_connectors/providers/discovery.py src/civic_data_connectors/providers/identification.py tests/test_champ_archive.py",
+      "status": "PASSED"
+    }
+  ],
+  "source_sha256": {
+    "src/civic_data_connectors/providers/champ_archive.py": "8dcce0cc753b7863e4f1e70a67baef59ece8c07f3308c9829201abb364d5e798",
+    "src/civic_data_connectors/providers/discovery.py": "68565dc56ab2f456779efbf1d4b6a6770db1cfd98600a0ea1f0171ad38388930",
+    "src/civic_data_connectors/providers/identification.py": "6f55265a17e723f38119468f8f6435f7c309d644b8f019253269b9dfcc81af75",
+    "tests/test_champ_archive.py": "30157b81aeb20d430614245d9cf91cd627d96848ade34ee2002a303b8e83a094",
+    "tests/fixtures/champ-archive/archive.json": "7859af3a58df45b68b45bc4e429f47bc454552bd0b67945016a9ef43db7e3b96",
+    "tests/fixtures/champ-archive/group.json": "91b5a5f4d791bd5b270418ca8416d8ead1ed8abe46088a02f593eb05b3d2b5b3",
+    "docs/CHAMP-ARCHIVE.md": "43faecf2cc9c82cda7e2713b4883788f5824ba503bb7bb0429dc0a2a3dcee5a7",
+    "docs/PROVIDER-NATIVE-MAPPINGS.md": "d2ae2a73947761220c8d9dfd89c66bb9c3e09a38ca33fc46c3443cc7a4f5862d"
+  },
+  "primary_source": "docs/capabilities/evidence/champ-public-archive/source.json",
+  "primary_source_sha256": "d578b18c230f69f289d2b5c3580e0abc9515c4e08022e114c3e9ccbee8088103",
+  "live_observations": "Five separately captured GETs; two JSON bodies returned text/html. API final redirect URLs not recorded. No live engine or write acceptance claimed.",
+  "limits": [
+    "Only DisplayTypeID 1 calendar groups and explicit dates within one month.",
+    "No verified server paging/exhaustion; checkpoint is a local response-hash-bound offset, not a provider cursor or cryptographic proof.",
+    "Other groups/months and configured external ECI publisher omitted; always partial.",
+    "No event-detail/document/media fetch, playback, staff write or publication."
+  ]
+}

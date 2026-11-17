@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "1f87c79",
+  "status": "PASSED",
+  "requirements": [
+    6
+  ],
+  "scope": "Shared document/recording attachment completion honors caller cancellation and total deadline after response and final wrapper resolution.",
+  "new_cases": 6,
+  "reproduction": {
+    "failed_before_fix": 4,
+    "scope": "Both generic document/recording responses returnedcompleted after synthetic cancellation or clock expiration. Initial document fixture corrected to declared AgendaViewer before final reproduction; no product change needed for that fixture."
+  },
+  "checks": [
+    {
+      "command": "pytest tests/test_attachment_response_boundaries.py tests/test_recording_retrieval.py tests/test_utah_supplied_assets.py tests/test_boardable_documents.py tests/test_boardbook_documents.py tests/test_onbase_documents.py tests/test_onbase_item_documents.py tests/test_onbase_packets.py tests/test_primegov_documents.py -q",
+      "passed": 120,
+      "failed": 0,
+      "seconds": 2.08,
+      "warnings": "One existing starlette/anyio BlockingPortal deprecation."
+    },
+    {
+      "command": "ruff check src/civic_data_connectors/providers/retrieval.py tests/test_attachment_response_boundaries.py",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "ba4edb6fe835bd84fe897ea2220c211743a53d95faa4405d9319d4dbf424d30a"
+    },
+    {
+      "path": "tests/test_attachment_response_boundaries.py",
+      "sha256": "dd2cc2d495e8b0de03597ea7ae81b804b2af995382d20d7b6daa6305feebdd6d"
+    }
+  ],
+  "unaffected_evidence_reused": {
+    "receipt": "docs/verification/write-response-bounds-2026-11-15.json",
+    "full_suite_passed": 1936,
+    "scope": "Prior full run; changed attachment paths reexecuted120cases. Utah13cases reexecuted without changing its locator/calendar contract."
+  },
+  "limits": [
+    "Cancellation is cooperative and checked after synchronous transport/resolver return; does not preempt an injected function mid-call.",
+    "No new vendor endpoint, playback or write behavior; no release.",
+    "This receipt covers the shared byte attachment completion path; provider-specific early-return readers retain their separate contracts."
+  ]
+}

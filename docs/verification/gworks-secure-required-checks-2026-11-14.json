@@ -1,0 +1,104 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "9f375b4594aecbeceebe4febe0fb3e5976444568",
+  "status": "LOCAL_REQUIRED_SOURCE_CHECKS_PASS_NOT_DELIVERED",
+  "checks": [
+    {
+      "command": "python -m pytest -q",
+      "passed": 1612,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 84.055,
+      "junit_sha256": "7eadf8575d3f0dab12d559b3ef8d0648183e1be64f7cd990713c65ed982b37e3",
+      "warnings": [
+        "Starlette dependency BlockingPortal deprecation"
+      ]
+    },
+    {
+      "command": "python -m ruff check src tests scripts examples",
+      "status": "passed"
+    },
+    {
+      "command": "python scripts/validate_capabilities.py",
+      "status": "passed",
+      "providers": 31,
+      "baseline_formats": 34,
+      "evidence_records": 387,
+      "distinct_evidence_urls": 241,
+      "outbound_entries": 171,
+      "negative_checks": 5,
+      "errors": 0
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/gworks_calendar.py",
+      "sha256": "f01d9dbd3677d41bc1644885f5a5d3c746271f5b5f6cdc4ba312d31fb22e10f2"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/discovery.py",
+      "sha256": "7d437982d2edd0afe5cbfdc4788eebd4bfd6c7ba5f01a488ebd40f01ad2e284f"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/identification.py",
+      "sha256": "29da24f4c3f5cae0082efe1a1f85b6ecd18aa5cbced95a5a764f40f1f4271930"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/native.py",
+      "sha256": "3ee6d0db2b8a938cd204f9f87eaf987b5c9190197c6c5ada1a02ce0b7e7557d3"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/__init__.py",
+      "sha256": "f2057efeb442a2b7aa7050f061d4ed45731c470a17edf87b020dbb39282e5a6d"
+    },
+    {
+      "path": "docs/capabilities/inventory.json",
+      "sha256": "b06eb087ccc2c51b07f48066921d22cf96c5b22897279d185d7f383ecb1f59d8"
+    },
+    {
+      "path": "src/civic_data_connectors/data/capabilities.json",
+      "sha256": "894081ab75eb535374018ea01cece4e02adaf35550dfc27c4d436cdf764a4482"
+    }
+  ],
+  "attribution": "docs/verification/gworks-secure-calendar-2026-11-14.json",
+  "reused_evidence": "Unchanged TypeScript build and four tests; no client source changes. Earlier1587-pass run covers prior GWorksHTML/TownCloud/Tyler batch; this1612-pass run includes25 additional secure-calendar cases.",
+  "limits": [
+    "Full tasks6/8/9/10 and full19-plan retain unresolved contracts; this receipt is not full-plan completion.",
+    "No package rebuild/repin, release, remote mutation, hosted CI, signing, install or live secure-calendar acceptance.",
+    "Final OnBase DIP clarification is documentation only; source unchanged after full run."
+  ],
+  "owned_job": "session82622 terminal exit0; headroom13.15GB at start; no owned test job remains",
+  "post_run_metadata": {
+    "reason": "Whitespace normalized in authored vendor-client excerpt and evidence hashes/runtime source hash refreshed; executable source and tests unchanged from1612-pass run. Original vendor bundle hash retained.",
+    "checks": [
+      {
+        "command": "pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q",
+        "passed": 25,
+        "failed": 0
+      },
+      {
+        "command": "python scripts/validate_capabilities.py",
+        "status": "passed",
+        "errors": 0
+      }
+    ],
+    "bindings": [
+      {
+        "path": "docs/capabilities/inventory.json",
+        "sha256": "36ef6383b943d21e4e5d6f3f184caba67351ac2e25509cc625cb847628b89169"
+      },
+      {
+        "path": "src/civic_data_connectors/data/capabilities.json",
+        "sha256": "441218afd0ff0ba16685a961a72ad788e3eee521f0641d0b9b8336be7241c67e"
+      },
+      {
+        "path": "docs/capabilities/evidence/gworks-published-client/secure-calendar.extract.js",
+        "sha256": "02512eac407492044656a25db959ff189d4c6bb1e9b6f9620494f4619fd95add"
+      },
+      {
+        "path": "docs/verification/gworks-secure-calendar-2026-11-14.json",
+        "sha256": "649be431e919b0fdc3200da0855837be6ac52054f876d4f3b98c10c402331578"
+      }
+    ]
+  }
+}

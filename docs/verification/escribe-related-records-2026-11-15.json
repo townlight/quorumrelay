@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "431294a",
+  "requirements": [
+    6,
+    8,
+    9,
+    10
+  ],
+  "status": "PASSED",
+  "additional_cases": 42,
+  "scope": "Native Package, Bookmark and Resolution reads plus six create/update mappings; exact parent/identity/full-model readback, no replay, neutral preserved source relationships. No timing-unit, enum, complete Resolution item identity, effective publication or live SOAP inference.",
+  "checks": [
+    {
+      "command": "pytest tests/test_escribe_related_records.py tests/test_escribe_publishing.py tests/test_escribe_upload.py -q",
+      "passed": 102,
+      "failed": 0,
+      "seconds": 3.0
+    },
+    {
+      "command": "pytest -q --junitxml=escribe-related-records-full-2026-11-15.xml",
+      "passed": 2105,
+      "failed": 0,
+      "seconds": 103.9,
+      "suite_attributes": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "2105",
+        "time": "103.821",
+        "timestamp": "2026-11-15T02:55:30.665521-07:00",
+        "hostname": "Halo"
+      },
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\escribe-related-records-full-2026-11-15.xml",
+      "xml_sha256": "8ac3cee5deb349b83c4ebd698d2ef72ff1aeb4a36274c4529fccffe3e8d368b3"
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "passed"
+    },
+    {
+      "command": "python scripts/validate_capabilities.py",
+      "status": "passed",
+      "outbound_entries": 188,
+      "evidence_records": 431,
+      "distinct_urls": 272,
+      "errors": 0
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/escribe_publishing.py",
+      "sha256": "5777f89a860e0ed6d5dd8b0af9013e8261d3f7f155cbd9f0aa48493cda5d2156"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/escribe_write.py",
+      "sha256": "17dcaa2c10143a0337d6bcf0c955112eb9db75d56fd4f88731b3f3dba44e8f5c"
+    },
+    {
+      "path": "src/civic_data_connectors/data/escribe_publishing.json",
+      "sha256": "7be9f6a811b6d1185a48aa30ea39f9b9b3da101f99f8dbfb8b2c159748d0215b"
+    },
+    {
+      "path": "scripts/pin_escribe_contract.py",
+      "sha256": "5681b014f3a570a0afe05e87631049078bb8b54d3d8ac4f114ccdf3a30b11b76"
+    },
+    {
+      "path": "tests/test_escribe_publishing.py",
+      "sha256": "9585c3e31fbbae83ae85c97cd5c7afd0a9ce2f8502d8a7e922c8bd0ce1f486b5"
+    },
+    {
+      "path": "tests/test_escribe_related_records.py",
+      "sha256": "9f34abb74734de8af3ffbdbdd1989cddc87dd8c7dc9f3de81884d3dab086309a"
+    }
+  ],
+  "metadata": "docs/capabilities/evidence/escribe-publishing-wsdl/source.json",
+  "research_followup": "docs/capabilities/evidence/agendaquick-openmedia/source.json",
+  "central_contract_provenance": "All14other vendor JSON sections compared equal to431294a before six whole-file proof hashes rebound solely for this eSCRIBE change; prior executed scopes unchanged.",
+  "owned_job": {
+    "owner": "root",
+    "unifiedexec_session": 4953,
+    "start_utc": "2026-11-15T09:55:16Z",
+    "terminal_exit_code": 0,
+    "free_memory_kib": 15275048,
+    "total_memory_kib": 66922820,
+    "next_action": "Save receipt and localcommit; continue remaining owned contract work.",
+    "cancellation": "Exact unifiedexec sessionCtrl+C while running; now terminal."
+  },
+  "delivery": "Local source only; no build/package/release/push/merge/tag/sign/install/pin or live vendor mutation."
+}

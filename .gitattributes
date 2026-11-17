@@ -1,5 +1,198 @@
 # Captures and expected outputs are byte-identity evidence, including original line endings.
 tests/fixtures/** -text
+# Exact task6 vendor HTML preserves source line endings and whitespace.
+tests/fixtures/clerkbase/docket-agenda-child.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+tests/fixtures/task6-archives/onbase-akron-2025-q1.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/clerkbase-nested-tree/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/task6-archived-windows/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/simbli-minutes-client/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/simbli-minutes-client/client-excerpts.txt whitespace=cr-at-eol
+tests/fixtures/municode-publish/effingham.html whitespace=cr-at-eol
+# Exact public ADA document bodies retain vendor CRLF, tabs and trailing whitespace.
+tests/fixtures/municode-publish/effingham-agenda.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+tests/fixtures/municode-publish/effingham-packet.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/municode-publishpage/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/essential-public-detail/source.json whitespace=cr-at-eol
+tests/fixtures/boarddocs-public/grand-detail-20240522.html whitespace=-blank-at-eol,-blank-at-eof
+docs/capabilities/evidence/utah-admin-client/help.html whitespace=-blank-at-eol
 docs/capabilities/inventory.json -text whitespace=cr-at-eol
 docs/capabilities/evidence/** -text
+# This vendor Swagger capture has original CRLF bytes; preserve its pinned hash.
+docs/capabilities/evidence/contract-followup-2026-11-14/onbase-unity-rest-swagger.json -text whitespace=cr-at-eol
 docs/verification/*.json -text whitespace=cr-at-eol
+
+# Exact vendor HTML includes trailing spaces; retain original response bytes.
+docs/capabilities/evidence/contract-followup-2026-11-14/onbase-unity-information-mapping.html -text whitespace=-blank-at-eol
+
+# Exact Hyland adapter topic capture contains vendor trailing spaces.
+docs/capabilities/evidence/onbase-eis-entity/*.content.html whitespace=-blank-at-eol
+
+tests/fixtures/onbase-search/*.html whitespace=-blank-at-eol,-blank-at-eof
+
+tests/fixtures/townhall-transcripts/*.html whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Exact TelVue public player capture retains six vendor trailing-space lines.
+tests/fixtures/telvue-player/player.html whitespace=-blank-at-eol
+
+# Exact SuiteOne public event HTML preserves original vendor whitespace.
+tests/fixtures/suiteone-player/event-2165.html whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Exact supplied WebVTT retains vendor CRLF bytes.
+tests/fixtures/suiteone-player/captions.vtt whitespace=cr-at-eol
+
+# Exact pinned partner source retains two original trailing-space lines.
+docs/capabilities/evidence/agendaquick-openmedia/om_clickable_agenda.module whitespace=-blank-at-eol
+
+# Exact official builder HTML retains vendor mixed-indentation whitespace.
+docs/capabilities/evidence/gworks-current-builder/builder.html whitespace=-space-before-tab,-blank-at-eol
+
+# Exact public iframe retains its final blank line.
+tests/fixtures/wistia-public/iframe-ylfk2zpd7f.html whitespace=-blank-at-eof,-blank-at-eol
+
+# Exact declared editor404 response retains vendor whitespace.
+docs/capabilities/evidence/gworks-current-builder/declared-editor-response.html whitespace=-blank-at-eol,-blank-at-eof
+
+# Exact supplied OnBase Minutes captures retain vendor CRLF/blank whitespace.
+docs/capabilities/evidence/onbase-minutes/wrapper-3831.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/onbase-minutes/minutes-3831.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Exact PrimeGov deployed client slices retain original CRLF/blank lines.
+docs/capabilities/evidence/primegov-tracking-search/tracking-client.txt whitespace=cr-at-eol,-blank-at-eof
+
+# Exact official Legistar help response retains vendor whitespace.
+docs/capabilities/evidence/legistar-text-import/article.html whitespace=-blank-at-eol,-blank-at-eof
+
+# Exact Peak vendor HTML/JavaScript responses retain original whitespace.
+docs/capabilities/evidence/peak-public-search/page1.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/peak-public-search/page2-empty.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/peak-public-search/pagination.js whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Exact Simbli JSON responses retain vendor CRLF bytes for capture hashes.
+docs/capabilities/evidence/simbli-search-client/default-request.json whitespace=cr-at-eol
+docs/capabilities/evidence/simbli-search-client/search-response.json whitespace=cr-at-eol
+docs/capabilities/evidence/simbli-search-client/board-response.json whitespace=cr-at-eol
+
+# Exact BoardBook rendered pages/client retain vendor CR/blank whitespace.
+docs/capabilities/evidence/boardbook-public-search/search.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/boardbook-public-search/results.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/boardbook-public-search/search.js whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Exact Town Hall Streams form/results retain vendor CR/blank whitespace.
+docs/capabilities/evidence/townhall-public-search/form.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/townhall-public-search/results.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Exact TelVue public HTML/player client retain vendor CR/blank whitespace.
+docs/capabilities/evidence/telvue-public-search/results.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/telvue-public-search/player-client.js whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Preserve exact CHAMP vendor HTML/client whitespace and capture hashes.
+docs/capabilities/evidence/champ-public-archive/*.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/champ-public-archive/*.js whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Exact official lifecycle captures retain original CRLF and vendor whitespace.
+docs/capabilities/evidence/granicus-legacy-lifecycle/eol.html whitespace=cr-at-eol,-blank-at-eol,-space-before-tab
+docs/capabilities/evidence/granicus-legacy-lifecycle/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardbook-vendor-guides/source.json whitespace=cr-at-eol
+
+# Preserve exact tested bytes in the November 16 checkpoint and its hash manifest.
+docs/investigations/2026-11-16-paused/** -text
+scripts/validate_capabilities.py -text whitespace=cr-at-eol
+src/civic_data_connectors/data/capabilities.json -text whitespace=cr-at-eol
+src/civic_data_connectors/providers/boardable_builder_write.py -text whitespace=cr-at-eol
+src/civic_data_connectors/providers/boardable_meeting_documents.py -text whitespace=cr-at-eol
+src/civic_data_connectors/providers/boardable_meeting_write.py -text whitespace=cr-at-eol
+src/civic_data_connectors/providers/boardable_series_write.py -text whitespace=cr-at-eol
+src/civic_data_connectors/providers/boardable_write.py -text whitespace=cr-at-eol
+src/civic_data_connectors/providers/discovery.py -text whitespace=cr-at-eol
+src/civic_data_connectors/providers/iqm2_media_write.py -text whitespace=cr-at-eol
+src/civic_data_connectors/providers/iqm2_meeting_write.py -text whitespace=cr-at-eol
+src/civic_data_connectors/providers/iqm2_write.py -text whitespace=cr-at-eol
+tests/test_boardable_builder_write.py -text whitespace=cr-at-eol
+tests/test_boardable_meeting_documents.py -text whitespace=cr-at-eol
+tests/test_boardable_meeting_write.py -text whitespace=cr-at-eol
+tests/test_boardable_series_write.py -text whitespace=cr-at-eol
+tests/test_iqm2_media_write.py -text whitespace=cr-at-eol
+tests/test_iqm2_meeting_write.py -text whitespace=cr-at-eol
+# These executed test-source bindings pin LF bytes. Preserve them on Windows
+# checkouts as well; autocrlf otherwise invalidates the existing raw digests.
+tests/test_primegov_documents.py -text
+tests/test_iqm2_write.py -text
+tests/test_telvue_playlist_write.py -text
+tests/test_telvue_chapter_export.py -text
+tests/test_gworks_media_write.py -text
+src/civic_data_connectors/providers/simbli_write.py -text whitespace=cr-at-eol
+src/civic_data_connectors/write_adapters.py -text
+tests/test_simbli_item_write.py -text whitespace=cr-at-eol
+docs/verification/simbli-item-write-2026-11-16.xml -text
+docs/investigations/2026-11-16-paused/CURRENT-STATE.md whitespace=cr-at-eol
+src/civic_data_connectors/providers/boardable_document_center.py -text
+tests/test_boardable_document_center.py -text
+docs/verification/boardable-document-center-2026-11-16.xml -text
+docs/capabilities/evidence/boardable-current-builder/boardable-current-source-excerpts.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-current-builder/boardable-live-verification.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-current-builder/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-document-center/quorumrelay-document-center-evaluation.txt whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-document-center/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-meeting-documents/quorumrelay-document-center-evaluation.txt whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-meeting-documents/quorumrelay-meeting-attachment-api-fixture.txt whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-meeting-documents/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-meeting-form/boardable-meeting-form-inline.js whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+docs/capabilities/evidence/boardable-meeting-form/followup-2026-11-16.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-meeting-form/recurrence-collection.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-meeting-form/recurrence-edit-all.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-meeting-form/recurrence-readback.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-meeting-form/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-series-form/boardable-recurrence-api-create.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-series-form/boardable-recurrence-api-readback.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-series-form/boardable-recurrence-api-update.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-series-form/boardable-recurrence-api-updated-readback.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-series-form/boardable-recurrence-minimal-readback.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-series-form/boardable-recurrence-minimal-update.json whitespace=cr-at-eol
+docs/capabilities/evidence/boardable-series-form/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/granicus-platform/current-schema-comparison.json whitespace=cr-at-eol
+docs/capabilities/evidence/granicus-platform/followup-2026-11-16.json whitespace=cr-at-eol
+docs/capabilities/evidence/gworks-development-editor/agenda-editor.html whitespace=cr-at-eol,-blank-at-eol,-space-before-tab
+docs/capabilities/evidence/gworks-development-editor/city.plugin.js whitespace=cr-at-eol,-blank-at-eol
+docs/capabilities/evidence/gworks-development-editor/contract.json whitespace=cr-at-eol
+docs/capabilities/evidence/gworks-development-editor/gworks.core.js whitespace=cr-at-eol,-blank-at-eol
+docs/capabilities/evidence/gworks-development-editor/media-source.json whitespace=cr-at-eol
+docs/capabilities/evidence/gworks-development-editor/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/iqm2-minutetraq-client/contract-excerpts.txt whitespace=cr-at-eol
+docs/capabilities/evidence/iqm2-minutetraq-client/media-contract-excerpts.txt whitespace=cr-at-eol
+docs/capabilities/evidence/iqm2-minutetraq-client/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/iqm2-minutetraq-client/write-contract-excerpts.txt whitespace=cr-at-eol
+docs/capabilities/evidence/novus-archived-evaluation/novus-demo-archive.html whitespace=cr-at-eol,-blank-at-eol
+docs/capabilities/evidence/novus-archived-evaluation/novus-demo-form-archive.html whitespace=cr-at-eol
+docs/capabilities/evidence/novus-archived-evaluation/novus-pilot-archive.html whitespace=cr-at-eol,-blank-at-eol
+docs/capabilities/evidence/novus-archived-evaluation/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/suiteone-dcr2-export/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/telvue-legacy-upload/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/telvue-legacy-upload/telvue-official-api-index-archive.html whitespace=cr-at-eol,-blank-at-eol,-space-before-tab
+docs/capabilities/evidence/telvue-legacy-upload/telvue-official-upload-20140721.html whitespace=cr-at-eol,-blank-at-eol,-space-before-tab
+docs/capabilities/evidence/telvue-upload-identity/episode-upload-consumer.js whitespace=cr-at-eol
+docs/capabilities/evidence/telvue-upload-identity/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/towncloud-client-drafts/upload-source.json whitespace=cr-at-eol
+docs/capabilities/evidence/towncloud-client-drafts/upload.extract.js whitespace=cr-at-eol
+tests/fixtures/iqm2/media-wire-fixture.ps1 whitespace=cr-at-eol
+tests/fixtures/iqm2/meeting-wire-fixture.ps1 whitespace=cr-at-eol
+
+# Sanitized anonymous login capture retains source whitespace and line endings.
+docs/capabilities/evidence/primegov-login-followup/login-sanitized.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+docs/capabilities/evidence/primegov-login-followup/attachmentHelpers.js whitespace=cr-at-eol
+docs/verification/icalendar-projection-reconciliation-2026-11-16.xml -text
+
+# Pin Simbli upload implementation and executed acceptance bytes.
+src/civic_data_connectors/providers/simbli_upload.py -text
+tests/test_simbli_upload.py -text
+docs/verification/simbli-title-upload-affected-2026-11-16.xml -text
+docs/verification/simbli-supporting-upload-2026-11-16.xml -text
+
+# Preserve Community acceptance inputs and captured public client bytes.
+src/civic_data_connectors/providers/diligent_community.py -text
+tests/test_diligent_community.py -text
+tests/fixtures/diligent_community/*.json -text
+docs/capabilities/evidence/diligent-community/portal-2.js -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+docs/capabilities/evidence/diligent-community/meeting-client.js -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+docs/capabilities/evidence/diligent-community/meeting-1655.html -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+
+docs/capabilities/evidence/diligent-community/source.json whitespace=cr-at-eol

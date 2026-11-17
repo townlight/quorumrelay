@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "8c87185",
+  "tasks": [
+    9,
+    10
+  ],
+  "status": "PASSED",
+  "scope": "Exact18property native Event PUT plus explicit complete native GET postcondition, pinned request/9reachablemodels; publication/media/template/unrelated-field preservation, explicit current event/location identity, beforehash, trustedscope, durable no replay. Caller supplies native clock literals; no conversion inferred.",
+  "checks": [
+    {
+      "scope": "Select reads/sections/native event writes/shared response bounds/writeproviders/planboundaries",
+      "passed": 141,
+      "failed": 0,
+      "seconds": 4.81
+    },
+    {
+      "scope": "full pytest",
+      "passed": 2184,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 106.02,
+      "xml": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\select-native-update-full-2026-11-15.xml",
+      "warning": "Existing Starlette anyio alias deprecation"
+    },
+    {
+      "scope": "ruff src tests scripts examples; capability validator",
+      "status": "PASSED"
+    }
+  ],
+  "new_cases": 34,
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/select_event_write.py",
+      "sha256": "2ce91899ed9acedaeadbca612878a81e85549f902e4f90ae4086c9fcde1facd2"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/civicclerk_write.py",
+      "sha256": "1c54d3ff6c12a1a40e762a6aa064e34b00bb224c0913ef6abbf3fc200ea9540b"
+    },
+    {
+      "path": "src/civic_data_connectors/data/select_event_update.json",
+      "sha256": "7444191452da198c7d38a27e049cba523fc42f148092c4f0e612dfc44d6945dd"
+    },
+    {
+      "path": "scripts/pin_select_event_contract.py",
+      "sha256": "56d28c8e3ba01803fb4e693f2c23a2c5fab4add1df9d1d29f4205f0e491054b5"
+    },
+    {
+      "path": "tests/test_select_event_write.py",
+      "sha256": "43d98c84d09f2b910e090496ef8b6fc313c9a7751f2b95a29cec11fdea9f4586"
+    },
+    {
+      "path": "tests/test_client_write_response_bounds.py",
+      "sha256": "2e5aa5c974b1cf7957895d9f5213d54a630d47d97dce13d0e661aea707c35d8f"
+    }
+  ],
+  "central_contract_rebinding": "15priorsections semantically unchanged;6matched prior whole-file proof hashes rebound solely for added Select native update scope.",
+  "inventory": "79identified API/client/file mappings;78implemented;only Select Event create identified but unimplemented, with separate destination/template/default qualification.109other unresolved/UI/applicability entries remain explicit, not proven outside-only.",
+  "initial_corrections": [
+    "Test reused already registered engine; fixed fixture to create fresh engine over same storage before registering native vendor.",
+    "Inventory meeting label matches public write event; both names explicitly attributed in synthetic proof without changing validator.",
+    "Authored settings assessment kept original LF line endings under evidence -text rule; raw captured vendor bytes unchanged."
+  ],
+  "delivery": "Local only; no live vendor mutation, release/build/package/push/merge/tag/sign/install/repin."
+}

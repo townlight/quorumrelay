@@ -1,0 +1,12 @@
+function getHref(doc) {
+
+    if (doc.link !== null) {
+        return doc.link;
+    }
+    var isVoteSummary = !doc.templateId || doc.templateId <= 0;
+    var meetingParam = isVoteSummary ? 'compiledMeetingDocumentFileId=' + doc.id : 'meetingTemplateId=' + doc.templateId;
+    if (isOutputTypeHtml(doc.compileOutputType)) {
+        return '/Portal/Meeting?' + meetingParam;
+    }
+    return '/Public/CompiledDocument?' + meetingParam + '&compileOutputType=' + doc.compileOutputType;
+}

@@ -1,0 +1,182 @@
+class Meeting {
+		constructor(data) {
+			this.ID = data.ID;
+			this.Name = data.Name;
+			this.MeetingTypeName = data.MeetingTypeName;
+			this.IsAgendaAvailable = data.IsAgendaAvailable;
+			this.IsAgendaPacketAvailable = data.IsAgendaPacketAvailable;
+			this.IsSummaryAvailable = data.IsSummaryAvailable;
+			this.IsMinutesAvailable = data.IsMinutesAvailable;
+			this.IsMinutesPacketAvailable = data.IsMinutesPacketAvailable;
+			this.Time = data.TimeString;
+			this.Date = data.TimeString.split(' ')[0];
+			this.TimeStamp = new Date(parseInt(data.TimeStamp) * 1000);
+			this.Documents = [];
+			this.HasDocuments = data.HasDocuments;
+			this.Media = data.Media;
+			this.HasMedia = data.HasMedia;
+			this.AgendaUniqueName = data.AgendaUniqueName;
+			this.AgendaPacketUniqueName = data.AgendaPacketUniqueName;
+			this.MinutesPacketUniqueName = data.MinutesPacketUniqueName;
+			this.MinutesUniqueName = data.MinutesUniqueName;
+			this.SummaryUniqueName = data.SummaryUniqueName;
+			this.LatestDocumentType = data.LatestDocumentType;
+
+			if (Array.isArray(data.Documents)) {
+				data.Documents.forEach(document => {
+					this.Documents.push(new Document(document));
+				});
+			}
+		}
+	}
+
+	class Document {
+		constructor(data) {
+			this.ID = data.ID;
+			this.Name = data.Name;
+			this.ItemID = data.ItemID;
+			this.ItemTitle = data.ItemTitle;
+			this.ItemOutlineNum = data.ItemOutlineNum;
+			this.PublishType = data.PublishType;
+			this.MeetingDocumentType = data.MeetingDocumentType;
+			this.UrlFriendlyName = data.UrlFriendlyName;
+		}
+	}
+
+
+
+function addMeetings(parent, meetings) {
+		meetings.forEach(meeting => {
+			let meetingRow = $("<tr>").attr("id", "meeting-" + meeting.ID + "-row").addClass("meeting-row").attr("data-meeting-id", meeting.ID);
+
+			meetingRow.append($("<td>").addClass("d-none d-md-table-cell").attr("data-sortable-type", "mtgName").text(meeting.Name));
+			meetingRow.append($("<td>").addClass("d-none d-md-table-cell").attr("data-sortable-type", "mtgType").text(meeting.MeetingTypeName));
+			meetingRow.append($("<td>").addClass("d-none d-md-table-cell").attr("data-sortable-type", "mtgTime").attr("data-sortable-label", meeting.Date)
+				.attr("data-sortable-data", meeting.TimeStamp.getTime()).text(meeting.Time));
+
+			// The following cell is only visible on small displays
+			meetingRow.append($("<td>").addClass("d-none d-sm-table-cell d-md-none")
+				.append(meeting.Name).append($("<br>"))
+				.append(meeting.MeetingTypeName).append($("<br>")).append(meeting.Time));
+
+			// The following cell is only visible on extra small displays
+			let tdExSmallName = $("<td>").addClass("d-sm-none")
+				.append(meeting.Name).append($("<br>"))
+				.append(meeting.MeetingTypeName).append($("<br>"))
+				.append(meeting.Time).append($("<br>"));
+			createMeetingDocumentLinks(tdExSmallName, meeting, "_small");
+			tdExSmallName.append(createPadding())
+			meetingRow.append(tdExSmallName);
+
+			// The following cell is only visible on small, medium and large displays
+			let tdLinks = $("<td>").addClass("d-none d-sm-table-cell");
+			createMeetingDocumentLinks(tdLinks, meeting);
+			tdLinks.append(createPadding());
+			meetingRow.append(tdLinks);
+
+			parent.append(meetingRow);
+
+			if (meeting.HasDocuments) {
+				let meetingDocumentRow = $("<tr>").attr("id", "meeting-" + meeting.ID + "-document-row").addClass("meeting-document-row").attr("data-meeting-id", meeting.ID);
+				let tdDocuments = $("<td>").attr("colspan", 4);
+
+				meetingDocumentRow.append(tdDocuments);
+				parent.append(meetingDocumentRow);
+
+				let lastItemTitle = "";
+				let i = 0;
+				for (let doc of meeting.Documents) {
+					tdDocuments.append($("<div>").addClass("col-lg-1"));
+					let documentDiv = $("<div>").addClass("col-lg-11");
+
+					if (doc.ItemTitle != "") {
+						// Item Attachment
+						if (lastItemTitle != doc.ItemTitle) {
+							if (i != 0) {
+								documentDiv.append($("<br>"));
+							}
+							let itemDiv = $("<div>");
+							let itemIcon = $("<img>").attr("src", "/OnBaseAgendaOnline/Images/AgendaItem.png").attr("alt", Translations.ITEM_TITLE).addClass("agenda-item");
+							itemDiv.append(itemIcon).append(doc.ItemOutlineNum).append(createPadding()).append(doc.ItemTitle);
+							documentDiv.append(itemDiv);
+						}
+						lastItemTitle = doc.ItemTitle;
+
+						let docDiv = $("<div>").append($("<div>").addClass("col-lg-1"));
+						let docLinkDiv = $("<div>").addClass("col-lg-11");
+						let link = $("<a>")
+							.attr("href", "/OnBaseAgendaOnline/Documents/DownloadFile/" + encodeURIComponent(doc.UrlFriendlyName) + ".pdf?documentType=" + doc.MeetingDocumentType + "&meetingId=" + meeting.ID + "&itemId=" + doc.ItemID + "&publishId=" + doc.ID + "&isSection=False" + "&isAttachment=" + (doc.PublishType == 4 ? "True" : "False"))
+							.attr("id", "lnkAttachment_" + doc.ItemID + "_" + i)
+							.attr("target", "_blank")
+							.attr("title", Translations.VIEW_PDF_IN_NEW_TAB_TITLE.format(doc.Name));
+
+						link.append(createPdfIcon());
+						link.append(doc.Name);
+						docLinkDiv.append(link);
+
+						docDiv.append(docLinkDiv);
+						documentDiv.append(docDiv);
+					}
+					else {
+						// Meeting Document
+						let docLinkDiv = $("<div>");
+						let link = $("<a>")
+							.attr("href", "/OnBaseAgendaOnline/Documents/DownloadFile/" + encodeURIComponent(doc.UrlFriendlyName) + ".pdf?documentType=" + doc.MeetingDocumentType + "&meetingId=" + meeting.ID)
+							.attr("id", "lnkMeetingDocument_" + meeting.ID + "_" + i).attr("target", "_blank")
+							.attr("title", Translations.VIEW_PDF_IN_NEW_TAB_TITLE.format(doc.Name));
+
+						link.append(createPdfIcon());
+						link.append(doc.Name);
+						docLinkDiv.append(link);
+
+						documentDiv.append(docLinkDiv);
+					}
+
+					tdDocuments.append(documentDiv);
+					i++;
+				};
+			}
+		});
+	}
+
+	function createMeetingDocumentLinks(parent, meeting, linkSize = "") {
+		if (meeting.IsAgendaAvailable) {
+			parent.append(createMeetingLink(meeting, "Agenda", PublishDocType.Agenda, Translations.AGENDA_TITLE, Translations.AGENDA_LABEL, linkSize));
+			parent.append(createMeetingPdfLink(meeting, "Agenda", 1, Translations.AGENDA_LABEL, Translations.VIEW_MEETING_PDF_NEW_TAB_TITLE, linkSize));
+		}
+		if (meeting.IsAgendaPacketAvailable) {
+			parent.append(createPacketLink(meeting, "Agenda", PublishDocType.AgendaPacket, Translations.AGENDA_PACKET_TITLE, Translations.AGENDA_PACKET_LABEL, linkSize));
+		}
+		if (meeting.IsSummaryAvailable) {
+			parent.append(createMeetingLink(meeting, "Summary", PublishDocType.Summary, Translations.SUMMARY_TITLE, Translations.SUMMARY_LABEL, linkSize));
+			parent.append(createMeetingPdfLink(meeting, "Summary", 3, Translations.SUMMARY_LABEL, Translations.VIEW_MEETING_PDF_NEW_TAB_TITLE, linkSize));
+		}
+		if (meeting.IsMinutesAvailable) {
+			parent.append(createMeetingLink(meeting, "Minutes", PublishDocType.Minutes, Translations.MINUTES_TITLE, Translations.MINUTES_LABEL, linkSize));
+			parent.append(createMeetingPdfLink(meeting, "Minutes", 2, Translations.MINUTES_LABEL, Translations.VIEW_MEETING_PDF_NEW_TAB_TITLE, linkSize));
+		}
+		if (meeting.IsMinutesPacketAvailable) {
+			parent.append(createPacketLink(meeting, "Minutes", PublishDocType.MinutesPacket, Translations.MINUTES_PACKET_TITLE, Translations.MINUTES_PACKET_LABEL, linkSize));
+		}
+		if (meeting.HasMedia) {
+			if (meeting.Media.IsLive) {
+				parent.append(
+					$("<a>")
+						.attr("href", "/OnBaseAgendaOnline/Meetings/ViewMeeting?id=" + meeting.ID + "&doctype=" + meeting.LatestDocumentType)
+						.addClass("meetingPadding")
+						.attr("Id", "lnkViewMedia_" + meeting.ID + linkSize)
+						.attr("title", Translations.MEDIA_TITLE.format(meeting.Name, meeting.MeetingTypeName, meeting.Time))
+						.text(Translations.LIVE_MEDIA)
+					);
+			} else if (meeting.Media.IsOnDemand) {
+				parent.append(
+					$("<a>")
+						.attr("href", "/OnBaseAgendaOnline/Meetings/ViewMeeting?id=" + meeting.ID + "&doctype=" + meeting.LatestDocumentType)
+						.addClass("meetingPadding")
+						.attr("Id", "lnkViewMedia_" + meeting.ID + linkSize)
+						.attr("title", Translations.MEDIA_TITLE.format(meeting.Name, meeting.MeetingTypeName, meeting.Time))
+						.text(Translations.VOD_MEDIA)
+					);
+			}
+		}
+	}

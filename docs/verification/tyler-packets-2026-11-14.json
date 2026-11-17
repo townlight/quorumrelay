@@ -1,0 +1,27 @@
+{
+  "base_commit": "5dcc8e02c3dd5a51720a3fd0721debb114259417",
+  "recorded_at": "2026-11-14T06:24:30.381156+00:00",
+  "scope": "Original task 6: posted enabled agenda/minutes packet locators and explicit PDF transfer using existing Tyler guard.",
+  "contract": {
+    "path": "docs/capabilities/evidence/tyler-packets/client-extract.txt",
+    "sha256": "3f6f19013d30ec41451a155562d70ea8afdefb75f91fdbff626e3acfba83a2aa",
+    "vendor_client_sha256": "2dcf06fa376a06f48571e959f11ba0b4c62386112feb3344475e18a330e039bd"
+  },
+  "source_hashes_canonical_lf": {
+    "tests/test_tyler_packets.py": "a1623cdaa03782cd08b2542cacdf7fc01fe362aa33b0330c14a048bd6f2f5a2a",
+    "src/civic_data_connectors/providers/tyler_public.py": "be1a4978739480cddc95deec0df737077ff737c2252bb967361ca42ebc40cff6"
+  },
+  "execution": {
+    "command": "python -X utf8 -m pytest tests/test_tyler_packets.py tests/test_tyler_liberty.py tests/test_tyler_native_rows.py tests/test_provider_discovery.py -q",
+    "passed": 106,
+    "failed": 0,
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\tyler-packets-integration.xml",
+    "lint": "Full repository Ruff passed"
+  },
+  "diagnosis": "First focused check used calendar row whose packet-enabled flags are false and an incorrect SDK argument. Inspection confirmed detail true vs calendar false; final workflow persists calendar, fetches exact selected detail, persists detail and explicitly fetches each packet using index. No permission or visibility gate relaxed.",
+  "limits": [
+    "Packet PDF bytes are synthetic; no live packet GET/rendering/playback or staff write.",
+    "Packet links require positive native agenda/minutes ID, posted status5 and literal boolean enabled flag; not the opaque packet document ID.",
+    "No new parser/provider/search handler or baseline compatibility changes. Existing affected evidence reused; no full-suite rerun or release."
+  ]
+}

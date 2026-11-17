@@ -1,0 +1,28 @@
+{
+  "url": "https://digitaltowpath.digitaltowpath.net/application/files/4317/4956/6451/Using_the_Meetings_Module.pdf",
+  "final_url": "https://digitaltowpath.digitaltowpath.net/application/files/4317/4956/6451/Using_the_Meetings_Module.pdf",
+  "status": 200,
+  "content_type": "application/pdf",
+  "bytes": 410153,
+  "sha256": "9f680134d3ec76ce5af1eae2fb904146e4e96a9ae24b5e9811539773855b1332",
+  "pages": 5,
+  "observed": "2026-11-15",
+  "pages_read": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "capture_path": "docs/capabilities/evidence/towpath-meetings-manual/using-the-meetings-module.pdf",
+  "findings": [
+    "Dashboard staff workflow with title, enabled visibility, featured calendar display, native local date/time, calendar association, default/overridden location, category and description.",
+    "Agenda and minutes accept typed text or PDF; missing content displays pending; additional documents are supported in the UI."
+  ],
+  "not_established": [
+    "Remote API method/route/body/authentication",
+    "Meeting/attachment created identity, version/conflict and machine readback schema",
+    "External provider-file import format or import/association machine request"
+  ],
+  "implementation_disposition": "No additional machine mapping established; retain existing supplied public HTML detail. No enable/publication mutation added. Missing contracts remain owned research, not outside-only proof."
+}

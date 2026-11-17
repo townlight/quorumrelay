@@ -1,6 +1,6 @@
 # Python SDK
 
-Install the QuorumRelay candidate wheel (`quorumrelay==0.1.0.dev8`) into a Python 3.11+ environment. The canonical import and CLI are `quorumrelay`; existing `civic_data_connectors` imports and the `civic-data-connectors` CLI remain compatible and use the same implementation objects. No reference application, HTTP server, model, hosted service, or database is required.
+Python **0.1.0.dev14**, TypeScript **0.1.0-dev.14**, schema **2.0.0**. [Installation instructions](USER-MANUAL.md).
 
 ```python
 from quorumrelay import Bounds, OperationContext, Query, Source, create_engine
@@ -55,6 +55,8 @@ For a recording that supplies a direct `video_url`, `audio_url` or `playback_url
 
 Export/import/search and write requests also use `engine.execute(operation, request, context=...)`. The transports and SDK share the same result/error contract. Writes require durable atomic storage, explicit `write:plan`/commit policy grants, server-side credentials, supported mappings and exact authorized plan approval. Importing a capture never writes upstream.
 
+For direct stream exports, `quorumrelay.interchange.write_bundle` accepts a caller-owned binary destination and returns its manifest only after completion checks. The deadline includes capture materialization and caller writes; cancellation and expiry are checked after synchronous writes return, including the final write. On any exception, discard the output stream even if it contains all expected bytes. The SDK cannot undo bytes already written to a destination you own.
+
 For backward-compatible application imports:
 
 ```python
@@ -80,9 +82,66 @@ The evidenced Legistar detail route requests supplied agenda items, agenda/minut
 
 One-event retrieval is bounded to that identity and does not claim full catalog coverage. An unimplemented provider detail mapping reports that gap explicitly. Credentials use trusted `OperationContext.credentials["legistar_token"]` when required; source URLs and returned captures do not contain that token.
 
-Legistar vote and roll-call writes use `entity="vote"` / `entity="roll_call"`, `operation="create"` / `"update"`, and `parent_id` for the event item. Each requires an explicitly authorized `meeting_id` relationship. Native `VotePersonId`/`VoteValueId` or `RollCallPersonId`/`RollCallValueId` are required when creating, with matching parent identifiers bound into the exact plan. Provider enum values, tenant access and live write readback acceptance remain access-dependent; synthetic adapter checks do not establish these outcomes.
+Legistar vote and roll-call writes use `entity="vote"` / `entity="roll_call"`, `operation="create"` / `"update"`, and `parent_id` for the event item. Each requires an explicitly authorized `meeting_id` relationship. Native `VotePersonId`/`VoteValueId` or `RollCallPersonId`/`RollCallValueId` are required when creating, with matching parent identifiers bound into the exact plan. Callers supply applicable native ValueIds and tenant grants; undocumented enum meanings and RowVersion conflict behavior remain qualified. Documented synthetic execution is accepted verification under the owner amendment; live tenant mutation is optional supporting evidence.
+
+Legistar `event` create/update also accepts the documented `EventMedia` and `EventVideoPath` string fields. A partial update of those fields preserves the existing required date and other documented event values in the native PUT body. This verifies exact JSON metadata values, not recording-byte upload, replacement, playback, or processing. The official [Event POST](https://webapi.legistar.com/Help/Api/POST-v1-Client-Events) and [Event PUT](https://webapi.legistar.com/Help/Api/PUT-v1-Client-Events-EventId) contracts do not define those recording-transfer semantics.
+
+`matter_attachment` create/update can carry a hyperlink with `MatterAttachmentIsHyperlink=true`, `MatterAttachmentHyperlink` and an explicit `MatterAttachmentShowOnInternetPage` boolean. The hyperlink-only flow sends no binary and does not request `/File`. Readback verifies the supplied values, including the visibility flag; it does not establish effective public access. Separate binary attachment operations use base64 `MatterAttachmentBinary` JSON and the documented `/File` readback, retaining their existing evidence. The [field-level receipt](verification/legistar-media-link-writes-2026-11-13.json) covers exact approval, create/update, omitted-field preservation, receipt replay and persistent mismatches without duplicate creates. It does not establish file-to-link conversion or the historical vendor import package.
 
 Official detail contract: https://webapi.legistar.com/Help/Api/GET-v1-Client-Events-EventId_EventItems_AgendaNote_MinutesNote_EventItemAttachments
+
+OnBase Agenda Online supports a bounded selected-detail path from its configured
+HTTPS root:
+
+```python
+onbase = Source("onbase", "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/")
+meeting = engine.fetch_record(onbase, "3825")
+items = engine.fetch_related(onbase, "3825", "agenda_item")
+item = engine.fetch_related(onbase, "3825", "agenda_item", external_id="88173")
+section = engine.fetch_related(onbase, "3825", "agenda_section", external_id="54973")
+```
+
+`fetch_record` revalidates the native meeting ID against the current public
+listing, then follows only its supplied `ViewMeeting?doctype=1` page and literal
+accessible `ViewMeetingAgenda?type=agenda` route. It returns the native meeting,
+agenda sections and agenda items. The selected listing metadata and recording
+references/relationships remain on the meeting result, and its compatibility
+meeting projection reflects that final record. `fetch_related` lists supplied sections/items;
+selected item/section detail is fetched only after membership in the requested
+record type and its exact declared `ViewMeetingAgendaItem` route are verified.
+The route uses `isSection=false` for an item and `isSection=true` for a section.
+The captured section response supplies a title only; it does not establish
+section attachments or additional section content.
+Native child IDs retain the meeting parent, and items retain a supplied parent
+section relationship. Rendered text is partial, timezone remains unknown, and
+supporting attachment IDs, publish IDs and links remain metadata locators; the
+detail call itself does not fetch attachment bytes. Exact page captures and
+citations are preserved.
+Reads use cumulative byte, page and deadline bounds, cancellation checks and
+same-origin exact-URL GETs with redirects disabled. Coverage remains partial.
+Only the supplied Agenda variant and selected item/section detail are mapped;
+archived meetings absent from the current listing,
+native search and broader Agenda APIs remain unresolved. The three pinned public
+detail-page GETs and scoped synthetic composition, persistence, search and ZIP
+evidence are recorded in [the OnBase detail receipt](verification/onbase-detail-2026-11-13.json)
+and [the pinned captures](capabilities/evidence/onbase-detail/source.json).
+The separately captured section response and scoped synthetic verification are
+recorded in [the section receipt](verification/onbase-section-detail-2026-11-13.json).
+
+After persisting the selected agenda-item record in the engine's scoped storage,
+retrieve its supplied supporting document with the separate attachment operation,
+for example
+`engine.fetch_attachment(onbase, item_record, index=0, context=context)`. This
+path accepts the exact same-tenant item locator only when its meeting, item,
+publish ID, Agenda document type and non-section attachment flags match both the
+record and the captured wrapper. It checks the declared safe PDF filename,
+performs the exact empty-body preparation POST and declared `ViewDocument` GET,
+and validates the returned PDF type and magic bytes. Redirects are disabled;
+cookies remain in call memory. The item wrapper and returned PDF are synthetic
+in this verification: no real item wrapper/PDF response was captured, and no
+live file availability or rendering is established. Section attachments and
+packet branches remain unmapped. See the separate
+[item-document receipt](verification/onbase-item-document-2026-11-13.json).
 
 ## Native search
 
@@ -97,6 +156,40 @@ native = engine.execute("search", {
 The Wistia adapter calls the documented `/modern/search` endpoint with media-only results. The provider chooses candidate matching semantics; QuorumRelay applies its exact local term/phrase rules to returned metadata and supplied transcript excerpts. Matches retain source timestamps. The response includes `data.bundle` for explicit preview/import. Provider limits (100 primary media plus up to 100 transcript-only matches, no pagination) and partial excerpt coverage remain explicit even below the cap. A video upload timestamp does not establish its meeting date. The account must permit this read route; missing/denied credentials produce a failure, never an empty success.
 
 Other unregistered native search routes report an implementation gap. `native=false` performs the existing local capture search. Connector extensions can supply their own typed `native_search` hook. Wistia live account acceptance remains unrun without authorized credentials; see the capability inventory.
+
+Laserfiche Repository v2 native search accepts the same `native=true` request
+with an explicitly configured folder Children source and trusted
+`OperationContext(credentials={"laserfiche_token": token})`. For example:
+
+```python
+result = engine.execute("search", {
+    "native": True,
+    "source": {"provider": "laserfiche-weblink",
+        "url": "https://api.laserfiche.com/repository/v2/Repositories/REPOSITORY/Entries/54/Folder/Children"},
+    "query": {"terms": ["park"], "phrases": ["funding was approved"]},
+    "bounds": {"max_records": 100, "max_pages": 10}
+}, context=context)
+```
+
+The provider supplies first-expression candidates within that folder's direct
+children; all exact terms/phrases are then checked against returned metadata and
+context excerpts. Results remain partial because excerpts are not whole-document
+text. Inspect coverage for candidate/context truncation, failures and task cleanup.
+Use the full `result` for explicit import to preserve records, page/context
+captures and partial coverage. Metadata-only records remain available even when
+context retrieval fails. Meeting date/body filters and task-resume checkpoints
+are rejected; WebLink public sources do not imply Repository API access. Search
+tasks are cleaned up within the call; there is no automatic background worker.
+
+For assigned Repository metadata, set source option
+`"repository_include_fields": true` on API-folder sources. Selected entry detail,
+discovery and native-search candidates then read the documented `/Fields`
+collection, preserving supplied multi-values rather than relying on a listing's
+first-value projection. Inspect `coverage.field_metadata` and each record's
+`extensions.repository_field_coverage`; missing/more values and bounded partial
+reads remain explicit. Searchable values appear in
+`normalized.repository_fields`, and raw supplementary captures survive explicit
+import/export. This option performs no template administration or field writes.
 
 
 Legistar native search uses the same request shape with a configured Legistar source and explicit dates. It searches **EventBodyName metadata only**, using provider-side substring filters and exact local term/phrase checking on that field. It retains full original records but does not advertise searching agenda titles, document text or vote details. Coverage states the searched field and binds resumed pages to the exact source/query/scope.
@@ -135,6 +228,75 @@ children = engine.discover(repository, bounds=Bounds(max_pages=5, max_records=10
 ```
 
 This distinct account API path requires `repository.Read` and an explicitly configured repository/folder URL. It lists direct children only and follows provider-issued same-folder OData nextLinks under byte/page/record/deadline bounds. No public WebLink-to-repository account relationship is guessed. Document, folder and shortcut IDs are repository-wide; current parent folder is a relationship so moving an entry does not change its identity. Creation/modification times and supplied fields remain metadata, never inferred meeting dates. File content, subtype expansion and recursive traversal are not requested by this operation. The saved format is `laserfiche-repository-entries-json`. Canonical account namespaces are `//api.laserfiche.com/repository/v2/Repositories/{repositoryId}`; writes route the repository separately while enforcing the exact configured namespace/credential grant, and retain explicit legacy write-only repository slug configurations. Public WebLink identities are unchanged. No authorized Repository account token has been supplied, so live account acceptance remains unrun.
+
+For a selected child, `engine.fetch_record(repository, "71", context=...)` reads
+`GET /repository/v2/Repositories/{repositoryId}/Entries/{entryId}` from the pinned
+vendor SDK. Use the same trusted `repository.Read` token context shown above.
+The response must identify entry 71 and parent folder 54; an entry moved elsewhere
+requires an explicitly updated source folder. This returns metadata and an exact
+capture, with `content_fetched: false`; it does not download the document or infer
+a meeting date. The existing `laserfiche-repository-entries-json` parser replays
+both children responses and single Entry responses offline. Namespace, caller,
+response URL, token privacy and byte/deadline bounds remain enforced.
+
+Use `engine.fetch_record(repository, "71", include_text=True, context=...)` to
+also read existing supplied page text. The equivalent operation request contains
+`"external_id":"71", "include_text":true` on SDK `fetch`, CLI, HTTP or MCP.
+The flag requires a boolean and is explicitly unavailable for other providers.
+The connector follows the documented page-info collection's same-document
+nextLinks and GETs text only for pages advertising `hasText`. It never requests
+OCR, text generation or transcription. `max_pages` limits document pages;
+supplementary responses share a cumulative `min(parser_bytes, transfer_bytes)`
+budget and the metadata request's original deadline. A bounded partial response
+can be retried with a larger bound; this enrichment has no continuation cursor.
+
+Page segments retain page numbers, supplied page IDs, citations and response
+hashes. Raw page-info/text captures occupy the bundle's standard `captures`
+collection, so scoped persistence and ZIP interchange preserve them. Missing
+text, failed pages and truncation keep the result and subsequent local search
+partial. Normalized change detection includes the page-text hash while the
+document identity and provider-supplied revision remain distinct. The reads do
+not form an atomic snapshot; `text_complete` describes the returned page
+collection and supplied text, not every kind of content in the document.
+
+For original electronic-document bytes, call `engine.fetch_attachment(repository,
+document_record, capture=original_capture, context=...)`, or omit `capture` when
+the record is persisted in the caller's scoped engine storage. This selects the
+document itself at index zero. Configure `repository.options["download_origins"]`
+with the exact HTTPS origins permitted for provider-issued downloads; a returned
+URL does not automatically authorize a new origin. The connector rechecks the
+entry's current parent, POSTs `{"part":"Edoc"}` to its documented `/Export`
+route, and downloads the single-use link once without bearer headers or redirects.
+Retries start a new export. The result contains bounded bytes as `content_base64`,
+SHA-256, durable entry citation and fresh metadata revision/capture hash; the
+signed link is never returned. Download failure retains the record as partial.
+The default is original-file retrieval. To select another documented representation,
+set `Source.options["repository_export_part"]` to `Image`, `Text` or `AlternateEdoc`.
+Image export defaults to PDF; `repository_image_format` also accepts MultiPageTIFF,
+SinglePageTIFF, PNG and JPEG. TIFF exports use the documented `AsStored` encoding.
+Image annotations and image/text redactions remain included. AlternateEdoc requires
+`repository_alternate_edoc_name`, using the vendor's restricted 1–15 character
+name. Irrelevant or invalid options fail before network access. Results disclose
+the exact `export_part` and `export_options`; files may be a vendor-created archive
+for formats containing multiple files. No local conversion is performed. Text-file
+export does not imply page-anchored extraction; use `include_text` for that path.
+Set `repository_export_async: true` in source options for the documented
+`/ExportAsync` task path. The default remains synchronous. The connector validates
+the issued task ID/type and optional result entry ID, polls only that exact task,
+then downloads its single-use `result.uri` through the same guarded transfer.
+`max_pages` bounds task polls in this mode; `deadline_seconds` covers metadata,
+start, polling, cleanup and download. Task responses share a bounded parser-byte
+budget, with time and bytes reserved for cleanup. Increasing the deadline supports
+longer exports without an unbounded background worker.
+
+If polling stops early, the connector requests cancellation for its own task and
+checks terminal status. It never submits a cancel-all request or changes document
+content. `coverage.export_task` distinguishes cancellation requested/accepted from
+terminal confirmation. A timeout can leave cleanup unconfirmed; the task ID and
+next action are returned explicitly, while raw task errors and signed URLs remain
+private. A retry starts a new export; no resumable task cursor is claimed. An
+unconfirmed start is reported when no safe task reference was returned. Synthetic
+verification is accepted; live account execution remains unobserved.
 
 Official read contracts: [Legistar Votes](https://webapi.legistar.com/Help/Api/GET-v1-Client-EventItems-EventItemId-Votes), [Legistar RollCalls](https://webapi.legistar.com/Help/Api/GET-v1-Client-EventItems-EventItemId-RollCalls), [Laserfiche folder contents](https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_get-folder-listing/).
 
@@ -195,7 +357,7 @@ All account reads remain partial coverage: list pagination/end conditions and ac
 
 ## Bounded public native search
 
-The dev7 source candidate adds the verified public search forms for PrimeGov, eSCRIBE, Swagit, SuiteOne, CivicPlus Select, AgendaCenter, AgendaQuick, Utah, iQM2 and ClerkBase. These adapters apply only to their evidenced source routes/tenants; `providers` and the capability inventory distinguish them from the preserved saved-input formats. They submit the first term or phrase to the provider, then apply exact local matching to the returned metadata and explicitly supplied excerpts. Provider ranking/candidate selection is separate from the local match and is not a full-text or catalog-completeness promise.
+The dev7 source candidate adds the verified public search forms for PrimeGov, eSCRIBE, Swagit, SuiteOne, CivicPlus Select, AgendaCenter, AgendaQuick, Utah, iQM2 and ClerkBase. These adapters apply only to their evidenced source routes/tenants; `providers` and the capability inventory distinguish them from the preserved saved-input formats. They submit the first term or phrase to the provider, then apply exact local matching to the returned metadata and explicitly supplied excerpts. Provider ranking/candidate selection is separate from the local match and is not a full-text or catalog-completeness promise. Current PrimeGov source also declares the public client document branches below; search preserves locators without fetching their files. Authenticated Meeting API schemas remain unresolved.
 
 ```python
 result = engine.execute("search", {
@@ -207,6 +369,19 @@ result = engine.execute("search", {
 # Supply coverage.checkpoint in the next request's bounds, with the same
 # source/query/caller and current grants. Retain partial status and all errors.
 ```
+
+PrimeGov public search attachments can be explicitly retrieved with `engine.fetch_attachment(source, record, context=context)` after importing the search bundle into that engine's scoped storage. The configured source remains its HTTPS `public/portal` URL. The selected record must retain its original type, native document ID, meeting parent, namespace and declared document URL.
+
+| Vendor search type | Selected document behavior |
+|---|---|
+| 1, system-item attachment | Exact public PDF URL resolver, then a bounded PDF-byte fetch |
+| 2, system document | Exact public original-file route |
+| 3, section attachment | Exact public PDF route including its native meeting ID |
+| 4, compiled document | Exact file URL resolver for supplied numeric non-HTML output types; HTML type 3 and unknown output types remain unmapped |
+
+The captured client assigns each JSON resolver's callback value to `window.location`. Accepting a JSON URL string is an explicit inference from that code, verified with synthetic responses; it is not an observed server response schema. Relative URL strings resolve against the configured public page. Every request rejects redirects and obeys the deadline, parser/request and cumulative transfer limits. Another download origin requires explicit `download_origins`. Received bounded resolver bytes survive subsequent failures; attachment citations use the durable meeting page rather than a resolved transient file URL. PDF signatures establish supplied byte shape, not rendering or live availability.
+
+Types 1, 3 and 4 now use identity external IDs `type:<type>:<native-id>` to distinguish resources with overlapping numeric IDs. Native IDs remain unchanged in original fields and document metadata, and the canonical meeting parent remains part of identity. Existing type-2 and all baseline identities are preserved. This corrects the unpublished source's previously unqualified generic search identities for types 1/3/4; already stored unqualified records are retained and are not automatically migrated or reconciled. Earlier public-search checkpoints must restart because their identity contract has changed. See [the selected-document receipt](verification/primegov-selected-documents-2026-11-13.json) for the executed scope.
 
 Date/body requirements are adapter-specific. Utah requires explicit dates and the configured public body for discovery; native search supports only its observed form. iQM2 rejects a body filter whose mapping is unverified. AgendaCenter and Boardable retain unknown bodies explicitly. AgendaQuick meeting rows and agenda items, iQM2 mixed result kinds, Select parents and related children, and ClerkBase supplied-URL document keys preserve their separate identities; consumers must not treat every result as a meeting.
 

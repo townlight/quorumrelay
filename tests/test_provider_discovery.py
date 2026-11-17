@@ -234,7 +234,10 @@ def test_civicclerk_player_link_is_not_a_direct_mp4(media_path):
     from civic_data_connectors.legacy import legacy_previews
 
     payload = json.loads((BRIEF / "civicclerk-erie-events-2026-11-11-page1.json").read_text())
-    next(row for row in payload["value"] if row["id"] == 1277)["mediaStreamPath"] = media_path
+    raw_event = next(row for row in payload["value"] if row["id"] == 1277)
+    raw_event["mediaStreamPath"] = media_path
+    # Isolate this field from the independently supplied MP4 candidate.
+    raw_event["mediaSourcePathMp4"] = None
     engine, _ = make_engine()
     result = engine.execute("discover", {
         "source": {"provider": "civicplus-select", "url": "https://erieco.api.civicclerk.com/v1/Events",
@@ -256,6 +259,7 @@ def test_civicclerk_unusable_media_path_is_not_reconstructed_or_lost(media_path)
     payload = json.loads((BRIEF / "civicclerk-erie-events-2026-11-11-page1.json").read_text())
     raw_event = next(row for row in payload["value"] if row["id"] == 1277)
     raw_event["mediaStreamPath"] = media_path
+    raw_event["mediaSourcePathMp4"] = None  # This test isolates unusable mediaStreamPath.
     raw_event["future_provider_field"] = {"nullable": [None, False, 0, ""]}
     content = json.dumps(payload, ensure_ascii=False).encode()
     engine, transport = make_engine()
@@ -599,3 +603,27 @@ def test_tyler_explicit_observed_calendar_api_uses_fixed_bounded_post_and_report
         req["source"]["options"]["calendar_api_base"] = base
         assert engine.execute("discover", req).status == "failed"
     assert len(transport.calls) == 1
+
+
+def test_tyler_discovery_retains_both_supplied_statuses_and_rich_digests():
+    from civic_data_connectors.engine import canonical_hash
+
+    rows = [{"id": str(index), "meetingTitle": "Council", "startDateTime": "2026-11-11",
+             "startTime": "07:00 PM", "isPublicVisibility": 1,
+             "canceled": index == 1, "adjourned": index == 2,
+             "newMeetingDate": "2026-11-12", "unknown": {"value": None}}
+            for index in (1, 2)]
+    engine, transport = make_engine(lambda *args: json.dumps(rows).encode())
+    source_url = "https://town.meetingmanager.tylerapp.com/"
+    req = request("tyler-meeting-manager", source_url,
+                  options={"calendar_api_base": source_url + "tylermmcalendar46612prod/"})
+    result = engine.execute("discover", req)
+    assert result.status == "partial", result.public_dict()
+    assert len(transport.calls) == 1
+    records = result.data["records"]
+    assert {record["identity"]["external_id"] for record in records} == {"1", "2"}
+    for record, raw in zip(records, rows, strict=True):
+        assert record["original"] == raw
+        assert record["normalized"]["source_status"] == {
+            "canceled": raw["canceled"], "adjourned": raw["adjourned"]}
+        assert record["normalized_sha256"] == canonical_hash(record["normalized"])

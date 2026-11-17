@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en-us">
+<head>
+    <meta name="robots" content="noindex,nofollow" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=11">
+    <title>Sign In - OneMeeting</title>
+    <link rel="icon" type="image/svg" href="/favicon.svg" sizes="32x32">
+    <script>
+        sessionStorage.removeItem("IsNewJsEnabled");
+        sessionStorage.removeItem('matomo-user');
+        sessionStorage.setItem("csrfToken", 'AnpPOvX8sSF6Y0pN56tGDsqyLHqh-Hx90lG-wkZQrBj2sNBzwYgKF9fqaq4DgTfTQ6dCQ0u48UH8zv6uvoP95RDb9BE1:qJmfX85q0DCD_n2S4Qbf6QJvfREb7z4mtXY9LsdjTk_DX_DoNM-9YVwY5_wCWkxURtVX4bS-Z2BE7JyoNg_uFOmwe3I1');
+        const _securityfeature = JSON.parse('{"csrf":true,"sensitiveData":true,"accusoftViewer":true,"xss":true,"pii":true}');
+    </script>
+    <script src="/Scripts/matomo-builder.js"></script>
+    <script type="text/javascript">
+        !function (T, l, y) { var S = T.location, k = "script", D = "instrumentationKey", C = "ingestionendpoint", I = "disableExceptionTracking", E = "ai.device.", b = "toLowerCase", w = "crossOrigin", N = "POST", e = "appInsightsSDK", t = y.name || "appInsights"; (y.name || T[e]) && (T[e] = t); var n = T[t] || function (d) { var g = !1, f = !1, m = { initialize: !0, queue: [], sv: "5", version: 2, config: d }; function v(e, t) { var n = {}, a = "Browser"; return n[E + "id"] = a[b](), n[E + "type"] = a, n["ai.operation.name"] = S && S.pathname || "_unknown_", n["ai.internal.sdkVersion"] = "javascript:snippet_" + (m.sv || m.version), { time: function () { var e = new Date; function t(e) { var t = "" + e; return 1 === t.length && (t = "0" + t), t } return e.getUTCFullYear() + "-" + t(1 + e.getUTCMonth()) + "-" + t(e.getUTCDate()) + "T" + t(e.getUTCHours()) + ":" + t(e.getUTCMinutes()) + ":" + t(e.getUTCSeconds()) + "." + ((e.getUTCMilliseconds() / 1e3).toFixed(3) + "").slice(2, 5) + "Z" }(), iKey: e, name: "Microsoft.ApplicationInsights." + e.replace(/-/g, "") + "." + t, sampleRate: 100, tags: n, data: { baseData: { ver: 2 } } } } var h = d.url || y.src; if (h) { function a(e) { var t, n, a, i, r, o, s, c, u, p, l; g = !0, m.queue = [], f || (f = !0, t = h, s = function () { var e = {}, t = d.connectionString; if (t) for (var n = t.split(";"), a = 0; a < n.length; a++) { var i = n[a].split("="); 2 === i.length && (e[i[0][b]()] = i[1]) } if (!e[C]) { var r = e.endpointsuffix, o = r ? e.location : null; e[C] = "https://" + (o ? o + "." : "") + "dc." + (r || "services.visualstudio.com") } return e }(), c = s[D] || d[D] || "", u = s[C], p = u ? u + "/v2/track" : d.endpointUrl, (l = []).push((n = "SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)", a = t, i = p, (o = (r = v(c, "Exception")).data).baseType = "ExceptionData", o.baseData.exceptions = [{ typeName: "SDKLoadFailed", message: n.replace(/\./g, "-"), hasFullStack: !1, stack: n + "\nSnippet failed to load [" + a + "] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: " + (S && S.pathname || "_unknown_") + "\nEndpoint: " + i, parsedStack: [] }], r)), l.push(function (e, t, n, a) { var i = v(c, "Message"), r = i.data; r.baseType = "MessageData"; var o = r.baseData; return o.message = 'AI (Internal): 99 message:"' + ("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) (" + n + ")").replace(/\"/g, "") + '"', o.properties = { endpoint: a }, i }(0, 0, t, p)), function (e, t) { if (JSON) { var n = T.fetch; if (n && !y.useXhr) n(t, { method: N, body: JSON.stringify(e), mode: "cors" }); else if (XMLHttpRequest) { var a = new XMLHttpRequest; a.open(N, t), a.setRequestHeader("Content-type", "application/json"), a.send(JSON.stringify(e)) } } }(l, p)) } function i(e, t) { f || setTimeout(function () { !t && m.core || a() }, 500) } var e = function () { var n = l.createElement(k); n.src = h; var e = y[w]; return !e && "" !== e || "undefined" == n[w] || (n[w] = e), n.onload = i, n.onerror = a, n.onreadystatechange = function (e, t) { "loaded" !== n.readyState && "complete" !== n.readyState || i(0, t) }, n }(); y.ld < 0 ? l.getElementsByTagName("head")[0].appendChild(e) : setTimeout(function () { l.getElementsByTagName(k)[0].parentNode.appendChild(e) }, y.ld || 0) } try { m.cookie = l.cookie } catch (p) { } function t(e) { for (; e.length;)!function (t) { m[t] = function () { var e = arguments; g || m.queue.push(function () { m[t].apply(m, e) }) } }(e.pop()) } var n = "track", r = "TrackPage", o = "TrackEvent"; t([n + "Event", n + "PageView", n + "Exception", n + "Trace", n + "DependencyData", n + "Metric", n + "PageViewPerformance", "start" + r, "stop" + r, "start" + o, "stop" + o, "addTelemetryInitializer", "setAuthenticatedUserContext", "clearAuthenticatedUserContext", "flush"]), m.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 }; var s = (d.extensionConfig || {}).ApplicationInsightsAnalytics || {}; if (!0 !== d[I] && !0 !== s[I]) { var c = "onerror"; t(["_" + c]); var u = T[c]; T[c] = function (e, t, n, a, i) { var r = u && u(e, t, n, a, i); return !0 !== r && m["_" + c]({ message: e, url: t, lineNumber: n, columnNumber: a, error: i }), r }, d.autoExceptionInstrumented = !0 } return m }(y.cfg); function a() { y.onInit && y.onInit(n) } (T[t] = n).queue && 0 === n.queue.length ? (n.queue.push(a), n.trackPageView({})) : a() }(window, document, {
+            src: "https://js.monitor.azure.com/scripts/b/ai.2.min.js", // The SDK URL Source
+            // name: "appInsights", // Global SDK Instance name defaults to "appInsights" when not supplied
+            // ld: 0, // Defines the load delay (in ms) before attempting to load the sdk. -1 = block page load and add to head. (default) = 0ms load after timeout,
+            // useXhr: 1, // Use XHR instead of fetch to report failures (if available),
+            crossOrigin: "anonymous", // When supplied this will add the provided value as the cross origin attribute on the script tag
+            // onInit: null, // Once the application insights instance has loaded and initialized this callback function will be called with 1 argument -- the sdk instance (DO NOT ADD anything to the sdk.queue -- As they won't get called)
+            cfg: { // Application Insights Configuration
+                instrumentationKey: 'd2ab0614-b4cf-4a9d-b150-0f6110a001e1'
+                /* ...Other Configuration Options... */
+            }
+        });
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="/Content/css/frontend/FamilyFonts.css" rel="stylesheet" />
+    <script src="/bundles/om/scripts/csrfinjector?v=T2TXVQjRhESpCxXV7OWoDkto68kMqwTQf8J1H-IkfMI1"></script>
+
+
+    <link href="/bundles/bootstrap?v=mE5-OFpVrb9NIbDfyj3ge_AS-XjSpyEZ-xOOiIoY9-E1" rel="stylesheet"/>
+
+    <link href="/bundles/om/bootstrap?v=-5DbdtAfXnNT9ZVE20wzKGr9-Ix_kVhRrvY2RiUBjhU1" rel="stylesheet"/>
+
+
+    
+    <!-- purify js for html sanitization -->
+    <script src="/Content/js/purify.min.js"></script>
+
+    <!-- Font Awesome Files -->
+    <link href="/Content/css/vendor/font-awesome.css" rel="stylesheet" />
+    <!-- Font Icons -->
+    <link href="/Content/remark/fonts/material-design/material-design.min.css" rel="stylesheet" />
+    <link href="/Content/remark/fonts/brand-icons/brand-icons.min.css" rel="stylesheet" />
+    <link href="/Content/remark/fonts/web-icons/web-icons.min.css" rel="stylesheet" />
+
+
+    <script type='text/javascript'>
+        var appInsights = window.appInsights || function (config) {
+            function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } }
+            var t = { config: config }, u = document, e = window, o = 'script', s = u.createElement(o), i, f; for (s.src = config.url || '//az416426.vo.msecnd.net/scripts/a/ai.0.js', u.getElementsByTagName(o)[0].parentNode.appendChild(s), t.cookie = u.cookie, t.queue = [], i = ['Event', 'Exception', 'Metric', 'PageView', 'Trace', 'Ajax']; i.length;)r('track' + i.pop()); return r('setAuthenticatedUserContext'), r('clearAuthenticatedUserContext'), config.disableExceptionTracking || (i = 'onerror', r('_' + i), f = e[i], e[i] = function (config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t['_' + i](config, r, u, e, o), s }), t
+        }({
+            instrumentationKey: '6ad9ce0b-9cb7-445e-a0af-ac44a38d57c2'
+        });
+
+        window.appInsights = appInsights;
+        appInsights.trackPageView();
+    </script>
+
+
+    <link href="/bundles/om/frontend?v=LRtfCSXW9C8d_qJCvfmzRywIg9FhEv3xlKw5MZukbUk1" rel="stylesheet"/>
+
+
+    
+</head>
+
+<body class="site-navbar-small dashboard om-loading">
+    <a href="#main-page" data-module="skiplink" class="skip-to-content" data-initialized="true">Skip to main content</a>
+
+    <!-- Overlay loader-->
+    <div id="om-loader-overlay">
+    <div class="om-loader-content" >
+        <img class="om-loader-logo" src="/Content/Version2/assets/loaders/loader-page-logo.svg" alt="" />
+        <div class="loader-index">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Side Navigation bar-->
+    
+
+
+
+
+    <div id="site-container-tour">
+        <!-- start of Navbar Toolbar -->
+<!-- Large Screen Header -->
+<nav class="header-nav row navbar-fixed-top">
+
+    <!-- Toolbar for breadcrumbs -->
+    <div id="nav-bread-crumb">
+        <!-- Granicus logo -->
+
+            <div id="home-icon-container--public">
+                
+                <img src="/Content/images/default/agenda-oe_logo_white.svg" alt="Agenda OE" class="header-product-logo header-product-logo--public-full" />
+            </div>
+    </div>
+
+    <!-- Right menu options -->
+    <div class="right-options">
+
+        <!-- dynamic actions Meeting Committees, Live meetings, search portal etc -->
+        <div>
+                    <a class="btn btn-link btn-login-unauthorized" href="/login">
+                        Sign In
+                    </a>
+        </div>
+
+    </div>
+</nav>
+
+<!-- Mobile Screen Header -->
+
+
+
+<script defer>
+
+    initMenu();
+
+    function initMenu() {
+        const toggle = document.querySelector(".toggle");
+        const menu = document.querySelector(".menu");
+        const menuItems = document.querySelectorAll(".item");
+
+        /* Toggle mobile menu */
+        function toggleMenu() {
+            if (menu.classList.contains("active")) {
+                menu.classList.remove("active");
+                toggle.querySelector("a").innerHTML = "<i class='icon md-more'></i>";
+            } else {
+                menu.classList.add("active");
+                toggle.querySelector("a").innerHTML = "<i class='fa fa-times'></i>";
+            }
+        }
+
+        /* Activate Submenu */
+        function toggleItem() {
+            if (this.classList.contains("submenu-active")) {
+                this.classList.remove("submenu-active");
+            } else if (menu.querySelector(".submenu-active")) {
+                menu.querySelector(".submenu-active").classList.remove("submenu-active");
+                this.classList.add("submenu-active");
+            } else {
+                this.classList.add("submenu-active");
+            }
+        }
+
+        /* Close Submenu From Anywhere */
+        function closeSubmenu(e) {
+            if (menu.querySelector(".submenu-active")) {
+                let isClickInside = menu
+                    .querySelector(".submenu-active")
+                    .contains(e.target);
+
+                if (!isClickInside && menu.querySelector(".submenu-active")) {
+                    menu.querySelector(".submenu-active").classList.remove("submenu-active");
+                }
+            }
+        }
+
+
+        var isLoggedIn = 'False'.toLowerCase() == 'true';
+
+        if (!isLoggedIn) {
+            var navBarTop = document.getElementsByClassName('navbar-fixed-top')[0];
+            navBarTop.classList.add('not-login-nav');
+
+            if (location.href.toLowerCase().indexOf('/login') != -1) {
+                var signInBtns = document.getElementsByClassName('btn-login-unauthorized');
+                for (var i = 0; i < signInBtns.length; i++) {
+                    signInBtns[i].parentNode.classList.add('display-none');
+                }
+            }
+        } else {
+            /* Event Listeners */
+            try {
+                toggle.addEventListener("click", toggleMenu, false);
+            } catch (e) { }
+            for (let item of menuItems) {
+                if (item.querySelector(".submenu")) {
+                    item.addEventListener("click", toggleItem, false);
+                }
+                item.addEventListener("keypress", toggleItem, false);
+            }
+            document.addEventListener("click", closeSubmenu, false);
+            document.getElementsByClassName('navbar-fixed-top')[0].id = 'large-indicator-nav';
+        }
+    }
+</script>
+
+
+        <main id="main-page" class="om-main-container container-fluid Sign In page-login">
+            
+
+<link href="/bundles/om/pages/login?v=J7DqdYUmZo3WgKzEf5XmxcpbTlU-fJ2ZXpe-F5_Xtqo1" rel="stylesheet"/>
+
+
+<section id="login-section" class="om-main-container">
+    <div class="well">
+<form action="/Login" class="form-horizontal" id="form0" method="post" role="form"><input name="__RequestVerificationToken" type="hidden" value="[REDACTED]" /><div class="validation-summary-valid text-danger" id="validationSummary"><ul><li style="display:none"></li>
+</ul></div>            <div class="login-image">
+                <img class="login-image-src" src="/content/images/org/de243c.png" title="city logo">
+            </div>
+            <h1>Sign in</h1>
+            <div class="form-group">
+<input class="form-control custom-input" id="Email" name="Email" placeholder="Email Address" type="text" value="" />            </div>
+            <div class="form-group">
+<input class="form-control custom-input" id="Password" name="Password" placeholder="Password" type="password" />            </div>
+            <div class="checkbox">
+                <label class="lblRememberMe">
+                    <input id="RememberMe" name="RememberMe" style="margin-top:2px;margin-left: -20px;" type="checkbox" value="true" /><input name="RememberMe" type="hidden" value="false" />
+                    Remember me
+                </label>
+                    <a href="account/forgotPassword" class="forgotPassword pull-right">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn-login btn btn-lg btn-block"><span>Sign In</span></button>
+</form><script type="text/javascript">
+//<![CDATA[
+if (!window.mvcClientValidationMetadata) { window.mvcClientValidationMetadata = []; }
+window.mvcClientValidationMetadata.push({"Fields":[],"FormId":"form0","ReplaceValidationSummary":false,"ValidationSummaryId":"validationSummary"});
+//]]>
+</script>
+        
+        <h4 class="or-style">Or</h4>
+<form action="/Account/ExternalLogin" id="form1" method="post"><input name="__RequestVerificationToken" type="hidden" value="[REDACTED]" />            <div id="socialLoginList">
+                            <button type="submit" class="btn btn-outline-dark btn-block btn-external-logins" style="margin-bottom:5px" id="Google" name="provider" value="Google" title="Login Google Account">
+                                <i class="om-icon--google om-icon-login"></i>
+                                <span>
+                                    Sign in with Google
+                                </span>
+                            </button>
+                            <button type="submit" class="btn btn-outline-dark btn-block btn-external-logins" style="margin-bottom:5px" id="Microsoft" name="provider" value="Microsoft" title="Login Microsoft Account">
+                                <i class="om-icon--microsoft om-icon-login"></i>
+                                <span>
+                                    Sign in with Microsoft
+                                </span>
+                            </button>
+            </div>
+</form><script type="text/javascript">
+//<![CDATA[
+if (!window.mvcClientValidationMetadata) { window.mvcClientValidationMetadata = []; }
+window.mvcClientValidationMetadata.push({"Fields":[],"FormId":"form1","ReplaceValidationSummary":false});
+//]]>
+</script>
+    </div>
+</section>
+
+
+<script defer>
+    loginPreConfigurer();
+    function loginPreConfigurer() {
+        var isLoggedIn = 'False'.toLowerCase() == 'true';
+        if (!isLoggedIn) {
+            var parent = document.getElementById('login-section').parentNode;
+            parent.outerHTML = parent.innerHTML;
+
+            document.getElementById('login-section').classList.add('login-section-parent');
+        }
+    }
+</script>
+        </main>
+
+        <footer class="cs_footer">
+            <div class="col-sm-12 text-center footer-copyright  ">
+                <span class="site-by">
+                    &copy; 2026 <a href="https://granicus.com/" target="_blank"><u>Granicus</u></a>
+                    - <a href="https://www.primegov.com/privacy-policy" target="_blank"><u>Privacy Policy</u></a>
+                </span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Lodash -->
+
+
+    <script src="/bundles/sanitize?v=z2iW46wBghGDiXGZYhdEXDaPd1CIMu8DXcxIVjb30xY1"></script>
+
+
+    
+    <script>
+        //Convert the above code from jquery to javascript
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                document.getElementById('om-loader-overlay').style.display = 'none';
+            }, 2000);
+        });
+
+    </script>
+    <script src="/Content/remark/vendors/jquery/jquery.min.js"></script>
+    <script src="/Scripts/svg-undefined-fix.js"></script>
+</body>
+</html>

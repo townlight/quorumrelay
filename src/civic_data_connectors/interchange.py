@@ -93,7 +93,7 @@ class _ArtifactManager:
                     self.size -= metadata["byte_length"]
                     del self.values[key]
 
-    def save(self, collection, key, source, metadata, *, scope, limit, context=None):
+    def save(self, collection, key, source, metadata, *, scope, limit, context=None, check_bounds=None):
         from pathlib import Path
         from .extensions import StorageConflict
 
@@ -108,6 +108,8 @@ class _ArtifactManager:
             try:
                 with path.open("xb") as target:
                     info = _copy(source, target, min(limit, 1024 * 1024 * 1024 - self.size), context)
+                if check_bounds is not None:
+                    check_bounds()
             except BaseException:
                 path.unlink(missing_ok=True)
                 raise
@@ -136,25 +138,36 @@ def _artifact_manager(engine):
         return manager
 
 
-def _save_artifact(engine, collection, key, source, metadata, *, context, max_bytes):
+def _save_artifact(engine, collection, key, source, metadata, *, context, max_bytes, check_bounds=None):
     metadata = {**metadata, "created_at": time.time(), "expires_at": time.time() + 3600}
     store = engine.storage
-    if (store is not None and callable(getattr(store, "save_capture", None))
-            and callable(getattr(store, "open_capture", None))):
-        class CancellableReader:
-            def read(self, size):
-                if operation_cancelled(store, context):
-                    raise InterruptedError("Export cancelled; no artifact was published.")
-                return source.read(size)
-        reference = store.save_capture(CancellableReader(), scope=context.scope, max_bytes=max_bytes)
+
+    def check():
         if operation_cancelled(store, context):
             raise InterruptedError("Export cancelled; no artifact was published.")
+        if check_bounds is not None:
+            check_bounds()
+
+    class BoundedReader:
+        def read(self, size):
+            check()
+            chunk = source.read(size)
+            check()
+            return chunk
+
+    check()
+    reader = BoundedReader()
+    if (store is not None and callable(getattr(store, "save_capture", None))
+            and callable(getattr(store, "open_capture", None))):
+        reference = store.save_capture(reader, scope=context.scope, max_bytes=max_bytes)
+        check()
         value = {**deepcopy(metadata), "storage_reference": reference,
                  "sha256": reference["sha256"], "byte_length": reference["byte_length"]}
         store.put(collection, key, value, scope=context.scope, create_only=True)
         return value
     return _artifact_manager(engine).save(
-        collection, key, source, metadata, scope=context.scope, limit=max_bytes, context=context,
+        collection, key, reader, metadata, scope=context.scope, limit=max_bytes, context=context,
+        check_bounds=check,
     )
 
 
@@ -285,14 +298,20 @@ def open_artifact(engine, artifact_id: str, *, context):
 
 
 class _LimitWriter:
-    def __init__(self, stream, limit, deadline_seconds):
+    def __init__(self, stream, limit, deadline_seconds, context=None):
         self.stream, self.limit, self.size = stream, limit, 0
         self.deadline = time.monotonic() + deadline_seconds
         self.digest = hashlib.sha256()
+        self.context = context
+
+    def check(self):
+        if self.context is not None and self.context.check_cancelled():
+            raise InterruptedError("Export cancelled; discard the output stream.")
+        if time.monotonic() >= self.deadline:
+            raise ValueError("The export deadline was exceeded.")
 
     def write(self, data):
-        if time.monotonic() > self.deadline:
-            raise ValueError("The export deadline was exceeded.")
+        self.check()
         if self.size + len(data) > self.limit:
             raise ValueError("The export exceeds the configured transfer byte limit.")
         written = self.stream.write(data)
@@ -300,6 +319,7 @@ class _LimitWriter:
             raise ValueError("The output stream did not accept all bytes.")
         self.digest.update(data)
         self.size += len(data)
+        self.check()
         return written
 
     def tell(self):
@@ -446,6 +466,8 @@ def write_bundle(bundle: dict, destination: BinaryIO, *, format="zip", bounds=No
     Output size and expanded payload sizes are bounded independently of parser input.
     """
     bounds = bounds or Bounds()
+    sink = _LimitWriter(destination, bounds.transfer_bytes, bounds.deadline_seconds, context)
+    sink.check()
     if not isinstance(bundle, dict) or not isinstance(bundle.get("records"), (list, tuple)):
         raise ValueError("Export requires a bundle with records.")
     if format in {"json", "jsonl"}:
@@ -466,7 +488,6 @@ def write_bundle(bundle: dict, destination: BinaryIO, *, format="zip", bounds=No
             if materialized > bounds.parser_bytes:
                 raise ValueError("Original captures exceed the text-format parser limit; use ZIP export.")
             capture["content_base64"] = base64.b64encode(raw).decode("ascii")
-    sink = _LimitWriter(destination, bounds.transfer_bytes, bounds.deadline_seconds)
     manifest = {"interchange_version": INTERCHANGE_VERSION, "schema_version": SCHEMA_VERSION,
                 "format": format, "entries": [], "attachments": [], "not_included": [],
                 "projection_losses": [], "bundle": _hash_json(bundle)}
@@ -505,12 +526,16 @@ def write_bundle(bundle: dict, destination: BinaryIO, *, format="zip", bounds=No
     elif format == "zip":
         metadata = deepcopy({key: value for key, value in bundle.items() if key != "records"})
         locations, captures = [], {}
-        for path, capture in _capture_locations(metadata):
+        # Snapshot every JSON location before removing inline bytes. deepcopy
+        # preserves object aliases; mutating one occurrence must not hide another
+        # occurrence from traversal or change its original inline flag.
+        original_locations = [(path, capture, "content_base64" in capture)
+                              for path, capture in _capture_locations(metadata)]
+        for path, capture, inline in original_locations:
             sha = capture.get("sha256")
             if not isinstance(sha, str) or re.fullmatch("[0-9a-f]{64}", sha) is None:
                 raise ValueError("A capture requires a SHA-256 hash.")
-            locations.append({"path": list(path), "sha256": sha,
-                              "inline": "content_base64" in capture})
+            locations.append({"path": list(path), "sha256": sha, "inline": inline})
             captures.setdefault(sha, deepcopy(capture))
             capture.pop("content_base64", None)
         manifest["capture_locations"] = locations
@@ -587,6 +612,7 @@ def write_bundle(bundle: dict, destination: BinaryIO, *, format="zip", bounds=No
             archive.writestr("manifest.json", raw_manifest)
     else:
         raise ValueError("Neutral format must be json, jsonl or zip.")
+    sink.check()
     return {**manifest, "output": {"sha256": sink.digest.hexdigest(), "byte_length": sink.size}}
 
 
@@ -758,6 +784,26 @@ def _csv_cell(value):
     return "'" + value if value.lstrip(" \t\r\n").startswith(("=", "+", "-", "@")) else value
 
 
+def _item_csv_parent(record):
+    candidates = []
+    parent = record["identity"].get("parent")
+    if isinstance(parent, dict) and parent.get("record_type") in {"meeting", "event"}:
+        candidates.append(parent)
+    candidates.extend(relation.get("identity") for relation in record.get("relationships", [])
+                      if relation.get("relation") == "meeting")
+    keys, invalid = set(), False
+    for identity in candidates:
+        if (not isinstance(identity, dict) or identity.get("record_type") not in {"meeting", "event"}
+                or any(not isinstance(identity.get(k), str) or not identity[k]
+                       for k in ("provider", "namespace", "external_id"))):
+            invalid = True
+        else:
+            keys.add(source_identity_key(identity))
+    if len(keys) == 1 and not invalid:
+        return next(iter(keys)), None
+    return "", "ambiguous_meeting_parent" if len(keys) > 1 else "missing_or_invalid_meeting_parent"
+
+
 def csv_projection(records, *, kind="meetings"):
     """RFC 4180 CSV with a separate, machine-readable omission ledger."""
     output = io.StringIO(newline="")
@@ -774,7 +820,14 @@ def csv_projection(records, *, kind="meetings"):
     for record in records:
         identity, normalized = record["identity"], record.get("normalized", {})
         key = source_identity_key(identity)
-        included = {"source_url"}
+        included = set()
+        def include_fields(container, fields, prefix=""):
+            for field in fields:
+                if field in container:
+                    path = f"{prefix}.{field}" if prefix else field
+                    included.update(_leaves(container[field], path))
+
+        limitations = []
         if kind == "meetings":
             if identity["record_type"] not in {"meeting", "event"}:
                 losses.append({"identity_key": key, "reason": "non_meeting_record_omitted",
@@ -784,9 +837,21 @@ def csv_projection(records, *, kind="meetings"):
                    **{k: normalized.get(k) for k in ("title", "scheduled_start", "meeting_date", "body")},
                    **{k: record.get(k) for k in ("source_url", "capture_sha256", "source_revision")}}
             writer.writerow({k: _csv_cell(v) for k, v in row.items()})
-            included |= {"identity.provider", "identity.namespace", "identity.external_id", "capture_sha256"}
-            included |= {p for p in _leaves(record) if p.startswith("source_revision.")}
-            included |= {f"normalized.{k}" for k in ("title", "scheduled_start", "meeting_date", "body")}
+            include_fields(identity, ("provider", "namespace", "external_id"), "identity")
+            include_fields(record, ("source_url", "capture_sha256", "source_revision"))
+            include_fields(normalized, ("title", "scheduled_start", "meeting_date", "body"), "normalized")
+        elif identity["record_type"] == "agenda_item":
+            parent_key, missing = _item_csv_parent(record)
+            writer.writerow({k: _csv_cell(v) for k, v in {
+                "meeting_identity_key": parent_key, "item_external_id": identity["external_id"],
+                "title": normalized.get("title"), "department": normalized.get("department"),
+                "source_url": record.get("source_url"),
+            }.items()})
+            include_fields(identity, ("external_id",), "identity")
+            include_fields(normalized, ("title", "department"), "normalized")
+            include_fields(record, ("source_url",))
+            if missing:
+                limitations.append(missing + "; parent key left empty, no join inferred")
         else:
             for index, item in enumerate(normalized.get("agenda_items", [])):
                 writer.writerow({k: _csv_cell(v) for k, v in {
@@ -794,14 +859,17 @@ def csv_projection(records, *, kind="meetings"):
                     "title": item.get("title"), "department": item.get("department"),
                     "source_url": record.get("source_url"),
                 }.items()})
-                included |= {f"normalized.agenda_items[{index}].{field}"
-                             for field in ("external_id", "title", "department")}
-        losses.append({"identity_key": key, "omitted_fields": sorted(_leaves(record) - included)})
+                include_fields(item, ("external_id", "title", "department"),
+                               f"normalized.agenda_items[{index}]")
+                include_fields(record, ("source_url",))
+        losses.append({"identity_key": key, "omitted_fields": sorted(_leaves(record) - included),
+                       **({"limitations": limitations} if limitations else {})})
     return output.getvalue().encode("utf-8"), {
         "projection": kind, "lossless": False, "records": losses,
         "representation_changes": ["null/absent become empty cells",
                                    "formula-like cells are prefixed with apostrophe",
-                                   "nested source_revision uses JSON; other nested fields are omitted"],
+                                   "nested projected cell values use JSON; other nested fields are omitted",
+                                   "standalone agenda_item rows use explicit meeting identities only; missing or ambiguous parents have empty keys"],
         "specification": "https://www.rfc-editor.org/rfc/rfc4180",
     }
 
@@ -838,7 +906,8 @@ def icalendar_projection(records):
         if record["identity"]["record_type"] not in {"meeting", "event"}:
             loss["reason"] = "non_event_record_omitted"
             continue
-        start = normalized.get("scheduled_start") or normalized.get("meeting_date")
+        start_field = "scheduled_start" if normalized.get("scheduled_start") else "meeting_date"
+        start = normalized.get(start_field)
         if not start:
             loss["reason"] = "missing_start_event_omitted"
             continue
@@ -858,7 +927,7 @@ def icalendar_projection(records):
         lines += ["BEGIN:VEVENT", f"UID:{key}@civic-data-connectors.invalid",
                   "DTSTAMP:" + stamp.astimezone(timezone.utc).strftime("%Y%m%dT%H%M%SZ"),
                   dtstart, "SUMMARY:" + _ical_text(normalized.get("title", ""))]
-        included = {"normalized.title", "normalized.scheduled_start", "normalized.meeting_date", "captured_at"}
+        included = {"normalized.title", f"normalized.{start_field}", "captured_at"}
         location = normalized.get("location")
         if isinstance(location, str):
             lines.append("LOCATION:" + _ical_text(location))
@@ -869,9 +938,12 @@ def icalendar_projection(records):
             lines.append("URL:" + citation)
             included.add("citation_urls[0]" if record.get("citation_urls") else "source_url")
         source_status = normalized.get("source_status")
-        if source_status == "CANCELLED" or (isinstance(source_status, dict) and source_status.get("canceled")):
+        if source_status == "CANCELLED":
             lines.append("STATUS:CANCELLED")
-            included |= {p for p in _leaves(record) if p.startswith("normalized.source_status")}
+            included.add("normalized.source_status")
+        elif isinstance(source_status, dict) and source_status.get("canceled") is True:
+            lines.append("STATUS:CANCELLED")
+            included.add("normalized.source_status.canceled")
         lines.append("END:VEVENT")
         loss["omitted_fields"] = sorted(_leaves(record) - included)
     lines.append("END:VCALENDAR")
@@ -883,6 +955,7 @@ def icalendar_projection(records):
 
 def register(engine) -> None:
     def export(owner, request, content, context):
+        started = time.monotonic()
         request = dict(request)
         if request.get("provider_specific"):
             return OperationResult.unsupported("export", reason=(
@@ -900,6 +973,12 @@ def register(engine) -> None:
             request["coverage"] = {**upstream.get("coverage", {}), "input_status": upstream["status"]}
             upstream_errors = tuple(Error(**error) for error in upstream.get("errors", []))
         bounds = Bounds(**request.get("bounds", {}))
+        def check_export():
+            if operation_cancelled(owner.storage, context):
+                raise InterruptedError("Export cancelled.")
+            if time.monotonic() >= started + bounds.deadline_seconds:
+                raise ValueError("The export deadline was exceeded.")
+
         if "stream" in request and type(request["stream"]) is not bool:
             raise ValueError("stream must be a JSON boolean.")
         delivery = request.get("delivery", "storage" if request.get("stream") else "inline")
@@ -952,10 +1031,12 @@ def register(engine) -> None:
         if operation_cancelled(owner.storage, context):
             return OperationResult("cancelled", operation_id=context.operation_id)
         if format in {"csv", "csv-meetings", "csv-items", "icalendar", "ics"}:
+            check_export()
             if format.startswith("csv"):
                 payload, losses = csv_projection(bundle["records"], kind="items" if format == "csv-items" else "meetings")
             else:
                 payload, losses = icalendar_projection(bundle["records"])
+            check_export()
             if len(payload) > bounds.transfer_bytes:
                 raise ValueError("Projection exceeds the transfer byte limit.")
             if delivery == "inline" and len(payload) > bounds.parser_bytes:
@@ -967,7 +1048,7 @@ def register(engine) -> None:
                 metadata = _save_artifact(owner, "artifacts", artifact_id, io.BytesIO(payload),
                     {"artifact_id": artifact_id, "format": format, "manifest": manifest,
                      "namespaces": sorted({r["identity"]["namespace"] for r in bundle["records"]})},
-                    context=context, max_bytes=bounds.transfer_bytes)
+                    context=context, max_bytes=bounds.transfer_bytes, check_bounds=check_export)
                 data = {"format": format, "artifact_id": artifact_id, "manifest": manifest,
                         "storage_reference": metadata.get("storage_reference",
                             {"kind": "civic_export_artifact", "artifact_id": artifact_id})}
@@ -977,6 +1058,7 @@ def register(engine) -> None:
             status = "partial" if (coverage.get("failures") or coverage.get("truncated")
                                     or coverage.get("input_status") in {"partial", "failed", "cancelled"}
                                     or upstream_errors) else "completed"
+            check_export()
             return OperationResult(status, data=data,
                                    errors=upstream_errors, coverage=coverage, operation_id=context.operation_id)
         attachment_ids = request.get("attachment_ids", [])
@@ -999,9 +1081,11 @@ def register(engine) -> None:
                                               item["citation_url"], item["sha256"]))
             output = stack.enter_context(tempfile.TemporaryFile())
             try:
+                check_export()
                 manifest = write_bundle(bundle, output, format=format, bounds=bounds, storage=owner.storage,
                                         scope=context.scope, context=context, attachments=attachments,
                                         authorized_attachments=frozenset(attachment_ids))
+                check_export()
             except InterruptedError:
                 return OperationResult("cancelled", coverage={"truncated": True}, operation_id=context.operation_id)
             if delivery == "storage":
@@ -1010,7 +1094,8 @@ def register(engine) -> None:
                 metadata = _save_artifact(owner, "artifacts", artifact_id, output,
                     {"artifact_id": artifact_id, "format": format, "manifest": manifest,
                      "requires_attachment_grant": bool(attachment_ids),
-                     "namespaces": sorted(namespaces)}, context=context, max_bytes=bounds.transfer_bytes)
+                     "namespaces": sorted(namespaces)}, context=context, max_bytes=bounds.transfer_bytes,
+                    check_bounds=check_export)
                 data = {"format": format, "artifact_id": artifact_id, "manifest": manifest,
                         "storage_reference": metadata.get("storage_reference",
                             {"kind": "civic_export_artifact", "artifact_id": artifact_id})}
@@ -1025,6 +1110,7 @@ def register(engine) -> None:
                                 or coverage.get("input_status") in {"partial", "failed", "cancelled"}
                                 or any(item.get("reason") == "original_capture_not_supplied"
                                        for item in manifest["not_included"])) else "completed"
+        check_export()
         return OperationResult(status, data=data,
                                errors=upstream_errors, coverage=coverage, operation_id=context.operation_id)
     def safe_export(owner, request, content, context):

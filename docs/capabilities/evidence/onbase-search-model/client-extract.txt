@@ -1,0 +1,42 @@
+const PublishDocType = Object.freeze({
+		Agenda: 1,
+		Minutes: 2,
+		Summary: 3,
+		Supporting: 4,
+		AgendaPacket: 5,
+		MinutesPacket: 6
+	});
+
+	
+
+function createMeetingPdfLink(meeting, type, docType, docName, titleFormat, linkSize) {
+		let name = meeting.AgendaUniqueName;
+		if (docType == PublishDocType.Summary) {
+			name = meeting.SummaryUniqueName
+		}
+		else if (docType == PublishDocType.Minutes)
+		{
+			name = meeting.MinutesUniqueName
+		}
+
+		return $("<a>")
+			.attr("href", "/OnBaseAgendaOnline/Documents/DownloadFile/" + name + ".pdf?documentType=" + docType + "&meetingId=" + meeting.ID)
+			.addClass("meetingPadding").attr("id", "lnkMeeting" + type + "Doc_" + meeting.ID + linkSize).attr("target", "_blank")
+			.attr("title", titleFormat.format(docName, meeting.Name, meeting.MeetingTypeName, meeting.Time))
+			.append(createPdfIcon());
+	}
+
+	function createPacketLink(meeting, type, docType, titleFormat, text, linkSize) {
+		let name = meeting.AgendaPacketUniqueName;
+		if (docType == PublishDocType.MinutesPacket) {
+			name = meeting.MinutesPacketUniqueName
+		}
+		return $("<a>")
+			.attr("href", "/OnBaseAgendaOnline/Documents/DownloadFile/" + name + ".pdf?documentType=" + docType + "&meetingId=" + meeting.ID + "&isAttachment=true")
+			.addClass("meetingPadding").attr("id", "lnk" + type + "Packet_" + meeting.ID + linkSize).attr("target", "_blank")
+			.attr("title", titleFormat.format(meeting.Name, meeting.MeetingTypeName, meeting.Time))
+			.append($("<span>").addClass("packet").text(text))
+			.append(createPdfIcon());
+	}
+
+	

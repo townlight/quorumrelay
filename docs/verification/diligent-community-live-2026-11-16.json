@@ -1,0 +1,22 @@
+{
+  "candidate_base": "667f40ebde02e86ef756cbd6c821f6432f6bdee8",
+  "date": "2026-11-16",
+  "scope": "one configured Boone County public tenant; no vendor writes or complete catalog claim",
+  "listing_status": "partial",
+  "meetings": 3,
+  "documents_status": "partial",
+  "public_documents": 1,
+  "download_status": "completed",
+  "download_errors": [],
+  "download": {
+    "citation_url": "https://boonecountyil.community.diligentoneplatform.com/document/d52a2c38-8d73-43fb-a9a4-d496caec99ae",
+    "content_type": "application/pdf",
+    "byte_length": 326108,
+    "sha256": "6aa7ef34b94a1e32d5c65a10d85ac255be9c9a459bd0716ac65f3b266da67ba3",
+    "text_availability": "not_extracted"
+  },
+  "input_hashes": {
+    "src\\civic_data_connectors\\providers\\diligent_community.py": "5590d10c7f932cedd7265c5449576964ebe0da6216ae5461298b6a36048242bc",
+    "tests\\test_diligent_community.py": "1feacf8a29130587c91164506fd0094fb7f14912d5871d6a970375a3cf55d097"
+  }
+}

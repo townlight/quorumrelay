@@ -1,0 +1,78 @@
+{
+  "observation_local_date": "2026-11-15",
+  "scope": "Former Municode Meetings / CivicPlus Meetings Essential task 6 public reading, distinct from Aha CMS and CivicClerk Select",
+  "captures": [
+    {
+      "source_url": "https://meetings.municode.com/adaHtmlDocument/index?cc=EFFINGHAM&me=4a737d59a401417fbd7fd597e964fdba&ip=false",
+      "method": "GET",
+      "status": 200,
+      "bytes": 62158,
+      "sha256": "0da96906f79aa7dc2344491eccc496b8654d65f54f8d4c76871c9e9bf0093175",
+      "fetched_utc": "2026-11-16T04:28:52.607625+00:00",
+      "role": "agenda",
+      "derivation": "Exact ADA HTML agenda href in already pinned Effingham PublishPage",
+      "fixture_path": "tests/fixtures/municode-publish/effingham-agenda.html"
+    },
+    {
+      "source_url": "https://meetings.municode.com/adaHtmlDocument/index?cc=EFFINGHAM&me=4a737d59a401417fbd7fd597e964fdba&ip=true",
+      "method": "GET",
+      "status": 200,
+      "bytes": 147857,
+      "sha256": "df11743eb9ab9dd1f36bf1ec44e5b39488e4b95f84a517754238c981ee1388c3",
+      "fetched_utc": "2026-11-16T04:29:11.746207+00:00",
+      "role": "packet",
+      "derivation": "Exact ADA HTML packet href in already pinned Effingham PublishPage",
+      "fixture_path": "tests/fixtures/municode-publish/effingham-packet.html"
+    }
+  ],
+  "observed": {
+    "sections": 19,
+    "agenda_items": 28,
+    "packet_attachment_links": 293,
+    "native_item_ids": false,
+    "scripts": 0
+  },
+  "api_boundary": {
+    "source_url": "https://meetings.municode.com/PublicApi/meeting/4c0379d9-c8e5-4b61-8f35-689cc49ddf7e",
+    "method": "GET",
+    "derivation": "Exact official-linked Postman meeting detail example",
+    "status": 401,
+    "www_authenticate": "Bearer, Bearer",
+    "bytes": 1669,
+    "sha256": "774cfeb97ba5593da09c09b13b277ee6186e64aed28b8c42cfd231287bb88563",
+    "fetched_utc": "2026-11-16T04:30:53.481179+00:00",
+    "authorization_sent": false,
+    "cookies_sent": false,
+    "redirect_followed": false,
+    "conclusion": "This exact route requires authorization. This does not prove public response documentation is absent."
+  },
+  "searches": {
+    "services": [
+      "Exa semantic web search",
+      "Firecrawl developer search",
+      "Firecrawl developer-category web search",
+      "GitHub code search MCP",
+      "Built-in web search",
+      "Search-service web MCP",
+      "Google Drive search and one relevant document read",
+      "Gmail search",
+      "ChatGPT Pages bounded search"
+    ],
+    "outcomes": "Official Essential help and Postman rediscovered, no additional response schema/offset rule. Aha/Select/Transform/ordinance-library results excluded by product identity. Drive municipal-source list supplied no Essential API contract; no matching Gmail. Pages returned only unrelated guide.",
+    "unavailable": [
+      {
+        "service": "GitBook",
+        "error": "UNAUTHORIZED; reauthentication required"
+      }
+    ],
+    "static_tools": "Craft Anything identified saved target as script/webpage; native overview not_supported. Direct HTMLParser investigation found no scripts in saved root/listing, therefore no declared executable asset chain. Exact existing /app receipt remains302 to authentication.",
+    "ledger_local": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\essential-followup-20261115\\search-services.json"
+  },
+  "limits": [
+    "Single selected meeting/public publication, not complete archive or tenant/version coverage.",
+    "No live engine acceptance inferred from source HTTP captures.",
+    "No native API GUID or item identity inferred from positional HTML content or attachment filenames.",
+    "Authenticated collection/detail response fields and collection stride/order/end condition still unresolved.",
+    "No account acquisition, authentication exchange, vendor mutation, release or publication."
+  ]
+}

@@ -1,0 +1,284 @@
+# eSCRIBE Publishing Service
+
+This local source mapping comes from the deployed vendor PublishingService WSDL
+and five imported XSDs captured on November 15, 2026. The service landing page
+declared both `?wsdl` and `?singleWsdl`. The earlier denial of `?singleWsdl` did
+not establish that the other metadata URL was inaccessible: `?wsdl` returned
+HTTP 200 XML, 222,643 bytes. All five exact declared schemas also returned 200.
+[Original metadata and hashes](capabilities/evidence/escribe-publishing-wsdl/source.json)
+are checked in. No SOAP operation was called on the live service.
+
+The binding is SOAP 1.2 over HTTPS with WS-Addressing 2005/08. The pinned policy
+does not require a client certificate. It does not document an application login
+exchange or guarantee anonymous operation access. Destination authentication, if
+needed, belongs to an explicitly injected trusted transport. No speculative
+token, cookie or authorization protocol is implemented.
+
+Use an explicit source with `input_format="escribe-publishing-soap-xml"` and the
+exact tenant `/WebService/eSCRIBE.Internet.WebService.svc` URL. The namespace is
+derived from that host. A publishing host and a public portal host are separate
+source namespaces; this mapping does not guess a cross-host identity merge.
+
+## Explicit reads
+
+```python
+from quorumrelay import Bounds, Source, create_engine
+
+source = Source(
+    "escribe",
+    "https://selected-tenant.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc",
+    input_format="escribe-publishing-soap-xml",
+)
+result = create_engine().fetch(source, {
+    "api_method": "MeetingGetById",
+    "api_parameters": {"MeetingId": "11111111-1111-4111-8111-111111111111"},
+}, bounds=Bounds(max_pages=1, max_records=1, deadline_seconds=15))
+```
+
+The example identifiers are synthetic. Do not send it to an unrelated tenant.
+The selected destination must authorize the read.
+
+Implemented record methods are MeetingGetById/GetByPortal,
+AgendaGetById/GetByMeeting, AgendaItemGetById/GetByAgenda,
+AttachmentGetById/GetByAgenda/GetByAgendaItem, DocumentGetById,
+PackageGetById/GetByMeeting, BookmarkGetById/GetByMeeting/GetByAgenda and
+ResolutionGetById/GetByMeeting/GetByAgendaItem, MeetingGetByMeetingType and
+AgendaItemTextGetByMeetingId. Parameters use
+their exact XSD names and native identifier objects; missing or nil selection
+parameters fail before network. Collection rows must match the supplied native
+portal, meeting, agenda or item parent. Responses exceeding `max_records` fail;
+there is no invented server paging, continuation, date filter or complete catalog.
+
+DocumentGetContent first reads the exact DocumentGetById metadata, then retrieves
+the SOAP base64 content. Supply `{"Id": 23}` and allow two request pages. Exact
+bytes must match the supplied FileSize. Both SOAP responses and the decoded
+content remain captured with hashes. A failed content step retains independently
+verified metadata. The content method supplies no MIME field, so bytes are opaque
+`application/octet-stream`; no PDF interpretation, text extraction or playback
+is claimed.
+
+`DocumentGetContentChunk` accepts exactly
+`{"Id": 23, "offset": 2, "length": 3}` with a positive native document ID,
+nonnegative Int32 offset and positive Int32 length. It first verifies
+`DocumentGetById`, then retains the exact chunk SOAP response, decoded opaque
+bytes, hashes and native request context. Allow two request pages. Metadata,
+context and captures round-trip through SQLite and JSON/JSONL/ZIP. Content failure
+retains independently verified metadata and an explicit error.
+
+The pinned XSD supplies integer parameters and base64 output but does not explain
+their units or range/assembly semantics. The adapter makes no offset-to-byte
+conversion, FileSize/range arithmetic, short-chunk terminal inference, chunk loop,
+atomic revision claim or whole-document hash claim. Empty returned bytes remain
+an explicitly zero-byte partial chunk. `document_complete` is always false, and
+the chunk relationship discloses request-context binding rather than a returned
+document-ID echo. Bare chunk SOAP cannot be normalized as a standalone record;
+use the context-preserving fetched bundle.
+
+Record reads return partial scope. Original XML, native fields, compound IDs,
+relationships and available text survive persistence, reopening and neutral
+JSON/JSONL/ZIP export. Meeting times remain native literals. Language-map integer
+keys remain source keys, without an inferred language. Supplied Minutes text is
+not interpreted as structured motions or votes. Unknown model fields, SOAP faults,
+wrong method/addressing, duplicate fields and invalid typed values fail explicitly.
+
+Agenda, AgendaItem and Attachment records expose explicit meeting relationships
+from their native compound identifiers. Item/attachment `AgendaType` binds to the
+native Agenda identifier's `Type`, as in the existing selected-parent checks.
+Attachments also expose supplied positive native item/document pointers; zero or
+absent pointers do not create those identities. This makes existing item records
+usable in `csv-items` without decoding provider fields or guessing a meeting join.
+
+## Record writes
+
+The existing plan/commit coordinator now supports native `meeting`, `agenda`,
+`agenda_item`, `attachment`, `document`, `package`, `bookmark` and `resolution`
+record create/update. For those operations, `document` means its metadata record; Attachment.Record binds an existing DocumentId to an
+explicit native meeting/agenda/item identifier. Those record operations do not upload bytes; the separately scoped upload below does.
+Meeting.VideoURL is a supplied reference, not a recording upload.
+
+Server-side `context.credentials["escribe"]` must bind the exact `endpoint`,
+`tenant`, `allowed_namespaces`, `permissions` such as `meeting:update`, and
+`resource_ids`. Meeting records additionally require allowed `portal_ids`;
+related agenda/item/attachment/package/bookmark/resolution operations require `meeting_ids` and an explicit
+`change.meeting_id`. Compound resource IDs use canonical sorted JSON objects
+without spaces. No private credentials are serialized into plans.
+
+Use native field names without case conversion. Create requires every field of
+the selected pinned record model, including explicit nullable values. Update
+reads the complete model, preserves its other fields, rejects identity changes
+and compares the full preflight fingerprint before sending. Expected version is
+that fingerprint; this is not an atomic upstream compare-and-swap guarantee.
+
+The plan contains exact native before/after models and method parameters. Commit
+requires its exact plan ID/hash. Durable intent precedes sending; returned create
+identities are saved before readback. Full-model readback must match. Duplicate
+commits and restart reconciliation do not repeat a mutation. If a create response
+is lost before its identity is saved, the receipt stays uncertain: no unique
+lookup or replay rule is inferred. Cancellation or an unverifiable response after
+sending likewise preserves uncertainty and reconciles by read methods only.
+
+These are vendor-schema synthetic execution results. No vendor write was made;
+runtime access, server-side transformations, effective publication/visibility and
+current deployment compatibility remain separately qualified. No publication, unpublish, delete, portal administration or workflow method is
+called. Requested DatePublished/IsPrivate model values remain explicit plan fields;
+their effective visibility consequences are not inferred from successful field readback.
+
+## Explicit chunk upload with whole-document hash verification
+
+`document` / `upload` accepts one scoped file part named `Chunk` and these explicit
+fields: `offset`, `length`, `IsPrivate`, `expected_document_sha256`. The first three
+are native request fields. The expected hash is a local readback condition, not a
+vendor parameter. Length must equal the supplied chunk byte count; offset is a
+caller-selected nonnegative Int32. No splice, append, truncate or replacement rule
+is computed by the library. The server policy must grant `document:upload` for the
+exact existing document resource ID.
+
+Planning reads the complete document metadata and bytes, checks FileSize, retains
+the original bytes in scoped immutable storage for recovery, and binds a combined
+metadata/content fingerprint. IsPrivate must match the existing record. The plan
+contains an immutable chunk reference and the caller's intended whole-document
+hash. It does not place the raw chunk or original document bytes in plan JSON.
+
+Commit repeats both preflight reads, compares the fingerprint, sends one exact
+DocumentUpload request, and reads metadata/content again. Success requires the
+caller-declared final whole-document hash, the native FileSize matching the actual
+bytes, and preservation of the remaining metadata. At least five request pages
+are required: two preflight reads, one upload and two readback calls. Byte and
+deadline bounds remain active throughout. Failed or different server behavior
+stays uncertain and reconciles by reads only; a void response alone proves no
+completed upload. Original bytes are available for explicit recovery, never an
+automatic rollback or additional write.
+
+This narrow execution contract does not establish general multi-chunk sequencing,
+append/replacement/truncation semantics, processing readiness, automatic metadata
+or meeting association, or a vendor file-import format. Those remain targeted
+research gaps, not proof that outside help is the only way to resolve them. No
+clear, append, finalize, publication or processing-poll method is inferred.
+
+The scoped runtime contract is reproducibly generated by
+`scripts/pin_escribe_contract.py` from the checked-in metadata without network.
+[Execution receipt](verification/escribe-publishing-2026-11-15.json) distinguishes
+synthetic record execution from actual metadata GET observations.
+
+## Native package, bookmark and resolution records
+
+These methods use the same captured WSDL/XSDs, exact plan coordinator and synthetic
+server checks. They do not require a new network survey or a live mutation.
+
+| Entity | Native ID | Parent and preserved values |
+| --- | --- | --- |
+| `package` | Int32 `Id` | Explicit `MeetingId`, existing `DocumentId`, native integer `LanguageId` and literal `Type`. The document relationship is an identity reference, not a guessed download URL or generated packet. |
+| `bookmark` | Complete `MeetingId`, `AgendaType`, `AgendaItemId`, `Id` object | Exact meeting and agenda-item relationships; native Int32 `TimeStart`/`TimeEnd` retained without assigning units or claiming a playable seek. |
+| `resolution` | Complete `MeetingId`, `AgendaItemId`, `Sequence` object | Supplied `Comments`, `MovedBy`, `SecondedBy`, `Number`, `Result`, `Type` and `VoteType`. Enum meanings and person-registry joins are not inferred. |
+
+For package reads, use `PackageGetByMeeting` with `{"MeetingId": "<native-guid>"}`.
+For bookmark and resolution reads, use `BookmarkGetByMeeting` or
+`ResolutionGetByMeeting` with that same native parameter. Explicit GetById and the
+listed agenda/item collections are also available. Every returned parent must
+match the selection; oversized unpaged responses fail without a truncated bundle.
+
+Resolution.Identifier does not carry AgendaType. Consequently the result retains
+an `agenda_item_reference` containing the native item and meeting values, with
+that missing component disclosed. It does not fabricate the complete compound
+agenda-item identity used elsewhere. Supplied resolution comments remain cited
+searchable source text, and the typed fields remain available in `source_resolution`.
+
+Writes use the exact native record names above and `<entity>:create` or
+`<entity>:update` trusted permissions, explicit `change.meeting_id`, and an allowed
+meeting ID. Package update checks the existing parent before applying fields as
+well as checking the planned parent. Full-model readback, conflict comparison,
+intent/receipt storage and read-only reconciliation apply to all three. A server
+returned bookmark ID can assign its `Id` component but cannot change its native
+meeting/agenda/item parent. Native package associations do not establish effective
+publication, document availability or server generation/readiness.
+
+## Meeting-type listing and supplied item text
+
+`MeetingTypeGetByPortal` takes `{"PortalId": "<native-guid>"}` and supplies the
+complete native `{Id, PortalId}` selectors required by the meeting-type filter
+below. The result preserves `meeting_type` records, source multilingual Name
+entries and their integer language keys. It does not assign language meanings or
+select a default name. Each returned identifier must match the requested portal;
+missing components, duplicates and unknown fields fail explicitly. Empty results
+remain partial and do not establish a complete catalog. This is a read selector,
+with no meeting-type administration or writes.
+
+`MeetingGetByMeetingType` takes `{"Id": {"Id": 7, "PortalId": "<native-guid>"}}`.
+Both selection components must match every returned Meeting.Record. This is one
+explicit unpaged response with record/byte/time limits, not a catalog traversal.
+
+### Find native item IDs with supplied history
+
+`MeetingAgendaItemsWithHistory` takes `{"MeetingId": "<native-guid>"}` and returns
+the vendor's integer array. Fetch it explicitly, then use a returned positive item
+ID in `AgendaItemItemHistoryView` with that same meeting. The engine makes no
+automatic detail requests or polling loop.
+
+The result contains distinct `agenda_item_history_reference` records. Each retains
+its original scalar integer, exact SOAP capture and explicit meeting request
+context. The server does not echo that meeting or supply AgendaType, so these are
+partial references with a disclosed request-context binding, rather than complete
+agenda-item identities. A bare saved array cannot normalize without its request
+context; portable bundles retain that context through JSON, JSONL and ZIP.
+
+Missing/nil results and supplied empty arrays are distinguished and remain partial;
+neither establishes absence of history across a catalog. Duplicate, nonpositive,
+out-of-range or malformed native IDs fail. Unpaged results must fit `max_records`;
+there is no invented paging or silent truncation. Cancellation/deadline and byte
+bounds apply through mapping. [Synthetic execution receipt](verification/escribe-history-index-2026-11-15.json).
+
+`AgendaItemTextGetByMeetingId` takes exactly
+`{"meetingId": "<native-guid>", "languageId": 1033}`. Parameter casing differs
+from other methods. Each returned AgendaItemText must match both selections and
+supply its native AgendaType and Id. Its stable `agenda_item_text` identity includes
+MeetingId, AgendaType, Id and LanguageId, retaining separate native-language
+records without treating the integer key as a known language code. The complete
+agenda-item identity is retained as a parent relationship.
+
+Title, Header, Description and the vendor's literal `Mintues` field are preserved
+as source text with citations and the native language key. The spelling is part
+of this pinned schema, not a local typo correction. Repeat imports, SQLite reopen,
+search and JSON/JSONL/ZIP round-trip retain both language records and exact source
+captures. Unsupported selectors and incomplete/mismatched source records fail;
+cancellation after response does not publish a completed bundle. No public-comment
+write operation or source timestamp conversion is added.
+
+## Selected source history, motions and votes
+
+Use `api_method: AgendaItemItemHistoryView` with exactly `api_parameters: {"MeetingId": "<native-guid>", "AgendaItemId": 12}`. The selected positive native item and meeting must match the returned History row. This is one bounded view, not history catalog traversal or a native search.
+
+The `agenda_item_history_view` record retains its complete native History.Id (Id and PortalId), the complete typed original view, `source_motions` and `source_votes`. Supplied motion text and history comments carry field-path citations and are locally searchable. Raw SOAP, source identities and all nested fields survive SQLite retry/reopen and neutral JSON/JSONL/ZIP. Inherited History fields retain XSD base-first order and their data-contract namespace.
+
+Nested motions, votes, steps and documents can refer to earlier meetings; their literal native values are retained without assigning them to the selected current meeting. No vote-label meaning, weighted tally, result, time-zone conversion or publication is inferred. The selected item relationship is an explicit partial reference because this view does not supply AgendaType. `max_records` also bounds the nested native components, including container/identity objects, rather than counting only the single outer view. A response exceeding that bound fails without a silently truncated bundle. No comment, approval, publish or mutation operation is added.
+
+## Create an explicit item-history step
+
+`plan_write` / `commit_write` support entity `agenda_item_history_step`, operation `create`, using the pinned `AgendaItemHistoryCreate(history)` and existing `AgendaItemItemHistoryView(MeetingId, AgendaItemId)` readback. This is one source-supplied agenda-item history step; it does not call `AgendaItemHistoryPublish`, migration methods, or interpret motion/vote result labels.
+
+Supply `meeting_id` as the exact native meeting GUID and `parent_id` as the canonical positive agenda-item ID string. Trusted eSCRIBE policy must authorize `agenda_item_history_step:create`, the exact `meeting_ids`, `agenda_item_ids`, and `portal_ids`, in addition to the established endpoint/namespace/tenant bindings. Caller fields cannot grant access.
+
+`fields` must contain every native step property, including explicit nulls: `AgendaItemId`, `Category`, `Comments`, `Date`, `Id`, `MeetingDate`, `MeetingId`, `MeetingTypeId`, `MeetingTypeName`, `Number`, `Sponsor`, `Stage`, and `Status`. The complete `Id` has `AgendaItemHistoryId`, `Id`, and `PortalId`; each integer ID must be a positive Int32. The history parent and portal must match the selected item's actual existing history. No default ID, local-time conversion, status mapping or automatic publication is inferred.
+
+Planning retains the complete before view, typed native request and fingerprint. An existing identical step payload or proposed native ID is a conflict. Commit rereads the full view and rejects changes before mutation. At least three call slots are required for commit preflight, creation and readback; the same session enforces aggregate call/byte bounds. The authoritative returned step ID may replace its proposed `Id`, while history parent and portal must remain exact.
+
+Success requires exactly the new full step in the readback, preserving every prior step and all other view fields. Reordering steps is immaterial; additional or changed steps/fields remain uncertain. This is strict scoped synthetic verification, not a claim about undocumented server side effects or live deployment applicability. The returned identity is durable before readback. Lost readback can reconcile after restart; a lost create-response identity stays uncertain and is never automatically replayed. No duplicate is inferred from a similar title or partial source match.
+
+See `verification/escribe-history-step-create-2026-11-15.json` for the pinned contract and actual synthetic execution scope.
+
+## Select document metadata by an explicit inserted-ID selector
+
+The pinned WSDL declares `DocumentGetSince(intLastInsertedId)` returning `ArrayOfDocument.Record`. Supply it through `fetch` or configured `discover` with the existing SOAP source:
+
+```python
+request = {
+    "api_method": "DocumentGetSince",
+    "api_parameters": {"intLastInsertedId": 20},
+}
+result = engine.fetch(source, request)
+```
+
+The selector is an explicit nonnegative Int32, not a timestamp. The library sends its literal value, preserves request context and exact response capture, and requires distinct positive native document IDs. It does not infer inclusive/exclusive filtering, stable ordering, cursor advancement, deletions, complete catalog or exhausted history. Even an empty response remains partial. An over-budget collection fails without publishing a truncated bundle. Caller-selected native parameters remain separate from date filters and generic checkpoints.
+
+Document records preserve original fields, native metadata, display names and revisions. Search is over obtained metadata; no file bytes, MIME type, PDF text, meeting association or public availability is inferred from a document ID or filename. A caller can select an explicit returned ID through the separately implemented `DocumentGetContent` metadata/content path. Saved-response normalization retains its native records but cannot reconstruct an absent selector; neutral JSON/JSONL/ZIP preserve the actual fetch request context. SQLite retry/reopen retains identities and exact local metadata hits.
+
+The independent synthetic checks and raw vendor schema bindings are recorded in `verification/escribe-document-since-2026-11-15.json`. No live SOAP method was invoked.

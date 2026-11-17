@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-16",
+  "base_commit": "897442bf99dff40c4bd03126009083ad9fd485a3",
+  "candidate": "local uncommitted changes",
+  "scope": "Captured development editor: draft/agenda meeting creation, metadata/agenda/minutes edits and appends, explicit agenda/minutes publication; existing files preserved, no delete/upload; exact ID readback, durable intent/no replay",
+  "checks": [
+    {
+      "command": "python -m pytest tests/test_gworks_write.py tests/test_gworks_editor.py tests/test_writes.py tests/test_write_intent_cancellation.py tests/test_write_plan_boundaries.py tests/test_write_preflight_cancellation.py -q",
+      "passed": 94,
+      "failed": 0,
+      "seconds": 176.71,
+      "scope": "39 write cases,30 editor reads,25 shared write cases; before six additive response-boundary cases"
+    },
+    {
+      "command": "python -m pytest tests/test_gworks_write.py -q -k native_response",
+      "passed": 6,
+      "failed": 0,
+      "seconds": 17.12,
+      "scope": "six additional native response and post-send boundary cases"
+    }
+  ],
+  "distinct_cases": 100,
+  "bindings": [
+    {
+      "path": "docs/capabilities/evidence/gworks-development-editor/meeting-editor.js",
+      "kind": "vendor_contract",
+      "sha256": "0c277bee76c897e0b34313ecf64b1384b5f05496954064f07b8dcc635bee9f1f"
+    },
+    {
+      "path": "docs/capabilities/evidence/gworks-development-editor/gworks.core.js",
+      "kind": "vendor_contract",
+      "sha256": "0826615bc22075396540a3251c724655100223d26afd973db96dc069ea28e920"
+    },
+    {
+      "path": "docs/capabilities/evidence/gworks-development-editor/agenda-editor.html",
+      "kind": "vendor_contract",
+      "sha256": "ab27ecf59d9a6b14713bc3f8491e9c7fc0b7291dbfcfaddca7a3ee5c3ed6c7bd"
+    },
+    {
+      "path": "tests/test_gworks_write.py",
+      "kind": "test",
+      "sha256": "631bc010a8be0abcb1ca0b2e423ded187437a352f8eea5185dd8bbbcaac02431",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "631bc010a8be0abcb1ca0b2e423ded187437a352f8eea5185dd8bbbcaac02431"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/gworks_write.py",
+      "kind": "implementation",
+      "sha256": "db72d5a0bf0b66d455135427bad184f4b1baeac93787cff7f1a58d36881d2df2"
+    },
+    {
+      "path": "src/civic_data_connectors/write_adapters.py",
+      "kind": "implementation",
+      "sha256": "49a5cc752bbd8ca1e6999cfd3bf38cc3736d1e4bbb78451aeab63fc2c0a06a36"
+    },
+    {
+      "path": "scripts/validate_capabilities.py",
+      "kind": "implementation",
+      "sha256": "032522e8e93d1b74b2d7a66393ebb5806c27af2475d2841c3d0ca34d53a8d23a"
+    }
+  ],
+  "live_api_calls": false,
+  "accounts_contacts_payments_releases": false,
+  "owned_jobs": [],
+  "metadata_checks": [
+    {
+      "command": "python -m pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q",
+      "passed": 25,
+      "failed": 0,
+      "seconds": 0.89
+    },
+    {
+      "command": "python -m ruff check src tests scripts examples",
+      "status": "passed"
+    },
+    {
+      "command": "python scripts/validate_capabilities.py",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "distinct_cases_with_metadata": 125
+}

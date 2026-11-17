@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-15",
+  "scope": "Exact Peak RSS URLs declared by existing LowerMerion publisher; anonymous bounded GETs, no extra tenant or binary/media transfer.",
+  "listing": {
+    "url": "https://lowermerion.granicus.com/ViewPublisher.php?view_id=1",
+    "status": 200,
+    "bytes": 199575,
+    "sha256": "cf0e75c497b830eb0b02b7ab799b112e822482eb44893d1cb0472282b105ddee",
+    "declarations": [
+      "ViewPublisherRSS.php?view_id=1&mode=agendas",
+      "ViewPublisherRSS.php?view_id=1&mode=minutes",
+      "ViewPublisherRSS.php?view_id=1&mode=podcast",
+      "ViewPublisherRSS.php?view_id=1&mode=vpodcast"
+    ]
+  },
+  "feeds": [
+    {
+      "url": "https://lowermerion.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
+      "status": 200,
+      "media_type": "text/xml",
+      "bytes": 3796,
+      "sha256": "625c0570bac2cb44feb46d34860f82385d48596a244b4cf96fa9cb5855495d86",
+      "items": 4,
+      "fixture_path": "tests/fixtures/peak-rss/agendas.xml"
+    },
+    {
+      "url": "https://lowermerion.granicus.com/ViewPublisherRSS.php?view_id=1&mode=minutes",
+      "status": 200,
+      "media_type": "text/xml",
+      "bytes": 614,
+      "sha256": "d766cfac3ac5b5dd2d6ab63130040ec7941d038aba9ee2419edef015948283b4",
+      "items": 0,
+      "fixture_path": "tests/fixtures/peak-rss/minutes.xml"
+    },
+    {
+      "url": "https://lowermerion.granicus.com/ViewPublisherRSS.php?view_id=1&mode=podcast",
+      "status": 200,
+      "media_type": "text/xml",
+      "bytes": 613,
+      "sha256": "365cc8651dd4da96a16eb24c382dc9ddc18b306f681827f74de55ec341210ee9",
+      "items": 0,
+      "fixture_path": null
+    },
+    {
+      "url": "https://lowermerion.granicus.com/ViewPublisherRSS.php?view_id=1&mode=vpodcast",
+      "status": 200,
+      "media_type": "text/xml",
+      "bytes": 614,
+      "sha256": "eca98aaa1d48d023a11c05cf446ec2bc3c532fe323fd5a23901b0d58b6b1fac3",
+      "items": 0,
+      "fixture_path": null
+    }
+  ],
+  "limits": [
+    "Four agenda publication notices; empty Minutes/podcast/video podcast channels establish no nonempty schema for those modes.",
+    "GUID is publication identity, event_id is supplied locator context, and pubDate is publication time. No meeting identity/date inferred from them or a formatted title.",
+    "XML stylesheet PI and description HTML are retained source, never executed or followed. No catalog completeness, binary attachment read or staff write contract."
+  ]
+}

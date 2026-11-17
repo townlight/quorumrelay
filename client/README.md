@@ -1,5 +1,7 @@
 # QuorumRelay HTTP client
 
+Client **0.1.0-dev.14** targets QuorumRelay **0.1.0.dev14**. Download the client tarball from the [GitHub release](https://github.com/townlight/quorumrelay/releases/tag/v0.1.0.dev14) and install it with `npm install ./quorumrelay-client-0.1.0-dev.14.tgz`.
+
 Requires Node 20.3+ and an explicitly configured running connector service.
 The owning application starts/stops the Python service, pins its version, owns
 its durable SQLite state, and supplies separate caller-scoped service tokens.

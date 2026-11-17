@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-12",
+  "operation": "iqm2_supplied_public_meeting_detail",
+  "source_url": "https://santamonicacityca.iqm2.com/Citizens/Detail_Meeting.aspx?ID=1496",
+  "public_observation": {
+    "response_url": "https://santamonicacityca.iqm2.com/Citizens/Detail_Meeting.aspx?ID=1496",
+    "status": 200,
+    "media_type": "text/html",
+    "byte_length": 89973,
+    "sha256": "829b13ca9de361abb5c465e5480520e5f3c9780ab5c7f1e92cec2907f64abb61",
+    "byte_limit": 2097152,
+    "deadline_seconds": 30,
+    "allow_redirects": false
+  },
+  "fixture": {
+    "path": "tests/fixtures/iqm2-detail-1496.capture.json",
+    "sha256": "02da7e96bfec37c2dcec33bca3c3d3b653d01ec184639e6de64f2cb9cae62a4c",
+    "encoding": "exact public response bytes in content_base64"
+  },
+  "synthetic_execution": {
+    "new_distinct_passed": 8,
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_iqm2_detail.py -q (6 passed; two test mutations used &amp; for attributes containing literal &)",
+      ".venv/Scripts/python.exe -m pytest \"tests/test_iqm2_detail.py::test_public_detail_rejects_changed_meeting_download_binding_or_duplicate_native_file[content4]\" tests/test_iqm2_detail.py::test_fileopen_other_meeting_context_is_retained_only_as_unassociated_reference -q (2 passed after exact-byte test mutation correction)",
+      ".venv/Scripts/python.exe -m pytest tests/test_iqm2_detail.py::test_default_configured_detail_and_separate_supplied_fileopen_attachment_transfer -q (1 passed after adding configured fetch assertion; reused case, not new count)"
+    ],
+    "outcome": {
+      "meeting": "1496",
+      "native_same_meeting_legislative_files": 17,
+      "supplied_document_locators": 63,
+      "other_meeting_references": 14,
+      "rendered_source_rows": 142
+    },
+    "covered": [
+      "Saved/default configured discovery and fetch use same public detail format",
+      "Native hidden meeting ID/form action and agenda ID/type controls bound independently",
+      "Other-meeting references retained without false current-parent association",
+      "Rendered source layout/comments/status/date/raw capture retained without inferred votes/adjacent file parents",
+      "Exact file-title local search, neutral lossless export and separate synthetic FileOpen attachment transfer",
+      "Changed meeting/control/document context and duplicate file guards"
+    ]
+  },
+  "limits": [
+    "One captured public template; no universal deployment or complete archive guarantee",
+    "Documents remain locators; attachment transfer uses synthetic PDF, no actual downloaded bytes claim",
+    "Legislative files have meeting parent only; no inferred agenda-item IDs or document-to-file parents",
+    "No staff action/script execution, credential acquisition, vendor mutation, frozen rebuild or publication"
+  ]
+}

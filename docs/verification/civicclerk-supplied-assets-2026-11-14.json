@@ -1,0 +1,113 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "410ca2706ec5660828afffcd42bde8b71a4ebb33",
+  "status": "SCOPED_SYNTHETIC_PASS",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_civicclerk_supplied_assets.py tests/test_civicclerk_event_files.py tests/test_civicclerk_detail.py tests/test_recording_retrieval.py tests/test_provider_discovery.py -q",
+      "passed": 119,
+      "failed": 0,
+      "junit_sha256": "3bb37c51988e1a8fd5573a169399a98d5c38d78bce93f88f69578d30b9fdb150"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/civicclerk-openapi/swagger.json",
+      "sha256": "d242638b2a6fd2b4dc2ef295ea000a52b146a1de63b7298ba463acd8d94ce62a"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/civicclerk-openapi/supplied-assets-extract.json",
+      "sha256": "711b5187ae5e7be41a78a261df39b2bb6594ed44c37c4eef2dfb45141b0078e2"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/civicclerk_detail.py",
+      "sha256": "3c8911267c04e6deef817cdacc99ba9c3886af38aeab407422572d996546e64b"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/discovery.py",
+      "sha256": "0c6d6e5fe84c574eb7a267eeac83c083856b729e347dcf140324c590027f4d8d"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "e24ad13a51fd155fac390faad510452f08aac48cd3cf250a7ddbe96d146634b7"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_civicclerk_supplied_assets.py",
+      "sha256": "9fb4befd90522f116e27ba633248bfba0fdbb27a0198f37c19421741f4dc91e4",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "9fb4befd90522f116e27ba633248bfba0fdbb27a0198f37c19421741f4dc91e4"
+    }
+  ],
+  "synthetic_execution": {
+    "provider": "civicplus-select",
+    "status": "fixture_passed",
+    "operations": [
+      "discover",
+      "fetch",
+      "neutral_export"
+    ],
+    "entities": [
+      "meeting",
+      "recording",
+      "transcript"
+    ],
+    "scope": "Published captured Event supplied absolute HTTPS MP4/caption locators, selected detail, guarded exact-membership transfers, SQLite reopen and exact neutral ZIP. No extraction/playability/full catalog or writes.",
+    "execution_provenance": "22 new scoped cases within119 affected passes; synthetic bytes, saved discovery without network, selected-detail GET, SQLite/reopen and ZIP executed. Existing mediaStreamPath negatives isolate that field from independently supplied MP4.",
+    "checks": [
+      {
+        "command": "pytest tests/test_civicclerk_supplied_assets.py tests/test_civicclerk_event_files.py tests/test_civicclerk_detail.py tests/test_recording_retrieval.py tests/test_provider_discovery.py -q",
+        "passed": 119,
+        "failed": 0,
+        "junit_sha256": "3bb37c51988e1a8fd5573a169399a98d5c38d78bce93f88f69578d30b9fdb150"
+      }
+    ],
+    "bindings": [
+      {
+        "kind": "vendor_contract",
+        "path": "docs/capabilities/evidence/civicclerk-openapi/swagger.json",
+        "sha256": "d242638b2a6fd2b4dc2ef295ea000a52b146a1de63b7298ba463acd8d94ce62a"
+      },
+      {
+        "kind": "vendor_contract",
+        "path": "docs/capabilities/evidence/civicclerk-openapi/supplied-assets-extract.json",
+        "sha256": "711b5187ae5e7be41a78a261df39b2bb6594ed44c37c4eef2dfb45141b0078e2"
+      },
+      {
+        "kind": "source",
+        "path": "src/civic_data_connectors/providers/civicclerk_detail.py",
+        "sha256": "3c8911267c04e6deef817cdacc99ba9c3886af38aeab407422572d996546e64b"
+      },
+      {
+        "kind": "source",
+        "path": "src/civic_data_connectors/providers/discovery.py",
+        "sha256": "0c6d6e5fe84c574eb7a267eeac83c083856b729e347dcf140324c590027f4d8d"
+      },
+      {
+        "kind": "source",
+        "path": "src/civic_data_connectors/providers/retrieval.py",
+        "sha256": "e24ad13a51fd155fac390faad510452f08aac48cd3cf250a7ddbe96d146634b7"
+      },
+      {
+        "kind": "test",
+        "path": "tests/test_civicclerk_supplied_assets.py",
+        "sha256": "9fb4befd90522f116e27ba633248bfba0fdbb27a0198f37c19421741f4dc91e4",
+        "hash_policy": "test_source_crlf_to_lf",
+        "canonical_lf_sha256": "9fb4befd90522f116e27ba633248bfba0fdbb27a0198f37c19421741f4dc91e4"
+      }
+    ]
+  },
+  "limits": [
+    "Published captured Event supplied absolute HTTPS MP4/caption locators, selected detail, guarded exact-membership transfers, SQLite reopen and exact neutral ZIP. No extraction/playability/full catalog or writes."
+  ]
+}

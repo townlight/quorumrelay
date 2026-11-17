@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-16",
+  "source_url": "http://www.telvue.com/support/product-documentation/telvue-connect-api-documentation/upload-video-rest/",
+  "archive_url": "https://web.archive.org/web/20140721080545id_/http://www.telvue.com/support/product-documentation/telvue-connect-api-documentation/upload-video-rest/",
+  "lead": "Archived firsthand Drupal discussion https://web.archive.org/web/20160711080906id_/https://groups.drupal.org/node/477728 linked this exact official page. The module itself targets a playback server, not Connect.",
+  "contract": {
+    "method": "POST",
+    "url": "https://connect.telvue.com/api/v1/assets/upload",
+    "encoding": "multipart/form-data",
+    "authentication": "HTTP Basic, authorized Connect user",
+    "file_field": "files[]",
+    "optional_fields": {
+      "published": "true/t publishes if permitted; moderated users submit for moderation",
+      "syndicated": "true/t syndicates; default false",
+      "syndication_groups[]": "names or access_key values"
+    }
+  },
+  "verification": "Primary archived vendor contract recovered, no upload or endpoint request executed. Current browser client separately consumes asset_ids from its upload response; equivalence with v1 API not established.",
+  "remaining": [
+    "Exact v1 successful response/native ID to media mapping",
+    "Stored-original locator, size/hash verification and processing readiness",
+    "Current deployment compatibility and meeting/playlist association",
+    "Metadata update payload still missing"
+  ],
+  "files": [
+    {
+      "path": "telvue-all-api-archive-index.json",
+      "sha256": "10ea1200f4253bcc8f90e6108709758966845ccc5d4249f730acf1c1aae79893"
+    },
+    {
+      "path": "telvue-official-api-index-archive.html",
+      "sha256": "5124425275a8be93aab5358c3b69716a2f64aefd469f71102dba45d06730429d"
+    },
+    {
+      "path": "telvue-official-upload-20140721.html",
+      "sha256": "ad460e2facf7c7ae762d599d5edbdfc35bbddb1804e3510d896d1d4c506c8e8a"
+    },
+    {
+      "path": "telvue-official-upload-archive-index.json",
+      "sha256": "75b9c27b08e050f7c9a7dde0c8edad2425e34800201545ddbec3033faa3b5bf7"
+    }
+  ]
+}

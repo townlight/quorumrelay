@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-12",
+  "operation": "clerkbase_supplied_document_text",
+  "source_url": "https://clerkshq.com/Content/Richmond-ri/council/2022/apr19_22tc.htm",
+  "fixture": {
+    "path": "tests/fixtures/baseline/clerkbase.response",
+    "byte_length": 323415,
+    "sha256": "4bc7c508723796477389fd2385c6e111eee88d5fedb54e7271daea2692d86e2a",
+    "origin": "existing pinned original baseline; no new network request"
+  },
+  "synthetic_execution": {
+    "new_distinct_passed": 4,
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_clerkbase_detail.py -q (2 passed; two assertions used nonexistent legacy_export key)",
+      ".venv/Scripts/python.exe -m pytest tests/test_clerkbase_detail.py::test_exact_saved_document_text_search_export_and_legacy_parity tests/test_clerkbase_detail.py::test_text_revision_changes_rich_digest_without_changing_legacy_identity_or_projection -q (2 passed after test-only key correction to actual compatibility field)"
+    ],
+    "covered": [
+      "Exact saved full document body/paragraph text and capture-hash provenance",
+      "Configured default GET using synthetic transport retains text",
+      "Actual supplied-text search/neutral roundtrip and unchanged legacy path identity/output",
+      "Content-only change updates rich normalized digest/capture digest without changing compatibility projection",
+      "Navigation/forms/scripts/hidden nodes excluded and enrichment idempotent"
+    ]
+  },
+  "limits": [
+    "Static HTML body text only, no CSS/script/rendered accessibility claim",
+    "No inferred governing body, agenda hierarchy, motions or votes from minutes prose",
+    "No new document download, native search semantics or provider write claim",
+    "Local source only, frozen dev8/1.8.5 unchanged"
+  ]
+}

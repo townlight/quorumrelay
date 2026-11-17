@@ -1,0 +1,44 @@
+{
+  "status": "PASS_SYNTHETIC_SCOPED_MEETING_DOCUMENT_WRAPPER",
+  "source_baseline": "ba4373b1c87f46d0cd20d5197647573c977b9b70",
+  "contract": {
+    "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Documents/Downloadfile/Agenda.pdf?documentType=1&meetingId=3825",
+    "observation_date": "2026-11-12",
+    "original_capture": "agendacenter-onbase-followup-20261112/onbase-supplied-file-response.body",
+    "path": "docs/capabilities/evidence/onbase-download/wrapper.html",
+    "sha256": "4c1f3f9b93f85603759a5237725ef71c7b5121e8603447de78f7cdeec08ec832",
+    "byte_length": 3719,
+    "contract": "Published tenant-generated OnBase JavaScript: exact same-meeting InvokeDownloadMeetingDocument POST then ViewDocument GET after 1000ms; no script execution.",
+    "scope": "Meeting-document branch only; preparation JSON members taken from viewDocument(data). No live preparation response or final PDF captured."
+  },
+  "source_sha256": {
+    "src/civic_data_connectors/providers/onbase_documents.py": "41b27822aeedc70a5b64ec4430414d4876b0df53522678440c38abb56e9866d4",
+    "src/civic_data_connectors/providers/retrieval.py": "02483624f359c995d8d30f971abdf161df07d94eefffe95665654682ed14f8b2",
+    "tests/test_onbase_documents.py": "dc0c660ed417fd2bae2c7f566115f339d4418921da468b508664a3648cdf9520"
+  },
+  "execution": {
+    "new_cases_passed": 21,
+    "affected_cases_passed": 84,
+    "command": "pytest tests/test_onbase_documents.py tests/test_onbase_listing.py tests/test_onbase_export.py tests/test_boardable_documents.py tests/test_boardbook_documents.py tests/test_repository_content.py tests/test_repository_async_export.py tests/test_recording_retrieval.py -q",
+    "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\onbase-documents.log",
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\onbase-documents.xml",
+    "junit_sha256": "20cf2eab5643852f1c737e5d22d49140336ac4d4df8463202e58b99be0222d26",
+    "ruff": "Full repository ruff check passed",
+    "scope": [
+      "actual pinned wrapper parsed as data; exact captured meeting/type/name and declared route templates",
+      "synthetic preparation POST/ViewDocument GET with in-call scoped cookies; no redirects",
+      "foreign meeting/type/item/publish/section/name, changed wrapper, echo, bad JSON/status/URL and HTML file rejected",
+      "parser/transfer/request/deadline/cancellation bounds; direct PDFs and prior attachment paths preserved",
+      "original citation/hash and raw unknown preparation fields; real SQLite import/reopen and ZIP capture round-trip",
+      "verified captures retained after later document failure; private cookies absent from results"
+    ]
+  },
+  "limitations": [
+    "All preparation/file responses synthetic; no actual provider POST, final download or live PDF acceptance",
+    "Production follows declared 1-second wait; synthetic tests replace this delay because preparation is immediate",
+    "Only exact recognized HTTPS same-tenant meeting-document wrapper; no item/section attachment mapping",
+    "PDF prefix/media type checked, not full PDF rendering/content validation",
+    "Native search, meeting detail, Agenda API, remote import/meeting association and whole-provider acceptance remain incomplete"
+  ],
+  "completed_local_date": "2026-11-13"
+}

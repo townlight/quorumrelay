@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "5a17873",
+  "requirements": [
+    8
+  ],
+  "status": "PASSED",
+  "defect": "Four streamed provider file exports published downloadable artifacts after capture storage exceeded the total deadline.",
+  "reproduction": "All four durable-store regression cases returned completed before the fix. Initial test collection typo corrected before reproduction.",
+  "changes": "Shared save reader checks cancellation and optional caller deadline before/after reads and before metadata publication. Temporary save checks before publishing and removes incomplete files. Four exporters pass their existing total deadline checker.",
+  "new_cases": 8,
+  "checks": [
+    {
+      "command": "pytest tests/test_provider_file_completion_bounds.py tests/test_civicplus_export.py tests/test_onbase_export.py tests/test_suiteone_export.py tests/test_telvue_chapter_export.py tests/test_interchange.py tests/test_interface_artifacts.py -q",
+      "passed": 116,
+      "failed": 0,
+      "seconds": 5.96
+    },
+    {
+      "command": "ruff check changed Python paths",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/interchange.py",
+      "sha256": "4692c520207ef7ee7a97c6a1d5de83b3502398f7978f7fdaf2a4fa486aae02cd"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/civicplus_export.py",
+      "sha256": "86931e0f1e641b30e2b99965734ade542858ab04022fbd1fe977b2f7d69ea7b9"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/onbase_export.py",
+      "sha256": "09ccffb8e52f35f62321a673bb98aaa3687250183f425fb740bf22b0c781f0d9"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/suiteone_export.py",
+      "sha256": "548db1b7b0fc2affcf2d75fbb843e130e9a291b98fa6b63374d9fac47f1c1f84"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/telvue_chapter_export.py",
+      "sha256": "45271cc5d566a7a1b21b9e156757f7575aefd74d19b448776a4efd3081bb690f"
+    },
+    {
+      "path": "tests/test_provider_file_completion_bounds.py",
+      "sha256": "c054ff7090b641d34303b40ed84f96d17712bd501ebc342fb610dec49502a239"
+    }
+  ],
+  "limits": [
+    "Cooperative bounds after synchronous storage calls return; no claim of preempting a blocked external storage backend.",
+    "Expired durable capture bytes may remain in scoped immutable storage without an artifact entry; no downloadable artifact is published.",
+    "No vendor import, live write or release."
+  ]
+}

@@ -1,0 +1,11 @@
+# TelVue public player and supplied captions
+
+The additive `telvue-public-player-html` reader decodes one literal JSON `Player.setupData['playlist']` assignment from an exact public native-media player URL. It checks the `medium/ID` against that URL, retains title, HLS locator, source duration and explicitly supplied caption display labels. It does not execute scripts or infer a meeting date/body from the title. The rich entity type is `recording`; no automatic identity merge with older meeting-shaped playlist records is asserted. The original31families/34baseline formats stay unchanged.
+
+A configured native-media URL is recognized by `fetch` without an explicit format. This one HTML request retains source bytes/hash and locators, without fetching HLS, captions, images or external scripts. `fetch_captions(source, native_id)` requests the player and first supplied caption. `language="English"` selects that exact display label. The inspected source does not supply a language-code field; `"en"` is not inferred from its filename.
+
+Caption requests require two request pages and no checkpoint. Same-origin `/closed_captions/` declarations are retained; exact no-redirect URL, MIME, UTF8/WebVTT header, per-response parser limit, total transfer limit, cancellation and deadline checks apply. A failed second request retains the parsed player. Successful supplied-file text remains raw WebVTT, with exact bytes/hash, citation, provenance and recording relationship through local search, idempotent import, SQLite reopen and JSON/JSONL/ZIP. No cue interpretation or generated text is performed.
+
+The original saved playlist1757 supplies native media1066963. Actual player and its first declared caption returned HTTP200; the caption is60,850bytes of text/vtt. English/Spanish are source display labels, with content language/accuracy unverified. Playback, media-byte transfer, timing, title-date semantics, arbitrary player layouts, authenticated upload/processing/publication and meeting association remain unverified.
+
+See [source capture manifest](capabilities/evidence/telvue-public-player/source.json), [253 affected tests](verification/telvue-public-player-2026-11-15.json), `tests/test_telvue_player.py` and the separate [Connect write contracts](TELVUE-WRITES.md). This public caption read does not use account credentials.

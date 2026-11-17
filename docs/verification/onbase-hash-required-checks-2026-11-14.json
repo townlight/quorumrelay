@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "602eb99",
+  "status": "PASSED",
+  "scope": "New OnBase native search, baseline normalized hash parity, actual OnBase submodel coverage and scoped configured-fetch inventory reconciliation",
+  "checks": [
+    {
+      "command": "pytest tests -q",
+      "passed": 1730,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 80.15,
+      "junit_sha256": "43c733631e8dbfd438d08ab40b9a9031fd2986908cbec77c84d62405d5ba8db2"
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "command": "scripts/validate_capabilities.py",
+      "status": "PASSED",
+      "evidence_records": 401,
+      "distinct_urls": 251,
+      "negative_checks": 5,
+      "errors": 0
+    },
+    {
+      "command": "pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q (executed separately)",
+      "passed": 25,
+      "failed": 0
+    }
+  ],
+  "reused": "Unchanged TypeScript build and4client tests; original34 compatibility outputs unchanged. No release, package/native rebuild, repin, install or live write.",
+  "final_metadata": "Essential /app access observation appended after full source run; final25metadata tests and capability validator passed. No implementation change after full run."
+}

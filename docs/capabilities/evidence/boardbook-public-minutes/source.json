@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-15",
+  "kind": "observed_public_response",
+  "lead": {
+    "path": "tests/fixtures/baseline/boardbook.response",
+    "sha256": "11f47982510d4bca619bf769802fa3276a28a7d49756604fb4563b8f684693cb",
+    "scope": "Original saved organization3307 listing supplies exact Minutes755664 link; no guessed path or new tenant survey."
+  },
+  "request": {
+    "url": "https://meetings.boardbook.org/Public/Minutes/3307?meeting=755664",
+    "method": "GET",
+    "byte_limit": 2000000,
+    "deadline_seconds": 20,
+    "redirects": false,
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 91781,
+    "sha256": "97973d79ec8860d5eed416ba04ebceff191ec312ba94d955a2a22ae7fc8ba3f1",
+    "response_url": "https://meetings.boardbook.org/Public/Minutes/3307?meeting=755664"
+  },
+  "capture_path": "tests/fixtures/boardbook-minutes-755664.html",
+  "findings": [
+    "MeetingHeader supplies date/localtime/title; DownloadMinutes link binds organization3307 and native meeting755664.",
+    "26native agenda-item rows retain explicit child-of IDs; ActionsTakenRow-nativeID contains source rendered action prose, separate from hidden empty placeholders.",
+    "Preserve native item/parent/source fields, supplied text, matching attachment/document IDs and exact capture. No inferred structured votes or cross-path namespace equivalence."
+  ],
+  "limits": "One selected actual layout; no staff API/import schema, full history or universal Minutes variants."
+}

@@ -1,6 +1,7 @@
 """CivicWeb meeting and document listing from saved public Loveland, CO captures; no live network."""
 import hashlib
 import json
+import pytest
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
@@ -14,6 +15,37 @@ MEETINGS = (FIXTURES / "loveland-meetings.json").read_bytes()
 TYPES = (FIXTURES / "loveland-meeting-types.html").read_bytes()
 DOCS = {i: (FIXTURES / f"loveland-docs-{i}.json").read_bytes() for i in (18421, 18353, 18077)}
 RANGE = {"date_from": "2026-10-01", "date_to": "2026-11-30"}
+
+
+@pytest.mark.parametrize("record_types", [["document"], ["meeting", "document"]])
+def test_document_budget_resumes_inside_one_meeting_without_loss(record_types):
+    checkpoint, collected = None, []
+    for _ in range(8):
+        result, _ = discover(request={"record_types": record_types}, max_records=1,
+                             date_from="2026-11-04", date_to="2026-11-04", checkpoint=checkpoint)
+        assert not result.errors, result.public_dict()
+        rows = result.data["records"]
+        assert len(rows) <= 1
+        collected.extend((r["identity"]["record_type"], r["identity"]["external_id"]) for r in rows)
+        checkpoint = result.coverage["checkpoint"]
+        if checkpoint is None:
+            break
+    assert checkpoint is None
+    expected = {("document", "522441"), ("document", "522399")}
+    if "meeting" in record_types:
+        expected.add(("meeting", "18421"))
+    assert len(collected) == len(set(collected)) and set(collected) == expected
+
+
+def test_resumed_document_list_rejects_changed_source_bytes():
+    first, _ = discover(request={"record_types": ["document"]}, max_records=1,
+                        date_from="2026-11-04", date_to="2026-11-04")
+    changed = {**DOCS, 18421: DOCS[18421] + b"\n"}
+    resumed, _ = discover(Transport(docs=changed), request={"record_types": ["document"]},
+                          checkpoint=first.coverage["checkpoint"], date_from="2026-11-04",
+                          date_to="2026-11-04")
+    assert resumed.status == "failed" and resumed.errors
+    assert resumed.data["records"] == []
 
 
 class Transport:

@@ -1,0 +1,595 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <title>Peak - Public Agenda Center - Granicus Content</title>
+
+  <meta charset="utf-8" />
+  <!-- For mobile devices to display pixes at 1:1 versus scaled to fit screen -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+      <!-- These no-cache and refresh meta tags automatically refresh the page to display In Progress events if available -->
+    <meta http-equiv="pragma" content="no-cache">
+    <!-- <meta http-equiv="refresh" content="300"> -->
+  
+
+  <!-- RSS Feed Links - Allows RSS Feed Compatable browsers to detect the feeds -->
+  <link rel="alternate" type="application/rss+xml" href="https://douglascountynv.granicus.com/ViewPublisherRSS.php?view_id=1&types%5BClip%5D=on&types%5BAgendaItem%5D=on&types%5BAttachmentItem%5D=on&types%5BNote%5D=on&types%5BVote%2CMotion%5D=on&keywords=budget&search_scope=past&pagenumber=2&mode=agendas" title="RSS feed for Agenda documents on this page">
+  <link rel="alternate" type="application/rss+xml" href="https://douglascountynv.granicus.com/ViewPublisherRSS.php?view_id=1&types%5BClip%5D=on&types%5BAgendaItem%5D=on&types%5BAttachmentItem%5D=on&types%5BNote%5D=on&types%5BVote%2CMotion%5D=on&keywords=budget&search_scope=past&pagenumber=2&mode=minutes" title="RSS feed for Minutes documents on this page">
+    
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9Z1HRTFDW"></script>
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-J9Z1HRTFDW', { 'request_origin':'external' });
+</script>
+
+
+  
+
+  <!-- Styles -->
+  
+    <style  type="text/css" media="screen">
+      /* General Styles */
+      body {
+        margin: 5px;
+        color: #000000;
+        font-size: 14px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      .displayNone {
+        display: none;
+      }
+      a:link {
+        color: #0000EE;
+        text-decoration: underline;
+      }
+      a:visited {
+        color: #551A8B;
+      }
+      a:hover {
+        color: #5656EB;
+        text-decoration: none;
+      }
+      a:active {
+        color: #4A90E2;
+      }
+      #granicus {
+        padding: 1em;
+      }
+
+      #granicus h1, h2, h3 {/* add header formatting here */
+        margin: 1.5em 0 0 0;
+        color: #000000;
+      }
+      #granicus p {
+        margin-top:0px;
+      }
+      #intro {/* Intro Only Styles here*/
+      }
+
+      .InstructionalText {
+        margin-bottom: 1em;
+      }
+
+      /* Granicus Archive Styles */
+      .archive { /* entire archive */
+        margin:10px 0;
+      }
+      .listingTable {/* listing table only */
+        width:100%;
+        border-collapse:collapse;
+      }
+      .listHeader {/* This class formats the listingTable table headers */
+        color:#666;
+        font-weight: bold;
+        font-size:10px;
+        text-decoration: none;
+        text-align:left;
+        padding:3px;
+        border-collapse:inherit;
+        border-bottom:2px solid #1468CC;
+      }
+      .listItem {
+        padding:3px;
+        font-size: 1em;
+        border-bottom:1px solid #1468CC;
+      }
+
+      /* Row shading and highlighting */
+      .listingRow:nth-child(odd) {
+        background-color:;
+      }
+      .listingRow:nth-child(even) {
+        background-color:#F1F1F1;
+      }
+      .listingRow:hover {/* table row highlights */
+        color:;
+        background-color:#C5C3C3;
+      }
+
+      /* Upcoming events column widths etc. */
+      /* Note: Setting pixel-set width can make less mobile friendly */
+      #Name {
+        width;
+      }
+      #Date {
+        width;
+      }
+      #AgendaLink {
+        width;
+      }
+      #ViewEventLive {
+        width;
+      }
+      /* Archive table column widths etc. */
+      /* Note: Setting pixel-set width can make less mobile friendly */
+      .Name {
+        width:;
+      }
+      .Date {
+        width:;
+      }
+      .Duration {
+        width:;
+      }
+      .Agenda {
+        width:;
+      }
+      .Minutes {
+        width:;
+      }
+      .Video {
+        width:;
+      }
+      .MP3Link {
+        width:;
+      }
+      .MP4Link {
+        width:;
+      }
+      /* search result styles */
+      .searchSubItem {
+        padding:3px;
+        padding-left:10px;
+      }
+      .searchResultSpacer {
+        border-bottom:1px solid #1468CC;
+      }
+
+      /* navigation box controls */
+      #nav {
+        display:block;
+        float:right;
+        margin:10px 0px 10px 55px;
+        padding:5px;
+        background:#F1F1F1;
+        border:1px solid #1468CC;
+      }
+      #nav h4 {
+        margin:0 0 5px 0;
+      }
+      #nav ul {
+        margin:0;
+        padding:0;
+      }
+      #nav ul li {
+        margin:0;
+        padding:0 0 0 5px;
+        list-style:none;
+      }
+
+      .listItem ul {
+        color:#19436D;
+      }
+
+      #searchTable {
+        border:1px solid #B1C77B;
+        background:#F1F6E4;
+      }
+      #searchTable thead {
+        color:#56750D;
+      }
+      #searchTable th, #searchTable td {
+        padding:6px;
+      }
+
+      /* CollapsiblePanel*/
+      .CollapsiblePanel {
+        margin: 0px;
+        padding: 0px;
+      }
+      /* Remove outline on a selected CollapsiblePanel */
+      div:focus {
+        outline: 0;
+      }
+
+      .CollapsiblePanelTab {
+        font-size:1.4em;
+        font-weight:bold;
+        margin: 0px;
+        padding: 10px 10px 10px 5px;
+        cursor: pointer;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        border-bottom: solid #666 thin;
+        color: #000000;
+        background: #F1F1F1;
+      }
+
+      /* Note: CollapsiblePanelContent must not have padding or causes animation issues*/
+      .CollapsiblePanelContent {
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+        height: 250px;
+        overflow: auto;
+      }
+
+      .CollapsiblePanelTab a {
+        color: black;
+        text-decoration: none;
+      }
+
+      .CollapsiblePanelOpen .CollapsiblePanelTab {
+        background: #C5C3C3;
+      }
+
+      .CollapsiblePanelTabHover,  .CollapsiblePanelOpen {
+        background: #C5C3C3;
+      }
+      .CollapsiblePanelOpen .CollapsiblePanelTab::before {
+        content: " - ";
+        display: inline-block;
+        width: 20px;
+        font-size: 20px;
+      }
+      .CollapsiblePanelClosed .CollapsiblePanelTab::before {
+        content: " + ";
+        position: relative;
+        bottom: .05em;
+        display: inline-block;
+        width: 20px;
+        font-size: 20px;
+      }
+
+      /* Tabs */
+      .TabbedPanels {
+        margin: 0px;
+        padding: 0px;
+        float: left;
+        clear: none;
+        width: 100%; /* IE Hack to force proper layout when preceded by a paragraph. (hasLayout Bug)*/
+      }
+
+      .TabbedPanelsTabGroup {
+        margin: 0;
+        padding: 0;
+      }
+
+      .TabbedPanelsTabGroup li:last-child {
+        margin-right:0;
+      }
+
+      .TabbedPanelsTab {
+        position: relative;
+        top: 1px;
+        float: left;
+        padding: 8px 10px;
+        margin: 0px 2px 5px 0px !important;
+        font: bold 1.0em sans-serif;
+        list-style: none;
+        border-left: solid 1px #CCC;
+        border-bottom: solid 1px #ccc;
+        border-top: solid 1px #ccc;
+        border-right: solid 1px #ccc;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        cursor: pointer;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        color: #000000;
+        background-color: #F1F1F1;
+      }
+      /* Remove outline on a selected TabbedPanlsTab */
+      .TabbedPanelsTab:focus {
+        outline: 0;
+      }
+
+      .TabbedPanelsTabHover {
+        background-color: #C5C3C3;
+      }
+
+      .TabbedPanelsTabSelected {
+        background-color: #C5C3C3;
+      }
+
+      .TabbedPanelsTab a {
+        color: black;
+        text-decoration: none;
+      }
+
+      .TabbedPanelsContentGroup {
+        clear: both;
+        background-color: #fff;
+      }
+
+      .TabbedPanelsContent {
+      }
+
+      .TabbedPanelsContentVisible {
+      }
+
+
+      /* Votelog styling */
+      
+
+      /* Special styling for this view page */
+
+    </style>
+
+  
+
+</head>
+
+<body>
+  <!--=================== BEGIN Granicus Content - Please edit with care! - Call customer support at (415) 357 3618 for assistance =================-->
+  <div id="granicus">
+    <div id="intro">
+      <a name="top"></a>
+              <div class="InstructionalText"><div>Meetings are arranged by date, with the most recent at the top of the list. Click <b>Video</b> to listen to the meeting and view agenda documents, or <b>Agenda</b> or <b>Minutes</b> to see just the documents. You can also search the archives by typing keywords into the Search box.</div><div><br></div><div>**The Douglas County Board of County Commissioners regularly meets on the <b>first and third Thursday of each month at 10:00 a.m.</b> Any changes to the regular meeting schedule, including special meetings, workshops, cancellations, or rescheduled meetings, will be posted below at least <b>three business days</b> in advance in accordance with Nevada Open Meeting Law requirements. Please refer to this page for current meeting information, agendas, and updates, or sign up below to receive meeting notifications and updates directly to your inbox.</div></div>
+                </div>
+
+    
+    
+    <!-- Auto refreshes page unless EComment Modal has been opened -->
+    
+    <div id="GranicusMainViewContent">                                   
+      <script type="text/javascript" src="//douglascountynv.granicus.com/js/gquery.js"></script>
+<script type="text/javascript" src="//douglascountynv.granicus.com/gqueryplugins/ui/granicus.ui.js"></script>
+<link href="//douglascountynv.granicus.com/gqueryplugins/ui/gquery.ui.css" rel="stylesheet" media="screen" type="text/css">
+<script type="text/javascript" src="//douglascountynv.granicus.com/gqueryplugins/ui/gquery.ui.js"></script>
+<script type="text/javascript" src="//douglascountynv.granicus.com/gqueryplugins/defaultText/gquery.defaultText.js"></script>
+<script type="text/javascript" src="//douglascountynv.granicus.com/gqueryplugins/validate/gquery.form.validate.js"></script>
+<link href="//douglascountynv.granicus.com/gqueryplugins/pagination/pagination.css" rel="stylesheet" media="screen" type="text/css">
+<script type="text/javascript" src="//douglascountynv.granicus.com/gqueryplugins/pagination/granicus.pagination.js"></script>
+<link href="//douglascountynv.granicus.com/css/search.css" rel="stylesheet" media="screen" type="text/css">
+<script type="text/javascript" src="//douglascountynv.granicus.com/js/granicus.search.js"></script>
+    <div class='gas_basic search-form' id='unified_searchForm' data-past-meeting-source='clip' data-advanced-search-enabled='1' data-search-rss-enabled='1'>
+      <div class='gas_rss' style='display:block'>
+        <div class='gas_header'>
+          <div class='gas_text'>RSS feeds <img alt="RSS Icon" src='//douglascountynv.granicus.com/images/icons/rss_icon.gif' /></div>
+        </div>
+        <div class='gas_links'>
+          <a href='//douglascountynv.granicus.com/ViewPublisherRSS.php?view_id=1&types%5BClip%5D=on&types%5BAgendaItem%5D=on&types%5BAttachmentItem%5D=on&types%5BNote%5D=on&types%5BVote%2CMotion%5D=on&keywords=budget&search_scope=past&pagenumber=2&mode=agendas'>Agenda</a>
+          <a href='//douglascountynv.granicus.com/ViewPublisherRSS.php?view_id=1&types%5BClip%5D=on&types%5BAgendaItem%5D=on&types%5BAttachmentItem%5D=on&types%5BNote%5D=on&types%5BVote%2CMotion%5D=on&keywords=budget&search_scope=past&pagenumber=2&mode=minutes'>Minutes</a>
+          <a href='//douglascountynv.granicus.com/ViewPublisherRSS.php?view_id=1&types%5BClip%5D=on&types%5BAgendaItem%5D=on&types%5BAttachmentItem%5D=on&types%5BNote%5D=on&types%5BVote%2CMotion%5D=on&keywords=budget&search_scope=past&pagenumber=2&mode=podcast'>Podcast</a>
+          <a href='//douglascountynv.granicus.com/ViewPublisherRSS.php?view_id=1&types%5BClip%5D=on&types%5BAgendaItem%5D=on&types%5BAttachmentItem%5D=on&types%5BNote%5D=on&types%5BVote%2CMotion%5D=on&keywords=budget&search_scope=past&pagenumber=2&mode=vpodcast'>Video Podcast</a>
+        </div>
+      </div>
+      <div class='gas_basicSearch'>
+        <form action='//douglascountynv.granicus.com/ViewSearchResults.php' method='get' role='search' aria-label='Search meetings'>
+          <input type='hidden' name='view_id' value='1'>
+          <input type='hidden' name='types[Clip]' value='on'><input type='hidden' name='types[AgendaItem]' value='on'><input type='hidden' name='types[AttachmentItem]' value='on'>
+            <input type='hidden' name='types[Note]' value='on'>
+            <input type='hidden' name='types[Vote,Motion]' value='on'>
+            
+          <label for='gas_keywords' class='gas_title'>Search:</label>
+          <input title='Enter Keywords here' type='text' id='gas_keywords' class='search-keywords' name='allwords' value="" maxlength='255'/>
+          &nbsp;<button type="submit" value="Search" class="gas_searchButton">Search</button>
+          <a class="gas_toggleSearch gas_advanced" href="javascript:void(0);" aria-expanded="false" aria-controls="unified_advancedSection">Advanced Search</a>
+          <fieldset class='unified_scopeSelector'>
+            <legend>Search scope</legend>
+            <label for='unified_scope_upcoming'>
+              <input type='radio' id='unified_scope_upcoming' name='search_scope' value='upcoming' />
+              Upcoming Events
+            </label>
+            <label for='unified_scope_past'>
+              <input type='radio' id='unified_scope_past' name='search_scope' value='past' checked/>
+              Available Archives
+            </label>
+          </fieldset>
+        </form>
+      </div>
+      <div class='gas_advancedSearch' id='unified_advancedSection' aria-live='polite'>
+        <form action='//douglascountynv.granicus.com/ViewSearchResults.php' method='get' id='gas_searchFormAdvanced' class='search-form-advanced'>
+        <input type='hidden' name='view_id' value='1'>
+        <input type='hidden' name='search_scope' value='past'>
+        <fieldset class='unified_typeCheckboxes'>
+          <legend>Search types</legend>
+          <div class='gas_options'>
+            <p class='gas_title'>Search:</p>
+            <div class='gas_option' style='display:inline'>
+              <input style='display:inline' id='granicus-inc-clip' type='checkbox' name="types[Clip]" checked/>
+              <label for='granicus-inc-clip'>Name &amp; Description</label>
+            </div>
+            <div class='gas_option' style='display:inline'>
+              <input style='display:inline' id='granicus-inc-agenda' type='checkbox' name="types[AgendaItem]" checked/>
+              <label for='granicus-inc-agenda'>Agenda Items</label>
+            </div>
+            <div class='gas_option' style='display:inline'>
+              <input style='display:inline' id='granicus-inc-attachment' type='checkbox' name="types[AttachmentItem]" checked/>
+              <label for='granicus-inc-attachment'>Attachment Items</label>
+            </div>
+            <div class='gas_option' style='display:inline'>
+              <input style='display:inline' id='granicus-inc-notes' class='search-checkbox-notes' type='checkbox' name="types[Note]" checked/>
+              <label for='granicus-inc-notes'>Notes</label>
+            </div>
+            <div class='gas_option' style='display:inline'>
+              <input style='display:inline' id='granicus-inc-actions' class='search-checkbox-actions' type='checkbox' name="types[Vote,Motion]" checked/>
+              <label for='granicus-inc-actions'>Motions/Votes</label>
+            </div>
+            <div class='gas_option' style='display:none'>
+              <input style='display:none' id='granicus-inc-captions' class='search-checkbox-captions' type='checkbox' name="types[Caption]" />
+              <label for='granicus-inc-captions'>Captions</label>
+            </div>
+          </div>
+        </fieldset>
+
+          <div class='gas_row'>
+            <label for="gas_allwords">All these words:</label>
+            <div class='gas_input'>
+              <input title='Enter keywords, ordinance or resolution' type='text' id='gas_allwords' class='search-allwords' name="allwords" maxlength="255" value=""/>
+            </div>
+          </div>
+          <div class='gas_row'>
+            <label for="phrase">This exact phrase:</label>
+            <div class='gas_input'>
+              <input type='text' id="phrase" name="phrase" maxlength="255" value=""/>
+            </div>
+          </div>
+          <div class='gas_row'>
+            <label for="unified_orwords_1">One or more of these words:</label>
+            <div class='gas_input gas_mini'>
+              <input type='text' id="unified_orwords_1" name="orwords[]" maxlength="255" value=""/>
+              <span>or</span>
+              <input type='text' id="unified_orwords_2" aria-label="optional second word" name="orwords[]" maxlength="255" value=""/>
+              <span>or</span>
+              <input type='text' id="unified_orwords_3" aria-label="optional third word" name="orwords[]" maxlength="255" value=""/>
+            </div>
+          </div>
+          <div class='gas_row'>
+            <label for="excludewords">But none of these words:</label>
+            <div class='gas_input'>
+              <input type='text' id="excludewords" maxlength="255" name="excludewords" value=""/>
+            </div>
+          </div>
+          <div class='gas_row'>
+            <label for="gas_date1">Date Range:</label>
+            <div class='gas_input gas_mini'>
+              <input aria-label="Start date" class='gas_date gas_dateRange search-date-from' type='text' id="gas_date1" name="startdate" value=""/>
+              <span><label for="gas_date2">through</label></span>
+              <input aria-label="End date" class='gas_date gas_dateRange search-date-to' type='text' id="gas_date2" name="enddate" value=""/>
+            </div>
+          </div>
+          <div class='gas_action'>
+            &nbsp;<button type="submit" value="Search" class="gas_searchButton">Search</button>
+            <a class='gas_toggleSearch gas_basic' href='javascript:void(0);'>Return to basic search</a>
+          </div>
+        </form>
+      </div>
+    </div>
+      <div class="archive">
+  <h2>Search Results for "budget"</h2>
+  <div style="margin: 1em 0;">
+    &larr; <a href="//douglascountynv.granicus.com/ViewPublisher.php?view_id=1" target="_self">Back to Archives</a>
+  </div>
+
+  <table class="listingTable" id="searchList"
+    summary="This table lists your Search Results.  With details of, and links to view the Video and Documents related to Archived Videos as published by Douglas County, NV.  There is one item per table row.">
+    <thead>
+      <tr>
+                              <th class="Name listHeader" scope="col">Meeting Name</th>
+                                                <th class="Date listHeader" scope="col">Date</th>
+                                                        <th class="Agenda listHeader" scope="col">Agenda</th>
+                                                <th class="Minutes listHeader" scope="col">Minutes</th>
+                                                <th class="Video listHeader" scope="col">Video Recording</th>
+                        </tr>
+    </thead>
+                  <tbody>
+          <tr class="listingRow">
+                          <td class="listItem" headers="Name" id="" scope="rowgroup"></td>
+                                      <td class="listItem" headers="Date ">
+                                  
+                                                  -
+                                      
+                                                </td>
+                                                  <td class="listItem">
+                                  &nbsp;
+                              </td>
+                                      <td class="listItem">
+                                  &nbsp;
+                              </td>
+                                      <td class="listItem" headers="VideoLink ">
+                              </td>
+                      </tr>
+          
+                            </tbody>
+            </table>
+  <!-- Advanced Search Pagination Links -->
+  
+</div>
+<!--end .archive (search results)-->                </div>
+    <!-- Styles for Advanced Search Box -->
+    
+      <style>
+        .search-form {
+          min-width: 100px;
+          border: 1px solid #1468CC;
+        }
+        .search-form .gas_rss {
+          background-color: #F1F1F1;
+        }
+      </style>
+    
+
+    <!-- Scripts to hide RSS Links for MP4 and MP3 Podcasts -->
+          
+        <script>
+          gQuery(".gas_links a:nth-child(3)").hide();
+          gQuery(".gas_links a:nth-child(2)").css({"border": "0 none"});
+        </script>
+      
+    
+          
+        <script>
+          gQuery(".gas_links a:nth-child(4)").hide();
+          gQuery(".gas_links a:nth-child(3)").css({"border": "0 none"});
+        </script>
+      
+      </div>
+  <!--end #granicus-->
+    
+  
+    <script>
+    function getDocLink(loc) {
+      //find out if it's an iOS device
+      if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
+        //change current window
+        window.parent.location.href=loc;
+      }else{
+      //open new window
+        window.open(loc);
+      }
+    }
+    </script>
+  
+</body>
+</html>

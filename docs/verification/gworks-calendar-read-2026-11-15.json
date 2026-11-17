@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "d09b48f",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "Observed vendor client secure calendar range POST, exact JSON/Bearer/unpaddeddate literals, existing saved row mapping, trusted configured city/tenant/origin/namespace binding, local ISO dates/unknownnumericunits, bounds/errors/cancel/deadline, persistence/search/neutral exports. No live account call or mutation.",
+  "new_cases": 21,
+  "checks": [
+    {
+      "scope": "new calendar read plus saved calendar and public detail tests",
+      "passed": 58,
+      "failed": 0,
+      "seconds": 0.4
+    },
+    {
+      "scope": "new calendar plus saved/public details, provider discovery, interfaces/package/baseline/search",
+      "passed": 248,
+      "failed": 0,
+      "seconds": 19.77
+    },
+    {
+      "scope": "native read after credential collection typing and HTTP denial classification",
+      "passed": 21,
+      "failed": 0,
+      "seconds": 0.19
+    },
+    {
+      "scope": "ruff src tests scripts examples",
+      "status": "PASSED"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/gworks_calendar.py",
+      "sha256": "3dad54980ca33544974a253fb53b378e28d26f7ce47bc70491276dfc40245598"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "6480b30de8d47e1c020ed5641a5a7bd2b92a2090253c1accef593035c3fc4471"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/discovery.py",
+      "sha256": "7b195883fe4476d55cabe3d745a469bd9fe581c3e3a8327a5fab03c1445516ec"
+    },
+    {
+      "path": "tests/test_gworks_calendar_read.py",
+      "sha256": "3c053b765027cbea866690334d2d53bc325a0875a74c4499c41a5ac2884b4655"
+    },
+    {
+      "path": "docs/capabilities/evidence/gworks-published-client/calendar-range-auth.extract.js",
+      "sha256": "9289eee54cbcb2eff8163097a3e129e076df014dc8187faa39f52da3e0453508"
+    }
+  ],
+  "source_metadata": "docs/capabilities/evidence/gworks-published-client/calendar-read-source.json",
+  "limits": [
+    "One start0 range response; no pagination/total/catalog completeness inferred.",
+    "City identity is configured by trusted private credential policy, not independently supplied by response.",
+    "Numeric timestamp units are not guessed; unknown dates remain explicit.",
+    "Publication flags do not establish document locators, meeting associations or writes.",
+    "Declared existing-tenant editor URL returned404; applies only to that URL."
+  ],
+  "delivery": "Local only; no release/build/package/push/merge/tag/sign/install/repin/live secure call/vendor mutation.",
+  "prior_full": "2184passed106.02s at e4a7ede, before22public-Wistia and21secure-calendar cases. Unaffected evidence reused; no fresh full run claimed."
+}

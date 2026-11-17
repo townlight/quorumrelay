@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="13" skipped="0" tests="27" time="18.414" timestamp="2026-11-16T18:45:54.950882-07:00" hostname="Halo"><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_plan_commit_title_only_preserves_tree_dto_and_release" time="0.493"><failure message="AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">work\workers\simbli-item-write-review\test_simbli_item_write.py:223: in test_plan_commit_title_only_preserves_tree_dto_and_release
+    prepared = plan(engine, context)
+               ^^^^^^^^^^^^^^^^^^^^^
+work\workers\simbli-item-write-review\test_simbli_item_write.py:202: in plan
+    assert result.status == 'completed', result.public_dict()
+E   AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed</failure></testcase><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_same_value_title_is_explicit_no_send" time="0.736"><failure message="AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">work\workers\simbli-item-write-review\test_simbli_item_write.py:243: in test_same_value_title_is_explicit_no_send
+    prepared = plan(engine, context, change)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work\workers\simbli-item-write-review\test_simbli_item_write.py:202: in plan
+    assert result.status == 'completed', result.public_dict()
+E   AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed</failure></testcase><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_public_noneditable_fixture_and_prepare_posts_zero" time="0.671" /><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_invalid_page_or_item_never_locks_or_saves[redirect]" time="0.691" /><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_invalid_page_or_item_never_locks_or_saves[oversize_page]" time="0.892" /><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_invalid_page_or_item_never_locks_or_saves[login]" time="0.913" /><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_invalid_page_or_item_never_locks_or_saves[malformed_tree]" time="1.154" /><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_invalid_page_or_item_never_locks_or_saves[duplicate_tree]" time="0.505" /><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_invalid_page_or_item_never_locks_or_saves[missing_selected]" time="0.881" /><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_invalid_page_or_item_never_locks_or_saves[deleted]" time="0.788" /><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_invalid_page_or_item_never_locks_or_saves[workflow]" time="0.423" /><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_conflict_before_lock_then_after_lock_releases_only_exact_item" time="0.541"><failure message="AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">work\workers\simbli-item-write-review\test_simbli_item_write.py:270: in test_conflict_before_lock_then_after_lock_releases_only_exact_item
+    prepared = plan(engine, context)
+               ^^^^^^^^^^^^^^^^^^^^^
+work\workers\simbli-item-write-review\test_simbli_item_write.py:202: in plan
+    assert result.status == 'completed', result.public_dict()
+E   AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed</failure></testcase><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_lock_failure_or_cancel_fails_closed_and_releases[lock_false]" time="0.513"><failure message="AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">work\workers\simbli-item-write-review\test_simbli_item_write.py:289: in test_lock_failure_or_cancel_fails_closed_and_releases
+    prepared = plan(engine, context)
+               ^^^^^^^^^^^^^^^^^^^^^
+work\workers\simbli-item-write-review\test_simbli_item_write.py:202: in plan
+    assert result.status == 'completed', result.public_dict()
+E   AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed</failure></testcase><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_lock_failure_or_cancel_fails_closed_and_releases[lock_malformed]" time="0.806"><failure message="AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">work\workers\simbli-item-write-review\test_simbli_item_write.py:289: in test_lock_failure_or_cancel_fails_closed_and_releases
+    prepared = plan(engine, context)
+               ^^^^^^^^^^^^^^^^^^^^^
+work\workers\simbli-item-write-review\test_simbli_item_write.py:202: in plan
+    assert result.status == 'completed', result.public_dict()
+E   AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed</failure></testcase><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_lock_failure_or_cancel_fails_closed_and_releases[lock_timeout]" time="0.836"><failure message="AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">work\workers\simbli-item-write-review\test_simbli_item_write.py:289: in test_lock_failure_or_cancel_fails_closed_and_releases
+    prepared = plan(engine, context)
+               ^^^^^^^^^^^^^^^^^^^^^
+work\workers\simbli-item-write-review\test_simbli_item_write.py:202: in plan
+    assert result.status == 'completed', result.public_dict()
+E   AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed</failure></testcase><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_lock_failure_or_cancel_fails_closed_and_releases[cancel_on_lock]" time="0.656"><failure message="AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">work\workers\simbli-item-write-review\test_simbli_item_write.py:289: in test_lock_failure_or_cancel_fails_closed_and_releases
+    prepared = plan(engine, context)
+               ^^^^^^^^^^^^^^^^^^^^^
+work\workers\simbli-item-write-review\test_simbli_item_write.py:202: in plan
+    assert result.status == 'completed', result.public_dict()
+E   AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed</failure></testcase><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_saved_policy_revocation_fails_before_network[tenant]" time="0.530" /><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_saved_policy_revocation_fails_before_network[namespace]" time="0.784" /><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_saved_policy_revocation_fails_before_network[permission]" time="0.763" /><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_saved_policy_revocation_fails_before_network[item]" time="0.832" /><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_budget_and_expected_version_and_rotation" time="1.273"><failure message="AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">work\workers\simbli-item-write-review\test_simbli_item_write.py:319: in test_budget_and_expected_version_and_rotation
+    first = plan(engine2, context2)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+work\workers\simbli-item-write-review\test_simbli_item_write.py:202: in plan
+    assert result.status == 'completed', result.public_dict()
+E   AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed</failure></testcase><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_insufficient_commit_budget_cannot_acquire_lock" time="0.511"><failure message="AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">work\workers\simbli-item-write-review\test_simbli_item_write.py:334: in test_insufficient_commit_budget_cannot_acquire_lock
+    prepared = plan(engine, context, max_pages=9)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work\workers\simbli-item-write-review\test_simbli_item_write.py:202: in plan
+    assert result.status == 'completed', result.public_dict()
+E   AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed</failure></testcase><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_save_timeout_restart_reconciles_read_only" time="0.639"><failure message="AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">work\workers\simbli-item-write-review\test_simbli_item_write.py:342: in test_save_timeout_restart_reconciles_read_only
+    prepared = plan(engine, context)
+               ^^^^^^^^^^^^^^^^^^^^^
+work\workers\simbli-item-write-review\test_simbli_item_write.py:202: in plan
+    assert result.status == 'completed', result.public_dict()
+E   AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed</failure></testcase><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_collateral_readback_is_uncertain" time="0.629"><failure message="AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">work\workers\simbli-item-write-review\test_simbli_item_write.py:359: in test_collateral_readback_is_uncertain
+    prepared = plan(engine, context)
+               ^^^^^^^^^^^^^^^^^^^^^
+work\workers\simbli-item-write-review\test_simbli_item_write.py:202: in plan
+    assert result.status == 'completed', result.public_dict()
+E   AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed</failure></testcase><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_cancel_after_save_retains_id_and_no_second_send" time="0.354"><failure message="AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">work\workers\simbli-item-write-review\test_simbli_item_write.py:369: in test_cancel_after_save_retains_id_and_no_second_send
+    prepared = plan(engine, context)
+               ^^^^^^^^^^^^^^^^^^^^^
+work\workers\simbli-item-write-review\test_simbli_item_write.py:202: in plan
+    assert result.status == 'completed', result.public_dict()
+E   AssertionError: {'status': 'failed', 'data': None, 'errors': [{'code': 'invalid_input', 'message': 'The plan cannot be persisted without credential scrubbing.', 'retryable': False, 'source': None, ...}], 'coverage': {}, ...}
+E   assert 'failed' == 'completed'
+E     
+E     - completed
+E     + failed</failure></testcase><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_prepared_mutation_is_rejected_directly" time="0.307"><failure message="ValueError: The plan cannot be persisted without credential scrubbing.">work\workers\simbli-item-write-review\test_simbli_item_write.py:382: in test_prepared_mutation_is_rejected_directly
+    prepared = adapter.prepare(source, WriteChange.from_dict(CHANGE), context, Bounds(**BOUNDS), monotonic() + 5)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work\workers\simbli-item-write-review\simbli_write.py:604: in prepare
+    _assert_safe(prepared, current.page['secrets'])
+work\workers\simbli-item-write-review\simbli_write.py:150: in _assert_safe
+    raise ValueError('The plan cannot be persisted without credential scrubbing.')
+E   ValueError: The plan cannot be persisted without credential scrubbing.</failure></testcase><testcase classname="work.workers.simbli-item-write-review.test_simbli_item_write" name="test_default_registry_wiring" time="0.001" /></testsuite></testsuites>

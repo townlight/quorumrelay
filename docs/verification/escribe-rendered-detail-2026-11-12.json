@@ -1,0 +1,34 @@
+{
+  "scope": "Local additive eSCRIBE rendered detail mapping, separate from frozen dev8 and calendar compatibility.",
+  "contract": {
+    "source_url": "https://pub-oakville.escribemeetings.com/Meeting.aspx?Id=4162e72f-daa8-4252-bfd5-fd54f125ebe4&Agenda=Agenda&lang=English",
+    "capture_bytes": 114444,
+    "capture_sha256": "dce58357679d08be11669ba114e6d7f237d53e576295fe82a3f0a2c230ff0414",
+    "declarations": "AgendaItems contains AgendaItemN display classes, title/counter sections and AgendaItemAttachmentN nodes with supplied FileStream DocumentId links. SelectItem changes display Item/Tab; positions are not asserted native provider IDs. Header AgendaMeetingTime/AgendaMeetingTimeStart/LocationValue supply date/local time/location."
+  },
+  "saved_capture_execution": {
+    "status": "completed",
+    "meeting_records": 1,
+    "capture_local_agenda_items": 12,
+    "associated_documents": 15,
+    "scope": "existing raw saved HTML, no network"
+  },
+  "synthetic_execution": {
+    "distinct_cases": 5,
+    "results": "Four of five passed in the first run; the configured-detail node then passed after explicit partial coverage correction. The two successful mapping/transfer nodes passed again after source header mapping. These are5 distinct cases, not a single final suite run.",
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_escribe_detail.py -q (4 passed/1 failed; coverage label diagnosed)",
+      ".venv/Scripts/python.exe -m pytest tests/test_escribe_detail.py::test_configured_detail_get_and_capture_verified_document_use_existing_engine -q (1 passed)",
+      ".venv/Scripts/python.exe -m pytest tests/test_escribe_detail.py::test_saved_agenda_positions_are_not_native_ids_and_documents_keep_association tests/test_escribe_detail.py::test_configured_detail_get_and_capture_verified_document_use_existing_engine -q (2 passed)"
+    ],
+    "fixture_path": "tests/fixtures/escribe-agenda-minimized.html",
+    "fixture_sha256": "07eff50e6f1d53b41cd569cb35abee8a8f031ddb386a9ad244052f4912f19775",
+    "fixture_kind": "minimized transcription of observed DOM with synthetic application title; not exact raw network capture"
+  },
+  "limits": [
+    "No live request or remote provider write executed in this batch.",
+    "Item keys are exact-capture-local and change when HTML changes; native item ID remains null. This is honest capture identity, not cross-revision native item matching.",
+    "No body/meeting timezone inferred from title; unrecognized source date/time retained raw, partial coverage explicit.",
+    "Only supplied same-origin FileStream links are mapped. Other private/public API controls, comments, media bytes, content fields absent in this capture and write contracts remain unresolved."
+  ]
+}

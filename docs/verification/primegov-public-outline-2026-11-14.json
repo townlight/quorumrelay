@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "058c4a9",
+  "status": "PASSED",
+  "new_cases": 16,
+  "scope": "Public speaker-request outline may omit agenda content, documents and private sections; not speaker-list search or authenticated Meeting API. Actual item result empty; nonemptyitems/votesummarybranches verified synthetically against client fields. No automatic full agenda, tier/current authenticated write schemas or API completeness claimed.",
+  "checks": [
+    {
+      "command": "pytest tests/test_primegov_public_outline.py tests/test_baseline.py tests/test_provider_record.py tests/test_interchange.py -q",
+      "passed": 124,
+      "failed": 0,
+      "seconds": 15.54,
+      "junit_sha256": "66e7d6c9805b300107e99f53972b0c58a7eaf4c388f47d53fa0776ebeadd4aff"
+    },
+    {
+      "command": "pytest tests -q",
+      "passed": 1778,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 96.85,
+      "junit_sha256": "7d93acc3596e2ab27a4a3753b9ebf6d4a331c7c365c67a68d63fbf6a34cb0328"
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "command": "pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q",
+      "passed": 25,
+      "failed": 0
+    },
+    {
+      "command": "scripts/validate_capabilities.py",
+      "status": "PASSED",
+      "evidence_records": 404,
+      "distinct_urls": 253,
+      "errors": 0
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/primegov-public-outline/source.json",
+      "sha256": "02b58d823af95c1ebaadba6cda69bffd29f08c93b89b454a491465afceee309f"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/primegov-public-outline/document_getHref.txt",
+      "sha256": "28658a4fe1db300a7263698fda5b9a6ecd8d8e6afebe46fee1ac797cc63b0113"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/primegov-public-outline/public_outline.txt",
+      "sha256": "e9311940404bf74fe475e789c2d464dfc8c744e887889843a9a9a37e98cf6b0d"
+    },
+    {
+      "kind": "fixture",
+      "path": "tests/fixtures/primegov-public-outline/waco-2026.json",
+      "sha256": "b385a2d0385da5fa12cd44d06012506d8c90b39a6408ec293a0ee290bd0a4c3e"
+    },
+    {
+      "kind": "fixture",
+      "path": "tests/fixtures/primegov-public-outline/waco-4922-sections.json",
+      "sha256": "705fb3e6b212109d23f9a51bd4a16e6fc81d0f772d4bebaa984630662c900ebb"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_primegov_public_outline.py",
+      "sha256": "38502fdb8dde11410355481c1ff59cdb0ae4634ab803aa98fd5e22f8b66a6429",
+      "hash_policy": "test_source_crlf_to_lf"
+    }
+  ],
+  "metadata_followup": "After full source run, two Select Event create/update inventory entries corrected from UI-only to documented API request schemas with unimplemented/readback gaps explicit.54API+2file+6observedclient entries,60implemented in attributed scopes and2Eventunimplemented.25finalmetadata/validatorPASS; no implementation edits afterfullrun."
+}

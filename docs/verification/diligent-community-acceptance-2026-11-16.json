@@ -1,0 +1,100 @@
+{
+  "date": "2026-11-16",
+  "base_commit": "667f40ebde02e86ef756cbd6c821f6432f6bdee8",
+  "candidate": "local uncommitted Community reader, scope amendment, HTML signature rejection and saved-fetch dispatch",
+  "status": "LOCAL_ACCEPTANCE_PASSED",
+  "python_full": {
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-16\\rea-2\\work\\community-full-tests.xml",
+    "passed": 3271,
+    "failures": "Historical pre-fix run: two obsolete provider-roster assertions. Superseded by final_six_priority_check below.",
+    "seconds": 328.61,
+    "failed": 2
+  },
+  "after_test_only_correction": {
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-16\\rea-2\\work\\community-roster-tests.xml",
+    "passed": 7,
+    "files": [
+      "tests/test_interfaces.py",
+      "tests/test_public_package.py"
+    ],
+    "seconds": 6.25,
+    "failed": 0
+  },
+  "checks": {
+    "client_tests": "4 passed",
+    "typescript_build": "passed",
+    "capability_validator": "passed: 31 baseline providers, 193 outbound mappings, 485 evidence records, 0 errors",
+    "git_diff_check": "passed",
+    "ruff": "passed"
+  },
+  "live_evidence": "diligent-community-live-2026-11-16.json",
+  "runtime": {
+    "baseline_formats": 34,
+    "baseline_families": 31,
+    "additive_parsers": 73,
+    "native_searches": 23,
+    "providers": 33
+  },
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/diligent_community.py",
+      "sha256": "ba44cd61d41d9084f520de63b71111f795f393c01785157cc49264918ab1043d"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/__init__.py",
+      "sha256": "3c8e6ee554fdb7e89f8888a90d54126d27e4b156c046800dc03a563116f29bf7"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/identification.py",
+      "sha256": "7734d17641ab0683a6b200574be47eca798bfd6e47c61be1d27c7fb579330af4"
+    },
+    {
+      "path": "tests/test_diligent_community.py",
+      "sha256": "b6e200b8321293d460372a41943e96f4d3b06d7af59480a2366cca4d297f3ccb"
+    },
+    {
+      "path": "tests/test_cablecast.py",
+      "sha256": "a40b18c50fa1b22f9657af61dc2401206f565126b282a78a4df617f205f23264"
+    },
+    {
+      "path": "tests/test_interfaces.py",
+      "sha256": "99ccebb3011f0d2705fcd935f8c786fb82282d2d59def43b64bfe57a1e1ef1b2"
+    },
+    {
+      "path": "tests/test_public_package.py",
+      "sha256": "2dce47c1bb32fcbc84b17785414aab775123dfc328b222ee78221d4f1f3940a0"
+    },
+    {
+      "path": "src/civic_data_connectors/engine.py",
+      "sha256": "9669c6a41ae5993d7f247d0db1bb3d4a43d8e828fa45d6bd381103061622819e"
+    }
+  ],
+  "limits": [
+    "Single public tenant live acceptance, not universal vendor coverage.",
+    "No Community writes implemented; no existing write adapter changed.",
+    "No commit, push, merge, package release or installation. Hosted CI not run for this local change.",
+    "Simbli base 667f40e previously passed hosted CI run 44013583805 attempt 2."
+  ],
+  "owned_jobs": "None; final pytest session 28447 terminated exit 0.",
+  "after_html_signature_fix": {
+    "command": "python -X utf8 -m pytest tests/test_diligent_community.py -q",
+    "passed": 32,
+    "failed": 0,
+    "reproduction": "Generic binary MIME with a short HTML login response was incorrectly accepted before the fix.",
+    "scope": "Community adapter and tests, including raw/base64 saved fetch and mixed-selector rejection; shared engine dispatch is also required. Prior full-suite result applies to unchanged behavior."
+  },
+  "final_six_priority_check": {
+    "passed": 3280,
+    "failed": 0,
+    "seconds": 439.35,
+    "warning": "Existing Starlette/AnyIO deprecation",
+    "junit": "work/six-priority-final.xml",
+    "log": "work/six-priority-final.log",
+    "exit_code": 0,
+    "ruff": "passed",
+    "capability_validation": "passed",
+    "diff_check": "passed",
+    "hosted_ci": "Not run for local changes; prior hosted pass covers base 667f40e only",
+    "client": "Earlier build and four tests reused; client unchanged"
+  }
+}

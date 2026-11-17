@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "b0a80c3",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "Existing csv-items includes standalone native agenda_item records using explicit meeting identities only; eSCRIBE agenda/item/attachment native compound parents become portable relationships. CSV/iCalendar completion checks span serialization and artifact storage. No new provider, method, columns or remote action.",
+  "reproduced_before_fix": {
+    "count": 10,
+    "cases": "1standalone PrimeGov synthetic reader item omitted;4cancel/deadline projection completions;2expired saved artifacts;3missing native eSCRIBE parent relationships. Fixture-construction errors excluded."
+  },
+  "new_cases": 24,
+  "checks": [
+    {
+      "scope": "all eSCRIBE plus neutral interchange/capture aliases/storage/imports/PrimeGov outline/provider-file completion",
+      "passed": 293,
+      "failed": 0,
+      "seconds": 18.03
+    },
+    {
+      "scope": "Ruff changed source/test paths",
+      "status": "PASSED"
+    },
+    {
+      "scope": "full required local Python source suite",
+      "command": "python -X utf8 -m pytest tests -q --junitxml=<receipt>",
+      "passed": 2317,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 112.62,
+      "warning": "Existing Starlette/AnyIO deprecated alias",
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\neutral-projection-parent-owned-full-2026-11-15.xml",
+      "xml_sha256": "96838332b199f0b2910711e924f0cac0ebc5a6edaf8b603796ed083d2c683fde"
+    },
+    {
+      "scope": "full required Ruff src/tests/scripts/examples",
+      "status": "PASSED"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/interchange.py",
+      "sha256": "90f9a980000e0d9917b955ad154e2c940208225aeb85459824146fff7e129c7e"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/escribe_publishing.py",
+      "sha256": "f16ebb5503b825460aa56a373cce01647240e95729e192ebb1a429a404598c62"
+    },
+    {
+      "path": "tests/test_item_csv_records.py",
+      "sha256": "55761902a3756417102ffc12d539349bb2b74f97d0ca402071d69e9df0fc87b8"
+    },
+    {
+      "path": "tests/test_neutral_projection_completion.py",
+      "sha256": "99f33967492f0c452437ba1b19db2e995d9dbf8eeb85dd5013e17ba6dbf168f9"
+    }
+  ],
+  "invariants": [
+    "Existing five csv-items columns and nested meeting-item path retained.",
+    "Native item identifiers, formula guards, explicit missing/invalid/conflicting parent-loss reporting; no name/date/order/native-field guessing in generic CSV.",
+    "eSCRIBE meeting/agenda/item/document identities derive from pinned complete native compound IDs and positive pointers. Raw fields and identities unchanged.",
+    "Reopened SQLite saved bundle exports by key; original durable bundle/captures are not rewritten.",
+    "Cancellation/deadline returns no completed inline output; expired capture/temp copying cannot publish artifact, temporary partial file removed.",
+    "Cooperative checks after synchronous work returns; no preemption/atomic storage deadline claim."
+  ],
+  "limits": [
+    "PrimeGov nonempty item sample synthetic from existing captured client; not a new live observation.",
+    "CSV remains lossy; raw relationships, original fields and other omitted content stay listed in loss ledger and preserved in neutral bundles.",
+    "No vendor mutation, release/build/package/push/merge/tag/install/sign/repin/auth/model setting change."
+  ],
+  "evidence_limits": "This is current local source acceptance, not installed package/native/hosted CI or vendor-contract completeness. Final receipt/inventory hash refresh is bookkeeping; tested source/test bindings unchanged."
+}

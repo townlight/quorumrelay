@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "b941a5f4aefa5c2147f0f3414b951cb371a6a801",
+  "tasks": [
+    6,
+    9,
+    10
+  ],
+  "status": "PASSED",
+  "scope": "One typed item-history-step create with selected meeting/item/history/portal preflight, full readback and durable no-replay uncertainty.",
+  "new_cases": 16,
+  "checks": [
+    {
+      "command": "pytest tests/test_escribe_history_write.py tests/test_escribe_publishing.py tests/test_escribe_upload.py tests/test_escribe_related_records.py tests/test_escribe_history.py tests/test_escribe_history_index.py tests/test_escribe_selected_text.py tests/test_writes.py -q",
+      "passed": 178,
+      "failed": 0,
+      "seconds": 4.78
+    },
+    {
+      "command": "ruff check changed source/compiler/tests",
+      "status": "PASSED"
+    }
+  ],
+  "source_sha256": {
+    "scripts/pin_escribe_contract.py": "d2d0287d6a1df73f770650be18c99c4b9c1d3b18f65f14a9c9fa8425c7218e62",
+    "src/civic_data_connectors/data/escribe_publishing.json": "2c51a546ac4a97cc3997a1207ceb9e6ddefa7e8efddc18b9450d32000d3dc006",
+    "src/civic_data_connectors/providers/escribe_history_write.py": "97f4a4ce618042ebbc6497bb7ffb01725048be390ef895cda3fa3e6a22799956",
+    "src/civic_data_connectors/providers/escribe_write.py": "b994df7dec4dd0ac6a1f8ab2e8e2b1cfc8f0f9a1325068367842c950d9edaba3",
+    "tests/test_escribe_history_write.py": "79cd8a0a5585219c9c7d017c62623eab68adb2a43d96f42775abc97eb8e10823",
+    "docs/ESCRIBE-PUBLISHING-SERVICE.md": "6b59df68e4a29af248d03c8a5b38d947587c8edc8ac4737c0159ed1e1ef74551"
+  },
+  "vendor_contract": [
+    "docs/capabilities/evidence/escribe-publishing-wsdl/publishing.wsdl",
+    "docs/capabilities/evidence/escribe-publishing-wsdl/xsd0.xsd",
+    "docs/capabilities/evidence/escribe-publishing-wsdl/xsd1.xsd"
+  ],
+  "test_server_correction": "Initial success/readback tests exposed independent synthetic server XML order error: Steps had been serialized after Votes. Corrected server order to pinned XSD; production strict response-order validation retained.",
+  "limits": [
+    "No live SOAP call, publication, mutation/release or deployment applicability claim.",
+    "MigrationCreateMotion usersvotes string grammar and numeric result/readback identity relation remain unresolved; not guessed or classified outside-only.",
+    "AgendaItemHistoryCreate is separate from publication; unexpected effects/readback remain uncertain."
+  ]
+}

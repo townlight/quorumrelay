@@ -1,0 +1,22 @@
+{
+  "source_urls": [
+    "https://telvue.com/knowledgebase/json-rest-api-version-2-playlist-items/",
+    "https://telvue.com/knowledgebase/json-rest-api-version-2-playlist-items.md"
+  ],
+  "observation_date": "2026-11-12",
+  "vendor_updated_html": "2022-12-01",
+  "vendor_updated_markdown": "2022-12-02",
+  "proof": "Official browser-retrieved reference; local urllib HTML/Markdown retrieval returned HTTP403. Fixture is a selected-field transcription of the published detail example, not an exact raw capture. Thumbnail fields and HLS/RTMP variants omitted; no schema completeness claim.",
+  "routes": [
+    "GET /api/v2/playlists/:playlist_id/playlist_items.json",
+    "GET /api/v2/playlists/:playlist_id/playlist_items/:id.json"
+  ],
+  "envelopes": [
+    "playlist_items array",
+    "playlist_item object"
+  ],
+  "authentication": "CONNECT-ACCESS-KEY and CONNECT-SECRET-PASSPHRASE headers; not Basic; TLS verification retained",
+  "fixture": "tests/fixtures/telvue-playlist_item-example.json",
+  "sha256": "0535b24ae01d58aee50acb189492366031dd5e11af770f7cb9e2062868cf5e87",
+  "limits": "No documented paging/total/order guarantee; GET contracts only, no write methods established."
+}

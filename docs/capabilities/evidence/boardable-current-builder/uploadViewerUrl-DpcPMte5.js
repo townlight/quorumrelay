@@ -1,0 +1,1 @@
+function t(r,u){const n=encodeURIComponent(window.location.href);if(r.document?.url){const e=r.document.url.includes("?")?"&":"?";return`${r.document.url}${e}back_url=${n}`}return r.uuid?.short_slug?`${window.__APP_CONFIG__?.boardableUrl??""}/${u}/documents/${r.uuid.short_slug}?back_url=${n}`:r.url||null}export{t as u};

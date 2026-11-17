@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-16",
+  "scope": "Public vendor client and selected meeting page; UTF-8 saved response text. No write contract inferred.",
+  "origin": "https://boonecountyil.community.diligentoneplatform.com",
+  "files": [
+    {
+      "file": "portal-2.js",
+      "sha256": "d898da3616ed4f15c2c2027ca72149bced305580be97dff20f7bfc5ccef17149"
+    },
+    {
+      "file": "meeting-client.js",
+      "sha256": "3d1a4e68eb1da7328e3e31f6308d61452c7f9edfbd088250bcb827fa15fa36b6"
+    },
+    {
+      "file": "meeting-1655.html",
+      "sha256": "de6b0d747aa59bbde44c751ba24900419dbc22b21eadbae7b972901a3daa2c4a"
+    }
+  ],
+  "routes": [
+    "/js/webforms/portal?v=5aED4XLgleU5TenCF5DcbgN1TDDw44ixDdsNt7-Gj741",
+    "/js/webforms/portal/meetings?v=fHULzE9BcxZOb2gPSryDOasXfawdaFALoZRzvKGKDVw1",
+    "/Portal/MeetingInformation.aspx?Org=Cal&Id=1655"
+  ],
+  "observed_document_redirect": "301 adds only trailing slash to the same native document route; connector requests canonical slash directly, with redirects disabled."
+}

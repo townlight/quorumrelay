@@ -1,6 +1,6 @@
 # QuorumRelay architecture
 
-Candidate <code>0.1.0.dev8</code> · schema <code>2.0.0</code>
+Python **0.1.0.dev14**, TypeScript **0.1.0-dev.14**, schema **2.0.0**.
 
 QuorumRelay is a transport-neutral civic-data engine. The Python engine owns the shared operation and result contract, provider adapters, capture normalization, bounded search, interchange, and write coordination. Applications own caller identity, access policy, service lifecycle, persistent database location, editorial review, and mapping QuorumRelay records into their own canonical records.
 

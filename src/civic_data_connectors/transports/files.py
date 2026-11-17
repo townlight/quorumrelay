@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import base64
+import re
 import tempfile
 import time
 from threading import Lock
@@ -14,6 +15,32 @@ FILE_OPERATIONS = frozenset({"normalize", "discover", "fetch", "import_preview",
 
 def allowed(context):
     return any(context.allows(operation) for operation in FILE_OPERATIONS)
+
+
+def open_file_input(engine, handle, *, context):
+    """Resolve generic inputs and published legacy uploads without inventing metadata."""
+    from ..interchange import open_input
+    if not isinstance(handle, str) or re.fullmatch(r"[0-9a-f]{64}", handle) is None:
+        raise ValueError("The file handle is unavailable in this caller scope.")
+    if not allowed(context):
+        raise ValueError("File-input authorization was revoked.")
+    item = engine.storage.get("service_files", handle, scope=context.scope) if engine.storage else None
+    if item is not None and item.value.get("purpose") is None and "reference" in item.value:
+        if item.value.get("expires_at", float("inf")) <= time.time():
+            raise ValueError("The file input expired.")
+        from ..write_files import open_write_file
+        reference = item.value["reference"]
+        return {"byte_length": reference["byte_length"], "sha256": reference["sha256"]}, open_write_file(
+            engine.storage, reference, scope=context.scope)
+    return open_input(engine, handle, context=context)
+
+
+def validate_metadata(filename, content_type):
+    if (not isinstance(filename, str) or not filename or len(filename) > 255
+            or any(ord(c) < 32 for c in filename)
+            or not isinstance(content_type, str) or not content_type or len(content_type) > 255
+            or any(ord(c) < 32 for c in content_type)):
+        raise ValueError("Invalid upload filename or content type metadata.")
 
 
 class InputUploads:
@@ -34,10 +61,7 @@ class InputUploads:
             raise ValueError("Caller policy does not permit file input.")
         if type(byte_length) is not int or not 0 <= byte_length <= self.max_bytes:
             raise ValueError("Upload byte length exceeds the configured transfer limit.")
-        if (not isinstance(filename, str) or not filename or len(filename) > 255 or "\0" in filename
-                or not isinstance(content_type, str) or len(content_type) > 255
-                or any(c in content_type for c in "\r\n")):
-            raise ValueError("Invalid upload filename or content type metadata.")
+        validate_metadata(filename, content_type)
         with self.lock:
             self._prune()
             if len(self.values) >= 16 or sum(x["byte_length"] for x in self.values.values()) + byte_length > 1024**3:

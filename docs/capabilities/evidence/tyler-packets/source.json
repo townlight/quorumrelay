@@ -1,0 +1,7 @@
+{
+  "url": "https://libertycountytxapp.meetingmanager.tylerapp.com/392259prod/tylermm/calendar/main.f980238b7778fb2e.js",
+  "client_sha256": "2dcf06fa376a06f48571e959f11ba0b4c62386112feb3344475e18a330e039bd",
+  "derivation": "Literal method extracts from the already observed and SHA-verified vendor calendar client; no JavaScript execution. Existing observation records the full source URL and capture hashes.",
+  "contract": "Client concatenates isPacket and native meetingAgendaId/minutesId onto Agenda/Minutes shareable link route. Packet-enabled flags retained in captured detail; calendar false flags do not authorize packet locators.",
+  "limits": "No new live packet GET, playback, staff write, complete catalog or PDF rendering acceptance."
+}

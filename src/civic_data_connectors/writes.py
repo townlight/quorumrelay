@@ -13,9 +13,9 @@ from .extensions import StorageConflict
 from .models import Bounds, Error, OperationResult, SCHEMA_VERSION, Source
 from .storage import operation_cancelled, update_operation
 from .write_adapters import (
-    AmbiguousWrite, WriteChange, WriteFailure, check_write_adapter, default_adapters, sanitize,
+    AmbiguousWrite, WriteCancelled, WriteChange, WriteFailure, check_write_adapter, default_adapters, sanitize,
 )
-from .write_files import open_write_file, resolve_write_files
+from .write_files import open_write_input, resolve_write_files
 
 
 def _now():
@@ -73,7 +73,7 @@ class WriteCoordinator:
             source, bounds = Source(**request["source"]), Bounds(**request.get("bounds", {}))
             adapter = self._adapter(source)
             if callable(getattr(adapter, "bind_files", None)):
-                adapter = adapter.bind_files(storage, context.scope)
+                adapter = adapter.bind_files(engine, context)
             adapter.validate_source(source, context)
             changes = request.get("changes")
             if not isinstance(changes, list) or not changes or len(changes) > bounds.max_records:
@@ -93,10 +93,16 @@ class WriteCoordinator:
             if sanitize(request, config) != request:
                 raise ValueError("Public write data contains credentials or signed authorization data.")
             deadline = monotonic() + bounds.deadline_seconds
+
+            def check_preflight_bounds():
+                if operation_cancelled(storage, context):
+                    raise WriteCancelled()
+                if monotonic() >= deadline:
+                    raise WriteFailure("deadline_exceeded", "The write preflight exceeded its total deadline.")
+
             prepared, keys, resources = [], set(), set()
             for raw in changes:
-                if operation_cancelled(storage, context):
-                    return OperationResult("cancelled", operation_id=context.operation_id)
+                check_preflight_bounds()
                 change_input = deepcopy(raw)
                 change_input["files"] = resolve_write_files(engine, raw.get("files", ()), context=context, bounds=bounds)
                 change = WriteChange.from_dict(change_input)
@@ -110,6 +116,7 @@ class WriteCoordinator:
                         raise ValueError("Overlapping changes to one resource require separate reviewed plans.")
                     resources.add(target)
                 value = adapter.prepare(source, change, context, bounds, deadline)
+                check_preflight_bounds()
                 if canonical_hash(sanitize(value, config)) != canonical_hash(value):
                     raise ValueError("The provider plan contains secret authorization data.")
                 prepared.append(value)
@@ -123,6 +130,7 @@ class WriteCoordinator:
                 "live_acceptance": "NOT_RUN", "authorization_policy": "explicit_exact_plan_commit",
             }
             digest = canonical_hash(plan)
+            check_preflight_bounds()
             storage.put("write_plans", plan_id, {"plan": plan, "plan_hash": digest},
                         scope=context.scope, create_only=True)
             return OperationResult("completed", data={"plan": deepcopy(plan), "plan_id": plan_id,
@@ -130,6 +138,8 @@ class WriteCoordinator:
                                    coverage={"mock": adapter.mock, "changes": len(prepared),
                                              "live_acceptance": "NOT_RUN"},
                                    operation_id=context.operation_id)
+        except WriteCancelled:
+            return OperationResult("cancelled", operation_id=context.operation_id)
         except (WriteFailure, ValueError, TypeError, KeyError) as error:
             return self._failure(error, context)
 
@@ -161,13 +171,13 @@ class WriteCoordinator:
             source, bounds = Source(**plan["source"]), Bounds(**plan["bounds"])
             adapter = self._adapter(source)
             if callable(getattr(adapter, "bind_files", None)):
-                adapter = adapter.bind_files(storage, context.scope)
+                adapter = adapter.bind_files(engine, context)
             if adapter.mock != plan["mock"]:
                 raise WriteFailure("plan_mismatch", "A plan cannot switch between mock and real transports.")
             for prepared in plan["changes"]:
                 adapter.authorize(source, WriteChange.from_dict(prepared["change"]), context)
                 for part in prepared["native"].get("files", ()):
-                    with open_write_file(storage, part["reference"], scope=context.scope):
+                    with open_write_input(engine, part["reference"], context=context):
                         pass
             if not context.allows("commit_write", source.namespace):
                 raise WriteFailure("permission_denied", "The trusted client policy denies commit to this namespace.")
@@ -223,6 +233,10 @@ class WriteCoordinator:
                 version = self._save(storage, receipt, version, context)
                 # Intent is durable before the first possible outbound mutation.
                 try:
+                    # Persistence may have yielded to a cancellation request. No adapter
+                    # has run for this intent yet, so cancellation is still unambiguous.
+                    if cancelled():
+                        raise WriteCancelled()
                     def persist_step(step):
                         nonlocal version
                         item.update(step)

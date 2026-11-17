@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-12",
+  "operation": "agendaquick_supplied_public_agenda_mapping",
+  "source_url": "https://public.destinyhosted.com/agenda_publish.cfm?id=98622&mt=ALL&get_month=11&get_year=2026&dsp=ag&seq=1737",
+  "public_observation": {
+    "status": 200,
+    "content_type": "text/html",
+    "byte_length": 59886,
+    "sha256": "46d51dcbed8e61316589e796c8745cef9a4fbdff84b583feb29ca6b2ca2bb80c",
+    "redirects_allowed": false,
+    "byte_limit": 2097152,
+    "deadline_seconds": 30
+  },
+  "fixture": {
+    "path": "tests/fixtures/agendaquick-detail-1737.capture.json",
+    "sha256": "aff0a5ed8d75f82fa74a92acd6d8f512f388e8f503b9d8e2314aaae3ab78a872",
+    "encoding": "exact vendor response bytes in content_base64"
+  },
+  "saved_result": {
+    "meeting_id": "1737",
+    "linked_native_memos": 25,
+    "packet_locators": 1,
+    "meeting_date": "2026-11-02",
+    "timezone": "unknown"
+  },
+  "synthetic_execution": {
+    "new_distinct_passed": 7,
+    "reused_existing_calendar_passed": 2,
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_agendaquick_detail.py -q (6 passed; duplicate-ID test initially replaced nseq instead of seq)",
+      ".venv/Scripts/python.exe -m pytest \"tests/test_agendaquick_detail.py::test_agenda_rejects_cross_tenant_meeting_or_duplicate_item_binding[source3-content3]\" -q (1 passed after correcting test mutation)",
+      ".venv/Scripts/python.exe -m pytest tests/test_agendaquick_public.py::test_actual_calendar_preserves_native_ids_supplied_documents_and_player tests/test_agendaquick_public.py::test_calendar_resumes_only_current_advertised_month_and_filters_dates -q (2 passed)",
+      ".venv/Scripts/python.exe -m pytest tests/test_agendaquick_detail.py::test_exact_captured_agenda_preserves_native_memo_meeting_and_packet_associations -q (1 passed after adding exact body/item-title search and lossless neutral export assertions)"
+    ],
+    "covered": [
+      "Exact byte/hash pin and native meeting/memo/packet associations",
+      "Default configured GET and separate generic synthetic packet transfer",
+      "Tenant/meeting/duplicate memo guards",
+      "Title-only revision changes rich digest without changing native identity",
+      "Exact governing-body/item-title local search remains partial and neutral JSON roundtrip preserves the full bundle"
+    ]
+  },
+  "limits": [
+    "One captured public meeting-notice template; no universal deployment compatibility claim",
+    "Only linked native memo items; unlinked headings have no invented IDs",
+    "Memo content, live packet bytes, complete archive and external write schema not established",
+    "Source cells preserved without motion/vote/speaker inference",
+    "No vendor mutation, credentials, frozen rebuild or publication"
+  ]
+}

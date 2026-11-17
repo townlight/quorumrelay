@@ -1,0 +1,11 @@
+{
+  "observation_date": "2026-11-14",
+  "vendor_asset_url": "https://app.boardable.com/v4/js/app.js?id=052287e3f473e7b1de4bacb15a125802",
+  "asset_sha256": "af516834c6bf34e420a1f06aff1a54233037590ca6e18bef290ff03bc85e1945",
+  "source_derivation": "Selected functions from exact previously captured anonymous vendor client; no further network/auth/mutation",
+  "extract_sha256": "eecdc1faed76639546fcdeabdc4a4dd319d8023670ef18bc70b19fd889e06ff3",
+  "request": "POST meeting.url+/agenda JSON {text,parent_id,date:\"\"}",
+  "response": "Client emits response.data to handleAgendaItemAdded; native row parent_agenda_id/id and nested agenda consumed, then exact edit-list GET refetched.",
+  "readback": "Confirm returned positive native ID, requested text/parent and exactly preserved other tree members. Lost ID cannot be reconstructed by title/date and never triggers POST replay.",
+  "limits": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication."
+}

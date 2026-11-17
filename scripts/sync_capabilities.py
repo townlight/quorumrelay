@@ -42,6 +42,7 @@ def generate() -> dict:
             key: evidence[key] for key in (
                 "id", "url", "title", "kind", "proof_level", "limits", "observation_date",
                 "receipt_path", "receipt_sha256", "fixture_path", "fixture_sha256",
+                "synthetic_execution",
             )
             if key in evidence
         } for evidence in row["evidence"]]

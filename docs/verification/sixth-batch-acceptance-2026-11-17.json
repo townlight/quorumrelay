@@ -1,0 +1,52 @@
+{
+  "recorded_utc": "2026-11-17T19:38:14.059956+00:00",
+  "status": "locally accepted for documented scope",
+  "base": "667f40ebde02e86ef756cbd6c821f6432f6bdee8 plus existing local changes",
+  "order": [
+    "CHAMP",
+    "Wistia",
+    "NovusAGENDA"
+  ],
+  "checks": {
+    "champ": {
+      "tests": 47,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "junit": "work/batch6-champ.xml",
+      "sha256": "a906f68487785434851bfe621ef77981398b0f7b58ce64e6d63e688ff0c1c001",
+      "log_sha256": "6bf389879f30e348ae347da7c38339d1726f30e14404cbe907bf5fa954cc8acf"
+    },
+    "wistia": {
+      "tests": 94,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "junit": "work/batch6-wistia.xml",
+      "sha256": "06bed66b82301264be7b25923f64fc26b3944b9d6e3792068b97d97ae4f8c285",
+      "log_sha256": "0f130e8a2336b2827af24025729f969a5f45655fae93e2e9ad454a8e7997e8fa"
+    },
+    "novus": {
+      "tests": 44,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "junit": "work/batch6-novus.xml",
+      "sha256": "0da2d3f56a5f1fd28a0b9747ed8ed533bc02f16a08394b508f2b8dd9e9c0c5f3",
+      "log_sha256": "54ab8e1ce06f6ed254ba0200cf389bb040ee441ae1c00cb60cca317fb81e9a6e"
+    }
+  },
+  "source_test_fingerprint": "7180b006ca17a5bb354f57398cec21546e32b7a7f9e2e43a954bd8e91f88136d",
+  "reused_regression_receipt": "docs/verification/fourth-batch-acceptance-2026-11-17.json",
+  "reused_receipt_sha256": "25d06e4da4238212fc6dd5b67e368e3702a1d3c062d454cf7fb404937eeb35db",
+  "shared_checks": "Ruff, capability validator and diff whitespace check passed. Prior 3293 unique Python cases (including browser follow-up) and npm ci/build/four tests reused for unchanged implementation.",
+  "native_writes": {
+    "CHAMP": "Read-only",
+    "Wistia": "Existing bounded authorized writes retained; unsupported writes deferred per market demand",
+    "NovusAGENDA": "Read-only"
+  },
+  "limits": "Scoped public captures and synthetic verification. No new live vendor calls, release or hosted CI.",
+  "remaining_deferred": [
+    "TownCloud (parked)"
+  ]
+}

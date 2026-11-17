@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "acd5a40",
+  "tasks": [
+    8
+  ],
+  "status": "PASSED",
+  "scope": "Engine JSON/JSONL/ZIP delivery shares cancellation/whole-operation deadline checks with CSV/iCalendar, after serialization, inline encoding and artifact save copying. No schema/format or remote mutation change.",
+  "reproduced_before_fix": {
+    "failed": 12,
+    "observed": "All3neutral formats returned completed after interruption during inline encoding, SQLite capture save or temporary artifact copy."
+  },
+  "checks": [
+    {
+      "scope": "New neutral and existing projection boundary tests",
+      "passed": 24,
+      "failed": 0,
+      "seconds": 0.29
+    },
+    {
+      "scope": "Full required local Python suite; includes current task6attachment and task10intent fixes",
+      "passed": 2335,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 106.86,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\shared-completion-owned-full-2026-11-15.xml",
+      "xml_sha256": "4716c76312038af7a6f585e1bc0bd638b78933507bc78184951ed08b15b77e1d",
+      "warning": "Existing Starlette/AnyIO alias deprecation"
+    },
+    {
+      "scope": "Full Ruff src/tests/scripts/examples",
+      "status": "PASSED"
+    }
+  ],
+  "source_sha256": {
+    "src/civic_data_connectors/interchange.py": "be46ad6e2655e82b28ccddc225cf047a69b6006b850d7f9f97551e99988b9137",
+    "tests/test_neutral_bundle_completion.py": "79b7945fdf271e40d81d6c6e839fe12e081a1dedbbdf3b11d81aab6b353d02be",
+    "docs/USER-MANUAL.md": "6df4b44ac242eefffe4dceba0bce3e0a4b3dcaf1d9a9f3d0caa53a8ebd70f411"
+  },
+  "limits": [
+    "Local source/synthetic evidence; no installed artifact/hosted CI/release claim.",
+    "Checks are cooperative after synchronous work returns."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "observation_date": "2026-11-14",
+  "shell_url": "https://connect.telvue.com/",
+  "shell_final_url": "https://connect.telvue.com/users/sign_in",
+  "shell_status": 200,
+  "shell_sha256": "7e771b01055043a722bd560d63973411b664d8aa62db49a79d321f91095a1c48",
+  "vendor_asset_url": "https://connect.telvue.com/static-assets/cms/application-6788570efca6e806428b108560747bf11401571fd73268886704605751a2f198.js",
+  "asset_status": 200,
+  "asset_bytes": 4595991,
+  "asset_sha256": "6e33d0dfb89702144b5468b923a037dcc4eabffddc5be776279d47d9112042f4",
+  "extract_sha256": "0d2aedad0904422c9729d9bda7243ef1df625c3aa6da57a87b9d53f6b7089a5a",
+  "extract_policy": "Selected declared functions only; LF and trailing-whitespace normalized. Raw original retained in work folder; not executed.",
+  "contracts": [
+    "POST /playlists/:id/reorder; form playlist_item[] native item IDs",
+    "POST /bulk/playlists/:id/playlist_items/create; form medium_ids[] native media IDs",
+    "GET documented v2 playlist and playlist_items to verify count, parent IDs and explicit sequence_number",
+    "Vendor jquery-ujs CSRF prefilter sets X-CSRF-Token from meta csrf-token on AJAX requests."
+  ],
+  "limits": [
+    "Browser-client machine contract, not a supported public write API/version guarantee.",
+    "Live mutation/account acquisition not performed or required for synthetic acceptance.",
+    "No upload URL guessed: options.fileUrl/options.dvdUrl/options.uploadParams/userId are supplied at runtime. Public bundle contains their consumption but not a concrete upload initializer.",
+    "No upload identity/readiness/meeting association response established. Connect and CloudCast remain distinct; HyperCaster not substituted."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+    "Customer": {
+        "CustomerName": "Lake Zurich IL",
+        "CustomerAccessID": "lakezurichil",
+        "CustomerTimezone": "America\/Chicago",
+        "ServiceGroupID": 1,
+        "CustomerEventAreaMask": 15359,
+        "CustomerOtherAreaMask": 16383
+    },
+    "Archive": {
+        "CustomerArchiveID": 1,
+        "ArchiveTitle": "Main",
+        "ArchiveDescription": "",
+        "DisplayTypeID": 1,
+        "LastModifyDateTimeUTC": "2020-10-20 20:56:39"
+    },
+    "ArchiveGroups": [
+        {
+            "CustomerArchiveGroupID": 1,
+            "CustomerArchiveID": 1,
+            "GroupName": "Village Board of Trustees",
+            "OrderOrdinal": 0,
+            "DisplayTypeID": 1,
+            "SortTypeID": 1,
+            "LastModifyDateTimeUTC": "2020-10-13 22:52:24"
+        },
+        {
+            "CustomerArchiveGroupID": 2,
+            "CustomerArchiveID": 1,
+            "GroupName": "Planning and Zoning Commission",
+            "OrderOrdinal": 10,
+            "DisplayTypeID": 1,
+            "SortTypeID": 1,
+            "LastModifyDateTimeUTC": "2020-10-13 22:52:35"
+        },
+        {
+            "CustomerArchiveGroupID": 4,
+            "CustomerArchiveID": 1,
+            "GroupName": "Special Meetings",
+            "OrderOrdinal": 30,
+            "DisplayTypeID": 1,
+            "SortTypeID": 1,
+            "LastModifyDateTimeUTC": "2020-10-13 22:53:00"
+        },
+        {
+            "CustomerArchiveGroupID": 5,
+            "CustomerArchiveID": 1,
+            "GroupName": "Community Events",
+            "OrderOrdinal": 40,
+            "DisplayTypeID": 1,
+            "SortTypeID": 1,
+            "LastModifyDateTimeUTC": "2020-10-13 22:53:10"
+        }
+    ],
+    "CDSECI": {
+        "isEnabled": true,
+        "publisherGUID": "lakezurichil",
+        "archiveGroupMappings": {
+            "1": "1",
+            "2": "6,2,3",
+            "4": "4",
+            "5": "5"
+        }
+    }
+}

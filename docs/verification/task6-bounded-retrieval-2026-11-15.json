@@ -1,0 +1,186 @@
+{
+  "date": "2026-11-15",
+  "scope": "Task 6 bounded source implementation and archived-window evidence; no full catalog, live staff account, release or full-provider acceptance claim.",
+  "simbli": {
+    "evidence": "docs/verification/simbli-item-content-2026-11-12.json",
+    "observed": "Captured supporting response had empty Attachment/HyperLink arrays; minutes response null. Existing public client supplies same-meeting supporting attachment fields and ModuleID 1 route.",
+    "implementation": "Synthetic nonempty supporting attachment mapping, exact capture and parent binding, explicit capture-verified transfer, partial-failure retention and bounded retry; client-declared print-agenda locator only.",
+    "limits": "Nonempty supporting and minutes responses are synthetic; no aggregate PDF, inferred agenda-item join or complete catalog claimed.",
+    "minutes": "Client-backed meeting-wide and explicit simple meeting/item contextual minutes mapping, raw supplemental capture provenance, anonymous controls and bounded failures. Nonempty synthetic DTO only; no native item join or new minutes identity. Selected item reads additionally bind the fresh tree-supplied opaque selector to the same native item and merge item minutes with supplemental raw provenance; failure retains content.",
+    "client_source": "docs/capabilities/evidence/simbli-minutes-client/source.json"
+  },
+  "clerkbase": {
+    "source_receipt": "docs/capabilities/evidence/clerkbase-nested-tree/source.json",
+    "observed": "One exact declared public nested tree returned 200 with 17 supplied agenda anchor links.",
+    "implementation": "Parent-chain revalidated recursive controls with bounded continuation, supplied-anchor identity and retained parent responses. Engine execution uses synthetic transport over the saved response.",
+    "limits": "One nested branch only; no inferred meeting parent, native item ID, document bytes or complete catalog."
+  },
+  "archived_windows": {
+    "source_receipt": "docs/capabilities/evidence/task6-archived-windows/source.json",
+    "onbase": "One existing Akron Q1 2025 window: 12 records; saved replay fixture has two anonymous anti-forgery values sanitized.",
+    "civicweb": "One existing Loveland Q1 2025 window: 89 records; meeting-list capture exact; type-control response was not separately captured.",
+    "limits": "Observed bounded windows only; no complete archive, other tenants or live archived selected-detail acceptance.",
+    "onbase_detail": "Explicit paired date bounds revalidate exact meeting membership via the observed Search route; selected detail execution is synthetic, not a live archived detail observation."
+  },
+  "civicweb_bounds": "Aggregate transfer budget now covers meeting-type, meeting-list and optional document requests; failed child retrieval retains independent meeting data and resumable work. Cancellation during the related-document request returns cancelled before publishing records and reports consumed bytes.",
+  "checks": [
+    {
+      "command": "pytest -q tests/test_simbli_detail.py tests/test_simbli_completion_bounds.py tests/test_simbli_discovery.py",
+      "passed": 35,
+      "failed": 0,
+      "seconds": 1.4,
+      "scope": "Supporting-document revision before the later minutes addition; superseded for changed Simbli source by the final 58-case run."
+    },
+    {
+      "command": "pytest -q tests/test_clerkbase_recursive_discovery.py tests/test_clerkbase_listing.py tests/test_clerkbase_search.py tests/test_provider_discovery.py",
+      "passed": 102,
+      "failed": 0,
+      "seconds": 1.65,
+      "scope": "Before subsequent correction of misleading test parameter literal; source unchanged."
+    },
+    {
+      "command": "pytest -q tests/test_clerkbase_recursive_discovery.py::test_node_mismatch_fails_without_false_records",
+      "passed": 2,
+      "failed": 0,
+      "seconds": 0.16,
+      "scope": "Corrected test parameter on final test file."
+    },
+    {
+      "command": "pytest -q tests/test_task6_archived_windows.py tests/test_civicweb_transfer_budget.py tests/test_civicweb_listing.py",
+      "passed": 29,
+      "failed": 0,
+      "seconds": 0.37,
+      "scope": "Root execution; three new CivicWeb budget tests failed before fix."
+    },
+    {
+      "command": "pytest -q tests/test_onbase_window_detail.py tests/test_onbase_detail.py tests/test_task6_archived_windows.py",
+      "passed": 36,
+      "failed": 0,
+      "warnings": 1,
+      "seconds": 1.33,
+      "scope": "Root execution on final OnBase date-window detail source; six cases reproduced failure before fix."
+    },
+    {
+      "command": "pytest -q tests/test_simbli_detail.py tests/test_simbli_minutes.py tests/test_simbli_completion_bounds.py tests/test_simbli_discovery.py",
+      "passed": 53,
+      "failed": 0,
+      "seconds": 6.02,
+      "scope": "Integrated Simbli candidate after fixture adaptations. Ruff passed for changed source and tests. Earlier run had four stale bundle-position/count assertions; corrected without removing identity, privacy or bounds checks."
+    },
+    {
+      "command": "pytest -q tests/test_simbli_minutes.py::test_registered_saved_minutes_format",
+      "passed": 2,
+      "failed": 0,
+      "seconds": 0.17,
+      "scope": "Added engine normalize registration coverage for both saved minutes formats after 53-test run; Ruff passed."
+    },
+    {
+      "command": "pytest -q tests/test_simbli_detail.py tests/test_simbli_minutes.py tests/test_simbli_completion_bounds.py tests/test_simbli_discovery.py",
+      "passed": 58,
+      "failed": 0,
+      "seconds": 1.28,
+      "scope": "Selected-item minutes branch and affected Simbli suite; Ruff passed. Initial test incorrectly assumed the source-supplied opaque ID was absent from raw capture; corrected to check private request parameters are not exposed."
+    },
+    {
+      "command": "pytest tests/test_civicweb_transfer_budget.py tests/test_civicweb_listing.py tests/test_task6_archived_windows.py -q",
+      "passed": 30,
+      "failed": 0,
+      "seconds": 0.32,
+      "scope": "Final CivicWeb cancellation and shared transfer ledger; cancellation test failed before correction."
+    },
+    {
+      "command": "pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py tests/test_public_package.py tests/test_interfaces.py -q",
+      "passed": 32,
+      "failed": 0,
+      "warnings": 1,
+      "seconds": 7.05,
+      "scope": "Final code, registrations, interfaces and metadata before only this receipt bookkeeping append."
+    }
+  ],
+  "execution": "Windows venv Python -X utf8 with PYTHONPATH=src;tests. Headless. Full Python run followed by affected checks for the later Simbli minutes change; no build, package, release or live vendor mutation.",
+  "sha256": {
+    "docs/capabilities/evidence/clerkbase-nested-tree/source.json": "9a03e4e01ac7a30bc3fba7111ebb67a31425c5288fc062c018720f45f342fedb",
+    "docs/capabilities/evidence/task6-archived-windows/source.json": "9ac5f1d58c86f7b4fa5db3f6d4813c8fa60ae1c8e7edc1a4644443c2db5c18a4",
+    "tests/fixtures/clerkbase/docket-agenda-child.html": "b822f935d3d64e88acdfd15eb4735e0d8e9309eed42f1648080d6f8f804c2f8e",
+    "tests/test_simbli_detail.py": "2e2e290ee904361b3695c49909ee6d1b7a32b52bb02500dc5edc66aef0d2e544",
+    "tests/test_clerkbase_recursive_discovery.py": "3c8faffbe6b32846184ff318960af60e380d1ab8de3835c516d4585140e5fe66",
+    "tests/test_civicweb_transfer_budget.py": "adf568019eb1b08565bf6f6c523a088f85ca5de6e5e94ae062d8b845d599d9d2",
+    "tests/test_task6_archived_windows.py": "d9f19ddbc661be75ebafc26de03ccfd3c462df2d1f2d6cd047fe03a432cc0841",
+    "src/civic_data_connectors/providers/onbase_detail.py": "6d349b94c694781546e7bb48a146f6a3d90f9be9c3554de0e3e5d3fcaf4f9365",
+    "tests/test_onbase_window_detail.py": "9ea54c5f44db4dba9e0f453c56245fe70cb48d912bd79a9539a3f1fa1157112e",
+    "tests/test_simbli_minutes.py": "9684a59023d3d39e0afe178ba193b48d8553a0ec2efcfd3a84c3c7c9b410641d",
+    "src/civic_data_connectors/providers/simbli_detail.py": "b51485b0a5c974c930327fbb4ebd62abc2c7d7c00f2b1a3485bb7d013a3bb907",
+    "docs/capabilities/evidence/simbli-minutes-client/source.json": "f72e16f8d7056ae1cc7753d0f03ab388d72f96cf2ed2223a4e04da01f26066d4",
+    "docs/capabilities/evidence/simbli-minutes-client/client-excerpts.txt": "fcf56ef2ae33123554d57731698da0d89bbcc437531295115fdcaa7d95c5a942",
+    "src/civic_data_connectors/providers/__init__.py": "aaa38e11d1d41f0e0983f55390f3ab9f1a52bba9d537ea9572ae8c1cfa1b281b",
+    "src/civic_data_connectors/providers/civicweb_listing.py": "73c1095c1fc6bb980309f705c67c649dad67bd1861fbbe60b073a7d5c2f8803d",
+    "src/civic_data_connectors/providers/clerkbase_listing.py": "14f3f4438126d2d9a04860104c5b6677f1f99831f33723827c54b7911c8960ac",
+    "src/civic_data_connectors/providers/discovery.py": "753cdbfd28feedb88fa9515515eb5117ac5b24245008848a57ff7769807b94ff",
+    "src/civic_data_connectors/providers/identification.py": "d044c6ef3263246235b639dc3f8335cdec0bf7c5b8ee0fde4c199249d89db8d0",
+    "src/civic_data_connectors/providers/native.py": "5e3272c1dc9a79cd2a76f62c22bffd90379236ea4819ac6d3dbc0151877fb662"
+  },
+  "historical_sha256": {
+    "tests/test_simbli_detail.py": "004df254394b43af545f7182b7f1c2024edfe2c243e86a6b009ae61823aaa17f",
+    "tests/test_civicweb_transfer_budget.py": "f629717d570dd97a59909efb54d8d18d33a6867c4f25d79ede0baa2386bbb8d3",
+    "docs/capabilities/evidence/clerkbase-nested-tree/source.json": "d556925960c4e940630c6dce8cd00068f50098d0846f68c0ae28232ef4d15241"
+  },
+  "full_python_run": {
+    "command": "python -X utf8 -m pytest tests -q --junitxml=C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\task6-current-python-20261115.xml",
+    "tests": 2691,
+    "passed": 2691,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warnings": 1,
+    "wall_seconds": 1795.28,
+    "junit_seconds": 1795.051,
+    "scope": "Pre-minutes task6 source. Later Simbli minutes source and tests are covered separately by the 58-case affected run; no full-suite repetition or final full-tree green claim.",
+    "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\task6-current-python-20261115.xml",
+    "xml_sha256": "f8b6d80f28f7b440e1f6ff03636387106f70c56acdc9b5c73abb0e6799cdd973",
+    "inputs_manifest_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\task6-full-python-inputs-20261115.json",
+    "inputs_manifest_sha256": "2bdbf3610eee90f779ef4ff38e6452fc3300e5899d6cfaafc6d26b9e09a1d694",
+    "trees": {
+      "src": {
+        "file_count": 234,
+        "manifest_sha256": "a4b50b49020b7e86ec7fe4608fa2a21e2c0e24c143bf4f9019f64c864dd0cea5"
+      },
+      "tests": {
+        "file_count": 439,
+        "manifest_sha256": "32863123657587eaacd5a771a199f39a7a199589fe328d9bcc54f6af557eef98"
+      }
+    }
+  },
+  "runtime_counts": {
+    "registered_providers": 32,
+    "baseline_families": 31,
+    "baseline_formats": 34,
+    "additive_parser_hooks": 67,
+    "native_search_handlers": 23
+  },
+  "remaining_information": {
+    "essential": "Normalized authenticated collection/detail response fields and collection offset stride/order/terminal condition remain unknown in the pinned official article and example-free Postman collection. Request routes and public PublishPage are implemented. This is unresolved source information, not proof the schema is private-only or that credentials/live acceptance are mandatory.",
+    "simbli": "No independent agenda IDs are established for the meeting-wide minutes hierarchy; it is retained with capture-local field paths. Aggregate print/PDF bytes and unseen variants remain qualified; no inferred file or item identity."
+  },
+  "canonical_lf_sha256": {
+    "src/civic_data_connectors/providers/__init__.py": "324b988f626a222c1b804ef50f78f49edb791f2199943f893993348e8d6f1b00",
+    "src/civic_data_connectors/providers/civicweb_listing.py": "652d81ffe74d9eb98d18f0cb1121c82e4a688bf708857ff29ca6a7779f6b3916",
+    "src/civic_data_connectors/providers/clerkbase_listing.py": "a80bfd65ce8787c8336a40488781e4b74c5caffe6cc8b0cf9057ef455fc5179f",
+    "src/civic_data_connectors/providers/discovery.py": "7362700246aeb6d8b4ef63a69699e6ca9aa7acf602b10374c84ae07339056c4f",
+    "src/civic_data_connectors/providers/identification.py": "7f09e109739d33980fe3d167ef0a2870c957d6f982158d43627d9e5744102588",
+    "src/civic_data_connectors/providers/native.py": "389161135c411c9bbfe0f95f15cd3c6b55319d803cbfa76de7dd583653ffc7b3",
+    "src/civic_data_connectors/providers/onbase_detail.py": "7f8f8924db7da0c3943f42db07b0aa4605c40ac004e1c626a0cefcbdf3054ff2",
+    "src/civic_data_connectors/providers/simbli_detail.py": "8bc961eb19f2d35d912387a8135afc574930ee0f0e8da896af461d8f2b382fd8",
+    "tests/test_civicweb_transfer_budget.py": "adf568019eb1b08565bf6f6c523a088f85ca5de6e5e94ae062d8b845d599d9d2",
+    "tests/test_clerkbase_recursive_discovery.py": "fdc3ef246007efec098538aecef35c0bd309ffba389b35aced66e376801406b7",
+    "tests/test_onbase_window_detail.py": "9ea54c5f44db4dba9e0f453c56245fe70cb48d912bd79a9539a3f1fa1157112e",
+    "tests/test_simbli_detail.py": "7c0abdd5a53253d069a3b581ade3aaab5a431fe16a6cf2dc09c452a688150762",
+    "tests/test_simbli_minutes.py": "94a9376bbdc1e6b75572a279cc7c7ba129d75ebd8d004a598cf97a482d24d0aa",
+    "tests/test_task6_archived_windows.py": "d9f19ddbc661be75ebafc26de03ccfd3c462df2d1f2d6cd047fe03a432cc0841"
+  },
+  "sha256_policy": "sha256 values are tested worktree bytes; canonical_lf_sha256 additionally identifies portable source/test content. Original vendor fixtures retain exact bytes except stated OnBase token sanitization.",
+  "quality_checks": {
+    "ruff": "python -m ruff check src tests scripts examples: passed",
+    "capability_validator": "passed; 31 original provider families, 462 evidence records, 291 distinct source URLs; no engine acceptance implied"
+  },
+  "source_receipt_whitespace": "Removed one extra CR in the authored ClerkBase receipt terminator; parsed JSON and original 5014-byte vendor HTML capture are unchanged."
+}

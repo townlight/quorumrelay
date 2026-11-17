@@ -1,0 +1,67 @@
+{
+  "source_revision": "ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+  "source_wsdl_sha256": "07326cbec0146d5f0e7d2b4a6fcfc0321d5066adbed9e10d6720661c6f536135",
+  "namespace": "http://granicus.com/MediaVault/SDK",
+  "endpoint_path": "/MediaVault/SDK.asmx",
+  "operations": {
+    "UploadFile": {
+      "soap_action": "http://granicus.com/MediaVault/SDK/UploadFile",
+      "request": {
+        "FolderID": "s:int",
+        "NewFileName": "s:string",
+        "bytes": "s:base64Binary"
+      },
+      "response": {
+        "UploadFileResult": "s:int"
+      }
+    },
+    "StartUpload": {
+      "soap_action": "http://granicus.com/MediaVault/SDK/StartUpload",
+      "request": {},
+      "response": {
+        "StartUploadResult": "s:string"
+      }
+    },
+    "SendChunk": {
+      "soap_action": "http://granicus.com/MediaVault/SDK/SendChunk",
+      "request": {
+        "GUID": "s:string",
+        "ChunkPosition": "s:long",
+        "bytes": "s:base64Binary"
+      },
+      "response": {
+        "SendChunkResult": "s:string"
+      }
+    },
+    "FinishUpload": {
+      "soap_action": "http://granicus.com/MediaVault/SDK/FinishUpload",
+      "request": {
+        "GUID": "s:string"
+      },
+      "response": {
+        "FinishUploadResult": "s:long"
+      }
+    },
+    "RegisterUploadedFile": {
+      "soap_action": "http://granicus.com/MediaVault/SDK/RegisterUploadedFile",
+      "request": {
+        "GUID": "s:string",
+        "FolderID": "s:int",
+        "Name": "s:string",
+        "Extension": "s:string"
+      },
+      "response": {
+        "RegisterUploadedFileResult": "s:int"
+      }
+    },
+    "AssignUploadedFile": {
+      "soap_action": "http://granicus.com/MediaVault/SDK/AssignUploadedFile",
+      "request": {
+        "GUID": "s:string",
+        "ClipUID": "s:string",
+        "Extension": "s:string"
+      },
+      "response": {}
+    }
+  }
+}

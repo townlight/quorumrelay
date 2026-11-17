@@ -1,0 +1,7 @@
+getMinutesShareMenuOptions(isPacket) {
+    return this.globalConstants.baseUrl + this.constants.serviceUrl.shareableLink.minutesLink + isPacket + '/' + this.meetingDetail.minutesId;
+  }
+
+getAgendaShareMenuOptions(isPacket) {
+    return this.globalConstants.baseUrl + this.constants.serviceUrl.shareableLink.agendaLink + isPacket + '/' + this.meetingDetail.meetingAgendaId;
+  }

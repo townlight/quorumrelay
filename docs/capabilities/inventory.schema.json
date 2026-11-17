@@ -143,6 +143,7 @@
                 "interface_type": {
                   "enum": [
                     "documented_automated_api",
+                    "observed_vendor_client_machine_contract",
                     "unresolved",
                     "gated_sdk_contract_unverified",
                     "manual_ui_documented_machine_contract_unverified",

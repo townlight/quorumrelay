@@ -23,19 +23,17 @@ from typing import Protocol, runtime_checkable
 from .engine import canonical_hash
 from .models import OperationContext, Source
 from .write_transport import PublicWriteTransport, WriteResponse, WriteTransport
-from .write_files import open_write_file
+from .write_files import open_write_input
 
 
 def _legistar_client(source):
-    """Keep URL client routing separate from canonical/legacy source identity."""
+    """Keep URL client routing separate from canonical or legacy source identity."""
     from .compat import source_namespace
     parsed = urlsplit(source.url)
     match = re.fullmatch(r"/v1/([A-Za-z0-9_-]+)(?:/.*)?", parsed.path)
     if parsed.hostname != "webapi.legistar.com" or match is None:
         raise ValueError("A Legistar write source must identify its exact API Client.")
     client = match.group(1)
-    # The canonical reader namespace remains authoritative for new shared sources.
-    # Original write-only configurations used the client slug and stay explicit.
     if source.namespace not in {client, source_namespace("legistar", parsed)}:
         raise ValueError("The Legistar source identity does not match its API Client.")
     return client
@@ -46,12 +44,32 @@ def _laserfiche_repository(source):
     from .compat import source_namespace
     parsed = urlsplit(source.url)
     match = re.match(r"/repository/v2/Repositories/([A-Za-z0-9_-]+)(?:/|$)", parsed.path)
-    if parsed.hostname != "api.laserfiche.com" or match is None:
-        raise ValueError("A Laserfiche write source must identify its exact Repository API.")
-    repository = match[1]
-    if source.namespace not in {repository, source_namespace("laserfiche-weblink", parsed)}:
+    repository = source.options.get("repository_id")
+    if parsed.hostname == "api.laserfiche.com" and match is not None:
+        if repository is not None and repository != match[1]:
+            raise ValueError("The repository option does not match the API URL.")
+        repository = match[1]
+    if not isinstance(repository, str) or re.fullmatch(r"[A-Za-z0-9_-]+", repository) is None:
+        raise ValueError("A Laserfiche write source requires its exact Repository API ID.")
+    legacy_repository = (repository if parsed.hostname == "api.laserfiche.com" and match else None)
+    if source.namespace not in {legacy_repository, source_namespace("laserfiche-weblink", parsed)}:
         raise ValueError("The Laserfiche source identity does not match its API repository.")
     return repository
+
+
+def _wistia_account(source):
+    from .compat import source_namespace
+    parsed = urlsplit(source.url)
+    match = re.fullmatch(r"([A-Za-z0-9_-]+)\.wistia\.(?:com|net)", parsed.hostname or "")
+    if match is None:
+        raise ValueError("The Wistia source is not an authorized provider/account origin.")
+    if match[1] in {"api", "upload", "fast"}:
+        # Published write-only configurations bind the account through exact
+        # server-side namespace policy while using a shared provider origin.
+        return source.namespace
+    if source.namespace not in {match[1], source_namespace("wistia", parsed)}:
+        raise ValueError("The Wistia source identity does not match its citation URL.")
+    return match[1]
 
 
 class WriteFailure(ValueError):
@@ -283,13 +301,18 @@ def _public_url(url):
 def sanitize(value, credentials=None):
     """Remove credentials even from a hostile provider response before persistence."""
     secrets = []
-    for key in ("token", "access_token", "authorization", "api_key"):
+    for key in ("token", "access_token", "authorization", "api_key", "username", "password",
+                "access_key", "secret_passphrase", "session_cookie", "csrf_token"):
         secret = (credentials or {}).get(key)
         if isinstance(secret, str) and secret:
             secrets.append(secret)
+            if key == "session_cookie":
+                secrets.extend(part.partition("=")[2].strip() for part in secret.split(";")
+                               if part.partition("=")[2].strip())
     if isinstance(value, dict):
         return {k: sanitize(v, credentials) for k, v in value.items()
-                if k.lower() not in {"token", "access_token", "authorization", "api_key", "cookie", "set-cookie"}}
+                if k.lower() not in {"token", "access_token", "authorization", "api_key", "cookie", "set-cookie", "password",
+                                     "access_key", "secret_passphrase", "session_cookie", "csrf_token"}}
     if isinstance(value, (list, tuple)):
         return [sanitize(v, credentials) for v in value]
     if isinstance(value, str):
@@ -313,19 +336,19 @@ class WriteAdapter:
         self.provider = provider
         self.family = "laserfiche" if provider == "laserfiche-weblink" else provider
         self.transport = transport or PublicWriteTransport()
-        self.file_storage = None
-        self.file_scope = None
+        self.file_engine = None
+        self.file_context = None
 
-    def bind_files(self, storage, scope):
+    def bind_files(self, engine, context):
         """Return an isolated per-invocation binding, never mutate a shared adapter."""
         bound = copy(self)
-        bound.file_storage, bound.file_scope = storage, scope
+        bound.file_engine, bound.file_context = engine, context
         return bound
 
     def _open_file(self, part):
-        if self.file_storage is None or self.file_scope is None:
+        if self.file_engine is None or self.file_context is None:
             raise ValueError("The adapter requires a trusted scoped file resolver.")
-        return open_write_file(self.file_storage, part["reference"], scope=self.file_scope)
+        return open_write_input(self.file_engine, part["reference"], context=self.file_context)
 
     def _file_bytes(self, part):
         with self._open_file(part) as stream:
@@ -351,21 +374,21 @@ class WriteAdapter:
             raise WriteFailure("permission_denied", "A trusted application tenant is required for write isolation.")
         if context.allowed_namespaces is not None and source.namespace not in context.allowed_namespaces:
             raise WriteFailure("permission_denied", "The target namespace is outside the trusted client policy.")
-        if source.options:
+        if source.options and (self.family != "laserfiche" or set(source.options) - {"repository_id"}):
             raise ValueError("Write sources do not accept arbitrary options or credential overrides.")
+        config = self.credentials(source, context)
         if self.family == "legistar":
-            _legistar_client(source)
+            target, policy = _legistar_client(source), "allowed_clients"
         elif self.family == "wistia":
-            host = parsed.hostname
-            if host not in {"api.wistia.com", "upload.wistia.com", "fast.wistia.com"} and host not in {
-                f"{source.namespace}.wistia.com", f"{source.namespace}.wistia.net",
-            }:
-                raise ValueError("The Wistia source is not an authorized provider/account origin.")
+            target, policy = _wistia_account(source), "allowed_accounts"
         elif self.family == "laserfiche":
-            _laserfiche_repository(source)
+            target, policy = _laserfiche_repository(source), "allowed_repositories"
+            if parsed.hostname != "api.laserfiche.com" and policy not in config:
+                raise WriteFailure("permission_denied", "Public WebLink citations require an explicit repository allowlist.")
         else:
             raise WriteFailure("mapping_unverified", "No verified native write mapping is installed.")
-        self.credentials(source, context)
+        if policy in config and target not in config[policy]:
+            raise WriteFailure("permission_denied", "The native target is outside the provider credential policy.")
 
     def authorize(self, source, change, context):
         self.validate_source(source, context)
@@ -390,6 +413,9 @@ class WriteAdapter:
         if change.entity == "media_tags" and allowed is not None:
             if any(str(i) not in allowed for i in change.fields.get("hashed_ids", ())):
                 raise WriteFailure("permission_denied", "A tag target is outside the source policy.")
+        if change.entity == "media_swap" and allowed is not None:
+            if str(change.fields.get("replacement_media_id")) not in allowed:
+                raise WriteFailure("permission_denied", "The replacement media is outside the source policy.")
 
     def _call(self, source, context, native, bounds, deadline, *, raw=False, private_response=False):
         if context.check_cancelled():
@@ -432,17 +458,32 @@ class WriteAdapter:
         remaining = deadline - monotonic()
         if remaining <= 0:
             raise WriteFailure("deadline_exceeded", "The bounded write deadline expired before the request.")
+        response_limit = bounds.transfer_bytes if raw else min(bounds.parser_bytes, bounds.transfer_bytes)
         try:
             response = self.transport.send(
                 url, method=native.method, body=body, headers=headers,
-                byte_limit=bounds.transfer_bytes if raw else bounds.parser_bytes, deadline_seconds=remaining,
+                byte_limit=response_limit, deadline_seconds=remaining,
             )
         except (OSError, TimeoutError, RuntimeError, ValueError):
             # Never echo transport errors: they may contain credentialed URLs.
             raise AmbiguousWrite() from None
+        # A transport timeout argument does not prove timely completion. Once
+        # send has started, interruption must preserve uncertainty, not mark a
+        # possible mutation cancelled or accept a late final read as success.
+        def check_completion():
+            cancelled, expired = context.check_cancelled(), monotonic() >= deadline
+            if native.method == "GET":
+                if cancelled:
+                    raise WriteCancelled()
+                if expired:
+                    raise WriteFailure("deadline_exceeded", "The read response exceeded the write deadline.")
+            elif cancelled or expired:
+                raise AmbiguousWrite("The provider response completed outside the active write bounds.")
+
+        check_completion()
         if not isinstance(response, WriteResponse):
             raise AmbiguousWrite("The configured transport returned an invalid response.")
-        if len(response.content) > (bounds.transfer_bytes if raw else bounds.parser_bytes):
+        if len(response.content) > response_limit:
             raise AmbiguousWrite("The provider response exceeded the bounded parser size.")
         if response.status in {401, 403}:
             raise WriteFailure("permission_denied", "The provider denied this operation.")
@@ -458,9 +499,11 @@ class WriteAdapter:
             return None
         try:
             value = json.loads(response.content)
-            return value if private_response else sanitize(value, config)
+            value = value if private_response else sanitize(value, config)
         except (UnicodeError, ValueError):
             raise AmbiguousWrite("The provider returned an invalid JSON response.") from None
+        check_completion()
+        return value
 
     def read(self, source, url, context, bounds, deadline):
         return self._call(source, context, NativeRequest("GET", url, "", {}, self.headers()), bounds, deadline)
@@ -491,6 +534,9 @@ class WriteAdapter:
             before = self.read_before(source, change, read_url, context, bounds, deadline)
             if not isinstance(before, dict):
                 raise ValueError("The existing provider resource could not be read.")
+        if (change.entity == "document_pages" and change.operation != "update"
+                and change.page_number is not None and change.page_number > before["pageCount"] + 1):
+            raise ValueError("The insertion page_number lies beyond the document's next page.")
         expected = change.expected_version
         supplied = before.get(revision_field) if before else None
         if expected is not None and expected != supplied:
@@ -508,14 +554,23 @@ class WriteAdapter:
         after.update(deepcopy(native.body))
         if change.entity == "caption_edits" and change.fields["expected_version"] != supplied:
             raise WriteFailure("conflict", "The caption expected_version differs from the active provider version.")
-        return {
+        prepared = {
             "change": asdict(change), "native": native.public_dict(), "before": before, "after": after,
             "before_fingerprint": canonical_hash(before), "expected_version": supplied,
+            "page_parts_contract": 1 if change.entity == "document_pages" else None,
             "revision_field": revision_field, "identity_field": identity_field,
             "read_url": read_url, "reconcile": lookup,
             "conflict_semantics": "provider_version" if change.entity == "caption_edits"
             else "preflight_read_compare_not_atomic_upstream_cas",
         }
+        if change.entity == "media_swap":
+            prepared["effects"] = {
+                "replaces_content_at_existing_embeds_and_urls": True,
+                "original_media_id": change.resource_id,
+                "replacement_media_id": change.fields["replacement_media_id"],
+                "completion": "queued_background_job_not_immediate_playable_media",
+            }
+        return prepared
 
     def _files(self, change, bounds):
         files, size = [], 0
@@ -587,7 +642,14 @@ class WriteAdapter:
         fields = deepcopy(change.fields)
         entity, op = change.entity, change.operation
         read_url, lookup, revision = None, None, "updated"
-        if entity == "media" and op == "update":
+        if entity == "media_swap" and op == "update":
+            validate_fields(fields, _fields(strings="replacement_media_id"), required=("replacement_media_id",))
+            original, replacement = safe_id(change.resource_id), safe_id(fields["replacement_media_id"])
+            if original == replacement or files:
+                raise ValueError("Media swap requires two distinct existing media IDs and no file parts.")
+            read_url = root + "/medias/" + original
+            url, method, content_type = read_url + "/swap", "PUT", "application/json"
+        elif entity == "media" and op == "update":
             validate_fields(fields, _fields(strings="name new_still_media_id description", arrays="tags",
                                            objects="custom_metadata"))
             if "tags" in fields and any(not isinstance(i, str) for i in fields["tags"]):
@@ -732,6 +794,15 @@ class WriteAdapter:
                     raise ValueError("Page creation/replacement uses imageFiles parts.")
                 url = root + safe_id(change.resource_id) + "/Document/Pages"
                 method = "PUT" if op == "update" else "POST"
+                if op != "update" and change.page_number is not None:
+                    if type(change.page_number) is not int or change.page_number < 1:
+                        raise ValueError("Page insertion requires a positive page_number.")
+                    url += "?pageNumber=" + str(change.page_number)
+                elif op == "update" and change.page_number is not None:
+                    raise ValueError("Full page replacement does not accept an insertion page_number.")
+                if (len(files) > 10 or sum(p["reference"]["byte_length"] for p in files) > 100_000_000
+                        or any(p["content_type"] not in {"image/tiff", "image/jpeg", "image/png"} for p in files)):
+                    raise ValueError("Page imageFiles permits at most 10 TIFF/JPG/PNG files and 100 MB aggregate.")
             else:
                 if op != "update" or type(change.page_number) is not int or change.page_number < 1:
                     raise ValueError("Single-page update requires a positive page_number.")
@@ -748,16 +819,32 @@ class WriteAdapter:
         return (NativeRequest(method, url, "multipart/form-data", fields, {}, files),
                 "id", "lastModifiedTime", read_url, None)
 
-    def read_before(self, source, change, url, context, bounds, deadline):
+    def read_before(self, source, change, url, context, bounds, deadline, *, page_parts=True):
+        if change.entity == "media_swap":
+            original = self.read(source, url, context, bounds, deadline)
+            replacement = self.read(source, "https://api.wistia.com/modern/medias/"
+                                    + safe_id(change.fields["replacement_media_id"]), context, bounds, deadline)
+            if (not isinstance(original, dict) or not isinstance(replacement, dict)
+                    or original.get("hashed_id") != change.resource_id
+                    or replacement.get("hashed_id") != change.fields["replacement_media_id"]
+                    or not original.get("type") or original.get("type") != replacement.get("type")):
+                raise ValueError("Swap readback must identify both existing media with the same provider type.")
+            return {"original": original, "replacement": replacement, "updated": original.get("updated")}
         if change.entity == "media_tags":
-            return {"media": [self.read(source, "https://api.wistia.com/modern/medias/" + safe_id(i),
-                                        context, bounds, deadline) for i in change.fields["hashed_ids"]]}
+            media = []
+            for identity in change.fields["hashed_ids"]:
+                value = self.read(source, "https://api.wistia.com/modern/medias/" + safe_id(identity),
+                                  context, bounds, deadline)
+                if not isinstance(value, dict) or value.get("hashed_id") != identity:
+                    raise AmbiguousWrite("Media tag readback did not identify the requested media.")
+                media.append(value)
+            return {"media": media}
         value = self.read(source, url, context, bounds, deadline)
         if self.family == "laserfiche":
-            value = self.document_readback(source, value, change, context, bounds, deadline)
+            value = self.document_readback(source, value, change, context, bounds, deadline, page_parts=page_parts)
         return value
 
-    def document_readback(self, source, entry, change, context, bounds, deadline):
+    def document_readback(self, source, entry, change, context, bounds, deadline, *, page_parts=True):
         if not isinstance(entry, dict) or "id" not in entry:
             raise AmbiguousWrite("The repository readback did not identify a document entry.")
         entry = deepcopy(entry)
@@ -790,15 +877,47 @@ class WriteAdapter:
                     "GET", page_url + "/Image", "", {}, {"Accept": "application/octet-stream"}),
                     bounds, deadline, raw=True)
                 entry["_page_image_sha256"] = hashlib.sha256(response.content).hexdigest()
-        if change.entity == "document_pages":
-            # Capture all supplied text pages on an existing document for exact conflict checks/readback.
+        if change.entity == "document_pages" and not page_parts:
+            # Preserve the established text-only readback shape for durable plans.
             entry["_text_pages"] = []
             if entry.get("pageCount", 0) > bounds.max_records:
                 raise ValueError("Page readback exceeds max_records; choose a more specific page update.")
             for number in range(1, entry.get("pageCount", 0) + 1):
                 value = self.read(source, root + f"/Document/Pages/{number}/Text", context, bounds, deadline)
                 entry["_text_pages"].append(value.get("text"))
-        if any(p["part"] == "imageFiles" for p in change.files):
+        elif change.entity == "document_pages":
+            # The vendor pairs imageFiles[i] and textPages[i]; absent parts are
+            # independent. Page metadata prevents reading absent streams as files.
+            listing = self.read(source, root + "/Document/Pages", context, bounds, deadline)
+            pages = listing.get("value") if isinstance(listing, dict) else None
+            count = entry.get("pageCount")
+            if (type(count) is not int or count < 0 or count > bounds.max_records
+                    or not isinstance(pages, list) or len(pages) != count
+                    or "@odata.nextLink" in listing):
+                raise AmbiguousWrite("Page-part readback is incomplete or exceeds max_records.")
+            by_number = {page.get("pageNumber"): page for page in pages if isinstance(page, dict)}
+            if (any(type(number) is not int for number in by_number)
+                    or len(by_number) != count or set(by_number) != set(range(1, count + 1))):
+                raise AmbiguousWrite("Page-part readback did not identify every page.")
+            entry["_page_parts"] = []
+            for number in range(1, count + 1):
+                page = by_number[number]
+                if any(type(page.get(flag)) is not bool for flag in ("hasImage", "hasText")):
+                    raise AmbiguousWrite("Page-part readback omitted stream-presence flags.")
+                part = {"text": None, "image_sha256": None}
+                if page["hasText"]:
+                    value = self.read(source, root + f"/Document/Pages/{number}/Text", context, bounds, deadline)
+                    if not isinstance(value, dict) or not isinstance(value.get("text"), str):
+                        raise AmbiguousWrite("Page text readback is incomplete.")
+                    part["text"] = value["text"]
+                if page["hasImage"]:
+                    response = self._call(source, context, NativeRequest(
+                        "GET", root + f"/Document/Pages/{number}/Image", "", {},
+                        {"Accept": "application/octet-stream"}), bounds, deadline, raw=True)
+                    part["image_sha256"] = hashlib.sha256(response.content).hexdigest()
+                entry["_page_parts"].append(part)
+        if (change.entity != "document_pages" or not page_parts) and any(
+                p["part"] == "imageFiles" for p in change.files):
             page_count = entry.get("pageCount", 0)
             if page_count > bounds.max_records:
                 raise ValueError("Image-page readback exceeds max_records.")
@@ -860,7 +979,8 @@ class WriteAdapter:
                 return False
             if file["part"] == "imageFile" and readback.get("_page_image_sha256") != digest:
                 return False
-            if file["part"] == "imageFiles":
+            if file["part"] == "imageFiles" and (change["entity"] != "document_pages"
+                                                 or prepared.get("page_parts_contract") != 1):
                 submitted = [p["reference"]["sha256"]
                              for p in prepared["native"]["files"] if p["part"] == "imageFiles"]
                 if readback.get("_image_pages_sha256", [])[-len(submitted):] != submitted:
@@ -868,10 +988,24 @@ class WriteAdapter:
         if change["entity"] == "document_page":
             return "text" not in fields or fields["text"] == readback.get("_page_text")
         if change["entity"] == "document_pages":
-            expected = fields.get("textPages", [])
+            texts = fields.get("textPages", [])
+            images = [p["reference"]["sha256"] for p in prepared["native"]["files"]
+                      if p["part"] == "imageFiles"]
+            if prepared.get("page_parts_contract") != 1:
+                expected = texts
+                if change["operation"] != "update":
+                    expected = (prepared["before"] or {}).get("_text_pages", []) + expected
+                return expected == readback.get("_text_pages")
+            expected = [{"text": texts[i] if i < len(texts) else None,
+                         "image_sha256": images[i] if i < len(images) else None}
+                        for i in range(max(len(texts), len(images)))]
             if change["operation"] != "update":
-                expected = (prepared["before"] or {}).get("_text_pages", []) + expected
-            return expected == readback.get("_text_pages")
+                before = (prepared["before"] or {}).get("_page_parts", [])
+                offset = (change.get("page_number") or len(before) + 1) - 1
+                if offset > len(before):
+                    return False
+                expected = before[:offset] + expected + before[offset:]
+            return expected == readback.get("_page_parts")
         return "name" not in fields or fields.get("autoRename") is True or fields["name"] == readback.get("name")
 
     def large_document(self, source, prepared, context, bounds, deadline, *, persist=None):
@@ -922,27 +1056,52 @@ class WriteAdapter:
         return {"state": "pending", "task_id": task_id, "upload_id": upload_id, "part_etags": etags,
                 "resource_id": change.get("resource_id")}
 
+    def _matches_identity(self, prepared, readback, expected=None):
+        if not isinstance(readback, dict):
+            return False
+        actual = readback.get(prepared["identity_field"])
+        if self.family == "wistia":
+            valid = isinstance(actual, str) and bool(actual) and re.fullmatch(r"[A-Za-z0-9_.:-]+", actual)
+            return bool(valid and (expected is None or actual == expected))
+        valid = type(actual) is int and actual > 0
+        if expected is None:
+            return valid
+        return bool(valid and not isinstance(expected, bool) and isinstance(expected, (int, str))
+                    and re.fullmatch(r"[1-9][0-9]*", str(expected)) and str(actual) == str(expected))
+
     def apply(self, source, prepared, context, bounds, deadline, *, persist=None):
         change = WriteChange.from_dict(prepared["change"])
         self.authorize(source, change, context)
         if prepared["before"] is not None:
-            now = self.read_before(source, change, prepared["read_url"], context, bounds, deadline)
+            now = self.read_before(source, change, prepared["read_url"], context, bounds, deadline,
+                                   page_parts=prepared.get("page_parts_contract") == 1)
             if canonical_hash(now) != prepared["before_fingerprint"]:
                 raise WriteFailure("conflict", "Provider state changed after this exact plan was prepared.")
         native = NativeRequest(**prepared["native"])
+        if persist and persist({"resource_id": change.resource_id}):
+            raise WriteCancelled()
         if change.entity == "document_large":
             return self.large_document(source, prepared, context, bounds, deadline, persist=persist)
         response = self._call(source, context, native, bounds, deadline)
-        if change.entity in {"media_import", "media_tags"}:
+        if change.entity in {"media_import", "media_tags", "media_swap"}:
             # Queued does not mean complete. Persist the job reference for receipt polling.
             if not isinstance(response, dict) or not isinstance(response.get("background_job_status"), dict):
                 raise AmbiguousWrite("The provider did not return its documented background job reference.")
             return {"state": "pending", "provider_response": response, "resource_id": None,
                     "job": response["background_job_status"]}
         identity = (response or {}).get(prepared["identity_field"]) if isinstance(response, dict) else None
-        if identity is None:
+        caption = self.family == "wistia" and change.entity in {"caption", "caption_edits"}
+        if not caption and change.operation == "update" and change.resource_id is not None:
+            if identity is not None and not self._matches_identity(prepared, response, change.resource_id):
+                return {"state": "uncertain", "resource_id": change.resource_id,
+                        "reason": "The mutation response did not identify the approved target."}
             identity = change.resource_id
-        if self.family == "wistia" and change.entity in {"caption", "caption_edits"}:
+        elif identity is None:
+            identity = change.resource_id
+        if not caption and change.operation != "update" and not self._matches_identity(
+                prepared, {prepared["identity_field"]: identity}):
+            raise AmbiguousWrite("The provider response did not establish a valid remote resource identity.")
+        if caption:
             identity = f"{change.parent_id}:{change.language or change.fields.get('language') or 'detected'}"
             read_url = prepared["read_url"]
         elif identity is not None:
@@ -962,8 +1121,12 @@ class WriteAdapter:
             persist({"resource_id": identity, "read_url": read_url})
         try:
             readback = self.read(source, read_url, context, bounds, deadline)
+            if not caption and not self._matches_identity(prepared, readback, identity):
+                return {"state": "uncertain", "resource_id": identity, "readback": readback,
+                        "reason": "Readback did not identify the acknowledged resource."}
             if self.family == "laserfiche":
-                readback = self.document_readback(source, readback, change, context, bounds, deadline)
+                readback = self.document_readback(source, readback, change, context, bounds, deadline,
+                                                  page_parts=prepared.get("page_parts_contract") == 1)
             if self.family == "legistar" and "MatterAttachmentBinary" in native.body:
                 file_response = self._call(source, context, NativeRequest("GET", read_url + "/File", "", {},
                                                                          {"Accept": "application/octet-stream"}),
@@ -1002,10 +1165,16 @@ class WriteAdapter:
         for key, value in fields.items():
             if key.endswith(("RowVersion", "LastModifiedUtc")):
                 continue
-            actual = readback.get(key)
+            if key not in readback:
+                return False
+            actual = readback[key]
             if key == "tags" and isinstance(actual, list):
                 actual = [v.get("name") if isinstance(v, dict) else v for v in actual]
-            if actual != value:
+            kind = LEGISTAR.get(change["entity"], ({},))[0].get(key) if self.family == "legistar" else None
+            if kind == "number":
+                if type(actual) not in {int, float} or not math.isfinite(actual) or actual != value:
+                    return False
+            elif canonical_hash(actual) != canonical_hash(value):
                 return False
         return True
 
@@ -1026,20 +1195,48 @@ class WriteAdapter:
             if task.get("status") != "Completed":
                 return {"state": "pending", "task": task}
             identity = task.get("result", {}).get("entryId")
-            if identity is not None:
+            if identity is not None and self._matches_identity(
+                    prepared, {prepared["identity_field"]: identity}, item.get("resource_id")):
                 result = self.read(source, root + "/Entries/" + safe_id(identity), context, bounds, deadline)
+                if not self._matches_identity(prepared, result, identity):
+                    return {"state": "uncertain", "task": task, "reason": "Task entry identity did not match readback."}
                 change = WriteChange.from_dict(prepared["change"])
-                result = self.document_readback(source, result, change, context, bounds, deadline)
+                result = self.document_readback(source, result, change, context, bounds, deadline,
+                                                page_parts=prepared.get("page_parts_contract") == 1)
                 if self.matches(prepared, result):
                     return {"state": "succeeded", "resource_id": identity, "readback": result,
                             "provider_revision": result.get("lastModifiedTime"), "task": task}
             return {"state": "uncertain", "task": task, "reason": "Task completion needs exact document readback."}
         if item.get("job"):
             job = item["job"]
-            job_id = job.get("hashed_id") or job.get("id")
+            if not isinstance(job, dict):
+                return {"state": "uncertain", "reason": "The acknowledged job reference is invalid."}
+            identity_field = "hashed_id" if job.get("hashed_id") else "id"
+            job_id = job.get(identity_field)
+            if not job_id:
+                return {"state": "uncertain", "reason": "The acknowledged job identity is missing."}
             result = self.read(source, "https://api.wistia.com/modern/background_job_status/"
                                + safe_id(job_id), context, bounds, deadline)
-            status = result.get("background_job_status", {})
+            status = result.get("background_job_status") if isinstance(result, dict) else None
+            if not isinstance(status, dict) or status.get(identity_field) != job_id:
+                return {"state": "uncertain", "reason": "The exact acknowledged job was not returned."}
+            if prepared["change"]["entity"] == "media_swap":
+                if status.get("status") == "failed":
+                    return {"state": "failed", "job": status, "reason": "The provider swap job failed."}
+                if status.get("status") in {"queued", "started"}:
+                    return {"state": "pending", "job": status}
+                if status.get("status") == "finished":
+                    value = self.read(source, prepared["read_url"], context, bounds, deadline)
+                    confirmed = (isinstance(value, dict)
+                                 and value.get("hashed_id") == prepared["change"]["resource_id"]
+                                 and value.get("type") == prepared["before"]["replacement"]["type"])
+                    return {"state": "succeeded" if confirmed else "uncertain", "job": status, "readback": value,
+                            "resource_id": prepared["change"]["resource_id"],
+                            "confirmation": "acknowledged_swap_job_finished_and_target_identity_readback"
+                            if confirmed else "target_identity_readback_mismatch",
+                            "verification_limits": "Provider-confirmed job completion; replacement bytes "
+                                                   "and playable processing are not independently verified."}
+                return {"state": "uncertain", "job": status, "reason": "Unknown swap job status."}
             if status.get("status") == "failed":
                 return {"state": "failed", "reason": "The provider background job failed.", "job": status}
             if status.get("status") == "finished" and prepared["change"]["entity"] == "media_tags":
@@ -1051,13 +1248,18 @@ class WriteAdapter:
                     return {"state": "succeeded", "job": status, "readback": readback,
                             "resource_ids": prepared["change"]["fields"]["hashed_ids"]}
             if status.get("status") == "finished" and prepared["change"]["entity"] == "media_import":
-                results = status.get("object", {}).get("results", [])
-                created = [r for r in results if r.get("status") == "succeeded"
-                           and r.get("operation") == "create" and r.get("resource_type") == "media" and r.get("id")]
-                if len(created) == 1:
-                    value = self.read(source, "https://api.wistia.com/modern/medias/" + safe_id(created[0]["id"]),
-                                      context, bounds, deadline)
-                    return {"state": "succeeded", "job": status, "resource_id": created[0]["id"], "readback": value}
+                obj = status.get("object")
+                results = obj.get("results") if isinstance(obj, dict) and obj.get("type") == "bulk_operation" else None
+                if isinstance(results, list) and all(isinstance(r, dict) for r in results):
+                    created = [r for r in results if r.get("status") == "succeeded"
+                               and r.get("operation") == "create" and r.get("resource_type") == "media"
+                               and isinstance(r.get("id"), str) and r["id"]]
+                    if len(created) == 1:
+                        media_id = created[0]["id"]
+                        value = self.read(source, "https://api.wistia.com/modern/medias/" + safe_id(media_id),
+                                          context, bounds, deadline)
+                        if isinstance(value, dict) and value.get("hashed_id") == media_id:
+                            return {"state": "succeeded", "job": status, "resource_id": media_id, "readback": value}
             return {"state": "pending" if status.get("status") in {"queued", "started"} else "uncertain",
                     "job": status, "reason": "Job status retained; exact resource readback still required."}
         if self.family == "legistar" and lookup and lookup.get("value"):
@@ -1066,29 +1268,52 @@ class WriteAdapter:
                 "$filter": f"{lookup['field']} eq '{term}'", "$top": 2,
             })
             result = self.read(source, url, context, bounds, deadline)
-            if isinstance(result, list) and len(result) == 1 and self.matches(prepared, result[0]):
+            if (isinstance(result, list) and len(result) == 1
+                    and self._matches_identity(prepared, result[0], identity)
+                    and self.matches(prepared, result[0])):
                 return {"state": "succeeded", "resource_id": result[0][lookup["id_field"]],
                         "readback": result[0], "reconciled": True,
                         "provider_revision": result[0].get(prepared["revision_field"])}
         if identity is not None and item.get("read_url"):
             result = self.read(source, item["read_url"], context, bounds, deadline)
+            caption = self.family == "wistia" and prepared["change"]["entity"] in {"caption", "caption_edits"}
+            if not caption and not self._matches_identity(prepared, result, identity):
+                return {"state": "uncertain", "resource_id": identity,
+                        "reason": "Readback did not identify the acknowledged resource."}
             if self.family == "laserfiche":
                 result = self.document_readback(source, result, WriteChange.from_dict(prepared["change"]),
-                                                context, bounds, deadline)
+                                                context, bounds, deadline,
+                                                page_parts=prepared.get("page_parts_contract") == 1)
             if self.matches(prepared, result):
                 return {"state": "succeeded", "resource_id": identity, "readback": result, "reconciled": True}
         if prepared["change"]["operation"] == "update" or (lookup and lookup.get("caption") is not None):
             result = self.read_before(source, WriteChange.from_dict(prepared["change"]), prepared["read_url"],
-                                      context, bounds, deadline)
-            if self.matches(prepared, result):
-                return {"state": "succeeded", "resource_id": identity or prepared["change"].get("resource_id"),
+                                      context, bounds, deadline,
+                                                page_parts=prepared.get("page_parts_contract") == 1)
+            caption = self.family == "wistia" and prepared["change"]["entity"] in {"caption", "caption_edits"}
+            expected = identity or prepared["change"].get("resource_id")
+            if (caption or self._matches_identity(prepared, result, expected)) and self.matches(prepared, result):
+                return {"state": "succeeded", "resource_id": expected,
                         "readback": result, "reconciled": True}
         return {"state": "uncertain", "resource_id": identity,
                 "reason": "Readback cannot uniquely reconcile the original intent; do not repeat create."}
 
 
 def default_adapters(transport=None):
+    from .providers.gworks_write import GWorksWriteAdapter
+    from .providers.iqm2_write import IQM2WriteAdapter
+    from .providers.boardable_write import BoardableWriteAdapter
+    from .providers.civicclerk_write import CivicClerkWriteAdapter
     from .providers.essential_write import EssentialWriteAdapter
+    from .providers.escribe_write import EscribeWriteAdapter
+    from .providers.granicus_write import GranicusWriteAdapter
+    from .providers.telvue_write import TelVueWriteAdapter
+    from .providers.towncloud_write import TownCloudWriteAdapter
+    from .providers.simbli_write import SimbliWriteAdapter
     return {**{name: WriteAdapter(name, transport)
                for name in ("legistar", "wistia", "laserfiche", "laserfiche-weblink")},
-            "municode-meetings": EssentialWriteAdapter(transport)}
+            "municode-meetings": EssentialWriteAdapter(transport), "granicus": GranicusWriteAdapter(transport),
+            "civicplus-select": CivicClerkWriteAdapter(transport), "telvue": TelVueWriteAdapter(transport),
+            "boardable": BoardableWriteAdapter(transport), "towncloud": TownCloudWriteAdapter(transport),
+            "escribe": EscribeWriteAdapter(transport), "gworks": GWorksWriteAdapter(transport),
+            "iqm2": IQM2WriteAdapter(transport), "simbli": SimbliWriteAdapter(transport)}

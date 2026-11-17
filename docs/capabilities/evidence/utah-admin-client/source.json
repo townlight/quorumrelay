@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-14",
+  "scope": "Utah Public Notice Website admin client only; public source review, no credentials, JS execution or live mutation",
+  "sources": [
+    {
+      "url": "https://secure.utah.gov/pmn-admin/help.html",
+      "status": 200,
+      "path": "docs/capabilities/evidence/utah-admin-client/help.html",
+      "sha256": "3d0711e22c2da8e63004900127caaa923afe33debbbcd0248c036ea6cfe76e0c"
+    },
+    {
+      "url": "https://secure.utah.gov/pmn-admin/js/app.js",
+      "status": 200,
+      "path": "docs/capabilities/evidence/utah-admin-client/app.js",
+      "sha256": "5e9dc4c5a87bd208ac535e4b46d0cc78f80cc0b496f5fb1a0a3b3df79d4b1bd4",
+      "derivation": "Literal script src in official help page"
+    }
+  ],
+  "admin_entry": {
+    "url": "https://secure.utah.gov/pmn-admin/index.html",
+    "status": 401,
+    "location": null,
+    "bytes": 119,
+    "sha256": "f824e819d730d8f86ab6f5cc1cfc7bdfefdd0044189a9255c96d6fc0c3b9a5e5",
+    "method": "anonymous GET, redirects disabled; no login attempted"
+  },
+  "response_path": "docs/capabilities/evidence/utah-admin-client/index-response.html",
+  "known": [
+    "Client uses document.forms.form.submit(), takes action/method/enctype/full input names from rendered form, and uses runtime _csrf meta in notice-search requests.",
+    "Existing draft save sets fact=draft, publish sets fact=publish, upload sets fact=upload; these intent constants are not standalone request contracts.",
+    "Uploader category IDs and names come from runtime attachments DOM. Client rejects first file size >=200000000 bytes; no server limit inferred."
+  ],
+  "exact_missing": [
+    "Rendered add/edit notice form action, HTTP method/enctype, complete named fields, selected body/notice identity and CSRF association",
+    "Version-matched create/update/upload result plus native notice/attachment readback for draft/public state"
+  ],
+  "outside_proof": "Anonymous exact help-linked /pmn-admin/index.html GET returns401 JSON Unauthorized with matching path, not connector token_expired. Access to that rendered admin entry requires authorized authentication or a shareable saved form. This does not prove a separate public specification cannot supply the missing contract.",
+  "classification": "Exact rendered-admin access dependency verified; broader machine contract research unresolved, not vendor-wide API absence."
+}

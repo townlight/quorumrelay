@@ -1,0 +1,27 @@
+    this.serviceUrl = {
+      meeting: {
+        create: 'meeting/saveOrUpdateMeeting',
+        lookup: 'meetingType/getMeetingTypes',
+        getMeetingByDateRange: 'meetingInformation/getMeetingInformationByDate',
+        delete: 'meeting/deleteMeetingRecurring',
+        getMeeting: 'meetingInformation/getMeeting',
+        saveDragAndDropMeeting: 'meeting/saveDragAndDropMeeting',
+        agendaMergedPdf: 'meetingInformation/getAgendaMergePDF',
+        printMinutes: 'meetingInformation/printMinutesMeetingPacket/'
+      },
+
+// ----- model constructor; no call site found in this bundle -----
+  updateMeetingScheduler(meeting) {
+    const meetingDragDrop = {
+      meetingId: meeting.data.id,
+      recurringId: meeting.data.recurringId,
+      startDate: moment__WEBPACK_IMPORTED_MODULE_2___default()(meeting.start).format(this.globalConstants.format.date),
+      endDate: moment__WEBPACK_IMPORTED_MODULE_2___default()(meeting.end).format(this.globalConstants.format.date),
+      startTime: moment__WEBPACK_IMPORTED_MODULE_2___default()(meeting.start).format(this.globalConstants.format.time),
+      endTime: moment__WEBPACK_IMPORTED_MODULE_2___default()(meeting.end).format(this.globalConstants.format.time),
+      actualStartDate: moment__WEBPACK_IMPORTED_MODULE_2___default()(meeting.data.actualStartDate).format(this.globalConstants.format.date),
+      actualEndDate: moment__WEBPACK_IMPORTED_MODULE_2___default()(meeting.data.actualEndDate).format(this.globalConstants.format.date),
+      occuranceType: meeting.data.occuranceType
+    };
+    return meetingDragDrop;
+  }

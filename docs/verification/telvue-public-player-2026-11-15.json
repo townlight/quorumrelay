@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "42308b4",
+  "status": "PASSED",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "new_cases": 14,
+  "scope": "Source-bound public TelVue player metadata and explicitly requested supplied WebVTT; exact source preservation without account access/generation.",
+  "checks": [
+    {
+      "command": "pytest tests/test_telvue_player.py tests/test_telvue_mrss.py tests/test_telvue_playlist_items.py tests/test_account_apis.py tests/test_swagit_player.py tests/test_provider_discovery.py tests/test_baseline.py tests/test_baseline_search.py -q",
+      "passed": 253,
+      "failed": 0,
+      "seconds": 18.54
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/telvue_player.py",
+      "sha256": "6c40171b67f8dddf8306c0b679f26cae0f0c80e2e28b127dacd0ae7e4a3f35f9"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/discovery.py",
+      "sha256": "c60abdc1e0f093e10cf066d3dd652d4859c853303600a212f658b7c51bd90390"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "707ed29898ae371e949797ba149502e47a7fb406ded9ea4e43ad2e30a5c046ef"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/native.py",
+      "sha256": "2eeeda9c4a4ecda14e40b83a66988f25d958f838426ae4116689432e89897eaf"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/identification.py",
+      "sha256": "d41447662cd21362ca57b34badb3e673748b6c56b7a0a7a7a967038c8d3bad65"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/__init__.py",
+      "sha256": "e00ab5f9d2c4c948ba30eca099834ef5f4e9093b1eaeb9990bd9635a28a2baee"
+    },
+    {
+      "path": "tests/test_telvue_player.py",
+      "sha256": "8eade45d8e4ce04b1b2abaa859e5c241d45c03e6b83b1c7d5cac94b16e4f3036"
+    },
+    {
+      "path": "docs/capabilities/evidence/telvue-public-player/source.json",
+      "sha256": "cb634e8218ff42e69e9b5ec81e9c5ba536d5982faa094696cab40a7419656e8d"
+    }
+  ],
+  "unaffected_evidence_reused": {
+    "receipt": "docs/verification/owned-boundaries-full-2026-11-15.json",
+    "full_suite_passed": 1968,
+    "scope": "Prior current-source full suite, followed by additive TelVue player registration/dispatch and253affected checks. No later full-suite run claimed."
+  },
+  "limits": [
+    "Only a literal JSON playlist assignment is decoded; no scripts evaluated or external assets executed.",
+    "Same-origin supplied captions only, exact no-redirect requests, total transfer budget, per-response parser bound, deadline/cancel; HLS locator not fetched.",
+    "caption_language selects an exact supplied display label, or default firsttrack. No language-code inference from filename.",
+    "Raw supplied WebVTT text is searchable and retained with captures/relationships/hash through SQLite retry/reopen and neutral exports. No cue interpretation, content-language/accuracy/playback or meeting-date inference.",
+    "Selected public reader does not establish authenticated Connect upload or staff meeting association. No release."
+  ]
+}

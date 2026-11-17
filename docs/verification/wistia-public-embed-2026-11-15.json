@@ -1,0 +1,79 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "e4a7ede",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "Exact public Wistia iframe literal JSON metadata and supplied caption text, no JavaScript execution/auth token. Selected fetch and static discovery continuation, captures, composite caption identity/recording relationship, SQLite retry/reopen/search, JSON/JSONL/ZIP.",
+  "new_cases": 22,
+  "checks": [
+    {
+      "scope": "new public iframe plus discovery/interfaces/public package/baseline/search",
+      "passed": 212,
+      "failed": 0,
+      "seconds": 19.91
+    },
+    {
+      "scope": "ruff src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "scope": "capabilities/interfaces/public package after metadata reconciliation",
+      "passed": 13,
+      "failed": 0,
+      "seconds": 2.99
+    }
+  ],
+  "prior_full": "2184passed106.02s at e4a7ede before22new public iframe cases. Reused unaffected full evidence; no claim of a new full run.",
+  "observed_source": "docs/capabilities/evidence/gworks-current-builder/source.json",
+  "public_source_result": "Actual declared iframe200text/html11499bytes, native media ylfk2zpd7f and one eng caption containing1366characters. No binary media GET or invented timing.",
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/wistia_embed.py",
+      "sha256": "b4fd93ac18ac8f494863a017a91fd3ba2bbc1c43433fd79294ebdc533ad1696d"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/__init__.py",
+      "sha256": "cb0cb0e638ae5a9ec48c7dab2a6fea4f0ac14da48288c5151613c0a78df9fbfd"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/identification.py",
+      "sha256": "9fe506ea9ab746045ea8ae71bc94fdf111f8979835c59908c745f0f864c7192f"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/native.py",
+      "sha256": "36260804428dc9bb330e638322ddc16f518e2d85a8269501a500aca771f244bd"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/discovery.py",
+      "sha256": "642c84bba010e612a5d98a6bb903be49de0e33c003896f4344205ca3a00a5481"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "682e51384d1db563452da6ba847e8c5a355d6af26c323202afd587eba86306ca"
+    },
+    {
+      "path": "tests/test_wistia_public_embed.py",
+      "sha256": "9f3b199bd6c36e6e8254956e7b6e60fcf218c7ce5175ef95bd9cb159c0f5037f"
+    },
+    {
+      "path": "tests/fixtures/wistia-public/iframe-ylfk2zpd7f.html",
+      "sha256": "40809e020ba47e669dfbeec71e15176b74e77545fb493d9762ea810788a1d38a"
+    }
+  ],
+  "limits": [
+    "Selected layout and exact iframe hosts/path, no query/options, no catalog/date/body inference.",
+    "Native caption language key retained without assigning a BCP47 interpretation. Supplied text has no cue timings.",
+    "Shared embed-origin namespace is not equated to authenticated account identity.",
+    "gWorks builder PDF is a raster UI screenshot; supplied demonstration transcript describes staff workflow without request/readback schemas. These sources do not establish gWorks writes or prove all public contracts absent."
+  ],
+  "test_corrections": [
+    "Caption text is retained in native recording fields as well as transcript; search test now explicitly selects transcript records.",
+    "Generic discovery passes headers=None and does not set allow_redirects; fixture models its protocol while explicit fetch separately verifies no redirects.",
+    "Finished static discovery remains partial with checkpoint null because catalog completeness is unverified."
+  ],
+  "delivery": "Local source only; no releases/build/package/push/merge/tag/sign/install/repin or vendor mutations."
+}

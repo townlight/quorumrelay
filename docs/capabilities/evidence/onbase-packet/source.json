@@ -1,0 +1,9 @@
+{
+  "url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Documents/Downloadfile/Commission_on_Aging_Well_3825_Agenda_Packet_11_12_2026_8_30_00_AM.pdf?documentType=5&meetingId=3825&isAttachment=True",
+  "response_url": "https://agendas.fitchburgwi.gov/OnBaseAgendaOnline/Documents/Downloadfile/Commission_on_Aging_Well_3825_Agenda_Packet_11_12_2026_8_30_00_AM.pdf?documentType=5&meetingId=3825&isAttachment=True",
+  "status": 200,
+  "bytes": 3725,
+  "sha256": "72bb4e8c541664e087a510dd265e613dd5240a01efaf7ab7e94e872a3aca7c76",
+  "method": "GET",
+  "scope": "One declared public agenda packet wrapper; no preparation POST or file GET executed"
+}

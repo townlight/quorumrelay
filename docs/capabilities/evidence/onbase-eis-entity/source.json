@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-14",
+  "product": "OnBase Enterprise Integration Server",
+  "release": "Foundation 25.1",
+  "sources": [
+    {
+      "title": "Entity: Update Entity Type",
+      "url": "https://docs.hyland.com/api/khub/maps/AugNBYY9Ewm9IM3rYOrWxg/topics/HSGuyyBGpnll99BnLS6miQ",
+      "content_url": "https://docs.hyland.com/api/khub/maps/AugNBYY9Ewm9IM3rYOrWxg/topics/HSGuyyBGpnll99BnLS6miQ/content",
+      "path": "docs/capabilities/evidence/onbase-eis-entity/entity-update.content.html",
+      "bytes": 3365,
+      "sha256": "d76cd6967431bc72fe83155dd46af4ea2217979eb0a3c10c908977e800313753",
+      "release": "Foundation 25.1"
+    },
+    {
+      "title": "Entity: Create Entity Type",
+      "url": "https://docs.hyland.com/api/khub/maps/AugNBYY9Ewm9IM3rYOrWxg/topics/TzP4k7UKxlu7Ku6TeJkk2w",
+      "content_url": "https://docs.hyland.com/api/khub/maps/AugNBYY9Ewm9IM3rYOrWxg/topics/TzP4k7UKxlu7Ku6TeJkk2w/content",
+      "path": "docs/capabilities/evidence/onbase-eis-entity/entity-create.content.html",
+      "bytes": 3086,
+      "sha256": "75a56ac67088534ae4e0af421ccc1b5db10b232b234348c0b61f15556c177f81",
+      "release": "Foundation 25.1"
+    },
+    {
+      "title": "Entity: Read Entity Type",
+      "url": "https://docs.hyland.com/api/khub/maps/AugNBYY9Ewm9IM3rYOrWxg/topics/Ha~88DlEGU6ICFcsp1vfOw",
+      "content_url": "https://docs.hyland.com/api/khub/maps/AugNBYY9Ewm9IM3rYOrWxg/topics/Ha~88DlEGU6ICFcsp1vfOw/content",
+      "path": "docs/capabilities/evidence/onbase-eis-entity/entity-read.content.html",
+      "bytes": 3099,
+      "sha256": "c0153602f30ca58c93dac8b51c32f2c3d1727278ef4e8ddb30311933591156f0",
+      "release": "Foundation 25.1"
+    },
+    {
+      "title": "Consuming the Hyland Adapter",
+      "url": "https://docs.hyland.com/api/khub/maps/AugNBYY9Ewm9IM3rYOrWxg/topics/PMFCrAmmXx~UmEFEKjm_qw",
+      "content_url": "https://docs.hyland.com/api/khub/maps/AugNBYY9Ewm9IM3rYOrWxg/topics/PMFCrAmmXx~UmEFEKjm_qw/content",
+      "path": "docs/capabilities/evidence/onbase-eis-entity/consume-adapter.content.html",
+      "bytes": 133437,
+      "sha256": "003a186b0ce6091a8c722cde01c7217fcdab72deff4faf38665b6e6a35298fdf",
+      "release": "Foundation 25.1"
+    }
+  ],
+  "retrieval": "Initial /r URLs returned SPA shells, expressly not contract text. Public documentation search returned contentUrl and release metadata; exact anonymous topic HTML retrieved and inspected.",
+  "established": [
+    "Agenda entity adapter example Entity/agendaandminutes/25957/Update; numeric type ID is a destination example, not universal.",
+    "CreateEntityType_<typeID>/EntityCreateData/Fields; created entityItemID returned.",
+    "ReadEntityType_<typeID>/EntityReadData/entityItemID; response includes configured entity fields and primary keys if any.",
+    "UpdateEntityType_<typeID>/EntityUpdateData/entityItemID/Fields.",
+    "Adapter uses configured Application Server, database and service-account context; selected object WSDL/schema is generated after connecting. Canonical mode binds configured Web Services Publishing objects."
+  ],
+  "proven_outside_dependency_scope": "For implementing this destination-specific EIS path: generated selected entity WSDL/XSD and matching Agenda fields/types, endpoint/binding, readback/error contract must come from its configuration/export. No live credential acquisition or mutation is required for synthetic acceptance.",
+  "not_established": [
+    "Fixed HTTP SOAP action, XML namespaces and complete typed Agenda fields.",
+    "Document-to-Agenda association envelope or upload bytes/readback.",
+    "Applicability/version/schema equivalence to any selected public Agenda Online tenant.",
+    "No assertion that every alternative Agenda API or public source is private."
+  ],
+  "implementation": "Mapping assessment only; no adapter/format or acceptance promotion."
+}

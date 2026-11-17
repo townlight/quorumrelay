@@ -1,0 +1,205 @@
+Static excerpts from official MinuteTraq8.11.3 installer. Sourcefile and one-based lines follow.
+Data_1_0.cs:5059-5077
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/MinutesGet", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 MinutesGet(int MinutesID, int MeetingID, DateTime GetFileDataIfNewerThan, DateTime GetPublicFileDataIfNewerThan)
+	{
+		return (DB_1_0)Invoke("MinutesGet", new object[4] { MinutesID, MeetingID, GetFileDataIfNewerThan, GetPublicFileDataIfNewerThan })[0];
+	}
+
+	public IAsyncResult BeginMinutesGet(int MinutesID, int MeetingID, DateTime GetFileDataIfNewerThan, DateTime GetPublicFileDataIfNewerThan, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("MinutesGet", new object[4] { MinutesID, MeetingID, GetFileDataIfNewerThan, GetPublicFileDataIfNewerThan }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndMinutesGet(IAsyncResult asyncResult)
+	{
+		return (DB_1_0)EndInvoke(asyncResult)[0];
+	}
+
+	public void MinutesGetAsync(int MinutesID, int MeetingID, DateTime GetFileDataIfNewerThan, DateTime GetPublicFileDataIfNewerThan)
+	{
+Data_1_0.cs:9139-9156
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/AgendaGet", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 AgendaGet(int AgendaID, int MeetingID, DateTime GetFileDataIfNewerThan, DateTime GetPublicFileDataIfNewerThan)
+	{
+		return (DB_1_0)Invoke("AgendaGet", new object[4] { AgendaID, MeetingID, GetFileDataIfNewerThan, GetPublicFileDataIfNewerThan })[0];
+	}
+
+	public IAsyncResult BeginAgendaGet(int AgendaID, int MeetingID, DateTime GetFileDataIfNewerThan, DateTime GetPublicFileDataIfNewerThan, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("AgendaGet", new object[4] { AgendaID, MeetingID, GetFileDataIfNewerThan, GetPublicFileDataIfNewerThan }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndAgendaGet(IAsyncResult asyncResult)
+	{
+		return (DB_1_0)EndInvoke(asyncResult)[0];
+	}
+
+	public void AgendaGetAsync(int AgendaID, int MeetingID, DateTime GetFileDataIfNewerThan, DateTime GetPublicFileDataIfNewerThan)
+Data_1_0.cs:9256-9270
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/AgendaImport", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 AgendaImport([XmlElement(DataType = "base64Binary")] byte[] aWordDoc, long MeetingID, bool SaveImmediately, ImportingHint[] ImportingHints)
+	{
+		return (DB_1_0)Invoke("AgendaImport", new object[4] { aWordDoc, MeetingID, SaveImmediately, ImportingHints })[0];
+	}
+
+	public IAsyncResult BeginAgendaImport(byte[] aWordDoc, long MeetingID, bool SaveImmediately, ImportingHint[] ImportingHints, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("AgendaImport", new object[4] { aWordDoc, MeetingID, SaveImmediately, ImportingHints }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndAgendaImport(IAsyncResult asyncResult)
+	{
+		return (DB_1_0)EndInvoke(asyncResult)[0];
+Data_1_0.cs:9295-9310
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/AgendaUpdate", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 AgendaUpdate(DB_1_0 ds)
+	{
+		return (DB_1_0)Invoke("AgendaUpdate", new object[1] { ds })[0];
+	}
+
+	public IAsyncResult BeginAgendaUpdate(DB_1_0 ds, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("AgendaUpdate", new object[1] { ds }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndAgendaUpdate(IAsyncResult asyncResult)
+	{
+		return (DB_1_0)EndInvoke(asyncResult)[0];
+	}
+Data_1_0.cs:5332-5345
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/MinutesUpdate", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 MinutesUpdate(DB_1_0 ds)
+	{
+		return (DB_1_0)Invoke("MinutesUpdate", new object[1] { ds })[0];
+	}
+
+	public IAsyncResult BeginMinutesUpdate(DB_1_0 ds, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("MinutesUpdate", new object[1] { ds }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndMinutesUpdate(IAsyncResult asyncResult)
+	{
+MinuteTraqData.cs:448-471
+	public string AuthorizationHeaderText
+	{
+		get
+		{
+			string text = "Unknown:";
+			switch (Main.Master.ConnectionInfo.ConnectUserType)
+			{
+			case LM.Auth.Models.UserType.NormalUser:
+				text = "Basic:";
+				break;
+			case LM.Auth.Models.UserType.WebUser:
+				text = "Web:";
+				break;
+			case LM.Auth.Models.UserType.ServiceUser:
+				text = "Service:";
+				break;
+			}
+			return text + EscapeColonDelimiter(Main.Master.ConnectionInfo.ConnectUserLogin + "@" + Main.Master.ConnectionInfo.ConnectAgency) + ":" + EscapeColonDelimiter(Main.Master.ConnectionInfo.ConnectPassword) + ":" + EscapeColonDelimiter(Main.Master.ConnectionInfo.ConnectionID.ToString("X")) + ":" + EscapeColonDelimiter(SourceAddress) + ":MinuteTraq:" + EscapeColonDelimiter(ProgramVersion.ToString(4)) + ":" + EscapeColonDelimiter(ExUtil.GetDotNetFWInfo());
+		}
+	}
+
+	public bool Connected { get; set; }
+
+	public string ConnectedServer => Main.Master.ConnectionInfo.ConnectServer;
+MinuteTraqData.cs:786-822
+	private string EscapeColonDelimiter(string sVal)
+	{
+		return MTSCUtil.Ne(sVal).ToString().Replace(":", "|~|");
+	}
+
+	[DebuggerStepThrough]
+	protected override WebRequest GetWebRequest(Uri uri)
+	{
+		WebRequest webRequest = base.GetWebRequest(uri);
+		webRequest.Headers.Add("Accept-Encoding", "gzip, deflate");
+		webRequest.Headers.Add("MinuteTraqVersion", ProgramVersion.ToString());
+		webRequest.Headers.Add("Authorization", AuthorizationHeaderText);
+		return webRequest;
+	}
+
+	[DebuggerStepThrough]
+	protected override WebResponse GetWebResponse(WebRequest Request)
+	{
+		try
+		{
+			NetRequestChanged?.Invoke(MTNetRequestStatus.RequestStarting);
+			NetStatAddRequest(Request.ContentLength);
+			WebResponse webResponse = base.GetWebResponse(Request);
+			Main.Master.ConnectionInfo.ConnectionID = MTSCUtil.HexLong(webResponse.Headers.Get("ConnectionID"));
+			return new HttpWebResponseDecompressed(webResponse, this);
+		}
+		finally
+		{
+			NetRequestChanged?.Invoke(MTNetRequestStatus.ResponseReceived);
+		}
+	}
+
+	[DebuggerStepThrough]
+	protected override WebResponse GetWebResponse(WebRequest Request, IAsyncResult result)
+	{
+		NetStatAddRequest(Request.ContentLength);
+		WebResponse webResponse = base.GetWebResponse(Request);
+DB_1_0.cs:96568-96580
+	private void InitClass()
+	{
+		base.DataSetName = "DB_1_0";
+		base.Prefix = "";
+		base.Namespace = "http://tempuri.org/DB_1_0.xsd";
+		base.EnforceConstraints = false;
+		SchemaSerializationMode = SchemaSerializationMode.IncludeSchema;
+		tableDepartment = new DepartmentDataTable();
+		base.Tables.Add(tableDepartment);
+		tableAgencySetting = new AgencySettingDataTable();
+		base.Tables.Add(tableAgencySetting);
+		tableMeetingType = new MeetingTypeDataTable();
+		base.Tables.Add(tableMeetingType);
+DB_1_0.cs:95608-95615
+	protected override XmlSchema GetSchemaSerializable()
+	{
+		MemoryStream memoryStream = new MemoryStream();
+		WriteXmlSchema(new XmlTextWriter(memoryStream, null));
+		memoryStream.Position = 0L;
+		return XmlSchema.Read(new XmlTextReader(memoryStream), null);
+	}
+
+Util.cs:4679-4708
+	public static DataSet GetChanges(DB ds, params DataRow[] oExtraRows)
+	{
+		ds = (DB)ds.Copy();
+		ds.Relations.Clear();
+		ds = (DB)ds.GetChanges();
+		foreach (DataTable table in ds.Tables)
+		{
+			foreach (DataRow row2 in table.Rows)
+			{
+				if (row2.RowState == DataRowState.Modified && !HasChanges(row2))
+				{
+					row2.RejectChanges();
+				}
+			}
+		}
+		DB dB = new DB();
+		DB dB2 = (DB)ds.GetChanges();
+		if (dB2 == null)
+		{
+			return null;
+		}
+		dB.Merge(dB2);
+		foreach (DataRow row in oExtraRows)
+		{
+			MergeRow(dB, row);
+		}
+		return dB;
+	}
+
+	public static DataSet DeltaSet(DataSet masterSet, DataSet copyToSynch, string IgnoreTables = null)

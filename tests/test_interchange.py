@@ -190,6 +190,22 @@ def test_csv_rfc4180_quoting_formula_guard_and_explicit_losses():
     assert losses["lossless"] is False
 
 
+@pytest.mark.parametrize("revision", [[], {}, ["v1"], "v1", None])
+def test_csv_losses_follow_serialized_cells_and_empty_items(revision):
+    record = sample()["records"][0]
+    record["source_revision"] = revision
+    record["normalized"]["title"] = {"en": "Council"}
+    record["normalized"]["agenda_items"] = []
+    payload, losses = csv_projection([record])
+    omitted = losses["records"][0]["omitted_fields"]
+    assert b"Council" in payload
+    assert not any(field == "source_revision" or field.startswith(("source_revision.", "source_revision["))
+                   for field in omitted)
+    assert "normalized.title.en" not in omitted
+    _, losses = csv_projection([record], kind="items")
+    assert "source_url" in losses["records"][0]["omitted_fields"]
+
+
 def test_ical_rfc5545_literal_datetime_escaping_folding_and_stable_uid():
     record = sample()["records"][0]
     record["normalized"]["scheduled_start"] = "1998-01-18T07:30:00Z"
@@ -211,6 +227,46 @@ def test_ical_rfc5545_literal_datetime_escaping_folding_and_stable_uid():
     assert "floating" in str(floating_losses)
     assert losses["lossless"] is False
     assert "future.a" in losses["records"][0]["omitted_fields"]
+
+
+@pytest.mark.parametrize("source_status,cancelled,mapped", [
+    ("CANCELLED", True, "normalized.source_status"),
+    ({"canceled": True, "adjourned": True}, True, "normalized.source_status.canceled"),
+    ({"canceled": False}, False, None),
+    ({"canceled": "False"}, False, None),
+    ({"canceled": "0"}, False, None),
+    ({"canceled": "unknown"}, False, None),
+    ({"canceled": 1}, False, None),
+    ({"canceled": None}, False, None),
+])
+def test_ical_cancellation_requires_explicit_status_and_reports_unmapped_fields(source_status, cancelled, mapped):
+    record = sample()["records"][0]
+    record["normalized"]["source_status"] = source_status
+    before = deepcopy(record)
+    payload, losses = icalendar_projection([record])
+    assert (b"STATUS:CANCELLED\r\n" in payload) is cancelled
+    omitted = losses["records"][0]["omitted_fields"]
+    status_fields = {"normalized.source_status"} if isinstance(source_status, str) else {
+        f"normalized.source_status.{key}" for key in source_status
+    }
+    assert {field for field in omitted if field.startswith("normalized.source_status")} == status_fields - {mapped}
+    assert record == before
+
+
+@pytest.mark.parametrize("scheduled_start", ["2026-11-12T09:00:00Z", None])
+def test_ical_reports_the_unused_date_field_as_omitted(scheduled_start):
+    record = sample()["records"][0]
+    record["normalized"].update(scheduled_start=scheduled_start, meeting_date="2026-11-11")
+    payload, losses = icalendar_projection([record])
+    omitted = losses["records"][0]["omitted_fields"]
+    if scheduled_start:
+        assert b"DTSTART:20261112T090000Z\r\n" in payload
+        assert "normalized.meeting_date" in omitted
+        assert "normalized.scheduled_start" not in omitted
+    else:
+        assert b"DTSTART;VALUE=DATE:20261111\r\n" in payload
+        assert "normalized.scheduled_start" in omitted
+        assert "normalized.meeting_date" not in omitted
 
 
 @pytest.mark.parametrize("durable", [False, True])

@@ -1,0 +1,436 @@
+MinuteTraq write contract excerpts; static official client inspection only.
+SOAP namespace http://tempuri.org/MinuteTraqService/Data_1_0; DB namespace http://tempuri.org/DB_1_0.xsd.
+
+SOURCE service-source/MinuteTraq.MinuteTraqService/Data_1_0.cs starting line 5332
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/MinutesUpdate", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 MinutesUpdate(DB_1_0 ds)
+	{
+		return (DB_1_0)Invoke("MinutesUpdate", new object[1] { ds })[0];
+	}
+
+	public IAsyncResult BeginMinutesUpdate(DB_1_0 ds, AsyncCallback callback, object asyncState)
+	{
+
+SOURCE service-source/MinuteTraq.MinuteTraqService/Data_1_0.cs starting line 9295
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/AgendaUpdate", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 AgendaUpdate(DB_1_0 ds)
+	{
+		return (DB_1_0)Invoke("AgendaUpdate", new object[1] { ds })[0];
+	}
+
+	public IAsyncResult BeginAgendaUpdate(DB_1_0 ds, AsyncCallback callback, object asyncState)
+	{
+
+SOURCE ui-source/frmAgenda.cs starting line 1861
+			{
+				moCurrentItem.SetTitleNull();
+			}
+		}
+		else if (moCurrentItem.IsTitleNull() || !moCurrentItem.Title.Equals(txtTitle.Text, StringComparison.InvariantCulture))
+		{
+			moCurrentItem.Title = txtTitle.Text;
+		}
+	}
+
+	private void SaveEditorDuration()
+	{
+		if (moCurrentItem == null || txtDuration.ReadOnly)
+		{
+			return;
+		}
+		if (txtDuration.IsEmpty || txtDuration.ValueInt32 <= 0)
+		{
+			if (!moCurrentItem.IsDurationNull())
+			{
+				moCurrentItem.SetDurationNull();
+			}
+
+SOURCE ui-source/frmAgenda.cs starting line 9261
+					}
+					if (!moRecord.IsFileFormatBoardNull() && Operators.CompareString(moRecord.FileFormatBoard, "pdf", TextCompare: true) == 0)
+					{
+						uploadHeaderAndSnapshotsSeparately = true;
+					}
+					moRecord.Updated = DateTime.Now;
+					mSpeakerSignupHandler.BeforeSave(dsMain);
+					dB = Main.Data.AgendaUpdate((DB)Util.GetChanges(dsMain, moRecord), uploadHeaderAndSnapshotsSeparately);
+					mLastGenerateError = string.Empty;
+					mSpeakerSignupHandler.AfterSave();
+					StandardUtil.PlaySound(ApplicationSound.Record);
+					dB.Util.ShowNonCriticalError("AgendaUpdate_Message");
+					GetTreeOutlineItems().ForceRefresh();
+				}
+				catch (Exception ex)
+				{
+					ProjectData.SetProjectError(ex);
+					Exception ex2 = ex;
+					ExUtil.ExBox(ex2, MsgBoxStyle.Critical, "Error Saving Agenda");
+					result = MsgBoxResult.Cancel;
+					ProjectData.ClearProjectError();
+					goto IL_02e0;
+				}
+				ReloadFormFromDataSet(dB);
+				if (IsAgendaPublished)
+				{
+
+SOURCE ui-source/frmMinutes.cs starting line 14946
+		goto IL_04fe;
+		IL_0188:
+		Util.ClearErrors(dsMain.MinutesItem);
+		Util.ClearErrors(dsMain.Attendance);
+		long[] array = null;
+		DB dB;
+		try
+		{
+			moRecord.Updated = DateTime.Now;
+			mSpeakerSignupHandler.BeforeSave(dsMain);
+			dB = Main.Data.MinutesUpdate((DB)Util.GetChanges(dsMain, moRecord));
+			if (Main.App.EncoderRemoteControl.LocalRecordingStartTime.HasValue)
+			{
+				Main.App.EncoderRemoteControl.UpdateRecordingTimestampStart(moRecord.MeetingID, Main.App.EncoderRemoteControl.LocalRecordingStartTime.Value, Main.App.EncoderRemoteControl.ServerTimeDelta);
+			}
+			if (moEBClient != null)
+			{
+				array = Util.SelectArray(moEBClient.MinutesCurrentItems, [SpecialName] (long x) => FindNewMinutesItemID(x, dB));
+			}
+			mSpeakerSignupHandler.AfterSave();
+			StandardUtil.PlaySound(ApplicationSound.Record);
+			mLastGenerateError = string.Empty;
+			DeleteAutoBackup();
+			moAddedReferralItems.Clear();
+			moAddedReferralItems.AcceptChanges();
+		}
+		catch (Exception ex)
+		{
+			ProjectData.SetProjectError(ex);
+			Exception ex2 = ex;
+			ExUtil.ExBox(ex2, MsgBoxStyle.Critical, "Error Saving Minutes");
+			result = MsgBoxResult.Cancel;
+			ProjectData.ClearProjectError();
+			goto IL_04fe;
+		}
+
+SOURCE common-source/M2Common/Util.cs starting line 4671
+				return true;
+			}
+			arrayList.Add(RuntimeHelpers.GetObjectValue(objectValue));
+			dataRow = dataRow.Table.Rows.Find(RuntimeHelpers.GetObjectValue(objectValue));
+		}
+		return false;
+	}
+
+	public static DataSet GetChanges(DB ds, params DataRow[] oExtraRows)
+	{
+		ds = (DB)ds.Copy();
+		ds.Relations.Clear();
+		ds = (DB)ds.GetChanges();
+		foreach (DataTable table in ds.Tables)
+		{
+			foreach (DataRow row2 in table.Rows)
+			{
+				if (row2.RowState == DataRowState.Modified && !HasChanges(row2))
+				{
+					row2.RejectChanges();
+				}
+			}
+		}
+		DB dB = new DB();
+		DB dB2 = (DB)ds.GetChanges();
+		if (dB2 == null)
+		{
+			return null;
+		}
+		dB.Merge(dB2);
+		foreach (DataRow row in oExtraRows)
+		{
+			MergeRow(dB, row);
+		}
+		return dB;
+	}
+
+	public static DataSet DeltaSet(DataSet masterSet, DataSet copyToSynch, string IgnoreTables = null)
+	{
+		if (Main.Master == null)
+		{
+			return null;
+		}
+		if (copyToSynch == null)
+		{
+			return masterSet.Copy();
+		}
+		DataSet dataSet = masterSet.Clone();
+		bool flag = false;
+		foreach (DataTable table in masterSet.Tables)
+		{
+			if (IsInCSV(IgnoreTables, table.TableName) || table.PrimaryKey == null || table.PrimaryKey.Length != 1)
+
+SOURCE work/minutetraq/service-source/MinuteTraq.MinuteTraqService/Data_1_0.cs starting line 6789
+	public DB_1_0 MeetingGet(int MeetingID, DateTime DateFrom, DateTime DateTo, string MeetingStatus, int DepartmentID)
+	{
+		return (DB_1_0)Invoke("MeetingGet", new object[5] { MeetingID, DateFrom, DateTo, MeetingStatus, DepartmentID })[0];
+	}
+
+	public IAsyncResult BeginMeetingGet(int MeetingID, DateTime DateFrom, DateTime DateTo, string MeetingStatus, int DepartmentID, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("MeetingGet", new object[5] { MeetingID, DateFrom, DateTo, MeetingStatus, DepartmentID }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndMeetingGet(IAsyncResult asyncResult)
+	{
+		return (DB_1_0)EndInvoke(asyncResult)[0];
+	}
+
+	public void MeetingGetAsync(int MeetingID, DateTime DateFrom, DateTime DateTo, string MeetingStatus, int DepartmentID)
+	{
+		MeetingGetAsync(MeetingID, DateFrom, DateTo, MeetingStatus, DepartmentID, null);
+	}
+
+	public void MeetingGetAsync(int MeetingID, DateTime DateFrom, DateTime DateTo, string MeetingStatus, int DepartmentID, object userState)
+	{
+		if (MeetingGetOperationCompleted == null)
+		{
+			MeetingGetOperationCompleted = OnMeetingGetOperationCompleted;
+		}
+		InvokeAsync("MeetingGet", new object[5] { MeetingID, DateFrom, DateTo, MeetingStatus, DepartmentID }, MeetingGetOperationCompleted, RuntimeHelpers.GetObjectValue(userState));
+	}
+
+	private void OnMeetingGetOperationCompleted(object arg)
+	{
+		if (MeetingGetCompleted != null)
+		{
+			InvokeCompletedEventArgs e = (InvokeCompletedEventArgs)arg;
+			MeetingGetCompleted?.Invoke(this, new MeetingGetCompletedEventArgs(e.Results, e.Error, e.Cancelled, RuntimeHelpers.GetObjectValue(e.UserState)));
+		}
+	}
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/MeetingUpdate", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 MeetingUpdate(DB_1_0 ds)
+	{
+		return (DB_1_0)Invoke("MeetingUpdate", new object[1] { ds })[0];
+	}
+
+	public IAsyncResult BeginMeetingUpdate(DB_1_0 ds, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("MeetingUpdate", new object[1] { ds }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndMeetingUpdate(IAsyncResult asyncResult)
+	{
+		return (DB_1_0)EndInvoke(asyncResult)[0];
+	}
+
+	public void MeetingUpdateAsync(DB_1_0 ds)
+	{
+		MeetingUpdateAsync(ds, null);
+	}
+
+	public void MeetingUpdateAsync(DB_1_0 ds, object userState)
+SOURCE work/minutetraq/common-source/M2Common/DB_1_0.cs starting line 15825
+		private void InitClass()
+		{
+			columnMeetingID = new DataColumn("MeetingID", typeof(int), null, MappingType.Element);
+			base.Columns.Add(columnMeetingID);
+			columnMeetingDate = new DataColumn("MeetingDate", typeof(DateTime), null, MappingType.Element);
+			base.Columns.Add(columnMeetingDate);
+			columnResolutionDueDate = new DataColumn("ResolutionDueDate", typeof(DateTime), null, MappingType.Element);
+			base.Columns.Add(columnResolutionDueDate);
+			columnMeetingTypeID = new DataColumn("MeetingTypeID", typeof(int), null, MappingType.Element);
+			base.Columns.Add(columnMeetingTypeID);
+			columnMeetingLocationID = new DataColumn("MeetingLocationID", typeof(int), null, MappingType.Element);
+			base.Columns.Add(columnMeetingLocationID);
+			columnMeetingStatusID = new DataColumn("MeetingStatusID", typeof(byte), null, MappingType.Element);
+			base.Columns.Add(columnMeetingStatusID);
+			columnDepartmentID = new DataColumn("DepartmentID", typeof(int), null, MappingType.Element);
+			base.Columns.Add(columnDepartmentID);
+			columnTimestampStart = new DataColumn("TimestampStart", typeof(DateTime), null, MappingType.Element);
+			base.Columns.Add(columnTimestampStart);
+			columnTimestampStartDelta = new DataColumn("TimestampStartDelta", typeof(int), null, MappingType.Element);
+			base.Columns.Add(columnTimestampStartDelta);
+			base.Constraints.Add(new UniqueConstraint("PK_Meeting", new DataColumn[1] { columnMeetingID }, isPrimaryKey: true));
+			columnMeetingID.AutoIncrement = true;
+			columnMeetingID.AutoIncrementSeed = -1L;
+			columnMeetingID.AutoIncrementStep = -1L;
+			columnMeetingID.AllowDBNull = false;
+			columnMeetingID.ReadOnly = true;
+			columnMeetingID.Unique = true;
+			columnMeetingDate.AllowDBNull = false;
+			columnResolutionDueDate.AllowDBNull = false;
+			columnMeetingTypeID.AllowDBNull = false;
+			columnMeetingLocationID.AllowDBNull = false;
+			columnMeetingStatusID.AllowDBNull = false;
+			columnMeetingStatusID.DefaultValue = (byte)10;
+			columnTimestampStartDelta.DefaultValue = 0;
+		}
+
+		[DebuggerNonUserCode]
+		[GeneratedCode("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+		public MeetingRow NewMeetingRow()
+		{
+			return (MeetingRow)NewRow();
+		}
+
+		[DebuggerNonUserCode]
+		[GeneratedCode("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+		protected override DataRow NewRowFromBuilder(DataRowBuilder builder)
+		{
+			return new MeetingRow(builder);
+		}
+
+		[DebuggerNonUserCode]
+		[GeneratedCode("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+		protected override Type GetRowType()
+		{
+			return typeof(MeetingRow);
+		}
+
+		[DebuggerNonUserCode]
+		[GeneratedCode("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+		protected override void OnRowChanged(DataRowChangeEventArgs e)
+		{
+			base.OnRowChanged(e);
+			if (MeetingRowChanged != null)
+			{
+				MeetingRowChanged?.Invoke(this, new MeetingRowChangeEvent((MeetingRow)e.Row, e.Action));
+			}
+		}
+
+		[DebuggerNonUserCode]
+		[GeneratedCode("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+		protected override void OnRowChanging(DataRowChangeEventArgs e)
+		{
+			base.OnRowChanging(e);
+			if (MeetingRowChanging != null)
+			{
+				MeetingRowChanging?.Invoke(this, new MeetingRowChangeEvent((MeetingRow)e.Row, e.Action));
+			}
+		}
+
+		[DebuggerNonUserCode]
+		[GeneratedCode("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+		protected override void OnRowDeleted(DataRowChangeEventArgs e)
+		{
+			base.OnRowDeleted(e);
+			if (MeetingRowDeleted != null)
+			{
+				MeetingRowDeleted?.Invoke(this, new MeetingRowChangeEvent((MeetingRow)e.Row, e.Action));
+			}
+		}
+
+		[DebuggerNonUserCode]
+		[GeneratedCode("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+		protected override void OnRowDeleting(DataRowChangeEventArgs e)
+		{
+			base.OnRowDeleting(e);
+SOURCE work/minutetraq/ui-source/frmMeeting.cs starting line 1015
+		txtMeetingPortalNotice.Text = FieldsWithoutSchema.GetMeetingCancelNotice(moRecord);
+	}
+
+	public void OpenRecord(int MeetingID)
+	{
+		if (SaveRecord(Prompt: true) == MsgBoxResult.Cancel)
+		{
+			return;
+		}
+		dsMain.Meeting.Clear();
+		if (MeetingID != 0)
+		{
+			Main.Data.MeetingGet(MeetingID, DateTime.MinValue, DateTime.MinValue, null, M2Common.Main.Master.CurrentMeetingGroupID);
+			GranicusIntegrationPresentationServiceRemote granicusIntegrationPresentationServiceRemote = new GranicusIntegrationPresentationServiceRemote(M2Common.Main.Master.ConnectionInfo, [SpecialName] () => Main.Data.Connected);
+			moSyncedEvent = granicusIntegrationPresentationServiceRemote.GetMeeting(MeetingID);
+			moRecord = (DB_1_0.MeetingRow)Util.MergeRowByKey(dsMain, Main.Data.Cache.Meeting, MeetingID);
+		}
+		else
+		{
+			moRecord = dsMain.Meeting.NewMeetingRow();
+			moRecord.MeetingStatusID = 10;
+			moRecord.DepartmentID = M2Common.Main.Master.CurrentMeetingGroupID;
+			dsMain.Meeting.AddMeetingRow(moRecord);
+			Util.CopyRowValuesToDefaults(moRecord);
+		}
+		LoadFields();
+	}
+
+	public MsgBoxResult SaveRecord(bool Prompt)
+	{
+		checked
+		{
+			MsgBoxResult result;
+			if (moRecord == null || base.ReadOnly)
+			{
+				result = MsgBoxResult.No;
+			}
+			else
+			{
+				moRecord.DepartmentID = (int)cboDepartmentID.SelectedValueLong;
+				moRecord.MeetingDate = txtMeetingDate.ValueDateTime;
+				moRecord.ResolutionDueDate = txtResolutionDueDate.ValueDateTime;
+				moRecord.MeetingLocationID = (int)cboMeetingLocationID.SelectedValueLong;
+				moRecord.MeetingTypeID = (int)cboMeetingTypeID.SelectedValueLong;
+				moRecord.MeetingStatusID = (byte)cboMeetingStatusID.SelectedValueLong;
+				FieldsWithoutSchema.SetMeetingCancelNotice(moRecord, txtMeetingPortalNotice.Text);
+				FieldsWithoutSchema.SetTimestampStart(moRecord, FieldsWithoutSchema.GetTimestampStart(moRecord));
+				FieldsWithoutSchema.SetTimestampStartDelta(moRecord, FieldsWithoutSchema.GetTimestampStartDelta(moRecord));
+				if (!Util.HasChanges(dsMain.Meeting))
+				{
+					result = MsgBoxResult.Yes;
+				}
+				else
+				{
+					MsgBoxResult msgBoxResult = StandardUtil.PromptSave("Meeting Record", Prompt);
+					if (msgBoxResult != MsgBoxResult.Yes)
+					{
+						result = msgBoxResult;
+					}
+					else if (!ValidateAll())
+					{
+						result = MsgBoxResult.Cancel;
+					}
+					else
+					{
+						try
+						{
+							DB dataSet = Main.Data.MeetingUpdate((DB)dsMain.GetChanges());
+							dsMain.Meeting.Clear();
+							dsMain.Merge(dataSet);
+							moRecord = dsMain.Meeting[0];
+							LoadFields();
+							StandardUtil.PlaySound(ApplicationSound.Record);
+							result = MsgBoxResult.Yes;
+						}
+						catch (Exception ex)
+						{
+							ProjectData.SetProjectError(ex);
+							Exception ex2 = ex;
+							ExUtil.ExBox(ex2, MsgBoxStyle.Critical, "Error Saving Meeting");
+							result = MsgBoxResult.Cancel;
+							ProjectData.ClearProjectError();
+						}
+					}
+				}
+			}
+			return result;
+		}
+	}
+
+	private void cboMeetingLocationID_NotInList(object sender, CancelEventArgs e)
+	{
+		StandardUtil.Combo_NotInList(cboMeetingLocationID, "MeetingLocation", "Meeting Location", e);
+	}
+
+	private void txtResolutionDueDate_Validate(object sender, FormValidationEventArgs e)
+	{
+		if (DateTime.Compare(txtResolutionDueDate.ValueDateTime, txtMeetingDate.ValueDateTime) > 0)
+		{
+			e.SetError("Resolution Due Date cannot be after Meeting Date.");
+		}
+	}
+
+	private void cboDepartmentID_ValueChanged(object sender, EventArgs e)
+	{
+		string value = cboMeetingTypeID.Text;
+		RefreshMeetingTypes(MTDataAction.Unknown, null);
+		if (!cboMeetingTypeID.IsEmpty && cboMeetingTypeID.SelectedIndex < 0)
+		{
+			cboMeetingTypeID.Value = value;

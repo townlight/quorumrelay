@@ -1,0 +1,97 @@
+{
+  "captured": "2026-11-16",
+  "vendor": "Boardable",
+  "access": "Authorized QuorumRelay Evaluation trial, organization 46098, owner 403839",
+  "canonical_url": "https://app.boardable.com/quorumrelay-evaluation/documents/4456b3ae",
+  "native_id": 1270573,
+  "files": [
+    {
+      "file": "boardable-document-center-create.json",
+      "bytes": 2950,
+      "sha256": "ec152fe263dc08a7d036c89991e3a1cbadcae19dfa506e92f11e2696bc3e3cfc"
+    },
+    {
+      "file": "boardable-document-center-download.json",
+      "bytes": 294,
+      "sha256": "22ed9c22c6d3a7dce1460a814cb037b43e83e8e94c67a8d238915e7ab14ce650"
+    },
+    {
+      "file": "boardable-document-center-update.json",
+      "bytes": 1064,
+      "sha256": "a7d1505a4c9c017aad6f4175ec7af89916a35f26dfb8631902e03b169ab388ae"
+    },
+    {
+      "file": "boardable-document-center-readback.json",
+      "bytes": 3098,
+      "sha256": "07a4a746ccc7a4a403272ff7ffb5f53a92a862e5abc91dbfb24f90bb01ec9164"
+    },
+    {
+      "file": "boardable-document-center-client.json",
+      "bytes": 12064,
+      "sha256": "a0c672d540ab4cd45f0856caa0ea6f99562810b4243002652982031dc0109ec2"
+    },
+    {
+      "file": "boardable-document-center-data.json",
+      "bytes": 9306,
+      "sha256": "1c7fef8df4d9190ce308a89c60324506b827a8278e2da79394bef50078617920"
+    },
+    {
+      "file": "boardable-document-center-json-update.json",
+      "bytes": 3360,
+      "sha256": "82463401f0069a5b6f60d698823a0205b2332d41afec7d59b457336611cad954"
+    },
+    {
+      "file": "boardable-document-center-final-readback.json",
+      "bytes": 9479,
+      "sha256": "bf2678b23b3086b9da7d6441f77a533a42692f81c7f7817af48b60ac8b47ee68"
+    },
+    {
+      "file": "quorumrelay-document-center-evaluation.txt",
+      "bytes": 118,
+      "sha256": "6255a5838ad4f46e2efc7f78d040e688d0b3f58d1fe646d36ca474fba13b6d9b"
+    }
+  ],
+  "executed": [
+    "Native multipart POST /quorumrelay-evaluation/documents returned 201 raw document.",
+    "Multipart metadata POST /documents/1270573 returned 200; native automatic reload evicted response body.",
+    "Separately captured exact declared JSON title-only POST /documents/1270573 returned 200 raw document.",
+    "Declared GET /documents/4456b3ae/data independently returned 200 raw document before and after JSON update.",
+    "Original download returned 200, 118 bytes and matching SHA256 before and after metadata changes."
+  ],
+  "contract": {
+    "create_fields": [
+      "file",
+      "title",
+      "body",
+      "disable_downloads",
+      "folder"
+    ],
+    "create_defaults": {
+      "body": "",
+      "disable_downloads": "false",
+      "folder": "0"
+    },
+    "json_update_fields": [
+      "title"
+    ],
+    "multipart_update_fields": [
+      "body",
+      "title",
+      "disable_downloads",
+      "upload_type",
+      "document_id",
+      "file"
+    ],
+    "no_replacement_file_value": "undefined",
+    "native_read_method": "GET",
+    "native_read_url": "https://app.boardable.com/quorumrelay-evaluation/documents/4456b3ae/data"
+  },
+  "limits": [
+    "Native browser evaluation actions executed; no Document Center adapter integrated yet.",
+    "Root folder 0 only; folder-specific creation, access changes, notifications, sharing and signatures not exercised.",
+    "File replacement inspected then cancelled; UI warns annotations are irreversibly lost. No replacement request executed.",
+    "No invitees, payments, vendor contacts or release.",
+    "Profile/contact/auth fields removed; URL query strings removed; unrelated deletion client methods omitted.",
+    "CDP multipart capture omits file bytes; exact synthetic source bytes and hash separately pinned."
+  ]
+}

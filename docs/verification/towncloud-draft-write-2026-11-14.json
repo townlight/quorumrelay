@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "49c8ad843b9890c37bf1145643a6b134aef713bf",
+  "status": "SCOPED_SYNTHETIC_PASS",
+  "requirements": [
+    8,
+    9,
+    10
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_towncloud_draft_write.py tests/test_boardable_agenda_write.py tests/test_telvue_playlist_write.py tests/test_writes.py -q",
+      "passed": 105,
+      "failed": 0,
+      "junit_sha256": "d84bf667bc22e77c3b19d186beccddeb7be0cc4e30718475dca412326a92c548"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/towncloud-client-drafts/application.extract.js",
+      "sha256": "f2a4b76f247d8732915f00497916bb941ef09f9b6a488392549bae190d1342e4"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/towncloud-client-drafts/source.json",
+      "sha256": "82cd73203ae70590a6cad9c477d476ed08de23f2ebbe132bfb9aff40b315a3ff"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/towncloud_write.py",
+      "sha256": "bac98d56b4d8cedde6eed5bcc6c31e5235098505372ede0f2f5908331ad5cccd"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_towncloud_draft_write.py",
+      "sha256": "cbf2ae5e7962516a3465d9a54fadd71f87d6005ef7ebda57695b442cf5970cdb",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "b3c91c545881a581299ded773cee30d188fd942aaeb830716a9b74438a72b967"
+    }
+  ],
+  "synthetic_execution": {
+    "provider": "towncloud",
+    "status": "mock_passed",
+    "operations": [
+      "update"
+    ],
+    "entities": [
+      "item_draft"
+    ],
+    "scope": "One existing explicitly unexpired draft text field bound to a trusted native meeting/item or section. Saved unpublished draft only.",
+    "execution_provenance": "30TownCloud cases including all declared field variants;105affected passes through shared coordinator, restart/reconcile and readback. No live mutation.",
+    "checks": [
+      {
+        "command": "pytest tests/test_towncloud_draft_write.py tests/test_boardable_agenda_write.py tests/test_telvue_playlist_write.py tests/test_writes.py -q",
+        "passed": 105,
+        "failed": 0,
+        "junit_sha256": "d84bf667bc22e77c3b19d186beccddeb7be0cc4e30718475dca412326a92c548"
+      }
+    ],
+    "bindings": [
+      {
+        "kind": "vendor_contract",
+        "path": "docs/capabilities/evidence/towncloud-client-drafts/application.extract.js",
+        "sha256": "f2a4b76f247d8732915f00497916bb941ef09f9b6a488392549bae190d1342e4"
+      },
+      {
+        "kind": "vendor_contract",
+        "path": "docs/capabilities/evidence/towncloud-client-drafts/source.json",
+        "sha256": "82cd73203ae70590a6cad9c477d476ed08de23f2ebbe132bfb9aff40b315a3ff"
+      },
+      {
+        "kind": "test",
+        "path": "tests/test_towncloud_draft_write.py",
+        "sha256": "cbf2ae5e7962516a3465d9a54fadd71f87d6005ef7ebda57695b442cf5970cdb",
+        "hash_policy": "test_source_crlf_to_lf",
+        "canonical_lf_sha256": "b3c91c545881a581299ded773cee30d188fd942aaeb830716a9b74438a72b967"
+      }
+    ]
+  },
+  "limits": [
+    "Existing unpublished draft content only. No agenda/item creation, publication, form save, new file or vendor import inferred.",
+    "GET response scope only; no invented paging, entire account snapshot or atomic upstream compare-and-swap.",
+    "Public captured display positions cannot authorize a native staff item. Trusted application policy supplies exact site/tenant/agenda/content binding."
+  ]
+}

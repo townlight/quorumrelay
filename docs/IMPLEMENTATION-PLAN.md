@@ -1,4 +1,17 @@
-# QuorumRelay — bounded implementation plan
+# QuorumRelay — bounded implementation plan (historical record)
+
+Current release scope and provider status are in [Delivery scope](DELIVERY-SCOPE.md). The instructions and dates below describe earlier milestones.
+
+## Current owner directives
+
+Scott's November 12 acceptance amendment accepts vendor-documented synthetic
+execution, readback and receipts for provider operations. Accounts and live-tenant
+mutation are optional supporting evidence, not acceptance gates. This supersedes
+older credential/test-tenant requirements retained below as planning history.
+Implementation of tasks 6, 8, 9 and 10 of the full 19-task plan is active;
+release and publication remain held. Follow the current serial, headless execution
+contract rather than historical delegation or pause language. Preserve the full
+agreed scope and label unresolved contracts honestly.
 
 Owner: Scott. Planning date: November 11, 2026, America/Denver.
 
@@ -185,11 +198,11 @@ The record envelope keeps schema version, provider, tenant namespace, external I
 
 Each remote write has a target provider/tenant/resource, field mapping, validation, a before/after plan and expected upstream version where available. Use the caller's established authorization or saved policy; bind commit to that exact plan. Validate credentials and supported fields server-side. Use idempotency where supported; otherwise reconcile remote identity/readback before repeating an uncertain create. Preserve per-operation results for partial batches. Do not automatically delete records to undo a partial result.
 
-**Done:** Neutral bundles round-trip without losing supported schema data. CSV/iCalendar/provider mappings disclose omitted fields. Every verified supported outbound operation in the agreed data domain is implemented and exercised in an authorized test tenant or equivalent provider test environment, with readback and a receipt. Tests cover duplicates, changed upstream records, partial failures, permission denial and ambiguous network outcomes. A mocked write proves adapter behavior, not live provider acceptance. Missing test access is an explicit remaining blocker. No silent downgrade from a promised supported write to a file download.
+**Done:** Neutral bundles round-trip without losing supported schema data. CSV/iCalendar/provider mappings disclose omitted fields. Every verified supported outbound operation in the agreed data domain is implemented and exercised through vendor-documented synthetic execution, readback and a receipt. Tests cover duplicates, changed upstream records, partial failures, permission denial and ambiguous network outcomes. Synthetic execution establishes behavior against the documented contract; label it separately from any actual live-provider observation. Accounts and live-tenant mutation are not completion gates, per Scott's November 12 acceptance amendment. No silent downgrade from a promised supported write to a file download.
 
 **Boundary:** No automatic bidirectional synchronization, deletes, procurement/award decisions or arbitrary vendor administration. Write-back covers explicit create/update/upload operations, not every API endpoint the vendor publishes. Provider capabilities can differ by account/tenant. A calendar feed does not imply its hosting CMS accepts writes.
 
-**Access dependency:** Official API documentation establishes a route to investigate, not usable credentials, permission, conflict semantics or live acceptance. Resolve and record test-access dependencies early. If a required operation remains blocked by access, continue independent authorized work and retain that operation as incomplete. The exclusion of automatic procurement/vendor outreach does not waive the operation or authorize claiming the full release complete. Any proposed scope reduction or separate delivery would require Scott's explicit decision. The existing requirement to bind commit to the exact authorized plan applies equally to SDK, CLI, HTTP and MCP calls, including retries after an ambiguous network outcome.
+**Contract dependency:** Official API documentation establishes a route to investigate; it does not establish undocumented fields, conflict semantics or destination configuration. Resolve contract gaps with vendor material and traceable synthetic execution. A remaining gap stays incomplete; call it an outside dependency only when evidence establishes the exact information that must come from outside. Continue independent authorized work. Do not acquire credentials or provision test accounts as an acceptance gate. The exclusion of automatic procurement/vendor outreach does not waive an operation or authorize claiming the full release complete. Any proposed scope reduction or separate delivery requires Scott's explicit decision. Binding commit to the exact authorized plan applies equally to SDK, CLI, HTTP and MCP calls, including retries after an ambiguous network outcome.
 
 ### 6. Complete API, MCP, SDK and extension access
 

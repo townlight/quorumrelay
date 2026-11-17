@@ -1,4 +1,4 @@
-# Engine contract, candidate 0.1.0.dev8 / schema 2.0.0
+# Engine contract, release 0.1.0.dev14 / schema 2.0.0
 
 Implementation layout: core `models.py`, `engine.py`, `extensions.py`, `compat.py`, `normalization.py`, `fetch.py`; discovery `providers/`; storage/search/export `storage.py`, `search.py`, `interchange.py`, `imports.py`; writes `writes.py`; transports `transports/`, TypeScript `client/`.
 
@@ -25,6 +25,8 @@ Engine construction does not start services, open a database, fetch data, or wri
 
 Public entry points use `from quorumrelay import create_engine`: `create_engine(*, storage=None, connectors=(), provider_transport=None, provider_browser=None, write_adapters=None, write_approval=None)`. This registers every standard module once. `write_adapters=None` includes real built-in adapters but grants no credentials/authorization; an explicit empty dictionary disables them. No implicit database or service starts.
 
+Native additive input formats require `create_engine()` or `providers.register(engine)`; an unextended bare `Engine()` supports only the 34 baseline formats.
+
 Missing implementation returns `unsupported` with reason explicitly distinguishing unavailable implementation from unsupported vendor capability. Unsupported fields/invalid input return `failed` plus typed errors. Every convenience call preserves the complete result envelope, not only its record list.
 
 ## Common serialization
@@ -32,6 +34,8 @@ Missing implementation returns `unsupported` with reason explicitly distinguishi
 `OperationResult`: `schema_version`, `status` (`completed|partial|cancelled|failed|unsupported`), `data`, `errors`, `coverage`, `operation_id`. Error: `code`, `message`, `retryable`, `source`, `details`. Public JSON never serializes OperationContext or credentials.
 
 `Source`: `provider`, `url`, optional `namespace`, `body`, `input_format`, `options` object. Namespace must equal evidenced provider-derived namespace, not an arbitrary user tenant label. `url` is a durable source/citation, never credentials. Options contain only provider-documented configuration, never arbitrary fetch targets or secrets.
+
+Source rejects recognized credential keys in URL queries and recursively in options, including case, hyphen and underscore variants. Errors identify the key path without its value and direct callers to private `OperationContext.credentials` using the provider-specific documented shape (for example, `legistar_token` for Legistar reads and nested provider objects for native writes). Generated record and text citations strip credential query parameters (and signed-transfer authentication); original captures and unknown upstream fields remain lossless.
 
 `Bounds`: optional inclusive `date_from`/`date_to` (`YYYY-MM-DD`); `max_records=1000`, `max_pages=25`, `parser_bytes=16777216`, `transfer_bytes=209715200`, `deadline_seconds=45`, optional `checkpoint`. Date filtering uses a source-supplied local calendar date when supplied, otherwise known scheduled date. Unknown dates remain explicit partial coverage, not silently excluded. API-specific ge/lt ranges must map the inclusive caller end date to the correct exclusive next-day boundary without inventing unknown time zones.
 
@@ -53,11 +57,21 @@ SDK may supply `content` bytes instead. `data` is a `CaptureBundle`: `schema_ver
 
 `Record`: `schema_version`, `identity`, `normalized`, `source_url`, `citation_urls`, `capture_sha256`, `captured_at`, `normalized_sha256`, `source_revision`, `original`, `relationships`, `text`, `extensions`. Preserve these dicts and all additional unknown keys losslessly when store/import/export pass dictionaries around. Typed `from_dict` helpers will preserve unknown top-level keys; dictionaries remain the interchange source of truth.
 
+`normalized_sha256` hashes the complete `normalized` object using the canonical
+JSON hash, including shared fields added after baseline parsing. Direct saved
+normalization and fetched discovery therefore use the same digest for equal
+normalized values. Older direct-normalization records could hash the narrower
+reader row; reprocessing one can refresh its local digest once. Source identities,
+original capture hashes and the version-1 compatibility output are unchanged.
+The digest is a local change indicator, never an upstream revision or overwrite grant.
+
 `Source`, `Identity`, `Record`, `CaptureBundle` and `OperationResult` supply `from_dict`/`public_dict` helpers. Unknown fields survive both top-level and nested typed round trips. JSON serialization uses arrays, not Python tuples. Known-offset timestamps, a supplied calendar TZID, and unknown zones are distinct; a supplied named zone never invents a UTC offset.
 
 Identity: `provider`, `namespace`, `record_type`, `external_id`, optional `parent` identity, `derivation`, `stability`. Only the first five form source identity. Capture hash, normalized hash, upstream revision and application destination IDs are different. `source_revision` has `kind` and `value`, provider mappings may add provenance; do not call local hashes upstream versions. Unknown revisions are `{"kind":"not_supplied","value":null}`.
 
 Normalized fields retain original v1 values, adding explicit timezone/agenda availability and supplied status. Unknown data stays original. HTML/PDF originals remain exact capture bytes with references. Rich Tyler and iCalendar records retain cancelled/adjourned entries even where compatibility filters them.
+
+Tyler saved-calendar normalization hashes the final rich normalized record, including supplied `source_status.canceled` and `source_status.adjourned`. A status-only change therefore keeps the same native identity while producing a different normalized digest and an import-preview `changed_source` outcome. Capture hashes identify the exact input bytes; no vendor revision is invented. Supplied reschedule, visibility and unknown fields remain in `original` without inferred status semantics. The compatibility reader and its filtering remain unchanged.
 
 Text segment: `field`, `text`, `citation_url`, optional `page`, `timestamp`, `language`, `provenance`, `completeness`. Supplied captions/notice text are initial segments. An extraction failure or scanned PDF is not complete text search. Durable source/citation URLs remain separate from short-lived attachment transfer URLs.
 
@@ -79,6 +93,17 @@ Write plans/receipts need create/CAS before sending requests. Persist exact immu
 ## Connector extension
 
 `Connector` protocol in `extensions.py` declares provider, `capabilities`, `identify`, `discover`, `fetch`, `parse`, `native_search`, `export`, `plan_write`, `commit_write`. `check_connector()` validates signatures/callability without network actions. Unsupported hooks return explicit `OperationResult.unsupported`, not fake success. Registration requires no transport edits. Provider discovery owner can expose richer orchestration through registered operation handlers while implementing these hooks.
+
+The optional `discover_request(source, request, bounds, context)` hook receives
+request-aware live discovery. The optional six-argument
+`discover_content(engine, source, request, content, bounds, context)` hook takes
+precedence when direct content bytes or a `content_base64` field are supplied;
+encoded content remains in the request for the hook to validate and decode. Absent
+saved content, the request-aware hook or original three-argument `discover` is
+used. Neither hook is required by the original Connector protocol, and
+`check_connector` checks each optional hook when present. Cablecast saved show and
+list capture discovery uses no provider network request and reports that the
+capture does not establish upstream catalog completeness.
 
 Registered custom source providers dispatch identify/discover/fetch/parse directly; `search` with `native:true` invokes native search, and `export` with `provider_specific:true` invokes provider export. Restricted custom requests require an explicit configured namespace. Write hooks cannot bypass the shared write coordinator: register a typed WriteAdapter as well for supported writes. The synthetic example connector proves read registration without transport changes.
 
@@ -105,3 +130,18 @@ Frozen early extraction artifact: `dist/core-baseline/civic_data_connectors-0.1.
 `fetch` accepts `external_id` for an evidenced provider detail adapter. It cannot be combined with attachment selection or saved content. The Legistar adapter issues one fixed event-detail route with items/notes/attachment expansion flags and rejects response IDs that differ from the requested EventId. It uses the same exact source identity as event discovery. Missing/unimplemented detail adapters remain explicit, rather than returning a catalog or successful empty result for a specific record request.
 
 `providers.data.providers[].additional_formats` lists registered additive parser hooks independently of the preserved 34 baseline formats. This is runtime parser availability, not a live provider acceptance claim.
+
+## Current source-only Granicus Platform mappings
+
+These additions are local source, not the frozen dev8 distribution. Select the explicit `granicus-platform-soap-xml` format and tenant URL `https://{tenant}.granicus.com/SDK/User/index.php`. Server-owned `context.credentials.granicus` binds `username`, `password`, application `tenant`, exact `origin` and `namespace`; credentials never belong in requests. Grant only the needed `permissions`, `resource_ids`, `meeting_ids`, `foreign_ids` or `folder_ids`. MediaVault additionally requires an explicit HTTPS `media_origin` matching the folder's vendor descriptor. General contacts, vendor administration and deletes are excluded.
+
+All mutations use the existing `plan_write` → approve exact `plan_id`/`plan_hash` → `commit_write` → receipt sequence. No ingestion implicitly publishes media.
+
+- `recording_publication` / `update`: existing clip `resource_id`, `meeting_id`, all seven native `PublishClipData` fields including explicit boolean `Public`; requires separate `recording_publication:update`. Receipts independently verify clip identity/default visibility, label other publication fields submitted-only, and retain Pending/missing-acknowledgement uncertainty without replay.
+- `agenda_tree` / `create`: target Event/Clip `resource_id`, `meeting_id`, fields `ParentType` and full `MetaDataData` root. `agenda_tree` / `update` imports `MetaData` array with explicit `AsTree` and `ClearExisting:false`. Every new node supplies all native fields, unassigned ID0/empty UID and a unique authorized ForeignID. Destructive clearing is vendor-supported but excluded by project scope. Readback checks provider IDs, fields and parent relationships.
+- `generated_minutes` / `create`: existing clip `resource_id`, `meeting_id`, exact `clipUid`, `name`, `templateUid`, `isPublished`, `isDefault` fields. Both flags are mandatory. This creates upstream content; it is not a read/export. New UID/name/publication/default metadata are checked; template choice and generated file bytes remain explicitly unverified.
+- `chunked_recording` / `upload`: no existing `resource_id`; explicit `meeting_id`, fields `FolderID`, `Name`, `Extension`, `ChunkBytes`, plus one approved audio/video `bytes` file part. `ChunkBytes` is caller-selected within the adapter's 7,000,000-byte per-chunk safety ceiling, not a vendor total-file cap. To assign uploaded bytes to an existing clip, use `update`, exact clip `resource_id`, and `ClipUID` instead of `Name`. Operation/resource/folder/meeting grants remain required. See the existing file-handle staging interface for exact authorized file bytes.
+
+Chunk state is stored privately in `private_provider_uploads`, scoped to the caller and bound to source/approved plan. The application owns database protection and retention. Remote bucket GUIDs never enter public plans/receipts, and current login cookies remain ephemeral. A recorded state is not a promise of resumability: unknown Start/Chunk/Finish/Register/Assign outcomes never automatically replay. Vendor checksum algorithm, playable processing and remote original-byte equality are not inferred.
+
+Record-shaped raw SOAP normalizes offline without provider credentials. Responses such as captions/attachments that contain no request parent ID use the existing neutral CaptureBundle fallback, preserving exact XML and supplied parent/records. Bare supporting XML fails explicitly rather than inventing identity. Read `provider-api-contracts.json` for pinned versions, method/outcome assessment and field-level qualifications; redundant convenience endpoints do not become additional requirements.

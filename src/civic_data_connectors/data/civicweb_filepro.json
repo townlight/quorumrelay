@@ -1,0 +1,398 @@
+{
+  "namespace": "http://civicweb.net/",
+  "source_wsdl_sha256": "b56a31e389885fa2295f406fce4de96987a4687ef34752710066d1a8519ebf46",
+  "guide_date": "2014-04-24",
+  "captured_date": "2026-11-12",
+  "operations": {
+    "GetChildList": {
+      "request": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "array": false
+        },
+        {
+          "name": "path",
+          "type": "string",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "includeDocuments",
+          "type": "boolean",
+          "optional": false,
+          "array": false
+        },
+        {
+          "name": "documentProvider",
+          "type": "string",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "controlId",
+          "type": "string",
+          "optional": true,
+          "array": false
+        }
+      ],
+      "response": [
+        {
+          "name": "GetChildListResult",
+          "type": "DocumentChildListResult",
+          "optional": true,
+          "array": false
+        }
+      ],
+      "soap_action": "http://civicweb.net/GetChildList"
+    },
+    "GetTitle": {
+      "request": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "array": false
+        }
+      ],
+      "response": [
+        {
+          "name": "GetTitleResult",
+          "type": "string",
+          "optional": true,
+          "array": false
+        }
+      ],
+      "soap_action": "http://civicweb.net/GetTitle"
+    },
+    "GetOriginalFile": {
+      "request": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "array": false
+        }
+      ],
+      "response": [
+        {
+          "name": "GetOriginalFileResult",
+          "type": "DocumentFileResult",
+          "optional": true,
+          "array": false
+        }
+      ],
+      "soap_action": "http://civicweb.net/GetOriginalFile"
+    },
+    "GetPdfFile": {
+      "request": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "array": false
+        }
+      ],
+      "response": [
+        {
+          "name": "GetPdfFileResult",
+          "type": "DocumentFileResult",
+          "optional": true,
+          "array": false
+        }
+      ],
+      "soap_action": "http://civicweb.net/GetPdfFile"
+    },
+    "GetMeetingAttachmentPdfFile": {
+      "request": [
+        {
+          "name": "documentId",
+          "type": "int",
+          "optional": false,
+          "array": false
+        },
+        {
+          "name": "meetingId",
+          "type": "int",
+          "optional": false,
+          "array": false
+        }
+      ],
+      "response": [
+        {
+          "name": "GetMeetingAttachmentPdfFileResult",
+          "type": "DocumentFileResult",
+          "optional": true,
+          "array": false
+        }
+      ],
+      "soap_action": "http://civicweb.net/GetMeetingAttachmentPdfFile"
+    },
+    "GetSearchResults": {
+      "request": [
+        {
+          "name": "exactPhrase",
+          "type": "string",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "allWords",
+          "type": "string",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "atLeastOneWord",
+          "type": "string",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "wordsInProximity1",
+          "type": "string",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "wordsInProximity2",
+          "type": "string",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "wordsNotIncluded",
+          "type": "string",
+          "optional": true,
+          "array": false
+        }
+      ],
+      "response": [
+        {
+          "name": "GetSearchResultsResult",
+          "type": "ArrayOfInt",
+          "optional": true,
+          "array": false
+        }
+      ],
+      "soap_action": "http://civicweb.net/GetSearchResults"
+    },
+    "GetSearchResultDetails": {
+      "request": [
+        {
+          "name": "searchResultsSubset",
+          "type": "ArrayOfInt",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "exactPhrase",
+          "type": "string",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "allWords",
+          "type": "string",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "atLeastOneWord",
+          "type": "string",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "wordsInProximity1",
+          "type": "string",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "wordsInProximity2",
+          "type": "string",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "wordsNotIncluded",
+          "type": "string",
+          "optional": true,
+          "array": false
+        }
+      ],
+      "response": [
+        {
+          "name": "GetSearchResultDetailsResult",
+          "type": "ArrayOfDocumentSearchResult",
+          "optional": true,
+          "array": false
+        }
+      ],
+      "soap_action": "http://civicweb.net/GetSearchResultDetails"
+    },
+    "GetSearchResultDetailsBySearchCriteria": {
+      "request": [
+        {
+          "name": "searchResultsSubset",
+          "type": "ArrayOfInt",
+          "optional": true,
+          "array": false
+        },
+        {
+          "name": "searchCriteria",
+          "type": "string",
+          "optional": true,
+          "array": false
+        }
+      ],
+      "response": [
+        {
+          "name": "GetSearchResultDetailsBySearchCriteriaResult",
+          "type": "ArrayOfDocumentSearchResult",
+          "optional": true,
+          "array": false
+        }
+      ],
+      "soap_action": "http://civicweb.net/GetSearchResultDetailsBySearchCriteria"
+    }
+  },
+  "types": {
+    "DocumentChildListResult": [
+      {
+        "name": "ControlID",
+        "type": "string",
+        "optional": true,
+        "array": false
+      },
+      {
+        "name": "ID",
+        "type": "int",
+        "optional": false,
+        "array": false
+      },
+      {
+        "name": "Path",
+        "type": "string",
+        "optional": true,
+        "array": false
+      },
+      {
+        "name": "Nodes",
+        "type": "ArrayOfDocumentTreeNodeInformation",
+        "optional": true,
+        "array": false
+      }
+    ],
+    "ArrayOfDocumentTreeNodeInformation": [
+      {
+        "name": "DocumentTreeNodeInformation",
+        "type": "DocumentTreeNodeInformation",
+        "optional": true,
+        "array": true
+      }
+    ],
+    "DocumentTreeNodeInformation": [
+      {
+        "name": "ID",
+        "type": "int",
+        "optional": false,
+        "array": false
+      },
+      {
+        "name": "Name",
+        "type": "string",
+        "optional": true,
+        "array": false
+      },
+      {
+        "name": "Path",
+        "type": "string",
+        "optional": true,
+        "array": false
+      },
+      {
+        "name": "Folder",
+        "type": "boolean",
+        "optional": false,
+        "array": false
+      },
+      {
+        "name": "IsPublic",
+        "type": "boolean",
+        "optional": false,
+        "array": false
+      },
+      {
+        "name": "CanUpdate",
+        "type": "boolean",
+        "optional": false,
+        "array": false
+      }
+    ],
+    "DocumentFileResult": [
+      {
+        "name": "Html",
+        "type": "string",
+        "optional": true,
+        "array": false
+      },
+      {
+        "name": "FileBytes",
+        "type": "base64Binary",
+        "optional": true,
+        "array": false
+      },
+      {
+        "name": "Extension",
+        "type": "string",
+        "optional": true,
+        "array": false
+      }
+    ],
+    "ArrayOfInt": [
+      {
+        "name": "int",
+        "type": "int",
+        "optional": true,
+        "array": true
+      }
+    ],
+    "ArrayOfDocumentSearchResult": [
+      {
+        "name": "DocumentSearchResult",
+        "type": "DocumentSearchResult",
+        "optional": true,
+        "array": true
+      }
+    ],
+    "DocumentSearchResult": [
+      {
+        "name": "Id",
+        "type": "int",
+        "optional": false,
+        "array": false
+      },
+      {
+        "name": "TitleHtml",
+        "type": "string",
+        "optional": true,
+        "array": false
+      },
+      {
+        "name": "SampleHtml",
+        "type": "string",
+        "optional": true,
+        "array": false
+      },
+      {
+        "name": "PathHtml",
+        "type": "string",
+        "optional": true,
+        "array": false
+      }
+    ]
+  }
+}

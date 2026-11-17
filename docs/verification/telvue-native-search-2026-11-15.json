@@ -1,0 +1,62 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "f7f9eaa56f9c7ee7a2a6c4cc42bfeadf8bae8d6d",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "Explicit TelVue player-wide public media candidates and metadata/summary search; native IDs, safe links and portable exact-hit behavior.",
+  "new_cases": 22,
+  "checks": [
+    {
+      "scope": "New search, existing TelVue public player/mRSS, discovery/interchange/storage and HTTP/MCP",
+      "passed": 185,
+      "failed": 0,
+      "seconds": 35.55,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\telvue-native-search-2026-11-15.xml",
+      "xml_sha256": "7b2d469de2fc40820a50a50f6b07b82cc5f1887ea7982f1067dbff07c829410b",
+      "warning": "Existing Starlette/AnyIO alias deprecation"
+    },
+    {
+      "scope": "Ruff changed source/test",
+      "status": "PASSED"
+    }
+  ],
+  "source_sha256": {
+    "src/civic_data_connectors/providers/telvue_search.py": "cb00abd5ce6fbde75faa8ab190fc45450842b398c50c86371c64c441f5bcdd4e",
+    "src/civic_data_connectors/providers/__init__.py": "10f912cfaa8e6100d72cafcf5dfd3f8ab6cdb63407b7b810dcc6a3348080f620",
+    "src/civic_data_connectors/providers/identification.py": "72e1d9d35767cb89fc1f29162c0586edb5871129a2924234d644a91ca56f2119",
+    "src/civic_data_connectors/providers/native.py": "cc3255dca00e393b10ff9d88bdf0f985064bdcb788897ccac8ab066ed05a0218",
+    "tests/test_telvue_native_search.py": "2ddb422594db9469e34c78ee4427e4688c1f36c005433eeb0a55f5856f50d731",
+    "docs/TELVUE-PUBLIC-SEARCH.md": "467e26bc9bd5c93bbe2bf14aeede6cbcf09689de03f0b875c418e9d9fd69bb04"
+  },
+  "primary_source": "docs/capabilities/evidence/telvue-public-search/source.json",
+  "limits": [
+    "All results partial; unreadable/empty fails, no complete catalog/fulltext/provider exhaustion.",
+    "Dates are explicitly title-derived calendar dates; unknown time zone remains unknown.",
+    "No account, upload, write/import, browser or release."
+  ],
+  "defect_found": "Initial probe returned43local hits because supplied search locators echo council. Moved links out of searchable normalized metadata into citations/relationships;22focused cases prove22exact hits now and after SQLite reopen/export, retaining all43candidates.",
+  "prior_source_sha256_at_d2c9046": {
+    "src/civic_data_connectors/providers/telvue_search.py": "6d4a1eca6b9266e1aa053cc6dce2336ffb7003a6330be3062cff13f316413a23",
+    "src/civic_data_connectors/providers/__init__.py": "10f912cfaa8e6100d72cafcf5dfd3f8ab6cdb63407b7b810dcc6a3348080f620",
+    "src/civic_data_connectors/providers/identification.py": "72e1d9d35767cb89fc1f29162c0586edb5871129a2924234d644a91ca56f2119",
+    "src/civic_data_connectors/providers/native.py": "cc3255dca00e393b10ff9d88bdf0f985064bdcb788897ccac8ab066ed05a0218",
+    "tests/test_telvue_native_search.py": "20df3b6775f4eb451ad11d47c72bc5977a2834a3fceb06a106465d2ef7f30878",
+    "docs/TELVUE-PUBLIC-SEARCH.md": "29337b3c4850f1eca15edb101035e363483c4755c5bc345213114fb06873c3ac"
+  },
+  "followup_base_commit": "d2c9046502c5112bd5db92dcc20d2f611398a60f",
+  "followup": {
+    "defect": "Consistently wrong terms in all native result locators were accepted and attributed to the current request.",
+    "reproduction": "Three coherent wrong-response fixtures returned partial before the fix: budget, Council, council+meeting. Initial one-link-only mutation was already rejected by the existing locator-consistency guard and did not reproduce this defect.",
+    "fix": "Require decoded native result terms to equal the exact requested first expression before publishing results. Saved-capture normalization remains independent of a current request.",
+    "command": "pytest tests/test_telvue_native_search.py tests/test_telvue_player.py tests/test_telvue_mrss.py -q",
+    "passed": 49,
+    "failed": 0,
+    "seconds": 1.32,
+    "new_cases": 3,
+    "limits": "Prior185-check run remains historical before this narrow validation patch. No additional vendor request or release."
+  }
+}

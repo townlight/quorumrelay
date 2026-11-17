@@ -42,10 +42,12 @@ def main(argv=None, *, stdin=None, stdout=None, stderr=None, engine=None) -> int
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(prog="quorumrelay")
-    parser.add_argument("operation", choices=(*OPERATIONS, "serve", "mcp"))
+    parser.add_argument("operation", choices=(*OPERATIONS, "serve", "mcp", "upload"))
     parser.add_argument("--request", help="Explicit JSON/JSONL file; otherwise stdin")
     parser.add_argument("--jsonl", action="store_true")
     parser.add_argument("--content", help="Explicit saved capture file")
+    parser.add_argument("--filename", help="Declared upload filename; defaults to the local basename")
+    parser.add_argument("--content-type", help="Explicit upload MIME type (required for upload)")
     parser.add_argument("--write-file", nargs=3, action="append", metavar=("CHANGE", "PART", "PATH"),
                         help="Stage a local file into one declared plan_write file part; repeat for additional parts")
     parser.add_argument("--export-file", nargs=2, action="append", metavar=("INDEX", "PATH"),
@@ -65,6 +67,28 @@ def main(argv=None, *, stdin=None, stdout=None, stderr=None, engine=None) -> int
     try:
         config = load_config(args.config) if args.config else {}
         principal = Principal.from_dict(config.get("principal", {}))
+        if args.operation == "upload":
+            if (not args.database or not args.content or not args.content_type or args.request or args.jsonl
+                    or args.output or args.write_file or args.export_file):
+                raise ValueError("upload requires --database, --content and --content-type, without operation JSON.")
+            from .interchange import stage_input
+            from .transports.files import allowed, validate_metadata
+            from uuid import uuid4
+            context = principal.context()
+            if not allowed(context):
+                raise ValueError("Caller policy does not permit file input.")
+            settings = ServiceConfig.from_dict(config.get("service", {}))
+            path = _checked_path(args.content, args.file_root)
+            filename = args.filename or path.name
+            validate_metadata(filename, args.content_type)
+            owner = engine or build_engine(database=args.database)
+            with path.open("rb") as source:
+                metadata = stage_input(owner, uuid4().hex, source, filename=filename,
+                    content_type=args.content_type, context=context, max_bytes=settings.transfer_bytes)
+            _emit(OperationResult("completed", data=metadata).public_dict(), stdout)
+            return 0
+        if args.filename or args.content_type:
+            raise ValueError("--filename and --content-type require upload.")
         if args.operation == "serve":
             import uvicorn
             from .transports.http import create_app
@@ -127,7 +151,8 @@ def main(argv=None, *, stdin=None, stdout=None, stderr=None, engine=None) -> int
                         files[index]["file_handle"] = staged["file_handle"]
                 if args.write_file:
                     from .models import Bounds
-                    from .write_files import stage_write_file
+                    from .interchange import stage_input
+                    from uuid import uuid4
                     bounds = Bounds(**request.get("bounds", {}))
                     used = set()
                     for change_key, part_name, filename in args.write_file:
@@ -140,8 +165,10 @@ def main(argv=None, *, stdin=None, stdout=None, stderr=None, engine=None) -> int
                             raise ValueError("--write-file requires one matching metadata-only file part.")
                         path = _checked_path(filename, args.file_root)
                         with path.open("rb") as source:
-                            matches[0]["file_handle"] = stage_write_file(
-                                owner, source, context=principal.context(), max_bytes=bounds.transfer_bytes)
+                            staged = stage_input(owner, uuid4().hex, source, filename=matches[0]["filename"],
+                                content_type=matches[0]["content_type"], context=principal.context(),
+                                max_bytes=bounds.transfer_bytes)
+                            matches[0]["file_handle"] = staged["file_handle"]
                 content = None
                 if args.content:
                     if "file_handle" in request or "content_base64" in request:

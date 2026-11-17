@@ -1,0 +1,19 @@
+{
+  "meetingSearchResponseDTOs": [],
+  "TotalCount": 0,
+  "SearchedMeetingTypeIds": [],
+  "SearchedStateAbbvrs": [],
+  "OrganizationFilters": null,
+  "ShowStateColumn": false,
+  "ShowOrganizationColumn": false,
+  "HideStateColumnOption": false,
+  "HideOrganizationColumnOption": false,
+  "ShowPopulationColumn": false,
+  "ShowRegionColumn": false,
+  "HidePopulationColumnOption": false,
+  "HideRegionColumnOption": false,
+  "SearchedRegions": [],
+  "SortColumnEnum": 1,
+  "SortDirectionEnum": 0,
+  "ShowRegionGroupColumn": false
+}

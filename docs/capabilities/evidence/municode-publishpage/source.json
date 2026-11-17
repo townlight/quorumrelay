@@ -1,0 +1,55 @@
+{
+  "observation_date": "2026-11-15",
+  "source_url": "https://meetings.municode.com/PublishPage/index?cid=EFFINGHAM&ppid=9639c19d-1d1f-4201-b8ff-163a28a35f08&p=1",
+  "source_kind": "Public HTML on vendor-owned meetings.municode.com; exact product release not stated",
+  "raw_capture": {
+    "path": "tests/fixtures/municode-publish/effingham.html",
+    "bytes": 92131,
+    "sha256": "f996a42d9d8811f6129cde3b9b57693627e1e2224141933428082ffe8865ee7c",
+    "http_status": null,
+    "status_limit": "Response bytes saved once; local optional-Location formatting error prevented HTTP-status recording. No retry."
+  },
+  "prior_observation": {
+    "path": "docs/capabilities/evidence/essential-postman/source.json",
+    "record": "public_page_followup",
+    "observed_at": "2026-11-14T16:29:30+00:00",
+    "http_status": 200,
+    "limits": "Separate historical observation, not the current response status or a prior content-hash comparison."
+  },
+  "observed_contract": {
+    "selected_page": "1",
+    "page_options": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "meeting_row_native_selectors": 25,
+    "tenant": "EFFINGHAM",
+    "publication_page": "9639c19d-1d1f-4201-b8ff-163a28a35f08",
+    "columns": [
+      "Meeting",
+      "Venue",
+      "Date",
+      "Time",
+      "Agenda",
+      "Packet",
+      "Minutes",
+      "Video/Audio",
+      "HTML Agenda",
+      "HTML Packet"
+    ],
+    "identity": "Native cc/me selectors in supplied ADA document links, with same-row PDF filename consistency checks. No authenticated API identity equivalence.",
+    "pagination": "Explicit first/last HTML links plus supplied selected/options and inline previous/next calculations. Only p=1 captured; no JavaScript executed or other page fetched.",
+    "client_assets": "No scripts/forms/iframes declared in this capture."
+  },
+  "scope_limits": [
+    "Selected public HTML page only, not authenticated Essential collection response or offset semantics.",
+    "Literal date/time supplied without time zone; title does not establish cancellation/publication status.",
+    "Linked files/media not retrieved by listing discovery.",
+    "Synthetic transport execution is separate from the single source-body observation; no live engine acceptance or full-catalog claim."
+  ]
+}

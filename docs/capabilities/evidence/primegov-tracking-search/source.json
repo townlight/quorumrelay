@@ -1,0 +1,34 @@
+{
+  "url": "https://reno.primegov.com/Scripts/Custom/Public/_Search.js",
+  "final_url": "https://reno.primegov.com/Scripts/Custom/Public/_Search.js",
+  "status": 200,
+  "bytes": 40780,
+  "content_type": "application/javascript",
+  "sha256": "59d8325d7adcff9451b9140acd3fe4acf1dcbecaa2b5a7ae3c1d80d63b0e6b70",
+  "same_as_pinned_2026_11_12": true,
+  "date": "2026-11-15",
+  "source_lines_1_based_inclusive": [
+    [
+      118,
+      138
+    ],
+    [
+      188,
+      194
+    ],
+    [
+      210,
+      225
+    ]
+  ],
+  "extract_path": "docs/capabilities/evidence/primegov-tracking-search/tracking-client.txt",
+  "extract_sha256": "5d30f542dbe2780fcf3906a1db62d0b520f1ea733020f60b77a5077f0d383fd0",
+  "derivation": "Exact line slices concatenated in order without separators; current public GET matches pinned 2026-11-12 client hash.",
+  "contract": "Advanced form TrackingNumber input -> TrackingNo; same POST /api/v2/PublicPortal/search, IsFromAdvanceSearch true, literal form field alongside Text/date bounds.",
+  "implementation": "Source.options.tracking_number for existing PrimeGov native public search; optional local text, exact request context captured, checkpoints bind source options.",
+  "limits": [
+    "Observed vendor public-client request contract, not official response-filter semantics or authenticated Meeting/speaker/tracking API.",
+    "Synthetic responses verify engine/form/capture/persistence/neutral export; no new live public search POST or account API call.",
+    "No source archive completeness, provider exact matching, import or write claim."
+  ]
+}

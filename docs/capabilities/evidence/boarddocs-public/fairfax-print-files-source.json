@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-14",
+  "url": "https://github.com/jessicamyu/school-surveillance/blob/785b3d6043426d2d533591618a4ca750f3c51da3/Meetings/vsba.html",
+  "fixture": "tests/fixtures/boarddocs-public/fairfax-print-20221115.html",
+  "git_blob": "90c15f107583cc5ff54dade8c0353c3a40b15ef9",
+  "sha256": "dd203526cecc33dd563ba7572aee05f4efc77e2c2db6c2d4bc53478197f4f914",
+  "bytes": 19281,
+  "provenance": "Exact third-party archived vendor print fragment, Git blob verified; not official/current live acceptance.",
+  "established": "Four public-file print-file nodes provide unique native IDs matching their literal same-site /Board.nsf/files/<ID>/$file/<filename> hrefs. One unmarked inline body hyperlink is not treated as an attachment.",
+  "implemented": "Selected print mapping retains validated file descriptors; scoped storage/reopen/download, exact raw capture/ZIP and synthetic PDF transfer. Redirects disabled; selected URL/fileID/original href/source must agree; cancel/deadline/status/size/PDF magic remain enforced.",
+  "execution": "13 new cases within72 affected passes. Initial cancellation test wrongly required optional attachment key; corrected to assert absence of bytes using get after observed cancelled result. No guard weakened.",
+  "limits": "Synthetic selected meeting request context is explicit and not asserted by raw print fragment. No title/date identity join, live original-byte availability, full catalog, item-to-file association, separate BD-GetPublicFiles mapping or staff write inferred."
+}

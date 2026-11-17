@@ -1,0 +1,27 @@
+{
+  "source_url": "https://clerkshq.com/toc/SouthKingstown-ri?path=SouthKingstown_Docket,AGENDA,",
+  "source_declaration": {
+    "host_page": "https://clerkshq.com/southkingstown-ri",
+    "parent_tree_url": "https://clerkshq.com/toc/SouthKingstown-ri?path=SouthKingstown_Docket,",
+    "attribute": "data-toc-url",
+    "data_path": "SouthKingstown_Docket,AGENDA,"
+  },
+  "requested_at_utc": "2026-11-16T02:42:51Z",
+  "method": "GET",
+  "status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_length_header": null,
+  "response_url": "https://clerkshq.com/toc/SouthKingstown-ri?path=SouthKingstown_Docket,AGENDA,",
+  "redirect_followed": false,
+  "credentials_or_cookies_used": false,
+  "retries": 0,
+  "max_bytes": 3145728,
+  "socket_timeout_seconds": 30,
+  "total_deadline_seconds": 30,
+  "response_bytes_saved": 5014,
+  "truncated": false,
+  "sha256": "b822f935d3d64e88acdfd15eb4735e0d8e9309eed42f1648080d6f8f804c2f8e",
+  "capture_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\clerkbase-nested-tree-20261115\\southkingstown-docket-agenda-tree.html",
+  "error": null,
+  "location_header": null
+}

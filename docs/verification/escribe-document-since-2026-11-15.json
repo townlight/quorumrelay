@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "729c92d2cc815a09f8ccec9f52ec065e81f8fe7a",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "One explicit native inserted-ID document metadata selector, bounded typed records, portable actual request context and local metadata search.",
+  "new_cases": 25,
+  "checks": [
+    {
+      "command": "pytest tests/test_escribe_document_since.py tests/test_escribe_publishing.py tests/test_escribe_history_write.py tests/test_escribe_related_records.py tests/test_escribe_content_chunk.py tests/test_escribe_selected_text.py tests/test_storage_search_imports.py tests/test_interchange.py tests/test_provider_discovery.py -q",
+      "passed": 289,
+      "failed": 0,
+      "seconds": 8.84
+    }
+  ],
+  "source_sha256": {
+    "scripts/pin_escribe_contract.py": "187993503385315975b3f0978bcc5a3a97b7d25906151f96cda2edd5d4dee937",
+    "src/civic_data_connectors/data/escribe_publishing.json": "cf881c35f6489d226b2d0b0cc18c87821b17affb20dc07d29e7310c020a797c9",
+    "src/civic_data_connectors/providers/escribe_publishing.py": "314c2c38c7e0471c156fc7cdc130e7e856141946374b9761713d54742eed441e",
+    "tests/test_escribe_document_since.py": "72ee77ac6ccd546a7194f66893951a00111096d1e9f8e7011f2ebe93dfec97e6",
+    "docs/ESCRIBE-PUBLISHING-SERVICE.md": "7a3f93b809886a094943d4ac5d7f008e84889fa3ae908d867a5d8926acf95854",
+    "src/civic_data_connectors/providers/discovery.py": "ee54996ee81888888a6a0d0038fbf90ed4557740bb1eeb7c7fb7843d0c32650a"
+  },
+  "vendor_contract": [
+    {
+      "path": "docs/capabilities/evidence/escribe-publishing-wsdl/publishing.wsdl",
+      "sha256": "a166e11909548edc8876556d4cba67f5661d8269a2269e99a412fe726bd1ac46"
+    },
+    {
+      "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd0.xsd",
+      "sha256": "9794f976a48bbc225e2d8162f50182efd02e7551b68da7bd82eb5c1270c7f6d8"
+    },
+    {
+      "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd1.xsd",
+      "sha256": "cff6937e7a1ed4a816ee6cb8525d75c041ff3244d8ca6100f031d20f689a521a"
+    },
+    {
+      "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd2.xsd",
+      "sha256": "690da8769e0e9c0a850e7978c10acd8f37f50625f6550c2839b2e1476bd418d4"
+    },
+    {
+      "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd3.xsd",
+      "sha256": "fac71636d6bf72283efb73bfafcffe586ae798dabb68b6593542e3b925a3e0de"
+    },
+    {
+      "path": "docs/capabilities/evidence/escribe-publishing-wsdl/xsd4.xsd",
+      "sha256": "fff0cdd3f2fc2a9d9509f5055c2987051485f7b0b022ec48f14200335c702023"
+    }
+  ],
+  "limits": [
+    "No live SOAP call or deployment applicability claim.",
+    "No ordering, inclusive/exclusive, cursor advance, catalog completeness or media/document byte inference.",
+    "An empty result stays partial; over-budget/invalid native records fail, not complete empty."
+  ],
+  "implementation_probe": "Actual discover test exposed the blanket SOAP discovery rejection; added only explicit DocumentGetSince routing, retaining unmapped/supplied-result rejection. Saved normalization comparison excludes fresh captured_at timestamps while verifying all other record fields and preserving lack of request context."
+}

@@ -144,7 +144,34 @@ def execute(engine: Engine, principal: Principal, operation: str, request: dict,
     if isinstance(request, dict) and any(key in request for key in
                                         ("authorization", "credentials", "principal", "client_id", "tenant", "context")):
         return failure("invalid_request", "Identity, credentials and grants are not operation arguments.")
+    try:
+        request, content = resolve_input(engine, operation, request, content=content, context=context)
+    except (ValueError, TypeError, KeyError) as error:
+        return failure("invalid_request", str(error), operation_id=context.operation_id)
     return engine.execute(operation, request, content=content, context=context)
+
+
+def resolve_input(engine, operation, request, *, content=None, context):
+    """Resolve parser inputs consistently, leaving neutral streams and nested write parts to core."""
+    if not isinstance(request, dict) or "file_handle" not in request:
+        return request, content
+    if operation not in {"normalize", "discover", "fetch", "import_preview", "import_bundle"}:
+        raise ValueError("Top-level file_handle is only a saved-capture/import input; use changes[].files[] for write parts.")
+    if content is not None or "content_base64" in request:
+        raise ValueError("Supply exactly one of file_handle, content_base64, or explicit content.")
+    if operation in {"import_preview", "import_bundle"} and request.get("format") in {"json", "jsonl", "zip"}:
+        return request, content
+    from .files import open_file_input
+    from ..models import Bounds
+    maximum = Bounds(**request.get("bounds", {})).parser_bytes
+    metadata, stream = open_file_input(engine, request["file_handle"], context=context)
+    with stream:
+        if metadata["byte_length"] > maximum:
+            raise ValueError("This parser operation exceeds its configured parser byte limit.")
+        content = stream.read(maximum + 1)
+    if len(content) > maximum:
+        raise ValueError("This parser operation exceeds its configured parser byte limit.")
+    return {key: value for key, value in request.items() if key != "file_handle"}, content
 
 
 def bound_request(operation, request, config):

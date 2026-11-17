@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "9f375b4594aecbeceebe4febe0fb3e5976444568",
+  "status": "SCOPED_SYNTHETIC_PASS",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_gworks_secure_calendar.py tests/test_gworks_published_detail.py tests/test_provider_discovery.py tests/test_interfaces.py tests/test_public_package.py -q",
+      "passed": 124,
+      "failed": 0,
+      "junit_sha256": "ad79d24945327b0b60ea4cd6ae8d07dee0857470040ae98222518ee3209ffa13"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/gworks-published-client/secure-calendar.extract.js",
+      "sha256": "02512eac407492044656a25db959ff189d4c6bb1e9b6f9620494f4619fd95add"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/gworks-published-client/secure-calendar-source.json",
+      "sha256": "409702f03d8779216653287f44c10bdab887cefcf7c703b15a107263a6a591d3"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/gworks_calendar.py",
+      "sha256": "f01d9dbd3677d41bc1644885f5a5d3c746271f5b5f6cdc4ba312d31fb22e10f2"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_gworks_secure_calendar.py",
+      "sha256": "1eed56868f89ea3190c7b608f62afd7c6891102b51fd954e5c5c7a09e1052a8e",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "1eed56868f89ea3190c7b608f62afd7c6891102b51fd954e5c5c7a09e1052a8e"
+    }
+  ],
+  "synthetic_execution": {
+    "provider": "gworks",
+    "status": "fixture_passed",
+    "operations": [
+      "parse",
+      "discover",
+      "local_search",
+      "neutral_export"
+    ],
+    "entities": [
+      "meeting"
+    ],
+    "scope": "One supplied secure-calendar response; city configured explicitly, no response-asserted tenant, live network or complete catalog.",
+    "execution_provenance": "25 new saved-format cases within124 affected passes. Native baseline identity, request-free saved discovery, local SQLite/reopen/search and exact original ZIP retention executed.",
+    "checks": [
+      {
+        "command": "pytest tests/test_gworks_secure_calendar.py tests/test_gworks_published_detail.py tests/test_provider_discovery.py tests/test_interfaces.py tests/test_public_package.py -q",
+        "passed": 124,
+        "failed": 0,
+        "junit_sha256": "ad79d24945327b0b60ea4cd6ae8d07dee0857470040ae98222518ee3209ffa13"
+      }
+    ],
+    "bindings": [
+      {
+        "kind": "vendor_contract",
+        "path": "docs/capabilities/evidence/gworks-published-client/secure-calendar.extract.js",
+        "sha256": "02512eac407492044656a25db959ff189d4c6bb1e9b6f9620494f4619fd95add"
+      },
+      {
+        "kind": "vendor_contract",
+        "path": "docs/capabilities/evidence/gworks-published-client/secure-calendar-source.json",
+        "sha256": "409702f03d8779216653287f44c10bdab887cefcf7c703b15a107263a6a591d3"
+      },
+      {
+        "kind": "source",
+        "path": "src/civic_data_connectors/providers/gworks_calendar.py",
+        "sha256": "f01d9dbd3677d41bc1644885f5a5d3c746271f5b5f6cdc4ba312d31fb22e10f2"
+      },
+      {
+        "kind": "test",
+        "path": "tests/test_gworks_secure_calendar.py",
+        "sha256": "1eed56868f89ea3190c7b608f62afd7c6891102b51fd954e5c5c7a09e1052a8e",
+        "hash_policy": "test_source_crlf_to_lf",
+        "canonical_lf_sha256": "1eed56868f89ea3190c7b608f62afd7c6891102b51fd954e5c5c7a09e1052a8e"
+      }
+    ]
+  },
+  "limits": [
+    "Saved response mapping only; no live account read, native search, writes, inferred paging/time units or publication-flag document URLs.",
+    "Explicit configured gworks_city_id; response does not independently assert its tenant. Namespace compatibility is configuration, not live authentication proof."
+  ]
+}

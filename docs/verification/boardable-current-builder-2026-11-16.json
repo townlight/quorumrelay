@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-16",
+  "status": "mock_passed",
+  "scope": "Current Boardable item create/update plus associated uploads, exact identity/tree/item preservation and downloaded hash; separate live web trial observations.",
+  "check": {
+    "passed": 105,
+    "failed": 0,
+    "seconds": 18.84,
+    "junit_sha256": "f1f4ed6cf795d71baf8ffb2491737e597688d680a72324817195585fc8b3f370"
+  },
+  "live_trial": {
+    "date": "2026-11-16",
+    "tenant": "QuorumRelay Evaluation",
+    "organization_id": 46098,
+    "meeting_id": 526552,
+    "item_id": 4819464,
+    "upload_id": 1458225,
+    "trial_days_observed": 13,
+    "actions": [
+      "JSON item create201",
+      "Multipart item update and new upload200",
+      "Exact item GET200",
+      "Original file browser download"
+    ],
+    "byte_readback": {
+      "filename": "quorumrelay-contract-evaluation.txt",
+      "size": 134,
+      "sha256": "ecbaade25c53d0d336960fab9b3c451f28bc43e4260ef0f6da5c7358a9818c15",
+      "matches_download": true
+    },
+    "limits": [
+      "Captured through trial web application; not separately entitled public developer API",
+      "No publication, invitations, payments, contacts or release"
+    ]
+  },
+  "adapter_live_execution": false,
+  "files": {
+    "src/civic_data_connectors/providers/boardable_builder_write.py": "1a99fc89894eb8379378b7b6f912625a3918d0585b4d482239aec01646d06013",
+    "src/civic_data_connectors/providers/boardable_write.py": "5ae88f11bb887806f8a25eca1ed7cbacc439662a86cf917932ebaed1925866c3",
+    "tests/test_boardable_builder_write.py": "b6c5b5c960513d15bdfaafc897e0bbb8ea3f47212a0cf79c4af4a148a422cfe4"
+  },
+  "full_python_regression": {
+    "command": "python -X utf8 -m pytest tests -q --tb=short --junitxml=.../boardable-candidate-full.xml",
+    "passed": 2984,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 2073.56,
+    "junit_sha256": "f91bd1ced0ee2eb34ecd39f0945382fc3873e0c3f07cbf8dcef064032449f89d",
+    "started_at": "2026-11-16T14:10:17-07:00",
+    "exit_code": 0,
+    "warnings": "One upstream Starlette/AnyIO BlockingPortal deprecation warning."
+  },
+  "other_checks": {
+    "repository_ruff": "passed",
+    "git_diff_check": "passed",
+    "capability_validator": {
+      "providers": 31,
+      "formats": 34,
+      "operations": 341,
+      "outbound": 190,
+      "evidence": 471,
+      "urls": 297,
+      "errors": 0
+    },
+    "current_metadata_tests": {
+      "passed": 25,
+      "failed": 0,
+      "seconds": 0.78
+    },
+    "client": "No client inputs changed in this phase; existing build/test evidence reused."
+  }
+}

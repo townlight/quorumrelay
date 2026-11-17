@@ -1,0 +1,338 @@
+{
+  "recorded_utc": "2026-11-14T17:08:35.680738+00:00",
+  "status": "LOCAL_OBJECTIVE_VERIFIED_WITH_UNRESOLVED_VENDOR_RESEARCH",
+  "objective": "Finish self-owned local preparation and required checks, resolve Townlight skips, and pursue concrete mapping leads; no releases or loops; no unproven outside-only blockers.",
+  "not_a_claim": "The original full19 delivery plan is not complete. Required unmapped vendor contracts and held native/public delivery remain separately recorded.",
+  "source_commit": "1fe198fae36d773b6428f7fa7c487a9329ce301d",
+  "versions": {
+    "python": "0.1.0.dev13",
+    "typescript": "0.1.0-dev.13",
+    "schema": "2.0.0"
+  },
+  "artifacts": {
+    "quorumrelay-0.1.0.dev13-py3-none-any.whl": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\quorumrelay-0.1.0.dev13-py3-none-any.whl",
+      "sha256": "bcce6d5d2985dfa0f2e0810403b45e64a82a7c6b6e769015a1660a188c75acc5",
+      "bytes": 598283
+    },
+    "quorumrelay-client-0.1.0-dev.13.tgz": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\quorumrelay-client-0.1.0-dev.13.tgz",
+      "sha256": "c5e8aa86dbe3dbb2b6d2b7ba79076f75a82a6392c4916e5c6d041f731a91f418",
+      "bytes": 3860
+    }
+  },
+  "consumer_commits": {
+    "brief": "8f93ecc38df68961892b3f29fb5b270165eda1ff",
+    "record": "af2e0ab967f19c5b61062cd4267f0b44a14e2b19",
+    "reporter": "db8c812be05fa417563a69bf0c259a63e202804a",
+    "tl": "f8bf264f1f72bd1b9f2e6b68e4994811107e9650"
+  },
+  "requirement_audit": [
+    {
+      "requirement": "Reconcile stale inventory and truthful status",
+      "result": "VERIFIED",
+      "evidence": "Prior local-preparation receipt records56 blocked_access corrections; remaining-research and runtime inventory preserve unknown contracts as unresolved, not unsupported or proven outside-only."
+    },
+    {
+      "requirement": "Complete required local checks",
+      "result": "VERIFIED",
+      "evidence": "Current required source JUnit1408passed/0failed/0errors/0skips; local Windows Python3.13 and Node24. Ruff, capability validator, TS build and4client tests passed. Hosted CI remains unrun."
+    },
+    {
+      "requirement": "Resolve Townlight corpus-dependent skips",
+      "result": "VERIFIED",
+      "evidence": "35cases passed against pinned original corpus and actual runtime wrapper, dev12 wheel archive in existing env-tl; dev13 non-MCP paths unchanged. Not native installed acceptance."
+    },
+    {
+      "requirement": "Fix defects exposed by required checks",
+      "result": "VERIFIED",
+      "evidence": "MCP progress cancellation could leave durable state running. Two deterministic cases failed before fix,13affected MCP tests passed after; fresh installeddev13 verifies actual cancelled terminal state for asyncio/future cancellation."
+    },
+    {
+      "requirement": "Prepare coherent local package and four consumer pins",
+      "result": "VERIFIED",
+      "evidence": "Fresh isolated SDK installation and actual examples passed. Exact wheel copies, uv hashes, npmSHA512, TL source identity and version gates verified; scoped consumer commits saved."
+    },
+    {
+      "requirement": "Pursue concrete mapping leads",
+      "result": "VERIFIED_BOUNDED_RESEARCH",
+      "evidence": "Select Event and Essential production readback leads inspected; BoardDocs XML notebook/example and PrimeGov named item-method/client leads checked. None establishes missing machine semantics; details below. Not exhaustive vendor research."
+    },
+    {
+      "requirement": "Preserve no-release/headless/no-loop boundaries",
+      "result": "VERIFIED_WITH_RECORDED_LIMITS",
+      "evidence": "No native/sign/install/upgrade/recovery/push/merge/tag/registry/site publication performed. Local SDK and loopback examples only; synthetic vendors; no visible desktop control. Actual source defect justified single correcteddev13 build, no docs rebuild."
+    }
+  ],
+  "checks": {
+    "source_suite": {
+      "tests": 1408,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "townlight_previously_skipped": {
+      "passed": 35,
+      "failed": 0,
+      "skipped": 0
+    },
+    "local_ci_other": "Ruff src/tests/scripts/examples PASS; validate_capabilities zeroerrors/fivenegatives; TSbuild +4tests PASS; pipcheck PASS",
+    "hosted_ci": "NOT_RUN; no remote push authorized"
+  },
+  "onboarding": {
+    "independent_node": "PASS; exact fifth-client example, tarball installed outside checkout and fresh installed SDK loopback service, discoverpartial/importpreviewfalse/persist/search1/ZIP2660bytes/syntheticreceipt",
+    "python": "PASS; env-local13 python -I examples/mock_workflow.py python --database <artifactdir>/onboarding-python.sqlite; cwd outside checkout",
+    "cli": "PASS; examples/cli-workflow.ps1 -Database <artifactdir>/onboarding-cli.sqlite; command-local env-local13 Scripts PATH; cwd outside checkout",
+    "limits": "Synthetic upstream. Not live vendor, native product or full consumer installed acceptance."
+  },
+  "reuse": {
+    "delta": {
+      "changed_python_resource_members_ignoring_CRLF": [
+        "civic_data_connectors/__init__.py",
+        "civic_data_connectors/transports/mcp.py"
+      ],
+      "typescript_dist_byte_identical": true,
+      "reuse_basis": "Non-MCP engine, parsers, storage, write adapters and TypeScript executable bytes unchanged. Reuse exact prior consumer and corpus behavior; verify new package/version pins and changed MCP behavior separately."
+    },
+    "prior_consumer_results": {
+      "artifact_copies_and_lock_hashes": "pass",
+      "brief_uv_lock_check": "pass",
+      "record_uv_lock_check": "pass",
+      "brief_connector_tests": "49 passed; wheel imported from archive on PYTHONPATH using existing env-brief; 1 deprecation warning",
+      "record_connector_migration": "3 passed; wheel imported from archive on PYTHONPATH using existing env-record; 1 deprecation warning",
+      "reporter_boundary": "pass; packaged client and installed env-local12 service; synthetic loopback, 32 providers",
+      "townlight_connector_contract": "33 passed, 35 skipped; wheel on PYTHONPATH using existing env-tl",
+      "townlight_installer": "pass; dev12 installed and verified in isolated consumer-test-venv",
+      "initial_test_environment_attempts": "env-local12 lacks pytest; system-site test venv lacked fastapi; affected tests passed in existing consumer envs with dev12 wheel on PYTHONPATH",
+      "reporter_boundary_initial": "failed because dev11 expected 31 providers; changed expectation to dev12 count 32 and passed",
+      "limitations": "Local source preparation and synthetic tests only; no native rebuild, installed product acceptance, publication or release."
+    },
+    "townlight_skip_resolution": "Supersedes prior35skip outcome only; previous33passed checks not repeated.",
+    "line_endings": "204 exact current Windows checkout package members. Git LF blobs can differ by CRLF only; no raw Git-blob equality claim.",
+    "limits": "Local source pin and artifact integrity preparation only. No consumer suite was rerun against dev13; no native build, new installed-product acceptance, signing, publication or release. Root separately verifies package delta and fresh installed dev13."
+  },
+  "mapping_assessment": {
+    "select_event": {
+      "status": "unresolved_research_and_engineering",
+      "checked": "Current Swagger, official workflows, full literal same-origin portal asset graph:21assets/843993bytes",
+      "missing": "Required templateId/date/time input to Event readback equivalence, timezone and recurrence/template side effects; safe mutation/readback mapping not established",
+      "outside_only_dependency_verified": false,
+      "guide": "docs/CIVICCLERK-SELECT.md"
+    },
+    "essential_production_multimedia": {
+      "status": "unresolved_research_and_engineering",
+      "checked": "Current official help and linked Postman collection, hash unchanged; exact existing Effingham public page 200/92131bytes, zero scripts/iframes/API shape references",
+      "known": "Production lower-camel request sample recorded separately from development Pascal-case DTO",
+      "missing": "Production GET wrapper/casing and independent readback equivalence; no response examples in linked collection",
+      "outside_only_dependency_verified": false,
+      "guide": "docs/capabilities/evidence/essential-postman/source.json"
+    },
+    "boarddocs_xml": {
+      "checked_utc": "2026-11-14T16:50:18.788406+00:00",
+      "status": "unresolved research; this lead only",
+      "pinned_source": {
+        "metadata": "docs/capabilities/evidence/boarddocs-public/llama-index-source.json",
+        "commit": "26c7dc3e9846045864cf93ab92cb13bc80a3394e",
+        "reader_url": "https://raw.githubusercontent.com/run-llama/llama_index/26c7dc3e9846045864cf93ab92cb13bc80a3394e/llama-index-integrations/readers/llama-index-readers-boarddocs/llama_index/readers/boarddocs/base.py",
+        "reader_status": 200,
+        "reader_sha256": "1d69e6ce6065041c7129c2fa6a591abe858aaf0a8dc21e26f9d9c76711daecb0",
+        "notebook_url": "https://raw.githubusercontent.com/run-llama/llama_index/26c7dc3e9846045864cf93ab92cb13bc80a3394e/llama-index-integrations/readers/llama-index-readers-boarddocs/examples/crawl.ipynb",
+        "notebook_status": 200,
+        "notebook_sha256": "a514cd242ac051a504a65b7e1ac5e8924f6b47e77462a3305dcb1e2b27c83d03",
+        "hashes_match_pins": true
+      },
+      "notebook_cell": {
+        "zero_based_index": 4,
+        "execution_count": null,
+        "saved_outputs": 0,
+        "evidence": "Source comments describe XML-ActiveMeetings and provide a nonempty example meeting/category/agendaitems/item tree with id, order, name, link, actiontype. This is third-party illustrative material; the example is an incomplete document and contains malformed numeric entities in description. It is not a saved response or vendor contract."
+      },
+      "known_example_endpoint": {
+        "url": "https://go.boarddocs.com/ca/redwood/Board.nsf/XML-ActiveMeetings",
+        "method": "GET",
+        "client": "Python urllib default user agent; no custom user agent",
+        "status": 403,
+        "note": "One request; no retry, bypass, guessed tenant, authentication or write."
+      },
+      "implementation_inspected": "src/civic_data_connectors/providers/boarddocs_public.py maps opt-in listing JSON and selected printable HTML; no XML or agenda-item hierarchy mapping. Existing captured listing identity, source scope, transfer bounds and no-redirect restrictions remain unchanged.",
+      "remaining_gap": "No complete valid nonempty XML response or verified field/identity contract was obtained. More research may establish an appropriate example or contract; this does not prove outside information is required or all public sources lack it. No parser or new support claim was added.",
+      "scope": "Closes this bounded lead only; not all BoardDocs or vendor research."
+    },
+    "primegov_item_methods": {
+      "checked_utc": "2026-11-14T16:51:22.671349+00:00",
+      "status": "unresolved research for named item methods",
+      "lead": "Desktop/civic-vendor-api-contracts.md names getItemInfo?itemId= and ListPublicFromSourceId without complete method or response contract",
+      "saved_portal_html": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\files-pasted-by-the-user-read\\outputs\\primegov-followup-20261112\\portal.html",
+      "saved_portal_sha256": "285fae35d205cf8ea1c64ea09e7f20be62157bcd5d73548f91dcc7f502495078",
+      "saved_search_js": "C:\\Users\\scott\\Documents\\Codex\\2026-11-11\\files-pasted-by-the-user-read\\outputs\\primegov-followup-20261112\\search.js",
+      "saved_search_sha256": "59d8325d7adcff9451b9140acd3fe4acf1dcbecaa2b5a7ae3c1d80d63b0e6b70",
+      "saved_search_findings": "Neither named method appears. Pinned search client has separate result grouping, parent meetingId and selected attachment links; these do not establish the named methods response or binding.",
+      "declared_asset_attempts": [
+        {
+          "url": "https://reno.primegov.com/bundles/portaljs?v=f-N5dDOrgDPKhijQ5zLHFRn3dcatXZtvBpyko_jjEEM1",
+          "status": 403,
+          "final_url": "https://reno.primegov.com/bundles/portaljs?v=f-N5dDOrgDPKhijQ5zLHFRn3dcatXZtvBpyko_jjEEM1"
+        },
+        {
+          "url": "https://reno.primegov.com/Scripts/Custom/Public/Portal/portal-iframe.js",
+          "status": 403,
+          "final_url": "https://reno.primegov.com/Scripts/Custom/Public/Portal/portal-iframe.js"
+        },
+        {
+          "url": "https://reno.primegov.com/Content/portal/Scripts/portalCommon.js",
+          "status": 403,
+          "final_url": "https://reno.primegov.com/Content/portal/Scripts/portalCommon.js"
+        },
+        {
+          "url": "https://reno.primegov.com/Scripts/Custom/Public/_Subscription.js",
+          "status": 403,
+          "final_url": "https://reno.primegov.com/Scripts/Custom/Public/_Subscription.js"
+        },
+        {
+          "url": "https://reno.primegov.com/Scripts/Custom/Public/_Upcoming.js?v3",
+          "status": 403,
+          "final_url": "https://reno.primegov.com/Scripts/Custom/Public/_Upcoming.js?v3"
+        },
+        {
+          "url": "https://reno.primegov.com/Scripts/Custom/Public/_Archived.js",
+          "status": 403,
+          "final_url": "https://reno.primegov.com/Scripts/Custom/Public/_Archived.js"
+        },
+        {
+          "url": "https://reno.primegov.com/Content/js/attachmentHelpers.js?v=2026.10.8.1837",
+          "status": 403,
+          "final_url": "https://reno.primegov.com/Content/js/attachmentHelpers.js?v=2026.10.8.1837"
+        }
+      ],
+      "fetch_limits": "Seven declared relevant vendor assets attempted; each returned HTTP 403 using Python urllib default behavior. No bytes captured, no user-agent changes or bypass, no guessed API requests, no new tenant. No asset dependencies could be inspected from denied responses.",
+      "local_capture_review": "Saved portal and all JS/HTML/JSON in the specified follow-up directory were searched; no occurrences of either method. The directory contains saved _Search.js only, not the other requested scripts.",
+      "remaining": "Exact request methods, parameters beyond itemId in the research note, response fields, item-parent binding and readback remain unverified. No new support mapping is justified on checked evidence. This is bounded unresolved research, not proof no public source exists or an external-only blocker.",
+      "scope": "No source, inventory, state, artifact build, or release changed."
+    }
+  },
+  "outside_only_dependencies_certified": [],
+  "remaining_original_plan": "Canonical per-provider inventory/remaining-research retain unmapped contracts, including BoardDocs/PrimeGov/OnBase/Tyler/Select/Essential/TelVue/Legistar and other named product schemas. Research gaps are not closed by this local objective.",
+  "held_delivery": [
+    "Remote push/PR/merge/tag and hosted CI tied to delivery",
+    "Candidate-specific native builds/signing/independent signatures/installed upgrade and recovery",
+    "Registry/release/download/site/document publication and actual postdelivery verification"
+  ],
+  "owned_jobs": "Example service process terminal in owned-job receipt; final targeted process inspection recorded in canonical state after commit.",
+  "receipts": {
+    "quorumrelay-development-13/source-equality.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\source-equality.json",
+      "sha256": "3ccc0cb6a99e8b7d039582b53ab8e95126196e604c624e44d2eec6bcc5ae8a5a",
+      "bytes": 26098
+    },
+    "quorumrelay-development-13/installed-wheel.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\installed-wheel.json",
+      "sha256": "965bcf4ee44c1f4cbbb3570589c88877618021de81a5099bafae3ea879930aa6",
+      "bytes": 24675
+    },
+    "quorumrelay-development-13/installed-mcp-cancellation.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\installed-mcp-cancellation.json",
+      "sha256": "9b1922c720615e6a171e278f65e10643a177ccefb8fe98ba2445e8f07ebc814b",
+      "bytes": 524
+    },
+    "quorumrelay-development-13/independent-client-acceptance.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\independent-client-acceptance.json",
+      "sha256": "28deb8fd4facf51596b2d84c1e3c68f1cb77857fd90597c8d0fdaaf1f706bd25",
+      "bytes": 2263
+    },
+    "quorumrelay-development-13/example-owned-job.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\example-owned-job.json",
+      "sha256": "34f38c827a28b624e357233acedd3c0144af10eb703e0ea34a7beca98536d4f3",
+      "bytes": 350
+    },
+    "quorumrelay-development-13/consumer-preparation.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\consumer-preparation.json",
+      "sha256": "e33cf16b57bfea879dce2e52f007363ed0b3f7f68d8bb2d8979226a8446166cf",
+      "bytes": 3635
+    },
+    "quorumrelay-development-13/final-local-verification.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\final-local-verification.json",
+      "sha256": "8558956911c5930f5453b79ea18282d47db3bef10c1814942182f162d1b3220a",
+      "bytes": 1676
+    },
+    "quorumrelay-development-13/verify-local-preparation.py": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\verify-local-preparation.py",
+      "sha256": "475b2ab82bd2c651f93dc7d5cbd3eac1452bfd19e8561504df5743689948c890",
+      "bytes": 4759
+    },
+    "quorumrelay-development-13/required-source-suite.xml": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\required-source-suite.xml",
+      "sha256": "d6dc010416b4ce886480ad53d5f925af15d37901fa0cc832e4abb08e83e98012",
+      "bytes": 203632
+    },
+    "quorumrelay-development-13/required-source-suite.log": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\required-source-suite.log",
+      "sha256": "9cdcc575be501dca6b836fe602c236f2c3e92fe526a2f1da7a13f1707c8d4eeb",
+      "bytes": 2235
+    },
+    "quorumrelay-development-13/installation.log": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\installation.log",
+      "sha256": "856658db99edbcd2562a253c2962bd268fae7f906f6c7661d4fd2c6779dc164a",
+      "bytes": 9569
+    },
+    "quorumrelay-development-13/onboarding-cli.log": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\onboarding-cli.log",
+      "sha256": "3585acc33386e722fa4b3ebf20e383ed0649976cce0a67263152c18596d8fabb",
+      "bytes": 106
+    },
+    "quorumrelay-development-13/onboarding-python.log": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-13\\onboarding-python.log",
+      "sha256": "44e90d2298bb066d8c17950b5b4e27827975754fab7f7adc6ffa9910e95d581c",
+      "bytes": 230
+    },
+    "quorumrelay-development-12/required-source-suite.xml": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\required-source-suite.xml",
+      "sha256": "725fb234058890ad8d87ec3677439381016306e39054038abb9f7f27e572bd18",
+      "bytes": 211981
+    },
+    "quorumrelay-development-12/required-source-suite.log": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\required-source-suite.log",
+      "sha256": "25ca3821341b16411c061ec1ca01f7193de2bfbf6c05577772e10c98e371caa8",
+      "bytes": 8944
+    },
+    "quorumrelay-development-12/mcp-progress-cancel-before.log": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\mcp-progress-cancel-before.log",
+      "sha256": "de15a5fcfe0cd2cbbe696a4a27ba359fce79d5334ca32722945e618b4bad5162",
+      "bytes": 14076
+    },
+    "quorumrelay-development-12/mcp-cancel-fixed.xml": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\mcp-cancel-fixed.xml",
+      "sha256": "55e8ce26feb7fad8008fd618033706b3615925097f0f682720a88a2d273448ac",
+      "bytes": 2012
+    },
+    "quorumrelay-development-12/mcp-cancel-fixed.log": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\mcp-cancel-fixed.log",
+      "sha256": "704789004a3fe08a3e9d7474af023afc8422e62137a4ff5e927e6a1519a385aa",
+      "bytes": 684
+    },
+    "quorumrelay-development-12/townlight-baseline-acceptance.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\townlight-baseline-acceptance.json",
+      "sha256": "e44161cba42593a62d317d6d61b32deeba5cce204cc191e77949731ec1bcc342",
+      "bytes": 6940
+    },
+    "quorumrelay-development-12/townlight-baseline-acceptance.log": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\townlight-baseline-acceptance.log",
+      "sha256": "e1d65d38d4e2d83d4666e6737125667d9cd0e37a2214ee5b28fe7afb23a70342",
+      "bytes": 5831
+    },
+    "quorumrelay-development-12/boarddocs-xml-lead.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\boarddocs-xml-lead.json",
+      "sha256": "f1b7021e27dd5b32368e64cefee94b9cf6a29b5c5aec65e1fe2af6c8abebc65f",
+      "bytes": 2451
+    },
+    "quorumrelay-development-12/primegov-item-lead.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\primegov-item-lead.json",
+      "sha256": "4bd6b8254435b910ea11272c8a3fd9410900afe1d002ce2d365a1ade87e538dd",
+      "bytes": 3448
+    },
+    "quorumrelay-development-12/consumer-preparation.json": {
+      "path": "C:\\Users\\scott\\Documents\\Codex\\qr9\\artifacts\\quorumrelay-development-12\\consumer-preparation.json",
+      "sha256": "bfc8d62d6479fff917b0a63045bb5029a7ae32a13510679768fb6b38d3236897",
+      "bytes": 7755
+    }
+  }
+}

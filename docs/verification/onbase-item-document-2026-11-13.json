@@ -1,0 +1,46 @@
+{
+  "status": "PASS_SYNTHETIC_SCOPED_ITEM_DOCUMENT_WRAPPER",
+  "source_baseline": "0e3db5d2c823c5133b4f2f5473b10a2cf4018d03",
+  "contract": {
+    "path": "docs/capabilities/evidence/onbase-download/wrapper.html",
+    "sha256": "4c1f3f9b93f85603759a5237725ef71c7b5121e8603447de78f7cdeec08ec832",
+    "supporting_link_path": "docs/capabilities/evidence/onbase-detail/item.html",
+    "supporting_link_sha256": "db8b36eb00a7a08cbb4a19e66f1b1e5db3cb5506cc2502de45993fcd409e1832",
+    "scope": "Actual previously captured vendor client declares InvokeDownloadAttachment POST then ViewDocument GET. Actual selected item HTML supplies exact supporting URL/native attachment ID and meeting/item/publish context. Attachment wrapper constants and preparation/PDF responses are synthetic; no actual item wrapper or attachment bytes captured."
+  },
+  "source_sha256": {
+    "src/civic_data_connectors/providers/onbase_documents.py": "9f9b33ab82ade828a6ca42243a5d0df35078b7a4abf2e13a431d81b75958f1ce",
+    "src/civic_data_connectors/providers/retrieval.py": "6a24000558d3c0803e5678c77aba941191d7e246aa4bd9428455ab3e66b7534f",
+    "tests/test_onbase_item_documents.py": "5f03ef42eeafc91a0b1de56fe6eca14433d3712ab196aa759c533a2988493bf3"
+  },
+  "execution": {
+    "new_item_cases_passed": 24,
+    "detail_cases_passed": 17,
+    "combined_affected_cases_passed": 100,
+    "command": "pytest tests/test_onbase_detail.py tests/test_onbase_item_documents.py tests/test_onbase_documents.py tests/test_onbase_listing.py tests/test_onbase_export.py tests/test_provider_record.py tests/test_recording_retrieval.py tests/test_capabilities.py -q --tb=short",
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\onbase-detail-and-item.xml",
+    "junit_sha256": "4fc055c6a996c52127c5d846176d9a92b399f471c4e1a1677196a0b6f86766ed",
+    "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\onbase-detail-and-item.log",
+    "scope": [
+      "exact selected supporting-document membership, canonical meeting parent, item and publish context; typed wrapper and preparation field binding",
+      "actual SQLite import/reopen, scoped fetch_attachment, exact capture bytes/hashes after reopen and ZIP destination stream readback",
+      "foreign parent/item/publish/type/section, absent membership, changed protocol/name, cookie echo, malformed file and late failure rejection",
+      "bounded same-origin no-redirect POST/GET with call-local cookie jar; unchanged meeting-document regressions",
+      "cancellation and page bound; shared previous byte/deadline guards retained"
+    ],
+    "corrections": "Required Ruff formatting corrected. Storage test follows actual inline capture representation before ZIP and exact scoped stream representation after ZIP. No production storage change."
+  },
+  "limitations": [
+    "Synthetic PDF-prefixed bytes prove protocol/relay/prefix checks, not PDF rendering or live availability.",
+    "Synthetic wait skipped because responses are immediate; production follows declared 1-second preparation delay.",
+    "Only selected non-section Agenda supporting-document wrapper; no section/packet/other deployment shape claim.",
+    "Native search, archive traversal, broader Agenda API/write/import association, other full-plan outcomes remain incomplete.",
+    "No live preparation/download, credentials, package/native build/sign/install or push/publication."
+  ],
+  "checks": {
+    "ruff": "PASS src tests scripts examples",
+    "distinct_cases": 100,
+    "count_policy": "Includes the previous 76 detail/affected/capability cases; do not add overlapping run counts."
+  },
+  "completed_local_date": "2026-11-13"
+}

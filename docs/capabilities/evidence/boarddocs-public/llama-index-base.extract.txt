@@ -1,0 +1,7 @@
+33:         self.base_url = "https://go.boarddocs.com/" + site + "/Board.nsf"
+62:         meeting_list_url = self.base_url + "/BD-GetMeetingsList?open"
+64:         data = "current_committee_id=" + self.committee_id
+83:         agenda_url = self.base_url + "/PRINT-AgendaDetailed"
+86:         data = "id=" + meeting_id + "&" + "current_committee_id=" + self.committee_id
+95:         [fd.a.get("href") for fd in soup.find_all("div", {"class": "public-file"})]
+98:         # TODO: index the linked PDFs in agenda_files!

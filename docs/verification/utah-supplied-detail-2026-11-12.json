@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-12",
+  "scope": "Rich-only existing Utah notice detail format; pinned supplied capture, no live request",
+  "source_url": "https://www.utah.gov/pmn/sitemap/notice/1101977.html",
+  "capture_path": "tests/fixtures/baseline/utah-notice.response",
+  "capture_sha256": "2067ed91c4346b0b39d6236dc9c470e9e0d401b63c8b390afb457745b8953f7e",
+  "native_notice_id": "1101977",
+  "public_body": {
+    "external_id": "724",
+    "url": "https://www.utah.gov/pmn/sitemap/publicbody/724.html",
+    "binding": "only exact supplied same-origin HTTPS publicbody numeric path, no query/fragment/userinfo; no crawl"
+  },
+  "mapped_fields": [
+    "explicit Public Body name",
+    "Entity and Government Type",
+    "literal Notice Type(s), Notice Posted On, Notice Last Edited On",
+    "Meeting Location prose excluding map-link button labels",
+    "labeled fields/attributes/link attributes retained without inferring staff workflow or vote semantics"
+  ],
+  "preserved": [
+    "pinned full compatibility output digest",
+    "notice identity and supplied attachment URLs",
+    "existing single notice.text TextSegment; no duplicate extraction path",
+    "unknown timezone; posted/edited labels are literal source values, not UTC claims",
+    "normalized digest changes with supplied body-field revision"
+  ],
+  "checks": {
+    "distinct_passed": 4,
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_utah_detail.py -q (3 passed, one test-only Other Information empty-value assumption failed)",
+      ".venv/Scripts/python.exe -m pytest tests/test_utah_detail.py::test_saved_labeled_notice_fields_relationship_existing_text_search_export -q (1 passed after assertion corrected to actual supplied prose)"
+    ],
+    "scoped_ruff": "passed"
+  },
+  "limits": [
+    "Saved/default supplied detail only; not full catalog, remote writes or provider-wide schema acceptance",
+    "No inferred notice status enum, timezone, item hierarchy, actions, votes or parent meeting",
+    "No frozen wheel or installed candidate equivalence"
+  ]
+}

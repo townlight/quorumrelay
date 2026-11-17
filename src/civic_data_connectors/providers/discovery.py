@@ -10,10 +10,10 @@ from copy import deepcopy
 from dataclasses import replace
 from datetime import date, timedelta
 from time import monotonic
-from urllib.parse import urlencode, urljoin, urlsplit
+from urllib.parse import parse_qs, urlencode, urljoin, urlsplit
 
 from ..engine import canonical_hash, source_identity_key
-from ..models import Bounds, Error, OperationResult
+from ..models import Bounds, Error, OperationResult, Source
 from .contracts import PublicTransport, RetrievalError, _origin
 from .identification import FORMATS, configured_source, validate_source, validate_url
 from .native import parse_native
@@ -65,11 +65,16 @@ def _api_source(source):
 
 
 def _binding(source, bounds, context, input_format):
-    return canonical_hash({
+    state = {
         "source": source.public_dict(), "dates": [bounds.date_from, bounds.date_to],
         "scope": context.scope, "input_format": input_format,
         "semantics": "inclusive-source-calendar-date/v1",
-    })
+    }
+    if (source.provider == "tyler-meeting-manager" and source.options.get("calendar_api_base")
+            and input_format == "tyler-public-calendar-json"):
+        # Retaining previously filtered rows changes local offsets in a captured page.
+        state["native_row_mapping"] = "tyler-visible-status/v2"
+    return canonical_hash(state)
 
 
 def _checkpoint(binding, queue, seen):
@@ -101,9 +106,20 @@ def _initial(source, bounds, input_format, saved):
     if saved:
         return [{"kind": "saved", "offset": 0}]
     provider = source.provider
+    if input_format == "wistia-public-embed-html":
+        return [{"kind": "static"}]
+    if (provider == "boarddocs" and input_format == "boarddocs-public-meetings-json"
+            and source.options.get("boarddocs_committee_id")):
+        return [{"kind": "boarddocs-public"}]
+    if (provider == "novusagenda" and input_format == "novus-public-listing-html"
+            and urlsplit(source.url).path == "/agendapublic/MeetingView.aspx"):
+        return [{"kind": "static"}]
     if input_format in {"meeting-export", "legistar-event-json", "wistia-media-detail-json", "wistia-caption-json",
                         "agendaquick-item-search-html", "civicplus-search-json"}:
         return []
+    if input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html", "boardbook-public-minutes-html", "town-hall-streams-event-html",
+                        "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "novus-public-coversheet-html", "swagit-public-player-html", "telvue-public-player-html", "suiteone-public-event-html"}:
+        return [{"kind": "static"}]
     if provider in NATIVE:
         if not bounds.date_from or not bounds.date_to:
             raise ValueError("Automatic discovery requires explicit inclusive date_from and date_to.")
@@ -121,6 +137,10 @@ def _initial(source, bounds, input_format, saved):
         if not bounds.date_from or not bounds.date_to:
             raise ValueError("Tyler calendar retrieval requires explicit inclusive date bounds.")
         return [{"kind": "tyler-calendar"}]
+    if (provider == "onbase" and bounds.date_from and bounds.date_to
+            and urlsplit(source.url).path.rstrip('/').lower() in {
+                '/onbaseagendaonline', '/onbaseagendaonline/meetings'}):
+        return [{"kind": "onbase-window"}]
     if (provider in SAVED_ONLY and not (provider == "boarddocs" and
             urlsplit(source.url).path.lower().endswith(".pdf"))) or input_format == "meeting-export" or (
             provider == "towncloud" and input_format == "towncloud-table-json"):
@@ -148,6 +168,13 @@ def _request_spec(source, bounds, task, context):
     size = _page_size(source)
     if kind == "static":
         url = source.url
+    elif kind == "onbase-window" and source.provider == "onbase":
+        from .onbase import window_url
+        url = window_url(source, bounds.date_from, bounds.date_to)
+    elif kind == "boarddocs-public" and source.provider == "boarddocs":
+        from .boarddocs_public import request_specs
+        spec = request_specs(source)['listing']
+        url, method, body, headers = (spec[k] for k in ('url', 'method', 'body', 'headers'))
     elif kind == "clerkbase-tree" and source.provider == "clerkbase":
         fields = task.get("fields")
         if not isinstance(fields, dict) or set(fields) != {"url"}:
@@ -198,9 +225,13 @@ def _request_spec(source, bounds, task, context):
                 or target.query or target.fragment):
             raise ValueError("The configured Tyler calendar API base is not an evidenced endpoint shape.")
         url = base.rstrip("/") + "/meetingInformation/getMeetingInformationByDate"
+        meeting_types = source.options.get("meeting_type_ids", [-1])
+        if (not isinstance(meeting_types, list) or len(meeting_types) > 100
+                or any(type(value) is not int or value < -1 or value > 2147483647 for value in meeting_types)):
+            raise ValueError("meeting_type_ids must be a bounded list of native integer IDs.")
         body = json.dumps({"startDate": date.fromisoformat(bounds.date_from).strftime("%m/%d/%Y"),
                            "endDate": date.fromisoformat(bounds.date_to).strftime("%m/%d/%Y"),
-                           "meetingTypeIds": [-1]}, separators=(",", ":")).encode()
+                           "meetingTypeIds": meeting_types}, separators=(",", ":")).encode()
         method, headers = "POST", {"Content-Type": "application/json", "Accept": "application/json"}
     elif kind == "legistar" and source.provider == kind:
         after = task.get("after", 0)
@@ -309,17 +340,54 @@ def _next(source, task, payload, size):
 
 
 def _enrich(bundle, provider):
+    if provider == "clerkbase":
+        from .clerkbase_detail import enrich_bundle
+        bundle.update(enrich_bundle(bundle))
+        return
+    if provider == "towncloud":
+        from .towncloud_detail import enrich_bundle
+        bundle.update(enrich_bundle(bundle))
+        return
     if provider == "champ":
         from .champ_media import enrich_bundle
+        from .champ_agenda import enrich_bundle as enrich_agenda
         bundle.update(enrich_bundle(bundle))
+        bundle.update(enrich_agenda(bundle))
         return
     for record in bundle["records"]:
         raw = record.get("original")
         if not isinstance(raw, dict):
             continue
         normalized = record["normalized"]
-        if provider == "civicplus-select":
+        if provider == "tyler-meeting-manager" and bundle['source'].get('options', {}).get('calendar_api_base'):
+            from .tyler_public import documents, recordings
+            supplied = documents(Source.from_dict(bundle['source']), raw)
+            if supplied:
+                normalized['documents'] = supplied
+                record['relationships'].extend({'relation': 'document', 'value': deepcopy(item)} for item in supplied)
+            supplied_recordings = recordings(raw)
+            normalized['recordings'] = supplied_recordings
+            record['relationships'].extend({'relation': 'recording', 'value': deepcopy(item)} for item in supplied_recordings)
+        elif provider == "civicplus-select":
             normalized["body"] = raw.get("categoryName")
+            from .civicclerk_detail import event_documents
+            civic_source = Source.from_dict(bundle['source'])
+            try:
+                legacy_files = event_documents(civic_source, raw, legacy=True)
+                api_files = event_documents(civic_source, raw)
+            except ValueError:
+                legacy_files, api_files = [], []
+            replacements = {canonical_hash(old): new['url']
+                            for old, new in zip(legacy_files, api_files, strict=True)}
+            for document in normalized.get('documents') or []:
+                replacement = replacements.get(canonical_hash(document))
+                if replacement is not None:
+                    document['url'] = replacement
+            for relation in record.get('relationships') or []:
+                if relation.get('relation') == 'document':
+                    replacement = replacements.get(canonical_hash(relation.get('value')))
+                    if replacement is not None:
+                        relation['value']['url'] = replacement
             # CivicClerk may publish a direct HTTPS video in mediaStreamPath
             # while the unchanged compatibility reader only maps
             # externalMediaUrl. Keep this enrichment discovery-only: relative
@@ -352,6 +420,8 @@ def _enrich(bundle, provider):
                                     value["video_url"] = media_url
                         citations = list(record.get("citation_urls") or ())
                         record["citation_urls"] = list(dict.fromkeys([*citations, media_url]))
+            from .civicclerk_detail import enrich_event_assets
+            enrich_event_assets(record, raw)
             # The provider's public payload writes local wall time with Z for
             # observed tenants. Preserve Z but never assert its UTC interpretation.
             normalized["time_zone_status"] = "source_literal_unverified"
@@ -396,13 +466,21 @@ def _enrich(bundle, provider):
 def parse_page(engine, source, namespace, content, input_format, bounds, context):
     if len(content) > bounds.parser_bytes:
         raise ValueError("The provider listing exceeds the configured parser byte limit.")
-    if input_format in {"legistar-events-json", "legistar-event-json", "wistia-api-media-json",
-                        "wistia-media-detail-json", "wistia-caption-json", "granicus-listing-html",
-                        "civicweb-detail-html", "civicweb-meetings-json", "civicweb-meeting-documents-json",
-                        "swagit-listing-html", "onbase-public-listing-html",
-                        "digital-towpath-listing-html", "towncloud-public-listing-json",
-                        "agendaquick-public-listing-html", "agendaquick-item-search-html", "civicplus-search-json",
-                        "utah-public-search-html", "iqm2-public-search-html",
+    if (source.provider == "tyler-meeting-manager" and source.options.get("calendar_api_base")
+            and input_format == "tyler-public-calendar-json"):
+        from .native import make_bundle
+        from .tyler_rows import calendar_rows
+
+        bundle = make_bundle(source, namespace, content, input_format,
+                             calendar_rows(source.url, json.loads(content)))
+        _enrich(bundle, source.provider)
+        return bundle, ()
+    if input_format in {"boarddocs-public-meetings-json", "legistar-events-json", "legistar-event-json", "wistia-api-media-json",
+                        "wistia-media-detail-json", "wistia-caption-json", "wistia-public-embed-html", "granicus-listing-html",
+                        "civicweb-detail-html", "civicweb-filepro-soap-xml", "civicweb-meetings-json", "civicweb-meeting-documents-json", "swagit-listing-html", "swagit-public-player-html", "telvue-public-player-html", "suiteone-public-event-html", "onbase-public-listing-html",
+                        "digital-towpath-listing-html", "towncloud-public-listing-json", "telvue-cloudcast-mrss-xml",
+                        "agendaquick-public-listing-html", "agendaquick-item-search-html", "agendaquick-public-agenda-html", "agendaquick-public-memo-html", "civicplus-search-json",
+                        "utah-public-search-html", "iqm2-public-search-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "novus-public-coversheet-html", "novus-public-listing-html", "peak-publication-rss-xml",
                         "clerkbase-public-tree-html", "clerkbase-search-html"}:
         return parse_native(source, namespace, content, input_format), ()
     result = engine.normalize(replace(source, body=None), content, input_format=input_format,
@@ -423,11 +501,53 @@ def record_day(record):
             (normalized.get("scheduled_start") or normalized.get("source_start") or "")[:10])
 
 
-def discover(engine, request, content, context, *, transport=None, browser=None):
-    source = configured_source(request["source"])
-    namespace = validate_source(source, context, content)
+def discover(engine, request, content, context, *, transport=None, browser=None, validated_namespace=None):
+    source = Source.from_dict(request["source"]) if validated_namespace is not None else configured_source(request["source"])
+    namespace = validated_namespace if validated_namespace is not None else validate_source(source, context, content)
     bounds = Bounds(**request.get("bounds", {}))
     input_format = source.input_format or DEFAULT_FORMAT[source.provider]
+    boardbook_minutes = (source.provider == "boardbook" and (input_format == "boardbook-public-minutes-html"
+                         or (source.input_format is None and urlsplit(source.url).path.startswith("/Public/Minutes/"))))
+    if boardbook_minutes:
+        from .boardbook_detail import minutes_context
+        minutes_context(source)
+        input_format = "boardbook-public-minutes-html"
+    suiteone_player = (source.provider == "suiteone-media" and (input_format == "suiteone-public-event-html"
+        or (source.input_format is None and urlsplit(source.url).path == "/event/")))
+    if suiteone_player:
+        from .suiteone_player import player_context
+        player_context(source)
+        input_format = "suiteone-public-event-html"
+    telvue_player = (source.provider == "telvue" and (input_format == "telvue-public-player-html"
+        or (source.input_format is None and urlsplit(source.url).hostname == "videoplayer.telvue.com"
+            and re.search(r"/media/[1-9][0-9]*$", urlsplit(source.url).path))))
+    if telvue_player:
+        from .telvue_player import player_context
+        player_context(source)
+        input_format = "telvue-public-player-html"
+    swagit_player = (source.provider == "swagit" and (input_format == "swagit-public-player-html"
+                     or (source.input_format is None and re.fullmatch(r"/videos/[1-9][0-9]*", urlsplit(source.url).path))))
+    if swagit_player:
+        from .swagit_player import player_context
+        player_context(source)
+        input_format = "swagit-public-player-html"
+    novus_minutes = (source.provider == "novusagenda"
+                     and "Minutes" in parse_qs(urlsplit(source.url).query).get("doctype", []))
+    if novus_minutes:
+        from .novus_detail import minutes_context
+        minutes_context(source)
+    if (source.provider == 'boarddocs' and source.input_format is None
+            and source.options.get('boarddocs_committee_id')):
+        input_format = 'boarddocs-public-meetings-json'
+    if (source.provider == "novusagenda" and source.input_format is None
+            and urlsplit(source.url).path in {"/agendapublic/Coversheet.aspx", "/agendapublic/CoverSheet.aspx"}):
+        input_format = "novus-public-coversheet-html"
+    if (source.provider == "novusagenda" and source.input_format is None
+            and urlsplit(source.url).path == "/agendapublic/MeetingView.aspx"):
+        input_format = "novus-public-listing-html"
+    if (source.provider == "iqm2" and source.input_format is None
+            and urlsplit(source.url).path == "/Citizens/Detail_Meeting.aspx"):
+        input_format = "iqm2-meeting-detail-html"
     if (source.provider == "digital-towpath" and source.input_format is None
             and re.fullmatch(r"/meetings/detail/[0-9]+/?", urlsplit(source.url).path) is None):
         input_format = "digital-towpath-listing-html"
@@ -438,13 +558,42 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
             input_format = "towncloud-public-listing-json"
     if (source.provider == "destiny-agendaquick" and source.input_format is None
             and urlsplit(source.url).path.lower() == "/agenda_publish.cfm"):
-        input_format = "agendaquick-public-listing-html"
+        input_format = ("agendaquick-public-agenda-html" if parse_qs(urlsplit(source.url).query).get("dsp") == ["ag"]
+                        else "agendaquick-public-memo-html" if parse_qs(urlsplit(source.url).query).get("dsp") == ["agm"]
+                        else "agendaquick-public-listing-html")
     if (source.provider == "clerkbase" and source.input_format is None
             and urlsplit(source.url).path.rstrip("/").casefold() == "/southkingstown-ri"):
         input_format = "clerkbase-public-tree-html"
+    if (source.provider == "iqm2" and source.input_format is None
+            and urlsplit(source.url).path == "/Citizens/SplitView.aspx"):
+        input_format = "iqm2-public-player-html"
+    if (source.provider == "iqm2" and source.input_format is None
+            and urlsplit(source.url).path == "/Citizens/Detail_LegiFile.aspx"):
+        input_format = "iqm2-legislative-file-html"
+    if source.provider == "peak" and source.input_format is None and urlsplit(source.url).path == "/ViewPublisherRSS.php":
+        input_format = "peak-publication-rss-xml"
+    if input_format == "peak-publication-rss-xml":
+        from .peak_rss import source_context
+        source_context(source)
+    if source.provider == "escribe" and input_format == "escribe-publishing-soap-xml":
+        if (request.get("api_method") != "DocumentGetSince" or content is not None
+                or any(k in request for k in ("content_base64", "records", "bundle", "result"))):
+            raise ValueError("Use explicit DocumentGetSince selection; unbounded catalog discovery is not inferred.")
+        from .escribe_publishing import read
+        return read(engine, source, namespace, request, bounds, context, transport or PublicTransport(), discover=True)
     saved = _decode_content(request, content)
     if saved is not None and len(saved) > bounds.parser_bytes:
         raise ValueError("The saved response exceeds the configured parser byte limit.")
+    if input_format == "gworks-secure-calendar-json" and saved is None:
+        raise ValueError("Use an explicit bounded calendar fetch; authenticated catalog traversal is not mapped.")
+    if input_format == "gworks-editor-meeting-json" and saved is None:
+        raise ValueError("Use fetch for one selected editor meeting; this is not a catalog endpoint.")
+    if source.provider == "granicus" and input_format == "granicus-platform-soap-xml" and saved is None:
+        from .granicus_platform import read
+        return read(source, namespace, request, bounds, context, transport or PublicTransport(), discover=True)
+    if source.provider == "civicweb" and input_format == "civicweb-filepro-soap-xml" and saved is None:
+        from .civicweb_filepro import read
+        return read(source, namespace, request, bounds, context, transport or PublicTransport(), discover=True)
     if (source.provider == "utah-public-notice" and saved is None
             and source.input_format in (None, "utah-public-search-html")
             and urlsplit(source.url).path in {"/pmn/", "/pmn/search.html"}):
@@ -452,6 +601,11 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
             raise ValueError("The public notice form exposes meeting notice records only.")
         from .utah_search import discover_public
         return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport())
+    if (source.provider == "champ" and saved is None and source.input_format is None
+            and re.fullmatch(r"/[A-Za-z0-9_-]+/archive/[1-9][0-9]*/?", urlsplit(source.url).path)):
+        from .champ_archive import discover_public
+        return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport(),
+                               record_types=request.get("record_types"))
     if source.provider == "simbli" and saved is None and urlsplit(source.url).path.lower() in {
             "/index.aspx", "/sb_meetings/sb_meetinglisting.aspx"}:
         from .simbli import discover_public
@@ -470,8 +624,9 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
             from .boardable import discover_public
             return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport(),
                                    record_types=request.get("record_types"))
-    if source.provider == "novusagenda" and (source.input_format == "novus-public-listing-html" or
-                                            (saved is None and source.input_format is None)):
+    if (source.provider == "novusagenda" and input_format != "novus-public-coversheet-html"
+            and urlsplit(source.url).path != "/agendapublic/MeetingView.aspx" and (source.input_format == "novus-public-listing-html" or
+                                            (saved is None and source.input_format is None))):
         from .novus import discover_public
         return discover_public(engine, source, namespace, bounds, context, transport or PublicTransport(),
                                saved=saved, record_types=request.get("record_types"))
@@ -502,7 +657,23 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     deadline = monotonic() + bounds.deadline_seconds
     transport = transport or PublicTransport()
     records, bundles, captures, failures, errors, retry = [], [], [], [], [], []
-    pages = filtered = 0
+    pages = filtered = transferred = request_count = 0
+    clerkbase_controls, clerkbase_content = {}, {}
+    clerkbase_root_content = None
+
+    def bounded_request(url, **kwargs):
+        nonlocal transferred, request_count
+        remaining = bounds.transfer_bytes - transferred
+        if remaining <= 0:
+            raise ValueError("Discovery exhausted its aggregate transfer byte limit.")
+        limit = min(bounds.parser_bytes, remaining)
+        request_count += 1
+        response = transport.request(url, byte_limit=limit, **kwargs)
+        transferred += len(response.content)
+        if len(response.content) > limit:
+            raise ValueError("Provider response exceeded the remaining discovery byte limit.")
+        return response
+
     unknown_dates, unknown_bodies, visited = [], [], set()
     public_controls = None
     while queue and pages < bounds.max_pages and len(records) < bounds.max_records:
@@ -540,33 +711,77 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                     # Continuations contain public control values, never trust a
                     # caller-modified group absent from the current root page.
                     if public_controls is None:
-                        root = transport.request(source.url, byte_limit=bounds.parser_bytes,
+                        root = bounded_request(source.url,
                             deadline_seconds=max(.001, deadline - monotonic()),
                             allowed_origins=(_origin(source.url),), allow_redirects=False)
                         if (root.status != 200 or root.url != source.url
                                 or len(root.content) > bounds.parser_bytes):
                             raise ValueError("The public control page is unavailable.")
                         public_controls = controls(root.content)
-                    if task.get("fields") not in public_controls:
+                        if task.get("kind") == "clerkbase-tree":
+                            clerkbase_root_content = root.content
+                    if task.get("kind") == "clerkbase-tree":
+                        ancestry = task.get("ancestors", [])
+                        if (not isinstance(ancestry, list) or len(ancestry) > 32
+                                or any(not isinstance(item, dict) or set(item) != {"url"} for item in ancestry)):
+                            raise ValueError("Invalid ClerkBase tree ancestry.")
+                        available = public_controls
+                        previous = None
+                        for entry in [*ancestry, task.get("fields")]:
+                            if entry not in available or not isinstance(entry, dict):
+                                raise ValueError("The ClerkBase tree is not declared by its current parent.")
+                            current = parse_qs(urlsplit(entry["url"]).query, keep_blank_values=True)["path"][0]
+                            if previous is not None and (current == previous or not current.startswith(previous)):
+                                raise ValueError("The ClerkBase child does not descend from its parent.")
+                            previous = current
+                            if entry is not task.get("fields"):
+                                if entry["url"] not in clerkbase_controls:
+                                    parent = bounded_request(entry["url"],
+                                        deadline_seconds=max(.001, deadline - monotonic()),
+                                        allowed_origins=(_origin(source.url),), allow_redirects=False)
+                                    if parent.status != 200 or parent.url != entry["url"]:
+                                        raise ValueError("The ClerkBase parent control is unavailable.")
+                                    if context.check_cancelled() or monotonic() >= deadline:
+                                        raise RetrievalError("provider_deadline_or_cancellation")
+                                    clerkbase_controls[entry["url"]] = controls(parent.content)
+                                    clerkbase_content[entry["url"]] = parent.content
+                                available = clerkbase_controls[entry["url"]]
+                    elif task.get("fields") not in public_controls:
                         raise ValueError("The requested value is not a current public root control.")
                     if context.check_cancelled() or monotonic() >= deadline:
                         raise RetrievalError("provider_deadline_or_cancellation")
                 url, method, body, headers, size = _request_spec(source, bounds, task, context)
                 origin = _origin(url)
-                response = transport.request(
+                response = bounded_request(
                     url, method=method, body=body, headers=headers or None,
-                    byte_limit=bounds.parser_bytes, deadline_seconds=max(0.001, deadline - monotonic()),
+                    deadline_seconds=max(0.001, deadline - monotonic()),
                     allowed_origins=(origin,),
-                    **({"allow_redirects": False} if task.get("kind") in {
-                        "suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period", "clerkbase-tree"} else {}),
+                    **({"allow_redirects": False} if boardbook_minutes or swagit_player or telvue_player or suiteone_player or novus_minutes or input_format == "peak-publication-rss-xml" or task.get("kind") in {
+                        "suiteone-group", "agendacenter-year", "towpath-year", "agendaquick-period", "clerkbase-tree",
+                        "onbase-window", "boarddocs-public", "tyler-calendar"} else {}),
                 )
                 if _origin(response.url) != origin:
                     raise ValueError("Provider retrieval left its configured origin.")
+                if (boardbook_minutes or swagit_player or telvue_player or suiteone_player or novus_minutes) and (response.url != url
+                        or response.content_type.split(";", 1)[0].strip().lower() not in {"text/html", "application/xhtml+xml"}
+                        or len(response.content) > bounds.transfer_bytes):
+                    raise ValueError("The exact bounded public detail HTML was not returned.")
+                if input_format == "peak-publication-rss-xml" and (response.url != url
+                        or response.content_type.split(";", 1)[0].strip().lower() not in {"text/xml", "application/xml", "application/rss+xml"}
+                        or len(response.content) > bounds.transfer_bytes):
+                    raise ValueError("The exact bounded XML feed was not returned.")
+                if task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar", "clerkbase-tree"} and response.url != url:
+                    raise ValueError("The OnBase response left its exact requested window.")
                 if response.status != 200:
                     raise RetrievalError("provider_http_error", status=response.status)
                 page_content = response.content
+                if task.get("kind") == "clerkbase-tree" and (context.check_cancelled() or monotonic() >= deadline):
+                    raise RetrievalError("provider_deadline_or_cancellation")
                 if len(page_content) > bounds.parser_bytes:
                     raise ValueError("The provider listing exceeds its parser byte limit.")
+                if (task.get("kind") in {"onbase-window", "boarddocs-public", "tyler-calendar"}
+                        and len(page_content) > bounds.transfer_bytes):
+                    raise ValueError("The OnBase window exceeds its transfer byte limit.")
                 try:
                     payload = json.loads(page_content)
                 except (ValueError, UnicodeError):
@@ -575,8 +790,32 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
             digest = hashlib.sha256(page_content).hexdigest()
             if task.get("sha256") is not None and task["sha256"] != digest:
                 raise ValueError("The resumed page changed; restart discovery to review its new revision.")
-            bundle, parse_errors = parse_page(
-                engine, source, namespace, page_content, input_format, bounds, context)
+            if source.provider == "clerkbase" and task.get("kind") == "clerkbase-tree":
+                from .clerkbase_listing import listing_bundle, parent_document
+                tree_url = task["fields"]["url"]
+                tree_path = parse_qs(urlsplit(tree_url).query).get("path", [])
+                expected_document = None
+                if tree_path == ["SouthKingstown_Docket,AGENDA,"]:
+                    ancestors = task.get("ancestors", [])
+                    if not ancestors or ancestors[-1]["url"] not in clerkbase_content:
+                        raise ValueError("The agenda node tree requires its current parent capture.")
+                    expected_document = parent_document(source, clerkbase_content[ancestors[-1]["url"]], tree_url)
+                bundle = listing_bundle(source, namespace, page_content, tree_url=tree_url,
+                                        expected_document_url=expected_document)
+                ancestry = task.get("ancestors", [])
+                chain = [(source.url, clerkbase_root_content)] + [
+                    (entry["url"], clerkbase_content[entry["url"]]) for entry in ancestry]
+                if any(raw is None for _, raw in chain):
+                    raise ValueError("The current ClerkBase control evidence is unavailable.")
+                bundle["extensions"]["tree_validation"] = {
+                    "requested_url": tree_url,
+                    "parent_responses": [{"url": url, "sha256": hashlib.sha256(raw).hexdigest(),
+                        "content_base64": base64.b64encode(raw).decode("ascii")} for url, raw in chain],
+                }
+                parse_errors = ()
+            else:
+                bundle, parse_errors = parse_page(
+                    engine, source, namespace, page_content, input_format, bounds, context)
             errors.extend(parse_errors)
             rows = bundle["records"]
             offset = task.get("offset", 0)
@@ -645,12 +884,27 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
                                  for values in public_controls
                                  if (not bounds.date_from or values["year"] >= bounds.date_from[:4])
                                  and (not bounds.date_to or values["year"] <= bounds.date_to[:4]))
-                elif (source.provider == "clerkbase" and task.get("kind") == "static"
+                elif (source.provider == "clerkbase" and task.get("kind") in {"static", "clerkbase-tree"}
                         and input_format == "clerkbase-public-tree-html"):
                     from .clerkbase_listing import controls
-                    public_controls = controls(source, page_content)
-                    queue.extend({"kind": "clerkbase-tree", "fields": values}
-                                 for values in public_controls)
+                    child_controls = controls(source, page_content)
+                    if task.get("kind") == "static":
+                        public_controls = child_controls
+                        clerkbase_root_content = page_content
+                        ancestors = []
+                    else:
+                        clerkbase_controls[task["fields"]["url"]] = child_controls
+                        clerkbase_content[task["fields"]["url"]] = page_content
+                        ancestors = [*task.get("ancestors", []), task["fields"]]
+                        parent_path = parse_qs(urlsplit(task["fields"]["url"]).query)["path"][0]
+                        child_controls = [child for child in child_controls
+                            if (child_path := parse_qs(urlsplit(child["url"]).query)["path"][0]) != parent_path
+                            and child_path.startswith(parent_path)]
+                    if len(ancestors) > 32:
+                        raise ValueError("The ClerkBase tree exceeds the bounded depth.")
+                    known = {entry.get("fields", {}).get("url") for entry in queue if entry.get("kind") == "clerkbase-tree"}
+                    queue.extend({"kind": "clerkbase-tree", "fields": values, "ancestors": ancestors}
+                                 for values in child_controls if values["url"] not in known)
                 elif (source.provider == "destiny-agendaquick" and task.get("kind") == "static"
                         and input_format == "agendaquick-public-listing-html"
                         and bounds.date_from and bounds.date_to):
@@ -676,7 +930,8 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
     cancelled = context.check_cancelled()
     timed_out = monotonic() >= deadline
     partial = bool(queue or failures or unknown_dates or unknown_bodies or saved is not None or
-                   source.provider not in NATIVE)
+                   source.provider not in NATIVE or
+                   input_format in {"escribe-meeting-detail-html", "boardbook-public-agenda-html", "boardbook-public-minutes-html", "town-hall-streams-event-html"})
     status = "cancelled" if cancelled else (
         "failed" if failures and not captures else "partial" if partial else "completed")
     checkpoint = _checkpoint(binding, queue, seen) if queue else None
@@ -694,7 +949,57 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
             "configured capture only; upstream catalog completeness is unverified"),
         "available_text": "metadata_and_supplied_text_only",
     }
-    if source.provider == "suiteone-media" and saved is None:
+    if suiteone_player:
+        coverage.update(scope="one native SuiteOne event and supplied transcript table",
+                        playback_verified=False, generation_requested=False,
+                        cue_timing_interpretation="not_performed", content_language=None,
+                        catalog_complete=False, source_complete=False)
+    if telvue_player:
+        coverage.update(scope="one native public TelVue player; supplied metadata/locators only",
+                        playback_verified=False, caption_bytes_received=False,
+                        meeting_date_inferred=False, content_language=None)
+    if swagit_player:
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one native-bound Swagit player and supplied rendered transcript; media/caption locators not fetched",
+            "generation_requested": False, "cue_timing_interpretation": "not_performed", "playback_verified": False})
+    elif input_format == "peak-publication-rss-xml":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one configured publication feed snapshot; not a meeting catalog",
+            "publication_time_is_meeting_time": False, "meeting_identity": "not_established",
+            "provider_pagination": "no supplied continuation mapped"})
+    elif input_format == "iqm2-legislative-file-html":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one supplied legislative-file page; parent membership requires retained meeting capture",
+            "meeting_membership": "not_verified_by_file_page_alone"})
+    elif input_format == "iqm2-public-player-html":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one meeting-bound player declaration; media and subtitle locators only, not fetched",
+            "date_availability": "not_supplied_in_player_mapping", "playback_verified": False})
+    elif input_format == "gworks-editor-meeting-json":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one saved development-editor meeting", "native_item_ids": False})
+    elif input_format == "gworks-secure-calendar-json":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one supplied secure calendar response; configured city, not response-verified tenant",
+            "live_read_implemented": False, "time_zone_status": "unknown"})
+    elif input_format == "town-hall-streams-event-html":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one configured public event/player declaration; no media segment or archive claim",
+            "time_zone_status": "unknown"})
+    elif input_format in {"boardbook-public-agenda-html", "boardbook-public-minutes-html"}:
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one configured rendered public BoardBook document; no hidden loaders or archive claim",
+            "native_item_ids": True, "time_zone_status": "unknown"})
+    elif input_format == "escribe-meeting-detail-html":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one supplied public rendered agenda; item keys are capture-local display positions",
+            "native_item_ids": False, "time_zone_status": "unknown"})
+    elif input_format == "telvue-cloudcast-mrss-xml":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "configured published CloudCast player feed; optional recent limit; no archive completeness",
+            "publication_time_is_meeting_time": False,
+            "provider_pagination": "no vendor-documented continuation in MRSS contract"})
+    elif source.provider == "suiteone-media" and saved is None:
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "configured public root and its supplied Older Meetings groups; catalog extent unverified",
             "older_groups": len(public_controls or []),
@@ -710,12 +1015,26 @@ def discover(engine, request, content, context, *, transport=None, browser=None)
             "control_validation": "current configured listing revalidated before resumed year GET"})
     elif source.provider == "clerkbase" and input_format == "clerkbase-public-tree-html":
         coverage.update({"catalog_complete": False, "source_complete": False,
-            "scope": "configured public root and supplied top-level trees; nested trees and catalog extent unverified",
-            "control_validation": "current public root revalidated before resumed tree GET"})
+            "scope": "configured public root and supplied nested trees; catalog extent unverified",
+            "control_validation": "current public root and parent chain revalidated before tree GET",
+            "network_requests": request_count, "transfer_bytes": transferred})
     elif source.provider == "destiny-agendaquick" and input_format == "agendaquick-public-listing-html":
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "configured public month and advertised month/year selections within requested bounds",
             "control_validation": "current configured calendar revalidated before resumed period GET"})
+    if source.provider == "onbase" and input_format == "onbase-public-listing-html":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one captured public OnBase listing/date window; server truncation and paging unverified",
+            "pagination": "no undocumented GetMoreFullTextResults traversal",
+            "unmapped_submodels": [name for name, predicate in (
+                ("Documents", lambda value: value.get("document_mapping_complete") is False),
+                ("Media", lambda value: value.get("media_availability") == "unmapped_submodel"))
+                if any(predicate(record["normalized"]) for record in records)]})
+    if source.provider == "boarddocs" and input_format == "boarddocs-public-meetings-json":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "third-party-source-backed public committee list; no paging or complete-catalog claim",
+            "provider_contract": "undocumented; pinned LlamaIndex source and synthetic execution",
+            "detail_and_files": "explicit selected detail only; linked files not downloaded"})
     return OperationResult(status, {"source": source.public_dict(), "records": records,
                                    "captures": captures, "bundles": bundles},
                            tuple(errors), coverage, context.operation_id)

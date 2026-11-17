@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "4f44fd3",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "Existing captured WSDL MeetingAgendaItemsWithHistory: selected native meeting -> positive integer item selectors -> separately requested existing history view. Original scalar IDs, disclosed request-context parent binding, exact source capture, partial reference identity, SQLite retry/reopen/search and JSON/JSONL/ZIP. No tenant call, polling, fan-out or mutation.",
+  "new_cases": 20,
+  "checks": [
+    {
+      "scope": "history index plus existing eSCRIBE reads/writes, interfaces/public package, baseline/search",
+      "passed": 266,
+      "failed": 0,
+      "seconds": 31.08
+    },
+    {
+      "scope": "Ruff changed Python paths",
+      "status": "PASSED"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/escribe_history.py",
+      "sha256": "051698c0b77088fd2d0e407ab200388a42b86ed01f403c76b887c0a4bfc6b75b"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/escribe_publishing.py",
+      "sha256": "ca797b3f40ec84a38927c0d6a6ef1b9523a8856ceed5b5631baa38d1ca53ac69"
+    },
+    {
+      "path": "scripts/pin_escribe_contract.py",
+      "sha256": "201831cb38b9c0cd0100ed51dcddbde2374a774394d5b5aa4983cb908cafb87f"
+    },
+    {
+      "path": "src/civic_data_connectors/data/escribe_publishing.json",
+      "sha256": "c7da54e9f2d0be730fd179f64e36824dbdfd72f1664a0090cbac4c669d677472"
+    },
+    {
+      "path": "tests/test_escribe_history_index.py",
+      "sha256": "f5cb1e9c1c2a0b3be8c1af09e78cb312e080b690a4dc303f84b551eab8236cab"
+    }
+  ],
+  "central_contract_rebinding": "15other central sections preserved semantically;6old proof hashes verified against prior raw bytes then rebound solely for added eSCRIBE read method.",
+  "limits": [
+    "Meeting association is exact caller request context, not independently echoed by response.",
+    "AgendaType absent; no full agenda-item identity inferred.",
+    "Unpaged/nil/empty always partial; no complete history/catalog or current tenant applicability claim.",
+    "No bare saved-array normalization without selected meeting; exported bundle retains context."
+  ],
+  "delivery": "Local source only; no release/push/merge/tag/build/package/sign/install/repin/credential change/vendor call."
+}

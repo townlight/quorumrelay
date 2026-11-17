@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "79e24ddbbe10bf02037b55ccc07392220b42b48d",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "Anonymous BoardBook rendered search-index entries and partial excerpts; no canonical parent inference/fulltext/exhaustive catalog/write.",
+  "new_cases": 20,
+  "checks": [
+    {
+      "scope": "New search, existing BoardBook readers, provider discovery, interchange/storage and HTTP/MCP interfaces",
+      "passed": 180,
+      "failed": 0,
+      "seconds": 35.76,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\boardbook-native-search-2026-11-15.xml",
+      "xml_sha256": "e66e9c470a984a8d2eca924e3c68b04bfd51ff3ab9dc8d41ac739552496992ab",
+      "warning": "Existing Starlette/AnyIO alias deprecation"
+    },
+    {
+      "scope": "Ruff changed source/test",
+      "status": "PASSED"
+    }
+  ],
+  "source_sha256": {
+    "src/civic_data_connectors/providers/boardbook_search.py": "d47c3dc97617832443eaa43113f78683ee4fe8f7e9afd7516ccd6d8e59f37000",
+    "src/civic_data_connectors/providers/__init__.py": "10f912cfaa8e6100d72cafcf5dfd3f8ab6cdb63407b7b810dcc6a3348080f620",
+    "src/civic_data_connectors/providers/identification.py": "72e1d9d35767cb89fc1f29162c0586edb5871129a2924234d644a91ca56f2119",
+    "src/civic_data_connectors/providers/native.py": "cc3255dca00e393b10ff9d88bdf0f985064bdcb788897ccac8ab066ed05a0218",
+    "tests/test_boardbook_native_search.py": "eede4f2970d43828ce7a0478e2205a62b37c72ca426695a3913fabe9803ec98c",
+    "docs/BOARDBOOK-PUBLIC-SEARCH.md": "e45d2f9b5af909f856c82eb027dc219948425557e9b3cb599fb627d8b17fd306",
+    "src/civic_data_connectors/providers/search_echo.py": "3245307efb7d5ac9281556617cb8d5df40f4c2c7158de013593c1febde0ebf3a"
+  },
+  "primary_source": "docs/capabilities/evidence/boardbook-public-search/source.json",
+  "limitations": [
+    "No inferred server pagination/exhaustion, document-byte search, date/body semantics or remote mutation.",
+    "No Index refresh/CheckLoadSearchItems call, result redirects or returnUrl navigation is executed.",
+    "No complete empty coverage inferred; all native results partial, empty/unrecognized result containers fail."
+  ],
+  "initial_test_correction": "Three roundtrip assertions originally assumed all42provider candidates were exact local hits. Inspection showed5document excerpts omit the term. Corrected expectations to37hits while retaining all42captured candidates and requiring native/local hit identity equality; no source behavior or acceptance weakened.",
+  "prior_source_sha256_before_query_binding": {
+    "src/civic_data_connectors/providers/boardbook_search.py": "f9d4355d493fd748bb9c926376f85365f850101cacf61192b77c31a4fe8e4774",
+    "src/civic_data_connectors/providers/__init__.py": "d04ec1b9463643a3b60285ff7e96ea2c4bea858aa9b1772a5011c22204e4b079",
+    "src/civic_data_connectors/providers/identification.py": "677faebb7ec99e3efd16ec5ecfd3a9520d4cb7e1ef23d69c1645f79902813308",
+    "src/civic_data_connectors/providers/native.py": "605e05fdab68a7316c7844738c3ab76cb38abc2284192f95818c0abf9b6545bf",
+    "tests/test_boardbook_native_search.py": "b9493f48b3d263ec3c7ba30c7e253c497239859fb22a68b5ce931ccc9bdb6400",
+    "docs/BOARDBOOK-PUBLIC-SEARCH.md": "dfeba898adf4488afe04764aa2c6c1a74c29719addd58149f363a7c7307d2a62"
+  },
+  "followup_base_commit": "b329fa6136b4c6242c2e1dcddcbbe91404780078",
+  "followup": {
+    "defect": "A response with changed or empty echoed query was accepted as the submitted native request.",
+    "reproduction": "Three changed/empty query fixtures per provider returned partial before the fix (six failures total).",
+    "fix": "Require exactly one visible text query control with exact decoded request value; duplicate/template-only controls fail. No response text/identity/transport or saved mapper changes.",
+    "command": "pytest tests/test_boardbook_native_search.py tests/test_townhall_native_search.py -q",
+    "passed": 47,
+    "failed": 0,
+    "seconds": 1.74,
+    "new_cases_per_provider": 5,
+    "limits": "Prior broad affected runs remain historical before this narrow validation patch. No vendor request, write or release."
+  }
+}

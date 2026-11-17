@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-16",
+  "status": "mock_passed",
+  "scope": "Boardable native single private unpublished no_remote meeting create/update: title,description,location,timezone,date range; owner-only creation; exact canonical-URL readback and no-replay recovery.",
+  "check": {
+    "passed": 131,
+    "failed": 0,
+    "seconds": 19.31,
+    "junit_sha256": "40d74cf1160d2597dfe47114cc00e8925d1a8dd995772de73195eaaefe103577"
+  },
+  "additional_field_check": {
+    "status": "passed",
+    "description": "Combined title/description/location/timezone/date update with independently literal Denver UTC16:15-17:45 expectations, one POST."
+  },
+  "live_trial": {
+    "create_status": 201,
+    "update_status": 200,
+    "readback_status": 200,
+    "meeting_ids": [
+      526572,
+      526577
+    ],
+    "invitations_sent": false,
+    "published": false,
+    "source": "docs/capabilities/evidence/boardable-meeting-form/source.json"
+  },
+  "adapter_live_execution": false,
+  "files": {
+    "src/civic_data_connectors/providers/boardable_meeting_write.py": "57d4a0e3ca4619c2314c755e7cca01b8117e3d2bb4cb3e9d4e1dd2d2ed6c2e97",
+    "src/civic_data_connectors/providers/boardable_write.py": "179b3fa59aebd2a4e61c0e0727d7fb733f7e243d87c9bb4f19bf5c14daf16188",
+    "tests/test_boardable_meeting_write.py": "f88cbf816a794e7d17d0417004ec99c6ee8ff36ae75199cfe2c4312c2af39e72",
+    "pyproject.toml": "01d5c4a2fc95df4900a927ea43a67636cd11ddc11a4bf6acd1e59a6a8e63c87b"
+  },
+  "full_python_regression": {
+    "status": "passed",
+    "passed": 3010,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 256.23,
+    "junit_sha256": "3a173095e786c7a426708ee0a214f242182331a5acd5e4bc893a2cc25d999663",
+    "owned_session": 5136,
+    "terminal_exit": 0,
+    "warning": "One upstream Starlette/AnyIO deprecation warning."
+  },
+  "remaining": [
+    "recurring/multiday/scheduler",
+    "draft preparation",
+    "publication/invitations",
+    "vendor imports",
+    "general Document Center uploads"
+  ],
+  "metadata_checks": {
+    "passed": 25,
+    "failed": 0,
+    "seconds": 1.22
+  },
+  "ruff": "passed",
+  "git_diff_check": "passed",
+  "client_checks": "Unchanged client; prior build/test evidence reused."
+}

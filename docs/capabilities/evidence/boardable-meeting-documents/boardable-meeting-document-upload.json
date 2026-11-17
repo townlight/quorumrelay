@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://app.boardable.com/quorumrelay-evaluation/attachments/upload",
+    "multipart_with_file_bytes_omitted": "------WebKitFormBoundarylr0KUIwB3hRse8Oi\r\nContent-Disposition: form-data; name=\"attachments[0][file]\"; filename=\"quorumrelay-document-center-evaluation.txt\"\r\nContent-Type: text/plain\r\n\r\n\r\n------WebKitFormBoundarylr0KUIwB3hRse8Oi\r\nContent-Disposition: form-data; name=\"attachments[0][type]\"\r\n\r\nupload\r\n------WebKitFormBoundarylr0KUIwB3hRse8Oi\r\nContent-Disposition: form-data; name=\"attachable_type\"\r\n\r\nmeeting\r\n------WebKitFormBoundarylr0KUIwB3hRse8Oi\r\nContent-Disposition: form-data; name=\"attachable_id\"\r\n\r\n526577\r\n------WebKitFormBoundarylr0KUIwB3hRse8Oi\r\nContent-Disposition: form-data; name=\"folder_id\"\r\n\r\n0\r\n------WebKitFormBoundarylr0KUIwB3hRse8Oi\r\nContent-Disposition: form-data; name=\"original_token\"\r\n\r\nundefined\r\n------WebKitFormBoundarylr0KUIwB3hRse8Oi--\r\n"
+  },
+  "response": {
+    "status": 200,
+    "mime": "text/html",
+    "body": ""
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-15",
+  "kind": "observed_public_response",
+  "lead": {
+    "path": "tests/fixtures/baseline/utah-notice.response",
+    "sha256": "2067ed91c4346b0b39d6236dc9c470e9e0d401b63c8b390afb457745b8953f7e",
+    "scope": "Existing original notice1101977 supplies exact Add Notice to Calendar and Audio Recording links; no new tenant survey."
+  },
+  "request": {
+    "url": "https://www.utah.gov/pmn/sitemap/noticeical/1101977.ics",
+    "method": "GET",
+    "byte_limit": 262144,
+    "deadline_seconds": 20,
+    "redirects": false,
+    "status": 200,
+    "content_type": "text/calendar",
+    "bytes": 270,
+    "sha256": "d95c10ef73ebd5d91615a461e7b149659f734e9bfc2980d092953464bd1bac93",
+    "response_url": "https://www.utah.gov/pmn/sitemap/noticeical/1101977.ics"
+  },
+  "capture_path": "tests/fixtures/utah-notice-1101977.ics",
+  "findings": [
+    "Actual calendar UID1101977 and floating DTSTART20260818T183000; preserve opaque bytes, do not infer timezone or overwrite notice fields.",
+    "Actual original HTML Audio Recording row supplies native MP3 file1477057 with filename08-14-2026.mp3; filename does not establish recording date."
+  ],
+  "limits": "One exact calendar GET. No actual audio bytes downloaded, playback, legal notice-compliance, staff writes or calendar semantic normalization established."
+}

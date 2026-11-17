@@ -1,0 +1,72 @@
+{
+  "vendor": "Granicus",
+  "official_repository": "https://github.com/Granicus/platform-api-net",
+  "revision": "ca7baf0768c32e5fd2ef9c5236fdefde3386934a",
+  "captured": "2026-11-12",
+  "executed_vendor_code": false,
+  "files": [
+    {
+      "file": "APIEntities.cs",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/APIEntities.cs",
+      "bytes": 307600,
+      "sha256": "a521a377c55c3cd8c6e089d6a9630fd96a2e0708c9167648b7a08b105b930a47"
+    },
+    {
+      "file": "IMediaManager.cs",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/IMediaManager.cs",
+      "bytes": 4985,
+      "sha256": "69f021cdacb1b7a6ff78589ef7580b5f796fb9b5d4a27ebdfac410c6beaa5d25"
+    },
+    {
+      "file": "MediaManager.cs",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/MediaManager.cs",
+      "bytes": 104888,
+      "sha256": "d832a41304952c34b9a56f060cf76df0ac5fbee5724a8e058b43b49ad3bde709"
+    },
+    {
+      "file": "index.php.wsdl",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/index.php.wsdl",
+      "bytes": 94937,
+      "sha256": "ac21ee789510bc062ef0c87ecd1481e49f893e3276661b503272d6947b82c0e0"
+    },
+    {
+      "file": "IMediaVault.cs",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/IMediaVault.cs",
+      "bytes": 640,
+      "sha256": "4bba6abf74c50fcf674d1f3efe5eb86bb6cb8dbf3fd1e2742963e78f19984f7f"
+    },
+    {
+      "file": "MediaVault.cs",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/MediaVault.cs",
+      "bytes": 25156,
+      "sha256": "ab7da09c74529bccada03fcf144ba08636c3a40a69452ad142170afec56dee6c"
+    },
+    {
+      "file": "SDK.asmx.wsdl",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-net/ca7baf0768c32e5fd2ef9c5236fdefde3386934a/Granicus.MediaManager.UserSDK/SDK.asmx.wsdl",
+      "bytes": 12321,
+      "sha256": "07326cbec0146d5f0e7d2b4a6fcfc0321d5066adbed9e10d6720661c6f536135"
+    },
+    {
+      "file": "java-granicus.wsdl",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-java/548e20a5f25f9ca5472e168996fe116ab8bd1164/src/granicus.wsdl",
+      "revision": "548e20a5f25f9ca5472e168996fe116ab8bd1164",
+      "bytes": 110270,
+      "sha256": "a4faf563185063a15f9f568a31cb2176332e9b02cb4ed20bdcbb047cd72e9820"
+    },
+    {
+      "file": "PublishClipData.java",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-java/548e20a5f25f9ca5472e168996fe116ab8bd1164/src/com/granicus/xsd/PublishClipData.java",
+      "revision": "548e20a5f25f9ca5472e168996fe116ab8bd1164",
+      "bytes": 9269,
+      "sha256": "4febe60acebb4e8bb4b22c7843c365630c8dccc61d95f0352177383ac60346a5"
+    },
+    {
+      "file": "PublishClipResult.java",
+      "url": "https://raw.githubusercontent.com/Granicus/platform-api-java/548e20a5f25f9ca5472e168996fe116ab8bd1164/src/com/granicus/xsd/PublishClipResult.java",
+      "revision": "548e20a5f25f9ca5472e168996fe116ab8bd1164",
+      "bytes": 5510,
+      "sha256": "429208848f42432e33e118e5073d93882a1180cf1b295b631d3cf19da8102b7c"
+    }
+  ]
+}

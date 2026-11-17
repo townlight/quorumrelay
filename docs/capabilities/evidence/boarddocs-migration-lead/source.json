@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-15",
+  "scope": "New original BoardDocs vendor-file migration documentation lead; no new product/API or live tenant operation.",
+  "administrator_document": {
+    "url": "https://go.boarddocs.com/ca/ccsf/Board.nsf/files/DLYRLF6E80E8/%24file/Diligent%20-%20Administrators%20101.pdf",
+    "status": 403,
+    "final_url": "https://go.boarddocs.com/ca/ccsf/Board.nsf/files/DLYRLF6E80E8/%24file/Diligent%20-%20Administrators%20101.pdf",
+    "content_type": "text/html",
+    "bytes": 919,
+    "sha256": "7340adbb17128159e64cf6adf28e032754a8f5445bb808daeabaf29eaefc1fa2"
+  },
+  "indexed_primary_document_assessment": {
+    "publisher": "Diligent, copyright2025, vendor PDF hosted on public BoardDocs tenant",
+    "named_references": [
+      "Implementation Guide for BoardDocs Migrations",
+      "Migration Project Resource Center"
+    ],
+    "established": "BoardDocs-to-Diligent-Community migration resources and administrative permission comparison; dedicated migration support exists.",
+    "not_established": "The referenced guides hyperlink URLs, migration package/file/schema, BoardDocs external create/update/upload contract, API version/applicability, identity and readback."
+  },
+  "access_limit": "Web open and one direct standard-library GET both returned403 for this exact document. No login or retries after those observations. The public search index exposes guide titles but not their targets. This is exact-source access evidence, not proof of private-only contracts or API absence.",
+  "separate_primary_source": {
+    "url": "https://www.diligent.com/company/newsroom/diligent-announces-integration-with-civicplus-docaccess",
+    "date": "2026-09-22",
+    "assessment": "Announces accessible HTML alternatives alongside PDFs for BoardDocs/iCompass/Community. No request, attachment identity, native file import or transfer/readback schema. No DocAccess connector or generation requirement added."
+  },
+  "rejected_mismatches": [
+    "Granicus API Integration help article describes govDelivery subscriber/topics/bulletins, not PrimeGov Meeting API.",
+    "Tyler public-safety API marketplace job is not Meeting Manager API documentation."
+  ],
+  "disposition": "No new executable contract established. Missing contract research remains owned; no new outside-only dependency claimed. Do not repeat these exact source/search chains without a new declared target or primary schema."
+}

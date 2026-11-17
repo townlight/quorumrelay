@@ -1,0 +1,31 @@
+{
+  "operation": "saved_and_configured_public_agenda_mapping",
+  "date": "2026-11-12",
+  "source_url": "https://meetings.boardbook.org/Public/Agenda/1807?meeting=775433",
+  "capture": {
+    "byte_length": 123605,
+    "sha256": "833d18bcac31aa1d678958ac62611f7fdd806196f6cdb77988d08f05789d26c4"
+  },
+  "offline_actual_capture": {
+    "meetings": 1,
+    "native_agenda_items": 44,
+    "item_document_viewer_links": 34
+  },
+  "synthetic_execution": {
+    "test_file": "tests/test_boardbook_detail.py",
+    "new_distinct_passed": 7,
+    "reused_existing_passed": 3,
+    "existing_test_file": "tests/test_boardbook_documents.py",
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_boardbook_detail.py tests/test_boardbook_documents.py -q (9 passed before added order test)",
+      ".venv/Scripts/python.exe -m pytest tests/test_boardbook_detail.py::test_native_parent_identity_does_not_depend_on_rendered_row_order -q (1 passed)"
+    ]
+  },
+  "limits": [
+    "No new network request",
+    "Viewer links are not independently verified original-file downloads",
+    "No hidden loaders or scripts executed",
+    "No catalog or write acceptance claim",
+    "Frozen release and consumers unchanged"
+  ]
+}

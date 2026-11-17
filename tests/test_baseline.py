@@ -40,3 +40,5 @@ def test_rich_capture_is_lossless_and_compatible(case):
     assert canonical_hash(result.data["compatibility"]) == case["original_output_sha256"]
     assert base64.b64decode(result.data["capture"]["content_base64"]) == data
     assert result.data["capture"]["sha256"] == case["sha256"]
+    for record in result.data["records"]:
+        assert record["normalized_sha256"] == canonical_hash(record["normalized"])

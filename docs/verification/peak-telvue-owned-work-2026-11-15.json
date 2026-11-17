@@ -1,0 +1,79 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "01dda2fee64e2245e3ac1cd6754441e5e60a983b",
+  "status": "PASSED",
+  "requirements": [
+    6,
+    8,
+    9,
+    10
+  ],
+  "scope": "Peak selected publication RSS and TelVue existing playlist response-bound regression; no new provider, staff route or release.",
+  "new_cases": 21,
+  "checks": [
+    {
+      "command": "pytest tests/test_peak_rss.py tests/test_peak_packets.py tests/test_peak_viewers.py tests/test_provider_discovery.py tests/test_interchange.py tests/test_baseline.py -q",
+      "passed": 206,
+      "failed": 0,
+      "seconds": 6.2
+    },
+    {
+      "command": "pytest tests/test_telvue_playlist_write.py tests/test_telvue_playlist_items.py tests/test_account_apis.py tests/test_peak_rss.py -q",
+      "passed": 76,
+      "failed": 0,
+      "seconds": 1.29
+    },
+    {
+      "command": "pytest tests -q",
+      "passed": 1876,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 101.272,
+      "junit_sha256": "8edc4b544f023697876f42ad36dc9c511530a8ae6f754d675c3bceb1898f5fc9"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/peak_rss.py",
+      "sha256": "47ebc145b747e5ab63cfcc02fdb9bf599a67fe5567cfd2c71267644ac54365b3"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/telvue_write.py",
+      "sha256": "268e0f678a8f2b94f67db1adce5e6aeaed22a4ec1b42d98f9762a74320a77882"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_peak_rss.py",
+      "sha256": "32139c0190febd7e2a9397242e319c40c7943752577464387401662dc706dc94"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_telvue_playlist_write.py",
+      "sha256": "454f8d42c7704fd49998a8862ec09a70ad54fc8b606b6c1ae6bdb76e85c7c282"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/peak-publication-rss/source.json",
+      "sha256": "79af57b6f55739982fd29bd2e59e8d0691329982ef1f45b088a0e053aad2a2a3"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/telvue-client-write/source.json",
+      "sha256": "fa6613a0a2501eb8cf2a0585f8e610248b0f6897ba0ab9bc5a77c6704a3578e2"
+    }
+  ],
+  "reproduction": "Before TelVue fix, engine plan_write with transfer_bytes16 incorrectly returned completed. New regression failed before source change. Minimum response bound now passed into transport and checked after injected response.",
+  "corrected_test_drafts": [
+    "Malformed RSS injection exposed uncaught ElementTree ParseError; parser now reports a ValueError through the SDK boundary.",
+    "Commit request schema deliberately does not accept new bounds; corrected new post-send regression to store its512bytebound in the approved plan, preserving immutable approved limits."
+  ],
+  "limitations": [
+    "Agenda publication GUID/time/event locator are not meeting identity/date. Minutes and two podcast channels were empty.",
+    "Configured Peak network path is injected transport against actual raw XML; no live binary or staff write.",
+    "TelVue oversize response recovery uses synthetic vendor client transactions, with reopen/reconcile and onePOST only."
+  ],
+  "other_research": "Official TelVue XML knowledge-base index exposes the same v2 resource family and upload UI guides; no new recording-write request/readback contract. BoardBook quick-tip search result describes copying items from an existing meeting, not external Word-file import; unrelated OnBoard/PublicInput/subscriber formats excluded."
+}

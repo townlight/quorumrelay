@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "bfd4040",
+  "tasks": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "scope": "Pinned DocumentGetContentChunk typed native request/output plus selected DocumentGetById metadata; opaque chunk and exact context/captures retained through retry, SQLite reopening/search and JSON/JSONL/ZIP. No network method call.",
+  "new_cases": 23,
+  "checks": [
+    {
+      "scope": "all eSCRIBE affected reads/writes/history/upload/chunks",
+      "passed": 203,
+      "failed": 0,
+      "seconds": 3.55
+    },
+    {
+      "scope": "Ruff changed Python paths",
+      "status": "PASSED"
+    },
+    {
+      "scope": "capabilities/synthetic evidence/public package/HTTP interfaces",
+      "passed": 32,
+      "failed": 0,
+      "seconds": 3.38,
+      "warning": "Existing Starlette AnyIO deprecated alias"
+    },
+    {
+      "scope": "Strengthened assertions reload exact bundle and all3capture entries from reopened SQLite before neutral export",
+      "passed": 23,
+      "failed": 0,
+      "seconds": 0.26,
+      "reason": "Direct evidence for durable capture/context claim; test-only refinement after27ca01b, no engine change"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/escribe_publishing.py",
+      "sha256": "24944bd1d7cc5890c589748b59d8500be0c60bde53b075090e134b8c3bc9416e"
+    },
+    {
+      "path": "scripts/pin_escribe_contract.py",
+      "sha256": "bf3c49cf0c755e355e3e864a2927e54b2a4803f01a9da2a7927e43d0976e8f4e"
+    },
+    {
+      "path": "src/civic_data_connectors/data/escribe_publishing.json",
+      "sha256": "41704b415c33d50849a6367756ceb68d8b5ca67f41175cb80c218ec17ecc9858"
+    },
+    {
+      "path": "tests/test_escribe_content_chunk.py",
+      "sha256": "dde9e675d89865f30fea78fc733594a1dfce49c07d4bc4adab77fe848191bc5d"
+    }
+  ],
+  "central_contract_rebinding": "15other root sections preserved;6prior raw byte hashes verified and rebound solely for added native read.",
+  "limits": [
+    "Pinned integers do not establish units, range arithmetic, short-chunk terminal conditions, assembly or atomic revision semantics.",
+    "No complete document/hash/MIME/text or read permission inferred from a chunk.",
+    "Empty returned bytes explicitly remain zero-byte partial chunk; transport/parse failures retain metadata and error.",
+    "No live SOAP, release/build/package/push/merge/tag/sign/install/repin or credential change."
+  ]
+}

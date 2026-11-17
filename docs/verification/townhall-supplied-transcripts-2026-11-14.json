@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "c309deca5022be754b0393b37c8a019340d0ea9a",
+  "status": "PASSED",
+  "new_cases": 19,
+  "checks": [
+    {
+      "command": "pytest tests/test_townhall_captions.py tests/test_townhall_detail.py tests/test_provider_record.py tests/test_interchange.py tests/test_storage_search_imports.py -q",
+      "passed": 81,
+      "failed": 0,
+      "junit_sha256": "758adeaeeffbd9091bff47ce6998ebdaf788e83079d55461a20fdac2eb1983fd"
+    },
+    {
+      "command": "pytest tests -q",
+      "passed": 1749,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 91.9,
+      "junit_sha256": "b1882103b07bc2659d780d54489f02d32e0f0e048d9b901b119db99ed3959dda"
+    },
+    {
+      "command": "pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q",
+      "passed": 25,
+      "failed": 0
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "PASSED"
+    },
+    {
+      "command": "scripts/validate_capabilities.py",
+      "status": "PASSED",
+      "evidence_records": 402,
+      "distinct_urls": 251,
+      "outbound_mapping_entries": 172,
+      "negative_checks": 5,
+      "errors": 0
+    },
+    {
+      "command": "git diff --check",
+      "status": "PASSED"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/townhall-transcripts/source.json",
+      "sha256": "41c5fca3e929de7aa5158da3eecca4079047975ee97575a097057bebd871c03f"
+    },
+    {
+      "kind": "fixture",
+      "path": "tests/fixtures/townhall-transcripts/hollis-74003.html",
+      "sha256": "06bd5275933a68e2b41d629b820623da7fc09633773467d9e2016b494bf67bcb"
+    },
+    {
+      "kind": "fixture",
+      "path": "tests/fixtures/townhall-transcripts/location31-77576.html",
+      "sha256": "b741f017d062d43d866dd64892bc4266d192f5baf9b1450a967882ed379ece9e"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_townhall_captions.py",
+      "sha256": "25bd7125c13d8e3a94ccbdc867a60d4848525d4f367ebc10a89254ae05840dbb",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "25bd7125c13d8e3a94ccbdc867a60d4848525d4f367ebc10a89254ae05840dbb"
+    }
+  ],
+  "scope": "SDK fetch_captions on exact configured Town Hall Streams native player, two bounded GETs, one-shot declared full HTML transcript display. Empty response plus synthetic static text/search/import/reopen/exactZIP. Fresh private public-session cookies carry only between the two same-origin reads and are absent from captured data.",
+  "verified": "No arbitrary endpoint, mixed IDs, unknown language, hidden/script text, full document/sentinel promotion, redirect, oversized/error response or cancelled-success claim. Transcript failure retains meeting partial. Actual empty capture survives ZIP.",
+  "defect_fixed": "New cancellation case exposed a stale normalized hash after availability changed; cancelled partial meeting digest now refreshed. No check weakened.",
+  "limits": "Actual two sessionless empty observations plus one fresh-session Hollis empty observation. Nonempty text is synthetic. No timestamp/speaker/language mapping, ASR, polling, playback, release or artifact/pin change."
+}

@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "75ebb30",
+  "status": "PASSED",
+  "scope": "Selected iQM2 first active WebVTT file, exact byte/text/hash capture, no cue interpretation/content-language inference. Active-track transport synthetic; actual6049 has none.",
+  "new_cases": 18,
+  "checks": [
+    {
+      "command": "pytest tests/test_iqm2_captions.py tests/test_iqm2_player.py tests/test_iqm2_file.py tests/test_townhall_captions.py tests/test_interchange.py -q",
+      "passed": 88,
+      "failed": 0,
+      "seconds": 4.85
+    },
+    {
+      "command": "pytest tests -q",
+      "passed": 1855,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 104.971,
+      "junit_sha256": "eb37e17ba8ba7ee0545aca1f80704b79114c602bab66b6e160d6ed23adcd35fb"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/iqm2_player.py",
+      "sha256": "6a7b2c2f739ab81136c6b5ede0d796679d625b77448de8d5dc132e1c456a687e"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "fba1bbea297bb15f8f1dd62506e185dd8f477690399cd0f3b6e2dfa8e884c75c"
+    },
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/iqm2-public-player/source.json",
+      "sha256": "4489143f5550d9e1d5cc53dac310d3577e0388da44badc778d4325f7ac3a28b2"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_iqm2_captions.py",
+      "sha256": "a7020b6b53418c29c7fd6ed2744f0540f4a1eac948cac36265a285a36ce8d847"
+    }
+  ],
+  "limits": [
+    "MIME/header recognition retains supplied UTF8 source text, not a full WebVTT cue validator.",
+    "Named-language selection unsupported because player hardcoded en does not establish actual content language.",
+    "No live caption/media transfer, playback, generation, staff mutation or complete archive claim."
+  ],
+  "initial_test_correction": "One draft assertion forgot parser_bytes also bounds each response; corrected expected min(parser_bytes, remaining aggregate transfer), no production bound weakened.",
+  "other_followup": "Official Liberty Meeting Recorder, Downloads and Knowledge Base pages confirm Word/HTML cue-point features but supply no timed *_content.HTML schema. No product feature or empty search result is treated as proof of an outside-only dependency."
+}

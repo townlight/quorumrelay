@@ -1,0 +1,54 @@
+{
+  "observed_at": "2026-11-15T08:58:21.649857+00:00",
+  "wsdl_url": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc?wsdl",
+  "wsdl_sha256": "a166e11909548edc8876556d4cba67f5661d8269a2269e99a412fe726bd1ac46",
+  "wsdl_status": 200,
+  "wsdl_bytes": 222643,
+  "schemas": [
+    {
+      "url": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc?xsd=xsd0",
+      "file": "xsd0.xsd",
+      "status": 200,
+      "bytes": 137357,
+      "content_type": "text/xml",
+      "sha256": "9794f976a48bbc225e2d8162f50182efd02e7551b68da7bd82eb5c1270c7f6d8"
+    },
+    {
+      "url": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc?xsd=xsd1",
+      "file": "xsd1.xsd",
+      "status": 200,
+      "bytes": 2273,
+      "content_type": "text/xml",
+      "sha256": "cff6937e7a1ed4a816ee6cb8525d75c041ff3244d8ca6100f031d20f689a521a"
+    },
+    {
+      "url": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc?xsd=xsd2",
+      "file": "xsd2.xsd",
+      "status": 200,
+      "bytes": 14791,
+      "content_type": "text/xml",
+      "sha256": "690da8769e0e9c0a850e7978c10acd8f37f50625f6550c2839b2e1476bd418d4"
+    },
+    {
+      "url": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc?xsd=xsd3",
+      "file": "xsd3.xsd",
+      "status": 200,
+      "bytes": 2797,
+      "content_type": "text/xml",
+      "sha256": "fac71636d6bf72283efb73bfafcffe586ae798dabb68b6593542e3b925a3e0de"
+    },
+    {
+      "url": "https://tcdsbpublishing.escribemeetings.com/WebService/eSCRIBE.Internet.WebService.svc?xsd=xsd4",
+      "file": "xsd4.xsd",
+      "status": 200,
+      "bytes": 329,
+      "content_type": "text/xml",
+      "sha256": "fff0cdd3f2fc2a9d9509f5055c2987051485f7b0b022ec48f14200335c702023"
+    }
+  ],
+  "limits": [
+    "Anonymous metadata GETs only; no SOAP method or tenant mutation invoked.",
+    "Prior singleWsdl403 applies only to that request.",
+    "Schema describes a specific deployed Publishing Service; account authorization, current applicability and vendor server behavior are not live verified."
+  ]
+}

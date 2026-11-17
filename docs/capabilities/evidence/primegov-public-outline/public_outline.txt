@@ -1,0 +1,63 @@
+function getMeetingSections(meetingId) {
+     var url = '/api/PublicSpeakerAndComment/GetSectionsAndItemsForSpeakerRequest?meetingId=' + meetingId;
+
+     $.getJSON(url, function (data) {
+          var sections = data;
+          var sectionsNames = '';
+          var sectionsIds = '';
+          var items = '';
+          var itemTitles = '';
+          var itemAndSubitems = [];
+          var itemAndSubitemsRequestSpeaker = [];
+          var namesArray = [];
+          var parentIdsArray = [];
+          var levelsArray = [];
+          var itemsArray = [];
+          var systemItemIds = [];
+          var itemsSectionTemplateIdArray = [];
+          var typesArray = [];
+          var sectionsType = "Section";
+          var itemsType = "Item";
+          var sectionHasItems = false;
+
+          var allowSectionsArray = [];
+          var sectionHasItemsArray = [];
+
+          for (var i = 0; i < sections.length; i++) {
+               var sectionsNames = sections[i].number == '' ? sections[i].name : (sections[i].number + '. ' + sections[i].name);
+               var sectionsIds = sections[i].id;
+               var sectionAllowPublicSpeaker = sections[i].allowPublicSpeaker;
+               var sectionHasItems = sections[i].items.length > 0;
+               var meetingSectionId = sections[i].meetingSectionId;
+
+               if (sectionHasItems || sectionAllowPublicSpeaker) {
+                    namesArray.push(sectionsNames);
+                    parentIdsArray.push(0);
+                    levelsArray.push(1);
+                    typesArray.push(sectionsType);
+                    itemsArray.push(sectionsIds);
+                    itemsSectionTemplateIdArray.push(meetingSectionId);
+                    allowSectionsArray.push(sectionAllowPublicSpeaker);
+                    sectionHasItemsArray.push(sectionHasItems);
+
+                    items = sections[i].items;
+
+                    for (var j = 0; j < items.length; j++) {
+                         var itemTitles = items[j].number == '' ? items[j].titleDisplayField : (items[j].number + '. ' + items[j].titleDisplayField);
+                         var itemIds = items[j].id;
+                         var itemLevel = items[j].level;
+                         var itemAllowPublicSpeaker = true;
+                         var itemSectionTemplateId = items[j].sectionTemplateId;
+
+                         systemItemIds.push(items[j].systemItemId);
+                         namesArray.push(itemTitles);
+                         parentIdsArray.push(items[j].parentId);
+                         levelsArray.push(itemLevel);
+                         typesArray.push(itemsType);
+                         itemsArray.push(itemIds);
+                         itemsSectionTemplateIdArray.push(itemSectionTemplateId);
+                         allowSectionsArray.push(itemAllowPublicSpeaker);
+                         sectionHasItemsArray.push(false);
+                    }
+               }
+          }

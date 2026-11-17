@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "602eb99",
+  "scope": "Fitchburg anonymous OnBase This Year candidate search, exact local title/date matching, literal native row identities and captured supplied documents.",
+  "status": "PASSED",
+  "new_cases": 20,
+  "checks": [
+    {
+      "command": "pytest tests/test_onbase_native_search.py tests/test_onbase_listing.py tests/test_onbase_search_model.py tests/test_onbase_model_documents.py tests/test_onbase_packets.py tests/test_onbase_detail.py tests/test_onbase_documents.py tests/test_onbase_item_documents.py tests/test_onbase_document_kinds.py tests/test_onbase_export.py -q",
+      "passed": 152,
+      "failed": 0,
+      "junit_sha256": "b7ffb4a58fe804092bd699e60a78ded1fff55f11ba3f64833164a39404f7f5eb"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/onbase-public-search/source.json",
+      "sha256": "b5080deb36164fd5fd55bc4279b7e6e2f8e69f2cc69b207d1ec4e1356694d6df"
+    },
+    {
+      "kind": "fixture",
+      "path": "tests/fixtures/onbase-search/fitchburg-council-2026.html",
+      "sha256": "37e29cadf9b6e75b8afcf8f8167ff5d5c3d1cb61ea7514bbf3d669a36c329391"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_onbase_native_search.py",
+      "sha256": "d2fad6d1c371da9b0c5323f45eef66609cd8088233aeb2ea00d065a6004cc97d",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "d2fad6d1c371da9b0c5323f45eef66609cd8088233aeb2ea00d065a6004cc97d"
+    }
+  ],
+  "execution": "Actual source observation plus local fixture and synthetic response-fault engine execution. SQLite import retry/reopen/local search/ZIP verified; no live mutation.",
+  "corrections": "Initial test expected200 from duplicate responsive table cells; diagnostic found100 native rows, one fileless row absent from legacy link-only parser. Dedicated search mapping retains agreeing native row ID without inventing its detail URL.",
+  "limits": "Provider cap stays partial; no pagination or complete/full-text semantics inferred. Only known Fitchburg root, no cross-tenant extrapolation."
+}

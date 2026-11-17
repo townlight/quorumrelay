@@ -1,0 +1,19 @@
+{
+  "observed_date": "2026-11-12",
+  "contract_version": "2026.09.0",
+  "proof": "Official vendor documentation only; no vendor mutation performed.",
+  "captures": [
+    {
+      "file": "put_medias-mediahashedid-swap.md",
+      "url": "https://docs.wistia.com/reference/put_medias-mediahashedid-swap.md",
+      "sha256": "5a62ce17971f9589d500180db3bfc2ea4650114ebf00c88f4284679397888610",
+      "byte_length": 17351
+    },
+    {
+      "file": "get_background-job-status-backgroundjobstatusid.md",
+      "url": "https://docs.wistia.com/reference/get_background-job-status-backgroundjobstatusid.md",
+      "sha256": "0d4471b3046472564fb50a0bbdf61bd7c5cc2aaa289673076e64cb034a91604e",
+      "byte_length": 13967
+    }
+  ]
+}

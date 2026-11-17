@@ -1,0 +1,60 @@
+{
+  "scope": "Saved MinuteTraq SOAP response normalization",
+  "think": "low",
+  "owned_jobs": [],
+  "base": "897442bf99dff40c4bd03126009083ad9fd485a3",
+  "date": "2026-11-16",
+  "lint": "full Ruff passed",
+  "live_vendor_calls": false,
+  "capability_validation": "passed465evidence",
+  "remaining": [
+    "native transport",
+    "write mappings",
+    "file transfers",
+    "inventory evidence refresh",
+    "final required suite and goal acceptance"
+  ],
+  "worker": "deepseek-v4.1-flash:1017-cloud",
+  "primary_product_coding": false,
+  "diff_check": "passed",
+  "checks": [
+    {
+      "seconds": 22.83,
+      "command": "pytest tests/test_iqm2_soap.py tests/test_iqm2_detail.py tests/test_iqm2_file.py tests/test_iqm2_player.py tests/test_iqm2_search.py tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q",
+      "candidate": "before final removal of unverified Meeting.Updated projection",
+      "passed": 96
+    },
+    {
+      "seconds": 2.16,
+      "command": "pytest tests/test_iqm2_soap.py -q",
+      "candidate": "final exact source bound below",
+      "passed": 29
+    }
+  ],
+  "files": [
+    {
+      "path": "src/civic_data_connectors/providers/iqm2_soap.py",
+      "sha256": "A62C9E8FF4635D0CAFA3CA4F697935909B46A622472CC651E35D6A6E4C5E5E14"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/__init__.py",
+      "sha256": "517DA01047AD7264783575E3BF2FA07FF07419DCB2B9780F47E370CC3F9AAF78"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/identification.py",
+      "sha256": "13EDFBC8DF61BFEA36635121F02331C44AA2D1F618A24AA28018BD6AFD8AEA29"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/native.py",
+      "sha256": "EB9EBBED4D4C39159AA82420AEC1C82A23E380B5CB15FA81F0BFFD89C21522B5"
+    },
+    {
+      "path": "tests/test_iqm2_soap.py",
+      "sha256": "17DBFB525FC48F7889F909C8319E800BD4D6570E0BB253268632F7C7C0937F16"
+    },
+    {
+      "path": "docs/IQM2-MINUTETRAQ-SOAP.md",
+      "sha256": "E8D13FBC7A56B8F9D4C32CBC957808B5053D8DFB7DEAC1EAE75DBE48F2AEEC59"
+    }
+  ]
+}

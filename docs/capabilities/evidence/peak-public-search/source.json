@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-15",
+  "request_contract": "Literal basic GET search form from original tests/fixtures/baseline/peak.response; selected Available Archives radio; fixed five hidden type fields and first keyword expression.",
+  "requests": [
+    {
+      "url": "https://douglascountynv.granicus.com/ViewSearchResults.php?view_id=1&types%5BClip%5D=on&types%5BAgendaItem%5D=on&types%5BAttachmentItem%5D=on&types%5BNote%5D=on&types%5BVote%2CMotion%5D=on&keywords=budget&search_scope=past",
+      "final_url": "https://douglascountynv.granicus.com/ViewSearchResults.php?view_id=1&types%5BClip%5D=on&types%5BAgendaItem%5D=on&types%5BAttachmentItem%5D=on&types%5BNote%5D=on&types%5BVote%2CMotion%5D=on&keywords=budget&search_scope=past",
+      "status": 200,
+      "bytes": 621727,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "bbfc15a412e69c1f5f2188c133d6a0b1d048438b2e3546334619d49200bc0d18",
+      "derivation": "Literal GET form action/hidden fields/search_scope past from original saved Peak baseline; keyword budget. No script execution."
+    },
+    {
+      "url": "https://douglascountynv.granicus.com/ViewSearchResults.php?view_id=1&types%5BClip%5D=on&types%5BAgendaItem%5D=on&types%5BAttachmentItem%5D=on&types%5BNote%5D=on&types%5BVote%2CMotion%5D=on&keywords=budget&search_scope=past&pagenumber=2",
+      "final_url": "https://douglascountynv.granicus.com/ViewSearchResults.php?view_id=1&types%5BClip%5D=on&types%5BAgendaItem%5D=on&types%5BAttachmentItem%5D=on&types%5BNote%5D=on&types%5BVote%2CMotion%5D=on&keywords=budget&search_scope=past&pagenumber=2",
+      "status": 200,
+      "bytes": 21604,
+      "sha256": "8a650d39fc3f2af9d9bb1cf849abc370890e4f9fe1da91cacbcf9a5856fa5941"
+    },
+    {
+      "url": "https://douglascountynv.granicus.com/gqueryplugins/pagination/granicus.pagination.js",
+      "status": 200,
+      "bytes": 5673,
+      "sha256": "c7d8971e62cb855b6d08de7ca90d58e7ed8fcb8e69d82adc360fccdf0e092aa9"
+    }
+  ],
+  "fixtures": {
+    "page1.html": "bbfc15a412e69c1f5f2188c133d6a0b1d048438b2e3546334619d49200bc0d18",
+    "page2-empty.html": "8a650d39fc3f2af9d9bb1cf849abc370890e4f9fe1da91cacbcf9a5856fa5941",
+    "pagination.js": "c7d8971e62cb855b6d08de7ca90d58e7ed8fcb8e69d82adc360fccdf0e092aa9"
+  },
+  "observed": {
+    "page1_native_clip_groups": 150,
+    "page1_declared_page": 1,
+    "page1_declared_total_pages": 5,
+    "page2": "200empty result table without page declaration; not verified exhaustion"
+  },
+  "limits": [
+    "Public rendered result excerpts, not complete documents or authenticated writes.",
+    "Subitems have no mapped native IDs; retain as meeting-group search excerpts, never invented item identities.",
+    "Do not infer empty completeness or all five pages from declared pagination.",
+    "Only one provider page per call; continuation binds exact same-page response bytes, query/source/scope and seen native IDs."
+  ],
+  "form_fixture_path": "tests/fixtures/baseline/peak.response",
+  "form_fixture_sha256": "835e3e2990186c4015b223f3692938b45437e8ee8c91e22fb55740c0cc06fb1b"
+}

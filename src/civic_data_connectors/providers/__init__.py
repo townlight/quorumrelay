@@ -33,36 +33,81 @@ def _parse_saved_native(source, content, input_format, bounds, context):
 def register(engine, *, transport: Transport | None = None,
              browser: BrowserSession | None = None) -> None:
     """Compose operations once; injected transports are an SDK/server trust boundary."""
-    from .cablecast import CablecastConnector
+    from .diligent_community import DiligentCommunityConnector, FORMATS as COMMUNITY_FORMATS
+    if "diligent-community" not in engine.connectors:
+        community = DiligentCommunityConnector(transport, engine.storage)
+        engine.register_connector(community)
+        for input_format in COMMUNITY_FORMATS:
+            engine.register_parser("diligent-community", input_format, community.parse)
+    from .cablecast import CablecastConnector, SHOW_FORMAT, SHOWS_FORMAT
     if "cablecast" not in engine.connectors:
-        engine.register_connector(CablecastConnector(transport))
+        cablecast = CablecastConnector(transport)
+        engine.register_connector(cablecast)
+        for input_format in (SHOW_FORMAT, SHOWS_FORMAT):
+            engine.register_parser("cablecast", input_format, cablecast.parse)
     engine.register_operation("identify", identify_handler)
     engine.register_operation("validate_source", validate_handler)
+    from .laserfiche import parse_listing
+    engine.register_parser("laserfiche-weblink", "laserfiche-listing-json", parse_listing)
     for provider, input_format in (
+            ("boarddocs", "boarddocs-public-meetings-json"),
+            ("boarddocs", "boarddocs-public-meeting-html"),
+            ("boarddocs", "boarddocs-public-item-html"),
+            ("boardbook", "boardbook-public-agenda-html"),
+            ("boardbook", "boardbook-public-minutes-html"),
+            ("boardbook", "boardbook-public-search-html"),
+            ("gworks", "gworks-published-meeting-html"),
+            ("gworks", "gworks-secure-calendar-json"),
+            ("gworks", "gworks-editor-meeting-json"),
+            ("town-hall-streams", "town-hall-streams-event-html"),
+            ("escribe", "escribe-meeting-detail-html"),
+            ("granicus", "granicus-platform-soap-xml"),
             ("boardable", "boardable-public-meetings-json"),
+            ("simbli", "simbli-meeting-detail-json"), ("simbli", "simbli-agenda-items-json"), ("simbli", "simbli-item-content-json"),
+            ("simbli", "simbli-supporting-documents-json"),
+            ("simbli", "simbli-meeting-minutes-json"), ("simbli", "simbli-simple-minutes-json"),
             ("clerkbase", "clerkbase-search-html"),
             ("clerkbase", "clerkbase-public-tree-html"),
             ("iqm2", "iqm2-public-search-html"),
+            ("iqm2", "iqm2-meeting-detail-html"),
+            ("iqm2", "iqm2-public-player-html"),
+            ("iqm2", "iqm2-legislative-file-html"),
+            ("iqm2", "iqm2-minutetraq-soap-xml"),
+            ("novusagenda", "novus-public-coversheet-html"),
             ("utah-public-notice", "utah-public-search-html"),
             ("civicplus-select", "civicplus-search-json"),
             ("civicweb", "civicweb-detail-html"),
+            ("civicweb", "civicweb-filepro-soap-xml"),
             ("civicweb", "civicweb-meetings-json"),
             ("civicweb", "civicweb-meeting-documents-json"),
             ("swagit", "swagit-listing-html"),
+            ("swagit", "swagit-public-player-html"),
             ("onbase", "onbase-public-listing-html"),
             ("digital-towpath", "digital-towpath-listing-html"),
             ("towncloud", "towncloud-public-listing-json"),
             ("destiny-agendaquick", "agendaquick-public-listing-html"),
             ("destiny-agendaquick", "agendaquick-item-search-html"),
+            ("destiny-agendaquick", "agendaquick-public-agenda-html"),
+            ("destiny-agendaquick", "agendaquick-public-memo-html"),
             ("municode-meetings", "essential-multimedia-json"),
+            ("municode-meetings", "municode-publishpage-html"), ("municode-meetings", "municode-publishpage-detail-html"),
+            ("escribe", "escribe-publishing-soap-xml"),
+            ("suiteone-media", "suiteone-public-event-html"),
+            ("telvue", "telvue-public-player-html"),
+            ("telvue", "telvue-public-search-html"),
+            ("telvue", "telvue-cloudcast-mrss-xml"),
+            ("peak", "peak-publication-rss-xml"),
+            ("peak", "peak-public-search-html"),
             ("telvue", "telvue-connect-media-json"), ("telvue", "telvue-connect-videos-json"),
             ("telvue", "telvue-connect-playlists-json"),
+            ("telvue", "telvue-connect-playlist_items-json"),
             ("legistar", "legistar-events-json"), ("legistar", "legistar-event-json"),
             ("legistar", "legistar-votes-json"), ("legistar", "legistar-rollcalls-json"),
             ("novusagenda", "novus-public-listing-html"),
             ("laserfiche-weblink", "laserfiche-repository-entries-json"),
             ("wistia", "wistia-api-media-json"), ("wistia", "wistia-media-detail-json"),
             ("wistia", "wistia-caption-json"),
+            ("wistia", "wistia-public-embed-html"),
             ("granicus", "granicus-listing-html"), ("peak", "granicus-listing-html")):
         engine.register_parser(provider, input_format, _parse_saved_native)
     engine.register_operation(
@@ -73,6 +118,9 @@ def register(engine, *, transport: Transport | None = None,
         fetch(engine, request, content, context, transport=transport, browser=browser))
     from .wistia import native_search
     from ..storage import tracked_handler
+    from .repository_search import native_search as repository_search
+    engine.register_native_search("laserfiche-weblink", tracked_handler("search", lambda engine, request, content, context:
+                                  repository_search(engine, request, content, context, transport=transport)))
     engine.register_native_search("wistia", tracked_handler("search", lambda engine, request, content, context:
                                   native_search(engine, request, content, context, transport=transport)))
     from .legistar import native_search as legistar_search
@@ -84,6 +132,27 @@ def register(engine, *, transport: Transport | None = None,
     from .primegov_search import native_search as primegov_search
     engine.register_native_search("primegov", tracked_handler("search", lambda engine, request, content, context:
                                   primegov_search(engine, request, content, context, transport=transport)))
+    from .peak_search import native_search as peak_search
+    engine.register_native_search("peak", tracked_handler("search", lambda engine, request, content, context:
+                                  peak_search(engine, request, content, context, transport=transport)))
+    from .boardbook_search import native_search as boardbook_search
+    engine.register_native_search("boardbook", tracked_handler("search", lambda engine, request, content, context:
+                                  boardbook_search(engine, request, content, context, transport=transport)))
+    from .townhall_search import native_search as townhall_search
+    engine.register_native_search("town-hall-streams", tracked_handler("search", lambda engine, request, content, context:
+                                  townhall_search(engine, request, content, context, transport=transport)))
+    from .telvue_search import native_search as telvue_search
+    engine.register_native_search("telvue", tracked_handler("search", lambda engine, request, content, context:
+                                  telvue_search(engine, request, content, context, transport=transport)))
+    from .boardable_search import native_search as boardable_search
+    engine.register_native_search("boardable", tracked_handler("search", lambda engine, request, content, context:
+                                  boardable_search(engine, request, content, context, transport=transport)))
+    from .onbase_search import native_search as onbase_search
+    engine.register_native_search("onbase", tracked_handler("search", lambda engine, request, content, context:
+                                  onbase_search(engine, request, content, context, transport=transport)))
+    from .tyler_search import native_search as tyler_search
+    engine.register_native_search("tyler-meeting-manager", tracked_handler("search", lambda engine, request, content, context:
+                                  tyler_search(engine, request, content, context, transport=transport)))
     from .escribe_search import native_search as escribe_search
     engine.register_native_search("escribe", tracked_handler("search", lambda engine, request, content, context:
                                   escribe_search(engine, request, content, context, transport=transport)))
@@ -112,7 +181,21 @@ def register(engine, *, transport: Transport | None = None,
     engine.register_native_search("clerkbase", tracked_handler("search", lambda engine, request, content, context:
                                   clerkbase_search(engine, request, content, context, transport=transport)))
     from .civicplus_export import export_historical
+    from .novus import native_search as novus_search
+    engine.register_native_search("novusagenda", tracked_handler("search", lambda engine, request, content, context:
+                                  novus_search(engine, request, content, context, transport=transport)))
+    from .civicweb_filepro import native_search as civicweb_search
+    engine.register_native_search("civicweb", tracked_handler("search", lambda engine, request, content, context:
+                                  civicweb_search(engine, request, content, context, transport=transport)))
     engine.register_native_export("civicplus-select", tracked_handler("export", export_historical))
+    from .onbase_export import export_dip
+    engine.register_native_export("onbase", tracked_handler("export", export_dip))
+    from .telvue_chapter_export import export_chapters
+    engine.register_native_export("telvue", tracked_handler("export", export_chapters))
+    from .suiteone_export import export_document
+    engine.register_native_export("suiteone-media", tracked_handler("export", export_document))
+    from .legistar_text_export import export_text
+    engine.register_native_export("legistar", tracked_handler("export", export_text))
 
 
 __all__ = ["FORMATS", "BrowserSession", "PublicTransport", "Response", "Transport", "register"]

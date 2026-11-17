@@ -1,8 +1,10 @@
 # QuorumRelay write adapter contract
 
-Schema 2.0.0. Candidate 0.1.0.dev8. Current status: 2026-11-12. The engine contains real native write mappings and `PublicWriteTransport`; it can change an upstream provider when an authorized caller supplies usable credentials and approves an exact plan. Deterministic checks inject synthetic transports into those same mappings. Live provider mutation/readback acceptance remains **NOT_RUN** because an authorized test tenant and credentials have not been supplied. A synthetic receipt does not establish vendor acceptance.
+Release 0.1.0.dev14 uses schema 2.0.0. The engine contains real native write mappings and `PublicWriteTransport`; it can change an upstream provider when an authorized caller supplies usable credentials and approves an exact plan. Vendor-documented synthetic execution through these mappings satisfies provider discovery/read/search/import/export/write acceptance for its evidenced operation and field scope. Live provider mutation/readback remains **NOT_RUN** and is optional supporting evidence, not a completion gate. A synthetic receipt must never be represented as an actual remote mutation.
 
 ## Public operations
+
+The gWorks development-editor mapping supports meeting create/update, agenda/minutes text and explicit publication with exact readback and no replay of uncertain sends. See [gWorks editor reads and writes](GWORKS-EDITOR.md) for fields, environment binding, permissions and the executed synthetic scope.
 
 `writes.register(engine, adapters=None)` registers `plan_write`, `commit_write`, and
 `receipt`. An adapter maps a documented native request and validates fields. The
@@ -82,6 +84,10 @@ not a safe-to-repeat create. Retry reconciles the original intended identity and
 state before it does anything else. If readback cannot identify exactly one
 matching effect, the receipt stays uncertain and requires review.
 
+For the shared Legistar and Wistia JSON field comparison, fields selected for confirmation must be present in readback with matching values and types; upload confirmation selects the mapped name and description fields, Wistia tag objects are normalized to tag names. Legistar's documented `number` fields accept equal finite integer and floating-point values, while integer fields do not accept booleans or floats. Provider-managed row versions and last-modified fields are excluded from that comparison. Synchronous resource readbacks must also identify the acknowledged native resource or the approved update target. Laserfiche task completion requires an entry readback matching the task's entry ID and any already-known target. Captions and Wistia background jobs use their own identity and confirmation rules. Granicus generated-minutes and TelVue playlist-membership confirmation also require the retained documents or item fields to match with their original types; TelVue sequence numbers retain the documented ordering exception.
+
+A mismatch remains uncertain. Reconciliation after reopening storage checks the original intent and any durable acknowledged ID; it does not replay a possibly accepted mutation or replace an acknowledged ID with a different lookup candidate. See the [scoped readback verification](verification/write-readback-2026-11-15.json).
+
 Allowed item states are `planned`, `sending`, `succeeded`, `failed`, `conflict`,
 `uncertain`, `pending` for asynchronous tasks, and `cancelled`. Receipt state may also be `partial`. These are data
 states, not additions to `OperationResult.status`. Standard envelope statuses
@@ -110,10 +116,21 @@ not yet a complete outbound backlog and unresolved entries remain incomplete.
 | Wistia | Supplied caption targeted update | POST modern `/medias/{mediaHashedId}/captions/{languageCode}/edits`; JSON expected_version plus edits[1..20] target_text/replacement_text and optional paired inclusive start_ms/end_ms. Atomic vendor version check; 409 stale_version/diverged, 422 unresolved edit writes nothing. |
 | Wistia | Recording/media additive tags | POST modern `/taggings/bulk_create`; JSON hashed_ids/tag_names. Adds tags, does not replace. Returns background_job_status; authorizations-based expiring tokens are explicitly disallowed. |
 
+Wistia asynchronous reconciliation must return the same acknowledged job identity
+for imports, additive tags and swaps. A missing or different job stays uncertain,
+including when it reports failure or completion. URL-import completion requires
+the documented `bulk_operation` result identifying one successfully created media
+record and a GET whose `hashed_id` matches that result. Tagging reads must identify
+each requested media record before its supplied tags can confirm completion.
+Queued or started jobs remain pending; reconciliation does not repeat the mutation.
+These checks establish documented job and record identity, without asserting
+recording-byte equality, playback readiness or other processing effects.
+
 Legistar JSON field schemas come from the official per-operation resource tables,
 not the older MeetingId/MeetingName/MeetingDate reader. Read token examples do not
-prove write permission. Its live write authentication/conflict behavior remains
-access-blocked and must not be invented.
+prove write permission. Actual deployment authentication/conflict behavior has
+not been observed live and must not be invented; the documented synthetic checks
+remain valid evidence for their attributed mapping and safety scope.
 
 Laserfiche repository documents are relevant only when explicitly associated with
 meeting records. Generic repository administration, folders, access control,
@@ -140,7 +157,35 @@ and are outside this release's no-new-OCR/ASR boundary.
 - https://docs.wistia.com/reference/post_medias-mediahashedid-captions-languagecode-edits.md
 - https://docs.wistia.com/reference/post_taggings-bulk-create.md
 
-Remaining acceptance includes provider-specific usable test credentials/permissions and live readback in an authorized test environment for every supported operation, along with each required consumer workflow and delivery outcome. Synthetic tests cover native wire contracts, duplicate commits, stale data, partial/denied outcomes, response loss/reconciliation, file handles and source isolation. These passed checks do not waive live acceptance or establish all provider capabilities. No mock-only scope reduction is inferred.
+Remaining acceptance includes unresolved documented provider entities/fields and their synthetic execution/readback/receipt coverage, plus the required consumer workflows and delivery outcomes. Existing synthetic tests cover native wire contracts, duplicate commits, stale data, partial/denied outcomes, response loss/reconciliation, file handles and source isolation. Coverage is attributed per operation and field; shared safety tests do not establish every provider capability. No provider account acquisition or live transaction is required to satisfy the documented synthetic verification basis. Real deployments still require their own trusted credentials, current permissions and exact-plan approval.
+
+## Later local source mappings
+
+TelVue Connect existing-playlist reorder and media membership additions are
+mapped from the pinned public vendor client, with documented v2 readback and
+synthetic coordinator execution. See [exact fields, credentials and limits](TELVUE-WRITES.md).
+This does not establish media upload, processing or vendor meeting association.
+
+The table above records the earlier mapped surface and does not enumerate all
+later source additions. Current source additionally includes Granicus Platform
+SOAP and MediaVault event/media/metadata/document workflows, explicit publication,
+non-clearing metadata imports, generated minutes and meeting-bound attendee/motion
+data. See [the coverage map](ENGINE-COVERAGE.md), the pinned
+[vendor contract provenance](capabilities/evidence/granicus-platform/source.json)
+and the [engine adapter](../src/civic_data_connectors/providers/granicus_platform.py).
+Publication is explicit approved input; destructive clearing, deletes and unrelated
+platform administration remain excluded. Returned provider IDs/jobs do not imply
+independently verified playable bytes.
+
+Granicus event creation accepts the full documented `EventData` with system-assigned `ID` left at zero. The caller may supply a GUID string as `UID`; the exact supplied value must appear in readback and cannot be changed by an update. An empty `UID` retains the existing server-assignment path. Full-model readback requires each planned, non-server field to be present with its exact value and type. The pinned WSDL does not establish how a provider treats omitted fields versus explicit nil on write. Agenda Add/Import confirmation also checks typed, present mapped fields, native node IDs, parent references, key-table IDs and preservation of retained nodes; an invalid persisted key mapping remains uncertain without replay.
+
+For lost event-create acknowledgments, `GetEventsByForeignID` returns all matches for the supplied association. Reconciliation requires one matching candidate with a valid native ID and honors any ID already acknowledged; observing one candidate is not a provider uniqueness or idempotency guarantee.
+
+Other later source additions include [Wistia replacement](WISTIA-SWAP.md),
+Laserfiche paired image/text pages (see the pinned contract and tests referenced
+in the coverage map), and the [OnBase DIP prepared file export](ONBASE-DIP.md).
+These are local source capabilities with scoped evidence; the immutable dev8 wheel
+and its existing installed-consumer receipts do not contain or certify later code.
 
 
 ## Source identity and credential routing
@@ -157,8 +202,20 @@ Laserfiche Repository routing derives its repository ID from the exact API sourc
 
 The built-in `municode-meetings` adapter uses only the documented dev origin `https://meetingsgov.devmunicode.com`. Trusted credentials must bind `origin`, caller `tenant`, exact application namespace, `token`, permission `meeting_multimedia:update`, and explicit `meeting_ids`. It does not issue tokens or infer a production host.
 
+The official-linked production Postman sample records a lower-camel-case update request, but its multimedia GET and POST have no response examples. The linked development article documents a Pascal-case `MeetingStructure` under `meetingStructure` for that development host, without establishing production response casing/wrapper or persistence/readback semantics. Production multimedia updates therefore remain unmapped and are rejected before network; an account is not required to identify this evidence gap. See [the exact saved source and limits](capabilities/evidence/essential-postman/source.json).
+
 A change uses entity `meeting_multimedia`, operation `update`, and equal GUID `resource_id`/`meeting_id`. `fields` can patch documented `PublishState`, `AudioVideoDetails` (`AudioVideoProviderType`, `AudioVideoUrl`), and `MultimediaItems`. Item patches are keyed by distinct existing `EntityId` and may update documented `EntityName`, `EntityTypeName`, `TimeStamp`, `MultimediaDisplayOptions`, `CustomDisplay`, `IncludeNumbering`, `UseDefaultMultimediaSettings`, and `MultimediaBaseUrl` values. Full-model `Id`/`MeetingId`, if supplied, must equal the before identities. The official sample demonstrates URL/timestamp/default/base-URL edits; remaining fields are typed by its full submitted model, with tenant enums and actual mutability still requiring authorized live verification. The adapter GETs the full `meetingStructure`, preserves all other documented and unknown values, validates the full model, and POSTs the full object to `/PublicApi/meeting/multimedia/update/{meetingId}`. It does not create meetings/items or upload media. Publication and other supplied enum integers are preserved as caller-selected model values; no enum meanings are invented.
 
 `expected_version`, when supplied, is the canonical hash of the full before structure, not a fabricated provider revision. Commit rereads and compares the exact before hash. This is a preflight compare, not atomic provider CAS. Update response shape is unspecified, so the adapter accepts bounded successful HTTP status without guessing an ID/JSON response and then requires exact full-structure GET readback. Lost responses remain uncertain until read-only reconciliation; a possibly accepted POST is never resent. Existing durable intent, exact approval, caller policy, cancellation and receipt boundaries apply. Structures containing secret-like unknown keys that cannot safely enter the plan fail rather than silently dropping those fields. Live tenant acceptance remains NOT_RUN.
 
 Fixed account reads and every PublicWriteTransport request disable redirects before a second socket/request can receive credentials. Exact account read routes are also verified on the response. Essential multimedia captures retain the supplied parent meeting relationship; arbitrary EntityTypeName values remain raw rather than inferred agenda relationships.
+
+## Response completion bounds
+
+Shared JSON write adapters recheck cancellation and the total deadline after transport completion and JSON sanitization. An interrupted mutation response remains uncertain because the request may have reached the provider. An interrupted final GET cannot confirm success; the durable intent remains available for read-only reconciliation after restart, without replaying the mutation. Preflight GET interruption retains its cancelled/deadline status and cannot produce an approved plan. Synthetic public-coordinator coverage includes Wistia and Select, raw mutation responses and parsing completion. See `verification/write-response-completion-2026-11-15.json`.
+
+The shared JSON, Essential and Granicus adapters also honor the durable cancellation returned by the coordinator after commit-time preflight and before the native mutation. A stopped item remains durably cancelled even if cancellation is later cleared. Granicus document chunk uploads check this persisted signal after each accepted chunk: interruption leaves the saved upload ID and completed-chunk count uncertain, sends no further chunks and permits read-only reconciliation without resubmitting or finishing the upload. These are cooperative checkpoints, not rollback of accepted remote work.
+
+## Select native event update
+
+Selected `event:update` additionally supports the exact documented18property native PUT plus an explicit complete intended GET snapshot. Publication/media/template and unrelated fields are preserved; native clock/date literals are caller supplied without inferred conversions. Preflight hash, exact readback and durable GET-only reconciliation apply. Event create remains separate. See [native contract and limits](CIVICPLUS-SELECT-EVENT-UPDATES.md).

@@ -1,0 +1,80 @@
+{
+  "vendor": "Boardable",
+  "captured": "2026-11-16",
+  "access": "Authorized private QuorumRelay Evaluation organization46098 owner403839",
+  "meeting_id": 526577,
+  "meeting_url": "https://app.boardable.com/quorumrelay-evaluation/meetings/0e58cf-quorumrelay-contract-fixture-revised",
+  "attachment_ids": [
+    684953,
+    684954
+  ],
+  "files": [
+    {
+      "file": "boardable-meeting-document-upload.json",
+      "bytes": 1084,
+      "sha256": "806f04693e32f8b3a75e4a8962a422be5366396d1e729360688d97f40a8b9d0d"
+    },
+    {
+      "file": "boardable-meeting-document-list.json",
+      "bytes": 2242,
+      "sha256": "23fb038da5c1afd25c4d52143e8f7f50b176f69f097ab3dbba62a0af2e6d477f"
+    },
+    {
+      "file": "boardable-meeting-document-readback.json",
+      "bytes": 5018,
+      "sha256": "2e8efb99a0f3495cae3b6913d72fea1989b0557a9ceecbd89d1f64562a0cff98"
+    },
+    {
+      "file": "boardable-meeting-document-before.json",
+      "bytes": 17136,
+      "sha256": "11ccfef562005d3b332f74a920eb988a1348f2096c07bd13e8b6dd90655e952e"
+    },
+    {
+      "file": "boardable-meeting-document-second-upload.json",
+      "bytes": 6524,
+      "sha256": "6918c8c0d4f5be07d976e3fc8d9dd002741ebc61f24fdd989cb4bd0fcb270a19"
+    },
+    {
+      "file": "boardable-meeting-document-after.json",
+      "bytes": 31393,
+      "sha256": "60de7f1fbbf2f6825dc6c6b65ceee1fd9dca8a26c312f1d3619ca03a23ec8c55"
+    },
+    {
+      "file": "boardable-meeting-document-client.json",
+      "bytes": 8381,
+      "sha256": "a5bee5d8db351d99c0707ac3afdae480c85f909390aa0513f2659cafb727d6f4"
+    },
+    {
+      "file": "quorumrelay-document-center-evaluation.txt",
+      "bytes": 118,
+      "sha256": "6255a5838ad4f46e2efc7f78d040e688d0b3f58d1fe646d36ca474fba13b6d9b"
+    },
+    {
+      "file": "quorumrelay-meeting-attachment-api-fixture.txt",
+      "bytes": 141,
+      "sha256": "785229e6354d8899d43e6c9bc083204360c51593717c738aca05c00dcc513ab5"
+    }
+  ],
+  "executed": [
+    "Native UI uploaded two synthetic files with separate POST /attachments/upload requests; each returned200 text/html with empty body.",
+    "Exact multipart fields: attachments[0][file], attachments[0][type]=upload, attachable_type=meeting, attachable_id=526577, folder_id=0, original_token=undefined.",
+    "Declared read-only POST /attachment-list JSON attachable_id/attachable_type/folder=root returned raw items/folders/current_folder/breadcrumbs, without client pagination.",
+    "Controlled second upload before list [684953], after [684953,684954]; existing row unchanged.",
+    "Independent canonical meeting GET?format=json returned200; meeting_resource.attachments gained exactly new native attachment684954 with explicit attachable_id/type and organization_id.",
+    "GET /documents/{uuid.short_slug}/data200 confirms attachment ID, meeting association and same-organization original download URL.",
+    "Original downloads200: 118 and141 bytes respectively; both SHA256 values match separately pinned source bytes.",
+    "Meeting remained unpublished with invitations unsent; no notifications, sharing or vendor contact sent."
+  ],
+  "observed_meeting_diff": [
+    "formattedMeetingTime.materials_published_at display time changed",
+    "timeUntilStart display text changed",
+    "meeting_resource.attachments gained the uploaded native ID"
+  ],
+  "limits": [
+    "Native browser contract capture; no meeting-document upload adapter integrated yet.",
+    "Root supporting files only; no inferred agenda upload, folder creation, replacement, delete, publish or invite workflow.",
+    "Upload response supplies no identity. Any future implementation must use complete native before/after ID evidence, exact detail association and original-byte hash; no title matching or upload replay.",
+    "PDF conversion is separate from stored original bytes; no PDF conversion claim required for original-byte verification.",
+    "Profile/auth/contact fields omitted, URL query strings omitted, file bytes omitted by CDP multipart capture and independently pinned."
+  ]
+}

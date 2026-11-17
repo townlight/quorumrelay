@@ -1,0 +1,54 @@
+{
+  "observed_utc": "2026-11-14T18:04:47.110935+00:00",
+  "base_source": "761dbab035f014472a787f482929a46fb161b709",
+  "status": "SCOPED_SOURCE_AND_THIRD_PARTY_SHAPED_SYNTHETIC_PASS",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "checks": {
+    "affected_passed": 19,
+    "failures": 0,
+    "junit_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\boarddocs-public-selectors.xml",
+    "junit_sha256": "552a43a422a2a4b44d3bc749446fe44f181148ba5d8035aacb9aa499d1ab2907",
+    "ruff": "affected source and tests PASS"
+  },
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/boarddocs_public.py",
+      "sha256": "9e4ab0883f072cbb8581196a4db26f3a84582b8d9d396f03c5aa4a9d50b26942"
+    },
+    {
+      "path": "tests/test_boarddocs_public_helpers.py",
+      "sha256": "af03b0f7d9fee40df70a27d8ccb2202a85e998f1ede315c85a1c665cf4b7635f"
+    },
+    {
+      "path": "tests/test_boarddocs_public_workflow.py",
+      "sha256": "84e36a83e1b507656e97a852e136472621fef6cb637b5e83195474520804d965"
+    },
+    {
+      "path": "docs/verification/boarddocs-public-selectors-2026-11-14.md",
+      "sha256": "5eeaaa4312f4db495394657ab6658a99885fd7fed6162a377145c385eea891cf"
+    }
+  ],
+  "limits": [
+    "Third-party evidence only; no official/live vendor acceptance.",
+    "Href strings preserved, not transferred files or document locators.",
+    "No outbound write change or package/release."
+  ],
+  "leads": [
+    {
+      "url": "https://github.com/dweekly/rcsd-meetings/blob/main/scripts/scrape-boarddocs.mjs",
+      "git_blob": "c19afe91e05dae319e3b90141b1757e45067136a",
+      "local_derived_copy": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\boarddocs-leads\\rcsd-client.mjs",
+      "local_sha256": "42bbd0657bf21b56b42773b6a678a722e3fe0031c025bce70756d32a6b401737"
+    },
+    {
+      "url": "https://github.com/WiserWebSolutions/laravel-boarddocs-scraper/blob/main/src/Parsing/FileLinkParser.php",
+      "git_blob": "d32a8aae45c76871c49c4a6c30137b871751376a",
+      "local_derived_copy": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\boarddocs-leads\\FileLinkParser.php",
+      "local_sha256": "33620b51b0b463a9cadfe8b9b6947c801fc84d8f1e8b7cc234c5ffd8693063db"
+    }
+  ]
+}

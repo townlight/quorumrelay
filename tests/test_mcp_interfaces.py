@@ -209,6 +209,36 @@ def test_protocol_cancellation_stops_engine_work(tmp_path, running_http, transpo
     anyio.run(run)
 
 
+@pytest.mark.parametrize("cancellation_type", ["asyncio", "future"])
+def test_cancelled_progress_preserves_cooperative_terminal_result(tmp_path, cancellation_type):
+    """A cancelled progress send must not strand the worker's durable operation."""
+    import asyncio
+    from concurrent.futures import CancelledError
+    from mcp.server.mcpserver import Context
+    from civic_data_connectors.transports.mcp import create_server
+
+    owner = engine(tmp_path / "progress-cancel.sqlite")
+    identity = principal("progress-cancel")
+    server = create_server(owner, identity)
+    error = asyncio.CancelledError if cancellation_type == "asyncio" else CancelledError
+
+    class CancelledProgress(Context):
+        async def report_progress(self, *args, **kwargs):
+            raise error()
+
+    async def run():
+        result = await server.call_tool("discover", {"request": {"fixture_slow": True}},
+                                        context=CancelledProgress(mcp_server=server))
+        payload = result.structured_content
+        assert payload["status"] == "cancelled"
+        assert payload["data"]["completed"] == 1
+        stored = owner.storage.get("operations", payload["operation_id"], scope=identity.context().scope)
+        assert stored.value["state"] == "cancelled"
+        assert stored.value["result"] == payload
+
+    anyio.run(run)
+
+
 def test_cli_mock_exact_plan_commit_receipt_same_core_contract(tmp_path):
     owner = engine(tmp_path / "cli-writes.sqlite")
     cfg = tmp_path / "principal.json"
@@ -254,3 +284,61 @@ console.log(JSON.stringify({status:'PASS',live_acceptance:'NOT_RUN'}));
              "CIVIC_WRITE": json.dumps(create_request())}, timeout=15)
     assert result.returncode == 0, result.stderr
     assert json.loads(result.stdout)["status"] == "PASS"
+
+
+def test_cancellation_releases_an_inflight_progress_notification(tmp_path):
+    """A transport waiting to send progress cannot strand a cancelled worker."""
+    from mcp.server.mcpserver import Context
+    from civic_data_connectors.transports.mcp import create_server
+
+    owner = engine(tmp_path / "blocked-progress.sqlite")
+    identity = principal("blocked-progress")
+    original = owner.handlers["discover"]
+    contexts = []
+
+    def capture(owner, request, content, context):
+        contexts.append(context)
+        return original(owner, request, content, context)
+
+    owner.handlers["discover"] = capture
+    server = create_server(owner, identity)
+
+    async def run():
+        started, release, finished = anyio.Event(), anyio.Event(), anyio.Event()
+        progress_unblocked = anyio.Event()
+        results = []
+
+        class BlockedProgress(Context):
+            async def report_progress(self, *args, **kwargs):
+                started.set()
+                try:
+                    await release.wait()
+                finally:
+                    progress_unblocked.set()
+
+        async def invoke():
+            results.append(await server.call_tool("discover", {"request": {"fixture_slow": True}},
+                context=BlockedProgress(mcp_server=server)))
+            finished.set()
+
+        async with anyio.create_task_group() as group:
+            group.start_soon(invoke)
+            with anyio.fail_after(2):
+                await started.wait()
+            contexts[0].cancellation.set()
+            # Preserve the prompt-unblock requirement: cancellation must release
+            # the in-flight progress send within 300ms, before the fixture is released.
+            with anyio.move_on_after(.3):
+                await progress_unblocked.wait()
+            unblocked_before_release = progress_unblocked.is_set()
+            # Always release the fixture and join the worker before asserting.
+            release.set()
+            with anyio.fail_after(2):
+                await finished.wait()
+        assert unblocked_before_release
+        payload = results[0].structured_content
+        assert payload["status"] == "cancelled" and payload["data"]["completed"] == 1
+        stored = owner.storage.get("operations", payload["operation_id"], scope=identity.context().scope)
+        assert stored.value["state"] == "cancelled" and stored.value["result"] == payload
+
+    anyio.run(run)

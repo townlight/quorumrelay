@@ -1,0 +1,472 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="IE=Edge" />
+
+	
+	<meta name="format-detection" content="telephone=no" />
+
+	<script src="/OnBaseAgendaOnline/bundles/jquery?v=CzTCZaJP74FdTPeEHdBm9wqQQzwMcKC-OuKZz8b62dI1"></script>
+
+
+	<link href="/OnBaseAgendaOnline/bundles/css?v=DRk4-i98xgECysKu9WVBQQzGWVS-p3dGRK3lDMW9ZTo1" rel="stylesheet"/>
+
+
+	<!-- Dynamic Stylesheet -->
+	<link href="/OnBaseAgendaOnline/Style" rel="stylesheet" />
+</head>
+<body>
+	<div id="logo-container">
+		
+<div class="logo"><img src="/OnBaseAgendaOnline/Images/fitchburgwisconsin.png" /></div>
+	</div>
+	<div id="navbar" class="navbar navbar-inverse" role="navigation">
+		<div class="navbar-header">
+			<button id="btnNavToggle" class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<div class="media-collapse">
+				<span id="media-collapse-text">Hide Media</span>
+			</div>
+		</div>
+		<div class="navbar-collapse collapse navbar-responsive-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="/OnBaseAgendaOnline/" id="lnkNavHome">Home</a></li>
+				<li><a href="/OnBaseAgendaOnline/Meetings" id="lnkNavMeetings">Meetings</a></li>
+			</ul>
+		</div>
+
+	</div>
+	<div>
+		
+		<section class="content-wrapper main-content clear-fix">
+			
+
+
+
+
+
+	<script type="text/javascript">
+		var g_documentType = '1';
+		var g_isAccessible = false;
+		var g_infoPaneTop = '?';
+
+		$(window).on('load',
+			function ()
+			{	
+				updateAccessibleLink();
+				loadAgendaDocument(g_documentType);
+			}
+		);
+
+		$(document).ready
+		(
+			function ()
+			{
+				var targetDiv = $('#mediaAndItemView');
+
+				resetDiv(targetDiv, true);
+				resetDiv(targetDiv.find('#itemView'), true);
+
+				$(window).on('scroll', onAgendaViewScroll);
+				positionItemView();
+			}
+		);
+
+		function switchAccessibleView()
+		{
+			g_isAccessible = !g_isAccessible;
+			updateAccessibleLink();
+			loadAgendaDocument(g_documentType);
+		}
+
+		function updateAccessibleLink()
+		{
+			var access = $('#btnAccessible');
+			if( !g_isAccessible )
+			{
+				access.html('Switch to Accessible View')
+					  .attr('title', 'View accessible version of the current document');
+			}
+			else
+			{
+				access.html('Switch to Standard View')
+					  .attr('title', 'View standard version of the current document');
+			}
+		}       
+	   
+	</script>
+	<div id="LargeDevice" class="visible-md-block visible-lg-block"></div> 
+	<div id="agenda-table" class="container-fluid">
+		<div id="agenda-container" class="row">
+			<div class="col-xs-12 no-padding">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-9 text-left no-padding-left">
+							<div>
+									<button id="btnAgenda" type="button" class="btn btn-primary" onclick="loadAgendaDocument(1); return false;">Agenda</button>
+																																	<span>&nbsp;</span>
+									<a href="/OnBaseAgendaOnline/Documents/Downloadfile/Commission_on_Aging_Well_3825_Agenda_Packet_11_12_2026_8_30_00_AM.pdf?documentType=5&amp;meetingId=3825&amp;isAttachment=True" id="lnkAgendaPacket" target="_blank"
+									   title="View Agenda Packet for Commission on Aging Well Commission on Aging Well on 11/12/2026 8:30:00 AM">
+										Agenda Packet
+										<img src="/OnBaseAgendaOnline/Images/PDF_16x16.png" />
+									</a>
+															</div>
+						</div>
+						<div class="col-sm-3 text-right no-padding-right">
+							<button id="btnAccessible" type="button" class="btn btn-primary" onclick="switchAccessibleView(); return false;" title="View accessible version of the current document">Switch to Accessible View</button>
+						</div>
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12 no-padding">
+				<script type="text/javascript">
+					function loadAgendaDocument(doctype)
+					{
+						var url = '';
+						var type = 'agenda';
+						var isDocumentAvailable = 'True';
+
+						if ( doctype == 2 )
+						{
+							type = 'minutes';
+							isDocumentAvailable = 'False';
+						}
+						else if ( doctype == 3 )
+						{
+							type = 'summary';
+							isDocumentAvailable ='False';
+						}
+
+						if( g_isAccessible )
+						{
+							url = '/OnBaseAgendaOnline/Meetings/ViewMeetingAgenda?meetingId=3825&type=AGENDATYPEVALUE';
+						}
+						else
+						{
+							url = '/OnBaseAgendaOnline/Documents/ViewAgenda?meetingId=3825&type=AGENDATYPEVALUE&doctype=' + doctype;
+						}
+
+						url = url.replace('AGENDATYPEVALUE', type);
+
+						if (isDocumentAvailable == "False")
+						{
+							$('#agendaView').html('Document unavailable');
+						}
+						else
+						{
+							$.get
+							(
+								url,
+								function (data)
+								{
+									$('#agendaView').html(data);
+									var linkId = 1;
+									//replace the link hrefs and create the click handler using jquery (used for IE9 and IE10 compatibility)
+									$('#agendaView a').each(function () {										
+										if ($(this).attr("href") != null) {
+											// add ID for automation
+											if ($(this).attr("id") == null) {
+												$(this).attr("id", "lnkAgendaItem_" + linkId++);
+											}
+											var hrefValue = $(this).attr("href");
+											var dataRegex = /loadAgendaItem\((\d{1,}),(true|false)\)/.exec(hrefValue);
+
+											if (dataRegex != null){
+												var sectionOrItemId = dataRegex[1];
+												var isSection = dataRegex[2] == "true";
+
+												if (sectionOrItemId != null && isSection != null){
+													$(this).click(function (e){
+														loadAgendaItem(sectionOrItemId, isSection);
+														e.preventDefault();
+														return false;
+													});
+
+													$(this).attr("href", "#");
+												}
+											}
+										}
+									});
+
+									$(window).resize();
+								}
+							);
+						}
+
+
+
+						// The global document type gets reset to whatever meeting document button was clicked.
+						g_documentType = doctype;
+
+						// Update agenda buttons
+						updateAgendaButtons();
+
+						// Update accessible link just in case
+						updateAccessibleLink();
+
+						// Clear out the item view section.
+						$('#itemView').empty();
+
+					}
+
+					function loadAgendaItem(itemId, isSection)
+					{
+						var type = 'agenda';
+
+						if ( g_documentType == 2 )
+						{
+							type = 'minutes';
+						}
+						else if ( g_documentType == 3 )
+						{
+							type = 'summary';
+						}
+
+						var url = '/OnBaseAgendaOnline/Meetings/ViewMeetingAgendaItem?meetingId=3825&itemId=ITEMIDVALUE&isSection=ISSECTIONVALUE&type=AGENDATYPEVALUE'
+									.replace("ITEMIDVALUE", encodeURIComponent(itemId))
+									.replace("ISSECTIONVALUE", isSection ? "true" : "false")
+									.replace('AGENDATYPEVALUE', type);
+
+						$.get
+						(
+							url,
+							function (data)
+							{
+								$('#itemView').html(data);
+
+								$(window).resize();
+
+								if ($('#LargeDevice:visible').length < 1)
+								{
+									$("#rightPane")[0].scrollIntoView();
+								}
+								else
+								{
+									$('#mediaAndItemView').scrollTop(0);
+									$('#mediaAndItemView').find('#itemView').scrollTop(0);
+								}
+							}
+						);
+
+					}
+
+					function loadAgendaSection(sectionId)
+					{
+						loadAgendaItem(sectionId, true);
+					}
+					
+					function updateAgendaButtons()
+					{
+						if (g_documentType == 2)
+						{
+							$('#btnAgenda').attr({
+								class: "btn btn-primary"
+							});
+
+							$('#btnAgenda').removeAttr('disabled');
+
+							$('#btnMinutes').attr({
+								disabled: "disabled",
+								class: "btn btn-default"
+							});
+
+							$('#btnSummary').attr({
+								class: "btn btn-primary"
+							});
+
+							$('#btnSummary').removeAttr('disabled');
+						}
+						else if (g_documentType == 3)
+						{
+							$('#btnAgenda').attr({
+								class: "btn btn-primary"
+							});
+
+							$('#btnAgenda').removeAttr('disabled');
+
+							$('#btnMinutes').attr({
+								class: "btn btn-primary"
+							});
+
+							$('#btnMinutes').removeAttr('disabled');
+
+							$('#btnSummary').attr({
+								disabled: "disabled",
+								class: "btn btn-default"
+							});
+						}
+						else
+						{
+							$('#btnAgenda').attr({
+								disabled: "disabled",
+								class: "btn btn-default"
+							});
+
+							$('#btnMinutes').attr({
+								class: "btn btn-primary"
+							});
+
+							$('#btnMinutes').removeAttr('disabled');
+
+							$('#btnSummary').attr({
+								class: "btn btn-primary"
+							});
+
+							$('#btnSummary').removeAttr('disabled');
+						}
+					}
+
+					
+					function resetDiv(div, store, props)
+					{
+						if (!(props && typeof(props) === 'object' && props.isArray()))
+							props = ['position', 'top', 'left', 'overflow-y', '-ms-overflow-y'];
+
+						if (div !== null && $(div).length > 0)
+						{
+							$.each
+							(
+								$(div),
+								function (i, e)
+								{
+									for (var i = 0; i < props.length; i++)
+									{
+										var prop = props[i];
+
+										if (!store)
+										{
+											var data = div.data('default-' + prop);
+											if (typeof(data) !== 'undefined')
+											{
+												$(this).css(prop, data);
+											}
+										}
+										else
+										{
+											if (typeof(div.css(prop)) !== 'undefined')
+											{
+												$(this).data('default-' + prop, div.css(prop));
+											}
+										}
+									}
+								}
+							);
+						}
+					}
+
+					function positionItemView()
+					{
+						var isLarge = $('#LargeDevice:visible').length > 0;
+					
+						var targetDiv = $('#mediaAndItemView');
+						var itemView = targetDiv.find('#itemView');
+					
+						if (targetDiv.length > 0)
+						{
+							if (isLarge)
+							{
+								if (typeof(g_infoPaneTop) === 'string' && g_infoPaneTop == '?')
+								{
+									g_infoPaneTop = targetDiv.offset().top;
+								}
+
+								var windowY = $(window).scrollTop();
+								var height = 0;
+							
+								if (windowY > g_infoPaneTop)
+								{
+									height = Math.floor($(window).height());
+
+									targetDiv.css('position', 'relative')
+											 .css('overflow-y', 'hidden')
+											 .css('-ms-overflow-y', 'hidden')
+											 .css('top', Math.floor(windowY - g_infoPaneTop) + 'px')
+											 .css('height', height + 'px');
+								}
+								else
+								{
+									height = Math.floor(($(window).height() - g_infoPaneTop) + windowY);
+
+									targetDiv.css('position', 'relative')
+											 .css('top', '0px')
+											 .css('overflow-y', 'hidden')
+											 .css('-ms-overflow-y', 'hidden')
+											 .css('height', height + 'px');
+								}
+
+								itemView.css('position', 'relative')
+										.css('overflow-y', 'auto')
+										.css('-ms-overflow-y', 'auto')
+										.css('height', Math.floor(height - itemView.position().top) + 'px');
+							}
+							else
+							{
+								targetDiv.css('height', 'auto');
+								resetDiv(targetDiv);
+
+								itemView.css('height', 'auto');
+								resetDiv(itemView);
+							}
+						}
+					}
+
+					$(window).resize
+					(
+						function ()
+						{
+							positionItemView();
+						}
+					);
+
+					function onAgendaViewScroll()
+					{
+						positionItemView();
+					}
+			</script>
+
+				<div id="agendaView" class="col-md-8 no-padding-left">
+					&nbsp;
+				</div>
+
+				<div id="mediaAndItemView" class="col-md-4 no-padding-right">
+					<a id="rightPane"></a>
+					<div id="mediaView">
+					</div>
+					<div id="itemView">
+						&nbsp;
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<br><br>
+
+		</section>
+	</div>
+	<div class="footer">
+		<div class="container">
+			<div class="row">
+                <div class="col-md-12 no-padding-left">
+                    <img src="/OnBaseAgendaOnline/Images/OnBase_Logo.png" class="onbase-logo" />
+                    Copyright &#169; 2015-2026 Hyland Software, Inc.
+                </div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/OnBaseAgendaOnline/bundles/corescripts?v=6h0g3m818gbdrW57_Q6xLaHjZitU5RtArUxI7lFhH9E1"></script>
+
+
+</body>
+</html>

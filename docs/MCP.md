@@ -1,4 +1,6 @@
-# MCP reference, candidate 0.1.0.dev8
+# MCP reference
+
+Python **0.1.0.dev14**, TypeScript **0.1.0-dev.14**, schema **2.0.0**. [Installation instructions](USER-MANUAL.md).
 
 The implementation uses the official Python SDK **mcp 2.3.0**, not hand-written
 JSON-RPC framing. Both transports call the same engine operations as Python,

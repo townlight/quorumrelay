@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-14",
+  "scope": "Selected native iQM2 public player data, not SOAP/staff API or playback acceptance.",
+  "observed_chain": [
+    {
+      "url": "https://kentwa.iqm2.com/citizens/default.aspx",
+      "status": 200,
+      "bytes": 62227,
+      "sha256": "55c8772e5b9932c55ce3f83a6154c81959151753e14903fce75a1202101d378e",
+      "declared": "Video control onclick OpenWindow exact SplitView meeting6049 URL; no JavaScript executed."
+    },
+    {
+      "url": "https://kentwa.iqm2.com/Citizens/SplitView.aspx?Mode=Video&MeetingID=6049&Format=Agenda",
+      "status": 200,
+      "bytes": 35947,
+      "sha256": "8f1f92006fe1b8b3f861e25c0f4e2b43dd17f5aa3577b379bcd76a3dbceea419",
+      "capture_path": "tests/fixtures/iqm2-player-6049.capture.json",
+      "declared": "OutlinePanelInner ID6049 and literal SetupJWPlayer(eval(JSON-single-quoted-literal),False,False). First media file HLS; tracks empty."
+    },
+    {
+      "url": "https://kentwa.iqm2.com/Scripts/player.js",
+      "status": 200,
+      "bytes": 5271,
+      "sha256": "ea82b53b1f948f4764c93d89f2a93c1f653726903e6816528cec1b341d38e7d3",
+      "declared": "Sets first source; extension overwrites supplied MIME. MP4 plus hasTranscript enables only first supplied track, hardcoding srclang=en. This does not establish track content language."
+    }
+  ],
+  "limitations": [
+    "No media/subtitle bytes fetched or playback verified.",
+    "No source title/date mapped from this player shell; ID label only.",
+    "Only exact Video/Agenda query and no-backslash literal JSON invocation supported; no eval, computed JS or dynamic loader executed.",
+    "Caption branch synthetically executed from actual player logic; observed6049 response has no caption track.",
+    "No staff API, upload, write or archive completeness claim."
+  ],
+  "other_lead_assessment": {
+    "url": "https://s3.amazonaws.com/media.legistar.com/parkcity/Minutes/2131/Agenda%20Packet.pdf",
+    "scope": "Historical vendor proposal describes .NET SOAP/XML datasets, not a WSDL endpoint or typed calls. It does not unblock SOAP/write implementation. No public-contract absence or outside-only claim."
+  }
+}

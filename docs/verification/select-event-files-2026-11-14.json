@@ -1,0 +1,219 @@
+{
+  "base_commit": "7e8c6d7bba68f59a8f502bd2844cb9f1c0e8ff6a",
+  "recorded_at": "2026-11-14T06:09:32.433117+00:00",
+  "defect": "Portal-source Event publishedFiles were normalized to a portal-host API path, then rejected by the existing tenant API download-origin guard. Both portal discovery and legacy stored portal-file transfer failures were reproduced before fix.",
+  "implementation": "Native discovery corrects only source-declared matching document/relationship locators to the same tenant API. Explicit fetch checks stored source, native Event identity, publication/deletion and exact published-file metadata. Exact old portal locators may resolve at fetch time without writing stored records. No extra Meeting GET or agendaId requirement for Event-supplied files. API origin derivation remains tenant-bound; explicit foreign recording origins and all network/byte/deadline/cancel/redirect safeguards remain. Root replaced nested file lookup with hash lookup to avoid quadratic work.",
+  "remote_writes": "NOT_PERFORMED",
+  "releases": "NOT_PERFORMED",
+  "contracts": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/civicclerk-openapi/swagger.json",
+      "sha256": "d242638b2a6fd2b4dc2ef295ea000a52b146a1de63b7298ba463acd8d94ce62a"
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/civicclerk_detail.py",
+      "sha256": "56f7ebaf022251a7c4922a48a14b88ea884a08ad75f9b273745325a12ee77230"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/discovery.py",
+      "sha256": "867a3169055a682ec109c22c6c8d2fabb1227d204ed4041d9641085443034b7e"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "fce8fe9b244250efc1ec86a8a75dae760b24f1bfa05c5337834167642af434c9"
+    }
+  ],
+  "tests": [
+    {
+      "kind": "test",
+      "path": "tests/test_civicclerk_event_files.py",
+      "sha256": "4474f67677a9b39d05dfde333ae7b2609ddfed98de6450634602afc45492782c",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "4474f67677a9b39d05dfde333ae7b2609ddfed98de6450634602afc45492782c"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_civicclerk_detail.py",
+      "sha256": "b0613bf53af88113b5c23b18917294f51a0a4a1beba2e18c69e4bb24121eab99",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "b0613bf53af88113b5c23b18917294f51a0a4a1beba2e18c69e4bb24121eab99"
+    }
+  ],
+  "runs": [
+    {
+      "name": "select-event-files-final",
+      "passed": 97,
+      "failed": 0,
+      "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\select-event-files-final.xml",
+      "junit_sha256": "8de1be70b4d66cdf49552257d2f83468388a4741ac12dbaa26d08b7376e41a02",
+      "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\select-event-files-final.log",
+      "nodes": [
+        "tests.test_civicclerk_event_files::test_event_file_from_discovery_or_legacy_storage[False]",
+        "tests.test_civicclerk_event_files::test_event_file_from_discovery_or_legacy_storage[True]",
+        "tests.test_civicclerk_event_files::test_tampered_event_file_fails_before_network[file_id]",
+        "tests.test_civicclerk_event_files::test_tampered_event_file_fails_before_network[url]",
+        "tests.test_civicclerk_event_files::test_tampered_event_file_fails_before_network[raw_file]",
+        "tests.test_civicclerk_event_files::test_tampered_event_file_fails_before_network[source]",
+        "tests.test_civicclerk_event_files::test_tampered_event_file_fails_before_network[event_id]",
+        "tests.test_civicclerk_event_files::test_legacy_portal_scheme_and_port_resolve_to_https_api[http://fishersin.portal.civicclerk.com/event/7]",
+        "tests.test_civicclerk_event_files::test_legacy_portal_scheme_and_port_resolve_to_https_api[https://fishersin.portal.civicclerk.com:443/event/7]",
+        "tests.test_civicclerk_detail::test_detail_scoped_file_search_reopen_and_zip",
+        "tests.test_civicclerk_detail::test_detail_mismatch_failure_retains_verified_bytes_and_no_file",
+        "tests.test_civicclerk_detail::test_detail_cancellation_and_byte_limit",
+        "tests.test_civicclerk_detail::test_requires_existing_matching_event_and_source",
+        "tests.test_civicclerk_detail::test_stored_file_spoof_is_rejected_before_request",
+        "tests.test_civicclerk_detail::test_file_cancel_and_transfer_limit",
+        "tests.test_provider_discovery::test_native_saved_direct_normalize_execute_and_base64_parity[legistar-legistar-events-json-https://webapi.legistar.com/v1/city-content0]",
+        "tests.test_provider_discovery::test_native_saved_direct_normalize_execute_and_base64_parity[wistia-wistia-api-media-json-https://api.wistia.com/modern/medias-[{\"hashed_id\":\"media1\",\"name\":\"Council\",\"created\":\"2026-11-10T12:00:00Z\"}]]",
+        "tests.test_provider_discovery::test_native_saved_direct_normalize_execute_and_base64_parity[granicus-granicus-listing-html-https://city.granicus.com/ViewPublisher.php?view_id=1-content2]",
+        "tests.test_provider_discovery::test_native_saved_direct_normalize_execute_and_base64_parity[peak-granicus-listing-html-https://city.granicus.com/ViewPublisher.php?view_id=1-content3]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[legistar/meeting-export]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[primegov/meeting-export]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[granicus/meeting-export]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[novusagenda/meeting-export]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[granicus/viewpublisher-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[primegov/primegov-portal-json]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[civicplus-select/civicplus-events-json]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[civicplus-agenda-center/agenda-center-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[municode-meetings/municode-meetings-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[boardbook/boardbook-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[escribe/escribe-calendar-json]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[simbli/simbli-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[civicweb/civicweb-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[iqm2/iqm2-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[swagit/swagit-archive-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[suiteone-media/suiteone-archive-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[peak/peak-viewpublisher-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[utah-public-notice/utah-notice-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[destiny-agendaquick/agendaquick-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[town-hall-streams/town-hall-streams-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[telvue/telvue-playlist-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[champ/champ-event-json]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[onbase/onbase-agenda-online-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[laserfiche-weblink/laserfiche-folder-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[towncloud/towncloud-agenda-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[towncloud/towncloud-table-json]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[digital-towpath/digital-towpath-detail-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[clerkbase/clerkbase-document-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[first-party/public-meeting-ics]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[wistia/wistia-media-json]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[boardable/boardable-public-meeting-html]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[gworks/gworks-frontdesk-json]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[boarddocs/boarddocs-print-pdf]",
+        "tests.test_provider_discovery::test_all_34_saved_format_discovery_paths[tyler-meeting-manager/tyler-public-calendar-json]",
+        "tests.test_provider_discovery::test_roster_identity_ambiguity_custom_domains_and_mismatch",
+        "tests.test_provider_discovery::test_identification_rejects_unsafe_or_credential_sources[http://127.0.0.1/]",
+        "tests.test_provider_discovery::test_identification_rejects_unsafe_or_credential_sources[http://[::1]/]",
+        "tests.test_provider_discovery::test_identification_rejects_unsafe_or_credential_sources[https://localhost/a]",
+        "tests.test_provider_discovery::test_identification_rejects_unsafe_or_credential_sources[https://city.internal/a]",
+        "tests.test_provider_discovery::test_identification_rejects_unsafe_or_credential_sources[https://u:p@city.example/a]",
+        "tests.test_provider_discovery::test_identification_rejects_unsafe_or_credential_sources[https://city.example/?token=do-not-echo]",
+        "tests.test_provider_discovery::test_identification_rejects_unsafe_or_credential_sources[https://city.example/?api_key=do-not-echo]",
+        "tests.test_provider_discovery::test_identification_rejects_unsafe_or_credential_sources[https://city.example:8443/a]",
+        "tests.test_provider_discovery::test_identification_rejects_unsafe_or_credential_sources[https://city.example/a#fragment]",
+        "tests.test_provider_discovery::test_civicclerk_independent_captures_follow_all_four_pages",
+        "tests.test_provider_discovery::test_civicclerk_discovery_media_reaches_preview_and_guarded_retrieval[https://]",
+        "tests.test_provider_discovery::test_civicclerk_discovery_media_reaches_preview_and_guarded_retrieval[HTTPS://]",
+        "tests.test_provider_discovery::test_civicclerk_player_link_is_not_a_direct_mp4[https://video.example/player]",
+        "tests.test_provider_discovery::test_civicclerk_player_link_is_not_a_direct_mp4[https://video.example/player?file=clip.mp4]",
+        "tests.test_provider_discovery::test_civicclerk_unusable_media_path_is_not_reconstructed_or_lost[None]",
+        "tests.test_provider_discovery::test_civicclerk_unusable_media_path_is_not_reconstructed_or_lost[]",
+        "tests.test_provider_discovery::test_civicclerk_unusable_media_path_is_not_reconstructed_or_lost[ERIECO/6a41c49b6f.mp4]",
+        "tests.test_provider_discovery::test_civicclerk_unusable_media_path_is_not_reconstructed_or_lost[42]",
+        "tests.test_provider_discovery::test_civicclerk_unusable_media_path_is_not_reconstructed_or_lost[media_path4]",
+        "tests.test_provider_discovery::test_civicclerk_unusable_media_path_is_not_reconstructed_or_lost[http://cpmedia.azureedge.net/erieco/6a41c49b6f.mp4]",
+        "tests.test_provider_discovery::test_escribe_real_capture_uses_post_and_inclusive_end_translation",
+        "tests.test_provider_discovery::test_legistar_api_separate_mapping_keyset_pages_and_credentials",
+        "tests.test_provider_discovery::test_primegov_independent_failure_keeps_successful_empty_sibling",
+        "tests.test_provider_discovery::test_primegov_archive_years_exact_boundaries",
+        "tests.test_provider_discovery::test_checkpoint_record_limit_resume_overlap_binding_and_changed_page",
+        "tests.test_provider_discovery::test_empty_middle_page_continues_to_next_and_cross_tenant_link_keeps_capture",
+        "tests.test_provider_discovery::test_bounds_body_types_unknown_dates_and_cancel_after_page",
+        "tests.test_provider_discovery::test_failed_page_resume_and_all_fail_never_completed_empty",
+        "tests.test_provider_discovery::test_saved_required_unknown_not_unsupported_vendor_and_missing_bounds",
+        "tests.test_provider_discovery::test_attachment_failed_fetch_retains_meeting_and_no_arbitrary_proxy",
+        "tests.test_provider_discovery::test_transfer_limit_is_separate_from_parser_limit",
+        "tests.test_provider_discovery::test_wistia_modern_version_bearer_page_and_unknown_meeting_date",
+        "tests.test_provider_discovery::test_discover_real_capture_import_search_preserves_partial_coverage",
+        "tests.test_provider_discovery::test_aliases_unknown_source_fields_and_newsroom_tenant_namespace_scope",
+        "tests.test_provider_discovery::test_granicus_upcoming_attachmentless_row_and_archived_clip_identity",
+        "tests.test_provider_discovery::test_http_failure_preserves_status_not_response_secrets",
+        "tests.test_provider_discovery::test_gworks_scheduled_calendar_day_filters_before_record_cap",
+        "tests.test_provider_discovery::test_deadline_between_response_and_records_preserves_resumable_capture",
+        "tests.test_provider_discovery::test_tyler_explicit_observed_calendar_api_uses_fixed_bounded_post_and_reports_partial",
+        "tests.test_provider_discovery::test_tyler_discovery_retains_both_supplied_statuses_and_rich_digests",
+        "tests.test_recording_retrieval::test_selected_captured_video_uses_transfer_ceiling_and_keeps_player_citation",
+        "tests.test_recording_retrieval::test_selector_cannot_supply_urls_access_unknown_fields_or_bypass_current_namespace",
+        "tests.test_recording_retrieval::test_cli_and_http_forward_the_same_scoped_captured_selector"
+      ]
+    },
+    {
+      "name": "select-event-files-root-final",
+      "passed": 15,
+      "failed": 0,
+      "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\select-event-files-root-final.xml",
+      "junit_sha256": "352157529d08c656b82111c92128d6ddd04452887ffe853d88fe2cd17a02824d",
+      "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\select-event-files-root-final.log",
+      "nodes": [
+        "tests.test_civicclerk_event_files::test_event_file_from_discovery_or_legacy_storage[False]",
+        "tests.test_civicclerk_event_files::test_event_file_from_discovery_or_legacy_storage[True]",
+        "tests.test_civicclerk_event_files::test_tampered_event_file_fails_before_network[file_id]",
+        "tests.test_civicclerk_event_files::test_tampered_event_file_fails_before_network[url]",
+        "tests.test_civicclerk_event_files::test_tampered_event_file_fails_before_network[raw_file]",
+        "tests.test_civicclerk_event_files::test_tampered_event_file_fails_before_network[source]",
+        "tests.test_civicclerk_event_files::test_tampered_event_file_fails_before_network[event_id]",
+        "tests.test_civicclerk_event_files::test_legacy_portal_scheme_and_port_resolve_to_https_api[http://fishersin.portal.civicclerk.com/event/7]",
+        "tests.test_civicclerk_event_files::test_legacy_portal_scheme_and_port_resolve_to_https_api[https://fishersin.portal.civicclerk.com:443/event/7]",
+        "tests.test_civicclerk_detail::test_detail_scoped_file_search_reopen_and_zip",
+        "tests.test_civicclerk_detail::test_detail_mismatch_failure_retains_verified_bytes_and_no_file",
+        "tests.test_civicclerk_detail::test_detail_cancellation_and_byte_limit",
+        "tests.test_civicclerk_detail::test_requires_existing_matching_event_and_source",
+        "tests.test_civicclerk_detail::test_stored_file_spoof_is_rejected_before_request",
+        "tests.test_civicclerk_detail::test_file_cancel_and_transfer_limit"
+      ]
+    }
+  ],
+  "distinct_passing_nodes": 97,
+  "execution_provenance": "97-case Python3.13 affected run preceded root hash-lookup/storage-invariance changes;15-case final Python3.13 Event/detail run executed those changes. Counts overlap; unchanged provider-discovery/recording cases are reused. No new full suite or build.",
+  "limits": [
+    "Synthetic file bytes and transport, not live file availability/rendering or full catalog proof.",
+    "Legacy compat parser/output and database records are unchanged; richer discovery records and explicit transfer apply the correction.",
+    "Event create/update date/time/template readback remains unresolved, not unsupported."
+  ],
+  "bounded_event_write_research": {
+    "purpose": "Bounded primary-source Event-write investigation; no credentials or mutations; public shell/client are display-only and do not establish write date/time transformations.",
+    "sources": [
+      {
+        "url": "https://fishersin.portal.civicclerk.com/",
+        "status": 200,
+        "local_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\select-event-public-shell.html",
+        "bytes": 2808,
+        "sha256": "fee1dc9cde8159a8be488c5c78da4a1b25a61429b00b824eebc6613aebfa463b"
+      },
+      {
+        "url": "https://fishersin.portal.civicclerk.com/assets/index-DOHLNEJb.js",
+        "status": 200,
+        "local_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\select-event-public-client.js",
+        "bytes": 571727,
+        "sha256": "6290028848edbc67b1cfa9f14bed77885cbddb459ef2864d853e14f7c5dd9955"
+      }
+    ],
+    "official_contract": "docs/capabilities/evidence/civicclerk-openapi/swagger.json",
+    "findings": [
+      "CreateEventFromTemplateApiModel.eventStartTime has HH:MM regex; EventUpdateApiModel.eventStartTime is free-form with12:00:00AM default. EventModel returns eventDate/startDateTime, not those request names.",
+      "Official UI create/edit/recurrence help does not establish machine request-to-readback timestamp conversion. No Event write mapping fabricated.",
+      "Pinned EventModel.publishedFiles is already used by baseline mapper, but urljoin with portal source yields portal file URL while retrieval allows tenant API origin; this is the actionable original retrieval defect."
+    ],
+    "official_ui_sources": [
+      "https://www.civicplus.help/meetings-select/docs/create-a-one-time-event",
+      "https://www.civicplus.help/meetings-select/docs/create-a-recurring-event",
+      "https://www.civicclerk8.civicplus.help/hc/en-us/articles/360035623054-Edit-an-Event-Summary"
+    ]
+  }
+}

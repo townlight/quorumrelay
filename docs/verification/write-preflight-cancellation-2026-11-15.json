@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "200c0582a7ec5c8b7467a2fc93baaa0f680827c6",
+  "tasks": [
+    10
+  ],
+  "status": "PASSED",
+  "scope": "Existing shared JSON/Essential/Granicus adapters honor coordinator durable cancellation after commit-time preflight and before mutation. Granicus chunk uploads retain accepted chunk count/upload ID as uncertain and send no further chunks after persisted cancellation. No new native operation, release or live mutation.",
+  "reproduced_before_fix": {
+    "failed": 6,
+    "cases": "Wistia JSON, Essential multimedia and Granicus event each ignored stored cancellation during commit-time preflight for implicit and explicit operation IDs and completed the mutation."
+  },
+  "new_cases": 14,
+  "checks": [
+    {
+      "scope": "Focused persisted preflight/chunk cancellation and durable no replay",
+      "passed": 14,
+      "failed": 0,
+      "seconds": 1.8
+    },
+    {
+      "scope": "All tests referencing plan_write or commit_write, including interfaces, other adapters, recovery, conflicts and denial",
+      "passed": 534,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 51.88,
+      "xml_path": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\write-preflight-cancellation-2026-11-15.xml",
+      "xml_sha256": "49394c50d3d350005d2743fb948cf9aa4430ee4e61b49cdf6da7df15ff6fed96",
+      "warning": "Existing Starlette/AnyIO alias deprecation"
+    },
+    {
+      "scope": "Ruff all changed source/test files",
+      "status": "PASSED"
+    }
+  ],
+  "source_sha256": {
+    "src/civic_data_connectors/write_adapters.py": "c3960fd10f7873ef6ea4ab79553ec9495bce178092a22cf7381f3d156a7ae409",
+    "src/civic_data_connectors/providers/essential_write.py": "e16a00d4bc1743bbdba79888fb691882db365d9d86ecfbbdc6413773f6ad4eeb",
+    "src/civic_data_connectors/providers/granicus_write.py": "1c29aeebe9bb9b5ee0e45ad82d9976e5b1ca9e2e5c369b798d079905ebcf7724",
+    "tests/test_write_preflight_cancellation.py": "529088a229c13d9e02058e4ae256bce9bdf560ab76e649b8b386d647e4c7977d",
+    "docs/WRITE-CONTRACT.md": "54db92b3df989df74daa2cc1674b53fe7f4e01d6a77d7509d00da8b6e1b2cc0c"
+  },
+  "limits": [
+    "Synthetic network responses only; real tenant transactions NOT_RUN.",
+    "Cooperative pre-mutation and between-chunk checkpoints, not rollback or atomic cancellation of remote requests.",
+    "Prior2335full is historical; current changed write behavior covered by534affected cases."
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "observed_date": "2026-11-14",
+  "sources": [
+    {
+      "url": "https://getsuiteone.com/importing-bookmarks-documents-for-bookmarking-plus-editing-bookmarks/",
+      "status": 200,
+      "media_type": "text/html",
+      "bytes": 47518,
+      "sha256": "d4b685be2d7d92bbd5f8c8e345199e7c2f961740e8453a6ed543571a4cd06748"
+    },
+    {
+      "url": "https://getsuiteone.com/wp-content/uploads/2021/08/S1_BookmarksUpdate_2021.pdf",
+      "status": 200,
+      "content_type": "application/pdf",
+      "bytes": 306787,
+      "sha256": "855482f94302b8d036864c5bf92c6f4fea07f02e5a9a863a93c1f5b00cb1e07d",
+      "path": "S1_BookmarksUpdate_2021.pdf"
+    }
+  ],
+  "findings": "August2021 official update explicitly permits ordinary Word or HTML documents for manual bookmarking. Separate Liberty *_content.HTML import mode and Replace Existing Bookmarks are not the generic document mode.",
+  "local_mapping": "Generate escaped UTF8 ordinary HTML from explicit plain-text title/paragraphs; manifest records bytes/hash, no automatic bookmark/timing/association.",
+  "limits": "Local file preparation only. No vendor import, remote API, processing or readback acceptance. Missing Liberty timed schema remains unresolved research, not proven outside-only.",
+  "other_sources_checked": [
+    {
+      "url": "https://getsuiteone.com/liberty-meeting-recorder-dcr2-how-to-export-to-html-for-suiteone/",
+      "finding": "March2021 page links MP4 demonstration; no HTML structure in page."
+    },
+    {
+      "url": "https://www.libertyrecording.com/storage/13356/a1a8e78d-7fa0-4fa2-8482-2175b7cb658b/lpv31_userguide.pdf",
+      "finding": "Version3.1 pp102-105 describes MP4/metadata folder and play/minimize CLI; no SuiteOne Liberty import schema or headless conversion command established. Player export is distinct from LMR Word export."
+    }
+  ]
+}

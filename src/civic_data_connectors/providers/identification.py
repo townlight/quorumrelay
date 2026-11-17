@@ -15,26 +15,33 @@ from ..models import OperationContext, OperationResult, Source
 FORMATS = {provider: tuple(row["input_format"] for row in compat.source_formats()
                            if row["connector"] == provider)
            for provider in dict.fromkeys(row["connector"] for row in compat.source_formats())}
-ADDITIONAL_FORMATS = {"legistar": ("legistar-events-json", "legistar-event-json", "legistar-votes-json",
+ADDITIONAL_FORMATS = {"suiteone-media": ("suiteone-public-event-html",),
+                      "gworks": ("gworks-published-meeting-html", "gworks-secure-calendar-json", "gworks-editor-meeting-json"),
+                      "legistar": ("legistar-events-json", "legistar-event-json", "legistar-votes-json",
                                  "legistar-rollcalls-json"),
+                      "boarddocs": ("boarddocs-public-meetings-json", "boarddocs-public-meeting-html", "boarddocs-public-item-html"),
+                      "boardbook": ("boardbook-public-agenda-html", "boardbook-public-minutes-html", "boardbook-public-search-html"),
+                      "town-hall-streams": ("town-hall-streams-event-html",),
                       "civicplus-select": ("civicplus-search-json",),
                       "clerkbase": ("clerkbase-search-html", "clerkbase-public-tree-html"),
-                      "iqm2": ("iqm2-public-search-html",),
+                      "iqm2": ("iqm2-public-search-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "iqm2-minutetraq-soap-xml"),
                       "utah-public-notice": ("utah-public-search-html",),
-                      "civicweb": ("civicweb-detail-html", "civicweb-meetings-json", "civicweb-meeting-documents-json"),
-                      "swagit": ("swagit-listing-html",),
+                      "escribe": ("escribe-meeting-detail-html", "escribe-publishing-soap-xml"),
+                      "civicweb": ("civicweb-detail-html", "civicweb-filepro-soap-xml", "civicweb-meetings-json", "civicweb-meeting-documents-json"),
+                      "swagit": ("swagit-listing-html", "swagit-public-player-html"),
                       "onbase": ("onbase-public-listing-html",),
                       "digital-towpath": ("digital-towpath-listing-html",),
                       "towncloud": ("towncloud-public-listing-json",),
-                      "destiny-agendaquick": ("agendaquick-public-listing-html", "agendaquick-item-search-html"),
+                      "destiny-agendaquick": ("agendaquick-public-listing-html", "agendaquick-item-search-html", "agendaquick-public-agenda-html", "agendaquick-public-memo-html"),
                       "boardable": ("boardable-public-meetings-json",),
-                      "telvue": ("telvue-connect-media-json", "telvue-connect-videos-json",
-                                 "telvue-connect-playlists-json"),
-                      "municode-meetings": ("essential-multimedia-json",),
-                      "novusagenda": ("novus-public-listing-html",),
-                      "granicus": ("granicus-listing-html",),
-                      "peak": ("granicus-listing-html",),
-                      "wistia": ("wistia-api-media-json", "wistia-media-detail-json", "wistia-caption-json"),
+                      "simbli": ("simbli-meeting-detail-json", "simbli-agenda-items-json", "simbli-item-content-json", "simbli-supporting-documents-json", "simbli-meeting-minutes-json", "simbli-simple-minutes-json"),
+                      "telvue": ("telvue-public-player-html", "telvue-public-search-html", "telvue-cloudcast-mrss-xml", "telvue-connect-media-json", "telvue-connect-videos-json",
+                                 "telvue-connect-playlists-json", "telvue-connect-playlist_items-json"),
+                      "municode-meetings": ("essential-multimedia-json", "municode-publishpage-html", "municode-publishpage-detail-html"),
+                      "novusagenda": ("novus-public-listing-html", "novus-public-coversheet-html"),
+                      "granicus": ("granicus-listing-html", "granicus-platform-soap-xml"),
+                      "peak": ("granicus-listing-html", "peak-publication-rss-xml", "peak-public-search-html"),
+                      "wistia": ("wistia-api-media-json", "wistia-media-detail-json", "wistia-caption-json", "wistia-public-embed-html"),
                       "laserfiche-weblink": ("laserfiche-listing-json", "laserfiche-repository-entries-json")}
 
 
@@ -62,10 +69,11 @@ def configured_source(value):
         raise ValueError("source must be a configured source object.")
     return Source.from_dict({**value, "provider": canonical_provider(value.get("provider"))})
 SENSITIVE_QUERY = re.compile(
-    r"^(?:token|access_token|id_token|password|secret|authorization|credential|"
+    r"^(?:token|access_token|id_token|password|secret|authorization|cookie|client[-_]?secret|credentials?|"
     r"api[-_]?key|signature|sig|x-amz-.*|x-goog-.*)$", re.I,
 )
 _HOSTS = (
+    ("diligent-community", r"[^.]+\.community\.diligentoneplatform\.com"),
     ("primegov", r"(?:[^.]+\.)?primegov\.com"),
     ("legistar", r"(?:[^.]+\.)?legistar\.com"),
     ("civicplus-select", r"[^.]+\.(?:portal|api)\.civicclerk\.com"),
@@ -161,20 +169,57 @@ def validate_source(source: Source, context: OperationContext | None = None,
     account_api = is_account_api(source)
     namespace = (account_namespace(source) if account_api else
                  compat.source_namespace(source.provider, urlsplit(source.url)))
+    if source.provider == "iqm2" and source.input_format == "iqm2-minutetraq-soap-xml":
+        from .iqm2_soap import namespace as iqm2_soap_namespace
+        namespace = iqm2_soap_namespace(source)
+    if source.provider == "municode-meetings" and source.input_format in {"municode-publishpage-html", "municode-publishpage-detail-html"}:
+        from .municode_publish import namespace as publish_namespace
+        namespace = publish_namespace(source)
+    if source.provider == "gworks" and source.input_format == "gworks-secure-calendar-json":
+        from .gworks_calendar import namespace as calendar_namespace
+        namespace = calendar_namespace(source)
+    if source.provider == "gworks" and source.input_format == "gworks-editor-meeting-json":
+        from .gworks_editor import namespace as editor_namespace
+        namespace = editor_namespace(source)
+    if source.provider == "gworks" and source.input_format == "gworks-published-meeting-html":
+        published = urlsplit(source.url)
+        city = re.fullmatch(r"/city/([1-9][0-9]*)/cms/[1-9][0-9]*_(?:agenda|minute)\.html", published.path)
+        if published.scheme == "https" and published.hostname == "files.frontdeskgworks.com" and city:
+            namespace = f"//files.frontdeskgworks.com/city/{city[1]}/cms/data.json"
     if not account_api and source.namespace is not None and namespace != source.namespace:
         raise ValueError("The configured namespace does not match the provider-derived source namespace.")
     if (context is not None and context.allowed_namespaces is not None and
             namespace not in context.allowed_namespaces):
         raise ValueError("The source namespace is outside the caller's authorized source scope.")
     allowed_options = {"download_origins"}
+    if source.provider == "iqm2" and source.input_format == "iqm2-minutetraq-soap-xml":
+        allowed_options.update({"minutetraq_agency", "meeting_id", "document_id", "document_kind"})
+    if source.provider == "primegov":
+        allowed_options.add("tracking_number")
+    if source.provider == "gworks" and source.input_format in {"gworks-secure-calendar-json", "gworks-editor-meeting-json"}:
+        allowed_options.add("gworks_city_id")
+    if source.provider == "simbli":
+        allowed_options.add("agenda_item_id")
+    if source.provider == "municode-meetings" and source.input_format in {"municode-publishpage-html", "municode-publishpage-detail-html"}:
+        allowed_options.update({"meeting_id", "detail_kind"})
     if source.provider in {"legistar", "wistia", "laserfiche-weblink"}:
         allowed_options.add("page_size")
     if source.provider == "wistia":
         allowed_options.add("folder_id")
     if source.provider == "laserfiche-weblink":
         allowed_options.add("max_folder_depth")
+        if urlsplit(source.url).hostname == "api.laserfiche.com":
+            allowed_options.update({"repository_export_part", "repository_image_format",
+                                    "repository_alternate_edoc_name", "repository_export_async",
+                                    "repository_include_fields"})
     if source.provider == "tyler-meeting-manager":
-        allowed_options.add("calendar_api_base")
+        allowed_options.update({"calendar_api_base", "meeting_type_ids"})
+    if source.provider == "boarddocs":
+        allowed_options.add("boarddocs_committee_id")
+    if source.provider == "champ":
+        allowed_options.add("archive_group_id")
+    if source.provider == "civicweb" and source.input_format == "civicweb-filepro-soap-xml":
+        allowed_options.update({"filepro_resource", "folder_id", "document_id", "meeting_id"})
     if not isinstance(source.options, dict) or set(source.options) - allowed_options:
         raise ValueError("Source options contain unrecognized provider configuration; credentials belong in context.")
     return namespace

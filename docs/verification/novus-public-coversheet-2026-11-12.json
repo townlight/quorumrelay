@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-12",
+  "operation": "novus_supplied_public_coversheet",
+  "source_url": "https://ebps.novusagenda.com/agendapublic/Coversheet.aspx?ItemID=12406&MeetingID=996",
+  "public_observation": {
+    "status": 200,
+    "media_type": "text/html",
+    "byte_length": 30741,
+    "sha256": "2562f1732678efc7dcbad6a64a7d70d0a8fd6793642c5b644361715767fbba8a",
+    "byte_limit": 2097152,
+    "deadline_seconds": 30,
+    "allow_redirects": false
+  },
+  "fixture": {
+    "path": "tests/fixtures/novus-coversheet-12406.capture.json",
+    "sha256": "9ee20a710913cea58c335222d5aad7fbafc5f0fd870e686b4c1a88feebf0a043",
+    "encoding": "exact public response bytes in content_base64"
+  },
+  "synthetic_execution": {
+    "new_distinct_passed": 6,
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest tests/test_novus_detail.py -q (5 passed, configured discovery exposed listing-only branch routing defect)",
+      ".venv/Scripts/python.exe -m pytest tests/test_novus_detail.py::test_default_configured_discover_fetch_and_separate_attachment_transfer -q (1 passed after scoped dispatch correction)",
+      ".venv/Scripts/python.exe -m pytest tests/test_novus_discovery.py::test_additive_saved_page_replay_retains_original_html_and_never_runs_pager -q (1 existing listing regression passed)"
+    ],
+    "covered": [
+      "Saved/default configured discovery and fetch",
+      "Native item12406/meeting996 form and attachment11729/item12406 binding",
+      "Rendered subject/text/date/sections, exact capture, local text search, neutral export",
+      "Separate synthetic PDF transfer through existing attachment path",
+      "Changed form, attachment context/origin and missing subject denials"
+    ]
+  },
+  "limits": [
+    "One captured public template, no complete catalog or universal deployment claim",
+    "Attachment is supplied locator; synthetic PDF transfer does not establish actual downloaded document bytes",
+    "Rendered recommendation/blank voting form preserved as text, not inferred motion/votes",
+    "Standalone exact configured Coversheet URL, not root-listing detail crawling or arbitrary-ID fetch_record",
+    "Local source only; immutable dev8/1.8.5 unchanged"
+  ]
+}

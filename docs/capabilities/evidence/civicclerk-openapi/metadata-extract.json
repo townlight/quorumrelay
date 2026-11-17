@@ -1,0 +1,21 @@
+{
+  "source_url": "https://fishersin.api.civicclerk.com/v1/$metadata",
+  "status": 200,
+  "observed": "2026-11-13",
+  "sha256": "8582821af15a446e0998ed8f1003eaaa5f171723d4695de67be9de9f62786efb",
+  "bytes": 57930,
+  "scope": "CivicClerk Select; public OData metadata, not Essential or live mutation",
+  "event_published_statuses": {
+    "NotPublished": 0,
+    "Published": 1,
+    "PublishedOnDate": 2
+  },
+  "event_model_fields": {
+    "isPublished": "CivicClerk.Entities.Models.Enums.EventPublishedStatuses",
+    "eventDate": "Edm.DateTimeOffset",
+    "startDateTime": "Edm.DateTimeOffset",
+    "eventTemplateId": "Edm.Int32",
+    "eventCategoryId": "Edm.Int32"
+  },
+  "limits": "OData enum names do not establish event input-to-readback time conversion or provider write acceptance."
+}

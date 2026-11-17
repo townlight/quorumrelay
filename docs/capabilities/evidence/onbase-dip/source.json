@@ -1,0 +1,97 @@
+{
+  "product": "OnBase Document Import Processor",
+  "release": "Foundation26.1",
+  "observed": "2026-11-12",
+  "sources": [
+    {
+      "name": "tagged-example",
+      "url": "https://docs.hyland.com/r/OnBase/Document-Import-Processor/Foundation-26.1/Document-Import-Processor/Import-Index-File/Import-Index-Parameters/Examples-of-DIP-Format-Process-Settings-and-Field-Order/Tagged-DIP-Example",
+      "byte_length": 2373,
+      "figure": {
+        "url": "https://docs.hyland.com/api/khub/maps/vwQTkBdjbDuh_oCpuhlYUw/resources/4YMNF9H1JkMwust8HD~B0A-vwQTkBdjbDuh_oCpuhlYUw/content?v=a5f5531569b1d962",
+        "path": "tagged-example.gif",
+        "sha256": "22ff3793a4c39f806ceff23e02988ab710dfe0937c0a85d0df48441fd401707a",
+        "byte_length": 12161
+      },
+      "http_body_kind": "HTML SPA bootstrap shell only; does not contain the contract text. Rules below were verified through official rendered reference.",
+      "http_response_sha256": "a674ad36cf22afba123580cf07c6c51c07e21fea8c307539a5644aaa2a36adb4",
+      "retained_sha256": "067480c40fe36f2eb848740ef812af540b41b2d833beaef7885e620244d8927e",
+      "retained_transform": "CRLF normalized to LF and line-end whitespace removed; SPA shell only, not documentation text"
+    },
+    {
+      "name": "default-keywords",
+      "url": "https://docs.hyland.com/r/OnBase/Document-Import-Processor/Foundation-26.1/Document-Import-Processor/Default-Keyword-Types/Default-Keyword-Types-Used-in-DIP-Processes",
+      "byte_length": 2373,
+      "http_body_kind": "HTML SPA bootstrap shell only; does not contain the contract text. Rules below were verified through official rendered reference.",
+      "http_response_sha256": "3e5efab644dd0b73fa8b3ba01eccfca202ae784d11d5463ad271e4cb829fd2b8",
+      "retained_sha256": "d9f9766b0b20fcd44be2a310d9e6c054f734d90c6f3096f2f119200aa8c43cd8",
+      "retained_transform": "CRLF normalized to LF and line-end whitespace removed; SPA shell only, not documentation text"
+    },
+    {
+      "name": "tagged-format",
+      "url": "https://docs.hyland.com/r/OnBase/Document-Import-Processor/Foundation-26.1/Document-Import-Processor/Import-Index-File/Import-Index-Parameters/Tagged-DIP-or-Ordered-DIP/Tagged-DIP-Import-Index-File",
+      "byte_length": 2373,
+      "http_body_kind": "HTML SPA bootstrap shell only; does not contain the contract text. Rules below were verified through official rendered reference.",
+      "http_response_sha256": "af1fe019e8cb8d3883efebf87b575ec679b0d667dd6f013e96585ce47bef9514",
+      "retained_sha256": "fea93244e162dea934e772dffa1a877a8ec9c0faee129258df134c84c81736c7",
+      "retained_transform": "CRLF normalized to LF and line-end whitespace removed; SPA shell only, not documentation text"
+    },
+    {
+      "name": "field-order",
+      "url": "https://docs.hyland.com/r/OnBase/Document-Import-Processor/Foundation-26.1/Document-Import-Processor/Configuration/Create-a-DIP-Format/Tagged-DIP-Field-Order-Configuration/Field-Order",
+      "byte_length": 2373,
+      "http_body_kind": "HTML SPA bootstrap shell only; does not contain the contract text. Rules below were verified through official rendered reference.",
+      "http_response_sha256": "3d11d437a235d8110ac62306c990fe22eb5c88fe8392fe3b26721ea9f7591336",
+      "retained_sha256": "6fb05dfdca101dc3c3f66af8588504a609b86b500510f391753d634907d2edb4",
+      "retained_transform": "CRLF normalized to LF and line-end whitespace removed; SPA shell only, not documentation text"
+    }
+  ],
+  "scope": "Explicit linked meeting-document file/index preparation only; no tenant import, Agenda entity mutation or live acceptance inferred.",
+  "contract_rules": [
+    {
+      "source_url": "https://docs.hyland.com/r/OnBase/Document-Import-Processor/Foundation-26.1/Document-Import-Processor/Import-Index-File/Import-Index-Parameters/Examples-of-DIP-Format-Process-Settings-and-Field-Order/Tagged-DIP-Example",
+      "rules": [
+        "Foundation26.1 published2026-09-11",
+        "Tagged Fields; Field Delimiters None; Separator New Line.",
+        "Vendor figure shows BEGIN: alone, then DocTypeName:value, ordinary keyword tags/value and FullPath:path. Tags are configured mappings, not universal property names."
+      ],
+      "figure_proof": "Exact vendor-linked GIF retained; it is a vendor example, not municipal data or an executed import."
+    },
+    {
+      "source_url": "https://docs.hyland.com/r/OnBase/Document-Import-Processor/Foundation-26.1/Document-Import-Processor/Default-Keyword-Types/Default-Keyword-Types-Used-in-DIP-Processes",
+      "rules": [
+        "Exclusive Begin marks a document boundary and is case-sensitive.",
+        "Document Type name/number must match destination configuration. File Type is a configured numeric file-format identity.",
+        "File Type must precede file path; Full Path includes drive/UNC. No type number is inferred."
+      ]
+    },
+    {
+      "source_url": "https://docs.hyland.com/r/OnBase/Document-Import-Processor/Foundation-26.1/Document-Import-Processor/Import-Index-File/Import-Index-Parameters/Tagged-DIP-or-Ordered-DIP/Tagged-DIP-Import-Index-File",
+      "rules": [
+        "Tags at most20 characters. Each value has its mapped tag; Begin separates documents."
+      ]
+    },
+    {
+      "source_url": "https://docs.hyland.com/r/OnBase/Document-Import-Processor/Foundation-26.1/Document-Import-Processor/Configuration/Tagged-DIP-Field-Order-Configuration/Field-Order",
+      "rules": [
+        "Exact case-sensitive tags include any separator character. Repeated keyword values may use the same tag.",
+        "Normal DIP without FTP: File Name alone locates files in the index directory.",
+        "File Type precedes FullPath or FileName; omitted type uses Document Type default. Destination configuration is required per Document Type."
+      ]
+    },
+    {
+      "source_url": "https://docs.hyland.com/r/OnBase/Document-Import-Processor/Foundation-26.1/Document-Import-Processor/Import-Index-File/Import-Index-Parameters/Important-Considerations-for-the-Import-Index-File-and-DIP-Format/File-Name-File-Path-and-Full-Path-Character-Length",
+      "rules": [
+        "File Name/full path/composite path may be260 characters; exporter uses shorter120-character basenames. Validate total extraction path before processing."
+      ]
+    },
+    {
+      "source_url": "https://docs.hyland.com/r/OnBase/Document-Import-Processor/English/Foundation-22.1/Document-Import-Processor/Usage/Primary-Usage-Main-Concepts/Running-a-DIP",
+      "rules": [
+        "Test Only produces a verification report without document creation/copy/source deletion.",
+        "Export preparation never runs this vendor operation or a batch commit."
+      ]
+    }
+  ],
+  "verification": "Synthetic emitted index checked against independently specified vendor layout/ordering and exact file hashes; not remote import or Agenda API acceptance."
+}

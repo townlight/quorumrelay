@@ -1,0 +1,45 @@
+{
+  "scope": "Existing documented Legistar JSON field handling through public plan/approval/commit/readback/receipt; no new runtime behavior or live provider transaction",
+  "base_commit": "1f363b22d2872c51b9a4c48eb3ddae1326ba19c0",
+  "bindings": [
+    {
+      "kind": "vendor_contract",
+      "path": "docs/capabilities/evidence/legistar-media-attachments/contract.json",
+      "sha256": "91ac0fe93859e59aa9a6e98bea232e5ef76638b6b3d3b90f9e3080cbf0234fdb"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_legistar_media_link_writes.py",
+      "sha256": "227f244f6d14dd9dc3cb9597060622384a3bb98a8bb0b096c99ed76b1f9fc4bb",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "227f244f6d14dd9dc3cb9597060622384a3bb98a8bb0b096c99ed76b1f9fc4bb"
+    }
+  ],
+  "unchanged_adapter": {
+    "path": "src/civic_data_connectors/write_adapters.py",
+    "working_tree_sha256": "dd712625379d876dbde90e2b8bde275cbf642ed6a72684b9139e56ac7860e9e3",
+    "canonical_lf_sha256": "588e69dee382c700c9724769f54cb80c93faaea6f798bf5dbc08dedbb9f371f0"
+  },
+  "verification": {
+    "tests": 6,
+    "failed": 0,
+    "command": "python -m pytest -q tests/test_legistar_media_link_writes.py",
+    "artifacts": {
+      "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\legistar-media-link-final.log": "1937581a11b4667dc651db49df2edac6258761a015f4d3724c85c5da99c207e9",
+      "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\legistar-media-link-final.xml": "8611df7be7eb1dc38fa1a0b5503f57bf2c0a993782063048c556405f4fcc5f4d"
+    }
+  },
+  "executed": [
+    "event create/update EventMedia and EventVideoPath string metadata",
+    "partial native PUT preserves omitted date/location/name/hyperlink flag and exact native ID",
+    "hyperlink-only attachment create/update and visibility-flag readback; no binary/File GET",
+    "scoped receipt exact plan hash and approval replay without new requests",
+    "persistent mismatch in either media string/hyperlink/visibility remains uncertain without duplicate create"
+  ],
+  "reuse": "Existing binary attachment create/update/upload and File readback evidence reused; new create cases are not relabeled upload. No runtime source changed.",
+  "limits": [
+    "Contract JSON is human-extracted official Help facts, not raw page capture/full schema.",
+    "Synthetic JSON-field readback does not establish media URL fetching/playback, byte recording upload/replacement, server processing, effective visibility, or live tenant behavior.",
+    "Historical vendor import package and undocumented MIME/size/processing semantics remain unresolved."
+  ]
+}

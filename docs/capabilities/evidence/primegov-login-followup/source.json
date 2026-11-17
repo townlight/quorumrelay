@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-16",
+  "scope": "Anonymous GETs of previously declared vendor login link and public portal script. No login submission, account, contact or mutation.",
+  "sources": [
+    {
+      "url": "https://reno.primegov.com/login",
+      "status": 200,
+      "file": "login-sanitized.html",
+      "sha256": "c2c29043d9b6216f7a080dd95df2dc0c27efb780b1e166bb05f5fd79257c6960",
+      "sanitization": "Hidden anti-CSRF values replaced with [REDACTED]; hash identifies sanitized bytes."
+    },
+    {
+      "url": "https://reno.primegov.com/Content/js/attachmentHelpers.js?v=2026.10.8.1837",
+      "status": 200,
+      "file": "attachmentHelpers.js",
+      "sha256": "38ff1b809846cb0f3c53bef8c32a31165fbe98fc83fb7406e19d19a7911c4638"
+    }
+  ],
+  "findings": [
+    "The public portal declares /login. Current anonymous login exposes ordinary form and Google/Microsoft sign-in, without administrative meeting/item/document client modules.",
+    "The declared attachmentHelpers.js contains escapeHtmlAttribute and escapeJsString only, with no upload contract."
+  ],
+  "remaining": [
+    "Native PrimeGov create/update/upload payloads, permissions, identity and readback remain unresolved."
+  ]
+}

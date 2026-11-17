@@ -1,0 +1,143 @@
+[
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://app.boardable.com/quorumrelay-evaluation/attachments/upload",
+      "postData": "------WebKitFormBoundaryQv4dCBsASJajqJLD\r\nContent-Disposition: form-data; name=\"attachments[0][file]\"; filename=\"quorumrelay-meeting-attachment-api-fixture.txt\"\r\nContent-Type: text/plain\r\n\r\n\r\n------WebKitFormBoundaryQv4dCBsASJajqJLD\r\nContent-Disposition: form-data; name=\"attachments[0][type]\"\r\n\r\nupload\r\n------WebKitFormBoundaryQv4dCBsASJajqJLD\r\nContent-Disposition: form-data; name=\"attachable_type\"\r\n\r\nmeeting\r\n------WebKitFormBoundaryQv4dCBsASJajqJLD\r\nContent-Disposition: form-data; name=\"attachable_id\"\r\n\r\n526577\r\n------WebKitFormBoundaryQv4dCBsASJajqJLD\r\nContent-Disposition: form-data; name=\"folder_id\"\r\n\r\n0\r\n------WebKitFormBoundaryQv4dCBsASJajqJLD\r\nContent-Disposition: form-data; name=\"original_token\"\r\n\r\nundefined\r\n------WebKitFormBoundaryQv4dCBsASJajqJLD--\r\n"
+    },
+    "response": {
+      "status": 200,
+      "mime": "text/html",
+      "body": ""
+    }
+  },
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://app.boardable.com/quorumrelay-evaluation/attachment-list",
+      "postData": "{\"attachable_id\":526577,\"attachable_type\":\"meeting\",\"folder\":\"root\"}"
+    },
+    "response": {
+      "status": 200,
+      "mime": "application/json",
+      "body": {
+        "items": [
+          {
+            "id": 684953,
+            "attached_type": "computer",
+            "attached_name": "",
+            "document_id": 0,
+            "title": "quorumrelay-document-center-evaluation.txt",
+            "type": "upload",
+            "iconUrl": "https://app.boardable.com/quorumrelay-evaluation/pdfs/3937287/quorumrelay-document-center-evaluationtxtpdf/thumb",
+            "bareIconUrl": "https://app.boardable.com/img/icons/doc_center/bare-file.svg",
+            "created_at": {
+              "date": "2026-11-16 23:53:29",
+              "timezone": "UTC"
+            },
+            "updated_at": {
+              "date": "2026-11-16 23:53:29",
+              "timezone": "UTC"
+            },
+            "limited": null,
+            "downloadUrl": "https://app.boardable.com/quorumrelay-evaluation/attachments/uploads/download/684953/quorumrelay-document-center-evaluation.txt",
+            "fileExtension": "txt",
+            "filename": "quorumrelay-document-center-evaluation.txt",
+            "file_size": 118,
+            "uuid": {
+              "uuid": "ac3883a5-3bab-4505-a173-01451d5f5617",
+              "uuidable_type": "App\\Boardable\\Attachments\\Attachment",
+              "uuidable_id": 684953,
+              "short_slug": "b838c2db",
+              "created_at": "2026-11-16T23:53:29.000000Z",
+              "updated_at": "2026-11-16T23:53:29.000000Z",
+              "hex": "ac3883a53bab4505a17301451d5f5617"
+            },
+            "body": false,
+            "document": null,
+            "pdf": {
+              "id": 3937287,
+              "filename": "quorumrelay-document-center-evaluation.txt",
+              "pdfable_type": "App\\Boardable\\Attachments\\Attachment",
+              "pdfable_id": 684953,
+              "created_at": {
+                "date": "2026-11-16 23:53:29",
+                "timezone": "UTC"
+              },
+              "updated_at": {
+                "date": "2026-11-16 23:53:33",
+                "timezone": "UTC"
+              },
+              "converted_at": {
+                "date": "2026-11-16 23:53:33",
+                "timezone": "UTC"
+              },
+              "conversion_failed_at": null,
+              "conversion_job_id": "0a1157eb-4da9-4708-8df3-dee9edde839d",
+              "original_is_encrypted": false,
+              "url": "https://app.boardable.com/quorumrelay-evaluation/pdfs/3937287/quorumrelay-document-center-evaluationtxtpdf",
+              "thumbUrl": "https://app.boardable.com/quorumrelay-evaluation/pdfs/3937287/quorumrelay-document-center-evaluationtxtpdf/thumb",
+              "status": "converted",
+              "isConverted": true
+            },
+            "order": 0,
+            "name": "quorumrelay-document-center-evaluation.txt",
+            "url": "https://app.boardable.com/quorumrelay-evaluation/attachments/uploads/download/684953/quorumrelay-document-center-evaluation.txt",
+            "third_party_raw_data": null,
+            "disable_downloads": 0,
+            "user_can_download": true
+          },
+          {
+            "id": 684954,
+            "attached_type": "computer",
+            "attached_name": "",
+            "document_id": 0,
+            "title": "quorumrelay-meeting-attachment-api-fixture.txt",
+            "type": "upload",
+            "iconUrl": "https://app.boardable.com/img/icons/doc_center/file.svg",
+            "bareIconUrl": "https://app.boardable.com/img/icons/doc_center/bare-file.svg",
+            "created_at": {
+              "date": "2026-11-16 23:55:32",
+              "timezone": "UTC"
+            },
+            "updated_at": {
+              "date": "2026-11-16 23:55:32",
+              "timezone": "UTC"
+            },
+            "limited": null,
+            "downloadUrl": "https://app.boardable.com/quorumrelay-evaluation/attachments/uploads/download/684954/quorumrelay-meeting-attachment-api-fixture.txt",
+            "fileExtension": "txt",
+            "filename": "quorumrelay-meeting-attachment-api-fixture.txt",
+            "file_size": 141,
+            "uuid": {
+              "uuid": "7feb46cf-fc5c-4863-9ddf-2aecea1e5b5f",
+              "uuidable_type": "App\\Boardable\\Attachments\\Attachment",
+              "uuidable_id": 684954,
+              "short_slug": "c39cc980",
+              "created_at": "2026-11-16T23:55:32.000000Z",
+              "updated_at": "2026-11-16T23:55:32.000000Z",
+              "hex": "7feb46cffc5c48639ddf2aecea1e5b5f"
+            },
+            "body": false,
+            "document": null,
+            "pdf": null,
+            "order": 1,
+            "name": "quorumrelay-meeting-attachment-api-fixture.txt",
+            "url": "https://app.boardable.com/quorumrelay-evaluation/attachments/uploads/download/684954/quorumrelay-meeting-attachment-api-fixture.txt",
+            "third_party_raw_data": null,
+            "disable_downloads": 0,
+            "user_can_download": true
+          }
+        ],
+        "folders": [],
+        "current_folder": null,
+        "breadcrumbs": [
+          {
+            "label": "All files",
+            "slug": ""
+          }
+        ]
+      }
+    }
+  }
+]

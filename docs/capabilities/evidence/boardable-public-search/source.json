@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-14",
+  "status": "SCOPED_NATIVE_SEARCH_AND_CAPTURE_BOUND_IDENTITY_IMPLEMENTED_SYNTHETICALLY",
+  "shell_url": "https://site.boardable.com/ventura-county-community-college-district/meetings",
+  "shell_status": 200,
+  "shell_bytes": 239105,
+  "shell_sha256": "d36f81d8771d46c57bec450c4073e94474c6fa79f1893f637ac1be290de2c6f0",
+  "main_asset_url": "https://site.boardable.com/_nuxt/CNuVc7AT.js",
+  "main_asset_sha256": "4bc5a175b673a735112528235816abcec294b55a322381665d4d1a3da51f8dda",
+  "declared_route_asset": "https://site.boardable.com/_nuxt/Cce_YNiz.js",
+  "declared_api_helper": "https://site.boardable.com/_nuxt/CX1JaS8D.js",
+  "assets": [
+    {
+      "path": "boardable-public-search-api.js",
+      "bytes": 530,
+      "sha256": "f27ef60e05858a0928cd91c61efd45e04bd03669a0f05361e1d81e0df625d6da"
+    },
+    {
+      "path": "boardable-public-search-route.js",
+      "bytes": 11175,
+      "sha256": "fa789602a6cbf16fe905d811eddce8dfc76938c91101f927e63583ff010774b3"
+    }
+  ],
+  "contract": [
+    "GET runtime public.apiUrl+/public-sites/search with query,year,month,type; helper attaches SiteId",
+    "Public route type selector Any/meetings/policies/documents; only meeting domain relevant",
+    "Client consumes response.meetings[].title,slug,search_highlight.agenda/minutes and attachment_matches[].id/title/url/context/agenda_item",
+    "No response paging/total/terminal contract; native numeric meeting ID/date not consumed by this renderer"
+  ],
+  "exact_anonymous_probes": [
+    {
+      "url": "https://app.boardable.com/api/public-sites/search?query=Board&year=&month=&type=meetings",
+      "result": "read timeout25s",
+      "SiteId": 3
+    },
+    {
+      "url": "https://app.boardable.com/api/public-sites/search?query=Board&year=2026&month=&type=meetings",
+      "headers": {
+        "Accept": "application/json",
+        "SiteId": "3"
+      },
+      "scope": "Known public tenant, year2026 and meetings type from literal vendor client. Previous unbounded-year request timed out25s; narrower supported year changes approach.",
+      "error": "TimeoutError",
+      "status": null,
+      "seconds": 20.07
+    }
+  ],
+  "limits": [
+    "Two live bounded requests timed out, second narrowed by documented year filter. No repeat of those probes.",
+    "No numeric meeting ID/date inferred from the renderer: only original same-source same-scope listing bytes bind an exact supplied result URL to its existing numeric identity.",
+    "Unmatched candidates remain explicit with preserved raw bytes, never invented slug IDs. Query semantics, full text, ranking, paging and catalog completeness are unverified.",
+    "Only declared meetings/title/slug/highlights/attachment context mapped. Policy administration and arbitrary document retrieval excluded.",
+    "Saved raw search alone is not normalized into guessed IDs; use the full neutral bundle with identity-listing capture provenance."
+  ]
+}

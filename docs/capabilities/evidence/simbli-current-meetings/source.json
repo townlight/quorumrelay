@@ -1,0 +1,33 @@
+{
+  "observed_at": "2026-11-15T11:14:27.024022+00:00",
+  "sources": [
+    {
+      "url": "https://21607822.fs1.hubspotusercontent-na1.net/hubfs/21607822/Website%20Downloads/Simbli%20Meetings%20Software.pdf",
+      "status": 200,
+      "final_url": "https://21607822.fs1.hubspotusercontent-na1.net/hubfs/21607822/Website%20Downloads/Simbli%20Meetings%20Software.pdf",
+      "content_type": "application/pdf",
+      "bytes": 1074272,
+      "sha256": "5ad207498de7f21d2846589aa75732c5cefdfaa3ff81ce5ba9a40fe2f0b7c0c9",
+      "file": "meetings.pdf"
+    }
+  ],
+  "web_reader_observations": [
+    {
+      "url": "https://eboardsolutions.com/simbli-board-management-software/board-meeting-software/",
+      "observed": "Product page declares current HubSpot brochure URL; direct urllib GET separately returned403 without saved body."
+    },
+    {
+      "url": "https://21607822.fs1.hubspotusercontent-na1.net/hubfs/21607822/Website%20Downloads/Simbli%20Meetings%20Software.pdf",
+      "observed": "Web reader obtained two-page PDF; recommendation import wording appears under During the Meeting."
+    },
+    {
+      "url": "https://eadn-wc02-12496346.nxedge.io/wp-content/uploads/2024/04/Simbli-Meetings-Software.pdf",
+      "observed": "Web reader returned CDN service not found, not a PDF."
+    }
+  ],
+  "assessment": "The meetings page and two-page brochure describe importing agenda-item recommendations into minutes, printing/saving packets, archive search and staff workflows. They do not supply an external import layout, machine endpoint/request/authentication or write/readback exchange. No external import or write implementation follows from this wording.",
+  "limits": [
+    "Exact access observations do not prove other public contracts absent or an outside-only dependency.",
+    "No tenant query, login, staff action or mutation."
+  ]
+}

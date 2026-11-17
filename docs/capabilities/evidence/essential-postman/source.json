@@ -1,0 +1,37 @@
+{
+  "observed_at": "2026-11-14T06:53:43.188020+00:00",
+  "official_referrer": "https://www.civicplus.help/meetings-essential/docs/public-application-programming-interface-api",
+  "document_url": "https://documenter.getpostman.com/view/7558574/TWDcEuDz",
+  "document_shell_sha256": "cfbe9090b8349f7a636ae39c8d963847176918bcd41ba6ca95438b62cea9b18b",
+  "collection_url": "https://documenter.gw.postman.com/api/collections/7558574/TWDcEuDz?segregateAuth=true&versionTag=latest",
+  "collection_sha256": "68b166434966c0fb7bf0db9b8016b31bb7782e17d08081ecb7d85269bc5d4c7d",
+  "derivation": "The collection URL was an anonymous prefetch href in the officially linked document shell. The saved source came from bounded public GETs only; a bounded headless GET of the current latest collection returned HTTP 200 and the same SHA-256. No vendor account API, token exchange, or mutation. routes.json records request names/methods/URLs and the supplied production multimedia request body field shape. Authentication examples and token request are omitted. Raw public document stays in local work evidence.",
+  "raw_collection_local": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\essential-postman-prefetch-1.json",
+  "limits": [
+    "The current linked collection has no response examples for production multimedia GET or POST. Its POST sample establishes the lower-camel request fields recorded in routes.json, but not the production GET response shape or mutation confirmation.",
+    "The official development API article documents a Pascal-case MeetingStructure inside a meetingStructure response wrapper for the development host. That does not establish production response casing/wrapper or persistence/readback semantics; no production response is supplied.",
+    "No meeting/item/list response schema or collection pagination is inferred. Production writes remain unmapped; no live account calls were made.",
+    "A bounded inspection of the exact Effingham public listing returned HTML with no inline/external script elements or script assets and no multimedia API fields; its Video/Audio column is not production GET contract evidence. See public_page_followup."
+  ],
+  "rechecked_at": "2026-11-14T16:21:08+00:00",
+  "rechecked_collection_sha256": "68b166434966c0fb7bf0db9b8016b31bb7782e17d08081ecb7d85269bc5d4c7d",
+  "public_page_followup": {
+    "url": "https://meetings.municode.com/PublishPage/index?cid=EFFINGHAM&ppid=9639c19d-1d1f-4201-b8ff-163a28a35f08&p=1",
+    "fetched_at": "2026-11-14T16:29:30+00:00",
+    "http_status": 200,
+    "response_bytes": 92131,
+    "page_title": "Board of Commissioners",
+    "script_elements": 0,
+    "inline_scripts": 0,
+    "iframe_elements": 0,
+    "declared_script_assets": 0,
+    "script_assets_fetched": 0,
+    "case_insensitive_contract_field_occurrences": {
+      "meetingStructure": 0,
+      "AudioVideoDetails": 0,
+      "multimediaItems": 0,
+      "PublicApi": 0
+    },
+    "observation": "The public listing has a Video/Audio column but exposes no multimedia API route, response model, wrapper, or production GET field contract. No endpoint was guessed and no account API was called."
+  }
+}

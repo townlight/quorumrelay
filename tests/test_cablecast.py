@@ -1,6 +1,7 @@
 """Cablecast shows, video links and caption tracks from saved public Loveland, CO captures; no live network."""
 import hashlib
 import json
+import pytest
 from datetime import date
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
@@ -90,8 +91,10 @@ def test_cablecast_is_listed_beside_the_unchanged_31_baseline_families():
     rows = create_engine().providers().data["providers"]
     assert sum(1 for row in rows if row["formats"]) == 31
     extra = [row for row in rows if not row["formats"]]
-    assert [row["provider"] for row in extra] == ["cablecast"]
-    capabilities = extra[0]["capabilities"]
+    assert {row["provider"] for row in extra} == {"cablecast", "diligent-community"}
+    cablecast = next(row for row in extra if row["provider"] == "cablecast")
+    assert cablecast["additional_formats"] == ["cablecast-show-json", "cablecast-shows-json"]
+    capabilities = cablecast["capabilities"]
     assert capabilities["operations"]["discover"]["acceptance_status"] == "fixture_passed"
     assert capabilities["operations"]["create"]["implementation_status"] == "not_implemented"
 
@@ -183,6 +186,34 @@ def test_paging_follows_the_offset_page_index_and_resumes_from_a_checkpoint():
     assert parse_qs(urlsplit(again.calls[0]).query)["offset"] == ["1"] and len(again.calls) == 1
 
 
+def test_record_budget_resumes_inside_pages_without_duplicate_page_tasks():
+    pages = {0: paged(4, 2, [102, 101])(0), 1: paged(4, 2, [104, 103])(1)}
+    checkpoint, collected = None, []
+    for _ in range(8):
+        result, _ = discover(Transport(pages=pages), max_records=1, checkpoint=checkpoint,
+                             date_from="2026-10-01", date_to="2026-10-31")
+        assert not result.errors, result.public_dict()
+        assert len(result.data["records"]) <= 1
+        collected.extend(by_id(result))
+        checkpoint = result.coverage["checkpoint"]
+        if checkpoint is None:
+            break
+    assert checkpoint is None
+    assert len(collected) == 4 and set(collected) == {"101", "102", "103", "104"}
+
+
+@pytest.mark.parametrize("record_types", [["meeting"], ["document"], ["meeting", "document"]])
+def test_discovery_preserves_and_applies_requested_record_types(record_types):
+    result, transport = discover(request={"record_types": record_types})
+    assert result.coverage["record_types"] == record_types
+    if "meeting" not in record_types:
+        assert result.status == "unsupported" and not transport.calls
+    else:
+        assert result.status == "partial" and by_id(result)
+        assert {r["identity"]["record_type"] for r in result.data["records"]} == {"meeting"}
+        assert result.coverage["unobserved_record_types"] == sorted(set(record_types) - {"meeting"})
+
+
 def test_a_repeated_page_is_reported_not_looped():
     page = paged(4, 2, [102, 101])
     result, _ = discover(Transport(pages={0: page(0), 1: page(1)}), date_from="2026-10-01", date_to="2026-10-31")
@@ -270,3 +301,35 @@ def test_no_native_search_write_or_export_is_claimed():
     assert plan.status in {"unsupported", "failed"}
     search = engine.execute("search", {"native": True, "source": SOURCE.public_dict(), "query": {"terms": ["council"]}})
     assert search.status == "unsupported"
+
+
+def test_saved_discovery_uses_no_network_and_preserves_capture_filters_and_checkpoint():
+    import base64
+    from dataclasses import replace
+
+    class NoNetwork:
+        def request(self, *args, **kwargs):
+            raise AssertionError("saved capture must not use network")
+
+    engine = create_engine(provider_transport=NoNetwork())
+    source = replace(SOURCE, input_format="cablecast-shows-json")
+    request = {"source": source.public_dict(), "bounds": {"max_records": 1}, "record_types": ["meeting"]}
+    first = engine.execute("discover", request, content=SHOWS)
+    assert first.status == "partial" and len(first.data["records"]) == 1
+    assert first.data["captures"][0]["sha256"] == hashlib.sha256(SHOWS).hexdigest()
+    assert first.coverage["checkpoint"] and "not a complete upstream catalog" in first.coverage["scope"]
+    assert first.coverage["catalog_complete"] is False and first.coverage["source_complete"] is False
+    resumed = engine.execute("discover", {**request, "bounds": {"max_records": 1,
+        "checkpoint": first.coverage["checkpoint"]}, "content_base64": base64.b64encode(SHOWS).decode()})
+    assert resumed.status == "partial" and len(resumed.data["records"]) == 1
+    assert resumed.data["records"][0]["identity"] != first.data["records"][0]["identity"]
+    filtered = engine.execute("discover", {"source": source.public_dict(), "record_types": ["document"],
+        "bounds": {"date_from": "2026-11-01", "date_to": "2026-11-30"}}, content=SHOWS)
+    assert filtered.status == "partial" and not filtered.data["records"]
+    assert filtered.coverage["filtered_records"] > 0
+    limited = engine.execute("discover", {"source": source.public_dict(), "bounds": {"parser_bytes": 10}}, content=SHOWS)
+    assert limited.status == "failed"
+    invalid = engine.execute("discover", {"source": source.public_dict(), "content_base64": "%%%"})
+    assert invalid.status == "failed"
+    malformed = engine.execute("discover", {"source": source.public_dict()}, content=b"not-json")
+    assert malformed.status == "failed" and malformed.errors

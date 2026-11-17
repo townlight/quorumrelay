@@ -1,0 +1,44 @@
+{
+  "observed_at": "2026-11-12T18:52:06.888775+00:00",
+  "source": "https://site.boardable.com/ventura-county-community-college-district/meetings/4870d6-board-of-trustees-regular-meeting",
+  "detail_http_status": 200,
+  "detail_capture_sha256": "b1a5060794ac484838034f305c9faeb889b1a2e9a67b8981c027289fbaad7d38",
+  "detail_bytes": 711603,
+  "detail_engine_status": "partial",
+  "identity": {
+    "provider": "boardable",
+    "namespace": "//site.boardable.com/ventura-county-community-college-district",
+    "record_type": "meeting",
+    "external_id": "463085",
+    "parent": null,
+    "derivation": "provider_or_legacy_reader",
+    "stability": "Stable according to the pinned input-format mapping; not an application identifier."
+  },
+  "detail_date": "2026-11-10",
+  "supplied_document_count": 5,
+  "attachment_index": 0,
+  "attachment_status": "completed",
+  "errors": [],
+  "attachment": {
+    "citation_url": "https://app.boardable.com/ventura-county-community-college-district/public-site-data/meetings/4870d6-board-of-trustees-regular-meeting/documents/7af1d8f8/view",
+    "content_type": "application/octet-stream",
+    "byte_length": 227464,
+    "sha256": "606b68337d78113ea981517b11c5eb7cca263285150a9712a6c20298ef85480a"
+  },
+  "viewer_capture": {
+    "citation_url": "https://app.boardable.com/ventura-county-community-college-district/public-site-data/meetings/4870d6-board-of-trustees-regular-meeting/documents/7af1d8f8/view",
+    "byte_length": 47184,
+    "sha256": "bd15cd4b29a2bab6b04b8f0056fc59a74ad44f0c8561f9a298eec9c420d9c198"
+  },
+  "limitations": [
+    "Only one exact supplied PDF read; other four documents untested.",
+    "Listing/detail date disagreement remains unresolved.",
+    "The original attempt returned HTML viewer bytes; it did not prove PDF download."
+  ],
+  "configured_detail_engine_get": {
+    "status": "partial",
+    "errors": [],
+    "records": 1,
+    "scope": "explicit detail Source URL; no organization-root-to-detail or external_id lookup inferred"
+  }
+}

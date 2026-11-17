@@ -1,15 +1,39 @@
 """Fixed documented account API origins with application-owned namespace binding."""
 
 import json
+import re
 from urllib.parse import urlsplit
 
 ORIGINS = {"municode-meetings": "https://meetingsgov.devmunicode.com",
            "telvue": "https://connect.telvue.com"}
+ESSENTIAL_PRODUCTION = "https://meetings.municode.com"
+
+
+def account_origin(source):
+    parsed = urlsplit(source.url)
+    origin = f"{parsed.scheme}://{parsed.netloc}"
+    allowed = (ORIGINS.get(source.provider),)
+    if source.provider == "municode-meetings":
+        allowed += (ESSENTIAL_PRODUCTION,)
+    if origin not in allowed:
+        raise ValueError("Use an exact documented account API origin.")
+    return origin
 
 
 def is_account_api(source):
-    origin = ORIGINS.get(source.provider)
-    return origin is not None and urlsplit(source.url).netloc == urlsplit(origin).netloc
+    if (source.provider == "municode-meetings" and source.input_format in {"municode-publishpage-html", "municode-publishpage-detail-html"}
+            and urlsplit(source.url).scheme == "https" and urlsplit(source.url).netloc == "meetings.municode.com"
+            and urlsplit(source.url).path in {"/PublishPage", "/PublishPage/index"}):
+        return False
+    if (source.provider == "telvue" and source.input_format == "telvue-cloudcast-mrss-xml"
+            and re.fullmatch(r"/mrss/[A-Za-z0-9_-]+", urlsplit(source.url).path)):
+        # The documented public player feed shares Connect's host, not its
+        # account credential/namespace contract. No /api route is exempted.
+        return False
+    origins = [ORIGINS.get(source.provider)]
+    if source.provider == "municode-meetings":
+        origins.append(ESSENTIAL_PRODUCTION)
+    return any(origin and urlsplit(source.url).netloc == urlsplit(origin).netloc for origin in origins)
 
 
 def account_namespace(source):
@@ -27,7 +51,7 @@ def credentials(source, context):
     config = context.credentials.get(source.provider)
     allowed = config.get("allowed_namespaces", [config.get("namespace")]) if isinstance(config, dict) else None
     if (not isinstance(config, dict) or not context.tenant or config.get("tenant") != context.tenant
-            or config.get("origin") != ORIGINS[source.provider]
+            or config.get("origin") != account_origin(source)
             or not isinstance(allowed, (list, tuple)) or namespace not in allowed
             or (context.allowed_namespaces is not None and namespace not in context.allowed_namespaces)):
         raise ValueError("Trusted account credentials must bind the exact origin, caller tenant and namespace.")

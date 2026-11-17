@@ -4,10 +4,10 @@ build-backend = "hatchling.build"
 
 [project]
 name = "quorumrelay"
-version = "0.1.0.dev8"
+version = "0.1.0.dev14"
 description = "Independent, bounded civic meeting data connectors"
 requires-python = ">=3.11"
-dependencies = ["pdfplumber>=0.11,<0.12"]
+dependencies = ["pdfplumber>=0.11,<0.12", "tzdata>=2025.2"]
 
 [project.optional-dependencies]
 browser = ["playwright>=1.48,<2"]
@@ -20,6 +20,9 @@ civic-data-connectors = "civic_data_connectors.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/civic_data_connectors", "src/quorumrelay"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/README.md", "/pyproject.toml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

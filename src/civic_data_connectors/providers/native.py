@@ -7,7 +7,7 @@ import hashlib
 import json
 from copy import deepcopy
 from datetime import datetime, timezone
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit
 
 from ..engine import canonical_hash
 from ..models import CaptureBundle, Identity, Record, Source
@@ -150,6 +150,60 @@ def make_bundle(source: Source, namespace: str, content: bytes, input_format: st
 
 
 def parse_native(source, namespace, content, input_format):
+    if input_format == "municode-publishpage-detail-html":
+        from .municode_publish import detail_bundle
+        return detail_bundle(source, namespace, content, source.options.get("meeting_id"), source.options.get("detail_kind", "agenda"))
+    if input_format == "municode-publishpage-html":
+        from .municode_publish import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "wistia-public-embed-html":
+        from .wistia_embed import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "escribe-publishing-soap-xml":
+        from .escribe_publishing import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "suiteone-public-event-html":
+        from .suiteone_player import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "telvue-public-player-html":
+        from .telvue_player import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "swagit-public-player-html":
+        from .swagit_player import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "boarddocs-public-item-html":
+        from .boarddocs_item import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "gworks-secure-calendar-json":
+        from .gworks_calendar import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "gworks-editor-meeting-json":
+        from .gworks_editor import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "gworks-published-meeting-html":
+        from .gworks_detail import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format in {"boarddocs-public-meetings-json", "boarddocs-public-meeting-html"}:
+        from .boarddocs_public import parse_bundle
+        return parse_bundle(source, namespace, content, input_format)
+    if input_format == "town-hall-streams-event-html":
+        from .townhall_detail import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format in {"boardbook-public-agenda-html", "boardbook-public-minutes-html"}:
+        from .boardbook_detail import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "escribe-meeting-detail-html":
+        from .escribe_detail import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "civicweb-filepro-soap-xml":
+        from .civicweb_filepro import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "granicus-platform-soap-xml":
+        from .granicus_platform import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format in {"simbli-meeting-detail-json", "simbli-agenda-items-json", "simbli-item-content-json", "simbli-supporting-documents-json", "simbli-meeting-minutes-json", "simbli-simple-minutes-json"}:
+        from .simbli_detail import parse_bundle
+        return parse_bundle(source, namespace, content, input_format)
     if input_format == "boardable-public-meetings-json":
         from .boardable import _meeting_row
         payload = json.loads(content)
@@ -170,16 +224,52 @@ def parse_native(source, namespace, content, input_format):
         from .iqm2_search import _rows
         rows, _ = _rows(source, content)
         return make_bundle(source, namespace, content, input_format, rows)
+    if input_format == "novus-public-coversheet-html":
+        from .novus_detail import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "iqm2-legislative-file-html":
+        from .iqm2_file import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "iqm2-minutetraq-soap-xml":
+        from .iqm2_soap import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "iqm2-public-player-html":
+        from .iqm2_player import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "iqm2-meeting-detail-html":
+        from .iqm2_detail import parse_bundle
+        return parse_bundle(source, namespace, content)
     if input_format == "utah-public-search-html":
         from .utah_public import search_rows
         return make_bundle(source, namespace, content, input_format, search_rows(source, content))
     if input_format == "civicplus-search-json":
         from .civicplus_search import search_bundle
         return search_bundle(source, namespace, content)
+    if input_format == "agendaquick-public-memo-html":
+        from .agendaquick_detail import parse_memo_bundle
+        return parse_memo_bundle(source, namespace, content)
+    if input_format == "agendaquick-public-agenda-html":
+        from .agendaquick_detail import parse_bundle
+        return parse_bundle(source, namespace, content)
     if input_format in {"agendaquick-public-listing-html", "agendaquick-item-search-html"}:
         from .agendaquick import listing_rows, search_rows
         mapper = listing_rows if input_format == "agendaquick-public-listing-html" else search_rows
         return make_bundle(source, namespace, content, input_format, mapper(source, content))
+    if input_format == "telvue-cloudcast-mrss-xml":
+        from .telvue_mrss import listing_rows
+        return make_bundle(source, namespace, content, input_format, listing_rows(source, content))
+    if input_format == "peak-publication-rss-xml":
+        from .peak_rss import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "peak-public-search-html":
+        from .peak_search import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "boardbook-public-search-html":
+        from .boardbook_search import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "telvue-public-search-html":
+        from .telvue_search import parse_bundle
+        return parse_bundle(source, namespace, content)
     if input_format == "towncloud-public-listing-json":
         from .towncloud_public import listing_rows
         return make_bundle(source, namespace, content, input_format, listing_rows(source, content))
@@ -187,6 +277,9 @@ def parse_native(source, namespace, content, input_format):
         from .towpath import listing_bundle
         return listing_bundle(source, namespace, content)
     if input_format == "onbase-public-listing-html":
+        if "/meetings/viewmeeting" in urlsplit(source.url).path.lower():
+            from .onbase_detail import parse_bundle
+            return parse_bundle(source, namespace, content)
         from .onbase import listing_rows
         return make_bundle(source, namespace, content, input_format, listing_rows(source, content))
     if input_format == "swagit-listing-html":
@@ -206,6 +299,9 @@ def parse_native(source, namespace, content, input_format):
         return (essential_bundle(source, namespace, content) if input_format == "essential-multimedia-json"
                 else telvue_bundle(source, namespace, content, input_format))
     if input_format == "novus-public-listing-html":
+        if urlsplit(source.url).path == "/agendapublic/MeetingView.aspx":
+            from .novus_detail import parse_meeting_bundle
+            return parse_meeting_bundle(source, namespace, content)
         from .novus import listing_bundle
         return listing_bundle(source, namespace, content)[0]
     if input_format == "laserfiche-repository-entries-json":

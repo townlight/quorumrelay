@@ -1,0 +1,6 @@
+{
+  "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/526577?format=json",
+  "status": 404,
+  "error": "The requested meeting was not found",
+  "implication": "Readback requires the exact returned canonical URL; do not invent a numeric detail route."
+}

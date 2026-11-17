@@ -1,0 +1,1002 @@
+{
+  "collection": {
+    "data": {
+      "can": {
+        "view-unpublished": true
+      },
+      "future": [
+        {
+          "can": {
+            "collaborate": true,
+            "edit": true,
+            "rsvp": false,
+            "view": true
+          },
+          "created_at": {
+            "date": "2026-11-16 22:44:08",
+            "timezone": "UTC"
+          },
+          "deleted_at": null,
+          "end": "2026-11-30T15:00:00.000000Z",
+          "id": 526618,
+          "isScheduled": true,
+          "meeting_has_started": false,
+          "members": [
+            {
+              "id": 403839,
+              "pivot": {
+                "attendance": "",
+                "automated_attendance": "",
+                "automated_attendance_override": 0,
+                "collaborator": 0,
+                "is_voter": 1,
+                "left_meeting": 0,
+                "meeting_id": 526618,
+                "rsvp": "",
+                "rsvp_note": "",
+                "user_id": 403839
+              }
+            }
+          ],
+          "owner_id": 403839,
+          "published_level": 0,
+          "published_type": "full",
+          "series_id": 12616,
+          "slug": "c8ab1a-quorumrelay-recurrence-api-fixture",
+          "start": "2026-11-30T14:00:00.000000Z",
+          "title": "QuorumRelay Recurrence API Fixture",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/c8ab1a-quorumrelay-recurrence-api-fixture"
+        },
+        {
+          "can": {
+            "collaborate": true,
+            "edit": true,
+            "rsvp": false,
+            "view": true
+          },
+          "created_at": {
+            "date": "2026-11-16 22:44:08",
+            "timezone": "UTC"
+          },
+          "deleted_at": null,
+          "end": "2026-12-07T15:00:00.000000Z",
+          "id": 526619,
+          "isScheduled": true,
+          "meeting_has_started": false,
+          "members": [
+            {
+              "id": 403839,
+              "pivot": {
+                "attendance": "",
+                "automated_attendance": "",
+                "automated_attendance_override": 0,
+                "collaborator": 0,
+                "is_voter": 1,
+                "left_meeting": 0,
+                "meeting_id": 526619,
+                "rsvp": "",
+                "rsvp_note": "",
+                "user_id": 403839
+              }
+            }
+          ],
+          "owner_id": 403839,
+          "published_level": 0,
+          "published_type": "full",
+          "series_id": 12616,
+          "slug": "d9bcfa-quorumrelay-recurrence-api-fixture",
+          "start": "2026-12-07T14:00:00.000000Z",
+          "title": "QuorumRelay Recurrence API Fixture",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/d9bcfa-quorumrelay-recurrence-api-fixture"
+        }
+      ],
+      "meeting": {
+        "can": {
+          "collaborate": true,
+          "edit": true,
+          "rsvp": false,
+          "view": true
+        },
+        "created_at": {
+          "date": "2026-11-16 22:44:08",
+          "timezone": "UTC"
+        },
+        "deleted_at": null,
+        "end": "2026-11-30T15:00:00.000000Z",
+        "id": 526618,
+        "isScheduled": true,
+        "meeting_has_started": false,
+        "owner_id": 403839,
+        "published_level": 0,
+        "published_type": "full",
+        "series_id": 12616,
+        "slug": "c8ab1a-quorumrelay-recurrence-api-fixture",
+        "start": "2026-11-30T14:00:00.000000Z",
+        "title": "QuorumRelay Recurrence API Fixture",
+        "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/c8ab1a-quorumrelay-recurrence-api-fixture"
+      },
+      "past": [],
+      "today": [],
+      "unpublished": [
+        {
+          "can": {
+            "collaborate": true,
+            "edit": true,
+            "rsvp": false,
+            "view": true
+          },
+          "created_at": {
+            "date": "2026-11-16 22:44:08",
+            "timezone": "UTC"
+          },
+          "deleted_at": null,
+          "end": "2026-11-30T15:00:00.000000Z",
+          "id": 526618,
+          "isScheduled": true,
+          "meeting_has_started": false,
+          "members": [
+            {
+              "id": 403839,
+              "pivot": {
+                "attendance": "",
+                "automated_attendance": "",
+                "automated_attendance_override": 0,
+                "collaborator": 0,
+                "is_voter": 1,
+                "left_meeting": 0,
+                "meeting_id": 526618,
+                "rsvp": "",
+                "rsvp_note": "",
+                "user_id": 403839
+              }
+            }
+          ],
+          "owner_id": 403839,
+          "published_level": 0,
+          "published_type": "full",
+          "series_id": 12616,
+          "slug": "c8ab1a-quorumrelay-recurrence-api-fixture",
+          "start": "2026-11-30T14:00:00.000000Z",
+          "title": "QuorumRelay Recurrence API Fixture",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/c8ab1a-quorumrelay-recurrence-api-fixture"
+        },
+        {
+          "can": {
+            "collaborate": true,
+            "edit": true,
+            "rsvp": false,
+            "view": true
+          },
+          "created_at": {
+            "date": "2026-11-16 22:44:08",
+            "timezone": "UTC"
+          },
+          "deleted_at": null,
+          "end": "2026-12-07T15:00:00.000000Z",
+          "id": 526619,
+          "isScheduled": true,
+          "meeting_has_started": false,
+          "members": [
+            {
+              "id": 403839,
+              "pivot": {
+                "attendance": "",
+                "automated_attendance": "",
+                "automated_attendance_override": 0,
+                "collaborator": 0,
+                "is_voter": 1,
+                "left_meeting": 0,
+                "meeting_id": 526619,
+                "rsvp": "",
+                "rsvp_note": "",
+                "user_id": 403839
+              }
+            }
+          ],
+          "owner_id": 403839,
+          "published_level": 0,
+          "published_type": "full",
+          "series_id": 12616,
+          "slug": "d9bcfa-quorumrelay-recurrence-api-fixture",
+          "start": "2026-12-07T14:00:00.000000Z",
+          "title": "QuorumRelay Recurrence API Fixture",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/d9bcfa-quorumrelay-recurrence-api-fixture"
+        }
+      ]
+    },
+    "status": 200
+  },
+  "occurrences": [
+    {
+      "data": {
+        "board_packet_status": "not_processed",
+        "can_import_previous_agenda": false,
+        "collaborators": {},
+        "date": null,
+        "global_ai": 0,
+        "has_transcript": false,
+        "logged_in": true,
+        "meeting": {
+          "active_until": "2026-11-30T15:00:00.000000Z",
+          "additional_collaborators": [],
+          "additional_dates": [],
+          "agenda_downloads_aggregate": null,
+          "agenda_draft_version": null,
+          "agenda_format": null,
+          "agenda_last_published_at": null,
+          "agenda_list_format": "num_la_lr",
+          "agenda_live_version": null,
+          "alternative_dates": null,
+          "blurb": "Synthetic private recurrence contract fixture.",
+          "created_at": "2026-11-16T22:44:08.000000Z",
+          "datesTimezone": [
+            {
+              "date": "11/30/2026",
+              "from": "9:00 am",
+              "id": 526618,
+              "timezone": "America/New_York",
+              "to": "10:00 am"
+            }
+          ],
+          "deleted_at": null,
+          "description": "<p>Synthetic private recurrence contract fixture.</p>",
+          "disable_remote_rsvp": 0,
+          "enable_ai_summary": 0,
+          "enable_recording": 0,
+          "enable_transcription": 0,
+          "end": "2026-11-30T15:00:00.000000Z",
+          "external_id": null,
+          "follow_up_meeting_id": 526619,
+          "formattedMeetingTime": {
+            "date_numeric": "30",
+            "datetime": "Mon, Nov 30, 2026 9:00 AM EST",
+            "end": "10:00 AM",
+            "end_raw": {
+              "date": "2026-11-30 10:00:00",
+              "timezone": "America/New_York"
+            },
+            "materials_published_at": "11/16/2026 at 5:44 PM",
+            "month_abbr": "NOV",
+            "start": {
+              "date": "2026-11-30 09:00:00",
+              "timezone": "America/New_York"
+            }
+          },
+          "globalAi": 0,
+          "globalTranscripts": 0,
+          "group": null,
+          "group_id": null,
+          "groups": [],
+          "guest_members": [],
+          "guests": [],
+          "id": 526618,
+          "isScheduled": true,
+          "location": "QuorumRelay integration evaluation",
+          "materials_published_at": null,
+          "meetingHasStarted": false,
+          "members": [
+            {
+              "id": 403839,
+              "pivot": {
+                "attendance": "",
+                "automated_attendance": "",
+                "automated_attendance_override": 0,
+                "collaborator": 0,
+                "is_voter": 1,
+                "left_meeting": 0,
+                "meeting_id": 526618,
+                "rsvp": "",
+                "rsvp_note": "",
+                "user_id": 403839
+              }
+            }
+          ],
+          "minutes_attachment_id": null,
+          "minutes_published": 0,
+          "minutes_signature_document_id": 0,
+          "minutes_type": "free_form",
+          "name": "QuorumRelay Recurrence API Fixture",
+          "not_available": null,
+          "notify": [
+            403839
+          ],
+          "organization_id": 46098,
+          "owner_id": 403839,
+          "previous_meeting": null,
+          "public_member_dashboard": 0,
+          "public_page": 0,
+          "published": false,
+          "published_at": null,
+          "published_level": 0,
+          "published_materials_status": null,
+          "recurrence_id": "20261130T140000Z",
+          "remote_option": "no_remote",
+          "remote_url": null,
+          "remote_url_description": null,
+          "removed_invitees": null,
+          "scheduler_notification": 0,
+          "series": {
+            "create_in_progress": false,
+            "created_at": "2026-11-16T22:44:08.000000Z",
+            "data": {
+              "dates": [
+                {
+                  "date": "11/30/2026",
+                  "from": "9:00 am",
+                  "to": "10:00 am"
+                }
+              ],
+              "description": "<p>Synthetic private recurrence contract fixture.</p>",
+              "disable_remote_rsvp": false,
+              "enable_ai_summary": false,
+              "enable_recording": false,
+              "enable_transcription": false,
+              "group_ids": [],
+              "guests": [],
+              "invitee_ids": [
+                403839
+              ],
+              "location": "QuorumRelay integration evaluation",
+              "meeting_type": "series",
+              "minutes_type": "free_form",
+              "monthly_interval": "1",
+              "monthly_repeat_type": "numbered-day",
+              "notify": false,
+              "owner_id": 403839,
+              "public_member_dashboard": false,
+              "public_page": false,
+              "remote_option": "no_remote",
+              "remote_url": null,
+              "remote_url_description": null,
+              "repeat_period": "week",
+              "series_date": "11/30/2026",
+              "series_ends": "12/07/2026",
+              "series_from": "9:00 am",
+              "series_to": "10:00 am",
+              "timezone": "America/New_York",
+              "title": "QuorumRelay Recurrence API Fixture",
+              "weekly_interval": "1"
+            },
+            "description": "<p>Synthetic private recurrence contract fixture.</p>",
+            "id": 12616,
+            "meeting_invite_leader_id": 526618,
+            "organization_id": 46098,
+            "original_meeting_id": 526618,
+            "publish_in_progress": false,
+            "title": "QuorumRelay Recurrence API Fixture",
+            "updated_at": "2026-11-16T22:44:08.000000Z",
+            "uuid": {
+              "created_at": "2026-11-16T22:44:08.000000Z",
+              "hex": "2bd42689b69741438fedd9420f74cb98",
+              "short_slug": "3b3d05c9",
+              "updated_at": "2026-11-16T22:44:08.000000Z",
+              "uuid": "2bd42689-b697-4143-8fed-d9420f74cb98",
+              "uuidable_id": 12616,
+              "uuidable_type": "App\\Boardable\\Meetings\\MeetingSeries"
+            }
+          },
+          "seriesListUrl": "https://app.boardable.com/quorumrelay-evaluation/meeting-series/list/3b3d05c9",
+          "series_id": 12616,
+          "single_update": 0,
+          "slug": "c8ab1a-quorumrelay-recurrence-api-fixture",
+          "starred_public_page": 0,
+          "start": "2026-11-30T14:00:00.000000Z",
+          "sub_leader": 0,
+          "timeUntilStart": "Starts 1 week 6 days from now",
+          "timezone": "America/New_York",
+          "title": "QuorumRelay Recurrence API Fixture",
+          "update_not_sent": 0,
+          "updated_at": "2026-11-16T22:44:08.000000Z",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/c8ab1a-quorumrelay-recurrence-api-fixture",
+          "uuid_v2": null,
+          "v2": 1,
+          "videoLink": null,
+          "video_conference_enabled": false,
+          "video_session_currently_active": 0
+        },
+        "meeting_resource": {
+          "additional_collaborators": [],
+          "additional_dates": [],
+          "agenda_documents": [],
+          "agenda_list_format": "num_la_lr",
+          "alternative_dates": null,
+          "attachments": [],
+          "blurb": "Synthetic private recurrence contract fixture.",
+          "can": {
+            "collaborate": true,
+            "edit": true,
+            "rsvp": false,
+            "view": true
+          },
+          "commentable_type": "App\\Boardable\\Meetings\\Meeting",
+          "created_at": {
+            "date": "2026-11-16 22:44:08",
+            "timezone": "UTC"
+          },
+          "deleted_at": null,
+          "description": "<p>Synthetic private recurrence contract fixture.</p>",
+          "disable_remote_rsvp": 0,
+          "documents": [],
+          "enable_ai_summary": 0,
+          "enable_recording": 0,
+          "enable_transcription": 0,
+          "end": "2026-11-30T15:00:00.000000Z",
+          "global_ai_enabled": 0,
+          "global_transcripts_enabled": 0,
+          "group": null,
+          "groups": [],
+          "guest_members": [],
+          "guests": [],
+          "has_agenda": false,
+          "has_agenda_attachments": false,
+          "has_minutes": false,
+          "id": 526618,
+          "isScheduled": true,
+          "location": "QuorumRelay integration evaluation",
+          "meeting_has_started": false,
+          "members": [
+            {
+              "id": 403839,
+              "pivot": {
+                "attendance": "",
+                "automated_attendance": "",
+                "automated_attendance_override": 0,
+                "collaborator": 0,
+                "is_voter": 1,
+                "left_meeting": 0,
+                "meeting_id": 526618,
+                "rsvp": "",
+                "rsvp_note": "",
+                "user_id": 403839
+              }
+            }
+          ],
+          "minutes_published": 0,
+          "motions": [],
+          "not_available": null,
+          "num_comments": 0,
+          "owner_id": 403839,
+          "polls": [],
+          "previous_meeting": null,
+          "public_page": 0,
+          "published_level": 0,
+          "published_materials_status": null,
+          "published_type": "full",
+          "recordings": [],
+          "remote_option": "no_remote",
+          "remote_url": null,
+          "remote_url_description": null,
+          "series_id": 12616,
+          "slug": "c8ab1a-quorumrelay-recurrence-api-fixture",
+          "start": "2026-11-30T14:00:00.000000Z",
+          "taskList": null,
+          "title": "QuorumRelay Recurrence API Fixture",
+          "type": null,
+          "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/c8ab1a-quorumrelay-recurrence-api-fixture",
+          "v2": 1,
+          "zoomMeeting": null
+        },
+        "minutes_approval_document": null,
+        "recordings": [],
+        "section": "invitees",
+        "selected_additional_collaborators": [],
+        "selected_collaborators": [
+          {
+            "accepted_privacy_policy": "6a455c0a213572c5b092e0bd",
+            "accepted_terms": "6a33fc6663bc93bfd8f1a59b",
+            "avatar_url": "https://app.boardable.com/img/default_user.svg",
+            "country_code": null,
+            "created_at": "2026-11-16T20:37:40.000000Z",
+            "first_name": "CivicCast",
+            "id": 403839,
+            "image": "",
+            "last_name": "",
+            "locked_at": null,
+            "name": "CivicCast ",
+            "pivot": {
+              "attendance": "",
+              "automated_attendance": "",
+              "automated_attendance_override": 0,
+              "collaborator": 0,
+              "is_voter": 1,
+              "left_meeting": 0,
+              "meeting_id": 526618,
+              "rsvp": "",
+              "rsvp_note": "",
+              "user_id": 403839
+            },
+            "saml_last_login_at": null,
+            "saml_only": 0,
+            "slug": "civiccast",
+            "summary": {
+              "first_name": "CivicCast",
+              "format": "user",
+              "image": "https://app.boardable.com/img/default_user.svg",
+              "last_name": "",
+              "name": "CivicCast ",
+              "slug": "civiccast"
+            },
+            "two_factor_auth": null,
+            "updated_at": "2026-11-16T22:44:08.000000Z",
+            "url": "https://app.boardable.com/quorumrelay-evaluation/people/civiccast"
+          }
+        ],
+        "v2_meetings": 1
+      },
+      "status": 200,
+      "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/c8ab1a-quorumrelay-recurrence-api-fixture"
+    },
+    {
+      "data": {
+        "board_packet_status": "not_processed",
+        "can_import_previous_agenda": false,
+        "collaborators": {},
+        "date": null,
+        "global_ai": 0,
+        "has_transcript": false,
+        "logged_in": true,
+        "meeting": {
+          "active_until": "2026-12-07T15:00:00.000000Z",
+          "additional_collaborators": [],
+          "additional_dates": [],
+          "agenda_downloads_aggregate": null,
+          "agenda_draft_version": null,
+          "agenda_format": null,
+          "agenda_last_published_at": null,
+          "agenda_list_format": "num_la_lr",
+          "agenda_live_version": null,
+          "alternative_dates": null,
+          "blurb": "Synthetic private recurrence contract fixture.",
+          "created_at": "2026-11-16T22:44:08.000000Z",
+          "datesTimezone": [
+            {
+              "date": "12/07/2026",
+              "from": "9:00 am",
+              "id": 526619,
+              "timezone": "America/New_York",
+              "to": "10:00 am"
+            }
+          ],
+          "deleted_at": null,
+          "description": "<p>Synthetic private recurrence contract fixture.</p>",
+          "disable_remote_rsvp": 0,
+          "enable_ai_summary": 0,
+          "enable_recording": 0,
+          "enable_transcription": 0,
+          "end": "2026-12-07T15:00:00.000000Z",
+          "external_id": null,
+          "follow_up_meeting_id": 0,
+          "formattedMeetingTime": {
+            "date_numeric": "07",
+            "datetime": "Mon, Dec 7, 2026 9:00 AM EST",
+            "end": "10:00 AM",
+            "end_raw": {
+              "date": "2026-12-07 10:00:00",
+              "timezone": "America/New_York"
+            },
+            "materials_published_at": "11/16/2026 at 5:44 PM",
+            "month_abbr": "DEC",
+            "start": {
+              "date": "2026-12-07 09:00:00",
+              "timezone": "America/New_York"
+            }
+          },
+          "globalAi": 0,
+          "globalTranscripts": 0,
+          "group": null,
+          "group_id": null,
+          "groups": [],
+          "guest_members": [],
+          "guests": [],
+          "id": 526619,
+          "isScheduled": true,
+          "location": "QuorumRelay integration evaluation",
+          "materials_published_at": null,
+          "meetingHasStarted": false,
+          "members": [
+            {
+              "id": 403839,
+              "pivot": {
+                "attendance": "",
+                "automated_attendance": "",
+                "automated_attendance_override": 0,
+                "collaborator": 0,
+                "is_voter": 1,
+                "left_meeting": 0,
+                "meeting_id": 526619,
+                "rsvp": "",
+                "rsvp_note": "",
+                "user_id": 403839
+              }
+            }
+          ],
+          "minutes_attachment_id": null,
+          "minutes_published": 0,
+          "minutes_signature_document_id": 0,
+          "minutes_type": "free_form",
+          "name": "QuorumRelay Recurrence API Fixture",
+          "not_available": null,
+          "notify": [
+            403839
+          ],
+          "organization_id": 46098,
+          "owner_id": 403839,
+          "previous_meeting": {
+            "active_until": "2026-11-30T15:00:00.000000Z",
+            "additional_dates": [],
+            "agenda_draft_version": null,
+            "agenda_format": null,
+            "agenda_last_published_at": null,
+            "agenda_list_format": "num_la_lr",
+            "agenda_live_version": null,
+            "alternative_dates": null,
+            "blurb": "Synthetic private recurrence contract fixture.",
+            "created_at": "2026-11-16T22:44:08.000000Z",
+            "datesTimezone": [
+              {
+                "date": "11/30/2026",
+                "from": "9:00 am",
+                "id": 526618,
+                "timezone": "America/New_York",
+                "to": "10:00 am"
+              }
+            ],
+            "deleted_at": null,
+            "description": "<p>Synthetic private recurrence contract fixture.</p>",
+            "disable_remote_rsvp": 0,
+            "enable_ai_summary": 0,
+            "enable_recording": 0,
+            "enable_transcription": 0,
+            "end": "2026-11-30T15:00:00.000000Z",
+            "external_id": null,
+            "follow_up_meeting_id": 526619,
+            "formattedMeetingTime": {
+              "date_numeric": "30",
+              "datetime": "Mon, Nov 30, 2026 9:00 AM EST",
+              "end": "10:00 AM",
+              "end_raw": {
+                "date": "2026-11-30 10:00:00",
+                "timezone": "America/New_York"
+              },
+              "materials_published_at": "11/16/2026 at 5:44 PM",
+              "month_abbr": "NOV",
+              "start": {
+                "date": "2026-11-30 09:00:00",
+                "timezone": "America/New_York"
+              }
+            },
+            "globalAi": 0,
+            "globalTranscripts": 0,
+            "group_id": null,
+            "id": 526618,
+            "isScheduled": true,
+            "location": "QuorumRelay integration evaluation",
+            "materials_published_at": null,
+            "meetingHasStarted": false,
+            "minutes_attachment_id": null,
+            "minutes_published": 0,
+            "minutes_signature_document_id": 0,
+            "minutes_type": "free_form",
+            "name": "QuorumRelay Recurrence API Fixture",
+            "not_available": null,
+            "notify": [
+              403839
+            ],
+            "organization_id": 46098,
+            "owner_id": 403839,
+            "public_member_dashboard": 0,
+            "public_page": 0,
+            "published": false,
+            "published_at": null,
+            "published_level": 0,
+            "published_materials_status": null,
+            "recurrence_id": "20261130T140000Z",
+            "remote_option": "no_remote",
+            "remote_url": null,
+            "remote_url_description": null,
+            "removed_invitees": null,
+            "scheduler_notification": 0,
+            "series": {
+              "create_in_progress": false,
+              "created_at": "2026-11-16T22:44:08.000000Z",
+              "data": {
+                "dates": [
+                  {
+                    "date": "11/30/2026",
+                    "from": "9:00 am",
+                    "to": "10:00 am"
+                  }
+                ],
+                "description": "<p>Synthetic private recurrence contract fixture.</p>",
+                "disable_remote_rsvp": false,
+                "enable_ai_summary": false,
+                "enable_recording": false,
+                "enable_transcription": false,
+                "group_ids": [],
+                "guests": [],
+                "invitee_ids": [
+                  403839
+                ],
+                "location": "QuorumRelay integration evaluation",
+                "meeting_type": "series",
+                "minutes_type": "free_form",
+                "monthly_interval": "1",
+                "monthly_repeat_type": "numbered-day",
+                "notify": false,
+                "owner_id": 403839,
+                "public_member_dashboard": false,
+                "public_page": false,
+                "remote_option": "no_remote",
+                "remote_url": null,
+                "remote_url_description": null,
+                "repeat_period": "week",
+                "series_date": "11/30/2026",
+                "series_ends": "12/07/2026",
+                "series_from": "9:00 am",
+                "series_to": "10:00 am",
+                "timezone": "America/New_York",
+                "title": "QuorumRelay Recurrence API Fixture",
+                "weekly_interval": "1"
+              },
+              "description": "<p>Synthetic private recurrence contract fixture.</p>",
+              "id": 12616,
+              "meeting_invite_leader_id": 526618,
+              "organization_id": 46098,
+              "original_meeting_id": 526618,
+              "publish_in_progress": false,
+              "title": "QuorumRelay Recurrence API Fixture",
+              "updated_at": "2026-11-16T22:44:08.000000Z",
+              "uuid": {
+                "created_at": "2026-11-16T22:44:08.000000Z",
+                "hex": "2bd42689b69741438fedd9420f74cb98",
+                "short_slug": "3b3d05c9",
+                "updated_at": "2026-11-16T22:44:08.000000Z",
+                "uuid": "2bd42689-b697-4143-8fed-d9420f74cb98",
+                "uuidable_id": 12616,
+                "uuidable_type": "App\\Boardable\\Meetings\\MeetingSeries"
+              }
+            },
+            "seriesListUrl": "https://app.boardable.com/quorumrelay-evaluation/meeting-series/list/3b3d05c9",
+            "series_id": 12616,
+            "single_update": 0,
+            "slug": "c8ab1a-quorumrelay-recurrence-api-fixture",
+            "starred_public_page": 0,
+            "start": "2026-11-30T14:00:00.000000Z",
+            "sub_leader": 0,
+            "timeUntilStart": "Starts 1 week 6 days from now",
+            "timezone": "America/New_York",
+            "title": "QuorumRelay Recurrence API Fixture",
+            "update_not_sent": 0,
+            "updated_at": "2026-11-16T22:44:08.000000Z",
+            "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/c8ab1a-quorumrelay-recurrence-api-fixture",
+            "uuid_v2": null,
+            "v2": 1,
+            "videoLink": null,
+            "video_conference_enabled": false,
+            "video_session_currently_active": 0
+          },
+          "public_member_dashboard": 0,
+          "public_page": 0,
+          "published": false,
+          "published_at": null,
+          "published_level": 0,
+          "published_materials_status": null,
+          "recurrence_id": "20261207T140000Z",
+          "remote_option": "no_remote",
+          "remote_url": null,
+          "remote_url_description": null,
+          "removed_invitees": null,
+          "scheduler_notification": 0,
+          "series": {
+            "create_in_progress": false,
+            "created_at": "2026-11-16T22:44:08.000000Z",
+            "data": {
+              "dates": [
+                {
+                  "date": "11/30/2026",
+                  "from": "9:00 am",
+                  "to": "10:00 am"
+                }
+              ],
+              "description": "<p>Synthetic private recurrence contract fixture.</p>",
+              "disable_remote_rsvp": false,
+              "enable_ai_summary": false,
+              "enable_recording": false,
+              "enable_transcription": false,
+              "group_ids": [],
+              "guests": [],
+              "invitee_ids": [
+                403839
+              ],
+              "location": "QuorumRelay integration evaluation",
+              "meeting_type": "series",
+              "minutes_type": "free_form",
+              "monthly_interval": "1",
+              "monthly_repeat_type": "numbered-day",
+              "notify": false,
+              "owner_id": 403839,
+              "public_member_dashboard": false,
+              "public_page": false,
+              "remote_option": "no_remote",
+              "remote_url": null,
+              "remote_url_description": null,
+              "repeat_period": "week",
+              "series_date": "11/30/2026",
+              "series_ends": "12/07/2026",
+              "series_from": "9:00 am",
+              "series_to": "10:00 am",
+              "timezone": "America/New_York",
+              "title": "QuorumRelay Recurrence API Fixture",
+              "weekly_interval": "1"
+            },
+            "description": "<p>Synthetic private recurrence contract fixture.</p>",
+            "id": 12616,
+            "meeting_invite_leader_id": 526618,
+            "organization_id": 46098,
+            "original_meeting_id": 526618,
+            "publish_in_progress": false,
+            "title": "QuorumRelay Recurrence API Fixture",
+            "updated_at": "2026-11-16T22:44:08.000000Z",
+            "uuid": {
+              "created_at": "2026-11-16T22:44:08.000000Z",
+              "hex": "2bd42689b69741438fedd9420f74cb98",
+              "short_slug": "3b3d05c9",
+              "updated_at": "2026-11-16T22:44:08.000000Z",
+              "uuid": "2bd42689-b697-4143-8fed-d9420f74cb98",
+              "uuidable_id": 12616,
+              "uuidable_type": "App\\Boardable\\Meetings\\MeetingSeries"
+            }
+          },
+          "seriesListUrl": "https://app.boardable.com/quorumrelay-evaluation/meeting-series/list/3b3d05c9",
+          "series_id": 12616,
+          "single_update": 0,
+          "slug": "d9bcfa-quorumrelay-recurrence-api-fixture",
+          "starred_public_page": 0,
+          "start": "2026-12-07T14:00:00.000000Z",
+          "sub_leader": 0,
+          "timeUntilStart": "Starts 2 weeks 6 days from now",
+          "timezone": "America/New_York",
+          "title": "QuorumRelay Recurrence API Fixture",
+          "update_not_sent": 0,
+          "updated_at": "2026-11-16T22:44:08.000000Z",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/d9bcfa-quorumrelay-recurrence-api-fixture",
+          "uuid_v2": null,
+          "v2": 1,
+          "videoLink": null,
+          "video_conference_enabled": false,
+          "video_session_currently_active": 0
+        },
+        "meeting_resource": {
+          "additional_collaborators": [],
+          "additional_dates": [],
+          "agenda_documents": [],
+          "agenda_list_format": "num_la_lr",
+          "alternative_dates": null,
+          "attachments": [],
+          "blurb": "Synthetic private recurrence contract fixture.",
+          "can": {
+            "collaborate": true,
+            "edit": true,
+            "rsvp": false,
+            "view": true
+          },
+          "commentable_type": "App\\Boardable\\Meetings\\Meeting",
+          "created_at": {
+            "date": "2026-11-16 22:44:08",
+            "timezone": "UTC"
+          },
+          "deleted_at": null,
+          "description": "<p>Synthetic private recurrence contract fixture.</p>",
+          "disable_remote_rsvp": 0,
+          "documents": [],
+          "enable_ai_summary": 0,
+          "enable_recording": 0,
+          "enable_transcription": 0,
+          "end": "2026-12-07T15:00:00.000000Z",
+          "global_ai_enabled": 0,
+          "global_transcripts_enabled": 0,
+          "group": null,
+          "groups": [],
+          "guest_members": [],
+          "guests": [],
+          "has_agenda": false,
+          "has_agenda_attachments": false,
+          "has_minutes": false,
+          "id": 526619,
+          "isScheduled": true,
+          "location": "QuorumRelay integration evaluation",
+          "meeting_has_started": false,
+          "members": [
+            {
+              "id": 403839,
+              "pivot": {
+                "attendance": "",
+                "automated_attendance": "",
+                "automated_attendance_override": 0,
+                "collaborator": 0,
+                "is_voter": 1,
+                "left_meeting": 0,
+                "meeting_id": 526619,
+                "rsvp": "",
+                "rsvp_note": "",
+                "user_id": 403839
+              }
+            }
+          ],
+          "minutes_published": 0,
+          "motions": [],
+          "not_available": null,
+          "num_comments": 0,
+          "owner_id": 403839,
+          "polls": [],
+          "previous_meeting": null,
+          "public_page": 0,
+          "published_level": 0,
+          "published_materials_status": null,
+          "published_type": "full",
+          "recordings": [],
+          "remote_option": "no_remote",
+          "remote_url": null,
+          "remote_url_description": null,
+          "series_id": 12616,
+          "slug": "d9bcfa-quorumrelay-recurrence-api-fixture",
+          "start": "2026-12-07T14:00:00.000000Z",
+          "taskList": null,
+          "title": "QuorumRelay Recurrence API Fixture",
+          "type": null,
+          "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/d9bcfa-quorumrelay-recurrence-api-fixture",
+          "v2": 1,
+          "zoomMeeting": null
+        },
+        "minutes_approval_document": null,
+        "recordings": [],
+        "section": "invitees",
+        "selected_additional_collaborators": [],
+        "selected_collaborators": [
+          {
+            "accepted_privacy_policy": "6a455c0a213572c5b092e0bd",
+            "accepted_terms": "6a33fc6663bc93bfd8f1a59b",
+            "avatar_url": "https://app.boardable.com/img/default_user.svg",
+            "country_code": null,
+            "created_at": "2026-11-16T20:37:40.000000Z",
+            "first_name": "CivicCast",
+            "id": 403839,
+            "image": "",
+            "last_name": "",
+            "locked_at": null,
+            "name": "CivicCast ",
+            "pivot": {
+              "attendance": "",
+              "automated_attendance": "",
+              "automated_attendance_override": 0,
+              "collaborator": 0,
+              "is_voter": 1,
+              "left_meeting": 0,
+              "meeting_id": 526619,
+              "rsvp": "",
+              "rsvp_note": "",
+              "user_id": 403839
+            },
+            "saml_last_login_at": null,
+            "saml_only": 0,
+            "slug": "civiccast",
+            "summary": {
+              "first_name": "CivicCast",
+              "format": "user",
+              "image": "https://app.boardable.com/img/default_user.svg",
+              "last_name": "",
+              "name": "CivicCast ",
+              "slug": "civiccast"
+            },
+            "two_factor_auth": null,
+            "updated_at": "2026-11-16T22:44:08.000000Z",
+            "url": "https://app.boardable.com/quorumrelay-evaluation/people/civiccast"
+          }
+        ],
+        "v2_meetings": 1
+      },
+      "status": 200,
+      "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/d9bcfa-quorumrelay-recurrence-api-fixture"
+    }
+  ]
+}

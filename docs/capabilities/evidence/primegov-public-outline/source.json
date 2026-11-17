@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-14",
+  "sources": [
+    {
+      "url": "https://wacotexas.primegov.com/public/portal",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 249487,
+      "sha256": "93861b857d351b807f93bb89b560fb7e14ac7abd3e157922e994e35a4bd405f3"
+    },
+    {
+      "url": "https://wacotexas.primegov.com/Scripts/Custom/Public/_Archived.js",
+      "status": 200,
+      "content_type": "application/javascript",
+      "bytes": 13690,
+      "sha256": "675cc5786a0947abea945a3bb87aa6da3123cb8a4ddd753362b63668d9217d5a"
+    },
+    {
+      "url": "https://wacotexas.primegov.com/Content/portal/Scripts/publicSpeaker.js?v=1.1",
+      "status": 200,
+      "content_type": "application/javascript",
+      "bytes": 18314,
+      "sha256": "74edc8dc3b42c5a3105c509cd56b3d8dd29af1ddcc71f8fb692207fad631d557"
+    },
+    {
+      "url": "https://wacotexas.primegov.com/api/v2/PublicPortal/ListArchivedMeetings?year=2026",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 344186,
+      "sha256": "b385a2d0385da5fa12cd44d06012506d8c90b39a6408ec293a0ee290bd0a4c3e"
+    },
+    {
+      "url": "https://wacotexas.primegov.com/api/PublicSpeakerAndComment/GetSectionsAndItemsForSpeakerRequest?meetingId=4922",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 1982,
+      "sha256": "705fb3e6b212109d23f9a51bd4a16e6fc81d0f772d4bebaa984630662c900ebb"
+    },
+    {
+      "url": "https://wacotexas.primegov.com/Scripts/Custom/Public/_Upcoming.js?v3",
+      "status": 200,
+      "bytes": 34459,
+      "sha256": "1ec7ceae86b0b3ebae3943e0f9666e26094d0d468f9313ecb37f23a1970d7cde"
+    },
+    {
+      "url": "https://wacotexas.primegov.com/Content/portal/Scripts/portalCommon.js",
+      "status": 200,
+      "content_type": "application/javascript",
+      "bytes": 12600,
+      "sha256": "3419d02672b1285d9a1411b8dcae44a5a0015bc0948246e64a5417402a3144c5"
+    },
+    {
+      "url": "https://wacotexas.primegov.com/bundles/portaljs?v=3UnC_XagAQMH3Gf3s7OhC7IX2R5YT0_CSiGLG32eUA81",
+      "status": 200,
+      "bytes": 1006248,
+      "sha256": "1e4a7ea889b65d30ff002f88ff857ce5d7e385afa7c053d82883b6b614c791e6"
+    },
+    {
+      "url": "https://wacotexas.primegov.com/Portal/Meeting?meetingTemplateId=1187",
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 1060349,
+      "sha256": "742bb0018f0f285f6f638faa16740fa029914c12ef4f9dc9398869dbb0dbc09a"
+    }
+  ],
+  "derivation": "Third-party BashfulBits city-meeting-podcasts review/15 PartC led to exact Waco public portal. Vendor portal declared script hrefs; _Archived.js declares year route, _Upcoming.js getHref branches and publicSpeaker.js declares read-only sections/items route. No staff or public-speaker write called.",
+  "lead_url": "https://github.com/BashfulBits/city-meeting-podcasts/blob/main/review/15-legistar-catalog-provider.md",
+  "actual_read": "335 native2026meetings,553documentdescriptors including21HTML. Selected allowPublicSpeaker=true4922 returned6sections/0items. ExactHTML locator1187 returned200text/html; no installed/rendered/playback acceptance inferred.",
+  "correction": "Richdocument HTML output3 uses Portal/Meeting. PDF1/Word2 use Public/CompiledDocument. Vote summary uses compiledMeetingDocumentFileId when templateId absent/nonpositive. Explicit link precedes format. Frozenlegacyprojection unchanged.",
+  "limits": "Public speaker-request outline may omit agenda content, documents and private sections; not speaker-list search or authenticated Meeting API. Actual item result empty; nonemptyitems/votesummarybranches verified synthetically against client fields. No automatic full agenda, tier/current authenticated write schemas or API completeness claimed.",
+  "excerpt_policy": "Selected functions only, line endings/trailing whitespace normalized. Full received client SHA256 values remain separate in sources; excerpts are not exact full script captures."
+}

@@ -1,0 +1,48 @@
+{
+  "status": "PASS_SYNTHETIC_SCOPED_ASSIGNED_FIELDS",
+  "source_baseline": "63eca82dc851939d8ef0ebb7574caecd4a5d0b4b",
+  "contract": {
+    "path": "docs/capabilities/evidence/laserfiche-repository/index.ts",
+    "sha256": "de9970a4b12c8b1fa73dcc9cf51bc4bc24618774f9b20ce40ceab9a3d386b762",
+    "sdk_lines": "5585-5636; 7909-7998; 13226; 23975-24060",
+    "route": "GET /repository/v2/Repositories/{repositoryId}/Entries/{entryId}/Fields",
+    "scope": "repository.Read; current configured folder members, no template administration",
+    "field_semantics": "Collection projections may return first value only; ListFields supplies assigned field objects, unformatted values by default. Missing hasMoreValues never becomes complete.",
+    "guide": "https://developer.laserfiche.com/docs/guides/documents-and-folders/guide_get-folder-listing/"
+  },
+  "source_sha256": {
+    "src/civic_data_connectors/providers/repository_fields.py": "ef923630a63c3f7440c6299804f81b1e65d1bbd23cfbeacf4adc78c0c7de3974",
+    "src/civic_data_connectors/providers/repository.py": "3655b144ee7b7ca67b10d4cc62438b9e625e53e46c00e3da75e97058d6d06580",
+    "src/civic_data_connectors/providers/repository_search.py": "42fd88693daa2f58df4977598b025c73cb086d7b4adb7ec693b1e62e50321dfd",
+    "src/civic_data_connectors/providers/repository_text.py": "b744bb1b853ebec30e63e8848fc9554be53df8671b42efe27f139917ba1e58fe",
+    "src/civic_data_connectors/providers/identification.py": "ad97d1ebf76d92507b08dbdabcda621aa91f6d1a4a58caab16ded7493e6af4e1",
+    "tests/test_repository_fields.py": "43aefb59681f646bfc23ea40b70e5334cf5e18ad8d9d6a099b63bb60b35a4ba7"
+  },
+  "execution": {
+    "new_cases_passed": 21,
+    "affected_cases_passed": 145,
+    "command": "pytest tests/test_repository_fields.py tests/test_repository_search.py tests/test_repository_async_export.py tests/test_repository_export_variants.py tests/test_repository_content.py tests/test_repository_text.py tests/test_repository_fetch.py tests/test_repository_discovery.py tests/test_capabilities.py -q",
+    "log": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\repository-fields.log",
+    "junit": "C:\\Users\\scott\\Documents\\Codex\\2026-11-12\\re\\work\\quorumrelay\\repository-fields.xml",
+    "junit_sha256": "4f7126ccdc2cde0a6eafe277220b89185081cdb2895befd18cc7d3074a6c4680",
+    "ruff": "Full repository ruff check passed",
+    "scope": [
+      "opt-in assigned multivalue fields on detail, discovery and native search; saved capture never initiates field network",
+      "raw supplementary bytes, unknown/null/empty/absent values, per-field capture/citation provenance",
+      "same-entry nextLinks, duplicates/counts, malformed/unknown completeness, token echo and HTTP/transport failures",
+      "page/field-count/byte/deadline bounds, cancellation and combined field/text budget",
+      "metadata/obtained fields retained on partial failure; later discovery failure retains supplemental captures",
+      "actual SQLite import/reopen/search and ZIP import/export preserve fields and captures",
+      "normalized change detection preserves source identity; existing read/search/export regressions"
+    ]
+  },
+  "limitations": [
+    "Synthetic provider transport only; no actual provider request or mutation",
+    "Opt-in repository_include_fields boolean; default reads preserve existing network scope",
+    "Current-folder membership comes from the scoped metadata/list/search response; no atomic snapshot",
+    "hasMoreValues true/missing, truncation and failures are partial rather than whole-field completion",
+    "Field values are repository metadata, not inferred meeting dates or governing bodies",
+    "No field writes, template administration, new provider/parser registration or whole-provider acceptance"
+  ],
+  "completed_local_date": "2026-11-13"
+}

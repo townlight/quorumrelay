@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "7d110c4",
+  "status": "ARCHIVED_LOCATORS_AND_SYNTHETIC_TRANSFER_PASS",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_boarddocs_print_files.py tests/test_boarddocs_item_fragment.py tests/test_boarddocs_selected_agenda.py tests/test_boarddocs_meeting_fragment.py tests/test_boarddocs_public_helpers.py tests/test_boarddocs_public_workflow.py -q",
+      "passed": 72,
+      "failed": 0,
+      "new_cases": 13,
+      "junit_sha256": "70b1b8527a78c8f4e7be3c0837d5d28949aab23a2733b44f7e8d6caa920ca2b2"
+    }
+  ],
+  "limits": "Synthetic selected meeting request context is explicit and not asserted by raw print fragment. No title/date identity join, live original-byte availability, full catalog, item-to-file association, separate BD-GetPublicFiles mapping or staff write inferred.",
+  "bindings": [
+    {
+      "kind": "archived_response",
+      "path": "tests/fixtures/boarddocs-public/fairfax-print-20221115.html",
+      "sha256": "dd203526cecc33dd563ba7572aee05f4efc77e2c2db6c2d4bc53478197f4f914"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/boarddocs_public.py",
+      "sha256": "59c7d25f48a2b76a44e0ddb688bc42a76a4eb65e4e3f2c3b48cd2cf0a261e5e7"
+    },
+    {
+      "kind": "source",
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "af9d88b0a3af7ba0aaa61f3546266d655e2456a0a394c167d5fcc9910536e9a9"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_boarddocs_print_files.py",
+      "sha256": "96fef85af217413de909a0ab6a1e44f14dd4f37873c9d05d1236c20fd669437c",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "96fef85af217413de909a0ab6a1e44f14dd4f37873c9d05d1236c20fd669437c"
+    }
+  ]
+}

@@ -1,21 +1,18 @@
 # QuorumRelay user manual
 
-Candidate <code>0.1.0.dev8</code> · schema <code>2.0.0</code>
+Python **0.1.0.dev14**, TypeScript **0.1.0-dev.14**, schema **2.0.0**.
 
-QuorumRelay is a standalone engine for identifying configured civic-data sources, reading or parsing bounded captures, normalizing meeting records, searching captured material, preparing neutral exports, and executing a small set of explicitly authorized provider writes. It does not require Townlight, TownReporter, TownRecord, Brief, a hosted service, or a particular application database. Those projects are examples of consumers; the engine API is intended for other products as well.
+The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 18 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. See [delivery scope](DELIVERY-SCOPE.md) for provider-specific limitations, including development-only writes.
 
-This is a development candidate. The verified Python wheel is <code>quorumrelay-0.1.0.dev8-py3-none-any.whl</code>, SHA-256 <code>bcfe691b4d1eb0de162f5f94985d0242a97b5d3d89bd5eeb9306d1ef28caf692</code>, built from source commit <code>3862e5f4ad7064aee722e09bb438899c3566477f</code>. It is not published to a Python package index. The candidate verification proves package contents and fixture/baseline behavior; it does not prove live provider acceptance, complete provider catalogs, or live write acceptance. See [the development 08 receipt](verification/quorumrelay-development-08.json), [the baseline equality receipt](verification/quorumrelay-development-08-equality.json), and [the capability matrix](capabilities/README.md).
+## 1. Install and verify
 
-## 1. Install and verify the candidate
+Use Python 3.11 or newer.
 
-QuorumRelay requires Python 3.11 or newer. Use the public source checkout at the verified commit for this publication. The dev8 wheel is documented as verification evidence but is not a public download asset; use a wheel only if your operator already has the matching immutable artifact. Do not use a package-index install command for this candidate.
-
-### Install from the public Git repository
+### Install from the release tag
 
 ~~~powershell
-git clone https://github.com/townlight/quorumrelay.git C:\work\quorumrelay
-Set-Location C:\work\quorumrelay
-git checkout 3862e5f4ad7064aee722e09bb438899c3566477f
+git clone --branch v0.1.0.dev14 https://github.com/townlight/quorumrelay.git
+Set-Location quorumrelay
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 py -m pip install -e .
@@ -29,16 +26,14 @@ py -m pip install -e ".[service]"
 
 The <code>service</code> extra installs the MCP, Starlette, Uvicorn, multipart and JSON-schema dependencies. The core SDK can be used without these service packages.
 
-### Install the verified wheel
+### Install the release wheel
 
-This repository does not offer a public wheel download for the candidate. If your operator has already transferred the exact immutable wheel into an approved artifact store, verify its digest before installing it:
+Download the wheel and SHA256SUMS from the [GitHub release](https://github.com/townlight/quorumrelay/releases/tag/v0.1.0.dev14). Compare its SHA-256 before installation.
 
 ~~~powershell
-Get-FileHash .\quorumrelay-0.1.0.dev8-py3-none-any.whl -Algorithm SHA256
-py -m pip install .\quorumrelay-0.1.0.dev8-py3-none-any.whl
+Get-FileHash ./quorumrelay-0.1.0.dev14-py3-none-any.whl -Algorithm SHA256
+python -m pip install ./quorumrelay-0.1.0.dev14-py3-none-any.whl
 ~~~
-
-Use only the immutable artifact whose hash is recorded above; rebuilding from source produces a different artifact identity. To run the HTTP or MCP service from source, install the matching checkout’s <code>.[service]</code> extra as shown above.
 
 ### Verify the installed package
 
@@ -47,7 +42,7 @@ py -c "import quorumrelay; print(quorumrelay.__version__)"
 '{}' | quorumrelay providers
 ~~~
 
-The version command should print <code>0.1.0.dev8</code>. The <code>providers</code> command returns the installed provider and format manifest as JSON. In an embedded deployment, also request <code>GET /v1/info</code> and compare the installed version and schema version with the application’s approved pin.
+The expected version is <code>0.1.0.dev14</code>. The <code>providers</code> command returns the installed provider and format manifest as JSON. In an embedded deployment, also request <code>GET /v1/info</code> and compare the installed version and schema version with the application’s approved pin.
 
 ## 2. Choose a provider and input format
 
@@ -81,7 +76,7 @@ for provider in manifest["data"]["providers"]:
           provider.get("additional_formats", []))
 ~~~
 
-The fixed compatibility baseline contains 34 provider/input-format pairs. The additive parser hooks expose 28 more provider-specific captured formats in this candidate. A baseline format keeps its exact historical reader behavior; additive formats replay other captured details or API responses. An additive parser is a saved-capture capability and does not imply that QuorumRelay can discover that provider live. Use the exact <code>input_format</code> returned for the provider. Do not choose a parser by guessing from a filename.
+The fixed compatibility baseline contains 34 provider/input-format pairs. The integrated source registers 74 additional parser hooks beside those baseline pairs. Cablecast contributes two public parser hooks (`cablecast-show-json` and `cablecast-shows-json`); BoardDocs contributes its public listing parser. These are advertised through `additional_formats`. A baseline format keeps its exact historical reader behavior; additive formats replay other captured details or API responses. A saved-capture parser does not by itself imply live discovery. Use the exact <code>input_format</code> returned for the provider. Do not choose a parser by guessing from a filename.
 
 Use <code>capabilities</code> for the provider’s operation-level implementation and acceptance information:
 
@@ -126,7 +121,7 @@ context = OperationContext(
 
 A default context is useful for local read-only SDK use. Production callers should set the real application principal/client/tenant and least-privilege operation and namespace policies. Provider credentials, when needed, belong in the private trusted <code>OperationContext.credentials</code> supplied by the application. Provider credential formats vary; follow the exact provider entry in [the SDK guide](SDK.md) and [native mappings](PROVIDER-NATIVE-MAPPINGS.md). Never put credentials in <code>Source.url</code>, operation JSON, a source option, or a citation.
 
-<code>Source.options</code> contains only provider-documented configuration. For example, Tyler calendar requests require an observed tenant-specific API base; the configured API base must match that tenant’s observed client. An option is not an unrestricted request target. Set <code>Source.body</code> only where the provider mapping recognizes that body. Unmapped body assignments remain an explicit unknown instead of being guessed from a city or meeting label.
+<code>Source.options</code> contains only configuration recognized by the selected mapping. Tyler calendar requests require an observed tenant-specific API base; the configured API base must match that tenant’s observed client. BoardDocs public discovery requires an explicit <code>boarddocs_committee_id</code> and the exact public <code>/{site}/Board.nsf/Public</code> path; see the [BoardDocs guide](BOARDDOCS-PUBLIC.md). CivicClerk Select public Search uses the configured portal/API tenant and requires an explicit date window; see the [CivicClerk Select guide](CIVICCLERK-SELECT.md). These options are not unrestricted request targets. Set <code>Source.body</code> only where the provider mapping recognizes that body. Unmapped body assignments remain an explicit unknown instead of being guessed from a city or meeting label.
 
 ## 4. Read, parse and fetch
 
@@ -176,7 +171,7 @@ result = engine.execute("discover", {
 
 Each <code>meeting</code> record carries the provider meeting ID, title, local date and start literal (time zone unknown), the meeting type ID and its name as <code>body</code> (taken from the portal's meeting-type list, else from the title with its date removed, labelled in <code>body_source</code>), the location and the portal page URL. Set <code>source.body</code> to keep one body. Meetings the portal has not published are left out and counted; a cancelled meeting is kept and flagged in <code>source_status.title_marks_cancelled</code>. No published meeting is hidden by a name guess. Meetings whose meeting-type name reads like a calendar or notice (for example "Rolling Calendar", "Public Meetings Notice", or a type containing a word such as notice, report or budget) are returned with <code>likely_not_a_meeting: true</code> and the matched name in <code>likely_not_a_meeting_type</code>, and <code>coverage.flagged_meeting_types</code> lists those types. Add <code>"exclude_likely_non_meetings": true</code> to the discover request to omit the flagged meetings instead; they are then counted in <code>coverage.likely_non_meeting_omitted</code>. The default is off. If the meeting-type page cannot be read, no meeting is flagged and coverage says so.
 
-With <code>"document"</code> in <code>record_types</code>, each returned meeting's document list is read (one request each, counted in <code>max_pages</code>, resumable by checkpoint). A <code>document</code> record has its parent meeting identity, kind (<code>agenda</code>, <code>agenda_packet</code>, <code>minutes</code>, <code>minutes_adopted</code> or <code>document</code>), format and a link in the portal's <code>/document/{id}/{name}.html</code> or <code>.pdf</code> shape. A document the portal marks not public is listed with no link. Nothing is downloaded, and document text is not extracted. One meeting's documents can also be read with <code>engine.fetch_related(source, "18421", "document")</code>.
+With <code>"document"</code> in <code>record_types</code>, each returned meeting's document list is read (one request each, counted in <code>max_pages</code>; <code>max_records</code> also bounds documents, with a checkpoint inside a document list when necessary. Resumption rejects changed list bytes). A <code>document</code> record has its parent meeting identity, kind (<code>agenda</code>, <code>agenda_packet</code>, <code>minutes</code>, <code>minutes_adopted</code> or <code>document</code>), format and a link in the portal's <code>/document/{id}/{name}.html</code> or <code>.pdf</code> shape. A document the portal marks not public is listed with no link. Nothing is downloaded, and document text is not extracted. One meeting's documents can also be read with <code>engine.fetch_related(source, "18421", "document")</code>.
 
 **Cablecast meeting video.** Configure <code>https://{host}/</code> for a <code>*.cablecast.tv</code> host. Dates are optional but bound the read.
 
@@ -186,7 +181,7 @@ shows = engine.discover(source, bounds=Bounds(date_from="2026-11-01", date_to="2
 detail = engine.fetch_record(source, "750")   # a show ID
 ~~~
 
-Discovery reads the public shows list. A show without a video is left out and counted. The meeting day is the day the title names ("November 4, 2026", "Nov 10 2026", "11-10-2026"), else the show's event date; <code>date_source</code> says which. Cablecast keeps a show per airing, so one meeting can appear twice: when copies share a title and day, the reader keeps the copy whose video has a caption playlist (it reads each copy's video record and <code>vod.m3u8</code>, counted in <code>max_pages</code>), lists the other show IDs in <code>duplicate_show_ids</code>, and states how it chose in <code>copy_selection</code>. If the page budget ends first, the first-listed copy is kept and marked <code>first_listed_unprobed</code>. The list's own <code>hasCaptions</code> flag is kept as supplied but is not used; copies of one meeting disagree.
+Discovery reads the public shows list. A show without a video is left out and counted. The meeting day is the day the title names ("November 4, 2026", "Nov 10 2026", "11-10-2026"), else the show's event date; <code>date_source</code> says which. Cablecast keeps a show per airing, so one meeting can appear twice: when copies share a title and day, the reader keeps the copy whose video has a caption playlist (it reads each copy's video record and <code>vod.m3u8</code>, counted in <code>max_pages</code>), lists the other show IDs in <code>duplicate_show_ids</code>, and states how it chose in <code>copy_selection</code>. If the page budget ends first, the first-listed copy is kept and marked <code>first_listed_unprobed</code>. A discovery <code>record_types</code> filter returns meeting records only when requested; a request for only other types returns <code>unsupported</code> without network access. Mixed requests identify unavailable types in coverage. The list's own <code>hasCaptions</code> flag is kept as supplied but is not used; copies of one meeting disagree.
 
 A show record's <code>recordings</code> entry links the watch page (<code>/internetchannel/show/{id}</code>); <code>fetch_record</code> adds the video file URL, the HLS playlist URL and length, and a <code>captions</code> entry naming the caption playlist (<code>captions.en.m3u8</code>) with its language and segment count. QuorumRelay returns these as records and links only. It does not download or cut audio or video, does not read the WebVTT caption segments, and does not transcribe. <code>fetch_captions</code>, attachment downloads and native search are reported <code>unsupported</code>.
 
@@ -248,7 +243,7 @@ document = engine.fetch_attachment(
 )
 ~~~
 
-If the bundle is stored, the helper can resolve the stored capture instead of receiving <code>capture</code>. Keep durable citation URLs separately from short-lived signed download URLs. Check the attachment result for availability, hash, byte length, content type and errors.
+If the bundle is stored, the helper can resolve the stored capture instead of receiving <code>capture</code>. Keep durable citation URLs separately from short-lived signed download URLs. Check the attachment result for availability, hash, byte length, content type and errors. The shared download path checks cancellation and its total deadline through hashing and encoding the returned bytes. An interrupted or expired result retains the source record without reporting a completed attachment; checks are cooperative after synchronous work returns.
 
 A captured media player URL may return a player page instead of media. Where a provider captured a direct <code>video_url</code>, <code>audio_url</code> or <code>playback_url</code>, select that existing field with <code>kind="recordings"</code> and <code>url_field="video_url"</code> (or the verified field). QuorumRelay does not let the caller substitute a URL. An HLS fetch returns the manifest, not all segments; it is not proof that a recording is playable.
 
@@ -312,9 +307,32 @@ native = engine.execute(
 
 Only use this when <code>capabilities</code> says that provider has an implemented native search. Provider search typically selects candidate records; QuorumRelay then applies exact local matching to fields that were actually supplied. Check the response’s <code>coverage</code> for searched fields, candidate limits, omitted rows and checkpoint information. A native result is not a promise of full-text or catalog coverage.
 
+### Discover a configured Municode public listing
+
+For `municode-meetings`, supply the URL of a public HTML meeting listing. Discovery reads that configured page, applies inclusive date bounds locally and returns a partial result with path-derived meeting IDs and the original page capture. The result does not claim a complete archive; the separate authenticated Essential collection response and pagination remain unverified.
+
+For the distinct `meetings.municode.com/PublishPage` layout, choose the explicit `municode-publishpage-html` format and a complete selected-page URL. It preserves public `cc/me` selectors and declared page controls, reads one page and reports partial coverage. `fetch_record` can revalidate membership in that selected listing and retrieve its supplied public HTML agenda or packet with section/item text and attachment locators. See [PublishPage instructions](MUNICODE-PUBLISHPAGE.md); this does not establish authenticated API identity or pagination.
+
 ### Export portable records
 
 The neutral <code>export</code> operation emits JSON, JSONL or ZIP bundles. CSV and iCalendar are explicit projections and can lose unsupported meeting fields; the result reports losses. Export does not contact a vendor or mutate records.
+
+iCalendar marks an event cancelled only for the explicit source status `CANCELLED`
+or a boolean `canceled: true`. Untyped strings and numbers do not establish
+cancellation. Other source status fields, including adjournment, remain listed
+as omitted from the projection and are retained in neutral bundles.
+The start uses `scheduled_start` when supplied, otherwise `meeting_date`; the
+unused date field remains reported as omitted.
+
+Use <code>csv-items</code> for both items nested in meeting records and standalone
+<code>agenda_item</code> records. Standalone rows retain the native item identifier,
+available normalized title/department and source URL. Their meeting key comes
+only from an explicit meeting identity in the record's parent or relationships.
+Missing, invalid or conflicting meeting identities leave that key empty and add
+a warning to the projection-loss ledger; names, dates and item order never supply
+a guessed join. JSON/JSONL/ZIP and CSV/iCalendar exports honor cancellation and
+the total deadline through serialization, inline encoding and streamed artifact saving. Checks run when synchronous
+work returns; an expired result is not reported as a completed download.
 
 ~~~python
 exported = engine.execute(
@@ -371,7 +389,7 @@ receipt = write_engine.receipt({"plan_id": approval["plan_id"]}, context=write_c
 
 The native fields are provider-specific. A neutral meeting record is not automatically a writable vendor request. Unknown fields, unsupported entities, deletion, arbitrary URLs and generic administration are rejected. An ambiguous create is not blindly repeated: the write coordinator persists intent and reconciles against readback. Completed siblings remain visible in a partial batch; no automatic remote rollback occurs.
 
-Live write acceptance for this candidate is **NOT_RUN**. The mappings have deterministic fixture checks, but no authorized provider test tenant and credentials have been supplied. Synthetic or mock receipts are not vendor acceptance. Do not use a public city’s production data as a test environment. See [the write contract](WRITE-CONTRACT.md) for the currently mapped operations and their exact fields.
+Live provider writes for this candidate are **NOT_RUN**. Vendor-documented synthetic execution/readback/receipts are the accepted verification basis for the provider operations and fields they actually cover; live checks are optional supporting evidence. A synthetic receipt does not mean a real tenant was changed. Do not use a public city’s production data as a test environment. Real writes still require the application's trusted credentials, current grants and exact-plan approval. See [the write contract](WRITE-CONTRACT.md) for mapped operations, field limits and source-versus-frozen-artifact evidence.
 
 ## 7. Run the CLI or service
 

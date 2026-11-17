@@ -1,0 +1,15 @@
+{
+  "status": "PASS_LOCAL_READER_PERSISTENCE",
+  "integration_commit": "03e11ae9eeea69be866d59710ce05bf7054f2d3a",
+  "scope": "Both retained readers: actual SQLite persistence, unchanged repeat import, reopened metadata phrase search, ZIP interchange and destination search preserve identities/citations/capture hashes. Source-only, no network or packaged consumer acceptance.",
+  "test": "tests/test_reader_storage_workflows.py",
+  "test_sha256": "b27c56e2ee579deea00110be37f74359019ab62b7fa1d3da50301cfc222fc13a",
+  "result": "2 passed",
+  "coverage": "Search deliberately partial/incomplete_text for metadata-only captures; fixture expectation corrected after tracing search coverage. Production search was unchanged.",
+  "log": "C:/Users/scott/Documents/Codex/2026-11-12/re/work/quorumrelay/reader-storage.log",
+  "additional_changes": "Developer-facing source/package distinction and runtime counts corrected; Cablecast parse description names both existing supported saved formats.",
+  "limits": [
+    "Remaining full-plan outcomes incomplete",
+    "No new artifacts, final hosted CI, native acceptance or delivery"
+  ]
+}

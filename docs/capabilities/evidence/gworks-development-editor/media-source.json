@@ -1,0 +1,48 @@
+{
+  "findings": [
+    "POST /cms/secure/media with cms_file.filename,mime_type,size_kb; size floor(bytes/1000), UI limit30000KB",
+    "Response consumed signedUrl; bytes PUT to signedUrl with MIME Content-Type, no Bearer on storage call",
+    "POST/list via DataTables server-side adapter /cms/secure/media/list gives cms_file.id,filename,mime_type,size_kb,created_ts",
+    "Meeting files descriptors {name,id,size,type}; agenda items {filename,usetype} official/public choice",
+    "No reliable allocation ID read in callback; listing/identity/uncertain-upload readback remains implementation work",
+    "dtAjaxCall uses postSecureParams, form-urlencoded jQuery parameters; start,length,draw,columns/order/search and equals filter. Not GET/JSON list.",
+    "List response handed directly to DataTables1.10 fnCallback; confirm raw envelope through public DataTables implementation before adapter assumptions.",
+    "Client __onComplete triggers success on XHR load without checking status: SDK must check PUT HTTP status and verify bytes/identity rather than copy UI toast behavior.",
+    "Pinned linked DataTables1.10.21 library plus official https://datatables.net/manual/core/server-side confirms draw,recordsTotal,recordsFiltered,data response envelope and zero-based start/length paging.",
+    "For future upload implementation: filename-only association is insufficient; compare preexisting listing, exact single returned/new nativeID and independently readback bytes/hash before association. Do not copy UI first-row auto-selection. SignedURL remains private; guard selected trustedstorageorigin and never forward Bearer to storage.",
+    "Additional direct vendor consumer city.plugin.js lines508-513 calls media/list and iterates data.data, independently corroborating list envelope.",
+    "gworks-2.js getMediaFileUrl/getFileUrl lines3114-3119 constructs filesUrl/city/cityCode/media/filename; captured development am.html declares filesUrl=https://files.dev.gworks.cloud. Trusted city binding and safe filename needed for byte/hash readback; no Bearer on files origin."
+  ],
+  "observed_at": "2026-11-16T18:38:29.0553377Z",
+  "method": "Public static GET of sources linked by captured development editor; no authenticated request",
+  "files": [
+    {
+      "bytes": 3151,
+      "url": "https://portal.dev.gworks.cloud/plugin/cms/common/snippet-mediafiles.html",
+      "sha256": "84EF1A9CADF4A566E7924A2F08498B1F03B1CAF1228DE94402D9F2D7F8E745EC",
+      "status": 200,
+      "path": "snippet-mediafiles.html"
+    },
+    {
+      "bytes": 33823,
+      "url": "https://portal.dev.gworks.cloud/plugin/cms/js/city.plugin.js?v=21-MM-DD-000DEV000",
+      "sha256": "4769B0E08F09679B4B7A93BE40FBBCD8384310693D299B6753AEF5EE497BFB8D",
+      "status": 200,
+      "path": "gworks-cms-plugin.js"
+    },
+    {
+      "bytes": 3558,
+      "url": "https://portal.dev.gworks.cloud/plugin/cms/common/snippet-media-agenda.html",
+      "sha256": "DBD16F14309F76474838D31B57AB18F32A934B1A376A16339E4B1EB1D37D366E",
+      "status": 200,
+      "path": "snippet-media-agenda.html"
+    },
+    {
+      "sha256": "4615DAD876F0BEBD5F512F816A398E6CD77BE78A3AF48693EF0804E0464415A4",
+      "path": "gworks-datatables-1.10.21.js",
+      "status": 200,
+      "url": "https://portal.dev.gworks.cloud/ext/datatables/1.10.21/js/datatables.min.js",
+      "bytes": 109152
+    }
+  ]
+}

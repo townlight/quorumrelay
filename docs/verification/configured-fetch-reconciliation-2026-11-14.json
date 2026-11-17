@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-14",
+  "base_commit": "602eb99",
+  "status": "PASSED",
+  "checks": [
+    {
+      "command": "pytest tests/test_first_party_feed_retrieval.py tests/test_baseline.py tests/test_onbase_model_documents.py tests/test_townhall_detail.py tests/test_agendaquick_detail.py tests/test_agendaquick_memo.py tests/test_clerkbase_detail.py tests/test_storage_search_imports.py tests/test_interchange.py -q",
+      "passed": 159,
+      "failed": 0,
+      "junit_sha256": "a26088e33c6a830fbb3c9e41e9f6b5b2a70d76f9a72081989dca43a411f62855"
+    }
+  ],
+  "bindings": [
+    {
+      "kind": "test",
+      "path": "tests/test_townhall_detail.py",
+      "sha256": "5aabb4f1e5a08419a122a38658ee6ce7cccad610bdc8838a7f872f8778372ea8",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "b117fe2d111dd7a345ff660edcac0fcc5f3e57a4a0bce85157b5e8a9c2bc6aba"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_agendaquick_detail.py",
+      "sha256": "70ee0d360aedc97e4765909b6fa60c4cbaab80a4f8d3f5db8e1d2e4287d97355",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "810621722753bff022c3714c53f563c710fa4d87e9765a8ba1ac36b400b1cfdc"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_clerkbase_detail.py",
+      "sha256": "2c26e4d5b7edb3775a0a179e02ede64b8e50dde12ae36a8ff91a0ac610865f7f",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "ef41563f92ba576ec1437f4d57bc90c390d596ee39cd56e8077435ffbc939325"
+    },
+    {
+      "kind": "test",
+      "path": "tests/test_first_party_feed_retrieval.py",
+      "sha256": "e2f0fae0c251a71c9a9091068cc704bdf2f59757b7678c6bbee07e25e97a7c67",
+      "hash_policy": "test_source_crlf_to_lf",
+      "canonical_lf_sha256": "e2f0fae0c251a71c9a9091068cc704bdf2f59757b7678c6bbee07e25e97a7c67"
+    }
+  ],
+  "scope": {
+    "town-hall-streams": "Configured event HTML GET and literal native event/location mapping; explicitly granted supplied HLS playlist transfer. Existing captured listing is bounded/partial. No segment playback, MP4, transcript action or complete archive claim.",
+    "destiny-agendaquick": "Configured supplied agenda/memo HTML GET with native meeting/memo/line IDs; separate selected packet PDF synthetic transfer. No automatic full archive traversal or vendor import/write claim.",
+    "clerkbase": "Configured selected HTML document GET retains supplied cited paragraph text and URL-derived identity; search/export/retry verified. Linked binaries, all nested trees and provider writes remain unverified.",
+    "first-party": "Configured explicit public-meeting-ics feed GET preserves1307 baseline records and original UID identities; bounded static-feed continuation and unchanged mixed normalize/fetch import. Municipality HTML-to-feed link discovery, server window/retention and provider write protocols are not implied."
+  },
+  "source_defects": {
+    "normalized_hash": "Reproduced equal normalized data/different digests between saved normalization and discovery. _record now hashes complete normalized object for every baseline provider; all34 corpus compatibility outputs unchanged. Existing source identities/capture bytes preserved; older local narrow hashes may refresh once.",
+    "onbase_coverage": "Previously always marked Documents and Media unmapped even for supported mapped shapes. Now lists only actual unmapped returned submodels; mapped and unknown-shape cases separately asserted."
+  },
+  "initial_test_corrections": "Capture timestamps differ across observations, direct normalize default cap1000 versus requested1307, and fetch coverage may omit optional catalog_complete. Assertions now compare declared content/identity/hash fields and require partial/no complete claim, with matching explicit bounds. Real digest mismatch was fixed in source, not removed from the assertion.",
+  "limits": "Local fixture/synthetic retrieval and previously pinned observations only. No new live requests, media playback, frozen artifact rebuild, repin or release."
+}

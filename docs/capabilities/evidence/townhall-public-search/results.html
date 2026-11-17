@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Town Hall - Town Hall Streams</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <link rel="bookmark" href="/assets/"/>
+
+    <!-- css -->
+    <link rel="stylesheet" href="/assets/css/site.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/anim.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+
+    <!-- JS -->
+    <script type="text/javascript" src="/assets/js/site.min.js"></script>
+    
+    <script type='text/javascript'>
+function doGroup(){
+	if($("#group_by_year").is(":checked")){
+		document.location.href='/town.php?id=31&group_by=year';
+	}
+	else{
+		document.location.href='/town.php?id=31&group_by=meeting';
+	}
+	
+}
+    </script>
+  </head>
+  <body style="background-color: #f5f5f5;">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163326848-2">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-163326848-2');
+</script>
+ <div>
+      <!--nav-->
+      <nav class="navbar navbar-default navbar-custom  transparent animated wow bounceInDown"  role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+			      <!-- LOGO -->
+            <a class="navbar-brand  hidden-xs logoo"id="logo" href="/index.php">
+              <img src="/assets/img/logo1.png"  class="logo1" style="padding-top: 11px;" width="110px">
+            </a>
+            <!--<a class="navbar-brand  hidden-xs logoo"id="logo1" href="index.html">
+              <img src="assets/img/logo.png"   style="padding-top: 11px;" width="105px">
+            </a>-->
+            <a class="navbar-brand visible-xs" href="/index.php"><img src="assets/img/logo1.png" height="30" ></a>
+
+          </div>
+
+          <div class="collapse navbar-collapse">
+		        <!-- MENU LINKS -->
+            <ul class="nav navbar-nav navbar-right" style="margin-left: 25px;     ">
+
+
+              <li><a href="/index.php" class="active">Home</a></li>
+              <li><a href="/about.php">About</a></li>
+
+              <li><a href="/howitworks.php">How it works</a></li> 
+             <li><a href="/contact.php">Contact</a></li>
+<!--               <li><a href="/contact.php">Contact</a></li> -->
+                            <li><a href="/portal/login.php" class="loginBtn"  >Login</a></li>
+              
+
+              <!--<li><a class="loginBtn reg" href="" style="margin-top: 4px; color: #fff !important; font-family: bold !important;">Register</a></li>-->
+
+
+
+
+
+
+            </ul>
+
+
+          </div>
+        </div>
+      </nav>
+    </div>
+
+
+
+
+
+
+
+      <section class="home-header" id="home" style="height: auto !important; padding-top: 80px; ">
+<div class="container">
+        <div class="row">
+
+          <div class="col-md-3 hidden-xs"><br><br><br>
+			            <img src="/assets/img/rockhill.jpg" width="93%"  >
+        	  
+	</div>
+          <div class="col-md-8">
+
+            <h1>Rock Hall, MD</h1>
+            <p>
+              5585 Main Street Rock Hall, MD 21661 <br>
+
+            </p>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+<section class="th">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="box">
+              <h3>Live Events: </h3><br>
+
+              
+              <i>Sorry, nothing streaming live at the moment.</i>
+
+            </div>
+          </div>
+
+
+
+          <div class="col-md-4">
+            <div class="box">
+              <h3>Upcoming Events: </h3><br>
+
+              <a href="/stream.php?location_id=31&id=77577">
+                <div class="evbox">
+                  <h5>Communications Board Meeting</h5>
+                  <p>November 18, 2026 - 06:00 pm to 09:00 pm  (EST)</p>
+                </div>
+              </a><a href="/stream.php?location_id=31&id=77664">
+                <div class="evbox">
+                  <h5>Board of Appeals Meeting</h5>
+                  <p>November 19, 2026 - 06:00 pm to 09:00 pm  (EST)</p>
+                </div>
+              </a><a href="/stream.php?location_id=31&id=77578">
+                <div class="evbox">
+                  <h5>Building Advisory Committee</h5>
+                  <p>November 25, 2026 - 06:00 pm to 09:00 pm  (EST)</p>
+                </div>
+              </a><a href="/stream.php?location_id=31&id=77579">
+                <div class="evbox">
+                  <h5>Mayor and Council Utility/Workshop Meeting</h5>
+                  <p>November 30, 2026 - 06:00 pm to 10:00 pm  (EST)</p>
+                </div>
+              </a>
+              
+
+
+
+
+
+            </div>
+          </div>
+
+
+
+
+
+                  <div class="col-md-4">
+<h3>Previous Events:</h3><br>
+<div style="clear:both; height: 10px"></div> 
+<form method='post' action="/town.php?id=31">
+<input type="radio" name="group_by" id="group_by_year" value="year" checked onchange="doGroup()" /> Group by Year <input type="radio"  name="group_by" value="meeting" onchange="doGroup()"  /> Group by Meeting Type
+<div style="clear:both; height: 10px"></div>
+
+<input type="text" style="width: 300px" name="search" value="budget" placeholder="Search Meetings .." /><input type='submit' name='searchbtn' value='Search' /><input type='button' name='searchbtn' value='Reset' onclick="document.location.href='town.php?id=31';" /></form>
+<br /><br />
+                    <!-- Tab panes -->
+
+                  <center><br>
+  <span class="yeardate">2026</span><br><br>
+</center>
+
+<!-- Tab panes -->
+ <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-1">
+                            <div class="panel-group" id="accordion-cat-1">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-1" href="#faq-cat-1-sub-1">
+                                            <h4 class="panel-title">
+                                                June                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-1-sub-1" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=75394">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Special Budget Workshop Meeting</h5>
+                                              <p>June 25, 2026 - 06:00 pm to 08:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=75280">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Budget Meeting</h5>
+                                              <p>June 18, 2026 - 06:00 pm to 08:00 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div> <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-2">
+                            <div class="panel-group" id="accordion-cat-2">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-2" href="#faq-cat-2-sub-2">
+                                            <h4 class="panel-title">
+                                                May                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-2-sub-2" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=74839">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Budget Meeting</h5>
+                                              <p>May 28, 2026 - 06:00 pm to 07:15 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=74796">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Budget Meeting</h5>
+                                              <p>May 25, 2026 - 06:00 pm to 07:15 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=74701">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Budget Meeting</h5>
+                                              <p>May 21, 2026 - 06:00 pm to 07:15 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=74568">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Budget Meeting</h5>
+                                              <p>May 11, 2026 - 06:00 pm to 07:30 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=74429">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Budget Meeting</h5>
+                                              <p>May 07, 2026 - 06:00 pm to 07:00 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div> <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-3">
+                            <div class="panel-group" id="accordion-cat-3">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-3" href="#faq-cat-3-sub-3">
+                                            <h4 class="panel-title">
+                                                April                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-3-sub-3" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=74416">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Budget Meeting</h5>
+                                              <p>April 30, 2026 - 06:00 pm to 07:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=74241">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Budget Meeting</h5>
+                                              <p>April 23, 2026 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div><center><br>
+  <span class="yeardate">2025</span><br><br>
+</center>
+
+<!-- Tab panes -->
+ <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-4">
+                            <div class="panel-group" id="accordion-cat-4">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-4" href="#faq-cat-4-sub-4">
+                                            <h4 class="panel-title">
+                                                June                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-4-sub-4" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=67877">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Special Budget Meeting</h5>
+                                              <p>June 17, 2025 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=67726">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor & Council Special Budget Meeting</h5>
+                                              <p>June 10, 2025 - 06:00 pm to 10:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=67448">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor & Council Special Budget Meeting</h5>
+                                              <p>June 05, 2025 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div> <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-5">
+                            <div class="panel-group" id="accordion-cat-5">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-5" href="#faq-cat-5-sub-5">
+                                            <h4 class="panel-title">
+                                                May                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-5-sub-5" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=67240">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor & Council Special Budget Meeting</h5>
+                                              <p>May 22, 2025 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=66886">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor & Council Special Budget Meeting</h5>
+                                              <p>May 12, 2025 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=67019">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor & Council Special Budget Meeting</h5>
+                                              <p>May 06, 2025 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div> <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-6">
+                            <div class="panel-group" id="accordion-cat-6">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-6" href="#faq-cat-6-sub-6">
+                                            <h4 class="panel-title">
+                                                April                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-6-sub-6" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=66983">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor & Council Special Budget Workshop</h5>
+                                              <p>April 29, 2025 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=66739">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Budget Workshop</h5>
+                                              <p>April 24, 2025 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=66738">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Budget Workshop</h5>
+                                              <p>April 14, 2025 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=66355">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Special Budget Meeting</h5>
+                                              <p>April 02, 2025 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div><center><br>
+  <span class="yeardate">2024</span><br><br>
+</center>
+
+<!-- Tab panes -->
+ <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-7">
+                            <div class="panel-group" id="accordion-cat-7">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-7" href="#faq-cat-7-sub-7">
+                                            <h4 class="panel-title">
+                                                June                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-7-sub-7" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=60837">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor & Council Special Budget Meeting</h5>
+                                              <p>June 18, 2024 - 07:00 pm to 10:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=60804">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor & Council Special Budget Meeting</h5>
+                                              <p>June 07, 2024 - 06:00 pm to 08:00 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div> <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-8">
+                            <div class="panel-group" id="accordion-cat-8">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-8" href="#faq-cat-8-sub-8">
+                                            <h4 class="panel-title">
+                                                May                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-8-sub-8" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=60530">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor & Council Special Budget Meeting</h5>
+                                              <p>May 30, 2024 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=60338">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor & Council Special Budget Meeting</h5>
+                                              <p>May 21, 2024 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=60023">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Special Budget Meeting</h5>
+                                              <p>May 14, 2024 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div> <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-9">
+                            <div class="panel-group" id="accordion-cat-9">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-9" href="#faq-cat-9-sub-9">
+                                            <h4 class="panel-title">
+                                                April                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-9-sub-9" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=59900">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor & Council Special Budget Meeting</h5>
+                                              <p>April 25, 2024 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=59811">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Budget Workshop</h5>
+                                              <p>April 18, 2024 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=59569">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor & Council Special Budget Meeting</h5>
+                                              <p>April 04, 2024 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div> <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-10">
+                            <div class="panel-group" id="accordion-cat-10">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-10" href="#faq-cat-10-sub-10">
+                                            <h4 class="panel-title">
+                                                March                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-10-sub-10" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=59466">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Special Budget Meeting</h5>
+                                              <p>March 28, 2024 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div><center><br>
+  <span class="yeardate">2023</span><br><br>
+</center>
+
+<!-- Tab panes -->
+ <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-11">
+                            <div class="panel-group" id="accordion-cat-11">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-11" href="#faq-cat-11-sub-11">
+                                            <h4 class="panel-title">
+                                                June                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-11-sub-11" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=53143">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor and Council Budget Workshop Meeting</h5>
+                                              <p>June 06, 2023 - 06:00 pm to 10:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=53142">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor and Council Budget Workshop Meeting</h5>
+                                              <p>June 01, 2023 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div> <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-12">
+                            <div class="panel-group" id="accordion-cat-12">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-12" href="#faq-cat-12-sub-12">
+                                            <h4 class="panel-title">
+                                                May                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-12-sub-12" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=53075">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor and Council Budget Workshop Meeting</h5>
+                                              <p>May 25, 2023 - 06:00 pm to 07:08 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div><center><br>
+  <span class="yeardate">2022</span><br><br>
+</center>
+
+<!-- Tab panes -->
+ <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-13">
+                            <div class="panel-group" id="accordion-cat-13">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-13" href="#faq-cat-13-sub-13">
+                                            <h4 class="panel-title">
+                                                June                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-13-sub-13" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=46268">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor and Council Budget Workshop Meeting</h5>
+                                              <p>June 29, 2022 - 06:00 pm to 07:32 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=46165">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Budget Workshop Meeting </h5>
+                                              <p>June 21, 2022 - 06:00 pm to 08:14 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=46005">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor and Council Budget Workshop Meeting</h5>
+                                              <p>June 15, 2022 - 06:00 pm to 08:38 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=45865">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor and Council Budget Workshop Meeting</h5>
+                                              <p>June 06, 2022 - 06:00 pm to 10:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=45668">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor and Council Budget Workshop Meeting</h5>
+                                              <p>June 01, 2022 - 06:00 pm to 10:00 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div> <div class="tab-content faq-cat-content">
+                        <div class="tab-pane active in fade" id="faq-cat-14">
+                            <div class="panel-group" id="accordion-cat-14">
+                                <div class="panel panel-default panel-faq">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-cat-14" href="#faq-cat-14-sub-14">
+                                            <h4 class="panel-title">
+                                                May                                                <span class="pull-right"><i class="fa fa-angle-down"></i></span>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div id="faq-cat-14-sub-14" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          
+<a href="/stream.php?location_id=31&id=44867">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor and Council Budget Workshop Meeting</h5>
+                                              <p>May 31, 2022 - 06:00 pm to 10:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=45558">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor and Council Budget Workshop Meeting</h5>
+                                              <p>May 24, 2022 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a><a href="/stream.php?location_id=31&id=45457">                                         
+<div class="evbox" style="background: #fafafa">
+                                              <h5>Mayor and Council Special Budget Workshop Meeting</h5>
+                                              <p>May 18, 2022 - 06:00 pm to 09:00 pm (EST)</p>
+                                            </div> </a> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+<!-- Tab panes --> 
+
+
+
+
+                  </div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+    </section>
+
+
+
+    <section>
+      <div class="container">
+        <div class="row">
+
+
+
+
+
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+    <footer id="page-footer" style="background: #a61111; padding: 0px 0px !important;">
+			<div class="container">
+				<div class="row">
+
+          <div class="col-md-4 hidden-xs">
+						<p class="made-by-me ">© 2017  THS. All Rights Reserved.</p>
+
+          </div>
+
+					<div class="col-md-4 text-center visible-xs">
+						<p class="made-by-me ">© 2017  THS. All Rights Reserved.</p>
+
+					</div>
+
+					<div class="col-md-4 text-center hidden-xs" style="padding-bottom: 28px; padding-top: 15px;"><br>
+
+
+						<div class="social-links">
+
+            <a href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://www.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a>
+			<a href="https://youtube.com/"><i class="fa fa-youtube"></i></a>
+          </div>
+					</div>
+
+          <div class="col-md-4 text-center visible-xs" style="padding-bottom: 0px; padding-top: 0px;"><br>
+
+
+						<div class="social-links">
+
+            <a href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://www.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a>
+			<a href="https://youtube.com/"><i class="fa fa-youtube"></i></a>
+          </div>
+					</div>
+
+          <div class="col-md-4 text-right hidden-xs">
+            <p class="made-by-me">  </p>
+          </div>
+          <div class="col-md-4 text-center visible-xs">
+            <p class="made-by-me"></p>
+          </div>
+				</div>
+			</div>
+		</footer>
+
+
+
+
+
+
+
+
+        <script type="text/javascript" src="/assets/js/jquery-1.10.1.min.js"></script>
+        <script type="text/javascript" src="/assets/js/script.js"></script>
+
+
+      <script type="text/javascript">
+      var vid = document.getElementById("bgvid");
+var pauseButton = document.querySelector("#polina button");
+
+function vidFade() {
+vid.classList.add("stopfade");
+}
+
+vid.addEventListener('ended', function()
+{
+// only functional if "loop" is removed
+vid.pause();
+// to capture IE10
+vidFade();
+});
+
+
+pauseButton.addEventListener("click", function() {
+vid.classList.toggle("stopfade");
+if (vid.paused) {
+  vid.play();
+  pauseButton.innerHTML = "Pause";
+} else {
+  vid.pause();
+  pauseButton.innerHTML = "Paused";
+}
+})
+
+      </script>
+
+      <script>
+document.getElementById('playVid').onclick = function (){
+  document.getElementById('secvideo').play();
+    document.getElementById('secvideo').style.display = 'block';
+};
+</script>
+
+<script>
+document.getElementById('xclose').onclick = function (){
+document.getElementById('secvideo').pause();
+};
+</script>
+
+
+  <script type="text/javascript">
+  var TxtType = function(el, toRotate, period) {
+      this.toRotate = toRotate;
+      this.el = el;
+      this.loopNum = 0;
+      this.period = parseInt(period, 10) || 2000;
+      this.txt = '';
+      this.tick();
+      this.isDeleting = false;
+  };
+
+  TxtType.prototype.tick = function() {
+      var i = this.loopNum % this.toRotate.length;
+      var fullTxt = this.toRotate[i];
+
+      if (this.isDeleting) {
+      this.txt = fullTxt.substring(0, this.txt.length - 1);
+      } else {
+      this.txt = fullTxt.substring(0, this.txt.length + 1);
+      }
+
+      this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+      var that = this;
+      var delta = 200 - Math.random() * 100;
+
+      if (this.isDeleting) { delta /= 2; }
+
+      if (!this.isDeleting && this.txt === fullTxt) {
+      delta = this.period;
+      this.isDeleting = true;
+      } else if (this.isDeleting && this.txt === '') {
+      this.isDeleting = false;
+      this.loopNum++;
+      delta = 500;
+      }
+
+      setTimeout(function() {
+      that.tick();
+      }, delta);
+  };
+
+  window.onload = function() {
+      var elements = document.getElementsByClassName('typewrite');
+      for (var i=0; i<elements.length; i++) {
+          var toRotate = elements[i].getAttribute('data-type');
+          var period = elements[i].getAttribute('data-period');
+          if (toRotate) {
+            new TxtType(elements[i], JSON.parse(toRotate), period);
+          }
+      }
+      // INJECT CSS
+      var css = document.createElement("style");
+      css.type = "text/css";
+      css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+      document.body.appendChild(css);
+  };
+  </script>
+  <script>
+              new WOW().init();
+              </script>
+			  	<script>
+	jQuery(document).ready(function($) {
+
+	$(".scroll").click(function(event){
+		event.preventDefault();
+		$('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+	});
+});
+</script>
+<script>
+$(document).ready(function(){
+  $('a[href^="#"]').on('click',function (e) {
+      e.preventDefault();
+
+      var target = this.hash;
+      var $target = $(target);
+
+
+      $('html, body').stop().animate({
+   'scrollTop': $target.offset().top
+}, 900, 'swing');
+  });
+
+});
+
+</script>
+
+  </body>
+</html>
+
+

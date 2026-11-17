@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "a3dfc79",
+  "requirements": [
+    6,
+    8,
+    9
+  ],
+  "status": "PASSED",
+  "new_cases": 17,
+  "scope": "Exact MeetingGetByMeetingType and AgendaItemTextGetByMeetingId SOAP reads; parent/language validation, language-qualified stable identity, source Mintues text, citations/reopen/search/neutral export, bounds/cancel. No API login or live SOAP call.",
+  "checks": [
+    {
+      "command": "pytest tests/test_escribe_selected_text.py tests/test_escribe_publishing.py tests/test_escribe_related_records.py tests/test_escribe_upload.py tests/test_escribe_detail.py tests/test_escribe_native_search.py tests/test_escribe_media_projection.py tests/test_interfaces.py tests/test_public_package.py tests/test_baseline.py tests/test_baseline_search.py -q",
+      "passed": 240,
+      "failed": 0,
+      "seconds": 21.69
+    },
+    {
+      "command": "pytest tests/test_escribe_selected_text.py -q",
+      "passed": 17,
+      "failed": 0,
+      "seconds": 0.55
+    },
+    {
+      "command": "ruff check src tests scripts examples",
+      "status": "passed"
+    }
+  ],
+  "prior_full": "2105passed at a3dfc79 before17new selected-text cases; unaffected evidence reused, not represented as current full-suite run.",
+  "initial_test_correction": "Both native-language fixtures contained identical supplied minutes text; search correctly returned two hits. Expected count corrected from one to two. Test E701 layout corrected without product behavior change.",
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/escribe_publishing.py",
+      "sha256": "3040f2f906aee9f737eee136413840af6fb304132f8813cf4785f9e07fb1f1b3"
+    },
+    {
+      "path": "src/civic_data_connectors/data/escribe_publishing.json",
+      "sha256": "aa80d0fdcd4a546774686cbdc165b00ed82b7e3b40e64fabb3399f45f6db83e5"
+    },
+    {
+      "path": "scripts/pin_escribe_contract.py",
+      "sha256": "348497566e590b0986b5ff9e6e9288b06e350d832c884d9323f0794e80ac93c8"
+    },
+    {
+      "path": "tests/test_escribe_selected_text.py",
+      "sha256": "94dbb3d0559e586b5c838093a98fbcd60141390a1c329490961cff511ededb90"
+    }
+  ],
+  "source_metadata": "docs/capabilities/evidence/escribe-publishing-wsdl/source.json",
+  "delivery": "Local source only; no release/build/package/push/merge/tag/sign/install/pin or live vendor mutation."
+}

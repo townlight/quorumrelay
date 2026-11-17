@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-16",
+  "source_url": "https://towncloud.io/go/woodford-vt/agendas/452",
+  "capture_bytes": 4763,
+  "capture_sha256": "13322460a2f37b8b9cd46724b665ef61eafcf379dbe431043793e08809fbf5e3",
+  "normalize_status": "completed",
+  "agenda_item_count": 6,
+  "search_terms": "Mitigation",
+  "search_hits": 1,
+  "json_roundtrip_equal": true,
+  "scope": "Fresh public page fetched headlessly then normalized/search/exported through existing engine. No authenticated editor/account/write."
+}
