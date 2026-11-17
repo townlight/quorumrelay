@@ -113,6 +113,13 @@ tests/test_boardable_meeting_write.py -text whitespace=cr-at-eol
 tests/test_boardable_series_write.py -text whitespace=cr-at-eol
 tests/test_iqm2_media_write.py -text whitespace=cr-at-eol
 tests/test_iqm2_meeting_write.py -text whitespace=cr-at-eol
+# These executed test-source bindings pin LF bytes. Preserve them on Windows
+# checkouts as well; autocrlf otherwise invalidates the existing raw digests.
+tests/test_primegov_documents.py -text
+tests/test_iqm2_write.py -text
+tests/test_telvue_playlist_write.py -text
+tests/test_telvue_chapter_export.py -text
+tests/test_gworks_media_write.py -text
 docs/capabilities/evidence/boardable-current-builder/boardable-current-source-excerpts.json whitespace=cr-at-eol
 docs/capabilities/evidence/boardable-current-builder/boardable-live-verification.json whitespace=cr-at-eol
 docs/capabilities/evidence/boardable-current-builder/source.json whitespace=cr-at-eol
