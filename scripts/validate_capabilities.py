@@ -268,6 +268,7 @@ def semantic_errors(data, identities):
                         ("boardable", "item", "create"),
                         ("boardable", "meeting", "create"), ("boardable", "meeting", "update"),
                         ("boardable", "meeting_document", "upload"),
+                        ("boardable", "document", "upload"), ("boardable", "document", "update"),
                         ("gworks", "meeting", "create"), ("gworks", "meeting", "update"),
                         ("gworks", "media", "upload"),
                         ("towncloud", "item_draft", "update"),

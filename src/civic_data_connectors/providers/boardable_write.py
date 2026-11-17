@@ -15,6 +15,7 @@ from .boardable_builder_write import BoardableBuilderWriteAdapter
 from .boardable_meeting_documents import BoardableMeetingDocumentsWriteAdapter
 from .boardable_meeting_write import BoardableMeetingWriteAdapter
 from .boardable_series_write import BoardableSeriesWriteAdapter
+from .boardable_document_center import BoardableDocumentCenterWriteAdapter
 
 
 def _native_id(value):
@@ -30,6 +31,7 @@ class BoardableWriteAdapter(WriteAdapter):
         self.meeting = BoardableMeetingWriteAdapter(self.transport)
         self.documents = BoardableMeetingDocumentsWriteAdapter(self.transport)
         self.series = BoardableSeriesWriteAdapter(self.transport)
+        self.center = BoardableDocumentCenterWriteAdapter(self.transport)
 
     def bind_files(self, engine, context):
         bound = super().bind_files(engine, context)
@@ -37,7 +39,15 @@ class BoardableWriteAdapter(WriteAdapter):
         bound.meeting = self.meeting.bind_files(engine, context)
         bound.documents = self.documents.bind_files(engine, context)
         bound.series = self.series.bind_files(engine, context)
+        bound.center = self.center.bind_files(engine, context)
         return bound
+
+    def _is_document_center(self, source, context):
+        config = context.credentials.get(self.provider)
+        if isinstance(config, dict) and config.get("current_document_center") is True:
+            self.center.credentials(source, context)
+            return True
+        return False
 
     def _is_meeting_series(self, source, context):
         config = context.credentials.get(self.provider)
@@ -89,6 +99,8 @@ class BoardableWriteAdapter(WriteAdapter):
         return current
 
     def credentials(self, source, context):
+        if self._is_document_center(source, context):
+            return self.center.credentials(source, context)
         if self._is_meeting_documents(source, context):
             return self.documents.credentials(source, context)
         if self._is_meeting_series(source, context):
@@ -116,6 +128,8 @@ class BoardableWriteAdapter(WriteAdapter):
         return config
 
     def validate_source(self, source, context):
+        if self._is_document_center(source, context):
+            return self.center.validate_source(source, context)
         if self._is_meeting_documents(source, context):
             return self.documents.validate_source(source, context)
         if self._is_meeting_series(source, context):
@@ -129,6 +143,8 @@ class BoardableWriteAdapter(WriteAdapter):
         self.credentials(source, context)
 
     def authorize(self, source, change, context):
+        if self._is_document_center(source, context):
+            return self.center.authorize(source, change, context)
         if self._is_meeting_documents(source, context):
             return self.documents.authorize(source, change, context)
         if self._is_meeting_series(source, context):
@@ -263,6 +279,8 @@ class BoardableWriteAdapter(WriteAdapter):
         return flat
 
     def prepare(self, source, change, context, bounds, deadline):
+        if self._is_document_center(source, context):
+            return self.center.prepare(source, change, context, bounds, deadline)
         if self._is_meeting_documents(source, context):
             return self.documents.prepare(source, change, context, bounds, deadline)
         if self._is_meeting_series(source, context):
@@ -387,6 +405,8 @@ class BoardableWriteAdapter(WriteAdapter):
                            "headers": {}, "body": fields}}
 
     def apply(self, source, prepared, context, bounds, deadline, *, persist=None):
+        if self._is_document_center(source, context):
+            return self.center.apply(source, prepared, context, bounds, deadline, persist=persist)
         if self._is_meeting_documents(source, context):
             return self.documents.apply(source, prepared, context, bounds, deadline, persist=persist)
         if prepared.get("series_mode"):
@@ -429,6 +449,8 @@ class BoardableWriteAdapter(WriteAdapter):
             raise AmbiguousWrite('The mutation was sent before readback could be confirmed.') from None
 
     def reconcile(self, source, prepared, item, context, bounds, deadline):
+        if self._is_document_center(source, context):
+            return self.center.reconcile(source, prepared, item, context, bounds, deadline)
         if self._is_meeting_documents(source, context):
             return self.documents.reconcile(source, prepared, item, context, bounds, deadline)
         if prepared.get("series_mode"):

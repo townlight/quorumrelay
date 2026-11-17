@@ -298,6 +298,7 @@ Evidence and exact scope: `inventory.json` provider `clerkbase`; operation statu
 - The saved Logan Township response contains five events. Adjacent-month, recurrence/timezone and update sampling were not executed; these are explicit feed-coverage limits, not a universal contract gap or mandatory new survey.
 - RFC 5545 defines event serialization, not universal feed paging or a write endpoint. Establish the published feed horizon/update behavior; do not infer mutation from subscription URLs.
 - Keep neutral iCalendar export separate from writing to a municipality calendar; no provider-specific import/write contract is supplied.
+- The goal's local ICS parsing/export artifact work is implemented in `compat.py` and `interchange.py`, including stable UIDs, escaping/folding and explicit time/cancellation handling. Remote calendar mutation remains separate; the older pending neutral-export label is stale metadata, not a missing generator.
 
 Evidence and exact scope: `inventory.json` provider `first-party`; operation status and outbound mappings are separate from historical observations.
 
@@ -319,11 +320,12 @@ Evidence and exact scope: `inventory.json` provider `wistia`; operation status a
 - Public meeting rows expose description, not a verified normalized body field; body filtering is unknown. Preserve timezone literals and the earlier VCCCD detail-versus-landing display discrepancy.
 - The listing has no agenda/document/media locators. Selected known-detail mapping and supplied viewer-to-document resolution are implemented with separate synthetic and bounded live-byte receipts. Other documents and the listing/detail date disagreement remain unverified; the separate native-search implementation does not establish complete catalog coverage.
 - The pinned public legacy client establishes sibling reorder, existing item text/description updates and text-only item creation. Existing36 coordinator cases plus21 new creation cases (64 affected passed) cover the scoped operations. Explicit runtime organization/meeting URLs and legacy-editor binding are required. No draft creation, parent moves, new attachments or publication. See [exact usage and limits](../BOARDABLE-WRITES.md).
-- Current Agenda Builder item create/update and associated new uploads are implemented with exact item/tree/association and original-byte verification (105 affected synthetic cases). The separate evaluation trial exercised create201 and update/upload200 with an exact134-byte download. Full meeting forms, recurring days, draft preparation, publication and imports remain open.
+- Current Agenda Builder item create/update and associated new uploads are implemented with exact item/tree/association and original-byte verification (105 affected synthetic cases). The separate evaluation trial exercised create201 and update/upload200 with an exact134-byte download. Bounded native meeting forms, weekly interval1 series and root meeting supporting-file upload are now implemented; broader recurrence/access states, publication, imports and replacement remain open.
+- General Document Center root upload and existing-title editing now use the separately captured native requests and original-byte readback. See [exact scope](../BOARDABLE-DOCUMENT-CENTER.md). API entitlement/key provisioning and the remaining recurrence/publication/import/replacement contracts remain unresolved.
 
 Evidence and exact scope: `inventory.json` provider `boardable`; operation status and outbound mappings are separate from historical observations.
 
-- Literal legacy NewAgendaItem contract now implements text-only root/child creation with explicit parent and empty date. Native returned ID and exact preserved-tree readback, snapshot preflight, durable intent/restart/noPOSTreplay and post-send cancellation have21new/64affected synthetic cases. Full meeting creation/publication remain unmapped; current-builder item files are covered separately.
+- Literal legacy NewAgendaItem contract now implements text-only root/child creation with explicit parent and empty date. Native returned ID and exact preserved-tree readback, snapshot preflight, durable intent/restart/noPOSTreplay and post-send cancellation have21new/64affected synthetic cases. Legacy-client meeting creation/publication remain unmapped; current native meeting forms and current-builder item files are covered separately.
 
 ## F29 gWorks FrontDesk (`gworks`)
 
@@ -440,7 +442,7 @@ The existing pinned WSDL establishes AgendaItemHistoryCreate and its typed retur
 The existing pinned WSDL establishes DocumentGetSince(intLastInsertedId), returning native document records. Explicit caller selection is now mapped and synthetically verified (25new/289affected passed), preserving native IDs, metadata, exact response/request context, SQLite retry/reopen/search and JSON/JSONL/ZIP. Ordering, selector inclusion, cursor advancement, full catalog and document byte availability remain qualified; no automatic continuation or complete-empty inference. This adds a scoped read, not a new provider or outbound operation.
 
 
-MinuteTraq native-write update (2026-11-16): selected agenda/minutes item-title edits and meeting create/update now pass70affectedchecks, including independent System.Data wire verification. See `../IQM2-MINUTETRAQ-SOAP.md` and `../verification/iqm2-minutetraq-writes-2026-11-16.json`. Earlier unknown-machine-endpoint statements are superseded only for those operations. Recording/chunk transfer, document imports and broader publication remain unfinished.
+MinuteTraq native-write update (2026-11-16): selected agenda/minutes item-title edits and meeting create/update pass70affectedchecks, including independent System.Data wire verification. Native recording creation/replacement and512000-byte media chunks have since been implemented and tested separately. See `../IQM2-MINUTETRAQ-SOAP.md` and the pinned write/media receipts. Document imports and broader publication remain unfinished.
 
 
 Boardable current-builder update (2026-11-16): explicit current_agenda_builder mode

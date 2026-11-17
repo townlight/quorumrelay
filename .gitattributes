@@ -120,10 +120,14 @@ tests/test_iqm2_write.py -text
 tests/test_telvue_playlist_write.py -text
 tests/test_telvue_chapter_export.py -text
 tests/test_gworks_media_write.py -text
-src/civic_data_connectors/providers/simbli_write.py -text
+src/civic_data_connectors/providers/simbli_write.py -text whitespace=cr-at-eol
 src/civic_data_connectors/write_adapters.py -text
-tests/test_simbli_item_write.py -text
+tests/test_simbli_item_write.py -text whitespace=cr-at-eol
 docs/verification/simbli-item-write-2026-11-16.xml -text
+docs/investigations/2026-11-16-paused/CURRENT-STATE.md whitespace=cr-at-eol
+src/civic_data_connectors/providers/boardable_document_center.py -text
+tests/test_boardable_document_center.py -text
+docs/verification/boardable-document-center-2026-11-16.xml -text
 docs/capabilities/evidence/boardable-current-builder/boardable-current-source-excerpts.json whitespace=cr-at-eol
 docs/capabilities/evidence/boardable-current-builder/boardable-live-verification.json whitespace=cr-at-eol
 docs/capabilities/evidence/boardable-current-builder/source.json whitespace=cr-at-eol

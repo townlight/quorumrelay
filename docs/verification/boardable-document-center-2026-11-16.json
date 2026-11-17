@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-16",
+  "scope": "Captured general root Document Center upload/title update plus re-executed existing Boardable write scopes after dispatcher change; synthetic only, no new vendor actions.",
+  "checks": [
+    {
+      "command": "python -X utf8 -m pytest tests/test_boardable_document_center.py tests/test_boardable_meeting_documents.py tests/test_boardable_series_write.py tests/test_boardable_meeting_write.py tests/test_boardable_builder_write.py tests/test_boardable_agenda_write.py tests/test_boardable_item_create.py -q",
+      "passed": 227,
+      "failed": 0,
+      "seconds": 502.979
+    }
+  ],
+  "new_document_center_cases": 31,
+  "junit": {
+    "path": "docs/verification/boardable-document-center-2026-11-16.xml",
+    "sha256": "3ada1600d9c27c7eda5d76d2e2ef2effa6eb6d1b330cc0bef53620a8ce4d9f96"
+  },
+  "files": [
+    {
+      "path": "src/civic_data_connectors/providers/boardable_document_center.py",
+      "sha256": "7546dd58bd4f779710af22e927082592f611eeb6bc51b3caa74daea7955b6e95"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/boardable_write.py",
+      "sha256": "9b555e93de01cfe1c749396b952184caf0d659ab9f6901136fa2c07ac3284518"
+    },
+    {
+      "path": "tests/test_boardable_document_center.py",
+      "sha256": "c23a350239945d900b75197c36f01a4e343c6dafc57d61e47670c01c5c2142be"
+    },
+    {
+      "path": "tests/test_boardable_meeting_documents.py",
+      "sha256": "2de2825d7d428b10f0d8b95a1de521e9ba76075ea20cf15615c9ebbc5372254c"
+    },
+    {
+      "path": "tests/test_boardable_series_write.py",
+      "sha256": "dfd32ea6173b1dca059ff3ea98378ec53bd5a44e3a799e4ee197715b41e9b089"
+    },
+    {
+      "path": "tests/test_boardable_meeting_write.py",
+      "sha256": "f88cbf816a794e7d17d0417004ec99c6ee8ff36ae75199cfe2c4312c2af39e72"
+    },
+    {
+      "path": "tests/test_boardable_builder_write.py",
+      "sha256": "b6c5b5c960513d15bdfaafc897e0bbb8ea3f47212a0cf79c4af4a148a422cfe4"
+    },
+    {
+      "path": "tests/test_boardable_agenda_write.py",
+      "sha256": "71d273f47b85857701d672aac8afe1a30476a93853166079d836d93addf4568e"
+    },
+    {
+      "path": "tests/test_boardable_item_create.py",
+      "sha256": "6ead52b86041da75b790b0d77d00372812a7213b3e98c23042363d0e5681439f"
+    }
+  ],
+  "lint": "Full required Ruff passed",
+  "remaining": [
+    "Required current-candidate integrated CI",
+    "API entitlement/key provisioning",
+    "Broader recurrence/access/publication/import/replacement contracts"
+  ]
+}

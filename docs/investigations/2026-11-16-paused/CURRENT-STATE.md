@@ -1,5 +1,18 @@
 # QuorumRelay current state — November 16, 2026
 
+## Current candidate: general Boardable Document Center writes
+
+Root computer-file upload and existing-title update now execute through the
+registered Boardable dispatcher. All227 affected cases passed (31new Document
+Center cases plus196 existing Boardable write cases),504.10seconds. After
+recording scoped evidence and the dispatcher re-execution,25metadata cases,
+capability validation and required full Ruff passed. See
+`docs/verification/boardable-document-center-2026-11-16.json` and
+`docs/BOARDABLE-DOCUMENT-CENTER.md`. New candidate integrated CI is pending push.
+Existing receipts remain historical; four new re-execution evidence records
+bind the changed dispatcher to the same tested legacy/series/meeting-file scopes.
+No vendor writes/accounts/payments/contacts occurred during this resumed work.
+
 ## Resumed: CI repaired; selected Simbli title write implemented
 
 Scott resumed the full goal in the Desktop Goals document, with CI first.
@@ -14,8 +27,8 @@ Its68 synthetic engine/SQLite cases plus25 metadata cases passed (93total,
 132.84seconds). Post-inventory bookkeeping25 metadata cases, capability
 validator and full required Ruff also passed. Receipt and exact pinned inputs:
 `docs/verification/simbli-item-write-2026-11-16.json`; native scope and remaining
-work: `docs/SIMBLI-WRITES.md`. Required integrated CI for this new candidate is
-the next delivery check; do not substitute the previous candidate's green run.
+work: `docs/SIMBLI-WRITES.md`. GitHub run44005225052 passed all required checks
+for delivered Simbli commit `f5a786afcd75e3838b98b67784534837de35f27b`.
 
 This closes only existing editable no-workflow agenda-item title updates.
 Simbli meeting/item creation, supporting uploads, minutes and publication remain

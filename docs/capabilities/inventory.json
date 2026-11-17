@@ -29829,6 +29829,305 @@
               }
             ]
           }
+        },
+        {
+          "id": "boardable-legacy-item-create-execution-dispatcher-reexecution-2026-11-16",
+          "url": "https://app.boardable.com/v4/js/app.js?id=052287e3f473e7b1de4bacb15a125802",
+          "title": "Literal legacy NewAgendaItem request and native tree readback execution; current dispatcher re-execution",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observed": "2026-11-14",
+          "observation_date": "2026-11-16",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "access_scope": "saved_anonymous_vendor_client_and_synthetic_coordinator_no_live_mutation",
+          "receipt_path": "docs/verification/boardable-document-center-2026-11-16.json",
+          "receipt_sha256": "7ca4cd03f2398185f56e3d23249f25668f30478685d1c67c40da24c9698d3441",
+          "limits": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication.",
+          "synthetic_execution": {
+            "provider": "boardable",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "item",
+              "agenda_order"
+            ],
+            "scope": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication. Update attribution is post-send cancellation/reconciliation of existing reorder only.",
+            "execution_provenance": "Re-executed the same attributed native entity/field scope in all seven Boardable write modules after adding independent Document Center dispatch. Earlier receipts remain historical; no new live actions.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_boardable_document_center.py tests/test_boardable_meeting_documents.py tests/test_boardable_series_write.py tests/test_boardable_meeting_write.py tests/test_boardable_builder_write.py tests/test_boardable_agenda_write.py tests/test_boardable_item_create.py -q",
+                "passed": 227,
+                "failed": 0,
+                "seconds": 502.979
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-client-write/create-item.extract.js",
+                "sha256": "eecdc1faed76639546fcdeabdc4a4dd319d8023670ef18bc70b19fd889e06ff3"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-client-write/create-item-source.json",
+                "sha256": "9187ca98dac8df305e9f367c10adda85ed35fb59dabdde9f8746c1a018aeac21"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_write.py",
+                "sha256": "9b555e93de01cfe1c749396b952184caf0d659ab9f6901136fa2c07ac3284518"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardable_item_create.py",
+                "sha256": "6ead52b86041da75b790b0d77d00372812a7213b3e98c23042363d0e5681439f",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "6ead52b86041da75b790b0d77d00372812a7213b3e98c23042363d0e5681439f"
+              }
+            ]
+          }
+        },
+        {
+          "id": "boardable-legacy-write-bounds-reexecution-2026-11-15-dispatcher-reexecution-2026-11-16",
+          "url": "https://app.boardable.com/v4/js/app.js?id=052287e3f473e7b1de4bacb15a125802",
+          "title": "Legacy Boardable native writes reexecuted after response bound correction; current dispatcher re-execution",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observed": "2026-11-15",
+          "observation_date": "2026-11-16",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "access_scope": "saved_anonymous_vendor_client_and_synthetic_coordinator_no_live_mutation",
+          "receipt_path": "docs/verification/boardable-document-center-2026-11-16.json",
+          "receipt_sha256": "7ca4cd03f2398185f56e3d23249f25668f30478685d1c67c40da24c9698d3441",
+          "limits": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication.",
+          "synthetic_execution": {
+            "provider": "boardable",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "item",
+              "agenda_order"
+            ],
+            "scope": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication. Update attribution is post-send cancellation/reconciliation of existing reorder only.",
+            "execution_provenance": "Re-executed the same attributed native entity/field scope in all seven Boardable write modules after adding independent Document Center dispatch. Earlier receipts remain historical; no new live actions.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_boardable_document_center.py tests/test_boardable_meeting_documents.py tests/test_boardable_series_write.py tests/test_boardable_meeting_write.py tests/test_boardable_builder_write.py tests/test_boardable_agenda_write.py tests/test_boardable_item_create.py -q",
+                "passed": 227,
+                "failed": 0,
+                "seconds": 502.979
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-client-write/create-item.extract.js",
+                "sha256": "eecdc1faed76639546fcdeabdc4a4dd319d8023670ef18bc70b19fd889e06ff3"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-client-write/create-item-source.json",
+                "sha256": "9187ca98dac8df305e9f367c10adda85ed35fb59dabdde9f8746c1a018aeac21"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_write.py",
+                "sha256": "9b555e93de01cfe1c749396b952184caf0d659ab9f6901136fa2c07ac3284518"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardable_item_create.py",
+                "sha256": "6ead52b86041da75b790b0d77d00372812a7213b3e98c23042363d0e5681439f",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "6ead52b86041da75b790b0d77d00372812a7213b3e98c23042363d0e5681439f"
+              }
+            ]
+          }
+        },
+        {
+          "id": "boardable-series-form-2026-11-16-dispatcher-reexecution-2026-11-16",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/meetings",
+          "title": "Boardable exact weekly series native create/update and all-occurrence readback; current dispatcher re-execution",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-16",
+          "observed": "Private native series12616: create201,metadata update200,each canonical occurrence GET200; same native IDs/schedule retained.",
+          "findings": [
+            "Boardable native weekly interval1 owner-only private unpublished no_remote series creation and original-leader whole-series title/description/location updates; complete occurrence identity/schedule readback, scoped grants and no-replay recovery."
+          ],
+          "limits": "Weekly interval1 and two through52 bounded occurrences. No schedule edits, other recurrence patterns, publication, invitations or general uploads. Native adapter execution is synthetic; native browser API fixtures independently executed.",
+          "access_scope": "authorized_evaluation_trial_and_local_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/boardable-document-center-2026-11-16.json",
+          "receipt_sha256": "7ca4cd03f2398185f56e3d23249f25668f30478685d1c67c40da24c9698d3441",
+          "synthetic_execution": {
+            "provider": "boardable",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Boardable native weekly interval1 owner-only private unpublished no_remote series creation and original-leader whole-series title/description/location updates; complete occurrence identity/schedule readback, scoped grants and no-replay recovery.",
+            "execution_provenance": "Re-executed the same attributed native entity/field scope in all seven Boardable write modules after adding independent Document Center dispatch. Earlier receipts remain historical; no new live actions.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_boardable_document_center.py tests/test_boardable_meeting_documents.py tests/test_boardable_series_write.py tests/test_boardable_meeting_write.py tests/test_boardable_builder_write.py tests/test_boardable_agenda_write.py tests/test_boardable_item_create.py -q",
+                "passed": 227,
+                "failed": 0,
+                "seconds": 502.979
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-series-form/source.json",
+                "sha256": "2729f9736ad77c5e4d551965049df79994a9452416e2e6447d925dc5f81de548"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_series_write.py",
+                "sha256": "b28a49f5a589bcd5c0797a988bd40e5f948c3f4550bf8a65acff2500a0643e88"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_write.py",
+                "sha256": "9b555e93de01cfe1c749396b952184caf0d659ab9f6901136fa2c07ac3284518"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardable_series_write.py",
+                "sha256": "dfd32ea6173b1dca059ff3ea98378ec53bd5a44e3a799e4ee197715b41e9b089"
+              }
+            ]
+          }
+        },
+        {
+          "id": "boardable-meeting-documents-2026-11-16-dispatcher-reexecution-2026-11-16",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/0e58cf-quorumrelay-contract-fixture-revised",
+          "title": "Boardable native supporting meeting-document upload and exact original-byte readback; current dispatcher re-execution",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-16",
+          "observed": "Two authorized native uploads200 empty; controlled before684953/after684953+684954; canonical meeting, root list, exact detail and original download200.",
+          "findings": [
+            "One root supporting meeting-document upload to an exact trusted owner-only private unpublished nonseries no_remote meeting; complete before/after native ID delta, independent association and original-byte SHA256; durable identity and read-only recovery without upload replay."
+          ],
+          "limits": "Root one-file supporting material only. Native browser capture executed independently; adapter executed locally with captured-response replay and adversarial synthetic transport.",
+          "access_scope": "authorized_evaluation_trial_and_local_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/boardable-document-center-2026-11-16.json",
+          "receipt_sha256": "7ca4cd03f2398185f56e3d23249f25668f30478685d1c67c40da24c9698d3441",
+          "synthetic_execution": {
+            "provider": "boardable",
+            "status": "mock_passed",
+            "operations": [
+              "upload"
+            ],
+            "entities": [
+              "meeting_document"
+            ],
+            "scope": "One root supporting meeting-document upload to an exact trusted owner-only private unpublished nonseries no_remote meeting; complete before/after native ID delta, independent association and original-byte SHA256; durable identity and read-only recovery without upload replay.",
+            "execution_provenance": "Re-executed the same attributed native entity/field scope in all seven Boardable write modules after adding independent Document Center dispatch. Earlier receipts remain historical; no new live actions.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_boardable_document_center.py tests/test_boardable_meeting_documents.py tests/test_boardable_series_write.py tests/test_boardable_meeting_write.py tests/test_boardable_builder_write.py tests/test_boardable_agenda_write.py tests/test_boardable_item_create.py -q",
+                "passed": 227,
+                "failed": 0,
+                "seconds": 502.979
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-meeting-documents/source.json",
+                "sha256": "6f3b76c6da7ecee4f13ba5ebf1117eb2efcc4eb5e58ad720df8d30e8764068ed"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_meeting_documents.py",
+                "sha256": "6e8871a8f90ff32b92b95b3956f3d7418d93c424574c6805310da03c6340c21a"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_write.py",
+                "sha256": "9b555e93de01cfe1c749396b952184caf0d659ab9f6901136fa2c07ac3284518"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardable_meeting_documents.py",
+                "sha256": "2de2825d7d428b10f0d8b95a1de521e9ba76075ea20cf15615c9ebbc5372254c"
+              }
+            ]
+          }
+        },
+        {
+          "id": "boardable-document-center-2026-11-16",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/documents/4456b3ae",
+          "title": "Boardable native general Document Center upload/title contracts and synthetic Engine/SQLite execution",
+          "kind": "source_and_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "observation_date": "2026-11-16",
+          "limits": "Captured root computer-file Document Center upload and existing title-only update, owner/organization/UUID binding, exact original-byte SHA256, current grants, bounded requests and durable read-only uncertain recovery; no replacement/folders/access changes.",
+          "receipt_path": "docs/verification/boardable-document-center-2026-11-16.json",
+          "receipt_sha256": "7ca4cd03f2398185f56e3d23249f25668f30478685d1c67c40da24c9698d3441",
+          "synthetic_execution": {
+            "provider": "boardable",
+            "status": "mock_passed",
+            "operations": [
+              "upload",
+              "update"
+            ],
+            "entities": [
+              "document"
+            ],
+            "scope": "Captured root computer-file Document Center upload and existing title-only update, owner/organization/UUID binding, exact original-byte SHA256, current grants, bounded requests and durable read-only uncertain recovery; no replacement/folders/access changes.",
+            "execution_provenance": "Captured native browser request/response fixtures and original bytes replayed through registered Engine/SQLite adapter with negative cases; no exported credentials or new live operations.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_boardable_document_center.py tests/test_boardable_meeting_documents.py tests/test_boardable_series_write.py tests/test_boardable_meeting_write.py tests/test_boardable_builder_write.py tests/test_boardable_agenda_write.py tests/test_boardable_item_create.py -q",
+                "passed": 227,
+                "failed": 0,
+                "seconds": 502.979
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-document-center/source.json",
+                "sha256": "467e1730d49b8272d3f03cd13c578d465ad8f44b5c04793cdccda78c57819334"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-document-center/boardable-document-center-create.json",
+                "sha256": "ec152fe263dc08a7d036c89991e3a1cbadcae19dfa506e92f11e2696bc3e3cfc"
+              },
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-document-center/boardable-document-center-json-update.json",
+                "sha256": "82463401f0069a5b6f60d698823a0205b2332d41afec7d59b457336611cad954"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardable_document_center.py",
+                "sha256": "c23a350239945d900b75197c36f01a4e343c6dafc57d61e47670c01c5c2142be"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_document_center.py",
+                "sha256": "7546dd58bd4f779710af22e927082592f611eeb6bc51b3caa74daea7955b6e95"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_write.py",
+                "sha256": "9b555e93de01cfe1c749396b952184caf0d659ab9f6901136fa2c07ac3284518"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -30042,7 +30341,10 @@
             "boardable-legacy-write-bounds-reexecution-2026-11-15",
             "boardable-current-builder-2026-11-16",
             "boardable-meeting-form-2026-11-16",
-            "boardable-series-form-2026-11-16"
+            "boardable-series-form-2026-11-16",
+            "boardable-legacy-item-create-execution-dispatcher-reexecution-2026-11-16",
+            "boardable-legacy-write-bounds-reexecution-2026-11-15-dispatcher-reexecution-2026-11-16",
+            "boardable-series-form-2026-11-16-dispatcher-reexecution-2026-11-16"
           ],
           "details": "Scoped native single private unpublished no_remote meeting create implemented with exact native ID/canonicalURL readback. Existing legacy/current-builder item create evidence remains separately attributed. Recurrence, multi-day, scheduler, draft preparation, publication and imports remain open. Weekly series creation and complete-series metadata updates are additionally implemented through explicit trusted series mode; schedule changes remain unmapped.",
           "dependencies": [],
@@ -30068,9 +30370,13 @@
             "boardable-legacy-item-create-execution",
             "boardable-legacy-write-bounds-reexecution-2026-11-15",
             "boardable-meeting-form-2026-11-16",
-            "boardable-series-form-2026-11-16"
+            "boardable-series-form-2026-11-16",
+            "boardable-legacy-item-create-execution-dispatcher-reexecution-2026-11-16",
+            "boardable-legacy-write-bounds-reexecution-2026-11-15-dispatcher-reexecution-2026-11-16",
+            "boardable-series-form-2026-11-16-dispatcher-reexecution-2026-11-16",
+            "boardable-document-center-2026-11-16"
           ],
-          "details": "Scoped native single private unpublished no_remote meeting update implemented with exact native ID/canonicalURL readback. Existing legacy/current-builder item update evidence remains separately attributed. Recurrence, multi-day, scheduler, draft preparation, publication and imports remain open. Weekly series creation and complete-series metadata updates are additionally implemented through explicit trusted series mode; schedule changes remain unmapped.",
+          "details": "Scoped native single private unpublished no_remote meeting update implemented with exact native ID/canonicalURL readback. Existing legacy/current-builder item update evidence remains separately attributed. Recurrence, multi-day, scheduler, draft preparation, publication and imports remain open. Weekly series creation and complete-series metadata updates are additionally implemented through explicit trusted series mode; schedule changes remain unmapped. General root Document Center update now has separately attributed synthetic execution; see document mapping.",
           "dependencies": [],
           "remaining_verification": [
             "New editor, meeting form, new items, new files and publication contracts remain unmapped."
@@ -30092,9 +30398,11 @@
           "implementation_status": "implemented",
           "evidence_ids": [
             "boardable-uploads",
-            "boardable-meeting-documents-2026-11-16"
+            "boardable-meeting-documents-2026-11-16",
+            "boardable-meeting-documents-2026-11-16-dispatcher-reexecution-2026-11-16",
+            "boardable-document-center-2026-11-16"
           ],
-          "details": "One root supporting meeting-document upload to an exact trusted owner-only private unpublished nonseries no_remote meeting; complete before/after native ID delta, independent association and original-byte SHA256; durable identity and read-only recovery without upload replay.",
+          "details": "One root supporting meeting-document upload to an exact trusted owner-only private unpublished nonseries no_remote meeting; complete before/after native ID delta, independent association and original-byte SHA256; durable identity and read-only recovery without upload replay. General root Document Center upload now has separately attributed synthetic execution; see document mapping.",
           "dependencies": [],
           "remaining_verification": [
             "Adapter has not used exported trial credentials; captured native behavior and local Engine/SQLite verification are separately recorded. Other access states/folders/replacement remain unmapped."
@@ -30174,7 +30482,8 @@
           ],
           "evidence_ids": [
             "boardable-meeting-form-2026-11-16",
-            "boardable-series-form-2026-11-16"
+            "boardable-series-form-2026-11-16",
+            "boardable-series-form-2026-11-16-dispatcher-reexecution-2026-11-16"
           ],
           "account_requirements": "Authorized tenant staff account, applicable module/tier and entity/workflow permissions; exact API entitlement unknown.",
           "authorized_test_access": "authorized_private_evaluation_trial",
@@ -30244,7 +30553,8 @@
           ],
           "evidence_ids": [
             "boardable-meeting-form-2026-11-16",
-            "boardable-series-form-2026-11-16"
+            "boardable-series-form-2026-11-16",
+            "boardable-series-form-2026-11-16-dispatcher-reexecution-2026-11-16"
           ],
           "account_requirements": "Authorized tenant staff account, applicable module/tier and entity/workflow permissions; exact API entitlement unknown.",
           "authorized_test_access": "authorized_private_evaluation_trial",
@@ -30290,7 +30600,8 @@
           ],
           "evidence_ids": [
             "boardable-uploads",
-            "boardable-meeting-documents-2026-11-16"
+            "boardable-meeting-documents-2026-11-16",
+            "boardable-meeting-documents-2026-11-16-dispatcher-reexecution-2026-11-16"
           ],
           "account_requirements": "Authorized native session/XSRF, current_meeting_form and current_meeting_documents, exact organization/owner/meeting/URL/namespace grants and meeting_document:upload permission.",
           "authorized_test_access": "authorized_private_evaluation_trial",
@@ -30498,7 +30809,9 @@
           "evidence_ids": [
             "boardable-legacy-item-create-execution",
             "boardable-legacy-write-bounds-reexecution-2026-11-15",
-            "boardable-current-builder-2026-11-16"
+            "boardable-current-builder-2026-11-16",
+            "boardable-legacy-item-create-execution-dispatcher-reexecution-2026-11-16",
+            "boardable-legacy-write-bounds-reexecution-2026-11-15-dispatcher-reexecution-2026-11-16"
           ],
           "account_requirements": "Trusted legacy tenant/org/meeting URL, namespace/meeting allowlists, item:create, session_cookie and CSRF. Readable existing edit-list; no credential acquisition gate.",
           "authorized_test_access": "synthetic_only_no_live_mutation",
@@ -30523,6 +30836,82 @@
           "api_version": "observed2026-11-14legacyclient",
           "automatable_contract_verified": true,
           "domain_scope": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication. Separate current-builder mode supports text/description/duration/is_private and item-associated new uploads; owner/presenters/approval tree and other nodes preserved."
+        },
+        {
+          "entity": "document",
+          "operation": "upload",
+          "endpoint_or_format": "POST /{org}/documents",
+          "field_mappings": [
+            {
+              "normalized": "title",
+              "provider_field": "title",
+              "mapping_level": "observed_vendor_client_payload_field"
+            }
+          ],
+          "evidence_ids": [
+            "boardable-document-center-2026-11-16"
+          ],
+          "account_requirements": "Exact private Document Center organization/owner/namespace grant; upload permission or existing-document ID/URL allowlist and update permission.",
+          "authorized_test_access": "synthetic_only_no_new_live_mutation",
+          "readback_receipt": "Independent native data and original download, UUID/ID binding, original SHA256 and length; uncertain saves recover read-only without replay.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_native_browser_capture_and_synthetic_engine_sqlite",
+          "method": "POST",
+          "api_version": "Captured native web Document Center 2026-11-16",
+          "automatable_contract_verified": true,
+          "domain_scope": "Captured root computer-file Document Center upload and existing title-only update, owner/organization/UUID binding, exact original-byte SHA256, current grants, bounded requests and durable read-only uncertain recovery; no replacement/folders/access changes."
+        },
+        {
+          "entity": "document",
+          "operation": "update",
+          "endpoint_or_format": "POST /{org}/documents/{native_document_id}",
+          "field_mappings": [
+            {
+              "normalized": "title",
+              "provider_field": "title",
+              "mapping_level": "observed_vendor_client_payload_field"
+            }
+          ],
+          "evidence_ids": [
+            "boardable-document-center-2026-11-16"
+          ],
+          "account_requirements": "Exact private Document Center organization/owner/namespace grant; upload permission or existing-document ID/URL allowlist and update permission.",
+          "authorized_test_access": "synthetic_only_no_new_live_mutation",
+          "readback_receipt": "Independent native data and original download, UUID/ID binding, original SHA256 and length; uncertain saves recover read-only without replay.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
+          "requirement_ids": [
+            "C01",
+            "X03",
+            "W01",
+            "W04",
+            "W05",
+            "W08",
+            "W09",
+            "W10"
+          ],
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_native_browser_capture_and_synthetic_engine_sqlite",
+          "method": "POST",
+          "api_version": "Captured native web Document Center 2026-11-16",
+          "automatable_contract_verified": true,
+          "domain_scope": "Captured root computer-file Document Center upload and existing title-only update, owner/organization/UUID binding, exact original-byte SHA256, current grants, bounded requests and durable read-only uncertain recovery; no replacement/folders/access changes."
         }
       ],
       "pagination": {
@@ -30546,7 +30935,8 @@
         "Pinned legacy client establishes sibling reorder, existing item text/description updates and text-only item creation; all are implemented with scoped synthetic coordinator/readback evidence. Current-builder item/create/update and associated uploads are now implemented separately. Recurring days, recurring/multiday/scheduler meeting forms, publication and vendor imports remain open.",
         "Legacy new-file FormData branch is visible, but a created attachment identity/byte/readiness and full subsequent GET readback schema is not established. Existing attachment IDs are preserved during text edits; no file upload is guessed.",
         "Legacy text-only item creation now source implemented from NewAgendaItem client with explicit parent/root and empty date;64affected/21new synthetic cases. Recurring/multiday/scheduler meeting forms/publication remain unmapped; current-builder item files have separate evidence.",
-        "Root supporting meeting_document:upload now mapped from native empty200 contract with exact association/original-byte verification and read-only recovery. Legacy/general Document Center uploads, replacement and other meeting access states remain separate unresolved contracts."
+        "Root supporting meeting_document:upload now mapped from native empty200 contract with exact association/original-byte verification and read-only recovery. Legacy/general Document Center uploads, replacement and other meeting access states remain separate unresolved contracts.",
+        "General root Document Center upload and existing-title edits implemented and synthetically verified; remaining API entitlement, recurrence/access/publication/import/replacement scopes stay unresolved. See docs/BOARDABLE-DOCUMENT-CENTER.md."
       ],
       "authentication": "Public reads plus authorized QuorumRelay Evaluation trial; staff session secrets remain in trusted runtime credentials, outside evidence.",
       "registry_id": "boardable",
