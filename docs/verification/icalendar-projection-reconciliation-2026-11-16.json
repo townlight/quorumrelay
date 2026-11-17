@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-16",
+  "scope": "Existing local ICS projection re-execution and metadata reconciliation only; no hosting calendar write or provider acceptance.",
+  "command": "python -X utf8 -m pytest tests/test_interchange.py -k ical -q",
+  "passed": 11,
+  "failed": 0,
+  "deselected": 30,
+  "junit": {
+    "path": "docs/verification/icalendar-projection-reconciliation-2026-11-16.xml",
+    "sha256": "4fb4786fd4092b56742dcdeef3e802ac05101c464a8c83f5df545e2b3263015e"
+  },
+  "inputs": [
+    {
+      "path": "src/civic_data_connectors/interchange.py",
+      "sha256": "cbfc18f6bde980546a960540c341490198d6dde391e84b03b6e35daf78504f71"
+    },
+    {
+      "path": "tests/test_interchange.py",
+      "sha256": "dac21b51cd4b9f7595e56708421ccdfeb8a7ceb310dd1bb0133f431e4902d3c0"
+    }
+  ],
+  "verified": [
+    "RFC literal UTC DTSTART",
+    "stable source-identity-derived UID",
+    "DTSTAMP",
+    "escaping and UTF-8 byte folding",
+    "floating time disclosure",
+    "explicit cancellation mappings and omitted-field reporting",
+    "date-only DTSTART and unused date field reporting"
+  ],
+  "omitted": [
+    "DTEND",
+    "DESCRIPTION",
+    "recurrence",
+    "attendees",
+    "votes",
+    "document/media content"
+  ],
+  "limits": "The source/report retains all omitted fields. No claim of a lossless ICS projection or upstream write."
+}

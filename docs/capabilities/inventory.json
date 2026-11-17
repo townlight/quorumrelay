@@ -27646,51 +27646,39 @@
           "endpoint_or_format": "RFC 5545 VCALENDAR/VEVENT file only; no upstream write",
           "field_mappings": [
             {
-              "normalized": "external_id",
+              "normalized": "source_identity_key",
               "provider_field": "UID",
-              "notes": "Standards projection only; preserve timezone/all-day/recurrence semantics and disclose missing fields.",
+              "notes": "Stable UID derives from the complete record source identity, not a bare external ID.",
               "mapping_level": "neutral_projection"
             },
             {
               "normalized": "title",
               "provider_field": "SUMMARY",
-              "notes": "Standards projection only; preserve timezone/all-day/recurrence semantics and disclose missing fields.",
+              "notes": "Explicit local projection; omitted fields are disclosed in the loss report.",
               "mapping_level": "neutral_projection"
             },
             {
-              "normalized": "scheduled_start",
+              "normalized": "scheduled_start or meeting_date",
               "provider_field": "DTSTART",
-              "notes": "Standards projection only; preserve timezone/all-day/recurrence semantics and disclose missing fields.",
-              "mapping_level": "neutral_projection"
-            },
-            {
-              "normalized": "scheduled_end",
-              "provider_field": "DTEND",
-              "notes": "Standards projection only; preserve timezone/all-day/recurrence semantics and disclose missing fields.",
+              "notes": "UTC for known offset, floating for unknown offset, VALUE=DATE for date-only input.",
               "mapping_level": "neutral_projection"
             },
             {
               "normalized": "location",
               "provider_field": "LOCATION",
-              "notes": "Standards projection only; preserve timezone/all-day/recurrence semantics and disclose missing fields.",
-              "mapping_level": "neutral_projection"
-            },
-            {
-              "normalized": "description",
-              "provider_field": "DESCRIPTION",
-              "notes": "Standards projection only; preserve timezone/all-day/recurrence semantics and disclose missing fields.",
+              "notes": "Explicit local projection; omitted fields are disclosed in the loss report.",
               "mapping_level": "neutral_projection"
             },
             {
               "normalized": "source_url",
               "provider_field": "URL",
-              "notes": "Standards projection only; preserve timezone/all-day/recurrence semantics and disclose missing fields.",
+              "notes": "Explicit local projection; omitted fields are disclosed in the loss report.",
               "mapping_level": "neutral_projection"
             },
             {
-              "normalized": "status",
+              "normalized": "source_status",
               "provider_field": "STATUS",
-              "notes": "Standards projection only; preserve timezone/all-day/recurrence semantics and disclose missing fields.",
+              "notes": "CANCELLED only for exact CANCELLED string or native canceled=true; other states remain omitted.",
               "mapping_level": "neutral_projection"
             }
           ],
@@ -27699,10 +27687,10 @@
           ],
           "account_requirements": "No account for local file generation; no verified vendor/CMS import target.",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Local file parse/round-trip validation only; not an upstream receipt.",
-          "verification_status": "documented_standard_pending_shared_engine",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
+          "readback_receipt": "11 existing projection tests re-executed; docs/verification/icalendar-projection-reconciliation-2026-11-16.json. Local artifact only; upstream acceptance not asserted.",
+          "verification_status": "local_standard_projection_implemented_and_reexecuted",
+          "evidence_level": "local_source_and_executed_projection_cases_not_provider_acceptance",
+          "implementation_status": "implemented",
           "acceptance_status": "not_run",
           "requirement_ids": [
             "C01",
@@ -27737,7 +27725,8 @@
       "remaining_research": [
         "The saved Logan Township response contains five events. Adjacent-month, recurrence/timezone and update sampling were not executed; these are explicit feed-coverage limits, not a universal contract gap or mandatory new survey.",
         "RFC 5545 defines event serialization, not universal feed paging or a write endpoint. Establish the published feed horizon/update behavior; do not infer mutation from subscription URLs.",
-        "Keep neutral iCalendar export separate from writing to a municipality calendar; no provider-specific import/write contract is supplied."
+        "Keep neutral iCalendar export separate from writing to a municipality calendar; no provider-specific import/write contract is supplied.",
+        "Local ICS export pending label reconciled 2026-11-16 against existing source and 11 re-executed projection tests. DTEND/DESCRIPTION are omitted, not implemented mappings. Receipt: docs/verification/icalendar-projection-reconciliation-2026-11-16.json. Hosting calendar write acceptance remains unclaimed."
       ],
       "authentication": "Observed feed public. Publication/admin credentials and hosting CMS are separate, unknown contracts.",
       "write_findings": "Only standards-based neutral iCalendar projection is established. Hosting CMS create/update/upload and vendor-file import remain unverified; no CalDAV support inferred.",

@@ -175,3 +175,8 @@ docs/capabilities/evidence/towncloud-client-drafts/upload-source.json whitespace
 docs/capabilities/evidence/towncloud-client-drafts/upload.extract.js whitespace=cr-at-eol
 tests/fixtures/iqm2/media-wire-fixture.ps1 whitespace=cr-at-eol
 tests/fixtures/iqm2/meeting-wire-fixture.ps1 whitespace=cr-at-eol
+
+# Sanitized anonymous login capture retains source whitespace and line endings.
+docs/capabilities/evidence/primegov-login-followup/login-sanitized.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+docs/capabilities/evidence/primegov-login-followup/attachmentHelpers.js whitespace=cr-at-eol
+docs/verification/icalendar-projection-reconciliation-2026-11-16.xml -text

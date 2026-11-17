@@ -1,6 +1,29 @@
 # QuorumRelay current state — November 16, 2026
 
-## Current candidate: general Boardable Document Center writes
+## Current follow-up: inventory reconciliation and contract research
+
+The full31-vendor goal remains incomplete:26 entries retain open work. Boardable
+Document Center and selected Simbli title writes are delivered to the candidate
+branch and both passed full CI. No merge or release.
+
+The stale iCalendar pending label is reconciled against existing source and11
+re-executed projection tests. DTEND/DESCRIPTION are disclosed omissions and no
+longer listed as emitted mappings. Capability validation and25metadata cases
+passed after runtime synchronization. No product code changed in this follow-up.
+
+PrimeGov's declared Reno login and public attachment helper both returned200;
+they expose sign-in/escaping code, not administrative write models. Sanitized
+capture: `docs/capabilities/evidence/primegov-login-followup/source.json`.
+Simbli supporting-upload descriptor construction, order/visibility and full-item
+save assignment are pinned in `docs/capabilities/evidence/simbli-supporting-upload-followup/source.json`.
+Its exact public attachment viewer returned a security challenge. Original-byte
+readback, temporary-to-final identity and upload/save recovery remain unfinished.
+No upload adapter has been added. Next action: follow declared attachment-view
+client/package contracts or another product-matched source for original retrieval;
+continue other vendor gaps if this source remains unavailable. TownCloud parked;
+no vendor contacts, payments, merges or releases. No owned local background job.
+
+## Current verified implementation: general Boardable Document Center writes
 
 Root computer-file upload and existing-title update now execute through the
 registered Boardable dispatcher. All227 affected cases passed (31new Document
@@ -8,7 +31,7 @@ Center cases plus196 existing Boardable write cases),504.10seconds. After
 recording scoped evidence and the dispatcher re-execution,25metadata cases,
 capability validation and required full Ruff passed. See
 `docs/verification/boardable-document-center-2026-11-16.json` and
-`docs/BOARDABLE-DOCUMENT-CENTER.md`. New candidate integrated CI is pending push.
+`docs/BOARDABLE-DOCUMENT-CENTER.md`. Delivered commit `1f8272e1bb655ce13704eb56e322ccae39047042` passed every required GitHub CI step in run44008005112.
 Existing receipts remain historical; four new re-execution evidence records
 bind the changed dispatcher to the same tested legacy/series/meeting-file scopes.
 No vendor writes/accounts/payments/contacts occurred during this resumed work.

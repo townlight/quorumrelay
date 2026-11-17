@@ -298,7 +298,7 @@ Evidence and exact scope: `inventory.json` provider `clerkbase`; operation statu
 - The saved Logan Township response contains five events. Adjacent-month, recurrence/timezone and update sampling were not executed; these are explicit feed-coverage limits, not a universal contract gap or mandatory new survey.
 - RFC 5545 defines event serialization, not universal feed paging or a write endpoint. Establish the published feed horizon/update behavior; do not infer mutation from subscription URLs.
 - Keep neutral iCalendar export separate from writing to a municipality calendar; no provider-specific import/write contract is supplied.
-- The goal's local ICS parsing/export artifact work is implemented in `compat.py` and `interchange.py`, including stable UIDs, escaping/folding and explicit time/cancellation handling. Remote calendar mutation remains separate; the older pending neutral-export label is stale metadata, not a missing generator.
+- The goal's local ICS parsing/export artifact work is implemented in `compat.py` and `interchange.py`, including stable UIDs, escaping/folding and explicit time/cancellation handling. Remote calendar mutation remains separate; the older pending neutral-export label is now reconciled. Eleven existing projection cases passed on2026-11-16. DTEND/DESCRIPTION remain disclosed omissions; the inventory no longer lists them as emitted fields. See `../verification/icalendar-projection-reconciliation-2026-11-16.json`.
 
 Evidence and exact scope: `inventory.json` provider `first-party`; operation status and outbound mappings are separate from historical observations.
 
@@ -452,3 +452,5 @@ Separate authorized browser trial observed create201/update-upload200 and exact
 134-byte download. See `BOARDABLE-WRITES.md` and
 `verification/boardable-current-builder-2026-11-16.json` under docs.
 Full meeting forms, recurring days, publication and imports remain open.
+
+PrimeGov declared login follow-up2026-11-16: current Reno anonymous login HTTP200 exposes sign-in forms and no administrative client. The portal-declared attachmentHelpers.js HTTP200 contains only escaping helpers. Sanitized capture and exact findings: `evidence/primegov-login-followup/source.json`. Native writes remain unfinished.
