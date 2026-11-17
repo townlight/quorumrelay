@@ -110,6 +110,56 @@ def _folder_in_range(name, year, bounds):
     return True, year
 
 
+def _document(source, base, row, repo, dbid, day):
+    identity, title = row["entryId"], str(row.get("name") or "")
+    kind = ("minutes" if "minute" in title.casefold() else
+            "packet" if "packet" in title.casefold() else
+            "agenda" if "agenda" in title.casefold() else "document")
+    link = _url(source, base, "ElectronicFile.aspx" if row.get("isEdoc") else "DocView.aspx",
+                identity, repo, dbid, "docid" if row.get("isEdoc") else "id")
+    return {"external_id": str(identity), "title": title, "meeting_date": day.isoformat(),
+            "url": _url(source, base, "DocView.aspx", identity, repo, dbid),
+            "body": source.body, "time_zone_status": "unknown",
+            "agenda_items_availability": "absent", "meeting_date_derivation": "dated_document_name",
+            "documents": [{"external_id": str(identity), "kind": kind, "title": title, "url": link}]}
+
+
+def parse_listing(source, content, input_format, bounds, context):
+    """Replay one observed listing page; never infer traversal or its parent context."""
+    from .identification import validate_source
+
+    namespace = validate_source(source, context)
+    base, _, repo, dbid = _parts(source.url)
+    value = json.loads(content)
+    block = value.get("data") if isinstance(value, dict) else None
+    if (not isinstance(block, dict) or not isinstance(block.get("results"), list)
+            or type(block.get("folderId")) is not int or block["folderId"] < 0
+            or type(block.get("totalEntries")) is not int
+            or block["totalEntries"] < len(block["results"])):
+        raise ValueError("WebLink listing replay requires supplied folderId, totalEntries and results.")
+    mapped, unclassified, folders, seen = [], [], [], set()
+    for row in block["results"]:
+        if (not isinstance(row, dict) or type(row.get("entryId")) is not int or row["entryId"] < 0
+                or row["entryId"] in seen):
+            raise ValueError("WebLink listing entries require unique numeric provider identifiers.")
+        seen.add(row["entryId"])
+        if row.get("type") == 0:
+            folders.append(row["entryId"])
+            continue
+        day = day_of(str(row.get("name") or ""))
+        if row.get("type") != -2 or day is None:
+            unclassified.append(row["entryId"])
+            continue
+        mapped.append((_document(source, base, row, repo, dbid, day), row, "meeting"))
+    bundle = make_bundle(source, namespace, content, input_format, mapped)
+    return OperationResult("completed", bundle, coverage={
+        "scope": "one saved WebLink listing page; no folder traversal or catalog completeness",
+        "source_complete": False, "catalog_complete": False, "folder_id": block["folderId"],
+        "unclassified_entries": unclassified, "untraversed_folders": folders,
+        "available_text": "metadata_only; viewer text requires separate page retrieval",
+    }, operation_id=context.operation_id)
+
+
 def discover_folders(engine, source, namespace, bounds, context, browser, *, record_types=None):
     _session(source, browser)
     base, root, repo, dbid = _parts(source.url)
@@ -209,20 +259,7 @@ def discover_folders(engine, source, namespace, bounds, context, browser, *, rec
                     continue
                 if types and "meeting" not in types:
                     continue
-                document_kind = ("minutes" if "minute" in title.casefold() else
-                                 "packet" if "packet" in title.casefold() else
-                                 "agenda" if "agenda" in title.casefold() else "document")
-                link = _url(source, base, "ElectronicFile.aspx" if row.get("isEdoc") else "DocView.aspx",
-                            identity, repo, dbid, "docid" if row.get("isEdoc") else "id")
-                normalized = {
-                    "external_id": str(identity), "title": title, "meeting_date": day.isoformat(),
-                    "url": _url(source, base, "DocView.aspx", identity, repo, dbid),
-                    "body": source.body, "time_zone_status": "unknown",
-                    "agenda_items_availability": "absent",
-                    "meeting_date_derivation": "dated_document_name",
-                    "documents": [{"external_id": str(identity), "kind": document_kind,
-                                   "title": title, "url": link}],
-                }
+                normalized = _document(source, base, row, repo, dbid, day)
                 identity_key = source_identity_key({"provider": source.provider, "namespace": namespace,
                                                    "record_type": "meeting", "external_id": str(identity)})
                 if identity_key not in seen:

@@ -1,4 +1,6 @@
-# Current local execution state
+# Current local execution state (historical record)
+
+Current release scope and provider status are in [Delivery scope](DELIVERY-SCOPE.md). The instructions and dates below describe earlier milestones.
 
 Updated 2026-11-14. The active instruction is to finish self-owned checks, Townlight skipped cases, local preparation and concrete mapping leads. Releases and publication remain held. The previous publication instructions in this file are a historical snapshot, not current authorization.
 

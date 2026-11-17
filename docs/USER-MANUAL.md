@@ -1,22 +1,18 @@
 # QuorumRelay user manual
 
-The preserved immutable package baseline is Python **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The current integrated source and its locally built, unpublished successor are Python **0.1.0.dev13** / TypeScript **0.1.0-dev.13**. This candidate includes the approved CivicWeb/Cablecast readers, opt-in BoardDocs public listing/detail and CivicClerk Select detail/files and section writes, with 32 registered providers, 31 baseline families, 34 baseline formats, 47 additive parser hooks and 17 native-search handlers. See [local preparation evidence](verification/local-completion-2026-11-14.json). Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
+Python **0.1.0.dev14**, TypeScript **0.1.0-dev.14**, schema **2.0.0**.
 
-This manual describes the integrated development source. Immutable dev8 and dev11 packages are separate historical candidates; the retained readers and repairs are included in the local dev13 successor candidate.
+The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 18 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. See [delivery scope](DELIVERY-SCOPE.md) for provider-specific limitations, including development-only writes.
 
-QuorumRelay is a standalone engine for identifying configured civic-data sources, reading or parsing bounded captures, normalizing meeting records, searching captured material, preparing neutral exports, and executing a small set of explicitly authorized provider writes. It does not require Townlight, TownReporter, TownRecord, Brief, a hosted service, or a particular application database. Those projects are examples of consumers; the engine API is intended for other products as well.
+## 1. Install and verify
 
-The preserved dev11 wheel is <code>quorumrelay-0.1.0.dev11-py3-none-any.whl</code>, SHA-256 <code>93c1736ab71bc1310c371d44a2a01d56425621625f012c8e4bc0ef4eddc25551</code>, from core <code>b71e9450b1742c1f87d5c7cdcb5cf212381cebed</code>. It does not contain the later reader integration. Its package evidence does not prove a new Windows release, whole-provider coverage or actual tenant transactions. Historical dev8 evidence remains in [its receipt](verification/quorumrelay-development-08.json) and [baseline receipt](verification/quorumrelay-development-08-equality.json). See the [capability matrix](capabilities/README.md) for operation-specific limits.
+Use Python 3.11 or newer.
 
-## 1. Install and verify the candidate
-
-QuorumRelay requires Python 3.11 or newer. For this integrated source, use the operator-provided approved checkout. Public main currently provides an older preview. Neither candidate has a package-index release; use source or an explicitly transferred, hash-verified wheel.
-
-### Install from an approved source checkout
+### Install from the release tag
 
 ~~~powershell
-# Set this to the approved source checkout supplied by your operator.
-Set-Location C:\work\quorumrelay
+git clone --branch v0.1.0.dev14 https://github.com/townlight/quorumrelay.git
+Set-Location quorumrelay
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 py -m pip install -e .
@@ -30,16 +26,14 @@ py -m pip install -e ".[service]"
 
 The <code>service</code> extra installs the MCP, Starlette, Uvicorn, multipart and JSON-schema dependencies. The core SDK can be used without these service packages.
 
-### Install the verified wheel
+### Install the release wheel
 
-This repository does not offer a public wheel download for the candidate. The locally prepared dev13 wheel is <code>quorumrelay-0.1.0.dev13-py3-none-any.whl</code>, SHA-256 <code>bcce6d5d2985dfa0f2e0810403b45e64a82a7c6b6e769015a1660a188c75acc5</code>. If your operator has transferred that exact immutable artifact into an approved artifact store, verify its digest before installing it:
+Download the wheel and SHA256SUMS from the [GitHub release](https://github.com/townlight/quorumrelay/releases/tag/v0.1.0.dev14). Compare its SHA-256 before installation.
 
 ~~~powershell
-Get-FileHash .\quorumrelay-0.1.0.dev13-py3-none-any.whl -Algorithm SHA256
-py -m pip install .\quorumrelay-0.1.0.dev13-py3-none-any.whl
+Get-FileHash ./quorumrelay-0.1.0.dev14-py3-none-any.whl -Algorithm SHA256
+python -m pip install ./quorumrelay-0.1.0.dev14-py3-none-any.whl
 ~~~
-
-Use only the dev13 artifact whose hash is recorded above; rebuilding from source produces a different artifact identity. The preserved dev11 wheel documented earlier is historical and predates the reader integration. To run the HTTP or MCP service from source, install the matching checkout’s <code>.[service]</code> extra as shown above.
 
 ### Verify the installed package
 
@@ -48,7 +42,7 @@ py -c "import quorumrelay; print(quorumrelay.__version__)"
 '{}' | quorumrelay providers
 ~~~
 
-For the current integrated candidate, the version command should print <code>0.1.0.dev13</code>. It prints <code>0.1.0.dev11</code> only when you intentionally install the preserved historical wheel. Verify the source manifest and wheel SHA-256 as well. The <code>providers</code> command returns the installed provider and format manifest as JSON. In an embedded deployment, also request <code>GET /v1/info</code> and compare the installed version and schema version with the application’s approved pin.
+The expected version is <code>0.1.0.dev14</code>. The <code>providers</code> command returns the installed provider and format manifest as JSON. In an embedded deployment, also request <code>GET /v1/info</code> and compare the installed version and schema version with the application’s approved pin.
 
 ## 2. Choose a provider and input format
 
@@ -82,7 +76,7 @@ for provider in manifest["data"]["providers"]:
           provider.get("additional_formats", []))
 ~~~
 
-The fixed compatibility baseline contains 34 provider/input-format pairs. The integrated source registers 47 additional parser hooks beside those baseline pairs. Cablecast contributes two public parser hooks (`cablecast-show-json` and `cablecast-shows-json`); BoardDocs contributes its public listing parser. These are advertised through `additional_formats`. A baseline format keeps its exact historical reader behavior; additive formats replay other captured details or API responses. A saved-capture parser does not by itself imply live discovery. Use the exact <code>input_format</code> returned for the provider. Do not choose a parser by guessing from a filename.
+The fixed compatibility baseline contains 34 provider/input-format pairs. The integrated source registers 74 additional parser hooks beside those baseline pairs. Cablecast contributes two public parser hooks (`cablecast-show-json` and `cablecast-shows-json`); BoardDocs contributes its public listing parser. These are advertised through `additional_formats`. A baseline format keeps its exact historical reader behavior; additive formats replay other captured details or API responses. A saved-capture parser does not by itself imply live discovery. Use the exact <code>input_format</code> returned for the provider. Do not choose a parser by guessing from a filename.
 
 Use <code>capabilities</code> for the provider’s operation-level implementation and acceptance information:
 

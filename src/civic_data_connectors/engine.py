@@ -208,6 +208,9 @@ class Engine:
                 return request_hook(source, request, bounds, context)
             return connector.discover(source, bounds, context)
         if operation == "fetch":
+            content_hook = getattr(connector, "fetch_content", None)
+            if callable(content_hook) and (content is not None or "content_base64" in request):
+                return content_hook(self, source, request, content, bounds, context)
             return connector.fetch(source, request, bounds, context)
         if operation == "search" and request.get("native") is True:
             return connector.native_search(source, Query(**request.get("query", {})), bounds, context)

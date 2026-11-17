@@ -267,7 +267,7 @@ def _search_rows(source, content):
     next_page_num = None
     if parser.next_page_numbers:
         value = parser.next_page_numbers[0]
-        if not re.fullmatch(r"[2-9][0-9]{0,4}", value):
+        if not re.fullmatch(r"[1-9][0-9]{0,4}", value) or int(value) < 2:
             raise ValueError("ClerkBase next-page control has an invalid page number.")
         next_page_num = int(value) - 1
         if next_page_num > _MAX_PAGE_NUMBER:

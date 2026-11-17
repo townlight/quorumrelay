@@ -1,5 +1,15 @@
 # Remaining provider work
 
+[Release scope for dev14](../DELIVERY-SCOPE.md) gives the current per-provider read and write coverage. Dated counts and artifact references below identify earlier verification snapshots.
+
+**Current scope amendment (November 16, 2026):** The [delivery scope](../DELIVERY-SCOPE.md)
+supersedes older instructions to finish all writes. Preserve working writes;
+unavailable write contracts below are **deferred per market demand**, not release
+blockers or claims of upstream incapability. Other providers outside the active
+priority list are future releases per market demand. Historical research and
+acceptance facts below remain unchanged. Diligent Community is a separate
+[public read connector](../DILIGENT-COMMUNITY.md), not a BoardDocs write adapter.
+
 Reconciled 2026-11-15 against current source and saved receipts. Canonical structured source: [inventory.json](inventory.json). This replaces stale imperative follow-ups; original dated observations and source URLs remain in that ledger and version history.
 
 Unknown machine contracts are unresolved research, not verified outside-information dependencies or unsupported features. No exhaustive-public-search claim is made. Vendor-documented synthetic execution is accepted for its attributed scope; credentials and live writes are optional. Actual public HTTP 403 and guarded redirect failures remain access observations for those exact requests only. Current operation dependencies omit superseded test-account acquisition gates and completed extraction/shared-engine prerequisites; current runtime authorization, machine-contract gaps and unverified acceptance remain separate.

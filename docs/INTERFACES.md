@@ -1,11 +1,6 @@
 # External interfaces
 
-This integrated source is local development software, currently reporting
-0.1.0.dev13 with schema 2.0.0. The matching Python wheel and TypeScript tarball
-are built locally but unpublished. The preserved dev11 wheel predates these reader repairs.
-Vendor-documented synthetic execution satisfies its attributed provider scope;
-it does not establish actual tenant transactions. No interface publishes stories or starts provider
-writes as part of ingestion.
+Python **0.1.0.dev14**, TypeScript **0.1.0-dev.14**, schema **2.0.0**. [Installation instructions](USER-MANUAL.md).
 
 ## Service ownership and startup
 
@@ -21,9 +16,6 @@ python -m pip install -e ".[service]"
 quorumrelay serve --config C:\app\connector-service.json --database C:\app\connector-state.sqlite
 ```
 
-The integrated source has not been delivered publicly. An operator may instead
-install a transferred wheel after verifying its approved hash and version.
-The preserved dev11 wheel predates these reader repairs.
 For checkout development use `pip install -e ".[service]"` from this repository.
 `python -m quorumrelay` is equivalent to the console entry point.
 Keep the service in its own supervised process; Ctrl+C shuts it down locally.
@@ -124,7 +116,7 @@ worker. Writes reconcile uncertain intents according to their core contract.
 
 ## TypeScript and an unrelated fifth client
 
-The package is `quorumrelay-client@0.1.0-dev.13`. For local development
+The package is `quorumrelay-client@0.1.0-dev.14`. For local development
 use a `file:` dependency to `client/`. To use it without this checkout or any
 reference product, build and `npm pack` the client, then install its `.tgz` in
 your own project. Generated types come from the packaged core schemas.

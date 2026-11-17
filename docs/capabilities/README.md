@@ -1,6 +1,8 @@
 # Provider capability inventory
 
-Current reconciliation: **2026-11-15**. Release remains incomplete and publication is held. The integrated local candidate is Python **0.1.0.dev13**, TypeScript **0.1.0-dev.13**, schema **2.0.0**. Historical dev8/dev11 artifacts remain separate.
+[Release scope for dev14](../DELIVERY-SCOPE.md) gives the current per-provider read and write coverage. Dated counts and artifact references below identify earlier verification snapshots.
+
+The operation evidence was reconciled November 15, 2026. The dev14 delivery scope incorporates the subsequent provider batches.
 
 ## Scope and evidence
 

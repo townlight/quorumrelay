@@ -1,25 +1,8 @@
 # Developer integration guide
 
-The preserved immutable package baseline is Python **0.1.0.dev11** / TypeScript **0.1.0-dev.11**, schema **2.0.0**. The current integrated source and its locally built, unpublished successor are Python **0.1.0.dev13** / TypeScript **0.1.0-dev.13**. The dev13 preparation included the approved CivicWeb/Cablecast readers, opt-in BoardDocs public listing/detail and CivicClerk Select detail/files and section writes, with 47 additive parser hooks and 17 native-search handlers. Current source has 32 registered providers, 31 baseline families, 34 baseline formats, 68 additive parser hooks and 23 native-search handlers. See [local preparation evidence](verification/local-completion-2026-11-14.json). Historical dev8/dev11 artifacts and their installed evidence remain separate from this source.
+Python **0.1.0.dev14**, TypeScript **0.1.0-dev.14**, schema **2.0.0**.
 
-Later local source changes, including the TelVue playlist writes and latest
-BoardDocs/OnBase corrections, are not inside the preserved dev13 package
-artifacts or consumer pins. Use the matching source checkout to exercise those
-changes. No successor package build or release is implied by this guide update.
-
-QuorumRelay is a standalone civic-data engine for your own application, service,
-script or agent. It does not require a Townlight installation, an application
-database, a model provider or a hosted QuorumRelay account. Use the Python API in
-process, or run the optional service for HTTP, TypeScript and MCP consumers.
-
-The frozen public preview is **0.1.0.dev8**; preserved dev11 packages and this
-integrated source are later, distinct candidates. Public main does not yet contain
-this integration. Neither older immutable wheel gains these source changes.
-Provider coverage varies by operation. Vendor-documented synthetic execution is
-accepted verification for its evidenced provider-operation scope. Live account
-and vendor-write observations remain unrun where stated; publishing code or
-documentation is not a claim that real tenant transactions occurred. Start with the [user manual](USER-MANUAL.md),
-[architecture](ARCHITECTURE.md) and [capability evidence](capabilities/README.md).
+The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 18 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. Use [delivery scope](DELIVERY-SCOPE.md) to select a provider and verify supported operations.
 
 ## 1. Choose an integration path
 
@@ -324,7 +307,7 @@ npm ci
 npm run build
 npm pack
 # In your own application:
-npm install /path/to/quorumrelay-client-0.1.0-dev.13.tgz
+npm install /path/to/quorumrelay-client-0.1.0-dev.14.tgz
 ```
 
 ```typescript
@@ -336,7 +319,7 @@ const client = new QuorumRelayClient({
   timeoutMs: 90_000,
 });
 const info = await client.info();
-if (info.data.version !== "0.1.0.dev13") throw new Error("Service pin mismatch");
+if (info.data.version !== "0.1.0.dev14") throw new Error("Service pin mismatch");
 try {
   const result = await client.execute("providers", {});
   console.log(result.status, result.data, result.errors, result.coverage);
@@ -530,7 +513,7 @@ Digital Towpath’s existing detail format also retains named supplied category,
 
 Utah’s existing notice-detail format retains the explicitly labeled public body and same-origin native public-body link, entity/government type, literal notice/post/edit labels, meeting location and other supplied labeled fields. Posted/edited times do not assert a timezone or normalized workflow status. The existing single `notice.text` segment stays unchanged. [Saved/default, relationship, search/export and revision checks](verification/utah-supplied-detail-2026-11-12.json) preserve the original compatibility output.
 
-For current local source, see the separate [GWorks published HTML](GWORKS-PUBLISHED-HTML.md) and [TownCloud existing draft update](TOWNCLOUD-WRITES.md) usage. These changes postdate the preserved dev13 artifacts.
+For this release, see the separate [GWorks published HTML](GWORKS-PUBLISHED-HTML.md) and [TownCloud existing draft update](TOWNCLOUD-WRITES.md) usage. These changes postdate the preserved dev13 artifacts.
 
 Local provider file preparation keeps the total deadline active while saving streamed output. CivicPlus historical files, OnBase DIP, SuiteOne HTML and TelVue chapter CSV check bounds before exposing a downloadable artifact. An expired save returns no artifact; temporary partial files are removed. Checks are cooperative after synchronous storage returns. [Regression evidence](verification/provider-file-completion-bounds-2026-11-15.json).
 

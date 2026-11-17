@@ -9,13 +9,13 @@ import civic_data_connectors
 def test_public_sdk_compatibility_identity_and_engine():
     for name in quorumrelay.__all__:
         assert getattr(quorumrelay, name) is getattr(civic_data_connectors, name)
-    assert quorumrelay.__version__ == "0.1.0.dev13"
+    assert quorumrelay.__version__ == "0.1.0.dev14"
     engine = quorumrelay.create_engine()
     listed = engine.providers()
     assert listed.status == "completed"
-    # 31 fixed baseline families, plus Cablecast as a built-in additive typed connector with no baseline format.
+    # 31 fixed baseline families, plus separately registered public-read connectors.
     assert len([row for row in listed.data["providers"] if row["formats"]]) == 31
-    assert [row["provider"] for row in listed.data["providers"] if not row["formats"]] == ["cablecast"]
+    assert {row["provider"] for row in listed.data["providers"] if not row["formats"]} == {"cablecast", "diligent-community"}
     assert len(listed.data["formats"]) == 34
     legistar = next(row for row in listed.data["providers"] if row["provider"] == "legistar")
     assert legistar["additional_formats"] == ["legistar-event-json", "legistar-events-json", "legistar-rollcalls-json", "legistar-votes-json"]

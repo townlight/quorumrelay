@@ -1,5 +1,7 @@
 # Native retrieval mappings and legacy projection
 
+[Release scope for dev14](DELIVERY-SCOPE.md) gives the current per-provider read and write coverage. Dated counts and artifact references below identify earlier verification snapshots.
+
 Candidate schema 2.0.0. This is implementation documentation, not provider acceptance.
 
 `providers/native.py` owns additive formats. They do not replace any of the original 34 inputs.
@@ -65,6 +67,15 @@ https://docs.wistia.com/reference/get_medias.md.
 Input format: `laserfiche-listing-json`, based on independently captured public WebLink 11 responses, not the separate Repository API.
 
 Each dated document entry preserves its provider entryId as external_id, matching the legacy per-document identity model. The document name provides meeting_date with `meeting_date_derivation=dated_document_name`. ElectronicFile.aspx versus DocView.aspx follows supplied isEdoc. Original entry fields are retained. Undated or nonmeeting entries remain explicit unclassified coverage. Folder failures/depth/page/date bounds cannot become a complete catalog.
+
+Saved `laserfiche-listing-json` pages can be replayed through `normalize` without
+a session. Replay uses the configured WebLink base path, repository and database
+for citations, preserves the supplied listing `folderId` separately, and does
+not infer that a child listing belongs directly to the configured root. It maps
+dated document names with the same rules as guarded discovery, retains exact
+capture bytes and original rows, and discloses unclassified entries and
+untraversed folders. One page never proves full folder or archive coverage and
+does not initiate continuation, viewer-text or Repository account requests.
 
 ## Laserfiche Repository entry metadata
 

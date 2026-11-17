@@ -1,6 +1,6 @@
 # QuorumRelay write adapter contract
 
-Schema 2.0.0. Frozen candidate 0.1.0.dev8; local source includes later mappings identified below. Current status: 2026-11-12. The engine contains real native write mappings and `PublicWriteTransport`; it can change an upstream provider when an authorized caller supplies usable credentials and approves an exact plan. Vendor-documented synthetic execution through these mappings satisfies provider discovery/read/search/import/export/write acceptance for its evidenced operation and field scope. Live provider mutation/readback remains **NOT_RUN** and is optional supporting evidence, not a completion gate. A synthetic receipt must never be represented as an actual remote mutation.
+Release 0.1.0.dev14 uses schema 2.0.0. The engine contains real native write mappings and `PublicWriteTransport`; it can change an upstream provider when an authorized caller supplies usable credentials and approves an exact plan. Vendor-documented synthetic execution through these mappings satisfies provider discovery/read/search/import/export/write acceptance for its evidenced operation and field scope. Live provider mutation/readback remains **NOT_RUN** and is optional supporting evidence, not a completion gate. A synthetic receipt must never be represented as an actual remote mutation.
 
 ## Public operations
 

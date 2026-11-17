@@ -1,4 +1,6 @@
-# QuorumRelay — bounded implementation plan
+# QuorumRelay — bounded implementation plan (historical record)
+
+Current release scope and provider status are in [Delivery scope](DELIVERY-SCOPE.md). The instructions and dates below describe earlier milestones.
 
 ## Current owner directives
 

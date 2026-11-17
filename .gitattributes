@@ -186,3 +186,13 @@ src/civic_data_connectors/providers/simbli_upload.py -text
 tests/test_simbli_upload.py -text
 docs/verification/simbli-title-upload-affected-2026-11-16.xml -text
 docs/verification/simbli-supporting-upload-2026-11-16.xml -text
+
+# Preserve Community acceptance inputs and captured public client bytes.
+src/civic_data_connectors/providers/diligent_community.py -text
+tests/test_diligent_community.py -text
+tests/fixtures/diligent_community/*.json -text
+docs/capabilities/evidence/diligent-community/portal-2.js -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+docs/capabilities/evidence/diligent-community/meeting-client.js -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+docs/capabilities/evidence/diligent-community/meeting-1655.html -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+
+docs/capabilities/evidence/diligent-community/source.json whitespace=cr-at-eol

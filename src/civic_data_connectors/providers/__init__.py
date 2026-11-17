@@ -33,6 +33,12 @@ def _parse_saved_native(source, content, input_format, bounds, context):
 def register(engine, *, transport: Transport | None = None,
              browser: BrowserSession | None = None) -> None:
     """Compose operations once; injected transports are an SDK/server trust boundary."""
+    from .diligent_community import DiligentCommunityConnector, FORMATS as COMMUNITY_FORMATS
+    if "diligent-community" not in engine.connectors:
+        community = DiligentCommunityConnector(transport, engine.storage)
+        engine.register_connector(community)
+        for input_format in COMMUNITY_FORMATS:
+            engine.register_parser("diligent-community", input_format, community.parse)
     from .cablecast import CablecastConnector, SHOW_FORMAT, SHOWS_FORMAT
     if "cablecast" not in engine.connectors:
         cablecast = CablecastConnector(transport)
@@ -41,6 +47,8 @@ def register(engine, *, transport: Transport | None = None,
             engine.register_parser("cablecast", input_format, cablecast.parse)
     engine.register_operation("identify", identify_handler)
     engine.register_operation("validate_source", validate_handler)
+    from .laserfiche import parse_listing
+    engine.register_parser("laserfiche-weblink", "laserfiche-listing-json", parse_listing)
     for provider, input_format in (
             ("boarddocs", "boarddocs-public-meetings-json"),
             ("boarddocs", "boarddocs-public-meeting-html"),

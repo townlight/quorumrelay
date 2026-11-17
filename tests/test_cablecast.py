@@ -91,9 +91,10 @@ def test_cablecast_is_listed_beside_the_unchanged_31_baseline_families():
     rows = create_engine().providers().data["providers"]
     assert sum(1 for row in rows if row["formats"]) == 31
     extra = [row for row in rows if not row["formats"]]
-    assert [row["provider"] for row in extra] == ["cablecast"]
-    assert extra[0]["additional_formats"] == ["cablecast-show-json", "cablecast-shows-json"]
-    capabilities = extra[0]["capabilities"]
+    assert {row["provider"] for row in extra} == {"cablecast", "diligent-community"}
+    cablecast = next(row for row in extra if row["provider"] == "cablecast")
+    assert cablecast["additional_formats"] == ["cablecast-show-json", "cablecast-shows-json"]
+    capabilities = cablecast["capabilities"]
     assert capabilities["operations"]["discover"]["acceptance_status"] == "fixture_passed"
     assert capabilities["operations"]["create"]["implementation_status"] == "not_implemented"
 

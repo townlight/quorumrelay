@@ -1,0 +1,84 @@
+{
+  "status": "locally accepted for documented operations",
+  "date_utc": "2026-11-17T19:29:48.962232+00:00",
+  "order": [
+    "iqm2",
+    "towpath",
+    "essential",
+    "boardable",
+    "icalendar"
+  ],
+  "base": "667f40ebde02e86ef756cbd6c821f6432f6bdee8 plus existing local changes",
+  "source_test_fingerprint": "7180b006ca17a5bb354f57398cec21546e32b7a7f9e2e43a954bd8e91f88136d",
+  "focused_checks": {
+    "iqm2": {
+      "tests": 205,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit": "work/batch5-iqm2.xml",
+      "junit_sha256": "5bfe480b156c77396e002416b156c3f3eb7400ffeb813640d779e1e65c2da29a",
+      "log": "work/batch5-iqm2.log",
+      "log_sha256": "05e5037d18885370995bd96e01f826e11c2cfefcf9f3a5209ababaa7c6ab2f4c"
+    },
+    "towpath": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit": "work/batch5-towpath.xml",
+      "junit_sha256": "b89afec7dc460fa12994cade049e4a73d1add0e96bdab13fac8f165efc5441a9",
+      "log": "work/batch5-towpath.log",
+      "log_sha256": "adc20b0627b09829699b4ef7c5d82a16ab571162abc5cae3c44dd6844e834d8a"
+    },
+    "essential": {
+      "tests": 71,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit": "work/batch5-essential.xml",
+      "junit_sha256": "3ffed28e2fff18cfde43f93ea7f377d6c0b2b7ce04a42d8a2bedd662d4f66b7f",
+      "log": "work/batch5-essential.log",
+      "log_sha256": "fc30bc5f79867af33b4c371529a936dc7a81a73f203573076799dd3bbe2ae344"
+    },
+    "boardable": {
+      "tests": 19,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit": "work/batch5-boardable.xml",
+      "junit_sha256": "749cc7d1e00597dc7734ca9fc1f1acdc4daa9b11307ecc0e95f79df20e653c36",
+      "log": "work/batch5-boardable.log",
+      "log_sha256": "c3536a4744a486831fe2115ada33e2c566913532543e6c237b8c2b3fb7081a08"
+    },
+    "icalendar": {
+      "tests": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit": "work/batch5-icalendar.xml",
+      "junit_sha256": "a8fce9f384ab2dd4c14111484daa09ad51f50695bdbe0e1aaa9f6e9a187323f1",
+      "log": "work/batch5-icalendar.log",
+      "log_sha256": "eb46c051b548d4b643ad15f91e83166332ca0a06a51779c2b91b99618983a482"
+    }
+  },
+  "shared_validation": "Ruff, capability validation and git diff --check passed. Verified prior full suite/browser/client logs and JUnit bindings applicable to unchanged code. 3293 unique Python cases including headless browser follow-up, npm ci, TypeScript build and four client tests.",
+  "previous_receipt": "docs/verification/fourth-batch-acceptance-2026-11-17.json",
+  "previous_receipt_sha256": "25d06e4da4238212fc6dd5b67e368e3702a1d3c062d454cf7fb404937eeb35db",
+  "writes_retained": {
+    "iqm2": "MinuteTraq item titles, meetings and M2 recordings",
+    "essential": "Development meeting multimedia updates",
+    "boardable": "Mapped agenda, meeting, series and document operations"
+  },
+  "read_only": [
+    "Digital Towpath",
+    "first-party iCalendar feed"
+  ],
+  "future_per_market_demand": [
+    "NovusAGENDA",
+    "CHAMP",
+    "TownCloud (parked)",
+    "Wistia"
+  ],
+  "limits": "Scoped reads, saved public evidence and synthetic execution. No fresh vendor transactions, universal tenant verification, hosted CI or publication."
+}

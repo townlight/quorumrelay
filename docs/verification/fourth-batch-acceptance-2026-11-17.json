@@ -1,0 +1,197 @@
+{
+  "recorded_utc": "2026-11-17T15:05:30.893504+00:00",
+  "status": "LOCAL_DOCUMENTED_SCOPE_ACCEPTED",
+  "candidate": "Local uncommitted tree atop 667f40ebde02e86ef756cbd6c821f6432f6bdee8; all earlier work preserved",
+  "order": [
+    "Utah Public Notice",
+    "gWorks",
+    "AgendaQuick",
+    "ClerkBase / Clerks HQ",
+    "Tyler Meeting Manager"
+  ],
+  "changes": {
+    "clerkbase": "Reproduced valid next pages 10/19/100/10001 rejected; minimal numeric validator fix retains lower/upper bounds, ten regression cases added.",
+    "agendaquick": "Four parameter IDs shortened after Windows environment-variable length setup errors; inputs/assertions and provider code unchanged.",
+    "other_providers": "No production changes needed.",
+    "documentation": [
+      "docs/UTAH-PUBLIC-NOTICE.md",
+      "docs/GWORKS-PUBLISHED-HTML.md",
+      "docs/AGENDAQUICK-DETAIL.md",
+      "docs/CLERKBASE-DOCUMENT.md",
+      "docs/DELIVERY-SCOPE.md",
+      "README.md"
+    ]
+  },
+  "checks": {
+    "utah": {
+      "tests": 28,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 28,
+      "seconds": 3.781,
+      "xml": "work/batch4-utah.xml",
+      "xml_sha256": "bd0a80365cd20ac2cf6f534639aefbde42d2040a72fda62b3dc5666f3ad2fd58",
+      "log": "work/batch4-utah.log",
+      "log_sha256": "5e45f9b7cd1cd595b0b1f0b569dcb2f28579140c735b2ba7f8022321d0f4a581",
+      "exit_code": 0
+    },
+    "gworks": {
+      "tests": 149,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 149,
+      "seconds": 127.6,
+      "xml": "work/batch4-gworks.xml",
+      "xml_sha256": "555d799c3da79e14baf433fa15ba0599c1cf29df75069dac874c394205262628",
+      "log": "work/batch4-gworks.log",
+      "log_sha256": "70731a214a6679978730f6981bc3714ab0e0a55aad0e264973d8c6cb53396aeb",
+      "exit_code": 0
+    },
+    "agendaquick": {
+      "tests": 30,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 30,
+      "seconds": 0.603,
+      "xml": "work/batch4-agendaquick.xml",
+      "xml_sha256": "dcca94d3d327eca6ebe3c2c22e0dcd39913868c7f6563d53c7e7ca6434dd2015",
+      "log": "work/batch4-agendaquick.log",
+      "log_sha256": "130e3a949925bca33d9a8353d3b34d29ac190bdbaaf248671fdb2472136a38b6",
+      "exit_code": 0
+    },
+    "clerkbase": {
+      "tests": 37,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 37,
+      "seconds": 2.148,
+      "xml": "work/batch4-clerkbase.xml",
+      "xml_sha256": "d8f9dc41fe50e688f406ce49df4499a041b0988b6347d9fefb6b47e127b5b46a",
+      "log": "work/batch4-clerkbase.log",
+      "log_sha256": "a928f4c42b29bc2fd999f2c0750b6bb1c5a0ac26893348d21c957b0767b01068",
+      "exit_code": 0
+    },
+    "tyler": {
+      "tests": 63,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 63,
+      "seconds": 13.804,
+      "xml": "work/batch4-tyler.xml",
+      "xml_sha256": "170f6dc7eeb49e33b016975b717d15ac547db090c8efdd86f87558bba20181fe",
+      "log": "work/batch4-tyler.log",
+      "log_sha256": "4837f0bdac7f309e81de3c2e4fcc275152d33bbcbae040452c6f7e665f82b1a6",
+      "exit_code": 0
+    },
+    "final": {
+      "tests": 3293,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 8,
+      "passed": 3285,
+      "seconds": 1992.024,
+      "xml": "work/batch4-final.xml",
+      "xml_sha256": "49c6ba77ed1c2def9c4569d406b24a1d1c9dfedfd0c18082fa8b06e412a042b6",
+      "log": "work/batch4-final.log",
+      "log_sha256": "68510d391987b63f279de5287ad4f852aaace85b033c5a3ed57327fd9b585bf1",
+      "exit_code": 0
+    },
+    "weblink_browser_followup": {
+      "tests": 10,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "passed": 10,
+      "seconds": 7.462,
+      "xml": "work/batch4-weblink-browser.xml",
+      "xml_sha256": "f5268824f52d699c64087133fb6ab5214f05da62243225307318ffc366e536f7",
+      "log": "work/batch4-weblink-browser.log",
+      "log_sha256": "802cfbfa20f76e89bfb88dcbc50a5e630daec619414b1bbbf5b157064fe9a1ad",
+      "exit_code": 0,
+      "interpreter": "C:\\Users\\scott\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "browser": "existing Chrome, headless=True; synthetic/offline transport"
+    },
+    "client_followup": {
+      "utc": "2026-11-17T19:21:33.768573+00:00",
+      "node": "v22.23.5",
+      "npm": "10.9.9",
+      "steps": [
+        {
+          "command": "npm --prefix client ci",
+          "exit_code": 0,
+          "log": "work/batch4-client-ci.log",
+          "sha256": "88d1bd5e1ee3c4a42ab3e8c3be515f28e9d6b5b87c98dcc72e093cf54b1c0169"
+        },
+        {
+          "command": "npm --prefix client run build",
+          "exit_code": 0,
+          "log": "work/batch4-client-build.log",
+          "sha256": "340ddc8ba13ef8fb090801c15c937cf3e69656a8560baa140dbe89aad05e54a9"
+        },
+        {
+          "command": "npm --prefix client test",
+          "exit_code": 0,
+          "log": "work/batch4-client-test.log",
+          "sha256": "6c3454e6be95f6561c1d979d1f936fbb456075d1979752b6008305e686464fc2"
+        }
+      ],
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "duration_ms": 379.4409
+    }
+  },
+  "shared_checks": {
+    "ruff": "uv tool run --from ruff>=0.11,<1 ruff check src tests scripts examples: passed",
+    "capability_validation": "Passed using ../env-service Python3.13.5; work/batch4-capabilities.log",
+    "git_diff_check": "passed",
+    "unchanged_client": "Fresh npm ci, TypeScript build and four client tests passed on this candidate.",
+    "optional_browser_skips": "Resolved by fresh follow-up: all10 tests/test_weblink_session.py cases passed with existing Python312 Playwright/headless Chrome, including all8 previously skipped cases. Full-run result remains3285pass/8skip; combined current-candidate evidence covers3293 unique tests without outstanding skips. Pytest versions generate different labels for one identical parameter case; source/test fingerprint unchanged.",
+    "full_suite_environment": "Isolated work/batch4-env Python3.13.5 installed declared .[service,test]; python -X utf8 -m pytest tests -q --junitxml=work/batch4-final.xml",
+    "focused_environment": "Python312; installed pytest; separate from full service environment"
+  },
+  "tree_fingerprint": {
+    "method": "SHA256 of sorted relative-posix-path:SHA256 lines for all src/tests .py files, joined with LF and final LF",
+    "files": 452,
+    "sha256": "7180b006ca17a5bb354f57398cec21546e32b7a7f9e2e43a954bd8e91f88136d"
+  },
+  "changed_source_test_bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/clerkbase_search.py",
+      "sha256": "4338424961d55bede29ee7f21a9e753703e15801fb271543a1fe94b4c8b1bc51"
+    },
+    {
+      "path": "tests/test_clerkbase_search.py",
+      "sha256": "a94ef8f968f761bab903a9838abfaea1011532694d8950a34980fb1d7db6a8e2"
+    },
+    {
+      "path": "tests/test_agendaquick_detail.py",
+      "sha256": "52d83b722394c24c843b2a1cc7686f94dece589e6f0a1f4e82e6142fa69f9247"
+    }
+  ],
+  "prior_tree_at_start": {
+    "started_utc": "2026-11-17T14:12:52.208406+00:00",
+    "tree_fingerprint": "22e4a3a68e5376de05ea6830ce88c67aa1b498717617c613b2ac0caf31fd77d2",
+    "files": 452
+  },
+  "writes": "gWorks existing development-bound meeting/media writes retained with safeguards. Other four have no native write adapter; unavailable contracts deferred per market demand. No production substitution or vendor mutation.",
+  "limits": [
+    "Accepted documented supported operations only; partial catalogs and tenant-specific contracts remain explicit.",
+    "AgendaQuick native search is limited to public.destinyhosted.com tenant98622.",
+    "ClerkBase tree/search scope is the captured South Kingstown interface; separate OnBoardGOV excluded.",
+    "gWorks production read interfaces and development write contracts remain separate; no live write certification.",
+    "Tyler supplied player metadata does not establish recording-byte retrieval or playback.",
+    "Earlier live captures reused; focused/synthetic checks are not new live tenant transactions.",
+    "No commit, push, merge, package publication, installation or new hosted CI."
+  ],
+  "environment_correction": "First full run40816 interrupted after timezone failures. Existing env-service lacked declared tzdata; ZoneInfo America/Denver failed. Isolated work/batch4-env installed declared dependencies; reproduced failing case passed before rerun. Interrupted log and diagnosis/recheck retained under work/batch4-*.log.",
+  "owned_jobs": "none; final root session99255 and all agent tests terminal",
+  "next_action": "Stop after these five; no next batch authorized.",
+  "browser_followup_utc": "2026-11-17T19:19:39.557292+00:00"
+}

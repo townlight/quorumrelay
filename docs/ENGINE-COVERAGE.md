@@ -1,8 +1,12 @@
 # QuorumRelay core coverage and remaining gaps
 
-Current immutable development snapshot: `0.1.0.dev8`, schema `2.0.0`, frozen source `3862e5f4ad7064aee722e09bb438899c3566477f`. The finite public-route batch marked post-dev6 below is included in this wheel. Fresh outside-checkout dev8 installation passed package/resource and corrected capability-label checks. All 34 independent original-output comparisons from dev7 are reused through exact runtime-module equality; these are separate from consumer and live-provider acceptance. This source-path and acceptance map preserves all 31 families, 34 baseline inputs and supported outbound obligations. It is not a completed-release or independent-review claim. The capability inventory records each operation's research and bounded evidence.
+[Release scope for dev14](DELIVERY-SCOPE.md) gives the current per-provider read and write coverage. Dated counts and artifact references below identify earlier verification snapshots.
 
-The later integrated development source is a separate, unshipped candidate. Its current source catalog has 32 registered providers (31 baseline families plus Cablecast), 34 baseline input formats, 68 additive parser hooks and 23 native-search handlers. These source counts do not update the frozen dev8/dev11 packages or claim complete provider or tenant coverage.
+The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 18 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. See [current delivery scope](DELIVERY-SCOPE.md).
+
+Historical development snapshot: `0.1.0.dev8`, schema `2.0.0`, frozen source `3862e5f4ad7064aee722e09bb438899c3566477f`. The finite public-route batch marked post-dev6 below is included in this wheel. Fresh outside-checkout dev8 installation passed package/resource and corrected capability-label checks. All 34 independent original-output comparisons from dev7 are reused through exact runtime-module equality; these are separate from consumer and live-provider acceptance. This source-path and acceptance map preserves all 31 families, 34 baseline inputs and supported outbound obligations. It is not a completed-release or independent-review claim. The capability inventory records each operation's research and bounded evidence.
+
+The dev14 catalog has 33 registered providers, including Cablecast and Diligent Community. See the delivery scope above for current operations.
 
 ## Shared implemented behavior
 

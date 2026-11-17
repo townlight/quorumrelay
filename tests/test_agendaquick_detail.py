@@ -79,7 +79,7 @@ def test_default_configured_detail_and_existing_packet_retrieval_are_separate_gu
     (replace(SOURCE, url=SOURCE.url.replace("seq=1737", "seq=1738")), CAPTURE),
     (SOURCE, CAPTURE.replace(b"ag&#x3d;1737", b"ag&#x3d;1738", 1)),
     (SOURCE, CAPTURE.replace(b"&amp;seq&#x3d;14740", b"&amp;seq&#x3d;14719", 1)),
-])
+], ids=["foreign_tenant", "foreign_meeting", "foreign_parent", "duplicate_item"])
 def test_agenda_rejects_cross_tenant_meeting_or_duplicate_item_binding(source, content):
     result = create_engine().normalize(source, content, input_format=SOURCE.input_format)
     assert result.status == "failed", result.public_dict()

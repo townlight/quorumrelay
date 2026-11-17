@@ -73,6 +73,7 @@ SENSITIVE_QUERY = re.compile(
     r"api[-_]?key|signature|sig|x-amz-.*|x-goog-.*)$", re.I,
 )
 _HOSTS = (
+    ("diligent-community", r"[^.]+\.community\.diligentoneplatform\.com"),
     ("primegov", r"(?:[^.]+\.)?primegov\.com"),
     ("legistar", r"(?:[^.]+\.)?legistar\.com"),
     ("civicplus-select", r"[^.]+\.(?:portal|api)\.civicclerk\.com"),

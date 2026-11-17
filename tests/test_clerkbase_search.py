@@ -12,7 +12,7 @@ import pytest
 from quorumrelay import create_engine
 from civic_data_connectors.models import OperationContext
 from civic_data_connectors.providers.clerkbase_search import (
-    FORMAT, listing_rows, mark_supplied_url_identities, native_search,
+    FORMAT, listing_rows, mark_supplied_url_identities, native_search, _search_rows,
 )
 from civic_data_connectors.providers.contracts import Response
 
@@ -169,6 +169,24 @@ def test_native_pager_uses_published_data_page_num_minus_one():
     assert page2_fields["sm.pageNum"] == ["1"]
     assert set(hit["identity"]["external_id"] for hit in first.data["hits"]).isdisjoint(
         hit["identity"]["external_id"] for hit in resumed.data["hits"])
+
+
+@pytest.mark.parametrize("page", [2, 10, 19, 100, 10001])
+def test_next_page_control_accepts_decimal_pages_through_existing_bound(page):
+    content = (FIXTURES / "search-council-page1.html").read_bytes().replace(
+        b'class="next js-page-link" data-page-num="2"',
+        f'class="next js-page-link" data-page-num="{page}"'.encode())
+    _, status = _search_rows(type("Source", (), SOURCE)(), content)
+    assert status["next_page_num"] == page - 1
+
+
+@pytest.mark.parametrize("page", ["0", "1", "01", "10002", "100000"])
+def test_next_page_control_rejects_invalid_or_out_of_bound_pages(page):
+    content = (FIXTURES / "search-council-page1.html").read_bytes().replace(
+        b'class="next js-page-link" data-page-num="2"',
+        f'class="next js-page-link" data-page-num="{page}"'.encode())
+    with pytest.raises(ValueError, match="page number|page bound"):
+        _search_rows(type("Source", (), SOURCE)(), content)
 
 
 def test_phrase_mode_empty_result_body_unknown_and_no_local_url_matching():

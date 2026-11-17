@@ -1,0 +1,104 @@
+{
+  "recorded_utc": "2026-11-17T05:48:05.804025+00:00",
+  "status": "LOCAL_DOCUMENTED_SCOPE_ACCEPTED",
+  "candidate": "Local uncommitted tree atop 667f40ebde02e86ef756cbd6c821f6432f6bdee8; prior Community changes preserved",
+  "ordered_checks": [
+    {
+      "provider": "Agenda Center",
+      "passed": 9,
+      "failed": 0,
+      "seconds": 0.367,
+      "xml": "work/batch2-agendacenter.xml",
+      "xml_sha256": "66cf739ab5e2f9a4c9d3a8ac61899bbfe0c6985c3d76a1455c88c8a18f4af24d",
+      "log_sha256": "6840d0e176edf82a7d894565ce99379d31518ae9f6a258b2fa334446ec645f09",
+      "production_changes": false,
+      "write_scope": "No built-in adapter; unavailable contracts deferred per market demand"
+    },
+    {
+      "provider": "CivicWeb / iCompass",
+      "passed": 64,
+      "failed": 0,
+      "seconds": 0.494,
+      "xml": "work/batch2-civicweb.xml",
+      "xml_sha256": "11affd179a0cf8d06569ba937bd3b3f2c123c1e71b75567320022d80b76f91b7",
+      "log_sha256": "2def77944da25e07c1acba16d8add2470cfe0f45ff2b0ac24b5f2e64b835d32c",
+      "production_changes": false,
+      "write_scope": "No built-in adapter; unavailable contracts deferred per market demand"
+    },
+    {
+      "provider": "PrimeGov / OneMeeting",
+      "passed": 156,
+      "failed": 0,
+      "seconds": 19.726,
+      "xml": "work/batch2-primegov.xml",
+      "xml_sha256": "778c921efbdd8a9c82280aba3a8ba3c41abd8792001266d5037b3c32d81adff5",
+      "log_sha256": "14362a27844e9954c628486ee1b5b720d86d852689597fa5d150993ba40646af",
+      "production_changes": false,
+      "write_scope": "No built-in adapter; unavailable contracts deferred per market demand"
+    },
+    {
+      "provider": "Swagit",
+      "passed": 32,
+      "failed": 0,
+      "seconds": 1.33,
+      "xml": "work/batch2-swagit.xml",
+      "xml_sha256": "c7e954b31f916ea08147a16d97577758c4c51f0a528b25fe111c1b08b5e65536",
+      "log_sha256": "928180c610f797adcc52b34eeca981cbb7b30d986d5f1d077d25242c9fab88cf",
+      "production_changes": false,
+      "write_scope": "No built-in adapter; unavailable contracts deferred per market demand"
+    },
+    {
+      "provider": "Peak",
+      "passed": 55,
+      "failed": 0,
+      "seconds": 1.085,
+      "xml": "work/batch2-peak.xml",
+      "xml_sha256": "df2cb4d0a6f1f9416dd414bc8ded6c43c0bf4997969c0295d8b6f57373c7d701",
+      "log_sha256": "605c0051a7316fd296f5914a085b231f0018e26f0afaafd4f096053b58b49f1b",
+      "production_changes": false,
+      "write_scope": "No built-in adapter; unavailable contracts deferred per market demand"
+    }
+  ],
+  "tree_fingerprint": {
+    "method": "SHA256 of sorted relative-posix-path:SHA256 lines for all src/tests .py files, joined with LF and final LF",
+    "files": 452,
+    "sha256": "eaa3e3eb42f3a91c8d1bc6ff46bce7d971882d18523c9e73ffca8f5985258d52"
+  },
+  "changes_this_batch": [
+    "docs/DELIVERY-SCOPE.md",
+    "docs/CIVICPLUS-AGENDA-CENTER.md",
+    "docs/SWAGIT-PUBLIC-TRANSCRIPTS.md",
+    "README.md",
+    "acceptance/state bookkeeping"
+  ],
+  "reused_evidence": {
+    "full_suite": {
+      "passed": 3280,
+      "failed": 0,
+      "seconds": 439.35,
+      "warning": "Existing Starlette/AnyIO deprecation",
+      "junit": "work/six-priority-final.xml",
+      "log": "work/six-priority-final.log",
+      "exit_code": 0,
+      "ruff": "passed",
+      "capability_validation": "passed",
+      "diff_check": "passed",
+      "hosted_ci": "Not run for local changes; prior hosted pass covers base 667f40e only",
+      "client": "Earlier build and four tests reused; client unchanged"
+    },
+    "prior_receipt_bindings_verified_unchanged": true,
+    "reason": "No production or test changes in this batch; existing source and first-batch changes preserved"
+  },
+  "fresh_shared_checks": {
+    "capability_validation": "passed; work/batch2-capabilities.log",
+    "git_diff_check": "passed"
+  },
+  "limits": [
+    "Tests use synthetic transports and saved captures; no new live tenant certification.",
+    "All provider coverage and historical receipt limitations retained in linked guides and DELIVERY-SCOPE.md.",
+    "PrimeGov count includes shared discovery tests; focused counts are not an additional full suite.",
+    "No source commit, push, merge, release, installation or new hosted CI in this batch."
+  ],
+  "owned_jobs": "none; all assigned test runs terminal exit 0",
+  "next_action": "Stop; do not start another batch without Scott authorization."
+}

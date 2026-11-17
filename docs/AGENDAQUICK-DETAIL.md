@@ -1,5 +1,23 @@
 # AgendaQuick supplied public agenda
 
+## Supported scope and native search boundary
+
+The existing public calendar reader, bounded calendar discovery, supplied agenda
+and memo readers, and separately selected attachments remain available. The native
+agenda-item search adapter is specifically bound to the captured Yuma deployment:
+`public.destinyhosted.com`, tenant `id=98622`. This is not general native search
+across AgendaQuick customers. Calendar/detail sources retain their own configured
+tenant and native identity checks. Discovery remains partial; full archive and
+live multi-page search coverage are not established.
+
+There is no built-in AgendaQuick write adapter. Unavailable native write contracts
+remain deferred per market demand; this does not imply that the vendor cannot
+write. Fourth-batch focused verification passed 30 cases. Four parameterized test
+labels were shortened to avoid Windows environment-variable limits; provider
+behavior and test inputs/assertions were unchanged.
+
+## Supplied agenda
+
 Current source adds `agendaquick-public-agenda-html` for the captured public AgendaQuick meeting-notice template. The calendar already supplies the exact `agenda_publish.cfm` URL with tenant `id`, `dsp=ag` and native meeting `seq`. Configured discovery selects the agenda mapper for that supplied URL; saved normalization can select the format explicitly. Calendar and agenda-item search formats and all 34 original readers remain unchanged. The frozen dev8 wheel does not include this mapping.
 
 ```python

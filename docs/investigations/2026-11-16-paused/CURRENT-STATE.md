@@ -1,3 +1,32 @@
+# Third batch locally complete
+
+Laserfiche/WebLink, OnBase, TelVue, Town Hall Streams and SuiteOne completed in
+order. Saved WebLink listing replay repaired; working writes preserved. Final
+full suite: 3,283 passed, zero failures. See ../../DELIVERY-SCOPE.md and
+../../verification/third-batch-acceptance-2026-11-16.json. All jobs terminal;
+no publication, installation or next batch started. Older sections are history.
+
+---
+# Second batch locally complete
+
+Agenda Center, CivicWeb/iCompass, PrimeGov/OneMeeting, Swagit and Peak completed
+in that order. See ../../DELIVERY-SCOPE.md and
+../../verification/second-batch-acceptance-2026-11-16.json. This batch changed no
+production code or tests; existing writes and prior Community work are preserved.
+All assigned jobs are terminal. No publication or next batch was started.
+
+---
+# Current scope amendment and local candidate
+
+November 16, 2026: Scott approved reads plus existing working writes; unavailable
+write contracts and lower-priority platforms are deferred per market demand.
+See ../../DELIVERY-SCOPE.md and ../../DILIGENT-COMMUNITY.md. The new Community
+reader is locally verified, uncommitted and not released. Acceptance:
+../../verification/diligent-community-acceptance-2026-11-16.json.
+Base667f40e was pushed and passed CI44013583805 attempt2; older pending-push or
+cancelled-CI wording below is historical. No owned background jobs remain.
+
+---
 # QuorumRelay current state — November 16, 2026
 
 ## Current candidate: Simbli supporting-file upload

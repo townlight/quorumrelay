@@ -1,11 +1,14 @@
 # QuorumRelay release notes
 
-## Unreleased
+## 0.1.0.dev14 · November 17, 2026
+
+The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 18 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. Included fixes cover saved Laserfiche WebLink listings and ClerkBase search pagination. Working writes retain their approval and readback requirements. See [delivery scope](DELIVERY-SCOPE.md) and [release assets](https://github.com/townlight/quorumrelay/releases/tag/v0.1.0.dev14).
+
+## Earlier development history
 
 QuorumRelay is being built under the Townlight organization as an independent
 package. The full first-release scope and acceptance requirements remain in
-[the approved plan](IMPLEMENTATION-PLAN.md). No completed first release has
-been published. Development packages and source checks are separate from
+[the approved plan](IMPLEMENTATION-PLAN.md). These early milestones preceded the dev14 preview. Development packages and source checks are separate from
 authorized vendor acceptance and installed reference-product acceptance.
 
 The implementation preserves all 31 provider families and 34 original format
