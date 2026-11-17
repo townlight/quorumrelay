@@ -1309,10 +1309,11 @@ def default_adapters(transport=None):
     from .providers.granicus_write import GranicusWriteAdapter
     from .providers.telvue_write import TelVueWriteAdapter
     from .providers.towncloud_write import TownCloudWriteAdapter
+    from .providers.simbli_write import SimbliWriteAdapter
     return {**{name: WriteAdapter(name, transport)
                for name in ("legistar", "wistia", "laserfiche", "laserfiche-weblink")},
             "municode-meetings": EssentialWriteAdapter(transport), "granicus": GranicusWriteAdapter(transport),
             "civicplus-select": CivicClerkWriteAdapter(transport), "telvue": TelVueWriteAdapter(transport),
             "boardable": BoardableWriteAdapter(transport), "towncloud": TownCloudWriteAdapter(transport),
             "escribe": EscribeWriteAdapter(transport), "gworks": GWorksWriteAdapter(transport),
-            "iqm2": IQM2WriteAdapter(transport)}
+            "iqm2": IQM2WriteAdapter(transport), "simbli": SimbliWriteAdapter(transport)}

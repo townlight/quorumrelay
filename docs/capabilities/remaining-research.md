@@ -129,7 +129,7 @@ Evidence and exact scope: `inventory.json` provider `escribe`; operation status 
 
 - Public listing/page2, fresh selected meeting/agenda tree, selected item content and same-meeting supplied attachments are source implemented with scoped captures/synthetic execution. The older HTML-only observation is historical. Aggregate agenda/minutes PDF generation, native search and full-catalog semantics remain unverified.
 - The deployed anonymous client establishes a partial search request/result contract. Nonempty result identity, the complete session/header chain and continuation remain unresolved; staff/import schemas remain separate research gaps. No outside-only dependency is inferred. See the [exact client/probe assessment](evidence/simbli-search-client/source.json).
-- Tenant-specific role/permission and write/readback configuration must come from a matching machine contract. No staff/test-tenant credential acquisition is an acceptance gate; no live mutation is authorized.
+- The recovered selected-item client contract now supports the bounded existing-title adapter described in [SIMBLI-WRITES.md](../SIMBLI-WRITES.md). Item/meeting creation, supporting upload, minutes and publication remain unfinished. Current exact tenant/item grants, editability and native lock/readback are required; no staff/test-tenant credential acquisition is an acceptance gate and no live mutation is authorized.
 
 Evidence and exact scope: `inventory.json` provider `simbli`; operation status and outbound mappings are separate from historical observations.
 

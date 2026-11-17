@@ -14060,6 +14060,54 @@
           "receipt_sha256": "4042084c28989ee57dbe5f07e2d6649f992a3af066a1e4e5f1f181a6d461667d",
           "findings": "The observed supporting arrays were empty; client-backed nonempty attachment mapping and minutes DTO execution are synthetic. Client-declared print-agenda locator is unverified.",
           "limits": "No live nonempty supporting or meeting-minutes response, aggregate PDF, inferred agenda-item join or full catalog."
+        },
+        {
+          "id": "simbli-selected-item-title-2026-11-16",
+          "url": "https://simbli.eboardsolutions.com/SB_Assets/AngularOutput/chunk-XH3WJOAC.js",
+          "title": "Recovered native selected-item save and lock contract with synthetic engine execution",
+          "kind": "source_and_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "limits": "Existing editable nondeleted no-workflow agenda-item title update, complete DTO preservation, exact lock/release, current grants, bounded transport, token-safe plans and read-only uncertain recovery; no create/upload/minutes/publication.",
+          "observation_date": "2026-11-16",
+          "receipt_path": "docs/verification/simbli-item-write-2026-11-16.json",
+          "receipt_sha256": "b721187caf39f28ca57aa7caa571b6d95b6c317752fb6d3908004982463c54d5",
+          "synthetic_execution": {
+            "provider": "simbli",
+            "status": "mock_passed",
+            "operations": [
+              "update"
+            ],
+            "entities": [
+              "agenda_item"
+            ],
+            "scope": "Existing editable nondeleted no-workflow agenda-item title update, complete DTO preservation, exact lock/release, current grants, bounded transport, token-safe plans and read-only uncertain recovery; no create/upload/minutes/publication.",
+            "execution_provenance": "Executed registered native adapter through real Engine/SQLite with synthetic transports; public noneditable fixture and explicitly synthetic authorized derivative. No staff mutation.",
+            "checks": [
+              {
+                "command": "python -X utf8 -m pytest tests/test_simbli_item_write.py tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q",
+                "passed": 93,
+                "failed": 0,
+                "seconds": 132.736
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/investigations/2026-11-16-paused/simbli-selected-item-contract.json",
+                "sha256": "d3ec3192f8f48e35f1f40a1557340bd376693b82990af418288810728ce871ee"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_simbli_item_write.py",
+                "sha256": "b342836eb08e6b20b200b05f388086771e711144bca5f8cf7a7ffbe830c7de30"
+              },
+              {
+                "kind": "implementation",
+                "path": "src/civic_data_connectors/providers/simbli_write.py",
+                "sha256": "280feedb5579af2a9de9f7aea45a2b8dbbad2f043e4fbc5d0a444d8269ec06ad"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -14290,24 +14338,23 @@
         },
         "update": {
           "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "simbli-docs"
+            "simbli-docs",
+            "simbli-selected-item-title-2026-11-16"
           ],
-          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
-          "dependencies": [
-            "Supported integration route and conflict/idempotency contract unresolved."
-          ],
+          "details": "Existing editable nondeleted no-workflow agenda-item title update, complete DTO preservation, exact lock/release, current grants, bounded transport, token-safe plans and read-only uncertain recovery; no create/upload/minutes/publication.",
+          "dependencies": [],
           "remaining_verification": [
-            "Validate exact entity/field permissions and plan-bound commit/readback; do not invent API payloads."
+            "Other administrative fields and operations remain unresolved; only the named title scope is accepted."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
             "https://simbli.eboardsolutions.com/index.aspx?S=36031063"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Local synthetic engine/SQLite execution; no account required.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -14382,18 +14429,24 @@
         {
           "entity": "agenda_item",
           "operation": "update",
-          "endpoint_or_format": "Unknown machine endpoint/import schema; source documents UI only.",
-          "field_mappings": [],
+          "endpoint_or_format": "POST /Services/api/MeetingView/SaveAgendaItem/ plus native app2 item lock and form release",
+          "field_mappings": [
+            {
+              "normalized": "title",
+              "provider_field": "itemDetailsDTO.Title",
+              "mapping_level": "observed_vendor_client_payload_field"
+            }
+          ],
           "evidence_ids": [
-            "simbli-docs"
+            "simbli-selected-item-title-2026-11-16"
           ],
           "account_requirements": "Authorized tenant staff account, applicable module/tier and entity/workflow permissions; exact API entitlement unknown.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Required, not exercised: stable remote entity and parent ID; persisted fields, version/status; uploaded file hash/download; reconcile uncertain commits before retry. No receipt exists from this research.",
-          "verification_status": "documented_ui_only",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
-          "acceptance_status": "not_run",
+          "authorized_test_access": "synthetic_only_no_live_mutation",
+          "readback_receipt": "Exact stable agenda ID, independent tree/details comparison, complete preserved business state, durable mutation/cleanup markers and read-only uncertain recovery.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -14404,12 +14457,12 @@
             "W09",
             "W10"
           ],
-          "interface_type": "manual_ui_documented_machine_contract_unverified",
-          "contract_confidence": "ui_labels_or_product_feature_not_payload_keys",
-          "method": null,
-          "api_version": "unknown",
-          "automatable_contract_verified": false,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_native_client_with_synthetic_engine_sqlite_execution",
+          "method": "POST",
+          "api_version": "Captured Angular MeetingView client 2026-11-16",
+          "automatable_contract_verified": true,
+          "domain_scope": "Existing editable nondeleted no-workflow agenda-item title update, complete DTO preservation, exact lock/release, current grants, bounded transport, token-safe plans and read-only uncertain recovery; no create/upload/minutes/publication."
         },
         {
           "entity": "meeting_document",
@@ -14457,7 +14510,8 @@
         "Public listing/page2, fresh selected meeting/agenda tree, selected item content and same-meeting supplied attachments are source implemented with scoped captures/synthetic execution. The older HTML-only observation is historical. Aggregate agenda/minutes PDF generation, native search and full-catalog semantics remain unverified.",
         "The deployed anonymous client now establishes a partial search request/result contract. Nonempty result identity, complete session/header chain and continuation remain unresolved; staff/import schemas remain separate research gaps. No outside-only dependency is inferred.",
         "Tenant-specific role/permission and write/readback configuration must come from a matching machine contract. No staff/test-tenant credential acquisition is an acceptance gate; no live mutation is authorized.",
-        "Current vendor-declared meetings brochure captured2026-11-15. Import recommendations into minutes is a product workflow claim, with no external file/request/readback schema. Exact old CDN failure and direct page403 do not prove other public contracts absent; no new tenant sampling or guessed staff path."
+        "Current vendor-declared meetings brochure captured2026-11-15. Import recommendations into minutes is a product workflow claim, with no external file/request/readback schema. Exact old CDN failure and direct page403 do not prove other public contracts absent; no new tenant sampling or guessed staff path.",
+        "Existing agenda-item title update now implemented and synthetically verified against recovered native save/tree/details/lock contracts. Meeting/item creation, supporting upload, minutes and publication remain incomplete. See docs/SIMBLI-WRITES.md."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "simbli",

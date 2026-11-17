@@ -1,4 +1,29 @@
-# Paused QuorumRelay work — November 16, 2026
+# QuorumRelay current state — November 16, 2026
+
+## Resumed: CI repaired; selected Simbli title write implemented
+
+Scott resumed the full goal in the Desktop Goals document, with CI first.
+Commit `db9c6fd66a33006c2889d921c26118796eb967ba` repairs the five
+test-source line-ending bindings. Fresh Windows checkout reproduced all16
+original failures before the fix and passed afterward. GitHub run44003626602
+passed every required step in11m19s, including the full Python suite, client
+build/tests, capability validation and Ruff. No validator checks were relaxed.
+
+The recovered Simbli title-update draft is now corrected and registered.
+Its68 synthetic engine/SQLite cases plus25 metadata cases passed (93total,
+132.84seconds). Post-inventory bookkeeping25 metadata cases, capability
+validator and full required Ruff also passed. Receipt and exact pinned inputs:
+`docs/verification/simbli-item-write-2026-11-16.json`; native scope and remaining
+work: `docs/SIMBLI-WRITES.md`. Required integrated CI for this new candidate is
+the next delivery check; do not substitute the previous candidate's green run.
+
+This closes only existing editable no-workflow agenda-item title updates.
+Simbli meeting/item creation, supporting uploads, minutes and publication remain
+unfinished. The older failed draft and results below are historical evidence.
+The full31-vendor goal remains active and incomplete. TownCloud stays parked;
+no merge, release, payment or vendor contact is authorized.
+
+## Historical paused checkpoint
 
 Scott paused development and authorized committing and pushing the current work.
 This is a checkpoint, not a release or a claim that all 31 vendors are complete.
