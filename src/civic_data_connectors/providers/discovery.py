@@ -586,6 +586,8 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
         raise ValueError("The saved response exceeds the configured parser byte limit.")
     if input_format == "gworks-secure-calendar-json" and saved is None:
         raise ValueError("Use an explicit bounded calendar fetch; authenticated catalog traversal is not mapped.")
+    if input_format == "gworks-editor-meeting-json" and saved is None:
+        raise ValueError("Use fetch for one selected editor meeting; this is not a catalog endpoint.")
     if source.provider == "granicus" and input_format == "granicus-platform-soap-xml" and saved is None:
         from .granicus_platform import read
         return read(source, namespace, request, bounds, context, transport or PublicTransport(), discover=True)
@@ -973,6 +975,9 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "one meeting-bound player declaration; media and subtitle locators only, not fetched",
             "date_availability": "not_supplied_in_player_mapping", "playback_verified": False})
+    elif input_format == "gworks-editor-meeting-json":
+        coverage.update({"catalog_complete": False, "source_complete": False,
+            "scope": "one saved development-editor meeting", "native_item_ids": False})
     elif input_format == "gworks-secure-calendar-json":
         coverage.update({"catalog_complete": False, "source_complete": False,
             "scope": "one supplied secure calendar response; configured city, not response-verified tenant",

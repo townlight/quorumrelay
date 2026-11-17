@@ -177,6 +177,9 @@ def parse_native(source, namespace, content, input_format):
     if input_format == "gworks-secure-calendar-json":
         from .gworks_calendar import parse_bundle
         return parse_bundle(source, namespace, content)
+    if input_format == "gworks-editor-meeting-json":
+        from .gworks_editor import parse_bundle
+        return parse_bundle(source, namespace, content)
     if input_format == "gworks-published-meeting-html":
         from .gworks_detail import parse_bundle
         return parse_bundle(source, namespace, content)
@@ -226,6 +229,9 @@ def parse_native(source, namespace, content, input_format):
         return parse_bundle(source, namespace, content)
     if input_format == "iqm2-legislative-file-html":
         from .iqm2_file import parse_bundle
+        return parse_bundle(source, namespace, content)
+    if input_format == "iqm2-minutetraq-soap-xml":
+        from .iqm2_soap import parse_bundle
         return parse_bundle(source, namespace, content)
     if input_format == "iqm2-public-player-html":
         from .iqm2_player import parse_bundle

@@ -1,0 +1,232 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/quorumrelay-evaluation/meetings_v2/526618",
+    "body": {
+      "id": 526618,
+      "title": "QuorumRelay Recurrence Minimal Update",
+      "description": "<p>Synthetic private recurrence contract fixture.</p>",
+      "owner_id": 403839,
+      "timezone": "America/New_York",
+      "dates": [
+        {
+          "date": "11/30/2026",
+          "from": "9:00 am",
+          "id": 526618,
+          "timezone": "America/New_York",
+          "to": "10:00 am"
+        }
+      ],
+      "minutes_type": "free_form",
+      "location": "QuorumRelay integration evaluation",
+      "remote_option": "no_remote",
+      "remote_url": null,
+      "remote_url_description": null,
+      "disable_remote_rsvp": false,
+      "invitee_ids": [
+        403839
+      ],
+      "group_ids": [],
+      "guests": [],
+      "notify": false,
+      "notify_changed_invitees": false,
+      "guestsChanged": [],
+      "usersChanged": [],
+      "public_member_dashboard": 0,
+      "public_page": 0,
+      "enable_recording": "",
+      "enable_transcription": "",
+      "enable_ai_summary": "",
+      "calendar_type": "set",
+      "assignable_class": "App\\Boardable\\Meetings\\Meeting",
+      "assignable_id": 526618,
+      "series_choice": "subsequent"
+    }
+  },
+  "response": {
+    "data": {
+      "active_until": "2026-11-30T15:00:00.000000Z",
+      "additional_dates": [],
+      "agenda_draft_version": null,
+      "agenda_format": null,
+      "agenda_last_published_at": null,
+      "agenda_list_format": "num_la_lr",
+      "agenda_live_version": null,
+      "alternative_dates": null,
+      "blurb": "Synthetic private recurrence contract fixture.",
+      "created_at": "2026-11-16T22:44:08.000000Z",
+      "dates": [
+        {
+          "date": "11/30/2026",
+          "from": "9:00 am",
+          "id": 526618,
+          "to": "10:00 am"
+        }
+      ],
+      "datesTimezone": [
+        {
+          "date": "11/30/2026",
+          "from": "9:00 am",
+          "id": 526618,
+          "timezone": "America/New_York",
+          "to": "10:00 am"
+        }
+      ],
+      "deleted_at": null,
+      "description": "<p>Synthetic private recurrence contract fixture.</p>",
+      "disable_remote_rsvp": 0,
+      "enable_ai_summary": 0,
+      "enable_recording": 0,
+      "enable_transcription": 0,
+      "end": "2026-11-30T15:00:00.000000Z",
+      "external_id": null,
+      "follow_up_meeting_id": 526619,
+      "formattedMeetingTime": {
+        "date_numeric": "30",
+        "datetime": "Mon, Nov 30, 2026 9:00 AM EST",
+        "end": "10:00 AM",
+        "end_raw": {
+          "date": "2026-11-30 10:00:00",
+          "timezone": "America/New_York"
+        },
+        "materials_published_at": "11/16/2026 at 5:45 PM",
+        "month_abbr": "NOV",
+        "start": {
+          "date": "2026-11-30 09:00:00",
+          "timezone": "America/New_York"
+        }
+      },
+      "globalAi": 0,
+      "globalTranscripts": 0,
+      "group_id": null,
+      "groups": [],
+      "guest_members": [],
+      "guests": [],
+      "id": 526618,
+      "isScheduled": true,
+      "location": "QuorumRelay integration evaluation",
+      "materials_published_at": null,
+      "meetingHasStarted": false,
+      "members": [
+        {
+          "id": 403839,
+          "pivot": {
+            "attendance": "",
+            "automated_attendance": "",
+            "automated_attendance_override": 0,
+            "collaborator": 0,
+            "is_voter": 1,
+            "left_meeting": 0,
+            "meeting_id": 526618,
+            "rsvp": "",
+            "rsvp_note": "",
+            "user_id": 403839
+          }
+        }
+      ],
+      "minutes_attachment_id": null,
+      "minutes_published": 0,
+      "minutes_signature_document_id": 0,
+      "minutes_type": "free_form",
+      "name": "QuorumRelay Recurrence Minimal Update",
+      "not_available": null,
+      "notify": [
+        403839
+      ],
+      "organization_id": 46098,
+      "owner_id": 403839,
+      "public_member_dashboard": 0,
+      "public_page": null,
+      "published": false,
+      "published_at": null,
+      "published_level": 0,
+      "published_materials_status": null,
+      "recurrence_id": "20261130T140000Z",
+      "remote_option": "no_remote",
+      "remote_url": null,
+      "remote_url_description": null,
+      "removed_invitees": null,
+      "scheduler_notification": 0,
+      "series": {
+        "create_in_progress": false,
+        "created_at": "2026-11-16T22:44:08.000000Z",
+        "data": {
+          "dates": [
+            {
+              "date": "11/30/2026",
+              "from": "9:00 am",
+              "to": "10:00 am"
+            }
+          ],
+          "description": "<p>Synthetic private recurrence contract fixture.</p>",
+          "disable_remote_rsvp": false,
+          "enable_ai_summary": false,
+          "enable_recording": false,
+          "enable_transcription": false,
+          "group_ids": [],
+          "guests": [],
+          "invitee_ids": [
+            403839
+          ],
+          "location": "QuorumRelay integration evaluation",
+          "meeting_type": "series",
+          "minutes_type": "free_form",
+          "monthly_interval": "1",
+          "monthly_repeat_type": "numbered-day",
+          "notify": false,
+          "owner_id": 403839,
+          "public_member_dashboard": false,
+          "public_page": false,
+          "remote_option": "no_remote",
+          "remote_url": false,
+          "remote_url_description": false,
+          "repeat_period": "week",
+          "series_date": "11/30/2026",
+          "series_ends": "12/07/2026",
+          "series_from": "9:00 am",
+          "series_to": "10:00 am",
+          "timezone": "America/New_York",
+          "title": "QuorumRelay Recurrence Minimal Update",
+          "video_conference_enabled": false,
+          "weekly_interval": "1"
+        },
+        "description": "<p>Synthetic private recurrence contract fixture.</p>",
+        "id": 12616,
+        "meeting_invite_leader_id": 526618,
+        "organization_id": 46098,
+        "original_meeting_id": 526618,
+        "publish_in_progress": false,
+        "title": "QuorumRelay Recurrence Minimal Update",
+        "updated_at": "2026-11-16T22:45:56.000000Z",
+        "uuid": {
+          "created_at": "2026-11-16T22:44:08.000000Z",
+          "hex": "2bd42689b69741438fedd9420f74cb98",
+          "short_slug": "3b3d05c9",
+          "updated_at": "2026-11-16T22:44:08.000000Z",
+          "uuid": "2bd42689-b697-4143-8fed-d9420f74cb98",
+          "uuidable_id": 12616,
+          "uuidable_type": "App\\Boardable\\Meetings\\MeetingSeries"
+        }
+      },
+      "seriesListUrl": "https://app.boardable.com/quorumrelay-evaluation/meeting-series/list/3b3d05c9",
+      "series_id": 12616,
+      "single_update": 0,
+      "slug": "c8ab1a-quorumrelay-recurrence-minimal-update",
+      "starred_public_page": 0,
+      "start": "2026-11-30T14:00:00.000000Z",
+      "sub_leader": 0,
+      "timeUntilStart": "Starts 1 week 6 days from now",
+      "timezone": "America/New_York",
+      "title": "QuorumRelay Recurrence Minimal Update",
+      "update_not_sent": 0,
+      "updated_at": "2026-11-16T22:45:56.000000Z",
+      "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/c8ab1a-quorumrelay-recurrence-minimal-update",
+      "uuid_v2": null,
+      "v2": 1,
+      "videoLink": null,
+      "video_conference_enabled": false,
+      "video_session_currently_active": 0
+    },
+    "status": 200
+  }
+}

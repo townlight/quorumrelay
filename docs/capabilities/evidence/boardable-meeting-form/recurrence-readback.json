@@ -1,0 +1,60 @@
+{
+  "status": 200,
+  "meeting": {
+    "id": 526612,
+    "organization_id": 46098,
+    "owner_id": 403839,
+    "series_id": 12615,
+    "recurrence_id": "20261116T223000Z",
+    "follow_up_meeting_id": 526613,
+    "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/d02cb5-quorumrelay-private-recurrence-contract",
+    "seriesListUrl": "https://app.boardable.com/quorumrelay-evaluation/meeting-series/list/f498acdf",
+    "timezone": "America/New_York",
+    "datesTimezone": [
+      {
+        "date": "11/16/2026",
+        "from": "5:30 pm",
+        "id": 526612,
+        "timezone": "America/New_York",
+        "to": "6:30 pm"
+      }
+    ],
+    "public_page": 0,
+    "published": false
+  },
+  "series": {
+    "id": 12615,
+    "original_meeting_id": 526612,
+    "meeting_invite_leader_id": 526612,
+    "create_in_progress": false,
+    "publish_in_progress": false
+  },
+  "persisted_series_form": {
+    "meeting_type": "series",
+    "repeat_period": "week",
+    "weekly_interval": "1",
+    "monthly_interval": "1",
+    "monthly_repeat_type": "numbered-day",
+    "series_date": "11/16/2026",
+    "series_ends": "11/23/2026",
+    "series_from": "5:30 pm",
+    "series_to": "6:30 pm",
+    "timezone": "America/New_York",
+    "title": "QuorumRelay Private Recurrence Contract",
+    "owner_id": 403839,
+    "invitee_ids": [
+      403839
+    ],
+    "public_page": false,
+    "published": false,
+    "notify": false,
+    "remote_option": "no_remote",
+    "dates": [
+      {
+        "date": "11/16/2026",
+        "from": "5:30 pm",
+        "to": "6:30 pm"
+      }
+    ]
+  }
+}

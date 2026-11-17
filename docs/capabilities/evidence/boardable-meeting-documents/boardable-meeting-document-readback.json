@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "body": {
+      "activity": {
+        "current_page": 1,
+        "data": [],
+        "first_page_url": "https://app.boardable.com/quorumrelay-evaluation/documents/b838c2db/data",
+        "from": null,
+        "last_page": 1,
+        "last_page_url": "https://app.boardable.com/quorumrelay-evaluation/documents/b838c2db/data",
+        "links": [
+          {
+            "active": false,
+            "label": "&laquo; Previous",
+            "page": null,
+            "url": null
+          },
+          {
+            "active": true,
+            "label": "1",
+            "page": 1,
+            "url": "https://app.boardable.com/quorumrelay-evaluation/documents/b838c2db/data"
+          },
+          {
+            "active": false,
+            "label": "Next &raquo;",
+            "page": null,
+            "url": null
+          }
+        ],
+        "next_page_url": null,
+        "path": "https://app.boardable.com/quorumrelay-evaluation/documents/b838c2db/data",
+        "per_page": 10,
+        "prev_page_url": null,
+        "to": null,
+        "total": 0
+      },
+      "attachable": {
+        "id": 526577,
+        "organization_id": 46098,
+        "public_member_dashboard": 0,
+        "public_page": 0,
+        "published_at": null,
+        "published_level": 0,
+        "title": "QuorumRelay Contract Fixture Revised",
+        "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/0e58cf-quorumrelay-contract-fixture-revised"
+      },
+      "attachable_id": 526577,
+      "attachable_type": "App\\Boardable\\Meetings\\Meeting",
+      "attached_link": "",
+      "attached_name": "",
+      "attached_type": "computer",
+      "bareIconUrl": "https://app.boardable.com/img/icons/doc_center/bare-file.svg",
+      "body": false,
+      "created_at": "2026-11-16T23:53:29.000000Z",
+      "deleted_at": null,
+      "disable_downloads": 0,
+      "display_options": null,
+      "document_id": 0,
+      "downloadUrl": "https://app.boardable.com/quorumrelay-evaluation/attachments/uploads/download/684953/quorumrelay-document-center-evaluation.txt",
+      "external_id": null,
+      "external_url": "https://app.boardable.com/quorumrelay-evaluation/attachments/external/684953",
+      "file": "684953--ac3883a5-3bab-4505-a173-01451d5f5617.txt",
+      "fileExtension": "txt",
+      "file_size": 118,
+      "filename": "quorumrelay-document-center-evaluation.txt",
+      "folder_id": 0,
+      "google_doc_embed_url": null,
+      "iconUrl": "https://app.boardable.com/quorumrelay-evaluation/pdfs/3937287/quorumrelay-document-center-evaluationtxtpdf/thumb",
+      "id": 684953,
+      "is_convertable": true,
+      "mime_type": "text/plain",
+      "name": "quorumrelay-document-center-evaluation.txt",
+      "order": 0,
+      "organization_id": 46098,
+      "owner_id": 403839,
+      "pdf": {
+        "cloned_from_pdf_id": null,
+        "conversion_failed_at": null,
+        "conversion_job_id": "0a1157eb-4da9-4708-8df3-dee9edde839d",
+        "converted_at": "2026-11-16T23:53:33.000000Z",
+        "created_at": "2026-11-16T23:53:29.000000Z",
+        "data": null,
+        "failure_reason": null,
+        "filename": "quorumrelay-document-center-evaluation.txt",
+        "id": 3937287,
+        "isConverted": true,
+        "is_stale": 0,
+        "organization_id": 46098,
+        "original_is_encrypted": false,
+        "pdfable_id": 684953,
+        "pdfable_type": "App\\Boardable\\Attachments\\Attachment",
+        "status": "converted",
+        "tag": "",
+        "thumbUrl": "https://app.boardable.com/quorumrelay-evaluation/pdfs/3937287/quorumrelay-document-center-evaluationtxtpdf/thumb",
+        "thumbnail": "",
+        "updated_at": "2026-11-16T23:53:33.000000Z",
+        "url": "https://app.boardable.com/quorumrelay-evaluation/pdfs/3937287/quorumrelay-document-center-evaluationtxtpdf"
+      },
+      "tag": "",
+      "third_party_raw_data": null,
+      "title": "quorumrelay-document-center-evaluation.txt",
+      "token_id": null,
+      "updated_at": "2026-11-16T23:53:29.000000Z",
+      "url": "https://app.boardable.com/quorumrelay-evaluation/attachments/uploads/download/684953/quorumrelay-document-center-evaluation.txt",
+      "userCanDownload": true,
+      "uuid": {
+        "created_at": "2026-11-16T23:53:29.000000Z",
+        "hex": "ac3883a53bab4505a17301451d5f5617",
+        "short_slug": "b838c2db",
+        "updated_at": "2026-11-16T23:53:29.000000Z",
+        "uuid": "ac3883a5-3bab-4505-a173-01451d5f5617",
+        "uuidable_id": 684953,
+        "uuidable_type": "App\\Boardable\\Attachments\\Attachment"
+      },
+      "webUrl": "https://app.boardable.com/quorumrelay-evaluation/attachments/uploads/download/684953/quorumrelay-document-center-evaluation.txt"
+    },
+    "status": 200
+  },
+  "original": {
+    "bytes": 118,
+    "sha256": "6255a5838ad4f46e2efc7f78d040e688d0b3f58d1fe646d36ca474fba13b6d9b",
+    "status": 200,
+    "url": "https://app.boardable.com/quorumrelay-evaluation/attachments/uploads/download/684953/quorumrelay-document-center-evaluation.txt"
+  }
+}

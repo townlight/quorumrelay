@@ -4,6 +4,8 @@ Schema 2.0.0. Frozen candidate 0.1.0.dev8; local source includes later mappings 
 
 ## Public operations
 
+The gWorks development-editor mapping supports meeting create/update, agenda/minutes text and explicit publication with exact readback and no replay of uncertain sends. See [gWorks editor reads and writes](GWORKS-EDITOR.md) for fields, environment binding, permissions and the executed synthetic scope.
+
 `writes.register(engine, adapters=None)` registers `plan_write`, `commit_write`, and
 `receipt`. An adapter maps a documented native request and validates fields. The
 write coordinator owns authorization, immutable plans, atomic execution intents,

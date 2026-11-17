@@ -1,0 +1,385 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" prefix="og: http://ogp.me/ns#">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>TelVue Corporation  TelVue Connect&trade; API Documentation &raquo; TelVue Corporation</title>
+    <link rel="stylesheet" href="http://www.telvue.com/wp-content/themes/telvue/style.css?cb=1" type="text/css" media="screen" />
+    <!--link rel="stylesheet" href="http://www.telvue.com/wp-content/themes/telvue/print.css" type="text/css" media="print" /-->
+    <link rel="alternate" type="application/rss+xml" title="TelVue Corporation RSS Feed" href="http://www.telvue.com/feed/" />
+    <link rel="pingback" href="http://www.telvue.com/xmlrpc.php" />
+        
+<!-- This site is optimized with the Yoast WordPress SEO plugin v1.5.3.2 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="http://www.telvue.com/support/product-documentation/telvue-connect-api-documentation/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TelVue Connect&trade; API Documentation - TelVue Corporation" />
+<meta property="og:description" content="RSS Feeds Upload Video (JSON REST API &#8211; version 1)" />
+<meta property="og:url" content="http://www.telvue.com/support/product-documentation/telvue-connect-api-documentation/" />
+<meta property="og:site_name" content="TelVue Corporation" />
+<!-- / Yoast WordPress SEO plugin. -->
+
+<link rel="alternate" type="application/rss+xml" title="TelVue Corporation &raquo; TelVue Connect&trade; API Documentation Comments Feed" href="http://www.telvue.com/support/product-documentation/telvue-connect-api-documentation/feed/" />
+<link rel='stylesheet' id='theme-my-login-css'  href='http://www.telvue.com/wp-content/plugins/theme-my-login/theme-my-login.css?ver=6.3.8' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='http://www.telvue.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='super-rss-reader-css-css'  href='http://www.telvue.com/wp-content/plugins/super-rss-reader/public/srr-css.css?ver=3.9.1' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-syntax-css-css'  href='http://www.telvue.com/wp-content/plugins/wp-syntax/css/wp-syntax.css?ver=1.0' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.telvue.com/wp-includes/js/jquery/jquery.js?ver=1.11.0'></script>
+<script type='text/javascript' src='http://www.telvue.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='http://www.telvue.com/wp-content/plugins/super-rss-reader/public/srr-js.js?ver=3.9.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.telvue.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.telvue.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 3.9.1" />
+<link rel='shortlink' href='http://www.telvue.com/?p=6643' />
+<link rel="stylesheet" type="text/css" href="http://www.telvue.com/wp-content/plugins/wp-recaptcha/recaptcha.css" />
+
+		<meta name="keywords" content="broadcast technology, broadcast automation, digital video servers, video servers, workflow solutions,
+		  television station workflow, public television, education television, government television, public access , local access,
+		  local origination tv channel, leased access tv channel, professional satellite, cable, digital tv, community tv, community television,
+		  hyperlocal, hyperlocal telelvision, PEG TV, PEG.TV, PEG-TV broadcast, PEG TV broadcast, mobile broadcasters, digital signage,
+		  digital video broadcast systems, digital broadcast servers, video-on-demand, video on demand, VoD, VOD, internet streaming media,
+		  streaming video, bulletin board, high-definition broadcast, digital media, digital TV, MPEG-2, MPEG-4, on demand television,
+		  software video server, IPTV, IPME, digital video recorder, video archival, video retrieval, MPEG encoders, transcoders, WEBUS, WEBEM,
+		  Princeton, TelVue Princeton, Princeton Server, Princeton Server Group, B100, B1000, B3000" />
+    <meta name="author" content="TelVue Corporation" />
+		<link type="image/x-icon" href="http://www.telvue.com/favicon.ico" rel="icon" />
+			<link type="text/css" href="/wp-content/themes/telvue/screen.css" rel="stylesheet"  media="screen" />
+  		<link type="text/css" href="/wp-content/themes/telvue/print.css" rel="stylesheet" media="print" />
+		<link  type="text/css" href="/public/js/lightbox/lightbox.css" rel="stylesheet" media="screen" />
+		<!--[if IE]>
+			<link type="text/css" href="/wp-content/themes/telvue/fix_ie6.css" rel="stylesheet" media="screen" />
+		<![endif]-->
+		<link type="text/css" rel="stylesheet" href="/public/fancybox/jquery.fancybox-1.3.4.css"/>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5867330-5']);
+  _gaq.push(['_setDomainName', 'telvue.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+		<script type="text/javascript" src="/public/js/global.js"></script>
+		<script type="text/javascript" src="/public/js/swfobject.js"></script>
+    <script type="text/javascript" src="/public/js/prototype.js"></script>
+		<script type="text/javascript" src="/public/js/scriptaculous/scriptaculous.js?load=effects,builder"></script>
+		<script type="text/javascript" src="/public/js/lightbox/lightbox.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/js/fancybox.js"></script>
+		<script type="text/javascript" src="/public/js/jQueryCalls.js"></script>
+		<script type="text/javascript" src="/public/js/contact_draft.js"></script>
+		<script type="text/javascript">$.noConflict();</script>
+
+
+    <script type="text/javascript" charset="utf-8">
+      // Redirect HyperCaster video to Cable and Telco page upon playback completion.
+      var player;
+      function playerReady(object) {
+        player = document.getElementById(object.id);
+        player.addModelListener('state', 'stateTracker');
+      };
+      function stateTracker(obj) {
+        if (obj.newstate == 'COMPLETED') {
+          window.location = '/markets/cable-and-telco/';
+        }
+      };
+    </script>
+
+    <script>
+      jQuery(document).ready(function() {
+        jQuery(".fancybox-pegtv").fancybox({
+           'width'        : 720,
+           'height'       : 480,
+           'scrolling'    : 'no',
+           autoDimensions : 'false'
+        });
+      });
+    </script>
+
+	</head>
+
+	<body class="@@(_document['class'])@@">
+
+		<div id="overlay-wrapper" class="flash-overlay"></div>
+		<a name="top" id="top"></a>
+		<div id="header-wrapper">
+			<div id="header">
+				<a href="/"><img src="/wp-content/uploads/telvue_logo.png" alt="TelVue Corporation" name="logo" width="202" height="76" id="logo" title="TelVue Corporation" /></a>
+                                  <div class="loginbox"><a href="/login/">Sign in</a> | <a href="/login/?action=register">Register</a></div>
+                                <div class="social">
+                <a href="http://www.facebook.com/#!/pages/TelVue-Corporation/102889164763?ref=mf"><img src="http://www.telvue.com/wp-content/themes/telvue/images/facebook.jpg"alt="Facebook" title="Facebook" /></a>
+				         <a href="http://www.linkedin.com/company/telvue-corporation?trk=fc_badge"><img src="http://www.telvue.com/wp-content/themes/telvue/images/linkedin.jpg" alt="LinkedIn" title="LinkedIn" /></a>
+  <a href="http://twitter.com/telvue"><img src="http://www.telvue.com/wp-content/themes/telvue/images/twitter.jpg" alt="Twitter" title="Twitter" /></a>
+
+</div>
+				<ul id="utility">
+					<li>
+						<form id="login_form" name="login_form" action="">
+							<label for="login_menu">Customer Login:</label>
+							<select id="login_menu" name="login_menu" onchange="jumpLink(this.value);">
+								<option value="" selected="selected">Please select a service...</option>
+								<!--option value="http://www.telvue.org/reports/jamweb.exe/login_web">ANI Reports</option-->
+								<option value="http://cloudcast.telvue.com">TelVue CloudCast&trade;</option>
+								<!--option value="http://cmdn.telvue.com/profile/login">TelVue CMDN</option-->
+								<option value="http://connect.telvue.com">TelVue Connect&trade;</option>
+								<!--option value="https://webus.telvue.com/index.aspx">WEBUS&reg;</option-->
+								<!--option value="http://www.telvue.org/gallery/main.php">WEBVUE</option-->
+							</select>
+						</form>
+					</li>
+					<li><a href="#" id="search">Search</a>
+						<ul>
+							<li>
+								<form method="get" id="searchform" action="http://www.telvue.com/">
+<input type="text" size="20" name="s" id="s" value="Search..."  onblur="if(this.value=='') this.value='Search...';" onfocus="if(this.value=='Search...') this.value='';"/>
+<input type="image" id="btn_sitesearch" name="btn_sitesearch" src="/assets/image/search_btn.gif" class="search" alt="search" title="search" />
+</form>
+							</li>
+						</ul>
+					</li>
+					<li><a href="/contact/">Contact</a></li>
+					<li class="last-utility-child"><a href="/partners">Partners</a></li>
+				</ul>
+				<div class="clear-both">&nbsp;</div>
+
+                <!--div id="navbar">
+          <ul id="nav">
+          	<li><a href=""></a></li>
+          	          </ul>
+        </div-->
+      	
+        <div id="nav-wrapper">
+          <div id="nav">
+            <ul>
+              <li id="nav_home"><a href="/">Home</a></li>
+              <li id="nav_products"><a href="#"/products">Products</a>
+                <ul>
+                  <li>
+                    <a href="/products/telvue-adcaster">
+                      TelVue AdCaster&trade; <span>Digital Ad Server</span>
+                    </a>
+		              </li>
+
+                  <li>
+                    <a href="/products/cloudcast">
+                      TelVue CloudCast&trade; <span>Streaming Video & VOD Service</span>
+                    </a>
+		              </li>
+
+                  <li>
+                    <a href="/products/telvue-connect">
+                      TelVue Connect&trade; <span>Cloud-based Broadcast Channel Management</span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="/products/hypercaster">
+                      TelVue HyperCaster <span>IP/HD-SDI Broadcast Server</span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="/products/pegtv">
+                      TelVue PEG.TV&trade; on Roku <span>Community TV on Roku</span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="/products/provue">
+                      TelVue ProVue&trade; <span>Professional IP Broadcast Decoder</span></a>
+                  </li>
+
+                  <li>
+                    <a href="/products/telecast">
+                      TelVue TeleCast&trade; <span>Multi-rate Streaming Encoder</span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="/products/turbo">
+                      TelVue Turbo&trade; <span>CloudCast Workflow Accelerator</span>
+                    </a>
+                  </li>
+
+                  <li class="trigger">
+                    <!--a href="/products/webus">
+                      TelVue WEBUS<sup>ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®</sup> <span>Broadcast Bulletin Board System</span></a>
+                  </li-->
+                </ul>
+              </li>
+
+              <li id="nav_markets"><a href="/markets/">Markets</a>
+                <ul>
+                  <li><a href="/markets/cable-and-telco-2">Cable/Telco TV</a></li>
+                  <li><a href="/markets/media-companies">Media Companies</a></li>
+                  <li class="trigger"><a href="#">Community TV</a>
+                      <ul class="menu-market">
+                          <li><a href="/markets/education">Education</a></li>
+                          <li><a href="/markets/peg-2">PEG</a></li>
+                      </ul>
+                  </li>
+                </ul>
+              </li>
+              <li id="nav_demos"><a href="#">Clients</a>
+                <ul>
+                  <li><a href="/clients/customer-list">Customer List</a></li>
+                  <li><a href="/clients/testimonials">Customer Testimonials</a></li>
+                  <li class="last-secondary-child"><a href="/clients/case-studies">Case Studies</a></li>
+                </ul>
+              </li>
+              <li id="nav_support"><a href="/support">Support</a>
+                <ul>
+                  <li><a href="/support">Technical Support</a></li>
+                  <li><a href="http://telvue.tumblr.com" target="_blank">Engineering Blog</a></li>
+                  <li><a href="/support/training">Training</a></li>
+                  <!--li><a href="/support/faq">FAQs</a></li-->
+                  <li><a href="/support/product-documentation">Product Documentation</a></li>
+                  <li><a href="/support/literature">Literature</a></li>
+                  <li class="last-secondary-child"><a href="/support/calculator/">Capacity Planning Calculator</a></li>
+                </ul>
+              </li>
+              <li id="nav_about"><a href="#">About</a>
+                <ul>
+                  <li><a href="/about/who-is-telvue">Who is TelVue?</a></li>
+                  <li><a href="/about/history">History</a></li>
+                  <li><a href="/about/executive-profiles">Our Team</a></li>
+                  <li><a href="/about/investor-relations">Investor Relations</a></li>
+                  <li class="last-secondary-child"><a href="/about/career-opportunities">Career Opportunities</a></li>
+                </ul>
+              </li>
+              <li id="nav_media"><a href="#">Media</a>
+                <ul>
+                  <li><a href="/media/press-releases">Press Releases</a></li>
+                  <li><a href="/media/in-the-news">In The News</a></li>
+                  <li><a href="/media/design-awards">Design Awards</a></li>
+                  <li><a href="/media/industry-associations">Industry Associations</a></li>
+                  <li class="last-secondary-child"><a href="/media/trade-shows">Upcoming Trade Shows</a></li>
+                </ul>
+              </li>
+              <li id="nav_blog" class="last-primary-child"><a href="/blog/">Blog</a></li>
+              <!--<li id="nav_developers" class="last-primary-child"><a href="http://forum.telvue.com/">Forum</a></li>-->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div id="content">
+
+
+        <h1 class="posttitle">TelVue Connect&trade; API Documentation</h1>
+
+			  <div id="primary-wrapper">
+
+          <div id="primary-content" class="column">
+
+      			<div class="postentry">
+      				<ul>
+ <li class="page_item page-item-8684"><a href="http://www.telvue.com/support/product-documentation/telvue-connect-api-documentation/rss-feeds/">RSS Feeds</a></li>
+<li class="page_item page-item-6645"><a href="http://www.telvue.com/support/product-documentation/telvue-connect-api-documentation/upload-video-rest/">Upload Video (JSON REST API &#8211; version 1)</a></li>
+ 
+</ul>      				      			</div>
+
+      			<div class="postmetadata">
+      				<div class="postmetadata">
+      					      					<a href="http://www.telvue.com/support/product-documentation/telvue-connect-api-documentation/trackback/ " rel="trackback">Trackback</a>      					      				</div>
+      			</div>
+
+        		
+<div id="comments">
+
+
+			<!-- If comments are closed and there are no comments. -->
+    <!--p class="nocomments">Comments are closed.</p-->
+
+  
+
+</div>
+
+          </div><!-- primary-content -->
+          
+
+<div id="secondary-content" class="column">
+  
+  <div class="secondary-gradient-banner">
+    <div class="gradient-banner-content">
+      25<li class="page_item">&uarr;<a href="http://www.telvue.com/support/product-documentation/">Product Documentation</a><ul>
+ <li class="page_item page-item-8684"><a href="http://www.telvue.com/support/product-documentation/telvue-connect-api-documentation/rss-feeds/">RSS Feeds</a></li>
+<li class="page_item page-item-6645"><a href="http://www.telvue.com/support/product-documentation/telvue-connect-api-documentation/upload-video-rest/">Upload Video (JSON REST API &#8211; version 1)</a></li>
+ 
+</ul></li></ul>    </div>
+  </div>
+  
+</div>
+
+<script type="text/javascript">// <![CDATA[
+  jQuery(document).ready(function() {
+   jQuery(".fancybox-pegtv").fancybox({
+       'width'        : 720,
+       'height'       : 480,
+       'scrolling'    : 'no',
+       autoDimensions : 'false'
+    });
+});
+// ]]></script>				<div id="content-footer">
+						<h2>Featured Product</h2>
+					       <div id="promo">
+							<h5><a href="/products/telvue-connect">
+								<img src="/wp-content/uploads/connectfeatured.png" width="112" alt="TelVue Connect™" title="TelVue Connect™" />
+								<strong>TelVue Connect™</strong>
+								<span class="tagline">A cloud-based Broadcast CMS that streamlines multi-user contribution, transcoding, content management and scheduling.</span></a></h5>
+						</div>
+						<div class="featured_description"><strong>
+						TelVue® Corporation is a broadcast technology innovator and leader that helps video broadcasters automate their channels, expand their audiences across multiple screens, and broaden their ability to monetize their content. TelVue’s professional quality broadcast equipment and cloud video services include all-in-one digital broadcast servers, live Internet streaming, IP video on demand (VOD), multi-user contribution and transcoding, and web-based digital signage. TelVue® serves the local origination and leased access needs for 9 of the top 10 MSOs and over 100 cable & telco TV operators, powers over 2,500 hyperlocal and PEG channels, and delivers local programming to over 50 million households.
+						</strong></div>
+					</div>
+					<div class="clear-both">&nbsp;</div>
+				</div><!-- primary-wrapper -->
+			</div><!-- content -->
+    </div><!-- container -->
+    <div id="footer-wrapper">
+			<div id="footer">
+				<p>&copy; <script type="text/javascript">var curDate=new Date(); document.write(curDate.getFullYear())</script> TelVue Corporation. All Rights Reserved.</p>
+				<ul>
+					<li><a href="/contact/">Contact</a></li>
+					<li><a href="/privacy/">Privacy</a></li>
+					<li><a href="/terms/">Terms of Use</a></li>
+					<li><a href="/sitemap/">Site Map</a></li>
+					<li><a href="http://www.telvue.com/feed/">Entries (RSS)</a></li>
+					<li><a href="http://www.telvue.com/comments/feed/">Comments (RSS)</a></li>
+					<li class="last-utility-child">800-885-8886</li>
+				</ul>
+				<div class="clear-both">&nbsp;</div>
+			</div>
+		</div>
+
+		<script type='text/javascript' src='http://www.telvue.com/wp-includes/js/comment-reply.min.js?ver=3.9.1'></script>
+<script type='text/javascript' src='http://www.telvue.com/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.50.0-2014.02.05'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/www.telvue.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ..."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.telvue.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=3.8.1'></script>
+
+  	<script type="text/javascript"> var vv_account_id = 'RZ66NoRprl'; var vv_BaseURL = (("https:" == document.location.protocol) ? "https://frontend.id-visitors.com/FrontEndWeb/" : "http://frontend.id-visitors.com/FrontEndWeb/");document.write(unescape("%3Cscript src='" + vv_BaseURL + "Scripts/liveVisit.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript"> try {document.write(unescape("%3Cscript src='" + new_url +"' type='text/javascript'%3E%3C/script%3E"));} catch( err ) {}</script>
+<script type="text/javascript">
+piAId = '46872';
+piCId = '1180';
+
+(function() {
+	function async_load(){
+		var s = document.createElement('script'); s.type = 'text/javascript';
+		s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+		var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+	}
+	if(window.attachEvent) { window.attachEvent('onload', async_load); }
+	else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+	</body>
+</html>

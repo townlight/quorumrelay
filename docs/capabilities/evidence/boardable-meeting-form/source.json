@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-16",
+  "origin": "https://app.boardable.com",
+  "organization_id": 46098,
+  "provenance": "Authorized QuorumRelay Evaluation trial browser. Exact server-rendered form script extracted from editor; all JSON.parse record initializers removed. Requests/responses recursively redact token/password/pin/email/phone/private authentication values. No browser credentials exported.",
+  "browser_fixture": {
+    "id": 526572,
+    "created": true,
+    "updated": true,
+    "public_page": 0,
+    "invitations_sent": false,
+    "materials_published": false
+  },
+  "exact_minimal_fixture": {
+    "id": 526577,
+    "create_status": 201,
+    "update_status": 200,
+    "readback_status": 200,
+    "canonical_url_changes_on_title": true,
+    "public_page": 0,
+    "invitations_sent": false,
+    "materials_published": false
+  },
+  "contract": {
+    "create": "POST /{org}/meetings, JSON,201 raw meeting object with nativeid and canonicalurl",
+    "update": "POST /{org}/meetings_v2/{id}, JSON,200 raw meeting object with nativeid and changed canonicalurl",
+    "readback": "GET exact returned/trusted canonical URL?format=json,200 {meeting:{...}}",
+    "authentication": "Session cookie plus X-XSRF-TOKEN and X-Requested-With XMLHttpRequest",
+    "numeric_detail": "A single native-ID detail probe returned404; no numeric readback route is mapped.",
+    "recovery": "Persist returned nativeid AND exact canonicalurl; no titlematching or mutation replay. Lost response with no known URL remains uncertain."
+  },
+  "scope": "Single private unpublished no_remote meeting create/update, title/description/location/timezone/date range, no guests, no invites. Recurrence, multi-day, scheduler, video integrations, publication and import remain separate.",
+  "files": [
+    {
+      "path": "boardable-meeting-minimal-create.json",
+      "sha256": "4eca0c4e11d1562dc442263af15fb9e38d3df943d407c1c5a8391b5ee10b7d41"
+    },
+    {
+      "path": "boardable-meeting-minimal-update.json",
+      "sha256": "9a85402ec9957adffc366d4f5407ce31e80ed71af0f336bec274bc23c2088a58"
+    },
+    {
+      "path": "boardable-meeting-created.json",
+      "sha256": "9e43c7acf2fe1525d071f1756f303ed0a96616c4e427b854ec582fd97498e822"
+    },
+    {
+      "path": "boardable-meeting-updated.json",
+      "sha256": "b4b63b061374b70dfeac5d1b0e2ec6761a6dc0e540bbdbc97a4bc7ed84dcbf41"
+    },
+    {
+      "path": "boardable-meeting-form-inline.js",
+      "sha256": "cefa0da9c30938aa8b9aaecdffd9a6d491aebeb41c5f1185066b463c798fccaf"
+    },
+    {
+      "path": "boardable-meeting-numeric-read.json",
+      "sha256": "6feddf64c6736e1086f1787d4a7bbbca0cf1a888929be2b0a1323c6e027f8dcb"
+    }
+  ]
+}

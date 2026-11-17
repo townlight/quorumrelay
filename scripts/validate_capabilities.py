@@ -266,7 +266,14 @@ def semantic_errors(data, identities):
                         ("telvue", "playlist_order", "update"), ("telvue", "playlist_membership", "create"),
                         ("boardable", "agenda_order", "update"), ("boardable", "item", "update"),
                         ("boardable", "item", "create"),
-                        ("towncloud", "item_draft", "update")}
+                        ("boardable", "meeting", "create"), ("boardable", "meeting", "update"),
+                        ("boardable", "meeting_document", "upload"),
+                        ("gworks", "meeting", "create"), ("gworks", "meeting", "update"),
+                        ("gworks", "media", "upload"),
+                        ("towncloud", "item_draft", "update"),
+                        ("iqm2", "meeting", "create"), ("iqm2", "meeting", "update"),
+                        ("iqm2", "agenda", "update"),
+                        ("iqm2", "recording", "upload")}
                         or mapping["implementation_status"] != "implemented"
                         or mapping["acceptance_status"] != "mock_passed"):
                     errors.append(f"{name}: vendor client contract requires attributed exact product/entity synthetic proof")

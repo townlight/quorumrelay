@@ -1,0 +1,20 @@
+{
+  "installer_sha256": "F685268823F757FA3512A1238A04A9904881A6689A4AF85B96928C21EEF1F927",
+  "observation_date": "2026-11-16",
+  "url": "https://downloads.iqm2.com/Downloads/MinuteTraq_8_11_3_1452015_Full.msi",
+  "excerpt_sha256": "5BA07C8636B68839F5801AFE65DF7DC78CA3B84BECA6D52F443966030D990E40",
+  "calls": "No authenticated vendor calls or live mutations",
+  "method": "Static extraction and ILSpy9.1 decompilation; vendor application not installed or executed",
+  "credentials": "Installer configuration excluded; no extracted credential values used",
+  "full_source_manifest": "C:/Users/scott/Documents/Codex/2026-11-16/rea/work/minutetraq/source.json",
+  "components": [
+    {
+      "name": "LMClassicServiceClient.dll",
+      "sha256": "6B7091F9F2AC83E78B1CA0191249D29E59F248CA82AA5D171FD063ECF622752D"
+    },
+    {
+      "name": "M2Common3.5.dll",
+      "sha256": "B221B7504A83914B861A130222B7CFE18F77DE20E2195861B6288ECC8DA53587"
+    }
+  ]
+}

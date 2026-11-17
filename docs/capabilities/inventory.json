@@ -15587,6 +15587,118 @@
           "proof_level": "official_documentation_or_ui_contract_not_live_acceptance",
           "fixture_path": "docs/capabilities/evidence/granicus-legacy-lifecycle/source.json",
           "fixture_sha256": "f42f054900834a55cea242ed34fb2514233614aa226ccc22687b79ad16b5cfb2"
+        },
+        {
+          "id": "iqm2-minutetraq-client-read-2026-11-16",
+          "url": "https://downloads.iqm2.com/Downloads/MinuteTraq_8_11_3_1452015_Full.msi",
+          "title": "MinuteTraq8.11.3 captured SOAP client and synthetic selected reads",
+          "kind": "source_and_named_test_coverage",
+          "proof_level": "source_and_named_test_coverage_not_provider_acceptance",
+          "limits": "No authenticated vendor call. Dataset writes, file transfer and meeting creation remain separate work; no catalog completeness claim.",
+          "observation_date": "2026-11-16",
+          "observed": "MinuteTraq8.11.3 captured SOAP client and synthetic selected reads",
+          "findings": "MinuteTraq8.11.3 captured SOAP client and synthetic selected reads",
+          "access_scope": "local_synthetic_only"
+        },
+        {
+          "id": "iqm2-minutetraq-writes-2026-11-16",
+          "url": "https://downloads.iqm2.com/Downloads/MinuteTraq_8_11_3_1452015_Full.msi",
+          "title": "Native MinuteTraq selected title and meeting writes",
+          "kind": "source_and_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "limits": "Local synthetic and independent .NET wire verification. No vendor calls. File transfer, broader agenda editing, document imports and publication remain separate work.",
+          "observation_date": "2026-11-16",
+          "receipt_path": "docs/verification/iqm2-minutetraq-writes-2026-11-16.json",
+          "receipt_sha256": "4505afa55d1c9c66a11c694a7dff82f4afaf9de77400c5ce25e6178b3e4c683b",
+          "synthetic_execution": {
+            "scope": "Native meeting create/update and selected existing agenda/minutes item titles only",
+            "bindings": [
+              {
+                "sha256": "2deb0f60a7a63916849c11eec85c8800fa6cbc9dca3a2d0c0fd016c3dc59c66a",
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/iqm2-minutetraq-client/write-contract-excerpts.txt"
+              },
+              {
+                "sha256": "d1ee2b32fe7ea59836b267c0748e6cb56762c62fd835084db7a8b7b86b73b693",
+                "kind": "test",
+                "path": "tests/test_iqm2_write.py"
+              },
+              {
+                "sha256": "8dd61efc4b991cb6dca5ed4cb1df5da657cc52d923d5deb0448558e18b72823a",
+                "kind": "test",
+                "path": "tests/test_iqm2_meeting_write.py"
+              }
+            ],
+            "provider": "iqm2",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "meeting",
+              "agenda",
+              "minutes"
+            ],
+            "execution_provenance": "Executed integrated default native adapter and WriteCoordinator using synthetic transports plus independent System.Data wire validation on 2026-11-16",
+            "checks": [
+              {
+                "failed": 0,
+                "command": "python -m pytest tests/test_iqm2_meeting_write.py tests/test_iqm2_write.py tests/test_writes.py -q",
+                "passed": 70,
+                "seconds": 115.31
+              }
+            ],
+            "status": "mock_passed"
+          },
+          "observed": "Native meeting create/update and selected existing agenda/minutes item titles only",
+          "findings": "Native meeting create/update and selected existing agenda/minutes item titles only",
+          "access_scope": "local_synthetic_only"
+        },
+        {
+          "id": "iqm2-minutetraq-media-2026-11-16",
+          "url": "https://downloads.iqm2.com/Downloads/MinuteTraq_8_11_3_1452015_Full.msi",
+          "title": "MinuteTraq native M2 recording upload client contract",
+          "kind": "source_and_synthetic_execution",
+          "observation_date": "2026-11-16",
+          "observed": "Statically recovered vendor SOAP, typed schema, upload UI, chunk transfer and original-download workflows; actual adapter requests deserialized by independent System.Data fixture.",
+          "access_scope": "local_synthetic_only",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "findings": "Native M2 BigFiles recording upload/new or existing Media row for an explicitly selected meeting; metadata and original-byte readback, durable chunk intent and read-only uncertain reconciliation. Requires trusted bigfiles_enabled true; no FTP/delete/transcoding administration.",
+          "limits": "No live acceptance. Native BigFiles path only.",
+          "receipt_path": "docs/verification/iqm2-minutetraq-media-2026-11-16.json",
+          "receipt_sha256": "f9d78b9ec6a70c3752c33c327d8fcff5763d62a92bc751c59cf3a3ba618c5476",
+          "synthetic_execution": {
+            "provider": "iqm2",
+            "status": "mock_passed",
+            "operations": [
+              "upload"
+            ],
+            "entities": [
+              "recording"
+            ],
+            "scope": "Native M2 BigFiles recording upload/new or existing Media row for an explicitly selected meeting; metadata and original-byte readback, durable chunk intent and read-only uncertain reconciliation. Requires trusted bigfiles_enabled true; no FTP/delete/transcoding administration.",
+            "execution_provenance": "Integrated default adapter and WriteCoordinator executed locally with synthetic vendor transport on 2026-11-16, with native System.Data wire validation.",
+            "checks": [
+              {
+                "command": "pytest tests/test_iqm2_media_write.py tests/test_iqm2_meeting_write.py tests/test_iqm2_write.py tests/test_writes.py -q",
+                "passed": 80,
+                "failed": 0,
+                "seconds": 185.325
+              }
+            ],
+            "bindings": [
+              {
+                "path": "docs/capabilities/evidence/iqm2-minutetraq-client/media-contract-excerpts.txt",
+                "kind": "vendor_contract",
+                "sha256": "cd2d7cb447b7483195388a30932adf96d5036062197937a40e1bc5c523aef88a"
+              },
+              {
+                "path": "tests/test_iqm2_media_write.py",
+                "kind": "test",
+                "sha256": "d9edbc6896b1dec2e2882327e2af67ac046b06930f3662be8e596db7549bac34"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -15656,9 +15768,10 @@
             "iqm2-public-detail-2026-11-12",
             "iqm2-public-player-2026-11-14",
             "iqm2-legislative-file-2026-11-14",
-            "iqm2-supplied-captions-2026-11-14"
+            "iqm2-supplied-captions-2026-11-14",
+            "iqm2-minutetraq-client-read-2026-11-16"
           ],
-          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified. Explicit fetch_captions reads the first active supplied WebVTT file with caller-origin grants, exact byte/text/hash capture and reopen/ZIP preservation; active transfer is synthetic, no timing/content-language inference.",
+          "details": "Public page GET returned content. Linked binaries are not independently verified downloads; shell-only cases do not establish record retrieval. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified. Explicit fetch_captions reads the first active supplied WebVTT file with caller-origin grants, exact byte/text/hash capture and reopen/ZIP preservation; active transfer is synthetic, no timing/content-language inference. Selected MinuteTraq SOAP1.1 AgendaGet/MinutesGet is now implemented from extracted vendor client: saved capture and bounded single POST, host+agency namespace, trusted private existing-session header, explicit file thresholds, typed identities/raw preservation, optional Meeting table, local persistence/search and neutral roundtrips. Source manifest and verification: iqm2-minutetraq-client/source.json and docs/verification/iqm2-minutetraq-native-2026-11-16.json. No live call or native write claim.",
           "dependencies": [],
           "remaining_verification": [
             "Verify document bytes/MIME/redirects, failed attachments, network and byte limits."
@@ -15685,9 +15798,10 @@
             "source-text-reference-clients-2026-11-12-iqm2",
             "iqm2-public-player-2026-11-14",
             "iqm2-legislative-file-2026-11-14",
-            "iqm2-supplied-captions-2026-11-14"
+            "iqm2-supplied-captions-2026-11-14",
+            "iqm2-minutetraq-client-read-2026-11-16"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified. Explicit fetch_captions reads the first active supplied WebVTT file with caller-origin grants, exact byte/text/hash capture and reopen/ZIP preservation; active transfer is synthetic, no timing/content-language inference.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Current source adds iqm2-meeting-detail-html for saved/default-configured supplied Detail_Meeting.aspx: native heading/control identity, same-meeting legislative files, explicitly contextual FileOpen locators and separate other-meeting references. Scoped synthetic configured fetch and separate attachment transfer pass; no arbitrary-ID fetch_record route or actual file byte claim. Selected iqm2-public-player-html supports explicit/default configured SplitView Video/Agenda source, native meeting-bound outline and first declared MP4/HLS source with conditional first subtitle locator. No JavaScript execution, media transfer/playback or title/date inference. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified. Explicit fetch_captions reads the first active supplied WebVTT file with caller-origin grants, exact byte/text/hash capture and reopen/ZIP preservation; active transfer is synthetic, no timing/content-language inference. Selected MinuteTraq SOAP1.1 AgendaGet/MinutesGet is now implemented from extracted vendor client: saved capture and bounded single POST, host+agency namespace, trusted private existing-session header, explicit file thresholds, typed identities/raw preservation, optional Meeting table, local persistence/search and neutral roundtrips. Source manifest and verification: iqm2-minutetraq-client/source.json and docs/verification/iqm2-minutetraq-native-2026-11-16.json. No live call or native write claim.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -15732,9 +15846,10 @@
           "evidence_ids": [
             "iqm2-baseline",
             "quorumrelay-shared-core-operations",
-            "source-text-reference-clients-2026-11-12-iqm2"
+            "source-text-reference-clients-2026-11-12-iqm2",
+            "iqm2-minutetraq-client-read-2026-11-16"
           ],
-          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Selected MinuteTraq SOAP1.1 AgendaGet/MinutesGet is now implemented from extracted vendor client: saved capture and bounded single POST, host+agency namespace, trusted private existing-session header, explicit file thresholds, typed identities/raw preservation, optional Meeting table, local persistence/search and neutral roundtrips. Source manifest and verification: iqm2-minutetraq-client/source.json and docs/verification/iqm2-minutetraq-native-2026-11-16.json. No live call or native write claim.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -15756,9 +15871,10 @@
             "iqm2-baseline",
             "quorumrelay-shared-core-operations",
             "iqm2-legislative-file-2026-11-14",
-            "iqm2-supplied-captions-2026-11-14"
+            "iqm2-supplied-captions-2026-11-14",
+            "iqm2-minutetraq-client-read-2026-11-16"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified. Explicit fetch_captions reads the first active supplied WebVTT file with caller-origin grants, exact byte/text/hash capture and reopen/ZIP preservation; active transfer is synthetic, no timing/content-language inference.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Selected legislative-file HTML preserves rendered staff text and native document locators. Related retrieval requires scoped retained parent capture membership and preserves child identity, document/meeting relations and both captures; standalone parent context remains unverified. Explicit fetch_captions reads the first active supplied WebVTT file with caller-origin grants, exact byte/text/hash capture and reopen/ZIP preservation; active transfer is synthetic, no timing/content-language inference. Selected MinuteTraq SOAP1.1 AgendaGet/MinutesGet is now implemented from extracted vendor client: saved capture and bounded single POST, host+agency namespace, trusted private existing-session header, explicit file thresholds, typed identities/raw preservation, optional Meeting table, local persistence/search and neutral roundtrips. Source manifest and verification: iqm2-minutetraq-client/source.json and docs/verification/iqm2-minutetraq-native-2026-11-16.json. No live call or native write claim.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -15883,18 +15999,60 @@
         {
           "entity": "meeting",
           "operation": "create",
-          "endpoint_or_format": "Unknown machine endpoint/import schema; source documents UI only.",
-          "field_mappings": [],
-          "evidence_ids": [
-            "iqm2-docs"
+          "endpoint_or_format": "HTTPS tenant /MinuteTraqService/Data_1_0.asmx; MeetingUpdate(DB_1_0)",
+          "field_mappings": [
+            {
+              "normalized": "meeting_date",
+              "provider_field": "Meeting.MeetingDate",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "resolution_due_date",
+              "provider_field": "Meeting.ResolutionDueDate",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "meeting_type_id",
+              "provider_field": "Meeting.MeetingTypeID",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "meeting_location_id",
+              "provider_field": "Meeting.MeetingLocationID",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "meeting_status_id",
+              "provider_field": "Meeting.MeetingStatusID",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "department_id",
+              "provider_field": "Meeting.DepartmentID",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "timestamp_start",
+              "provider_field": "Meeting.TimestampStart",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "timestamp_start_delta",
+              "provider_field": "Meeting.TimestampStartDelta",
+              "mapping_level": "observed_vendor_client_payload_field"
+            }
           ],
-          "account_requirements": "Authorized tenant staff account, applicable module/tier and entity/workflow permissions; exact API entitlement unknown.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Required, not exercised: stable remote entity and parent ID; persisted fields, version/status; uploaded file hash/download; reconcile uncertain commits before retry. No receipt exists from this research.",
-          "verification_status": "documented_index_excerpt_only",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
-          "acceptance_status": "not_run",
+          "evidence_ids": [
+            "iqm2-docs",
+            "iqm2-minutetraq-writes-2026-11-16"
+          ],
+          "account_requirements": "Existing private staff-session header, exact tenant/origin/agency binding, operation permissions and native-ID allowlists. Local synthetic acceptance requires no account acquisition.",
+          "authorized_test_access": "synthetic_only_no_live_mutation",
+          "readback_receipt": "Persist known/returned ID, verify exact typed readback and preserved fields; unknown create ID remains uncertain, never inferred or replayed. Preflight is not atomic server CAS.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -15905,28 +16063,70 @@
             "W09",
             "W10"
           ],
-          "interface_type": "manual_ui_documented_machine_contract_unverified",
-          "contract_confidence": "ui_labels_or_product_feature_not_payload_keys",
-          "method": null,
-          "api_version": "unknown",
-          "automatable_contract_verified": false,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_native_client_with_synthetic_and_dotnet_wire_checks",
+          "method": "POST",
+          "api_version": "MinuteTraq8.11.3.1452015 Data_1_0 DB_1_0",
+          "automatable_contract_verified": true,
+          "domain_scope": "Native meeting create/update with required fields and optional timestamps; no deletion/files/publication."
         },
         {
           "entity": "meeting",
           "operation": "update",
-          "endpoint_or_format": "Unknown machine endpoint/import schema; source documents UI only.",
-          "field_mappings": [],
-          "evidence_ids": [
-            "iqm2-docs"
+          "endpoint_or_format": "HTTPS tenant /MinuteTraqService/Data_1_0.asmx; MeetingUpdate(DB_1_0)",
+          "field_mappings": [
+            {
+              "normalized": "meeting_date",
+              "provider_field": "Meeting.MeetingDate",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "resolution_due_date",
+              "provider_field": "Meeting.ResolutionDueDate",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "meeting_type_id",
+              "provider_field": "Meeting.MeetingTypeID",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "meeting_location_id",
+              "provider_field": "Meeting.MeetingLocationID",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "meeting_status_id",
+              "provider_field": "Meeting.MeetingStatusID",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "department_id",
+              "provider_field": "Meeting.DepartmentID",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "timestamp_start",
+              "provider_field": "Meeting.TimestampStart",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "timestamp_start_delta",
+              "provider_field": "Meeting.TimestampStartDelta",
+              "mapping_level": "observed_vendor_client_payload_field"
+            }
           ],
-          "account_requirements": "Authorized tenant staff account, applicable module/tier and entity/workflow permissions; exact API entitlement unknown.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Required, not exercised: stable remote entity and parent ID; persisted fields, version/status; uploaded file hash/download; reconcile uncertain commits before retry. No receipt exists from this research.",
-          "verification_status": "unverified",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
-          "acceptance_status": "not_run",
+          "evidence_ids": [
+            "iqm2-docs",
+            "iqm2-minutetraq-writes-2026-11-16"
+          ],
+          "account_requirements": "Existing private staff-session header, exact tenant/origin/agency binding, operation permissions and native-ID allowlists. Local synthetic acceptance requires no account acquisition.",
+          "authorized_test_access": "synthetic_only_no_live_mutation",
+          "readback_receipt": "Persist known/returned ID, verify exact typed readback and preserved fields; unknown create ID remains uncertain, never inferred or replayed. Preflight is not atomic server CAS.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -15937,28 +16137,45 @@
             "W09",
             "W10"
           ],
-          "interface_type": "unresolved",
-          "contract_confidence": "unverified_machine_contract",
-          "method": null,
-          "api_version": "unknown",
-          "automatable_contract_verified": false,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_native_client_with_synthetic_and_dotnet_wire_checks",
+          "method": "POST",
+          "api_version": "MinuteTraq8.11.3.1452015 Data_1_0 DB_1_0",
+          "automatable_contract_verified": true,
+          "domain_scope": "Native meeting create/update with required fields and optional timestamps; no deletion/files/publication."
         },
         {
           "entity": "agenda",
           "operation": "update",
-          "endpoint_or_format": "Unknown machine endpoint/import schema; source documents UI only.",
-          "field_mappings": [],
-          "evidence_ids": [
-            "iqm2-outline"
+          "endpoint_or_format": "HTTPS tenant /MinuteTraqService/Data_1_0.asmx; AgendaUpdate(DB_1_0), selected item titles only",
+          "field_mappings": [
+            {
+              "normalized": "updated",
+              "provider_field": "Agenda.Updated",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "items.item_id",
+              "provider_field": "AgendaItem.AgendaItemID",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "items.title",
+              "provider_field": "AgendaItem.Title",
+              "mapping_level": "observed_vendor_client_payload_field"
+            }
           ],
-          "account_requirements": "Authorized tenant staff account, applicable module/tier and entity/workflow permissions; exact API entitlement unknown.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Required, not exercised: stable remote entity and parent ID; persisted fields, version/status; uploaded file hash/download; reconcile uncertain commits before retry. No receipt exists from this research.",
-          "verification_status": "documented_index_excerpt_only",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
-          "acceptance_status": "not_run",
+          "evidence_ids": [
+            "iqm2-outline",
+            "iqm2-minutetraq-writes-2026-11-16"
+          ],
+          "account_requirements": "Existing private staff-session header, exact tenant/origin/agency binding, operation permissions and native-ID allowlists. Local synthetic acceptance requires no account acquisition.",
+          "authorized_test_access": "synthetic_only_no_live_mutation",
+          "readback_receipt": "Persist known/returned ID, verify exact typed readback and preserved fields; unknown create ID remains uncertain, never inferred or replayed. Preflight is not atomic server CAS.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -15969,28 +16186,55 @@
             "W09",
             "W10"
           ],
-          "interface_type": "manual_ui_documented_machine_contract_unverified",
-          "contract_confidence": "ui_labels_or_product_feature_not_payload_keys",
-          "method": null,
-          "api_version": "unknown",
-          "automatable_contract_verified": false,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_native_client_with_synthetic_and_dotnet_wire_checks",
+          "method": "POST",
+          "api_version": "MinuteTraq8.11.3.1452015 Data_1_0 DB_1_0",
+          "automatable_contract_verified": true,
+          "domain_scope": "Existing selected agenda/minutes item-title changes and parent Updated only; no broad agenda replacement, reorder, import, files or publication."
         },
         {
           "entity": "recording",
           "operation": "upload",
-          "endpoint_or_format": "Unknown machine endpoint/import schema; source documents UI only.",
-          "field_mappings": [],
-          "evidence_ids": [
-            "iqm2-media"
+          "endpoint_or_format": "Data_1_0 SOAP BigFileGetUploadInfo, BigFileAppend, MediaUpdate, MediaGet; Citizens/FileOpen.aspx Type=11",
+          "field_mappings": [
+            {
+              "normalized": "resource_id",
+              "provider_field": "Media.MediaID",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "meeting_id",
+              "provider_field": "Media.MeetingID",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "published",
+              "provider_field": "Media.Published",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "started",
+              "provider_field": "Media.Started",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "file",
+              "provider_field": "BigFile.FileData; Media.FileFormat/FileSize/FileData",
+              "mapping_level": "observed_vendor_client_payload_field"
+            }
           ],
-          "account_requirements": "Authorized tenant staff account, applicable module/tier and entity/workflow permissions; exact API entitlement unknown.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Required, not exercised: stable remote entity and parent ID; persisted fields, version/status; uploaded file hash/download; reconcile uncertain commits before retry. No receipt exists from this research.",
-          "verification_status": "documented_index_excerpt_only",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
-          "acceptance_status": "not_run",
+          "evidence_ids": [
+            "iqm2-media",
+            "iqm2-minutetraq-media-2026-11-16"
+          ],
+          "account_requirements": "Existing tenant/origin/agency-scoped MinuteTraq session, bigfiles_enabled true, recording:upload permission and explicit meeting/media allowlists.",
+          "authorized_test_access": "synthetic_only_no_live_mutation",
+          "readback_receipt": "Exact MediaGet postcondition and original file length/SHA256; durable chunk and metadata intent; positive ID persisted before cancellation; uncertain results reconcile without mutation replay.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -16001,12 +16245,12 @@
             "W09",
             "W10"
           ],
-          "interface_type": "manual_ui_documented_machine_contract_unverified",
-          "contract_confidence": "ui_labels_or_product_feature_not_payload_keys",
-          "method": null,
-          "api_version": "unknown",
-          "automatable_contract_verified": false,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_vendor_client_with_native_dotnet_and_synthetic_readback",
+          "method": "POST/GET",
+          "api_version": "MinuteTraq 8.11.3.1452015 Data_1_0",
+          "automatable_contract_verified": true,
+          "domain_scope": "Native M2 BigFiles recording upload/new or existing Media row for an explicitly selected meeting; metadata and original-byte readback, durable chunk intent and read-only uncertain reconciliation. Requires trusted bigfiles_enabled true; no FTP/delete/transcoding administration."
         }
       ],
       "pagination": {
@@ -16027,7 +16271,10 @@
         "Upload limits, write schemas, permission/readback and product applicability remain unresolved in pinned material. Do not substitute Legistar contracts; credentials and live writes are not required acceptance evidence.",
         "Selected legislative-file text/documents and scoped exact-child retrieval are implemented from native meeting1496/file7478 captures; parent replay, hashes/relationships, reopen and ZIP are tested. No staff form submission, adopted action or complete history inferred.",
         "Explicit selected-player first-active WebVTT retrieval is synthetically executed with raw source text/search/reopen/ZIP and both captures. Actual6049 has no active track; no broader caption availability, cue timing or content-language inference.",
-        "Lifecycle applicability reviewed 2026-11-15 from pinned official HTML/PDF; conflicting dates retained in granicus-legacy-lifecycle/source.json. Saved captures/scoped reads remain valid evidence. No operation/status promotion, removal or outside-only inference."
+        "Lifecycle applicability reviewed 2026-11-15 from pinned official HTML/PDF; conflicting dates retained in granicus-legacy-lifecycle/source.json. Saved captures/scoped reads remain valid evidence. No operation/status promotion, removal or outside-only inference.",
+        "2026-11-16 static client recovery supersedes the earlier no-machine-contract finding for selected agenda/minutes reads. SOAP dataset writes and chunked file transfer now have concrete client source to implement; their acceptance remains unfinished. See docs/IQM2-MINUTETRAQ-SOAP.md.",
+        "2026-11-16 native meeting create/update and selected agenda/minutes titles implemented and verified with70affectedchecks. Recording/chunk transfer, document imports and broader publication/editing remain unfinished; see IQM2-MINUTETRAQ-SOAP.md and the scoped write receipt.",
+        "2026-11-16: Native M2 BigFiles recording upload implemented with80affectedchecks; metadata and original byte verification, new/existing IDs and durable no-replay recovery. FTP and broader document import/publication remain separate."
       ],
       "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
       "registry_id": "iqm2",
@@ -16848,6 +17095,23 @@
           "receipt_path": "docs/verification/suiteone-public-event-2026-11-15.json",
           "receipt_sha256": "33f5f9d8f18221a9ec7041b33bc3b560f817606569c95009755ac16bc5e78056",
           "proof_level": "actual_public_capture_and_saved_engine_execution_not_catalog_or_write_acceptance"
+        },
+        {
+          "id": "suiteone-dcr2-export-producer-2026-11-16",
+          "url": "https://bisdigital.com/software",
+          "title": "Official DCR2 Word exporter statically inspected",
+          "kind": "observed_vendor_source",
+          "observed": "Actual native classic content controls, caption rules, native index/clock semantics, companion position distinction and modern/classic format difference.",
+          "observation_date": "2026-11-16",
+          "access_scope": "public_download_static_inspection_no_execution_or_contact",
+          "proof_level": "source_observation_not_acceptance",
+          "findings": [
+            "Actual native classic content controls, caption rules, native index/clock semantics, companion position distinction and modern/classic format difference.",
+            "March2021 guide ties matching exportedWMV and_content.HTML; bookmarkduration fills aftermedia processing, through historical MinutesHTML/importandBookmarks workflow."
+          ],
+          "limits": "SuiteOne staff importer parsing, required settings and mapping from classic control index to SuiteOne playback time are still unavailable. No timed SuiteOne artifact generator or remote import claimed. Existing ordinary HTML/manual timing exporter retained.",
+          "fixture_path": "docs/capabilities/evidence/suiteone-dcr2-export/source.json",
+          "fixture_sha256": "7fe5295b6530547f66deeeab99bcfd4067652132a30bd1071e181236714dc193"
         }
       ],
       "tenants": [
@@ -17310,7 +17574,8 @@
       "remaining_research": [
         "On Vermilion, root and one supplied Older Meetings group were traversed (328 rows; 17 older groups reported; continuation retained). A separate bounded Council native-search run/resume returned three provider candidates per page and zero exact local hits. Remaining groups, full history, remote search/date semantics and all meeting/document MIME/redirect outcomes remain unestablished.",
         "Ordinary HTML document preparation is implemented from the August2021 guide, with manual timing explicit. The separate Liberty timed *_content.HTML schema is still unresolved; a matching schema or example would establish it. No outside-only dependency is proved.",
-        "Pinned admin UI steps do not establish a machine write/publication/readback contract. Those schemas remain unresolved; account credentials or live publication are not an acceptance gate."
+        "Pinned admin UI steps do not establish a machine write/publication/readback contract. Those schemas remain unresolved; account credentials or live publication are not an acceptance gate.",
+        "DCR2 native producer and historical SuiteOne pairedWMV/_content.HTML timing workflow recovered. Current staff machine upload/save/readback and current parser applicability remain unmapped; no standalone index-to-seconds conversion. Evidence suiteone-dcr2-export-producer-2026-11-16."
       ],
       "authentication": "Public archive GET anonymous. Upload/update requires an authorized SuiteView Admin account; account tier not specified.",
       "write_findings": "Concrete supported UI intake exists for WMV recording files and Liberty *_content.HTML bookmarks; programmatic route and bookmark schema remain unverified. Ordinary HTML document preparation is now source implemented; this does not promote the remote UI writes.",
@@ -20705,6 +20970,39 @@
               }
             ]
           }
+        },
+        {
+          "id": "telvue-official-legacy-upload-2026-11-16",
+          "url": "https://web.archive.org/web/20140721080545id_/http://www.telvue.com/support/product-documentation/telvue-connect-api-documentation/upload-video-rest/",
+          "title": "Archived official Connect v1 video upload request contract",
+          "kind": "official_documentation",
+          "observation_date": "2026-11-16",
+          "observed": "Recovered exact official URL through archived developer forum; fetched vendor page archived2014-07-21.",
+          "findings": [
+            "POST https://connect.telvue.com/api/v1/assets/upload; HTTP Basic authorized Connect user; multipart files[].",
+            "Optional published/syndicated/syndication_groups[] have publication/moderation/syndication effects. Fixed legacy endpoint does not require the browser runtime initializer."
+          ],
+          "limits": "No successful response/media identity, processing/original-byte contract or current deployment verification. No upload executed.",
+          "access_scope": "public_archived_vendor_documentation_read_only",
+          "proof_level": "official_documentation_or_ui_contract_not_live_acceptance",
+          "fixture_path": "docs/capabilities/evidence/telvue-legacy-upload/telvue-official-upload-20140721.html",
+          "fixture_sha256": "ad460e2facf7c7ae762d599d5edbdfc35bbddb1804e3510d896d1d4c506c8e8a"
+        },
+        {
+          "id": "telvue-upload-medium-identity-2026-11-16",
+          "url": "https://connect.telvue.com/static-assets/cms/application-6788570efca6e806428b108560747bf11401571fd73268886704605751a2f198.js",
+          "title": "Current and archived episode upload response consumers",
+          "kind": "observed_vendor_source",
+          "observed": "populateNewEpisodeForm parses xhr.responseText.medium_id specifically when URL contains episodes/new. addNewEpisodeFormData sends episode[medium_attributes][title], short_summary and episode_identifier when nonempty. Existing showSummary separately consumes asset_ids.",
+          "observation_date": "2026-11-16",
+          "access_scope": "public_download_static_inspection_no_execution_or_contact",
+          "proof_level": "source_observation_not_acceptance",
+          "findings": [
+            "populateNewEpisodeForm parses xhr.responseText.medium_id specifically when URL contains episodes/new. addNewEpisodeFormData sends episode[medium_attributes][title], short_summary and episode_identifier when nonempty. Existing showSummary separately consumes asset_ids."
+          ],
+          "limits": "Current browser episode upload branch; medium_id is read but not subsequently used by that function. It is not an unconditional successful response sample or a legacy v1 contract.",
+          "fixture_path": "docs/capabilities/evidence/telvue-upload-identity/source.json",
+          "fixture_sha256": "ed2fffb469b1430b4fd30e022d4da1b656837f603c7ce85b8fae4ebfec6e7b2d"
         }
       ],
       "tenants": [
@@ -21032,15 +21330,23 @@
         {
           "entity": "recording",
           "operation": "create",
-          "endpoint_or_format": "Connect UI: Media Library or Series upload creates media/episode; API unknown",
-          "field_mappings": [],
+          "endpoint_or_format": "Legacy official Connect v1: POST https://connect.telvue.com/api/v1/assets/upload, multipart files[]; success response/media identity and processing readback unresolved.",
+          "field_mappings": [
+            {
+              "normalized": "files",
+              "provider_field": "files[]",
+              "notes": "Multipart file field in archived official Connect v1 upload request.",
+              "mapping_level": "documented_payload_field"
+            }
+          ],
           "evidence_ids": [
-            "telvue-upload"
+            "telvue-upload",
+            "telvue-official-legacy-upload-2026-11-16"
           ],
           "account_requirements": "Public playlists anonymous; Connect API requires client application access key + secret passphrase in custom headers, not Basic auth. Upload roles Contributor/Coordinator/Admin and account feature settings matter.",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
           "readback_receipt": "Read media id/uuid and transcode Activity outcome, then authorized GET /api/v2/media/:id after publication.",
-          "verification_status": "documented_ui_only_api_unverified",
+          "verification_status": "documented_request_contract_partial",
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "not_verified_by_inventory",
           "acceptance_status": "not_run",
@@ -21054,25 +21360,33 @@
             "W09",
             "W10"
           ],
-          "interface_type": "manual_ui_documented_machine_contract_unverified",
-          "contract_confidence": "ui_labels_or_product_feature_not_payload_keys",
-          "method": null,
-          "api_version": "unknown",
+          "interface_type": "unresolved",
+          "contract_confidence": "archived_official_request_contract_response_and_current_applicability_unverified",
+          "method": "POST",
+          "api_version": "v1_archived2014",
           "automatable_contract_verified": false,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
         {
           "entity": "recording",
           "operation": "upload",
-          "endpoint_or_format": "Connect UI drag/drop videos; API upload endpoint unknown",
-          "field_mappings": [],
+          "endpoint_or_format": "Legacy official Connect v1: POST https://connect.telvue.com/api/v1/assets/upload, multipart files[]; success response/media identity and processing readback unresolved.",
+          "field_mappings": [
+            {
+              "normalized": "files",
+              "provider_field": "files[]",
+              "notes": "Multipart file field in archived official Connect v1 upload request.",
+              "mapping_level": "documented_payload_field"
+            }
+          ],
           "evidence_ids": [
-            "telvue-upload"
+            "telvue-upload",
+            "telvue-official-legacy-upload-2026-11-16"
           ],
           "account_requirements": "Public playlists anonymous; Connect API requires client application access key + secret passphrase in custom headers, not Basic auth. Upload roles Contributor/Coordinator/Admin and account feature settings matter.",
           "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
           "readback_receipt": "Capture upload task, file hash and media id; poll supported processing state and read back playable sources, not merely HTTP upload success.",
-          "verification_status": "documented_ui_only_api_unverified",
+          "verification_status": "documented_request_contract_partial",
           "evidence_level": "referenced_contract_or_ui_documentation",
           "implementation_status": "not_verified_by_inventory",
           "acceptance_status": "not_run",
@@ -21086,10 +21400,10 @@
             "W09",
             "W10"
           ],
-          "interface_type": "manual_ui_documented_machine_contract_unverified",
-          "contract_confidence": "ui_labels_or_product_feature_not_payload_keys",
-          "method": null,
-          "api_version": "unknown",
+          "interface_type": "unresolved",
+          "contract_confidence": "archived_official_request_contract_response_and_current_applicability_unverified",
+          "method": "POST",
+          "api_version": "v1_archived2014",
           "automatable_contract_verified": false,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
@@ -21245,7 +21559,9 @@
         "Connect/CloudCast MRSS has scoped published-player coverage. Connect native playlist reorder/media membership writes now have exact public-client request contracts and synthetic readback. No upload/processing/visibility or vendor meeting association inferred; HyperCaster remains separate.",
         "Connect client upload consumes runtime fileUrl/dvdUrl/uploadParams/userId absent from public bundle initializers. Sanitized deployment-matched initializer, created-media response and processing/association readback specification are required to map upload safely. This is an exact missing runtime contract input, not a live-account acceptance gate.",
         "Local historical CloudCast4.1 and documented2022Connect five-position chapter CSV preparation is implemented and synthetically verified. Current deployment import, processing, association and byte/playback acceptance are not inferred; headerless derivation and optional-end variant are separately attributed.",
-        "Existing playlist order/membership response transfers now enforce min(parser_bytes, transfer_bytes) at transport and response validation. Oversized preflight rejects; after-send oversized response reconciles without replay. No new upload contract inferred."
+        "Existing playlist order/membership response transfers now enforce min(parser_bytes, transfer_bytes) at transport and response validation. Oversized preflight rejects; after-send oversized response reconciles without replay. No new upload contract inferred.",
+        "Recovered official legacy Connect v1 upload request with fixed endpoint/basic-auth/files[]; native successful response/media-ID/original-byte/readiness and current applicability remain open. The missing runtime initializer applies to the separate current browser branch.",
+        "Current and2015episode uploader consume medium_id as well as asset_ids; precise consumer branch pinned. Not assigned to unmatched legacyv1endpoint. Need matched upload initializer/response+originalreadiness. Evidence telvue-upload-medium-identity-2026-11-16."
       ],
       "authentication": "Public playlists anonymous; Connect API requires client application access key + secret passphrase in custom headers, not Basic auth. Upload roles Contributor/Coordinator/Admin and account feature settings matter.",
       "write_findings": "Strong official UI evidence for recording creation/upload and metadata updates. Public v2 pages inspected document GET only, so a write adapter still needs a supported submission contract and authorized access.",
@@ -28750,7 +29066,7 @@
         "boardable-public-meeting-html"
       ],
       "observations_date": "2026-11-12",
-      "research_status": "bounded_public_listing_route_observed_and_engine_partial; provider_api_support_catalog_and_write_acceptance_unverified",
+      "research_status": "public_reads_and_scoped_native_writes_implemented_remaining_contracts_explicit",
       "evidence": [
         {
           "id": "boardable-baseline",
@@ -29217,6 +29533,248 @@
               }
             ]
           }
+        },
+        {
+          "id": "boardable-current-builder-2026-11-16",
+          "url": "https://agendas.boardable.com/",
+          "title": "Current Boardable item and upload contracts from authorized evaluation trial",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-16",
+          "observed": "105 affected cases passed; separate browser trial created item, edited/uploaded and downloaded exact original bytes.",
+          "findings": [
+            "Current-builder item create/update and associated new file upload implemented with exact tree/item/native association and hash verification."
+          ],
+          "limits": "Adapter acceptance is synthetic. Full meeting forms, recurring days, draft preparation, publication, invitations and imports remain open.",
+          "access_scope": "authorized_evaluation_trial_and_local_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/boardable-current-builder-2026-11-16.json",
+          "receipt_sha256": "2fe4a961b6b4c97710ae519ea2246a1a923e90ac67b980a0b85a9ceff30d6e67",
+          "synthetic_execution": {
+            "provider": "boardable",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "item"
+            ],
+            "scope": "Current-builder item text/description/duration/privacy create/update and associated uploads with exact identity and downloaded-byte verification.",
+            "execution_provenance": "105-case affected pytest run, 0 failures, 18.84 seconds. Synthetic public Engine transactions; separate browser trial supporting evidence.",
+            "checks": [
+              {
+                "command": "pytest tests/test_boardable_builder_write.py tests/test_boardable_agenda_write.py tests/test_boardable_item_create.py tests/test_write_file_recovery.py tests/test_write_preflight_cancellation.py tests/test_write_intent_cancellation.py tests/test_write_plan_boundaries.py -q",
+                "passed": 105,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-current-builder/source.json",
+                "sha256": "f5a6a5b5c1b45f2b8a3d256a7b1c083db6cb7f303cd506ce7d195f0bc2d121da"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardable_builder_write.py",
+                "sha256": "b6c5b5c960513d15bdfaafc897e0bbb8ea3f47212a0cf79c4af4a148a422cfe4"
+              }
+            ]
+          }
+        },
+        {
+          "id": "boardable-meeting-form-2026-11-16",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/meetings",
+          "title": "Native Boardable meeting form exact requests and responses",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-16",
+          "observed": "Authorized private trial create201/update200/canonicalGET200; separately131 affected synthetic tests passed.",
+          "findings": [
+            "Boardable native single private unpublished no_remote meeting create/update: title,description,location,timezone,date range; owner-only creation; exact canonical-URL readback and no-replay recovery."
+          ],
+          "limits": "Single private unpublished no_remote meetings only; recurring/multiday/scheduler/publication/import remain open. Adapter execution synthetic; native trial requests independently executed.",
+          "access_scope": "authorized_evaluation_trial_and_local_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/boardable-meeting-write-2026-11-16.json",
+          "receipt_sha256": "39e64d14b328cb205794346325a48f3a865a5bd75f2ec4fb350629d5b4bef0a6",
+          "synthetic_execution": {
+            "provider": "boardable",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Boardable native single private unpublished no_remote meeting create/update: title,description,location,timezone,date range; owner-only creation; exact canonical-URL readback and no-replay recovery.",
+            "execution_provenance": "131 affected pytest cases passed19.31s; no native adapter browser execution claim.",
+            "checks": [
+              {
+                "command": "pytest Boardable meeting/builder/legacy and shared identity/cancellation/plan suites -q",
+                "passed": 131,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-meeting-form/source.json",
+                "sha256": "56480f260d9aa2e65e128c0726c8b7c2190b78d6e686b07d670ecbc3db9d6397"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_meeting_write.py",
+                "sha256": "57d4a0e3ca4619c2314c755e7cca01b8117e3d2bb4cb3e9d4e1dd2d2ed6c2e97"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardable_meeting_write.py",
+                "sha256": "f88cbf816a794e7d17d0417004ec99c6ee8ff36ae75199cfe2c4312c2af39e72"
+              }
+            ]
+          }
+        },
+        {
+          "id": "boardable-series-form-2026-11-16",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/meetings",
+          "title": "Boardable exact weekly series native create/update and all-occurrence readback",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-16",
+          "observed": "Private native series12616: create201,metadata update200,each canonical occurrence GET200; same native IDs/schedule retained.",
+          "findings": [
+            "Boardable native weekly interval1 owner-only private unpublished no_remote series creation and original-leader whole-series title/description/location updates; complete occurrence identity/schedule readback, scoped grants and no-replay recovery."
+          ],
+          "limits": "Weekly interval1 and two through52 bounded occurrences. No schedule edits, other recurrence patterns, publication, invitations or general uploads. Native adapter execution is synthetic; native browser API fixtures independently executed.",
+          "access_scope": "authorized_evaluation_trial_and_local_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/boardable-series-write-2026-11-16.json",
+          "receipt_sha256": "026c33fb2abea201a9158a88f0be713a07fc612da51297dc680ba244c6f550f9",
+          "synthetic_execution": {
+            "provider": "boardable",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Boardable native weekly interval1 owner-only private unpublished no_remote series creation and original-leader whole-series title/description/location updates; complete occurrence identity/schedule readback, scoped grants and no-replay recovery.",
+            "execution_provenance": "Native authorized private trial independently captured; local engine/SQLite captured-response replay, publication negatives and combined metadata-field update passed. Full current-candidate Python regression 3042 passed, zero failures/errors/skips; 703 frozen input hashes verified.",
+            "checks": [
+              {
+                "command": "pytest -k \"unexpected_publication or pinned_capture\"",
+                "passed": 4,
+                "failed": 0
+              },
+              {
+                "command": "python -X utf8 -m pytest -q",
+                "passed": 3042,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-series-form/source.json",
+                "sha256": "2729f9736ad77c5e4d551965049df79994a9452416e2e6447d925dc5f81de548"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_series_write.py",
+                "sha256": "b28a49f5a589bcd5c0797a988bd40e5f948c3f4550bf8a65acff2500a0643e88"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_write.py",
+                "sha256": "38ac1417e0c57bc975fc19a8eaab40276d3cf0c7d47d60a1e0c25e53b993dd8a"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardable_series_write.py",
+                "sha256": "dfd32ea6173b1dca059ff3ea98378ec53bd5a44e3a799e4ee197715b41e9b089"
+              }
+            ]
+          }
+        },
+        {
+          "id": "boardable-document-center-native-2026-11-16",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/documents/4456b3ae",
+          "title": "Boardable native Document Center upload and metadata/readback capture",
+          "kind": "observed_vendor_ui_and_native_request_contract",
+          "observation_date": "2026-11-16",
+          "observed": "Authorized synthetic fixture: native multipart upload201, metadata POST200, declared JSON title POST200, independent exact data GET200, original download200 and matching SHA256.",
+          "findings": [
+            "Root folder upload fields file/title/body/disable_downloads/folder0; raw document response ID/UUID slug/canonical/download URLs; exact JSON detail endpoint and title save contract."
+          ],
+          "limits": "No Document Center adapter integrated. This root-folder capture does not settle meeting-document association, folder-specific grants, replacement, notifications, sharing or signatures.",
+          "access_scope": "authorized_evaluation_trial_native_capture",
+          "proof_level": "official_documentation_or_ui_contract_not_live_acceptance",
+          "fixture_path": "docs/capabilities/evidence/boardable-document-center/source.json",
+          "fixture_sha256": "467e1730d49b8272d3f03cd13c578d465ad8f44b5c04793cdccda78c57819334"
+        },
+        {
+          "id": "boardable-meeting-documents-2026-11-16",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/0e58cf-quorumrelay-contract-fixture-revised",
+          "title": "Boardable native supporting meeting-document upload and exact original-byte readback",
+          "kind": "observed_vendor_source_and_synthetic_engine_tests",
+          "observation_date": "2026-11-16",
+          "observed": "Two authorized native uploads200 empty; controlled before684953/after684953+684954; canonical meeting, root list, exact detail and original download200.",
+          "findings": [
+            "One root supporting meeting-document upload to an exact trusted owner-only private unpublished nonseries no_remote meeting; complete before/after native ID delta, independent association and original-byte SHA256; durable identity and read-only recovery without upload replay."
+          ],
+          "limits": "Root one-file supporting material only. Native browser capture executed independently; adapter executed locally with captured-response replay and adversarial synthetic transport.",
+          "access_scope": "authorized_evaluation_trial_and_local_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "receipt_path": "docs/verification/boardable-meeting-documents-2026-11-16.json",
+          "receipt_sha256": "3819878edd06eaf30afe645d64a68e2b430bd4d70c5005434297e2114e280551",
+          "synthetic_execution": {
+            "provider": "boardable",
+            "status": "mock_passed",
+            "operations": [
+              "upload"
+            ],
+            "entities": [
+              "meeting_document"
+            ],
+            "scope": "One root supporting meeting-document upload to an exact trusted owner-only private unpublished nonseries no_remote meeting; complete before/after native ID delta, independent association and original-byte SHA256; durable identity and read-only recovery without upload replay.",
+            "execution_provenance": "Actual native before/after/detail fixture replay through Engine+SQLite and combined affected Boardable regression passed; required full current-candidate Python regression passed with frozen source/test/script/example/config inputs verified.",
+            "checks": [
+              {
+                "command": "pytest new meeting-document and five existing Boardable test modules -q",
+                "passed": 196,
+                "failed": 0
+              },
+              {
+                "command": "python -X utf8 -m pytest tests -q",
+                "passed": 3102,
+                "failed": 0
+              }
+            ],
+            "bindings": [
+              {
+                "kind": "vendor_contract",
+                "path": "docs/capabilities/evidence/boardable-meeting-documents/source.json",
+                "sha256": "6f3b76c6da7ecee4f13ba5ebf1117eb2efcc4eb5e58ad720df8d30e8764068ed"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_meeting_documents.py",
+                "sha256": "6e8871a8f90ff32b92b95b3956f3d7418d93c424574c6805310da03c6340c21a"
+              },
+              {
+                "kind": "source",
+                "path": "src/civic_data_connectors/providers/boardable_write.py",
+                "sha256": "b6f08b5bbbf398c498fcd25b17c480c1bbe6ddd06d9ad2edabd0c58f8c222380"
+              },
+              {
+                "kind": "test",
+                "path": "tests/test_boardable_meeting_documents.py",
+                "sha256": "2de2825d7d428b10f0d8b95a1de521e9ba76075ea20cf15615c9ebbc5372254c"
+              }
+            ]
+          }
         }
       ],
       "tenants": [
@@ -29427,18 +29985,21 @@
           "evidence_ids": [
             "boardable-docs",
             "boardable-legacy-item-create-execution",
-            "boardable-legacy-write-bounds-reexecution-2026-11-15"
+            "boardable-legacy-write-bounds-reexecution-2026-11-15",
+            "boardable-current-builder-2026-11-16",
+            "boardable-meeting-form-2026-11-16",
+            "boardable-series-form-2026-11-16"
           ],
-          "details": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication. Scoped vendor-client item create and native readback implemented. Meeting creation remains unmapped.",
+          "details": "Scoped native single private unpublished no_remote meeting create implemented with exact native ID/canonicalURL readback. Existing legacy/current-builder item create evidence remains separately attributed. Recurrence, multi-day, scheduler, draft preparation, publication and imports remain open. Weekly series creation and complete-series metadata updates are additionally implemented through explicit trusted series mode; schedule changes remain unmapped.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "mock_passed",
           "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
-            "https://site.boardable.com/ventura-county-community-college-district"
+            "https://app.boardable.com/quorumrelay-evaluation/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "Synthetic transport and application-owned runtime policy; no live account gate.",
+          "test_access": "Authorized evaluation trial contract captures plus scoped synthetic coordinator tests.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -29451,9 +30012,11 @@
             "boardable-edit",
             "boardable-client-agenda-synthetic",
             "boardable-legacy-item-create-execution",
-            "boardable-legacy-write-bounds-reexecution-2026-11-15"
+            "boardable-legacy-write-bounds-reexecution-2026-11-15",
+            "boardable-meeting-form-2026-11-16",
+            "boardable-series-form-2026-11-16"
           ],
-          "details": "Scoped legacy editor sibling reorder and existing item text/description edits use pinned native client requests with full snapshot/readback. Whole-provider update support is not claimed; outbound entity rows carry synthetic acceptance.",
+          "details": "Scoped native single private unpublished no_remote meeting update implemented with exact native ID/canonicalURL readback. Existing legacy/current-builder item update evidence remains separately attributed. Recurrence, multi-day, scheduler, draft preparation, publication and imports remain open. Weekly series creation and complete-series metadata updates are additionally implemented through explicit trusted series mode; schedule changes remain unmapped.",
           "dependencies": [],
           "remaining_verification": [
             "New editor, meeting form, new items, new files and publication contracts remain unmapped."
@@ -29461,10 +30024,10 @@
           "acceptance_status": "not_run",
           "evidence_level": "source_implementation_scoped_outbound_synthetic_acceptance",
           "tenant_scope": [
-            "https://site.boardable.com/ventura-county-community-college-district"
+            "https://app.boardable.com/quorumrelay-evaluation/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "36 synthetic coordinator cases; no live mutation or credential acquisition required.",
+          "test_access": "Authorized evaluation trial contract captures plus scoped synthetic coordinator tests.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -29472,24 +30035,23 @@
         },
         "upload": {
           "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "boardable-uploads"
+            "boardable-uploads",
+            "boardable-meeting-documents-2026-11-16"
           ],
-          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Documented UI/feature capability only. No supported machine-write field/readback contract verified; see entity mappings and evidence limits.",
-          "dependencies": [
-            "Supported integration route and conflict/idempotency contract unresolved."
-          ],
+          "details": "One root supporting meeting-document upload to an exact trusted owner-only private unpublished nonseries no_remote meeting; complete before/after native ID delta, independent association and original-byte SHA256; durable identity and read-only recovery without upload replay.",
+          "dependencies": [],
           "remaining_verification": [
-            "Validate exact entity/field permissions and plan-bound commit/readback; do not invent API payloads."
+            "Adapter has not used exported trial credentials; captured native behavior and local Engine/SQLite verification are separately recorded. Other access states/folders/replacement remain unmapped."
           ],
-          "acceptance_status": "not_run",
-          "evidence_level": "referenced_documentation_or_source_observation",
+          "acceptance_status": "mock_passed",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
           "tenant_scope": [
-            "https://site.boardable.com/ventura-county-community-college-district"
+            "https://app.boardable.com/quorumrelay-evaluation/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "Authorized private evaluation trial native capture; local synthetic adapter acceptance.",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance"
@@ -29511,49 +30073,62 @@
         {
           "entity": "meeting",
           "operation": "create",
-          "endpoint_or_format": "Unknown machine endpoint/import schema; source documents UI only.",
+          "endpoint_or_format": "POST /{org}/meetings",
           "field_mappings": [
             {
               "normalized": "title",
-              "provider_field": "Title",
-              "notes": "UI label only, not a verified API payload name. ",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
+              "provider_field": "title",
+              "notes": "Pinned native form JSON field; dates use MM/DD/YYYY and12-hour from/to.",
+              "mapping_level": "observed_vendor_client_payload_key"
             },
             {
               "normalized": "description",
-              "provider_field": "Description",
-              "notes": "UI label only, not a verified API payload name. ",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
-            },
-            {
-              "normalized": "timezone",
-              "provider_field": "time zone",
-              "notes": "UI label only, not a verified API payload name. ",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
-            },
-            {
-              "normalized": "owner",
-              "provider_field": "meeting owner",
-              "notes": "UI label only, not a verified API payload name. Reference.",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
+              "provider_field": "description",
+              "notes": "Pinned native form JSON field; dates use MM/DD/YYYY and12-hour from/to.",
+              "mapping_level": "observed_vendor_client_payload_key"
             },
             {
               "normalized": "location",
-              "provider_field": "Location",
-              "notes": "UI label only, not a verified API payload name. ",
-              "mapping_level": "UI_label_or_unverified_field_not_API_key"
+              "provider_field": "location",
+              "notes": "Pinned native form JSON field; dates use MM/DD/YYYY and12-hour from/to.",
+              "mapping_level": "observed_vendor_client_payload_key"
+            },
+            {
+              "normalized": "timezone",
+              "provider_field": "timezone",
+              "notes": "Pinned native form JSON field; dates use MM/DD/YYYY and12-hour from/to.",
+              "mapping_level": "observed_vendor_client_payload_key"
+            },
+            {
+              "normalized": "dates",
+              "provider_field": "dates",
+              "notes": "Pinned native form JSON field; dates use MM/DD/YYYY and12-hour from/to.",
+              "mapping_level": "observed_vendor_client_payload_key"
+            },
+            {
+              "normalized": "owner_id",
+              "provider_field": "owner_id",
+              "notes": "Pinned native form JSON field; dates use MM/DD/YYYY and12-hour from/to.",
+              "mapping_level": "observed_vendor_client_payload_key"
+            },
+            {
+              "normalized": "recurrence",
+              "provider_field": "meeting_type,repeat_period,weekly_interval,series_date,series_ends,series_from,series_to",
+              "notes": "Explicit current_meeting_series mode: week interval1 with inclusive end_date; exact minimal JSON contract; other patterns unmapped.",
+              "mapping_level": "observed_vendor_client_payload_key"
             }
           ],
           "evidence_ids": [
-            "boardable-docs"
+            "boardable-meeting-form-2026-11-16",
+            "boardable-series-form-2026-11-16"
           ],
           "account_requirements": "Authorized tenant staff account, applicable module/tier and entity/workflow permissions; exact API entitlement unknown.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Required, not exercised: stable remote entity and parent ID; persisted fields, version/status; uploaded file hash/download; reconcile uncertain commits before retry. No receipt exists from this research.",
-          "verification_status": "documented_ui_only",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
-          "acceptance_status": "not_run",
+          "authorized_test_access": "authorized_private_evaluation_trial",
+          "readback_receipt": "Boardable native single private unpublished no_remote meeting create/update: title,description,location,timezone,date range; owner-only creation; exact canonical-URL readback and no-replay recovery. Explicit series mode also verifies all weekly occurrences; original native leader, series ID and canonical URLs are retained for recovery.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -29564,28 +30139,66 @@
             "W09",
             "W10"
           ],
-          "interface_type": "manual_ui_documented_machine_contract_unverified",
-          "contract_confidence": "ui_labels_or_product_feature_not_payload_keys",
-          "method": null,
-          "api_version": "unknown",
-          "automatable_contract_verified": false,
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_authorized_vendor_client_contract",
+          "method": "POST",
+          "api_version": "observed_native_web_form_2026-11-16",
+          "automatable_contract_verified": true,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
         {
           "entity": "meeting",
           "operation": "update",
-          "endpoint_or_format": "Unknown machine endpoint/import schema; source documents UI only.",
-          "field_mappings": [],
+          "endpoint_or_format": "POST /{org}/meetings_v2/{id}",
+          "field_mappings": [
+            {
+              "normalized": "title",
+              "provider_field": "title",
+              "notes": "Pinned native form JSON field; dates use MM/DD/YYYY and12-hour from/to.",
+              "mapping_level": "observed_vendor_client_payload_key"
+            },
+            {
+              "normalized": "description",
+              "provider_field": "description",
+              "notes": "Pinned native form JSON field; dates use MM/DD/YYYY and12-hour from/to.",
+              "mapping_level": "observed_vendor_client_payload_key"
+            },
+            {
+              "normalized": "location",
+              "provider_field": "location",
+              "notes": "Pinned native form JSON field; dates use MM/DD/YYYY and12-hour from/to.",
+              "mapping_level": "observed_vendor_client_payload_key"
+            },
+            {
+              "normalized": "timezone",
+              "provider_field": "timezone",
+              "notes": "Pinned native form JSON field; dates use MM/DD/YYYY and12-hour from/to.",
+              "mapping_level": "observed_vendor_client_payload_key"
+            },
+            {
+              "normalized": "dates",
+              "provider_field": "dates",
+              "notes": "Pinned native form JSON field; dates use MM/DD/YYYY and12-hour from/to.",
+              "mapping_level": "observed_vendor_client_payload_key"
+            },
+            {
+              "normalized": "owner_id",
+              "provider_field": "owner_id",
+              "notes": "Pinned native form JSON field; dates use MM/DD/YYYY and12-hour from/to.",
+              "mapping_level": "observed_vendor_client_payload_key"
+            }
+          ],
           "evidence_ids": [
-            "boardable-edit"
+            "boardable-meeting-form-2026-11-16",
+            "boardable-series-form-2026-11-16"
           ],
           "account_requirements": "Authorized tenant staff account, applicable module/tier and entity/workflow permissions; exact API entitlement unknown.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Required, not exercised: stable remote entity and parent ID; persisted fields, version/status; uploaded file hash/download; reconcile uncertain commits before retry. No receipt exists from this research.",
-          "verification_status": "documented_ui_only",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
-          "acceptance_status": "not_run",
+          "authorized_test_access": "authorized_private_evaluation_trial",
+          "readback_receipt": "Boardable native single private unpublished no_remote meeting create/update: title,description,location,timezone,date range; owner-only creation; exact canonical-URL readback and no-replay recovery. Explicit series mode also verifies all weekly occurrences; original native leader, series ID and canonical URLs are retained for recovery.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -29596,28 +30209,42 @@
             "W09",
             "W10"
           ],
-          "interface_type": "manual_ui_documented_machine_contract_unverified",
-          "contract_confidence": "ui_labels_or_product_feature_not_payload_keys",
-          "method": null,
-          "api_version": "unknown",
-          "automatable_contract_verified": false,
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_authorized_vendor_client_contract",
+          "method": "POST",
+          "api_version": "observed_native_web_form_2026-11-16",
+          "automatable_contract_verified": true,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
         {
           "entity": "meeting_document",
           "operation": "upload",
-          "endpoint_or_format": "Materials -> +New -> Upload a File; API unknown",
-          "field_mappings": [],
-          "evidence_ids": [
-            "boardable-uploads"
+          "endpoint_or_format": "POST /{org}/attachments/upload multipart; read-only POST /{org}/attachment-list; canonical meeting GET?format=json; GET /{org}/documents/{uuid.short_slug}/data; exact original download",
+          "field_mappings": [
+            {
+              "normalized": "files[0]",
+              "provider_field": "attachments[0][file]",
+              "notes": "One immutable scoped file and MIME/filename; attachments[0][type]=upload.",
+              "mapping_level": "observed_vendor_client_payload_key"
+            },
+            {
+              "normalized": "meeting_id",
+              "provider_field": "attachable_id",
+              "notes": "Exact trusted native meeting; attachable_type=meeting, folder_id=0, original_token=undefined string.",
+              "mapping_level": "observed_vendor_client_payload_key"
+            }
           ],
-          "account_requirements": "Authorized tenant staff account, applicable module/tier and entity/workflow permissions; exact API entitlement unknown.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Required, not exercised: stable remote entity and parent ID; persisted fields, version/status; uploaded file hash/download; reconcile uncertain commits before retry. No receipt exists from this research.",
-          "verification_status": "documented_ui_only",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
-          "acceptance_status": "not_run",
+          "evidence_ids": [
+            "boardable-uploads",
+            "boardable-meeting-documents-2026-11-16"
+          ],
+          "account_requirements": "Authorized native session/XSRF, current_meeting_form and current_meeting_documents, exact organization/owner/meeting/URL/namespace grants and meeting_document:upload permission.",
+          "authorized_test_access": "authorized_private_evaluation_trial",
+          "readback_receipt": "One root supporting meeting-document upload to an exact trusted owner-only private unpublished nonseries no_remote meeting; complete before/after native ID delta, independent association and original-byte SHA256; durable identity and read-only recovery without upload replay.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -29628,11 +30255,11 @@
             "W09",
             "W10"
           ],
-          "interface_type": "manual_ui_documented_machine_contract_unverified",
-          "contract_confidence": "ui_labels_or_product_feature_not_payload_keys",
-          "method": null,
-          "api_version": "unknown",
-          "automatable_contract_verified": false,
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_authorized_vendor_client_contract",
+          "method": "POST",
+          "api_version": "observed_native_web_form_2026-11-16",
+          "automatable_contract_verified": true,
           "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
         },
         {
@@ -29708,7 +30335,7 @@
         {
           "entity": "item",
           "operation": "update",
-          "endpoint_or_format": "POST meeting.url+/agenda/update",
+          "endpoint_or_format": "POST meeting.url+/agenda/update; explicit current_agenda_builder: /api/agenda-approvals/agenda-items JSON POST/create, PUT/update or multipart POST _method=PUT with uploads",
           "field_mappings": [
             {
               "normalized": "text",
@@ -29719,10 +30346,35 @@
               "normalized": "description",
               "provider_field": "description",
               "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "text",
+              "provider_field": "title",
+              "notes": "Explicit current_agenda_builder mode only; legacy field mappings above remain separate.",
+              "mapping_level": "documented_payload_field"
+            },
+            {
+              "normalized": "description",
+              "provider_field": "description",
+              "notes": "Explicit current_agenda_builder mode only; legacy field mappings above remain separate.",
+              "mapping_level": "documented_payload_field"
+            },
+            {
+              "normalized": "duration",
+              "provider_field": "duration",
+              "notes": "Explicit current_agenda_builder mode only; legacy field mappings above remain separate.",
+              "mapping_level": "documented_payload_field"
+            },
+            {
+              "normalized": "is_private",
+              "provider_field": "is_private",
+              "notes": "Explicit current_agenda_builder mode only; legacy field mappings above remain separate.",
+              "mapping_level": "documented_payload_field"
             }
           ],
           "evidence_ids": [
-            "boardable-client-agenda-synthetic"
+            "boardable-client-agenda-synthetic",
+            "boardable-current-builder-2026-11-16"
           ],
           "account_requirements": "Explicit trusted legacy org_url/meeting_urls, tenant/namespace, meeting allowlist, entity:update, session_cookie/CSRF; item edits require explicit null runtime OneDrive token.",
           "authorized_test_access": "synthetic_only_no_live_mutation",
@@ -29746,12 +30398,12 @@
           "method": "POST",
           "api_version": "observed2026-11-14legacyclient",
           "automatable_contract_verified": true,
-          "domain_scope": "Existing meeting-bound legacy agenda only; sibling order and existing item text/description. No draft creation, parent move, file upload, new editor or publication."
+          "domain_scope": "Existing meeting-bound legacy agenda only; sibling order and existing item text/description. No draft creation, parent move, file upload, new editor or publication. Separate current-builder mode supports text/description/duration/is_private and item-associated new uploads; owner/presenters/approval tree and other nodes preserved."
         },
         {
           "entity": "item",
           "operation": "create",
-          "endpoint_or_format": "POST meeting.url+/agenda",
+          "endpoint_or_format": "POST meeting.url+/agenda; explicit current_agenda_builder: /api/agenda-approvals/agenda-items JSON POST/create, PUT/update or multipart POST _method=PUT with uploads",
           "field_mappings": [
             {
               "normalized": "text",
@@ -29763,11 +30415,36 @@
               "provider_field": "parent_id",
               "mapping_level": "observed_vendor_client_payload_field",
               "notes": "Explicit0 root or existing native parent; date empty only."
+            },
+            {
+              "normalized": "text",
+              "provider_field": "title",
+              "notes": "Explicit current_agenda_builder mode only; legacy field mappings above remain separate.",
+              "mapping_level": "documented_payload_field"
+            },
+            {
+              "normalized": "description",
+              "provider_field": "description",
+              "notes": "Explicit current_agenda_builder mode only; legacy field mappings above remain separate.",
+              "mapping_level": "documented_payload_field"
+            },
+            {
+              "normalized": "duration",
+              "provider_field": "duration",
+              "notes": "Explicit current_agenda_builder mode only; legacy field mappings above remain separate.",
+              "mapping_level": "documented_payload_field"
+            },
+            {
+              "normalized": "is_private",
+              "provider_field": "is_private",
+              "notes": "Explicit current_agenda_builder mode only; legacy field mappings above remain separate.",
+              "mapping_level": "documented_payload_field"
             }
           ],
           "evidence_ids": [
             "boardable-legacy-item-create-execution",
-            "boardable-legacy-write-bounds-reexecution-2026-11-15"
+            "boardable-legacy-write-bounds-reexecution-2026-11-15",
+            "boardable-current-builder-2026-11-16"
           ],
           "account_requirements": "Trusted legacy tenant/org/meeting URL, namespace/meeting allowlists, item:create, session_cookie and CSRF. Readable existing edit-list; no credential acquisition gate.",
           "authorized_test_access": "synthetic_only_no_live_mutation",
@@ -29791,7 +30468,7 @@
           "method": "POST",
           "api_version": "observed2026-11-14legacyclient",
           "automatable_contract_verified": true,
-          "domain_scope": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication."
+          "domain_scope": "Legacy existing meeting, explicit root0 or existing parent with child array; text-only new item, date empty/nonrecurring. No draft preparation, new files, full meeting create, new editor or publication. Separate current-builder mode supports text/description/duration/is_private and item-associated new uploads; owner/presenters/approval tree and other nodes preserved."
         }
       ],
       "pagination": {
@@ -29812,11 +30489,12 @@
         "The declared public search route and SiteId/query/year/month/type mapping are implemented;24synthetic cases preserve native listing identity and excerpts/unknown fields. Unbound candidate URLs remain explicit; two exact bounded live queries timed out. No full-text/paging/ranking or raw-search ID/date equivalence inferred.",
         "Public meeting rows expose description, not a verified normalized body field; body filtering is unknown. Preserve timezone literals and the earlier VCCCD detail-versus-landing display discrepancy.",
         "The listing has no agenda/document/media locators. Selected known-detail mapping and supplied viewer-to-document resolution are implemented with separate synthetic and bounded live-byte receipts. Other documents and the listing/detail date disagreement remain unverified; this detail mapping does not establish native-search relevance or complete catalog.",
-        "Pinned legacy client establishes sibling reorder, existing item text/description updates and text-only item creation; all are implemented with scoped synthetic coordinator/readback evidence. New agenda_app_url editor, recurring day, full meeting form, new files, publication and vendor import contracts remain unresolved; no account acquisition gate.",
+        "Pinned legacy client establishes sibling reorder, existing item text/description updates and text-only item creation; all are implemented with scoped synthetic coordinator/readback evidence. Current-builder item/create/update and associated uploads are now implemented separately. Recurring days, recurring/multiday/scheduler meeting forms, publication and vendor imports remain open.",
         "Legacy new-file FormData branch is visible, but a created attachment identity/byte/readiness and full subsequent GET readback schema is not established. Existing attachment IDs are preserved during text edits; no file upload is guessed.",
-        "Legacy text-only item creation now source implemented from NewAgendaItem client with explicit parent/root and empty date;64affected/21new synthetic cases. Full meeting forms/new files/publication/new editor remain unmapped; no blanket acceptance."
+        "Legacy text-only item creation now source implemented from NewAgendaItem client with explicit parent/root and empty date;64affected/21new synthetic cases. Recurring/multiday/scheduler meeting forms/publication remain unmapped; current-builder item files have separate evidence.",
+        "Root supporting meeting_document:upload now mapped from native empty200 contract with exact association/original-byte verification and read-only recovery. Legacy/general Document Center uploads, replacement and other meeting access states remain separate unresolved contracts."
       ],
-      "authentication": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted.",
+      "authentication": "Public reads plus authorized QuorumRelay Evaluation trial; staff session secrets remain in trusted runtime credentials, outside evidence.",
       "registry_id": "boardable",
       "family_acceptance_id": "F28",
       "baseline_input_meanings": [
@@ -29839,16 +30517,16 @@
         "W10"
       ],
       "test_environment": {
-        "mode": "synthetic_fixture_only",
-        "authorized_remote_writes": false,
-        "provider_credentials": "not_supplied",
-        "live_provider_write_acceptance": "NOT_RUN_OPTIONAL",
-        "rule": "Vendor-documented synthetic checks are accepted only for their attributed scope; live execution is optional and has not occurred. See operation and mapping acceptance, not this environment summary.",
+        "mode": "synthetic_adapter_execution_and_separate_authorized_trial_contract_probes",
+        "authorized_remote_writes": true,
+        "provider_credentials": "authorized_evaluation_account",
+        "live_provider_write_acceptance": "native_trial_contract_probes_completed_adapter_execution_synthetic",
+        "rule": "Attributed synthetic execution remains accepted; native trial probes support exact contracts. No arbitrary public-city mutation.",
         "permission_status": "No arbitrary public-city mutation. Runtime credentials are needed only to execute optional live account calls; they are not a synthetic acceptance gate."
       },
       "account_tier": {
-        "status": "unverified_unless_named_in_evidence",
-        "details": "Public pages accessed without credentials where content returned. Staff/test credentials not supplied; no private access attempted."
+        "status": "authorized_evaluation_trial",
+        "details": "QuorumRelay Evaluation trial, organization46098; no paid entitlement claimed."
       },
       "official_docs_status": "inspected_with_recorded_limits; some indexed_only/login_or_extraction_blocked",
       "family_id": "boardable",
@@ -30093,6 +30771,141 @@
           "receipt_sha256": "2cde0ab3bec699776483a5b38f398211ce182fbdae164186d03e8198674b7142",
           "findings": "Pinned existing core source defines date literals/JSON/Bearer. Selected secure calendar POST implemented;21newnative-read cases plus248affected checks. No live secure call or write.",
           "limits": "One start0 range response; no pagination/total/catalog completeness inferred.; City identity is configured by trusted private credential policy, not independently supplied by response.; Numeric timestamp units are not guessed; unknown dates remain explicit.; Publication flags do not establish document locators, meeting associations or writes."
+        },
+        {
+          "id": "gworks-development-editor-2026-11-16",
+          "url": "https://portal.dev.gworks.cloud/plugin/cms/js-app/meeting-editor.js?v=21-MM-DD-000DEV000",
+          "title": "Public development editor meeting contract and synthetic reader acceptance",
+          "kind": "source_and_named_test_coverage",
+          "proof_level": "source_and_named_test_coverage_not_provider_acceptance",
+          "limits": "Development origin only; no live API calls. Create/update execution and production applicability remain separate work.",
+          "observation_date": "2026-11-16",
+          "observed": "Public development editor meeting contract and synthetic reader acceptance",
+          "findings": "Public development editor meeting contract and synthetic reader acceptance",
+          "access_scope": "local_synthetic_only"
+        },
+        {
+          "id": "gworks-development-writes-2026-11-16",
+          "url": "https://portal.dev.gworks.cloud/plugin/cms/js-app/meeting-editor.js?v=21-MM-DD-000DEV000",
+          "title": "Captured development editor writes through durable coordinator",
+          "kind": "source_and_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "limits": "Development deployment only; production applicability and file upload association remain separate. No live writes or releases.",
+          "observation_date": "2026-11-16",
+          "synthetic_execution": {
+            "provider": "gworks",
+            "status": "mock_passed",
+            "operations": [
+              "create",
+              "update"
+            ],
+            "entities": [
+              "meeting"
+            ],
+            "scope": "Captured development editor: draft/agenda meeting creation, metadata/agenda/minutes edits and appends, explicit agenda/minutes publication; existing files preserved, no delete/upload; exact ID readback, durable intent/no replay",
+            "execution_provenance": "Local pytest execution through default native adapter and WriteCoordinator with synthetic vendor transport on 2026-11-16; no live API call",
+            "checks": [
+              {
+                "command": "python -m pytest tests/test_gworks_write.py tests/test_gworks_editor.py tests/test_writes.py tests/test_write_intent_cancellation.py tests/test_write_plan_boundaries.py tests/test_write_preflight_cancellation.py -q",
+                "passed": 94,
+                "failed": 0,
+                "seconds": 176.71,
+                "scope": "39 write cases,30 editor reads,25 shared write cases; before six additive response-boundary cases"
+              },
+              {
+                "command": "python -m pytest tests/test_gworks_write.py -q -k native_response",
+                "passed": 6,
+                "failed": 0,
+                "seconds": 17.12,
+                "scope": "six additional native response and post-send boundary cases"
+              }
+            ],
+            "bindings": [
+              {
+                "path": "docs/capabilities/evidence/gworks-development-editor/meeting-editor.js",
+                "kind": "vendor_contract",
+                "sha256": "0c277bee76c897e0b34313ecf64b1384b5f05496954064f07b8dcc635bee9f1f"
+              },
+              {
+                "path": "docs/capabilities/evidence/gworks-development-editor/gworks.core.js",
+                "kind": "vendor_contract",
+                "sha256": "0826615bc22075396540a3251c724655100223d26afd973db96dc069ea28e920"
+              },
+              {
+                "path": "docs/capabilities/evidence/gworks-development-editor/agenda-editor.html",
+                "kind": "vendor_contract",
+                "sha256": "ab27ecf59d9a6b14713bc3f8491e9c7fc0b7291dbfcfaddca7a3ee5c3ed6c7bd"
+              },
+              {
+                "path": "tests/test_gworks_write.py",
+                "kind": "test",
+                "sha256": "631bc010a8be0abcb1ca0b2e423ded187437a352f8eea5185dd8bbbcaac02431",
+                "hash_policy": "test_source_crlf_to_lf",
+                "canonical_lf_sha256": "631bc010a8be0abcb1ca0b2e423ded187437a352f8eea5185dd8bbbcaac02431"
+              }
+            ]
+          },
+          "observed": "Captured development editor: draft/agenda meeting creation, metadata/agenda/minutes edits and appends, explicit agenda/minutes publication; existing files preserved, no delete/upload; exact ID readback, durable intent/no replay",
+          "findings": "Captured development editor: draft/agenda meeting creation, metadata/agenda/minutes edits and appends, explicit agenda/minutes publication; existing files preserved, no delete/upload; exact ID readback, durable intent/no replay",
+          "access_scope": "local_synthetic_only"
+        },
+        {
+          "id": "gworks-development-media-2026-11-16",
+          "url": "https://portal.dev.gworks.cloud/plugin/cms/js/city.plugin.js?v=21-MM-DD-000DEV000",
+          "title": "Development media upload and exact attachment association",
+          "kind": "source_and_synthetic_execution",
+          "proof_level": "vendor_contract_and_synthetic_engine_execution",
+          "limits": "Development deployment only. No live calls. Recording/video upload and production applicability remain unresolved.",
+          "observation_date": "2026-11-16",
+          "receipt_path": "docs/verification/gworks-media-writes-2026-11-16.json",
+          "receipt_sha256": "b49f1ca816164a667f9b34cb90ea9ba5a704e2d17d76e6dc4541e1066dbc10ee",
+          "synthetic_execution": {
+            "provider": "gworks",
+            "status": "mock_passed",
+            "operations": [
+              "upload",
+              "update"
+            ],
+            "entities": [
+              "media",
+              "meeting"
+            ],
+            "scope": "Development media-library file upload and existing meeting/agenda-item attachment association; supported document/image extensions only, no recording-video upload, deletion or implicit publication.",
+            "execution_provenance": "Integrated default adapter and WriteCoordinator executed locally on 2026-11-16; exact bytes and receipts tested without vendor calls.",
+            "checks": [
+              {
+                "command": "python -m pytest tests/test_gworks_media_write.py tests/test_gworks_write.py tests/test_gworks_editor.py tests/test_writes.py -q",
+                "passed": 97,
+                "failed": 0,
+                "seconds": 191.56
+              }
+            ],
+            "bindings": [
+              {
+                "path": "docs/capabilities/evidence/gworks-development-editor/city.plugin.js",
+                "kind": "vendor_contract",
+                "sha256": "4769b0e08f09679b4b7a93be40fbbcd8384310693d299b6753aef5ee497bfb8d"
+              },
+              {
+                "path": "docs/capabilities/evidence/gworks-development-editor/gworks.core.js",
+                "kind": "vendor_contract",
+                "sha256": "0826615bc22075396540a3251c724655100223d26afd973db96dc069ea28e920"
+              },
+              {
+                "path": "docs/capabilities/evidence/gworks-development-editor/meeting-editor.js",
+                "kind": "vendor_contract",
+                "sha256": "0c277bee76c897e0b34313ecf64b1384b5f05496954064f07b8dcc635bee9f1f"
+              },
+              {
+                "path": "tests/test_gworks_media_write.py",
+                "kind": "test",
+                "sha256": "f9cc05020c59666b1ae3599d191ccae3a23e1223e0474acb19466defebef4ef8"
+              }
+            ]
+          },
+          "observed": "Development media-library file upload and existing meeting/agenda-item attachment association; supported document/image extensions only, no recording-video upload, deletion or implicit publication.",
+          "findings": "Development media-library file upload and existing meeting/agenda-item attachment association; supported document/image extensions only, no recording-video upload, deletion or implicit publication.",
+          "access_scope": "local_synthetic_only"
         }
       ],
       "tenants": [
@@ -30170,9 +30983,10 @@
             "gworks-galena-minutes-engine-fetch-403-live",
             "quorumrelay-shared-core-operations",
             "gworks-published-html-capture-and-tests",
-            "gworks-secure-range-read-2026-11-15"
+            "gworks-secure-range-read-2026-11-15",
+            "gworks-development-editor-2026-11-16"
           ],
-          "details": "The existing fetch_attachment path resolves baseline-derived api.gworks.cloud agenda/minutes URLs and downloads only through explicitly configured exact public origins. The city-1311 agenda fetch completed (5,211-byte PDF); a flagged Galena minutes object resolved but its signed object GET returned HTTP 403, so the citation was retained as partial/unavailable. This is a document route, not a separate meeting detail API. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Observed vendor-core client now establishes explicit secure-calendar range POST via existing gworks-secure-calendar-json format. Private configured tenant/city/origin/namespace credentials, exact unpadded native date strings/JSON/auth, local ISO date checks, unknown numeric timestamp units, transfer/parser/time/cancel guards and source-capture neutral export are synthetically verified. Unpaged response is always partial; configured city is not independently asserted by response. No live account acceptance or writes.",
+          "details": "The existing fetch_attachment path resolves baseline-derived api.gworks.cloud agenda/minutes URLs and downloads only through explicitly configured exact public origins. The city-1311 agenda fetch completed (5,211-byte PDF); a flagged Galena minutes object resolved but its signed object GET returned HTTP 403, so the citation was retained as partial/unavailable. This is a document route, not a separate meeting detail API. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Observed vendor-core client now establishes explicit secure-calendar range POST via existing gworks-secure-calendar-json format. Private configured tenant/city/origin/namespace credentials, exact unpadded native date strings/JSON/auth, local ISO date checks, unknown numeric timestamp units, transfer/parser/time/cancel guards and source-capture neutral export are synthetically verified. Unpaged response is always partial; configured city is not independently asserted by response. No live account acceptance or writes. Development editor detail GET and gworks-editor-meeting-json normalization now preserve selected meeting identity, nested agenda/minutes text, raw file descriptors and unknown fields; isolated development city namespace, scoped credentials, bounds, cancellation, persistence/search and neutral exports covered by tests/test_gworks_editor.py.",
           "dependencies": [
             "Supplied capture with the agenda_fl/minutes_fl row flag",
             "Explicit bounded download_origins for the API and observed signed-file origin"
@@ -30201,9 +31015,10 @@
             "media-reader-source",
             "quorumrelay-shared-core-operations",
             "gworks-published-html-capture-and-tests",
-            "gworks-secure-calendar-saved-mapping-2026-11-14"
+            "gworks-secure-calendar-saved-mapping-2026-11-14",
+            "gworks-development-editor-2026-11-16"
           ],
-          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
+          "details": "The standalone compatibility parser is registered for this provider’s exact baseline format pair(s) and preserves the pinned legacy output while retaining raw captures, original fields and source identity. This is parser/fixture behavior, not live source discovery. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog. Development editor detail GET and gworks-editor-meeting-json normalization now preserve selected meeting identity, nested agenda/minutes text, raw file descriptors and unknown fields; isolated development city namespace, scoped credentials, bounds, cancellation, persistence/search and neutral exports covered by tests/test_gworks_editor.py.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -30248,9 +31063,10 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations",
             "gworks-published-html-capture-and-tests",
-            "gworks-secure-calendar-saved-mapping-2026-11-14"
+            "gworks-secure-calendar-saved-mapping-2026-11-14",
+            "gworks-development-editor-2026-11-16"
           ],
-          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
+          "details": "Shared local search indexes the stored record’s normalized metadata and supplied text with provider/namespace/capture scoping. It does not claim full source text, OCR, unprovided transcripts or provider-native search. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog. Development editor detail GET and gworks-editor-meeting-json normalization now preserve selected meeting identity, nested agenda/minutes text, raw file descriptors and unknown fields; isolated development city namespace, scoped credentials, bounds, cancellation, persistence/search and neutral exports covered by tests/test_gworks_editor.py.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -30271,9 +31087,10 @@
           "evidence_ids": [
             "quorumrelay-shared-core-operations",
             "gworks-published-html-capture-and-tests",
-            "gworks-secure-calendar-saved-mapping-2026-11-14"
+            "gworks-secure-calendar-saved-mapping-2026-11-14",
+            "gworks-development-editor-2026-11-16"
           ],
-          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog.",
+          "details": "Shared neutral export supports lossless JSON/JSONL/ZIP bundles and explicit CSV/iCalendar projections with recorded losses. This is not a vendor-specific import file or external provider mutation. Published meeting HTML now maps native meeting ID, rendered capture-local section/item hierarchy and supplied document links; selected-page/local workflow evidence only. Separate saved secure-calendar flattened fields are now mapped with explicit configured city binding; no live secure request or complete catalog. Development editor detail GET and gworks-editor-meeting-json normalization now preserve selected meeting identity, nested agenda/minutes text, raw file descriptors and unknown fields; isolated development city namespace, scoped credentials, bounds, cancellation, persistence/search and neutral exports covered by tests/test_gworks_editor.py.",
           "dependencies": [],
           "remaining_verification": [],
           "acceptance_status": "not_run",
@@ -30310,25 +31127,27 @@
           ]
         },
         "create": {
-          "capability_status": "documented",
-          "implementation_status": "not_implemented",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
           "evidence_ids": [
-            "gworks-builder"
+            "gworks-builder",
+            "gworks-development-writes-2026-11-16"
           ],
-          "details": "Machine contract/mapping is not established in the cited evidence; implementation remains unresolved research, not a verified outside-information dependency. Supported UI/product operation only, not a verified machine route. agenda_or_minutes: FrontDesk Agenda & Minutes builder UI in historical indexed official article; API unknown",
+          "details": "Captured development editor: draft/agenda meeting creation, metadata/agenda/minutes edits and appends, explicit agenda/minutes publication; existing files preserved, no delete/upload; exact ID readback, durable intent/no replay",
           "dependencies": [
-            "supported programmatic or explicit authorized UI contract"
+            "Explicit trusted development origin/city/tenant credential policy at runtime; not needed for synthetic acceptance"
           ],
           "remaining_verification": [
-            "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
+            "Production deployment applicability",
+            "New file upload and meeting association are outside this mapping"
           ],
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "evidence_level": "referenced_documentation_or_source_observation",
           "tenant_scope": [
             "https://galenaks.frontdeskgworks.com/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "vendor_client_contract_and_synthetic_coordinator_execution",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance",
@@ -30336,23 +31155,26 @@
           ]
         },
         "update": {
-          "capability_status": "unverified",
-          "implementation_status": "not_implemented",
-          "evidence_ids": [],
-          "details": "No public contract established in inspected sources. Capability remains unverified, not unsupported. Historical official indexed article documents agenda creation/logging minutes/publication; live docs 404. Machine create/update/upload contracts remain unknown; no absence claim.",
+          "capability_status": "observed",
+          "implementation_status": "implemented",
+          "evidence_ids": [
+            "gworks-development-writes-2026-11-16"
+          ],
+          "details": "Captured development editor: draft/agenda meeting creation, metadata/agenda/minutes edits and appends, explicit agenda/minutes publication; existing files preserved, no delete/upload; exact ID readback, durable intent/no replay",
           "dependencies": [
-            "resolve provider contract and tenant prerequisites"
+            "Explicit trusted development origin/city/tenant credential policy at runtime; not needed for synthetic acceptance"
           ],
           "remaining_verification": [
-            "Verify field schema, permissions, version conflicts, duplicate/retry behavior and asynchronous processing."
+            "Production deployment applicability",
+            "New file upload and meeting association are outside this mapping"
           ],
-          "acceptance_status": "not_run",
+          "acceptance_status": "mock_passed",
           "evidence_level": "unverified",
           "tenant_scope": [
             "https://galenaks.frontdeskgworks.com/"
           ],
           "account_tier_status": "provider_tenant_specific_not_fully_verified",
-          "test_access": "No provider test tenant/credentials supplied; synthetic fixture evidence only.",
+          "test_access": "vendor_client_contract_and_synthetic_coordinator_execution",
           "restrictions": [
             "Historical observation: no live test tenant was supplied. Vendor-documented synthetic execution is now accepted verification; live checks are optional.",
             "Docs/UI and source-baseline evidence are not acceptance",
@@ -30397,21 +31219,54 @@
       ],
       "outbound_mappings": [
         {
-          "entity": "agenda_or_minutes",
+          "entity": "meeting",
           "operation": "create",
-          "endpoint_or_format": "FrontDesk Agenda & Minutes builder UI in historical indexed official article; API unknown",
-          "field_mappings": [],
+          "endpoint_or_format": "https://api.dev.gworks.cloud/cms/secure/city/meeting/",
+          "field_mappings": [
+            {
+              "normalized": "title",
+              "provider_field": "cms_meeting.title",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "location",
+              "provider_field": "cms_meeting.location",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "scheduled_start",
+              "provider_field": "cms_meeting.date/time/meeting_ts",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "category_ref_type_id",
+              "provider_field": "cms_meeting.category_ref_type_id",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "sections",
+              "provider_field": "cms_meeting.data JSON string and section_count",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "publication",
+              "provider_field": "cms_meeting agenda/minutes publication flags and dates",
+              "mapping_level": "observed_vendor_client_payload_field"
+            }
+          ],
           "evidence_ids": [
             "gworks-builder",
-            "gworks-current-builder-source-followup-2026-11-15"
+            "gworks-current-builder-source-followup-2026-11-15",
+            "gworks-development-editor-2026-11-16",
+            "gworks-development-writes-2026-11-16"
           ],
-          "account_requirements": "City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Require current authorized test tenant, assigned meeting/document identity and public PDF/JSON readback.",
-          "verification_status": "historical_indexed_ui_documentation_only",
-          "evidence_level": "referenced_contract_or_ui_documentation",
-          "implementation_status": "not_verified_by_inventory",
-          "acceptance_status": "not_run",
+          "account_requirements": "Development client uses Bearer token; synthetic acceptance does not require obtaining an account.",
+          "authorized_test_access": "synthetic_only_no_live_mutation",
+          "readback_receipt": "Persist returned native ID before GET. Verify requested fields and preservation of every preexisting field except mod_ts; compare explicit instants/categories semantically. Unknown create ID remains uncertain and never replays.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -30422,28 +31277,61 @@
             "W09",
             "W10"
           ],
-          "interface_type": "manual_ui_or_feature_indexed_only",
-          "contract_confidence": "ui_labels_or_product_feature_not_payload_keys",
-          "method": null,
-          "api_version": "unknown",
-          "automatable_contract_verified": false,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_development_client_with_synthetic_readback",
+          "method": "POST",
+          "api_version": "development client query v=21-MM-DD-000DEV000; release version unspecified",
+          "automatable_contract_verified": true,
+          "domain_scope": "Captured development editor: draft/agenda meeting creation, metadata/agenda/minutes edits and appends, explicit agenda/minutes publication; existing files preserved, no delete/upload; exact ID readback, durable intent/no replay"
         },
         {
-          "entity": "meeting_event_or_related_document_or_recording",
+          "entity": "meeting",
           "operation": "update",
-          "endpoint_or_format": "unknown",
-          "field_mappings": [],
-          "evidence_ids": [
-            "gworks-current-builder-source-followup-2026-11-15"
+          "endpoint_or_format": "https://api.dev.gworks.cloud/cms/secure/city/meeting/{id}",
+          "field_mappings": [
+            {
+              "normalized": "title",
+              "provider_field": "cms_meeting.title",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "location",
+              "provider_field": "cms_meeting.location",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "scheduled_start",
+              "provider_field": "cms_meeting.date/time/meeting_ts",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "category_ref_type_id",
+              "provider_field": "cms_meeting.category_ref_type_id",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "sections",
+              "provider_field": "cms_meeting.data JSON string and section_count",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "publication",
+              "provider_field": "cms_meeting agenda/minutes publication flags and dates",
+              "mapping_level": "observed_vendor_client_payload_field"
+            }
           ],
-          "account_requirements": "City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Unknown provider receipt contract; require assigned identity, before/after state and authorized resource readback before acceptance.",
-          "verification_status": "unverified",
-          "evidence_level": "unverified",
-          "implementation_status": "not_verified_by_inventory",
-          "acceptance_status": "not_run",
+          "evidence_ids": [
+            "gworks-current-builder-source-followup-2026-11-15",
+            "gworks-development-editor-2026-11-16",
+            "gworks-development-writes-2026-11-16"
+          ],
+          "account_requirements": "Development client uses Bearer token; synthetic acceptance does not require obtaining an account.",
+          "authorized_test_access": "synthetic_only_no_live_mutation",
+          "readback_receipt": "Persist returned native ID before GET. Verify requested fields and preservation of every preexisting field except mod_ts; compare explicit instants/categories semantically. Unknown create ID remains uncertain and never replays.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -30454,28 +31342,55 @@
             "W09",
             "W10"
           ],
-          "interface_type": "unresolved",
-          "contract_confidence": "unverified_machine_contract",
-          "method": null,
-          "api_version": "unknown",
-          "automatable_contract_verified": false,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_development_client_with_synthetic_readback",
+          "method": "PUT",
+          "api_version": "development client query v=21-MM-DD-000DEV000; release version unspecified",
+          "automatable_contract_verified": true,
+          "domain_scope": "Captured development editor: draft/agenda meeting creation, metadata/agenda/minutes edits and appends, explicit agenda/minutes publication; existing files preserved, no delete/upload; exact ID readback, durable intent/no replay"
         },
         {
-          "entity": "meeting_event_or_related_document_or_recording",
+          "entity": "media",
           "operation": "upload",
-          "endpoint_or_format": "unknown",
-          "field_mappings": [],
-          "evidence_ids": [
-            "gworks-current-builder-source-followup-2026-11-15"
+          "endpoint_or_format": "Development POST /cms/secure/media, signed PUT, POST /cms/secure/media/list, file GET, selected meeting PUT",
+          "field_mappings": [
+            {
+              "normalized": "filename",
+              "provider_field": "cms_file.filename",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "content_type",
+              "provider_field": "cms_file.mime_type",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "byte_length",
+              "provider_field": "cms_file.size_kb=floor(bytes/1000)",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "meeting_attachment",
+              "provider_field": "cms_meeting.files{name,id,size,type}",
+              "mapping_level": "observed_vendor_client_payload_field"
+            },
+            {
+              "normalized": "item_attachment",
+              "provider_field": "cms_meeting.data items.files{filename,usetype}",
+              "mapping_level": "observed_vendor_client_payload_field"
+            }
           ],
-          "account_requirements": "City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown.",
-          "authorized_test_access": "not_supplied;synthetic_fixture_evidence_only_no_provider_acceptance",
-          "readback_receipt": "Unknown provider receipt contract; require assigned identity, before/after state and authorized resource readback before acceptance.",
-          "verification_status": "unverified",
-          "evidence_level": "unverified",
-          "implementation_status": "not_verified_by_inventory",
-          "acceptance_status": "not_run",
+          "evidence_ids": [
+            "gworks-current-builder-source-followup-2026-11-15",
+            "gworks-development-media-2026-11-16"
+          ],
+          "account_requirements": "Private existing development Bearer credential, tenant/city and explicit file city-code binding, media:upload and selected meeting:update permissions.",
+          "authorized_test_access": "synthetic_only_no_live_mutation",
+          "readback_receipt": "Bounded library pages, unique new native file ID, exact file byte/hash verification and preserved meeting/item postcondition. Durable step intent; reconciliation reads only, no automatic mutation replay.",
+          "verification_status": "vendor_client_contract_synthetic_coordinator_verified",
+          "evidence_level": "vendor_contract_and_synthetic_engine_execution",
+          "implementation_status": "implemented",
+          "acceptance_status": "mock_passed",
           "requirement_ids": [
             "C01",
             "X03",
@@ -30486,12 +31401,12 @@
             "W09",
             "W10"
           ],
-          "interface_type": "unresolved",
-          "contract_confidence": "unverified_machine_contract",
-          "method": null,
-          "api_version": "unknown",
-          "automatable_contract_verified": false,
-          "domain_scope": "Meetings/events,agenda items,linked meeting documents,recordings metadata and supplied captions/transcripts only; no deletes or arbitrary provider administration."
+          "interface_type": "observed_vendor_client_machine_contract",
+          "contract_confidence": "pinned_development_client_with_synthetic_readback",
+          "method": "POST/PUT",
+          "api_version": "development client query v=21-MM-DD-000DEV000; release version unspecified",
+          "automatable_contract_verified": true,
+          "domain_scope": "Development media-library file upload and existing meeting/agenda-item attachment association; supported document/image extensions only, no recording-video upload, deletion or implicit publication."
         }
       ],
       "pagination": {
@@ -30509,10 +31424,12 @@
       "remaining_research": [
         "Published HTML detail is now mapped from the vendor-declared /city/{city}/cms/{meeting}_{agenda|minute}.html format with real city1311 meeting5017 capture. Existing Galena PDF failure remains a one-document access failure; not a provider-wide blocker. Catalog continuation/completeness and every flagged document remain unverified.",
         "Retained history, update frequency and maximum response payload remain unknown; one static response cannot establish them. No additional repeated sampling is required for this bounded research outcome.",
-        "Pinned FrontDesk builder material describes staff UI without an external write schema. Vendor machine field/readback contracts remain unresolved; staff credentials and live-write acceptance are not completion gates.",
-        "Anonymous citizen client declares secure POST /cms/secure/city/meeting/list with Bearer token and flattened cms_meeting.* fields. Explicit unpaged calendar range POST is now implemented from captured core/plugin source with synthetic response execution; current server applicability/paging and meeting-write payload/readback remain unresolved; do not substitute static meetings JSON field names. Generic upload helper consumes a caller-supplied endpoint and signedUrl but does not establish meeting association.",
+        "Development meeting write routes and client fields are now captured. Safe outbound creation/update/publication with preservation/readback is implemented; production applicability and upload association remain separate.",
+        "Secure calendar range POST remains implemented. The development editor additionally establishes detail GET and meeting save payload/readback. Paging remains unresolved. Generic upload helpers do not establish meeting-file association.",
         "Current official builder resource and its declared PDF/video reviewed2026-11-15: raster public UI example and supplied workflow captions, no endpoint/request/readback schema. Exact source chain checked; cannot label all gWorks write research outside-only. Source captures retained; no repeated tenant survey.",
-        "Previously missing core date/serialization/auth details are now source-inspected and mapped for explicit range fetch. Current live account applicability, response paging/total and independent returned city remain unverified without becoming account-acquisition acceptance gates. Exact declared editor minutes URL on existing Galena context returned404; no alternate staff host/path guessed."
+        "Previously missing core date/serialization/auth details are now source-inspected and mapped for explicit range fetch. Current live account applicability, response paging/total and independent returned city remain unverified without becoming account-acquisition acceptance gates. Exact declared editor minutes URL on existing Galena context returned404; no alternate staff host/path guessed.",
+        "Development editor source recovered on 2026-11-16; detail reads implemented. Captured save/publication operations are implemented and synthetically verified; production version applicability remains separate.",
+        "2026-11-16: development document/image media upload and existing meeting/item association implemented with97affectedchecks. Earlier upload-association gap is closed for this exact client and file scope. Recording/video upload, production applicability and public calendar paging remain unresolved. See GWORKS-EDITOR.md and gworks-media-writes-2026-11-16.json."
       ],
       "authentication": "City JSON public; login/admin writes separate. Galena UI login disabled at observation; API credentials/roles unknown.",
       "write_findings": "Historical official indexed article documents agenda creation/logging minutes/publication; live docs 404. Machine create/update/upload contracts remain unknown; no absence claim.",

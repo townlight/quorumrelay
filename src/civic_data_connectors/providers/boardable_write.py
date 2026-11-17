@@ -11,6 +11,10 @@ from uuid import uuid4
 from ..engine import canonical_hash
 from ..write_adapters import AmbiguousWrite, WriteAdapter, WriteCancelled, WriteChange, WriteFailure, sanitize
 from ..write_transport import WriteResponse
+from .boardable_builder_write import BoardableBuilderWriteAdapter
+from .boardable_meeting_documents import BoardableMeetingDocumentsWriteAdapter
+from .boardable_meeting_write import BoardableMeetingWriteAdapter
+from .boardable_series_write import BoardableSeriesWriteAdapter
 
 
 def _native_id(value):
@@ -22,8 +26,77 @@ def _native_id(value):
 class BoardableWriteAdapter(WriteAdapter):
     def __init__(self, transport=None):
         super().__init__("boardable", transport)
+        self.builder = BoardableBuilderWriteAdapter(self.transport)
+        self.meeting = BoardableMeetingWriteAdapter(self.transport)
+        self.documents = BoardableMeetingDocumentsWriteAdapter(self.transport)
+        self.series = BoardableSeriesWriteAdapter(self.transport)
+
+    def bind_files(self, engine, context):
+        bound = super().bind_files(engine, context)
+        bound.builder = self.builder.bind_files(engine, context)
+        bound.meeting = self.meeting.bind_files(engine, context)
+        bound.documents = self.documents.bind_files(engine, context)
+        bound.series = self.series.bind_files(engine, context)
+        return bound
+
+    def _is_meeting_series(self, source, context):
+        config = context.credentials.get(self.provider)
+        series = isinstance(config, dict) and config.get("current_meeting_series") is True
+        current = isinstance(config, dict) and config.get("current_meeting_form") is True
+        legacy = isinstance(config, dict) and config.get("legacy_agenda_editor") is True
+        builder = isinstance(config, dict) and config.get("current_agenda_builder") is True
+        if series:
+            if not current:
+                raise WriteFailure("permission_denied", "The Boardable recurrence series mode requires the native meeting form credential.")
+            if legacy or builder:
+                raise WriteFailure("permission_denied", "The native Boardable series form is mutually exclusive with legacy and current agenda builder modes.")
+            return True
+        return False
+
+    def _is_meeting_documents(self, source, context):
+        config = context.credentials.get(self.provider)
+        documents = isinstance(config, dict) and config.get('current_meeting_documents') is True
+        if not documents:
+            return False
+        form = isinstance(config, dict) and config.get('current_meeting_form') is True
+        series = isinstance(config, dict) and config.get('current_meeting_series') is True
+        legacy = isinstance(config, dict) and config.get('legacy_agenda_editor') is True
+        builder = isinstance(config, dict) and config.get('current_agenda_builder') is True
+        if not form:
+            raise WriteFailure('permission_denied', 'The Boardable meeting document mode requires the native meeting form credential.')
+        if series or legacy or builder:
+            raise WriteFailure('permission_denied', 'The Boardable meeting document mode is mutually exclusive with series, legacy and current agenda builder modes.')
+        return True
+
+    def _is_meeting_form(self, source, context):
+        config = context.credentials.get(self.provider)
+        current = isinstance(config, dict) and config.get("current_meeting_form") is True
+        series = isinstance(config, dict) and config.get("current_meeting_series") is True
+        legacy = isinstance(config, dict) and config.get("legacy_agenda_editor") is True
+        builder = isinstance(config, dict) and config.get("current_agenda_builder") is True
+        if series and not current:
+            raise WriteFailure("permission_denied", "The Boardable recurrence series mode requires the native meeting form credential.")
+        if (current or series) and (legacy or builder):
+            raise WriteFailure("permission_denied", "The native Boardable meeting form is mutually exclusive with legacy and current agenda builder modes.")
+        return current
+
+    def _is_current(self, source, context):
+        config = context.credentials.get(self.provider)
+        current = isinstance(config, dict) and config.get("current_agenda_builder") is True
+        legacy = isinstance(config, dict) and config.get("legacy_agenda_editor") is True
+        if current and legacy:
+            raise WriteFailure("permission_denied", "Current and legacy Boardable agenda builders are mutually exclusive.")
+        return current
 
     def credentials(self, source, context):
+        if self._is_meeting_documents(source, context):
+            return self.documents.credentials(source, context)
+        if self._is_meeting_series(source, context):
+            return self.series.credentials(source, context)
+        if self._is_meeting_form(source, context):
+            return self.meeting.credentials(source, context)
+        if self._is_current(source, context):
+            return self.builder.credentials(source, context)
         config = context.credentials.get(self.provider)
         parsed = urlsplit(source.url)
         if (not isinstance(config, dict) or config.get("tenant") != context.tenant or not context.tenant
@@ -43,11 +116,27 @@ class BoardableWriteAdapter(WriteAdapter):
         return config
 
     def validate_source(self, source, context):
+        if self._is_meeting_documents(source, context):
+            return self.documents.validate_source(source, context)
+        if self._is_meeting_series(source, context):
+            return self.series.validate_source(source, context)
+        if self._is_meeting_form(source, context):
+            return self.meeting.validate_source(source, context)
+        if self._is_current(source, context):
+            return self.builder.validate_source(source, context)
         if source.provider != self.provider or source.options:
             raise ValueError("Only the explicit legacy Boardable organization source without options is supported.")
         self.credentials(source, context)
 
     def authorize(self, source, change, context):
+        if self._is_meeting_documents(source, context):
+            return self.documents.authorize(source, change, context)
+        if self._is_meeting_series(source, context):
+            return self.series.authorize(source, change, context)
+        if self._is_meeting_form(source, context):
+            return self.meeting.authorize(source, change, context)
+        if self._is_current(source, context):
+            return self.builder.authorize(source, change, context)
         self.validate_source(source, context)
         config = self.credentials(source, context)
         creating = change.entity == 'item' and change.operation == 'create'
@@ -174,6 +263,14 @@ class BoardableWriteAdapter(WriteAdapter):
         return flat
 
     def prepare(self, source, change, context, bounds, deadline):
+        if self._is_meeting_documents(source, context):
+            return self.documents.prepare(source, change, context, bounds, deadline)
+        if self._is_meeting_series(source, context):
+            return self.series.prepare(source, change, context, bounds, deadline)
+        if self._is_meeting_form(source, context):
+            return self.meeting.prepare(source, change, context, bounds, deadline)
+        if self._is_current(source, context):
+            return self.builder.prepare(source, change, context, bounds, deadline)
         self.authorize(source, change, context)
         if not isinstance(change.key, str) or not 0 < len(change.key) <= 200:
             raise ValueError("A bounded change key is required.")
@@ -290,6 +387,16 @@ class BoardableWriteAdapter(WriteAdapter):
                            "headers": {}, "body": fields}}
 
     def apply(self, source, prepared, context, bounds, deadline, *, persist=None):
+        if self._is_meeting_documents(source, context):
+            return self.documents.apply(source, prepared, context, bounds, deadline, persist=persist)
+        if prepared.get("series_mode"):
+            return self.series.apply(source, prepared, context, bounds, deadline, persist=persist)
+        if self._is_meeting_series(source, context):
+            return self.series.apply(source, prepared, context, bounds, deadline, persist=persist)
+        if self._is_meeting_form(source, context):
+            return self.meeting.apply(source, prepared, context, bounds, deadline, persist=persist)
+        if prepared.get("builder") == "current":
+            return self.builder.apply(source, prepared, context, bounds, deadline, persist=persist)
         change = WriteChange.from_dict(prepared["change"])
         if change.operation == 'create':
             now = self._request(source, change, context, bounds, deadline)
@@ -322,6 +429,16 @@ class BoardableWriteAdapter(WriteAdapter):
             raise AmbiguousWrite('The mutation was sent before readback could be confirmed.') from None
 
     def reconcile(self, source, prepared, item, context, bounds, deadline):
+        if self._is_meeting_documents(source, context):
+            return self.documents.reconcile(source, prepared, item, context, bounds, deadline)
+        if prepared.get("series_mode"):
+            return self.series.reconcile(source, prepared, item, context, bounds, deadline)
+        if self._is_meeting_series(source, context):
+            return self.series.reconcile(source, prepared, item, context, bounds, deadline)
+        if self._is_meeting_form(source, context):
+            return self.meeting.reconcile(source, prepared, item, context, bounds, deadline)
+        if prepared.get("builder") == "current":
+            return self.builder.reconcile(source, prepared, item, context, bounds, deadline)
         change = WriteChange.from_dict(prepared["change"])
         if change.operation == 'create':
             value = self._request(source, change, context, bounds, deadline)

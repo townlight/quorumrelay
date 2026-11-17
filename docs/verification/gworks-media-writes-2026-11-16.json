@@ -1,0 +1,44 @@
+{
+  "live_vendor_calls": false,
+  "primary_product_coding": false,
+  "files": [
+    {
+      "path": "src/civic_data_connectors/providers/gworks_media_write.py",
+      "sha256": "9EB589C6A32D8857551BC7D79B1BAEA81A0321C55D2F37F99D5E6F7AF07EC460"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/gworks_write.py",
+      "sha256": "F992BAC3B5C5FF089ABD43BA662C08BFAE95E2055F01A15E4A77DED0E7AB63DE"
+    },
+    {
+      "path": "tests/test_gworks_media_write.py",
+      "sha256": "F9CC05020C59666B1AE3599D191CCAE3A23E1223E0474ACB19466DEFEBEF4EF8"
+    },
+    {
+      "path": "docs/capabilities/evidence/gworks-development-editor/city.plugin.js",
+      "sha256": "4769B0E08F09679B4B7A93BE40FBBCD8384310693D299B6753AEF5EE497BFB8D"
+    }
+  ],
+  "checks": [
+    {
+      "command": "pytest tests/test_gworks_media_write.py tests/test_gworks_write.py tests/test_gworks_editor.py tests/test_writes.py -q",
+      "failed": 0,
+      "passed": 97,
+      "seconds": 191.56
+    }
+  ],
+  "scope": "Development gWorks media allocation, signed byte PUT, exact file readback and existing meeting/item association",
+  "date": "2026-11-16",
+  "remaining": [
+    "final required source checks",
+    "MinuteTraq recording transfer"
+  ],
+  "think": "low",
+  "base": "897442bf99dff40c4bd03126009083ad9fd485a3",
+  "worker": "deepseek-v4.1-flash:1017-cloud",
+  "limits": [
+    "development deployment only",
+    "no account or vendor API calls",
+    "uncertain writes are reconciled by reads, never blindly replayed"
+  ]
+}

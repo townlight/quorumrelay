@@ -535,3 +535,12 @@ For current local source, see the separate [GWorks published HTML](GWORKS-PUBLIS
 Local provider file preparation keeps the total deadline active while saving streamed output. CivicPlus historical files, OnBase DIP, SuiteOne HTML and TelVue chapter CSV check bounds before exposing a downloadable artifact. An expired save returns no artifact; temporary partial files are removed. Checks are cooperative after synchronous storage returns. [Regression evidence](verification/provider-file-completion-bounds-2026-11-15.json).
 
 The local eSCRIBE [PublishingService mapping](ESCRIBE-PUBLISHING-SERVICE.md) now pins a deployed WSDL/five XSDs and implements scoped native record reads/create/update plus metadata-bound document bytes. Exact native parameters and synthetic coordinator evidence are separate from public portal HTML, chunk-upload semantics and live deployment/visibility acceptance.
+
+
+Boardable current-builder update (2026-11-16): explicit current_agenda_builder mode
+now implements item create/update and associated uploads, with exact tree/item
+readback and original-byte hash checks. 105 affected synthetic cases passed.
+Separate authorized browser trial observed create201/update-upload200 and exact
+134-byte download. See `BOARDABLE-WRITES.md` and
+`verification/boardable-current-builder-2026-11-16.json` under docs.
+Full meeting forms, recurring days, publication and imports remain open.

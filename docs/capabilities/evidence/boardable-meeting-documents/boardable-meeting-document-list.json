@@ -1,0 +1,67 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://app.boardable.com/quorumrelay-evaluation/attachment-list",
+    "json": {
+      "attachable_id": 526577,
+      "attachable_type": "meeting",
+      "folder": "root"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "items": [
+        {
+          "id": 684953,
+          "attached_type": "computer",
+          "attached_name": "",
+          "document_id": 0,
+          "title": "quorumrelay-document-center-evaluation.txt",
+          "type": "upload",
+          "iconUrl": "https://app.boardable.com/img/icons/doc_center/file.svg",
+          "bareIconUrl": "https://app.boardable.com/img/icons/doc_center/bare-file.svg",
+          "created_at": {
+            "date": "2026-11-16 23:53:29",
+            "timezone": "UTC"
+          },
+          "updated_at": {
+            "date": "2026-11-16 23:53:29",
+            "timezone": "UTC"
+          },
+          "limited": null,
+          "downloadUrl": "https://app.boardable.com/quorumrelay-evaluation/attachments/uploads/download/684953/quorumrelay-document-center-evaluation.txt",
+          "fileExtension": "txt",
+          "filename": "quorumrelay-document-center-evaluation.txt",
+          "file_size": 118,
+          "uuid": {
+            "uuid": "ac3883a5-3bab-4505-a173-01451d5f5617",
+            "uuidable_type": "App\\Boardable\\Attachments\\Attachment",
+            "uuidable_id": 684953,
+            "short_slug": "b838c2db",
+            "created_at": "2026-11-16T23:53:29.000000Z",
+            "updated_at": "2026-11-16T23:53:29.000000Z",
+            "hex": "ac3883a53bab4505a17301451d5f5617"
+          },
+          "body": false,
+          "document": null,
+          "pdf": null,
+          "order": 0,
+          "name": "quorumrelay-document-center-evaluation.txt",
+          "url": "https://app.boardable.com/quorumrelay-evaluation/attachments/uploads/download/684953/quorumrelay-document-center-evaluation.txt",
+          "third_party_raw_data": null,
+          "disable_downloads": 0,
+          "user_can_download": true
+        }
+      ],
+      "folders": [],
+      "current_folder": null,
+      "breadcrumbs": [
+        {
+          "label": "All files",
+          "slug": ""
+        }
+      ]
+    }
+  }
+}

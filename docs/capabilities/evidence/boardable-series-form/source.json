@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-16",
+  "origin": "https://app.boardable.com",
+  "organization_id": 46098,
+  "series_id": 12616,
+  "meeting_ids": [
+    526618,
+    526619
+  ],
+  "provenance": "Authorized evaluation tenant. Native JSON create and exact minimal JSON update via supported browser CDP developer requests; independent collection and canonical GET readback for every occurrence. Tokens/contact fields redacted in-browser. Organization/profile DTOs omitted and member rows reduced to native IDs and relationship pivots. No credentials exported.",
+  "contract": {
+    "create": "POST /{org}/meetings, JSON201 raw meeting with series_id and nested series identity",
+    "collection": "POST /{org}/meeting-series/{series_id}/data {} ->200 can/meeting/past/today/future/unpublished; unpublished overlaps time buckets",
+    "detail": "GET exact canonical URL?format=json ->200 {meeting}",
+    "update": "POST /{org}/meetings_v2/{original_meeting_id}, JSON200 raw meeting; series_choice subsequent; no meeting_type in minimal update",
+    "schedule": "Weekly interval1, inclusive end date verified with two dates. Native UI states recurrence schedule cannot change after creation."
+  },
+  "verified": {
+    "create_status": 201,
+    "update_status": 200,
+    "all_occurrences_readback": 200,
+    "same_occurrence_ids_after_update": true,
+    "times_preserved_after_update": true,
+    "invitations_sent": false,
+    "publication": false
+  },
+  "files": [
+    {
+      "path": "boardable-recurrence-api-create.json",
+      "sha256": "ab8b5c0ca8c75eb904b246cc815105347206e351121bd796c49ab017ede50cac"
+    },
+    {
+      "path": "boardable-recurrence-api-readback.json",
+      "sha256": "57ebaabbf103bc255d4f419b39ee210d367fcf82bad070327d8726a9b35a6c93"
+    },
+    {
+      "path": "boardable-recurrence-api-update.json",
+      "sha256": "8438bca23f0f28f86d92b51d47dffad05b8e536fb4748b5a321e8d9b89369563"
+    },
+    {
+      "path": "boardable-recurrence-minimal-update.json",
+      "sha256": "c2c67a8e180728982557c7f64557d9db7c4824e268b3184789167e11dc216b10"
+    },
+    {
+      "path": "boardable-recurrence-api-updated-readback.json",
+      "sha256": "739ef134238ad8d8728d19b01379ab0ec2f9b85b94f54b30d7452da6c59dc959"
+    },
+    {
+      "path": "boardable-recurrence-minimal-readback.json",
+      "sha256": "1808a063128b8de59de62e1db2383c975e41792306c3ec7d1d9db1b15b094424"
+    }
+  ]
+}

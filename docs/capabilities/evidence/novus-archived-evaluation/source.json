@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-16",
+  "sources": [
+    {
+      "url": "http://novusolutions.com/demo.aspx",
+      "archive_timestamp": "20160311112323"
+    },
+    {
+      "url": "http://www.novusolutions.com:80/novusagenda/pilot.aspx",
+      "archive_timestamp": "20160207074534"
+    },
+    {
+      "url": "http://storage.coremotivesmarketing.com:80/library/6a563288-c76e-e111-9094-00155d323097/884/webforms/d3ed1c6f-06d2-e211-abf3-842b2b19fef1.htm",
+      "archive_timestamp": "20160727190241"
+    }
+  ],
+  "findings": [
+    "Official historical pilot offered a fully functional 90-day evaluation at no cost or obligation.",
+    "Self-guided demo links to CoreMotives contact capture form requiring first name, last name, email and slider challenge. Archived form has no application URL, API schema or client bundle.",
+    "No form submitted, contact initiated, account created or challenge attempted.",
+    "Current machine create/update/upload contracts remain unresolved."
+  ],
+  "files": [
+    {
+      "path": "novus-demo-archive.html",
+      "sha256": "a07acb26ac08ca5a5fe27ac4246576748101a2e1e308fd44fd08a9ea454a245c"
+    },
+    {
+      "path": "novus-pilot-archive.html",
+      "sha256": "eed8f0d7c1b6deca2f8128b24557f06b2fcbd66338ff97ce0d000aa18e316b8e"
+    },
+    {
+      "path": "novus-demo-form-archive.html",
+      "sha256": "a7c90856e044b04a28a75e571287b92e8035e091ea52515763620b218923c34a"
+    },
+    {
+      "path": "novus-demo-form.cdx.json",
+      "sha256": "80587288a6711246a0c6da1c097343df5315059a890cf242b7a8c6108b20a0de"
+    },
+    {
+      "path": "novus-demo.aspx.cdx.json",
+      "sha256": "dcb5a8d288d15769aea69ef3911e9972eb46b50e3e2d042be28a7d679213a2f1"
+    },
+    {
+      "path": "novus-pilot.aspx.cdx.json",
+      "sha256": "16c6e94cda4d9e613fda26e3bfa48156d69303cd0a40950cd8bd130622197664"
+    }
+  ]
+}

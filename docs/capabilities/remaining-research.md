@@ -50,6 +50,8 @@ Evidence and exact scope: `inventory.json` provider `granicus`; operation status
 
 ## F04 NovusAGENDA (`novusagenda`)
 
+- Archived official demo/pilot pages and their exact linked CoreMotives form were recovered on2026-11-16. The pilot offered a free fully functional90-day environment; the self-guided path terminates in contact capture, without an exposed application URL/API schema. No submission or contact occurred. See [pinned archived evaluation chain](evidence/novus-archived-evaluation/source.json).
+
 - Selected-window listing, bounded native search, supplied Coversheet and MeetingView Agenda parsing are implemented with separate receipts. The older failed search postback is historical. Selected rendered Minutes now have separate native document/meeting identities, supplied source text and scoped bounds/persistence/reopen/search/ZIP proof. Other Minutes layouts, search candidate/full-text semantics and automatic root-to-detail traversal remain unverified; exact saved detail contexts are not a complete catalog.
 - Existing receipts establish their selected listing/search windows only. Default horizon, retained history and broader catalog extent remain qualified; no repeated tenant/history survey is a new completion gate.
 - Pinned UI instructions do not supply a current machine create/update/upload contract or field/readback schema. Vendor-contract synthetic execution is accepted when such a contract is available; staff-account acquisition is not required for acceptance.
@@ -140,6 +142,8 @@ Evidence and exact scope: `inventory.json` provider `simbli`; operation status a
 Evidence and exact scope: `inventory.json` provider `civicweb`; operation status and outbound mappings are separate from historical observations.
 
 ## F12 iQM2 (`iqm2`)
+
+- November16 client recovery: official MinuteTraq installer supplies generated SOAP methods and typed DB_1_0 structures. Selected AgendaGet/MinutesGet saved normalization and bounded native reads now pass synthetic execution, persistence/search and neutral exports. See docs/IQM2-MINUTETRAQ-SOAP.md. Older statements below describe the earlier help-only record. Native dataset writes and file transfers are the next implementation work; no live API calls were made.
 
 - Explicit selected-player `fetch_captions` now retrieves the first active supplied WebVTT under bounded no-redirect/origin policy, preserving exact source text/bytes and both captures through search/reopen/ZIP. Active-track transfer is synthetic from pinned vendor-client semantics; actual6049 has none. No cue interpretation, content-language claim or generation. See `docs/IQM2-PUBLIC-PLAYER.md`.
 
@@ -267,7 +271,7 @@ Evidence and exact scope: `inventory.json` provider `laserfiche-weblink`; operat
 
 - Woodford /agendas embeds the published agenda response; public body/year controls, next-page behavior and complete history remain unverified.
 - The observed published JSON is mapped; no native public search or complete archive scope is established.
-- Pinned vendor client now establishes existing unpublished item/section draft fields, implemented with30synthetic coordinator cases. Full item save/publication, file upload and vendor file-import remain unmapped. Nested-sort PUT and packet GET require runtime DOM paths not supplied by the anonymous published page; the exact editor GET302home supplies no form. This is not proof all documentation is private or API absent.
+- Pinned vendor client now establishes existing unpublished item/section draft fields, implemented with30synthetic coordinator cases. Full item save/publication, file upload and vendor file-import remain unmapped. Nested-sort PUT and packet GET require runtime DOM paths not supplied by the anonymous published page; the exact editor GET302home supplies no form. The public client additionally supplies presigned storage POST201, PDF validation and indexed attachment association fields; exact runtime editor config/full form and created attachment/readback schema remain missing. See `../TOWNCLOUD-WRITES.md`.
 
 Evidence and exact scope: `inventory.json` provider `towncloud`; operation status and outbound mappings are separate from historical observations.
 
@@ -315,17 +319,17 @@ Evidence and exact scope: `inventory.json` provider `wistia`; operation status a
 - Public meeting rows expose description, not a verified normalized body field; body filtering is unknown. Preserve timezone literals and the earlier VCCCD detail-versus-landing display discrepancy.
 - The listing has no agenda/document/media locators. Selected known-detail mapping and supplied viewer-to-document resolution are implemented with separate synthetic and bounded live-byte receipts. Other documents and the listing/detail date disagreement remain unverified; the separate native-search implementation does not establish complete catalog coverage.
 - The pinned public legacy client establishes sibling reorder, existing item text/description updates and text-only item creation. Existing36 coordinator cases plus21 new creation cases (64 affected passed) cover the scoped operations. Explicit runtime organization/meeting URLs and legacy-editor binding are required. No draft creation, parent moves, new attachments or publication. See [exact usage and limits](../BOARDABLE-WRITES.md).
-- New agenda_app_url editor, recurring day, full meeting forms, new files, publication and vendor-specific import contracts remain unresolved. Legacy text-only item creation is implemented; no modern-editor or file-creation contract is inferred. The visible new-file FormData branch does not establish created attachment identity/bytes/readiness or subsequent GET readback; no account acquisition gate is imposed.
+- Current Agenda Builder item create/update and associated new uploads are implemented with exact item/tree/association and original-byte verification (105 affected synthetic cases). The separate evaluation trial exercised create201 and update/upload200 with an exact134-byte download. Full meeting forms, recurring days, draft preparation, publication and imports remain open.
 
 Evidence and exact scope: `inventory.json` provider `boardable`; operation status and outbound mappings are separate from historical observations.
 
-- Literal legacy NewAgendaItem contract now implements text-only root/child creation with explicit parent and empty date. Native returned ID and exact preserved-tree readback, snapshot preflight, durable intent/restart/noPOSTreplay and post-send cancellation have21new/64affected synthetic cases. Full meeting creation/new files/new editor/publication remain unmapped.
+- Literal legacy NewAgendaItem contract now implements text-only root/child creation with explicit parent and empty date. Native returned ID and exact preserved-tree readback, snapshot preflight, durable intent/restart/noPOSTreplay and post-send cancellation have21new/64affected synthetic cases. Full meeting creation/publication remain unmapped; current-builder item files are covered separately.
 
 ## F29 gWorks FrontDesk (`gworks`)
 
 - Bounded public evidence now covers the Galena static listing, one successful city-1311 agenda fetch, and one Galena minutes failure (resolver ready, guarded object GET HTTP 403). See the three F29 receipts. Published HTML detail is now mapped separately from the vendor-declared path, with native meeting identity matching the original city listing namespace. Eleven sections and thirteen children are capture-local rendered positions. Catalog continuation/completeness and every flagged document remain unverified. A separate saved secure-calendar response mapping now preserves flattened native fields with explicit configured city binding; no live account request or inferred flag/epoch equivalence.
 - Retained history, update frequency and maximum response payload remain unknown; one static response cannot establish them. No additional repeated sampling is required for this bounded research outcome.
-- Pinned FrontDesk builder material describes staff UI without an external write schema. Vendor machine field/readback contracts remain unresolved; staff credentials and live-write acceptance are not completion gates.
+- The public development editor supplies exact detail GET, create/update routes, flattened response fields, nested section/item structure, save serialization and publication controls. Selected development-origin reads, saved-response normalization, draft/agenda meeting creation, metadata/agenda/minutes updates and explicit publication are implemented with synthetic coordinator/readback acceptance. See `../GWORKS-EDITOR.md`, `evidence/gworks-development-editor/source.json` and `../verification/gworks-writes-2026-11-16.json`. Production applicability and new-file upload association remain separate. No accounts or live writes are needed for the recorded synthetic acceptance.
 
 Evidence and exact scope: `inventory.json` provider `gworks`; operation status and outbound mappings are separate from historical observations.
 
@@ -434,3 +438,15 @@ The existing pinned WSDL establishes AgendaItemHistoryCreate and its typed retur
 ### eSCRIBE explicit document inserted-ID selector (2026-11-15)
 
 The existing pinned WSDL establishes DocumentGetSince(intLastInsertedId), returning native document records. Explicit caller selection is now mapped and synthetically verified (25new/289affected passed), preserving native IDs, metadata, exact response/request context, SQLite retry/reopen/search and JSON/JSONL/ZIP. Ordering, selector inclusion, cursor advancement, full catalog and document byte availability remain qualified; no automatic continuation or complete-empty inference. This adds a scoped read, not a new provider or outbound operation.
+
+
+MinuteTraq native-write update (2026-11-16): selected agenda/minutes item-title edits and meeting create/update now pass70affectedchecks, including independent System.Data wire verification. See `../IQM2-MINUTETRAQ-SOAP.md` and `../verification/iqm2-minutetraq-writes-2026-11-16.json`. Earlier unknown-machine-endpoint statements are superseded only for those operations. Recording/chunk transfer, document imports and broader publication remain unfinished.
+
+
+Boardable current-builder update (2026-11-16): explicit current_agenda_builder mode
+now implements item create/update and associated uploads, with exact tree/item
+readback and original-byte hash checks. 105 affected synthetic cases passed.
+Separate authorized browser trial observed create201/update-upload200 and exact
+134-byte download. See `BOARDABLE-WRITES.md` and
+`verification/boardable-current-builder-2026-11-16.json` under docs.
+Full meeting forms, recurring days, publication and imports remain open.

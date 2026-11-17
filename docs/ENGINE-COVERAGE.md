@@ -106,3 +106,12 @@ OnBase embedded document/media submodels: the pinned tenant client defines nativ
 - Current source adds GWorks published HTML native meeting/capture-local hierarchy and TownCloud existing unpublished draft field writes. See [GWorks](GWORKS-PUBLISHED-HTML.md) and [TownCloud](TOWNCLOUD-WRITES.md). Preserved dev13 packages do not contain these changes.
 
 - Tyler public agenda-item native search now maps exact client request/response fields and a mandatory feature flag, with22synthetic cases/63affected passes. Native meeting parent ID remains absent; Liberty flagGET404 is not live search acceptance. See [usage](TYLER-AGENDA-ITEM-SEARCH.md).
+
+
+Boardable current-builder update (2026-11-16): explicit current_agenda_builder mode
+now implements item create/update and associated uploads, with exact tree/item
+readback and original-byte hash checks. 105 affected synthetic cases passed.
+Separate authorized browser trial observed create201/update-upload200 and exact
+134-byte download. See `BOARDABLE-WRITES.md` and
+`verification/boardable-current-builder-2026-11-16.json` under docs.
+Full meeting forms, recurring days, publication and imports remain open.

@@ -1,0 +1,99 @@
+UPDATE:
+
+**The list still contains unresolved API contracts and unactivated access leads. The concrete gWorks, MinuteTraq and Laserfiche follow-up work is finished locally.**
+
+Also, my previous answer improperly counted releases, consumer installation and live vendor testing as unfinished requirements. **Your list did not require those, and you explicitly prohibited releases and account creation.**
+
+Comparing the goal file with the current inventory, these are the remaining technical gaps:
+
+| List entry | What remains incomplete |
+|---|---|
+| **1. Legistar** | Historical file-import contract, recording-byte upload/replacement, and effective publication/visibility behavior. Documented field mappings and text-file preparation are implemented. |
+| **2. PrimeGov / OneMeeting** | Native write payloads. The partner sandbox does not supply them. |
+| **3. MediaManager** | Publication presentation-field readback and generated-minutes template/file handling. The mapped SOAP operations are implemented. |
+| **4. NovusAGENDA** | A functioning evaluation route and additional legacy write contracts. |
+| **5. CivicPlus Select** | Meeting creation defaults/template effects, agenda-item create/update, and document upload. Native event updates and section writes are implemented. |
+| **6. AgendaCenter** | AgendaCenter-specific write endpoints and payloads. |
+| **7. Essential** | Authenticated meeting/item/multimedia response structures, collection pagination, and meeting/item/document write contracts. Existing public ingestion and the scoped development multimedia mapping are implemented. |
+| **8. BoardBook** | External agenda import/write payloads. |
+| **9. eSCRIBE** | General upload chunk sequencing/assembly, replacement/readiness behavior and file-import contracts. The explicitly mapped document chunk operation and native record operations are implemented. |
+| **10. Simbli** | Administrative write contracts. |
+| **11. iCompass / CivicWeb** | Unresolved CivicWeb-specific writes beyond the documented document-service operations. |
+| **13. Swagit** | Staff-side write payloads. |
+| **14. SuiteOne** | Exact additional import fields for the documented recorder/bookmark workflow. |
+| **15. Peak** | Additional executable write schemas. |
+| **16. Utah Public Notice** | Approved publisher access for actual posting. That access was intentionally not pursued. |
+| **17. AgendaQuick / Destiny** | Deployment-specific agenda-write/import schema. |
+| **18. Town Hall Streams** | Scheduling/editor request contracts obtainable through the contact-based trial. |
+| **19. TelVue** | Recording creation/upload and metadata-update contracts, including upload initialization, resulting identity and processing/association readback. Documented reads, mapped playlist writes and chapter-file preparation are implemented. |
+| **20. CHAMP** | Staff-side write contracts/access. |
+| **21. OnBase** | Agenda-specific meeting/item/document/minutes write schemas and destination configuration; whether the lab includes the required Agenda module. |
+| **23. TownCloud** | Additional authenticated editor/save/upload contracts that the trial could expose. |
+| **24. Digital Towpath** | Additional machine write payloads. |
+| **25. ClerkBase** | Legacy ClerkBase native write contracts. |
+| **28. Boardable** | Trial API entitlement and additional contracts beyond the already mapped operations. |
+| **30. BoardDocs** | Native write contracts. |
+| **31. Tyler Meeting Manager** | Product-specific machine contracts for unresolved operations. |
+
+These specific follow-ups from the file **are completed**:
+
+- **MinuteTraq download investigation:** package inspected; native reads, meeting writes, selected agenda/minutes title edits and recording uploads implemented and tested.
+- **Laserfiche forum findings:** applied to import/recovery tests and documentation.
+- **gWorks “new-file upload remains unfinished”:** that statement is now outdated. Document/image upload and attachment association are implemented and tested for the captured development API.
+- **Wistia documented operations:** mapped upload/import, metadata, captions and swap operations are implemented. Its developer account remains unactivated.
+
+The **OnBase lab, TownCloud trial, Boardable trial, Town Hall Streams trial, Wistia developer plan and Laserfiche evaluation** remain unactivated, as instructed.
+
+For **#26 iCalendar**, this comparison did not separately verify completion of every local artifact mentioned in the file, so I should not count that line as closed without inspecting its implementation.
+
+**The mistake was calling the entire list complete when only the recovered-contract implementation phase had been closed.**
+
+ORIGINAL GOALS YOU STILL MUCH COMPLETE
+
+Here is the full list, separating completed work from what the information enables next.
+
+| # | Vendor / family | What we found | What we can do with it now |
+|---|---|---|---|
+| 1 | **Legistar** | Public API reference; documentation connecting media fields to MediaManager clip IDs. | Use the documented fields and identifiers in existing mappings. File-import bytes and publication behavior still need additional contracts. |
+| 2 | **PrimeGov / OneMeeting** | Product configuration and permissions documentation; a separately licensed AgendaLink partner sandbox. | Use the configuration information for integration setup. The partner sandbox does not provide PrimeGov’s native write payloads. |
+| 3 | **Granicus MediaManager** | Official .NET SDK, Java counterpart, WSDL and SDK issue tracker. | Continue implementation and testing against the documented SOAP operations. Template selection, publication and some readback details remain missing. |
+| 4 | **NovusAGENDA** | Historical pilot/self-guided demo offers and legacy vendor material; current end-of-life information. | Use historical material to trace legacy behavior. We have no functioning evaluation environment or newly recovered write contract. |
+| 5 | **CivicPlus Select / CivicClerk** | Existing tenant OpenAPI and current product documentation. | Work from the documented operations. Event creation still needs exact template, publication and media defaults. |
+| 6 | **CivicPlus AgendaCenter** | Web Central API documentation and samples. | Use those samples for their documented modules. AgendaCenter write endpoints remain missing. |
+| 7 | **CivicPlus Essential / Municode Meetings** | Official API guide, Postman collection, archived Vue client, eight legacy portal bundles and two open-source integrations. | Continue retrieving public meeting details through the existing PublishPage reader. Authenticated meeting/item response structures and pagination remain unfinished; the recovered clients cover public HTML/player behavior. |
+| 8 | **BoardBook** | Document-format/conversion guidance and demo registration. | Apply documented format requirements to import preparation. No external agenda-write payload recovered. |
+| 9 | **eSCRIBE** | PublishingService WSDL, help center and an advertised customer forum. | Use existing service definitions and target the forum for the remaining upload/chunk questions when access is authorized. Those questions remain open now. |
+| 10 | **Simbli** | Public meeting clients, helpdesk and demonstration route. | Continue public meeting ingestion. No new administrative write contract recovered. |
+| 11 | **iCompass / CivicWeb** | Document.asmx contract, LeadOn community and Diligent training resources. | Use documented document-service operations. The community is a concrete route for unresolved CivicWeb-specific writes when access is available. |
+| 12 | **iQM2 / MinuteTraq** | Official client-download instructions and guides. | **Follow the downloadable-client lead:** inspect publicly available packages and documentation for service references and request structures. No installation or package inspection was completed in this investigation. |
+| 13 | **Swagit** | Public player clients and vendor integration references. | Continue player-based reads. No new staff-side write payloads recovered. |
+| 14 | **SuiteOne** | Technical documentation and the Liberty recorder/bookmark upload workflow. | Use the documented workflow to focus import-contract work. Exact additional import fields remain missing. |
+| 15 | **Peak** | Product FAQ, support and demo route. | Use workflow documentation for setup research. No new executable write schema recovered. |
+| 16 | **Utah Public Notice** | Publisher help, training and registration followed by owner approval. | Prepare integrations against documented publishing requirements. Actual posting requires approved publisher access. |
+| 17 | **AgendaQuick / Destiny** | Product/integration pages and hosted versus installed deployment options. | Identify the relevant deployment before further contract work. No new agenda-write schema recovered. |
+| 18 | **Town Hall Streams** | **Explicit free trial offered through vendor contact.** | There is a concrete route to inspect scheduling/editor requests once contact and access are authorized. Existing public-player work can continue now. |
+| 19 | **TelVue Connect / CloudCast** | Public Connect API documentation; historical forum references. | **Use the public API documentation directly for implementation and contract tests.** No trial is needed to read those contracts. |
+| 20 | **CHAMP** | Help center, public player code and a demo embed. | Exercise public-reader behavior using the demo/player material. Staff-side write access remains unresolved. |
+| 21 | **Hyland OnBase** | **A specific 90-minute REST API sandbox lab**, plus customer/partner enrollment instructions. | Prepare tests from existing REST/Swagger documentation. Running the lab requires eligible access; its Agenda-module availability needs confirmation. |
+| 22 | **Laserfiche** | Developer center, schemas, SDKs, Swagger, evaluation terms and **two useful developer-forum discussions**. | **Inspect import request-body options and improve uncertain-result handling.** One discussion reports an entry being created despite a page-generation error; another points toward `ImportUploadedParts` for longer uploads. These are actionable implementation leads within existing import scope. |
+| 23 | **TownCloud** | **An explicit Agenda free trial and active signup page.** | A concrete route to recover authenticated editor/save/upload requests once account creation is authorized. Public-client research remains available now. |
+| 24 | **Digital Towpath** | Cooperative support, public forms and membership/provisioning route. | Continue public-site ingestion. No new write payload or anonymous API sandbox recovered. |
+| 25 | **ClerkBase** | Product/help material and demonstration routes. | Continue product-specific public reads. ClerkMate and OnBoardGOV material must be evaluated separately from legacy ClerkBase. |
+| 26 | **Public iCalendar** | CalConnect publishing guidance and the standard format. | **Build and test ICS parsing/publication artifacts locally without accounts.** Writing to a destination requires that destination’s supported interface and permissions. |
+| 27 | **Wistia** | **Developer plan with a free starting allowance**, API-token instructions and existing API contracts. | Continue coding against the documented APIs now. Live testing through that plan requires an account; billing thresholds apply later. |
+| 28 | **Boardable** | **Official open-API claim and a 14-day Professional trial.** | A concrete evaluation route to investigate editor/API behavior once signup is authorized. Whether the trial includes API access is still unanswered. |
+| 29 | **gWorks FrontDesk** | **Public development editor, agenda/minutes editors and shared transport code**, exposing exact read/save methods, fields, response IDs and publication flags. | **Implemented and tested:** selected meeting reads; draft or published-agenda creation; metadata, agenda and minutes updates; section/item additions; explicit agenda/minutes publishing; preservation of existing attachment descriptors; conflict checks and readback/recovery. Scope is the captured development API. New-file upload remains unfinished. |
+| 30 | **Diligent BoardDocs** | BoardDocs-specific resources and support routes; previously examined Diligent developer portal. | Continue public reads and product-specific research. No new BoardDocs native-write contract recovered. |
+| 31 | **Tyler Meeting Manager** | **Tyler Community forums, wikis and libraries**, plus product/demo information. | A concrete product-community route for missing contracts once access is available. Public Enterprise ERP APIs do not supply Meeting Manager’s missing payloads. |
+
+**The work we can advance immediately, within your current restrictions, is:**
+
+- **Use the completed gWorks adapter** in local integration workflows and synthetic contract tests. The latest affected verification passed **125 tests**, plus lint and capability checks. Live vendor operations require credentials.
+- **Follow MinuteTraq’s official downloadable-client trail**, inspecting available packages and service definitions headlessly.
+- **Apply the Laserfiche forum findings** to the existing import implementation, especially request options and recovery after uncertain server responses.
+- **Continue documented API work for TelVue, Laserfiche, MediaManager, Legistar and Wistia**, targeting their specific remaining gaps.
+- **Continue Essential public meeting ingestion.** Its authenticated response and pagination work still needs a source containing those actual structures.
+
+The newly identified access routes are **OnBase’s REST lab, TownCloud’s trial, Boardable’s trial, Town Hall Streams’ trial, Wistia’s developer plan and Laserfiche’s evaluation program**. They are ready leads for a later access phase; none has been activated.
+
+All source links and the historical Git findings are in the [complete 31-vendor report](C:/Users/scott/Documents/Codex/2026-11-16/rea/outputs/QUORUMRELAY-31-VENDOR-PATHS.md). No accounts, payments, vendor contacts or releases have been made.

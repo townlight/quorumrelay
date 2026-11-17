@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-16",
+  "status": "mock_passed",
+  "scope": "Boardable native weekly interval1 owner-only private unpublished no_remote series creation and original-leader whole-series title/description/location updates; complete occurrence identity/schedule readback, scoped grants and no-replay recovery.",
+  "final_changed_branch_checks": {
+    "command": "scratch pytest -k \"unexpected_publication or pinned_capture\"",
+    "passed": 4,
+    "failed": 0,
+    "seconds": 13.384,
+    "junit_sha256": "31ad825db83f317f19c9a8022c6b66a8f6752aa5d6f0ccd1f2ac37d98aeb9096"
+  },
+  "affected_baseline_before_publication_guard": {
+    "passed": 134,
+    "failed": 0,
+    "seconds": 333.19,
+    "note": "Only subsequent changes are two creation publication guards and their tests; both native capture replays and both new negative cases passed afterward."
+  },
+  "additional_field_check": {
+    "status": "passed",
+    "fields": [
+      "title",
+      "description",
+      "location"
+    ],
+    "occurrence_ids": [
+      526618,
+      526619
+    ],
+    "mutation_posts": 1,
+    "independent_utc_starts": [
+      "2026-11-30T14:00:00Z",
+      "2026-12-07T14:00:00Z"
+    ]
+  },
+  "live_trial": {
+    "series_id": 12616,
+    "meeting_ids": [
+      526618,
+      526619
+    ],
+    "create_status": 201,
+    "update_status": 200,
+    "all_occurrence_readback_status": 200,
+    "invitations_sent": false,
+    "published": false,
+    "source": "docs/capabilities/evidence/boardable-series-form/source.json"
+  },
+  "adapter_live_execution": false,
+  "files": {
+    "src/civic_data_connectors/providers/boardable_series_write.py": "b28a49f5a589bcd5c0797a988bd40e5f948c3f4550bf8a65acff2500a0643e88",
+    "src/civic_data_connectors/providers/boardable_write.py": "38ac1417e0c57bc975fc19a8eaab40276d3cf0c7d47d60a1e0c25e53b993dd8a",
+    "tests/test_boardable_series_write.py": "dfd32ea6173b1dca059ff3ea98378ec53bd5a44e3a799e4ee197715b41e9b089",
+    "docs/capabilities/evidence/boardable-series-form/source.json": "2729f9736ad77c5e4d551965049df79994a9452416e2e6447d925dc5f81de548"
+  },
+  "full_python_regression": {
+    "status": "passed",
+    "command": "python -X utf8 -m pytest -q --junitxml=boardable-series-full.xml",
+    "tests": 3042,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 3042,
+    "seconds": 2119.263,
+    "junit_sha256": "1c5736eddb169805de54aaeec38c5cacc948abbc0c3000a6f2adf44bcbab35e3",
+    "frozen_input_files_verified": 703,
+    "candidate": "HEAD897442bf plus preserved dirty local work",
+    "started": "2026-11-16T23:14:02.9500314Z",
+    "finished": "2026-11-16T23:49:24.1490015Z"
+  },
+  "ruff": "passed",
+  "git_diff_check": "passed",
+  "client_checks": "Client unchanged; prior build/test evidence reused.",
+  "remaining": [
+    "Other recurrence patterns and intervals",
+    "Multi-day and scheduler forms",
+    "Draft preparation",
+    "Publication and invitations",
+    "Vendor imports",
+    "General Document Center uploads"
+  ]
+}

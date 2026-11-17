@@ -44,6 +44,12 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
     transport = transport or PublicTransport()
     content = _decode_content(request, content)
     attachment = request.get("attachment")
+    if source.provider == "gworks" and source.input_format == "gworks-editor-meeting-json":
+        if attachment is not None:
+            raise ValueError("Editor file descriptors are retained as metadata; no download route is inferred.")
+        if content is None:
+            from .gworks_editor import fetch as fetch_editor
+            return fetch_editor(source, namespace, request, bounds, context, transport)
     if (source.provider == "gworks" and source.input_format == "gworks-secure-calendar-json"
             and attachment is None and content is None):
         from .gworks_calendar import fetch as fetch_calendar
@@ -64,6 +70,11 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         if attachment is not None:
             raise ValueError("SOAP document retrieval requires its documented resource mapping; no arbitrary attachment URL.")
         from .granicus_platform import read
+        return read(source, namespace, request, bounds, context, transport)
+    if source.provider == "iqm2" and source.input_format == "iqm2-minutetraq-soap-xml" and content is None:
+        if attachment is not None:
+            raise ValueError("MinuteTraq SOAP reads select only the configured meeting and document.")
+        from .iqm2_soap import read
         return read(source, namespace, request, bounds, context, transport)
     from .account_api import is_account_api
     if is_account_api(source) and attachment is None and content is None:

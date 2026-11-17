@@ -1,0 +1,763 @@
+service-source/MinuteTraq.MinuteTraqService/Data_1_0.cs line 5849
+		}
+	}
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/MediaGet", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 MediaGet(int MediaID, int MeetingID, int MediaEventID, bool fRetrieveTranscript)
+	{
+		return (DB_1_0)Invoke("MediaGet", new object[4] { MediaID, MeetingID, MediaEventID, fRetrieveTranscript })[0];
+	}
+
+	public IAsyncResult BeginMediaGet(int MediaID, int MeetingID, int MediaEventID, bool fRetrieveTranscript, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("MediaGet", new object[4] { MediaID, MeetingID, MediaEventID, fRetrieveTranscript }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndMediaGet(IAsyncResult asyncResult)
+	{
+		return (DB_1_0)EndInvoke(asyncResult)[0];
+	}
+
+	public void MediaGetAsync(int MediaID, int MeetingID, int MediaEventID, bool fRetrieveTranscript)
+	{
+		MediaGetAsync(MediaID, MeetingID, MediaEventID, fRetrieveTranscript, null);
+	}
+
+	public void MediaGetAsync(int MediaID, int MeetingID, int MediaEventID, bool fRetrieveTranscript, object userState)
+	{
+		if (MediaGetOperationCompleted == null)
+		{
+			MediaGetOperationCompleted = OnMediaGetOperationCompleted;
+		}
+		InvokeAsync("MediaGet", new object[4] { MediaID, MeetingID, MediaEventID, fRetrieveTranscript }, MediaGetOperationCompleted, RuntimeHelpers.GetObjectValue(userState));
+	}
+
+	private void OnMediaGetOperationCompleted(object arg)
+	{
+		if (MediaGetCompleted != null)
+		{
+			InvokeCompletedEventArgs e = (InvokeCompletedEventArgs)arg;
+			MediaGetCompleted?.Invoke(this, new MediaGetCompletedEventArgs(e.Results, e.Error, e.Cancelled, RuntimeHelpers.GetObjectValue(e.UserState)));
+		}
+	}
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/MediaUpdate", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 MediaUpdate(DB_1_0 ds)
+	{
+		return (DB_1_0)Invoke("MediaUpdate", new object[1] { ds })[0];
+	}
+
+	public IAsyncResult BeginMediaUpdate(DB_1_0 ds, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("MediaUpdate", new object[1] { ds }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndMediaUpdate(IAsyncResult asyncResult)
+	{
+		return (DB_1_0)EndInvoke(asyncResult)[0];
+	}
+
+	public void MediaUpdateAsync(DB_1_0 ds)
+	{
+		MediaUpdateAsync(ds, null);
+	}
+
+	public void MediaUpdateAsync(DB_1_0 ds, object userState)
+	{
+		if (MediaUpdateOperationCompleted == null)
+		{
+			MediaUpdateOperationCompleted = OnMediaUpdateOperationCompleted;
+		}
+		InvokeAsync("MediaUpdate", new object[1] { ds }, MediaUpdateOperationCompleted, RuntimeHelpers.GetObjectValue(userState));
+	}
+
+	private void OnMediaUpdateOperationCompleted(object arg)
+	{
+		if (MediaUpdateCompleted != null)
+		{
+			InvokeCompletedEventArgs e = (InvokeCompletedEventArgs)arg;
+			MediaUpdateCompleted?.Invoke(this, new MediaUpdateCompletedEventArgs(e.Results, e.Error, e.Cancelled, RuntimeHelpers.GetObjectValue(e.UserState)));
+		}
+	}
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/MediaGetStatusList", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DataTable MediaGetStatusList(int iEncoderID)
+	{
+		return (DataTable)Invoke("MediaGetStatusList", new object[1] { iEncoderID })[0];
+	}
+
+	public IAsyncResult BeginMediaGetStatusList(int iEncoderID, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("MediaGetStatusList", new object[1] { iEncoderID }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DataTable EndMediaGetStatusList(IAsyncResult asyncResult)
+	{
+		return (DataTable)EndInvoke(asyncResult)[0];
+
+service-source/MinuteTraq.MinuteTraqService/Data_1_0.cs line 7889
+		}
+	}
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/BigFileGetUploadInfo", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 BigFileGetUploadInfo(int FileType, long ID)
+	{
+		return (DB_1_0)Invoke("BigFileGetUploadInfo", new object[2] { FileType, ID })[0];
+	}
+
+	public IAsyncResult BeginBigFileGetUploadInfo(int FileType, long ID, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("BigFileGetUploadInfo", new object[2] { FileType, ID }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndBigFileGetUploadInfo(IAsyncResult asyncResult)
+	{
+		return (DB_1_0)EndInvoke(asyncResult)[0];
+	}
+
+	public void BigFileGetUploadInfoAsync(int FileType, long ID)
+	{
+		BigFileGetUploadInfoAsync(FileType, ID, null);
+	}
+
+	public void BigFileGetUploadInfoAsync(int FileType, long ID, object userState)
+	{
+		if (BigFileGetUploadInfoOperationCompleted == null)
+		{
+			BigFileGetUploadInfoOperationCompleted = OnBigFileGetUploadInfoOperationCompleted;
+		}
+		InvokeAsync("BigFileGetUploadInfo", new object[2] { FileType, ID }, BigFileGetUploadInfoOperationCompleted, RuntimeHelpers.GetObjectValue(userState));
+	}
+
+	private void OnBigFileGetUploadInfoOperationCompleted(object arg)
+	{
+		if (BigFileGetUploadInfoCompleted != null)
+		{
+			InvokeCompletedEventArgs e = (InvokeCompletedEventArgs)arg;
+			BigFileGetUploadInfoCompleted?.Invoke(this, new BigFileGetUploadInfoCompletedEventArgs(e.Results, e.Error, e.Cancelled, RuntimeHelpers.GetObjectValue(e.UserState)));
+		}
+	}
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/BigFileDelete", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public void BigFileDelete(int FileType, long ID)
+	{
+		Invoke("BigFileDelete", new object[2] { FileType, ID });
+	}
+
+	public IAsyncResult BeginBigFileDelete(int FileType, long ID, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("BigFileDelete", new object[2] { FileType, ID }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public void EndBigFileDelete(IAsyncResult asyncResult)
+	{
+		EndInvoke(asyncResult);
+	}
+
+	public void BigFileDeleteAsync(int FileType, long ID)
+	{
+		BigFileDeleteAsync(FileType, ID, null);
+	}
+
+	public void BigFileDeleteAsync(int FileType, long ID, object userState)
+	{
+		if (BigFileDeleteOperationCompleted == null)
+		{
+			BigFileDeleteOperationCompleted = OnBigFileDeleteOperationCompleted;
+		}
+		InvokeAsync("BigFileDelete", new object[2] { FileType, ID }, BigFileDeleteOperationCompleted, RuntimeHelpers.GetObjectValue(userState));
+	}
+
+	private void OnBigFileDeleteOperationCompleted(object arg)
+	{
+		if (BigFileDeleteCompleted != null)
+		{
+			InvokeCompletedEventArgs e = (InvokeCompletedEventArgs)arg;
+			BigFileDeleteCompleted?.Invoke(this, new AsyncCompletedEventArgs(e.Error, e.Cancelled, RuntimeHelpers.GetObjectValue(e.UserState)));
+		}
+	}
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/BigFileAppend", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 BigFileAppend(DB_1_0 ds)
+	{
+		return (DB_1_0)Invoke("BigFileAppend", new object[1] { ds })[0];
+	}
+
+	public IAsyncResult BeginBigFileAppend(DB_1_0 ds, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("BigFileAppend", new object[1] { ds }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndBigFileAppend(IAsyncResult asyncResult)
+	{
+		return (DB_1_0)EndInvoke(asyncResult)[0];
+	}
+
+	public void BigFileAppendAsync(DB_1_0 ds)
+	{
+		BigFileAppendAsync(ds, null);
+	}
+
+	public void BigFileAppendAsync(DB_1_0 ds, object userState)
+	{
+		if (BigFileAppendOperationCompleted == null)
+		{
+			BigFileAppendOperationCompleted = OnBigFileAppendOperationCompleted;
+		}
+		InvokeAsync("BigFileAppend", new object[1] { ds }, BigFileAppendOperationCompleted, RuntimeHelpers.GetObjectValue(userState));
+	}
+
+	private void OnBigFileAppendOperationCompleted(object arg)
+	{
+		if (BigFileAppendCompleted != null)
+		{
+			InvokeCompletedEventArgs e = (InvokeCompletedEventArgs)arg;
+			BigFileAppendCompleted?.Invoke(this, new BigFileAppendCompletedEventArgs(e.Results, e.Error, e.Cancelled, RuntimeHelpers.GetObjectValue(e.UserState)));
+		}
+	}
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/BigFileGetDownloadInfoFromIDList", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 BigFileGetDownloadInfoFromIDList(int FileType, string IDs)
+	{
+		return (DB_1_0)Invoke("BigFileGetDownloadInfoFromIDList", new object[2] { FileType, IDs })[0];
+	}
+
+	public IAsyncResult BeginBigFileGetDownloadInfoFromIDList(int FileType, string IDs, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("BigFileGetDownloadInfoFromIDList", new object[2] { FileType, IDs }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndBigFileGetDownloadInfoFromIDList(IAsyncResult asyncResult)
+	{
+		return (DB_1_0)EndInvoke(asyncResult)[0];
+	}
+
+	public void BigFileGetDownloadInfoFromIDListAsync(int FileType, string IDs)
+	{
+		BigFileGetDownloadInfoFromIDListAsync(FileType, IDs, null);
+	}
+
+	public void BigFileGetDownloadInfoFromIDListAsync(int FileType, string IDs, object userState)
+	{
+		if (BigFileGetDownloadInfoFromIDListOperationCompleted == null)
+		{
+			BigFileGetDownloadInfoFromIDListOperationCompleted = OnBigFileGetDownloadInfoFromIDListOperationCompleted;
+		}
+		InvokeAsync("BigFileGetDownloadInfoFromIDList", new object[2] { FileType, IDs }, BigFileGetDownloadInfoFromIDListOperationCompleted, RuntimeHelpers.GetObjectValue(userState));
+	}
+
+	private void OnBigFileGetDownloadInfoFromIDListOperationCompleted(object arg)
+	{
+		if (BigFileGetDownloadInfoFromIDListCompleted != null)
+		{
+			InvokeCompletedEventArgs e = (InvokeCompletedEventArgs)arg;
+			BigFileGetDownloadInfoFromIDListCompleted?.Invoke(this, new BigFileGetDownloadInfoFromIDListCompletedEventArgs(e.Results, e.Error, e.Cancelled, RuntimeHelpers.GetObjectValue(e.UserState)));
+		}
+	}
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/BigFileGetDownloadInfo", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 BigFileGetDownloadInfo(int FileType, long ID)
+	{
+		return (DB_1_0)Invoke("BigFileGetDownloadInfo", new object[2] { FileType, ID })[0];
+	}
+
+	public IAsyncResult BeginBigFileGetDownloadInfo(int FileType, long ID, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("BigFileGetDownloadInfo", new object[2] { FileType, ID }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndBigFileGetDownloadInfo(IAsyncResult asyncResult)
+	{
+		return (DB_1_0)EndInvoke(asyncResult)[0];
+	}
+
+	public void BigFileGetDownloadInfoAsync(int FileType, long ID)
+	{
+		BigFileGetDownloadInfoAsync(FileType, ID, null);
+	}
+
+	public void BigFileGetDownloadInfoAsync(int FileType, long ID, object userState)
+	{
+		if (BigFileGetDownloadInfoOperationCompleted == null)
+		{
+			BigFileGetDownloadInfoOperationCompleted = OnBigFileGetDownloadInfoOperationCompleted;
+		}
+		InvokeAsync("BigFileGetDownloadInfo", new object[2] { FileType, ID }, BigFileGetDownloadInfoOperationCompleted, RuntimeHelpers.GetObjectValue(userState));
+	}
+
+	private void OnBigFileGetDownloadInfoOperationCompleted(object arg)
+	{
+		if (BigFileGetDownloadInfoCompleted != null)
+		{
+			InvokeCompletedEventArgs e = (InvokeCompletedEventArgs)arg;
+			BigFileGetDownloadInfoCompleted?.Invoke(this, new BigFileGetDownloadInfoCompletedEventArgs(e.Results, e.Error, e.Cancelled, RuntimeHelpers.GetObjectValue(e.UserState)));
+		}
+	}
+
+	[SoapDocumentMethod("http://tempuri.org/MinuteTraqService/Data_1_0/BigFileDownload", RequestNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", ResponseNamespace = "http://tempuri.org/MinuteTraqService/Data_1_0", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped)]
+	public DB_1_0 BigFileDownload(DB_1_0 ds, long Offset, long Length)
+	{
+		return (DB_1_0)Invoke("BigFileDownload", new object[3] { ds, Offset, Length })[0];
+	}
+
+	public IAsyncResult BeginBigFileDownload(DB_1_0 ds, long Offset, long Length, AsyncCallback callback, object asyncState)
+	{
+		return BeginInvoke("BigFileDownload", new object[3] { ds, Offset, Length }, callback, RuntimeHelpers.GetObjectValue(asyncState));
+	}
+
+	public DB_1_0 EndBigFileDownload(IAsyncResult asyncResult)
+
+common-source/M2Common/DB_1_0.cs line 51999
+			columnMediaID = new DataColumn("MediaID", typeof(int), null, MappingType.Element);
+			base.Columns.Add(columnMediaID);
+			columnMeetingID = new DataColumn("MeetingID", typeof(int), null, MappingType.Element);
+			base.Columns.Add(columnMeetingID);
+			columnMediaEventID = new DataColumn("MediaEventID", typeof(int), null, MappingType.Element);
+			base.Columns.Add(columnMediaEventID);
+			columnMediaStatusID = new DataColumn("MediaStatusID", typeof(byte), null, MappingType.Element);
+			base.Columns.Add(columnMediaStatusID);
+			columnMediaStatusMessage = new DataColumn("MediaStatusMessage", typeof(string), null, MappingType.Element);
+			base.Columns.Add(columnMediaStatusMessage);
+			columnMediaEncoderID = new DataColumn("MediaEncoderID", typeof(short), null, MappingType.Element);
+			base.Columns.Add(columnMediaEncoderID);
+			columnFileFormat = new DataColumn("FileFormat", typeof(string), null, MappingType.Element);
+			base.Columns.Add(columnFileFormat);
+			columnFileUpdated = new DataColumn("FileUpdated", typeof(DateTime), null, MappingType.Element);
+			base.Columns.Add(columnFileUpdated);
+			columnFileSize = new DataColumn("FileSize", typeof(long), null, MappingType.Element);
+			base.Columns.Add(columnFileSize);
+			columnFileData = new DataColumn("FileData", typeof(byte[]), null, MappingType.Element);
+			base.Columns.Add(columnFileData);
+			columnFileSizeMP4 = new DataColumn("FileSizeMP4", typeof(long), null, MappingType.Element);
+			base.Columns.Add(columnFileSizeMP4);
+			columnMediaURL = new DataColumn("MediaURL", typeof(string), null, MappingType.Element);
+			base.Columns.Add(columnMediaURL);
+			columnMediaURLMP4 = new DataColumn("MediaURLMP4", typeof(string), null, MappingType.Element);
+			base.Columns.Add(columnMediaURLMP4);
+			columnStarted = new DataColumn("Started", typeof(DateTime), null, MappingType.Element);
+			base.Columns.Add(columnStarted);
+			columnDuration = new DataColumn("Duration", typeof(int), null, MappingType.Element);
+			base.Columns.Add(columnDuration);
+			columnPublished = new DataColumn("Published", typeof(DateTime), null, MappingType.Element);
+			base.Columns.Add(columnPublished);
+			columnTranscodeStatusID = new DataColumn("TranscodeStatusID", typeof(byte), null, MappingType.Element);
+			base.Columns.Add(columnTranscodeStatusID);
+			columnTranscodeID = new DataColumn("TranscodeID", typeof(long), null, MappingType.Element);
+			base.Columns.Add(columnTranscodeID);
+			columnTranscodeFormats = new DataColumn("TranscodeFormats", typeof(string), null, MappingType.Element);
+			base.Columns.Add(columnTranscodeFormats);
+			columnTranscodeTimeLeft = new DataColumn("TranscodeTimeLeft", typeof(long), null, MappingType.Element);
+			base.Columns.Add(columnTranscodeTimeLeft);
+			columnTranscodeProgress = new DataColumn("TranscodeProgress", typeof(byte), null, MappingType.Element);
+			base.Columns.Add(columnTranscodeProgress);
+			columnTranscodeInfo = new DataColumn("TranscodeInfo", typeof(string), null, MappingType.Element);
+			base.Columns.Add(columnTranscodeInfo);
+			columnTranscodeStarted = new DataColumn("TranscodeStarted", typeof(DateTime), null, MappingType.Element);
+			base.Columns.Add(columnTranscodeStarted);
+			columnTranscodeUpdated = new DataColumn("TranscodeUpdated", typeof(DateTime), null, MappingType.Element);
+			base.Columns.Add(columnTranscodeUpdated);
+			columnMediaEncoderPresetID = new DataColumn("MediaEncoderPresetID", typeof(int), null, MappingType.Element);
+			base.Columns.Add(columnMediaEncoderPresetID);
+			columnLocalVaultStatusID = new DataColumn("LocalVaultStatusID", typeof(byte), null, MappingType.Element);
+			base.Columns.Add(columnLocalVaultStatusID);
+			columnCreated = new DataColumn("Created", typeof(DateTime), null, MappingType.Element);
+			base.Columns.Add(columnCreated);
+			columnCreatedUserID = new DataColumn("CreatedUserID", typeof(int), null, MappingType.Element);
+			base.Columns.Add(columnCreatedUserID);
+			columnUpdated = new DataColumn("Updated", typeof(DateTime), null, MappingType.Element);
+			base.Columns.Add(columnUpdated);
+			columnMediaEncoderStartDelta = new DataColumn("MediaEncoderStartDelta", typeof(int), null, MappingType.Element);
+			base.Columns.Add(columnMediaEncoderStartDelta);
+			columnUpdatedUserID = new DataColumn("UpdatedUserID", typeof(int), null, MappingType.Element);
+			base.Columns.Add(columnUpdatedUserID);
+			base.Constraints.Add(new UniqueConstraint("PK_Media", new DataColumn[1] { columnMediaID }, isPrimaryKey: true));
+			columnMediaID.AutoIncrement = true;
+			columnMediaID.AutoIncrementSeed = -1L;
+			columnMediaID.AutoIncrementStep = -1L;
+			columnMediaID.AllowDBNull = false;
+			columnMediaID.ReadOnly = true;
+			columnMediaID.Unique = true;
+			columnMediaStatusID.AllowDBNull = false;
+			columnMediaStatusID.DefaultValue = (byte)20;
+			columnStarted.AllowDBNull = false;
+			columnDuration.AllowDBNull = false;
+			columnTranscodeStatusID.AllowDBNull = false;
+			columnTranscodeStatusID.DefaultValue = (byte)10;
+			columnTranscodeProgress.AllowDBNull = false;
+			columnTranscodeProgress.DefaultValue = (byte)0;
+			columnLocalVaultStatusID.AllowDBNull = false;
+			columnLocalVaultStatusID.DefaultValue = (byte)20;
+			columnCreated.AllowDBNull = false;
+			columnCreatedUserID.AllowDBNull = false;
+			columnUpdated.AllowDBNull = false;
+			columnMediaEncoderStartDelta.DefaultValue = 0;
+			columnUpdatedUserID.AllowDBNull = false;
+		}
+
+		[DebuggerNonUserCode]
+		[GeneratedCode("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+		public MediaRow NewMediaRow()
+		{
+			return (MediaRow)NewRow();
+		}
+
+		[DebuggerNonUserCode]
+		[GeneratedCode("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+		protected override DataRow NewRowFromBuilder(DataRowBuilder builder)
+		{
+			return new MediaRow(builder);
+
+service-source/MinuteTraq/MinuteTraqData.cs line 2002
+	private bool UseBigFilesFor(DataFileType FileType)
+	{
+		if (!BigFilesEnabled)
+		{
+			return false;
+		}
+		switch (FileType)
+		{
+		default:
+			return false;
+		case DataFileType.Agenda:
+		case DataFileType.AgendaStaff:
+		case DataFileType.AgendaBoard:
+		case DataFileType.Attachment:
+		case DataFileType.Communication:
+		case DataFileType.Document:
+		case DataFileType.DocRevision:
+		case DataFileType.Media:
+		case DataFileType.Minutes:
+		case DataFileType.PublicAgenda:
+		case DataFileType.PublicMinutes:
+		case DataFileType.ResolutionBody:
+		case DataFileType.ResolutionDiscussion:
+		case DataFileType.ResolutionComments:
+		case DataFileType.MediaEventDoc:
+		case DataFileType.MinutesBoard:
+		case DataFileType.MinutesStaff:
+		case DataFileType.Snapshot:
+		case DataFileType.TempFileRecipientImportExport:
+		case DataFileType.AgendaMeta:
+		case DataFileType.AgendaMetaPublic:
+		case DataFileType.AgendaMetaBoard:
+
+service-source/MinuteTraq/MinuteTraqData.cs line 4047
+	public DB MediaUpdate(DB ds)
+	{
+		DB dB = new DB();
+		try
+		{
+			UploadBigFileIfNeeded(DataFileType.Media, ds.Media);
+			dB.Merge(MediaUpdate((DB_1_0)ds));
+			CacheMerge(ds, dB);
+			UpdateCachedFileDateTimes(DataFileType.Media, ds, dB, "Media");
+			RefreshMedias?.Invoke(MTDataAction.MediaUpdate, dB);
+		}
+		catch (Exception ex)
+		{
+			ProjectData.SetProjectError(ex);
+			Exception ex2 = ex;
+			ExUtil.ExRethrow(ex2);
+			ProjectData.ClearProjectError();
+		}
+		return dB;
+	}
+
+	public new DB MediaVaultStartupData()
+	{
+
+service-source/MinuteTraq/BigFileTransfer.cs line 638
+		{
+			throw new Exception("You cannot initiate a file transfer while there is already one in progress.");
+		}
+		Direction = BigFileTransferDirection.Upload;
+		if (oTransferInfo.Path == null || !File.Exists(oTransferInfo.Path))
+		{
+			throw new Exception("File can not be found on your computer, please browse to the file.");
+		}
+		DateTime lastWriteTime = new FileInfo(oTransferInfo.Path).LastWriteTime;
+		Util.GetFileFormat(oTransferInfo.Path);
+		bool flag = false;
+		int num = 512000;
+		FileStream fileStream = null;
+		byte[] array = new byte[1];
+		checked
+		{
+			bool result;
+			while (true)
+			{
+				try
+				{
+					if (mfHasUserCancelled)
+					{
+						SetState(BigFileTransferState.Cancelling);
+					}
+					if (mfHasUserCancelled)
+					{
+						throw new ThreadTerminationException();
+					}
+					oTransferInfo.BytesTransfered = 0L;
+					oTransferInfo.BytesPerSecond = 0L;
+					SetState(BigFileTransferState.InitializingTransfer);
+					DB dB = moData.BigFileGetUploadInfo(FileType, oTransferInfo.ID);
+					if (dB == null || dB.BigFile.Count <= 0)
+					{
+						throw new Exception("The Upload was unable to retrieve information from the server. Please try again.");
+					}
+					DB_1_0.BigFileRow bigFileRow = dB.BigFile[0];
+					long num2 = 0L;
+					if (!bigFileRow.IsFileSizeNull())
+					{
+						num2 = bigFileRow.FileSize;
+					}
+					if (!flag && !bigFileRow.IsFileUpdatedNull() && (DateTime.Compare(bigFileRow.FileUpdated, lastWriteTime) >= 0 || !UseRecovery) && (!UseRecovery || !GetUserInput("A partially uploaded file was found on the server.\r\nDo you want to Recover from the previous upload?\r\n\r\nChoose Yes to recover the upload from where it stopped.\r\nChoose No, to delete the file and start from the beginning.", "Continue Existing Upload")))
+					{
+						moData.BigFileDelete(FileType, oTransferInfo.ID);
+						num2 = 0L;
+					}
+					oTransferInfo.TransferStartTime = DateTime.Now;
+					if (fileStream == null)
+					{
+						fileStream = new FileStream(oTransferInfo.Path, FileMode.Open, FileAccess.Read, FileShare.Read);
+					}
+					fileStream.Position = num2;
+					oTransferInfo.TotalBytes = fileStream.Length;
+					SetState(BigFileTransferState.Transferring);
+					while (fileStream.Position < oTransferInfo.TotalBytes)
+					{
+						if (State == BigFileTransferState.Cancelling)
+						{
+							throw new ThreadTerminationException();
+						}
+						num = ((fileStream.Position + num <= oTransferInfo.TotalBytes) ? 512000 : ((int)(oTransferInfo.TotalBytes - fileStream.Position)));
+						if (num != array.Length)
+						{
+							array = new byte[num - 1 + 1];
+						}
+						fileStream.Read(array, 0, num);
+						bigFileRow.FileData = array;
+						IAsyncResult asyncResult = moData.BeginBigFileAppend(dB, null, null);
+						DateTime now = DateTime.Now;
+						while (!asyncResult.IsCompleted)
+						{
+							if (State == BigFileTransferState.Cancelling)
+							{
+								throw new ThreadTerminationException();
+							}
+							if (DateTime.Compare(DateTime.Now, now.AddSeconds(2.0)) > 0)
+							{
+								Application.DoEvents();
+								now = DateTime.Now;
+							}
+							else
+							{
+								Thread.Sleep(5);
+							}
+						}
+						moData.EndBigFileAppend(asyncResult);
+						oTransferInfo.BytesTransfered = fileStream.Position;
+						oTransferInfo.BytesPerSecond = (int)Math.Round((double)(oTransferInfo.BytesTransfered - num2) / TimeSpan.FromTicks(DateTime.Now.Ticks - oTransferInfo.TransferStartTime.Ticks).TotalSeconds);
+						OnTranferProgress();
+					}
+					SetState(BigFileTransferState.Idle);
+					result = true;
+				}
+				catch (ThreadTerminationException ex)
+				{
+					ProjectData.SetProjectError(ex);
+					ThreadTerminationException ex2 = ex;
+					result = false;
+					ProjectData.ClearProjectError();
+				}
+				catch (Exception ex3)
+				{
+					ProjectData.SetProjectError(ex3);
+					Exception ex4 = ex3;
+					if (!GetUserInput("There was an error uploading a file. Would you like to retry to upload?\r\n\r\n" + ex4.Message, "Retry File Upload ?"))
+					{
+						result = false;
+						ProjectData.ClearProjectError();
+						break;
+					}
+					flag = true;
+					ProjectData.ClearProjectError();
+					continue;
+				}
+				finally
+				{
+					if (fileStream != null)
+					{
+						fileStream.Close();
+						fileStream = null;
+					}
+				}
+				break;
+			}
+			return result;
+		}
+	}
+
+	private bool DownloadFiles()
+	{
+		if (State != BigFileTransferState.Idle)
+		{
+			throw new Exception("You cannot initiate a file transfer while there is already one in progress.");
+		}
+		Direction = BigFileTransferDirection.Download;
+		if (TransferInfo.Length == 0)
+		{
+			return true;
+
+service-source/MinuteTraq/BigFileTransfer.cs line 867
+	private bool DownloadIndividualFile(FileTransferInfo oTransferInfo)
+	{
+		string tempWorkFilePath = moData.GetTempWorkFilePath(Conversions.ToString((byte)FileType) + "-" + Conversions.ToString(oTransferInfo.ID));
+		new FileInfo(tempWorkFilePath);
+		WebClient webClient = null;
+		oTransferInfo.BytesTransfered = 0L;
+		oTransferInfo.TotalBytes = 0L;
+		oTransferInfo.BytesTransfered = 0L;
+		SetState(BigFileTransferState.InitializingTransfer);
+		bool result = default(bool);
+		try
+		{
+			oTransferInfo.OnDownloadStarted();
+			webClient = new WebClient();
+			string uriString = moData.ConnectedServerAndProtocol + "/Citizens/FileOpen.aspx?Type=" + Conversions.ToString((byte)FileType) + "&Inline=true&IsMinuteTraqRequest=true&ID=" + Conversions.ToString(oTransferInfo.ID) + "&AgencyName=" + moData.ConnectedAgency;
+			webClient.Headers.Add("Authorization", moData.AuthorizationHeaderText);
+			webClient.Headers.Add("User-Agent", "MinuteTraq");
+			webClient.DownloadProgressChanged += HttpClient_DownloadProgressChanged;
+			webClient.DownloadFileCompleted += HttpClient_DownloadFileCompleted;
+			oTransferInfo.TransferStartTime = DateTime.Now;
+			webClient.DownloadFileAsync(new Uri(uriString), tempWorkFilePath, oTransferInfo);
+			DateTime now = DateTime.Now;
+			do
+			{
+				Thread.Sleep(500);
+				if (webClient.IsBusy)
+				{
+					now = DateTime.Now;
+				}
+				if (!webClient.IsBusy && (DateTime.Now - now).TotalSeconds > 15.0)
+				{
+					break;
+				}
+				OnTranferProgress();
+			}
+			while (oTransferInfo.IsBusy);
+			OnTranferProgress();
+			webClient.Dispose();
+			if (oTransferInfo.Status == FileTransferStatus.Pending)
+			{
+				oTransferInfo.SetError(new Exception("Unable to download file"), fCancelAllTransactions: true);
+				result = false;
+			}
+			else
+			{
+				if (oTransferInfo.Status == FileTransferStatus.Downloaded)
+				{
+					int num = 5;
+					while (num > 0)
+					{
+						try
+						{
+							Util.MoveFile(tempWorkFilePath, oTransferInfo.Path, fOverwrite: true);
+							num = 0;
+						}
+						catch (IOException ex)
+						{
+							ProjectData.SetProjectError(ex);
+							IOException ex2 = ex;
+							num = checked(num - 1);
+							if (num == 0)
+							{
+								throw ex2;
+							}
+							Thread.Sleep(500);
+							ProjectData.ClearProjectError();
+						}
+					}
+					DataRow dataRow = moData.Cache.Util.LoadRowByTypeAndID(FileType, oTransferInfo.ID);
+					string fileUpdatedFieldName = moData.Cache.Util.GetFileUpdatedFieldName(FileType);
+					if (dataRow != null && dataRow.Table.Columns.Contains(fileUpdatedFieldName) && !dataRow.IsNull(fileUpdatedFieldName))
+					{
+						DateTime lastWriteTime = Conversions.ToDate(dataRow[fileUpdatedFieldName]);
+						File.SetLastWriteTime(oTransferInfo.Path, lastWriteTime);
+					}
+				}
+				if (oTransferInfo.Status == FileTransferStatus.Downloaded)
+				{
+					oTransferInfo.OnFileCompleted();
+					result = true;
+				}
+				else
+				{
+					result = false;
+				}
+			}
+		}
+		catch (Exception ex3)
+		{
+			ProjectData.SetProjectError(ex3);
+			Exception ex4 = ex3;
+			if (ex4.Message.StartsWith("Thread Abort"))
+			{
+				if (Interaction.MsgBox("Are you sure you want to Cancel the Download?", MsgBoxStyle.YesNo | MsgBoxStyle.Question | MsgBoxStyle.MsgBoxSetForeground, "Cancel Download?") == MsgBoxResult.Yes)
+				{
+					result = false;
+					ProjectData.ClearProjectError();
+				}
+				else
+				{
+					webClient?.CancelAsync();
+					SetState(BigFileTransferState.Transferring);
+					ProjectData.ClearProjectError();
+				}
+			}
+			else
+			{
+				oTransferInfo.SetError(ex4, fCancelAllTransactions: true);
+				result = false;
+				ProjectData.ClearProjectError();
+
+ui-source/frmMediaUpload.cs line 827
+	private bool M2Upload()
+	{
+		checked
+		{
+			bool result;
+			try
+			{
+				DB_1_0.MediaRow mediaRow = ((!Operators.ConditionalCompareObjectEqual(optMeetingOrEvent.Value, "Meeting", TextCompare: true)) ? dsMain.Util.GetMediaFromEvent((int)cboMeetingID.SelectedValueLong) : dsMain.Util.GetMediaFromMeeting((int)cboMeetingID.SelectedValueLong));
+				if (mediaRow == null)
+				{
+					mediaRow = dsMain.Media.NewMediaRow();
+					if (Operators.ConditionalCompareObjectEqual(optMeetingOrEvent.Value, "Meeting", TextCompare: true))
+					{
+						mediaRow.MeetingID = (int)cboMeetingID.SelectedValueLong;
+					}
+					else
+					{
+						mediaRow.MediaEventID = (int)cboMeetingID.SelectedValueLong;
+					}
+					dsMain.Media.AddMediaRow(mediaRow);
+				}
+				mediaRow.Duration = 0;
+				mediaRow.MediaStatusID = 100;
+				mediaRow.FileFormat = Util.GetFileFormat(txtVideoFile.Text);
+				mediaRow.FileData = MinuteTraqData.BigFileDataFromPath(txtVideoFile.Text);
+				mediaRow.Started = File.GetCreationTime(txtVideoFile.Text);
+				mediaRow.FileSize = Util.FileSize(txtVideoFile.Text);
+				mediaRow.Published = Conversions.ToDate(txtPublishDate.Value);
+				Main.Data.MediaUpdate((DB)dsMain.GetChanges());
+				Interaction.MsgBox("Media Upload Complete!", MsgBoxStyle.Information, "Upload Complete");
+				result = true;
+			}
+			catch (Exception ex)
+			{
+				ProjectData.SetProjectError(ex);
+				Exception ex2 = ex;
+				Interaction.MsgBox(ex2.Message, MsgBoxStyle.Exclamation, "Error Uploading File");
+				result = false;
+				ProjectData.ClearProjectError();
+			}

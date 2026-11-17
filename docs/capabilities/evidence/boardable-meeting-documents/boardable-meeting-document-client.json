@@ -1,0 +1,107 @@
+[
+  {
+    "data_keys": [
+      "attachments",
+      "display_options",
+      "token"
+    ],
+    "methods": {
+      "attachDocuments": "attachDocuments(t){t.forEach((t=>{let e={type:\"document\",attachment:t};this.attachments.push(e)}))}",
+      "attachMinutes": "attachMinutes(t,e){let s={type:\"minutes\",attachment:{title:e+\" minutes\",meeting_id:t,agenda_id:this.attachable_id,bareIconUrl:\"/img/icons/doc_center/bare-pdf.svg\"}};this.attachments.push(s)}",
+      "handleFolderCreated": "handleFolderCreated(t){this.$emit(\"folder_created\",t)}",
+      "openCreateFolder": "openCreateFolder(){this.$refs.create_folder_modal.open(this.current_folder)}",
+      "openUploadDialog": "openUploadDialog(){this.$refs.file_upload_input.click()}",
+      "selectFilesToUpload": "selectFilesToUpload(){this.$refs.file_upload_input.files.forEach((t=>{let e={type:\"upload\",file:t};this.attachments.push(e)}))}"
+    },
+    "name": "AttachmentsMenu"
+  },
+  {
+    "data_keys": [],
+    "methods": {},
+    "name": "Card"
+  },
+  {
+    "data_keys": [
+      "loading",
+      "items",
+      "folders",
+      "sort",
+      "new_attachments",
+      "current_folder",
+      "breadcrumbs",
+      "agenda_attachments",
+      "show_agenda_attachments"
+    ],
+    "methods": {
+      "canEditFolder": "canEditFolder(t){return this.is_admin||t.owner.id===Boardable.user.id}",
+      "fetchData": "fetchData(t){this.loading=!0,axios.post(Boardable.org_url+\"attachment-list\",{attachable_id:this.attachable_id,attachable_type:this.attachable_type,folder:t}).then((t=>{this.items=t.data.items,this.folders=t.data.folders,this.current_folder=t.data.current_folder,this.breadcrumbs=t.data.breadcrumbs,this.loading=!1,this.agenda_attachments=[],this.show_agenda_attachments=!1}))}",
+      "handleAgendaAttachmentUpdated": "handleAgendaAttachmentUpdated(t){let e=this.agenda_attachments.find((e=>e.id===t.id));this.$set(e,\"name\",t.name)}",
+      "handleCurrentFolderUpdated": "handleCurrentFolderUpdated(t){let e=new URL(this.attachable.url).pathname;page(e+\"/documents/\"+t.slug)}",
+      "handleFilesDropped": "handleFilesDropped(t){let e=[];t.forEach((t=>e.push({type:\"upload\",file:t}))),this.handleNewAttachments(e)}",
+      "handleFolderCreated": "handleFolderCreated(t){this.folders.push(t)}",
+      "handleNewAttachments": "handleNewAttachments(t){if(t.length){this.loading=!0;let e=new AttachmentsFormData(t).export();e.append(\"attachable_type\",this.attachable_type),e.append(\"attachable_id\",this.attachable_id),e.append(\"folder_id\",this.current_folder?this.current_folder.id:0),e.append(\"original_token\",Boardable.onedrive.access_token),axios.post(Boardable.org_url+\"attachments/upload\",e).then((()=>{let t=this.current_folder?this.current_folder.slug:\"root\";this.fetchData(t)})),this.new_attachments=[]}}",
+      "openAgendaAttachmentsFolder": "openAgendaAttachmentsFolder(){this.breadcrumbs=[{label:\"Documents\",slug:\"\"},{label:\"Agenda Documents\",slug:\"agenda-documents\"}],this.items=[],this.folders=[],this.current_folder=null,this.loading=!0,this.show_agenda_attachments=!0,axios.get(this.attachable.url+\"/agenda-attachments\").then((t=>{this.agenda_attachments=t.data.data,this.loading=!1}))}",
+      "refreshContent": "refreshContent(){this.fetchData(this.current_folder?this.current_folder.slug:\"root\")}",
+      "updateFolder": "updateFolder(t){let e=this.folders.find((e=>e.id===t.id));this.folders.splice(this.folders.indexOf(e),1),this.folders.push(t)}"
+    },
+    "name": "AttachmentsWidget"
+  },
+  {
+    "data_keys": [
+      "activeDashboardSection",
+      "start_editing",
+      "num_agenda_uploads",
+      "current_date",
+      "meeting",
+      "hasMinutes",
+      "templateType",
+      "minutesEditorUrl",
+      "publicPage",
+      "materialsPublished",
+      "agendaAttachments",
+      "assignableUsers",
+      "assignableGroups",
+      "assignableNonInvitees",
+      "userIds",
+      "groupIds",
+      "collaborators",
+      "additionalCollaborators",
+      "meetingDocsUrl",
+      "attachable",
+      "minutes_approval_document",
+      "num_attachments",
+      "num_agenda_attachments",
+      "is_admin",
+      "download_enabled",
+      "download_loading",
+      "openBoardPacket",
+      "invitesSent",
+      "minutesPublished",
+      "updateNotSent",
+      "usTimezones",
+      "intTimezones",
+      "summaryAndRecordingStarted",
+      "has_transcript",
+      "boardPacketStatus",
+      "boardPacketPollTimer",
+      "componentKey",
+      "refreshMinutes",
+      "votingUpdated",
+      "hasMeetingEngagementDashboard",
+      "hasMotionsAndVotes",
+      "agendaRefreshKey",
+      "motionsRefreshKey",
+      "updateMotions",
+      "hasPublicMeetingPageFeature"
+    ],
+    "methods": {
+      "downloadDocuments": "downloadDocuments() {\n                    this.download_loading = true;\n                    axios.get(this.attachable.url + '/download-documents')\n                        .then((response) => {\n                            let link = document.createElement('a');\n                            link.href = response.data.url;\n                            document.body.appendChild(link);\n                            link.click();\n                            setTimeout(() => {\n                                document.body.removeChild(link);\n                            }, 100);\n                        })\n                        .catch((e) => {\n                            Alert.alert('There was an error compiling the documents');\n                        })\n                        .then(() => {\n                            this.download_loading = false;\n                        })\n                }",
+      "fetchAgendaAggregate": "fetchAgendaAggregate(force_rebuild, is_poll) {\n                    this.status = 'processing';\n                    clearTimeout(this.boardPacketPollTimer);\n                    let url = this.meeting.url + '/agenda/documents/info?packet=true';\n                    if (this.current_date)\n                        url += `&date=${this.current_date.id}`;\n\n                    if (force_rebuild)\n                        url += '&force_rebuild=true';\n\n                    if (is_poll)\n                        url += '&poll=1';\n\n                    axios.get(url)\n                        .then((response) => {\n                            if (response.data.build_status === 'success') {\n                                this.boardPacketStatus = 'success';\n                                this.componentKey++;\n                            }\n                            else if (response.data.build_status === 'error') {\n                                this.boardPacketStatus = 'error';\n                                this.componentKey++;\n                            }\n                            else if (response.data.build_status === 'processing') {\n                                // Poll while the build runs — the Echo\n                                // broadcast also refreshes on completion, but\n                                // must not be the only way out of the spinner.\n                                this.boardPacketPollTimer = setTimeout(() => this.fetchAgendaAggregate(false, true), 5000);\n                            }\n                        });\n                }",
+      "fetchAssignables": "fetchAssignables() {\n                    return axios.post(Boardable.data_url('assignables'), {\n                        model_type: 'meetingCollaborators',\n                        model_id: \"526577\"\n                    }).then( response => {\n                            this.assignableUsers = response.data.assignable_users || []\n                            this.assignableGroups = response.data.assignable_groups || []\n                            this.assignableNonInvitees = response.data.assignable_non_invitees || []\n                    })\n                }",
+      "handleAttachmentsChanged": "handleAttachmentsChanged(count) {\n                    this.num_attachments = count;\n                }",
+      "handleNumUploadsChanged": "handleNumUploadsChanged(d, newItems) {\n                    this.num_agenda_uploads += d;\n                    this.agendaAttachments = newItems;\n                }",
+      "refetchAgenda": "refetchAgenda() {\n                    this.agendaRefreshKey++\n                }"
+    },
+    "name": "MeetingDashboard"
+  }
+]

@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-16",
+  "base_commit": "897442bf99dff40c4bd03126009083ad9fd485a3",
+  "candidate": "local uncommitted gWorks editor detail change",
+  "scope": "Development-origin selected detail GET, saved normalization, raw preservation, nested agenda/minutes, persistence/search/export, credential and request boundaries",
+  "checks": [
+    {
+      "command": "python -m pytest tests/test_gworks_editor.py tests/test_gworks_secure_calendar.py tests/test_gworks_calendar_read.py tests/test_gworks_published_detail.py -q",
+      "passed": 89,
+      "failed": 0,
+      "seconds": 6.6
+    },
+    {
+      "command": "python -m pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py tests/test_provider_discovery.py -q",
+      "passed": 104,
+      "failed": 0,
+      "seconds": 10.32
+    },
+    {
+      "command": "python -m ruff check src tests scripts examples",
+      "status": "passed"
+    },
+    {
+      "command": "python scripts/validate_capabilities.py",
+      "status": "passed",
+      "errors": []
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/gworks_editor.py",
+      "sha256": "983875331609fa5af4164f933f97b12ee11c1b62b77e22286e7ceb76cfc6f429"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/identification.py",
+      "sha256": "3a33fd871dc57e5e131e6d06d355b145a1fa7dbbed7ebccae2989970d0036202"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/native.py",
+      "sha256": "655137166ba1393032a36f3a50e83125f6355474b40c87d2c01bbe4983403ba0"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/retrieval.py",
+      "sha256": "6e0565d1f701b1ef1097f3653743e0dd62e65db6a26fee2638a7cb79fc4156a2"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/discovery.py",
+      "sha256": "24fc82f548db9549a972c341cc75f5f77a6451940f5dad805b44f2db8b90361b"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/__init__.py",
+      "sha256": "fad67786ceec2b11791e82c3561e4a05598b27f4c96d4d7efc44f64f45eb5e19"
+    },
+    {
+      "path": "tests/test_gworks_editor.py",
+      "sha256": "45f4237d77153343939ae34390994bf5b26ca424e6c94b653248e124b1c3e569"
+    },
+    {
+      "path": "docs/capabilities/evidence/gworks-development-editor/source.json",
+      "sha256": "33dbb11eb06e8a70527c3a1c3dcb737bc0f1db902c2d58685a81052ae31daf88"
+    },
+    {
+      "path": "docs/capabilities/inventory.json",
+      "sha256": "9e68097ae4e3ba2690d5d728d904ebf444061a5c3c879d4cb780d1d4dc5670a4"
+    },
+    {
+      "path": "src/civic_data_connectors/data/capabilities.json",
+      "sha256": "7cdc77c62a69ab58eee46e8a6cf989dc4ddcce803e6d763f9f9aa45398ef0b03"
+    }
+  ],
+  "account_creation": false,
+  "vendor_contact": false,
+  "live_api_execution": false,
+  "release": false,
+  "remaining": [
+    "Essential authenticated meeting/item/multimedia response and collection pagination contracts",
+    "gWorks safe outbound execution and production applicability",
+    "Remaining per-family contracts in all-31 research report"
+  ],
+  "owned_jobs": []
+}

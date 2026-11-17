@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-16",
+  "capability_validation": "passed466evidence",
+  "think": "low",
+  "remaining": [
+    "dataset writes",
+    "file transfers",
+    "meeting create/update and recording upload contract implementation",
+    "final required suite and goal acceptance"
+  ],
+  "worker": "deepseek-v4.1-flash:1017-cloud",
+  "files": [
+    {
+      "sha256": "4B9015AA65147DFC2B5C8CC13BB30CF8B58EF4A8C194A143A40B74B250A582F1",
+      "path": "src/civic_data_connectors/providers/iqm2_soap.py"
+    },
+    {
+      "sha256": "E85AD88B99D55A70EC93CDD93BEE99300045087B402EB3A1F6C970F688215C39",
+      "path": "src/civic_data_connectors/providers/retrieval.py"
+    },
+    {
+      "sha256": "44FDE5CC08DAE9071E6EF2C357521E70E7BBCEF8F3F339637D3585AD3E908EE2",
+      "path": "tests/test_iqm2_soap.py"
+    },
+    {
+      "sha256": "69619F658F789B740085EA31AB19674F6A8E643D91AE029A04C074488165F3A9",
+      "path": "tests/test_iqm2_soap_fetch.py"
+    },
+    {
+      "sha256": "00F93D27B9746B092588932DB24CF687AA8FE8F26D9AA7E36B2792B8D7D7B001",
+      "path": "docs/capabilities/evidence/iqm2-minutetraq-client/source.json"
+    },
+    {
+      "sha256": "5BA07C8636B68839F5801AFE65DF7DC78CA3B84BECA6D52F443966030D990E40",
+      "path": "docs/capabilities/evidence/iqm2-minutetraq-client/contract-excerpts.txt"
+    }
+  ],
+  "live_vendor_calls": false,
+  "base": "897442bf99dff40c4bd03126009083ad9fd485a3",
+  "owned_jobs": [],
+  "checks": [
+    {
+      "passed": 130,
+      "seconds": 7.79,
+      "command": "pytest tests/test_iqm2_soap_fetch.py tests/test_iqm2_soap.py tests/test_gworks_editor.py tests/test_configured_fetch_labels.py tests/test_provider_credential_privacy.py -q"
+    },
+    {
+      "passed": 25,
+      "seconds": 1.2,
+      "command": "pytest tests/test_capabilities.py tests/test_capability_synthetic_evidence.py -q"
+    }
+  ],
+  "lint": "full Ruff passed",
+  "scope": "Selected MinuteTraq AgendaGet/MinutesGet SOAP retrieval and saved normalization",
+  "diff_check": "passed",
+  "primary_product_coding": false
+}

@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="en-CA" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Paperless Meetings - Demo for NovusAGENDA Meeting Management Software</title>
+
+<meta name="description" content="Take a self guided demo or sign up to see our meeting management software in action based on your schedule."/>
+<meta name="keywords" content="Self guided demo of paperless meeting software, meeting management software demonstration, agenda software demonstration"/>
+
+<link rel="stylesheet" href="/css/normalize.css" />
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,500|Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/styles2015.css" />
+<link rel="stylesheet" href="/css/mainNav2015.css" />
+
+
+<script src="/scripts/modernizr.js" type="text/javascript"></script>
+
+
+
+
+	
+<!-- RSS FEED Section -->
+<link href="/css/rssfeeds.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="/scripts/gfeedfetcher.js"></script>
+	<script type="text/javascript">
+		google.load("feeds", "1");
+		function initialize() {      
+			var feed = new google.feeds.Feed("http://fastpshb.appspot.com/feed/1/fastpshb");
+			feed.load(function(result) {
+				if (!result.error) {
+					var container = document.getElementById("feed");
+					for (var i = 0; i < result.feed.entries.length; i++) {
+						var entry = result.feed.entries[i];
+						var div = document.createElement("div");
+						div.appendChild(document.createTextNode(entry.title));
+						container.appendChild(div);
+					}
+				}
+			});
+		}
+		google.setOnLoadCallback(initialize);
+	</script>
+<!-- End RSS FEED Section -->
+
+<script type="text/javascript">
+var cmJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+var path = "databroker.coremotives.com/DataBroker.js?version=2";
+document.write(unescape("%3Cscript src='" + cmJsHost + path + "' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+	var coreMotives = new DataBroker();
+	coreMotives.customerId = "6a563288-c76e-e111-9094-00155d323097";
+	coreMotives.instanceId = 884;
+	coreMotives.trackPageView();
+} catch (e) { }
+</script>
+
+
+
+</head> 
+<body>
+	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+		<defs>
+
+			<symbol id="svg-home" viewBox="0 0 50 50">
+				<path d="M7.282,29.549v19.527h11.875V29.21h11.709v19.866h11.875V29.549l-17.729-17.73L7.282,29.549z M28.104,21.2
+					c0,1.708-1.385,3.093-3.091,3.093c-1.709,0-3.095-1.385-3.095-3.093c0-1.71,1.386-3.095,3.095-3.095
+					C26.721,18.105,28.104,19.49,28.104,21.2z"/>
+				<polygon points="36.932,0.924 31.667,0.924 31.667,4.132 36.932,9.397 "/>
+				<path d="M49.355,25.617L48.93,25.19l0.004-0.011L25.167,1.412l-0.155-0.115l-0.156,0.115L2.152,24.116
+					c-0.017,0.016-0.035,0.025-0.05,0.041l-1.46,1.46c-0.855,0.855-0.856,2.242,0,3.098l0.282,0.281c0.855,0.857,2.242,0.857,3.098,0
+					l0.558-0.559L4.6,28.45L25.012,8.038l20.302,20.304l0.006-0.001l0.656,0.655c0.854,0.855,2.241,0.855,3.098,0l0.281-0.282
+					C50.215,27.859,50.214,26.473,49.355,25.617z"/>
+			</symbol> <!-- /svg-home -->
+
+			<symbol id="svg-menu-lines" viewBox="0 0 50 50">
+
+				<path d="M50,9.546c0,1.104-0.896,2-2,2H2c-1.104,0-2-0.896-2-2V2c0-1.104,0.896-2,2-2h46c1.104,0,2,0.896,2,2V9.546z"/>
+				<path d="M50,48c0,1.104-0.896,2-2,2H2c-1.104,0-2-0.896-2-2v-7.546c0-1.104,0.896-2,2-2h46c1.104,0,2,0.896,2,2V48z"/>
+				<path d="M50,28.773c0,1.104-0.896,2-2,2H2c-1.104,0-2-0.896-2-2v-7.546c0-1.104,0.896-2,2-2h46c1.104,0,2,0.896,2,2V28.773z"/>
+
+			</symbol> <!-- /svg-menu-lines -->
+			<symbol id="svg-plus" viewBox="0 0 50 50">
+				<polygon points="29.512,7.291 20.488,7.291 20.487,20.487 7.29,20.487 7.291,29.512 20.488,29.512 20.488,42.709 
+					29.512,42.709 29.513,29.513 42.71,29.513 42.709,20.488 29.512,20.488 "/>
+			</symbol> <!-- /svg-plus -->
+
+		</defs>
+	</svg>
+
+<form name="aspnetForm" method="post" action="/demo.aspx?" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUENTM4MWRkNP0BoOEowKcfQNNSSAnQN95pqnI=" />
+</div>
+
+<div class="fixed-header">
+
+	<header>
+	<div class="wrapper clearfix">
+		<div class="top-nav">
+				
+			<a href="/about-us.aspx">About</a><a href="/about-us/news-and-announcements.aspx">News</a><a href="/about-us/contact-us.aspx">Contact</a>
+			<a href="/" class="home-icon"><svg data-fallback="/media/68991/homeicon.png"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-home"></use></svg></a>
+		</div>
+		<a href="/" class="logo"><img src="/media/68985/logo.png"></a>
+		<div class="header-buttons">
+			<a href="/demo.aspx">Self Guided Demo</a>
+			<a href="/cost-.aspx">Software Pricing</a>
+		</div>
+
+	</div>
+	</header>
+
+	<div class="nav-wrapper">
+	<a class="nav-icon"><svg data-fallback="/media/68991/homeicon.png"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-menu-lines"></use></svg></a>
+	<nav class="site-nav">
+			<span class="nav-icon-close" title="Close Menu"> </span><ul class="main-nav"><li><a href="/novusagenda.aspx"><span>NovusAGENDA</span></a><span class="subnav-icon"> </span><ul class="menu"><li><a href="/novusagenda/pilot.aspx"><span>Pilot Program</span></a></li><li><a href="/novusagenda/what-about-tablets.aspx"><span>What about Tablets?</span></a></li><li><a href="/novusagenda/proven.aspx"><span>Proven</span></a></li><li><a href="/novusagenda/user-benefits.aspx"><span>User Benefits</span></a></li><li><a href="/novusagenda/key-features.aspx"><span>Key Features</span></a></li><li><a href="/novusagenda/reporting.aspx"><span>Reporting</span></a></li><li><a href="/novusagenda/electronic-voting.aspx"><span>Electronic Voting</span></a></li><li><a href="/novusagenda/technical-overview.aspx"><span>Technical Overview</span></a></li><li><a href="/novusagenda/deployment-overview.aspx"><span>Deployment Overview</span></a></li><li><a href="/novusagenda/how-much-can-we-save.aspx"><span>How Much Can We Save?</span></a></li><li><a href="/novusagenda/we-use-pdf-today.aspx"><span>Do You Use PDF Today?</span></a></li><li><a href="/novusagenda/video-streaming-meetings.aspx"><span>Video Streaming</span></a></li><li><a href="/novusagenda/unique.aspx"><span>NovusAGENDA is Unique</span></a></li><li><a href="/novusagenda/falling-in-love-lately.aspx"><span>Fallen in Love Lately?</span></a></li><li><a href="/novusagenda/best-practices.aspx"><span>Best Practices</span></a></li></ul></li><li><a href="/cost-.aspx"><span>Cost </span></a><span class="subnav-icon"> </span><ul class="menu"><li><a href="/cost-/pilot.aspx"><span>Pilot Program</span></a></li><li><a href="/cost-/how-do-i-buy.aspx"><span>How Do I Buy?</span></a></li></ul></li><li class="active"><a href="/demo.aspx"><span>Demo</span></a></li><li><a href="/support.aspx"><span>Support</span></a></li><li><a href="/partners.aspx"><span>Partners</span></a><span class="subnav-icon"> </span><ul class="menu"><li><a href="/partners/laserfiche-.aspx"><span>Laserfiche </span></a></li><li><a href="/partners/swagit-video.aspx"><span>Swagit Video</span></a></li><li><a href="/partners/general-code.aspx"><span>General Code</span></a></li><li><a href="/partners/ecs-imaging.aspx"><span>ECS Imaging</span></a></li><li><a href="/partners/tkb-associates.aspx"><span>TKB Associates</span></a></li><li><a href="/partners/professional-document-systems.aspx"><span>Professional Document Systems</span></a></li><li><a href="/partners/peelle-technologies.aspx"><span>Peelle Technologies</span></a></li></ul></li><li><a href="/about-us.aspx"><span>About Us</span></a><span class="subnav-icon"> </span><ul class="menu"><li><a href="/about-us/leadership.aspx"><span>Leadership</span></a></li><li><a href="/about-us/green-.aspx"><span>Green Revolution</span></a></li><li><a href="/about-us/contact-us.aspx"><span>Contact Us</span></a></li><li><a href="/about-us/news-and-announcements.aspx"><span>News and Announcements</span></a></li></ul></li><li><a href="/clients.aspx"><span>Clients</span></a><span class="subnav-icon"> </span><ul class="menu"><li><a href="/clients/novusagenda.aspx"><span>NovusAGENDA</span></a></li><li><a href="/clients/novushr.aspx"><span>NovusHR</span></a></li></ul></li><li><a href="/novushr.aspx"><span>NovusHR</span></a><span class="subnav-icon"> </span><ul class="menu"><li><a href="/novushr/user-benefits.aspx"><span>User Benefits</span></a></li><li><a href="/novushr/key-features.aspx"><span>Key Features</span></a></li><li><a href="/novushr/unique-pricing.aspx"><span>Unique Pricing</span></a></li><li><a href="/novushr/technical-overview.aspx"><span>Technical Overview</span></a></li><li><a href="/novushr/deployment-overview.aspx"><span>Deployment Overview</span></a></li></ul></li><li><a href="/blogs.aspx"><span>Blogs</span></a></li></ul><div class="site-nav-overlay"> </div>
+	</nav>
+	</div>
+
+</div><!-- /fixed-header -->
+
+
+<div class="content">
+	<hr>
+	<div class="wrapper clearfix">
+		<div class="page-header clearfix">
+			<div class="breadcrumbs clearfix"><ul id="breadcrumb"><li class="link"><a href="/">Home</a> &gt; </li><li>Demo</li></ul></div>
+			<h1>Demo for NovusAGENDA Meeting Management Software</h1>
+			<div class="line"></div>
+		</div>
+
+		<div class="clearfix">
+			<div class="col-1-2">
+				<h3>Check out our <a href="/novusagenda/pilot.aspx" title="Pilot">Pilot
+Program</a></h3>
+
+<h3>Want to see our software in action?</h3>
+
+<p>Paperless meeting software demonstrations are done on your
+schedule. We will schedule a Web-based demonstration at a time that
+fits your calendar. Our meeting management software demonstration
+will focus on showing you exactly how the product works to help you
+evaluate how you can benefit.</p>
+
+<p>During a board meeting minutes and agenda software demonstration
+you will see the actual software in action. You can also ask
+questions such as,&nbsp;"Show me how I would get this done?" Our
+online demonstrations are as thorough as you need them to be.</p>
+
+<p>Using Web meeting technology, we can answer your questions while
+showing you how things are done. Seeing is believing, so <strong><a
+href="/forms/demo-request.aspx" target="_blank"
+title="Demo Request">schedule&nbsp;your demonstration
+today!</a></strong></p>		
+			</div>
+			<div class="col-1-2 last">
+				<div class="video-container"></div>
+				<h4><a
+href="http://storage.coremotivesmarketing.com/library/6a563288-c76e-e111-9094-00155d323097/884/webforms/d3ed1c6f-06d2-e211-abf3-842b2b19fef1.htm"
+ target="_blank">Self-Guided Paperless Meeting Demo</a></h4>
+
+<p><strong style="font-weight: bold;">Want to take a tour on your
+own? Feel free to take a look. We will just need a little
+information about you so we can contact you later.</strong></p>
+
+<p><a style="font-size: 16px; font-weight: bold;"
+href="http://storage.coremotivesmarketing.com/library/6a563288-c76e-e111-9094-00155d323097/884/webforms/d3ed1c6f-06d2-e211-abf3-842b2b19fef1.htm"
+ target="_blank">Start your demo now</a></p>
+			
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+<footer>
+<div class="wrapper clearfix">
+	<div class="col-1-2 left-side">
+		<div class="clearfix">
+			<div class="footer-nav">
+				<a class="footer-link" href="/novusagenda.aspx">NovusAGENDA</a><a class="footer-link" href="/novushr.aspx">NovusHR</a><a class="footer-link" href="/cost-.aspx">Cost</a><a class="footer-link" href="/blogs.aspx">Blog</a><a class="footer-link" href="/demo.aspx">Demo</a><a class="footer-link" href="/about-us.aspx">About</a><a class="footer-link" href="/support.aspx">Support</a><a class="footer-link" href="/about-us/news-and-announcements.aspx">News</a><a class="footer-link" href="/partners.aspx">Partners</a><a class="footer-link" href="/forms/contact-us.aspx">Contact</a><a class="footer-link" href="/clients.aspx">Clients</a>
+			</div>
+		
+			<div class="footer-buttons">
+				<a href="/demo.aspx">Self Guided Demo</a>
+				<a href="/cost-.aspx">Software Pricing</a>
+			</div>
+
+		</div>
+	</div>
+	<div class="col-1-2 last">
+		<a href="/" class="logo"><img src="/media/68985/logo.png"></a>
+		
+		<div class="phones">
+			<strong>Support :</strong> 800-274-5624 x 2<br /><strong>Sales:</strong> 800-274-5624 x 702<br /><strong>Partner Inquiries:</strong> 800-274-5624 x 702<br /><strong>Billing:</strong> 800-274-5624 x 711<br />
+		</div>
+	</div>
+
+		<div class="copyright">&copy; Copyright 2016 Novusolutions, All Rights Reserved.</div>
+</div>
+
+
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="/Scripts/fitVids.js"></script>
+<script src="/Scripts/scripts.js"></script>
+
+
+
+<!-- Google Code for Remarketing Tag -->
+<!--------------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+--------------------------------------------------->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 981217284;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/981217284/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-12531724-1");
+pageTracker._trackPageview();
+</script>
+
+
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Google Code for Self Demo Conversion Page -->
+<script type="text/javascript">
+
+var google_conversion_id = 981217284;
+var google_conversion_language = "en";
+var google_conversion_format = "2";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "Hyb2CJPCglgQhODw0wM";
+var google_remarketing_only = false;
+
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/981217284/?label=Hyb2CJPCglgQhODw0wM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="CA0B0334" />
+</div></form>
+</body> 
+</html> 

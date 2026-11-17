@@ -1,0 +1,59 @@
+{
+  "occurrences": [
+    {
+      "meeting": {
+        "datesTimezone": [
+          {
+            "date": "11/30/2026",
+            "from": "9:00 am",
+            "id": 526618,
+            "timezone": "America/New_York",
+            "to": "10:00 am"
+          }
+        ],
+        "end": "2026-11-30T15:00:00.000000Z",
+        "id": 526618,
+        "organization_id": 46098,
+        "owner_id": 403839,
+        "public_member_dashboard": 0,
+        "public_page": 0,
+        "published": false,
+        "published_at": null,
+        "remote_option": "no_remote",
+        "series_id": 12616,
+        "start": "2026-11-30T14:00:00.000000Z",
+        "title": "QuorumRelay Recurrence Minimal Update",
+        "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/c8ab1a-quorumrelay-recurrence-minimal-update"
+      },
+      "status": 200
+    },
+    {
+      "meeting": {
+        "datesTimezone": [
+          {
+            "date": "12/07/2026",
+            "from": "9:00 am",
+            "id": 526619,
+            "timezone": "America/New_York",
+            "to": "10:00 am"
+          }
+        ],
+        "end": "2026-12-07T15:00:00.000000Z",
+        "id": 526619,
+        "organization_id": 46098,
+        "owner_id": 403839,
+        "public_member_dashboard": 0,
+        "public_page": 0,
+        "published": false,
+        "published_at": null,
+        "remote_option": "no_remote",
+        "series_id": 12616,
+        "start": "2026-12-07T14:00:00.000000Z",
+        "title": "QuorumRelay Recurrence Minimal Update",
+        "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/d9bcfa-quorumrelay-recurrence-minimal-update"
+      },
+      "status": 200
+    }
+  ],
+  "status": 200
+}

@@ -16,7 +16,7 @@ FORMATS = {provider: tuple(row["input_format"] for row in compat.source_formats(
                            if row["connector"] == provider)
            for provider in dict.fromkeys(row["connector"] for row in compat.source_formats())}
 ADDITIONAL_FORMATS = {"suiteone-media": ("suiteone-public-event-html",),
-                      "gworks": ("gworks-published-meeting-html", "gworks-secure-calendar-json"),
+                      "gworks": ("gworks-published-meeting-html", "gworks-secure-calendar-json", "gworks-editor-meeting-json"),
                       "legistar": ("legistar-events-json", "legistar-event-json", "legistar-votes-json",
                                  "legistar-rollcalls-json"),
                       "boarddocs": ("boarddocs-public-meetings-json", "boarddocs-public-meeting-html", "boarddocs-public-item-html"),
@@ -24,7 +24,7 @@ ADDITIONAL_FORMATS = {"suiteone-media": ("suiteone-public-event-html",),
                       "town-hall-streams": ("town-hall-streams-event-html",),
                       "civicplus-select": ("civicplus-search-json",),
                       "clerkbase": ("clerkbase-search-html", "clerkbase-public-tree-html"),
-                      "iqm2": ("iqm2-public-search-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html"),
+                      "iqm2": ("iqm2-public-search-html", "iqm2-meeting-detail-html", "iqm2-public-player-html", "iqm2-legislative-file-html", "iqm2-minutetraq-soap-xml"),
                       "utah-public-notice": ("utah-public-search-html",),
                       "escribe": ("escribe-meeting-detail-html", "escribe-publishing-soap-xml"),
                       "civicweb": ("civicweb-detail-html", "civicweb-filepro-soap-xml", "civicweb-meetings-json", "civicweb-meeting-documents-json"),
@@ -168,12 +168,18 @@ def validate_source(source: Source, context: OperationContext | None = None,
     account_api = is_account_api(source)
     namespace = (account_namespace(source) if account_api else
                  compat.source_namespace(source.provider, urlsplit(source.url)))
+    if source.provider == "iqm2" and source.input_format == "iqm2-minutetraq-soap-xml":
+        from .iqm2_soap import namespace as iqm2_soap_namespace
+        namespace = iqm2_soap_namespace(source)
     if source.provider == "municode-meetings" and source.input_format in {"municode-publishpage-html", "municode-publishpage-detail-html"}:
         from .municode_publish import namespace as publish_namespace
         namespace = publish_namespace(source)
     if source.provider == "gworks" and source.input_format == "gworks-secure-calendar-json":
         from .gworks_calendar import namespace as calendar_namespace
         namespace = calendar_namespace(source)
+    if source.provider == "gworks" and source.input_format == "gworks-editor-meeting-json":
+        from .gworks_editor import namespace as editor_namespace
+        namespace = editor_namespace(source)
     if source.provider == "gworks" and source.input_format == "gworks-published-meeting-html":
         published = urlsplit(source.url)
         city = re.fullmatch(r"/city/([1-9][0-9]*)/cms/[1-9][0-9]*_(?:agenda|minute)\.html", published.path)
@@ -185,9 +191,11 @@ def validate_source(source: Source, context: OperationContext | None = None,
             namespace not in context.allowed_namespaces):
         raise ValueError("The source namespace is outside the caller's authorized source scope.")
     allowed_options = {"download_origins"}
+    if source.provider == "iqm2" and source.input_format == "iqm2-minutetraq-soap-xml":
+        allowed_options.update({"minutetraq_agency", "meeting_id", "document_id", "document_kind"})
     if source.provider == "primegov":
         allowed_options.add("tracking_number")
-    if source.provider == "gworks" and source.input_format == "gworks-secure-calendar-json":
+    if source.provider == "gworks" and source.input_format in {"gworks-secure-calendar-json", "gworks-editor-meeting-json"}:
         allowed_options.add("gworks_city_id")
     if source.provider == "simbli":
         allowed_options.add("agenda_item_id")

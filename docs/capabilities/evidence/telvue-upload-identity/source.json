@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-16",
+  "vendor_asset_url": "https://connect.telvue.com/static-assets/cms/application-6788570efca6e806428b108560747bf11401571fd73268886704605751a2f198.js",
+  "original_sha256": "6e33d0dfb89702144b5468b923a037dcc4eabffddc5be776279d47d9112042f4",
+  "extract_sha256": "a2e42d372ad526d5b9c6eab9c4c8106a346119b31aa49c845ccab5f77f39520d",
+  "discovery": "populateNewEpisodeForm parses xhr.responseText.medium_id specifically when URL contains episodes/new. addNewEpisodeFormData sends episode[medium_attributes][title], short_summary and episode_identifier when nonempty. Existing showSummary separately consumes asset_ids.",
+  "scope": "Current browser episode upload branch; medium_id is read but not subsequently used by that function. It is not an unconditional successful response sample or a legacy v1 contract.",
+  "archive_followup": {
+    "javascript_index_rows": 32,
+    "downloaded_2015_application_scripts": 2,
+    "result": "20150923 vendor application also consumes medium_id in episodes/new and asset_ids in summary; runtime fileUrl remains supplied from outside. Neither inspected2015script contains concrete assets/upload or api/v1 upload initializer."
+  },
+  "remaining": "Matched upload initializer, response envelope/type guarantees, native original/readiness/association and metadata-save contract; no upload sent."
+}

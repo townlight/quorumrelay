@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-16",
+  "scope": "SuiteOne-linked DCR2/Liberty Word export producer structure; static inspection only, no installer/app execution or vendor import.",
+  "official_download_page": "https://bisdigital.com/software",
+  "official_package": "https://bisdigital.com/software-download/DCR2-Player-5.0-build-9583-64-bit.zip",
+  "package_bytes": 14784116,
+  "package_sha256": "0d56d9ca75c9b48a2842921c92d5a6ceeca4fe2fdf234ef5047a6ae1ee898027",
+  "files": {
+    "HCWordAddIn.dll": "9a0de51c25b3cb6a942e66c8df027bddd1a15a522de61a82236113793ec00f85",
+    "LMRS_64.chm": "c6747040ad9eaa7e51d90cacd90260f0c98d5d312e83d3dcb66a057815acf030",
+    "BaseExportPage.html": "52adb9b4c52f8810a35ef66e0a429a9f32cf60d804c0a2d015ed431dcbfe8c6b"
+  },
+  "method": "7-Zip static MSI/CAB/CHM extraction, existing ILSpy9.1 read-only managed-code decompilation; no program installation, activation, Word or recording execution.",
+  "producer": {
+    "assembly": "HCWordAddIn.dll",
+    "classes": [
+      "HCWordAddIn.HTMLProcessing",
+      "HCWordAddIn.ExportHtmlProcess",
+      "HCWordAddIn.DCRTimes"
+    ],
+    "classic_horizontal_vertical": "ProcessFileH/ProcessFileV replace the Word bookmark control CLSID:A0418111-CD85-4969-8385-297EC9EBB3A8 with INPUT TYPE BUTTON, NAME and VALUE caption, OnClick StartMeUp(native marker index). The content filename is selected stem + _content.HTML.",
+    "caption": "LoadButtonsBM limits the source name to50characters (47+ellipsis); replaces ampersand, apostrophe, doublequote and anglebrackets with periods. FormatCaption optionally appends a FILETIME-derived hh:mm:sstt and MM/dd/yyyy; this is clock time, not recording offset.",
+    "indices": "LoadButtonsBM adds Start position, sorts by native FILETIME, assigns in-range markers one-based indices. Before/after markers use special indices100001/100002 in classic content.",
+    "positions": "DCRTimes.Pos is obtained via player.GetPosFromTime. WriteWMPResourceToFileV and Mac-capable H write [caption,index,position] tuples into a companion player document. Classic Windows H uses native WMP marker indices. The content INPUT itself carries index, not playback seconds.",
+    "modern_html5": "ProcessFile34 emits a single main document with ChgPlayPos(position formatted invariant F1); before/after sentinels -1/-2. It is a different output from the classic _content.HTML required by SuiteOne guide.",
+    "encoding": "WriteBufferToFile uses Encoding.Default, with locale-dependent implications; no universal UTF8 claim for native producer files."
+  },
+  "suiteone_primary": {
+    "guide": "https://getsuiteone.com/wp-content/uploads/2021/08/S1_BookmarksUpdate_2021.pdf",
+    "demo_page": "https://getsuiteone.com/liberty-meeting-recorder-dcr2-how-to-export-to-html-for-suiteone/",
+    "demo_video": "https://getsuiteone.com/wp-content/uploads/2021/03/S1_ExportToHTML.mp4",
+    "demo_video_sha256": "a33197b8a31f3e43ce4a69e964e2e8058be87d8eadc380eabf3dc60d0b2171aa",
+    "observation": "59second official demo ends with selected S1_Regular Meeting_exphtml_content.HTML. Guide instructs Liberty Exported Format, Replace Existing Bookmarks, select/upload, save.",
+    "post_recording_guide": {
+      "url": "https://getsuiteone.com/wp-content/uploads/2021/03/LMR-S1_PostMeeting_Step-by-Step-Guide_Video-Bookmarks2021.pdf",
+      "file": "LMR-S1-PostMeeting.pdf",
+      "sha256": "d35f5e7c830cd9df5ec97b50dd48ff1b68ccbad149ab6fa6b68ee14db2fda976",
+      "pages": [
+        1,
+        2,
+        3
+      ],
+      "workflow": "March2021 Agendas & Minutes workflow: export Word+DCR toHTML; upload resultingWMV to EventMedia, save and allowprocessing; Minutes Edit/Upload set PublishedImmediately and UploadasHTML/importandBookmarks, select paired_content.HTML, save then saveEvent. Guide says bookmark durationtimes automaticallyfilled whenmedia finishesprocessing. These are user actions, not API payload keys."
+    }
+  },
+  "resolved": "Actual native classic content controls, caption rules, native index/clock semantics, companion position distinction and modern/classic format difference. Official March2021 paired WMV+content import and post-processing duration fill now recovered; native marker index can be resolved against its matching processed recording, rather than interpreted as seconds.",
+  "remaining": "Current SuiteOne staff machine upload/save payloads, parsing/readback and current applicability of the historical March2021 workflow remain unavailable. August2021 separate Bookmarks-tab workflow is documented separately. No standalone HTML-to-seconds inference, native artifact generation or remote import executed.",
+  "local_intermediates": "work/suiteone-dcr2-static contains the original package, CHM and decompiled selected classes; proprietary assembly/source not republished into repository evidence.",
+  "public_media_leads": {
+    "index": "https://getsuiteone.com/wp-json/wp/v2/media?per_page=100",
+    "basis": "Exact WordPress API root and post878 JSON link declared by official export guide page. Public media metadata supplies direct official guide/video URLs.",
+    "examples_zip": "https://getsuiteone.com/wp-content/uploads/2024/09/Examples.zip",
+    "examples_result": "24 PDF minutes/transcript text files, no nativeLibertyHTML or sampleDCR. Archive listed only.",
+    "additional_public_scripts": "Observed Watkinsvilleevent2165declares SO-events/SO-portal-shared/main/SO-player scripts; all fetched200. No Liberty/import/upload-bookmark handler surfaced in those scripts."
+  }
+}

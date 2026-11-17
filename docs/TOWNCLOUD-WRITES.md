@@ -43,3 +43,27 @@ sent mutation leaves an uncertain receipt; a subsequent commit reconciles by
 readback after reopening without sending a second mutation. The
 [executed boundary regressions](verification/write-response-bounds-2026-11-15.json)
 preserve existing target binding and request payload contracts.
+
+## Presigned upload contract recovered from public client
+
+The 2026-11-16 public bundle is byte-identical to the pinned application. Its
+[single- and multi-file source](capabilities/evidence/towncloud-client-drafts/upload-source.json)
+exposes a two-stage storage upload and parent item save. The runtime DOM element
+`s3-upload-config` supplies `presigned_post.url` and `presigned_post.fields`. The
+client sends those fields, substitutes `${filename}` in the storage key, appends
+the file, and requires HTTP201. PDFs then require JSON `success` from the
+configured validation URL or `/go/{site}/pdf_validations`, with `s3_key`,
+`file_name`, and `content_type=application/pdf`.
+
+The final item form includes indexed `item[item_attachments_attributes]` values:
+`name`, `s3_key`, `private_doc` (1/0), `rank` (0), and `original_filename` in the
+multi-file branch. The current public page lacks the runtime upload config and
+full item form. The created attachment response/native ID, original download
+locator, and recovery lookup are still missing. These extracted fields are
+pinned for the remaining implementation; no partial storage upload is executed.
+
+All39 current TownCloud draft/public/detail tests passed on2026-11-16. The trial
+request was subsequently submitted successfully, with a confirmation that someone
+will be in touch. No application dashboard was available. Scott ended further
+TownCloud pursuit; do not repeat signup or contact the vendor. Existing
+unpublished-draft writes remain the implemented outbound scope.

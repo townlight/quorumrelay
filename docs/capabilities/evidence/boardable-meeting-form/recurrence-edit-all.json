@@ -1,0 +1,22 @@
+{
+  "action": "https://app.boardable.com/quorumrelay-evaluation/meetings_v2/526612",
+  "editType": "Series",
+  "form": {
+    "dates": [
+      {
+        "date": "11/16/2026",
+        "from": "5:30 pm",
+        "id": 526612,
+        "timezone": "America/New_York",
+        "to": "6:30 pm"
+      }
+    ],
+    "notify": false,
+    "published": false,
+    "series_choice": "subsequent",
+    "series_date": "11/16/2026",
+    "series_from": "5:45 pm",
+    "series_to": "6:45 pm",
+    "title": "QuorumRelay Private Recurrence Contract"
+  }
+}

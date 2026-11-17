@@ -67,3 +67,33 @@ the processing/association readback specification, not a live account or live
 upload. HyperCaster and CloudCast contracts are not substituted for Connect.
 
 Response transfers use the smaller of `parser_bytes` and `transfer_bytes`, both at the transport boundary and when checking an injected response. An oversized preflight cannot produce a mutation plan. If a mutation was sent before its oversized response is rejected, its durable outcome stays uncertain; a later reconciliation reads actual state without resending the mutation. Regression execution is recorded in `docs/verification/peak-telvue-owned-work-2026-11-15.json`.
+
+## Recovered official legacy upload endpoint
+
+An archived developer-forum thread linked the official vendor page
+[Upload Video (JSON REST API version1)](https://web.archive.org/web/20140721080545/http://www.telvue.com/support/product-documentation/telvue-connect-api-documentation/upload-video-rest/).
+The [pinned original and provenance](capabilities/evidence/telvue-legacy-upload/source.json)
+recover `POST https://connect.telvue.com/api/v1/assets/upload`, multipart
+`files[]`, using HTTP Basic authentication for an authorized Connect user.
+Optional `published`, `syndicated` and `syndication_groups[]` affect publication,
+moderation and syndication; these are separate explicit actions.
+
+This legacy API supplies a fixed endpoint without the browser's missing runtime
+initializer. The archived page has request examples but no successful response
+schema, created-media mapping, original-file verification or readiness lookup.
+The current browser client consumes `asset_ids`; that response is not silently
+assigned to this separate legacy API. Upload remains closed in the adapter until
+the native identity and original-byte/readiness contract can be verified.
+Recording metadata updates remain unresolved. No upload was sent.
+
+
+## Scoped upload identity consumer recovered, November16
+
+The [current vendor episode-upload consumer](capabilities/evidence/telvue-upload-identity/source.json)
+parses `medium_id` from the upload response when the location contains
+`episodes/new`, in addition to the summary's `asset_ids`. That branch also sends
+nonempty nested episode medium title, short_summary and episode_identifier.
+A separately archived September2015 application contains the same consumers.
+This identifies a concrete response field for that browser branch. Its runtime
+upload initializer is still external; no unconditional response envelope/type or
+legacy v1 equivalence is established. No new upload request was sent.

@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-16",
+  "status": "mock_passed",
+  "scope": "One root supporting meeting-document upload to an exact trusted owner-only private unpublished nonseries no_remote meeting; complete before/after native ID delta, independent association and original-byte SHA256; durable identity and read-only recovery without upload replay.",
+  "affected_checks": {
+    "tests": 196,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 196,
+    "seconds": 592.903,
+    "junit_sha256": "59d78602ba499f2477e72b3a49ab4f15f80de572b0acc03a2a70899d4a4e1d3b",
+    "command": "Isolated new meeting-document tests plus existing meeting, series, builder, legacy agenda and item-create tests"
+  },
+  "files": {
+    "src/civic_data_connectors/providers/boardable_meeting_documents.py": "6e8871a8f90ff32b92b95b3956f3d7418d93c424574c6805310da03c6340c21a",
+    "src/civic_data_connectors/providers/boardable_write.py": "b6f08b5bbbf398c498fcd25b17c480c1bbe6ddd06d9ad2edabd0c58f8c222380",
+    "tests/test_boardable_meeting_documents.py": "2de2825d7d428b10f0d8b95a1de521e9ba76075ea20cf15615c9ebbc5372254c"
+  },
+  "contract_sha256": "6f3b76c6da7ecee4f13ba5ebf1117eb2efcc4eb5e58ad720df8d30e8764068ed",
+  "live_native_capture": {
+    "meeting_id": 526577,
+    "attachment_ids": [
+      684953,
+      684954
+    ],
+    "upload_status": 200,
+    "upload_response": "empty",
+    "independent_meeting_list_detail_download_status": 200,
+    "bytes": 141,
+    "sha256": "785229e6354d8899d43e6c9bc083204360c51593717c738aca05c00dcc513ab5"
+  },
+  "adapter_live_execution": false,
+  "required_full_candidate_regression": {
+    "tests": 3102,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 3102,
+    "seconds": 1741.646,
+    "command": "python -X utf8 -m pytest tests -q",
+    "junit_sha256": "17afcaf1bc3a312b41a7c814537d27a475c00c16cf6ce384d216710d6f0a6f9b",
+    "frozen_inputs_verified": 725,
+    "completed_utc": "2026-11-17T01:27:14.5652625Z"
+  },
+  "remaining": [
+    "Other meeting access states and folders",
+    "Replacement, delete and publication are unmapped",
+    "General Document Center upload is captured separately and has no adapter"
+  ]
+}

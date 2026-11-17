@@ -76,3 +76,12 @@ Simbli's [deployed anonymous search client](evidence/simbli-search-client/source
 [Municode configured public listing discovery](../verification/municode-configured-discovery-2026-11-15.json) is implemented for one supplied HTML page, with local date filtering, path-derived IDs and original capture retention. Offline fixture checks do not establish the separate authenticated Essential collection response, pagination or complete catalog.
 
 [Municode PublishPage](../MUNICODE-PUBLISHPAGE.md) adds one explicit selected HTML page with tenant-scoped public `cc/me` selectors, supplied page controls and no automatic archive traversal. The captured page status was not recorded; offline fixture execution is not live engine acceptance.
+
+
+Boardable current-builder update (2026-11-16): explicit current_agenda_builder mode
+now implements item create/update and associated uploads, with exact tree/item
+readback and original-byte hash checks. 105 affected synthetic cases passed.
+Separate authorized browser trial observed create201/update-upload200 and exact
+134-byte download. See `BOARDABLE-WRITES.md` and
+`verification/boardable-current-builder-2026-11-16.json` under docs.
+Full meeting forms, recurring days, publication and imports remain open.

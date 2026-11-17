@@ -1,0 +1,13 @@
+{
+  "status": "cancelled",
+  "model": "deepseek-v4.1-flash:1017-cloud",
+  "started": "2026-11-17T01:53:40.9425909Z",
+  "headroom_gib": 31.6,
+  "task": "Correct reproduced Simbli serialization plus reviewed status/token/lock defects",
+  "owner": "current Codex",
+  "think": "low",
+  "cancel": "Ctrl-C owning exec session",
+  "expected": "simbli-item-write-correction-02.json",
+  "finished": "2026-11-17T01:57:21.797231+00:00",
+  "reason": "Scott paused development; owning exec50596 interrupted and terminal exit1 verified. Remote provider cancellation cannot be observed."
+}

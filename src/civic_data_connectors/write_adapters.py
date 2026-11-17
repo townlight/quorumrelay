@@ -1300,6 +1300,8 @@ class WriteAdapter:
 
 
 def default_adapters(transport=None):
+    from .providers.gworks_write import GWorksWriteAdapter
+    from .providers.iqm2_write import IQM2WriteAdapter
     from .providers.boardable_write import BoardableWriteAdapter
     from .providers.civicclerk_write import CivicClerkWriteAdapter
     from .providers.essential_write import EssentialWriteAdapter
@@ -1312,4 +1314,5 @@ def default_adapters(transport=None):
             "municode-meetings": EssentialWriteAdapter(transport), "granicus": GranicusWriteAdapter(transport),
             "civicplus-select": CivicClerkWriteAdapter(transport), "telvue": TelVueWriteAdapter(transport),
             "boardable": BoardableWriteAdapter(transport), "towncloud": TownCloudWriteAdapter(transport),
-            "escribe": EscribeWriteAdapter(transport)}
+            "escribe": EscribeWriteAdapter(transport), "gworks": GWorksWriteAdapter(transport),
+            "iqm2": IQM2WriteAdapter(transport)}

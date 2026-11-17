@@ -1,0 +1,12 @@
+{
+  "tests": 3102,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 3102,
+  "seconds": 1741.646,
+  "command": "python -X utf8 -m pytest tests -q",
+  "junit_sha256": "17afcaf1bc3a312b41a7c814537d27a475c00c16cf6ce384d216710d6f0a6f9b",
+  "frozen_inputs_verified": 725,
+  "completed_utc": "2026-11-17T01:27:14.5652625Z"
+}

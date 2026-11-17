@@ -1,0 +1,62 @@
+{
+  "vendor-findings.md": {
+    "bytes": 70837,
+    "sha256": "5ebd18141c6caf85783f75a497d64e8038cf827b2cb238ff3f98aac5eef84162"
+  },
+  "goal-reference.txt": {
+    "bytes": 14160,
+    "sha256": "89016c09a9569a94fc7ee15a50a3ee37c3b0117fe700c66c7a47c307edbd8f93"
+  },
+  "boardable-documents-full.xml": {
+    "bytes": 452768,
+    "sha256": "17afcaf1bc3a312b41a7c814537d27a475c00c16cf6ce384d216710d6f0a6f9b"
+  },
+  "boardable-documents-tested-inputs.json": {
+    "bytes": 86087,
+    "sha256": "b68bccb4a529f53cf592a219881cb1b83cb616a712c672ac71c38de6f39bcb06"
+  },
+  "boardable-documents-full-proof.json": {
+    "bytes": 341,
+    "sha256": "c63952ab706cc39b793a96c78e7fd13cc22bc28d5d771a302c5d3860d9082db3"
+  },
+  "simbli-selected-item-contract.json": {
+    "bytes": 11846,
+    "sha256": "d3ec3192f8f48e35f1f40a1557340bd376693b82990af418288810728ce871ee"
+  },
+  "simbli-public-item-model-sanitized.json": {
+    "bytes": 7683,
+    "sha256": "e53be90bff1b8511790cb2b25e66d79ea88f33f48cf524eed19f09752f606855"
+  },
+  "simbli-unintegrated-draft.json": {
+    "bytes": 60931,
+    "sha256": "ade7e49134e893c74ddd8811dd33104bb07b0c5a1e5c4f5cbb51f06d1d602d9f"
+  },
+  "simbli-correction-assignment.md": {
+    "bytes": 7757,
+    "sha256": "948fd58a161e6e268411888f4843c6b4650736bcf5f0ae30e7ea05cb2983f848"
+  },
+  "simbli-isolated-test-result.xml": {
+    "bytes": 17292,
+    "sha256": "e5d45715f18cc6c59229965134dc8acb093ede4f681849f8052ebc543a938599"
+  },
+  "simbli-test-import-correction.json": {
+    "bytes": 256,
+    "sha256": "466b29065d16e97da640fc3bac39405331162727c3ad5f26b977110082b25af4"
+  },
+  "simbli-cancelled-job.json": {
+    "bytes": 588,
+    "sha256": "19f4e7d923fd9bf6c43f7252027f908087fba31cc04541643a42c6ef1a8931bb"
+  },
+  "simbli-meeting-editor-access.json": {
+    "bytes": 176,
+    "sha256": "f1527fdeef47429d5f437e91e87ee2908f14dfcd6be1f253e01128156ad37b99"
+  },
+  "simbli-upload-client.txt": {
+    "bytes": 6927,
+    "sha256": "e8f427ca0318b41495cfcdb903e642383da7ab5066f0ec7711f32d7d69f436c2"
+  },
+  "simbli-upload-plugin-source.json": {
+    "bytes": 212,
+    "sha256": "e9382e7bb9af822d2a20225cf77f0ee5cb0655eb9e6bc6b45eb5736b18535c45"
+  }
+}

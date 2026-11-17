@@ -305,12 +305,16 @@ def test_cancellation_releases_an_inflight_progress_notification(tmp_path):
 
     async def run():
         started, release, finished = anyio.Event(), anyio.Event(), anyio.Event()
+        progress_unblocked = anyio.Event()
         results = []
 
         class BlockedProgress(Context):
             async def report_progress(self, *args, **kwargs):
                 started.set()
-                await release.wait()
+                try:
+                    await release.wait()
+                finally:
+                    progress_unblocked.set()
 
         async def invoke():
             results.append(await server.call_tool("discover", {"request": {"fixture_slow": True}},
@@ -322,15 +326,16 @@ def test_cancellation_releases_an_inflight_progress_notification(tmp_path):
             with anyio.fail_after(2):
                 await started.wait()
             contexts[0].cancellation.set()
-            # Always release the fixture's blocked send and join the worker,
-            # even against the old implementation, before asserting failure.
+            # Preserve the prompt-unblock requirement: cancellation must release
+            # the in-flight progress send within 300ms, before the fixture is released.
             with anyio.move_on_after(.3):
-                await finished.wait()
-            finished_before_release = finished.is_set()
+                await progress_unblocked.wait()
+            unblocked_before_release = progress_unblocked.is_set()
+            # Always release the fixture and join the worker before asserting.
             release.set()
             with anyio.fail_after(2):
                 await finished.wait()
-        assert finished_before_release
+        assert unblocked_before_release
         payload = results[0].structured_content
         assert payload["status"] == "cancelled" and payload["data"]["completed"] == 1
         stored = owner.storage.get("operations", payload["operation_id"], scope=identity.context().scope)

@@ -1,0 +1,58 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://app.boardable.com/quorumrelay-evaluation/documents",
+    "content_type": "multipart/form-data",
+    "multipart_with_file_bytes_omitted": "------WebKitFormBoundary1dij2oy3ynBt5sMw\r\nContent-Disposition: form-data; name=\"file\"; filename=\"quorumrelay-document-center-evaluation.txt\"\r\nContent-Type: text/plain\r\n\r\n\r\n------WebKitFormBoundary1dij2oy3ynBt5sMw\r\nContent-Disposition: form-data; name=\"title\"\r\n\r\nQuorumRelay Document Center Evaluation\r\n------WebKitFormBoundary1dij2oy3ynBt5sMw\r\nContent-Disposition: form-data; name=\"body\"\r\n\r\n\r\n------WebKitFormBoundary1dij2oy3ynBt5sMw\r\nContent-Disposition: form-data; name=\"disable_downloads\"\r\n\r\nfalse\r\n------WebKitFormBoundary1dij2oy3ynBt5sMw\r\nContent-Disposition: form-data; name=\"folder\"\r\n\r\n0\r\n------WebKitFormBoundary1dij2oy3ynBt5sMw--\r\n"
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "filename": "quorumrelay-document-center-evaluation.txt",
+      "title": "QuorumRelay Document Center Evaluation",
+      "body": "",
+      "mime_type": "text/plain",
+      "owner_id": 403839,
+      "folder_id": "0",
+      "file_size": 118,
+      "upload_type": "computer",
+      "disable_downloads": false,
+      "organization_id": 46098,
+      "updated_at": "2026-11-16T23:24:31.000000Z",
+      "created_at": "2026-11-16T23:24:31.000000Z",
+      "id": 1270573,
+      "file": "1270573--387449dd-f270-403c-b3a5-0162e67d2803.txt",
+      "thumbnailUrl": false,
+      "url": "https://app.boardable.com/quorumrelay-evaluation/documents/4456b3ae",
+      "downloadUrl": "https://app.boardable.com/quorumrelay-evaluation/documents/download/4456b3ae/quorumrelay-document-center-evaluation.txt",
+      "fileExtension": "txt",
+      "iconUrl": "https://app.boardable.com/img/icons/doc_center/file.svg",
+      "bareIconUrl": "https://app.boardable.com/img/icons/doc_center/bare-file.svg",
+      "filesize_label": "118.0B",
+      "is_convertable": true,
+      "userCanDownload": true,
+      "webUrl": "https://app.boardable.com/quorumrelay-evaluation/documents/download/4456b3ae/quorumrelay-document-center-evaluation.txt",
+      "external_url": "https://app.boardable.com/quorumrelay-evaluation/documents/external/1270573",
+      "google_doc_embed_url": null,
+      "uuid": {
+        "uuid": "387449dd-f270-403c-b3a5-0162e67d2803",
+        "uuidable_type": "App\\Boardable\\Documents\\Document",
+        "uuidable_id": 1270573,
+        "short_slug": "4456b3ae",
+        "created_at": "2026-11-16T23:24:31.000000Z",
+        "updated_at": "2026-11-16T23:24:31.000000Z",
+        "hex": "387449ddf270403cb3a50162e67d2803"
+      },
+      "folder": null,
+      "owner": {
+        "id": 403839
+      },
+      "pdf": null
+    }
+  },
+  "fixture": {
+    "filename": "quorumrelay-document-center-evaluation.txt",
+    "bytes": 118,
+    "sha256": "6255a5838ad4f46e2efc7f78d040e688d0b3f58d1fe646d36ca474fba13b6d9b"
+  }
+}

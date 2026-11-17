@@ -1,0 +1,260 @@
+{
+  "request": {},
+  "response": {
+    "can": {
+      "view-unpublished": true
+    },
+    "meeting": {
+      "id": 526612,
+      "owner_id": 403839,
+      "slug": "d02cb5-quorumrelay-private-recurrence-contract",
+      "title": "QuorumRelay Private Recurrence Contract",
+      "start": "2026-11-16T22:30:00.000000Z",
+      "end": "2026-11-16T23:30:00.000000Z",
+      "deleted_at": null,
+      "series_id": 12615,
+      "created_at": {
+        "date": "2026-11-16 22:36:19",
+        "timezone": "UTC"
+      },
+      "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/d02cb5-quorumrelay-private-recurrence-contract",
+      "isScheduled": true,
+      "meeting_has_started": true,
+      "can": {
+        "edit": true,
+        "collaborate": true,
+        "view": true,
+        "rsvp": false
+      },
+      "published_type": "full",
+      "published_level": 0
+    },
+    "past": [],
+    "today": [
+      {
+        "id": 526612,
+        "owner_id": 403839,
+        "slug": "d02cb5-quorumrelay-private-recurrence-contract",
+        "title": "QuorumRelay Private Recurrence Contract",
+        "start": "2026-11-16T22:30:00.000000Z",
+        "end": "2026-11-16T23:30:00.000000Z",
+        "deleted_at": null,
+        "series_id": 12615,
+        "created_at": {
+          "date": "2026-11-16 22:36:19",
+          "timezone": "UTC"
+        },
+        "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/d02cb5-quorumrelay-private-recurrence-contract",
+        "isScheduled": true,
+        "meeting_has_started": true,
+        "members": [
+          {
+            "id": 403839,
+            "name": "CivicCast ",
+            "email": "[redacted]",
+            "slug": "civiccast",
+            "pivot": {
+              "meeting_id": 526612,
+              "user_id": 403839,
+              "rsvp": "",
+              "rsvp_note": "",
+              "attendance": "",
+              "collaborator": 0,
+              "automated_attendance": "",
+              "automated_attendance_override": 0,
+              "left_meeting": 0,
+              "token": "[redacted]",
+              "is_voter": 1
+            },
+            "rsvp": "",
+            "attendance": "",
+            "collaborator": 0
+          }
+        ],
+        "can": {
+          "edit": true,
+          "collaborate": true,
+          "view": true,
+          "rsvp": false
+        },
+        "published_type": "full",
+        "published_level": 0
+      }
+    ],
+    "future": [
+      {
+        "id": 526613,
+        "owner_id": 403839,
+        "slug": "cc4c25-quorumrelay-private-recurrence-contract",
+        "title": "QuorumRelay Private Recurrence Contract",
+        "start": "2026-11-23T22:30:00.000000Z",
+        "end": "2026-11-23T23:30:00.000000Z",
+        "deleted_at": null,
+        "series_id": 12615,
+        "created_at": {
+          "date": "2026-11-16 22:36:20",
+          "timezone": "UTC"
+        },
+        "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/cc4c25-quorumrelay-private-recurrence-contract",
+        "isScheduled": true,
+        "meeting_has_started": false,
+        "members": [
+          {
+            "id": 403839,
+            "name": "CivicCast ",
+            "email": "[redacted]",
+            "slug": "civiccast",
+            "pivot": {
+              "meeting_id": 526613,
+              "user_id": 403839,
+              "rsvp": "",
+              "rsvp_note": "",
+              "attendance": "",
+              "collaborator": 0,
+              "automated_attendance": "",
+              "automated_attendance_override": 0,
+              "left_meeting": 0,
+              "token": "[redacted]",
+              "is_voter": 1
+            },
+            "rsvp": "",
+            "attendance": "",
+            "collaborator": 0
+          }
+        ],
+        "can": {
+          "edit": true,
+          "collaborate": true,
+          "view": true,
+          "rsvp": false
+        },
+        "published_type": "full",
+        "published_level": 0
+      }
+    ],
+    "unpublished": [
+      {
+        "id": 526612,
+        "owner_id": 403839,
+        "slug": "d02cb5-quorumrelay-private-recurrence-contract",
+        "title": "QuorumRelay Private Recurrence Contract",
+        "start": "2026-11-16T22:30:00.000000Z",
+        "end": "2026-11-16T23:30:00.000000Z",
+        "deleted_at": null,
+        "series_id": 12615,
+        "created_at": {
+          "date": "2026-11-16 22:36:19",
+          "timezone": "UTC"
+        },
+        "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/d02cb5-quorumrelay-private-recurrence-contract",
+        "isScheduled": true,
+        "meeting_has_started": true,
+        "members": [
+          {
+            "id": 403839,
+            "name": "CivicCast ",
+            "email": "[redacted]",
+            "slug": "civiccast",
+            "pivot": {
+              "meeting_id": 526612,
+              "user_id": 403839,
+              "rsvp": "",
+              "rsvp_note": "",
+              "attendance": "",
+              "collaborator": 0,
+              "automated_attendance": "",
+              "automated_attendance_override": 0,
+              "left_meeting": 0,
+              "token": "[redacted]",
+              "is_voter": 1
+            },
+            "rsvp": "",
+            "attendance": "",
+            "collaborator": 0
+          }
+        ],
+        "can": {
+          "edit": true,
+          "collaborate": true,
+          "view": true,
+          "rsvp": false
+        },
+        "published_type": "full",
+        "published_level": 0
+      },
+      {
+        "id": 526613,
+        "owner_id": 403839,
+        "slug": "cc4c25-quorumrelay-private-recurrence-contract",
+        "title": "QuorumRelay Private Recurrence Contract",
+        "start": "2026-11-23T22:30:00.000000Z",
+        "end": "2026-11-23T23:30:00.000000Z",
+        "deleted_at": null,
+        "series_id": 12615,
+        "created_at": {
+          "date": "2026-11-16 22:36:20",
+          "timezone": "UTC"
+        },
+        "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/cc4c25-quorumrelay-private-recurrence-contract",
+        "isScheduled": true,
+        "meeting_has_started": false,
+        "members": [
+          {
+            "id": 403839,
+            "name": "CivicCast ",
+            "email": "[redacted]",
+            "slug": "civiccast",
+            "pivot": {
+              "meeting_id": 526613,
+              "user_id": 403839,
+              "rsvp": "",
+              "rsvp_note": "",
+              "attendance": "",
+              "collaborator": 0,
+              "automated_attendance": "",
+              "automated_attendance_override": 0,
+              "left_meeting": 0,
+              "token": "[redacted]",
+              "is_voter": 1
+            },
+            "rsvp": "",
+            "attendance": "",
+            "collaborator": 0
+          }
+        ],
+        "can": {
+          "edit": true,
+          "collaborate": true,
+          "view": true,
+          "rsvp": false
+        },
+        "published_type": "full",
+        "published_level": 0
+      }
+    ]
+  },
+  "second": {
+    "meeting": {
+      "datesTimezone": [
+        {
+          "date": "11/23/2026",
+          "from": "5:30 pm",
+          "id": 526613,
+          "timezone": "America/New_York",
+          "to": "6:30 pm"
+        }
+      ],
+      "follow_up_meeting_id": 0,
+      "id": 526613,
+      "organization_id": 46098,
+      "owner_id": 403839,
+      "public_page": 0,
+      "published": false,
+      "recurrence_id": "20261123T223000Z",
+      "series_id": 12615,
+      "timezone": "America/New_York",
+      "url": "https://app.boardable.com/quorumrelay-evaluation/meetings/cc4c25-quorumrelay-private-recurrence-contract"
+    },
+    "status": 200
+  }
+}
