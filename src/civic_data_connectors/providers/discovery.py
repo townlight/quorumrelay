@@ -552,10 +552,9 @@ def discover(engine, request, content, context, *, transport=None, browser=None,
             and re.fullmatch(r"/meetings/detail/[0-9]+/?", urlsplit(source.url).path) is None):
         input_format = "digital-towpath-listing-html"
     if source.provider == "towncloud" and source.input_format is None:
-        parts = urlsplit(source.url)
-        if (parts.path.rstrip("/") == "/agendas" or (parts.hostname == "towncloud.io" and
-                re.fullmatch(r"/go/[A-Za-z0-9_-]+/published_agendas\.json", parts.path))):
-            input_format = "towncloud-public-listing-json"
+        from .towncloud_public import FORMAT, is_listing_url
+        if is_listing_url(source.url):
+            input_format = FORMAT
     if (source.provider == "destiny-agendaquick" and source.input_format is None
             and urlsplit(source.url).path.lower() == "/agenda_publish.cfm"):
         input_format = ("agendaquick-public-agenda-html" if parse_qs(urlsplit(source.url).query).get("dsp") == ["ag"]

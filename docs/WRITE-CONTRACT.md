@@ -1,10 +1,12 @@
 # QuorumRelay write adapter contract
 
-Release 0.1.0.dev14 uses schema 2.0.0. The engine contains real native write mappings and `PublicWriteTransport`; it can change an upstream provider when an authorized caller supplies usable credentials and approves an exact plan. Vendor-documented synthetic execution through these mappings satisfies provider discovery/read/search/import/export/write acceptance for its evidenced operation and field scope. Live provider mutation/readback remains **NOT_RUN** and is optional supporting evidence, not a completion gate. A synthetic receipt must never be represented as an actual remote mutation.
+Release 0.1.0.dev15 uses schema 2.0.0. The engine contains real native write mappings and `PublicWriteTransport`; it can change an upstream provider when an authorized caller supplies usable credentials and approves an exact plan. Vendor-documented synthetic execution through these mappings satisfies provider discovery/read/search/import/export/write acceptance for its evidenced operation and field scope. Live provider mutation/readback remains **NOT_RUN** and is optional supporting evidence, not a completion gate. A synthetic receipt must never be represented as an actual remote mutation.
 
 ## Public operations
 
 The gWorks development-editor mapping supports meeting create/update, agenda/minutes text and explicit publication with exact readback and no replay of uncertain sends. See [gWorks editor reads and writes](GWORKS-EDITOR.md) for fields, environment binding, permissions and the executed synthetic scope.
+
+The separate [gWorks production mapping](GWORKS-EDITOR.md#production-one-unpublished-meeting-title-location-or-schedule) supports one title, location or schedule update on one authorized unpublished draft. Schedule input supplies its own offset. Preflight checks the original snapshot and final readback checks the change and preserved fields.
 
 `writes.register(engine, adapters=None)` registers `plan_write`, `commit_write`, and
 `receipt`. An adapter maps a documented native request and validates fields. The

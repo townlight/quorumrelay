@@ -31,7 +31,7 @@ def main():
     owner = create_engine()
     providers = owner.providers().data
     assert len(providers["providers"]) == 33 and len(providers["formats"]) == 34
-    assert civic_data_connectors.__version__ == "0.1.0.dev14"
+    assert civic_data_connectors.__version__ == "0.1.0.dev15"
     assert len([row for row in providers["providers"] if row["formats"]]) == 31
     assert len(owner.parsers) == 74
     assert len(owner.native_searches) == 23

@@ -1,0 +1,74 @@
+{
+  "observed": "2026-11-17",
+  "method": "Unauthenticated static GET only; scripts not executed; no API/authentication requests",
+  "source_chain": "Search-indexed utilities \u2192 declared Public Information \u2192 declared Agenda/Minutes \u2192 declared meeting-list editor path \u2192 editor declared scripts and API origin",
+  "files": [
+    {
+      "path": "utilities.extract.html",
+      "url": "https://portal.gworks.com/plugin/utilities/index.html",
+      "status": 200,
+      "captured_full_response_sha256": "5f560c9c92199960d08386bef9d7d70879f164b0ce976ffd5045ae2845c9bd18",
+      "captured_full_response_bytes": 61696,
+      "sha256": "703953827143743a4afabffc72bb8980af5d9868cdd8911eccf1fa1cf468f5e8",
+      "bytes": 1651,
+      "saved_scope": "Selected source lines only; complete response hashed at capture"
+    },
+    {
+      "path": "publicnotices.extract.html",
+      "url": "https://portal.gworks.com/plugin/cms/publicnotices.html",
+      "status": 200,
+      "captured_full_response_sha256": "2fde77297728a3aa70b7475ca5e2871b4bd4d479978e04953d4e7bede6afd10c",
+      "captured_full_response_bytes": 50031,
+      "sha256": "005523de3441811d9f1183cb65d29dda8eb14fb81c2d703f1a34ea91ce751639",
+      "bytes": 2413,
+      "saved_scope": "Selected source lines only; complete response hashed at capture"
+    },
+    {
+      "path": "meetings.extract.html",
+      "url": "https://portal.gworks.com/plugin/cms/am.html",
+      "status": 200,
+      "captured_full_response_sha256": "5ab7aa966016f0fdcc0e9d4e59060d5eff80132da12eb86dec2b1089a4c7ec2b",
+      "captured_full_response_bytes": 51348,
+      "sha256": "0f330086a582da6370edd1160baa35eb04e5f7bbd3293a90db879788a200ffb0",
+      "bytes": 2905,
+      "saved_scope": "Selected source lines only; complete response hashed at capture"
+    },
+    {
+      "path": "meeting-list.extract.js",
+      "url": "https://portal.gworks.com/plugin/cms/js-app/meeting-list.js?v=26-10-29-c6a48f2b01",
+      "status": 200,
+      "captured_full_response_sha256": "936054a99232e2b13854ea10dc1d660fda39d5897794203dd19b706690f6e74d",
+      "captured_full_response_bytes": 8532,
+      "sha256": "e797cf6280c75580f25f4810a6225b387be77105eb3ddac0f1a3405b34debea4",
+      "bytes": 393,
+      "saved_scope": "Selected source lines only; complete response hashed at capture"
+    },
+    {
+      "path": "agenda-editor.extract.html",
+      "url": "https://portal.gworks.com/plugin/cms/am-editor-agenda.html",
+      "status": 200,
+      "captured_full_response_sha256": "9821764d5ce7daffb9218bbd3661f0a7a2fc7ac019818cd54fe9440f4da936db",
+      "captured_full_response_bytes": 62616,
+      "sha256": "779d0cf234b44504dd89ca7c3ab2669933afaa2292578dbd177b14b6a3cb9c18",
+      "bytes": 3581,
+      "saved_scope": "Selected source lines only; complete response hashed at capture"
+    },
+    {
+      "path": "meeting-editor.js",
+      "url": "https://portal.gworks.com/plugin/cms/js-app/meeting-editor.js?v=26-10-29-c6a48f2b01",
+      "status": 200,
+      "bytes": 36768,
+      "sha256": "0c277bee76c897e0b34313ecf64b1384b5f05496954064f07b8dcc635bee9f1f"
+    },
+    {
+      "path": "gworks.core.extract.js",
+      "url": "https://portal.gworks.com/js-app/gworks.core.js?v=26-10-29-c6a48f2b01",
+      "status": 200,
+      "captured_full_response_sha256": "6830cd18bbf7325e78bbda7a7cf4239ba2d53179d1bb68afb4c3067854941723",
+      "captured_full_response_bytes": 171862,
+      "sha256": "0db76514d9b7221b5fb49105330b5458f29b6ab862a9a730ac94024b63c86780",
+      "bytes": 6614,
+      "saved_scope": "Selected source lines only; complete response hashed at capture"
+    }
+  ]
+}

@@ -15,12 +15,11 @@ These paths preserve native meeting identity under the configured city, original
 captures and explicitly partial coverage. They support local persistence, search
 and neutral export; no account-wide or cross-customer catalog is inferred.
 
-The [editor reader and mapped meeting/media writes](GWORKS-EDITOR.md) belong to a
-separate captured development deployment. Existing create/update/publication and
-upload/association mappings are preserved. Their synthetic execution does not
-establish production applicability or live write acceptance; production write
-contracts remain deferred per market demand. No production origin is substituted
-for a development origin.
+The [editor integration](GWORKS-EDITOR.md) supports meeting and media writes
+on the captured development deployment. Release dev15 also maps single-field
+title, location or schedule updates on an authorized, unpublished production meeting.
+These operations use a separate production policy and have synthetic verification.
+Other production writes remain deferred per market demand.
 
 Fourth-batch verification passed 149 focused read/write tests with no source or
 test changes (`work/batch4-gworks.log` and `.xml`). This closes the documented

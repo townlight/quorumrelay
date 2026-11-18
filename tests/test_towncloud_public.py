@@ -4,7 +4,9 @@ from pathlib import Path
 import pytest
 
 from civic_data_connectors.models import Source
+from civic_data_connectors.providers.contracts import Response
 from civic_data_connectors.providers.towncloud_public import listing_rows
+from quorumrelay import create_engine
 
 FIXTURE = Path(__file__).parent / "fixtures" / "towncloud-published-woodford.json"
 PUBLISHED = "https://towncloud.io/go/woodford-vt/published_agendas.json"
@@ -63,8 +65,6 @@ def test_refuses_unbound_or_multiple_embedded_sources():
 
 
 def test_real_engine_registration_handles_canonical_listing_and_ssr_source():
-    from quorumrelay import create_engine
-
     engine=create_engine()
     canonical=engine.execute("discover",{"source":source().public_dict()},content=FIXTURE.read_bytes())
     assert canonical.status=="partial" and len(canonical.data["records"])==115
@@ -74,3 +74,29 @@ def test_real_engine_registration_handles_canonical_listing_and_ssr_source():
     ssr=engine.execute("discover",{"source":source("https://woodfordvt.org/agendas").public_dict()},content=html)
     assert len(ssr.data["records"])==115
     assert ssr.data["records"][0]["normalized"]==canonical.data["records"][0]["normalized"]
+
+
+@pytest.mark.parametrize("url", [PUBLISHED, "https://woodfordvt.org/agendas"])
+def test_configured_listing_replays_for_attachment_retrieval(url):
+    raw = FIXTURE.read_bytes()
+    if url != PUBLISHED:
+        wrapper = json.dumps({"status": 200, "body": raw.decode()})
+        raw = f'<script type="application/json" sveltekit:data-url="{PUBLISHED}">{wrapper}</script>'.encode()
+    pdf = b"%PDF-1.7\nsynthetic TownCloud minutes"
+    document_url = json.loads(FIXTURE.read_bytes())[0]["minutesDownload"]
+
+    class Transport:
+        def request(self, requested_url, **kwargs):
+            assert requested_url == document_url
+            assert "https://towncloud.io" in kwargs["allowed_origins"]
+            return Response(requested_url, pdf, "application/pdf")
+
+    engine = create_engine(provider_transport=Transport())
+    listing = Source("towncloud", url, options={"download_origins": ["https://towncloud.io"]})
+    discovered = engine.execute("discover", {"source": listing.public_dict()}, content=raw)
+    record = discovered.data["records"][0]
+    assert record["identity"]["external_id"] == "452"
+    fetched = engine.fetch_attachment(listing, record, index=1, capture=raw)
+    assert fetched.status == "completed", fetched.public_dict()
+    assert fetched.data["attachment"]["citation_url"] == document_url
+    assert fetched.data["attachment"]["byte_length"] == len(pdf)

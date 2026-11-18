@@ -1,6 +1,6 @@
 # Python SDK
 
-Python **0.1.0.dev14**, TypeScript **0.1.0-dev.14**, schema **2.0.0**. [Installation instructions](USER-MANUAL.md).
+Python **0.1.0.dev15**, TypeScript **0.1.0-dev.15**, schema **2.0.0**. [Installation instructions](USER-MANUAL.md).
 
 ```python
 from quorumrelay import Bounds, OperationContext, Query, Source, create_engine

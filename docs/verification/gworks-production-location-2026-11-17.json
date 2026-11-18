@@ -1,0 +1,70 @@
+{
+  "observed": "2026-11-17",
+  "scope": "Production gWorks exactly one title or location field on one authorized unpublished existing meeting; no combined update",
+  "candidate_base": "25731a7b697196c983a02ac2c0b7ef47665f9a38",
+  "proof": "pinned_production_client_contract_and_synthetic_coordinator_execution",
+  "live_provider_api_requests": 0,
+  "live_provider_writes": 0,
+  "contract": {
+    "source_manifest": "docs/capabilities/evidence/gworks-production-title/source.json",
+    "location_field": "agenda-editor.extract.html original source line 661 declares required cms_meeting.location with min 4/max 256",
+    "projection": "meeting-editor.js data.fetch() gets ALL fields from #gworks-evt-am-form; existing meeting save invokes putSecure(apiData)"
+  },
+  "checks": [
+    {
+      "command": "work/batch4-env/Scripts/python.exe -m pytest tests/test_gworks_production_title.py -q --junitxml=docs/verification/gworks-production-location-2026-11-17.xml",
+      "passed": 52,
+      "failed": 0,
+      "errors": 0,
+      "duration_seconds": 80.58
+    },
+    {
+      "command": "work/batch4-env/Scripts/python.exe -m ruff check src/civic_data_connectors/providers/gworks_production_write.py tests/test_gworks_production_title.py",
+      "result": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/gworks_production_write.py",
+      "sha256": "c1c981bc652f860621fc8684b07d3ef28f2e553a68d459330a325ccf54e7f86d"
+    },
+    {
+      "path": "src/civic_data_connectors/write_adapters.py",
+      "sha256": "6797c54bbf8eab6ed89527dbf2395ca2acf4782231ceaa1f99f240727466380a"
+    },
+    {
+      "path": "tests/test_gworks_production_title.py",
+      "sha256": "3bf75a8748b3d5d5d5c5964cf97526dccec63b50095fb5fe9182d967cc2444b9"
+    },
+    {
+      "path": "docs/capabilities/evidence/gworks-production-title/source.json",
+      "sha256": "31a3977614fc874420066470296cfdccdf178675731dc4fb0ad0ca0945f2e09e"
+    },
+    {
+      "path": "docs/capabilities/evidence/gworks-production-title/agenda-editor.extract.html",
+      "sha256": "779d0cf234b44504dd89ca7c3ab2669933afaa2292578dbd177b14b6a3cb9c18"
+    },
+    {
+      "path": "docs/capabilities/evidence/gworks-production-title/meeting-editor.js",
+      "sha256": "0c277bee76c897e0b34313ecf64b1384b5f05496954064f07b8dcc635bee9f1f"
+    },
+    {
+      "path": "docs/GWORKS-EDITOR.md",
+      "sha256": "87f1ac57617383310b5479ede7d9cf1ccee828ddc5d342db1e476e8770a69525"
+    }
+  ],
+  "prior_receipt": {
+    "path": "docs/verification/gworks-production-title-2026-11-17.json",
+    "status": "historical title-only evidence retained unchanged"
+  },
+  "limits": [
+    "Synthetic execution only; no live authenticated acceptance.",
+    "Ordinary native form projection preserves complete meeting snapshot through preflight and full readback, excluding modification timestamp and equivalent meeting instant/category representation.",
+    "No atomic upstream compare-and-swap.",
+    "No general production reads, combined updates, create, publication, agenda/minutes edits, attachments or media added."
+  ],
+  "reused_evidence": {
+    "path": "docs/verification/gworks-production-title-2026-11-17.json",
+    "scope": "Previous development regression results retained; development implementation and routing unchanged by location extension. No new development regression claim."
+  }
+}

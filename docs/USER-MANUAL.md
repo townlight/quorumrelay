@@ -1,8 +1,10 @@
 # QuorumRelay user manual
 
-Python **0.1.0.dev14**, TypeScript **0.1.0-dev.14**, schema **2.0.0**.
+Python **0.1.0.dev15**, TypeScript **0.1.0-dev.15**, schema **2.0.0**.
 
 The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 18 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. See [delivery scope](DELIVERY-SCOPE.md) for provider-specific limitations, including development-only writes.
+
+TownCloud agenda, minutes and packet downloads now accept the same configured source used for discovery. Use the selected record and its saved listing capture, and explicitly allow any required download origins. Further TownCloud writes stay parked. For an authorized gWorks production draft, plan exactly one title, location or scheduled-time update and verify the returned receipt. Schedule inputs require an explicit UTC offset and whole-minute precision. See the [TownCloud reader guide](TOWNCLOUD-AGENDA.md) and [gWorks production editor guide](GWORKS-EDITOR.md#production-one-unpublished-meeting-title-location-or-schedule).
 
 ## 1. Install and verify
 
@@ -11,7 +13,7 @@ Use Python 3.11 or newer.
 ### Install from the release tag
 
 ~~~powershell
-git clone --branch v0.1.0.dev14 https://github.com/townlight/quorumrelay.git
+git clone --branch v0.1.0.dev15 https://github.com/townlight/quorumrelay.git
 Set-Location quorumrelay
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
@@ -28,11 +30,11 @@ The <code>service</code> extra installs the MCP, Starlette, Uvicorn, multipart a
 
 ### Install the release wheel
 
-Download the wheel and SHA256SUMS from the [GitHub release](https://github.com/townlight/quorumrelay/releases/tag/v0.1.0.dev14). Compare its SHA-256 before installation.
+Download the wheel and SHA256SUMS from the [GitHub release](https://github.com/townlight/quorumrelay/releases/tag/v0.1.0.dev15). Compare its SHA-256 before installation.
 
 ~~~powershell
-Get-FileHash ./quorumrelay-0.1.0.dev14-py3-none-any.whl -Algorithm SHA256
-python -m pip install ./quorumrelay-0.1.0.dev14-py3-none-any.whl
+Get-FileHash ./quorumrelay-0.1.0.dev15-py3-none-any.whl -Algorithm SHA256
+python -m pip install ./quorumrelay-0.1.0.dev15-py3-none-any.whl
 ~~~
 
 ### Verify the installed package
@@ -42,7 +44,7 @@ py -c "import quorumrelay; print(quorumrelay.__version__)"
 '{}' | quorumrelay providers
 ~~~
 
-The expected version is <code>0.1.0.dev14</code>. The <code>providers</code> command returns the installed provider and format manifest as JSON. In an embedded deployment, also request <code>GET /v1/info</code> and compare the installed version and schema version with the application’s approved pin.
+The expected version is <code>0.1.0.dev15</code>. The <code>providers</code> command returns the installed provider and format manifest as JSON. In an embedded deployment, also request <code>GET /v1/info</code> and compare the installed version and schema version with the application’s approved pin.
 
 ## 2. Choose a provider and input format
 

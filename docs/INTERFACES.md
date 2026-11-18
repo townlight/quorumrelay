@@ -1,6 +1,6 @@
 # External interfaces
 
-Python **0.1.0.dev14**, TypeScript **0.1.0-dev.14**, schema **2.0.0**. [Installation instructions](USER-MANUAL.md).
+Python **0.1.0.dev15**, TypeScript **0.1.0-dev.15**, schema **2.0.0**. [Installation instructions](USER-MANUAL.md).
 
 ## Service ownership and startup
 
@@ -116,7 +116,7 @@ worker. Writes reconcile uncertain intents according to their core contract.
 
 ## TypeScript and an unrelated fifth client
 
-The package is `quorumrelay-client@0.1.0-dev.14`. For local development
+The package is `quorumrelay-client@0.1.0-dev.15`. For local development
 use a `file:` dependency to `client/`. To use it without this checkout or any
 reference product, build and `npm pack` the client, then install its `.tgz` in
 your own project. Generated types come from the packaged core schemas.

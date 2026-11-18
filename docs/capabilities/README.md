@@ -1,8 +1,8 @@
 # Provider capability inventory
 
-[Release scope for dev14](../DELIVERY-SCOPE.md) gives the current per-provider read and write coverage. Dated counts and artifact references below identify earlier verification snapshots.
+[Release scope for dev15](../DELIVERY-SCOPE.md) gives the current per-provider read and write coverage. Dated counts and artifact references below identify earlier verification snapshots.
 
-The operation evidence was reconciled November 15, 2026. The dev14 delivery scope incorporates the subsequent provider batches.
+The operation evidence was reconciled November 15, 2026. The dev15 delivery scope incorporates the subsequent provider batches.
 
 ## Scope and evidence
 

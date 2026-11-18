@@ -1,6 +1,6 @@
 # QuorumRelay
 
-Python **0.1.0.dev14**, TypeScript **0.1.0-dev.14**, schema **2.0.0**. [Release packages and checksums](https://github.com/townlight/quorumrelay/releases/tag/v0.1.0.dev14).
+Python **0.1.0.dev15**, TypeScript **0.1.0-dev.15**, schema **2.0.0**. [Release packages and checksums](https://github.com/townlight/quorumrelay/releases/tag/v0.1.0.dev15).
 
 Civic records, with their source. QuorumRelay is a standalone civic-data connector engine for applications, scripts and agents. A project of [Townlight](https://github.com/townlight).
 
@@ -13,7 +13,7 @@ Identify configured sources, discover and retrieve records, normalize saved capt
 Python 3.11 or newer is required. Clone the release tag or download the wheel from GitHub Releases.
 
 ```powershell
-git clone --branch v0.1.0.dev14 https://github.com/townlight/quorumrelay.git
+git clone --branch v0.1.0.dev15 https://github.com/townlight/quorumrelay.git
 cd quorumrelay
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
@@ -28,6 +28,8 @@ Installing the package does not start a service or install a consumer applicatio
 The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 18 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. See the [provider delivery scope](docs/DELIVERY-SCOPE.md) for exact operations and deployment limits.
 
 Townlight, TownReporter, CivicCast Brief and TownRecord are reference integrations. Other products can use QuorumRelay independently; none of these applications is a runtime dependency. This publication does not merge or release those projects.
+
+This preview fixes [TownCloud public agenda, minutes and packet downloads](docs/TOWNCLOUD-AGENDA.md) from both published listing formats and adds [gWorks production draft title, location and schedule updates](docs/GWORKS-EDITOR.md#production-one-unpublished-meeting-title-location-or-schedule), one field at a time. Further TownCloud writes stay parked. The release also improves [Wistia swap readback](docs/WISTIA-SWAP.md) when the provider supplies comparable original-file metadata.
 
 ## Reference and development
 
