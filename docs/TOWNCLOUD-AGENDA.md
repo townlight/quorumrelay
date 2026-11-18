@@ -1,6 +1,12 @@
 # TownCloud rendered agenda associations
 
-Current source enriches the existing `towncloud-agenda-html` format. Saved normalization and default configured agenda discovery preserve the original meeting projection in `compatibility`, while rich records additionally retain nested rendered agenda items, their own supplied text and attachment associations. No new format or API is introduced. The frozen dev8 wheel does not contain this enrichment.
+## Read published meetings and documents
+
+Use a configured TownCloud tenant listing, such as `https://towncloud.io/go/woodford-vt/published_agendas.json`, or a municipal `/agendas` page that embeds one TownCloud listing, such as `https://woodfordvt.org/agendas`. Discovery returns the meeting IDs, dates, titles and supplied agenda, minutes and packet links in the configured capture. A discovery checkpoint is bound to the exact response bytes. Use saved HTML to resume a municipal listing whose page bytes change on reload, or use the direct TownCloud listing as its own configured source. Provider archive completeness, server paging and time zones are unverified.
+
+To retrieve an agenda, minutes or packet, use `fetch_attachment` with the same listing source, the selected meeting record, its document index and the decoded capture bytes. For a municipal listing, authorize `https://towncloud.io` explicitly in `download_origins`. If a selected link redirects to TownCloud's observed S3 origin, authorize `https://towncloud-core-prod.s3.us-west-2.amazonaws.com` explicitly as well. Document retrieval remains a separate request. The municipal and direct vendor sources have separate default namespaces.
+
+For a rendered agenda and its supporting documents, explicitly select the public agenda URL supplied by the listing. Saved normalization and configured agenda discovery preserve the original meeting projection in `compatibility`, while rich records retain nested rendered agenda items, their own supplied text and attachment associations. TownCloud write development remains parked. The existing draft adapter is documented separately in the [TownCloud write guide](TOWNCLOUD-WRITES.md).
 
 ```python
 from pathlib import Path

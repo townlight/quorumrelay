@@ -1,6 +1,6 @@
 # Developer integration guide
 
-Python **0.1.0.dev14**, TypeScript **0.1.0-dev.14**, schema **2.0.0**.
+Python **0.1.0.dev15**, TypeScript **0.1.0-dev.15**, schema **2.0.0**.
 
 The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 18 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. Use [delivery scope](DELIVERY-SCOPE.md) to select a provider and verify supported operations.
 
@@ -307,7 +307,7 @@ npm ci
 npm run build
 npm pack
 # In your own application:
-npm install /path/to/quorumrelay-client-0.1.0-dev.14.tgz
+npm install /path/to/quorumrelay-client-0.1.0-dev.15.tgz
 ```
 
 ```typescript
@@ -319,7 +319,7 @@ const client = new QuorumRelayClient({
   timeoutMs: 90_000,
 });
 const info = await client.info();
-if (info.data.version !== "0.1.0.dev14") throw new Error("Service pin mismatch");
+if (info.data.version !== "0.1.0.dev15") throw new Error("Service pin mismatch");
 try {
   const result = await client.execute("providers", {});
   console.log(result.status, result.data, result.errors, result.coverage);
@@ -425,7 +425,8 @@ checkout containing the mapping; the frozen dev8 wheel is not silently updated.
 | Boardable public search | [Declared search and capture-bound numeric IDs](BOARDABLE-SEARCH.md); title/excerpts only, unbound candidates explicit |
 | Boardable known listing record | [Scoped capture-bound detail retrieval](BOARDABLE-DETAIL.md); no guessed slugs or implicit document download |
 | AgendaQuick supplied public agenda | [Native linked memo IDs and packet locator](AGENDAQUICK-DETAIL.md); supplied memo sections/PDF locator, no inferred adopted motion/vote |
-| TownCloud rendered agenda | [Capture-local hierarchy and native attachment links](TOWNCLOUD-AGENDA.md); existing format and explicit download origins |
+| TownCloud public listing or rendered agenda | [Published-listing PDF retrieval, rendered hierarchy and attachment links](TOWNCLOUD-AGENDA.md); keep the selected listing capture and configure download origins |
+| gWorks production draft meeting | [Single-field title, location or schedule changes](GWORKS-EDITOR.md#production-one-unpublished-meeting-title-location-or-schedule); exact authorized meeting and full preservation readback |
 | iQM2 supplied meeting detail | [Native meeting/files and contextual FileOpen controls](IQM2-DETAIL.md); historical references kept separate |
 | Town Hall Streams event | [Player citation and declared HLS locator](TOWN-HALL-STREAMS-DETAIL.md); a playlist is not verified media segments |
 | CHAMP event JSON | [Native agenda parents, documents and timeline anchors](CHAMP-AGENDA.md); no inferred transcript or speaker |
@@ -513,7 +514,7 @@ Digital Towpath’s existing detail format also retains named supplied category,
 
 Utah’s existing notice-detail format retains the explicitly labeled public body and same-origin native public-body link, entity/government type, literal notice/post/edit labels, meeting location and other supplied labeled fields. Posted/edited times do not assert a timezone or normalized workflow status. The existing single `notice.text` segment stays unchanged. [Saved/default, relationship, search/export and revision checks](verification/utah-supplied-detail-2026-11-12.json) preserve the original compatibility output.
 
-For this release, see the separate [GWorks published HTML](GWORKS-PUBLISHED-HTML.md) and [TownCloud existing draft update](TOWNCLOUD-WRITES.md) usage. These changes postdate the preserved dev13 artifacts.
+See the [gWorks public reader and editor boundaries](GWORKS-PUBLISHED-HTML.md) and the [TownCloud public reader](TOWNCLOUD-AGENDA.md). TownCloud write development stays parked with the [existing draft-text adapter](TOWNCLOUD-WRITES.md) preserved.
 
 Local provider file preparation keeps the total deadline active while saving streamed output. CivicPlus historical files, OnBase DIP, SuiteOne HTML and TelVue chapter CSV check bounds before exposing a downloadable artifact. An expired save returns no artifact; temporary partial files are removed. Checks are cooperative after synchronous storage returns. [Regression evidence](verification/provider-file-completion-bounds-2026-11-15.json).
 

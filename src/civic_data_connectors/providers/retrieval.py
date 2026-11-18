@@ -254,9 +254,12 @@ def fetch(engine, request, content, context, *, transport=None, browser=None):
         raise ValueError("Select url, or a captured recording audio_url/video_url/playback_url field.")
     bundle = None
     if content is not None:
-        bundle, _ = parse_page(engine, source, namespace, content,
-                               source.input_format or DEFAULT_FORMAT[source.provider],
-                               bounds, context)
+        input_format = source.input_format or DEFAULT_FORMAT[source.provider]
+        if source.provider == "towncloud" and source.input_format is None:
+            from .towncloud_public import FORMAT, is_listing_url
+            if is_listing_url(source.url):
+                input_format = FORMAT
+        bundle, _ = parse_page(engine, source, namespace, content, input_format, bounds, context)
         record = next((r for r in bundle["records"]
                        if source_identity_key(r["identity"]) == record_key), None)
     elif engine.storage is not None:

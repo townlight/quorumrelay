@@ -1,5 +1,13 @@
 # QuorumRelay release notes
 
+## 0.1.0.dev15 · November 18, 2026
+
+- **TownCloud:** Fixed agenda, minutes and packet retrieval for the direct published listing and municipal pages that embed it. The retrieval uses the same source format selection as discovery and keeps the existing scoped download-origin checks. Further TownCloud writes remain parked. [Reader guide](TOWNCLOUD-AGENDA.md)
+- **gWorks FrontDesk:** Added single-field title, location or schedule updates for one authorized existing unpublished production meeting. The adapter checks the complete original snapshot and verifies the saved change and preserved state. Schedule input uses whole minutes and a caller-supplied UTC offset. Verification used the captured production editor and synthetic execution. [Editor guide](GWORKS-EDITOR.md#production-one-unpublished-meeting-title-location-or-schedule)
+- **Wistia:** Media swap can now report a match against provider-reported original-file metadata when comparable fields are available. Verified playback and independent byte comparison remain outside that check. Recording copy remains deferred. [Swap guide](WISTIA-SWAP.md)
+
+Python is **0.1.0.dev15**, TypeScript is **0.1.0-dev.15**, and the result schema stays at **2.0.0**. [Release assets and checksums](https://github.com/townlight/quorumrelay/releases/tag/v0.1.0.dev15) · [Delivery scope](DELIVERY-SCOPE.md)
+
 ## 0.1.0.dev14 · November 17, 2026
 
 The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 18 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. Included fixes cover saved Laserfiche WebLink listings and ClerkBase search pagination. Working writes retain their approval and readback requirements. See [delivery scope](DELIVERY-SCOPE.md) and [release assets](https://github.com/townlight/quorumrelay/releases/tag/v0.1.0.dev14).

@@ -1,0 +1,55 @@
+{
+  "observed": "2026-11-17",
+  "scope": "Production gWorks single unpublished existing meeting title update; development mapping preserved",
+  "candidate_base": "25731a7b697196c983a02ac2c0b7ef47665f9a38",
+  "proof": "production_client_contract_and_synthetic_coordinator_execution",
+  "live_provider_api_requests": 0,
+  "live_provider_writes": 0,
+  "checks": [
+    {
+      "command": "work/batch4-env/Scripts/python.exe -m pytest tests/test_gworks_production_title.py -q --junitxml=docs/verification/gworks-production-title-2026-11-17.xml",
+      "passed": 32,
+      "failed": 0
+    },
+    {
+      "command": "work/batch4-env/Scripts/python.exe -m ruff check src/civic_data_connectors/providers/gworks_production_write.py src/civic_data_connectors/write_adapters.py tests/test_gworks_production_title.py",
+      "result": "passed"
+    },
+    {
+      "command": "work/batch4-env/Scripts/python.exe -m pytest tests/test_gworks_production_title.py tests/test_gworks_write.py tests/test_gworks_media_write.py tests/test_gworks_editor.py -q",
+      "passed": 122,
+      "failed": 0,
+      "duration_seconds": 214.55,
+      "scope": "Development regression and initial production branch; final production comparator/trimmed evidence separately rerun with 32 focused passes"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/gworks_production_write.py",
+      "sha256": "63d077519d49a854565cde8d650fa8810e6d4e07a1f456f39935512c8ffc131d"
+    },
+    {
+      "path": "src/civic_data_connectors/write_adapters.py",
+      "sha256": "e25de4bb67cd0cb37a467c1826c0f65ca2e7653e168a60af01a35194e6b358fe"
+    },
+    {
+      "path": "tests/test_gworks_production_title.py",
+      "sha256": "a8345bd82871968067e4f8c3cb2cb796269ff65de4621cde99c3ad8250032d2c"
+    },
+    {
+      "path": "docs/capabilities/evidence/gworks-production-title/source.json",
+      "sha256": "31a3977614fc874420066470296cfdccdf178675731dc4fb0ad0ca0945f2e09e"
+    },
+    {
+      "path": "docs/GWORKS-EDITOR.md",
+      "sha256": "4d981746bd75941e7480b6896ade34ea3e4a1ec24d5b01f2b74314b6bce1f240"
+    }
+  ],
+  "limits": [
+    "Static production scripts are source evidence; no live authenticated production acceptance.",
+    "Editor sends a form projection, not unknown arbitrary server fields. Preservation is checked after send.",
+    "Full original snapshot compared before send; no atomic upstream compare-and-swap.",
+    "Only modification timestamp, equivalent meeting instant offset, and category integer/string representations may vary.",
+    "No production general reads, create, publication, agenda/minutes edits, attachments, media or other fields added."
+  ]
+}

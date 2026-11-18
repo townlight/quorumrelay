@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "QuorumRelay",
-    "version": "0.1.0.dev14"
+    "version": "0.1.0.dev15"
   },
   "paths": {
     "/v1/operations/providers": {

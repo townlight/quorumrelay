@@ -1,6 +1,6 @@
 # Native retrieval mappings and legacy projection
 
-[Release scope for dev14](DELIVERY-SCOPE.md) gives the current per-provider read and write coverage. Dated counts and artifact references below identify earlier verification snapshots.
+[Release scope for dev15](DELIVERY-SCOPE.md) gives the current per-provider read and write coverage. Dated counts and artifact references below identify earlier verification snapshots.
 
 Candidate schema 2.0.0. This is implementation documentation, not provider acceptance.
 
@@ -379,9 +379,9 @@ cover synthetic transfers; preserved dev13 packages predate this source.
 
 [BOARDABLE-WRITES.md](BOARDABLE-WRITES.md) documents the pinned runtime org/meeting binding, native list and item GETs, reorder JSON and preserved-field multipart text edits. Vendor client source and36 synthetic coordinator checks are separately attributed; new editor/draft creation/new files/publication remain unmapped. Current source is later than preserved dev13 packages.
 
-## GWorks published HTML and TownCloud drafts
+## gWorks and TownCloud
 
-[GWorks published HTML](GWORKS-PUBLISHED-HTML.md) uses the original city listing namespace and meeting ID; rendered item IDs remain capture-local. [TownCloud draft writes](TOWNCLOUD-WRITES.md) map native agenda/content/field form keys with exact GET readback for an existing unpublished draft. Full item save/publication/file upload remain unmapped.
+[gWorks published HTML](GWORKS-PUBLISHED-HTML.md) uses the original city listing namespace and meeting ID. Rendered item IDs remain capture-local. Its [production editor mapping](GWORKS-EDITOR.md#production-one-unpublished-meeting-title-location-or-schedule) supports one title, location or schedule change on an existing unpublished meeting. The [TownCloud public reader](TOWNCLOUD-AGENDA.md) retrieves selected documents from the direct or embedded listing capture. The [existing TownCloud draft-text adapter](TOWNCLOUD-WRITES.md) is preserved and further writes remain parked.
 
 Historical TelVue CloudCast 4.1 chapter CSV preparation is available as `telvue-cloudcast-4.1-chapters-csv`; see [the format and limits](TELVUE-CHAPTER-CSV.md). This is local file preparation, with current Connect applicability and remote import unverified.
 

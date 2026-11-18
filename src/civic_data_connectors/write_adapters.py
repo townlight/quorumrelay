@@ -24,6 +24,7 @@ from .engine import canonical_hash
 from .models import OperationContext, Source
 from .write_transport import PublicWriteTransport, WriteResponse, WriteTransport
 from .write_files import open_write_input
+from .providers.wistia_swap_readback import swap_asset_evidence
 
 
 def _legistar_client(source):
@@ -1234,6 +1235,8 @@ class WriteAdapter:
                             "resource_id": prepared["change"]["resource_id"],
                             "confirmation": "acknowledged_swap_job_finished_and_target_identity_readback"
                             if confirmed else "target_identity_readback_mismatch",
+                            "asset_verification": swap_asset_evidence(prepared["before"]["original"],
+                                prepared["before"]["replacement"], value),
                             "verification_limits": "Provider-confirmed job completion; replacement bytes "
                                                    "and playable processing are not independently verified."}
                 return {"state": "uncertain", "job": status, "reason": "Unknown swap job status."}
@@ -1300,7 +1303,7 @@ class WriteAdapter:
 
 
 def default_adapters(transport=None):
-    from .providers.gworks_write import GWorksWriteAdapter
+    from .providers.gworks_production_write import GWorksWriteAdapter
     from .providers.iqm2_write import IQM2WriteAdapter
     from .providers.boardable_write import BoardableWriteAdapter
     from .providers.civicclerk_write import CivicClerkWriteAdapter

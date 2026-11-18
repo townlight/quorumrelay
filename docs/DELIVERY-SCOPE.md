@@ -1,6 +1,6 @@
-# Delivery scope — November 17, 2026
+# Delivery scope — November 18, 2026
 
-Release **0.1.0.dev14** includes readers for all 31 baseline families and separate Cablecast and Diligent Community readers. Among the baseline families, 12 active connectors have mapped writes, 18 are read-only, and TownCloud is parked with its existing draft-text adapter. The tables below describe the operations and evidence for each family.
+Release **0.1.0.dev15** includes readers for all 31 baseline families and separate Cablecast and Diligent Community readers. Among the baseline families, 12 active connectors have mapped writes, 18 are read-only, and TownCloud is parked with its existing draft-text adapter. The tables below describe the operations and evidence for each family.
 
 ## Acceptance rule
 
@@ -193,9 +193,29 @@ The focused runs passed 47 CHAMP, 94 Wistia and 44 NovusAGENDA cases. The
 [sixth-batch receipt](verification/sixth-batch-acceptance-2026-11-17.json)
 records the tested candidate, results and reused regression evidence.
 
+## Changes in dev15
+
+Production gWorks now maps exactly one title, location or scheduled-time update
+on one authorized unpublished existing meeting. Schedule inputs require a known
+explicit offset and whole minutes; full preservation readback and durable
+no-replay behavior apply. This is captured-client and synthetic acceptance;
+live production acceptance remains unverified. See the
+[production editor guide](GWORKS-EDITOR.md#production-one-unpublished-meeting-title-location-or-schedule)
+and [schedule receipt](verification/gworks-production-schedule-2026-11-18.json).
+
+TownCloud public reading covers configured published listings, selected rendered agendas,
+and supplied agenda, minutes, packet and supporting-document retrieval with scoped
+download origins. See the [TownCloud reader guide](TOWNCLOUD-AGENDA.md).
+Further TownCloud writes remain parked. The existing draft-text adapter is preserved.
+
+Wistia media swap can report an additional original-file metadata match when
+the provider supplies comparable fields. See the [swap guide](WISTIA-SWAP.md).
+
 ## Future releases per market demand
 
-TownCloud remains parked with its existing implementation and writes preserved.
+Wistia recording copy, Simbli draft-item creation, CivicPlus Select unpublished
+event creation and Diligent Community draft PDF attachment remain deferred
+pending usable contracts. TownCloud's write work stays parked.
 
 ## BoardDocs lifecycle evidence
 

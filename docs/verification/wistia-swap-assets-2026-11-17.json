@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-17",
+  "scope": "Additive optional provider-reported OriginalFile match for one approved existing media swap. Existing acknowledged-job completion unchanged.",
+  "implementation": "Uses approval-bound before.original/before.replacement snapshots and existing target Media Show GET; no extra requests or operations. Distinct pre-swap asset URL and exact intended URL/file_size/content_type/type match required. Returned URLs are fingerprinted, not exposed again.",
+  "tests": [
+    {
+      "command": "work/batch4-env/Scripts/python.exe -X utf8 -m pytest -q tests/test_wistia_swap_assets.py --junitxml=work/wistia-swap-assets-final-2026-11-17.xml",
+      "result": "15 passed in 12.67s"
+    },
+    {
+      "command": "work/batch4-env/Scripts/python.exe -m ruff check src/civic_data_connectors/providers/wistia_swap_readback.py tests/test_wistia_swap_assets.py src/civic_data_connectors/write_adapters.py",
+      "result": "All checks passed"
+    },
+    {
+      "command": "work/batch4-env/Scripts/python.exe -X utf8 -m pytest -q tests/test_wistia_swap_assets.py tests/test_wistia_swap.py tests/test_wistia_job_binding.py --junitxml=work/wistia-swap-assets-2026-11-17.xml",
+      "result": "56 passed in 157.36s; new asset tests rerun after final public URL/fingerprint adjustment, 15 passed."
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://docs.wistia.com/docs/asset-urls",
+      "access": "Public web search readback successful; direct Markdown urllib fetch returned HTTP 403."
+    },
+    {
+      "url": "https://docs.wistia.com/reference/get_medias-mediahashedid",
+      "contract": "Existing captured modern 2026.09.0 OpenAPI in provider-api-contracts.json; tested modern fields and documented HLS URL structure."
+    },
+    {
+      "url": "https://docs.wistia.com/reference/put_medias-mediahashedid-swap",
+      "contract": "Existing pinned vendor swap capture documents hashed ID and URL preservation."
+    }
+  ],
+  "limits": [
+    "Synthetic execution only. No live auth, mutation, public media/CDN retrieval, byte checksum or playback test.",
+    "Public URL preservation is explicitly the vendor promise backed by retained hashed ID; public URL and reachability not observed.",
+    "Asset URL equality is provider-reported source pointer evidence, not an independently verified immutable URL or byte identity.",
+    "Missing/ambiguous/nonmatching assets add inconclusive evidence without changing established swap completion.",
+    "Prior gWorks receipt is immutable historical hash-bound evidence; write_adapters.py includes preexisting gWorks work retained, and current combined source hash differs."
+  ],
+  "files": {
+    "src/civic_data_connectors/providers/wistia_swap_readback.py": "7eccab33c648ab7faaec1759987e1fcd20b7f753e3473651349e0bc3b268896f",
+    "src/civic_data_connectors/write_adapters.py": "6797c54bbf8eab6ed89527dbf2395ca2acf4782231ceaa1f99f240727466380a",
+    "tests/test_wistia_swap_assets.py": "5af7693a7a224106109a8d646456b7f0e1f55178b2262470edabc1f9249bc4d9",
+    "docs/WISTIA-SWAP.md": "781defb6b4b708f68043ad4912e904c091db608d7ef5bf87331dc96b01a1c6b6",
+    "docs/capabilities/provider-api-contracts.json": "a537f0c4ba0cc8e168d0e513e16035fee5aced70289fe907349e13bc4e81de5d",
+    "docs/verification/wistia-swap-assets-2026-11-17.xml": "b63dfcce9ee45708f67149dd2b671d76034e2d9da2d37492c1fa6e47809f3e72",
+    "docs/verification/wistia-swap-regression-2026-11-17.xml": "176f174454a41dc84c43e4ff5b7f248ac33b0acfb4fee2f5e0f20d0b6c6155b6"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "observed": "2026-11-18",
+  "scope": "Production gWorks exactly one title, location or scheduled_start field on one authorized existing unpublished meeting; schedule extension only",
+  "candidate_base": "25731a7b697196c983a02ac2c0b7ef47665f9a38",
+  "proof": "pinned_production_client_contract_and_synthetic_coordinator_execution",
+  "live_provider_api_requests": 0,
+  "live_provider_writes": 0,
+  "contract": {
+    "date_time_fields": "agenda-editor.extract.html source lines 645 and 648 required local date/time; date range 2000-01-01 to 2050-12-31",
+    "source_manifest": "docs/capabilities/evidence/gworks-production-title/source.json",
+    "validation": "Known explicit offset, whole minutes only, valid numeric offset, local and UTC year 2000-2050; reject unknown -00:00, fractions, seconds, naive time, impossible dates and normalization-prone offset minute overflow before transport",
+    "mapping": "scheduled_start -> cms_meeting.meeting_ts; preserve title/location and all other snapshot fields",
+    "conversion": "meeting-editor.js lines 76-77 append seconds :00 and Moment local-to-UTC format"
+  },
+  "checks": [
+    {
+      "duration_seconds": 113.74,
+      "passed": 129,
+      "failed": 0,
+      "errors": 0,
+      "command": "work/batch4-env/Scripts/python.exe -m pytest tests/test_gworks_production_title.py tests/test_gworks_write.py -q --junitxml=docs/verification/gworks-production-schedule-2026-11-18.xml",
+      "scope": "84 production cases plus 45 development regressions; new schedule native projection initially tested UTC response"
+    },
+    {
+      "duration_seconds": 9.2,
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "command": "work/batch4-env/Scripts/python.exe -m pytest tests/test_gworks_production_title.py -k 'schedule_native_projection or schedule_ignored' -q --junitxml=docs/verification/gworks-production-schedule-readback-2026-11-18.xml",
+      "scope": "Subsequently refined fixture returns supplied equivalent offset during initial post-PUT readback; all 3 cases assert 3 GETs, success and one PUT. Added ignored-schedule case remains uncertain and never resends PUT."
+    },
+    {
+      "command": "work/batch4-env/Scripts/python.exe -m ruff check src/civic_data_connectors/providers/gworks_production_write.py tests/test_gworks_production_title.py",
+      "result": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "src/civic_data_connectors/providers/gworks_production_write.py",
+      "sha256": "b15dbbe35e5381c4d48175438c371d730df44961852c8b9bfecd16f3473efe80"
+    },
+    {
+      "path": "src/civic_data_connectors/providers/gworks_write.py",
+      "sha256": "f992bac3b5c5ff089abd43ba662c08bfae95e2055f01a15e4a77ded0e7ab63de"
+    },
+    {
+      "path": "src/civic_data_connectors/write_adapters.py",
+      "sha256": "6797c54bbf8eab6ed89527dbf2395ca2acf4782231ceaa1f99f240727466380a"
+    },
+    {
+      "path": "tests/test_gworks_production_title.py",
+      "sha256": "97e81e533c471584131c0b3fa26aa7660586fe727cd2a6928c0bff86a369e32c"
+    },
+    {
+      "path": "tests/test_gworks_write.py",
+      "sha256": "631bc010a8be0abcb1ca0b2e423ded187437a352f8eea5185dd8bbbcaac02431"
+    },
+    {
+      "path": "docs/capabilities/evidence/gworks-production-title/source.json",
+      "sha256": "31a3977614fc874420066470296cfdccdf178675731dc4fb0ad0ca0945f2e09e"
+    },
+    {
+      "path": "docs/capabilities/evidence/gworks-production-title/agenda-editor.extract.html",
+      "sha256": "779d0cf234b44504dd89ca7c3ab2669933afaa2292578dbd177b14b6a3cb9c18"
+    },
+    {
+      "path": "docs/capabilities/evidence/gworks-production-title/meeting-editor.js",
+      "sha256": "0c277bee76c897e0b34313ecf64b1384b5f05496954064f07b8dcc635bee9f1f"
+    },
+    {
+      "path": "docs/GWORKS-EDITOR.md",
+      "sha256": "a903f031b857e6f8a867bee516ec08235cd130f5f4a73daa2104947ef8e5256c"
+    },
+    {
+      "path": "docs/DELIVERY-SCOPE.md",
+      "sha256": "6ed59159e35ce2dd09ebc0c39070939ae80a80aa2cf814997983d3e700c1afae"
+    },
+    {
+      "path": "docs/capabilities/remaining-research.md",
+      "sha256": "8a1928df0281b27652c79bb5be9b13cdbef923e5c23a1e55d0906aa0f4c19b13"
+    },
+    {
+      "path": "docs/verification/gworks-production-schedule-2026-11-18.xml",
+      "sha256": "3b9902dffbe66bbaf5d0a201f1623460e91648db3a17dd5c6200d18455dc06cf"
+    },
+    {
+      "path": "docs/verification/gworks-production-schedule-readback-2026-11-18.xml",
+      "sha256": "f5d63fc2e3defc5f8277d0a09941dba269a12ef96310b0e70d599b631bdc2382"
+    }
+  ],
+  "limits": [
+    "Synthetic execution only; no live authenticated acceptance.",
+    "No upstream atomic compare-and-swap; preflight full original snapshot comparison only.",
+    "Caller supplies intended UTC offset; city timezone and DST rules are not inferred.",
+    "Production combined fields, create, publication, agenda/minutes edits, media and attachments remain outside this mapping.",
+    "No vendor outreach, commits, CI, builds, signing or releases performed. Existing unrelated dirty work preserved."
+  ],
+  "prior_receipts": [
+    "docs/verification/gworks-production-title-2026-11-17.json",
+    "docs/verification/gworks-production-location-2026-11-17.json"
+  ]
+}

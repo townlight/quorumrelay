@@ -196,3 +196,23 @@ docs/capabilities/evidence/diligent-community/meeting-client.js -text whitespace
 docs/capabilities/evidence/diligent-community/meeting-1655.html -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
 
 docs/capabilities/evidence/diligent-community/source.json whitespace=cr-at-eol
+
+# Preserve production FrontDesk title contract and acceptance byte identities.
+src/civic_data_connectors/providers/gworks_production_write.py -text whitespace=cr-at-eol
+tests/test_gworks_production_title.py -text whitespace=cr-at-eol
+docs/GWORKS-EDITOR.md -text whitespace=cr-at-eol
+docs/verification/gworks-production-title-2026-11-17.xml -text
+docs/verification/gworks-production-location-2026-11-17.xml -text
+docs/verification/gworks-production-schedule-2026-11-18.xml -text
+docs/verification/gworks-production-schedule-readback-2026-11-18.xml -text
+docs/capabilities/evidence/gworks-production-title/meeting-editor.js whitespace=cr-at-eol,-blank-at-eol
+docs/capabilities/evidence/gworks-production-title/source.json whitespace=cr-at-eol
+docs/capabilities/evidence/gworks-production-title/*.extract.html whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/capabilities/evidence/gworks-production-title/*.extract.js whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof,-space-before-tab
+
+# Preserve Wistia swap readback verification byte identities.
+src/civic_data_connectors/providers/wistia_swap_readback.py -text
+tests/test_wistia_swap_assets.py -text
+docs/WISTIA-SWAP.md -text
+docs/verification/wistia-swap-assets-2026-11-17.xml -text
+docs/verification/wistia-swap-regression-2026-11-17.xml -text

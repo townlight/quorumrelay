@@ -79,3 +79,67 @@ The upload performs metadata allocation, one signed PUT, bounded library readbac
 Supported extensions follow the captured client: gif, jpg, jpeg, png, pdf, doc, docx, ppt, pptx, xls and xlsx. The vendor UI threshold is 30000KB; SDK byte/deadline limits also apply. Publication is not implicit in attachment upload. This maps the development client; production applicability remains separate.
 
 Integrated verification: 97 affected cases passed, including 15 media cases, existing meeting writes/editor reads and shared coordinator checks. Exact bindings: `docs/verification/gworks-media-writes-2026-11-16.json`. No live vendor calls or uploads were performed.
+
+
+## Production: one unpublished meeting title, location or schedule
+
+The built-in write router now separately accepts the exact production source
+`https://api.gworks.cloud/cms/secure/city/meeting/`, namespace
+`//api.gworks.cloud/city/1311/cms` and `gworks_city_id="1311"` (substitute the explicitly
+configured city ID in both places). The trusted `gworks` credential must bind that
+production origin, tenant, city and namespace. `meeting_ids` must contain exactly
+the selected native meeting ID as a string, with `meeting:update` permission.
+The shared durable plan/hash approval and `write:plan`/`write:commit` policy apply.
+
+Only `entity="meeting"`, `operation="update"`, the selected `resource_id`, and
+exactly one of `fields={"title": "Changed hearing"}`,
+`fields={"location": "Other room"}` or
+`fields={"scheduled_start": "2026-11-18T18:45:00-07:00"}` are mapped in production.
+Title and location values must be trimmed strings of 4 to 256 characters. Schedule
+input must be ISO date/time with seconds exactly `00`, no fractional seconds, and
+a known explicit offset (`Z` or valid numeric offset; `-00:00` is rejected).
+Both the supplied local date and its UTC instant must fall in 2000–2050. The
+captured required date/time inputs and Moment conversion serialize local date,
+local `HH:MM` and UTC `cms_meeting.meeting_ts`; the example becomes
+`2026-11-19T01:45:00Z`. The caller supplies the intended offset; no city timezone
+or daylight-saving rule is inferred. Invalid or lossy schedule input is rejected
+before transport. Combined field updates, create,
+publication, media and other field changes are rejected before transport. The detail snapshot
+must explicitly mark agenda/minutes publication, template and archive flags false;
+non-null publication dates are rejected. Development reads, writes and media
+routing retain their previous configuration and behavior.
+
+Production authority comes from the indexed vendor portal Utilities page, its
+Public Information link, the Agenda/Minutes tab and its declared editor scripts.
+The production editor declares `https://api.gworks.cloud`; its meeting-editor
+script is byte-identical to the previously captured development editor. The
+production editor's location textarea declares the same required 4-to-256-character
+constraint, and `data.fetch()` includes it through the form's `ALL` projection.
+Production core code separately establishes Bearer authorization, JSON body
+encoding and PUT. Sources, exact discovery chain and SHA256 hashes are saved in
+`docs/capabilities/evidence/gworks-production-title/source.json`; selected source
+excerpts retain original line numbers. No production API request was made.
+
+The actual editor sends its form projection (including title, location,
+category, timestamp, ordered sections and files), rather than arbitrary unknown
+server fields. Ordinary save omits publication flags; explicit publish handlers
+add them. Before saving, the adapter re-reads and compares the entire original
+snapshot. After saving, it requires the same native ID and compares the complete
+snapshot with only the requested title, location or native meeting timestamp changed. Modification timestamp changes,
+equivalent ISO offsets for the same instant, and category integer/string
+representation are allowed; all other fields, attachments, agenda/minutes text,
+unknown properties and unpublished status must match. This verifies preservation
+in readback; the vendor client does not establish atomic compare-and-swap or an
+upstream guarantee against concurrent edits.
+
+Save identity is durably recorded; uncertain sends or readbacks are reconciled
+with GET only and never repeat PUT. No title matching, production-to-development
+fallback, authentication attempt or live provider write was performed. Synthetic
+coverage is in `tests/test_gworks_production_title.py`; it proves adapter behavior
+against the captured production client contract, not a live production acceptance.
+The prior title-only receipt remains historical. The location extension's focused
+test results and source bindings are recorded separately in
+`docs/verification/gworks-production-location-2026-11-17.json`.
+The schedule extension's focused results, regressions and source bindings are in
+`docs/verification/gworks-production-schedule-2026-11-18.json`. Historical title
+and location receipts are retained unchanged.

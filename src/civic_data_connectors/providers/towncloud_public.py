@@ -13,6 +13,13 @@ FORMAT = "towncloud-public-listing-json"
 _PUBLISHED = re.compile(r"/go/([A-Za-z0-9_-]+)/published_agendas\.json\Z")
 
 
+def is_listing_url(url):
+    parts = urlsplit(url)
+    return parts.path.rstrip("/") == "/agendas" or (
+        parts.hostname == "towncloud.io" and _PUBLISHED.fullmatch(parts.path) is not None
+    )
+
+
 def _tenant(url):
     try:
         validate_url(url)

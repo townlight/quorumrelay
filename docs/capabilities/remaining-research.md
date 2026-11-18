@@ -1,6 +1,6 @@
 # Remaining provider work
 
-[Release scope for dev14](../DELIVERY-SCOPE.md) gives the current per-provider read and write coverage. Dated counts and artifact references below identify earlier verification snapshots.
+[Release scope for dev15](../DELIVERY-SCOPE.md) gives the current per-provider read and write coverage. Dated counts and artifact references below identify earlier verification snapshots.
 
 **Current scope amendment (November 16, 2026):** The [delivery scope](../DELIVERY-SCOPE.md)
 supersedes older instructions to finish all writes. Preserve working writes;
@@ -316,6 +316,11 @@ Evidence and exact scope: `inventory.json` provider `first-party`; operation sta
 
 ## F27 Wistia (`wistia`)
 
+- Release dev15 reports an optional provider-reported source asset
+  match after a confirmed swap when the returned OriginalFile metadata is
+  complete and distinguishable. See [swap readback](../WISTIA-SWAP.md).
+  Independent replacement-byte and playback verification remain deferred.
+
 - Authenticated media detail, supplied caption list/per-language reads and native search are source implemented with scoped synthetic verification. Optional live account reads require trusted token/account policy; credential acquisition is not a completion gate.
 - /modern/search is capped at 100 primary and 100 transcript-only candidates with no cursor and provider-defined exact/phrase candidate semantics. Local exact checks cover returned metadata/excerpts, not full transcripts.
 - Upload/import, media metadata, caption create/update/edits and media swap have separately scoped implementation and synthetic evidence. Account-tier/permission and current server applicability remain runtime qualifications, not unresolved swap implementation or a live-account acceptance gate. No independent playback or overwrite-from-swap inference.
@@ -338,6 +343,12 @@ Evidence and exact scope: `inventory.json` provider `boardable`; operation statu
 - Literal legacy NewAgendaItem contract now implements text-only root/child creation with explicit parent and empty date. Native returned ID and exact preserved-tree readback, snapshot preflight, durable intent/restart/noPOSTreplay and post-send cancellation have21new/64affected synthetic cases. Legacy-client meeting creation/publication remain unmapped; current native meeting forms and current-builder item files are covered separately.
 
 ## F29 gWorks FrontDesk (`gworks`)
+
+- Release dev15 maps one title, location or schedule update on one authorized, unpublished
+  production meeting using a separately captured production editor contract.
+  See [configuration and readback](../GWORKS-EDITOR.md#production-one-unpublished-meeting-title-location-or-schedule)
+  and the [synthetic verification receipt](../verification/gworks-production-schedule-2026-11-18.json).
+  Other fields, production media, meeting creation and publication remain deferred.
 
 - Bounded public evidence now covers the Galena static listing, one successful city-1311 agenda fetch, and one Galena minutes failure (resolver ready, guarded object GET HTTP 403). See the three F29 receipts. Published HTML detail is now mapped separately from the vendor-declared path, with native meeting identity matching the original city listing namespace. Eleven sections and thirteen children are capture-local rendered positions. Catalog continuation/completeness and every flagged document remain unverified. A separate saved secure-calendar response mapping now preserves flattened native fields with explicit configured city binding; no live account request or inferred flag/epoch equivalence.
 - Retained history, update frequency and maximum response payload remain unknown; one static response cannot establish them. No additional repeated sampling is required for this bounded research outcome.
