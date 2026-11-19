@@ -1,6 +1,6 @@
 # Delivery scope — November 18, 2026
 
-Release **0.1.0.dev15** includes readers for all 31 baseline families and separate Cablecast and Diligent Community readers. Among the baseline families, 12 active connectors have mapped writes, 18 are read-only, and TownCloud is parked with its existing draft-text adapter. The tables below describe the operations and evidence for each family.
+Release **0.1.0.dev15** includes readers for all 31 baseline families and separate Cablecast and Diligent Community readers. Among the baseline families, 12 active connectors have mapped writes, 18 are read-only, and TownCloud is parked with its existing draft-text adapter. Use the [current provider coverage table](PROVIDER-COVERAGE.md) for the complete roster in one place. The tables below retain batch-specific evidence.
 
 ## Acceptance rule
 

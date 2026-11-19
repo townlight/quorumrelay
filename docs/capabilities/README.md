@@ -6,7 +6,7 @@ The operation evidence was reconciled November 15, 2026. The dev15 delivery scop
 
 ## Scope and evidence
 
-The runtime registers **32 providers**, retaining **31 original families / 34 baseline formats**, with **68 additive parser hooks / 23 native-search handlers**. Cablecast is the additional typed reader, not a new original baseline family. These counts do not imply every operation is supported.
+The dev15 runtime registers **33 providers**, with **31 original families / 34 baseline formats**, **74 additional parsers** and **23 native search handlers**. Cablecast and Diligent Community are the two additional readers. Use the [current provider coverage table](../PROVIDER-COVERAGE.md) for release decisions. The ledger below describes its dated research snapshot.
 
 Capability, source implementation and executed acceptance are independent. Vendor-documented synthetic checks satisfy only their explicitly attributed scope. Product/UI documentation alone does not establish an API payload. Live credentials, account acquisition and real vendor mutations are not acceptance gates. Unresolved research is not a verified outside-information dependency.
 

@@ -1,6 +1,6 @@
 # MCP reference
 
-Python **0.1.0.dev15**, TypeScript **0.1.0-dev.15**, schema **2.0.0**. [Installation instructions](USER-MANUAL.md).
+Python **0.1.0.dev15**, TypeScript **0.1.0-dev.15**, schema **2.0.0**. [Published-package quickstart](QUICKSTART.md) · [Operation requests and examples](OPERATION-REQUESTS.md).
 
 The implementation uses the official Python SDK **mcp 2.3.0**, not hand-written
 JSON-RPC framing. Both transports call the same engine operations as Python,

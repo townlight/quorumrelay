@@ -2,7 +2,7 @@
 
 Python **0.1.0.dev15**, TypeScript **0.1.0-dev.15**, schema **2.0.0**.
 
-The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 18 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. Use [delivery scope](DELIVERY-SCOPE.md) to select a provider and verify supported operations.
+The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 20 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. Use the [provider coverage table](PROVIDER-COVERAGE.md) to select a provider and verify supported operations.
 
 ## 1. Choose an integration path
 
@@ -18,34 +18,15 @@ The engine registers 33 providers, 34 baseline formats, 74 additional parsers an
 The four reference applications illustrate these paths. They do not define the
 product boundary. A fifth application uses the same interfaces and contracts.
 
-## 2. Install from public source
+## 2. Install the published package
 
-Python 3.11+ is required; current Windows CI uses Python 3.13. Node is needed only
-to build the TypeScript client or website. The client declares Node 20.3+; the
-repository CI uses Node 24. No package-index release is claimed.
+Start with the [pinned wheel and offline quickstart](QUICKSTART.md). The core SDK requires Python 3.11+. Install the same wheel with `[service]` for HTTP and MCP. The optional `[browser]` extra and Playwright are used for the [guarded WebLink session](WEBLINK-SESSION.md).
 
-```sh
-git clone https://github.com/townlight/quorumrelay.git
-cd quorumrelay
-python -m venv .venv
-# Activate .venv using your shell's activation command.
-python -m pip install -e ".[service]"
-quorumrelay providers
-```
+Install the published TypeScript tarball in your application and configure the service URL and token separately. The client declares Node 20.3+ and the repository CI uses Node 24. Release artifacts are distributed on GitHub.
 
-The clone commands above obtain the public preview. For this integrated source,
-start in the operator-provided approved checkout and run the venv/install steps
-there; do not expect its local commit to be available from the public remote.
+For source development use `git clone --branch v0.1.0.dev15 https://github.com/townlight/quorumrelay.git` and install the checkout in a virtual environment. `quorumrelay` is the canonical import and command. `civic_data_connectors` and `civic-data-connectors` remain compatible aliases.
 
-For an application deployment, pin a reviewed commit or explicit wheel rather
-than following a moving branch. Install the core without extras for an in-process
-integration; add `[service]` for HTTP/MCP. The optional `[browser]` extra and
-Playwright's Chrome installation are needed only for the guarded WebLink browser
-session described in [its guide](WEBLINK-SESSION.md).
-
-`quorumrelay` is the canonical import and command. `civic_data_connectors` and
-`civic-data-connectors` remain compatible aliases sharing the same implementation
-objects. Installing a package never starts a server or downloads a model.
+Use the [operation request reference](OPERATION-REQUESTS.md) for required inputs and response shapes across the interfaces.
 
 ## 3. Preserve the complete result
 
@@ -527,4 +508,4 @@ readback and original-byte hash checks. 105 affected synthetic cases passed.
 Separate authorized browser trial observed create201/update-upload200 and exact
 134-byte download. See `BOARDABLE-WRITES.md` and
 `verification/boardable-current-builder-2026-11-16.json` under docs.
-Full meeting forms, recurring days, publication and imports remain open.
+For the full dev15 scope, including the mapped single meetings and weekly series added separately, see [Boardable writes](BOARDABLE-WRITES.md).

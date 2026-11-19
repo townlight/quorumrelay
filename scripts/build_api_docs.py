@@ -7,6 +7,14 @@ from quorumrelay import __version__
 from quorumrelay.transports.openapi import document, schemas
 
 
+REQUEST_SECTIONS = {
+    "source-and-discovery": {"providers", "capabilities", "identify", "validate_source", "discover"},
+    "retrieve-and-normalize": {"fetch", "normalize"},
+    "search-and-interchange": {"search", "import_preview", "import_bundle", "export"},
+    "exact-write-lifecycle": {"plan_write", "commit_write", "receipt"},
+}
+
+
 def main():
     root = Path(__file__).resolve().parents[1]
     target = root / "docs" / "api"
@@ -22,17 +30,24 @@ def main():
         f"Generated from QuorumRelay **{__version__}** source, OpenAPI **{api['openapi']}**.", "",
         "These files describe an application-hosted service. The documentation website does not",
         "operate a public provider API or accept credentials. Run your own configured service.", "",
-        "[Integration guide](DEVELOPER-GUIDE.md) · [HTTP details](INTERFACES.md) · "
-        "[MCP](MCP.md) · [OpenAPI JSON download](api/openapi.json)", "",
+        "[Operation requests and examples](OPERATION-REQUESTS.md) · [Integration guide](DEVELOPER-GUIDE.md) · "
+        "[HTTP details](INTERFACES.md) · [MCP](MCP.md) · [OpenAPI JSON download](api/openapi.json)", "",
         "## HTTP endpoints", "",
         "Operation endpoints accept a shared JSON request and return the complete schema 2.0.0",
         "result envelope. Provider-specific request details and coverage remain important; the",
         "OpenAPI request object deliberately permits operation-specific fields.", "",
-        "| Method | Path | Operation |", "|---|---|---|",
+        "| Method | Path | Operation | Request and result |", "|---|---|---|---|",
     ]
     for path, verbs in api["paths"].items():
         for method, value in verbs.items():
-            lines.append(f"| `{method.upper()}` | `{path}` | `{value['operationId']}` |")
+            operation = value["operationId"]
+            if operation.startswith("submit_"):
+                section = "jobs-and-files"
+            else:
+                section = next((name for name, group in REQUEST_SECTIONS.items() if operation in group),
+                               "jobs-and-files")
+            lines.append(f"| `{method.upper()}` | `{path}` | `{operation}` | "
+                         f"[Contract](OPERATION-REQUESTS.md#{section}) |")
     lines += [
         "", "The running service also exposes `GET /openapi.json`; `/mcp` exists only when",
         "enabled in trusted service configuration. HTTP service authentication uses a service",
