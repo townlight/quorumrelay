@@ -7,17 +7,14 @@ Python **0.1.0.dev15**, TypeScript **0.1.0-dev.15**, schema **2.0.0**. [Installa
 The consuming application or its deployment operator owns service startup,
 shutdown, exact version pins, trusted configuration, database backups, tokens,
 and any reverse proxy. A TypeScript client does not start or stop a server.
-Install the standalone package with its service extra, pinned to the same
-candidate as the client:
+Install the pinned standalone wheel with `[service]` using the [release quickstart](QUICKSTART.md). Start your service with an explicit policy and database:
 
-```powershell
-# From the approved source checkout:
-python -m pip install -e ".[service]"
+~~~powershell
 quorumrelay serve --config C:\app\connector-service.json --database C:\app\connector-state.sqlite
-```
+~~~
 
-For checkout development use `pip install -e ".[service]"` from this repository.
 `python -m quorumrelay` is equivalent to the console entry point.
+
 Keep the service in its own supervised process; Ctrl+C shuts it down locally.
 Restart it using the same database, config, and exact version. Check
 authenticated `GET /v1/info` after startup and compare `version`/`schema_version`
@@ -48,8 +45,7 @@ externally supplied, audience-validating token verifier; see MCP documentation.
 ## JSON operations and CLI
 
 `POST /v1/operations/OPERATION` accepts exactly the shared engine request object.
-Common operations and schemas are in `ENGINE-CONTRACT.md`; writes are in
-`WRITE-CONTRACT.md`. `/openapi.json` is the actual OpenAPI 3.1 document.
+See [operation requests](OPERATION-REQUESTS.md), [engine schemas and contracts](ENGINE-CONTRACT.md) and [write planning](WRITE-CONTRACT.md). `/openapi.json` is the actual OpenAPI 3.1 document.
 Every response preserves the full schema 2.0.0 envelope. Inspect `status`,
 `errors`, and `coverage`, including partial records, failed pages and truncation.
 An unknown implementation is `unsupported`, not an empty successful search.
@@ -116,10 +112,7 @@ worker. Writes reconcile uncertain intents according to their core contract.
 
 ## TypeScript and an unrelated fifth client
 
-The package is `quorumrelay-client@0.1.0-dev.15`. For local development
-use a `file:` dependency to `client/`. To use it without this checkout or any
-reference product, build and `npm pack` the client, then install its `.tgz` in
-your own project. Generated types come from the packaged core schemas.
+Install the [published client tarball](https://github.com/townlight/quorumrelay/releases/download/v0.1.0.dev15/quorumrelay-client-0.1.0-dev.15.tgz) with `npm install ./quorumrelay-client-0.1.0-dev.15.tgz` after verifying its checksum. The client uses the separately configured service. Generated types come from the packaged core schemas. For source development, use a `file:` dependency to `client/`.
 
 ```typescript
 import { QuorumRelayClient, type RecordEnvelope } from "quorumrelay-client";

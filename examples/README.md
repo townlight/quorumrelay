@@ -38,8 +38,8 @@ Do not use this fixture as evidence of cross-restart upstream persistence.
 
 ## Unrelated fifth Node client
 
-From `client/`, run `npm install`, `npm run build`, and `npm pack`.
-In a new unrelated directory, install the generated `.tgz`; copy only
+Download the pinned client tarball from the [published release](https://github.com/townlight/quorumrelay/releases/tag/v0.1.0.dev15) and check its SHA-256.
+In a new unrelated directory, install that `.tgz` and copy only
 `fifth-client.mjs` there. With the explicit URL/token above:
 
 ```powershell

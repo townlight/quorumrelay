@@ -2,69 +2,19 @@
 
 Python **0.1.0.dev15**, TypeScript **0.1.0-dev.15**, schema **2.0.0**.
 
-The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 18 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. See [delivery scope](DELIVERY-SCOPE.md) for provider-specific limitations, including development-only writes.
+The engine registers 33 providers, 34 baseline formats, 74 additional parsers and 23 native search handlers. All 31 original families have readers. Twelve active families support selected upstream writes, 20 are read-only, and TownCloud remains parked with its existing draft-text adapter. Cablecast and Diligent Community are additional readers. See [delivery scope](DELIVERY-SCOPE.md) for provider-specific limitations, including development-only writes.
 
 TownCloud agenda, minutes and packet downloads now accept the same configured source used for discovery. Use the selected record and its saved listing capture, and explicitly allow any required download origins. Further TownCloud writes stay parked. For an authorized gWorks production draft, plan exactly one title, location or scheduled-time update and verify the returned receipt. Schedule inputs require an explicit UTC offset and whole-minute precision. See the [TownCloud reader guide](TOWNCLOUD-AGENDA.md) and [gWorks production editor guide](GWORKS-EDITOR.md#production-one-unpublished-meeting-title-location-or-schedule).
 
 ## 1. Install and verify
 
-Use Python 3.11 or newer.
+Use Python 3.11 or newer. Follow the [published-wheel quickstart](QUICKSTART.md) to verify the download, install in a virtual environment and read one saved meeting. The HTTP and MCP transports use the same wheel with the `[service]` extra.
 
-### Install from the release tag
-
-~~~powershell
-git clone --branch v0.1.0.dev15 https://github.com/townlight/quorumrelay.git
-Set-Location quorumrelay
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-py -m pip install -e .
-~~~
-
-For the REST/HTTP and MCP service commands, install the optional service dependencies from the same checkout:
-
-~~~powershell
-py -m pip install -e ".[service]"
-~~~
-
-The <code>service</code> extra installs the MCP, Starlette, Uvicorn, multipart and JSON-schema dependencies. The core SDK can be used without these service packages.
-
-### Install the release wheel
-
-Download the wheel and SHA256SUMS from the [GitHub release](https://github.com/townlight/quorumrelay/releases/tag/v0.1.0.dev15). Compare its SHA-256 before installation.
-
-~~~powershell
-Get-FileHash ./quorumrelay-0.1.0.dev15-py3-none-any.whl -Algorithm SHA256
-python -m pip install ./quorumrelay-0.1.0.dev15-py3-none-any.whl
-~~~
-
-### Verify the installed package
-
-~~~powershell
-py -c "import quorumrelay; print(quorumrelay.__version__)"
-'{}' | quorumrelay providers
-~~~
-
-The expected version is <code>0.1.0.dev15</code>. The <code>providers</code> command returns the installed provider and format manifest as JSON. In an embedded deployment, also request <code>GET /v1/info</code> and compare the installed version and schema version with the application’s approved pin.
+To verify a configured HTTP deployment, request `GET /v1/info` and check the installed version and result schema against your application's pin. For checkout development, clone the `v0.1.0.dev15` tag and use `python -m pip install -e ".[service]"`.
 
 ## 2. Choose a provider and input format
 
-The package contains 31 canonical provider families. These are identifiers accepted by the engine; they are not claims that every tenant is reachable or every vendor feature is implemented.
-
-| Canonical provider IDs | Canonical provider IDs | Canonical provider IDs |
-|---|---|---|
-| <code>legistar</code> | <code>primegov</code> | <code>granicus</code> |
-| <code>novusagenda</code> | <code>civicplus-select</code> | <code>civicplus-agenda-center</code> |
-| <code>municode-meetings</code> | <code>boardbook</code> | <code>escribe</code> |
-| <code>simbli</code> | <code>civicweb</code> | <code>iqm2</code> |
-| <code>swagit</code> | <code>suiteone-media</code> | <code>peak</code> |
-| <code>utah-public-notice</code> | <code>destiny-agendaquick</code> | <code>town-hall-streams</code> |
-| <code>telvue</code> | <code>champ</code> | <code>onbase</code> |
-| <code>laserfiche-weblink</code> | <code>towncloud</code> | <code>digital-towpath</code> |
-| <code>clerkbase</code> | <code>first-party</code> | <code>wistia</code> |
-| <code>boardable</code> | <code>gworks</code> | <code>boarddocs</code> |
-| <code>tyler-meeting-manager</code> |  |  |
-
-One further provider, <code>cablecast</code> (Tightrope "Reflect" meeting video, hosts ending <code>.cablecast.tv</code>), is registered by <code>create_engine()</code> as a built-in typed connector. It is outside the fixed 31 baseline families: it has no baseline format, <code>providers</code> lists it with an empty <code>formats</code> array, and it is not part of the 34-format compatibility baseline.
+The [provider coverage table](PROVIDER-COVERAGE.md) lists all 33 registered IDs and their read/search/write scope. Cablecast and Diligent Community are additional readers outside the 31-family, 34-format compatibility baseline.
 
 Ask the installed engine for the authoritative provider-specific choices:
 
@@ -86,7 +36,7 @@ Use <code>capabilities</code> for the provider’s operation-level implementatio
 result = engine.execute("capabilities", {"provider": "legistar"})
 ~~~
 
-Read its status fields separately. A documented provider feature, an implemented operation, a fixture-tested parser, a bounded public read and authorized live acceptance are different evidence levels. The inventory and [provider coverage map](ENGINE-COVERAGE.md) explain current limits.
+Read its status fields separately. A documented provider feature, an implemented operation, a fixture-tested parser, a bounded public read and authorized live acceptance are different evidence levels. The inventory and [provider coverage table](PROVIDER-COVERAGE.md) explain current limits.
 
 ## 3. Configure a source and caller
 
@@ -509,4 +459,5 @@ A continuation token is opaque state. Supply the exact returned checkpoint under
 - [Provider implementation and acceptance coverage](ENGINE-COVERAGE.md)
 - [Provider-native endpoint and field evidence](PROVIDER-NATIVE-MAPPINGS.md)
 - [Capability research inventory](capabilities/README.md)
+- [Operation requests and responses](OPERATION-REQUESTS.md)
 - [Independent synthetic examples](../examples/README.md)

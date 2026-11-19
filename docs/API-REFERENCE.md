@@ -5,7 +5,7 @@ Generated from QuorumRelay **0.1.0.dev15** source, OpenAPI **3.1.0**.
 These files describe an application-hosted service. The documentation website does not
 operate a public provider API or accept credentials. Run your own configured service.
 
-[Integration guide](DEVELOPER-GUIDE.md) · [HTTP details](INTERFACES.md) · [MCP](MCP.md) · [OpenAPI JSON download](api/openapi.json)
+[Operation requests and examples](OPERATION-REQUESTS.md) · [Integration guide](DEVELOPER-GUIDE.md) · [HTTP details](INTERFACES.md) · [MCP](MCP.md) · [OpenAPI JSON download](api/openapi.json)
 
 ## HTTP endpoints
 
@@ -13,41 +13,41 @@ Operation endpoints accept a shared JSON request and return the complete schema 
 result envelope. Provider-specific request details and coverage remain important; the
 OpenAPI request object deliberately permits operation-specific fields.
 
-| Method | Path | Operation |
-|---|---|---|
-| `POST` | `/v1/operations/providers` | `providers` |
-| `POST` | `/v1/jobs/providers` | `submit_providers` |
-| `POST` | `/v1/operations/capabilities` | `capabilities` |
-| `POST` | `/v1/jobs/capabilities` | `submit_capabilities` |
-| `POST` | `/v1/operations/identify` | `identify` |
-| `POST` | `/v1/jobs/identify` | `submit_identify` |
-| `POST` | `/v1/operations/validate_source` | `validate_source` |
-| `POST` | `/v1/jobs/validate_source` | `submit_validate_source` |
-| `POST` | `/v1/operations/discover` | `discover` |
-| `POST` | `/v1/jobs/discover` | `submit_discover` |
-| `POST` | `/v1/operations/fetch` | `fetch` |
-| `POST` | `/v1/jobs/fetch` | `submit_fetch` |
-| `POST` | `/v1/operations/normalize` | `normalize` |
-| `POST` | `/v1/jobs/normalize` | `submit_normalize` |
-| `POST` | `/v1/operations/search` | `search` |
-| `POST` | `/v1/jobs/search` | `submit_search` |
-| `POST` | `/v1/operations/import_preview` | `import_preview` |
-| `POST` | `/v1/jobs/import_preview` | `submit_import_preview` |
-| `POST` | `/v1/operations/import_bundle` | `import_bundle` |
-| `POST` | `/v1/jobs/import_bundle` | `submit_import_bundle` |
-| `POST` | `/v1/operations/export` | `export` |
-| `POST` | `/v1/jobs/export` | `submit_export` |
-| `POST` | `/v1/operations/plan_write` | `plan_write` |
-| `POST` | `/v1/jobs/plan_write` | `submit_plan_write` |
-| `POST` | `/v1/operations/commit_write` | `commit_write` |
-| `POST` | `/v1/jobs/commit_write` | `submit_commit_write` |
-| `POST` | `/v1/operations/receipt` | `receipt` |
-| `POST` | `/v1/jobs/receipt` | `submit_receipt` |
-| `POST` | `/v1/operations/status` | `status` |
-| `POST` | `/v1/operations/cancel` | `cancel` |
-| `POST` | `/v1/files` | `upload_file` |
-| `GET` | `/v1/files/{handle}` | `download_file` |
-| `GET` | `/v1/info` | `service_info` |
+| Method | Path | Operation | Request and result |
+|---|---|---|---|
+| `POST` | `/v1/operations/providers` | `providers` | [Contract](OPERATION-REQUESTS.md#source-and-discovery) |
+| `POST` | `/v1/jobs/providers` | `submit_providers` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/capabilities` | `capabilities` | [Contract](OPERATION-REQUESTS.md#source-and-discovery) |
+| `POST` | `/v1/jobs/capabilities` | `submit_capabilities` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/identify` | `identify` | [Contract](OPERATION-REQUESTS.md#source-and-discovery) |
+| `POST` | `/v1/jobs/identify` | `submit_identify` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/validate_source` | `validate_source` | [Contract](OPERATION-REQUESTS.md#source-and-discovery) |
+| `POST` | `/v1/jobs/validate_source` | `submit_validate_source` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/discover` | `discover` | [Contract](OPERATION-REQUESTS.md#source-and-discovery) |
+| `POST` | `/v1/jobs/discover` | `submit_discover` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/fetch` | `fetch` | [Contract](OPERATION-REQUESTS.md#retrieve-and-normalize) |
+| `POST` | `/v1/jobs/fetch` | `submit_fetch` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/normalize` | `normalize` | [Contract](OPERATION-REQUESTS.md#retrieve-and-normalize) |
+| `POST` | `/v1/jobs/normalize` | `submit_normalize` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/search` | `search` | [Contract](OPERATION-REQUESTS.md#search-and-interchange) |
+| `POST` | `/v1/jobs/search` | `submit_search` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/import_preview` | `import_preview` | [Contract](OPERATION-REQUESTS.md#search-and-interchange) |
+| `POST` | `/v1/jobs/import_preview` | `submit_import_preview` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/import_bundle` | `import_bundle` | [Contract](OPERATION-REQUESTS.md#search-and-interchange) |
+| `POST` | `/v1/jobs/import_bundle` | `submit_import_bundle` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/export` | `export` | [Contract](OPERATION-REQUESTS.md#search-and-interchange) |
+| `POST` | `/v1/jobs/export` | `submit_export` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/plan_write` | `plan_write` | [Contract](OPERATION-REQUESTS.md#exact-write-lifecycle) |
+| `POST` | `/v1/jobs/plan_write` | `submit_plan_write` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/commit_write` | `commit_write` | [Contract](OPERATION-REQUESTS.md#exact-write-lifecycle) |
+| `POST` | `/v1/jobs/commit_write` | `submit_commit_write` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/receipt` | `receipt` | [Contract](OPERATION-REQUESTS.md#exact-write-lifecycle) |
+| `POST` | `/v1/jobs/receipt` | `submit_receipt` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/status` | `status` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/operations/cancel` | `cancel` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `POST` | `/v1/files` | `upload_file` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `GET` | `/v1/files/{handle}` | `download_file` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
+| `GET` | `/v1/info` | `service_info` | [Contract](OPERATION-REQUESTS.md#jobs-and-files) |
 
 The running service also exposes `GET /openapi.json`; `/mcp` exists only when
 enabled in trusted service configuration. HTTP service authentication uses a service
