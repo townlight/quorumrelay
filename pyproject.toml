@@ -7,6 +7,7 @@ name = "quorumrelay"
 version = "0.1.0.dev15"
 description = "Independent, bounded civic meeting data connectors"
 requires-python = ">=3.11"
+license = { text = "AGPL-3.0-only" }
 dependencies = ["pdfplumber>=0.11,<0.12", "tzdata>=2025.2"]
 
 [project.optional-dependencies]
@@ -22,7 +23,7 @@ civic-data-connectors = "civic_data_connectors.cli:main"
 packages = ["src/civic_data_connectors", "src/quorumrelay"]
 
 [tool.hatch.build.targets.sdist]
-include = ["/src", "/README.md", "/pyproject.toml"]
+include = ["/src", "/README.md", "/pyproject.toml", "/LICENSE"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
