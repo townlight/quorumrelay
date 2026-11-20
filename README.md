@@ -34,3 +34,7 @@ This preview fixes [TownCloud public agenda, minutes and packet downloads](docs/
 - [Write planning and receipts](docs/WRITE-CONTRACT.md), [provider mappings](docs/PROVIDER-NATIVE-MAPPINGS.md), [BoardDocs public reader](docs/BOARDDOCS-PUBLIC.md), [CivicClerk Select reads/writes](docs/CIVICCLERK-SELECT.md)
 - [Examples](examples/README.md), [TypeScript client](client/README.md)
 - [Contributing and checks](CONTRIBUTING.md), [site build](site/README.md)
+
+## License
+
+Current Townlight-owned source is licensed under AGPL-3.0-only; see [LICENSE](LICENSE). Dependencies retain their own licenses. This declaration does not replace or alter historical published artifacts.

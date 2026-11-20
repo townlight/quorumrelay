@@ -25,3 +25,7 @@ Types are generated from packaged core schemas using
 Engine failure remains an envelope. HTTP failure throws `ServiceError` carrying
 the same envelope; network/abort errors remain distinct native errors.
 Pass `{signal}` to execute/submit/upload/download/info for cancellation.
+
+## License
+
+Current Townlight-owned source is licensed under AGPL-3.0-only; see [LICENSE](../LICENSE). Dependencies retain their own licenses. This declaration does not replace or alter historical published artifacts.
